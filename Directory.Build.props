@@ -1,0 +1,36 @@
+<Project>
+  <!-- Normalize $(TestWpfArcadeSdkPath) by appending a '\' to it if one is missing -->
+  <PropertyGroup Condition="'$(TestWpfArcadeSdkPath)'!=''">
+    <WpfArcadeSdkPath>$(TestWpfArcadeSdkPath)</WpfArcadeSdkPath>
+    <WpfArcadeSdkPath Condition="!$(WpfArcadeSdkPath.EndsWith('\'))">$(TestWpfArcadeSdkPath)\</WpfArcadeSdkPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TestWpfArcadeSdkPath)'=='' And Exists('$(MSBuildThisFileDirectory)eng\WpfArcadeSdk\')">
+    <WpfArcadeSdkPath>$(MSBuildThisFileDirectory)eng\WpfArcadeSdk\</WpfArcadeSdkPath>
+  </PropertyGroup>
+  <!-- Select Sdk.props from test location or eng\WpfArcadeSdk\. If neither exists, then fall back to the use of one 
+      obtained using MSBuild's Sdk resolver -->
+  <PropertyGroup Condition="Exists('$(WpfArcadeSdkPath)')">
+    <WpfArcadeSdkProps>$(WpfArcadeSdkPath)Sdk\Sdk.props</WpfArcadeSdkProps>
+    <WpfArcadeSdkTargets>$(WpfArcadeSdkPath)Sdk\Sdk.targets</WpfArcadeSdkTargets>
+  </PropertyGroup>
+  
+  
+  <Import Project="$(WpfArcadeSdkProps)"
+          Condition="Exists('$(WpfArcadeSdkProps)') And Exists('$(WpfArcadeSdkTargets)')"/>
+
+  <Import Sdk="Microsoft.DotNet.Arcade.Wpf.Sdk"
+          Project="Sdk.props"
+          Condition="!Exists('$(WpfArcadeSdkProps)') Or !Exists('$(WpfArcadeSdkTargets)')"/>
+  
+  <PropertyGroup>
+    <WpfTestsRoot>$(MsBuildThisFileDirectory)</WpfTestsRoot>
+    <BinariesRoot>$(WpfTestsRoot)bin\</BinariesRoot>
+    <PublishRoot>$(WpfTestsRoot)publish\</PublishRoot>
+    <ObjRoot>$(BinariesRoot)obj\</ObjRoot>
+    <PackagesRoot>$(BinariesRoot)packages\</PackagesRoot>
+    <PlatformFolder>x86</PlatformFolder>
+    <PlatformFolder Condition="'$(Platform)' == 'x64'">x64</PlatformFolder>
+  </PropertyGroup>
+  
+</Project>
