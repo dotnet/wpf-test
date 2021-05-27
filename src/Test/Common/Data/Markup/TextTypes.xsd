@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating flow, fixed, and text types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 84997 $
+ * Revision:         $Revision: 11 $
+ * Change Date:      $Date: 2006/04/06 08:54:25 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_TextTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  
+  <!-- ******************************************************* -->
+  <!-- *** Flow and Text Types ******************************* -->
+  <!-- ******************************************************* -->
+
+  <!-- *** FlowDocument ************************************** -->
+  <xs:complexType name="dFlowDocument">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkContentElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gFrameworkContentElementPropertyElements" />
+          <xs:group ref="gFlowDocumentPropertyElements" />
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+              <xs:element name="Paragraph" type="dParagraph" />
+            </xs:choice>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+              <xs:group ref="gBlockItems" />
+            </xs:choice>
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** TextBox ******************************************* -->
+  <xs:complexType name="dTextBox" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dTextOnlyContentControl">
+        <xs:attributeGroup ref="TextBoxBaseAttributes" />
+        <xs:attributeGroup ref="TextBoxAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** TextBlock ***************************************** -->
+  <xs:complexType name="dTextBlock" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gTextBlockPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="gFrameworkContentElement" />
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="TextBlockAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** RichTextBox *************************************** -->
+  <xs:complexType name="dRichTextBox">
+    <xs:complexContent>
+      <xs:extension base="dControlBase">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gControlPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:element name="FlowDocument" type="dFlowDocument" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="TextBoxBaseAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** FlowDocumentPageViewer **************************** -->
+  <xs:complexType name="dFlowDocumentPageViewer">
+    <xs:complexContent>
+      <xs:extension base="dControlBase">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gControlPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:element name="FlowDocument" type="dFlowDocument" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="FlowDocumentPageViewerAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** FlowDocumentScrollViewer ************************** -->
+  <xs:complexType name="dFlowDocumentScrollViewer">
+    <xs:complexContent>
+      <xs:extension base="dControlBase">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gControlPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:element name="FlowDocument" type="dFlowDocument" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="FlowDocumentScrollViewerAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** DocumentViewer ************************************ -->
+  <xs:complexType name="dDocumentViewer">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:element name="FixedDocument" type="dFixedDocument" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="DocumentViewerAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** FixedDocument ************************************* -->
+  <xs:complexType name="dFixedDocument">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkContentElement">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="PageContent" type="dPageContent" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** PageContent *************************************** -->
+  <xs:complexType name="dPageContent">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="FixedPage" type="dFixedPage" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** FixedPage ***************************************** -->
+  <xs:complexType name="dFixedPage">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Section ******************************************* -->
+  <xs:complexType name="dSection">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkContentElement">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="Paragraph" type="dParagraph" />
+          </xs:choice>
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:group ref="gBlockItems" />
+          </xs:choice>
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** TextElement *************************************** -->
+  <xs:complexType name="dTextElement" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkContentElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gFrameworkContentElementPropertyElements" />
+          <xs:group ref="gTextElementPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="gFrameworkContentElement" />
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Block ********************************************* -->
+  <xs:complexType name="dBlock" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dTextElement">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Paragraph ***************************************** -->
+  <xs:complexType name="dParagraph" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dBlock">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** LineBreak ***************************************** -->
+  <xs:complexType name="dLineBreak">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkContentElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gFrameworkContentElementPropertyElements" />
+          <xs:group ref="gTextElementPropertyElements" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** InlineUIContainer ********************************* -->
+  <xs:complexType name="dInlineUIContainer">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkContentElement">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElement" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Run *********************************************** -->
+  <xs:complexType name="dRun" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkContentElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gFrameworkContentElementPropertyElements" />
+          <xs:group ref="gTextElementPropertyElements" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Inline ******************************************** -->
+  <xs:complexType name="dInline" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dTextElement">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Hyperlink ***************************************** -->
+  <xs:complexType name="dHyperlink" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkContentElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gFrameworkContentElementPropertyElements" />
+          <xs:group ref="gTextElementPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="gHyperLink" />
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="HyperlinkAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Element Groups ************************************ -->
+  <!-- ******************************************************* -->
+  <xs:group name="gFrameworkContentElement">   
+    <xs:choice>      
+      <xs:element name="Hyperlink" type="dHyperlink" />
+      <xs:element name="Italic" type="dInline" />
+      <xs:element name="Bold" type="dInline" />
+      <xs:element name="Underline" type="dInline" />
+      <xs:element name="LineBreak" type="dLineBreak" />
+      <xs:element name="Run" type="dRun" />
+      <xs:element name="InlineUIContainer" type="dInlineUIContainer" />
+    </xs:choice>
+  </xs:group>
+
+  <xs:group name="gHyperLink">
+    <xs:choice>
+      <xs:element name="Run" type="dRun" />
+      <xs:element name="LineBreak" type="dLineBreak" />
+      <xs:element name="InlineUIContainer" type="dInlineUIContainer" />
+    </xs:choice>
+  </xs:group>
+  
+  <xs:group name="gBlockItems">
+    <xs:choice>
+      <xs:element name="Section" type="dSection" />
+    </xs:choice>
+  </xs:group>
+
+  <!-- ******************************************************* -->
+  <!-- *** Property Element Groups *************************** -->
+  <!-- ******************************************************* -->
+  <xs:group name="gFrameworkContentElementPropertyElements">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="FrameworkContentElement.Resources" type="dResources" />
+    </xs:choice>
+  </xs:group>
+  <xs:group name="gTextElementPropertyElements">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="TextElement.Background" type="dComplexPropertyBrush" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TextElement.TextEffects" type="dTextEffectsPropertyElement" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TextElement.FontFamily" type="dFontFamilyPropertyElement" />
+    </xs:choice>
+  </xs:group>
+  <xs:group name="gTextBlockPropertyElements">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="TextBlock.TextEffects" type="dTextEffectsPropertyElement" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TextBlock.FontFamily" type="dFontFamilyPropertyElement" />
+    </xs:choice>
+  </xs:group>
+  <xs:group name="gFlowDocumentPropertyElements">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="FlowDocument.TextEffects" type="dTextEffectsPropertyElement" />
+    </xs:choice>
+  </xs:group>
+  <xs:group name="cFlowDocumentScrollViewer">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="FlowDocumentScrollViewer.Background" type="dComplexPropertyBrush" />
+    </xs:choice>
+  </xs:group>
+
+  <!-- ******************************************************* -->
+  <!-- *** TextEffect Types ********************************** -->
+  <!-- ******************************************************* -->
+
+  <!-- *** TextEffects Property Element ********************** -->
+  <xs:complexType name="dTextEffectsPropertyElement">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="TextEffectCollection" type="dTextEffectCollection" />
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- *** TextEffectCollection ****************************** -->
+  <xs:complexType name="dTextEffectCollection">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+          <xs:element name="TextEffect" type="dTextEffect" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** TextEffect **************************************** -->
+  <xs:complexType name="dTextEffect">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice>
+          <xs:element name="TextEffect.Transform" type="dTransformPropertyElement" />
+        </xs:choice>
+        <xs:attribute name="Clip" type="frlrfMSAvalonWindowsMediaGeometryClassTopic" />
+        <xs:attribute name="Foreground" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+        <xs:attribute name="PositionStart" type="frlrfSystemInt32ClassTopic" />
+        <xs:attribute name="PositionCount" type="frlrfSystemInt32ClassTopic" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** FontFamily Types ********************************** -->
+  <!-- ******************************************************* -->
+
+  <!-- *** FontFamily Property Element *********************** -->
+  <xs:complexType name="dFontFamilyPropertyElement">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="FontFamily" type="dFontFamily" />
+    </xs:choice>
+  </xs:complexType>
+  
+  <xs:complexType name="dFontFamily">
+      <xs:sequence minOccurs="1" maxOccurs="1">
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="FontFamily.FamilyNames"/>
+        </xs:sequence>
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="FontFamily.FamilyTypefaces" type="dFontFamily.FamilyTypefaces" />
+        </xs:sequence>
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="FontFamily.FamilyMaps" type="dFontFamily.FamilyMaps" />
+        </xs:sequence>
+      </xs:sequence>
+    <xs:attributeGroup ref="FontFamilyBaseAttributes" />
+  </xs:complexType>
+
+  <xs:complexType name="dFontFamily.FamilyTypefaces">
+    <!-- We can only have one typeface with the same style+weight+stretch -->
+    <xs:choice minOccurs="0" maxOccurs="1">
+      <xs:element name="FamilyTypeface" type="dFamilyTypeface" />
+    </xs:choice>
+  </xs:complexType>
+  
+  <xs:complexType name="dFamilyTypeface">
+    <xs:attributeGroup ref="FontFamilyTypefaceAttributes" />
+  </xs:complexType>
+
+  <xs:complexType name="dFontFamily.FamilyMaps">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="FontFamilyMap" type="dFontFamilyMap" />
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="dFontFamilyMap">
+    <xs:attributeGroup ref="FontFamilyMapAttributes" />
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Attribute Groups ********************************** -->
+  <!-- ******************************************************* -->
+  <xs:attributeGroup name="TextBoxBaseAttributes">
+    <xs:attribute name="IsReadOnly" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="AcceptsReturn" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="AcceptsTab" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="IsUndoEnabled" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="AutoWordSelection" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="VerticalScrollBarVisibility" type="frlrfMSAvalonWindowsControlsScrollerVisibilityClassTopic" />
+    <xs:attribute name="HorizontalScrollBarVisibility" type="frlrfMSAvalonWindowsControlsScrollerVisibilityClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="TextBoxAttributes">
+    <xs:attribute name="TextWrapping" type="TextWrappingAttributeType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="TextBlockAttributes">
+    <xs:attribute name="Foreground" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute name="TextWrapping" type="TextWrappingAttributeType" />
+    
+    <!--  Since FontFamily is defined above as an element, including this will
+        an error as it will be defined twice.
+    <xs:attribute name="FontFamily" type="frlrfFontFamilyClassTopic" />
+    -->
+    
+    <xs:attribute name="FontStyle" type="frlrfMSAvalonWindowsFontStyleClassTopic" />
+    <xs:attribute name="FontWeight" type="frlrfMSAvalonWindowsFontWeightClassTopic" />
+    <xs:attribute name="FontStretch" type="FontStretchAttributeType" />
+    <xs:attribute name="FontSize" type="frlrfMSAvalonWindowsFontSizeClassTopic" />
+    <xs:attribute name="TextDecorations" type="frlrfMSAvalonWindowsTextDecorationsClassTopic" />
+    <xs:attribute name="TextAlignment" type="TextAlignmentAttributeType" />
+    <xs:attribute name="TextTrimming" type="TextTrimmingAttributeType" />
+    <xs:attribute name="LineHeight" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="Padding" type="frlrfMSAvalonWindowsThicknessClassTopic" />
+    <xs:attribute name="IsHyphenationEnabled" type="frlrfSystemBooleanClassTopic" />
+    <!-- PROPERTY ELEMENT SYNTAX ONLY <xs:attribute name="TextEffects" type="TextEffects" /> -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="DocumentViewerAttributes">
+    <xs:attribute name="HorizontalOffset" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="VerticalOffset" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="ShowPageBorders" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="Zoom" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="MaxPagesAcross" type="frlrfSystemInt32ClassTopic" />
+    <xs:attribute name="VerticalPageSpacing" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="HorizontalPageSpacing" type="NonZeroDoubleAttributeType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="FlowDocumentPageViewerAttributes">
+    <xs:attribute name="Zoom" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="ZoomIncrement" type="NonZeroDoubleAttributeType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="FlowDocumentScrollViewerAttributes">
+    <xs:attribute name="Zoom" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="ZoomIncrement" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="VerticalScrollBarVisibility" type="frlrfMSAvalonWindowsControlsScrollerVisibilityClassTopic" />
+    <xs:attribute name="HorizontalScrollBarVisibility" type="frlrfMSAvalonWindowsControlsScrollerVisibilityClassTopic" />
+    <xs:attribute name="IsToolBarVisible" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="IsSelectionEnabled" type="frlrfSystemBooleanClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="FontFamilyBaseAttributes">
+    <xs:attribute name="Baseline" type="FontFamilyBaselineSimpleType" />
+    <xs:attribute name="LineSpacing" type="FontFamilyLineSpacingSimpleType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="FontFamilyTypefaceAttributes">
+    <xs:attribute name="Weight" type="frlrfMSAvalonWindowsFontWeightClassTopic" />
+    <xs:attribute name="Stretch" type="FontStretchAttributeType" />
+    <xs:attribute name="Style" type="frlrfMSAvalonWindowsFontStyleClassTopic" />
+    <xs:attribute name="UnderlinePosition" type="NegativeDoubleAttributeType" />
+    <xs:attribute name="UnderlineThickness" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="StrikethroughPosition" type="NegativeDoubleAttributeType" />
+    <xs:attribute name="StrikethroughThickness" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="CapsHeight" type="NonZeroDoubleAttributeType" />
+    <xs:attribute name="XHeight" type="NonZeroDoubleAttributeType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="FontFamilyMapAttributes">
+    <xs:attribute name="Target" use="required" type="FontFamilyMapTargetAttributeType" />
+    <xs:attribute name="Unicode" type="UnicodeRangeType" />
+    <xs:attribute name="Scale" type="NonZeroDoubleAttributeType" />
+  </xs:attributeGroup>
+</xs:schema>

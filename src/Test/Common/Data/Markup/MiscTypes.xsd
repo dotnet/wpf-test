@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating misc types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 78916 $
+ * Revision:         $Revision: 7 $
+ * Change Date:      $Date: 2006/02/02 09:18:08 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_MiscTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  
+  <!-- ******************************************************* -->
+  <!-- *** Misc Types **************************************** -->
+  <!-- ******************************************************* -->
+  <xs:complexType name="dMediaElement">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+        </xs:choice>
+        <xs:attribute use="required" name="Source" type="MediaElementSourceAttribute" />
+        <!-- Force low volume so people don't go crazy hearing media -->
+        <xs:attribute use="required" name="Volume">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="0.02" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dInkCanvas">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dGlyphs">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:attributeGroup ref="GlyphsAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dBorder">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:choice minOccurs="0" maxOccurs="1">
+          <xs:group ref="gUIElement" />
+        </xs:choice>
+        <xs:attributeGroup ref="BorderAttributes" />
+        <xs:attributeGroup ref="DecoratorAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dCheckBox">
+    <xs:complexContent>
+      <xs:extension base="dNoContentControl">
+        <xs:attributeGroup ref="CheckBoxAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dContextMenu" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dItemsControl">
+        <xs:attributeGroup ref="ContextMenuAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dFrame">
+    <xs:complexContent>
+      <xs:extension base="dNoContentControl">
+        <xs:choice minOccurs="0" maxOccurs="1">
+          <xs:element name="Frame.Content" type="dFrameContentPropertyElement" />
+        </xs:choice>
+        <xs:attributeGroup ref="FrameAttributes" />
+        <xs:attributeGroup ref="ContentControlAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dFrameContentPropertyElement">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:group ref="gUIElement" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="dSlider">
+    <xs:complexContent>
+      <xs:extension base="dNoContentControl">
+        <xs:attributeGroup ref="SliderAttributes" />
+        <xs:attributeGroup ref="RangeBaseAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dImage">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="Image.Source" type="dImageSourcePropertyElement" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="ImageAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dImageSourcePropertyElement">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="BitmapImage" type="dBitmapImage" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="dBitmapImage">
+    <xs:attributeGroup ref="BitmapImageAttributes" />
+  </xs:complexType>
+  <xs:complexType name="dLabel">
+    <xs:complexContent>
+      <xs:extension base="dAvalonContentControl">
+        <xs:attributeGroup ref="LabelAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dItemsControl" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dMixedContentControl">
+        <xs:attributeGroup ref="ItemsControlAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dMenu" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dItemsControl">
+        <xs:attributeGroup ref="MenuAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dListBox" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dItemsControl" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dToolTip">
+    <xs:complexContent>
+      <xs:extension base="dAvalonContentControl">
+        <xs:attributeGroup ref="ToolTipAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dButton">
+    <xs:complexContent>
+      <xs:extension base="dAvalonContentControl">
+        <xs:attributeGroup ref="ButtonAttributes" />
+        <xs:attributeGroup ref="ButtonBaseAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dScrollViewer">
+    <xs:complexContent>
+      <xs:extension base="dAvalonContentControl">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dComplexPropertyBrush">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:group ref="gBrush" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="dComplexPropContextMenu">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:group ref="cComplexPropContextMenu" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="dComplexPropToolTip">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:group ref="cComplexPropToolTip" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:group name="cComplexPropContextMenu">
+    <xs:choice>
+      <xs:element minOccurs="1" maxOccurs="1" name="ContextMenu" type="dContextMenu" />
+    </xs:choice>
+  </xs:group>
+  <xs:group name="cComplexPropToolTip">
+    <xs:choice>
+      <xs:element minOccurs="1" maxOccurs="1" name="ToolTip" type="dToolTip" />
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="dBitmapEffectPropertyElement">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="BitmapEffectGroup" type="dBitmapEffectGroup" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="dResources">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="gFrameworkContentElement" />
+      <xs:group ref="gUIElement" />
+      <xs:group ref="gBrush" />
+      <xs:element name="Style" type="dControlStyleType" />
+      <xs:element name="ControlTemplate" type="dControlTemplate" />
+    </xs:choice>
+  </xs:complexType>
+  
+</xs:schema>

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Sti</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <OutputSubFolder>Infra</OutputSubFolder>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+ 
+ <ItemGroup>
+    <Compile Include="SimpleTestInvoke.cs" />
+    <Compile Include="StiDriverParameters.cs" />
+    <Compile Include="StiUtilities.cs" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating panel types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 78916 $
+ * Revision:         $Revision: 2 $
+ * Change Date:      $Date: 2006/02/02 09:18:08 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_PanelTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  
+  <!-- ******************************************************* -->
+  <!-- *** Panel Types *************************************** -->
+  <!-- ******************************************************* -->
+
+  <!-- *** Panel Base **************************************** -->
+  <xs:complexType name="dPanel">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gPanelPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="PanelAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <!-- *** Grid ********************************************** -->
+  <xs:complexType name="dGrid">
+    <xs:complexContent>
+      <xs:extension base="dPanel">
+        <xs:attributeGroup ref="GridAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** DockPanel ***************************************** -->
+  <xs:complexType name="dDockPanel">
+    <xs:complexContent>
+      <xs:extension base="dPanel">
+        <xs:attributeGroup ref="DockPanelAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** StackPanel **************************************** -->
+  <xs:complexType name="dStackPanel">
+    <xs:complexContent>
+      <xs:extension base="dPanel">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Canvas ******************************************** -->
+  <xs:complexType name="dCanvas">
+    <xs:complexContent>
+      <xs:extension base="dPanel">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Property Element Groups *************************** -->
+  <!-- ******************************************************* -->
+  <xs:group name="gPanelPropertyElements">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="Panel.Style">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="Style" type="dPanelStyleType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:group>
+  
+</xs:schema>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for specifying the common children we want 
+ *          in generated xaml. 
+ *          Note: This version excludes Flow types, MediaElement, and BitmapEffect.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 85158 $
+ * Revision:         $Revision: 7 $
+ * Change Date:      $Date: 2006/04/07 08:34:49 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_ElementGroups3.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:cc="clr-namespace:Microsoft.Test.Windows.Controls;assembly=TestRuntimeUntrusted"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
+  <xs:import namespace="clr-namespace:Microsoft.Test.Windows.Controls;assembly=TestRuntimeUntrusted" schemaLocation="CustomTypes.xsd" />
+
+  <!-- ******************************************************* -->
+  <!-- *** Misc Element Groups ******************************* -->
+  <!-- ******************************************************* -->
+  <xs:group name="gUIElement">
+    <xs:choice>
+      <xs:element name="Rectangle" type="dRectangle" />
+      <xs:element name="Ellipse" type="dEllipse" />
+      <xs:element name="Polygon" type="dPolygon" />
+      <xs:element name="Polyline" type="dPolyline" />
+      <xs:element name="Line" type="dLine" />
+      <xs:element name="Path" type="dPath" />
+      <xs:element name="Grid" type="dGrid" />
+      <xs:element name="Glyphs" type="dGlyphs" />
+      <xs:element name="Frame" type="dFrame" />
+      <xs:element name="Button" type="dButton" />
+      <xs:element name="TextBox" type="dTextBox" />
+      <!--<xs:element name="RichTextBox" type="dRichTextBox" />
+      <xs:element name="FlowDocumentPageViewer" type="dFlowDocumentPageViewer" />
+      <xs:element name="FlowDocumentScrollViewer" type="dFlowDocumentScrollViewer" />
+      <xs:element name="DocumentViewer" type="dDocumentViewer" />-->
+      <xs:element name="TextBlock" type="dTextBlock" />
+      <xs:element name="Canvas" type="dCanvas" />
+      <xs:element name="StackPanel" type="dStackPanel" />
+      <xs:element name="DockPanel" type="dDockPanel" />
+      <xs:element name="Slider" type="dSlider" />
+      <xs:element name="CheckBox" type="dCheckBox" />
+      <xs:element name="Border" type="dBorder" />
+      <xs:element name="Menu" type="dMenu" />
+      <xs:element name="ListBox" type="dListBox" />
+      <xs:element name="Image" type="dImage" />
+      <xs:element name="ScrollViewer" type="dScrollViewer" />
+      <xs:element name="InkCanvas" type="dInkCanvas" />
+      <xs:element name="Viewport3D" type="dViewport3D" />
+      <!--<xs:element name="MediaElement" type="dMediaElement" />-->
+      <xs:group ref="cc:gUIElementCustom" />
+    </xs:choice>
+  </xs:group>
+  
+  <!-- ******************************************************* -->
+  <!-- *** Misc Property Element Groups ********************** -->
+  <!-- ******************************************************* -->
+  <xs:group name="gUIElementPropertyElements">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="UIElement.RenderTransform" type="dTransformPropertyElement" />
+      <xs:element minOccurs="0" maxOccurs="0" name="UIElement.BitmapEffect" type="dBitmapEffectPropertyElement" />
+    </xs:choice>
+  </xs:group>
+  <xs:group name="gFrameworkElementPropertyElements">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="1" name="FrameworkElement.Resources" type="dResources" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FrameworkElement.LayoutTransform" type="dTransformPropertyElement" />
+    </xs:choice>
+  </xs:group>
+  <xs:group name="gControlPropertyElements">
+    <xs:choice>
+      <xs:element minOccurs="1" maxOccurs="1" name="Control.Background" type="dComplexPropertyBrush" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Control.ContextMenu" type="dComplexPropContextMenu" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Control.ToolTip" type="dComplexPropToolTip" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Control.Style">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="Style" type="dControlStyleType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Control.Template">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="ControlTemplate" type="dControlTemplate" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:group>
+
+</xs:schema>

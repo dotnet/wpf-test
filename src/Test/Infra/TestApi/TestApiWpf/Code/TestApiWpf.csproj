@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>TestApiWpf</AssemblyName>
+    <RootNamespace>Microsoft.Test</RootNamespace>
+    <OutputType>Library</OutputType>
+    <PublishDir>$(WpfTestBasePublishPath)\Infra</PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="AutomationUtilities.cs" />
+    <Compile Include="DispatcherOperations.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="ApplicationControl\UIAutomationApplicationImpl.cs" />
+    <Compile Include="ApplicationControl\UIAutomationOutOfProcessApplicationFactory.cs" />
+    <Compile Include="ApplicationControl\WpfApplicationImpl.cs" />
+    <Compile Include="ApplicationControl\WpfInProcessApplicationFactory.cs" />
+    <Compile Include="ApplicationControl\WpfInProcessApplicationSettings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="VisualVerification\SnapshotHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TestApiCoreProject)" />
+  </ItemGroup>
+</Project>

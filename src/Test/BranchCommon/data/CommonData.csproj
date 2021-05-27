@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <PublishDir>$(WpfTestBasePublishPath)</PublishDir>
+    <_IsPortable>true</_IsPortable>
+    <SelfContained>false</SelfContained>
+    <NoTargets>true</NoTargets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="DiscoveryInfo*.xml">
+      <Link>%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtList.xml">
+      <Link>DRT\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    
+    <None Include="*.cmd">
+      <Link>%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+
+    <None Include="Reporting\*.xsl" >
+      <Link>Infra\Reporting\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+
+    <None Include="Deployments\*.xml" >
+        <Link>Infra\Deployments\%(Filename)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+
+    <None Include="Configurations\*.xml" >
+      <Link>Infra\Configurations\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

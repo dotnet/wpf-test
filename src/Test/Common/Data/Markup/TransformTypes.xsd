@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating Transform types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 78916 $
+ * Revision:         $Revision: 2 $
+ * Change Date:      $Date: 2006/02/02 09:18:08 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_TransformTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  
+  <!-- ******************************************************* -->
+  <!-- *** Transform Types *********************************** -->
+  <!-- ******************************************************* -->
+
+  <!-- *** Transform Type Property Element ******************* -->
+  <xs:complexType name="dTransformPropertyElement">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="TransformGroup" type="dTransformGroup" />
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- *** TransformGroup ************************************ -->
+  <xs:complexType name="dTransformGroup">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <!-- masOccurs could be unbounded but we have to constrain it to keep performance good -->
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="RotateTransform" type="dRotateTransform" />
+          <xs:element name="ScaleTransform" type="dScaleTransform" />
+          <xs:element name="SkewTransform" type="dSkewTransform" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** RotateTransform *********************************** -->
+  <xs:complexType name="dRotateTransform">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="Angle" type="AngleAttribute" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** ScaleTransform ************************************ -->
+  <xs:complexType name="dScaleTransform">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="ScaleX" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="ScaleY" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="CenterX" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="CenterY" type="ConstrainedDoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** SkewTransform ************************************* -->
+  <xs:complexType name="dSkewTransform">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="AngleX" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="AngleY" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="CenterX" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="CenterY" type="ConstrainedDoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+</xs:schema>

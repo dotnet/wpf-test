@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating 3D types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 76931 $
+ * Revision:         $Revision: 2 $
+ * Change Date:      $Date: 2006/01/12 16:04:43 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_3DTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:clr="http://schemas.microsoft.com/clr" 
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
+  
+  <!-- ******************************************************* -->
+  <!-- *** 3D Types ****************************************** -->
+  <!-- ******************************************************* -->
+
+  <!-- *** Viewport3D **************************************** -->
+  <xs:complexType name="dViewport3D">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element minOccurs="1" name="Viewport3D.Camera" type="dViewport3D.Camera" />
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="ModelVisual3D"        type="dModelVisual3D" />
+            <xs:element name="Viewport2DVisual3D"   type="dViewport2DVisual3D" />
+            <xs:element name="ModelUIElement3D"     type="dModelUIElement3D" />
+            <xs:element name="ContainerUIElement3D" type="dContainerUIElement3D" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Viewport2DVisual3D ************************************** -->
+  <xs:complexType name="dViewport2DVisual3D">
+    <xs:complexContent>
+      <xs:extension base="dVisual">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element name="Viewport2DVisual3D.Transform" type="d3DTransform.Transform" />
+          <xs:choice minOccurs="1" maxOccurs="1">
+             <xs:element name="DockPanel"     type="dDockPanel" />
+          </xs:choice>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element minOccurs="1" maxOccurs="1" name="Viewport2DVisual3D.Material" type="dViewport2DVisual3D.Material" />
+          </xs:choice>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element minOccurs="1" maxOccurs="1" name="Viewport2DVisual3D.Geometry" type="dGeometryModel3D.Geometry" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** ModelUIElement3D **************************************** -->
+  <xs:complexType name="dModelUIElement3D">
+    <xs:complexContent>
+      <xs:extension base="dVisual">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element name="ModelUIElement3D.Transform" type="d3DTransform.Transform" />
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element minOccurs="1" maxOccurs="1" name="ModelUIElement3D.Model" type="dModel" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attribute use="required" name="ModelUIElement3D.Focusable">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** ContainerUIElement3D ************************************ -->
+  <xs:complexType name="dContainerUIElement3D">
+    <xs:complexContent>
+      <xs:extension base="dVisual">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element name="ContainerUIElement3D.Transform" type="d3DTransform.Transform" />
+          <xs:choice minOccurs="1" maxOccurs="2">
+            <xs:element name="Viewport2DVisual3D" type="dViewport2DVisual3D" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Viewport3D.Camera ********************************* -->
+  <xs:complexType name="dViewport3D.Camera">
+      <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element name="PerspectiveCamera" type="dPerspectiveCamera" />
+      </xs:choice>
+  </xs:complexType>
+
+  <!-- *** PerspectiveCamera ********************************* -->
+  <xs:complexType name="dPerspectiveCamera">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element name="PerspectiveCamera.Transform" type="d3DTransform.Transform" />
+        </xs:sequence>
+        <xs:attribute use="required" name="FarPlaneDistance" type="FarPlaneDistanceAttribute" />
+        <xs:attribute use="required" name="LookDirection" type="LookDirectionAttribute" />
+        <xs:attribute use="required" name="UpDirection" type="UpDirectionAttribute" />
+        <xs:attribute use="required" name="NearPlaneDistance" type="NearPlaneDistanceAttribute" />
+        <xs:attribute use="required" name="Position" type="PositionAttribute" />
+        <xs:attribute use="required" name="FieldOfView" type="FieldOfViewAttribute" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="FarPlaneDistanceAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="20" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LookDirectionAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0,0,-1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UpDirectionAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0,1,0" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NearPlaneDistanceAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PositionAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0,0,10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FieldOfViewAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="40" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- *** Model *********************************** -->
+  <xs:complexType name="dModel">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element minOccurs="1" maxOccurs="1" name="GeometryModel3D" type="dGeometryModel3D" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** ModelVisual3D ************************************* -->
+  <xs:complexType name="dModelVisual3D">
+    <xs:complexContent>
+      <xs:extension base="dVisual">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="ModelVisual3D.Content" type="dModelVisual3D.Content" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** ModelVisual3D.Content ***************************** -->
+  <xs:complexType name="dModelVisual3D.Content">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="Model3DGroup" type="dModel3DGroup" />
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- *** Model3DGroup ************************************** -->
+  <xs:complexType name="dModel3DGroup">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element name="Model3D.Transform" type="d3DTransform.Transform" />
+          <xs:choice minOccurs="1" maxOccurs="2">
+            <xs:element name="AmbientLight" type="dAmbientLight" />
+            <xs:element name="DirectionalLight" type="dDirectionalLight" />
+          </xs:choice>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="Model3DGroup" type="dModel3DGroup" />
+            <xs:element name="GeometryModel3D" type="dGeometryModel3D" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** GeometryModel3D *********************************** -->
+  <xs:complexType name="dGeometryModel3D">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element name="GeometryModel3D.Transform" type="d3DTransform.Transform" />
+          <xs:element minOccurs="1" maxOccurs="1" name="GeometryModel3D.Geometry" type="dGeometryModel3D.Geometry" />
+          <xs:element minOccurs="1" maxOccurs="1" name="GeometryModel3D.Material" type="dGeometryModel3D.Material" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** GeometryModel3D.Geometry ************************** -->
+  <xs:complexType name="dGeometryModel3D.Geometry">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="MeshGeometry3D" type="dMeshGeometry3D" />
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- *** MeshGeometry3D ************************************ -->
+  <xs:complexType name="dMeshGeometry3D">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute use="required" name="Positions" type="MeshGeometryPositions" />
+        <xs:attribute use="required" name="Normals" type="MeshGeometryNormals" />
+        <xs:attribute use="required" name="TextureCoordinates" type="MeshGeometryTextureCoordinates" />
+        <xs:attribute use="required" name="TriangleIndices" type="MeshGeometryTriangleIndices" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="MeshGeometryPositions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="-1,1,0  1,1,0  1,-1,0  -1,-1,0  -1,-1,2  1,-1,2  1,1,2  -1,1,2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MeshGeometryNormals">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0,0,1 0,0,1 0,0,1 0,0,1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MeshGeometryTextureCoordinates">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0,0 1,0 1,1 0,1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MeshGeometryTriangleIndices">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1 0 3 2 1 3 4 5 7 5 6 7 0 4 7 0 3 4 3 2 4 2 5 4 6 5 1 1 5 2" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- *** GeometryModel3D.Material ************************** -->
+  <xs:complexType name="dGeometryModel3D.Material">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="MaterialGroup" type="dMaterialGroup" />
+          <xs:element name="DiffuseMaterial" type="dDiffuseMaterial" />
+          <xs:element name="EmissiveMaterial" type="dEmissiveMaterial" />
+          <xs:element name="SpecularMaterial" type="dSpecularMaterial" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** Viewport2DVisual3D.Material ************************** -->
+  <xs:complexType name="dViewport2DVisual3D.Material">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="DiffuseMaterial" type="dDiffuseMaterial" />
+          <xs:element name="EmissiveMaterial" type="dEmissiveMaterial" />
+          <xs:element name="SpecularMaterial" type="dSpecularMaterial" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** MaterialGroup ************************************* -->
+  <xs:complexType name="dMaterialGroup">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="2">
+          <xs:element name="MaterialGroup" type="dMaterialGroup" />
+          <xs:element name="DiffuseMaterial" type="dDiffuseMaterialInGroup" />
+          <xs:element name="EmissiveMaterial" type="dEmissiveMaterialInGroup" />
+          <xs:element name="SpecularMaterial" type="dSpecularMaterialInGroup" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** DiffuseMaterial *********************************** -->
+  <xs:complexType name="dDiffuseMaterial">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="DiffuseMaterial.Brush" type="dComplexPropertyBrush" />
+        </xs:choice>
+        <xs:attribute use="optional" name="Viewport2DVisual3D.IsVisualHostMaterial">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** DiffuseMaterial in MaterialGroup ******************* -->
+  <xs:complexType name="dDiffuseMaterialInGroup">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="DiffuseMaterial.Brush" type="dComplexPropertyBrush" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** EmissiveMaterial ********************************** -->
+  <xs:complexType name="dEmissiveMaterial">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="EmissiveMaterial.Brush" type="dComplexPropertyBrush" />
+        </xs:choice>
+        <xs:attribute use="optional" name="Viewport2DVisual3D.IsVisualHostMaterial">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** EmissiveMaterial in MaterialGroup *******************-->
+  <xs:complexType name="dEmissiveMaterialInGroup">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="EmissiveMaterial.Brush" type="dComplexPropertyBrush" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** SpecularMaterial ********************************** -->
+  <xs:complexType name="dSpecularMaterial">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="SpecularMaterial.Brush" type="dComplexPropertyBrush" />
+        </xs:choice>
+        <xs:attribute use="required" name="SpecularPower" type="DoubleAttributeType" />
+        <xs:attribute use="optional" name="Viewport2DVisual3D.IsVisualHostMaterial">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** SpecularMaterial in MaterialGroup ******************* -->
+  <xs:complexType name="dSpecularMaterialInGroup">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="SpecularMaterial.Brush" type="dComplexPropertyBrush" />
+        </xs:choice>
+        <xs:attribute use="required" name="SpecularPower" type="DoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** 3D Transforms ******************************** -->
+  <!-- ******************************************************* -->
+
+  <!-- *** Transform ********************************* -->
+  <xs:complexType name="d3DTransform.Transform">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="Transform3DGroup" type="dTransform3DGroup" />
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- *** Transform3DGroup ********************************** -->
+  <xs:complexType name="dTransform3DGroup">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="3">
+          <xs:element name="ScaleTransform3D" type="dScaleTransform3D" />
+          <xs:element name="TranslateTransform3D" type="dTranslateTransform3D" />
+          <xs:element name="RotateTransform3D" type="dRotateTransform3D" />
+          <xs:element name="Transform3DGroup" type="dTransform3DGroup" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** ScaleTransform3D ********************************** -->
+  <xs:complexType name="dScaleTransform3D">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="ScaleX" type="NegativeDoubleAttributeType" />
+        <xs:attribute name="ScaleY" type="NegativeDoubleAttributeType" />
+        <xs:attribute name="ScaleZ" type="NegativeDoubleAttributeType" />
+        <xs:attribute name="CenterX" type="NegativeDoubleAttributeType" />
+        <xs:attribute name="CenterY" type="NegativeDoubleAttributeType" />
+        <xs:attribute name="CenterZ" type="NegativeDoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** TranslateTransform3D ****************************** -->
+  <xs:complexType name="dTranslateTransform3D">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="OffsetX" type="NegativeDoubleAttributeType" />
+        <xs:attribute name="OffsetY" type="NegativeDoubleAttributeType" />
+        <xs:attribute name="OffsetZ" type="NegativeDoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** RotateTransform3D ********************************* -->
+  <xs:complexType name="dRotateTransform3D">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+          <xs:element name="RotateTransform3D.Rotation" type="dRotateTransform3D.Rotation" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** RotateTransform3D.Rotation ************************ -->
+  <xs:complexType name="dRotateTransform3D.Rotation">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="AxisAngleRotation3D" type="dAxisAngleRotation3D" />
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- *** AxisAngleRotation3D ******************************* -->
+  <xs:complexType name="dAxisAngleRotation3D">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute use="required" name="Axis" type="AxisAttribute" />
+        <xs:attribute use="required" name="Angle" type="AngleAttribute" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="AxisAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1,0,0" />
+      <xs:enumeration value="0,1,0" />
+      <xs:enumeration value="0,0,1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Model3D Light ************************************* -->
+  <!-- ******************************************************* -->
+
+  <!-- *** AmbientLight ************************************** -->
+  <xs:complexType name="dAmbientLight">
+    <xs:attribute use="required" name="Color" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+  </xs:complexType>
+
+  <!-- *** DirectionalLight ********************************** -->
+  <xs:complexType name="dDirectionalLight">
+    <xs:attribute use="required" name="Color" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute use="required" name="Direction" type="DirectionalLightDirections" />
+  </xs:complexType>
+
+  <xs:simpleType name="DirectionalLightDirections">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0,0,0" />
+      <xs:enumeration value=".5,-1,1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

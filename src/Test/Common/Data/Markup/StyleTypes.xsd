@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating Style and Template types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 78916 $
+ * Revision:         $Revision: 2 $
+ * Change Date:      $Date: 2006/02/02 09:18:08 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_StyleTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  
+  <!-- ******************************************************* -->
+  <!-- *** Style Types *************************************** -->
+  <!-- ******************************************************* -->
+
+  <!-- *** Style ********************************************* -->
+  <xs:complexType name="dStyle" abstract="true">
+      <xs:sequence minOccurs="1" maxOccurs="1">
+        <xs:element minOccurs="1" maxOccurs="1" name="Style.Resources" type="dResources" />
+        <xs:choice minOccurs="0" maxOccurs="5">
+          <xs:element name="Setter" type="dSetterBase" />
+        </xs:choice>
+        <xs:element minOccurs="1" maxOccurs="1" name="Style.Triggers" type="dTriggers" />
+      </xs:sequence>
+  </xs:complexType>
+
+  <!-- *** ControlStyleType ********************************** -->
+  <xs:complexType name="dControlStyleType">
+    <xs:complexContent>
+      <xs:extension base="dStyle">
+        <xs:attribute use="required" name="TargetType" type="ControlTargetTypeAttribute" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** PanelStyleType ************************************ -->
+  <xs:complexType name="dPanelStyleType">
+    <xs:complexContent>
+      <xs:extension base="dStyle">
+        <xs:attribute use="required" name="TargetType" type="PanelTargetTypeAttribute" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Trigger Types ************************************* -->
+  <!-- ******************************************************* -->
+  <xs:complexType name="dTriggers">
+    <xs:choice minOccurs="0" maxOccurs="5">
+      <xs:element name="Trigger" type="dTriggerBase" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="dTriggerBase" abstract="true">
+    <!-- May have Setter child tag -->
+    <xs:choice minOccurs="0" maxOccurs="5">
+      <xs:element name="Setter" type="dSetterBase" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="dBoolTrigger">
+    <xs:complexContent>
+      <xs:extension base="dTriggerBase">
+        <xs:attribute use="required" name="Property" type="BoolTriggerPropertyType" />
+        <xs:attribute use="required" name="Value" type="frlrfSystemBooleanClassTopic" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Setter Types ************************************** -->
+  <!-- ******************************************************* -->
+  <xs:complexType name="dSetterBase" abstract="true">
+  </xs:complexType>
+  <xs:complexType name="dBrushSetter">
+    <xs:complexContent>
+      <xs:extension base="dSetterBase">
+        <xs:attribute use="required" name="Property" type="BrushSetterPropertyType" />
+        <xs:attribute use="required" name="Value" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dThicknessSetter">
+    <xs:complexContent>
+      <xs:extension base="dSetterBase">
+        <xs:attribute use="required" name="Property" type="ThicknessSetterPropertyType" />
+        <xs:attribute use="required" name="Value" type="frlrfMSAvalonWindowsThicknessClassTopic" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dDoubleSetter">
+    <xs:complexContent>
+      <xs:extension base="dSetterBase">
+        <xs:attribute use="required" name="Property" type="DoubleSetterPropertyType" />
+        <xs:attribute use="required" name="Value" type="ConstrainedDoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Template Types ************************************ -->
+  <!-- ******************************************************* -->
+  <xs:complexType name="dControlTemplate">
+    <xs:sequence minOccurs="1" maxOccurs="1">
+      <xs:element minOccurs="1" maxOccurs="1"  name="Template.Resources" type="dResources" />
+      <xs:group ref="gUIElement" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ControlTemplate.Triggers" type="dTriggers" />
+    </xs:sequence>
+    <xs:attribute use="required" name="TargetType" type="ControlTargetTypeAttribute" />
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** TargetType Attributes ***************************** -->
+  <!-- ******************************************************* -->
+  
+  <xs:simpleType name="FrameworkElementTargetTypeAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="{x:Type FrameworkElement}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ControlTargetTypeAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="{x:Type Control}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PanelTargetTypeAttribute">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="{x:Type Panel}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Setter/Trigger Attributes ************************* -->
+  <!-- ******************************************************* -->
+  
+  <xs:simpleType name="BrushSetterPropertyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Control.Background" />
+      <xs:enumeration value="Control.BorderBrush" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ThicknessSetterPropertyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Control.BorderThickness" />
+      <xs:enumeration value="Control.Padding" />
+      <xs:enumeration value="Control.TabIndex" />
+      <xs:enumeration value="Control.Margin" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DoubleSetterPropertyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UIElement.Opacity" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BoolTriggerPropertyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UIElement.IsMouseOver" />
+      <xs:enumeration value="UIElement.IsMouseDirectlyOver" />
+      <xs:enumeration value="UIElement.IsMouseCaptured" />
+      <xs:enumeration value="UIElement.IsKeyboardFocused" />
+      <xs:enumeration value="UIElement.IsKeyboardFocusWithin" />
+      <xs:enumeration value="UIElement.IsEnabled" />
+      <xs:enumeration value="UIElement.IsVisible" />
+      <xs:enumeration value="UIElement.IsHitTestVisible" />
+      <xs:enumeration value="UIElement.IsFocused" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

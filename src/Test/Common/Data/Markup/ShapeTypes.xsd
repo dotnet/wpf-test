@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating brush types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 77774 $
+ * Revision:         $Revision: 1 $
+ * Change Date:      $Date: 2006/01/20 09:29:32 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_ShapeTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:clr="http://schemas.microsoft.com/clr" 
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
+  
+  <!-- ******************************************************* -->
+  <!-- *** Shape Types *************************************** -->
+  <!-- ******************************************************* -->
+  
+  <xs:complexType name="dEllipse">
+    <xs:complexContent>
+      <xs:extension base="dShape">
+        <xs:attributeGroup ref="EllipseAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dPolygon">
+    <xs:complexContent>
+      <xs:extension base="dShape">
+        <xs:attributeGroup ref="PolygonAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dPolyline">
+    <xs:complexContent>
+      <xs:extension base="dShape">
+        <xs:attributeGroup ref="PolylineAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dLine">
+    <xs:complexContent>
+      <xs:extension base="dShape">
+        <xs:attributeGroup ref="LineAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dPath">
+    <xs:complexContent>
+      <xs:extension base="dShape">
+        <xs:attributeGroup ref="PathAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dRectangle">
+    <xs:complexContent>
+      <xs:extension base="dShape">
+        <xs:attributeGroup ref="RectangleAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Attributes **************************************** -->
+  <!-- ******************************************************* -->
+  <xs:attributeGroup name="ShapeAttributes">
+    <xs:attribute name="Fill" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute name="Stretch" type="StretchSimpleType" />
+    <xs:attribute name="Stroke" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute name="StrokeThickness" type="frlrfMSAvalonWindowsThicknessClassTopic" />
+    <xs:attribute name="StrokeStartLineCap" type="frlrfMSAvalonWindowsMediaPenLineCapClassTopic" />
+    <xs:attribute name="StrokeEndLineCap" type="frlrfMSAvalonWindowsMediaPenLineCapClassTopic" />
+    <xs:attribute name="StrokeDashCap" type="frlrfMSAvalonWindowsMediaPenDashCapClassTopic" />
+    <xs:attribute name="StrokeLineJoin" type="frlrfMSAvalonWindowsMediaPenLineJoinClassTopic" />
+    <xs:attribute name="StrokeMiterLimit" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute name="StrokeDashOffset" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute name="StrokeDashArray" type="frlrfMSAvalonWindowsMediaDoubleCollectionClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="EllipseAttributes">
+  </xs:attributeGroup>
+  <xs:attributeGroup name="PolygonAttributes">
+    <xs:attribute name="Points" type="frlrfMSAvalonWindowsMediaPointCollectionClassTopic" />
+    <xs:attribute name="FillRule" type="frlrfMSAvalonWindowsMediaFillRuleClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="PolylineAttributes">
+    <xs:attribute name="Points" type="frlrfMSAvalonWindowsMediaPointCollectionClassTopic" />
+    <xs:attribute name="FillRule" type="frlrfMSAvalonWindowsMediaFillRuleClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="LineAttributes">
+    <xs:attribute name="X1" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="Y1" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="X2" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="Y2" type="frlrfMSAvalonWindowsLengthClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="PathAttributes">
+    <xs:attribute name="Data" type="frlrfMSAvalonWindowsMediaGeometryClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="RectangleAttributes">
+    <xs:attribute name="RadiusX" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="RadiusY" type="frlrfMSAvalonWindowsLengthClassTopic" />
+  </xs:attributeGroup>
+
+  <!-- ******************************************************* -->
+  <!-- *** Simple types ************************************** -->
+  <!-- ******************************************************* -->
+  <xs:simpleType name="StyleSimulationsSimpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="BoldSimulation" />
+      <xs:enumeration value="ItalicSimulation" />
+      <xs:enumeration value="BoldItalicSimulation" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for base types used for definition of other types to generate in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 78916 $
+ * Revision:         $Revision: 2 $
+ * Change Date:      $Date: 2006/02/02 09:18:08 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_BaseTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  
+  <!-- ******************************************************* -->
+  <!-- *** Base Types **************************************** -->
+  <!-- ******************************************************* -->
+  <xs:complexType name="dVisual">
+    <xs:attributeGroup ref="VisualAttributes" />
+    <xs:attributeGroup ref="DependencyObjectAttributes" />
+    <xs:attributeGroup ref="UIContextObjectAttributes" />
+    <xs:attributeGroup ref="ObjectAttributes" />
+  </xs:complexType>
+  <xs:complexType name="dAnimatable">
+    <xs:attributeGroup ref="DependencyObjectAttributes" />
+    <xs:attributeGroup ref="UIContextObjectAttributes" />
+    <xs:attributeGroup ref="ObjectAttributes" />
+  </xs:complexType>
+  <xs:complexType name="dFrameworkElement">
+    <xs:complexContent>
+      <xs:extension base="dVisual">
+        <xs:attributeGroup ref="DockPanelAttachedAttributes" />
+        <xs:attributeGroup ref="CanvasAttachedAttributes" />
+        <xs:attributeGroup ref="FrameworkElementAttributes" />
+        <xs:attributeGroup ref="UIElementAttributes" />
+        <xs:attributeGroup ref="RetainedVisualAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dFrameworkContentElement">
+    <xs:attributeGroup ref="FrameworkContentElementAttributes" />
+    <xs:attributeGroup ref="DependencyObjectAttributes" />
+    <xs:attributeGroup ref="UIContextObjectAttributes" />
+    <xs:attributeGroup ref="ObjectAttributes" />
+  </xs:complexType>
+  <xs:complexType name="dShape">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:choice minOccurs="0" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+        </xs:choice>
+        <xs:attributeGroup ref="ShapeAttributes" />
+        <xs:attributeGroup ref="CanvasAttachedAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dControlBase">
+    <xs:complexContent>
+      <xs:extension base="dFrameworkElement">
+        <xs:attributeGroup ref="ControlAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dNoContentControl">
+    <xs:complexContent>
+      <xs:extension base="dControlBase">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gControlPropertyElements" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dTextOnlyContentControl" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dControlBase">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gControlPropertyElements" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dSingleContentControl">
+    <xs:complexContent>
+      <xs:extension base="dControlBase">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gControlPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:group ref="gFrameworkContentElement" />
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dMixedContentControl" mixed="true">
+    <xs:complexContent>
+      <xs:extension base="dControlBase">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="gUIElementPropertyElements" />
+          <xs:group ref="gFrameworkElementPropertyElements" />
+          <xs:group ref="gControlPropertyElements" />
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="gFrameworkContentElement" />
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dAvalonContentControl">
+    <xs:complexContent>
+      <xs:extension base="dSingleContentControl">
+        <xs:attributeGroup ref="ContentControlAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+</xs:schema>

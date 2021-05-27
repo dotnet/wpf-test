@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating BitmapEffect and TextEffect types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 84091 $
+ * Revision:         $Revision: 3 $
+ * Change Date:      $Date: 2006/03/29 09:10:20 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_EffectTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  
+  <!-- ******************************************************* -->
+  <!-- *** BitmapEffect Types ******************************** -->
+  <!-- ******************************************************* -->
+
+  <!-- *** BitmapEffectGroup ********************************* -->
+  <xs:complexType name="dBitmapEffectGroup">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:choice minOccurs="1" maxOccurs="1">
+        <!-- masOccurs could be unbounded but we have to constrain it to keep performance good -->
+          <xs:element name="BlurBitmapEffect" type="dBlurBitmapEffect" />
+          <xs:element name="DropShadowBitmapEffect" type="dDropShadowBitmapEffect" />
+          <xs:element name="EmbossBitmapEffect" type="dEmbossBitmapEffect" />
+          <xs:element name="OuterGlowBitmapEffect" type="dOuterGlowBitmapEffect" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** OuterGlowBitmapEffect ***************************** -->
+  <xs:complexType name="dOuterGlowBitmapEffect">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="GlowColor" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+        <xs:attribute name="GlowSize" type="DoubleAttributeType" />
+        <xs:attribute name="Noise" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="Opacity" type="ConstrainedDoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** BlurBitmapEffect ********************************** -->
+  <xs:complexType name="dBlurBitmapEffect">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="Radius" type="DoubleAttributeType" />
+        <xs:attribute name="KernelType" type="KernelTypeAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** DropShadowBitmapEffect **************************** -->
+  <xs:complexType name="dDropShadowBitmapEffect">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="ShadowDepth" type="DoubleAttributeType" />
+        <xs:attribute name="Color" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+        <xs:attribute name="Direction" type="DoubleAttributeType" />
+        <xs:attribute name="Noise" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="Opacity" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="Softness" type="ConstrainedDoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- *** EmbossBitmapEffect ******************************** -->
+  <xs:complexType name="dEmbossBitmapEffect">
+    <xs:complexContent>
+      <xs:extension base="dAnimatable">
+        <xs:attribute name="LightAngle" type="DoubleAttributeType" />
+        <xs:attribute name="Relief" type="ConstrainedDoubleAttributeType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+</xs:schema>

@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>TestServices</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PublishDir>$(WpfDrtTestBasePublishPath)</PublishDir>
+    <SignAssemblyAttribute>true</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseInput.cs" />
+    <Compile Include="AutomationHelper.cs" />
+    <Compile Include="Call.cs" />
+    <Compile Include="CertificateManager.cs" />
+    <Compile Include="ContextInvoker.cs" />
+    <Compile Include="DebugOutputPublisher.cs" />
+    <Compile Include="DiagnosticTips.cs" />
+    <Compile Include="DrtBaseAdapter.cs" />
+    <Compile Include="DrtTests.cs" />
+    <Compile Include="DrtTestSuiteAdapter.cs" />
+    <Compile Include="MethodInvoker.cs" />
+    <Compile Include="ProcessManager.cs" />
+    <Compile Include="ReachHelper.cs" />
+    <Compile Include="ReflectionHelper.cs" />
+    <Compile Include="Syncronizer.cs" />
+    <Compile Include="TestContext.cs" />
+    <Compile Include="TestEngine.cs" />
+    <Compile Include="TestInfo.cs" />
+    <Compile Include="TestServices.cs" />
+    <Compile Include="WebServer.cs" />
+    <Compile Include="WebServer.ContextEventArgs.cs" />
+    <Compile Include="WebServer.RegistryHelpers.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="$(SystemDiagnosticsPerformanceCounterVersion)" />
+  </ItemGroup>
+  
+</Project>

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <NoTargets>true</NoTargets>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="pict\i386\pict.exe" Condition= "'$(Platform)' != 'x64'">
+      <Link>Effects\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="pict\amd64\pict.amd64.exe" Condition= "'$(Platform)' == 'x64'">
+      <Link>Effects\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="AssemblyLinker\**\*.*">
+      <Link>\AssemblyLinker\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Markup\*.*">
+      <Link>%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
+  

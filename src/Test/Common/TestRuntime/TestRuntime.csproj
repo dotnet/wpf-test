@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>TestRuntime</AssemblyName>
+    <OutputType>Library</OutputType>
+    <OutputSubFolder>Common</OutputSubFolder>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>$(DefineConstants);TRACE;TARGET_NET3_5;STANDALONE_BUILD;TESTBUILD_CLR40</DefineConstants>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="@(SourcesETWLogging)" />
+    <Compile Include="@(SharedRuntimeDiscoverySources)" />
+    <Compile Include="@(SharedRuntimeExecutionSources)" />
+    <Compile Include="@(SourcesAppmonitor)" />
+    <Compile Include="@(SourcesCompression)" />
+    <Compile Include="@(SourcesInput)" />
+    <!--<Compile Include="@(SourcesXamlBrowserHost)" />-->
+    <!--<Compile Include="@(SourcesSecurity)" />-->
+    <Compile Include="@(SourcesLogging)" />
+    <Compile Include="@(SourcesStateManagement)" />
+    <Compile Include="@(SourcesStateManagementRuntime)" />
+    <Compile Include="@(SourcesExecutionServiceClient)" />
+    <Compile Include="@(SourcesProcessHelper)" />
+    <Compile Include="@(SourcesExecution)" />
+    <!--<Compile Include="@(SourcesDebugging)" />-->
+    <Compile Include="@(SourcesWin32)" />
+    <Compile Include="@(SourcesModeling)" />
+    <Compile Include="@(SourcesIntegrationTxr)" />
+    <Compile Include="@(SourcesPict)" />
+    <Compile Include="@(SourcesImaging)" />
+    <Compile Include="@(SourcesObjectserializer)" />
+    <!--<Compile Include="@(SourcesSecurityWrappers)" />-->
+    <!--<Compile Include="@(SourcesClickonceHelper)" />-->
+    <Compile Include="@(SourcesDiscovery)" />
+    <Compile Include="@(SourcesDiscoveryAdaptors)" />
+    <Compile Include="@(SourcesSystemInfo)" />
+    <Compile Include="@(SourcesSystemInfoWpf)" />
+    <Compile Include="@(SourcesSystemInfoMediaPlayer)" />
+    <Compile Include="@(SourcesDisplay)" />
+    <Compile Include="@(SourcesLoaders)" />
+    <Compile Include="@(SourcesWindowsForms)" />
+    <Compile Include="@(SourcesMarkup)" />
+    <Compile Include="@(SourcesAnimation)" />
+    <Compile Include="@(SourcesRenderingVerification)" />
+    <Compile Include="@(SourcesSerializationCustomElements)" />
+    <Compile Include="@(SourcesSerialization)" />
+    <Compile Include="@(SourcesContainer)" />
+    <Compile Include="@(SourcesTest)" />
+    <Compile Include="@(SourcesThreading)" />
+    <Compile Include="@(SourcesTS)" />
+    <Compile Include="@(SourcesWindows)" />
+    <Compile Include="@(SourcesDrt)" />
+    <Compile Include="@(SourcesLeak)" />
+    <Compile Include="@(SourcesTestTypes)" />
+    <Compile Include="@(SourcesVerification)" />
+    <Compile Include="@(SourcesGraphics)" />
+    <Compile Include="@(SourcesLayoutCommon)" />
+    <!--<Compile Include="@(SourcesStressFramework)" />
+    <Compile Include="@(SourmeworkLonghaulProxy)" />
+    <Compile Include="@(SourcesStrescesStressFrameworkAvalonProxy)" />
+    <Compile Include="@(SourcesStressFrasGraphics)" />-->
+    <Compile Include="@(SourcesStabilityLeak)" />
+    <Compile Include="@(SourcesAutoData)" />
+    <Compile Include="@(SourcesAnnotations)" />
+    <Compile Include="@(SourcesExceptionValidation)" />
+    <Compile Include="Test\Graphics\ClearTypeDetector.cs" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+        <Compile Include="$(CommonCodeLocation)\Threading\DispatcherHelper.cs"/>
+    </ItemGroup>-->
+  <ItemGroup>
+    <EmbeddedResource Include="@(ManagedResourcesAppMonitor)" />
+    <EmbeddedResource Include="@(ManagedResourcesWindows)" />
+    <EmbeddedResource Include="@(ManagedResourcesAutoData)" />
+    <EmbeddedResource Include="@(ManagedResourcesVscan)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestApiCoreProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.EventLog" Version="$(SystemDiagnosticsEventLogPackageVersion)" />
+    <PackageReference Include="System.Threading.AccessControl" Version="$(SystemThreadingAccessControlVersion)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,38 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <!--Automatically converted using custom WPF settings-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <AssemblyName>wpfSetup</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <OutputType>EXE</OutputType>
+    <OutputSubFolder>DRT</OutputSubFolder>
+  </PropertyGroup>
+
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <Clean Include="$(IntermediateOutputDirectory)\SNKey.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="wpfSetup.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="$(IntermediateOutputDirectory)\SNKey.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <DataFile Include="$(EnlistmentRootPath)\tools\testroot.cer" />
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+  <Target Name="BeforeBuild">
+    <MakeDir Directories="$(IntermediateOutputDirectory)" Condition="!Exists('$(IntermediateOutputDirectory)')" />
+    <Exec Command="COPY /Y /V SNKey.cs $(IntermediateOutputDirectory)\SNKey.cs"/>
+    <Exec Command="rep find:&quot;_WCP_PUBLIC_KEY_TOKEN_&quot; -replace:&quot;$(WINDOWS_PUBLIC_KEY_TOKEN)&quot; $(IntermediateOutputDirectory)\SNKey.cs" />
+  </Target>
+
+</Project>

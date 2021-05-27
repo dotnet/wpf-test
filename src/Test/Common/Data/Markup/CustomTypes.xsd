@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Schema for custom (non-Avalon) types used in xaml generation.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 85158 $
+ * Revision:         $Revision: 1 $
+ * Change Date:      $Date: 2006/04/07 08:34:49 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_CustomTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="clr-namespace:Microsoft.Test.Windows.Controls;assembly=TestRuntimeUntrusted" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="clr-namespace:Microsoft.Test.Windows.Controls;assembly=TestRuntimeUntrusted"
+  xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+
+  <!-- ******************************************************* -->
+  <!-- *** Custom Types ************************************** -->
+  <!-- ******************************************************* -->
+  <xs:complexType name="dCustomContentControl">
+    <xs:complexContent>
+      <xs:extension base="av:dSingleContentControl">
+        <xs:choice minOccurs="0" maxOccurs="1">
+          <xs:element name="CustomContentControl.ExtraContent" type="dCustomContentControl.ExtraContent" />
+        </xs:choice>
+        <xs:attributeGroup ref="av:ContentControlAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="dCustomContentControl.ExtraContent">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:group ref="av:gFrameworkContentElement" />
+      <xs:group ref="av:gUIElement" />
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:group name="gUIElementCustom">
+    <xs:choice>
+      <xs:element name="CustomContentControl" type="dCustomContentControl" />
+    </xs:choice>
+  </xs:group>
+</xs:schema>

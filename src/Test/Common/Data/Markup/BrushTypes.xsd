@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating brush types in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 77774 $
+ * Revision:         $Revision: 3 $
+ * Change Date:      $Date: 2006/01/20 09:29:32 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_BrushTypes.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:clr="http://schemas.microsoft.com/clr" 
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
+  
+  <!-- ******************************************************* -->
+  <!-- *** Brush Types *************************************** -->
+  <!-- ******************************************************* -->
+  
+  <!-- VisualBrush ******************************************* -->
+  <xs:complexType name="dVisualBrush" >
+    <xs:choice>
+      <xs:element name="VisualBrush.Visual">
+        <xs:complexType>
+          <xs:choice>
+            <xs:group ref="gUIElement" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="VisualBrushAttributes" />
+    <xs:attributeGroup ref="TileBrushAttributes" />
+  </xs:complexType>
+  
+  <!-- SolidColorBrush *************************************** -->
+  <xs:complexType name="dSolidColorBrush">
+    <xs:attributeGroup ref="SolidColorBrushAttributes" />
+  </xs:complexType>
+  
+  <!-- LinearGradientBrush *********************************** -->
+  <xs:complexType name="dLinearGradientBrush">
+    <xs:choice>
+      <xs:element name="LinearGradientBrush.GradientStops" type="dGradientStops" />
+    </xs:choice>
+    <xs:attributeGroup ref="LinearGradientBrushAttributes" />
+    <xs:attributeGroup ref="GradientBrushAttributes" />
+  </xs:complexType>
+
+  <!-- RadialGradientBrush *********************************** -->
+  <xs:complexType name="dRadialGradientBrush">
+    <xs:choice>
+      <xs:element name="RadialGradientBrush.GradientStops" type="dGradientStops" />
+    </xs:choice>
+    <xs:attributeGroup ref="RadialGradientBrushAttributes" />
+    <xs:attributeGroup ref="GradientBrushAttributes" />
+  </xs:complexType>
+
+  <!-- ImageBrush ******************************************** -->
+  <xs:complexType name="dImageBrush">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="ImageBrush.ImageSource" type="dImageSourcePropertyElement" />
+    </xs:choice>
+    <xs:attributeGroup ref="TileBrushAttributes" />
+  </xs:complexType>
+
+  <xs:complexType name="dGradientStops">
+    <xs:choice>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="GradientStop" type="dGradientStop" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="dGradientStop">
+    <xs:attributeGroup ref="GradientStopAttributes" />
+  </xs:complexType>
+
+  <!-- ******************************************************* -->
+  <!-- *** Groups ******************************************** -->
+  <!-- ******************************************************* -->
+  <xs:group name="gBrush">
+    <xs:choice>
+      <xs:element minOccurs="1" maxOccurs="1" name="VisualBrush" type="dVisualBrush" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SolidColorBrush" type="dSolidColorBrush" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LinearGradientBrush" type="dLinearGradientBrush" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RadialGradientBrush" type="dRadialGradientBrush" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImageBrush" type="dImageBrush" />
+    </xs:choice>
+  </xs:group>
+
+  <!-- ******************************************************* -->
+  <!-- *** Attributes **************************************** -->
+  <!-- ******************************************************* -->
+  <xs:attributeGroup name="TileBrushAttributes">
+    <xs:attribute name="ViewportUnits" type="BrushMappingModeSimpleType" />
+    <xs:attribute name="ViewboxUnits" type="BrushMappingModeSimpleType" />
+    <xs:attribute name="Viewport" type="RectSimpleType" />
+    <xs:attribute name="Viewbox" type="RectSimpleType" />
+    <xs:attribute name="Stretch" type="StretchSimpleType" />
+    <xs:attribute name="TileMode" type="TileModeSimpleType" />
+    <xs:attribute name="AlignmentX" type="AlignmentXSimpleType" />
+    <xs:attribute name="AlignmentY" type="AlignmentYSimpleType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="VisualBrushAttributes">
+    <xs:attribute name="AutoLayoutContent" type="frlrfBoolClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="SolidColorBrushAttributes">
+    <xs:attribute name="Color" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="GradientStopAttributes">
+    <xs:attribute use="required" name="Color" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute name="Offset" type="ConstrainedDoubleAttributeType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="LinearGradientBrushAttributes">
+    <xs:attribute use="required" name="StartPoint" type="frlrfMSAvalonWindowsPointClassTopic" />
+    <xs:attribute use="required" name="EndPoint" type="frlrfMSAvalonWindowsPointClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="RadialGradientBrushAttributes">
+    <xs:attribute name="GradientOrigin" type="frlrfMSAvalonWindowsPointClassTopic" />
+    <xs:attribute name="Center" type="frlrfMSAvalonWindowsPointClassTopic" />
+    <xs:attribute name="RadiusX" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute name="RadiusY" type="ConstrainedDoubleAttributeType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="GradientBrushAttributes">
+    <xs:attribute name="MappingMode" type="BrushMappingModeSimpleType" />
+    <xs:attribute name="ColorInterpolationMode" type="ColorInterpolationModeSimpleType" />
+    <xs:attribute name="SpreadMethod" type="GradientSpreadMethodSimpleType" />
+  </xs:attributeGroup>
+
+  <!-- ******************************************************* -->
+  <!-- *** Simple types ************************************** -->
+  <!-- ******************************************************* -->
+  <xs:simpleType name="RectSimpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0 0 0 0" />
+      <xs:enumeration value=".25 .25 .25 .25" />
+      <xs:enumeration value=".25 .25 .5 .5" />
+      <xs:enumeration value=".5 .5 .5 .5" />
+      <xs:enumeration value=".75 .75 .75 .75" />
+      <xs:enumeration value="1 1 1 1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TileModeSimpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Tile" />
+      <xs:enumeration value="FlipX" />
+      <xs:enumeration value="FlipY" />
+      <xs:enumeration value="FlipXY" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlignmentXSimpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Center" />
+      <xs:enumeration value="Right" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlignmentYSimpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Top" />
+      <xs:enumeration value="Center" />
+      <xs:enumeration value="Bottom" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BrushMappingModeSimpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Absolute" />
+      <xs:enumeration value="RelativeToBoundingBox" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ColorInterpolationModeSimpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ScRgbLinearInterpolation" />
+      <xs:enumeration value="SRgbLinearInterpolation" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="GradientSpreadMethodSimpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pad" />
+      <xs:enumeration value="Reflect" />
+      <xs:enumeration value="Repeat" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

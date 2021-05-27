@@ -1,0 +1,14 @@
+<Project>
+  <Import Condition="Exists('../Directory.Build.props')" Project="../Directory.Build.props" />
+  <PropertyGroup>
+    <!-- Ignore CLS compliant warnings-->
+    <NoWarn>CS3005;CS3001;CS300;CS3005;CS3008;CS0436</NoWarn>
+    <!-- Temporarily disable warning -->
+    <!-- CA2200: Re-throwing caught exception changes stack information -->
+    <!-- SYSLIB0004: ReliabilityContractAttribute' is obsolete: 'The Constrained Execution Region (CER) feature is not supported. -->
+    <!-- SYSLIB0006: Thread.Abort -->
+    <!-- SYSLIB0011: BinaryFormatter.Serialize is obsolete -->
+    <NoWarn>$(NoWarn);CA1416;CA2200;SYSLIB0004;SYSLIB0006;SYSLIB0011</NoWarn>
+
+  </PropertyGroup>
+</Project>

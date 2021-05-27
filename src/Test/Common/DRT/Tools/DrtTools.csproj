@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtTools</AssemblyName>
+    <PublishDir>$(WpfDrtTestBasePublishPath)</PublishDir>
+    <OutputType>Library</OutputType>
+    <SignAssemblyAttribute>true</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+    <NoWarn Condition="'$(NoWarn)'!=''">$(NoWarn),</NoWarn>
+    <NoWarn>$(NoWarn)618</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>    
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Performance.cs" />
+    <Compile Include="Monitors.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="UnsafeNativeMethods.cs" />
+    <Compile Include="ExternDll.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="$(SystemDiagnosticsPerformanceCounterVersion)" />
+  </ItemGroup>
+</Project>

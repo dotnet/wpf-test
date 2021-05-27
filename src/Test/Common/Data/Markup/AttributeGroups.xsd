@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Custom schema for generating attributes in xaml.
+ * Owner: jbuls
+ * Contributors: 
+ *
+ * Last Changed By:  $Author: WINGROUP\\jbuls $
+ * Change Number:    $Change: 78473 $
+ * Revision:         $Revision: 7 $
+ * Change Date:      $Date: 2006/01/27 12:38:21 $
+ * Filename:         $Source: //depot/vbl_wcp_avalon_dev_stress/windowstest/client/wcptests/stress/Framework/CoreUI/CoreUIStress_AttributeGroups.xsd $
+********************************************************************/
+-->
+<xs:schema 
+  targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="qualified" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
+  
+  <!-- ******************************************************* -->
+  <!-- *** Attribute Groups ********************************** -->
+  <!-- ******************************************************* -->
+  <xs:attributeGroup name="FrameworkContentElementAttributes">
+    <!--
+        <xs:attribute name="Style" type="frlrfMSAvalonWindowsStyleClassTopic" />
+        <xs:attribute name="Resources" type="frlrfMSAvalonWindowsResourceDictionaryClassTopic" />
+    -->
+    <xs:attribute name="Cursor" type="frlrfMSAvalonWindowsInputCursorClassTopic" />
+    <xs:attribute name="ForceCursor" type="frlrfSystemBooleanClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="DoubleAnimationAttributes">
+    <xs:attribute use="required" name="From" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute use="required" name="To" type="ConstrainedDoubleAttributeType" />
+    <!--
+        <xs:attribute name="By" type="ConstrainedDoubleAttributeType" />
+        <xs:attribute name="KeyFrames" type="frlrfMSAvalonWindowsMediaAnimationDoubleKeyFrameCollectionClassTopic" />
+        <xs:attribute name="InterpolationMethod" type="frlrfMSAvalonWindowsMediaAnimationInterpolationMethodClassTopic" />
+    -->
+    <xs:attribute name="IsAdditive" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="IsCumulative" type="frlrfSystemBooleanClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ObjectAttributes">
+    <xs:attribute ref="xml:lang" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ChangeableAttributes" />
+  <xs:attributeGroup name="AnimationCollectionAttributes" />
+  <xs:attributeGroup name="DoubleAnimationCollectionAttributes">
+    <xs:attribute name="Item" type="frlrfMSAvalonWindowsMediaAnimationDoubleAnimationBaseClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="UIContextObjectAttributes" />
+  <xs:attributeGroup name="DependencyObjectAttributes" />
+  <xs:attributeGroup name="VisualAttributes" />
+  <xs:attributeGroup name="RetainedVisualAttributes" />
+  <xs:attributeGroup name="UIElementAttributes">
+    <!--
+        <xs:attribute name="ForwardCommandsTo" type="frlrfMSAvalonWindowsCommandsICommandTargetClassTopic" />
+        <xs:attribute name="AnimationEffects" type="frlrfMSAvalonWindowsMediaAnimationAnimationEffectCollectionClassTopic" />
+    -->
+    <xs:attribute name="AllowDrop" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute use="required" name="Opacity" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute name="OpacityMask" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <!--
+        <xs:attribute name="BitmapEffectInput" type="BitmapEffectInput" />
+    -->
+    <xs:attribute name="Visibility" type="frlrfMSAvalonWindowsVisibilityClassTopic" />
+    <xs:attribute name="ClipToBounds" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="Clip" type="frlrfMSAvalonWindowsMediaGeometryClassTopic" />
+    <xs:attribute name="RenderTransformOrigin" type="frlrfMSAvalonWindowsPointClassTopic" />
+    <xs:attribute name="SnapsToDevicePixels" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="IsHitTestVisible" type="frlrfSystemBooleanClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="FrameworkElementAttributes">
+    <!--
+        <xs:attribute name="Style" type="frlrfMSAvalonWindowsStyleClassTopic" />
+        <xs:attribute name="Resources" type="frlrfMSAvalonWindowsResourceDictionaryClassTopic" />
+        <xs:attribute name="DataContext" type="frlrfSystemObjectClassTopic" />
+    -->
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="Width" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="MinWidth" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="MaxWidth" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="Height" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="MinHeight" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="MaxHeight" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="FlowDirection" type="frlrfMSAvalonWindowsFlowDirectionClassTopic" />
+    <xs:attribute name="Margin" type="frlrfMSAvalonWindowsThicknessClassTopic" />
+    <xs:attribute name="OverridesDefaultStyle" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="Cursor" type="frlrfMSAvalonWindowsInputCursorClassTopic" />
+    <xs:attribute name="ForceCursor" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="Focusable" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="HorizontalAlignment" type="frlrfMSAvalonWindowsHorizontalAlignmentClassTopic" />
+    <xs:attribute name="VerticalAlignment" type="frlrfMSAvalonWindowsMediaVerticalAlignmentClassTopic" />
+    <!--
+        <xs:attribute name="CultureInfo" type="" />
+        <xs:attribute name="FocusVisualStyle" type="" />
+    -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="PanelAttributes">
+  </xs:attributeGroup>
+  <xs:attributeGroup name="DockPanelAttributes">
+    <xs:attribute name="LastChildFill" type="frlrfBoolClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="DockPanelAttachedAttributes">
+    <xs:attribute name="DockPanel.Dock" type="frlrfMSAvalonWindowsControlsDockClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ControlAttributes">
+    <xs:attribute name="BorderBrush" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute name="BorderThickness" type="frlrfMSAvalonWindowsThicknessClassTopic" />
+    <xs:attribute name="Foreground" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute name="FontFamily" type="frlrfFontFamilyClassTopic" />
+    <xs:attribute name="FontSize" type="frlrfMSAvalonWindowsFontSizeClassTopic" />
+    <xs:attribute name="FontStyle" type="frlrfMSAvalonWindowsFontStyleClassTopic" />
+    <xs:attribute name="FontWeight" type="frlrfMSAvalonWindowsFontWeightClassTopic" />
+    <xs:attribute name="FontStretch" type="FontStretchAttributeType" />
+    <xs:attribute name="Padding" type="frlrfMSAvalonWindowsThicknessClassTopic" />
+    <xs:attribute name="TabIndex" type="frlrfSystemInt32ClassTopic" />
+    <xs:attribute name="IsTabStop" type="frlrfSystemBooleanClassTopic" />
+    <!--
+        <xs:attribute name="ToolTip" type="frlrfSystemObjectClassTopic" />
+        <xs:attribute name="ContextMenu" type="frlrfMSAvalonWindowsControlsContextMenuClassTopic" />
+    -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ContentControlAttributes">
+    <!--
+        <xs:attribute name="Content" type="frlrfSystemObjectClassTopic" />
+        <xs:attribute name="ContentStyle" type="frlrfMSAvalonWindowsStyleClassTopic" />
+        <xs:attribute name="ContentStyleSelector" type="frlrfMSAvalonWindowsControlsStyleSelectorClassTopic" />
+    -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="BorderAttributes">
+    <xs:attribute name="BorderThickness" type="frlrfMSAvalonWindowsThicknessClassTopic" />
+    <xs:attribute name="BorderBrush" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute name="Background" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="DecoratorAttributes">
+  </xs:attributeGroup>
+  <xs:attributeGroup name="CanvasAttachedAttributes">
+    <xs:attribute name="Canvas.Left" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="Canvas.Top" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="Canvas.Right" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="Canvas.Bottom" type="frlrfMSAvalonWindowsLengthClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="StackPanelAttributes">
+    <xs:attribute name="Orientation" type="frlrfMSAvalonWindowsOrientationClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ItemsControlAttributes">
+    <!--
+        <xs:attribute name="ItemsSource" type="frlrfSystemCollectionsIEnumerableClassTopic" />
+        <xs:attribute name="ItemStyle" type="frlrfMSAvalonWindowsStyleClassTopic" />
+        <xs:attribute name="ItemStyleSelector" type="frlrfMSAvalonWindowsControlsStyleSelectorClassTopic" />
+        <xs:attribute name="ItemsPanel" type="frlrfMSAvalonWindowsFrameworkElementFactoryClassTopic" />
+        <xs:attribute name="GroupBy" type="frlrfMSAvalonWindowsControlsGroupingClassTopic" />
+    -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="FrameAttributes">
+    <xs:attribute name="Source" type="PageUriSimpleType" />
+    <xs:attribute name="NavigationUIVisibility" type="NavigationUIVisibilitySimpleType" />
+    <xs:attribute name="JournalOwnership" type="JournalOwnershipSimpleType" />
+    <xs:attribute name="SandboxExternalContent" type="frlrfSystemBooleanClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ContextMenuAttributes">
+    <xs:attribute name="HorizontalOffset" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="VerticalOffset" type="frlrfMSAvalonWindowsLengthClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="GlyphsAttributes">
+    <xs:attribute name="Indices" type="IndicesSimpleType" />
+    <xs:attribute name="CaretStops" type="CaretStopsSimpleType" />
+    <xs:attribute name="Fill" type="frlrfMSAvalonWindowsMediaColorClassTopic" />
+    <xs:attribute use="required" name="UnicodeString" type="frlrfSystemStringClassTopic" />
+    <xs:attribute use="required" name="FontRenderingEmSize" type="frlrfMSAvalonWindowsFontSizeClassTopic" />
+    <xs:attribute name="OriginX" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="OriginY" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="FontUri" type="FontUriSimpleType" />
+    <xs:attribute name="StyleSimulations" type="StyleSimulationsSimpleType" />
+    <xs:attribute name="IsSideways" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="BidiLevel" type="frlrfSystemInt32ClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="GridAttributes">
+    <xs:attribute name="ShowGridLines" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="Grid.Column" type="frlrfSystemInt32ClassTopic" />
+    <xs:attribute name="Grid.Row" type="frlrfSystemInt32ClassTopic" />
+    <xs:attribute name="Grid.ColumnSpan" type="frlrfSystemInt32ClassTopic" />
+    <xs:attribute name="Grid.RowSpan" type="frlrfSystemInt32ClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="SliderAttributes">
+    <xs:attribute name="IsDirectionReversed" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="Orientation" type="frlrfSliderOrientationClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="RangeBaseAttributes">
+    <xs:attribute name="Minimum" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute name="Maximum" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute name="Value" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute name="SmallChange" type="ConstrainedDoubleAttributeType" />
+    <xs:attribute name="LargeChange" type="ConstrainedDoubleAttributeType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ToolTipAttributes">
+    <xs:attribute name="HorizontalOffset" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <xs:attribute name="VerticalOffset" type="frlrfMSAvalonWindowsLengthClassTopic" />
+    <!--
+        <xs:attribute name="IsOpen" type="frlrfSystemBooleanClassTopic" />
+    -->
+    <!--
+        <xs:attribute name="PlacementTarget" type="frlrfMSAvalonWindowsUIElementClassTopic" />
+        <xs:attribute name="Placement" type="frlrfMSAvalonWindowsControlsPrimitivesPlacementModeClassTopic" />
+        <xs:attribute name="Opened" type="xs:string" vs:omtype="event" />
+        <xs:attribute name="Closed" type="xs:string" vs:omtype="event" />
+    -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ScrollViewerAttributes">
+    <xs:attribute name="ScrollerVisibilityX" type="frlrfMSAvalonWindowsControlsScrollerVisibilityClassTopic" />
+    <xs:attribute name="ScrollerVisibilityY" type="frlrfMSAvalonWindowsControlsScrollerVisibilityClassTopic" />
+    <!--<xs:attribute name="ScrollChangeEvent" type="xs:string" vs:omtype="event" />-->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ButtonBaseAttributes">
+    <!--
+        <xs:attribute name="Command" type="frlrfMSAvalonWindowsCommandsCommandClassTopic" />
+        <xs:attribute name="Click" type="xs:string" vs:omtype="event" />
+    -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ButtonAttributes">
+    <xs:attribute name="ClickMode" type="frlrfMSAvalonWindowsControlsClickModeClassTopic" />
+    <xs:attribute name="IsDefault" type="frlrfSystemBooleanClassTopic" />
+    <xs:attribute name="IsCancel" type="frlrfSystemBooleanClassTopic" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="CheckBoxAttributes">
+    <xs:attribute name="IsChecked" type="frlrfSystemBooleanClassTopic" />
+    <!--
+        <xs:attribute name="CheckState" type="frlrfMSAvalonWindowsControlsCheckStateClassTopic" />
+        <xs:attribute name="ThreeState" type="frlrfSystemBooleanClassTopic" />
+        <xs:attribute name="CheckStateChanged" type="xs:string" vs:omtype="event" />
+        <xs:attribute name="IsCheckedChanged" type="xs:string" vs:omtype="event" />
+    -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="LabelAttributes">
+    <!--<xs:attribute name="Target" type="frlrfMSAvalonWindowsUIElementClassTopic" />-->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="MenuAttributes" />
+  <xs:attributeGroup name="HyperlinkAttributes">
+    <xs:attribute name="NavigateUri" type="PageUriSimpleType" />
+    <!-- 
+         Exclude this because an exception will occur if it's not valid.
+         We can't reasonably maintain a valid name since we modify the tree a lot.
+         <xs:attribute name="TargetName" type="frlrfSystemStringClassTopic" /> 
+    -->
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ImageAttributes">
+    <xs:attribute name="HorizontalAlignment" type="frlrfMSAvalonWindowsHorizontalAlignmentClassTopic" />
+    <xs:attribute name="VerticalAlignment" type="frlrfMSAvalonWindowsMediaVerticalAlignmentClassTopic" />
+    <xs:attribute name="Stretch" type="StretchSimpleType" />
+  </xs:attributeGroup>
+  <xs:attributeGroup name="BitmapImageAttributes">
+    <xs:attribute use="required" name="UriSource" type="frlrfMSAvalonWindowsMediaImageSourceClassTopic" />
+    <!--
+        <xs:attribute name="DecodePixelWidth" type="frlrfSystemInt32ClassTopic" />
+        <xs:attribute name="DecodePixelHeight" type="frlrfSystemInt32ClassTopic" />
+    -->
+    <xs:attribute name="Rotation" type="frlrfRotationClassTopic" />
+  </xs:attributeGroup>
+  
+</xs:schema>
