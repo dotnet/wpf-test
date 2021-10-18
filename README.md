@@ -62,6 +62,27 @@ This [update](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-ne
 
 This project uses the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct) to define expected conduct in our community. Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting a project maintainer at conduct@dotnetfoundation.org.
 
+## Running tests locally
+
+In order to run the tests on your local machine,
+
+- Build the tests with `build.cmd` script. Use `/help` parameter to check the different arguments that can be passed along with the build command.
+- cd into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test` and run `RunDrts.cmd` to run the tests. You can use `/Area` and `/Name` parameters to run tests from a specific area or with a certain name.
+
+At the end of the run, you should see something like this:
+
+```
+  A total of 98 test Infos were processed, with the following results.
+   Passed: 98
+   Failed (need to analyze): 0
+   Failed (with BugIDs): 0
+   Ignore: 0
+
+```
+*NOTE: Some tests require the screen resolution to be set to 1920 x 1080.*
+
+*NOTE: This requires being run from an admin window at the moment.*
+
 ## Reporting security issues and security bugs
 
 Security issues and bugs should be reported privately, via email, to the Microsoft Security Response Center (MSRC) <secure@microsoft.com>. You should receive a response within 24 hours. If for some reason you do not, please follow up via email to ensure we received your original message. Further information, including the MSRC PGP key, can be found in the [Security TechCenter](https://www.microsoft.com/msrc/faqs-report-an-issue).
