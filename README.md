@@ -79,6 +79,19 @@ At the end of the run, you should see something like this:
    Ignore: 0
 
 ```
+
+If there were any failures, run the tests manually with the `/debugtests` flag using the `RunDrts.cmd` script. Note that you do not run the `RunDrtsDebug` script, as this will debug the test infrastructure, `QualityVault`. When you pass the `/debugtests` flag, a cmd window will open where you can open the test executable in Visual Studio and debug it. When the cmd pops up, you will see instructions for debugging using a few different commands, however these commands will enable you to debug the `Simple Test Invocation` executable, `sti.exe`, which simply launches the test executable you are most likely interested in debugging. Using `DrtXaml.exe` as an example, this is how you can debug the test executable. Any MSBuild style properties should be replaced with actual values:
+
+1. `$(RepoRoot)\artifacts\test\$(Configuration)\$(Platform)\Test\RunDrts.cmd /name=DrtXaml /debugtests`
+2. Enter following command into the cmd window that pops up:
+`"%ProgramFiles%\Microsoft Visual Studio\2019\Preview\Common7\IDE\devenv.exe" DrtXaml.exe`
+3. Once Visual Studio is open, go to `Debug-> DrtXaml Properties` and do the following:
+    - Manually change the `Debugger Type` from `Auto` to `Mixed (CoreCLR)`.
+    - Change the `Environment` from `Default` to a custom one that properly defines the `DOTNET_ROOT` variable so that the host is able to locate the install of `Microsoft.NETCore.App`.
+      - x86 (Default): Name: `DOTNET_ROOT(x86)` Value: `$(RepoRoot).dotnet\x86`
+      - x64 (/p:Platform=x64): Name: `DOTNET_ROOT` Value: `$(RepoRoot).dotnet` 
+4. From there you can F5 and the test will execute.
+
 *NOTE: Some tests require the screen resolution to be set to 1920 x 1080.*
 
 *NOTE: This requires being run from an admin window at the moment.*
