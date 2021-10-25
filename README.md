@@ -62,6 +62,40 @@ This [update](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-ne
 
 This project uses the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct) to define expected conduct in our community. Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting a project maintainer at conduct@dotnetfoundation.org.
 
+## Running tests locally
+
+In order to run the tests on your local machine,
+
+- Build the tests with `build.cmd` script. Use `/help` parameter to check the different arguments that can be passed along with the build command.
+- cd into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test` and run `RunDrts.cmd` to run the tests. You can use `/Area` and `/Name` parameters to run tests from a specific area or with a certain name.
+
+At the end of the run, you should see something like this:
+
+```
+  A total of 98 test Infos were processed, with the following results.
+   Passed: 98
+   Failed (need to analyze): 0
+   Failed (with BugIDs): 0
+   Ignore: 0
+
+```
+
+If there were any failures, run the tests manually with the `/debugtests` flag using the `RunDrts.cmd` script. Note that you do not run the `RunDrtsDebug` script, as this will debug the test infrastructure, `QualityVault`. When you pass the `/debugtests` flag, a cmd window will open where you can open the test executable in Visual Studio and debug it. When the cmd pops up, you will see instructions for debugging using a few different commands, however these commands will enable you to debug the `Simple Test Invocation` executable, `sti.exe`, which simply launches the test executable you are most likely interested in debugging. Using `DrtXaml.exe` as an example, this is how you can debug the test executable. Any MSBuild style properties should be replaced with actual values:
+
+1. `$(RepoRoot)\artifacts\test\$(Configuration)\$(Platform)\Test\RunDrts.cmd /name=DrtXaml /debugtests`
+2. Enter following command into the cmd window that pops up:
+`"%ProgramFiles%\Microsoft Visual Studio\2019\Preview\Common7\IDE\devenv.exe" DrtXaml.exe`
+3. Once Visual Studio is open, go to `Debug-> DrtXaml Properties` and do the following:
+    - Manually change the `Debugger Type` from `Auto` to `Mixed (CoreCLR)`.
+    - Change the `Environment` from `Default` to a custom one that properly defines the `DOTNET_ROOT` variable so that the host is able to locate the install of `Microsoft.NETCore.App`.
+      - x86 (Default): Name: `DOTNET_ROOT(x86)` Value: `$(RepoRoot).dotnet\x86`
+      - x64 (/p:Platform=x64): Name: `DOTNET_ROOT` Value: `$(RepoRoot).dotnet` 
+4. From there you can F5 and the test will execute.
+
+*NOTE: Some tests require the screen resolution to be set to 1920 x 1080.*
+
+*NOTE: This requires being run from an admin window at the moment.*
+
 ## Reporting security issues and security bugs
 
 Security issues and bugs should be reported privately, via email, to the Microsoft Security Response Center (MSRC) <secure@microsoft.com>. You should receive a response within 24 hours. If for some reason you do not, please follow up via email to ensure we received your original message. Further information, including the MSRC PGP key, can be found in the [Security TechCenter](https://www.microsoft.com/msrc/faqs-report-an-issue).
