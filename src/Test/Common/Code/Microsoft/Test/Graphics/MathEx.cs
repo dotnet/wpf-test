@@ -1321,7 +1321,7 @@ namespace Microsoft.Test.Graphics
             int index = 0;
             int length = s.Length;
             char[] separatorChars = new char[] { Const.valueSeparator, ' ', '\r', '\n', '\t', '\0' };
-            string specialSeparator = "§";
+            string specialSeparator = "?";
            
             string result = string.Empty;
             while (index < length)
