@@ -19,7 +19,7 @@ namespace DRT
         private Logger _logger = new Logger("DrtAppShutdown", "Microsoft", "Tests app shutdown when multiple windows open that have owned windows");
         const int WindowCount = 2; // We just need more than one.
 
-        static bool passed = false;
+        static bool s_passed = false;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -46,7 +46,7 @@ namespace DRT
             // Calling shutdown used to cause a crash because DoShutdown was iterating over a list while
             // the list was being changed.
             this.Shutdown();
-            passed = true;
+            s_passed = true;
         }
 
         Window TestWindow()
@@ -63,9 +63,9 @@ namespace DRT
         {
             DrtAppShutdown theApp = new DrtAppShutdown();
             theApp.Run();
-            if (passed)
+            if (s_passed)
             {
-                theApp._logger.Log("Passed.");
+                theApp._logger.Log("s_passed.");
                 return 0;
             }
             else
