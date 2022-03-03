@@ -84,7 +84,7 @@ If there were any failures, run the tests manually with the `/debugtests` flag u
 
 1. `$(RepoRoot)\artifacts\test\$(Configuration)\$(Platform)\Test\RunDrts.cmd /name=DrtXaml /debugtests`
 2. Enter following command into the cmd window that pops up:
-`"%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe" DrtXaml.exe`
+`"%ProgramFiles%\Microsoft Visual Studio\2022\Preview\Common7\IDE\devenv.exe" DrtXaml.exe`
 3. Once Visual Studio is open, go to `Debug-> DrtXaml Properties` and do the following:
     - Manually change the `Debugger Type` from `Auto` to `Mixed (CoreCLR)`.
     - Change the `Environment` from `Default` to a custom one that properly defines the `DOTNET_ROOT` variable so that the host is able to locate the install of `Microsoft.NETCore.App`.
