@@ -11,21 +11,21 @@ See the [WPF Roadmap](roadmap.md) to learn about project priorities, status and 
 
 [WinForms](https://github.com/dotnet/winforms) is another UI framework for building Windows desktop applications that is supported on .NET (6.0.x/5.0.x/3.1.x). WPF and WinForms applications only run on Windows. They are part of the `Microsoft.NET.Sdk.WindowsDesktop` SDK. You are recommended to use the most recent version of [Visual Studio](https://visualstudio.microsoft.com/downloads/) to develop WPF and WinForms applications for .NET.  
 
-WPF for ARM64 is new for .NET 6.0 and is supported by NET 6.0 Preview 1 and later. 
+WPF for ARM64 is new for .NET 6.0 and is supported by NET 6.0 and later. 
 
 To build the WPF repo and contribute features and fixes for .NET 6.0, the most recent [Visual Studio Preview](https://visualstudio.microsoft.com/vs/preview/) is required.  
 
 ## Getting started
 
-* [.NET 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
-* [.NET Preview SDKs (6.0 Preview 1, 5.0 servicing, and 3.1 servicing)](https://github.com/dotnet/installer)
+* [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
+* [.NET Preview SDKs (7.0 Preview 1, 6.0 servicing, and 3.1 servicing)](https://github.com/dotnet/installer)
 * [Getting started instructions](Documentation/getting-started.md)
 * [Contributing guide](Documentation/contributing.md)
 * [Migrating .NET Framework WPF Apps to .NET Core](https://docs.microsoft.com/en-us/dotnet/desktop-wpf/migration/convert-project-from-net-framework)
 
 ## Status
 
-- We are currently developing WPF for .NET 6. 
+- We are currently developing WPF for .NET 7. 
 - We have completed publishing WPF sources. You can learn more about this at https://github.com/dotnet/wpf/issues/2554. 
 - We have completed porting WPF to .NET Core as part of .NET Core 3.0, you can learn more about what was done [here](https://github.com/dotnet/wpf/issues/1936).
 
@@ -84,7 +84,7 @@ If there were any failures, run the tests manually with the `/debugtests` flag u
 
 1. `$(RepoRoot)\artifacts\test\$(Configuration)\$(Platform)\Test\RunDrts.cmd /name=DrtXaml /debugtests`
 2. Enter following command into the cmd window that pops up:
-`"%ProgramFiles%\Microsoft Visual Studio\2019\Preview\Common7\IDE\devenv.exe" DrtXaml.exe`
+`"%ProgramFiles%\Microsoft Visual Studio\2022\Preview\Common7\IDE\devenv.exe" DrtXaml.exe`
 3. Once Visual Studio is open, go to `Debug-> DrtXaml Properties` and do the following:
     - Manually change the `Debugger Type` from `Auto` to `Mixed (CoreCLR)`.
     - Change the `Environment` from `Default` to a custom one that properly defines the `DOTNET_ROOT` variable so that the host is able to locate the install of `Microsoft.NETCore.App`.
@@ -104,11 +104,11 @@ Also see info about related [Microsoft .NET Core and ASP.NET Core Bug Bounty Pro
 
 ## License
 
-.NET Core (including the WPF repo) is licensed under the [MIT license](LICENSE.TXT).
+.NET (including the WPF repo) is licensed under the [MIT license](LICENSE.TXT).
 
 ## .NET Foundation
 
-.NET Core WPF is a [.NET Foundation](https://www.dotnetfoundation.org/projects) project.
+.NET WPF is a [.NET Foundation](https://www.dotnetfoundation.org/projects) project.
 
 See the [.NET home repo](https://github.com/Microsoft/dotnet) to find other .NET-related projects.
 
