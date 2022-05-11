@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <OutputPath>$(RepoRoot)\artifacts\bin\DrtFolderPathWithNumberSignCharacter\$(Configuration)\$(RuntimeIdentifier)\FolderPathWith#Character</OutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <TestCode>true</TestCode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="MainWindow.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Image.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+</Project>
