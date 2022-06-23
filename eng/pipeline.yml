@@ -29,16 +29,18 @@ jobs:
     jobs:
     - job: Windows_NT
       timeoutInMinutes: 120  # how long to run the job before automatically cancelling; see https://github.com/dotnet/wpf/issues/952
+      # pool:
+      #   # For public jobs, use the hosted pool.  For internal jobs use the internal pool.
+      #   # Will eventually change this to two BYOC pools.
+      #   # agent pool can't be read from a user-defined variable (Azure DevOps limitation)
+      #   ${{ if eq(variables['System.TeamProject'], 'public') }}:
+      #     name: NetCore1ESPool-Public
+      #     demands: ImageOverride -equals Build.Windows.Amd64.VS2022.Pre.Open
+      #   ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+      #     name: NetCore1ESPool-Internal
+      #     demands: ImageOverride -equals Build.Windows.Amd64.VS2022.Pre
       pool:
-        # For public jobs, use the hosted pool.  For internal jobs use the internal pool.
-        # Will eventually change this to two BYOC pools.
-        # agent pool can't be read from a user-defined variable (Azure DevOps limitation)
-        ${{ if eq(variables['System.TeamProject'], 'public') }}:
-          name: NetCore1ESPool-Public
-          demands: ImageOverride -equals Build.Windows.Amd64.VS2022.Pre.Open
-        ${{ if eq(variables['System.TeamProject'], 'internal') }}:
-          name: NetCore1ESPool-Internal
-          demands: ImageOverride -equals Build.Windows.Amd64.VS2022.Pre
+        vmImage: 'windows-latest'
       variables:
         # needed for signing
         - name: _TeamName
