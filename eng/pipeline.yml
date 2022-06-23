@@ -40,7 +40,8 @@ jobs:
       #     name: NetCore1ESPool-Internal
       #     demands: ImageOverride -equals Build.Windows.Amd64.VS2022.Pre
       pool:
-        vmImage: 'windows-latest'
+          name: NetCore1ESPool-Public
+          demands: ImageOverride -equals Build.Windows.Amd64.VS2022.Pre.Open
       variables:
         # needed for signing
         - name: _TeamName
