@@ -40,8 +40,9 @@ jobs:
       #     name: NetCore1ESPool-Internal
       #     demands: ImageOverride -equals Build.Windows.Amd64.VS2022.Pre
       pool:
-          name: NetCore1ESPool-Public
-          demands: ImageOverride -equals Build.Windows.Amd64.VS2022.Pre.Open
+        name: AzurePipelines-EO
+        demands:
+          - ImageOverride -equals AzurePipelinesWindows2022compliant
       variables:
         # needed for signing
         - name: _TeamName
