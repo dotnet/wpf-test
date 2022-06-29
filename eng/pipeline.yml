@@ -42,15 +42,6 @@ jobs:
         #  name: NetCoreInternal-Pool
         #  queue: buildpool.windows.10.amd64.vs2019.pre
       variables:
-        # needed for signing
-        - name: _TeamName
-          value: DotNetCore
-        - name: _SignType
-          value: test 
-        - name: _SignArgs
-          value: ''
-        - name: AllowEmptySignList
-          value: true
         # needed for darc (dependency flow) publishing
         - name: _PublishType
           value: none
@@ -64,15 +55,11 @@ jobs:
           value: x86
         - name: _PlatformArgs
           value: /p:Platform=$(_Platform)
-        - name: AllowEmptySignPostBuildList
-          value: true
         # Override some values if we're building internally
         - ${{ if eq(parameters.runAsPublic, 'false') }}:
           # note: You have to use list syntax here (- name: value) or you will get errors about declaring the same variable multiple times
           - name: _PublishType
             value: blob
-          - name: _SignType
-            value: test 
           - name: _DotNetPublishToBlobFeed
             value: true
           - group: DotNet-Blob-Feed
@@ -84,8 +71,6 @@ jobs:
           # note: Even though they are referenced here, user defined variables (like $(_SignType)) are not resolved 
           # until the agent is running on the machine. They can be overridden any time before they are resolved,
           # like in the job matrix below (see Build_Debug)
-          - name: _SignArgs
-            value: /p:DotNetSignType=$(_SignType) /p:TeamName=$(_TeamName)
           - name: _PublishArgs
             value: /p:DotNetPublishBlobFeedKey=$(dotnetfeed-storage-access-key-1)
               /p:DotNetPublishBlobFeedUrl=$(_PublishBlobFeedUrl)
@@ -94,8 +79,6 @@ jobs:
               /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory)
               /p:DotNetSymbolServerTokenMsdl=$(microsoft-symbol-server-pat)
               /p:DotNetSymbolServerTokenSymWeb=$(symweb-symbol-server-pat)
-              /p:AllowEmptySignPostBuildList=true
-              /p:AllowEmptySignList=true
           - name: _OfficialBuildIdArgs
             value: /p:OfficialBuildId=$(BUILD.BUILDNUMBER)
 
