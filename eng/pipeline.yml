@@ -51,8 +51,6 @@ jobs:
           value: ''
         - name: AllowEmptySignList
           value: true
-        - name: AllowEmptySignPostBuildList
-          value: true
         # needed for darc (dependency flow) publishing
         - name: _PublishType
           value: none
@@ -66,7 +64,8 @@ jobs:
           value: x86
         - name: _PlatformArgs
           value: /p:Platform=$(_Platform)
-
+        - name: AllowEmptySignPostBuildList
+          value: true
         # Override some values if we're building internally
         - ${{ if eq(parameters.runAsPublic, 'false') }}:
           # note: You have to use list syntax here (- name: value) or you will get errors about declaring the same variable multiple times
@@ -95,6 +94,8 @@ jobs:
               /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory)
               /p:DotNetSymbolServerTokenMsdl=$(microsoft-symbol-server-pat)
               /p:DotNetSymbolServerTokenSymWeb=$(symweb-symbol-server-pat)
+              /p:AllowEmptySignPostBuildList=true
+              /p:AllowEmptySignList=true
           - name: _OfficialBuildIdArgs
             value: /p:OfficialBuildId=$(BUILD.BUILDNUMBER)
 
