@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;                       // InvalidOperationException
 using System.Windows;               // UIElement, etc.
 using System.Windows.Input ;        // Key
@@ -288,11 +292,7 @@ namespace DRT
 
         #endregion
     }
-    //
-    // Consider combining all uses of UnsafeNativeMethods.cs, NativeMethods.cs, etc... from
-    // specific DRTs and putting them in a shared version under devtest\drts\drtbase but for
-    // now just define w/in this module.
-    //
+
     internal class InternalUnsafeNativeMethods
     {
         [DllImport( "user32.dll", ExactSpelling = true, CharSet = CharSet.Auto )]

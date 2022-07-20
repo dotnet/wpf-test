@@ -1,0 +1,42 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="#efefef">
+    <DockPanel.Resources>
+       <Style TargetType="{x:Type TableCell}">
+           <Setter Property="Background" Value="Yellow" />
+
+       </Style>
+       <Style TargetType="{x:Type Button}">
+           <Style.Storyboards>
+           <ParallelTimeline BeginTime="0" RepeatBehavior="Forever" Duration="0:0:6">
+           <SetterTimeline Path="(Button.Background)" Value="Blue" BeginTime="0" Duration="0:0:2" />
+           <SetterTimeline Path="(Button.Background)" Value="Red" BeginTime="0:0:2" Duration="0:0:2" />
+           <SetterTimeline Path="(Button.Background)" Value="Green" BeginTime="0:0:4" Duration="0:0:2" />
+           </ParallelTimeline>
+           </Style.Storyboards>
+       </Style>
+    </DockPanel.Resources>
+    <Button DockPanel.Dock="Right">Some Colored Button</Button>
+    <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" DockPanel.Dock="Left">
+        <FlowDocument TextAlignment="Left" PagePadding="0">
+        <Table>
+            <Table.Columns>
+                <TableColumn Width="160" Background="Black" />
+                <TableColumn Width="160" Background="Green" />
+            </Table.Columns>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell Name="Target04" Padding="6,6,6,6" BorderThickness="1,1,1,1" BorderBrush="White" Foreground="LightBlue"></TableCell>
+                    <TableCell Padding="6,6,6,6" BorderThickness="1,1,1,1" BorderBrush="White" Foreground="White"></TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell Name="Target04" Padding="6,6,6,6" BorderThickness="1,1,1,1" BorderBrush="Blue" Foreground="Red" />
+                    <TableCell Padding="6,6,6,6" BorderThickness="1,1,1,1" BorderBrush="White" Foreground="White"></TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+</DockPanel>
+

@@ -1,0 +1,44 @@
+<PageFunction  
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:local="clr-namespace:DrtPagefunctionTest"
+    x:TypeArguments="sys:Boolean"
+    x:Class="DrtPagefunctionTest.MarkupPF1"
+    Loaded="Init">
+  <DockPanel>
+    <StackPanel DockPanel.Dock="Left"
+                Orientation="Vertical"
+	              Background="LightGray">
+      <TextBlock FontSize="14"
+				    FontWeight="Bold"
+				    Margin="10,20,10,10">Some Explanatory Text</TextBlock>
+    </StackPanel>
+
+    <StackPanel Orientation="Vertical"
+	              Background="LightYellow">
+      <TextBlock Name="SomeText"
+				    FontSize="14"
+				    FontWeight="Bold"
+				    Margin="10,20,10,10">MarkupPageFunctin 1 : Enter Some Text</TextBlock>
+
+        <local:TestTextBox  Margin="10,20,10,10"
+                HorizontalAlignment="Left"
+		            x:Name="testTextBox"
+		            Height="30"
+		            Width="150">This is original Text</local:TestTextBox>
+
+      <Button  Margin="10,20,10,10"
+                  HorizontalAlignment="Left"
+				          Name="task2"
+				          Height="25"
+				          Width="150">Go to PageFunction 2</Button>
+
+      <Button Margin="10,20,10,10"
+              HorizontalAlignment="Left"
+				      Name="cancel"
+				      Height="25"
+				      Width="100">Cancel</Button>
+    </StackPanel>
+  </DockPanel>
+</PageFunction>

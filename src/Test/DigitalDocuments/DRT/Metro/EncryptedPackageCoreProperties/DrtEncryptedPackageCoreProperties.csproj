@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtEncryptedPackageCoreProperties</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Internal\IO\SynchronizingStream.cs" />
+    <Compile Include="DrtEncryptedPackageCoreProperties.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\EncryptedPackageCoreProperties\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

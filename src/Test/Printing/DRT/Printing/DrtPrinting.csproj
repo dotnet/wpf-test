@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtPrinting</AssemblyName>
+    <OutputType>EXE</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DrtPrinting.cs" />
+    <Compile Include="$(WpfTestBasePath)\Printing\Common\Helpers\PrinterManager.cs" />
+    <Compile Include="$(WpfTestBasePath)\Printing\Common\Helpers\ProcessWatcher.cs" />
+    <Compile Include="$(WpfTestBasePath)\Infra\TestUtilities\InternalUtilities\OSVersionHelper\GlobalSuppressions.cs" />
+    <Compile Include="$(WpfTestBasePath)\Infra\TestUtilities\InternalUtilities\OSVersionHelper\NativeConstants.cs" />
+    <Compile Include="$(WpfTestBasePath)\Infra\TestUtilities\InternalUtilities\OSVersionHelper\NativeMethods.cs" />
+    <Compile Include="$(WpfTestBasePath)\Infra\TestUtilities\InternalUtilities\OSVersionHelper\NativeTypes.cs" />
+    <Compile Include="$(WpfTestBasePath)\Infra\TestUtilities\InternalUtilities\OSVersionHelper\OperatingSystemVersion.cs" />
+    <Compile Include="$(WpfTestBasePath)\Infra\TestUtilities\InternalUtilities\OSVersionHelper\Util.cs" />
+    <Compile Include="$(WpfTestBasePath)\Infra\TestUtilities\InternalUtilities\OSVersionHelper\VersionHelper.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\Printing\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestServicesProject)" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- <PackageReference Include="Microsoft.NETCore.Platforms" Version="$(MicrosoftNETCorePlatformsVersion)" /> -->
+    <PackageReference Include="System.Management" Version="$(SystemManagementVersion)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,58 @@
+<Page Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    >
+
+<Page.Resources>
+
+    <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+
+    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="red"/>
+        <Style.Triggers>
+            <Trigger Property="Content" Value="Button2">
+                <Setter Property="Background" Value="cyan"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <DataTemplate x:Key="PlainTemplate">
+        <StackPanel>
+            <TextBlock Name="PlainTextBlock" Text="{Binding}" Foreground="green"/>
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding}" Value="Button4">
+                <Setter TargetName="PlainTextBlock" Property="Background" Value="cyan"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+</Page.Resources>
+
+<StackPanel>
+
+    <DockPanel>
+
+        <Button Name="Button1" Content="Button1" />
+
+        <Button Name="Button2" Content="Button2"
+                Style="{StaticResource ButtonStyle}" />
+
+        <StackPanel DataContext="Button3">
+            <Button Name="Button3" Content="{Binding}" />
+        </StackPanel>
+
+        <Button Name="Button4" Content="Button4"
+                ContentTemplate="{StaticResource PlainTemplate}"/>
+
+        <Button Name="Button5" Content="Button5" IsEnabled="false"/>
+
+        <ScrollBar Name="ScrollBar1" Width="100" Orientation="Horizontal"/>
+
+    </DockPanel>
+
+</StackPanel>
+</Page>

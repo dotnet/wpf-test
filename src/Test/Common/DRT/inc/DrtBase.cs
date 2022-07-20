@@ -4,7 +4,6 @@
 
 //
 //
-// File: DrtBase.cs
 //
 // Description: Framework for DRT tests
 //

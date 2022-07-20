@@ -4,7 +4,6 @@
 
 //
 //
-// File: DrtLaunchContainer.cs
 //
 // Description: This is a set of helper functions that could be used by hosting
 //              tests.  This has helper functions that could be used by tests that

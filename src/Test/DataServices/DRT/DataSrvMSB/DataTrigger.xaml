@@ -1,0 +1,114 @@
+﻿
+
+<Page Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="DrtDataSrv.DataTriggerPage"
+    xmlns:custom="clr-namespace:DrtDataSrv"
+    >
+
+    <Page.Resources>
+        <ObjectDataProvider ObjectType="{x:Type custom:Places}" x:Key="ods" />
+        <custom:IdentityConverter x:Key="IdentityConverter"/>
+
+        <XmlDataProvider x:Key="imagePaths" XPath="root">
+         <x:XData>
+          <root xmlns="">
+            <content>DrtFiles\DataSrvMSB\content.jpg</content>
+            <resource>DrtFiles\DataSrvMSB\resource.jpg</resource>
+          </root>
+         </x:XData>
+        </XmlDataProvider>
+        <custom:Writers x:Key="writers" />
+
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="ct">
+            <Border BorderBrush="Pink" BorderThickness="4" x:Name="border1" Background="Purple">
+                <Border BorderBrush="Yellow" BorderThickness="4" Background="{TemplateBinding Background}" x:Name="border2">
+                    <ContentPresenter x:Name="content" />
+                </Border>
+            </Border>
+            <ControlTemplate.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource ods}, Path=/Name}" Value="Seattle">
+                    <Setter TargetName="border1" Property="BorderBrush" Value="Red" />
+                </DataTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <DataTemplate x:Key="PlaceTemplate">
+            <TextBlock Text="{Binding Path=Name}" />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type custom:Place}">
+            <DockPanel>
+                <TextBlock Text="{Binding Path=Name}" Width="150" x:Name="mytext" />
+                <TextBlock Width="30"
+                        Text="{Binding  Path=(custom:Place.State),
+                                        Converter={StaticResource IdentityConverter}}"/>
+            </DockPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=State}" Value="WA">
+                    <Setter TargetName="mytext" Property="Foreground" Value="Red" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <Style x:Key="ContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Name}" Value="Seattle">
+                    <Setter Property="Background" Value="Cyan" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate x:Key="dt">
+            <TextBox Text="{Binding Path=FirstName}" Background="Tan" Name="tb"></TextBox>
+            <DataTemplate.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=FirstName}" Value="Jules"></Condition>
+                            <Condition Binding="{Binding Path=LastName}" Value="Verne"></Condition>
+                        </MultiDataTrigger.Conditions>
+                        <MultiDataTrigger.Setters>
+                            <Setter Property="ListBoxItem.Background" Value="Brown" TargetName="tb" />
+                        </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <CollectionViewSource x:Key="PlacesView"
+            Source="{StaticResource ods}"
+            Filter="OnFilter"
+          />
+
+        <HierarchicalDataTemplate x:Key="TestTemplateParser"
+            ItemsSource="{x:Null}"
+            ItemTemplate="{x:Null}"
+            ItemTemplateSelector="{x:Null}"
+            ItemContainerStyle="{x:Null}"
+            ItemContainerStyleSelector="{x:Null}"
+            ItemBindingGroup="{x:Null}"
+            ItemStringFormat="C"
+            AlternationCount="0"
+            />
+
+    </Page.Resources>
+
+    <StackPanel>
+        <Button Width="150" Height="50" Name="btn" Template="{StaticResource ct}">Hello</Button>
+
+        <ListBox ItemsSource="{Binding Source={StaticResource ods}}"
+                    ItemTemplate="{DynamicResource PlaceTemplate}"
+                    ItemContainerStyle="{DynamicResource ContainerStyle}"
+                    IsSynchronizedWithCurrentItem="true" />
+
+        <ListBox ItemsSource="{Binding Source={StaticResource ods}}" />
+
+        <ListBox ItemsSource="{Binding Source={StaticResource writers}}" ItemTemplate="{StaticResource dt}" Name="lb" />
+
+        <ListBox ItemsSource="{Binding Source={StaticResource PlacesView}}" />
+
+        <!-- load loose and embedded image files -->
+        <Image Name="_looseFileImage" Height="100" Width="200" Source="{Binding Source={StaticResource imagePaths}, XPath=content}" />
+        <Image Name="_resourceImage" Height="100" Width="200" Source="{Binding Source={StaticResource imagePaths}, XPath=resource}" />
+    </StackPanel>
+</Page>

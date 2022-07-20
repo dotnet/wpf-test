@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtLocalization</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <NoWarn Condition="'$(NoWarn)'!=''">$(NoWarn),</NoWarn>
+    <NoWarn>$(NoWarn)618</NoWarn>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="DrtFiles\*.*">
+      <Link>DrtFiles\Localization\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    
+    <None Include="DrtFiles\baml\*.*">
+      <Link>DrtFiles\Baml\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="DrtLocalization.cs" />
+    <Compile Include="$(DrtCommonRoot)\bamldump\BamlWriterWrapper.cs" />
+    <Compile Include="$(DrtCommonRoot)\bamldump\WrapperUtil.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(DrtToolsProject)"/>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,24 @@
+﻿<Page WindowTitle="Page A" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <DockPanel>
+        <DockPanel.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="LightBlue" Offset="0" />
+                        <GradientStop Color="White" Offset="1" />
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </DockPanel.Background>
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock Margin="4" FontSize="12" FontWeight="Bold">Page A</TextBlock>
+            <TextBlock Margin="4">
+                <Hyperlink NavigateUri="PageB.xaml" FontSize="12">Page B</Hyperlink>
+            </TextBlock>
+        </StackPanel>
+        <Frame Name="LeftFrame" DockPanel.Dock="Left" Margin="8" Width="200" Source="PageC.xaml" />
+        <Frame Name="RightFrame" DockPanel.Dock="Right" Margin="8" Source="PageE.xaml" />
+        <!-- Test for bug 1244875 - journaling of a frame with null Content -->
+        <Frame Name="EmptyFrame" DockPanel.Dock="Right" Width="4" />
+    </DockPanel>
+</Page>

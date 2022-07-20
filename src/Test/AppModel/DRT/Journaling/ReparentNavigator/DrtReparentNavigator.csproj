@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtReparentNavigator</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <TestCode>true</TestCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DrtReparentNavigator.cs" />
+    <Compile Include="..\..\Logger\logger.cs" />
+    <None Include="DrtReparentNavigatorSecure.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="*.xaml">
+      <Link>DrtFiles\ReparentNavigator\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

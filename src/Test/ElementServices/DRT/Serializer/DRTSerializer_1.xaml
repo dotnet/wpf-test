@@ -1,0 +1,58 @@
+﻿
+<ser:Panel
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:ser="clr-namespace:DRT;assembly=DrtMarkupSerializer"
+ xml:lang="en-CA" xmlns:MappingPIGen1="clr-namespace:DRT;assembly=DrtMarkupSerializer">
+  <ser:Panel.Resources>
+    <ser:Label x:Key="one" />
+    <ser:Label x:Key="{x:Type ser:Label}" />
+    <ser:Label x:Key="{x:Static av:Dock.Left}" />
+  </ser:Panel.Resources>
+
+  <ser:Item
+  StringNormalProp="TestString"
+  StringHiddenProp="TestHiddenString"
+  IntDefaultProp="1"
+  IntValueProp="1"
+  IntValuePropWithManager="1"
+  StringNormalDP="TestStringDP"
+  StringHiddenDP1="TestHiddenStringDP1"
+  StringHiddenDP2="TestHiddenStringDP2"
+  IntDefaultDP2="2"
+  IntValueDP1="1"
+  IntValueDP2="2"
+  IntValueDP3="1"
+  ser:Label.IntNoWrapperAttachedDP="1"
+  ser:Label.IntHiddenAttachedDP="1"
+  ResourceRefDP1="{av:DynamicResource one}"
+  ResourceRefDP2="{av:DynamicResource {x:Type ser:Label}}"
+  ResourceRefDP3="{av:DynamicResource {x:Static av:Dock.Left}}">
+    <ser:Item.ListProp>
+      <ser:Label MyType="MyType" />
+      <ser:Label />
+      <ser:CustomControl />
+    </ser:Item.ListProp>
+    <ser:Item.ListDP1>
+      <ser:Label />
+      <ser:Label />
+    </ser:Item.ListDP1>
+    <ser:Item.ListDP2>
+      <ser:Label />
+      <ser:Label />
+    </ser:Item.ListDP2>
+    <ser:Item.DictionaryProp>
+      <ser:Label x:Key="one" />
+      <ser:Label x:Key="{x:Type ser:Label}" />
+      <ser:Label x:Key="{x:Static av:Dock.Left}" />
+    </ser:Item.DictionaryProp>
+    <ser:Item.DictionaryDP1>
+      <ser:Label x:Key="one" />
+      <ser:Label x:Key="{x:Type ser:Label}" />
+    </ser:Item.DictionaryDP1>
+    <ser:Item.DictionaryDP2>
+      <ser:Label x:Key="one" />
+      <ser:Label x:Key="{x:Type ser:Label}" />
+    </ser:Item.DictionaryDP2>
+  </ser:Item>
+</ser:Panel>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Basic</AssemblyName>
+    <Configuration>Release</Configuration>
+    <OutputType>winexe</OutputType>
+  </PropertyGroup>
+   <ItemGroup>
+       <ApplicationDefinition Include="Basic_App.xaml"/>       
+       <Page Include="..\drtfiles\Basic.xaml"/>
+       <Page Include="..\drtfiles\ErrorNotify.xaml"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(IntermediateOutputPath)\Basic.baml">
+      <Link>DrtFiles\Localization\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(IntermediateOutputPath)\ErrorNotify.baml">
+      <Link>DrtFiles\Localization\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
