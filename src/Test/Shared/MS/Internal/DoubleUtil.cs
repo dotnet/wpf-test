@@ -294,7 +294,7 @@ namespace MS.Internal
 
         // The standard CLR double.IsNaN() function is approximately 100 times slower than our own wrapper,
         // so please make sure to use DoubleUtil.IsNaN() in performance sensitive code.
-        // PS item that tracks the CLR improvement is DevDiv Schedule : 26916.
+        // PS item that tracks the CLR improvement is DevDiv Schedule.
         // IEEE 754 : If the argument is any value in the range 0x7ff0000000000001L through 0x7fffffffffffffffL 
         // or in the range 0xfff0000000000001L through 0xffffffffffffffffL, the result will be NaN.         
         public static bool IsNaN(double value)
