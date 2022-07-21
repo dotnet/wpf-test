@@ -4,7 +4,6 @@
 
 //---------------------------------------------------------------------------
 //
-// File: ReliabilityAssertException.cs
 //
 // Description: Exception used to test exception continuability.
 //

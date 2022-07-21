@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtNGCTest</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <OutputType>EXE</OutputType>
+    <Culture>Neutral</Culture>
+    <UnsafeCode>false</UnsafeCode>
+    <DefineConstants>NGCTEST</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="DrtNGCSerialization.cs" />
+    <None Include="*.xaml">
+      <Link>DrtFiles\NGCTest\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

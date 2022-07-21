@@ -1,0 +1,130 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <SignAssemblyAttribute>true</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+    <AssemblyName>AnnotationCommon</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PublishDir>$(WpfTestBasePublishPath)\FeatureTests\Annotations</PublishDir>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="Common\AnnotationComponentFinder.cs" />
+    <Compile Include="Common\AnnotationTabHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\AnnotationTestHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\AsyncTestScript.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\AsyncTestScriptRunner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\DispatcherHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\FlowDocumentProperties.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Reflection\AnnotationProxyException.cs" />
+    <Compile Include="Common\Reflection\AReflectiveProxy.cs" />
+    <Compile Include="Common\Reflection\ArrayModule.cs" />
+    <Compile Include="Common\Reflection\ConversionType.cs" />
+    <Compile Include="Common\Reflection\EnumModule.cs" />
+    <Compile Include="Common\Reflection\GenericModule.cs" />
+    <Compile Include="Common\Reflection\IReflectiveProxy.cs" />
+    <Compile Include="Common\Reflection\ProxyConstants.cs" />
+    <Compile Include="Common\Reflection\ProxyDefinition.cs" />
+    <Compile Include="Common\Reflection\ProxyFactory.cs" />
+    <Compile Include="Common\Reflection\ProxyInstanceManager.cs" />
+    <Compile Include="Common\Reflection\ProxyTypeConverter.cs" />
+    <Compile Include="Common\Reflection\ProxyWriter.cs" />
+    <Compile Include="Common\Reflection\ReflectionHelper.cs" />
+    <Compile Include="Common\SecurityHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\SelectionProcessorTester.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\StickyNoteWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\SubtreeProcessorTester.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\TextControl\Annotation\AnnotationDefinition.cs" />
+    <Compile Include="Common\TextControl\Annotation\AnnotationStateInfo.cs" />
+    <Compile Include="Common\TextControl\Annotation\DocumentStateInfo.cs" />
+    <Compile Include="Common\TextControl\Annotation\HighlightDefinition.cs" />
+    <Compile Include="Common\TextControl\Annotation\HighlightStateInfo.cs" />
+    <Compile Include="Common\TextControl\Annotation\StickyNoteDefinition.cs" />
+    <Compile Include="Common\TextControl\Annotation\StickyNoteStateInfo.cs" />
+    <Compile Include="Common\TextControl\ATextControlTestSuite.cs" />
+    <Compile Include="Common\TextControl\Selection\AbsoluteSelectionData.cs" />
+    <Compile Include="Common\TextControl\Selection\ADocumentViewerBaseSelector.cs" />
+    <Compile Include="Common\TextControl\Selection\ATextSelector.cs" />
+    <Compile Include="Common\TextControl\Selection\ContentElements\AnchoredBlocks\AnchoredBlockSelectionData.cs" />
+    <Compile Include="Common\TextControl\Selection\ContentElements\AnchoredBlocks\AnchoredBlockSelector.cs" />
+    <Compile Include="Common\TextControl\Selection\ContentElements\FlowElementSelector.cs" />
+    <Compile Include="Common\TextControl\Selection\ContentElements\Tables\TableSelectionData.cs" />
+    <Compile Include="Common\TextControl\Selection\ContentElements\Tables\TableSelector.cs" />
+    <Compile Include="Common\TextControl\Selection\DocumentViewerSelector.cs" />
+    <Compile Include="Common\TextControl\Selection\FlowDocumentPageViewerSelector.cs" />
+    <Compile Include="Common\TextControl\Selection\FlowDocumentScrollViewerSelector.cs" />
+    <Compile Include="Common\TextControl\Selection\ISelectionData.cs" />
+    <Compile Include="Common\TextControl\Selection\Paginated\MultiPageSelectionData.cs" />
+    <Compile Include="Common\TextControl\Selection\Paginated\PaginatedSelectionData.cs" />
+    <Compile Include="Common\TextControl\Selection\Paginated\SimpleSelectionData.cs" />
+    <Compile Include="Common\TextControl\Wrappers\ADocumentViewerBaseWrapper.cs" />
+    <Compile Include="Common\TextControl\Wrappers\ATextControlWrapper.cs" />
+    <Compile Include="Common\TextControl\Wrappers\DocumentViewerWrapper.cs" />
+    <Compile Include="Common\TextControl\Wrappers\FlowDocumentPageViewerWrapper.cs" />
+    <Compile Include="Common\TextControl\Wrappers\FlowDocumentReaderWrapper.cs" />
+    <Compile Include="Common\TextControl\Wrappers\FlowDocumentScrollViewerWrapper.cs" />
+    <Compile Include="Common\VisualTreeWalker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Driver\TestSuiteDriver.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\AttachedAnnotation.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\DataIdProcessor.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\FixedPageProcessor.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\FixedTextSelectionProcessor.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\LocatorManager.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\PathNode.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\SelectionProcessor.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\SubtreeProcessor.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\TextSelectionProcessor.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\TextViewSelectionProcessor.cs" />
+    <Compile Include="Proxies\Generated\Anchoring\TreeNodeSelectionProcessor.cs" />
+    <Compile Include="Proxies\Generated\AnnotationComponentChooser.cs" />
+    <Compile Include="Proxies\Generated\AnnotationHelper.cs" />
+    <Compile Include="Proxies\Generated\AnnotationService.cs" />
+    <Compile Include="Proxies\Generated\AttachedAnnotation.cs" />
+    <Compile Include="Proxies\Generated\AttachedAnnotationChangedEventArgs.cs" />
+    <Compile Include="Proxies\Generated\Component\AdornerPresentationContext.cs" />
+    <Compile Include="Proxies\Generated\Component\AnnotationAdorner.cs" />
+    <Compile Include="Proxies\Generated\Component\AnnotationComponentManager.cs" />
+    <Compile Include="Proxies\Generated\Component\AnnotationHighlightLayer.cs" />
+    <Compile Include="Proxies\Generated\Component\HighlightComponent.cs" />
+    <Compile Include="Proxies\Generated\Component\IAnnotationComponent.cs" />
+    <Compile Include="Proxies\Generated\Component\PresentationContext.cs" />
+    <Compile Include="Proxies\Generated\StickyNote.cs" />
+    <Compile Include="Proxies\Manual\Anchoring\DynamicSelectionProcessor.cs" />
+    <Compile Include="Proxies\Manual\Anchoring\FixedPageProxy.cs" />
+    <Compile Include="Proxies\Manual\Anchoring\TextFingerprintProcessor.cs" />
+    <Compile Include="Proxies\Manual\AnnotationXmlConstants.cs" />
+    <Compile Include="Proxies\Manual\Proxy_IAnnotationComponent.cs" />
+    <None Include="$(AssemblyName).deployment">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+ 
+</Project>

@@ -1,0 +1,410 @@
+﻿<Canvas
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Background="Navy"> 
+ <Canvas.Resources>
+
+  <Storyboard x:Key="XYTo2">
+   <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)" To="2" AccelerationRatio=".9" />
+   <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)" To="2" AccelerationRatio=".9" />
+  </Storyboard>
+
+  <Storyboard x:Key="ButtonWidthHeight">
+   <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Width" To="200" />
+   <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Height" To="100" />
+  </Storyboard>
+
+  <Storyboard x:Key="ButtonEnterAction" TargetName="StoryboardTarget">
+   <DoubleAnimation Duration="0:0:0.25" Storyboard.TargetProperty="Width" To="200" />
+   <DoubleAnimation Duration="0:0:0.25" Storyboard.TargetProperty="Height" To="100" />
+  </Storyboard>
+
+  <Storyboard x:Key="ButtonExitAction" TargetName="StoryboardTarget">
+   <DoubleAnimation Duration="0:0:0.25" Storyboard.TargetProperty="Width" />
+   <DoubleAnimation Duration="0:0:0.25" Storyboard.TargetProperty="Height" />
+  </Storyboard>
+
+  <Style x:Key="StyleResource" TargetType="{x:Type Button}">
+   <Setter Property="Button.RenderTransform">
+    <Setter.Value>
+     <ScaleTransform CenterX="0" CenterY="0" ScaleX="1.0" ScaleY="1.0" />
+    </Setter.Value>
+   </Setter>
+   <Style.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <EventTrigger.Actions>
+      <BeginStoryboard Storyboard="{StaticResource XYTo2}" />
+     </EventTrigger.Actions>
+    </EventTrigger>
+   </Style.Triggers>
+  </Style>
+
+  <Style x:Key="StyleResourceName" TargetType="{x:Type Button}">
+   <Setter Property="Button.RenderTransform">
+    <Setter.Value>
+     <ScaleTransform CenterX="0" CenterY="0" ScaleX="1.0" ScaleY="1.0" />
+    </Setter.Value>
+   </Setter>
+   <Style.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <EventTrigger.Actions>
+
+     <!-- Dummy operations to exercise the code.
+          Tests SoundPlayerAction: relative content Uri, absolute content Uri, absolute siteoforigin Uri. -->
+     <SoundPlayerAction Source="/ding.wav" />
+       
+     <BeginStoryboard Name="BSB1">
+		<Storyboard TargetProperty="Opacity">
+			<DoubleAnimation To="0" Duration="0:0:1"/>
+		</Storyboard>
+     </BeginStoryboard>
+     
+     <SoundPlayerAction Source="pack://application:,,,/ding.wav" />
+     
+     <PauseStoryboard BeginStoryboardName="BSB1"/>
+     <ResumeStoryboard BeginStoryboardName="BSB1"/>
+     <StopStoryboard BeginStoryboardName="BSB1"/>
+     <RemoveStoryboard BeginStoryboardName="BSB1"/>
+
+      <BeginStoryboard Name="StyleResourceNamed" Storyboard="{StaticResource XYTo2}" />
+       
+      <SoundPlayerAction Source="pack://siteoforigin:,,,/DrtFiles/DrtStoryboards/ding.wav" />
+     </EventTrigger.Actions>
+    </EventTrigger>
+   </Style.Triggers>
+  </Style>
+
+  <ControlTemplate x:Key="TemplateResource" TargetType="{x:Type Button}">
+   <Rectangle x:Name="TheRect" Fill="Red" Width="100" Height="50" />
+   <ControlTemplate.Resources>
+    <Storyboard x:Key="RectWidthHeight" TargetName="TheRect">
+     <ColorAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Fill.Color" To="Green" />
+     <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Width" To="200" />
+     <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Height" To="100" />
+    </Storyboard>
+   </ControlTemplate.Resources>
+   <ControlTemplate.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <EventTrigger.Actions>
+      <BeginStoryboard Storyboard="{StaticResource RectWidthHeight}" />
+     </EventTrigger.Actions>
+    </EventTrigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="TemplateResourceNamed" TargetType="{x:Type Button}">
+   <Rectangle x:Name="TheRect" Fill="Red" Width="100" Height="50" />
+   <ControlTemplate.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <EventTrigger.Actions>
+      <BeginStoryboard Name="TemplateResourceNamedBegin">
+       <Storyboard TargetName="TheRect">
+        <ColorAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Fill.Color" To="Gray" />
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Width" To="200" />
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Height" To="100" />
+       </Storyboard>
+      </BeginStoryboard>
+     </EventTrigger.Actions>
+    </EventTrigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+ </Canvas.Resources>
+
+<!-- Element storyboard trigger tests ******************************************************************* -->
+<Button Canvas.Top="0" Canvas.Left="0" Width="100" Height="50">
+ Element.Inline
+ <Button.Triggers>
+  <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+   <EventTrigger.Actions>
+    <BeginStoryboard>
+     <Storyboard>    
+   <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Width" To="200" AccelerationRatio=".9" />
+   <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Height" To="100" AccelerationRatio=".9" />
+     </Storyboard>
+    </BeginStoryboard>
+   </EventTrigger.Actions>
+  </EventTrigger>
+ </Button.Triggers>
+</Button>
+
+<Button Canvas.Top="0" Canvas.Left="200" Width="100" Height="50">
+ Element.Resource
+ <Button.Triggers>
+  <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+   <EventTrigger.Actions>
+    <BeginStoryboard Storyboard="{DynamicResource ButtonWidthHeight}" />
+   </EventTrigger.Actions>
+  </EventTrigger>
+ </Button.Triggers>
+</Button>
+
+<Button Canvas.Top="0" Canvas.Left="400" Width="100" Height="50">
+ Element.Inline.Name
+ <Button.Triggers>
+  <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+   <EventTrigger.Actions>
+    <BeginStoryboard Name="ElementInlineName">
+     <Storyboard>    
+   <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Width" To="200" AccelerationRatio=".9" />
+   <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Height" To="100" AccelerationRatio=".9" />
+     </Storyboard>
+    </BeginStoryboard>
+   </EventTrigger.Actions>
+  </EventTrigger>
+ </Button.Triggers>
+</Button>
+
+<Button Canvas.Top="0" Canvas.Left="600" Width="100" Height="50">
+ Element.Resource.Name
+ <Button.Triggers>
+  <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+   <EventTrigger.Actions>
+    <BeginStoryboard Name="ElementResourceName" Storyboard="{DynamicResource ButtonWidthHeight}" />
+   </EventTrigger.Actions>
+  </EventTrigger>
+ </Button.Triggers>
+</Button>
+
+<!-- Styled storyboard trigger tests ******************************************************************* -->
+
+<Button Canvas.Top="100" Canvas.Left="0" Width="100" Height="50">
+ Style.Inline
+ <Button.Style>
+  <Style TargetType="{x:Type Button}">
+   <Setter Property="Button.RenderTransform">
+    <Setter.Value>
+     <ScaleTransform CenterX="0" CenterY="0" ScaleX="1.0" ScaleY="1.0" />
+    </Setter.Value>
+   </Setter>
+   <Style.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <EventTrigger.Actions>
+      <BeginStoryboard>
+       <Storyboard>    
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)" To="2" AccelerationRatio=".9" />
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)" To="2" AccelerationRatio=".9" />
+       </Storyboard>
+      </BeginStoryboard>
+     </EventTrigger.Actions>
+    </EventTrigger>
+   </Style.Triggers>
+  </Style>
+ </Button.Style>
+</Button>
+
+<Button Canvas.Top="100" Canvas.Left="200" Width="100" Height="50"
+ Style="{StaticResource StyleResource}">Style.Resource</Button>
+
+<Button Canvas.Top="100" Canvas.Left="400" Width="100" Height="50">
+ Style.Inline.Name
+ <Button.Style>
+  <Style TargetType="{x:Type Button}">
+   <Setter Property="Button.RenderTransform">
+    <Setter.Value>
+     <ScaleTransform CenterX="0" CenterY="0" ScaleX="1.0" ScaleY="1.0" />
+    </Setter.Value>
+   </Setter>
+   <Style.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <EventTrigger.Actions>
+      <BeginStoryboard Name="StyleInlineNamed">
+       <Storyboard>
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)" To="2" AccelerationRatio=".9" />
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)" To="2" AccelerationRatio=".9" />
+       </Storyboard>
+      </BeginStoryboard>
+     </EventTrigger.Actions>
+    </EventTrigger>
+   </Style.Triggers>
+  </Style>
+ </Button.Style>
+</Button>
+
+<Button Canvas.Top="100" Canvas.Left="600" Width="100" Height="50"
+ Style="{StaticResource StyleResourceName}">Style.Resource.Name</Button>
+
+<!-- Templated storyboard trigger tests ******************************************************************* -->
+
+<Button Canvas.Top="200" Canvas.Left="0">
+ <Button.Template>
+  <ControlTemplate TargetType="{x:Type Button}">
+   <Rectangle x:Name="TheRect" Fill="Red" Width="100" Height="50" />
+   <ControlTemplate.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <EventTrigger.Actions>
+      <BeginStoryboard>
+       <Storyboard TargetName="TheRect">
+        <ColorAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Fill.Color" To="Yellow" />
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Width" To="200" />
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Height" To="100" />
+       </Storyboard>
+      </BeginStoryboard>
+     </EventTrigger.Actions>
+    </EventTrigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate>
+ </Button.Template>
+</Button>
+
+<Button Canvas.Top="200" Canvas.Left="200"
+ Template="{StaticResource TemplateResource}">Template.Resource</Button>
+
+<Button Canvas.Top="200" Canvas.Left="400">
+ <Button.Template>
+  <ControlTemplate TargetType="{x:Type Button}">
+   <Rectangle x:Name="TheRect" Fill="Red" Width="100" Height="50" />
+   <ControlTemplate.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <EventTrigger.Actions>
+      <BeginStoryboard Name="TemplateInlineNamed">
+       <Storyboard TargetName="TheRect">
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Fill.Opacity" To="0.0" />
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Width" To="200" />
+        <DoubleAnimation Duration="0:0:0.5" Storyboard.TargetProperty="Height" To="100" />
+       </Storyboard>
+      </BeginStoryboard>
+     </EventTrigger.Actions>
+    </EventTrigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate>
+ </Button.Template>
+</Button>
+
+<Button Canvas.Top="200" Canvas.Left="600"
+ Template="{StaticResource TemplateResourceNamed}">Template.Resource.Name</Button>
+
+<!-- Trigger EnterAction/ExitAction tests in Template ******************************************************************* -->
+
+<Canvas Name="EnterExitActionsTests" Top="300" Width="800" Height="100">
+<Button Name="TriggerButton">
+ <Button.Template>
+  <ControlTemplate TargetType="{x:Type Button}">
+   <Rectangle x:Name="StoryboardTarget" Fill="Cyan" Width="100" Height="50" />
+   <ControlTemplate.Triggers>
+    <Trigger Property="Canvas.Left" Value="0">
+     <Trigger.EnterActions>
+       <BeginStoryboard Storyboard="{StaticResource ButtonEnterAction}" />
+     </Trigger.EnterActions>
+     <Trigger.ExitActions>
+       <BeginStoryboard Storyboard="{StaticResource ButtonExitAction}" />
+     </Trigger.ExitActions>
+    </Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate>
+ </Button.Template>
+</Button>
+
+<Button Name="DataTriggerButton">
+ <Button.Template>
+  <ControlTemplate TargetType="{x:Type Button}">
+   <Canvas Width="100" Height="100">
+    <Rectangle x:Name="StoryboardTarget" Fill="Magenta" Width="100" Height="50" />
+    <TextBlock Foreground="Black" Name="GhettoTypeConverter" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Canvas.Left)}" />
+   </Canvas>
+   <ControlTemplate.Triggers>
+    <DataTrigger Binding="{Binding ElementName=GhettoTypeConverter, Path=Text}" Value="200">
+     <DataTrigger.EnterActions>
+       <BeginStoryboard Storyboard="{StaticResource ButtonEnterAction}" />
+     </DataTrigger.EnterActions>
+     <DataTrigger.ExitActions>
+       <BeginStoryboard Storyboard="{StaticResource ButtonExitAction}" />
+     </DataTrigger.ExitActions>
+    </DataTrigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate>
+ </Button.Template>
+</Button>
+
+<Button Name="MultiTriggerButton">
+ <Button.Template>
+  <ControlTemplate TargetType="{x:Type Button}">
+   <Rectangle x:Name="StoryboardTarget" Fill="Yellow" Width="100" Height="50" />
+   <ControlTemplate.Triggers>
+    <MultiTrigger>
+     <MultiTrigger.Conditions>
+      <Condition Property="Canvas.Left" Value="400" />
+      <Condition Property="Name" Value="MultiTriggerButton" /> <!-- This is always gonna be true -->
+     </MultiTrigger.Conditions>
+     <MultiTrigger.EnterActions>
+       <BeginStoryboard Storyboard="{StaticResource ButtonEnterAction}" />
+     </MultiTrigger.EnterActions>
+     <MultiTrigger.ExitActions>
+       <BeginStoryboard Storyboard="{StaticResource ButtonExitAction}" />
+     </MultiTrigger.ExitActions>
+    </MultiTrigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate>
+ </Button.Template>
+</Button>
+
+<Button Name="MultiDataTriggerButton">
+ <Button.Template>
+  <ControlTemplate TargetType="{x:Type Button}">
+   <Canvas Width="100" Height="100">
+    <Rectangle x:Name="StoryboardTarget" Fill="Black" Width="100" Height="50" />
+    <TextBlock Foreground="White" Name="GhettoTypeConverter" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Canvas.Left)}" />
+   </Canvas>
+   <ControlTemplate.Triggers>
+    <MultiDataTrigger>
+     <MultiDataTrigger.Conditions>
+      <Condition Binding="{Binding ElementName=GhettoTypeConverter, Path=Text}" Value="600" />
+      <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Name}" Value="MultiDataTriggerButton" />
+     </MultiDataTrigger.Conditions>
+     <MultiDataTrigger.EnterActions>
+       <BeginStoryboard Storyboard="{StaticResource ButtonEnterAction}" />
+     </MultiDataTrigger.EnterActions>
+     <MultiDataTrigger.ExitActions>
+       <BeginStoryboard Storyboard="{StaticResource ButtonExitAction}" />
+     </MultiDataTrigger.ExitActions>
+    </MultiDataTrigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate>
+ </Button.Template>
+</Button>
+ <Canvas.Triggers>
+  <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+   <EventTrigger.Actions>
+    <BeginStoryboard>
+     <BeginStoryboard.Storyboard>
+      <Storyboard TargetProperty="(Canvas.Left)">
+       <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TriggerButton">
+        <DoubleAnimationUsingKeyFrames.KeyFrames>
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="10" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="10" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.6" Value="0" />
+        </DoubleAnimationUsingKeyFrames.KeyFrames>
+       </DoubleAnimationUsingKeyFrames>
+       <DoubleAnimationUsingKeyFrames Storyboard.TargetName="DataTriggerButton">
+        <DoubleAnimationUsingKeyFrames.KeyFrames>
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="200" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.6" Value="200" />
+        </DoubleAnimationUsingKeyFrames.KeyFrames>
+       </DoubleAnimationUsingKeyFrames>
+       <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MultiTriggerButton">
+        <DoubleAnimationUsingKeyFrames.KeyFrames>
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="400" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.6" Value="400" />
+        </DoubleAnimationUsingKeyFrames.KeyFrames>
+       </DoubleAnimationUsingKeyFrames>
+       <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MultiDataTriggerButton">
+        <DoubleAnimationUsingKeyFrames.KeyFrames>
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="600" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+         <DiscreteDoubleKeyFrame KeyTime="0:0:0.6" Value="600" />
+        </DoubleAnimationUsingKeyFrames.KeyFrames>
+       </DoubleAnimationUsingKeyFrames>
+      </Storyboard>
+     </BeginStoryboard.Storyboard>
+    </BeginStoryboard>
+   </EventTrigger.Actions>
+  </EventTrigger>
+ </Canvas.Triggers>
+</Canvas>
+</Canvas>

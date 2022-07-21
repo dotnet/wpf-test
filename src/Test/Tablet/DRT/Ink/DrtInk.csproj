@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtInk</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <DefineConstants>DRT;UNDO_DISABLED</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="testdata\*.*">
+      <Link>DrtFiles\Ink\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\Tablet\TestSecurityLevel.cs" />
+    <Compile Include="$(DrtCommonRoot)\Tablet\DoubleUtil.cs" />
+    <Compile Include="DrtHelpers.cs" />
+    <Compile Include="DrtInkHarness.cs" />
+    <Compile Include="DrtInkTestcase.cs" />
+    <Compile Include="DrtInkTestSuite.cs" />
+    <Compile Include="tests\BitStreamTest.cs" />
+    <Compile Include="tests\CreateStrokeTest.cs" />
+    <Compile Include="tests\DrawingAttributesTest.cs" />
+    <Compile Include="tests\SaveLoad.cs" />
+    <Compile Include="tests\StylusPointTest.cs" />
+    <Compile Include="tests\ExtendedPropertiesTest.cs" />
+    <Compile Include="tests\InkConverterTest.cs" />
+    <Compile Include="tests\RegressionSuite.cs" />
+    <Compile Include="tests\GestureTest.cs" />
+    <Compile Include="tests\StrokesEventsTest.cs" />
+    <Compile Include="tests\ZOrderTest.cs" />
+    <Compile Include="tests\HitTestTest.cs" />
+    <Compile Include="tests\InkExceptionHardening.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\ReliabilityAssertException.cs" />
+  </ItemGroup>
+
+</Project>

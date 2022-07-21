@@ -1,0 +1,320 @@
+﻿
+<DockPanel
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ser="clr-namespace:DRT;assembly=DrtMarkupSerializer"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:MappingPIGen1="clr-namespace:DRT;assembly=DrtMarkupSerializer">
+
+  <DockPanel.Resources>
+    <Style x:Key="MyButton2" TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+        <Canvas Height="20" Width="100">                
+          <Rectangle Style="{DynamicResource {x:Type Rectangle}}" Stroke="Red" Height="40" Width="90" RadiusX="10" RadiusY="10" StrokeThickness="5" x:Name="MainRect" />
+          <ContentPresenter Margin="15,13,15,15" />
+        </Canvas>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      <Style.Resources>
+        <SolidColorBrush x:Key="GreenBrush2">
+          <SolidColorBrush.Color>
+            <Color A="100" G="219" />
+          </SolidColorBrush.Color>
+        </SolidColorBrush>
+        <Style TargetType="{x:Type Rectangle}">
+          <Setter Property="Fill" Value="{DynamicResource GreenBrush2}" />
+        </Style>
+      </Style.Resources>
+    </Style>
+
+    <SolidColorBrush x:Key="GreenBrush">
+      <SolidColorBrush.Color>
+        <Color A="100" G="219" />
+      </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <Style x:Key="NoTargetTypeStyle">
+
+        <Setter Property="Control.Template">
+        <Setter.Value>
+        <ControlTemplate>
+        <Canvas Height="20" Width="100" />
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="8" />
+        <Setter Property="ser:Label.IntNoWrapperAttachedDP" Value="1" />
+        <Setter Property="TextBlock.Foreground">
+        <Setter.Value>
+              <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStopCollection>
+                    <GradientStop Color="#FFFF0000" Offset="0" />
+                    <GradientStop Color="#FF00FF00" Offset="0.5" />
+                    <GradientStop Color="#FF0000FF" Offset="1.0" />
+                  </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+        </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style x:Key="MyButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+        <Canvas Height="20" Width="100" ser:Label.IntNoWrapperAttachedDP="1">                
+          <Rectangle RadiusX="10" RadiusY="10" Stroke="{DynamicResource GreenBrush}" StrokeThickness="2" x:Name="MainRect">
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStopCollection>
+                    <GradientStop Color="#FFFF0000" Offset="0" />
+                    <GradientStop Color="#FF00FF00" Offset="0.5" />
+                    <GradientStop Color="#FF0000FF" Offset="1.0" />
+                  </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+          <ContentPresenter Content="{TemplateBinding Content}" DockPanel.Dock="{TemplateBinding DockPanel.Dock}" Margin="15,13,15,15" />
+        </Canvas>
+        <ControlTemplate.Triggers>
+
+        <MultiTrigger>
+        <MultiTrigger.Conditions>
+            <Condition Property="IsPressed" Value="True" />
+            <Condition Property="IsFocused" Value="True" />
+            <Condition Property="DockPanel.Dock" Value="Top" />
+          </MultiTrigger.Conditions>
+        <Setter Property="TextBlock.FontSize" Value="16" TargetName="MainRect" />
+        </MultiTrigger>
+        <MultiTrigger>
+        <MultiTrigger.Conditions>
+            <Condition SourceName="MainRect" Property="ser:Label.IntNoWrapperAttachedDP" Value="1" />
+          </MultiTrigger.Conditions>
+        <Setter Property="TextBlock.FontSize" Value="16" TargetName="MainRect" />
+        </MultiTrigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="TextBlock.FontSize" Value="16" />
+        <Setter Property="DockPanel.Dock" Value="Top" />
+        <Setter Property="ser:Label.IntNoWrapperAttachedDP" Value="1" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+              <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStopCollection>
+                    <GradientStop Color="#FFFF0000" Offset="0" />
+                    <GradientStop Color="#FF00FF00" Offset="0.5" />
+                    <GradientStop Color="#FF0000FF" Offset="1.0" />
+                  </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        </Trigger>
+        <Trigger Property="ser:Label.IntNoWrapperAttachedDP" Value="1">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" />
+        </Trigger>
+        <MultiTrigger>
+        <MultiTrigger.Conditions>
+            <Condition Property="IsPressed" Value="True" />
+            <Condition Property="IsFocused" Value="True" />
+            <Condition Property="DockPanel.Dock" Value="Top" />
+          </MultiTrigger.Conditions>
+        <Setter Property="ser:Label.IntNoWrapperAttachedDP" Value="1" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+              <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStopCollection>
+                    <GradientStop Color="#FFFF0000" Offset="0" />
+                    <GradientStop Color="#FF00FF00" Offset="0.5" />
+                    <GradientStop Color="#FF0000FF" Offset="1.0" />
+                  </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="MySecondButtonStyle" xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type ser:MyButton}">
+        <Setter Property="ser:MyButton.MyContent">
+        <Setter.Value>
+        <x:Array x:Type="{x:Type sys:Object}">
+          <TextBlock> Click Me Again and Again and Again! </TextBlock> 
+          <TextBlock> Click Me Again and Again and Again and Again! </TextBlock> 
+        </x:Array>
+        </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style x:Key="MyTextStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TextBox}">
+       
+       <ser:MyButton xmlns:sys="clr-namespace:System;assembly=mscorlib">
+        <ser:MyButton.MyContent>
+         <x:Array x:Type="{x:Type sys:Object}">
+          <TextBlock> Click Me Again and Again and Again! </TextBlock> 
+          <TextBlock> Click Me Again and Again and Again and Again! </TextBlock> 
+         </x:Array>
+        </ser:MyButton.MyContent>
+       </ser:MyButton>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style x:Key="MyThirdButtonStyle" TargetType="{x:Type ser:MyButton}">
+
+        <Style.Triggers>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter Property="MyContent">
+        <Setter.Value>
+         
+         <x:Array x:Type="{x:Type sys:Object}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+          <TextBlock> Click Me Again and Again and Again! </TextBlock> 
+          <TextBlock> Click Me Again and Again and Again and Again! </TextBlock> 
+         </x:Array>
+        </Setter.Value>
+        </Setter>
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="ButtonStyleWithoutVisualTreeorTriggers" TargetType="{x:Type Button}">
+        <Setter Property="Button.Foreground">
+        <Setter.Value>
+                <SolidColorBrush>
+                    <SolidColorBrush.Color>
+                        <Color A="255" B="255" />
+                    </SolidColorBrush.Color>
+                </SolidColorBrush>
+        </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Storyboard x:Key="elementStoryboardTimeline2">
+     <DoubleAnimation To="100" Storyboard.TargetProperty="Height" Storyboard.TargetName="elementStoryboardTarget2" />
+    </Storyboard>
+    <Storyboard x:Key="elementStoryboardTimelineW2">
+     <DoubleAnimation To="400" Storyboard.TargetProperty="Width" Storyboard.TargetName="elementStoryboardTarget2" />
+    </Storyboard>
+  </DockPanel.Resources>
+
+  <DockPanel.Triggers>
+   <EventTrigger RoutedEvent="Button.Click" SourceName="elementTriggerSource">
+     <BeginStoryboard Storyboard="{StaticResource elementStoryboardTimeline2}" />
+     <BeginStoryboard Name="ControlledStoryboard" Storyboard="{StaticResource elementStoryboardTimelineW2}" />
+   </EventTrigger>
+  </DockPanel.Triggers>
+
+  <StackPanel>
+    <Button>
+      <Button.Style>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+        <Canvas Height="20" Width="100">                
+          <Rectangle RadiusX="10" RadiusY="10" Stroke="{DynamicResource GreenBrush}" StrokeThickness="2" x:Name="MainRect">
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStopCollection>
+                    <GradientStop Color="#FFFF0000" Offset="0" />
+                    <GradientStop Color="#FF00FF00" Offset="0.5" />
+                    <GradientStop Color="#FF0000FF" Offset="1.0" />
+                  </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+          <ContentPresenter Content="{TemplateBinding Content}" DockPanel.Dock="{TemplateBinding DockPanel.Dock}" Margin="15,13,15,15" />
+        </Canvas>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="TextBlock.FontSize" Value="16" />
+        <Setter Property="DockPanel.Dock" Value="Top" />
+        </Trigger>
+        <MultiTrigger>
+        <MultiTrigger.Conditions>
+            <Condition Property="IsPressed" Value="True" />
+            <Condition Property="IsFocused" Value="True" />
+            <Condition Property="DockPanel.Dock" Value="Top" />
+          </MultiTrigger.Conditions>
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="TextBlock.FontSize" Value="16" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+              <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStopCollection>
+                    <GradientStop Color="#FFFF0000" Offset="0" />
+                    <GradientStop Color="#FF00FF00" Offset="0.5" />
+                    <GradientStop Color="#FF0000FF" Offset="1.0" />
+                  </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+      </Button.Style>
+    </Button>
+   <Button Name="elementTriggerSource">Click to start element storyboard timeline</Button>
+   <Rectangle Name="elementStoryboardTarget2" Width="200" Height="10" Fill="Blue" />
+  </StackPanel>
+  <TextBlock>This TextBlock control must have its implicit style serialized inline when in value mode</TextBlock>
+  <Rectangle>
+  <Rectangle.Style>
+      <Style TargetType="{x:Type Rectangle}">
+          <Setter Property="Width" Value="80" />
+          <Setter Property="Height" Value="40" />
+          <Setter Property="Fill" Value="Red" />
+         <Style.Resources>
+          <Storyboard x:Key="TestRectLine"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+           <ColorAnimation To="Yellow" BeginTime="0" Duration="0:0:1" />
+           <ColorAnimation To="Green" BeginTime="0:0:1" Duration="0:0:1" />
+          </Storyboard>
+         </Style.Resources>
+          <Style.Triggers>
+         <EventTrigger RoutedEvent="Mouse.MouseDown">
+         <EventTrigger.Actions>
+            <BeginStoryboard Storyboard="{StaticResource TestRectLine}" />
+         </EventTrigger.Actions>
+         </EventTrigger>
+      </Style.Triggers>
+      </Style>
+  </Rectangle.Style>
+  </Rectangle>
+  <Button Style="{DynamicResource MyButton2}">Hello World</Button>
+
+</DockPanel>

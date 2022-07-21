@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtPropertyEngine</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <TestCode>true</TestCode>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <AddTargetFrameworkAttributeToWpfTestExe>true</AddTargetFrameworkAttributeToWpfTestExe>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>FRAMEWORK_NATIVEMETHODS;CORE_NATIVEMETHODS;DRT</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\ExternDll.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\HandleCollector.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsSetLastError.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Internal\FriendAccessAllowedAttribute.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityHelper.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\WpfLibraryLoader.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\PointUtil.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityCriticalDataForSet.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseGlobalInput.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseInput.cs" />
+    <Compile Include="DrtPropertyEngine.cs" />
+    <Compile Include="TestDependencyProperty.cs" />
+    <Compile Include="TestInheritanceContext.cs" />
+    <Compile Include="TestValueSource.cs" />
+    <Compile Include="TestVisualTransforms.cs" />
+    <None Include="files\*.xaml">
+      <Link>DrtFiles\PropertyEngine\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,167 @@
+﻿<!-- ?Mapping XmlNamespace="anim" ClrNamespace="System.Windows.Media.Animation" Assembly="PresentationFramework" ? -->
+<Border Background="red" xml:space="default" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <DockPanel>
+        <TextBlock>Hello</TextBlock>
+        <!-- Test: Transform, Geometry, Pen, Brush -->
+        <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="700" Width="800">
+            <!-- Transform simple syntax -->
+            <Decorator>
+                <Decorator.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <TransformCollection>
+                                <TranslateTransform X="10" Y="10" />
+                                <ScaleTransform ScaleX="1.5" ScaleY="0.75" />
+                                <SkewTransform AngleX="1.1" />
+                                <SkewTransform AngleY="0.9" />
+                                <RotateTransform Angle="25" />
+                                <ScaleTransform ScaleX="1.2" ScaleY="1.3" />
+                                <RotateTransform Angle="2" CenterX="45" CenterY="45" />
+                            </TransformCollection>
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Decorator.RenderTransform>
+                <Rectangle Width="100" Height="100" StrokeThickness="1" Stroke="Blue" />
+            </Decorator>
+            <!-- TransformGroup -->
+            <Decorator>
+                <Decorator.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <TranslateTransform X="10" Y="10">
+                            </TranslateTransform>
+                            <ScaleTransform ScaleX="1.5" ScaleY="0.75" />
+                            <SkewTransform AngleX="1.5" AngleY="0.9" />
+                            <RotateTransform Angle="25" />
+                            <ScaleTransform ScaleX="1.2" ScaleY="1.3" CenterX="30" CenterY="30" />
+                            <RotateTransform Angle="2" CenterX="45" CenterY="45" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Decorator.RenderTransform>
+                <Rectangle Width="100" Height="100" StrokeThickness="2" Stroke="Blue" />
+            </Decorator>
+            <!-- Transform -->
+            <Decorator>
+                <Decorator.RenderTransform>
+                    <SkewTransform AngleX="1.5" AngleY="0.9" CenterX="150" CenterY="50" />
+                </Decorator.RenderTransform>
+                <Rectangle Width="100" Height="100" StrokeThickness="2" Stroke="Green" />
+            </Decorator>
+            <!-- Line -->
+            <Line X1="25" Y1="10" X2="75" Y2="90" Fill="Yellow" />
+            <!-- Ellipse -->
+            <Ellipse Width="110" Height="60" Canvas.Left="-5" Canvas.Top="120" StrokeThickness="10" Stroke="Orange" />
+            <!-- Rectangle -->
+            <Rectangle Width="100" Height="100">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Aqua" Offset="0" />
+                                <GradientStop Color="Blue" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <!-- Polygon -->
+            <Decorator>
+                <Decorator.RenderTransform>
+                    <TranslateTransform X="300" Y="200" />
+                </Decorator.RenderTransform>
+                <Polygon Points="50 50 150 50 150 100 100 100 100 75 125 75 125 150 50 150 50 50" Fill="#80808000" FillRule="EvenOdd" Stroke="Green" />
+            </Decorator>
+            <!-- Polyline -->
+            <!-- NOTE: Polyline should ignore the Fill property -->
+            <Decorator>
+                <Decorator.RenderTransform>
+                    <TranslateTransform X="450" Y="200" />
+                </Decorator.RenderTransform>
+                <Polyline Points="50 50 150 50 150 100 100 100 100 75 125 75 125 150 50 150 50 50" Fill="#80008080" FillRule="Nonzero" Stroke="Green" />
+            </Decorator>
+            <!-- Path - LineGeometry and stroke properties -->
+            <Path Stroke="#4000FF00" StrokeThickness="20" StrokeStartLineCap="Flat" StrokeEndLineCap="Triangle" StrokeDashCap="Round" StrokeLineJoin="Bevel" StrokeMiterLimit="100" StrokeDashOffset="0" StrokeDashArray="1.0 2.0">
+                <Path.Data>
+                    <LineGeometry StartPoint="125 25" EndPoint="175 75">
+                    </LineGeometry>
+                </Path.Data>
+            </Path>
+            <!-- Path - LineGeometry and different stroke properties -->
+            <Path Stroke="#4000FF00" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Flat" StrokeDashCap="Triangle" StrokeLineJoin="Round" StrokeDashOffset="1" StrokeDashArray="1.5 2.0 3.0 2.0 1.0 2.0">
+                <Path.Data>
+                    <LineGeometry StartPoint="25 25" EndPoint="75 75">
+                    </LineGeometry>
+                </Path.Data>
+            </Path>
+            <!-- Path - RectangleGeometry and different Stroke properties -->
+            <Path Fill="#4000FF00">
+                <Path.Data>
+                    <RectangleGeometry Rect="125 125 75 75" RadiusX="10" RadiusY="5">
+                    </RectangleGeometry>
+                </Path.Data>
+            </Path>
+            <!-- Path - EllipseGeometry -->
+            <Path Fill="#4000FF00">
+                <Path.Data>
+                    <EllipseGeometry Center="50 300" RadiusX="50" RadiusY="75">
+                    </EllipseGeometry>
+                </Path.Data>
+            </Path>
+            <!-- Path - PathGeometry -->
+            <Path Fill="#4000FF00" Stroke="Yellow">
+                <Path.Data>
+                    <PathGeometry FillRule="EvenOdd">
+                        <PathGeometry.Transform>
+                            <TranslateTransform X="225" Y="25" />
+                        </PathGeometry.Transform>
+                        <PathGeometry.Figures>
+                            <PathFigureCollection>
+                                <PathFigure StartPoint="0 0" IsClosed="True" IsFilled="True">
+                                    <PathFigure.Segments>
+                                        <PathSegmentCollection>
+                                            <LineSegment Point="100 0" />
+                                            <BezierSegment Point1="125 25" Point2="125 75" Point3="100 100" />
+                                            <QuadraticBezierSegment Point1="50 50" Point2="0 100" />
+                                            <ArcSegment Point="100 150" Size="100 100" RotationAngle="45" IsLargeArc="False" SweepDirection="Clockwise" />
+                                            <PolyLineSegment Points="100 175 0 175" />
+                                            <PolyBezierSegment Points="50 225 50 275 0 300 50 325 50 375 0 400" />
+                                            <PolyQuadraticBezierSegment Points="50 450 0 500 50 550 0 600" />
+                                        </PathSegmentCollection>
+                                    </PathFigure.Segments>
+                                </PathFigure>
+                            </PathFigureCollection>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+            <!-- Path - CombinedGeometry -->
+            <Path Fill="#4000FF00">
+                <Path.Data>
+                    <CombinedGeometry GeometryCombineMode="Xor">
+                        <CombinedGeometry.Transform>
+                            <TranslateTransform X="425" Y="25" />
+                        </CombinedGeometry.Transform>
+                        <CombinedGeometry.Geometry1>
+                            <RectangleGeometry Rect="0 0 100 100" />
+                        </CombinedGeometry.Geometry1>
+                        <CombinedGeometry.Geometry2>
+                            <RectangleGeometry Rect="50 50 100 100" />
+                        </CombinedGeometry.Geometry2>
+                    </CombinedGeometry>
+                </Path.Data>
+            </Path>
+            <!-- Path - GeometryGroup -->
+            <Path Fill="#4000FF00">
+                <Path.Data>
+                    <GeometryGroup FillRule="NonZero">
+                        <GeometryGroup.Transform>
+                            <TranslateTransform X="625" Y="25" />
+                        </GeometryGroup.Transform>
+                        <RectangleGeometry Rect="0 0 100 100" />
+                        <RectangleGeometry Rect="50 50 100 100" />
+                    </GeometryGroup>
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </DockPanel>
+</Border>

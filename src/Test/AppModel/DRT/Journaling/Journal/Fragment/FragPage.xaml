@@ -1,0 +1,24 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   Title="FragPage" x:Class="FragPage">
+<ScrollViewer>
+    <StackPanel Background="OrangeRed">
+		<TextBlock Name="top" Margin="0,0,0,20" FontSize="65" Opacity="0.5" Foreground="White">FragPage.xaml</TextBlock>
+
+		<TextBlock>
+			<Hyperlink NavigateUri="..\Basic\PageA.xaml">Go to another page</Hyperlink>
+		</TextBlock>
+
+		<TextBox Name="TextBox1"></TextBox>
+		<TextBlock>Text box used to test journaling. Fragment navigation should not change content.</TextBlock>
+
+		<TextBlock />
+		<TextBlock><Hyperlink NavigateUri="#bottom">#bottom</Hyperlink></TextBlock>
+		<TextBlock><Hyperlink NavigateUri="Page1.xaml#bottom">Page1.xaml#bottom</Hyperlink></TextBlock>
+
+		<!-- big top margin to make scrolling necessary -->
+		<TextBlock Name="bottom" FontSize="20" Foreground="yellow" Margin="10,800,10,10">Bottom target</TextBlock>
+		<TextBlock><Hyperlink NavigateUri="#top">#top</Hyperlink></TextBlock>
+	</StackPanel>
+</ScrollViewer>
+</Page>

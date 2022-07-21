@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>warmupOpt</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TestCode>true</TestCode>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="warmup.cs" />
+    <None Include="WarmupOpt.cmd">
+       <Link>$(FileName)$(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="warmup.xaml">
+      <Link>DrtFiles\WarmupOpt\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtMarkupSerializer</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <TestCode>true</TestCode>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <AddTargetFrameworkAttributeToWpfTestExe>true</AddTargetFrameworkAttributeToWpfTestExe>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="DrtMarkupSerializer.cs" />
+    <Compile Include="..\Serializer\DrtSerializerFramework.cs" />
+    <Compile Include="..\Serializer\DrtSerializerHelper.cs" />
+    <None Include="*.xaml">
+      <Link>DrtFiles\MarkupSerializer\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Serializer\*.xaml">
+      <Link>DrtFiles\MarkupSerializer\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+</Project>

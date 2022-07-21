@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <PropertyGroup>
+    <AssemblyName>DrtMedia</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <TestCode>true</TestCode>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\drtbase.cs" />
+    <Compile Include="DrtMedia.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\DrtMedia\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

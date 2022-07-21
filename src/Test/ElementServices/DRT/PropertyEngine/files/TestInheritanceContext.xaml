@@ -1,0 +1,171 @@
+<Page Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    >
+
+<Page.Resources>
+    <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+
+    <XmlDataProvider x:Key="XDP">
+        <x:XData>
+            <root xmlns="">
+                <item Text="data" Color="cornflowerblue"/>
+            </root>
+        </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="Names">
+        <x:XData>
+            <root xmlns="">
+                <child Name="Tom"/>
+                <child Name="Dick"/>
+                <child Name="Harry"/>
+            </root>
+        </x:XData>
+    </XmlDataProvider>
+
+    <SolidColorBrush x:Key="CyanBrush" Color="Cyan"/>
+
+    <DataTemplate x:Key="3DTemplate">
+        <Viewport3D Name="MainViewport3D" ClipToBounds="true" Height="100" Width="400" Margin="10">
+            <Viewport3D.Camera>
+                <PerspectiveCamera FarPlaneDistance="20" LookDirection="5,-2,-3" UpDirection="0,1,0" NearPlaneDistance="1" Position="-5,2,3" FieldOfView="45" />
+            </Viewport3D.Camera>
+            <Viewport3D.Children>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <Model3DGroup>
+                            <Model3DGroup.Children>
+                                <DirectionalLight Color="#FFFFFFFF" Direction="-3,-4,-5" />
+                                <GeometryModel3D>
+                                    <GeometryModel3D.Geometry>
+                                        <MeshGeometry3D
+                                            Positions="-1,1,1 1,1,1 1,-1,1 -1,-1,1"
+                                            Normals="0,0,1 0,0,1 0,0,1 0,0,1"
+                                            TextureCoordinates="0,0 1,0 1,1 0,1"
+                                            TriangleIndices="1 0 3 2 1 3" />
+                                    </GeometryModel3D.Geometry>
+                                    <GeometryModel3D.Material>
+                                        <DiffuseMaterial>
+                                            <DiffuseMaterial.Brush>
+                                                <VisualBrush>
+                                                    <VisualBrush.Visual>
+                                                        <TextBlock Text="{Binding XPath=@Name}" Background="white"/>
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </DiffuseMaterial.Brush>
+                                        </DiffuseMaterial>
+                                    </GeometryModel3D.Material>
+                                </GeometryModel3D>
+                            </Model3DGroup.Children>
+                        </Model3DGroup>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+            </Viewport3D.Children>
+        </Viewport3D>
+    </DataTemplate>
+</Page.Resources>
+
+<StackPanel>
+
+    <DockPanel>
+
+        <Label Name="VBLoadedMentor" Content="Testing Loaded">
+            <Label.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <TextBlock Foreground="cornflowerblue" Text="unloaded"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Label.Background>
+        </Label>
+
+        <Label Name="VBInheritanceMentor" Content="Testing inheritance" DataContext="Foo">
+            <Label.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <StackPanel>
+                            <TextBlock Foreground="cornflowerblue" Text="Inheritance" />
+                        </StackPanel>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Label.Background>
+        </Label>
+
+        <Label Name="VBResourcesMentor" Content="Testing resource references">
+            <Label.Resources>
+                <sys:String x:Key="MyString">Resource string</sys:String>
+            </Label.Resources>
+            <Label.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <TextBlock Foreground="cornflowerblue" Text="{DynamicResource MyString}" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Label.Background>
+        </Label>
+
+        <Label Name="VBNameScopeMentor" Content="Testing NameScope">
+            <Label.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <TextBlock Name="VBNameScopeTB" Foreground="cornflowerblue" Text="NameScope" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Label.Background>
+        </Label>
+
+        <Label Name="VBDataBindingMentor" Content="Testing Data Binding"
+                DataContext="{Binding Source={StaticResource XDP}, XPath=/root/item}">
+            <Label.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <TextBlock Foreground="cornflowerblue" Text="{Binding XPath=@Text}" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Label.Background>
+        </Label>
+
+        <StackPanel>
+            <TextBlock Name="MyTextBlock" Text="My TextBlock"/>
+            <Label Name="VBElementNameMentor" Content="Testing ElementName">
+                <Label.Background>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <TextBlock Foreground="cyan" Text="{Binding ElementName=MyTextBlock, Path=Text}" />
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Label.Background>
+            </Label>
+        </StackPanel>
+
+    </DockPanel>
+
+    <DockPanel>
+        <Button Name="VBWithDRInTemplateButton">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Button>
+                        <Button.Background>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Button Name="InnerButton" Background="{DynamicResource CyanBrush}">Nested Button</Button>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Button.Background>
+                    </Button>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </DockPanel>
+
+    <ListBox Name="LB3D" Width="600" Margin="10"
+            ItemsSource="{Binding Source={StaticResource Names}, XPath=/root/child}"
+            ItemTemplate="{StaticResource 3DTemplate}"
+            />
+
+</StackPanel>
+</Page>

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtJournalMode</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <TestCode>true</TestCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DrtJournalMode.cs" />
+    <Compile Include="..\..\Logger\Logger.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <None Include="DrtJournalModeSecure.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DrtJournalModeDefault.xaml">
+      <Link>DrtFiles\JournalMode\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
