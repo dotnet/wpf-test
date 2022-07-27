@@ -1,0 +1,624 @@
+﻿<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  Name="rootElement" Background="Tan">
+  <Canvas.Resources>
+
+    <Rect x:Key="sabrinaRect">15, 0, 70, 70</Rect>
+    <Rect x:Key="jillRect">80, 10, 65, 65</Rect>
+    <Rect x:Key="kellyRect">145, 15, 60, 60</Rect>
+
+    <PathFigureCollection x:Key="starFigureCollection">
+      <PathFigure StartPoint="60 30" IsClosed="True">
+        <LineSegment Point="40 40" />
+        <ArcSegment Point="30 60" Size="20 20" />
+        <LineSegment Point="20 40" />
+        <ArcSegment Point="0 30" Size="20 20" />
+        <LineSegment Point="20 20" />
+        <ArcSegment Point="30 0" Size="20 20" />
+        <LineSegment Point="40 20" />
+        <ArcSegment Point="60 30" Size="20 20" />
+      </PathFigure>
+    </PathFigureCollection>
+
+    <PathGeometry x:Key="myGeometry" Figures="{StaticResource starFigureCollection}">
+      <PathGeometry.Transform>
+        <TransformGroup>
+          <TransformGroup.Children>
+            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+          </TransformGroup.Children>
+        </TransformGroup>
+      </PathGeometry.Transform>
+    </PathGeometry>
+
+    <PathGeometry x:Key="myTriangle">
+      <PathFigure StartPoint="0 0" IsClosed="True">
+        <LineSegment Point="20 7.5" />
+        <LineSegment Point="0 15" />
+      </PathFigure>
+    </PathGeometry>
+
+    <PathGeometry x:Key="bounceGeometry">
+      <PathGeometry.Transform>
+        <TransformGroup>
+          <TransformGroup.Children>
+            <ScaleTransform ScaleX="2" ScaleY="2" />
+          </TransformGroup.Children>
+        </TransformGroup>
+      </PathGeometry.Transform>
+      <PathFigure StartPoint="30 0">
+        <ArcSegment Point="0 0" Size="20 20" />
+      </PathFigure>
+    </PathGeometry>
+  </Canvas.Resources>
+  <Canvas.Triggers>
+    <EventTrigger RoutedEvent="Canvas.Loaded">
+      <BeginStoryboard>
+        <Storyboard>
+
+          <!-- Row Index 0 -->
+
+          <DoubleAnimationUsingKeyFrames Duration="0:0:5" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="moveableCanvasAt0_0"
+                                         Storyboard.TargetProperty="(Canvas.Top)">
+            <LinearDoubleKeyFrame Value="60" KeyTime="80%" />
+          </DoubleAnimationUsingKeyFrames>
+
+          <DoubleAnimationUsingKeyFrames Duration="0:0:5" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="moveableCanvasAt1_0"
+                                         Storyboard.TargetProperty="(Canvas.Top)">
+            <LinearDoubleKeyFrame Value="90" KeyTime="Uniform" />
+            <LinearDoubleKeyFrame Value="60" KeyTime="0:0:4" />
+          </DoubleAnimationUsingKeyFrames>
+
+          <DoubleAnimationUsingKeyFrames Duration="0:0:5" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="moveableCanvasAt2_0"
+                                         Storyboard.TargetProperty="(Canvas.Top)">
+            <LinearDoubleKeyFrame Value="90" KeyTime="10%" />
+            <LinearDoubleKeyFrame Value="30" KeyTime="20%" />
+            <LinearDoubleKeyFrame Value="60" KeyTime="80%" />
+          </DoubleAnimationUsingKeyFrames>
+
+          <DoubleAnimationUsingKeyFrames Duration="0:0:5" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="moveableCanvasAt3_0"
+                                         Storyboard.TargetProperty="(Canvas.Top)">
+            <LinearDoubleKeyFrame Value="20" KeyTime="Paced" />
+            <LinearDoubleKeyFrame Value="90" KeyTime="Paced" />
+            <LinearDoubleKeyFrame Value="30" KeyTime="Paced" />
+            <LinearDoubleKeyFrame Value="60" KeyTime="80%" />
+          </DoubleAnimationUsingKeyFrames>
+
+          <DoubleAnimationUsingKeyFrames Duration="0:0:5" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="moveableCanvasAt4_0"
+                                         Storyboard.TargetProperty="(Canvas.Top)">
+            <DiscreteDoubleKeyFrame Value="20" KeyTime="Paced" />
+            <DiscreteDoubleKeyFrame Value="90" KeyTime="Paced" />
+            <DiscreteDoubleKeyFrame Value="30" KeyTime="Paced" />
+            <DiscreteDoubleKeyFrame Value="60" KeyTime="80%" />
+          </DoubleAnimationUsingKeyFrames>
+
+          <DoubleAnimationUsingKeyFrames Duration="0:0:5" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="moveableCanvasAt5_0"
+                                         Storyboard.TargetProperty="(Canvas.Top)">
+            <SplineDoubleKeyFrame Value="90" KeySpline=".5,0 1,.5" />
+            <SplineDoubleKeyFrame Value="30" KeySpline=".5,0 1,.5" />
+            <SplineDoubleKeyFrame Value="60" KeySpline=".5,0 1,.5" KeyTime="80%" />
+          </DoubleAnimationUsingKeyFrames>
+
+          <!-- Row Index 1 -->
+
+          <ThicknessAnimation From="2, 6, 10, 14" To="12, 18, 7, 9" Duration="0:0:2" AutoReverse="True" RepeatBehavior="Forever"
+                              Storyboard.TargetName="borderAt1_0"
+                              Storyboard.TargetProperty="(Border.BorderThickness)" />
+
+          <DoubleAnimationUsingPath PathGeometry="{StaticResource myGeometry}" Duration="0:0:10" RepeatBehavior="Forever" Source="Angle"
+                                    Storyboard.TargetName="pathAt1_1"
+                                    Storyboard.TargetProperty="(Path.RenderTransform).(TransformGroup.Children)[0].(RotateTransform.Angle)" />
+
+          <DoubleAnimationUsingPath IsAdditive="True" PathGeometry="{StaticResource myGeometry}" Duration="0:0:10" RepeatBehavior="Forever" Source="X"
+                                    Storyboard.TargetName="pathAt2_1"
+                                    Storyboard.TargetProperty="(Path.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.X)" />
+
+          <RectAnimationUsingKeyFrames Duration="0:0:5" RepeatBehavior="Forever"
+                                       Storyboard.TargetName="canvasAt3_1"
+                                       Storyboard.TargetProperty="(Canvas.Background).(ImageBrush.Viewbox)">
+            <DiscreteRectKeyFrame Value="{StaticResource sabrinaRect}" />
+            <LinearRectKeyFrame Value="{StaticResource jillRect}" />
+            <DiscreteRectKeyFrame Value="{StaticResource jillRect}" />
+            <LinearRectKeyFrame Value="{StaticResource kellyRect}" />
+            <DiscreteRectKeyFrame Value="{StaticResource kellyRect}" />
+            <LinearRectKeyFrame Value="{StaticResource sabrinaRect}" />
+          </RectAnimationUsingKeyFrames>
+
+          <StringAnimationUsingKeyFrames Duration="0:0:5" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="textBlockAt3_1"
+                                         Storyboard.TargetProperty="(TextBlock.Text)">
+            <DiscreteStringKeyFrame Value="Jill" />
+            <DiscreteStringKeyFrame Value="Kelly" />
+            <DiscreteStringKeyFrame Value="Sabrina" />
+          </StringAnimationUsingKeyFrames>
+
+          <StringAnimationUsingKeyFrames Duration="0:0:8" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="textBlockAt5_1"
+                                         Storyboard.TargetProperty="(TextBlock.Text)">
+            <DiscreteStringKeyFrame Value="7" KeyTime="0%" />
+            <DiscreteStringKeyFrame Value="6" />
+            <DiscreteStringKeyFrame Value="5" />
+            <DiscreteStringKeyFrame Value="4" />
+            <DiscreteStringKeyFrame Value="3" />
+            <DiscreteStringKeyFrame Value="2" />
+            <DiscreteStringKeyFrame Value="1" />
+            <DiscreteStringKeyFrame Value="0" />
+            <DiscreteStringKeyFrame KeyTime="100%" />
+          </StringAnimationUsingKeyFrames>
+
+          <!-- Row Index 2 -->
+
+          <DoubleAnimation From="0" To="360" Duration="0:0:20" RepeatBehavior="Forever"
+                           Storyboard.TargetName="canvasAt0_2"
+                           Storyboard.TargetProperty="(Canvas.Clip).(PathGeometry.Transform).(TransformGroup.Children)[0].(RotateTransform.Angle)" />
+
+          <DoubleAnimation From="0" To="360" Duration="0:0:20" RepeatBehavior="Forever"
+                           Storyboard.TargetName="pathAt0_2"
+                           Storyboard.TargetProperty="(Path.Data).(PathGeometry.Transform).(TransformGroup.Children)[0].(RotateTransform.Angle)" />
+
+          <DoubleAnimationUsingPath Duration="0:0:10" RepeatBehavior="Forever" IsAdditive="True"
+                                    PathGeometry="{StaticResource myGeometry}" Source="Y"
+                                    Storyboard.TargetName="pathAt1_2"
+                                    Storyboard.TargetProperty="(Path.RenderTransform).(TranslateTransform.Y)" />
+
+          <MatrixAnimationUsingPath Duration="0:0:10" RepeatBehavior="Forever"
+                                    PathGeometry="{StaticResource myGeometry}" DoesRotateWithTangent="True"
+                                    Storyboard.TargetName="pathAt2_2"
+                                    Storyboard.TargetProperty="(Path.RenderTransform).(TransformGroup.Children)[1].(MatrixTransform.Matrix)" />
+
+          <DoubleAnimationUsingPath Duration="0:0:10" RepeatBehavior="Forever" IsAdditive="True"
+                                    PathGeometry="{StaticResource myGeometry}" Source="Y"
+                                    Storyboard.TargetName="canvasAt3_2"
+                                    Storyboard.TargetProperty="(Canvas.Top)" />
+
+          <StringAnimationUsingKeyFrames Duration="0:0:2" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="buttonAt4_2"
+                                         Storyboard.TargetProperty="(Button.Content)">
+            <DiscreteStringKeyFrame Value="Enabled" KeyTime="0%" />
+            <DiscreteStringKeyFrame Value="Disabled" KeyTime="50%" />
+          </StringAnimationUsingKeyFrames>
+
+          <BooleanAnimationUsingKeyFrames Duration="0:0:2" RepeatBehavior="Forever"
+                                          Storyboard.TargetName="buttonAt4_2"
+                                          Storyboard.TargetProperty="(Button.IsEnabled)">
+            <DiscreteBooleanKeyFrame KeyTime=" 0%" Value="True" />
+            <DiscreteBooleanKeyFrame KeyTime="50%" Value="False" />
+          </BooleanAnimationUsingKeyFrames>
+
+          <ParallelTimeline Duration="0:0:4" RepeatBehavior="Forever"
+                            Storyboard.TargetName="canvasAt5_2"
+                            Storyboard.TargetProperty="(Canvas.Top)">
+            <DoubleAnimation BeginTime="0:0:0" Duration="0:0:1.5" AccelerationRatio="0.2" DecelerationRatio="0.8" From="20" To="80" />
+            <DoubleAnimation BeginTime="0:0:2" Duration="0:0:1.5" AccelerationRatio="0.2" DecelerationRatio="0.8" To="20" />
+          </ParallelTimeline>
+
+          <!-- Row Index 3 -->
+
+          <DoubleAnimation From="0.1" To="0.9" Duration="0:0:3" AutoReverse="True" RepeatBehavior="Forever"
+                           Storyboard.TargetName="canvasAt0_3"
+                           Storyboard.TargetProperty="(Canvas.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Offset)" />
+
+          <DoubleAnimation From="0.1" To="0.9" Duration="0:0:3" AutoReverse="True" RepeatBehavior="Forever"
+                           Storyboard.TargetName="canvasAt1_3"
+                           Storyboard.TargetProperty="(Canvas.Background).(RadialGradientBrush.GradientStops)[1].(GradientStop.Offset)" />
+
+          <DoubleAnimationUsingPath Duration="0:0:10" RepeatBehavior="Forever" IsAdditive="True"
+                                    PathGeometry="{StaticResource myGeometry}" Source="X"
+                                    Storyboard.TargetName="canvasAt2_3"
+                                    Storyboard.TargetProperty="(Canvas.Left)" />
+
+          <MatrixAnimationUsingPath Duration="0:0:0.6" RepeatBehavior="0:0:10"
+                                    PathGeometry="{StaticResource bounceGeometry}"
+                                    IsOffsetCumulative="True" IsAngleCumulative="True"
+                                    DoesRotateWithTangent="True"
+                                    Storyboard.TargetName="progressBounce"
+                                    Storyboard.TargetProperty="(Path.RenderTransform).(TransformGroup.Children)[1].(MatrixTransform.Matrix)" />
+
+          <ObjectAnimationUsingKeyFrames Duration="0:0:3" RepeatBehavior="Forever"
+                                         Storyboard.TargetName="canvasAt3_3"
+                                         Storyboard.TargetProperty="HorizontalAlignment">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static HorizontalAlignment.Left}" />
+            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static HorizontalAlignment.Center}" />
+            <DiscreteObjectKeyFrame KeyTime="0:0:2" Value="{x:Static HorizontalAlignment.Right}" />
+          </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+      </BeginStoryboard>
+    </EventTrigger>
+  </Canvas.Triggers>
+  <Grid Margin="20">
+    <Grid.ColumnDefinitions>
+    <ColumnDefinition />
+    <ColumnDefinition />
+    <ColumnDefinition />
+    <ColumnDefinition />
+    <ColumnDefinition />
+    <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+    <RowDefinition />
+    <RowDefinition />
+    <RowDefinition />
+    <RowDefinition />
+    <RowDefinition />
+    </Grid.RowDefinitions>
+    <Grid.Resources>
+      <SolidColorBrush x:Key="ContrastBrush" Color="#FFD6E9CD" />
+      <SolidColorBrush x:Key="LightSteelBlue" Color="#FFB4B8E2" />
+      <SolidColorBrush x:Key="MediumSteelBlue" Color="#FF989ED8" />
+      <SolidColorBrush x:Key="DarkSteelBlue" Color="#FF6D77C9" />
+      <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="FontWeight" Value="Bold" />
+      </Style>
+      <Style x:Key="TestText" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="FontSize" Value="8pt" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+      </Style>
+      <Style x:Key="DarkSquare" TargetType="{x:Type Canvas}">
+        <Setter Property="Background" Value="{DynamicResource MediumSteelBlue}" />
+        <Setter Property="Width" Value="125" />
+        <Setter Property="Height" Value="125" />
+      </Style>
+      <Style x:Key="LightSquare" TargetType="{x:Type Canvas}">
+        <Setter Property="Background" Value="{DynamicResource LightSteelBlue}" />
+        <Setter Property="Width" Value="125" />
+        <Setter Property="Height" Value="125" />
+      </Style>
+      <Style x:Key="MovableCanvas" TargetType="{x:Type Canvas}">
+        <Setter Property="Left" Value="10" />
+        <Setter Property="Top" Value="10" />
+        <Setter Property="Background" Value="{DynamicResource ContrastBrush}" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="105" />
+      </Style>
+    </Grid.Resources>
+
+    <!-- Row 1 -->
+
+    <Canvas Grid.Column="0" Grid.Row="0" Style="{DynamicResource DarkSquare}">
+      <Canvas Style="{DynamicResource MovableCanvas}" Name="moveableCanvasAt0_0" />
+    </Canvas>
+    <TextBlock Grid.Column="0" Grid.Row="0" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Top<LineBreak />DoubleUsingKeyFrames<LineBreak />1 Linear<LineBreak />Percent KeyTime
+    </TextBlock>
+
+    <Canvas Grid.Column="1" Grid.Row="0" Style="{DynamicResource LightSquare}">
+      <Canvas Style="{DynamicResource MovableCanvas}" Name="moveableCanvasAt1_0" />
+    </Canvas>
+    <TextBlock Grid.Column="1" Grid.Row="0" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Top<LineBreak />DoubleUsingKeyFrames<LineBreak />2 Linear<LineBreak />Time KeyTimes
+    </TextBlock>
+
+    <Canvas Grid.Column="2" Grid.Row="0" Style="{DynamicResource DarkSquare}">
+      <Canvas Style="{DynamicResource MovableCanvas}" Name="moveableCanvasAt2_0" />
+    </Canvas>
+    <TextBlock Grid.Column="2" Grid.Row="0" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Top<LineBreak />DoubleUsingKeyFrames<LineBreak />3 Linear<LineBreak />Percent KeyTimes
+    </TextBlock>
+
+    <Canvas Grid.Column="3" Grid.Row="0" Style="{DynamicResource LightSquare}">
+      <Canvas Style="{DynamicResource MovableCanvas}" Name="moveableCanvasAt3_0" />
+    </Canvas>
+    <TextBlock Grid.Column="3" Grid.Row="0" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Top<LineBreak />DoubleUsingKeyFrames<LineBreak />4 Linear<LineBreak />Paced KeyTimes
+    </TextBlock>
+
+    <Canvas Grid.Column="4" Grid.Row="0" Style="{DynamicResource DarkSquare}">
+      <Canvas Style="{DynamicResource MovableCanvas}" Name="moveableCanvasAt4_0" />
+    </Canvas>
+    <TextBlock Grid.Column="4" Grid.Row="0" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Top<LineBreak />DoubleUsingKeyFrames<LineBreak />4 Discrete<LineBreak />Paced KeyTimes
+    </TextBlock>
+
+    <Canvas Grid.Column="5" Grid.Row="0" Style="{DynamicResource LightSquare}">
+      <Canvas Style="{DynamicResource MovableCanvas}" Name="moveableCanvasAt5_0" />
+    </Canvas>
+    <TextBlock Grid.Column="5" Grid.Row="0" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Top<LineBreak />DoubleUsingKeyFrames<LineBreak />3 Spline<LineBreak />Uniform KeyTimes
+    </TextBlock>
+
+    <!-- Row 2 -->
+
+    <Canvas Grid.Column="0" Grid.Row="1" Style="{DynamicResource LightSquare}">
+      <Border Canvas.Left="10" Canvas.Top="10" BorderThickness="4" BorderBrush="{DynamicResource ContrastBrush}" Name="borderAt1_0">
+        <Rectangle Width="75" Height="75" />
+      </Border>
+    </Canvas>
+    <TextBlock Grid.Column="0" Grid.Row="1" Style="{DynamicResource TestText}">
+      Border<LineBreak />BorderThickness<LineBreak />Thickness
+    </TextBlock>
+
+    <Canvas Grid.Column="1" Grid.Row="1" Style="{DynamicResource DarkSquare}">
+      <Path Name="pathAt1_1" Margin="15" Canvas.Left="15" Canvas.Top="25" Fill="{DynamicResource ContrastBrush}" Data="{DynamicResource myTriangle}">
+        <Path.RenderTransform>
+          <TransformGroup>
+            <TransformGroup.Children>
+              <RotateTransform CenterX="10" CenterY="7.5" />
+              <ScaleTransform ScaleX="3" ScaleY="3" />
+            </TransformGroup.Children>
+          </TransformGroup>
+        </Path.RenderTransform>
+      </Path>
+    </Canvas>
+    <TextBlock Grid.Column="1" Grid.Row="1" Style="{DynamicResource TestText}">
+      RotateTransform<LineBreak />Angle<LineBreak />DoubleUsingPath<LineBreak />Source="Angle"
+    </TextBlock>
+
+    <Canvas Grid.Column="2" Grid.Row="1" Style="{DynamicResource LightSquare}">
+      <Path Name="pathAt2_1" Margin="15" Canvas.Top="85" Fill="{DynamicResource ContrastBrush}" Data="{DynamicResource myTriangle}">
+        <Path.RenderTransform>
+          <TransformGroup>
+            <TransformGroup.Children>
+              <RotateTransform Angle="90" />
+              <TranslateTransform X="7.5" />
+            </TransformGroup.Children>
+          </TransformGroup>
+        </Path.RenderTransform>
+      </Path>
+    </Canvas>
+    <TextBlock Grid.Column="2" Grid.Row="1" Style="{DynamicResource TestText}">
+      TranslateTransform<LineBreak />X<LineBreak />DoubleUsingPath<LineBreak />Source="X"
+    </TextBlock>
+
+    <Canvas Grid.Column="3" Grid.Row="1" Style="{DynamicResource DarkSquare}">
+      <StackPanel Canvas.Left="30" Canvas.Top="5" Background="{DynamicResource DarkSteelBlue}">
+        <StackPanel.RenderTransform>
+          <RotateTransform Angle="10" />
+        </StackPanel.RenderTransform>
+        <Border BorderThickness="5, 5, 5, 5">
+          <StackPanel Width="75">
+            <Canvas Width="75" Height="75" Name="canvasAt3_1">
+              <Canvas.Background>
+                <ImageBrush ViewboxUnits="Absolute" Viewbox="{StaticResource sabrinaRect}" ImageSource="DrtFiles/DrtAnimation/angels.jpg" />
+              </Canvas.Background>
+            </Canvas>
+            <TextBlock Name="textBlockAt3_1" Height="15" Foreground="{DynamicResource ContrastBrush}" TextAlignment="Center" Text="Sabrina" />
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </Canvas>
+
+    <Canvas Grid.Column="4" Grid.Row="1" Style="{DynamicResource LightSquare}">
+    </Canvas>
+    <TextBlock Grid.Column="4" Grid.Row="1" Style="{DynamicResource TestText}">
+      &lt;&lt;&lt;&lt;&lt;&lt;&lt;<LineBreak />ImageBrush<LineBreak />Viewbox<LineBreak />RectUsingKeyFrames<LineBreak />Linear and Discrete
+    </TextBlock>
+
+    <Canvas Grid.Column="5" Grid.Row="1" Style="{DynamicResource DarkSquare}" />
+    <TextBlock Grid.Column="5" Grid.Row="1" Name="textBlockAt5_1" Canvas.Top="-10" Height="125" TextAlignment="Center" FontSize="72pt" Foreground="{DynamicResource ContrastBrush}" />
+    <TextBlock Grid.Column="5" Grid.Row="1" Style="{DynamicResource TestText}">
+      TextBox<LineBreak />Text<LineBreak />KeyFrameString<LineBreak />9 Discrete
+    </TextBlock>
+
+    <!-- Row Index 2 -->
+
+    <Canvas Grid.Column="0" Grid.Row="2" Style="{DynamicResource DarkSquare}">
+      <Canvas Left="15" Top="15">
+        <Canvas Name="canvasAt0_2" Width="100" Height="100">
+          <Canvas.Clip>
+            <PathGeometry Figures="{StaticResource starFigureCollection}">
+              <PathGeometry.Transform>
+                <TransformGroup>
+                  <TransformGroup.Children>
+                    <RotateTransform CenterX="30" CenterY="30" />
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                  </TransformGroup.Children>
+                </TransformGroup>
+              </PathGeometry.Transform>
+            </PathGeometry>
+          </Canvas.Clip>
+          <FlowDocumentScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+          <FlowDocument TextAlignment="Left" FontSize="8pt" Background="{DynamicResource LightSteelBlue}" Foreground="{DynamicResource DarkSteelBlue}">
+            <Paragraph>
+              Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region
+              Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region
+              Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region
+              Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region
+              Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region
+              Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region
+              Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region Animated Clip Region
+            </Paragraph>
+          </FlowDocument>
+          </FlowDocumentScrollViewer>
+        </Canvas>
+        <!-- Animated Path Matching Clip Region Drawn On Top -->
+        <Path Name="pathAt0_2" Stroke="{DynamicResource ContrastBrush}" Fill="Transparent" StrokeThickness="2">
+          <Path.Data>
+            <PathGeometry Figures="{StaticResource starFigureCollection}">
+              <PathGeometry.Transform>
+                <TransformGroup>
+                  <TransformGroup.Children>
+                    <RotateTransform CenterX="30" CenterY="30" />
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                  </TransformGroup.Children>
+                </TransformGroup>
+              </PathGeometry.Transform>
+            </PathGeometry>
+          </Path.Data>
+        </Path>
+      </Canvas>
+    </Canvas>
+    <TextBlock Grid.Column="0" Grid.Row="2" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Clip<LineBreak />RotateTransform<LineBreak />Angle<LineBreak />Double
+    </TextBlock>
+
+    <Canvas Grid.Column="1" Grid.Row="2" Style="{DynamicResource LightSquare}">
+      <Path Margin="15" Canvas.Left="85" Name="pathAt1_2" Fill="{DynamicResource ContrastBrush}" Data="{DynamicResource myTriangle}">
+        <Path.RenderTransform>
+          <TranslateTransform Y="-7.5" />
+        </Path.RenderTransform>
+      </Path>
+    </Canvas>
+    <TextBlock Grid.Column="1" Grid.Row="2" Style="{DynamicResource TestText}">
+      TranslateTransform<LineBreak />Y<LineBreak />DoubleUsingPath<LineBreak />Source="Y"
+    </TextBlock>
+
+    <Canvas Grid.Column="2" Grid.Row="2" Style="{DynamicResource DarkSquare}">
+      <Path Canvas.Left="15" Canvas.Top="15" Stroke="{DynamicResource DarkSteelBlue}" StrokeThickness="2" Data="{DynamicResource myGeometry}" />
+      <Path Name="pathAt2_2" Margin="15" Fill="{DynamicResource ContrastBrush}" Data="{DynamicResource myTriangle}">
+        <Path.RenderTransform>
+          <TransformGroup>
+            <TransformGroup.Children>
+              <TranslateTransform X="-7.5" Y="-7.5" />
+              <MatrixTransform />
+            </TransformGroup.Children>
+          </TransformGroup>
+        </Path.RenderTransform>
+      </Path>
+    </Canvas>
+    <TextBlock Grid.Column="2" Grid.Row="2" Style="{DynamicResource TestText}">
+      MatrixTransform<LineBreak />Matrix<LineBreak />MatrixUsingPath
+    </TextBlock>
+
+    <Canvas Grid.Column="3" Grid.Row="2" Style="{DynamicResource LightSquare}">
+      <Canvas Name="canvasAt3_2" Margin="15" Left="10" Top="7.5">
+        <Path Fill="{DynamicResource ContrastBrush}" Data="{DynamicResource myTriangle}">
+          <Path.RenderTransform>
+            <RotateTransform Angle="-180" />
+          </Path.RenderTransform>
+        </Path>
+      </Canvas>
+    </Canvas>
+    <TextBlock Grid.Column="3" Grid.Row="2" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Top<LineBreak />DoubleUsingPath<LineBreak />Source="Y"
+    </TextBlock>
+
+    <Canvas Grid.Column="4" Grid.Row="2" Style="{DynamicResource DarkSquare}">
+      <Border Margin="22 10" Background="{DynamicResource ContrastBrush}">
+        <Button Name="buttonAt4_2" Margin="3">
+          <Button.Content>Enabled</Button.Content>
+        </Button>
+      </Border>
+    </Canvas>
+    <TextBlock Grid.Column="4" Grid.Row="2" Style="{DynamicResource TestText}">
+      Button<LineBreak />IsEnabled<LineBreak />BooleanUsingKeyFrames
+    </TextBlock>
+
+    <Canvas Grid.Column="5" Grid.Row="2" Style="{DynamicResource LightSquare}">
+      <Canvas Name="canvasAt5_2" Style="{DynamicResource MovableCanvas}" />
+    </Canvas>
+    <TextBlock Grid.Column="5" Grid.Row="2" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Top<LineBreak />Two Composing Double
+    </TextBlock>
+
+    <!-- Row Index 3 -->
+
+    <Canvas Grid.Column="0" Grid.Row="3" Style="{DynamicResource LightSquare}">
+      <Canvas Name="canvasAt0_3" Style="{DynamicResource MovableCanvas}">
+        <Canvas.Background>
+          <LinearGradientBrush StartPoint="0 0.5" EndPoint="1 0.5">
+            <LinearGradientBrush.GradientStops>
+              <GradientStop Color="#FF6D77C9" Offset="0.0" />
+              <GradientStop Color="#FFD6E9CD" Offset="0.5" />
+              <GradientStop Color="#FF6D77C9" Offset="1.0" />
+            </LinearGradientBrush.GradientStops>
+          </LinearGradientBrush>
+        </Canvas.Background>
+      </Canvas>
+    </Canvas>
+    <TextBlock Grid.Column="0" Grid.Row="3" Style="{DynamicResource TestText}">
+      LinearGradientBrush<LineBreak />GradientStop<LineBreak />Offset<LineBreak />Double
+    </TextBlock>
+
+    <Canvas Grid.Column="1" Grid.Row="3" Style="{DynamicResource DarkSquare}">
+      <Canvas Name="canvasAt1_3" Style="{DynamicResource MovableCanvas}">
+        <Canvas.Background>
+          <RadialGradientBrush>
+            <RadialGradientBrush.GradientStops>
+              <GradientStop Color="#FF6D77C9" Offset="0.0" />
+              <GradientStop Color="#FFD6E9CD" Offset="0.5" />
+              <GradientStop Color="#FF6D77C9" Offset="1.0" />
+            </RadialGradientBrush.GradientStops>
+          </RadialGradientBrush>
+        </Canvas.Background>
+      </Canvas>
+    </Canvas>
+    <TextBlock Grid.Column="1" Grid.Row="3" Style="{DynamicResource TestText}">
+      RadialGradientBrush<LineBreak />GradientStop<LineBreak />Offset<LineBreak />Double
+    </TextBlock>
+
+    <Canvas Grid.Column="2" Grid.Row="3" Style="{DynamicResource LightSquare}">
+      <Canvas>
+        <Path Name="canvasAt2_3" Margin="15" Canvas.Left="-7.5" Canvas.Top="10" Fill="{DynamicResource ContrastBrush}" Data="{DynamicResource myTriangle}">
+          <Path.RenderTransform>
+            <RotateTransform Angle="-90" />
+          </Path.RenderTransform>
+        </Path>
+      </Canvas>
+    </Canvas>
+    <TextBlock Grid.Column="2" Grid.Row="3" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />Left<LineBreak />DoubleUsingPath<LineBreak />Source="X"
+    </TextBlock>
+
+    <Canvas Grid.Column="3" Grid.Row="3" Style="{DynamicResource DarkSquare}">
+      <StackPanel Width="105" Canvas.Left="10" Canvas.Top="10">
+        <Canvas Name="canvasAt3_3" Width="20" Style="{DynamicResource MovableCanvas}" />
+      </StackPanel>
+    </Canvas>
+    <TextBlock Grid.Column="3" Grid.Row="3" Style="{DynamicResource TestText}">
+      Canvas<LineBreak />HorizontalAlignment<LineBreak />ObjectUsingKeyFrames
+    </TextBlock>
+
+    <Canvas Grid.Column="4" Grid.Row="3" Style="{DynamicResource LightSquare}">
+      <!-- Empty -->
+    </Canvas>
+
+    <Canvas Grid.Column="5" Grid.Row="3" Style="{DynamicResource DarkSquare}">
+      <!-- Empty -->
+    </Canvas>
+
+    <!-- Row Index 4 -->
+
+    <Canvas Grid.Column="0" Grid.Row="4" Style="{DynamicResource DarkSquare}">
+      <!-- Empty -->
+    </Canvas>
+
+    <Canvas Grid.Column="1" Grid.Row="4" Style="{DynamicResource LightSquare}">
+      <!-- Empty -->
+    </Canvas>
+
+    <Canvas Grid.Column="2" Grid.Row="4" Style="{DynamicResource DarkSquare}">
+      <!-- Empty -->
+    </Canvas>
+
+    <Canvas Grid.Column="3" Grid.Row="4" Style="{DynamicResource LightSquare}">
+      <!-- Empty -->
+    </Canvas>
+
+    <Canvas Grid.Column="4" Grid.Row="4" Style="{DynamicResource DarkSquare}">
+      <Canvas Style="{DynamicResource MovableCanvas}" Background="{DynamicResource DarkSteelBlue}">
+        <Rectangle Name="progressRectangle" Width="50" Height="30" Fill="{DynamicResource ContrastBrush}" />
+      </Canvas>
+    </Canvas>
+    <TextBlock Grid.Column="4" Grid.Row="4" Style="{DynamicResource TestText}">
+      Rectangle<LineBreak />Width<LineBreak />Double<LineBreak />Percent Values
+    </TextBlock>
+
+    <Canvas Grid.Column="5" Grid.Row="4" Style="{DynamicResource LightSquare}">
+      <Path Margin="30 110" Stroke="{DynamicResource DarkSteelBlue}" StrokeThickness="2" Data="{DynamicResource bounceGeometry}" />
+      <Path Name="progressBounce" Margin="30 110" Fill="{DynamicResource ContrastBrush}" Data="{DynamicResource myTriangle}">
+        <Path.RenderTransform>
+          <TransformGroup>
+            <TransformGroup.Children>
+              <TranslateTransform X="-7.5" Y="-7.5" />
+              <MatrixTransform />
+            </TransformGroup.Children>
+          </TransformGroup>
+        </Path.RenderTransform>
+      </Path>
+    </Canvas>
+    <TextBlock Grid.Column="5" Grid.Row="4" Style="{DynamicResource TestText}">
+      MatrixTransform<LineBreak />Matrix<LineBreak />MatrixUsingPath<LineBreak />IsAngleCumulative="true"<LineBreak />IsOffsetCumulative="true"
+    </TextBlock>
+
+
+  </Grid>
+</Canvas>

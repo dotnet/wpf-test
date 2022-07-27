@@ -1,0 +1,112 @@
+﻿<AdornerDecorator
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<StackPanel Background="white">
+
+
+<StackPanel.Resources>
+        <Style x:Key="MyFocusVisualStyle">
+
+        <Setter Property="Control.Template">
+        <Setter.Value>
+        <ControlTemplate>
+                <Border>
+                <!-- negative margins are disabled until future design on how to support them
+                    <Rectangle Margin="-4,-4,-4,-4" StrokeThickness="2" Stroke="Red" Fill="Transparent" /> -->
+                    <Rectangle StrokeThickness="2" Stroke="Blue" /> 
+                </Border>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+
+        </Style>
+
+
+        <Style x:Key="CheckBoxFocusVisualStyle">
+
+        <Setter Property="Control.Template">
+        <Setter.Value>
+        <ControlTemplate>
+        <Border>
+            <Rectangle Margin="15,0,0,0" StrokeThickness="1" Stroke="Pink" />
+        </Border>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+
+        </Style>
+
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource CheckBoxFocusVisualStyle}" />
+        </Style>
+
+
+                <Style x:Key="ButtonFocusVisualStyle">
+
+        <Setter Property="Control.Template">
+        <Setter.Value>
+        <ControlTemplate>
+                                <Border>
+                                        <Rectangle Margin="3,4,3,4" StrokeThickness="1" Stroke="#80000000" StrokeDashArray="1 2" />
+                                </Border>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+
+                </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisualStyle}" />
+        </Style>
+
+</StackPanel.Resources>
+
+
+
+<!--
+********************************
+  SCENARIO 1: Set local value 
+********************************
+--> 
+<Button Name="b1">Button
+        <Button.FocusVisualStyle>
+                <Style>
+
+        <Setter Property="Control.Template">
+        <Setter.Value>
+        <ControlTemplate>
+                                <Border>
+                                        <Rectangle Margin="3,3,3,3" StrokeThickness="1" Stroke="Black" StrokeDashArray="1 2" />
+                                </Border>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+
+                </Style>
+        </Button.FocusVisualStyle>
+</Button>
+
+<!--
+********************************
+  SCENARIO 2: Set resource
+********************************
+--> 
+<Button Name="b2" FocusVisualStyle="{DynamicResource MyFocusVisualStyle}">Button1</Button>
+
+
+<!--
+********************************
+  SCENARIO 3: Use CheckBox style defined in StackPanel.Resources
+********************************
+--> 
+
+<CheckBox Name="cb1">CheckBox</CheckBox>
+
+<TextBlock Name="textblock">
+<Hyperlink Name="hl">Hyperlink</Hyperlink>
+</TextBlock>
+
+<Button>Hello world</Button>
+
+</StackPanel>
+</AdornerDecorator>

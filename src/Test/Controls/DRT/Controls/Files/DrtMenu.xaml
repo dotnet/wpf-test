@@ -1,0 +1,181 @@
+﻿
+
+<AdornerDecorator xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:MappingPIGen1="clr-namespace:System;assembly=mscorlib">
+
+<Border Width="550" Height="500">
+<DockPanel Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+
+    <Menu Name="MainMenu" DockPanel.Dock="Top">
+
+
+    </Menu>
+
+    <Menu Name="StaysOpenOnClickMenu" DockPanel.Dock="Top">
+        <MenuItem Header="StaysOpenOnClick Test" Name="StaysOpenOnClickHeader">
+            <MenuItem Header="Read-Only (StaysOpenOnClick=false)" IsCheckable="true" Name="StaysOpenOnClickFalse" />
+            <MenuItem Header="Archive (StaysOpenOnClick=true)" IsCheckable="true" StaysOpenOnClick="True" Name="StaysOpenOnClickTrue" />
+        </MenuItem>
+    </Menu>
+
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+        <Button Name="Button1">Button1</Button>
+        <Button Name="Button2">Show Button1's ContextMenu</Button>
+        <Button Name="Button3">Show CM</Button>
+        <Button Name="ActivateButton">Activate Desktop</Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+        <TextBox Name="TextBox1" Width="250" Height="100">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="ContextMenu 1" />
+                    <MenuItem Header="One" />
+                    <MenuItem Header="Two" />
+                    <MenuItem Header="Three" />
+                    <MenuItem Header="Four">
+                        <MenuItem Header="A" />
+                        <MenuItem Header="B" />
+                        <MenuItem Header="C" />
+                    </MenuItem>
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+
+        <TextBox Name="TextBox2" Width="250" Height="100">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <sys:String>Wrapper Item 1</sys:String>
+                    <sys:String>Wrapper Item 2</sys:String>
+                    <MenuItem Header="Disabled menu item" IsEnabled="false" />
+                    <sys:String>Wrapper Item 3</sys:String>
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+        <Menu Name="SparkleMenu">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" />
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="1" />
+                <Separator />
+                <MenuItem Header="2">
+                    <MenuItem Header="A" />
+                    <MenuItem Header="B" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="4" />
+                <MenuItem Header="5" />
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Blah" />
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Blah" />
+            </MenuItem>
+        </Menu>
+
+        <ComboBox Name="ComboBox">
+            <sys:String>ComboBox Item 1</sys:String>
+            <sys:String>ComboBox Item 2</sys:String>
+            <sys:String>ComboBox Item 3</sys:String>
+            <sys:String>ComboBox Item 4</sys:String>
+        </ComboBox>
+
+        <Button Name="ShowPopupButton">
+            Show Popup
+        </Button>
+
+            <Popup StaysOpen="false" Name="AutoClosePopup" Placement="Bottom" PlacementTarget="{Binding ElementName=ShowPopupButton}">
+                <Border BorderThickness="2" BorderBrush="Black">
+                    <DockPanel>
+                        <Menu Name="PopupMenu" DockPanel.Dock="Top">
+                            <MenuItem Header="Popup Menu">
+                                <sys:String>Item 1</sys:String>
+                                <sys:String>Item 2</sys:String>
+                                <sys:String>Item 3</sys:String>
+                            </MenuItem>
+                        </Menu>
+                        <Button>Test Subcapture</Button>
+                        <ComboBox>
+                            <sys:String>Search 1</sys:String>
+                            <sys:String>Search 2</sys:String>
+                            <sys:String>Search 3</sys:String>
+                        </ComboBox>
+                    </DockPanel>
+                </Border>
+            </Popup>
+
+
+        <Border Name="ContextMenuBorder" Background="Gray" BorderBrush="DarkGreen" BorderThickness="1" Width="100" Height="50">
+            <TextBlock>Right click me</TextBlock>
+        </Border>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+        <Button Name="AccessKeyButton">
+            Access Key Context Menu
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="_Item 1" />
+                    <MenuItem Header="I_tem 2" />
+                    <MenuItem Header="It_em 3">
+                        <MenuItem Header="_Subitem 1" />
+                        <MenuItem Header="S_ubitem 2" />
+                        <MenuItem Header="Su_bitem 3" />
+                        <MenuItem Header="Sub_item 4" />
+                    </MenuItem>
+                    <MenuItem Header="Ite_m 4" />
+                    <Button>_Button 1</Button>
+                    <Button>_Button 2</Button>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+
+        <TextBox Name="SearchTextBox">
+            <TextBox.ContextMenu>
+                <ContextMenu Placement="Bottom" Focusable="false">
+                    <MenuItem Header="Focusless menu!" Focusable="false" />
+                    <Separator />
+                    <MenuItem Header="Atanas" Focusable="false" />
+                    <MenuItem Header="Ben" Focusable="false" />
+                    <MenuItem Header="Jevan" Focusable="false" />
+                    <MenuItem Header="Nox" Focusable="false" />
+                    <MenuItem Header="Ramani" Focusable="false" />
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label>Number of items:</Label>
+            <ComboBox Name="NumItemsCB" DockPanel.Dock="Top" SelectedIndex="0" MinWidth="0" SelectedValue="{Binding Path=NumItems,Mode=TwoWay}" ItemContainerStyle="{DynamicResource {x:Type ComboBoxItem}}">
+                <sys:Int32>10</sys:Int32>
+                <sys:Int32>20</sys:Int32>
+                <sys:Int32>50</sys:Int32>
+                <sys:Int32>100</sys:Int32>
+                <sys:Int32>500</sys:Int32>
+                <sys:Int32>1000</sys:Int32>
+                <sys:Int32>10000</sys:Int32>
+                <sys:Int32>100000</sys:Int32>
+                <sys:Int32>1000000</sys:Int32>
+            </ComboBox>
+
+            <Button Name="ScrollingContextMenuButton">
+                Scrolling Context Menu!
+                <Button.ContextMenu>
+                    <ContextMenu MaxHeight="400" ItemsSource="{Binding Path=ItemsList}" />
+                </Button.ContextMenu>
+            </Button>
+
+        </StackPanel>
+     </StackPanel>
+
+</DockPanel>
+</Border>
+
+</AdornerDecorator>
+

@@ -1,0 +1,34 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="Page1MainBorder"
+    FocusManager.FocusedElement="{Binding ElementName=HL1}"
+>
+    <Border.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#666699" Offset="0" />
+                    <GradientStop Color="white" Offset="1" />
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Border.Background>
+    <DockPanel>
+        <Border DockPanel.Dock="top">
+            <TextBlock FontSize="14" FontWeight="bold" Foreground="white">Navigate to:</TextBlock>
+        </Border>
+        <Border DockPanel.Dock="top">
+            <TextBlock>
+                <Hyperlink Name="HL1" NavigateUri="page2.xaml">
+                    <TextBlock>tpage.xaml</TextBlock>
+                </Hyperlink>
+            </TextBlock>
+        </Border>
+        <TextBlock>
+            <Hyperlink Name="HL_WITH_STRING">string hyperlink</Hyperlink>
+        </TextBlock>
+        <TextBlock>
+            <Hyperlink Name="HL_WITH_OBJARRAY">
+                <TextBlock>string1<TextBlock Name="TEXT_IN_H_W_O">Text1</TextBlock></TextBlock>
+            </Hyperlink>
+        </TextBlock>
+    </DockPanel>
+</Border>

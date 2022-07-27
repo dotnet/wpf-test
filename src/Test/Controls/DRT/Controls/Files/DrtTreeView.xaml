@@ -1,0 +1,180 @@
+﻿
+<AdornerDecorator xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Width="500" Height="500" xmlns:MappingPIGen1="clr-namespace:System;assembly=mscorlib">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />        
+        <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <XmlDataProvider x:Key="OneThroughFive" XPath="/Root/Number">
+              <x:XData>
+                <Root xmlns="">
+                    <Number type="string">One</Number>
+                    <Number type="string">Two</Number>
+                    <Number type="string">Three</Number>
+                    <Number type="int">4</Number>
+                    <Number type="int">5</Number>
+                </Root>
+              </x:XData>
+            </XmlDataProvider>
+
+            <XmlDataProvider x:Key="SixThroughTen" XPath="/Root/Number">
+              <x:XData>
+                <Root xmlns="">
+                    <Number type="string">Six</Number>
+                    <Number type="string">Seven</Number>
+                    <Number type="string">Eight</Number>
+                    <Number type="int">9</Number>
+                    <Number type="int">10</Number>
+                </Root>
+              </x:XData>
+            </XmlDataProvider>
+
+            <DataTemplate x:Key="TextTypeTemplate">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Left" Margin="0,0,5,0" Text="{Binding XPath=.}" />
+                    <TextBlock DockPanel.Dock="Left" Text="{Binding XPath=@type}" />
+                </DockPanel>
+            </DataTemplate>
+
+            <XmlDataProvider x:Key="FoodDataSource" XPath="FoodGroups">
+              <x:XData>
+                <FoodGroups xmlns="">
+                    <FoodItem Name="Food">
+                        <FoodItem Name="Fruit">
+                            <FoodItem Name="Apple" />
+                            <FoodItem Name="Citrus">
+                                <FoodItem Name="Orange" />
+                                <FoodItem Name="Lemon" />
+                            </FoodItem>
+                        </FoodItem>
+                        <FoodItem Name="Bread">
+                            <FoodItem Name="White" />
+                            <FoodItem Name="Wheat" />
+                        </FoodItem>
+                        <FoodItem Name="Dairy">
+                            <FoodItem Name="Cheese" />
+                            <FoodItem Name="Milk" />
+                        </FoodItem>
+                        <FoodItem Name="Vegetable">
+                            <FoodItem Name="Broccoli" />
+                            <FoodItem Name="Lettuce" />
+                        </FoodItem>
+                        <FoodItem Name="Meat">
+                            <FoodItem Name="Beef" />
+                            <FoodItem Name="Chicken" />
+                        </FoodItem>
+                    </FoodItem>
+                </FoodGroups>
+              </x:XData>
+            </XmlDataProvider>
+
+        <HierarchicalDataTemplate DataType="FoodItem" ItemsSource="{Binding XPath=FoodItem}">
+            <TextBlock Text="{Binding XPath=@Name}" />
+        </HierarchicalDataTemplate>
+
+        </Grid.Resources>
+        
+        
+        <TextBlock FontFamily="Arial" FontWeight="Bold" FontSize="12" Margin="5">DRT:TreeView</TextBlock>
+
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Content="Focusable Content (1)" Margin="5" />
+        
+        <TreeView Grid.Row="2" Name="HierarchicalDB" ItemsSource="{Binding Source={StaticResource FoodDataSource}, XPath=FoodItem}" Margin="5" />
+        
+        <TreeView Name="TV" Grid.Row="2" Grid.Column="1" Margin="5">
+            <TreeViewItem Header="My Computer">
+                <TreeViewItem Header="Floppy Drive" />
+                <TreeViewItem Header="Hard Drive">
+                    <TreeViewItem Header="boot.ini" />
+                    <TreeViewItem Header="config.sys" />
+                    <TreeViewItem Header="autoexec.bat" />
+                    <TreeViewItem Header="WINDOWS">
+                        <TreeViewItem Header="win.ini" />
+                        <TreeViewItem Header="win.com" />
+                        <TreeViewItem Header="leaves.bmp" />
+                        <TreeViewItem Header="1.bmp" />
+                        <TreeViewItem Header="2.bmp" />
+                        <TreeViewItem Header="3.bmp" />
+                        <TreeViewItem Header="4.bmp" />
+                        <TreeViewItem Header="5.bmp" />
+                        <TreeViewItem Header="6.bmp" />
+                        <TreeViewItem Header="7.bmp" />
+                        <TreeViewItem Header="8.bmp" />
+                        <TreeViewItem Header="9.bmp" />
+                        <TreeViewItem Header="10.bmp" />
+                    </TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="Removable Drive">
+                    <TreeViewItem Header="readme.txt" />
+                    <TreeViewItem>
+                        <TreeViewItem.Header><StackPanel><Button Content="Focusable Button 1" /><Button Content="Focusable Button 2" /></StackPanel></TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem Header="settings.ini" />
+                    <TreeViewItem Header="finances.mny" />
+                    <sys:String>Random String</sys:String>
+                    <TreeViewItem Header="novel.doc" />
+                </TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="My Network Places">
+                <TreeViewItem Header="msn.com" />
+                <TreeViewItem Header="microsoft.com" />
+                <TreeViewItem Header="msweb" />
+                <TreeViewItem Header="Other sites">
+                    <TreeViewItem Header="World News" />
+                    <TreeViewItem Header="Local News" />
+                    <TreeViewItem Header="Business News" />
+                    <TreeViewItem Header="Technology" />
+                    <TreeViewItem Header="Entertainment" />
+                    <TreeViewItem Header="Health" />
+                    <TreeViewItem Header="Comics" />
+                    <TreeViewItem Header="Alerts" />
+                    <TreeViewItem Header="Search" />
+                </TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="Control Panel" Name="cp" />
+            <sys:String>Apples</sys:String>
+            <sys:String>Oranges</sys:String>
+            <sys:String>Apples</sys:String>
+            <sys:String>Apples</sys:String>
+            <TreeViewItem Header="Games" IsExpanded="true">
+                <TreeViewItem Header="Halo" />
+                <TreeViewItem Header="Fable" />
+                <TreeViewItem Header="Age of Empires">
+                    <TreeViewItem Header="Age of Empires II" />
+                    <TreeViewItem Header="Age of Mythology" />
+                </TreeViewItem>
+            </TreeViewItem>
+        </TreeView>
+        
+        <DockPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="5">
+            <Button Content="Focusable Content (2)" Margin="0,0,5,0" />
+            <CheckBox Content="Control Panel IsSelected" Name="IsSelectedCB" IsChecked="{Binding Path=IsSelected,ElementName=cp}" />
+        </DockPanel>
+        
+        <Border Grid.Row="4" Grid.ColumnSpan="2" Margin="5" MinHeight="25" Background="#44000000">
+            <TextBlock FontSize="10" Margin="2" Text="{Binding Path=SelectedItem,ElementName=TV}" />
+        </Border>
+        
+        <ListBox Grid.Row="5" Name="BindingSource" SelectedIndex="0" SelectedValuePath="Tag" Margin="5">
+            <ListBoxItem Content="One through five" Tag="{StaticResource OneThroughFive}" />
+            <ListBoxItem Content="Six through ten" Tag="{StaticResource SixThroughTen}" />
+        </ListBox>
+        <TreeView Grid.Row="5" Grid.Column="1" Margin="5" Name="ItemBound">
+            <TreeViewItem Header="Before" />
+            <TreeViewItem Header="Databound" IsExpanded="true" DataContext="{Binding Path=SelectedValue,ElementName=BindingSource}" ItemTemplate="{DynamicResource TextTypeTemplate}" ItemsSource="{Binding }" />
+            <TreeViewItem Header="After" />
+        </TreeView>
+    </Grid>
+</AdornerDecorator>

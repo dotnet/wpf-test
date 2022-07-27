@@ -1,0 +1,12 @@
+﻿<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="sys" Name="Root" Background="White"
+    Orientation="Horizontal">
+  <Calendar x:Name="TestCalendar"></Calendar>
+  <StackPanel>
+    <Button x:Name="TestButton" Height="50">Click Me</Button>
+    <TextBox Text="{Binding ElementName=TestCalendar, Path=SelectedDate}" />
+    <TextBox Text="{Binding ElementName=TestCalendar, Path=DisplayDate}" />
+    <ListBox ItemsSource="{Binding ElementName=TestCalendar, Path=SelectedDates}" />
+  </StackPanel>
+</StackPanel>

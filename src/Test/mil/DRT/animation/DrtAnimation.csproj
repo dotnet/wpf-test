@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtAnimation</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <TestCode>true</TestCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="DCAnimatedDrawDrawingTest.cs" />
+    <Compile Include="DCAnimatedDrawEllipseTest.cs" />
+    <Compile Include="DCAnimatedDrawImageTest.cs" />
+    <Compile Include="DCAnimatedDrawLineTest.cs" />
+    <Compile Include="DCAnimatedDrawRectangleTest.cs" />
+    <Compile Include="DCAnimatedDrawRoundedRectangleTest.cs" />
+    <Compile Include="DCAnimatedPushOpacityTest.cs" />
+    <Compile Include="DRTAnimation.cs" />
+    <Compile Include="DRTAnimationChangeables.cs" />
+    <Compile Include="DRTDependencyPropertyAnimation.cs" />
+    <Compile Include="DRTKeyFrameAnimation.cs" />
+    <Compile Include="DRTMarkupAnimation.cs" />
+    <Compile Include="DRTCompositionTargetRendering.cs" />
+
+    <None Include="DrtFiles\*">
+        <Link>\DrtFiles\DrtAnimation\%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtAnimationRDP.cmd">
+        <Link>%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DRTEasing.cs" />
+    <Page Include="EasingFunctionGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="EasingFunctionGraph.xaml.cs">
+      <DependentUpon>EasingFuncionGraph.xaml</DependentUpon>
+    </Compile>
+ </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+</Project>

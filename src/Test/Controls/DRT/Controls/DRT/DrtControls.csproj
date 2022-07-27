@@ -1,0 +1,220 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtControls</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <DefineConstants>$(DefineConstants);FRAMEWORK_NATIVEMETHODS;CORE_NATIVEMETHODS;DRT</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Page Include="..\MarkupResources\bof.xaml" />
+    <Page Include="..\MarkupResources\MainMenu.xaml" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\ExternDll.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\HandleCollector.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsSetLastError.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Internal\FriendAccessAllowedAttribute.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityHelper.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityCriticalDataForSet.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\WpfLibraryLoader.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\PointUtil.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseInput.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseGlobalInput.cs" />
+    <Compile Include="..\Common\DrtControlsBase.cs" />
+    <Compile Include="..\Suites\DrtAccessibility.cs" />
+    <Compile Include="..\Suites\DrtActiveElement.cs" />
+    <Compile Include="..\Suites\DrtButtonBase.cs" />
+    <Compile Include="..\Suites\DrtCalendar.cs" />
+    <Compile Include="..\Suites\DrtComboBox.cs" />
+    <Compile Include="..\Suites\DrtContainerVirtualization.cs" />
+    <Compile Include="..\Suites\DrtDataGrid.cs" />
+    <Compile Include="..\Suites\DrtDatePicker.cs" />
+    <Compile Include="..\Suites\DrtDelayLoad.cs" />
+    <Compile Include="..\Suites\DrtExpander.cs" />
+    <Compile Include="..\Suites\DrtFocusVisual.cs" />
+    <Compile Include="..\Suites\DrtFrame.cs" />
+    <Compile Include="..\Suites\DrtGridSplitter.cs" />
+    <Compile Include="..\Suites\DrtGroupBox.cs" />
+    <Compile Include="..\Suites\DrtKeyboardNavigation.cs" />
+    <Compile Include="..\Suites\DrtLayeredWindows.cs" />
+    <Compile Include="..\Suites\DrtListBox.cs" />
+    <Compile Include="..\Suites\DrtListView.cs" />
+    <Compile Include="..\Suites\DrtLogicalTreeVerify.cs" />
+    <Compile Include="..\Suites\DrtMenu.cs" />
+    <Compile Include="..\Suites\DrtPopup.cs" />
+    <Compile Include="..\Suites\DrtProgressBar.cs" />
+    <Compile Include="..\Suites\DrtRangeBase.cs" />
+    <Compile Include="..\Suites\DrtRadioButtonList.cs" />
+    <Compile Include="..\Suites\DrtScrollBar.cs" />
+    <Compile Include="..\Suites\DrtSelector.cs" />
+    <Compile Include="..\Suites\DrtSlider.cs" />
+    <Compile Include="..\Suites\DrtStatusBar.cs" />
+    <Compile Include="..\Suites\DrtTabControl.cs" />
+    <Compile Include="..\Suites\DrtThemeDictionaryExtension.cs" />
+    <Compile Include="..\Suites\DrtThemes.cs" />
+    <Compile Include="..\Suites\DrtThirdPartyThemes.cs" />
+    <Compile Include="..\Suites\DrtToolTip.cs" />
+    <Compile Include="..\Suites\DrtToolBar.cs" />
+    <Compile Include="..\Suites\DrtTreeView.cs" />
+    <Compile Include="..\Suites\DrtTypeSearch.cs" />
+    <Compile Include="..\Suites\DrtVirtualizingTreeView.cs" />
+    <Compile Include="..\Suites\DrtVSMGoToState.cs" />
+    <Compile Include="..\Suites\DrtMetadata.cs" />
+    <Compile Include="..\DrtControls.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\Files\DrtCalendar.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtContainerVirtualization.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtContainerVirtualizationPerf.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    
+    <!--<None Include="..\Files\DrtContainerVirtualizationPerf.cmd">
+      <Link>$(OutputPath)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>-->
+    <None Include="..\Files\DrtDatePicker.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtDataGrid.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtExpander.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtFrameInner.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtFrameOuter.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtListBox.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtListBoxRecycling.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtListView.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtLogicalTreeVerify.xml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtMetadata.xml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtMenu.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtMonthCalendar.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\FocusVisual.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\Page1.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\Page2.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\page3.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\rose.jpg">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\smallenglish.txt">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\textpanelwithmargin.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\ThirdPartyThemes.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\Tulip.jpg">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtGridSplitter.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtProgressBar.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtGroupBox.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtTreeView.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtVirtualizingTreeView.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtThemeDictionaryExtension.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtScrollBar.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtComboBox.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Files\DrtVSMGoToState.xaml">
+      <Link>DrtFiles\Controls\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ThemeDictionaryExtension\DrtThemeDictionaryExtension.csproj"/>
+  </ItemGroup>
+  
+</Project>

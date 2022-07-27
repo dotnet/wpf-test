@@ -1,0 +1,339 @@
+<AdornerDecorator
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:DRT.DrtVirtualizingTreeView;assembly=DrtControls"
+    Height="300" Width="300"
+    >
+  <AdornerDecorator.Resources>
+
+    <Style TargetType="{x:Type local:TestTreeView}">
+        <Setter Property="Padding" Value="1" />
+    </Style>
+    <Style x:Key="ExpandCollapseToggleStyle"
+           TargetType="{x:Type ToggleButton}">
+        <Setter Property="Focusable"
+                Value="False"/>
+        <Setter Property="Width"
+                Value="19"/>
+        <Setter Property="Height"
+                Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Width="19"
+                            Height="13"
+                            Background="Transparent">
+                        <Border Width="9"
+                                Height="9"
+                                BorderThickness="1"
+                                BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
+                                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                                SnapsToDevicePixels="true">
+                            <Path x:Name="ExpandPath"
+                                  Margin="1,1,1,1"
+                                  Fill="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"
+                                  Data="M 0 2 L 0 3 L 2 3 L 2 5 L 3 5 L 3 3 L 5 3 L 5 2 L 3 2 L 3 0 L 2 0 L 2 2 Z"/>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter Property="Data"
+                                    TargetName="ExpandPath"
+                                    Value="M 0 2 L 0 3 L 5 3 L 5 2 Z"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="TreeViewItemFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type local:TestTreeViewItem}">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Padding" Value="1,0,0,0"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="19"
+                                              Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ToggleButton x:Name="Expander"
+                                      Style="{StaticResource ExpandCollapseToggleStyle}"
+                                      IsChecked="{Binding Path=IsExpanded,RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press"/>
+                        <Border Name="Bd"
+                                Grid.Column="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="PART_Header"
+                                              ContentSource="Header"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ItemsPresenter x:Name="ItemsHost"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded"
+                                 Value="false">
+                            <Setter TargetName="ItemsHost"
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="HasItems"
+                                 Value="false">
+                            <Setter TargetName="Expander"
+                                    Property="Visibility"
+                                    Value="Hidden"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="true">
+                            <Setter TargetName="Bd"
+                                    Property="Background"
+                                    Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected"
+                                           Value="true"/>
+                                <Condition Property="IsSelectionActive"
+                                           Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Bd"
+                                    Property="Background"
+                                    Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+      <Style.Triggers>
+        <Trigger Property="VirtualizingPanel.IsVirtualizing"
+                 Value="true">
+          <Setter Property="ItemsPanel">
+            <Setter.Value>
+              <ItemsPanelTemplate>
+                <VirtualizingStackPanel/>
+              </ItemsPanelTemplate>
+            </Setter.Value>
+          </Setter>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Height" Value="20px"/>
+    </Style>
+    
+    <HierarchicalDataTemplate DataType="Item"
+                              ItemsSource="{Binding XPath=Item}">
+      <TextBlock Text="{Binding XPath=@Header}" Style="{StaticResource TextBlockStyle}"/>
+    </HierarchicalDataTemplate>
+    
+    <XmlDataProvider x:Key="DefaultTreeData"  XPath="/Tree">
+      <x:XData>
+        <Tree xmlns="">
+          <Item Header="1" IsExpanded="true">
+            <Item Header="2"/>
+            <Item Header="3"/>
+            <Item Header="4"/>
+            <Item Header="5"/>
+            <Item Header="6"/>
+            <Item Header="7"/>
+            <Item Header="8"/>
+            <Item Header="9"/>
+            <Item Header="10" IsExpanded="true">
+              <Item Header="11" IsExpanded="true">
+                <Item Header="12"/>
+                <Item Header="13"/>
+                <Item Header="14"/>
+                <Item Header="15"/>
+                <Item Header="16"/>
+                <Item Header="17"/>
+                <Item Header="18"/>
+                <Item Header="19"/>
+                <Item Header="20"/>
+                <Item Header="21"/>
+                <Item Header="22"/>
+                <Item Header="23"/>
+                <Item Header="24"/>
+                <Item Header="25"/>
+              </Item>
+            </Item>
+            <Item Header="26"/>
+            <Item Header="27"/>
+            <Item Header="28"/>
+            <Item Header="29"/>
+            <Item Header="30"/>
+            <Item Header="31"/>
+            <Item Header="32"/>
+            <Item Header="33"/>
+            <Item Header="34"/>
+            <Item Header="35"/>
+            <Item Header="36"/>
+            <Item Header="37"/>
+            <Item Header="38"/>
+            <Item Header="39"/>
+            <Item Header="40"/>
+            <Item Header="41"/>
+          </Item>
+          <Item Header="42" IsExpanded="true">
+            <Item Header="43"/>
+            <Item Header="44"/>
+            <Item Header="45" IsExpanded="true">
+              <Item Header="46"/>
+              <Item Header="47"/>
+              <Item Header="48"/>
+              <Item Header="49"/>
+              <Item Header="50"/>
+              <Item Header="51"/>
+              <Item Header="52"/>
+              <Item Header="53"/>
+              <Item Header="54"/>
+              <Item Header="55"/>
+              <Item Header="56"/>
+              <Item Header="57"/>
+              <Item Header="58"/>
+              <Item Header="59"/>
+              <Item Header="60"/>
+              <Item Header="61"/>
+              <Item Header="62"/>
+              <Item Header="63"/>
+              <Item Header="64"/>
+              <Item Header="65"/>
+            </Item>
+            <Item Header="66" IsExpanded="true">
+              <Item Header="67"/>
+              <Item Header="68"/>
+              <Item Header="69"/>
+              <Item Header="70"/>
+              <Item Header="71"/>
+              <Item Header="72"/>
+              <Item Header="73"/>
+              <Item Header="74"/>
+              <Item Header="75"/>
+              <Item Header="76"/>
+              <Item Header="77"/>
+              <Item Header="78"/>
+              <Item Header="79"/>
+              <Item Header="80"/>
+              <Item Header="81"/>
+              <Item Header="82"/>
+              <Item Header="83"/>
+              <Item Header="84"/>
+              <Item Header="85"/>
+              <Item Header="86"/>
+            </Item>
+            <Item Header="87"/>
+            <Item Header="88"/>
+            <Item Header="89"/>
+            <Item Header="90"/>
+            <Item Header="91"/>
+            <Item Header="92"/>
+            <Item Header="93"/>
+            <Item Header="94"/>
+            <Item Header="95"/>
+            <Item Header="96"/>
+            <Item Header="97"/>
+            <Item Header="98"/>
+            <Item Header="99"/>
+          </Item>
+          <Item Header="100" IsExpanded="true">
+            <Item Header="101"/>
+            <Item Header="102"/>
+            <Item Header="103"/>
+            <Item Header="104"/>
+            <Item Header="105"/>
+            <Item Header="106"/>
+            <Item Header="107"/>
+            <Item Header="108"/>
+            <Item Header="109"/>
+            <Item Header="110"/>
+            <Item Header="111"/>
+            <Item Header="112"/>
+            <Item Header="113"/>
+            <Item Header="114"/>
+            <Item Header="115"/>
+            <Item Header="116"/>
+            <Item Header="117"/>
+            <Item Header="118"/>
+            <Item Header="119"/>
+            <Item Header="120"/>
+            <Item Header="121"/>
+            <Item Header="122"/>
+            <Item Header="123"/>
+            <Item Header="124"/>
+            <Item Header="125"/>
+            <Item Header="126"/>
+            <Item Header="127"/>
+            <Item Header="128"/>
+            <Item Header="129"/>
+            <Item Header="130"/>
+            <Item Header="131"/>
+            <Item Header="132"/>
+            <Item Header="133"/>
+            <Item Header="134"/>
+            <Item Header="135"/>
+            <Item Header="136"/>
+            <Item Header="137"/>
+            <Item Header="138"/>
+            <Item Header="139"/>
+            <Item Header="140"/>
+            <Item Header="141"/>
+            <Item Header="142"/>
+            <Item Header="143"/>
+            <Item Header="144"/>
+            <Item Header="145"/>
+            <Item Header="146"/>
+            <Item Header="147"/>
+            <Item Header="148"/>
+            <Item Header="149"/>
+            <Item Header="150"/>
+          </Item>
+        </Tree>
+      </x:XData>
+    </XmlDataProvider>
+
+  </AdornerDecorator.Resources>
+  <Grid>
+    <local:TestTreeView x:Name="_treeView" ItemsSource="{Binding Source={StaticResource DefaultTreeData}, XPath=Item}" BorderThickness="1"
+              VirtualizingStackPanel.IsVirtualizing="True">
+    </local:TestTreeView>
+  </Grid>
+</AdornerDecorator>

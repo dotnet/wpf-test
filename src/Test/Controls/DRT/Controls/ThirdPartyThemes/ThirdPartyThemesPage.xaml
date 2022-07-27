@@ -1,0 +1,21 @@
+﻿
+<StackPanel
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:local="clr-namespace:DRT.ThirdPartyThemes"
+
+
+           x:Class="DRT.ThirdPartyThemes.ThirdPartyThemesPage"
+
+           Name="root"
+           Initialized="OnLoaded" xmlns:MappingPIGen1="clr-namespace:DRT.ThirdPartyThemes">
+
+    <local:ThirdPartyButton x:Name="Button1">Third Party Button</local:ThirdPartyButton>
+    <TextBlock Text="{Binding Path=Index,ElementName=Button1}" /><TextBlock>(==2?)</TextBlock>
+
+    <local:ThirdPartyButton2 x:Name="Button2">Third Party Button</local:ThirdPartyButton2>
+    <TextBlock Text="{Binding Path=Index,ElementName=Button2}" /><TextBlock>(==2?)</TextBlock>
+
+    <TextBlock Text="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type local:ThirdPartyButton},ResourceId=CRK}}" />
+
+</StackPanel>

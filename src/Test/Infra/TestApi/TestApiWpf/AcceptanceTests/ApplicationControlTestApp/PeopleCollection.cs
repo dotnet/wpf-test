@@ -31,15 +31,15 @@ namespace Microsoft.Test.AcceptanceTests.WpfTestApplication
                 for (int i = 0; i < multiplier; i++)
                 {
                     Add(new Person("George", "Washington"));
-                    Add(new Person("Microsoft", "Microsoft"));
+                    Add(new Person("John", "Adams"));
                     Add(new Person("Thomas", "Jefferson"));
                     Add(new Person("James", "Madison"));
                     Add(new Person("James", "Monroe"));
-                    Add(new Person("Microsoft", "Quincy", "Microsoft"));
+                    Add(new Person("John", "Quincy", "Adams"));
                     Add(new Person("Andrew", "Jackson"));
                     Add(new Person("Martin", "Van Buren"));
                     Add(new Person("William", "H.", "Harrison"));
-                    Add(new Person("Microsoft", "Tyler"));
+                    Add(new Person("John", "Tyler"));
                     Add(new Person("James", "K.", "Polk"));
                     Add(new Person("Zachary", "Taylor"));
                     Add(new Person("Millard", "Fillmore"));
@@ -63,15 +63,15 @@ namespace Microsoft.Test.AcceptanceTests.WpfTestApplication
                     Add(new Person("Franklin", "D.", "Roosevelt"));
                     Add(new Person("Harry", "S.", "Truman"));
                     Add(new Person("Dwight", "D.", "Eisenhower"));
-                    Add(new Person("Microsoft", "F.", "Kennedy"));
+                    Add(new Person("John", "F.", "Kennedy"));
                     Add(new Person("Lyndon", "B.", "Johnson"));
                     Add(new Person("Richard", "Nixon"));
                     Add(new Person("Gerald", "Ford"));
                     Add(new Person("Jimmy", "Carter"));
                     Add(new Person("Ronald", "Reagan"));
-                    Add(new Person("George", "----"));
+                    Add(new Person("George", "Bush"));
                     Add(new Person("Bill", "Clinton"));
-                    Add(new Person("George", "W.", "----"));
+                    Add(new Person("George", "W.", "Bush"));
                 }
             }
         }
