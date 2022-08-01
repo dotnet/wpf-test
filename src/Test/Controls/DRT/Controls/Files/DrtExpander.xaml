@@ -1,0 +1,63 @@
+﻿
+<AdornerDecorator xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:MappingPIGen1="clr-namespace:System;assembly=mscorlib">
+
+    <Canvas Width="400" Height="300" Background="White">
+        <Canvas.Resources>
+            <Style TargetType="{x:Type Expander}">
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </Canvas.Resources>
+
+        <Expander Name="expander"
+            Content="---expand content---\r\n\r\n ...\r\n\r\n---end---" />
+
+        <Expander Name="expanderDown"
+            Canvas.Top="150" IsExpanded="true" Header="Header">
+            <Expander.Content>
+                <ListBox Name="listbox" SelectedIndex="0">
+                    <ListBoxItem>1</ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel>
+                            <RadioButton Content="RadioButton1" />
+                            <RadioButton Content="RadioButton2" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>3</ListBoxItem>
+                    <ListBoxItem>
+                        <DockPanel>
+                            <CheckBox /><TextBlock Text="Ready?" />
+                        </DockPanel>
+                    </ListBoxItem>
+                    <ListBoxItem><Button /></ListBoxItem>
+                    <ListBoxItem>6</ListBoxItem>
+                    <ListBoxItem><TextBlock>
+                        <Hyperlink>hyperlink</Hyperlink></TextBlock></ListBoxItem>
+                    <ListBoxItem>8</ListBoxItem>
+                    <ListBoxItem>This is a test!</ListBoxItem>
+                </ListBox>
+            </Expander.Content>
+        </Expander>
+
+        <Expander Name="expanderRight"
+            Canvas.Left="150" Canvas.Top="150"
+            ExpandDirection="Right">
+            <Expander.Content>
+                <ListBox>
+                    <ListBox.ItemsPanel>
+                      <ItemsPanelTemplate><DockPanel /></ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem>1</ListBoxItem>
+                    <ListBoxItem>2</ListBoxItem>
+                    <ListBoxItem>3</ListBoxItem>
+                    <ListBoxItem><Button /></ListBoxItem>
+                    <ListBoxItem>5</ListBoxItem>
+                    <ListBoxItem><TextBlock>
+                        <Hyperlink>hyperlink</Hyperlink></TextBlock></ListBoxItem>
+                    <ListBoxItem>This is a test!</ListBoxItem>
+                </ListBox>
+            </Expander.Content>
+        </Expander>
+</Canvas>
+</AdornerDecorator>

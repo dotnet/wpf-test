@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtAppModelSuites</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyAttributeCLSCompliant>false</AssemblyAttributeCLSCompliant>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Include="*.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="DrtAppModelSuites.cs" />
+    <Compile Include="CacheSuite.cs" />
+    <Compile Include="DataStreamsSuite.cs" />
+    <Compile Include="JournalingSuite.cs" />
+    <Compile Include="NewLoaderSuite.cs" />
+    <Compile Include="TransparentWindowSuite.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="DrtFiles\loader_tulip.jpg" />
+    <Resource Include="DrtFiles\PageA.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DrtFiles\loader_tulip.jpg">
+      <Link>DrtFiles\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtFiles\PageA.xaml">
+      <Link>DrtFiles\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Drt\TestServices\TestServices.csproj" />
+  </ItemGroup>
+
+</Project>

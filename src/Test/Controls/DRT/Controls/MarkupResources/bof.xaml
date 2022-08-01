@@ -1,0 +1,42 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+        Name="RootBorder"
+        Background="White">
+
+<Border.Resources>
+    <ContextMenu x:Key="CM-Shared" x:Shared="True">
+        <MenuItem IsCheckable="true" Header="Item 1" />
+        <MenuItem IsCheckable="true" Header="Item 2" />
+        <MenuItem IsCheckable="true" Header="Item 3" />
+    </ContextMenu>
+    <ContextMenu x:Key="CM-NotShared" x:Shared="False">
+        <MenuItem IsCheckable="true" Header="Item 1" />
+        <MenuItem IsCheckable="true" Header="Item 2" />
+        <MenuItem IsCheckable="true" Header="Item 3" />
+    </ContextMenu>
+    <ContextMenu x:Key="CM-Default">
+        <MenuItem IsCheckable="true" Header="Item 1" />
+        <MenuItem IsCheckable="true" Header="Item 2" />
+        <MenuItem IsCheckable="true" Header="Item 3" />
+    </ContextMenu>
+</Border.Resources>
+
+<StackPanel Orientation="Vertical">
+  <TextBlock FontSize="16pt">BamlObjectFactory DRT</TextBlock>
+  <StackPanel Orientation="Horizontal">
+    <Button Name="shared1" ContextMenu="{DynamicResource CM-Shared}">1 - Shared</Button>
+    <Button Name="shared2" ContextMenu="{DynamicResource CM-Shared}">2 - Shared</Button>
+  </StackPanel>
+  <StackPanel Orientation="Horizontal">
+    <Button Name="notShared1" ContextMenu="{DynamicResource CM-NotShared}">1 - NotShared</Button>
+    <Button Name="notShared2" ContextMenu="{DynamicResource CM-NotShared}">2 - NotShared</Button>
+  </StackPanel>
+  <StackPanel Orientation="Horizontal">
+    <Button Name="default1" ContextMenu="{DynamicResource CM-Default}">1 - Default</Button>
+    <Button Name="default2" ContextMenu="{DynamicResource CM-Default}">2 - Default</Button>
+  </StackPanel>
+</StackPanel>
+
+</Border>
+

@@ -1,0 +1,2 @@
+@DrtAnimation.exe /memoryrdp
+

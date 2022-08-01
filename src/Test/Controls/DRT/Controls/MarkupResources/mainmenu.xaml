@@ -1,0 +1,55 @@
+﻿<AdornerDecorator xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+<DockPanel MaxHeight="500" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+<DockPanel.Resources>
+
+    <DataTemplate x:Key="SuiteItem">
+        <TextBlock Text="{Binding Path=Name}" Margin="5,2,5,2" FontFamily="Arial" FontSize="11pt" />
+    </DataTemplate>
+
+    <Style x:Key="SuiteList" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <LinearGradientBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" StartPoint="0,0" EndPoint="1,0">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#FF7890FF" Offset="0" />
+                <GradientStop Color="#AA7890FF" Offset="0.02" />
+                <GradientStop Color="#707890FF" Offset="0.025" />
+                <GradientStop Color="#007890FF" Offset="1" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SideBrush" StartPoint="0,0" EndPoint="1,0">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#45000000" Offset="0" />
+                <GradientStop Color="Transparent" Offset="1" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+</DockPanel.Resources>
+
+<Border DockPanel.Dock="Left" Background="{DynamicResource SideBrush}" Width="300" Margin="0, 0, 10, 0"
+    DataContext="{Binding ElementName=SuiteList,Path=SelectedItem}">
+    <StackPanel TextElement.FontFamily="Arial" Margin="20, 50, 20, 50">
+        <TextBlock HorizontalAlignment="Right" FontSize="18pt" TextTrimming="CharacterEllipsis" Text="{Binding Path=Name}" />
+        <TextBlock HorizontalAlignment="Right" xml:space="preserve">Owner: <TextBlock Text="{Binding Path=Contact}" /></TextBlock>
+        <Button HorizontalAlignment="Right" Name="Run" Margin="0,10,0,5">Open Suite</Button>
+        <CheckBox HorizontalAlignment="Right" Name="KeepAlive">Run the suite's tests</CheckBox>
+    </StackPanel>
+</Border>
+
+<ListBox Name="SuiteList" Margin="10, 50, 20, 50"
+    Style="{DynamicResource SuiteList}" ItemTemplate="{DynamicResource SuiteItem}"
+    SelectedIndex="0" />
+
+</DockPanel>
+
+</AdornerDecorator>

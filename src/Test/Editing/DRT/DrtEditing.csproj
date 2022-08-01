@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtEditing</AssemblyName>
+    <OutputSubFolder>DRT</OutputSubFolder>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>WinExe</OutputType>
+    <Resources>EditPadFrame.xaml</Resources>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="DrtEditing.cs" />
+    <Compile Include="AdornerLayerSuite.cs" />
+    <Compile Include="DataTransferSuite.cs" />
+    <Compile Include="GrabHandleAdorner.cs" />
+    <Compile Include="TextBoxSuite.cs" />
+    <Compile Include="RichTextBoxSuite.cs" />
+    <Compile Include="TextChangedSuite.cs" />
+    <Compile Include="TextTreeSuite.cs" />
+    <Compile Include="PasswordBoxSuite.cs" />
+    <Compile Include="SafeNativeMethods.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="UnsafeNativeMethods.cs" />
+    <Compile Include="HandleCollector.cs" />
+    <Compile Include="Input.cs" />
+    <Compile Include="EditPad.cs" />
+    <Compile Include="TypographyFeatures.cs" />
+    <Compile Include="ExceptionHardeningSuite.cs" />
+    <Compile Include="ReliabilityAssertException.cs" />
+    <Compile Include="TextElementUndoSuite.cs" />
+    <Compile Include="TextContainerSuite.cs" />
+    <Compile Include="TextRangeSerializationSuite.cs" />
+    <Compile Include="XamlRtfConverterSuite.cs" />
+    <Compile Include="XamlRtfConverter.cs" />
+    <None Include="cut.png">
+      <Link>DrtFiles\Editing\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="rtfsimple.rtf">
+      <Link>DrtFiles\Editing\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="rtfsimple_expect.rtf.xaml">
+      <Link>DrtFiles\Editing\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="rtfsimple_expect.rtf.xaml.rtf">
+      <Link>DrtFiles\Editing\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CustomDict2.lex">
+      <Link>DrtFiles\Editing\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include="CustomDict1.lex" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include="CustomDict2.lex" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- <PackageReference Include="Microsoft.NETCore.Platforms" Version="$(MicrosoftNETCorePlatformsVersion)" /> -->
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="$(SystemTextEncodingCodePagesVersion)" />
+  </ItemGroup>
+  
+</Project>

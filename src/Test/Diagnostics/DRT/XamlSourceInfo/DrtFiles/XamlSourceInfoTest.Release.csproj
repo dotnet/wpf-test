@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>XamlSourceInfoTest.Release</AssemblyName>
+    <XamlDebuggingInformation>false</XamlDebuggingInformation>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LinkSubsystem>console</LinkSubsystem>
+    <TestCode>true</TestCode>
+    <PublishDir>$(WpfDrtTestBasePublishPath)\DrtFiles</PublishDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>DrtXamlSourceInfo</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Include="$(DiagnosticsCommon)\RD.xaml"/>
+    <Page Include="$(DiagnosticsCommon)\TestControl.xaml"/>
+    <Page Include="$(DiagnosticsCommon)\TestControl3.xaml"/>
+    <Page Include="$(DiagnosticsCommon)\TestControl4.xaml"/>
+    <Page Include="$(DiagnosticsCommon)\Themes\Generic.xaml" Link="Themes\Generic.xaml"/>
+    <Compile Include="$(DiagnosticsCommon)\DummyDependencyObject.cs" />
+    <Compile Include="$(DiagnosticsCommon)\Helper.cs" />
+    <Compile Include="$(DiagnosticsCommon)\AssemblyInfo.cs"/>
+    <Compile Include="$(DiagnosticsCommon)\TestControl.xaml.cs">
+      <DependentUpon>$(DiagnosticsCommon)\TestControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(DiagnosticsCommon)\TestControl2.cs" />
+    <Compile Include="$(DiagnosticsCommon)\TestControl3.xaml.cs">
+      <DependentUpon>$(DiagnosticsCommon)\TestControl3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(DiagnosticsCommon)\TestControl4.xaml.cs">
+      <DependentUpon>$(DiagnosticsCommon)\TestControl4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(DiagnosticsCommon)\TestControl5.cs" />
+  </ItemGroup>
+  
+</Project>

@@ -1,0 +1,61 @@
+﻿<Window  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         x:Class="MyTestNamespace.MyWindow"
+         Loaded="Init"
+>
+    <Window.Resources>
+        <CollectionViewSource x:Key="cvs"/>
+
+        <DataTemplate x:Key="CellTemplate2">
+            <Border BorderThickness="1" BorderBrush="Blue">
+                <TextBlock Text="{Binding Path=Month}" FontSize="28" Margin="20,2,20,2" />
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CellTemplate2_2">
+            <Border BorderThickness="1" BorderBrush="Yellow">
+                <TextBlock Text="{Binding Path=Year}" FontSize="28" Margin="20,2,20,2" />
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ColumnHeaderTemplate2">
+            <Border BorderThickness="1" BorderBrush="Blue">
+                <TextBlock Text="Month" FontSize="28" Margin="20,2,20,2" />
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ColumnHeaderTemplate2_2">
+            <Border BorderThickness="1" BorderBrush="Yellow">
+                <TextBlock Text="Year" FontSize="28" Margin="20,2,20,2" />
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel>
+            <Button Content="Null" Click="OnButtonClick" Name="view0"/>
+            <Button Content="View1" Click="OnButtonClick1" Name="view1"/>
+            <Button Content="View2" Click="OnButtonClick2" Name="view2"/>
+            <Button Content="Select1" Click="OnButtonClick3" Name="select1"/>
+            <Button Content="Select2" Click="OnButtonClick4" Name="select2"/>
+            <Button Content="Select3" Click="OnButtonClick5" Name="select3"/>
+            <Button Content="AddItem" Click="OnButtonClick6" Name="additem"/>
+            <Button Content="RemoveItem" Click="OnButtonClick7" Name="removeitem"/>
+            <Button Content="ClearItem" Click="OnButtonClick8" Name="clearitem"/>
+            <Button Content="AddItems" Click="OnButtonClick9" Name="additems"/>
+            <Button Content="AddColumn" Click="OnButtonClick10" Name="addcolumn"/>
+            <Button Content="RemoveColumn" Click="OnButtonClick11" Name="removecolumn"/>
+            <Button Content="ClearColumn" Click="OnButtonClick12" Name="clearcolumn"/>
+            <Button Content="Add 1000 Items" Click="OnButtonClick13" Name="add1000items"/>
+            <Button Content="ToggleGrouping1" Click="OnButtonClick14" Name="togglegrouping1"/>
+            <Button Content="ToggleGrouping2" Click="OnButtonClick15" Name="togglegrouping2"/>
+        </StackPanel>
+        <StackPanel>
+            <ListView Name="listView" Width="400" Height="94" ItemsSource="{Binding Source={StaticResource cvs}}"
+                    VirtualizingPanel.IsVirtualizing="true" VirtualizingPanel.IsVirtualizingWhenGrouping="true">
+                <ListView.GroupStyle>
+                    <x:Static Member="GroupStyle.Default" />
+                </ListView.GroupStyle>
+            </ListView>
+        </StackPanel>
+    </DockPanel>
+</Window>
