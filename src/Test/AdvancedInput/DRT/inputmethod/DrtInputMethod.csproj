@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtInputMethod</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="xaml\drtinputscope.xaml">
+      <Link>DrtFiles\DrtInputMethod\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="DRTInputMethod.cs" />
+    <Compile Include="DRTInputScope.cs" />
+    <Compile Include="DRTInputLanguage.cs" />
+    <Compile Include="MyBoxElement.cs" />
+  </ItemGroup>
+  
+</Project>
