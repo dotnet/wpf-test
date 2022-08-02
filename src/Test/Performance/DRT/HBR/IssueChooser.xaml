@@ -1,0 +1,655 @@
+﻿
+
+
+
+
+
+
+
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Loaded="Init" x:Class="HBRApp.IssueChooser" xmlns:mil="clr-namespace:System.Windows.Media;assembly=PresentationCore" xmlns:MappingPIGen1="clr-namespace:System.Windows.Controls;assembly=PresentationFramework" xmlns:MappingPIGen2="clr-namespace:System.Windows.Media.Animation;assembly=PresentationFramework" xmlns:MappingPIGen3="clr-namespace:System.Windows.Media.Animation;assembly=PresentationCore" xmlns:MappingPIGen4="clr-namespace:System.Windows.Shapes;assembly=PresentationFramework" xmlns:MappingPIGen5="clr-namespace:System.Windows.Media;assembly=PresentationCore" xmlns:MappingPIGen6="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen7="clr-namespace:System.Windows.Data;assembly=PresentationCore" xmlns:MappingPIGen8="clr-namespace:HBRApp;assembly=HBRApp">
+    <Grid.Resources>
+        <XmlDataProvider x:Key="IssueData" XPath="/Issues">
+          <x:XData>
+            <Issues>
+                <Issue Filename="comingsoon.xaml" IssueImage="Images\cover_4.jpg">
+                    <CoverImage>Images\cover_4.jpg</CoverImage>
+                    <Date>November 2002</Date>
+                    <Volume>Volume 11</Volume>
+                    <Intro>Harvard Business Review brings to life the insights and best practices of business thinkers and leaders from around the world. Every month, HBR delivers ideas powerful enough to change not only what people think, but also what they do.</Intro>
+                </Issue>
+                <Issue Filename="comingsoon.xaml" IssueImage="Images\cover_3.jpg">
+                    <CoverImage>Images\cover_3.jpg</CoverImage>
+                    <Date>December 2002</Date>
+                    <Volume>Volume 12</Volume>
+                    <Intro>Examines business leadership from all angles and reaches a comprehensive conclusion: Great leadership is an intensely personal process that places extraordinary demands on the time, energy, and intellectual capacities of those who would lead.</Intro>
+                </Issue>
+                <Issue Filename="comingsoon.xaml" IssueImage="Images\cover_2.jpg">
+                    <CoverImage>Images\cover_2.jpg</CoverImage>
+                    <Date>January 2003</Date>
+                    <Volume>Volume 1</Volume>
+                    <Intro>test</Intro>
+                </Issue>
+                <Issue Filename="FebruaryIssue.xaml" IssueImage="Images\cover_1.jpg">
+                    <CoverImage>Images\cover_1.jpg</CoverImage>
+                    <Date>February 2003</Date>
+                    <Volume>Volume 2</Volume>
+                    <Intro>Provides practical insights into the mysteries of motivation, taking a fresh look at the use (and abuse) of some of the most powerful tools for inspiring and guiding complex organizations.</Intro>
+                </Issue>
+                <Issue Filename="comingsoon.xaml" IssueImage="Images\cover_4.jpg">
+                    <CoverImage>Images\cover_4.jpg</CoverImage>
+                    <Date>November 2002</Date>
+                    <Volume>Volume 11</Volume>
+                    <Intro>Harvard Business Review brings to life the insights and best practices of business thinkers and leaders from around the world. Every month, HBR delivers ideas powerful enough to change not only what people think, but also what they do.</Intro>
+                </Issue>
+                <Issue Filename="comingsoon.xaml" IssueImage="Images\cover_3.jpg">
+                    <CoverImage>Images\cover_3.jpg</CoverImage>
+                    <Date>December 2002</Date>
+                    <Volume>Volume 12</Volume>
+                    <Intro>Examines business leadership from all angles and reaches a comprehensive conclusion: Great leadership is an intensely personal process that places extraordinary demands on the time, energy, and intellectual capacities of those who would lead.</Intro>
+                </Issue>
+                <Issue Filename="comingsoon.xaml" IssueImage="Images\cover_2.jpg">
+                    <CoverImage>Images\cover_2.jpg</CoverImage>
+                    <Date>January 2003</Date>
+                    <Volume>Volume 1</Volume>
+                    <Intro>test</Intro>
+                </Issue>
+                <Issue Filename="FebruaryIssue.xaml" IssueImage="Images\cover_1.jpg">
+                    <CoverImage>Images\cover_1.jpg</CoverImage>
+                    <Date>February 2003</Date>
+                    <Volume>Volume 2</Volume>
+                    <Intro>Provides practical insights into the mysteries of motivation, taking a fresh look at the use (and abuse) of some of the most powerful tools for inspiring and guiding complex organizations.</Intro>
+                </Issue>
+            </Issues>
+          </x:XData>
+        </XmlDataProvider>
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Margin" Value="20,0,30,10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <DockPanel IsItemsHost="true" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MyListItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="DockPanel.Dock" Value="Left" />
+        </Style>
+        <DataTemplate x:Key="IssueItemTemplate">
+            <DockPanel Width="100">
+                <TextBlock x:Name="listText" DockPanel.Dock="Top" Text="{Binding XPath=Date}" Foreground="white" FontSize="8pt" FontWeight="bold" Width="100" HorizontalAlignment="Center" />
+                <Image Source="{Binding XPath=CoverImage}" Height="100" Margin="0,5,0,0" />
+            </DockPanel>
+            <DataTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Foreground" Value="black" TargetName="listText" />
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <!-- ******************** This draws the black gradients on the toolbars ********************* -->
+        <LinearGradientBrush x:Key="BlackBarGradient" xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,0" EndPoint="0,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Offset="0" Color="#FF000000" />
+                    <GradientStop Offset="0.1" Color="#22ffffff" />
+                    <GradientStop Offset="0.2" Color="#FF000000" />
+                    <GradientStop Offset="0.85" Color="#22ffffff" />
+                    <GradientStop Offset="1" Color="#FF000000" />
+                </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <!-- ******************** This draws the glass background on panels ********************* -->
+        <DataTemplate x:Key="ButtonContentTemplate">
+            <TextBlock FontFamily="Trebuchet MS" Foreground="white" FontSize="16">
+                <TextBlock.Text>
+                    <Binding />
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
+        <Style x:Key="ButtonContentUIStyle" TargetType="{x:Type ContentControl}">
+            <Setter Property="Margin" Value="56,10,25,15" />
+        </Style>
+        <DataTemplate x:Key="myContentTemplate">
+            <!-- Setters are not supported in DataTemplate.  Review with NamitaG.
+         <Setter Property="VerticalAlignment" Value="center" />
+            -->
+            <TextBlock FontFamily="Arial" Foreground="white" FontSize="16">
+                <TextBlock.Text>
+                    <Binding />
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
+        <Style x:Key="BlueRound" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel>
+                            <Border Width="48" Height="48">
+                                <Border.Background>
+                                    <DrawingBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" ViewboxUnits="Absolute" Viewbox="-5,-5,265,265">
+                                        <DrawingBrush.Drawing>
+                                            <DrawingGroup>
+                                                <DrawingGroup.Children>
+                                                    <GeometryDrawing Geometry="M249.436,124.968c0,68.742-55.726,124.468-124.468,124.468C56.226,249.436,0.5,193.709,0.5,124.968    C0.5,56.226,56.226,0.5,124.968,0.5C193.709,0.5,249.436,56.226,249.436,124.968z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="1.192488E-08,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0" Color="#FF575757" />
+                                                                        <GradientStop Offset="1" Color="#FF000000" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Thickness="6">
+                                                                <Pen.Brush>
+                                                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="4.371139E-08,0" EndPoint="0,1">
+                                                                        <LinearGradientBrush.GradientStops>
+                                                                            <GradientStopCollection>
+                                                                                <GradientStop Offset="0" Color="#FF000000" />
+                                                                                <GradientStop Offset="1" Color="#FF7E7E7E" />
+                                                                            </GradientStopCollection>
+                                                                        </LinearGradientBrush.GradientStops>
+                                                                    </LinearGradientBrush>
+                                                                </Pen.Brush>
+                                                            </Pen>
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M249.436,124.968c0,68.742-55.726,124.468-124.468,124.468C56.226,249.436,0.5,193.709,0.5,124.968    C0.5,56.226,56.226,0.5,124.968,0.5C193.709,0.5,249.436,56.226,249.436,124.968z">
+                                                        <GeometryDrawing.Brush>
+                                                            <RadialGradientBrush>
+                                                                <GradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Color="lightskyblue" Offset="0" />
+                                                                        <GradientStop Color="royalblue" Offset="1" />
+                                                                    </GradientStopCollection>
+                                                                </GradientBrush.GradientStops>
+                                                            </RadialGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Thickness="1">
+                                                                <Pen.Brush>
+                                                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,0" EndPoint="1,0">
+                                                                        <LinearGradientBrush.GradientStops>
+                                                                            <GradientStopCollection>
+                                                                                <GradientStop Offset="0" Color="#FF000000" />
+                                                                                <GradientStop Offset="1" Color="#FF7E7E7E" />
+                                                                            </GradientStopCollection>
+                                                                        </LinearGradientBrush.GradientStops>
+                                                                    </LinearGradientBrush>
+                                                                </Pen.Brush>
+                                                            </Pen>
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M234.605,82.995c0,30.001-48.82,0-109.042,0c-60.222,0-109.042,30.001-109.042,0    S66.579,7.542,126.802,7.542S234.605,52.993,234.605,82.995z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="0.7002075,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0.4135802 " Color="#00FFFFFF " />
+                                                                        <GradientStop Offset="1" Color="#72FFFFFF" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Brush="transparent" Thickness="1" />
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M33.652,195.33c0-14.167,40.926,0,91.411,0c50.484,0,91.411-14.167,91.411,0    c0,14.167-41.964,49.129-92.449,49.129S33.652,209.497,33.652,195.33z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="0.2679492,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0.00617284" Color="#00FFFFFF " />
+                                                                        <GradientStop Offset="0.3148148" Color="#5FFFFFFF" />
+                                                                        <GradientStop Offset="0.771605" Color="#00FFFFFF" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Brush="transparent" Thickness="1" />
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                </DrawingGroup.Children>
+                                            </DrawingGroup>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Border.Background>
+                            </Border>
+                            <ContentPresenter Margin="4" Content="{TemplateBinding  Content}" ContentTemplate="{DynamicResource myContentTemplate}" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="GreenRound" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel>
+                            <Border Width="48" Height="48">
+                                <Border.Background>
+                                    <DrawingBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" ViewboxUnits="Absolute" Viewbox="-5,-5,265,265">
+                                        <DrawingBrush.Drawing>
+                                            <DrawingGroup>
+                                                <DrawingGroup.Children>
+                                                    <GeometryDrawing Geometry="M249.436,124.968c0,68.742-55.726,124.468-124.468,124.468C56.226,249.436,0.5,193.709,0.5,124.968    C0.5,56.226,56.226,0.5,124.968,0.5C193.709,0.5,249.436,56.226,249.436,124.968z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="1.192488E-08,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0" Color="#FF575757" />
+                                                                        <GradientStop Offset="1" Color="#FF000000" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Thickness="6">
+                                                                <Pen.Brush>
+                                                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="4.371139E-08,0" EndPoint="0,1">
+                                                                        <LinearGradientBrush.GradientStops>
+                                                                            <GradientStopCollection>
+                                                                                <GradientStop Offset="0" Color="#FF000000" />
+                                                                                <GradientStop Offset="1" Color="#FF7E7E7E" />
+                                                                            </GradientStopCollection>
+                                                                        </LinearGradientBrush.GradientStops>
+                                                                    </LinearGradientBrush>
+                                                                </Pen.Brush>
+                                                            </Pen>
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M249.436,124.968c0,68.742-55.726,124.468-124.468,124.468C56.226,249.436,0.5,193.709,0.5,124.968    C0.5,56.226,56.226,0.5,124.968,0.5C193.709,0.5,249.436,56.226,249.436,124.968z">
+                                                        <GeometryDrawing.Brush>
+                                                            <RadialGradientBrush>
+                                                                <GradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Color="#a0d338" Offset="0" />
+                                                                        <GradientStop Color="#2c932e" Offset="1" />
+                                                                    </GradientStopCollection>
+                                                                </GradientBrush.GradientStops>
+                                                            </RadialGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Thickness="1">
+                                                                <Pen.Brush>
+                                                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,0" EndPoint="1,0">
+                                                                        <LinearGradientBrush.GradientStops>
+                                                                            <GradientStopCollection>
+                                                                                <GradientStop Offset="0" Color="#FF000000" />
+                                                                                <GradientStop Offset="1" Color="#FF7E7E7E" />
+                                                                            </GradientStopCollection>
+                                                                        </LinearGradientBrush.GradientStops>
+                                                                    </LinearGradientBrush>
+                                                                </Pen.Brush>
+                                                            </Pen>
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M234.605,82.995c0,30.001-48.82,0-109.042,0c-60.222,0-109.042,30.001-109.042,0    S66.579,7.542,126.802,7.542S234.605,52.993,234.605,82.995z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="0.7002075,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0.4135802 " Color="#00FFFFFF " />
+                                                                        <GradientStop Offset="1" Color="#72FFFFFF" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Brush="transparent" Thickness="1" />
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M33.652,195.33c0-14.167,40.926,0,91.411,0c50.484,0,91.411-14.167,91.411,0    c0,14.167-41.964,49.129-92.449,49.129S33.652,209.497,33.652,195.33z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="0.2679492,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0.00617284" Color="#00FFFFFF " />
+                                                                        <GradientStop Offset="0.3148148" Color="#5FFFFFFF" />
+                                                                        <GradientStop Offset="0.771605" Color="#00FFFFFF" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Brush="transparent" Thickness="1" />
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                </DrawingGroup.Children>
+                                            </DrawingGroup>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Border.Background>
+                            </Border>
+                            <ContentPresenter Margin="4" Content="{TemplateBinding  Content}" ContentTemplate="{DynamicResource myContentTemplate}" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RedRound" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="VerticalAlignment" Value="center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel>
+                            <Border Width="48" Height="48">
+                                <Border.Background>
+                                    <DrawingBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" ViewboxUnits="Absolute" Viewbox="-5,-5,265,265">
+                                        <DrawingBrush.Drawing>
+                                            <DrawingGroup>
+                                                <DrawingGroup.Children>
+                                                    <GeometryDrawing Geometry="M249.436,124.968c0,68.742-55.726,124.468-124.468,124.468C56.226,249.436,0.5,193.709,0.5,124.968    C0.5,56.226,56.226,0.5,124.968,0.5C193.709,0.5,249.436,56.226,249.436,124.968z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="1.192488E-08,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0" Color="#FF575757" />
+                                                                        <GradientStop Offset="1" Color="#FF000000" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Thickness="6">
+                                                                <Pen.Brush>
+                                                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="4.371139E-08,0" EndPoint="0,1">
+                                                                        <LinearGradientBrush.GradientStops>
+                                                                            <GradientStopCollection>
+                                                                                <GradientStop Offset="0" Color="#FF000000" />
+                                                                                <GradientStop Offset="1" Color="#FF7E7E7E" />
+                                                                            </GradientStopCollection>
+                                                                        </LinearGradientBrush.GradientStops>
+                                                                    </LinearGradientBrush>
+                                                                </Pen.Brush>
+                                                            </Pen>
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M249.436,124.968c0,68.742-55.726,124.468-124.468,124.468C56.226,249.436,0.5,193.709,0.5,124.968    C0.5,56.226,56.226,0.5,124.968,0.5C193.709,0.5,249.436,56.226,249.436,124.968z">
+                                                        <GeometryDrawing.Brush>
+                                                            <RadialGradientBrush>
+                                                                <GradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Color="#a0d338" Offset="0" />
+                                                                        <GradientStop Color="#2c932e" Offset="1" />
+                                                                    </GradientStopCollection>
+                                                                </GradientBrush.GradientStops>
+                                                            </RadialGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Thickness="1">
+                                                                <Pen.Brush>
+                                                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,0" EndPoint="1,0">
+                                                                        <LinearGradientBrush.GradientStops>
+                                                                            <GradientStopCollection>
+                                                                                <GradientStop Offset="0" Color="#FF000000" />
+                                                                                <GradientStop Offset="1" Color="#FF7E7E7E" />
+                                                                            </GradientStopCollection>
+                                                                        </LinearGradientBrush.GradientStops>
+                                                                    </LinearGradientBrush>
+                                                                </Pen.Brush>
+                                                            </Pen>
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M234.605,82.995c0,30.001-48.82,0-109.042,0c-60.222,0-109.042,30.001-109.042,0    S66.579,7.542,126.802,7.542S234.605,52.993,234.605,82.995z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="0.7002075,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0.4135802 " Color="#00FFFFFF " />
+                                                                        <GradientStop Offset="1" Color="#72FFFFFF" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Brush="transparent" Thickness="1" />
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Geometry="M33.652,195.33c0-14.167,40.926,0,91.411,0c50.484,0,91.411-14.167,91.411,0    c0,14.167-41.964,49.129-92.449,49.129S33.652,209.497,33.652,195.33z">
+                                                        <GeometryDrawing.Brush>
+                                                            <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="0.2679492,0">
+                                                                <LinearGradientBrush.GradientStops>
+                                                                    <GradientStopCollection>
+                                                                        <GradientStop Offset="0.00617284" Color="#00FFFFFF " />
+                                                                        <GradientStop Offset="0.3148148" Color="#5FFFFFFF" />
+                                                                        <GradientStop Offset="0.771605" Color="#00FFFFFF" />
+                                                                    </GradientStopCollection>
+                                                                </LinearGradientBrush.GradientStops>
+                                                            </LinearGradientBrush>
+                                                        </GeometryDrawing.Brush>
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Brush="transparent" Thickness="1" />
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                </DrawingGroup.Children>
+                                            </DrawingGroup>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Border.Background>
+                            </Border>
+                            <ContentPresenter Margin="4" Content="{TemplateBinding  Content}" ContentTemplate="{DynamicResource myContentTemplate}" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HBRLogo" TargetType="{x:Type Border}">
+            <Setter Property="Border.Background">
+                <Setter.Value>
+                    <DrawingBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" ViewboxUnits="Absolute" Viewbox="0,0,568,76">
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <DrawingGroup.Children>
+                                    <GeometryDrawing Brush="#000000" Geometry="M92.455,25.735V12.07c0-6.377,0-8.274-4.707-8.274V2.429h14.12v1.367c-4.707,0-4.707,1.897-4.707,8.274v30.975     c0,6.377,0,8.275,4.707,8.275v1.366h-14.12v-1.366c4.707,0,4.707-1.898,4.707-8.275V28.469H77.033v14.576     c0,6.377,0,8.275,4.707,8.275v1.366h-14.12v-1.366c4.707,0,4.707-1.898,4.707-8.275V12.07c0-6.377,0-8.274-4.707-8.274V2.429     h14.12v1.367c-4.707,0-4.707,1.897-4.707,8.274v13.665H92.455z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M120.995,43.197c0,3.417,0,5.846,1.251,5.846c0.802,0,1.953-1.974,2.604-2.961v2.125     c-1.151,2.278-3.104,5.542-5.207,5.542c-2.153,0-2.704-2.732-2.704-5.542c-2.253,2.505-4.006,5.542-7.06,5.542     c-3.455,0-5.357-3.872-5.357-8.882c0-8.503,8.312-11.54,12.417-14.272c0-5.694-0.25-10.629-4.105-10.629     c-1.653,0-3.355,1.442-3.355,4.479c0,3.644-0.501,5.39-2.053,5.39c-1.403,0-2.053-1.67-2.053-3.644     c0-2.05,1.452-8.503,8.262-8.503c7.361,0,7.361,7.061,7.361,9.187V43.197z M116.938,32.796c-3.355,2.05-8.362,4.707-8.362,10.477     c0,3.037,1.352,6.226,3.555,6.226c1.553,0,3.655-2.278,4.807-3.721V32.796z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M133.161,24.977h0.1c1.102-2.734,3.005-7.289,5.658-7.289c1.502,0,3.155,1.67,3.155,4.176     c0,1.746-0.952,3.416-2.154,3.416c-1.602,0-2.453-2.505-3.555-2.505c-1.151,0-2.753,4.252-3.205,5.694v14.272     c0,6.15,0,8.58,4.156,8.58v1.366H125.65v-1.366c2.304-0.077,3.456-0.608,3.456-5.087V27.71c0-5.163-1.052-5.163-1.752-5.163     c-0.552,0-1.202,0.304-1.703,0.607l-0.35-1.291l6.759-4.176h1.102V24.977z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M160.75,25.963c0.301-0.986,0.801-2.809,0.801-3.871c0-1.898-1.101-1.974-2.554-1.974v-1.367h7.311v1.367     c-2.053,0-2.805,2.581-3.556,5.314l-7.711,28.317h-1.001l-7.711-27.862c-0.952-3.417-1.502-5.238-4.156-5.77v-1.367h10.516v1.367     c-1.603,0-2.654,0.304-2.654,2.733c0,1.291,0.451,2.657,0.751,3.796l4.957,17.916L160.75,25.963z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M183.683,43.197c0,3.417,0,5.846,1.251,5.846c0.801,0,1.953-1.974,2.604-2.961v2.125     c-1.151,2.278-3.105,5.542-5.207,5.542c-2.153,0-2.705-2.732-2.705-5.542c-2.253,2.505-4.005,5.542-7.06,5.542     c-3.455,0-5.357-3.872-5.357-8.882c0-8.503,8.312-11.54,12.417-14.272c0-5.694-0.25-10.629-4.105-10.629     c-1.652,0-3.354,1.442-3.354,4.479c0,3.644-0.501,5.39-2.053,5.39c-1.403,0-2.053-1.67-2.053-3.644     c0-2.05,1.452-8.503,8.261-8.503c7.361,0,7.361,7.061,7.361,9.187V43.197z M179.626,32.796c-3.354,2.05-8.362,4.707-8.362,10.477     c0,3.037,1.353,6.226,3.555,6.226c1.553,0,3.656-2.278,4.807-3.721V32.796z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M195.849,24.977h0.1c1.102-2.734,3.004-7.289,5.658-7.289c1.503,0,3.155,1.67,3.155,4.176     c0,1.746-0.952,3.416-2.154,3.416c-1.602,0-2.454-2.505-3.555-2.505c-1.151,0-2.753,4.252-3.205,5.694v14.272     c0,6.15,0,8.58,4.156,8.58v1.366h-11.667v-1.366c2.303-0.077,3.455-0.608,3.455-5.087V27.71c0-5.163-1.051-5.163-1.752-5.163     c-0.551,0-1.202,0.304-1.703,0.607l-0.351-1.291l6.759-4.176h1.102V24.977z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M221.836,10.021c0-5.163-1.052-5.163-1.752-5.163c-0.551,0-1.202,0.304-1.703,0.607l-0.35-1.29L224.79,0h1.102v43.729     c0,5.163,1.052,5.163,1.753,5.163c0.551,0,1.202-0.304,1.702-0.607l0.351,1.291l-6.76,4.175h-1.101v-4.858     c-1.903,2.961-3.855,4.858-6.66,4.858c-5.857,0-9.063-8.806-9.063-16.777c0-9.035,4.255-19.284,10.766-19.284     c1.802,0,3.655,0.835,4.957,2.885V10.021z M221.836,29.684c0-4.555-1.803-9.717-5.208-9.717c-1.802,0-5.958,2.505-5.958,14.348     c0,9.263,3.055,15.336,6.86,15.336c1.752,0,3.155-1.519,4.307-3.417V29.684z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M247.622,12.07c0-6.377,0-8.274-4.706-8.274V2.429h15.321c9.364,0,12.869,6.453,12.869,13.514     c0,5.542-2.604,9.565-5.858,11.008v0.152c3.856,0.758,7.411,5.162,7.411,11.615c0,4.479-1.652,13.969-12.768,13.969h-16.974     v-1.366c4.706,0,4.706-1.898,4.706-8.275V12.07z M252.329,25.053c1.502,0.455,3.054,0.532,5.508,0.532     c7.21,0,8.161-6.984,8.161-9.946c0-7.82-4.906-10.704-9.363-10.704c-1.452,0-2.904,0.228-4.306,0.835V25.053z M252.329,48.967     c1.803,0.683,3.706,0.987,5.658,0.987c4.256,0,9.063-2.885,9.063-10.401c0-8.883-5.558-11.464-10.515-11.464     c-1.401,0-2.854,0-4.206,0.38V48.967z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M296.591,43.729c0,5.163,1.052,5.163,1.753,5.163c0.55,0,1.201-0.304,1.703-0.607l0.349,1.291l-6.759,4.175h-1.102     v-7.212c-2.203,3.644-4.306,7.212-7.611,7.212c-3.705,0-5.708-4.782-5.708-11.159V26.04c0-4.631-0.35-5.77-3.706-5.921v-1.367     h7.761v23.611c0,4.251,1.201,6.833,3.755,6.833c2.053,0,4.156-2.733,5.508-4.859V26.04c0-4.631-0.351-5.77-3.705-5.921v-1.367     h7.761V43.729z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M316.57,29.304h-0.9c-0.752-5.086-2.104-9.337-6.01-9.337c-1.802,0-3.805,1.518-3.805,4.631     c0,8.275,12.367,7.212,12.367,18.98c0,6.225-3.855,10.172-7.661,10.172c-1.452,0-3.055-0.531-4.506-1.139     c-0.301-0.151-0.901-0.379-1.252-0.379c-0.451,0-0.802,0.379-0.901,0.987H303V41.071h0.901c0.45,5.315,3.105,10.401,6.859,10.401     c2.054,0,3.855-1.822,3.855-5.163c0-8.882-11.666-7.667-11.666-18.448c0-6.225,2.954-10.173,6.96-10.173     c1.051,0,1.853,0.38,2.854,0.835c0.602,0.227,1.252,0.607,1.853,0.607c0.651,0,0.853-0.607,1.053-1.442h0.9V29.304z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M329.087,46.233c0,4.479,1.151,5.011,3.455,5.087v1.366h-10.966v-1.366c2.304-0.077,3.454-0.608,3.454-5.087V27.71     c0-5.163-1.051-5.163-1.752-5.163c-0.55,0-1.202,0.304-1.702,0.607l-0.352-1.291l6.76-4.176h1.103V46.233z M327.034,0     c1.353,0,2.455,1.67,2.455,3.72c0,2.05-1.103,3.72-2.455,3.72c-1.351,0-2.453-1.67-2.453-3.72C324.581,1.67,325.683,0,327.034,0z     " />
+                                    <GeometryDrawing Brush="#000000" Geometry="M341.905,24.825c2.805-4.707,4.758-7.136,7.61-7.136c4.058,0,5.659,5.77,5.659,11.464v17.081     c0,4.479,1.151,5.011,3.455,5.087v1.366h-10.966v-1.366c2.304-0.077,3.455-0.608,3.455-5.087V30.519     c0-7.516-2.054-8.276-3.556-8.276c-2.303,0-4.005,2.278-5.658,4.86v19.13c0,4.479,1.152,5.011,3.455,5.087v1.366h-10.965v-1.366     c2.303-0.077,3.455-0.608,3.455-5.087V27.71c0-5.163-1.053-5.163-1.753-5.163c-0.551,0-1.202,0.304-1.702,0.607l-0.351-1.291     l6.76-4.176h1.101V24.825z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M363.937,31.582c0,7.591,2.604,16.094,8.061,16.094c3.606,0,5.559-3.188,6.71-8.123l0.752,0.759     c-0.852,6.985-4.106,13.438-9.164,13.438c-5.457,0-9.763-7.061-9.763-17.461c0-9.793,3.254-18.6,10.364-18.6     c5.157,0,8.563,5.694,8.563,13.894H363.937z M374.352,29.304c0-4.707-1.553-8.882-5.107-8.882c-2.955,0-5.058,4.479-5.257,8.882     H374.352z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M397.234,29.304h-0.902c-0.75-5.086-2.104-9.337-6.007-9.337c-1.803,0-3.806,1.518-3.806,4.631     c0,8.275,12.366,7.212,12.366,18.98c0,6.225-3.855,10.172-7.66,10.172c-1.451,0-3.055-0.531-4.507-1.139     c-0.3-0.151-0.901-0.379-1.253-0.379c-0.449,0-0.8,0.379-0.9,0.987h-0.902V41.071h0.902c0.451,5.315,3.104,10.401,6.86,10.401     c2.053,0,3.856-1.822,3.856-5.163c0-8.882-11.668-7.667-11.668-18.448c0-6.225,2.955-10.173,6.96-10.173     c1.052,0,1.852,0.38,2.854,0.835c0.601,0.227,1.252,0.607,1.854,0.607c0.648,0,0.851-0.607,1.05-1.442h0.902V29.304z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M416.71,29.304h-0.9c-0.753-5.086-2.104-9.337-6.011-9.337c-1.801,0-3.805,1.518-3.805,4.631     c0,8.275,12.368,7.212,12.368,18.98c0,6.225-3.855,10.172-7.661,10.172c-1.452,0-3.054-0.531-4.506-1.139     c-0.3-0.151-0.901-0.379-1.252-0.379c-0.45,0-0.801,0.379-0.901,0.987h-0.901V41.071h0.901c0.451,5.315,3.105,10.401,6.86,10.401     c2.054,0,3.854-1.822,3.854-5.163c0-8.882-11.667-7.667-11.667-18.448c0-6.225,2.955-10.173,6.961-10.173     c1.052,0,1.853,0.38,2.854,0.835c0.601,0.227,1.251,0.607,1.852,0.607c0.651,0,0.851-0.607,1.053-1.442h0.9V29.304z" />
+                                    <GeometryDrawing Brush="#7F0020" Geometry="M434.385,27.558c0-14.045,6.359-26.268,16.224-26.268c9.863,0,16.223,12.223,16.223,26.268     s-6.359,26.268-16.223,26.268C440.745,53.826,434.385,41.603,434.385,27.558z M461.223,27.558     c0-11.312-2.402-23.535-10.614-23.535s-10.616,12.223-10.616,23.535s2.404,23.535,10.616,23.535S461.223,38.87,461.223,27.558z" />
+                                    <GeometryDrawing Brush="#7F0020" Geometry="M476.794,24.825c2.805-4.707,4.757-7.136,7.611-7.136c4.055,0,5.658,5.77,5.658,11.464v17.081     c0,4.479,1.152,5.011,3.454,5.087v1.366h-10.964v-1.366c2.303-0.077,3.455-0.608,3.455-5.087V30.519     c0-7.516-2.054-8.276-3.556-8.276c-2.304,0-4.006,2.278-5.659,4.86v19.13c0,4.479,1.151,5.011,3.455,5.087v1.366h-10.966v-1.366     c2.304-0.077,3.455-0.608,3.455-5.087V27.71c0-5.163-1.051-5.163-1.753-5.163c-0.55,0-1.201,0.304-1.702,0.607l-0.351-1.291     l6.761-4.176h1.101V24.825z" />
+                                    <GeometryDrawing Brush="#7F0020" Geometry="M502.933,46.233c0,4.479,1.151,5.011,3.454,5.087v1.366H495.42v-1.366     c2.304-0.077,3.455-0.608,3.455-5.087V10.021c0-5.163-1.051-5.163-1.753-5.163c-0.55,0-1.2,0.304-1.702,0.607l-0.35-1.29     L501.831,0h1.103V46.233z" />
+                                    <GeometryDrawing Brush="#7F0020" Geometry="M516.852,46.233c0,4.479,1.151,5.011,3.455,5.087v1.366H509.34v-1.366     c2.305-0.077,3.456-0.608,3.456-5.087V27.71c0-5.163-1.052-5.163-1.753-5.163c-0.551,0-1.201,0.304-1.703,0.607l-0.35-1.291     l6.759-4.176h1.103V46.233z M514.799,0c1.352,0,2.453,1.67,2.453,3.72c0,2.05-1.102,3.72-2.453,3.72     c-1.353,0-2.454-1.67-2.454-3.72C512.345,1.67,513.447,0,514.799,0z" />
+                                    <GeometryDrawing Brush="#7F0020" Geometry="M529.67,24.825c2.804-4.707,4.756-7.136,7.611-7.136c4.056,0,5.657,5.77,5.657,11.464v17.081     c0,4.479,1.151,5.011,3.455,5.087v1.366h-10.966v-1.366c2.304-0.077,3.455-0.608,3.455-5.087V30.519     c0-7.516-2.054-8.276-3.556-8.276c-2.304,0-4.005,2.278-5.657,4.86v19.13c0,4.479,1.152,5.011,3.454,5.087v1.366h-10.966v-1.366     c2.304-0.077,3.456-0.608,3.456-5.087V27.71c0-5.163-1.053-5.163-1.752-5.163c-0.553,0-1.202,0.304-1.704,0.607l-0.35-1.291     l6.759-4.176h1.103V24.825z" />
+                                    <GeometryDrawing Brush="#7F0020" Geometry="M551.702,31.582c0,7.591,2.604,16.094,8.061,16.094c3.605,0,5.559-3.188,6.71-8.123l0.752,0.759     c-0.852,6.985-4.106,13.438-9.164,13.438c-5.457,0-9.763-7.061-9.763-17.461c0-9.793,3.253-18.6,10.364-18.6     c5.157,0,8.563,5.694,8.563,13.894H551.702z M562.116,29.304c0-4.707-1.552-8.882-5.106-8.882c-2.955,0-5.058,4.479-5.257,8.882     H562.116z" />
+                                    <GeometryDrawing Brush="#7F0020" Geometry="M51.786,19.832H0.871V2.986h50.915V19.832z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#000000" Thickness="1.5759" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="transparent" Geometry="M45.061,49.547c-8.838,13.449-18.445,17.868-18.445,17.868      s-10.375-4.419-19.02-18.06c-8.204-12.943-6.725-26.13-6.725-26.13h50.722C51.593,23.226,53.899,36.098,45.061,49.547z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#000000" Thickness="1.537" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="#000000" Geometry="M2.216,23.61l35.352,34.583l4.803-5.571L13.36,23.61H2.216z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#000000" Thickness="1.537" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="#000000" Geometry="M50.825,23.61L15.473,58.193l-4.803-5.571L39.682,23.61H50.825z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#000000" Thickness="1.537" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="#FFFFFF" Geometry="M26.233,39.173l2.688,2.689l-2.688,2.688l-2.689-2.688      L26.233,39.173z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#FFFFFF" Thickness="1.17" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="#FFFFFF" Geometry="M35.888,48.944l2.283,2.284l-2.283,2.283l-2.284-2.283      L35.888,48.944z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#FFFFFF" Thickness="0.9937" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="#FFFFFF" Geometry="M15.906,29.154l2.283,2.284l-2.283,2.283l-2.284-2.283      L15.906,29.154z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#FFFFFF" Thickness="0.9937" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="#FFFFFF" Geometry="M36.079,29.154l2.283,2.284l-2.283,2.283l-2.283-2.283      L36.079,29.154z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#FFFFFF" Thickness="0.9937" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="#FFFFFF" Geometry="M17.25,48.751l2.283,2.284l-2.283,2.284l-2.284-2.284      L17.25,48.751z">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="#FFFFFF" Thickness="0.9937" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="#FFFFFF" Geometry="M16.818,15.732H4.713v-9.03h12.104V15.732z" />
+                                    <GeometryDrawing Brush="#FFFFFF" Geometry="M32.764,15.732H20.66v-9.03h12.104V15.732z" />
+                                    <GeometryDrawing Brush="#FFFFFF" Geometry="M48.52,15.732H36.415v-9.03H48.52V15.732z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M9.901,12.658H7.403v-2.498h2.498V12.658z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M14.128,12.658H11.63v-2.498h2.498V12.658z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M25.848,12.658H23.35v-2.498h2.498V12.658z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M30.075,12.658h-2.498v-2.498h2.498V12.658z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M41.603,12.658h-2.498v-2.498h2.498V12.658z" />
+                                    <GeometryDrawing Brush="#000000" Geometry="M45.829,12.658h-2.497v-2.498h2.497V12.658z" />
+                                </DrawingGroup.Children>
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Grid.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Height="60" Background="{DynamicResource BlackBarGradient}">
+            <Grid>
+                <Rectangle RadiusX="20" RadiusY="20" Fill="white" StrokeThickness="3" Width="320" Height="40">
+                    <Rectangle.Stroke>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientBrush.GradientStops>
+                                <GradientStopCollection>
+                                    <GradientStop Color="transparent" Offset="0" />
+                                    <GradientStop Color="#666666" Offset="1" />
+                                </GradientStopCollection>
+                            </GradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Rectangle.Stroke>
+                </Rectangle>
+                <Border Style="{DynamicResource HBRLogo}" Width="289" Height="35" HorizontalAlignment="center" VerticalAlignment="center" />
+            </Grid>
+            <Button Style="{DynamicResource BlueRound}" Content="Manage account" />
+            <Button Style="{DynamicResource RedRound}" Content="Buy more issues" />
+        </DockPanel>
+        <Border DockPanel.Dock="Bottom" Height="60" Background="{DynamicResource BlackBarGradient}">
+            <Button Style="{DynamicResource GreenRound}" Content="Buy more issues" />
+        </Border>
+        <Border>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="#60609b" Offset="0" />
+                            <GradientStop Color="#d2d2f0" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.Background>
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Margin="10" FontSize="20" Foreground="white">Choose an issue</TextBlock>
+                <DockPanel DockPanel.Dock="Top" Height="150">
+                    <ListBox ItemContainerStyle="{DynamicResource MyListItemStyle}" ItemTemplate="{DynamicResource IssueItemTemplate}" ItemsSource="{Binding XPath=Issue,Source={StaticResource IssueData}}" />
+                </DockPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="TOCandFrame.xaml">
+                            <Image Stretch="Uniform" Source="images\cover_1.jpg" />
+                        </Hyperlink>
+                    </TextBlock>
+                    <Grid Margin="20" Grid.Column="1">
+                        <Rectangle RadiusX="15" RadiusY="15" Stroke="#cc000000" StrokeThickness="1">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,0" EndPoint="0.0524078,1">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Offset="0.1975309" Color="#00FFFFFF" />
+                                            <GradientStop Offset="0.3271605" Color="#22FFFFFF" />
+                                            <GradientStop Offset="0.345679" Color="#00FFFFFF" />
+                                            <GradientStop Offset="1" Color="#2FFFFFFF" />
+                                        </GradientStopCollection>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <DockPanel>
+                            <Rectangle Margin="1" RadiusX="15" RadiusY="15" StrokeThickness="1">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0.0524078,1" EndPoint="0,0">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Offset="0.1" Color="#00FFFFFF" />
+                                                <GradientStop Offset="0.3" Color="#54FFFFFF" />
+                                                <GradientStop Offset="0.5" Color="#00FFFFFF" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="0,1" EndPoint="0,0">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Offset="0" Color="#00FFFFFF" />
+                                                <GradientStop Offset="0.5" Color="#ffffff" />
+                                                <GradientStop Offset="1" Color="#00FFFFFF" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                            </Rectangle>
+                        </DockPanel>
+                        <DockPanel>
+                            <Rectangle Margin="1" Fill="transparent" RadiusX="15" RadiusY="15" StrokeThickness="1">
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" StartPoint="1,0" EndPoint="0,0">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Offset="0" Color="#00FFFFFF" />
+                                                <GradientStop Offset="0.5" Color="#ffffff" />
+                                                <GradientStop Offset="1" Color="#00FFFFFF" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                            </Rectangle>
+                        </DockPanel>
+                        <DockPanel Margin="10">
+                            <TextBlock DockPanel.Dock="Top" FontSize="22" FontWeight="Bold" Foreground="#60609b" Opacity="1">February 2003</TextBlock>
+                            <TextBlock Margin="0,10,0,0" DockPanel.Dock="Top" FontWeight="bold">Volume 12 Version 2.1</TextBlock>
+                            <TextBlock Margin="0,5,0,0" FontStyle="italic" DockPanel.Dock="Top">Last Read May 2nd, 2003</TextBlock>
+                            <ScrollViewer Margin="0,10,0,0" MaxHeight="70">
+                                <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                                    Harvard Business Review brings to life the insights and best practices of business thinkers and leaders from around the world. Every month, HBR delivers ideas powerful enough to change not only what people think,
+                                </TextBlock>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </Border>
+    </DockPanel>
+</Grid>

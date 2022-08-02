@@ -1,0 +1,36 @@
+﻿
+
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cmd="clr-namespace:System.Windows.Input;assembly=PresentationCore" xmlns:doc="clr-namespace:System.Windows.Documents;assembly=PresentationFramework" xmlns:MappingPIGen1="clr-namespace:System.Windows.Input;assembly=PresentationCore" xmlns:MappingPIGen2="clr-namespace:System.Windows.Documents;assembly=PresentationFramework">
+
+<Menu DockPanel.Dock="Top">      
+<MenuItem Header="Edit">
+ <MenuItem Header="Cut" Command="cmd:ApplicationCommands.Cut" />
+ <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
+ <MenuItem Header="Paste" Command="Paste" />
+ <MenuItem Header="Bold" Command="doc:EditingCommands.ToggleBold" />
+ <MenuItem Header="Underline" Command="EditingCommands.ToggleUnderline" />
+ <MenuItem Header="Italic" Command="ToggleItalic" />
+ <MenuItem Header="Play" Command="cmd:MediaCommands.Play" />
+ <MenuItem Header="Pause" Command="MediaCommands.Pause" />
+ <MenuItem Header="MuteVolume" Command="MuteVolume" />
+</MenuItem>
+</Menu>
+
+<Button Command="ScrollBar.PageDownCommand" Style="{DynamicResource LeftButton}" Height="100px" Width="100px" Content="foo" />
+    <FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer.InputBindings>
+            <cmd:KeyBinding Command="Cut" Modifiers="Shift" Key="Del" />
+            <cmd:KeyBinding Command="Save" Key="F5" Modifiers="Ctrl+Shift" />
+            <cmd:MouseBinding Command="MoveToLineEnd" Gesture="RightClick" />
+            <cmd:MouseBinding Command="MoveToDocumentStart" MouseAction="LeftDoubleClick" />
+            <cmd:KeyBinding Command="SelectToLineStart" Gesture="Shift+Up" />
+            <cmd:KeyBinding Command="Open" Gesture="Windows+O" />
+            <cmd:KeyBinding Command="Save" Gesture="Win+S" />
+            <cmd:MouseBinding Command="SelectToLineEnd" Gesture="Shift+LeftClick" />
+            <cmd:MouseBinding Command="Paste" Gesture="WheelClick" />
+        </FlowDocumentScrollViewer.InputBindings>
+        <FlowDocument>
+            <Paragraph />
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+</DockPanel>

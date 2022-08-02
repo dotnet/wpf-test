@@ -1,0 +1,96 @@
+﻿<TextFlow
+ xmlns="using:MSDotnetAvalon.Windows;MSDotnetAvalon.Windows.Controls;MSDotnetAvalon.Windows.Documents;MSDotnetAvalon.Windows.Shapes;MSDotnetAvalon.Windows.Media;MSDotnetAvalon.Windows.Presenters;MSDotnetAvalon.Windows.Media.Animation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:media="using:MSDotnetAvalon.Windows.Media" xmlns:anim="using:MSDotnetAvalon.Windows.Media.Animation"
+ DisplayModel="AdaptiveFlow" FontFamily="Georgia" ColumnPreference="Low" BoxPresenter.PageMargin="48,36,12,36" TextFlowPresenter.ColumnRuleWidth="1" TextFlowPresenter.ColumnRuleColor="#000000" TextFlowPresenter.ColumnRuleStyle="Solid">
+
+<PropertySheet>
+Paragraph {Margin="0,0,0,0" HorizontalAlignment="Justify"}
+Section [Role="Article"] {Margin="0,0,0,0"}
+Section [Role="CaseStudy"] {Margin="0,0,0,0"}
+Section [Role="GenericArticle"] {Margin="0,0,0,0"}
+Heading [Role="Title"] {HeadingLevel="Level3" Margin="0,2Small,0,Small"}
+Section [Role="Author"] {Margin="0,0,0,Small"}
+Heading [Role="AuthorName"] {HeadingLevel="Level6"}
+Paragraph [Role="AuthorBio"] {FontSize="XSmall" Text.TextIndent="0" Padding=".5Gutter,.5Small,.5Gutter,.5Small" FontStyle="Italic" }
+Section [Role="Squib"] {Margin="0,12,0,12"}
+Paragraph [Role="Squib"] {FontWeight="Bold" Text.TextIndent="0"}
+Heading [Role="SectionHeader"] {HeadingLevel="Level5" Margin="0,Small,0,.5Small"}
+Paragraph [Role="CallOut"] {BorderThickness="1,1,3,3" BorderColor="#000000" BorderStyle="Outset" FontStyle="Italic" FontSize="XSmall" Padding=".5Gutter,.5Small,.5Gutter,.5Small" HorizontalAlignment="Left" Text.TextIndent="0"}
+Note [Role="Quote"] {Margin="Gutter,Small,Gutter,Small" FontStyle="Italic"}
+Heading [Role="Subtitle"] {HeadingLevel="Level4"}
+Section [Role="Body"] {Margin="0,0,0,0"}
+Section [Role="Commentary"] {Margin="0,Small,0,0"}
+Inline [Role="TimeStamp"] {FontSize="XSmall"}
+Section [Role="CommentaryArticle"] {TextFlowPresenter.PageBreakBefore="Always"}
+</PropertySheet>
+
+<Section Role="Article">
+
+<Heading Role="Title">Real People Real Data </Heading>
+
+	<Section Role="Author">
+		<Heading Role="AuthorName">Jeffrey A. Krug</Heading>
+	</Section>
+
+	<Section Role="Squib">
+		<Paragraph Role="Squib">Including Customer Experience in the Software Development Cycle </Paragraph>
+	</Section>
+
+	<Section>
+		<Paragraph>As a finance manager at PepsiCo in the late 1980s, I was transferred to Louisville, Kentucky, to oversee financial analysis for Latin American restaurants in the company’s newly acquired Kentucky Fried Chicken franchise. I saw firsthand the pressure the acquisition put on KFC’s management and how this stress trickled down to the rank and file. Managers and employees alike were anxious about the future and their prospects for advancement under the new ownership. Most KFC managers thought that PepsiCo regarded them as dispensable yokels, and a rumor circulated that the new parent company planned to prune the “homegrown tomatoes” out of KFC’s management ranks. </Paragraph>
+		<Paragraph>A large portion of KFC’s top management team did end up leaving (either voluntarily or not) soon after the acquisition. The remaining KFC executives and employees continued to put in their hours, but I could sense their unease as the company’s culture shifted. Most believed KFC would never be the same.</Paragraph>
+		<Paragraph>That experience stayed with me long after I entered academia and led to my interest in the long-term effects of mergers and acquisitions on the dynamics and performance of top management teams. A rich literature going back two decades confirms the conventional wisdom about executive turnover after a merger: Incumbent executives – the managers in charge of the target company at the time of the acquisition – leave in droves soon after the deal is complete. On average, about a quarter of the executives in acquired top management teams leave within the first year, a departure rate about three times higher than in comparable companies that haven’t been acquired. An additional 15% depart in the second year, roughly double the normal turnover rate. But it’s been assumed that executive turnover rates generally return to normal within two years.</Paragraph>
+
+			<Block Margin="0,.5Small,0,.5Small">
+				<!-- <Image Source="DRTFiles\HBROpt\F0302A.jpg" Width="Column" /> -->
+				
+
+
+<DockPanel Top="250" Left="90">
+	<Button Click="PlayMovie">Play</Button>
+	<Button Click="PauseMovie">Pause</Button>
+	<Button Click="ResumeMovie">Resume</Button>
+    <Button Click="EndMovie">Stop</Button>
+ </DockPanel>
+	<x:Code>
+		<![CDATA[
+				void PlayMovie(Element element, RoutedEventArgs args)
+				{
+					MovieButton.Timeline.BeginIn(0);
+				}
+				void PauseMovie(Element element, RoutedEventArgs args)
+				{
+					MovieButton.Timeline.Pause();
+				}
+				void ResumeMovie(Element element, RoutedEventArgs args)
+				{
+					MovieButton.Timeline.Resume();
+				}
+				void EndMovie(Element element, RoutedEventArgs args)
+				{
+					MovieButton.Timeline.EndIn(0);
+				}
+		]]>
+	</x:Code>
+				<Paragraph Text.TextIndent="0"><Bold>Executive Exodus</Bold></Paragraph>
+				<Paragraph FontSize="XSmall">A 10% attrition rate is average for companies that have never gone through a merger. But for those that have, the rate remains twice that even nine years after the event.</Paragraph>
+			</Block>
+
+		<Paragraph>In fact, they don’t. Previous studies have looked only at the turnover of incumbent executives. What happens to the new hires? To find out, I followed the careers of more than 12,000 executives in 473 merged and nonmerged firms over a 15-year period. (See the graph “Executive Exodus.”) My results were similar but showed that just like incumbents, executives who joined target firms after an acquisition also left at significantly higher rates than normal, beginning about two years after the acquisition. More surprising, executives continued to depart at twice the normal rate for a minimum of nine years after the acquisition.</Paragraph>
+
+		<Heading Role="SectionHeader">Explaining the Exit</Heading>
+		
+		<Paragraph>It’s no surprise that so many of the original executives go soon after an acquisition. About one third of those who leave do so involuntarily, and another third depart because of reduced job status or alienation. But why do the new hires start leaving even though the acquiring company presumably wants to retain them? </Paragraph>
+		<Paragraph>Many of these new executives are managers who have been rotated from the acquirer into the target company to speed knowledge transfer and culture assimilation. When they arrive, they often encounter an organization in distress. Acquiring firms frequently restructure and downsize the target company shortly after the acquisition to exploit synergies. Employees are expected to maintain or even increase productivity with fewer hands. The exodus of incumbent executives decreases leadership stability, disrupts lines of communication, and fractures the organizational culture. </Paragraph>
+		<Paragraph>New executives taking the reins in this tough environment may be set up to fail, or at least to fall short of expectations. Since acquiring firms generally don’t improve the performance of the companies they take over, new executive hires may shoulder much of the blame. Continuing rounds of employee downsizing and restructuring, and eventual divestiture (in as many as half the cases), may also help explain the persistent high turnover rate long after the incumbents have gone.</Paragraph>
+
+		<Heading Role="SectionHeader">Retaining Incumbents </Heading>
+
+		<Paragraph>High turnover after an acquisition is more than just a symptom of organizational problems – it may be an important cause. The loss of incumbents at the outset affects operations directly, has the indirect effect of demoralizing a workforce already compromised by downsizing, and perhaps helps trigger a wave of further executive departures.</Paragraph>
+		<Paragraph>Companies contemplating an acquisition should focus on retaining key incumbent executives for the long haul. Failing to keep a critical mass of the old guard may set off a domino effect the organization will be feeling at least nine years out – and perhaps much longer.</Paragraph>
+
+	</Section>
+
+</Section>
+
+</TextFlow>

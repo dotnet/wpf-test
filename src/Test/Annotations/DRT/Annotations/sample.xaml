@@ -1,0 +1,80 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Width="900" Height="500" MinWidth="400" MinHeight="300"
+    Text="Sample App"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="SampleApp"
+
+    Name="topLevel"
+    Initialized="Init">  
+    <Canvas>          
+	<AnnotationService.Store>
+		<XmlFileStore Path="test_annotations.xml" AutoFlush="true" />
+	</AnnotationService.Store>
+    <Button Canvas.Left="0" Width="33%" Height="25px" DockPanel.Dock="Top" Click="ClearAllAnnotations">Clear All Annotations</Button>
+    <Button Canvas.Left="33%" Width="33%" Height="25px" DockPanel.Dock="Top" Click="UnloadAllAnnotations">Unload All Annotations</Button>
+    <Button Canvas.Left="66%" Width="34%" Height="25px" DockPanel.Dock="Top" Click="ReloadAllAnnotations">Reload All Annotations</Button>
+    <Border Canvas.Left="0" Canvas.Top="26px" Width="200" Height="200" Background="Red" BorderThickness="10" BorderBrush="Red">
+        <DockPanel Name="a" DataIdProcessor.DataId="A">
+            <TextBlock DockPanel.Dock="Top">Only C, D and E are leaves.  F works as well because it has FetchAsBatch=True.</TextBlock>
+            <Button DockPanel.Dock="Top" Click="CreateMarker" Margin="0,0,0,20">A</Button>    
+            <Border DockPanel.Dock="Top" Background="green" BorderThickness="20" BorderBrush="green">        
+                <DockPanel Name="b" DataIdProcessor.DataId="B">
+                    <Button DockPanel.Dock="Top" Click="CreateMarker" Margin="0,0,0,20">B</Button>
+                    <Border DockPanel.Dock="Left" Background="red">
+                        <StackPanel Name="c" Margin="20,20,20,20" DataIdProcessor.DataId="C">
+                            <Button Click="CreateMarker">C</Button>
+                        </StackPanel>
+                    </Border>
+                    <Border DockPanel.Dock="Left" Background="purple">
+                        <DockPanel Name="d" Margin="20,20,20,20" DataIdProcessor.DataId="D">
+                            <Button DockPanel.Dock="Top" Click="CreateMarker" Margin="0,0,0,20">D</Button>
+                            <Border Background="orange" BorderBrush="orange">
+                                <StackPanel Name="e" DockPanel.Dock="Top" Margin="20,20,20,20" DataIdProcessor.DataId="E">
+                                    <Button Click="CreateMarker">E</Button>
+                                </StackPanel>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                    <Border Background="blue"> 
+                        <DockPanel Name="f" Margin="20,20,20,20" DataIdProcessor.DataId="F" DataIdProcessor.FetchAnnotationsAsBatch="true">
+                            <Button DockPanel.Dock="Top" Click="CreateMarker" Margin="0,0,0,20">F</Button>
+                            <Border Background="orange" BorderBrush="orange">
+                                <StackPanel Name="g" DockPanel.Dock="Top" Margin="20,20,20,20" DataIdProcessor.DataId="G">
+                                    <Button Click="CreateMarker">G</Button>
+                                </StackPanel>
+                            </Border>
+                        </DockPanel>       
+                    </Border>
+                </DockPanel>
+            </Border>
+        </DockPanel>
+    </Border>
+    <Border Name="unresolvable" Canvas.Left="200" Canvas.Top="26px" Width="200" Height="200" Background="Green" BorderThickness="10" BorderBrush="Green">
+        <DockPanel>
+            <Button DockPanel.Dock="Top" Click="CreateMarkerOnSelectionForTextPanel">Create Marker On Selected Text</Button>        
+            <Canvas> 
+                <RichTextBox Name="richTextBox" DockPanel.Dock="Top" DataIdProcessor.DataId="RichTextBox" LocatorManager.SubTreeProcessorId="TextFingerprint">
+                    <FlowDocument>
+                        <Paragraph>
+                            Most young people in the United States go to school for 12 or 13 years.  They begin in Kindergarten and graduate from high school once they complete the twelfth grade.
+                        </Paragraph>
+                        <Paragraph>
+                            Some students may have to repeat some grades and others may have the opportunity to skip one or more grades.  These decisions are usually based on performance or tests.  In the past a child's age would also be taken into account.
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </Canvas>
+        </DockPanel>
+    </Border>
+    <Border Canvas.Left="0" Canvas.Top="200" Height="200" Background="Blue" BorderThickness="10" BorderBrush="Blue">
+        <DockPanel>
+            <Button DockPanel.Dock="Top" Click="CreateMarkerOnSelection">Create Marker On Selected Text</Button>        
+            <TextBox Name="textBox" TextWrapping="Wrap" DataIdProcessor.DataId="TextBox">
+                Most young people in the United States go to school for 12 or 13 years.  They begin in Kindergarten and graduate from high school once they complete the twelfth grade.
+                Some students may have to repeat some grades and others may have the opportunity to skip one or more grades.  These decisions are usually based on performance or tests.  In the past a child's age would also be taken into account.
+                There is a significant number of adults that take the G.D.E. exam.  Passing this exam is supposed to represent that the test taker has equivalent knowledge as a student who finished the normal number of years in school.
+            </TextBox>
+        </DockPanel>
+    </Border>        
+</Canvas>
+</Window>
