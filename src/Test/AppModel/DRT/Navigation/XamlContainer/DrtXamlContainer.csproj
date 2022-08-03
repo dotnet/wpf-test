@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtXamlContainer</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <TestCode>true</TestCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DrtXamlContainer.cs" />
+    <Compile Include="..\..\Logger\Logger.cs" />
+    <None Include="DrtXamlContainerSecure.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NavByElement.xaml">
+      <Link>DrtFiles\XamlContainer\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="NavByUri.xaml">
+      <Link>DrtFiles\XamlContainer\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SetContent.xaml">
+      <Link>DrtFiles\XamlContainer\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SetUri.xaml">
+      <Link>DrtFiles\XamlContainer\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtXamlContainer.Permissions">
+      <Link>DrtFiles\XamlContainer\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

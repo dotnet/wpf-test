@@ -1,0 +1,1 @@
+Secure.exe DrtXamlContainer.Permissions DrtXamlContainer.exe
