@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtCommanding</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <AddTargetFrameworkAttributeToWpfTestExe>true</AddTargetFrameworkAttributeToWpfTestExe>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TestCode>true</TestCode>
+    <DefineConstants>FRAMEWORK_NATIVEMETHODS;CORE_NATIVEMETHODS;BASE_NATIVEMETHODS;DRT_NATIVEMETHODS;DRT</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\ExternDll.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\HandleCollector.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsSetLastError.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Internal\FriendAccessAllowedAttribute.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityHelper.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityCriticalDataForSet.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\WpfLibraryLoader.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\PointUtil.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseInput.cs" />
+    <Compile Include="DrtCommandingElement.cs" />
+    <Compile Include="DrtCommandingBox.cs" />
+    <Compile Include="DrtCommanding.cs" />
+    <Compile Include="TestCommandOverride.cs" />
+    <None Include="DrtCommandingVerify.xml">
+      <Link>DrtFiles\Commanding\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtCommandingMarkup.xaml">
+      <Link>DrtFiles\Commanding\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCommandOverride.xaml">
+      <Link>DrtFiles\Commanding\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

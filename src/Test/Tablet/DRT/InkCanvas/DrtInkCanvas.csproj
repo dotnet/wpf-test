@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtInkCanvas</AssemblyName>
+    <LinkSubsystem>console</LinkSubsystem>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>DRT;FRAMEWORK_NATIVEMETHODS;CORE_NATIVEMETHODS</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="drtinkcanvas_initialink.isf">
+      <Link>DrtFiles\InkCanvas\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="largepage.isf">
+      <Link>DrtFiles\InkCanvas\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="inkcollection.isf">
+      <Link>DrtFiles\InkCanvas\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lasso.isf">
+      <Link>DrtFiles\InkCanvas\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtInkCanvasDataBinding.xaml">
+      <Link>DrtFiles\InkCanvas\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SelectionMovingPerfTest.xaml">
+      <Link>DrtFiles\InkCanvas\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RunInkCanvasSpeedTests.cmd">
+      <Link>%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RunInkCanvasAllocationTests.cmd">
+      <Link>%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\ExternDll.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\HandleCollector.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsSetLastError.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Internal\FriendAccessAllowedAttribute.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityHelper.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityCriticalDataForSet.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\WpfLibraryLoader.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\PointUtil.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseInput.cs" />
+    <Compile Include="$(DrtCommonRoot)\Tablet\StylusInputSimulation.cs" />
+    <Compile Include="$(DrtCommonRoot)\Tablet\DrtTabletBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\Tablet\APITestBase.cs" />
+    <Compile Include="DrtInkCanvas.cs" />
+    <Compile Include="InkPresenterTests.cs" />
+    <Compile Include="InkCanvasEditingTests.cs" />
+    <Compile Include="InkCanvasTests.cs" />
+    <Compile Include="InkCanvasExceptionHardening.cs" />
+    <Compile Include="InkCanvasMidStrokeTest.cs" />
+    <Compile Include="InkCanvasDataBindingTest.cs" />
+    <Compile Include="InkCanvasPerfTestBase.cs" />
+    <Compile Include="InkCollectionPerfTest.cs" />
+    <Compile Include="SelectAPIPerfTest.cs" />
+    <Compile Include="SelectionMovingPerfTest.cs" />
+    <Compile Include="LassoSelectionPerfTest.cs" />
+    <Compile Include="PointErasePerfTest.cs" />
+    <Compile Include="StrokeErasePerfTest.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\ReliabilityAssertException.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\CLRProfilerControl.cs" />
+  </ItemGroup>
+
+</Project>

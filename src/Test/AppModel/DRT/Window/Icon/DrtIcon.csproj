@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtIcon</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <AddTargetFrameworkAttributeToWpfTestExe>true</AddTargetFrameworkAttributeToWpfTestExe>
+  </PropertyGroup>
+  <ItemGroup>
+    <Page Include="DrtIconWindow1.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="DrtIconAD.xaml" />
+    <Compile Include="..\..\Logger\Logger.cs" />
+    <Compile Include="DrtIconAD.xaml.cs" />
+    <Compile Include="DrtIconWindow1.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="cart.ico"/>
+    <Resource Include="arp16.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="heart.ico">
+      <Link>DrtFiles\Icon\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

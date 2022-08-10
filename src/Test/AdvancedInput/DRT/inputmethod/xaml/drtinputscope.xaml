@@ -1,0 +1,87 @@
+﻿
+<Canvas
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="lightgray" xmlns:MappingPIGen1="clr-namespace:System.Windows.Input;assembly=PresentationCore">
+
+        <Canvas.InputScope>
+            <InputScope xmlns="clr-namespace:System.Windows.Input;assembly=PresentationCore">
+                <InputScope.Names>
+                    <InputScopeName>Url</InputScopeName>
+                    <InputScopeName>FileName</InputScopeName>
+                </InputScope.Names>
+                <InputScope.RegularExpression>
+                    [0-9]
+                </InputScope.RegularExpression>
+            </InputScope> 
+        </Canvas.InputScope>
+
+        <TextBlock
+            Canvas.Left="10"
+            Canvas.Top="10"
+            FontSize="11"
+            Foreground="black">
+            sample text string
+        </TextBlock>
+
+
+        <ComboBox
+            IsEditable="true"
+            Canvas.Left="10"
+            Canvas.Top="54"
+            Width="200"
+            Name="Combo">
+            <ComboBox.InputScope>
+                <InputScope xmlns="clr-namespace:System.Windows.Input;assembly=PresentationCore">        		
+                    <InputScope.Names>
+                        <InputScopeName>PhraseList</InputScopeName>
+                    </InputScope.Names>
+                    <InputScope.PhraseList>
+                            <InputScopePhrase>Redmond</InputScopePhrase>
+                            <InputScopePhrase>Seattle</InputScopePhrase>
+                            <InputScopePhrase>Kirkland</InputScopePhrase>
+                            <InputScopePhrase>Bellevue</InputScopePhrase>
+                            <InputScopePhrase>Renton</InputScopePhrase>
+                            <InputScopePhrase>Woodenville</InputScopePhrase>
+                            <InputScopePhrase>Bothell</InputScopePhrase>
+                    </InputScope.PhraseList>
+                </InputScope>        		
+            </ComboBox.InputScope>
+            <ComboBoxItem>Redmond</ComboBoxItem>
+            <ComboBoxItem>Seattle</ComboBoxItem>
+            <ComboBoxItem>Kirkland</ComboBoxItem>
+            <ComboBoxItem>Renton</ComboBoxItem>
+            <ComboBoxItem>Woodenville</ComboBoxItem>
+            <ComboBoxItem>Bothell</ComboBoxItem>
+        </ComboBox>
+
+        <TextBox
+        Canvas.Left="10"
+        Canvas.Top="75"
+        FontSize="12"
+        Name="TextBox1">
+        </TextBox>
+        
+        <TextBox
+        Canvas.Left="100"
+        Canvas.Top="75"
+        FontSize="12"
+        Name="TextBox2"
+        InputScope="AddressCity">
+        </TextBox>
+
+        <Button
+        Width="75"
+        Canvas.Left="10"
+        Canvas.Top="100">
+            OK
+        </Button>
+
+        <Button
+        Width="75"
+        Canvas.Left="85"
+        Canvas.Top="100">
+        Cancel
+        </Button>
+</Canvas>

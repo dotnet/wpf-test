@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtDigitalSignature</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <NoWarn Condition="'$(NoWarn)'!=''">$(NoWarn),</NoWarn>
+    <NoWarn>$(NoWarn)618</NoWarn>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="DrtDigitalSignature.cs" />
+    <Compile Include="XmlDSigTests.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\SpewWriter.cs" />
+    <None Include="DrtDigitalSignature.cmd">
+      <Link>%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\DrtFiles\*">
+      <Link>DrtFiles\DigitalSignature\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(DigitalDocumentsDrtPath)\CopyFiles\x64\*" Condition="'$(Platform)' == 'x64'">
+        <Link>%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(DigitalDocumentsDrtPath)\CopyFiles\x86\*" Condition="'$(Platform)' != 'x64'">
+        <Link>%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
