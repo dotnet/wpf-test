@@ -5,7 +5,6 @@
 
 /***************************************************************************\
 *
-* File: TestClasses.cs
 *
 *  Parser test classes used by DrtParser.exe
 *

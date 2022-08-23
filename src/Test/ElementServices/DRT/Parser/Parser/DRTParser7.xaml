@@ -1,0 +1,263 @@
+﻿<DockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+<DockPanel.Resources>
+
+  <ResourceDictionary>
+
+    <!-- Template for a Button in the Style section -->
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Template">
+	        <Setter.Value>
+	            <ControlTemplate TargetType="{x:Type Button}">
+	                <Canvas Height="20" Width="100">                
+	                    <Rectangle Name="MainRect" Width="100" Height="20" RadiusX="10" RadiusY="10" Fill="LightGreen" Stroke="CadetBlue" StrokeThickness="2" />
+	                    <ContentPresenter Margin="15,13,15,15" />
+	                </Canvas>
+	             </ControlTemplate>
+	        </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <!-- Template for a Button in the Style section -->
+    <Style x:Key="MyButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Button.Template">
+	        <Setter.Value>
+	            <ControlTemplate TargetType="{x:Type Button}">
+	                <Canvas Height="20" Width="100">                
+	                    <Rectangle Name="MainRect" Width="100" Height="20" RadiusX="10" RadiusY="10" Fill="LightGray" Stroke="CadetBlue" StrokeThickness="2" />
+	                    <ContentPresenter Margin="15,13,15,15" />
+	                </Canvas>
+	             </ControlTemplate>
+	        </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Template for a Button in the Resource section -->
+    <ControlTemplate x:Key="MyButtonTemplate" TargetType="{x:Type Button}">
+        <Canvas Height="20" Width="100">                
+            <Rectangle
+             Name="MainRect"
+             Width="100" Height="20"
+             RadiusX="10" RadiusY="10"
+             Fill="LightYellow"
+             Stroke="CadetBlue" StrokeThickness="2" />
+
+            <ContentPresenter Margin="15,13,15,15" />
+        </Canvas>
+     </ControlTemplate>
+
+  </ResourceDictionary>
+
+</DockPanel.Resources>
+
+    <!-- Template for a Button -->
+    <Button
+     Content="Hello"
+     Style="{x:Null}">
+	    
+	    <Button.Template>
+	        <ControlTemplate TargetType="{x:Type Button}">
+	            <Canvas Height="20" Width="100">                
+	                <Rectangle Name="MainRect"
+                 Width="100" Height="20"
+                 RadiusX="10" RadiusY="10"
+                 Fill="LightBlue"
+                 Stroke="CadetBlue" StrokeThickness="2" />
+	                <ContentPresenter
+                 Margin="15,13,15,15" />
+	            </Canvas>
+	        </ControlTemplate>
+	    </Button.Template>
+	    
+    </Button>
+
+    <!-- This Button should pick its style from the Resource section -->
+    <Button Content="World" />
+
+    <!-- This Button should pick its style from the Resource section -->
+    <Button Content="Once" Style="{DynamicResource MyButtonStyle}" />
+
+    <!-- This Button should pick its template from the Resource section -->
+    <Button Content="More" Style="{x:Null}" Template="{DynamicResource MyButtonTemplate}" />
+
+    <!-- Template with Triggers for a Button -->
+    <Button
+     Content="And"
+     Style="{x:Null}">
+	    <Button.Template>
+	        <ControlTemplate TargetType="{x:Type Button}">
+	            <Canvas Height="20" Width="100">                
+	                <Rectangle Name="MainRect"
+                 Width="100" Height="20"
+                 RadiusX="10" RadiusY="10"
+                 Fill="LightPink"
+                 Stroke="CadetBlue" StrokeThickness="2" />
+	                <ContentPresenter x:Name="ContentSite"
+                 Margin="15,13,15,15" />
+	            </Canvas>
+	            
+		        <ControlTemplate.Triggers>
+		            <Trigger Property="IsPressed" Value="true">
+		                <Setter TargetName="ContentSite" Property="TextBlock.Foreground" Value="Yellow" />
+		                <Setter TargetName="ContentSite" Property="TextBlock.FontSize" Value="16" />   
+		            </Trigger>
+		        </ControlTemplate.Triggers>
+		        
+	        </ControlTemplate>
+	    </Button.Template>
+    </Button>
+
+    <!-- Template with Storyboards and EventTriggers for a Button -->
+    <Button Style="{x:Null}">
+	    <Button.Template>
+	        <ControlTemplate TargetType="{x:Type Button}">
+	            <Rectangle
+              x:Name="DaRectangle"
+              Fill="Red"
+              Width="80"
+              Height="40" />
+	            
+		        <ControlTemplate.Triggers>
+		           <EventTrigger SourceName="DaRectangle" RoutedEvent="Mouse.MouseDown">
+		           <EventTrigger.Actions>
+		              <BeginStoryboard>
+		                 <Storyboard TargetName="DaRectangle" TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+		                    <ColorAnimation To="Yellow" BeginTime="0" Duration="0:0:1" />
+		                    <ColorAnimation To="Green" BeginTime="0:0:1" Duration="0:0:1" />
+		                 </Storyboard>
+		              </BeginStoryboard>
+		           </EventTrigger.Actions>
+		           </EventTrigger>
+		        </ControlTemplate.Triggers>
+		        
+	        </ControlTemplate>
+	    </Button.Template>
+    </Button>
+
+
+    <!-- Template with Freezables & 3D (button #7) -->
+    <Button Style="{x:Null}">
+	    <Button.Template>
+	        <ControlTemplate TargetType="{x:Type Button}">
+	            <Grid>
+	            		<Grid.ColumnDefinitions>
+	            		<ColumnDefinition Width="1" />
+	            		<ColumnDefinition Width="*" />
+	            		<ColumnDefinition Width="*" />
+	            		</Grid.ColumnDefinitions>
+
+					<Rectangle
+      Name="RectangleWithNamedBrush"
+      Grid.Row="0" Grid.Column="0"
+      Width="100" Height="100">
+						<Rectangle.Fill>
+							<SolidColorBrush x:Name="RectangleFill" Color="Red" />
+						</Rectangle.Fill>
+					</Rectangle>
+	            	
+					<Rectangle
+      Name="RectangleWithDynamicResource"
+      Grid.Row="0" Grid.Column="1"
+      Width="100" Height="100">
+						<Rectangle.Fill>
+							<SolidColorBrush Color="{DynamicResource ColorResource}" />
+						</Rectangle.Fill>
+					</Rectangle>
+
+
+					<Grid
+      Name="ThreeDCell"
+      Grid.Row="0" Grid.Column="2"
+      Width="800" Height="600">
+						
+					    <Viewport3D Name="Viewport" Margin="52,45,253,100">
+					    
+							<Viewport3D.Children>
+					            <ModelVisual3D>
+					                <ModelVisual3D.Content>
+					                    <Model3DGroup>
+
+					                        <DirectionalLight Direction="0,-1,-1" Color="{DynamicResource ColorResource}" />
+
+					                        <AmbientLight Color="#FF7F7F7F" />
+
+					                        <Model3DGroup>
+					                            <GeometryModel3D>
+					                                <GeometryModel3D.Geometry>
+					                                    <MeshGeometry3D Positions="-1,1,1 1,1,1 1,-1,1 -1,-1,1" Normals="0,0,1 0,0,1 0,0,1 0,0,1" TextureCoordinates="0,0 1,0 1,1 0,1" TriangleIndices="1 0 3 2 1 3" />
+					                                </GeometryModel3D.Geometry>
+					                                <GeometryModel3D.Material>
+					                                    <DiffuseMaterial Brush="Blue" />
+					                                </GeometryModel3D.Material>
+					                            </GeometryModel3D>
+					                            
+					                            <GeometryModel3D>
+					                                <GeometryModel3D.Geometry>
+					                                    <MeshGeometry3D Positions="1,1,-1 -1,1,-1 -1,-1,-1 1,-1,-1" Normals="0,0,-1 0,0,-1 0,0,-1 0,0,-1" TextureCoordinates="0,0 1,0 1,1 0,1" TriangleIndices="1 0 3 2 1 3" />
+					                                </GeometryModel3D.Geometry>
+					                                <GeometryModel3D.Material>
+					                                    <DiffuseMaterial Brush="LightGray" />
+					                                </GeometryModel3D.Material>
+					                            </GeometryModel3D>
+					                            
+					                            <GeometryModel3D>
+					                                <GeometryModel3D.Geometry>
+					                                    <MeshGeometry3D Positions="1,1,1 1,1,-1 1,-1,-1 1,-1,1" Normals="1,0,0 1,0,0 1,0,0 1,0,0" TextureCoordinates="0,0 1,0 1,1 0,1" TriangleIndices="1 0 3 2 1 3" />
+					                                </GeometryModel3D.Geometry>
+					                                <GeometryModel3D.Material>
+					                                    <DiffuseMaterial Brush="LightGray" />
+					                                </GeometryModel3D.Material>
+					                            </GeometryModel3D>
+					                            
+					                            <GeometryModel3D>
+					                                <GeometryModel3D.Geometry>
+					                                    <MeshGeometry3D Positions="-1,1,-1 -1,1,1 -1,-1,1 -1,-1,-1" Normals="-1,0,0 -1,0,0 -1,0,0 -1,0,0" TextureCoordinates="0,0 1,0 1,1 0,1" TriangleIndices="1 0 3 2 1 3" />
+					                                </GeometryModel3D.Geometry>
+					                                <GeometryModel3D.Material>
+					                                    <DiffuseMaterial Brush="LightGray" />
+					                                </GeometryModel3D.Material>
+					                            </GeometryModel3D>
+					                            
+					                            <GeometryModel3D>
+					                                <GeometryModel3D.Geometry>
+					                                    <MeshGeometry3D Positions="-1,1,-1 1,1,-1 1,1,1 -1,1,1" Normals="0,1,0 0,1,0 0,1,0 0,1,0" TextureCoordinates="0,0 1,0 1,1 0,1" TriangleIndices="1 0 3 2 1 3" />
+					                                </GeometryModel3D.Geometry>
+					                                <GeometryModel3D.Material>
+					                                    <DiffuseMaterial Brush="LightGray" />
+					                                </GeometryModel3D.Material>
+					                            </GeometryModel3D>
+					                            
+					                            <GeometryModel3D>
+					                                <GeometryModel3D.Geometry>
+					                                    <MeshGeometry3D Positions="1,-1,-1 -1,-1,-1 -1,-1,1 1,-1,1" Normals="0,-1,0 0,-1,0 0,-1,0 0,-1,0" TextureCoordinates="0,0 1,0 1,1 0,1" TriangleIndices="1 0 3 2 1 3" />
+					                                </GeometryModel3D.Geometry>
+					                                <GeometryModel3D.Material>
+					                                    <DiffuseMaterial Brush="LightGray" />
+					                                </GeometryModel3D.Material>
+					                            </GeometryModel3D>
+					                        </Model3DGroup>
+
+					                    </Model3DGroup>
+					                </ModelVisual3D.Content>
+					            </ModelVisual3D>
+							</Viewport3D.Children>
+							
+					        <Viewport3D.Camera>
+					            <PerspectiveCamera FieldOfView="45" NearPlaneDistance="1" FarPlaneDistance="10" Position="-2,2,4" LookDirection="0,0,0" UpDirection="0,1,0" />
+					        </Viewport3D.Camera>
+					    </Viewport3D>
+					</Grid>
+	            	
+	            </Grid>
+		        
+	        </ControlTemplate>
+	    </Button.Template>
+    </Button>
+    
+
+
+
+</DockPanel>

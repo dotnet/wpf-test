@@ -1,0 +1,53 @@
+<?Mapping XmlNamespace="dttns" ClrNamespace="DRTText" Assembly="TestClasses" ?>
+<Page 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:l="clr-namespace:DRTText;assembly=TestClasses"
+    Name="root"
+>
+    <Page.Resources>
+
+        <l:MyXmlIsland x:Key="myXmlIslandCPA">
+            <x:XData>
+                <Root xmlns="">
+                    <Number type="int">222</Number>
+                </Root>
+            </x:XData>
+        </l:MyXmlIsland>
+
+        <l:MyXmlIsland x:Key="myXmlIslandComplexProp">
+            <l:MyXmlIsland.XmlSerializer>
+                <x:XData>
+                    <Root xmlns="">
+                        <Number type="int">222</Number>
+                    </Root>
+                </x:XData>
+            </l:MyXmlIsland.XmlSerializer>
+        </l:MyXmlIsland>
+
+        <XmlDataProvider x:Key="aXmlDP" IsAsynchronous="false" XPath="/Root/Number">
+            <x:XData>
+                <Root xmlns="">
+                    <Number type="int">333</Number>
+                </Root>
+            </x:XData>
+        </XmlDataProvider>
+
+<!--  assigning Xml island to element not supported yet by parser
+        <XmlDataProvider x:Key="aXmlDP2" XPath="/Root/Number">
+            <XmlDataProvider.Document>
+                <l:XmlIslandDocument>
+                    <x:XData>
+                        <Root xmlns="">
+                            <Number type="int">444</Number>
+                        </Root>
+                    </x:XData>
+                </l:XmlIslandDocument>
+            </XmlDataProvider.Document>
+        </XmlDataProvider>
+-->
+
+    </Page.Resources>
+</Page>
+
+

@@ -1,0 +1,88 @@
+﻿
+
+
+
+
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mil="clr-namespace:System.Windows.Media;assembly=PresentationCore"
+    xmlns:fed="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dtt="http://schemas.microsoft.com/ParserTest/2005" xmlns:foo="clr-namespace:DRT;assembly=DrtParser"
+    fed:Uid="0"
+    xmlns:S="clr-namespace:System;assembly=Mscorlib" Background="LightGray" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media;assembly=PresentationCore" xmlns:MappingPIGen2="clr-namespace:System.Windows.Input;assembly=PresentationCore" xmlns:MappingPIGen3="clr-namespace:DRT;assembly=DrtParser" xmlns:MappingPIGen4="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen5="clr-namespace:System.Windows.Media.Animation;assembly=PresentationCore">
+    <DockPanel.Resources fed:Uid="1">
+    <SolidColorBrush x:Key="Green Brush" Color="Green" />
+    <Color x:Key="{}{Blue}{Blue}" B="222" A="255" />
+     <Style> <!-- TargetType="{x:Type TypeName=RadioButton}"> -->
+
+       <Style.TargetType>
+             <x:Type>
+               <x:Type.TypeName>
+                   RadioButton
+               </x:Type.TypeName>
+             </x:Type>
+       </Style.TargetType>
+
+       <Setter Property='Button.Background' Value='Red' />
+       <Setter Property='Button.Foreground' Value='Red' />
+    </Style>
+    <Style BasedOn="{StaticResource ResourceKey={x:Type TypeName=RadioButton}}" x:Key="BasedOnStyle" TargetType="{fed:Type RadioButton}">
+    </Style>
+    <Style x:Key="BasedOnStyle2" TargetType="{fed:Type Panel}">
+       <Style.BasedOn>
+           <StaticResourceExtension>
+               <StaticResource.ResourceKey>
+                   <x:Type>
+                      <x:Type.TypeName> RadioButton </x:Type.TypeName>
+                   </x:Type>
+               </StaticResource.ResourceKey>
+           </StaticResourceExtension>
+       </Style.BasedOn>
+    </Style>
+    <Style>
+        <Style.TargetType>
+            <fed:Type TypeName="Grid" />
+        </Style.TargetType>
+    </Style>
+    <Style x:Key="{x:Type TypeName=ListBox}" TargetType="{fed:Type Button}">
+        <Setter Property="Background" Value="Red" />
+        <Setter Property="Foreground" Value="Indigo" />
+        <Setter Property="DockPanel.Dock" Value="{x:Static &apos;Dock.Right&apos;}" />
+    </Style>
+  </DockPanel.Resources>
+            <Button Name="Button0" Background="{DynamicResource &apos;Green Brush&apos;}" />
+  <Button>
+        <Button.Style>
+           <StaticResource>
+            <StaticResource.ResourceKey>
+             <x:Type>
+               <x:Type.TypeName>
+                   ListBox
+               </x:Type.TypeName>
+             </x:Type>
+            </StaticResource.ResourceKey>
+          </StaticResource>
+        </Button.Style>
+      Right and Red</Button>
+  <Button Name="Button2" Content="{}{Stuff   In  \&apos;Curlies\&apos;}}">
+     <Button.Background>
+        <SolidColorBrush Color="{StaticResourceExtension ResourceKey=&apos;\{Blue\}\{Blue\}&apos;}" /> 
+     </Button.Background>
+  </Button>
+  <Button Content="{dtt:LiteralRepeat &apos;Foo &apos;, 3}" DockPanel.Dock="{ x:Static  Member = Dock.Top}">
+<!--     <Button.Content>
+        <x:Array x:Type="{x:Type TypeName = S:Object }">
+          <TextBlock> Click Me Again and Again and Again! </TextBlock> 
+          <TextBlock> Click Me Again and Again and Again and Again! </TextBlock> 
+        </x:Array>
+     </Button.Content>
+-->
+  </Button>
+  <Button>
+    <Button.Content>
+        <dtt:LiteralRepeat BaseStr="Bar " RepeatCount="3" />
+     </Button.Content>
+     <DockPanel.Dock>
+        <x:Static Member="{}Dock.Bottom" />
+     </DockPanel.Dock>
+  </Button>
+
+</DockPanel>
