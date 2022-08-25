@@ -1,0 +1,272 @@
+﻿
+
+
+
+
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mil="clr-namespace:System.Windows.Media;assembly=PresentationCore"
+    xmlns:fed="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dtt="clr-namespace:DRTText;assembly=TestClasses" xmlns:foo="clr-namespace:DRT;assembly=DrtParser"
+    fed:Uid="0"
+    xmlns:S="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media;assembly=PresentationCore" xmlns:MappingPIGen2="clr-namespace:DRT;assembly=DrtParser" xmlns:MappingPIGen3="clr-namespace:DRTText;assembly=TestClasses" xmlns:MappingPIGen4="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen5="clr-namespace:System.Windows.Media.Animation;assembly=PresentationCore">
+  <DockPanel.Resources fed:Uid="1">
+    <mil:Color fed:Key="{}DaColor" R="255" fed:Uid="2" />
+    <mil:SolidColorBrush fed:Key="DaBrush" fed:Uid="3">
+      <mil:SolidColorBrush.Color fed:Uid="4">
+        <StaticResource ResourceKey="DaColor" fed:Uid="5" />
+      </mil:SolidColorBrush.Color>
+    </mil:SolidColorBrush>
+    <mil:SolidColorBrush fed:Key="{fed:Static Member=Dock.Top}" fed:Uid="3">
+      <mil:SolidColorBrush.Color fed:Uid="456">
+          <mil:Color A="255" G="200" />
+      </mil:SolidColorBrush.Color>
+    </mil:SolidColorBrush>
+    <mil:SolidColorBrush fed:Key="{fed:Static dtt:TextTestControl.FieldOne}" fed:Uid="3">
+      <mil:SolidColorBrush.Color fed:Uid="45678">
+          <mil:Color A="255" B="200" />
+      </mil:SolidColorBrush.Color>
+    </mil:SolidColorBrush>
+    <Style fed:Key="DaOtherStyle" fed:Uid="6" TargetType="{fed:Type foo:MyButton}">
+        <Setter Property="foo:DoType" Value="{fed:Type dtt:TextTestControl}" />
+    </Style>
+       <Style TargetType="{fed:Type StackPanel}">
+
+           <Style.Setters>
+           <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush>
+                              <SolidColorBrush.Color fed:Uid="123">
+                              <Color A="255" B="200" fed:Uid="546" />
+                              </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+           <Setter Property="DockPanel.Dock" Value="Left" />
+
+           </Style.Setters>
+       </Style>
+       <Style TargetType="{fed:Type Grid}">
+           <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush>
+                              <SolidColorBrush.Color fed:Uid="123">
+                              <Color A="255" B="200" fed:Uid="546" />
+                              </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+           <Setter Property="DockPanel.Dock" Value="Left" />
+
+       </Style>
+      <Style fed:Key="DaStyle" fed:Uid="8" xmlns:d="clr-namespace:DRTText;assembly=TestClasses" TargetType="{fed:Type dtt:TextTestControl}">
+          <Setter Property="dtt:Alpha" Value="4" />
+          <Setter Property="dtt:BackgroundDP" Value="{StaticResource DaBrush}" />
+          <Setter Property="d:NumberEnum" Value="one, two" />
+          <Setter Property="d:TextTestControl.ForegroundDP">
+          <Setter.Value>
+          <mil:SolidColorBrush fed:Uid="11">
+            <mil:SolidColorBrush.Color fed:Uid="12">
+              <mil:Color B="255" fed:Uid="13" />
+            </mil:SolidColorBrush.Color>
+          </mil:SolidColorBrush>
+          </Setter.Value>
+          </Setter>
+          <Setter Property="Template">
+          <Setter.Value>
+          <ControlTemplate TargetType="{fed:Type dtt:TextTestControl}">
+        <DockPanel fed:Uid="15">
+          <dd:TextTestControl dtt:Alpha="7" d:TextTestControl.GreekAlpha="9" fed:Name="ss1" xmlns:d="clr-namespace:DRTText;assembly=TestClasses" xmlns:dd="clr-namespace:DRTText;assembly=TestClasses" fed:Uid="16">
+            <dtt:TextTestControl.BackgroundDP fed:Uid="17">
+              <mil:SolidColorBrush fed:Uid="18">
+                <mil:SolidColorBrush.Color fed:Uid="19">
+                  <mil:Color G="255" fed:Uid="20" />
+                </mil:SolidColorBrush.Color>
+              </mil:SolidColorBrush>
+            </dtt:TextTestControl.BackgroundDP>
+          </dd:TextTestControl>
+        </DockPanel>
+          </ControlTemplate>
+          </Setter.Value>
+          </Setter>
+          <Style.Triggers>
+          <Trigger Property="DockPanel.Dock" Value="Left" fed:Uid="22">
+          <Setter Property="dtt:Alpha" Value="2" fed:Uid="23" />
+          <Setter Property="dtt:TextTestControl.BackgroundDP" Value="{DynamicResource DaBrush}" fed:Uid="24" />
+          </Trigger>
+          <MultiTrigger fed:Uid="25">
+          <MultiTrigger.Conditions fed:Uid="26">
+            <Condition Property="Button.IsPressed" Value="True" fed:Uid="27" />
+            <Condition Property="Button.IsFocused" Value="True" fed:Uid="28" />
+          </MultiTrigger.Conditions>
+          <Setter Property="dtt:Alpha" Value="33" fed:Uid="29" />
+          </MultiTrigger>
+          </Style.Triggers>
+      </Style>
+    <Style fed:Key="{fed:Type mil:SolidColorBrush}" fed:Uid="30" TargetType="{fed:Type dtt:TextTestControl}">
+        <Setter Property="dtt:Alpha" Value="2" />
+        <Setter Property="dtt:TextTestControlSubclass.GreekBeta" Value="6" />
+    </Style>
+    <Style fed:Uid="32" TargetType="{fed:Type Button}">
+        <Style.Triggers>
+        <Trigger Property="DockPanel.Dock" Value="Left" fed:Uid="35">
+        <Setter Property="Background" fed:Uid="36">
+            <Setter.Value fed:Uid="37">
+              <mil:LinearGradientBrush mil:StartPoint="0, 0" mil:EndPoint="0,1" fed:Uid="38">
+                <mil:LinearGradientBrush.GradientStops fed:Uid="39">
+                  <mil:GradientStopCollection fed:Uid="40">
+                    <mil:GradientStop mil:Color="#FFcc00cc" mil:Offset="0" fed:Uid="41" />
+                    <mil:GradientStop mil:Color="#FF888800" mil:Offset="1" fed:Uid="42" />
+                  </mil:GradientStopCollection>
+                </mil:LinearGradientBrush.GradientStops>
+              </mil:LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        </Trigger>
+        <MultiTrigger fed:Uid="43">
+        <MultiTrigger.Conditions fed:Uid="44">
+            <Condition Property="Button.IsPressed" Value="True" fed:Uid="45" />
+            <Condition Property="Button.IsFocused" Value="True" fed:Uid="46" />
+          </MultiTrigger.Conditions>
+        <Setter Property="Background" fed:Uid="47">
+            <Setter.Value fed:Uid="48">
+              <LinearGradientBrush mil:StartPoint="0, 0" m:EndPoint="0,1" xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" xmlns:m="clr-namespace:System.Windows.Media;assembly=PresentationCore" fed:Uid="49">
+                <LinearGradientBrush.GradientStops fed:Uid="50">
+                  <GradientStopCollection fed:Uid="51">
+                    <GradientStop Color="#FFFF0000" m:Offset="0" fed:Uid="52" />
+                    <GradientStop Color="#FF00FF00" Offset="0.5" fed:Uid="53" />
+                    <m:GradientStop Color="#FF0000FF" Offset="1.0" fed:Uid="54" />
+                  </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style fed:Uid="55" TargetType="{fed:Type TextBlock}">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="foo:MyButton.Yabba" Value="77" />
+    </Style>
+    <Style fed:Uid="57" TargetType="{fed:Type foo:MyButton}">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="foo:MyButton.Dabba" Value="88" />
+    </Style>
+    <Style fed:Uid="59" TargetType="{fed:Type Hyperlink}">
+        <Setter Property="Foreground" Value="Yellow" />
+    </Style>
+    <Style BasedOn="{fed:Null}" fed:Uid="61" TargetType="{fed:Type CheckBox}">
+        <Setter Property="Foreground" Value="Blue" />
+    </Style>
+    <Style BasedOn="{StaticResource {fed:Type Button}}" fed:Uid="63" TargetType="{fed:Type RadioButton}">
+        <Setter Property="Foreground" Value="Green" />
+    </Style>
+    <foo:TestFreezable fed:Key="TestFreezable" TheValue="1" fed:Uid="65" />
+  </DockPanel.Resources>
+  <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mil="clr-namespace:System.Windows.Media;assembly=PresentationCore" xmlns:fed="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dtt="clr-namespace:DRTText;assembly=TestClasses" xmlns:foo="clr-namespace:DRT;assembly=DrtParser" fed:Uid="66">
+    <Border Width="150" Height="50" Background="{DynamicResource DaBrush}" fed:Uid="67"
+             dtt:TextTestControl.Alpha="{fed:Static dtt:TextTestControl.FieldOne}"
+             dtt:TextTestControl.GreekAlpha="{fed:Static dtt:TextTestControl.PropertyThree}"
+             DockPanel.Dock="{fed:Static Dock.Left}">
+      <DockPanel fed:Uid="68" />
+    </Border>
+    <Button Content="{DynamicResource TestFreezable}" fed:Uid="69" Background="{DynamicResource {fed:Static dtt:TextTestControl.FieldOne}}" />
+    <Button Style="{DynamicResource ResourceKey={fed:Type TypeName=Button}}" fed:Uid="70" Background="{DynamicResource {fed:Static Dock.Top}}" Button.Width="120" />
+    <Button fed:Uid="71" />
+    <TextBlock fed:Uid="72"> Hello World </TextBlock>
+    <foo:MyButton fed:Uid="73" />
+    <!--  Readonly IList DP without explicit object tag -->
+    <dtt:TextTestControl Style="{StaticResource DaStyle}" fed:Uid="74">
+      <dtt:TextTestControl.BetaIList fed:Uid="75">
+        <foo:MyButton fed:Uid="76" />
+        <Button fed:Uid="77" />
+      </dtt:TextTestControl.BetaIList>
+    </dtt:TextTestControl>
+    <!--  Readonly IList DP with explicit object tag -->
+    <dtt:TextTestControl fed:Uid="78">
+      <dtt:TextTestControl.BetaIList fed:Uid="79">
+        <dtt:MyIList fed:Uid="80">
+          <foo:MyButton fed:Uid="81" />
+          <Button fed:Uid="82" />
+        </dtt:MyIList>
+      </dtt:TextTestControl.BetaIList>
+    </dtt:TextTestControl>
+    <!--  IDictionary with explicit object tag and property set -->
+    <dtt:TextTestControl fed:Uid="83" xml:lang="en-US">
+      <dtt:TextTestControl.IDict fed:Uid="84">
+        <dtt:MyHashtable xmlns="clr-namespace:DRT;assembly=DrtParser" fed:Uid="85">
+          <dtt:MyHashtable.MYTP fed:Uid="8585">
+             <S:Int32 fed:Uid="8586"> 1234 </S:Int32>
+          </dtt:MyHashtable.MYTP>
+          <MyButton fed:Key="one" fed:Uid="86" />
+          <MyButton fed:Key="{fed:Type foo:MyButton}" fed:Uid="87" />
+        </dtt:MyHashtable>
+      </dtt:TextTestControl.IDict>
+    </dtt:TextTestControl>
+    <!--  IDictionary without explicit object tag -->
+    <dtt:TextTestControl fed:Uid="88">
+      <dtt:TextTestControl.IDict fed:Uid="89">
+        <foo:MyButton fed:Key="two" fed:Uid="90" />
+        <Button fed:Key="{fed:Type foo:MyButton}" fed:Uid="91" />
+      </dtt:TextTestControl.IDict>
+    </dtt:TextTestControl>
+    <!-- Array property -->
+    <dtt:TextTestControl fed:Uid="92">
+      <dtt:TextTestControl.MyTextArrayProp fed:Uid="93">
+        <dtt:MyText fed:Uid="94" />
+        <dtt:MyText fed:Uid="95" />
+      </dtt:TextTestControl.MyTextArrayProp>
+    </dtt:TextTestControl>
+    <!-- IList with explicit object tag -->
+    <dtt:TextTestControl fed:Uid="109">
+      <dtt:TextTestControl.RWList fed:Uid="110">
+        <dtt:MyIList fed:Uid="111">
+          <Button fed:Uid="112">One</Button>
+          <TextBlock fed:Uid="113">Text in a text.</TextBlock>
+          <Button fed:Uid="114">Two</Button>
+          <Button fed:Uid="115">Three</Button>
+        </dtt:MyIList>
+      </dtt:TextTestControl.RWList>
+    </dtt:TextTestControl>
+    <!-- IList without explicit object tag -->
+    <dtt:TextTestControl fed:Uid="116">
+      <dtt:TextTestControl.RWList fed:Uid="117">
+        <Button fed:Uid="118">Four</Button>
+        <Button fed:Uid="119">Five</Button>
+      </dtt:TextTestControl.RWList>
+    </dtt:TextTestControl>
+    <Button>
+        <Button.Content>
+            <fed:Array fed:Type="{fed:Type syse:Object}" xmlns:syse="clr-namespace:System;assembly=Mscorlib">
+                     <TextBlock> Hello </TextBlock>
+                     <TextBlock> World </TextBlock>
+            </fed:Array>
+        </Button.Content>
+    </Button>
+  </StackPanel>
+    <FlowDocumentScrollViewer fed:Uid="120">
+        <FlowDocument>
+    <Paragraph>
+      <Border fed:Uid="123">
+        <Border.Resources fed:Uid="124">
+          
+         <ResourceDictionary>
+          <Style fed:Key="AnimatedButton" fed:Uid="126" TargetType="{fed:Type Button}">
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{fed:Type Button}">
+            <Decorator fed:Uid="129">
+              <Decorator.LayoutTransform fed:Uid="130">
+                <ScaleTransform CenterX="50" CenterY="50" fed:Uid="131" />
+              </Decorator.LayoutTransform>
+              <Rectangle Width="100" Height="100" Fill="blue" RadiusX="10" RadiusY="10" fed:Uid="138" />
+            </Decorator>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+          </Style>
+         </ResourceDictionary>
+        </Border.Resources>
+        <Button Style="{DynamicResource AnimatedButton}" Width="200" Height="300" fed:Uid="139" />
+      </Border>      
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+</DockPanel>
