@@ -1,0 +1,32 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <!--Automatically converted using custom WPF settings-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <SignAssemblyAttribute>true</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+    <AssemblyName>ElementLayoutCommon</AssemblyName>
+    <OutputType>Library</OutputType>
+    <OutputSubFolder>FeatureTests\ElementLayout</OutputSubFolder>
+    <ProjectGuid>{E95C9036-1D6E-4ac9-BB83-213929B06FA5}</ProjectGuid>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <Compile Include="ElementLayoutCommon.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>

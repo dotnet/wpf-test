@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtSelection</AssemblyName>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LinkSubsystem>console</LinkSubsystem>
+    <TestCode>true</TestCode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="NativeSupport\NativeMethods.cs" />
+    <Compile Include="NativeSupport\UnsafeNativeMethods.cs" />
+    <Compile Include="BugSuite.cs" />
+    <Compile Include="DrtSelection.cs" />
+    <Compile Include="DrtSelectionBase.cs" />
+    <Compile Include="DrtSelectionSuite.cs" />
+    <Compile Include="NoBleedSuite.cs" />
+    <Compile Include="TextDocumentViewSuite.cs" />
+    <Compile Include="TextParagraphViewSuite.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\Selection\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

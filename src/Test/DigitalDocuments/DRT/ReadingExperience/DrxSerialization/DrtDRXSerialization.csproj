@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtDRXSerialization</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DrtDRXSerialization.cs" />
+    <Compile Include="ISerializationTestCaseHost.cs" />
+    <Compile Include="SerializationTestCase.cs" />
+    <Compile Include="SerializationTestCaseGroup.cs" />
+    <Compile Include="SerializationTestCaseRunMode.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\DRXSerialization\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\Drt\TestServices\TestServices.csproj" />
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+</Project>

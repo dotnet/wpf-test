@@ -1,0 +1,20 @@
+<FlowDocument Name="FD" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Paragraph Name="P1">
+        First page with <Hyperlink Name="H1">hyperlink</Hyperlink> and <Button Name="B1">Button</Button>.
+    </Paragraph>
+    <Paragraph Name="P2" BreakPageBefore="True">
+        Second page with hyperlink and embedded viewer
+        <Hyperlink Name="H2">
+            <FlowDocumentReader Name="FDR" Width="200" Height="200" Background="RoyalBlue">
+                <FlowDocument Name="FD2">
+                    <Paragraph Name="FD2P1">
+                        Page with <Hyperlink Name="FD2H1">hyperlink</Hyperlink> and <Button Name="FD2B1">Button</Button>.
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentReader>
+        </Hyperlink>
+    </Paragraph>
+    <Paragraph Name="P3" BreakPageBefore="True">
+        Third page with <Hyperlink Name="H3">hyperlink</Hyperlink> and <Button Name="B3">Button</Button>.
+    </Paragraph>
+</FlowDocument>

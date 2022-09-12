@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtTextFind</AssemblyName>
+    <TestCode>true</TestCode>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LinkSubsystem>console</LinkSubsystem>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="DrtTextFind.cs" />
+    <Compile Include="DrtTextFindBase.cs" />
+    <Compile Include="DrtTextFindSuite.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="TextFindSuites.cs" />
+    <Compile Include="UnsafeNativeMethods.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\TextFind\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtFiles\Win8\*">
+      <Link>DrtFiles\TextFind\Win8\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+</Project>
