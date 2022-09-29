@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtCompressionXform</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DrtCompressionXform.cs" />
+    <Compile Include="FormatVersionPublicWrappers.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\StorageRootWrapper.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\compressionXform\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

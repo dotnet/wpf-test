@@ -1,0 +1,1741 @@
+﻿<FrameworkElement
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FrameworkElement.Resources>
+
+    <!-- Classic -->
+
+    <!--
+         ****************************************
+         * AccessKey Style                      *
+         ****************************************
+    -->
+
+    <Style x:Key="{x:Type AccessKey}" BasedOn="{x:Null}" TargetType="{x:Type AccessKey}">
+        <Style.Triggers>
+            <Trigger Property="KeyboardNavigation.ShowKeyboardCues" Value="true">
+                <Setter Property="TextDecorations" Value="Underline" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <!--
+         ****************************************
+         * Label Style                          *
+         ****************************************
+    -->
+
+        <Style x:Key="{x:Type Label}" BasedOn="{x:Null}" TargetType="{x:Type Label}">
+            <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+            <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+            <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+            <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="AlignmentX" Value="Left" />
+            <Setter Property="AlignmentY" Value="Top" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Label}">
+                <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                    <StackPanel Margin="{TemplateBinding Padding}" AlignmentX="{TemplateBinding AlignmentX}" AlignmentY="{TemplateBinding AlignmentY}">
+                        <ContentPresenter x:Name="ContentSite" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+    <Style x:Key="http://schemas.microsoft.com/2003/xaml/ContentControl/DropShadowEffect" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContentControl}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="4" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                <RowDefinition Height="4" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="4" />
+                </Grid.RowDefinitions>
+
+                <!-- TopRight -->
+                <Rectangle Grid.Row="1" Grid.Column="3">
+                    <Rectangle.Fill>
+                        <RadialGradientBrush Focus="0,1" Center="0,1" RadiusX=".9" RadiusY=".9">
+                            <RadialGradientBrush.GradientStops>
+                                <GradientStop Color="#99000000" Offset="0" />
+                                <GradientStop Color="Transparent" Offset="1" />
+                            </RadialGradientBrush.GradientStops>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <!-- BottomRight -->
+                <Rectangle Grid.Row="3" Grid.Column="3">
+                    <Rectangle.Fill>
+                        <RadialGradientBrush Focus="0,0" Center="0,0" RadiusX=".9" RadiusY=".9">
+                            <RadialGradientBrush.GradientStops>
+                                <GradientStop Color="#88000000" Offset="0" />
+                                <GradientStop Color="Transparent" Offset="1" />
+                            </RadialGradientBrush.GradientStops>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <!-- Right -->
+                <Rectangle Grid.Row="2" Grid.Column="3">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#99000000" Offset="0" />
+                                <GradientStop Color="Transparent" Offset="1" />
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <!-- BottomLeft -->
+                <Rectangle Grid.Row="3" Grid.Column="1">
+                    <Rectangle.Fill>
+                        <RadialGradientBrush Focus="1,0" Center="1,0" RadiusX=".9" RadiusY=".9">
+                            <RadialGradientBrush.GradientStops>
+                                <GradientStop Color="#99000000" Offset="0" />
+                                <GradientStop Color="Transparent" Offset="1" />
+                            </RadialGradientBrush.GradientStops>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <!-- Bottom -->
+                <Rectangle Grid.Row="3" Grid.Column="2">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#99000000" Offset="0" />
+                                <GradientStop Color="Transparent" Offset="1" />
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <!-- Background "Primer" -->
+                <Rectangle Grid.Row="2" Grid.Column="2" Fill="#99000000" />
+
+                <!-- Content -->
+                <ContentPresenter Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" />
+        </Grid>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="http://schemas.microsoft.com/2003/xaml/MenuItem/PopupBackground" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContentControl}">
+            <ContentControl Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ContentControl/DropShadowEffect}">
+                    <DockPanel Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+
+                            <!--right -->        <Rectangle DockPanel.Dock="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                            <!--bottom-->        <Rectangle DockPanel.Dock="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                            <!--left  -->        <Rectangle DockPanel.Dock="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                            <!--top   -->        <Rectangle DockPanel.Dock="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+                            <!--right -->        <Rectangle DockPanel.Dock="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                            <!--bottom-->        <Rectangle DockPanel.Dock="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                            <!--left  -->        <Rectangle DockPanel.Dock="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+                            <!--top   -->        <Rectangle DockPanel.Dock="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                            <!--right -->        <Rectangle DockPanel.Dock="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                            <!--bottom-->        <Rectangle DockPanel.Dock="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                            <!--left  -->        <Rectangle DockPanel.Dock="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                            <!--top   -->        <Rectangle DockPanel.Dock="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+                        <ContentPresenter />
+                    </DockPanel>
+            </ContentControl>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type Menu}" BasedOn="{x:Null}" TargetType="{x:Type Menu}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" />
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MenuFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+        <Setter Property="AlignmentY" Value="Center" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Menu}">
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <StackPanel Margin="{TemplateBinding Padding}" AlignmentY="{TemplateBinding AlignmentY}" AlignmentX="{TemplateBinding AlignmentX}" IsItemsHost="true" KeyboardNavigation.DirectionalNavigation="Cycle" />
+            </Border>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+         ****************************************
+         * ContextMenu Style                    *
+         ****************************************
+    -->
+
+    <Style x:Key="{x:Type ContextMenu}" BasedOn="{x:Null}" TargetType="{x:Type ContextMenu}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" />
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MenuFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+        <Setter Property="AlignmentY" Value="Center" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContextMenu}">
+            <Popup IsOpen="{Binding Path=IsOpen,RelativeSource={RelativeSource TemplatedParent}}" Placement="{TemplateBinding Placement}" PlacementTarget="{TemplateBinding PlacementTarget}" HorizontalOffset="{TemplateBinding HorizontalOffset}" VerticalOffset="{TemplateBinding VerticalOffset}">
+                    <ContentControl Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/PopupBackground}">
+                        <Border> <!-- Need this b/c I want margin on the GP -->
+                            <StackPanel Margin="1" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" KeyboardNavigation.TabNavigation="None" KeyboardNavigation.ControlTabNavigation="None" />
+                        </Border>
+                    </ContentControl>
+             </Popup>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--   PART: TopLevelItem   -->
+    <Style x:Key="http://schemas.microsoft.com/2003/xaml/MenuItem/TopLevelItem" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContentControl}">
+            <Border Background="{TemplateBinding Background}">
+                    <DockPanel Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+
+                            <!--right -->
+                            <Rectangle DockPanel.Dock="Right" x:Name="RightLine" Width="1" Visibility="Hidden" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                            <!--bottom-->
+                            <Rectangle DockPanel.Dock="Bottom" x:Name="BottomLine" Height="1" Visibility="Hidden" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                            <!--left  -->
+                            <Rectangle DockPanel.Dock="Left" x:Name="LeftLine" Width="1" Visibility="Hidden" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+                            <!--top   -->
+                            <Rectangle DockPanel.Dock="Top" x:Name="TopLine" Height="1" Visibility="Hidden" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                    <ContentPresenter Margin="5,2,5,2" />
+                </DockPanel>
+            </Border>
+
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="Selector.IsSelected" Value="True">
+        <Setter TargetName="RightLine" Property="Visibility" Value="Visible" />
+        <Setter TargetName="BottomLine" Property="Visibility" Value="Visible" />
+        <Setter TargetName="LeftLine" Property="Visibility" Value="Visible" />
+        <Setter TargetName="TopLine" Property="Visibility" Value="Visible" />
+        </Trigger>
+        <Trigger Property="MenuItem.IsSubmenuOpen" Value="True">
+        <Setter TargetName="RightLine" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+        <Setter TargetName="BottomLine" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+        <Setter TargetName="LeftLine" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter TargetName="TopLine" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <!--   PART: TopLevelHeader   -->
+    <Style x:Key="http://schemas.microsoft.com/2003/xaml/MenuItem/TopLevelHeader" BasedOn="{StaticResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/TopLevelItem}" TargetType="{x:Type ContentControl}">
+        <!-- <ContentControl FontWeight="Bold" /> -->
+    </Style>
+
+
+    <!--   PART: SubmenuItem   -->
+    <Style x:Key="http://schemas.microsoft.com/2003/xaml/MenuItem/SubmenuItem" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Selector.IsSelectable" Value="False" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContentControl}">
+            <Border Background="{TemplateBinding Background}">
+                <DockPanel Margin="0,2,0,2">
+                    <StackPanel x:Name="Checkmark" DockPanel.Dock="Left" Visibility="Hidden" AlignmentY="Center" FlowDirection="LeftToRight">
+                        <Path Margin="4,0,6,0" Fill="{TemplateBinding Foreground}" Data="M 0 2.0 L 0 4.8 L 2.5 7.4 L 7.1 2.8 L 7.1 0 L 2.5 4.6 Z" />
+                    </StackPanel>
+                    <StackPanel x:Name="SubmenuIndicator" DockPanel.Dock="Right" Visibility="Hidden" AlignmentY="Center">
+                        <Path Margin="4,0,6,0" Fill="{TemplateBinding Foreground}" Data="M 0 0 L 0 8 L 4 4 Z" />
+                    </StackPanel>
+                    <StackPanel Margin="{TemplateBinding Padding}">
+                        <ContentPresenter />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="MenuItem.IsChecked" Value="True">
+        <Setter TargetName="Checkmark" Property="Visibility" Value="Visible" />
+        </Trigger>
+        <Trigger Property="Selector.IsSelectable" Value="True">
+        <Setter TargetName="SubmenuIndicator" Property="Visibility" Value="Visible" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="Selector.IsSelected" Value="True">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+        </Trigger>
+        <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <!--   PART: SubmenuHeader   -->
+    <Style x:Key="http://schemas.microsoft.com/2003/xaml/MenuItem/SubmenuHeader" BasedOn="{StaticResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/SubmenuItem}" TargetType="{x:Type ContentControl}">
+        <Setter Property="Selector.IsSelectable" Value="True" />
+    </Style>
+
+
+    <!--   PART: Separator   -->
+    <Style x:Key="http://schemas.microsoft.com/2003/xaml/MenuItem/Separator" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContentControl}">
+            <Border>
+                <!-- BUG: Margin is never taken into account properly.  Need a buffer to put margin on. -->
+                <Border Margin="1,2,1,3">
+                    <Canvas Height="2">
+                        <Rectangle Height="2" Canvas.Bottom="0" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+                        <Rectangle Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                    </Canvas>
+                </Border>
+            </Border>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="{x:Type MenuItem}" BasedOn="{x:Null}" TargetType="{x:Type MenuItem}">
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MenuFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+        <Setter Property="AlignmentX" Value="Left" />
+        <Setter Property="AlignmentY" Value="Center" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type MenuItem}">
+            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                <Canvas Background="Transparent">
+                    <ContentControl x:Name="HeaderSite" Selector.IsSelected="{Binding Path=IsHighlighted,RelativeSource={RelativeSource TemplatedParent}}" MenuItem.IsChecked="{Binding Path=IsChecked,RelativeSource={RelativeSource TemplatedParent}}" MenuItem.IsSubmenuOpen="{Binding Path=IsSubmenuOpen,RelativeSource={RelativeSource TemplatedParent}}" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" />
+
+                    <Popup x:Name="SubMenuPopup" Placement="Right" IsOpen="{Binding Path=IsSubmenuOpen,RelativeSource={RelativeSource TemplatedParent}}" Focusable="False">
+                        <ContentControl Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/PopupBackground}">
+                            <Border> <!-- Need this b/c I want margin on the GP -->
+                                <StackPanel Margin="{TemplateBinding Padding}" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" KeyboardNavigation.TabNavigation="None" KeyboardNavigation.ControlTabNavigation="None" />
+                            </Border>
+                        </ContentControl>
+                    </Popup>
+                </Canvas>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="Role" Value="TopLevelHeader">
+        <Setter TargetName="HeaderSite" Property="Style" Value="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/TopLevelHeader}" />
+        <Setter TargetName="SubMenuPopup" Property="Placement" Value="Bottom" />
+        </Trigger>
+        <Trigger Property="Role" Value="TopLevelItem">
+        <Setter TargetName="HeaderSite" Property="Style" Value="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/TopLevelItem}" />
+        </Trigger>
+        <Trigger Property="Role" Value="SubmenuHeader">
+        <Setter TargetName="HeaderSite" Property="Style" Value="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/SubmenuHeader}" />
+        <Setter TargetName="SubMenuPopup" Property="VerticalOffset" Value="-3" />
+        <Setter TargetName="SubMenuPopup" Property="HorizontalOffset" Value="-3" />
+        </Trigger>
+        <Trigger Property="Role" Value="SubmenuItem">
+        <Setter TargetName="HeaderSite" Property="Style" Value="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/SubmenuItem}" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- ********************* COMBOBOX ************************ -->
+
+    <Style x:Key="http://schemas.microsoft.com/2003/xaml/ComboBox/TransparentButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+            <DockPanel Background="Transparent">
+                    <DockPanel DockPanel.Dock="Right" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+
+                            <!--right -->        <Rectangle DockPanel.Dock="Right" x:Name="R1" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                            <!--bottom-->        <Rectangle DockPanel.Dock="Bottom" x:Name="B1" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                            <!--left  -->        <Rectangle DockPanel.Dock="Left" x:Name="L1" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                            <!--top   -->        <Rectangle DockPanel.Dock="Top" x:Name="T1" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+                            <!--right -->        <Rectangle DockPanel.Dock="Right" x:Name="R2" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                            <!--bottom-->        <Rectangle DockPanel.Dock="Bottom" x:Name="B2" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                            <!--left  -->        <Rectangle DockPanel.Dock="Left" x:Name="L2" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+                            <!--top   -->        <Rectangle DockPanel.Dock="Top" x:Name="T2" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                            <StackPanel x:Name="Arrow" Margin="1,1,1,1" AlignmentY="Center" AlignmentX="Center">
+                        <Path Fill="{TemplateBinding Foreground}" Data="M 0 0 L 3.5 4 L 7 0 Z" />
+                            </StackPanel>
+                    </DockPanel>
+            </DockPanel>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsPressed" Value="true">
+        <Setter TargetName="R1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter TargetName="B1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter TargetName="L1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter TargetName="T1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter TargetName="R2" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter TargetName="B2" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter TargetName="L2" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter TargetName="T2" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter TargetName="Arrow" Property="Margin" Value="2,2,0,0" />
+        </Trigger>
+        <!-- Foreground will inherit from combobox, so shouldn't need to do anything here
+            <Trigger Property="IsEnabled" Value="false">
+            </Trigger>
+            -->
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type ComboBox}" BasedOn="{x:Null}" TargetType="{x:Type ComboBox}">
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="1,1,1,1" />
+        <Setter Property="MinWidth" Value="100" />
+        <Setter Property="MinHeight" Value="10" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ComboBox}">
+            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                <Canvas>
+                    <DockPanel>
+                            <!-- Right --> <Rectangle DockPanel.Dock="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                            <!-- Bottom --><Rectangle DockPanel.Dock="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                            <!-- Left -->  <Rectangle DockPanel.Dock="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                            <!-- Top -->   <Rectangle DockPanel.Dock="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                            <!-- Right --> <Rectangle DockPanel.Dock="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+                            <!-- Bottom --><Rectangle DockPanel.Dock="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+                            <!-- Left -->  <Rectangle DockPanel.Dock="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+                            <!-- Top -->   <Rectangle DockPanel.Dock="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                    </DockPanel>
+
+                    <Border>
+                        <DockPanel Margin="2">
+                            <!-- saves space for the button which will be drawn on top -->
+                            <FrameworkElement DockPanel.Dock="Right" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+                            <Border>
+                                <Border x:Name="SelectedItemBorder" Margin="{TemplateBinding Padding}">
+                                    <StackPanel AlignmentY="Center" ClipToBounds="{TemplateBinding ClipToBounds}">
+                                        <ContentPresenter x:Name="ContentSite" Focusable="true" Margin="2,2,2,2" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+
+                    <Border>
+                    <Button Margin="2" MinWidth="0" MinHeight="0" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ComboBox/TransparentButtonStyle}" Command="ComboBox.ToggleDropDown" />
+                    </Border>
+
+                    <Popup Placement="Bottom" StaysOpen="false" IsOpen="{Binding Path=IsDropDownOpen,RelativeSource={RelativeSource TemplatedParent}}" Focusable="False">
+
+                        <ContentControl Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ContentControl/DropShadowEffect}">
+                            <Border MaxHeight="{TemplateBinding MaxDropDownHeight}" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="Black" ClipToBounds="True" MinWidth="{TemplateBinding Width}">
+                                <StackPanel IsItemsHost="True" />
+                            </Border>
+                        </ContentControl>
+
+                    </Popup>
+                </Canvas>
+            </Border>
+
+        <ControlTemplate.Triggers>
+
+        <MultiTrigger>
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsFocusWithin" Value="true" />
+                    <Condition Property="IsDropDownOpen" Value="false" />
+                </MultiTrigger.Conditions>
+        <Setter TargetName="SelectedItemBorder" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+        </MultiTrigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        </Trigger>
+        <MultiTrigger>
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsFocusWithin" Value="true" />
+                    <Condition Property="IsDropDownOpen" Value="false" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+        </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="{x:Type ComboBoxItem}" BasedOn="{x:Null}" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="DockPanel.Dock" Value="Top" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="AlignmentY" Value="Center" />
+        <Setter Property="AlignmentX" Value="Left" />
+        <Setter Property="Padding" Value="3,0,3,0" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <StackPanel Margin="{TemplateBinding Padding}" AlignmentY="{TemplateBinding AlignmentY}" AlignmentX="{TemplateBinding AlignmentX}">
+                    <ContentPresenter x:Name="ContentSite" />
+                </StackPanel>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <!--
+            <Trigger Property="IsSelected" Value="true">
+                <Set PropertyPath="Background" Value="{*SystemColors.HighlightBrushKey}" />
+                <Set PropertyPath="Foreground" Value="{*SystemColors.HighlightTextBrushKey}" />
+            </Trigger>
+            -->
+        <Trigger Property="IsEnabled" Value="false">
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="true">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+        </Trigger>
+        <!--
+            <Trigger Property="IsSelected" Value="true">
+                <Set PropertyPath="Background" Value="{*SystemColors.HighlightBrushKey}" />
+                <Set PropertyPath="Foreground" Value="{*SystemColors.HighlightTextBrushKey}" />
+            </Trigger>
+            -->
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+        <Style x:Key="{x:Type ToolTip}" BasedOn="{x:Null}" TargetType="{x:Type ToolTip}">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" />
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" />
+            <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+            <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+            <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+            <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+            <Setter Property="AlignmentX" Value="Center" />
+            <Setter Property="AlignmentY" Value="Center" />
+            <Setter Property="Padding" Value="1,2,1,2" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type ToolTip}">
+                <Popup PlacementTarget="{TemplateBinding PlacementTarget}" Placement="{TemplateBinding Placement}" HorizontalOffset="{TemplateBinding HorizontalOffset}" VerticalOffset="{TemplateBinding VerticalOffset}" IsOpen="{TemplateBinding IsOpen}">
+
+
+                    <ContentControl Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ContentControl/DropShadowEffect}">
+
+                                <!-- The content -->
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ClipToBounds="{TemplateBinding ClipToBounds}">
+                                <StackPanel Margin="{TemplateBinding Padding}" AlignmentX="{TemplateBinding AlignmentX}" AlignmentY="{TemplateBinding AlignmentY}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                                    <ContentPresenter x:Name="ContentSite" />
+                                </StackPanel>
+
+                        </Border>
+
+                    </ContentControl>
+
+                </Popup>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    <!-- ********************* TabControl ************************ -->
+
+    <Style x:Key="{x:Type TabControl}" BasedOn="{x:Null}" TargetType="{x:Type TabControl}">
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="1,1,1,1" />
+        <Setter Property="MinWidth" Value="10" />
+        <Setter Property="MinHeight" Value="10" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TabControl}">
+            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                <Grid KeyboardNavigation.TabNavigation="Local">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="ColumnDefinition0" />
+                    <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                    <RowDefinition x:Name="RowDefinition0" Height="Auto" />
+                    <RowDefinition x:Name="RowDefinition1" Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel x:Name="ContentPanel" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.DirectionalNavigation="Contained" Control.TabIndex="2" Dock="Fill" Grid.Column="0" Grid.Row="1">
+                        <!-- Right --> <Rectangle DockPanel.Dock="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+                        <!-- Bottom --><Rectangle DockPanel.Dock="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+                        <!-- Left -->  <Rectangle DockPanel.Dock="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+
+                        <!-- Top -->   <Rectangle DockPanel.Dock="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+
+                        <!-- Right --> <Rectangle DockPanel.Dock="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                        <!-- Bottom --><Rectangle DockPanel.Dock="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                        <Border ClipToBounds="True" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                            <ContentPresenter x:Name="ContentSite" Margin="2,2,2,2" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+                        </Border>
+                    </DockPanel>
+
+                    <TabPanel x:Name="HeaderPanel" TabControl.TabStripPlacement="{TemplateBinding TabStripPlacement}" Control.TabIndex="1" Grid.Column="0" Grid.Row="0" Grid.Top="2" Grid.Left="2" Grid.Right="2" IsItemsHost="True" DockPanel.Dock="Top" />
+
+                </Grid>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="TabControl.TabStripPlacement" Value="Bottom">
+        <Setter Property="Grid.Row" Value="1" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Row" Value="0" TargetName="ContentPanel" />
+        <Setter Property="Height" Value="*" TargetName="RowDefinition0" />
+        <Setter Property="Height" Value="Auto" TargetName="RowDefinition1" />
+        <Setter Property="Grid.Top" Value="0" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Bottom" Value="2" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Left" Value="2" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Right" Value="2" TargetName="HeaderPanel" />
+        </Trigger>
+        <Trigger Property="TabControl.TabStripPlacement" Value="Left">
+        <Setter Property="Grid.Row" Value="0" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Row" Value="0" TargetName="ContentPanel" />
+        <Setter Property="Grid.Column" Value="0" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Column" Value="1" TargetName="ContentPanel" />
+        <Setter Property="Width" Value="Auto" TargetName="ColumnDefinition0" />
+        <Setter Property="Width" Value="*" TargetName="ColumnDefinition1" />
+        <Setter Property="Height" Value="0" TargetName="RowDefinition1" />
+        <Setter Property="Grid.Top" Value="2" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Bottom" Value="2" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Left" Value="2" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Right" Value="0" TargetName="HeaderPanel" />
+        </Trigger>
+        <Trigger Property="TabControl.TabStripPlacement" Value="Right">
+        <Setter Property="Grid.Row" Value="0" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Row" Value="0" TargetName="ContentPanel" />
+        <Setter Property="Grid.Column" Value="1" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Column" Value="0" TargetName="ContentPanel" />
+        <Setter Property="Width" Value="*" TargetName="ColumnDefinition0" />
+        <Setter Property="Width" Value="Auto" TargetName="ColumnDefinition1" />
+        <Setter Property="Height" Value="0" TargetName="RowDefinition1" />
+        <Setter Property="Grid.Top" Value="2" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Bottom" Value="2" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Left" Value="0" TargetName="HeaderPanel" />
+        <Setter Property="Grid.Right" Value="2" TargetName="HeaderPanel" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- ********************* TabItem ************************ -->
+
+    <Style x:Key="{x:Type TabItem}" BasedOn="{x:Null}" TargetType="{x:Type TabItem}">
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Padding" Value="12,2,12,2" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TabItem}">
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ClipToBounds="True">
+                <DockPanel x:Name="MainTabPanel" Canvas.Bottom="0">
+                            <!-- Top -->   <Rectangle DockPanel.Dock="Top" Height="1" Margin="2,0,2,0" x:Name="TopBorder1" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+
+                            <!-- Top -->
+                                <DockPanel DockPanel.Dock="Top" Height="1" x:Name="TopBorder2">
+                                    <Rectangle DockPanel.Dock="Left" Width="1" Margin="1,0,0,0" x:Name="UpperBorderLeft" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                                    <Rectangle DockPanel.Dock="Right" Width="1" Margin="0,0,1,0" x:Name="UpperBorderRight" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                                    <Rectangle x:Name="UpperBorder" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                </DockPanel>
+
+                            <!-- Left -->  <Rectangle DockPanel.Dock="Left" Width="1" x:Name="LeftBorder" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+
+                            <!-- Right --> <Rectangle DockPanel.Dock="Right" Width="1" x:Name="RightBorder1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+                            <!-- Right --> <Rectangle DockPanel.Dock="Right" Width="1" x:Name="RightBorder2" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+
+                            <!-- Bottom -->   <Rectangle DockPanel.Dock="Bottom" Height="1" Margin="1,0,0,0" x:Name="BottomBorder" Fill="{TemplateBinding Background}" />
+
+                            <Border x:Name="InternalBorder" ClipToBounds="True" Background="{TemplateBinding Background}">
+                                <StackPanel Margin="{TemplateBinding Padding}" AlignmentY="Center" AlignmentX="Center">
+                                    <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
+                                </StackPanel>
+                            </Border>
+                </DockPanel>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="TabControl.TabStripPlacement" Value="Bottom">
+        <Setter Property="DockPanel.Dock" Value="Bottom" TargetName="TopBorder1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" TargetName="TopBorder1" />
+        <Setter Property="DockPanel.Dock" Value="Bottom" TargetName="TopBorder2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="UpperBorder" />
+        </Trigger>
+        <Trigger Property="TabControl.TabStripPlacement" Value="Left">
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="BottomBorder" />
+        </Trigger>
+        <Trigger Property="TabControl.TabStripPlacement" Value="Right">
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="BottomBorder" />
+        </Trigger>
+        <MultiTrigger>
+        <!-- Selected and Top -->
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true" />
+                    <Condition Property="TabControl.TabStripPlacement" Value="Top" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Margin" Value="0,0,0,1" TargetName="LeftBorder" />
+        <Setter Property="Margin" Value="0,0,0,1" TargetName="RightBorder1" />
+        <Setter Property="Margin" Value="0,0,0,1" TargetName="RightBorder2" />
+        </MultiTrigger>
+        <MultiTrigger>
+        <!-- Selected and Bottom -->
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true" />
+                    <Condition Property="TabControl.TabStripPlacement" Value="Bottom" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Margin" Value="0,1,0,0" TargetName="LeftBorder" />
+        <Setter Property="Margin" Value="0,1,0,0" TargetName="RightBorder1" />
+        <Setter Property="Margin" Value="0,1,0,0" TargetName="RightBorder2" />
+        </MultiTrigger>
+        <MultiTrigger>
+        <!-- Selected and Left -->
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true" />
+                    <Condition Property="TabControl.TabStripPlacement" Value="Left" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Visibility" Value="Collapsed" TargetName="RightBorder1" />
+        <Setter Property="Visibility" Value="Collapsed" TargetName="RightBorder2" />
+        <Setter Property="Visibility" Value="Collapsed" TargetName="UpperBorderRight" />
+        <Setter Property="Margin" Value="2,0,1,0" TargetName="BottomBorder" />
+        </MultiTrigger>
+        <MultiTrigger>
+        <!-- Selected and Right -->
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true" />
+                    <Condition Property="TabControl.TabStripPlacement" Value="Right" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Visibility" Value="Collapsed" TargetName="LeftBorder" />
+        <Setter Property="Visibility" Value="Collapsed" TargetName="UpperBorderLeft" />
+        </MultiTrigger>
+        <Trigger Property="IsFocused" Value="true">
+        <Setter Property="Fill" Value="Orange" TargetName="UpperBorder" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <MultiTrigger>
+        <!-- Selected and Top -->
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true" />
+                    <Condition Property="TabControl.TabStripPlacement" Value="Top" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Margin" Value="0,0,0,-2" />
+        </MultiTrigger>
+        <MultiTrigger>
+        <!-- Selected and Bottom -->
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true" />
+                    <Condition Property="TabControl.TabStripPlacement" Value="Bottom" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Margin" Value="0,-3,0,0" />
+        </MultiTrigger>
+        <MultiTrigger>
+        <!-- Selected and Left -->
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true" />
+                    <Condition Property="TabControl.TabStripPlacement" Value="Left" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Padding" Value="12,2,14,2" />
+        <Setter Property="Margin" Value="0,0,-2,0" />
+        </MultiTrigger>
+        <MultiTrigger>
+        <!-- Selected and Right -->
+        <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true" />
+                    <Condition Property="TabControl.TabStripPlacement" Value="Right" />
+                </MultiTrigger.Conditions>
+        <Setter Property="Padding" Value="13,2,12,2" />
+        <Setter Property="Margin" Value="-3,0,0,0" />
+        </MultiTrigger>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <!--
+        *****************************************
+        * Thumb Style
+        *****************************************
+    -->
+
+    <Style x:Key="{x:Type Thumb}" BasedOn="{x:Null}" TargetType="{x:Type Thumb}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MinWidth" Value="10" />
+        <Setter Property="MinHeight" Value="10" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Thumb}">
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <Canvas Width="Auto" Height="Auto">
+                    <!-- Draw Edge -->
+                    <Border BorderThickness="0,0,1,1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+                    <Border BorderThickness="1,1,1,1" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                    <Border BorderThickness="1,1,2,2" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                    <Border BorderThickness="2,2,2,2" BorderBrush="Transparent" Background="{TemplateBinding Background}" />
+                </Canvas>
+            </Border>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <!--
+        *****************************************
+        * Button Style
+        *****************************************
+    -->
+
+    <Style x:Key="{x:Type Button}" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="AlignmentY" Value="Center" />
+        <Setter Property="AlignmentX" Value="Center" />
+        <Setter Property="MinWidth" Value="75" />
+        <Setter Property="MinHeight" Value="23" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <Canvas Width="Auto" Height="Auto">
+                    <!-- Draw Edge -->
+                    <Border BorderThickness="0,0,1,1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+                    <Border BorderThickness="0,0,1,1" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                    <Border BorderThickness="1,1,1,1" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                    <Border x:Name="ContentBorder" BorderThickness="1,1,2,2" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                        <StackPanel Margin="{TemplateBinding Padding}" AlignmentY="{TemplateBinding AlignmentY}" AlignmentX="{TemplateBinding AlignmentX}">
+                            <ContentPresenter x:Name="ContentSite" Margin="1,1,2,2" />
+                        </StackPanel>
+                    </Border>
+                </Canvas>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsFocused" Value="true">
+        <Setter Property="Margin" Value="0,0,1,1" TargetName="ContentSite" />
+        </Trigger>
+        <Trigger Property="IsDefaulted" Value="true">
+        <Setter Property="Margin" Value="0,0,1,1" TargetName="ContentSite" />
+        </Trigger>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter Property="BorderThickness" Value="1,1,1,1" TargetName="ContentBorder" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" TargetName="ContentBorder" />
+        <Setter Property="Margin" Value="1,1,1,1" TargetName="ContentSite" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsFocused" Value="true">
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="1,1,1,1" />
+        </Trigger>
+        <Trigger Property="IsDefaulted" Value="true">
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="1,1,1,1" />
+        </Trigger>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <!--
+        *****************************************
+        * RepeatButton Style
+        *****************************************
+    -->
+
+    <Style x:Key="{x:Type RepeatButton}" BasedOn="{x:Null}" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="AlignmentY" Value="Center" />
+        <Setter Property="AlignmentX" Value="Center" />
+        <Setter Property="MinWidth" Value="75" />
+        <Setter Property="MinHeight" Value="23" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RepeatButton}">
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <Canvas Width="Auto" Height="Auto">
+                    <!-- Draw Edge -->
+                    <Border BorderThickness="0,0,1,1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+                    <Border BorderThickness="0,0,1,1" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                    <Border BorderThickness="1,1,1,1" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                    <Border x:Name="ContentBorder" BorderThickness="1,1,2,2" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                        <StackPanel Margin="{TemplateBinding Padding}" AlignmentY="{TemplateBinding AlignmentY}" AlignmentX="{TemplateBinding AlignmentX}">
+                            <ContentPresenter x:Name="ContentSite" Margin="1,1,2,2" />
+                        </StackPanel>
+                    </Border>
+                </Canvas>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsFocused" Value="true">
+        <Setter Property="Margin" Value="0,0,1,1" TargetName="ContentSite" />
+        </Trigger>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter Property="BorderThickness" Value="1,1,1,1" TargetName="ContentBorder" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" TargetName="ContentBorder" />
+        <Setter Property="Margin" Value="1,1,1,1" TargetName="ContentSite" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsFocused" Value="true">
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="1,1,1,1" />
+        </Trigger>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--
+        ********************************************
+        *                                          *
+        * HorizontalSlider & VerticalSlider Styles *
+        *                                          *
+        ********************************************
+    -->
+        <!--
+            *****************************************
+            * HorizontalSlider DecreaseButton Style *
+            *****************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/HorizontalSlider/DecreaseButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Command" Value="Slider.DecreaseLarge" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="DockPanel.Dock" Value="Left" />
+            <Style.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+            <Setter Property="Background" Value="Transparent" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--
+            *****************************************
+            * HorizontalSlider IncreaseButton Style *
+            *****************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/HorizontalSlider/IncreaseButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Command" Value="Slider.IncreaseLarge" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="DockPanel.Dock" Value="Right" />
+            <Style.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+            <Setter Property="Background" Value="Transparent" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--
+            ********************************
+            * HorizonatlSlider Thumb Style *
+            ********************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/HorizontalSlider/ThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="BorderThickness" Value="0,0,0,0" />
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Thumb}">
+            <Border Background="Transparent" BorderThickness="{TemplateBinding BorderThickness}">
+                <Canvas>
+                    <Path Fill="{TemplateBinding Background}" Stroke="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" StrokeThickness="1.0" Data="M 10.5 2 L 0.5 2 L 0.5 19 L 4.5 23 L 5.5 23 L 10.5 18 z" />
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" StrokeThickness="1.0" Data="M 0.5 19 L 0.5 19.5 L 4.5 23.5 L 5 23.5" />
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" StrokeThickness="1.0" Data="M 5 23.5 L 5.5 23.5 L 10.5 18.5 L 10.5 1.5" />
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" StrokeThickness="1.0" Data="M 0.5 17.5 L 0.5 18.5 L 4.5 22.5 L 5 22.5" />
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" StrokeThickness="1.0" Data="M 5 22.5 L 5.5 22.5 L 9.5 18.5 L 9.5 2.5" />
+                </Canvas>
+            </Border>
+
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <!--
+            **************************
+            * HorizontalSlider Style *
+            **************************
+        -->
+        <Style x:Key="{x:Type HorizontalSlider}" BasedOn="{x:Null}" TargetType="{x:Type HorizontalSlider}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="TrackLength" Value="100%" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="Width" Value="104" />
+            <Setter Property="ThumbLength" Value="11" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type HorizontalSlider}">
+                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Canvas>
+
+                        <!-- Draw Track -->
+                        <Canvas Width="{TemplateBinding TrackLength}" Height="4">
+                            <Border Height="4" BorderThickness="0,0,0,0" Canvas.Top="-2" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                            <Border Height="4" BorderThickness="0,0,1,1" Canvas.Top="-2" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                            <Border Height="4" BorderThickness="1,1,1,1" Canvas.Top="-2" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+                            <Border Height="1" BorderThickness="1,0,2,0" Canvas.Top="-1" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                        </Canvas>
+
+                        <DockPanel Width="{TemplateBinding TrackLength}">
+                            <RepeatButton x:Name="HorizontalSliderDecreaseButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/HorizontalSlider/DecreaseButtonStyle}" Width="{TemplateBinding DecreaseButtonLength}" />
+                            <RepeatButton x:Name="HorizontalSliderIncreaseButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/HorizontalSlider/IncreaseButtonStyle}" Width="{TemplateBinding IncreaseButtonLength}" />
+                            <Thumb x:Name="HorizontalSliderThumb" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/HorizontalSlider/ThumbStyle}" Width="{TemplateBinding ThumbLength}" />
+                        </DockPanel>
+                    </Canvas>
+                </Border>
+            <ControlTemplate.Triggers>
+
+            <Trigger Property="IsOrientationInverted" Value="true">
+            <Setter TargetName="HorizontalSliderDecreaseButton" Property="DockPanel.Dock" Value="Right" />
+            <Setter TargetName="HorizontalSliderIncreaseButton" Property="DockPanel.Dock" Value="Left" />
+            </Trigger>
+            </ControlTemplate.Triggers>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <!--
+            ***************************************
+            * VerticalSlider DecreaseButton Style *
+            ***************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/VerticalSlider/DecreaseButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Command" Value="Slider.DecreaseLarge" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="DockPanel.Dock" Value="Bottom" />
+            <Style.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+            <Setter Property="Background" Value="Transparent" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--
+            *****************************************
+            * VerticalSlider IncreaseButton Style *
+            *****************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/VerticalSlider/IncreaseButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Command" Value="Slider.IncreaseLarge" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="DockPanel.Dock" Value="Top" />
+            <Style.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+            <Setter Property="Background" Value="Transparent" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--
+            *****************************************
+            * VerticalSlider Thumb Style *
+            *****************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/VerticalSlider/ThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="BorderThickness" Value="0,0,0,0" />
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Thumb}">
+            <Border Background="Transparent" BorderThickness="{TemplateBinding BorderThickness}">
+                <Canvas>
+                    <Path Fill="{TemplateBinding Background}" Stroke="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" StrokeThickness="1.0" Data="M 2 10.5 L 2 0.5 L 19.5 0.5 L 23.5 4.5 L 23.5 5.5 L 18.5 10.5 Z" />
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" StrokeThickness="1.0" Data="M 19 0.5 L 19.5 0.5 L 23.5 4.5 L 23.5 5" />
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" StrokeThickness="1.0" Data="M 23.5 5 L 23.5 5.5 L 18.5 10.5 L 1.5 10.5" />
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" StrokeThickness="1.0" Data="M 17.5 0.5 L 18.5 0.5 L 22.5 4.5 L 22.5 5" />
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" StrokeThickness="1.0" Data="M 22.5 5 L 22.5 5.5 L 18.5 9.5 L 2.5 9.5" />
+                </Canvas>
+            </Border>
+
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    <!--
+        ************************
+        * VerticalSlider Style *
+        ************************
+    -->
+    <Style x:Key="{x:Type VerticalSlider}" BasedOn="{x:Null}" TargetType="{x:Type VerticalSlider}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="104" />
+        <Setter Property="TrackLength" Value="100%" />
+        <Setter Property="ThumbLength" Value="11" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type VerticalSlider}">
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <Canvas>
+
+                    <!-- Draw Track -->
+                    <Canvas Height="{TemplateBinding TrackLength}" Width="4">
+                        <Border Width="4" BorderThickness="0,0,0,0" Canvas.Left="-2" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                        <Border Width="4" BorderThickness="0,0,1,1" Canvas.Left="-2" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                        <Border Width="4" BorderThickness="1,1,1,1" Canvas.Left="-2" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+                        <Border Width="1" BorderThickness="0,1,0,2" Canvas.Left="-1" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                    </Canvas>
+
+                    <DockPanel Height="{TemplateBinding TrackLength}">
+                        <RepeatButton x:Name="VerticalSliderDecreaseButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/VerticalSlider/DecreaseButtonStyle}" Height="{TemplateBinding DecreaseButtonLength}" />
+                        <RepeatButton x:Name="VerticalSliderIncreaseButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/VerticalSlider/IncreaseButtonStyle}" Height="{TemplateBinding IncreaseButtonLength}" />
+                        <Thumb x:Name="VerticalSliderThumb" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/VerticalSlider/ThumbStyle}" Height="{TemplateBinding ThumbLength}" />
+                    </DockPanel>
+                </Canvas>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsOrientationInverted" Value="true">
+        <Setter TargetName="VerticalSliderDecreaseButton" Property="DockPanel.Dock" Value="Bottom" />
+        <Setter TargetName="VerticalSliderIncreaseButton" Property="DockPanel.Dock" Value="Top" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+        **************************************************
+        *                                                *
+        * HorizontalScrollBar & VerticalScrollBar Styles *
+        *                                                *
+        **************************************************
+    -->
+
+        <!--
+            **************************************************************
+            * Base style for HorizontalScrollBar LineLeft/Right buttons  *
+            * and VerticalScrollBar LineUp/Down button                   *
+            **************************************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/ScrollBar/LineButtonStyle" BasedOn="{x:Null}" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="FontFamily" Value="WebDings" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="AlignmentY" Value="Center" />
+            <Setter Property="AlignmentX" Value="Center" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type RepeatButton}">
+                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Canvas Width="Auto" Height="Auto">
+                        <!-- Draw Edge -->
+                        <Border BorderThickness="0,0,1,1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+                        <Border BorderThickness="1,1,1,1" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+
+                        <Border BorderThickness="1,1,2,2" BorderBrush="Transparent" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+
+                        <Border x:Name="ContentBorder" BorderThickness="2,2,2,2" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                            <StackPanel Margin="{TemplateBinding Padding}" AlignmentY="{TemplateBinding AlignmentY}" AlignmentX="{TemplateBinding AlignmentX}">
+                                <ContentPresenter x:Name="ContentSite" Margin="0,0,0,0" />
+                            </StackPanel>
+                        </Border>
+                    </Canvas>
+                </Border>
+            <ControlTemplate.Triggers>
+
+            <Trigger Property="IsPressed" Value="true">
+            <Setter Property="BorderThickness" Value="1,1,1,1" TargetName="ContentBorder" />
+            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" TargetName="ContentBorder" />
+            <Setter Property="Margin" Value="1,1,0,0" TargetName="ContentSite" />
+            </Trigger>
+            </ControlTemplate.Triggers>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <!--
+            ********************************************
+            * HorizontalScrollBar LineLeftButton Style *
+            ********************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/HorizontalScrollBar/LineLeftButtonStyle" BasedOn="{StaticResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ScrollBar/LineButtonStyle}" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
+            <Setter Property="Command" Value="Slider.DecreaseSmall" />
+            <Setter Property="DockPanel.Dock" Value="Left" />
+            <Setter Property="Content" Value="3" />
+        </Style>
+
+        <!--
+            *********************************************
+            * HorizontalScrollBar LineRightButton Style *
+            *********************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/HorizontalScrollBar/LineRightButtonStyle" BasedOn="{StaticResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ScrollBar/LineButtonStyle}" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
+            <Setter Property="Command" Value="Slider.IncreaseSmall" />
+            <Setter Property="DockPanel.Dock" Value="Right" />
+            <Setter Property="Content" Value="4" />
+        </Style>
+
+        <!--
+            ****************************************
+            * VerticalScrollBar LineUpButton Style *
+            ****************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/VerticalScrollBar/LineUpButtonStyle" BasedOn="{StaticResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ScrollBar/LineButtonStyle}" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
+            <Setter Property="Command" Value="Slider.DecreaseSmall" />
+            <Setter Property="DockPanel.Dock" Value="Top" />
+            <Setter Property="Content" Value="5" />
+        </Style>
+
+
+        <!--
+            ******************************************
+            * VerticalScrollBar LineDownButton Style *
+            ******************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/VerticalScrollBar/LineDownButtonStyle" BasedOn="{StaticResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ScrollBar/LineButtonStyle}" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
+            <Setter Property="Command" Value="Slider.IncreaseSmall" />
+            <Setter Property="DockPanel.Dock" Value="Bottom" />
+            <Setter Property="Content" Value="6" />
+        </Style>
+
+        <!--
+            ********************************************
+            * HorizontalScrollBar PageLeftButton Style *
+            ********************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/HorizontalScrollBar/PageLeftButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="DockPanel.Dock" Value="Left" />
+            <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}" />
+            <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
+            <Setter Property="Command" Value="Slider.DecreaseLarge" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="true">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <!--
+            *********************************************
+            * HorizontalScrollBar PageRightButton Style *
+            *********************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/HorizontalScrollBar/PageRightButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="DockPanel.Dock" Value="Right" />
+            <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}" />
+            <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
+            <Setter Property="Command" Value="Slider.IncreaseLarge" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="true">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <!--
+            ******************************************
+            * VerticalScrollBar PageUpButton Style *
+            ******************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/VerticalScrollBar/PageUpButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="DockPanel.Dock" Value="Top" />
+            <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+            <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
+            <Setter Property="Command" Value="Slider.DecreaseLarge" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="true">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <!--
+            *******************************************
+            * VerticalScrollBar PageDownButton Style *
+            *******************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/VerticalScrollBar/PageDownButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="DockPanel.Dock" Value="Bottom" />
+            <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+            <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
+            <Setter Property="Command" Value="Slider.IncreaseLarge" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="true">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+            </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--
+            ************************************
+            * HorizontalScrollBar Slider Style *
+            ************************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/HorizontalScrollBar/SliderStyle" TargetType="{x:Type HorizontalSlider}">
+            <Setter Property="TrackLength" Value="100%" />
+            <Setter Property="ThumbLength" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarThumbWidthKey}}" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type HorizontalSlider}">
+                <Border>
+                    <DockPanel>
+                        <RepeatButton x:Name="HorizontalScrollBarPageLeftButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/HorizontalScrollBar/PageLeftButtonStyle}" Width="{TemplateBinding DecreaseButtonLength}" />
+                        <RepeatButton x:Name="HorizontalScrollBarPageRightButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/HorizontalScrollBar/PageRightButtonStyle}" Width="{TemplateBinding IncreaseButtonLength}" />
+                        <Thumb x:Name="HorizontalScrollBarThumb" Width="{TemplateBinding ThumbLength}" />
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--
+            **********************************
+            * VerticalScrollBar Slider Style *
+            **********************************
+        -->
+        <Style x:Key="http://schemas.microsoft.com/2003/xaml/VerticalScrollBar/SliderStyle" TargetType="{x:Type VerticalSlider}">
+            <Setter Property="TrackLength" Value="100%" />
+            <Setter Property="ThumbLength" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarThumbHeightKey}}" />
+            <Setter Property="IsOrientationInverted" Value="True" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type VerticalSlider}">
+                <Border>
+                    <DockPanel>
+                        <RepeatButton x:Name="VerticalScrollBarPageUpButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/VerticalScrollBar/PageUpButtonStyle}" Height="{TemplateBinding DecreaseButtonLength}" />
+                        <RepeatButton x:Name="VerticalScrollBarPageDownButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/VerticalScrollBar/PageDownButtonStyle}" Height="{TemplateBinding IncreaseButtonLength}" />
+                        <Thumb x:Name="VerticalScrollBarThumb" Height="{TemplateBinding ThumbLength}" />
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+    <!--
+        *****************************
+        * HorizontalScrollBar Style *
+        *****************************
+    -->
+    <Style x:Key="{x:Type HorizontalScrollBar}" BasedOn="{x:Null}" TargetType="{x:Type HorizontalScrollBar}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}" />
+        <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type HorizontalScrollBar}">
+            <Border x:Name="HorizontalScrollBarBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <DockPanel>
+                    <RepeatButton x:Name="HorizontalScrollBarLineLeftButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/HorizontalScrollBar/LineLeftButtonStyle}" />
+                    <RepeatButton x:Name="HorizontalScrollBarLineRightButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/HorizontalScrollBar/LineRightButtonStyle}" />
+                    <HorizontalSlider x:Name="HorizontalScrollBarSlider" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/HorizontalScrollBar/SliderStyle}" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" Width="Auto" Height="{TemplateBinding Height}" Value="{Binding Path=Value,RelativeSource={RelativeSource TemplatedParent}}" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" SmallChange="{TemplateBinding SmallChange}" LargeChange="{TemplateBinding LargeChange}" IsTabStop="False" Focusable="False" />
+                </DockPanel>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter TargetName="HorizontalScrollBarSlider" Property="Visibility" Value="Hidden" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+        *****************************
+        * VerticalScrollBar Style *
+        *****************************
+    -->
+    <Style x:Key="{x:Type VerticalScrollBar}" BasedOn="{x:Null}" TargetType="{x:Type VerticalScrollBar}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+        <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type VerticalScrollBar}">
+            <Border x:Name="VerticalScrollBarBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <DockPanel>
+                    <RepeatButton x:Name="VerticalScrollBarLineUpButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/VerticalScrollBar/LineUpButtonStyle}" />
+                    <RepeatButton x:Name="VerticalScrollBarLineDownButton" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/VerticalScrollBar/LineDownButtonStyle}" />
+                    <VerticalSlider x:Name="VerticalScrollBarSlider" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/VerticalScrollBar/SliderStyle}" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" Height="Auto" Width="{TemplateBinding Width}" Value="{Binding Path=Value,RelativeSource={RelativeSource TemplatedParent}}" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" SmallChange="{TemplateBinding SmallChange}" LargeChange="{TemplateBinding LargeChange}" IsTabStop="False" Focusable="False" />
+                </DockPanel>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter TargetName="VerticalScrollBarSlider" Property="Visibility" Value="Hidden" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+
+   <!--
+         ****************************************
+         * CheckBox Style                       *
+         ****************************************
+    -->
+
+    <Style x:Key="{x:Type CheckBox}" BasedOn="{x:Null}" TargetType="{x:Type CheckBox}">
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Padding" Value="3,0,0,0" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type CheckBox}">
+            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                <!-- Background  = "Transparent" makes hittesting work on this panel so gap between checkmark and content is hittestable -->
+                <DockPanel Background="Transparent" Margin="{TemplateBinding Padding}">
+                    <!-- Draw Checkmark border and tick mark -->
+                    <Border Width="13" Height="13" Margin="0,0,3,0" FlowDirection="LeftToRight" BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+                        <Border BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+                            <Border BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                                <Border x:Name="CheckMark" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                                    <Path x:Name="CheckMarkPath" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" Data="M 1 3.5 L 3.5 6 L 8 1 L 8 3 L 3.5 8 L 1 5.5 z" />
+                                </Border>
+                            </Border>
+                        </Border>
+                    </Border>
+
+                    <ContentPresenter />
+                </DockPanel>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="CheckState" Value="Unchecked">
+        <Setter TargetName="CheckMarkPath" Property="Visibility" Value="Collapsed" />
+        </Trigger>
+        <Trigger Property="CheckState" Value="Indeterminate">
+        <Setter TargetName="CheckMark" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+        <Setter TargetName="CheckMarkPath" Property="Fill" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter TargetName="CheckMark" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        </Trigger>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter TargetName="CheckMark" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter TargetName="CheckMarkPath" Property="Fill" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+   <!--
+         ****************************************
+         * RadioButton Style                    *
+         ****************************************
+    -->
+
+    <Style x:Key="{x:Type RadioButton}" BasedOn="{x:Null}" TargetType="{x:Type RadioButton}">
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Padding" Value="3,0,0,0" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RadioButton}">
+            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                <!-- Background  = "Transparent" makes hittesting work on this panel so gap between checkmark and content is hittestable -->
+                <DockPanel Background="Transparent" Margin="{TemplateBinding Padding}">
+                    <!-- Draw Checkmark border and tick mark -->
+                    <Canvas Width="13" Height="13" FlowDirection="LeftToRight" Margin="0,0,3,0">
+                        <!-- Upper Left Outside-->
+                        <Path StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Data="M 2 10 A 4 4 0 0 1 10 2" />
+                        <!-- Down Right Outside-->
+                        <Path StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Data="M 2 10 A 4 4 0 1 0 10 2" />
+
+                        <!-- Background -->
+                        <Path x:Name="RadioMarkBackground" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Data="M 6 2 A 4 4 0 1 0 6.01 2 z" />
+
+                        <!-- Dot mark -->
+                        <Path x:Name="RadioMarkDot" Visibility="Collapsed" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" Data="M 6 4 A 2 2 0 1 0 6.01 4 z" />
+                    </Canvas>
+
+                    <ContentPresenter />
+                </DockPanel>
+            </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsChecked" Value="true">
+        <Setter TargetName="RadioMarkDot" Property="Visibility" Value="Visible" />
+        </Trigger>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter TargetName="RadioMarkBackground" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        </Trigger>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter TargetName="RadioMarkBackground" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter TargetName="RadioMarkDot" Property="Fill" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    </FrameworkElement.Resources>
+
+</FrameworkElement>

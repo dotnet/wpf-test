@@ -1,0 +1,101 @@
+﻿<!-- To show this window, do this: Window w=new Window1; w.Show(); -->
+
+
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="ClassicStyles.Window1" x:CodeBehind="Window1.xaml.cs" Text="ClassicStyles" Visible="True" xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration" xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:MappingPIGen1="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration" xmlns:MappingPIGen2="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms">
+    <Window.Resources>
+        <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New">
+                </MenuItem>
+                <MenuItem Header="Save">
+                </MenuItem>
+                <Separator />
+                <MenuItem IsCheckable="true" Header="Checkable Item 1">
+                </MenuItem>
+                <MenuItem IsCheckable="true" IsChecked="true" Header="Checkable Item 2">
+                </MenuItem>
+                <MenuItem Header="Exit">
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Tool Box" IsChecked="True" Width="136">
+                </MenuItem>
+                <MenuItem Header="Color Box" IsChecked="True">
+                </MenuItem>
+                <MenuItem Header="Status Bar" IsChecked="True">
+                </MenuItem>
+                <MenuItem Header="Text Toolbar" IsChecked="True" IsEnabled="False">
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Zoom">
+                    <MenuItem Header="Custom">
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="View Bitmap">
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About..." />
+            </MenuItem>
+            <MenuItem Header="TopLevelItem" />
+        </Menu>
+        <StackPanel>
+            <Button ToolTip="ClassicStyles">
+                Button with ContextMenu
+                <Button.ContextMenu><ContextMenu><MenuItem Header="Item 1"></MenuItem><MenuItem Header="Item 2"><MenuItem Header="SubmenuItem 1"></MenuItem><MenuItem Header="SubmenuItem 2"></MenuItem></MenuItem><MenuItem Header="Item 3"></MenuItem><Separator /><MenuItem Header="Item 4"></MenuItem><MenuItem IsCheckable="true" Header="Checkable Item 1"></MenuItem><MenuItem IsCheckable="true" IsChecked="true" Header="Checkable Item 2"></MenuItem></ContextMenu></Button.ContextMenu></Button>
+            <Border Name="WFHost">
+            </Border>
+            <!--            
+            <wfi:WindowsFormsHost Name="wfh"
+                                    Width="100"
+                                    Height="30"
+                                    Canvas.Top="100"
+                                    Canvas.Left="100" Visibility="Collapsed">
+            
+                <wfi:WindowsFormsHost.Controls>        
+                    <wf:ComboBox></wf:ComboBox>
+                </wfi:WindowsFormsHost.Controls>
+            
+            </wfi:WindowsFormsHost>
+-->
+            <!--
+        <Control Width="100" Height="100" Style="{http://schemas.microsoft.com/winfx/2006/xaml/xaml/MenuItem/PopupBackground}"></Control>
+-->
+            <StackPanel>
+                <StackPanel.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3" />
+                </StackPanel.LayoutTransform>
+                <ComboBox ToolTip="ClassicStyles">
+                    <ComboBoxItem>Robert Ingebretsen</ComboBoxItem>
+                    <ComboBoxItem>Jevan Saks</ComboBoxItem>
+                </ComboBox>
+                <Border Width="10" Height="10">
+                </Border>
+                <ComboBox Background="Orange">
+                    <ComboBoxItem>Robert Ingebretsen</ComboBoxItem>
+                    <ComboBoxItem>Jevan Saks</ComboBoxItem>
+                </ComboBox>
+                <Border Width="10" Height="10">
+                </Border>
+                <ComboBox Background="Orange" Width="50">
+                    <ComboBoxItem>Robert Ingebretsen</ComboBoxItem>
+                    <ComboBoxItem>Jevan Saks</ComboBoxItem>
+                </ComboBox>
+                <Border Width="10" Height="10">
+                </Border>
+                <ComboBox IsEnabled="False" SelectedIndex="0">
+                    <ComboBoxItem>Robert Ingebretsen</ComboBoxItem>
+                    <ComboBoxItem>Jevan Saks</ComboBoxItem>
+                </ComboBox>
+                <ComboBox FontSize="20">
+                    <ComboBoxItem>Robert Ingebretsen</ComboBoxItem>
+                    <ComboBoxItem>Jevan Saks</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtPageContent</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\common\PayLoadsDrtHost.cs" />
+    <Compile Include="DrtPageContent.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\Payloads\PageContent\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtFiles\MSNMain_files\*">
+      <Link>DrtFiles\Payloads\PageContent\MSNMain_files\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FixedDocViewer\FixedDocViewer.csproj" />
+  </ItemGroup>
+</Project>

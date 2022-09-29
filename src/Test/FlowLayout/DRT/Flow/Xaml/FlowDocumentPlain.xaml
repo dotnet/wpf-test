@@ -1,0 +1,293 @@
+<FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FlowDocument.Resources>
+        <Style x:Key="Info" TargetType="{x:Type Paragraph}">
+            <Setter Property="Foreground" Value="Gray" />
+        </Style>
+        <Style x:Key="Title" TargetType="{x:Type Paragraph}">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="Contents" TargetType="{x:Type Paragraph}">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="Header" TargetType="{x:Type Paragraph}">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="KeepWithNext" Value="True" />
+        </Style>
+    </FlowDocument.Resources>
+
+    <Paragraph Style="{StaticResource Info}">
+        Sample topic from <Italic>Aero User Experience Guidelines</Italic>
+    </Paragraph>
+    <Paragraph Style="{StaticResource Title}">
+        Picking the Right Degree of Control for User Interfaces
+    </Paragraph>
+    <Paragraph>
+        Microsoft User Experience Group<LineBreak />
+        October 2003
+    </Paragraph>
+    <Paragraph Style="{StaticResource Contents}">
+        Picking the Right Degree of Control for User Interfaces
+    </Paragraph>
+    <Paragraph>
+        <Hyperlink NavigateUri="#first">User Control vs. Leading the User</Hyperlink>
+        <LineBreak />
+        <Hyperlink NavigateUri="#second">Control in a User Interface</Hyperlink>
+        <LineBreak />
+        <Hyperlink NavigateUri="#third">Regular Activities and Infrequent Tasks</Hyperlink>
+        <LineBreak />
+        <Hyperlink NavigateUri="#forth">Usage Profiles</Hyperlink>
+        <LineBreak />
+        <Hyperlink NavigateUri="#fifth">How Much Control Should You Give?</Hyperlink>
+        <LineBreak />
+        <Hyperlink NavigateUri="#sixth">Different Techniques for Different Degrees of Control</Hyperlink>
+        <LineBreak />
+        <Hyperlink NavigateUri="#seventh">Other Factors that Affect Control</Hyperlink>
+    </Paragraph>
+    <Paragraph>
+        Your application's user interface is an intermediary, situated between the user and the computer. To some extent, 
+        the user and the software rely on each other. A user cannot directly manipulate bits of data in memory or storage 
+        hardware, nor can the software's limited capacity for intelligence allow it to independently determine the desired 
+        result for any non-trivial task. In a way, the user and the software collaborate. This collaboration requires you 
+        to make a critical decision: which of the two will control the interaction—the user or the software?
+    </Paragraph>
+    <Paragraph>
+        The decisions you make about how your software and your users collaborate will significantly affect the user experience 
+        of your application—and ultimately the success of your application as a whole.
+    </Paragraph>
+    <Paragraph Name="first" Style="{StaticResource Header}">
+        User Control vs. Leading the User
+    </Paragraph>
+    <Paragraph>
+        Giving the user control is like putting someone in the driver's seat of a car. You might think that the person always 
+        likes to drive. While there are times when driving is fine (if, for example, they know the route well, they like to 
+        drive, or they feel rested), there are other times when having someone else drive is better (if, for example, they're 
+        in an unfamiliar area, they don't like to drive, or the route is boring). Regardless of whether the person is a driver 
+        or a passenger, they can still reach their destination; but the situation determines which role is ideal.
+    </Paragraph>
+    <Paragraph>
+        In the same way, your users can either be in control of the interaction, or they can be lead through the interaction 
+        by the software. There is an established set of UI elements and techniques suitable for an interface in which the 
+        user is firmly in control, and there is an equally valuable set of elements and techniques suitable for an interface 
+        that controls the interaction and leads the user through a task.
+    </Paragraph>
+    <Paragraph Name="second" Style="{StaticResource Header}">
+        Control in a User Interface
+    </Paragraph>
+    <Paragraph>
+        What does it mean for software to put the user in control? It means that the software assumes users know what they want 
+        to accomplish. Most of the time the software is waiting for the user to give commands or enter data. The software 
+        presents the user with a range of commands. The user selects a command, the software executes it immediately, and 
+        then the software resumes waiting for commands. The software doesn't second-guess the user's methods, distract the 
+        user, or offer instruction beyond that which is explicitly requested.
+    </Paragraph>
+    <Paragraph>
+        What does it mean for software to control an interaction with the user? It means that the software assumes it knows the 
+        best way for the user to accomplish the task, and will lead the user. The software begins with a rough picture of the 
+        user's situation and intended result, and may ask the user for details that are sufficient enough to complete the picture. 
+        These questions have a narrow scope, and constrain the user's responses to meaningful answers. The software may offer 
+        to educate the user on the general process and on the repercussions of certain answers. In particular, the software may 
+        take pains to confirm the user's intentions before performing irrevocable or destructive actions.
+    </Paragraph>
+    <Paragraph>
+        Either approach allows the user to accomplish the task, but the situation determines which approach is best. You might 
+        think it's best to always give the user control, because users surely know what they want and can produce a better 
+        result than the software. But users may not actually know what they want, the task may be long and boring, and the 
+        perfection of the result may not be the user's main concern. The user may be more concerned with the amount of time 
+        and energy needed to complete the task. Having the software lead the user might produce a result that is good enough 
+        for the user's purposes, at a lower cost than if the user were in control.
+    </Paragraph>
+    <Paragraph>
+        Control is not an all-or-nothing proposition—it's a question of degree. You can make independent determinations 
+        about control at different levels of your application. For example, your application might put the user in control 
+        overall, while at times reasserting control and leading the user; or, it can generally lead the user, but will offer 
+        user control for certain operations.
+    </Paragraph>
+    <Paragraph Name="third" Style="{StaticResource Header}">
+        Regular Activities and Infrequent Tasks
+    </Paragraph>
+    <Paragraph>
+        Determining when the user should have control should not be based on distinguishing between expert and novice users, 
+        or on the user's intelligence or familiarity with computers. For example, a brilliant industrial engineer who is 
+        skilled in a complex modeling application may not want to learn a complex interface for sending the occasional fax.
+    </Paragraph>
+    <Paragraph>
+        Control is based on an essentially economic point: to understand and learn a user interface, people must invest valuable 
+        time and energy. In exchange for this investment, people demand an appropriate return in either the short term 
+        (accomplishing a task at hand) or the long term (learning how to accomplish the same task or similar tasks more 
+        quickly in the future). To understand the economics of learning interfaces, it's useful to understand how people 
+        use a computer to perform tasks.
+    </Paragraph>
+    <Paragraph>
+        Software applications and features are tools—people use them to perform tasks, not to learn interfaces. (Computer 
+        games are the exceptions to this rule. In games and other forms of immersive entertainment, mastering a complex UI 
+        may be part of the appeal.) A task is anything a user does to accomplish a result, such as writing a report, balancing 
+        a budget, sending e-mail to a friend, and so on. Each person may perform many tasks over time, but he or she has 
+        a small set of tasks that need to be done all the time. These frequently performed tasks are done in the context 
+        of the regular activities users do repeatedly. For example, a financial planner may regularly meet with clients, review 
+        financial statements, investigate investment opportunities, prepare recommendations, and record billable time. This 
+        same person may also regularly communicate with friends, read news, and listen to music.
+    </Paragraph>
+    <Paragraph>
+        Users are typically willing to invest time and energy to learn how to perform the tasks that are necessary for their 
+        regular activities. Since they perform these tasks frequently, the initial investments of time and energy produce useful 
+        long-term returns. They perform tasks more efficiently over time, which in the long-term saves time, and more importantly 
+        helps users advance their careers and achieve other life goals. Once a user has found a way to complete a task, it's 
+        rare that the user will reinvest the same amount of time and energy to learn a new way to accomplish the same task.
+    </Paragraph>
+    <Paragraph>
+        Infrequent tasks are not part of a user's regular activities. Investments in infrequent tasks must pay for themselves in 
+        the short term. For example, most computer owners don't set up computers for a living, so they hope to be able to set 
+        up a new computer with a minimum investment of time and energy. They have no interest in learning to perform this task 
+        more efficiently or effectively in the long term, because that knowledge will likely become forgotten or obsolete by 
+        the time they perform the task again.
+    </Paragraph>
+    <Paragraph>
+        You must decide if your target users will use the software for a regular activity or an infrequent task. You must make 
+        this decision for the application overall, and often for individual features within the application as well.
+    </Paragraph>
+    <Paragraph Name="forth" Style="{StaticResource Header}">
+        Usage Profiles
+    </Paragraph>
+    <Paragraph>
+        Because most software has a wide variety of users, you need to develop a feeling for your product's usage profile: the 
+        rough proportion of people who use the product for regular activities versus those who use it for infrequent tasks.
+    </Paragraph>
+    <Paragraph>
+        It's easiest to design software that focuses on a single category of users in your product's usage profile. You can 
+        create flexible interfaces that can handle a spectrum of users, but the wider this range is, the harder the design 
+        task becomes. Moreover, work aimed at one user segment is bound to affect others. It's not easy to offer guidance to 
+        the infrequent user and also stay out of the way of the regular user. It's similarly difficult to offer regular users 
+        a tool that won't get noticed by—and confuse—the infrequent user.
+    </Paragraph>
+    <Paragraph>
+        It's particularly challenging (and sometimes impossible) to design a product whose usage profile has users bunched at 
+        either end of the spectrum. For instance, the average user may set up a new computer once every few years, but an IT 
+        professional may set up computers many times a day. If you try to create a single interface that addresses the needs 
+        of such disparate groups, you may end up satisfying neither. The solution may be to create different products or 
+        features for each type of user.
+    </Paragraph>
+    <Paragraph>
+        You must also watch for fringe cases—the person who uses some obscure feature twenty times a day, or the person who uses 
+        a complex application once a year and expects to produce great results. It can be hard to willingly turn away a potential 
+        customer, but attempts to include fringe cases in your target users can compromise the interface's design, to the 
+        detriment of the majority of your users.
+    </Paragraph>
+    <Paragraph>
+        Every product has one category of users who are so far beyond the fringe that they don't belong in the usage profile 
+        at all. These users are the product's creators. If the developers of a software product have to click hundreds of 
+        times through a screen that their actual users will see only once, they may be tempted to apply design techniques 
+        appropriate for regular activities to what are in fact infrequent tasks. You must recognize this temptation and 
+        hold your ground against it.
+    </Paragraph>
+    <Paragraph Name="fifth" Style="{StaticResource Header}">
+        How Much Control Should You Give?
+    </Paragraph>
+    <Paragraph>
+        Once you determine if a task will be performed infrequently or as part of a regular activity, you can determine 
+        the degree of control the user needs to have to perform that task. You should base this decision on your product's 
+        usage profile.
+    </Paragraph>
+    <Paragraph>
+        As mentioned above, the user must invest time and energy learning a user interface in order to control it and direct 
+        the action. Because users are more willing to invest for the long term in tasks they perform as part of their regular 
+        activities, it follows that giving the user control generally makes sense only for regular activities. People who do 
+        something day in and day out are more willing to do what it takes to get good at it. Having done so, they will want to 
+        be in charge.
+    </Paragraph>
+    <Paragraph>
+        In contrast, because people are only willing to make small investments in infrequent tasks, software should guide 
+        the user through those tasks. Guiding the user should never be viewed as condescending. People often need to perform 
+        tasks they don't know how to perform (or don't care to know how to), and a computer can be powerful enough to help 
+        them succeed at those tasks.
+    </Paragraph>
+    <Paragraph>
+        For a real-world parallel, suppose you needed to give a first-time visitor driving directions to your home or office. 
+        You would probably try to maximize the visitor's chance of success by describing the simplest route, even if it 
+        wasn't the fastest way. The visitor wouldn't find the simplified directions condescending, but would probably 
+        welcome the thoughtful help. The visitor might never travel this route again, and therefore would hardly be interested 
+        in learning or memorizing the best possible way. The visitor would be entirely concerned with reaching the destination 
+        with minimum stress.
+    </Paragraph>
+    <Paragraph>
+        As observed earlier, control is a matter of degree and not absolutes. Users can never be completely in control—they 
+        can't hold bits of data in their hands—so they always act through an intermediary interface that removes some degree 
+        of control. At the other extreme, even if the software provides extensive guidance, it must still confer a minimum 
+        degree of user control. The computer should always be responsive (for example, to mouse movements), and the user must 
+        be able to stop or switch away from the task to do something else.
+    </Paragraph>
+    <Paragraph Name="sixth" Style="{StaticResource Header}">
+        Different Techniques for Different Degrees of Control
+    </Paragraph>
+    <Paragraph>
+        Tasks that are part of regular activities require a different UI design technique than infrequent tasks. Once you decide 
+        how much control is appropriate, that decision will pervade your product's design.
+    </Paragraph>
+    <Paragraph>
+        If the user is in control, you need to create software that functions as an extension of the user, and could be described 
+        as an instrument. Like scientific or musical instruments, software instruments can do precise work, but they require 
+        time to master and can be delicate or dangerous things. With a small slip, an inexperienced user could alter work or 
+        damage their system. Since instruments require user control, they are appropriate for performing tasks as part of 
+        regular activities. Examples of software instruments include most document editing applications such as Microsoft® 
+        Word and Microsoft Excel, as well as electronic e-mail programs such as Microsoft Outlook®.
+    </Paragraph>
+    <Paragraph>
+        If the software leads the user, you need to create a sufficiently detailed application design so that the software can 
+        make good decisions for the user. Depending on the situation, the software might play a role such as advisor, guide, 
+        or specialist—for example, a network setup wizard advises the user about what hardware to buy, and then guides the 
+        user through the process of setting up the network.
+    </Paragraph>
+    <Paragraph>
+        It's worth restating that leading users through a task doesn't mean the result will be inferior. If the software is well 
+        designed, users may achieve better results by being guided by the software than if they had been left in complete control.
+    </Paragraph>
+    <Paragraph Name="seventh" Style="{StaticResource Header}">
+        Other Factors that Affect Control
+    </Paragraph>
+    <Paragraph>
+        The rule of thumb is to put the user in control of tasks performed as part of regular activities and guide them through 
+        everything else. However, other factors can influence this decision.
+    </Paragraph>
+    <Paragraph>
+        For example, you should consider fundamental differences in the sorts of tasks that humans and computers each do well. 
+        Certain tasks cannot be performed by computers—for example, creative tasks like writing a speech. Even if a user needs 
+        to write a witty and engaging speech only occasionally, the computer can't do it for them.
+    </Paragraph>
+    <Paragraph>
+        On the other hand, computers do a better job with repetitive and error-prone tasks (for example, copying a thousand 
+        numbers), intricate tasks (for example, applying a complex shading effect to a photograph), or long, time-consuming 
+        tasks (for example, watching a particular network location day and night for signs of change). Even if users could 
+        produce a marginally better result, they will typically prefer that the computer take control of such operations.
+    </Paragraph>
+    <Paragraph>
+        If learning an interface is an investment that demands an appropriate return, it's worth considering ways to lower 
+        the investment cost or raise the return. For example, consistency in user interfaces can lower the cost of learning 
+        a new product. If users are already familiar with a product that they use to perform a regular activity, they may 
+        be able to use a very similar product to perform an infrequent task, even if they haven't used the other product 
+        before. Additionally, if the quality of an application's output is extremely high, the return may justify learning 
+        the application, even for an infrequent task.
+    </Paragraph>
+    <Paragraph>
+        Sometimes an interface that leads the user through a task isn't practical. Designing such an interface requires 
+        developing a task model that is sufficiently detailed and accurate—and that can be implemented in code. Depending 
+        on the task, creating and implementing a task model can be prohibitively expensive. It may be cheaper to design 
+        and implement an interface in which the user is left in control, because giving the user some way to perform this 
+        task is better than no way at all.
+    </Paragraph>
+    <Paragraph>
+        Finally, users with different abilities and personalities are more or less open to user interfaces that require 
+        control. The drive for control can motivate some people to learn to control an unfamiliar interface. Some people 
+        learn or remember things very easily, lowering the investment required to achieve control. Some people take a 
+        long-term view of investments in performing tasks, and readily invest in learning an interface if they estimate 
+        they will perform a task more than once. It's worth remembering that software professionals possess all these 
+        characteristics, and therefore that your understanding of the interface lies far beyond the fringe of users 
+        that matter in the design of many products.
+    </Paragraph>
+    <BlockUIContainer>
+        <Border BorderThickness="0,1,0,0" BorderBrush="Gray" />
+    </BlockUIContainer>
+    <Paragraph>
+        ©2003 Microsoft Corporation. All rights reserved.
+    </Paragraph>
+</FlowDocument>

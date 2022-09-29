@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtFlow</AssemblyName>
+    <TestCode>true</TestCode>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LinkSubsystem>console</LinkSubsystem>
+    <DefineConstants>DRT;FRAMEWORK_NATIVEMETHODS;CORE_NATIVEMETHODS</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="DrtFlow.cs" />
+    <Compile Include="Common\DrtFlowBase.cs" />
+    <Compile Include="Common\FlowTestSuite.cs" />
+    <Compile Include="Common\ApplicationTestSuite.cs" />
+    <Compile Include="Common\DumpTestSuite.cs" />
+    <Compile Include="Common\LayoutDumpTestSuite.cs" />
+    <Compile Include="FlowDoc\BlockUIContainerTestSuite.cs" />
+    <Compile Include="FlowDoc\FlowDocUIHostingTestSuite.cs" />
+    <Compile Include="UIAuto\UIAutoTestSuite.cs" />
+    <Compile Include="UIAuto\FlowDocTextPatternTestSuite.cs" />
+    <Compile Include="UIAuto\DocumentPeerTestSuite.cs" />
+    <Compile Include="UIAuto\ReaderPeerTestSuite.cs" />
+    <Compile Include="Viewer\CustomDocumentPaginator.cs" />
+    <Compile Include="Viewer\CustomDocumentViewer.cs" />
+    <Compile Include="Viewer\CustomViewerTestSuite.cs" />
+    <Compile Include="Viewer\PageViewerNavTestSuite.cs" />
+    <Compile Include="Viewer\PageViewerTestSuite.cs" />
+    <Compile Include="Viewer\ReaderViewerNavTestSuite.cs" />
+    <Compile Include="Viewer\ReaderViewerTestSuite.cs" />
+    <Compile Include="Viewer\ScrollViewerNavTestSuite.cs" />
+    <Compile Include="Viewer\ScrollViewerTestSuite.cs" />
+    <Compile Include="Viewer\ViewerBringIntoViewTestSuite.cs" />
+    <Compile Include="Viewer\ViewerEventRoutingTestSuite.cs" />
+    <Compile Include="Viewer\ViewerFlowDirectionTestSuite.cs" />
+    <Compile Include="Viewer\ViewerNavTestSuite.cs" />
+    <Compile Include="Viewer\ViewerTestSuite.cs" />
+    <None Include="Xaml\*.xaml">
+      <Link>DrtFiles\Flow\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Masters\*.xml">
+      <Link>DrtFiles\Flow\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
