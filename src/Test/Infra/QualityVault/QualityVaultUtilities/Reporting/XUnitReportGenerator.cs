@@ -37,7 +37,7 @@ namespace Microsoft.Test.Reporting
                 var assembly = new XElement("assembly");
                 assembly.SetAttributeValue("name", assemblyName);
                 assembly.SetAttributeValue("test-framework", "QualityVault");
-                assembly.SetAttributeValue("run-date", DateTime.Now.ToString("yyyy-mm-dd"));
+                assembly.SetAttributeValue("run-date", DateTime.Now.ToString("yyyy-MM-dd"));
                 assembly.SetAttributeValue("run-time", areaEntry.StartTime.ToString(@"hh\:mm\:ss"));
                 assembly.SetAttributeValue("time", (areaEntry.EndTime - areaEntry.StartTime).TotalSeconds);
                 assembly.SetAttributeValue("total", areaEntry.TotalVariations);
