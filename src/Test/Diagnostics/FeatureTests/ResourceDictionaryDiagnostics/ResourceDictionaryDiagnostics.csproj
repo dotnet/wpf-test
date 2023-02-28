@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>ResourceDictionaryDiagnosticsTests</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PublishDir>$(PublishDir)\ResourceDictionaryDiagnostics</PublishDir>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <TestDirectory>$(WpfTestBasePath)\Diagnostics\FeatureTests\ResourceDictionaryDiagnostics</TestDirectory>
+  </PropertyGroup>
+  <!-- Source Code -->
+  <ItemGroup>
+    <Compile Include="$(TestDirectory)\ResourceDictionaryDiagnosticsTests.cs" />
+    <Compile Include="$(TestDirectory)\ResourceDictionaryDiagnosticsTests2017.cs"/>
+    <Compile Include="$(WpfTestBasePath)\Diagnostics\FeatureTests\Enabler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="$(TestDirectory)\TestGrid.xaml"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestApiCoreProject)" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(TestDirectory)\Controls\MyButton.Aero2\MyButton.Aero2.csproj" />
+    <ProjectReference Include="$(TestDirectory)\Controls\MyButton.Classic\MyButton.Classic.csproj" />
+    <ProjectReference Include="$(TestDirectory)\Controls\MyButton\MyButton.csproj" />
+    <ProjectReference Include="$(TestDirectory)\Controls\MyButton.Generic\MyButton.generic.csproj" />
+    <ProjectReference Include="$(TestDirectory)\Controls\YourButton\YourButton.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>MyButton.Generic</AssemblyName>
+    <PublishDir>$(PublishDir)\ResourceDictionaryDiagnostics</PublishDir>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <TestDirectory>$(WpfTestBasePath)\Diagnostics\FeatureTests\ResourceDictionaryDiagnostics\Controls</TestDirectory>
+  </PropertyGroup>
+  
+  <!-- Project References -->
+  <ItemGroup>
+    <ProjectReference Include="$(TestDirectory)\MyButton\MyButton.csproj"/>
+  </ItemGroup>
+  
+  <!-- Sources -->
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+
+</Project>
