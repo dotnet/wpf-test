@@ -1,0 +1,316 @@
+﻿
+
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:theme="Themes" xmlns:MappingPIGen1="clr-namespace:System.Windows.Documents;assembly=PresentationFramework" xmlns:MappingPIGen2="clr-namespace:System;assembly=Mscorlib"
+    >
+
+
+<!--=================================================================
+    One Page
+==================================================================-->
+<Style x:Key="onePageStyle" BasedOn="{x:Null}" TargetType="{x:Type DocumentViewerBase}">
+  <Style.Resources>
+  <!-- Theme copied from the Luna theme to fix a break in test cases -->
+    <!-- Button Style hosted in ToolBar -->
+    <Style x:Key="PFThemeToolBarButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+        <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Width" Value="23" />
+        <Setter Property="Height" Value="23" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+            <Border Name="ButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="true">
+        <Setter Property="BorderBrush" Value="#FF08246B" />
+        <Setter Property="Background" Value="#FFB5BED6" />
+        </Trigger>
+        <Trigger Property="IsKeyboardFocused" Value="true">
+        <Setter Property="BorderBrush" Value="#FF08246B" />
+        <Setter Property="Background" Value="#FFB5BED6" />
+        </Trigger>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter Property="Background" Value="#FF8492B5" />
+        </Trigger>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+  </Style.Resources>
+    <Setter Property="Template">
+    <Setter.Value>
+		<ControlTemplate TargetType="{x:Type DocumentViewerBase}">
+			<AdornerDecorator>
+				<Grid
+     Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+     >
+					<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" /> <!-- Page        -->
+					<ColumnDefinition Width="10" /> <!-- Page Shadow -->
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+					<RowDefinition Height="*" /> <!-- Pages       -->
+					<RowDefinition Height="10" /> <!-- Pages Shadow-->
+					<RowDefinition Height="Auto" /> <!-- Status bar  -->
+					</Grid.RowDefinitions>
+
+					<!-- Page 1 -->
+					<Border
+      Grid.Column="0" Grid.Row="0"
+      Margin="5,5,0,0" BorderThickness="1"
+      BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+      >
+						<DocumentPageView PageNumber="0" DocumentViewerBase.IsMasterPage="True" />
+					</Border>
+					<!-- Shadow -->
+					<Rectangle Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+					<Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+					<!-- Status Bar -->
+					<Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+						<StackPanel Orientation="Horizontal">
+							<!-- PrevPage ><Button Command="NavigationCommands.PreviousPage" Style="{DynamicResource PFThemeToolBarButtonStyle}" IsEnabled="{Binding Path=CanGoToPreviousPage,RelativeSource={RelativeSource TemplatedParent}}" FontFamily="Webdings" FontSize="24" Width="30" Height="30">&#x0033;</Button-->
+							<!-- PrevPage --><Button Command="NavigationCommands.PreviousPage" IsEnabled="{Binding Path=CanGoToPreviousPage,RelativeSource={RelativeSource TemplatedParent}}" FontFamily="Webdings" FontSize="24" Width="30" Height="30">&#x0033;</Button>
+							<!-- Zoom-out --><Button Command="NavigationCommands.DecreaseZoom" IsEnabled="{Binding Path=CanZoomOut,RelativeSource={RelativeSource TemplatedParent}}" FontSize="24" Width="30" Height="30" VerticalAlignment="Center">-</Button>
+							<!-- Zoom lvl -->
+							<TextBox IsEnabled="true" Width="30" Height="30" Text="{Binding Path=Zoom,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+							<TextBlock VerticalAlignment="Center" Margin="8,0,8,0">%</TextBlock>
+							<!-- Zoom-in  --><Button Command="NavigationCommands.IncreaseZoom" IsEnabled="{Binding Path=CanZoomIn,RelativeSource={RelativeSource TemplatedParent}}" FontSize="24" Width="30" Height="30" VerticalAlignment="Center">+</Button>
+							<!-- NextPage --><Button Command="NavigationCommands.NextPage" IsEnabled="{Binding Path=CanGoToNextPage,RelativeSource={RelativeSource TemplatedParent}}" FontFamily="Webdings" FontSize="24" Width="30" Height="30">&#x0034;</Button>
+						</StackPanel>
+					</Border>
+				</Grid>
+			</AdornerDecorator>
+		</ControlTemplate>
+    </Setter.Value>
+    </Setter>
+</Style>
+
+<!--=================================================================
+    Two Page
+==================================================================-->
+<Style x:Key="twoPageStyle" BasedOn="{x:Null}" TargetType="{x:Type DocumentViewerBase}">
+    <Setter Property="Template">
+		<Setter.Value>
+			<ControlTemplate TargetType="{x:Type DocumentViewerBase}">
+				<AdornerDecorator>
+					<Grid
+      Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+     >
+						<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="10" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="10" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="10" />
+						<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<!-- Pages       -->
+						<!-- Pages Shadow-->
+						<!-- Page 1      -->
+						<!-- Shadow      -->
+						<!-- Page 2      -->
+						<!-- Shadow      -->
+						<!-- Status bar  -->
+
+						<!-- Page 1-->
+						<Border
+       Grid.Column="0" Grid.Row="0"
+       Margin="5,5,0,0" BorderThickness="1"
+       BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+     >
+							<DocumentPageView PageNumber="0" DocumentViewerBase.IsMasterPage="True" />
+						</Border>
+						<!-- Shadow -->
+						<Rectangle Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+						<Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+						<!-- Page 2-->
+						<Border
+       Grid.Column="2" Grid.Row="0"
+       Margin="5,5,0,0" BorderThickness="1"
+       BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+     >
+							<DocumentPageView PageNumber="1" />
+						</Border>
+						<!-- Shadow -->
+						<Rectangle Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+						<Rectangle Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+						<!-- Status Bar -->
+						<Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+							<StackPanel Orientation="Horizontal">
+								<!-- PrevPage -->
+								<Button Command="NavigationCommands.PreviousPage" IsEnabled="{Binding Path=CanGoToPreviousPage,RelativeSource={RelativeSource TemplatedParent}}" FontFamily="Webdings" FontSize="24" Width="30" Height="30">&#x0033;</Button>
+								<!-- Zoom-out -->
+								<Button Command="NavigationCommands.DecreaseZoom" IsEnabled="{Binding Path=CanZoomOut,RelativeSource={RelativeSource TemplatedParent}}" FontSize="24" Width="30" Height="30" VerticalAlignment="Center">-</Button>
+								<!-- Zoom lvl -->
+								<TextBox IsEnabled="true" Width="30" Height="30" Text="{Binding Path=Zoom,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+								<TextBlock VerticalAlignment="Center" Margin="8,0,8,0">%</TextBlock>
+								<!-- Zoom-in  -->
+								<Button Command="NavigationCommands.IncreaseZoom" IsEnabled="{Binding Path=CanZoomIn,RelativeSource={RelativeSource TemplatedParent}}" FontSize="24" Width="30" Height="30" VerticalAlignment="Center">+</Button>
+								<!-- NextPage -->
+								<Button Command="NavigationCommands.NextPage" IsEnabled="{Binding Path=CanGoToNextPage,RelativeSource={RelativeSource TemplatedParent}}" FontFamily="Webdings" FontSize="24" Width="30" Height="30">&#x0034;</Button>
+							</StackPanel>
+						</Border>
+					</Grid>
+				</AdornerDecorator>
+			</ControlTemplate>
+		</Setter.Value>
+	</Setter>
+</Style>
+
+
+	<!--=================================================================
+    Six Pages
+==================================================================-->
+	<Style x:Key="sixPageStyle" BasedOn="{x:Null}" TargetType="{x:Type DocumentViewerBase}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type DocumentViewerBase}">
+					<AdornerDecorator>
+						<Grid
+       Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+       >
+							<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" /> <!-- Col 1 of pages -->
+							<ColumnDefinition Width="10" /> <!-- Shadows for col1 -->
+							<ColumnDefinition Width="*" /> <!-- Col 2 of pages -->
+							<ColumnDefinition Width="10" /> <!-- Shadows for col2 -->
+							<ColumnDefinition Width="*" /> <!-- Col 3 of pages -->
+							<ColumnDefinition Width="10" /> <!-- Shadows for col3 -->
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+							<RowDefinition Height="*" /> <!-- Row 1 of pages  -->
+							<RowDefinition Height="10" /> <!-- Shadows of row 1 -->
+							<RowDefinition Height="*" /> <!-- Row 2 of pages  -->
+							<RowDefinition Height="10" /> <!-- Shadows of row 2 -->
+							<RowDefinition Height="Auto" /> <!-- Status bar  -->
+							</Grid.RowDefinitions>
+
+
+
+							<!--
+							First Row of pages:  page0 |s|  page1 |s| page2 |s|
+							-->
+
+							<!-- Page 1-->
+							<Border
+        Grid.Column="0" Grid.Row="0"
+        Margin="5,5,0,0" BorderThickness="1"
+        BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+        >
+								<DocumentPageView PageNumber="0" DocumentViewerBase.IsMasterPage="True" />
+							</Border>
+							<!-- Shadow -->
+							<Rectangle Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+							<Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+							<!-- Page 2-->
+							<Border
+        Grid.Column="2" Grid.Row="0"
+        Margin="5,5,0,0" BorderThickness="1"
+        BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+        >
+								<DocumentPageView PageNumber="1" />
+							</Border>
+							<!-- Shadow -->
+							<Rectangle Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+							<Rectangle Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+							<!-- Page 3 -->
+							<Border
+        Grid.Column="4" Grid.Row="0"
+        Margin="5,5,0,0" BorderThickness="1"
+        BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+        >
+								<DocumentPageView PageNumber="2" />
+							</Border>
+							<!-- Shadow -->
+							<Rectangle Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+							<Rectangle Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+							<!--
+							Second Row of pages:  page3 |s|  page4 |s| page5 |s|
+							-->
+
+							<!-- Page 3-->
+							<Border
+        Grid.Column="0" Grid.Row="2"
+        Margin="5,5,0,0" BorderThickness="1"
+        BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+        >
+								<DocumentPageView PageNumber="3" />
+							</Border>
+							<!-- Shadow -->
+							<Rectangle Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+							<Rectangle Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+							<!-- Page 4-->
+							<Border
+        Grid.Column="2" Grid.Row="2"
+        Margin="5,5,0,0" BorderThickness="1"
+        BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+        >
+								<DocumentPageView PageNumber="4" />
+							</Border>
+							<!-- Shadow -->
+							<Rectangle Grid.Column="3" Grid.Row="2" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+							<Rectangle Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+							<!-- Page 5 -->
+							<Border
+        Grid.Column="4" Grid.Row="2"
+        Margin="5,5,0,0" BorderThickness="1"
+        BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+        >
+								<DocumentPageView PageNumber="5" />
+							</Border>
+							<!-- Shadow -->
+							<Rectangle Grid.Column="5" Grid.Row="2" Grid.RowSpan="2" Margin="0,10,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+							<Rectangle Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0,5,5" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+
+
+							<!-- Status Bar -->
+							<Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+								<StackPanel Orientation="Horizontal">
+									<!-- PrevPage --><Button Command="NavigationCommands.PreviousPage" IsEnabled="{Binding Path=CanGoToPreviousPage,RelativeSource={RelativeSource TemplatedParent}}" FontFamily="Webdings" FontSize="24" Width="30" Height="30">&#x0033;</Button>
+									<!-- Zoom-out --><Button Command="NavigationCommands.DecreaseZoom" IsEnabled="{Binding Path=CanZoomOut,RelativeSource={RelativeSource TemplatedParent}}" FontSize="24" Width="30" Height="30" VerticalAlignment="Center">-</Button>
+									<!-- Zoom lvl -->
+									<TextBox IsEnabled="true" Width="30" Height="30" Text="{Binding Path=Zoom,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+									<TextBlock VerticalAlignment="Center" Margin="8,0,8,0">%</TextBlock>
+									<!-- Zoom-in  --><Button Command="NavigationCommands.IncreaseZoom" IsEnabled="{Binding Path=CanZoomIn,RelativeSource={RelativeSource TemplatedParent}}" FontSize="24" Width="30" Height="30" VerticalAlignment="Center">+</Button>
+									<!-- NextPage --><Button Command="NavigationCommands.NextPage" IsEnabled="{Binding Path=CanGoToNextPage,RelativeSource={RelativeSource TemplatedParent}}" FontFamily="Webdings" FontSize="24" Width="30" Height="30">&#x0034;</Button>
+								</StackPanel>
+							</Border>
+						</Grid>
+					</AdornerDecorator>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

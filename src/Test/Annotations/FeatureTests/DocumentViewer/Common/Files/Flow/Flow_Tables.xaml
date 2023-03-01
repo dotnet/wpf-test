@@ -1,0 +1,351 @@
+﻿<FlowDocument 
+  ColumnWidth="500" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  FontFamily="Times">
+<Paragraph>This is a test document for creating annotations on various kinds of Tables.</Paragraph>
+
+<!-- Simple Table -->
+<Paragraph>
+	<Run FontWeight="Bold">Simple Table:</Run><LineBreak />
+	<Run>Table has no special formatting and all the columns and rows are the same size.</Run>
+</Paragraph>
+
+<Table CellSpacing="1" Name="SimpleTable">
+  <Table.Columns>
+    <TableColumn />
+    <TableColumn />
+    <TableColumn />
+    <TableColumn />
+    <TableColumn />
+    <TableColumn />
+  </Table.Columns>
+    <TableRowGroup>
+            <TableRow>
+                    <TableCell><Paragraph>Name</Paragraph></TableCell>
+                    <TableCell><Paragraph>Age</Paragraph></TableCell>
+                    <TableCell><Paragraph>Occupation</Paragraph></TableCell>
+                    <TableCell><Paragraph>Id</Paragraph></TableCell>
+                    <TableCell><Paragraph>Sex</Paragraph></TableCell>
+                    <TableCell><Paragraph>Height</Paragraph></TableCell>
+            </TableRow>
+            <TableRow>
+                    <TableCell><Paragraph>John</Paragraph></TableCell>
+                    <TableCell><Paragraph>17</Paragraph></TableCell>
+                    <TableCell><Paragraph>Student</Paragraph></TableCell>
+                    <TableCell><Paragraph>444</Paragraph></TableCell>
+                    <TableCell><Paragraph>Malee</Paragraph></TableCell>
+                    <TableCell><Paragraph>5'10</Paragraph></TableCell>
+            </TableRow>
+
+            <TableRow>
+                    <TableCell><Paragraph>Jane</Paragraph></TableCell>
+                    <TableCell><Paragraph>35</Paragraph></TableCell>
+                    <TableCell><Paragraph>Doctor</Paragraph></TableCell>
+                    <TableCell><Paragraph>918</Paragraph></TableCell>
+                    <TableCell><Paragraph>Female</Paragraph></TableCell>
+                    <TableCell><Paragraph>Tall</Paragraph></TableCell>
+            </TableRow>
+
+            <TableRow>
+                    <TableCell><Paragraph>Suzanne</Paragraph></TableCell>
+                    <TableCell><Paragraph>23</Paragraph></TableCell>
+                    <TableCell><Paragraph>Engineer</Paragraph></TableCell>
+                    <TableCell><Paragraph>1923</Paragraph></TableCell>
+                    <TableCell><Paragraph>Female</Paragraph></TableCell>
+                    <TableCell><Paragraph>6'1</Paragraph></TableCell>
+            </TableRow>
+
+    </TableRowGroup>
+</Table>
+
+<!-- Spanning Table -->
+<Paragraph>
+	<Run FontWeight="Bold">Spanning Table:</Run><LineBreak />
+	<Run>Table has cells that span multiple rows and columns.  Is also composed of multiple TableRowGroups and contains different TextAlignments.</Run>
+</Paragraph>
+
+  <Table CellSpacing="1" Background="LightGray" Name="SpanningTable">
+    <Table.Columns>
+      <TableColumn Width="1*" />
+      <TableColumn Width="1*" />
+      <TableColumn Width="3*" />
+      <TableColumn Width="2*" />
+    </Table.Columns>
+    <TableRowGroup>
+      <TableRow Background="Silver" FontWeight="Bold">
+        <TableCell>
+          <Paragraph>Header 1</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Yet another header</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Header2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Header3</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>c1r2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c2r2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c3r2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c4r2</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>c1r3</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c2r3</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c3r3</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c4r3</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>c1r4</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c2r4</Paragraph>
+        </TableCell>
+        <TableCell ColumnSpan="2">
+          <Paragraph TextAlignment="Center">Cell spans 2 columns and has some extra content to allow wrapping.</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>c1r5</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c2r5</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c3r5</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c4r5</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>c1r6</Paragraph>
+        </TableCell>
+        <TableCell RowSpan="2">
+          <Paragraph>Cell spans 2 rows, here is some additional text.</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c3r6</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c4r6</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>c2r7</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c3r7</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c4r7</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>c1r8</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c2r8</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c3r8</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c4r8</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell RowSpan="2" ColumnSpan="4">
+          <Paragraph TextAlignment="Right">This cell spans multiple rows and also the full width of the table. It also has text that is Right aligned.</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow />
+      <TableRow>
+        <TableCell>
+          <Paragraph>c1r10</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c2r10</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c3r10</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>c4r10</Paragraph>
+        </TableCell>
+      </TableRow>
+    </TableRowGroup>
+  </Table>
+  
+  <!-- Nested Table -->
+  <Paragraph>
+    <Run FontWeight="Bold">Nested Table:</Run>
+    <LineBreak />
+    <Run>This Table contains nested Table elements.</Run>
+  </Paragraph>
+
+  <Table CellSpacing="1" Background="Silver" Name="OuterTable">
+    <Table.Columns>
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+    </Table.Columns>
+    <TableRowGroup>
+      <TableRow>
+        <TableCell>
+          <Paragraph>Row0.1</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row0.2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row0.3</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row0.4</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>Row1.1</Paragraph>
+        </TableCell>
+        <TableCell ColumnSpan="2" RowSpan="4">
+          <Paragraph>This is right before a nested table.</Paragraph>
+          <!-- Embedded Table -->
+          <Table Background="LightGray" Name="InnerTable">
+            <TableRowGroup>
+              <TableRow>
+                <TableCell>
+                  <Paragraph>one</Paragraph>
+                </TableCell>
+                <TableCell>
+                  <Paragraph>two</Paragraph>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Paragraph>Three</Paragraph>
+                </TableCell>
+                <TableCell>
+                  <Paragraph>4</Paragraph>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Paragraph>Five</Paragraph>
+                </TableCell>
+                <TableCell>
+                  <Paragraph>Six Seven</Paragraph>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Paragraph>Eight</Paragraph>
+                </TableCell>
+                <TableCell>
+                  <Paragraph>Nine</Paragraph>
+                </TableCell>
+              </TableRow>
+            </TableRowGroup>
+          </Table>
+          <Paragraph>This is right after a nested table.</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row1.3</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>Row2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row2.1</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>Row3</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row3.1</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>Row4</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row4.1</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <Paragraph>Row5.1</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row5.2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row5.3</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>Row5.4</Paragraph>
+        </TableCell>
+      </TableRow>
+    </TableRowGroup>
+  </Table>  
+
+<Paragraph>There is text before and after the table so that the entire element can be selected.</Paragraph>
+
+  <!-- Embedded Table -->
+  <Paragraph BreakPageBefore="true">
+    <Run FontWeight="Bold">Embedded Table:</Run>
+    <LineBreak />
+    <Run>This Table contains an embedded image.</Run>
+  </Paragraph>
+  <Table Background="LightGray" Name="EmbeddedTable">
+    <TableRowGroup>
+      <TableRow>
+        <TableCell>
+          <Paragraph>one</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>
+            This text precedes an image
+            <Image Width="200" Height="200" Source="complex_flow_image1.bmp" />
+            After the image.
+          </Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>two</Paragraph>
+        </TableCell>
+      </TableRow>
+    </TableRowGroup>
+  </Table>
+  <Paragraph>This is text after the embedded table.</Paragraph>
+</FlowDocument>

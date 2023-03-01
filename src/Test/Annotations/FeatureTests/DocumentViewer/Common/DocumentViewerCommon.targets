@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" >
+
+  <ItemGroup>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\ADocumentViewerBaseSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\PageSelectionControl.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\ViewerTestConstants.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\AFlowSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\ADefaultContentSuite.cs"/>
+  </ItemGroup>
+
+  <!-- References to Uis Imaging libraries -->
+  <ItemGroup>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Attributes.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\VersionInformation.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\StringIdentifierSupport.cs" />
+    <!--<Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\BitmapUtils.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\BitmapCapture.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\ComparisonCriteria.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\ComparisonOperation.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\ComparisonAlgorithm.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\ComparisonOperationUtils.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\ComparisonResult.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\PixelData.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Imaging\ColorUtils.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Utils\ElementUtils.cs" />
+    <Compile Include="$(WpfTest)\Editing\Common\Library\Wrappers\Wrappers.cs" />-->
+  </ItemGroup>
+  <!-- Compiler flags required to build Uis Imaging library -->
+  <PropertyGroup>
+    <DefineConstants>IGNORE_IMAGE_LOGGING</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- Embedded Resources -->
+  <ItemGroup>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\flow_annotations.xml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\fixed_annotations.xml"/>
+    <!-- FixedContent resources -->
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\DocumentSequence.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\SequencePart1.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\SequencePart2.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\fixed_empty.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\fixed_simple.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\Fixed_EmptyPage.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\fs_page0.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\fs_page1.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\fs_page2.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\fs_page3.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\fs_page4.xaml"/>
+    <!-- <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\font_1.TTF"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\font_2.TTF"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\font_3.TTF"/> -->
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Fixed\image_3.PNG"/>
+    <!-- FlowContent resources -->
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\Flow_Figures.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\Flow_Tables.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\simple_flow.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\CustomFlowStyles.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\complex_flow.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\complex_flow_image1.bmp"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\Flow_ImageOnly.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\flow_image_1.PNG"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\flow_image_2.JPG"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\flow_image_3.PNG"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\flow_image_5.PNG"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\Flow_DRT.xaml"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\Flow_DRT_image1.bmp"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\Flow_DRT_image2.bmp"/>
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\Files\Flow\Flow_SimpleNestedViewer.xaml"/>
+  </ItemGroup>
+
+</Project>

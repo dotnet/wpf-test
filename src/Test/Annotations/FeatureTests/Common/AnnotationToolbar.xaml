@@ -1,0 +1,42 @@
+﻿
+
+<ContentControl
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:Class="Avalon.Test.Annotations.AnnotationToolbar"
+  xmlns:cc="clr-namespace:Avalon.Test.Annotations"
+  xmlns:annot="clr-namespace:System.Windows.Annotations;assembly=PresentationFramework" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.Annotations" xmlns:MappingPIGen2="clr-namespace:System.Windows.Annotations;assembly=PresentationFramework">
+
+  <ContentControl.Resources>
+    <Style x:Key="HighlightColorButtonStyle" TargetType="{x:Type Button}">
+      <Setter Property="Width" Value="20" />
+    </Style>
+  </ContentControl.Resources>
+
+  <ToolBarTray Background="LightGray">
+    <ToolBar>
+      <!-- StickyNote Operations -->
+      <GroupBox Header="Notes">
+        <StackPanel Orientation="Horizontal">
+          <Button Content="Text" Width="30" Command="annot:AnnotationService.CreateTextStickyNoteCommand" CommandParameter="Darth Vader" />
+          <Button Content="Ink" Width="30" Command="annot:AnnotationService.CreateInkStickyNoteCommand" CommandParameter="Luke Skywalker" />
+          <Button Content="Delete" Width="50" Command="annot:AnnotationService.DeleteStickyNotesCommand" />
+        </StackPanel>
+      </GroupBox>
+
+      <!-- Highlight Operations -->
+      <GroupBox Header="Highlight">
+        <StackPanel Orientation="Horizontal">
+          <StackPanel Orientation="Horizontal">
+            <Button Background="Yellow" Style="{StaticResource HighlightColorButtonStyle}" Command="annot:AnnotationService.CreateHighlightCommand" CommandParameter="{x:Static Brushes.Yellow}" />
+            <Button Background="Green" Style="{StaticResource HighlightColorButtonStyle}" Command="annot:AnnotationService.CreateHighlightCommand" CommandParameter="{x:Static Brushes.Green}" />
+            <Button Background="Red" Style="{StaticResource HighlightColorButtonStyle}" Command="annot:AnnotationService.CreateHighlightCommand" CommandParameter="{x:Static Brushes.Red}" />
+            <Button Background="Blue" Style="{StaticResource HighlightColorButtonStyle}" Command="annot:AnnotationService.CreateHighlightCommand" CommandParameter="{x:Static Brushes.Blue}" />
+            <Button Background="Violet" Style="{StaticResource HighlightColorButtonStyle}" Command="annot:AnnotationService.CreateHighlightCommand" CommandParameter="{x:Static Brushes.Violet}" />
+          </StackPanel>
+          <Button Content="Clear" Width="50" Command="annot:AnnotationService.ClearHighlightsCommand" />
+        </StackPanel>
+      </GroupBox>
+    </ToolBar>
+  </ToolBarTray>
+  </ContentControl>   
