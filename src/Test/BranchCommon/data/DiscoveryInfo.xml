@@ -11,6 +11,7 @@
     <Configurations/>
   </DefaultTestInfo>
   <Targets>
+    <!-- Area : Annotations -->
     <!-- Annotations -->
     <Target Adaptor="AnnotationAdaptor" Path="FeatureTests\Annotations\AnnotationsTest.dll">
       <DefaultTestInfo Area="Annotations" Type="Functional" UacElevation="Elevated" Timeout="30">
@@ -59,6 +60,42 @@
         <Versions>
           <Version>3.0+</Version>
           <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!-- Area : Diagnostics -->
+    <!-- VisualDiagnostics -->
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\Diagnostics\VisualDiagnostics\VisualDiagnosticsLibrary.dll">
+      <DefaultTestInfo Area="Diagnostics" SubArea="VisualDiagnostics" Type="Functional">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Diagnostics\VisualDiagnostics\TestData\XamlSourceInfoTest.Debug.dll" />
+          <SupportFile Source="FeatureTests\Diagnostics\VisualDiagnostics\TestData\XamlSourceInfoTest.Release.dll" />
+          <SupportFile Source="FeatureTests\Diagnostics\VisualDiagnostics\VisualDiagnosticsLibrary.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.6+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <!-- ResourceDictionaryDiagnostics -->
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\Diagnostics\ResourceDictionaryDiagnostics\ResourceDictionaryDiagnosticsTests.dll">
+      <DefaultTestInfo Area="Diagnostics" SubArea="ResourceDictionaryDiagnostics" Type="Functional" Timeout="200">
+        <Driver Executable="sti.exe"/>
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Diagnostics\ResourceDictionaryDiagnostics\ResourceDictionaryDiagnosticsTests.dll"/>
+          <SupportFile Source="FeatureTests\Diagnostics\ResourceDictionaryDiagnostics\MyButton.dll"/>
+          <SupportFile Source="FeatureTests\Diagnostics\ResourceDictionaryDiagnostics\MyButton.Aero2.dll"/>
+          <SupportFile Source="FeatureTests\Diagnostics\ResourceDictionaryDiagnostics\MyButton.Classic.dll"/>
+          <SupportFile Source="FeatureTests\Diagnostics\ResourceDictionaryDiagnostics\MyButton.Generic.dll"/>
+          <SupportFile Source="FeatureTests\Diagnostics\ResourceDictionaryDiagnostics\YourButton.dll"/>
+          <SupportFile Source="FeatureTests\Diagnostics\VisualDiagnostics\TestData\XamlSourceInfoTest.Debug.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.6.2+</Version>
         </Versions>
       </DefaultTestInfo>
     </Target>

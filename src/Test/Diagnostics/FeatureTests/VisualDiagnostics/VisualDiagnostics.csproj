@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <AssemblyName>VisualDiagnosticsLibrary</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PublishDir>$(PublishDir)\VisualDiagnostics</PublishDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TestDirectory>$(WpfTestBasePath)\Diagnostics\FeatureTests\VisualDiagnostics</TestDirectory>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(TestDirectory)\VisualTreeChangeTest.cs" />
+    <Compile Include="$(TestDirectory)\XamlSourceInfoTest.cs" />
+    <Compile Include="$(WpfTestBasePath)\Diagnostics\FeatureTests\Enabler.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+
+</Project>
