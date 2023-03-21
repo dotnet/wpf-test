@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>AnnotationsOrcasTest</AssemblyName>
+    <OutputType>EXE</OutputType>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <Compile Include="OrcasDriver.cs" />
+  </ItemGroup>
+  
+<!-- Source Code Imports -->
+
+  <Import Project="$(AnnotationsFeatureTestDirectory)\Common\Annotations.Common.props" />
+  <Import Project="$(AnnotationsFeatureTestDirectory)\DocumentViewer\IAnchorInfo\IAnchorInfo.props" />
+  
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(AnnotationCommonProject)" />
+  </ItemGroup>
+  
+</Project>
