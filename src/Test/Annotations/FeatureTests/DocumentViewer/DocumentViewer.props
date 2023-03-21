@@ -1,0 +1,79 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" >
+  
+  <!-- Common Code Import -->
+  <Import Project="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Common\DocumentViewerCommon.targets" />
+  
+  <!-- API Test Sources -->
+  <ItemGroup>
+    <!-- Test Driver -->
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\API\ADocumentViewerSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\API\DocumentViewerAPIHelpers.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\API\TestLayouts.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\API\Suites\AnnotateSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\API\Suites\DisableSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\API\Suites\EnableSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\API\Suites\IsEnabledSuite.cs" />
+  </ItemGroup>
+
+  <!-- Commands Test Sources -->
+  <ItemGroup>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Commands\ACommandSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Commands\Suites\CommandSuite.cs" />
+  </ItemGroup>
+
+  <!-- Highlight Test Sources -->
+  <ItemGroup>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Highlight\AHighlightSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Highlight\Suites\Scenario1Suite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Highlight\Suites\Scenario2Suite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Highlight\Suites\AddHighlightSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Highlight\Suites\DeleteHighlightSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Highlight\Suites\MultiColorSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Highlight\Suites\MultiSegmentSuite.cs" />
+  </ItemGroup>
+
+  <!-- Commands Test Sources -->
+  <ItemGroup>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Printing\API\APrintingSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Printing\API\Suites\PaginatorSourceSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\Printing\API\Suites\PaginatorSuite.cs" />
+  </ItemGroup>
+
+  <!-- Sticky Note Control Test Sources -->
+  <ItemGroup>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\AStickyNoteControlSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Accessibility\AStickyNoteAccessibilitySuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Accessibility\Suites\SingleNoteSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Accessibility\Suites\HighlightSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Accessibility\Suites\MultiNoteSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Accessibility\Suites\FlowSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Accessibility\Suites\FixedSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\API\AStickyNoteControlAPISuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\API\Suites\APISuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\AIconificationSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\ALocationSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\AStickyNoteControlFunctionalSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\Suites\IconificationSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\Suites\FocusSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\Suites\MenuSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\Suites\InputSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\Suites\ResizeSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\Suites\LocationSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Functional\Suites\ZOrderSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Styling\AStickyNoteStylingSuite.cs"/>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Styling\Suites\StylingSuite.cs" />
+    <Resource Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteControl\Styling\Suites\Styles.xaml"/>
+  </ItemGroup>
+
+  <!-- Sticky Note With Anchor Test Sources -->
+  <ItemGroup>
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteWithAnchor\AStickyNoteWithAnchorSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteWithAnchor\AStateSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteWithAnchor\Suites\AddStickyNoteSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteWithAnchor\Suites\DeleteStickyNoteSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteWithAnchor\Suites\StateSuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteWithAnchor\Suites\HighlightCompatibilitySuite.cs" />
+    <Compile Include="$(AnnotationsFeatureTestDirectory)\DocumentViewer\StickyNoteWithAnchor\Suites\RegressionSuite.cs" />
+  </ItemGroup>
+  
+</Project>

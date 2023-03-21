@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>AnnotationsTestPart2</AssemblyName>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="VersionTolerance\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="VersionTolerance\*.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="VersionTolerance\word.xps">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+  </ItemGroup>
+
+</Project>                                                             

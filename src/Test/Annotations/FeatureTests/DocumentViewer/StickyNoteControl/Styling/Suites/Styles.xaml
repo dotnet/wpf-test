@@ -1,0 +1,261 @@
+<!-- Simple setting of background -->
+<style1>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Style TargetType="{x:Type StickyNoteControl}">
+            <Setter Property="Background" Value="Red"/>
+        </Style>
+    </ResourceDictionary>
+</style1>
+
+<!-- Change behavior for IsMouseOverAnchor -->
+<style2>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Style TargetType="{x:Type StickyNoteControl}">
+            <Setter Property="Background" Value="Pink"/>
+            <Style.Triggers>                
+                <Trigger Property="StickyNoteControl.IsMouseOverAnchor" Value="True">
+                    <Setter Property="Background" Value="Orange"/>                    
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ResourceDictionary>
+</style2>
+
+<!-- Change behavior for IsActive -->
+<style3>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Style TargetType="{x:Type StickyNoteControl}">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX=".5" ScaleY=".5"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="StickyNoteControl.IsActive" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ResourceDictionary>
+</style3>
+
+<!-- Override default style with a single content element -->
+<style4.StickyNote>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Style TargetType="{x:Type StickyNoteControl}">
+            <!-- Override default style completely -->
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Width" Value="250" />
+            <Setter Property="Height" Value ="250" />
+            <!-- Custom template that only contains required controls -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>                        
+                        <ScrollViewer Background="Yellow">
+                            <RichTextBox Name="PART_ContentControl" />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ResourceDictionary>
+</style4.StickyNote>
+
+<style4.InkStickyNote>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Style TargetType="{x:Type StickyNoteControl}">
+            <!-- Override default style completely -->
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Width" Value="250" />
+            <Setter Property="Height" Value ="250" />
+            <!-- Custom template that only contains required controls -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>                        
+                        <ScrollViewer Background="Yellow">
+                            <InkCanvas Name="PART_ContentControl" />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ResourceDictionary>
+</style4.InkStickyNote>
+
+
+<!-- Override only the expanded template -->
+<style5.StickyNote>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        
+        <Style TargetType="{x:Type StickyNoteControl}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ScrollViewer>
+                            <RichTextBox Background="Yellow" Name="PART_ContentControl" />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </ResourceDictionary>
+</style5.StickyNote>
+
+<style5.InkStickyNote>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        
+        <Style TargetType="{x:Type StickyNoteControl}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ScrollViewer>
+                            <InkCanvas Background="Yellow" Name="PART_ContentControl" />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </ResourceDictionary>
+</style5.InkStickyNote>
+
+<!-- Override only the icon template -->
+<style6>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">       
+        <Style TargetType="{x:Type StickyNoteControl}">
+            <Style.Triggers>
+                <Trigger Property="StickyNoteControl.IsExpanded" Value="False">
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <DockPanel Background="Green"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ResourceDictionary>
+</style6>
+
+<!-- Change the default Expanded/Icon size -->
+<style14>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Style TargetType="{x:Type StickyNoteControl}">
+          <Setter Property="Width" Value="100"/>
+          <Setter Property="Height" Value="50"/>          
+          <Setter Property="MinWidth" Value="10"/>
+          <Setter Property="MinHeight" Value="10"/>
+          <Style.Triggers>
+              <Trigger Property="StickyNoteControl.IsExpanded" Value="False">
+                <Setter Property="Width" Value="25"/>
+                <Setter Property="Height" Value="45"/>
+              </Trigger>
+          </Style.Triggers>
+        </Style>
+    </ResourceDictionary>
+</style14>
+
+
+<!-- Using binding to CheckBox to control Expanded State. -->
+<style7.StickyNote>
+  <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type StickyNoteControl}">
+      <Style.Triggers>
+        <Trigger Property="StickyNoteControl.IsExpanded" Value="False">
+          <Setter Property="Control.Template">
+            <Setter.Value>
+              <ControlTemplate>
+                <DockPanel Background="Blue">
+                  <CheckBox IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
+                </DockPanel>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Trigger>
+      </Style.Triggers>
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Grid Background="Green" Name="TheGrid">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <Menu>
+                <CheckBox Name="CB" Width="20" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
+              </Menu>
+              <ScrollViewer Grid.Row="1">
+                <RichTextBox Name="PART_ContentControl" />
+              </ScrollViewer>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </ResourceDictionary>
+</style7.StickyNote>
+
+<style7.InkStickyNote>
+  <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type StickyNoteControl}">
+      <Style.Triggers>
+        <Trigger Property="StickyNoteControl.IsExpanded" Value="False">
+          <Setter Property="Control.Template">
+            <Setter.Value>
+              <ControlTemplate>
+                <DockPanel Background="Blue">
+                  <CheckBox IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
+                </DockPanel>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Trigger>
+      </Style.Triggers>
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Grid Background="Green" Name="TheGrid">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <Menu>
+                <CheckBox Name="CB" Width="20" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
+              </Menu>
+              <ScrollViewer Grid.Row="1">
+                <InkCanvas Name="PART_ContentControl" />
+              </ScrollViewer>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </ResourceDictionary>
+</style7.InkStickyNote>
+
+<!-- Simple setting of background -->
+<style15>
+  <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type StickyNoteControl}">
+      <Setter Property="Background" Value="Red"/>
+      <Setter Property="BitmapEffect">
+        <Setter.Value>
+          <BitmapEffectGroup>
+            <BlurBitmapEffect Radius="2"/>
+            <DropShadowBitmapEffect/>
+            <OuterGlowBitmapEffect/>
+            <BevelBitmapEffect/>
+            <EmbossBitmapEffect/>
+          </BitmapEffectGroup>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Opacity" Value="10" />
+    </Style>
+  </ResourceDictionary>
+</style15>

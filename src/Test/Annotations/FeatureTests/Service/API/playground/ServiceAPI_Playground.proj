@@ -1,0 +1,40 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <WindowsTestClientRoot>$(_NTBINDIR)\testsrc\windowstest\client</WindowsTestClientRoot>
+    <AssemblyName>ServiceAPI_Pri1</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+    <RootNamespace>Avalon.Annotations.Test</RootNamespace>
+    <SecurityManifest>..\ServiceAPI.manifest</SecurityManifest>
+    <GenerateManifests>true</GenerateManifests>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <ItemGroup>
+    <Compile Include="ServiceAPI_Playground.cs" />
+    <Compile Include="..\ServiceAPIHelpers.cs" />
+    <Compile Include="..\AAttachTests.cs" />
+    <Compile Include="..\AConstructorTests.cs" />
+    <Compile Include="..\AEventingTests.cs" />
+    <Compile Include="..\AGetServiceTests.cs" />
+    <Compile Include="..\AStoreTests.cs" />
+    <Compile Include="..\AServiceAPITests.cs" />
+    <Compile Include="..\AnnotationTestDriver.cs" />
+    <Reference Include="$(OBJECT_ROOT)\testsrc\windowstest\client\Tools\Runtime\Legacy\AutomationFramework\$(O)\AutomationFramework.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationClient">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationTypes">
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationProvider" />
+  </ItemGroup>
+</Project>

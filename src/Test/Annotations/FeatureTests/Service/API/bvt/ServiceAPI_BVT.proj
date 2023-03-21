@@ -1,0 +1,24 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>ServiceAPI_BVT</AssemblyName>
+    <RootNamespace>Avalon.Annotations.Test</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(Windows_TST_CLIENT_ROOT)\wcptests\annotations\testcases\common\Annotations.Common.targets" />
+  <ItemGroup>
+    <!-- Test Driver -->
+    <Compile Include="ServiceAPI_BVT.cs" />
+    <!-- TestSuites -->
+    <Compile Include="EnablementSuite_BVT.cs" />
+    <!-- GONE DUE TO NO SETTER FOR PROPERTY - Compile Include="StorePropertySuite_BVT.cs" /-->
+    <Compile Include="..\AProcessorSuite.cs" />
+    <Compile Include="ProcessorSuite_BVT.cs" />
+    <Compile Include="..\ALoadingSuite.cs" />
+    <Compile Include="LoadingSuite_BVT.cs" />
+    <Compile Include="StoreContentChangedSuite_BVT.cs" />
+    <Compile Include="AnchorChangedSuite_BVT.cs" />
+    <Compile Include="AttachedAnnotationChangedSuite_BVT.cs" />
+    <!-- Library Files -->
+    <Compile Include="..\ServiceEventListener.cs" />
+    <Compile Include="..\ServiceTestContext.cs" />
+  </ItemGroup>
+</Project>

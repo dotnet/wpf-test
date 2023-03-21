@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <AssemblyName>AnnotationsTest</AssemblyName>
+    <OutputType>EXE</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="RTMDriver.cs" />
+  </ItemGroup>
+
+  <!-- Source Code Imports -->
+
+  <Import Project="$(AnnotationsFeatureTestDirectory)\Common\Annotations.Common.props" />
+  <Import Project="$(AnnotationsFeatureTestDirectory)\Anchoring\Anchoring.props" />  
+  <Import Project="$(AnnotationsFeatureTestDirectory)\DocumentViewer\DocumentViewer.props" />
+  <Import Project="$(AnnotationsFeatureTestDirectory)\FlowDocumentReader\FlowDocumentReader.props" />
+  <Import Project="$(AnnotationsFeatureTestDirectory)\FlowDocumentScrollViewer\FlowDocumentScrollViewer.props" />
+  <Import Project="$(AnnotationsFeatureTestDirectory)\ObjectModel\ObjectModel.props" />
+  <Import Project="$(AnnotationsFeatureTestDirectory)\Storage\AnnotationStore.props" />
+  <Import Project="$(AnnotationsFeatureTestDirectory)\Versioning\Versioning.props" />
+
+
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(AnnotationCommonProject)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="$(SystemDataSqlClientVersion)" />
+  </ItemGroup>
+  
+</Project>
