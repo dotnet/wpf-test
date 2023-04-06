@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+    <Project DefaultTargets="TestCleanup;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+      <PropertyGroup>
+        <TextVariation ID="1">
+          <AssemblyName>AppDefAscode</AssemblyName>
+        </TextVariation>
+        <TextVariation ID="2">
+          <Configuration>Release</Configuration>
+        </TextVariation>
+        <TextVariation ID="3">
+          <OutputType>winexe</OutputType>
+        </TextVariation>
+
+        <TextVariation ID="4">
+          <UICulture></UICulture>
+        </TextVariation>
+
+        <OutputPath>bin\$(Configuration)\</OutputPath>
+
+        <TextVariation ID="5">
+          <RootNamespace>Generated</RootNamespace>
+        </TextVariation>
+
+        <SignManifests>true</SignManifests>
+        <ManifestKeyFile>ClickOnceTest.pfx</ManifestKeyFile>
+        <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+
+        <NodeVariation ID="6">
+        </NodeVariation>
+        
+        <TextVariation ID="7">
+          <GenerateManifests>true</GenerateManifests>
+        </TextVariation>        
+
+      </PropertyGroup>
+      <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+      <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+      <ItemGroup>
+        <!-- Application Markup -->
+        <NodeVariation ID="10">
+          <Page Include="Simple.xaml" />
+        </NodeVariation>
+
+        <NodeVariation ID="11">
+          <Compile Include="CodeforAppdef.cs" />
+        </NodeVariation>
+        <None Include="ClickOnceTest.pfx" />
+
+        <NodeVariation ID="15">
+        </NodeVariation>
+
+      </ItemGroup>
+      <!-- Included only for test run -->
+      <Import Project="TestCommon.target" />
+      <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Data" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+      </ItemGroup>
+    </Project>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>AppdefasCodeProject</FileName>
+      <FileExtension>.proj</FileExtension>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Defaults>
+    <Scenario Case="1">
+      <TextVariation ID="4">{Culture}</TextVariation>
+      <TextVariation ID="5">__Generated</TextVariation>
+      <TextVariation ID="7">false</TextVariation>
+    </Scenario>
+    <Scenario Case="2">
+      <TextVariation ID="4">{Culture}</TextVariation>
+      <TextVariation ID="5">Avalon.Test.AppModel</TextVariation>
+      <TextVariation ID="7">false</TextVariation>
+    </Scenario>
+    <Scenario Case="3">
+      <TextVariation ID="4">{Culture}</TextVariation>
+      <TextVariation ID="5">TestDll</TextVariation>
+      <TextVariation ID="7">false</TextVariation>
+    </Scenario>
+    <Scenario Case="4">
+      <TextVariation ID="4">{Culture}</TextVariation>
+      <NodeVariation ID="10"></NodeVariation>
+      <TextVariation ID="7">false</TextVariation>
+    </Scenario>
+    <Scenario Case="5">      
+      <NodeVariation ID="11"></NodeVariation>
+      <TextVariation ID="7">false</TextVariation>
+    </Scenario>    
+  </Scenarios>
+</XMLVariationTemplate>

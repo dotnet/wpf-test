@@ -1,0 +1,67 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <FileHostStep>
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="SimpleBrowserHostedNSVApplication.xbap" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+        <TestLogStep Name="Verifying Full Trust Express app behavior test log - Local">
+          <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedNSVApplication.xbap">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedNSVApplication"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Verifying Full Trust Express app behavior test log - UNC">
+          <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedNSVApplication.xbap">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler AutomationElementAndValue="LogFileButton" ProcessName="firefox" WindowTitle="RegExp:(SimpleBrowserHostedNSV)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Verifying Full Trust Express app behavior test log - HTTP Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler AutomationElementAndValue="LogFileButton" ProcessName="firefox" WindowTitle="RegExp:(SimpleBrowserHostedNSV)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Verifying Full Trust Express app behavior test log - HTTPS Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler AutomationElementAndValue="LogFileButton" ProcessName="firefox" WindowTitle="RegExp:(SimpleBrowserHostedNSV)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Verifying Full Trust Express app behavior test log - HTTP Internet">
+          <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler AutomationElementAndValue="LogFileButton" ProcessName="firefox" WindowTitle="RegExp:(SimpleBrowserHostedNSV)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+      </FileHostStep>
+
+      <TestLogStep Name="Verifying Full Trust Express app behavior test log - HTTPS Internet">
+        <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+          <ActivationStep.UIHandlers>
+            <PassIfSeenHandler AutomationElementAndValue="LogFileButton" ProcessName="firefox" WindowTitle="RegExp:(SimpleBrowserHostedNSV)"/>
+          </ActivationStep.UIHandlers>
+          <ActivationStep.SupportFiles>
+            <SupportFile Name="SimpleBrowserHostedNSVApplication.xbap" IncludeDependencies="true" />
+          </ActivationStep.SupportFiles>
+        </ActivationStep>
+      </TestLogStep>
+
+    
+  </Steps>
+</AppMonitorConfig>

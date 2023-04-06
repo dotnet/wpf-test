@@ -1,0 +1,70 @@
+<AppMonitorConfig>
+<Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+       <FileHostStep>
+             <FileHostStep.SupportFiles>
+              <SupportFile Name="SetPersistentCookie.html" IncludeDependencies="false" />
+	      <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+	      <SupportFile Name="SimpleCleanup.html" IncludeDependencies="false" />
+	      <SupportFile Name="XBAPinIFrame_Get.html" IncludeDependencies="false" />
+	      <SupportFile Name="GetnSetPersistentCookie.xbap" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+
+	<TestLogStep Name="Verifying XBAP cookie - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SetPersistentCookie.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_PersistentCookieFromHTML=value1)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="XBAPinIFrame_Get.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NewPersistentCookieFromXBAP=1978)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleCleanup.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="Verifying XBAP cookie - HTTP Intranet">
+           <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SetPersistentCookie.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_PersistentCookieFromHTML=value1)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="XBAPinIFrame_Get.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NewPersistentCookieFromXBAP=1978)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleCleanup.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+        </TestLogStep>
+       </FileHostStep>
+
+
+  </Steps>
+</AppMonitorConfig>

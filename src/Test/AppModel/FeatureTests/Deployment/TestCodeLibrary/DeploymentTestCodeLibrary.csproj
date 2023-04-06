@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <RootNamespace>Microsoft.Windows.Test.Client.AppSec</RootNamespace>
+        <AssemblyName>DeploymentCommonLibrary</AssemblyName>
+        <OutputType>library</OutputType>
+        <PublishDir>$(PublishDir)\Deployment\TestLibraries</PublishDir>
+        <!-- <SignAssembly>true</SignAssembly> -->
+        <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <!-- Deployment Scenarios -->
+    <Import Project="Deployment_BVT_TestCodeLibrary.targets"/>
+
+    <ItemGroup>
+        <ProjectReference Include="$(TestContractsProject)" />
+        <ProjectReference Include="$(InternalUtilitiesProject)" />
+        <ProjectReference Include="$(TestRuntimeProject)" />
+
+    </ItemGroup>    
+</Project>

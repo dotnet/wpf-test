@@ -1,0 +1,80 @@
+﻿<!--**************************************************************************
+//
+// <copyright file="ApplicationStyledNavigationWindowViaStartUri.xaml" company="Microsoft">
+//    Copyright (C) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//
+// Description: Test for create a Styled Window from Application.StartupUri
+//              Regression Test for bug#: 1269604
+//
+// History
+//  09/29/05    EddieLi     Created
+//
+//**************************************************************************-->
+
+
+
+<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     x:Class="WindowTest.ApplicationStyledNavigationWindowViaStartUri"
+     xmlns:y="clr-namespace:WindowTest"
+     StartupUri="ApplicationStyledNavigationWindowViaStartupUri_Window.xaml" 
+     xmlns:MappingPIGen1="clr-namespace:Microsoft.Windows.Test.Client.AppSec.BVT.ELCommon" xmlns:MappingPIGen2="clr-namespace:Microsoft.Windows.Test.Client.AppSec.BVT">
+        <Application.Resources>
+        <ControlTemplate x:Key="WindowContent" TargetType="{x:Type Window}">
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*"/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <AdornerDecorator Grid.Row="0"
+                                  Grid.Column="0">
+                  <StackPanel Orientation="Horizontal">
+                    <Button Width="100" Height="200" Background="Green">Button</Button>
+                  </StackPanel>
+                </AdornerDecorator>
+                <ResizeGrip x:Name="WindowResizeGrip"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Height="23"
+                            Width="14"
+                            Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+                            Background="Transparent"
+                            Visibility="Collapsed"
+                            IsTabStop="false"/>
+              </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="Window.ResizeMode" Value="CanResizeWithGrip"/>
+                <Condition Property="Window.WindowState" Value="Normal"/>
+              </MultiTrigger.Conditions>
+              <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
+            </MultiTrigger>
+          </ControlTemplate.Triggers>
+          
+        </ControlTemplate>
+     
+            <Style TargetType="{x:Type y:ApplicationStyledNavigationWindowViaStartupUri_Window}">
+            <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+            <Setter Property="Title" Value="Window Test" />
+            <Setter Property="Background" Value="Blue" />
+            <Setter Property="Top" Value="0" />
+            <Setter Property="Left" Value="0" />
+            <Setter Property="Width" Value="300" />
+            <Setter Property="Height" Value="300" />
+            <Setter Property="Template" Value="{StaticResource WindowContent}" />
+        </Style>
+    </Application.Resources>
+</Application>
+

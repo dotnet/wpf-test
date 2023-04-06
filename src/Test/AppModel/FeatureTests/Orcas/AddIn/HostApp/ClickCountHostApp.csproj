@@ -1,0 +1,75 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <OutputSubFolder>FeatureTests\AppModel\AddIn\</OutputSubFolder>
+    <AssemblyName>ClickCountHostApp</AssemblyName>
+    <TargetType>winexe</TargetType>
+    <UICulture>en-US</UICulture>
+  </PropertyGroup>
+
+
+  <!-- Test Code -->
+  <ItemGroup>
+    <!-- Code -->
+    <Compile Include="Application.cs" />
+    <Compile Include="..\Shared\AssemblyInfo.cs" />
+    <Compile Include="Window1.xaml.cs" />
+
+    <!-- Pages -->
+    <Page Include="Window1.xaml" />
+  </ItemGroup>
+
+
+  <!-- Reference Items Group  -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.AddIn.Contract" >
+	<HintPath>$(WinFx35RefPath)\System.AddIn.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="System.AddIn" >
+	<HintPath>$(WinFx35RefPath)\System.AddIn.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Presentation"  >
+	<HintPath>$(WinFx35RefPath)\System.Windows.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core"  >
+    <!-- This reference is needed because System.Windows.Presentation.dll has a metadata
+         reference to System.Core, which cannot be directly resolved by the CLR in our
+         build system. (Assembly.ReflectionOnlyLoad("System.Core") fails because System.Core
+         is not in the build system's "local" GAC.)
+    -->
+	<HintPath>$(WinFx35RefPath)\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationClient" />
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+  <!-- Supporting Projects -->
+  <ItemGroup>
+    <ProjectReference Include="$(HostViewsProject)">
+      <Project>{E373F227-4EAB-4587-BF36-724A025A6327}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(ContractsProject)">
+      <Project>{F822516C-3154-491e-B6B3-C7EAE224233A}</Project>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

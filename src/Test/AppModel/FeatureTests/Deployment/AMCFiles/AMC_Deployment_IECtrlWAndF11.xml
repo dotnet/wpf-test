@@ -1,0 +1,22 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="IE F11, Ctrl-P, Ctrl W test - XBAP">
+         <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <IECtrlWAndF11Handler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="IE F11, Ctrl-P, Ctrl W test - Loose Xaml">
+         <ActivationStep Method="launch" Scheme="Local" FileName="deploy_markup2.xaml">
+             <ActivationStep.UIHandlers>
+                 <IECtrlWAndF11Handler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+     </Steps>
+</AppMonitorConfig>

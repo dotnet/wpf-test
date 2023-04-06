@@ -1,0 +1,84 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+              <SupportFile Name="StandaloneAppWebOC.application" IncludeDependencies="true" />
+              <SupportFile Name="deploy_picture1.jpg" IncludeDependencies="False" />
+              <SupportFile Name="deploy_htmlmarkup.htm" IncludeDependencies="False" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Web OC .Application - Local">
+         <ActivationStep Method="launch" Scheme="Local" FileName="StandaloneAppWebOC.application" PropertyBagValue="WebOCTestUrl=pack://siteoforigin:,,,/deploy_htmlmarkup.htm" >
+             <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="RegExp:(Navigation Completed)" ProcessName="StandaloneAppWebOC" AppName="StandaloneAppWebOC" ExpectedWindowTitle="Navigation Completed" IsAppShellVisible="true" Scheme="local" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+    
+         <UninstallStep AppName="StandaloneAppWebOC"/>
+        </TestLogStep>
+
+	<TestLogStep Name="Web OC .Application - UNC">
+         <ActivationStep Method="launch" Scheme="UNC" FileName="StandaloneAppWebOC.application" PropertyBagValue="WebOCTestUrl=pack://siteoforigin:,,,/deploy_htmlmarkup.htm" >
+             <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="RegExp:(Navigation Completed)" ProcessName="StandaloneAppWebOC" AppName="StandaloneAppWebOC" ExpectedWindowTitle="Navigation Completed" IsAppShellVisible="true" Scheme="UNC" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+    
+         <UninstallStep AppName="StandaloneAppWebOC"/>
+	</TestLogStep>
+
+	<TestLogStep Name="Web OC .Application - HTTP Intranet Test Log">
+         <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="StandaloneAppWebOC.application" Arguments="?samedir:deploy_htmlmarkup.htm">
+             <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="RegExp:(Navigation Completed)" ProcessName="StandaloneAppWebOC" AppName="StandaloneAppWebOC" ExpectedWindowTitle="Navigation Completed" IsAppShellVisible="true" Scheme="HTTPIntranet" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+    
+         <UninstallStep AppName="StandaloneAppWebOC"/>
+	</TestLogStep>
+
+
+	<TestLogStep Name="Web OC .Application - HTTPS Intranet Test Log">
+         <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="StandaloneAppWebOC.application" Arguments="?samedir:deploy_htmlmarkup.htm">
+             <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="RegExp:(Navigation Completed)" ProcessName="StandaloneAppWebOC" AppName="StandaloneAppWebOC" ExpectedWindowTitle="Navigation Completed" IsAppShellVisible="true" Scheme="HTTPSIntranet" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+    
+         <UninstallStep AppName="StandaloneAppWebOC"/>
+	</TestLogStep>
+
+	<TestLogStep Name="Web OC .Application - HTTP Internet Test Log">
+         <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="StandaloneAppWebOC.application" Arguments="?samedir:deploy_htmlmarkup.htm">
+             <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="RegExp:(Navigation Completed)" ProcessName="StandaloneAppWebOC" AppName="StandaloneAppWebOC" ExpectedWindowTitle="Navigation Completed" IsAppShellVisible="true" Scheme="HTTPInternet" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+    
+         <UninstallStep AppName="StandaloneAppWebOC"/>
+	</TestLogStep>
+
+       </FileHostStep>
+
+       <TestLogStep Name="Web OC .Application - HTTPS Internet Test Log">
+        <MachineInfoStepDisabler IsServer="true" DoNotRunReason="HTTPS Internet-sourced .Application on Server bug : (DD bug 110008, WOSB 2011532)" >
+         <ActivationStep Method="launch" Scheme="HttpsInternet" FileName="StandaloneAppWebOC.application" Arguments="?samedir:deploy_htmlmarkup.htm">
+             <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="RegExp:(Navigation Completed)" ProcessName="StandaloneAppWebOC" AppName="StandaloneAppWebOC" ExpectedWindowTitle="Navigation Completed" IsAppShellVisible="true" Scheme="HttpsInternet" />
+             </ActivationStep.UIHandlers>
+             <ActivationStep.SupportFiles>
+                <SupportFile Name="StandaloneAppWebOC.application" IncludeDependencies="true" />
+                <SupportFile Name="deploy_picture1.jpg" IncludeDependencies="False" />
+                <SupportFile Name="deploy_htmlmarkup.htm" IncludeDependencies="False" />
+             </ActivationStep.SupportFiles>
+         </ActivationStep>
+    
+         <UninstallStep AppName="StandaloneAppWebOC"/>
+
+         </MachineInfoStepDisabler>	
+        </TestLogStep>
+      
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,12 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="130 - Compile with Version number set">
+      <MSBuildStep CurrentStage="Run" Arguments="BasicVersionTest.proj " />
+      <ActivationStep FileName="&amp;ExecutableFullPath&amp;" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;Build /p:HostinBrowser=true;Version=2.0*" AlwaysRun="True" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

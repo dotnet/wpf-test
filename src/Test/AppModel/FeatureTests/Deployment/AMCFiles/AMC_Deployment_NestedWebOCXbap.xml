@@ -1,0 +1,53 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+
+       <FileHostStep>
+           <FileHostStep.SupportFiles>
+                <SupportFile Name="ExpressAppWebOC.xbap" IncludeDependencies="true" />
+                <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="True" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Web OC Express App hosting an Express App - HTTP Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="ExpressAppWebOC.xbap" Arguments="?samedir:SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                <BrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Navigation Completed)" ProcessName="IEXPLORE" ExpectedWindowTitle="Navigation Completed" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Web OC Express App hosting an Express App - HTTP Internet Test Log">
+          <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="ExpressAppWebOC.xbap" Arguments="?samedir:SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                <BrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Navigation Completed)" ProcessName="IEXPLORE" ExpectedWindowTitle="Navigation Completed" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Web OC Express App hosting an Express App - HTTPS Intranet Test Log">
+          <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="ExpressAppWebOC.xbap" Arguments="?samedir:SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                <BrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Navigation Completed)" ProcessName="IEXPLORE" ExpectedWindowTitle="Navigation Completed" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep>
+	</TestLogStep>
+
+       </FileHostStep>
+
+	<TestLogStep Name="Web OC Express App hosting an Express App - HTTPS Internet Test Log">
+          <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="ExpressAppWebOC.xbap" Arguments="?samedir:SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                <BrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Navigation Completed)" ProcessName="IEXPLORE" ExpectedWindowTitle="Navigation Completed" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+             </ActivationStep.UIHandlers>
+             <ActivationStep.SupportFiles>
+                <SupportFile Name="ExpressAppWebOC.xbap" IncludeDependencies="true" />
+                <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="True" />
+             </ActivationStep.SupportFiles>
+          </ActivationStep>
+
+	</TestLogStep>
+
+       
+     </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,65 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Windows.Client.AppSec.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+
+           <TestLogStep Name=".Application Cancel Download - UI button - UNC">
+             <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandaloneCancelHandler  ProcessName="dfsvc" WindowTitle="RegExp:(@@System.Deployment,Version=2.0.0.0;System.Deployment;UI_ProgressTitleInstall@@)" />
+                     <FailIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep>
+           </TestLogStep>    
+
+           <TestLogStep Name=".Application Cancel Download - UI button - HTTP Intranet">
+             <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandaloneCancelHandler  ProcessName="dfsvc" WindowTitle="RegExp:(@@System.Deployment,Version=2.0.0.0;System.Deployment;UI_ProgressTitleInstall@@)" />
+                     <FailIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep>
+           </TestLogStep>    
+
+           <TestLogStep Name=".Application Cancel Download - UI button - HTTP Internet">
+             <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandaloneCancelHandler  ProcessName="dfsvc" WindowTitle="RegExp:(@@System.Deployment,Version=2.0.0.0;System.Deployment;UI_ProgressTitleInstall@@)" />
+                     <FailIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep>
+           </TestLogStep>    
+
+           <TestLogStep Name=".Application Cancel Download - UI button - HTTPS Intranet">
+             <ActivationStep Method="launch" Scheme="HttpsIntranet" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandaloneCancelHandler  ProcessName="dfsvc" WindowTitle="RegExp:(@@System.Deployment,Version=2.0.0.0;System.Deployment;UI_ProgressTitleInstall@@)" />
+                     <FailIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep>
+           </TestLogStep>    
+
+        </FileHostStep>
+
+           <TestLogStep Name=".Application Cancel Download - UI button - HTTPS Internet">
+            <MachineInfoStepDisabler IsServer="true" DoNotRunReason="HTTPS Internet-sourced .Application on Server bug : (DD bug 110008, WOSB 2011532)" >
+             <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandaloneCancelHandler  ProcessName="dfsvc" WindowTitle="RegExp:(@@System.Deployment,Version=2.0.0.0;System.Deployment;UI_ProgressTitleInstall@@)" />
+                     <FailIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" />
+                 </ActivationStep.UIHandlers>
+                 <ActivationStep.SupportFiles>
+                    <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+                 </ActivationStep.SupportFiles>
+             </ActivationStep>
+            </MachineInfoStepDisabler>
+           </TestLogStep>    
+        
+     </Steps>
+</AppMonitorConfig>

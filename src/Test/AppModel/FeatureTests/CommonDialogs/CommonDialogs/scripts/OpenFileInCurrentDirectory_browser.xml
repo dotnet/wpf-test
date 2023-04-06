@@ -1,0 +1,19 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFileDialog test: Open pre-existing file in current directory [browser]">
+      <ActivationStep Method="launch" Scheme="Local" FileName="CommonFileDialogTest.xbap">
+        <ActivationStep.UIHandlers>
+          <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFileDialogTitle, TestRuntime" 
+                             ProcessName="PresentationHost" 
+                             Dialog="OpenFileInCurrentDirectory_browser" 
+                             FileName="hello.txt" 
+                             TestType="TypeFileNameAndOpen" />
+        </ActivationStep.UIHandlers>
+        <ActivationStep.SupportFiles>
+          <SupportFile Name="CommonFileDialogTest.xbap" IncludeDependencies="true" />
+        </ActivationStep.SupportFiles>
+      </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

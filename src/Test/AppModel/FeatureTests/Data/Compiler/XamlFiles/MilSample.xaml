@@ -1,0 +1,144 @@
+﻿
+
+<Canvas Name="root" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media.Animation;assembly=PresentationFramework" xmlns:MappingPIGen2="clr-namespace:System.Windows.Media;assembly=PresentationCore">
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Width)" Storyboard.TargetName="myRect" From="300" To="250" BeginTime="0:0:0" Duration="0:0:10" RepeatBehavior="500x" AutoReverse="True" />
+                            <DoubleAnimation Storyboard.TargetProperty="(Rectangle.Height)" Storyboard.TargetName="myRect" From="300" To="250" BeginTime="0:0:0" Duration="0:0:2" RepeatBehavior="500x" AutoReverse="True" />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+    <Ellipse Width="203" Height="103" Canvas.Left="18.5" Canvas.Top="68.5" StrokeThickness="3" Stroke="#000000">
+        <Ellipse.Fill>
+            <SolidColorBrush Color="Yellow" Opacity="0.4" />
+        </Ellipse.Fill>
+    </Ellipse>
+    <Ellipse Width="103" Height="203" Canvas.Left="68.5" Canvas.Top="18.5" StrokeThickness="3" Stroke="Orange">
+        <Ellipse.Fill>
+            <SolidColorBrush Color="Blue" Opacity="0.4" />
+        </Ellipse.Fill>
+    </Ellipse>
+    <Line Stroke="Black" X1="200" Y1="10" X2="50" Y2="300" />
+    <Line StrokeThickness="5" X1="250" Y1="50" X2="100" Y2="280">
+        <Line.Stroke>
+            <RadialGradientBrush>
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="Red" Offset="0" />
+                        <GradientStop Color="Blue" Offset="1" />
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </RadialGradientBrush>
+        </Line.Stroke>
+    </Line>
+    <Rectangle Canvas.Top="300" Canvas.Left="10" Name="myRect" Fill="LimeGreen" Height="10" Width="10" StrokeThickness="10">
+        <Rectangle.Stroke>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="Purple" Offset="0" />
+                        <GradientStop Color="Blue" Offset="1" />
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Rectangle.Stroke>
+    </Rectangle>
+    <!--
+    <Rectangle Canvas.Left="10" Canvas.Top="300" 
+      Width="300" Height="200">
+      
+      <Rectangle.Fill>
+        <LinearGradientBrush xmlns="media">
+        
+          <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="red" Offset="0"/>
+              <GradientStop Color="yellow" Offset="1" />
+              <GradientStop Color="blue" Offset="0.5"/>
+              <GradientStop Color="white" Offset="0.2"/>
+            </GradientStopCollection>
+          </LinearGradientBrush.GradientStops>
+          
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+      
+    </Rectangle>
+-->
+    <!-- Rectangle #2 is identical to the first rectangle except that the Transform 
+     property rotates the LinearGradientBrush so that the gradient colors are 
+     rotated by 45 degrees. 
+
+    <Rectangle Canvas.Left="320" Canvas.Top="10" 
+      Width="300" Height="200">
+    
+      <Rectangle.Fill>
+        <LinearGradientBrush xmlns="media">
+        
+          <LinearGradientBrush.Transform>
+            <RotateTransform Angle="45" /> Rotation angle. 
+          </LinearGradientBrush.Transform>
+          
+          <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="red" Offset="0"/>
+              <GradientStop Color="yellow" Offset="1" />
+              <GradientStop Color="blue" Offset="0.5"/>
+              <GradientStop Color="white" Offset="0.2"/>
+            </GradientStopCollection>
+          </LinearGradientBrush.GradientStops>
+          
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+      
+    </Rectangle>
+-->
+    <!-- Rectangle #3 is filled with a RadialGradientBrush.
+
+    <Rectangle Canvas.Left="10" Canvas.Top="250" 
+      Width="300" Height="200">
+      
+      <Rectangle.Fill>
+        <RadialGradientBrush xmlns="media" GradientOrigin="0.5,0.5">
+        
+          <RadialGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="red" Offset="0"/>
+              <GradientStop Color="yellow" Offset="1"/>
+              <GradientStop Color="blue" Offset="0.5"/>
+            </GradientStopCollection>
+          </RadialGradientBrush.GradientStops>
+          
+        </RadialGradientBrush>
+      </Rectangle.Fill>
+      
+    </Rectangle>
+
+ -->
+    <!-- Rectangle #4 is identical to the third rectangle except that the Transform 
+     property applies a ScaleTransform to the RadialGradientBrush so that the 
+     gradient is half its previous height. -->
+    <Rectangle Canvas.Left="320" Canvas.Top="250" Width="300" Height="200">
+        <Rectangle.Fill>
+            <RadialGradientBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" Center="0.5,0.5">
+                <RadialGradientBrush.Transform>
+                    <ScaleTransform ScaleX="1" ScaleY="0.5" />
+                    <!-- Scale transform. -->
+                </RadialGradientBrush.Transform>
+                <RadialGradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="red" Offset="0" />
+                        <GradientStop Color="yellow" Offset="1" />
+                        <GradientStop Color="blue" Offset="0.5" />
+                    </GradientStopCollection>
+                </RadialGradientBrush.GradientStops>
+            </RadialGradientBrush>
+        </Rectangle.Fill>
+    </Rectangle>
+</Canvas>

@@ -1,0 +1,70 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+                <SupportFile Name="deploy_markup1.xaml" IncludeDependencies="true" />
+                <SupportFile Name="Deploy_XamlFlowDoc.xaml" IncludeDependencies="true" />
+                <SupportFile Name="Deploy_XamlFixedDoc.xaml" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Printing Loose Xaml With FixedDocument Root - Ctrl-P">
+           <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HttpInternet" FileName="Deploy_XamlFixedDoc.xaml">
+              <ActivationStep.UIHandlers>
+                 <BrowserContentPrintHandler CtrlP="true" ProcessName="iexplore" WindowTitle="RegExp:(XamlFixedDoc)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Printing Loose Xaml With FixedDocument Root - File/Print">
+           <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HttpInternet" FileName="Deploy_XamlFixedDoc.xaml">
+              <ActivationStep.UIHandlers>
+                 <BrowserContentPrintHandler ProcessName="iexplore" WindowTitle="RegExp:(XamlFixedDoc)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+
+	<TestLogStep Name="Printing Loose Xaml With FlowDocument Root - Ctrl-P">
+           <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HttpInternet" FileName="Deploy_XamlFlowDoc.xaml">
+              <ActivationStep.UIHandlers>
+                 <BrowserContentPrintHandler CtrlP="true" ProcessName="iexplore" WindowTitle="RegExp:(XamlFlowDoc)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+	<TestLogStep Name="Printing Loose Xaml With FlowDocument Root - File/Print">
+           <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HttpInternet" FileName="Deploy_XamlFlowDoc.xaml">
+              <ActivationStep.UIHandlers>
+                 <BrowserContentPrintHandler ProcessName="iexplore" WindowTitle="RegExp:(XamlFlowDoc)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+
+	<TestLogStep Name="Printing Regular Loose Xaml - Ctrl-P">
+           <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HttpInternet" FileName="deploy_markup1.xaml">
+              <ActivationStep.UIHandlers>
+                 <BrowserContentPrintHandler CtrlP="true" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 1)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+	<TestLogStep Name="Printing Regular Loose Xaml - File/Print">
+           <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HttpInternet" FileName="deploy_markup1.xaml">
+              <ActivationStep.UIHandlers>
+                 <BrowserContentPrintHandler ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 1)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+     </FileHostStep>
+    
+  </Steps>
+</AppMonitorConfig>

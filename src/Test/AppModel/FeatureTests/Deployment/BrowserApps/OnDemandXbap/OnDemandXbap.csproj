@@ -1,0 +1,60 @@
+﻿<Project InitialTargets="CleanChildProject" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+
+  <Target Name = "CleanChildProject">
+      <RemoveDir Directories="SimpleOnDemandAssembly\objr" />
+      <RemoveDir Directories="SimpleOnDemandAssembly\objc" />
+  </Target>
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <AssemblyName>SimpleBrowserHostedApplication</AssemblyName>
+    <Configuration>Release</Configuration>
+    <OutputType>winexe</OutputType>
+    <HostinBrowser>True</HostinBrowser>
+    <TargetZone>Internet</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <Install>False</Install>
+    <SupportUrl>http://www.microsoft.com</SupportUrl>
+    <OutputSubFolder>FeatureTests\AppModel\Deployment\Apps\OnDemandXbap</OutputSubFolder>
+    <RootNamespace>Microsoft.Test.Windows.Client.AppModel</RootNamespace>
+    <SignManifests>true</SignManifests>
+    <ManifestKeyFile>$(WpfTest)\Common\ClickOnceTest.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+
+  <ItemGroup>
+     <PublishFile Include="SimpleOnDemandAssembly">
+         <FileType>Assembly</FileType>
+         <InProject>False</InProject>
+         <Group>OnDemandGroup</Group>
+         <PublishState>Auto</PublishState>
+     </PublishFile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\Resources\Deploy_OnDemandAppDef.xaml" />
+    <Page Include="..\..\Resources\Deploy_OnDemandXbap.xaml" />
+    <Compile Include="..\..\Code\AssemblyInfo.cs"/>
+    <None Include="$(WpfTest)\Common\clickoncetest.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <ProjectReference Include="SimpleOnDemandAssembly\Deploy_SimpleOnDemandAssembly.csproj" />
+    <Reference Include="System.Deployment" />
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+</Project>

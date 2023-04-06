@@ -1,0 +1,28 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+	<TestLogStep Name="StandAlone .Application Local Install, Web Update Test Log">
+	   <FileHostStep UserDefinedDirectory="WebUpdate" >
+             <FileHostStep.SupportFiles>
+                <SupportFile Name=".\Update\SimpleStandAloneApplication.application" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+             <ActivationStep Method="launch" OverwriteDeploymentProvider="False" Scheme="Local" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="Local" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep> 
+
+             <UpdateStep PreUpdateVer="1.0000" PostUpdateVer="1.0001" Scheme="HttpIntranet" AppName="SimpleStandAloneApplication">
+                 <UpdateStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpIntranet" />
+                 </UpdateStep.UIHandlers>
+             </UpdateStep>  
+
+             <UninstallStep  AppName="SimpleStandAloneApplication" checkRestoreOption="True" />
+	   </FileHostStep>
+        </TestLogStep>
+
+     </Steps>
+</AppMonitorConfig>

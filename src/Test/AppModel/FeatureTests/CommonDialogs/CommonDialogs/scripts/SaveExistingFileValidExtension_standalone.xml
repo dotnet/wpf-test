@@ -1,0 +1,19 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="SaveFileDialog test: Save existing file with a valid extension [standalone]">
+      <ActivationStep Method="launch" Scheme="Local" FileName="CommonFileDialogTest.exe">
+        <ActivationStep.UIHandlers>
+          <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.SaveFileDialogTitle, TestRuntime" 
+                             ProcessName="CommonFileDialogTest" 
+                             Dialog="SaveExistingFileValidExtension" 
+                             FileName="hello.txt" 
+                             TestType="TypeFileNameAndSave" />
+        </ActivationStep.UIHandlers>
+        <ActivationStep.SupportFiles>
+          <SupportFile Name="CommonFileDialog.exe" IncludeDependencies="true" />
+        </ActivationStep.SupportFiles>
+      </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+    <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+      <PropertyGroup>
+        <AssemblyName>ImageLoadComponent</AssemblyName>
+        <Configuration>Release</Configuration>
+        <TextVariation ID="0">
+          <OutputType>library</OutputType>
+        </TextVariation>
+        <RootNamespace>Avalon.Test.AppModel.Component</RootNamespace>
+        <TextVariation ID="1">
+          <HostInBrowser>false</HostInBrowser>
+        </TextVariation>
+        <TextVariation ID="2">
+          <OutputPath>Componentbin\$(Configuration)\</OutputPath>
+        </TextVariation>
+        <TextVariation ID="3">
+          <IntermediateOutputPath>ComponentObj\\$(Configuration)\\</IntermediateOutputPath>
+        </TextVariation>
+        <NodeVariation ID="4">
+        </NodeVariation>
+        <SignManifests>true</SignManifests>
+        <ManifestKeyFile>ClickOnceTest.pfx</ManifestKeyFile>
+        <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+        <TextVariation ID="5">
+          <GenerateManifests>false</GenerateManifests>
+        </TextVariation>
+      </PropertyGroup>
+      <AttributeVariation ID="50">
+        <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      </AttributeVariation>
+      <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+      <ItemGroup>
+        <NodeVariation ID="00">
+        </NodeVariation>
+        <!-- Application Markup -->
+        <NodeVariation ID="10">
+          <AttributeVariation ID="11">
+            <Page Include="Simple.xaml" />
+          </AttributeVariation>
+        </NodeVariation>
+        <NodeVariation ID="12">
+          <AttributeVariation ID="13">
+            <Resource Include="Picture1.jpg" />
+          </AttributeVariation>
+        </NodeVariation>
+        <NodeVariation ID="14">
+        </NodeVariation>
+        <None Include="ClickOnceTest.pfx" />
+      </ItemGroup>
+      <!-- Included only for test run -->
+      <Import Project="TestCommon.target" />
+      <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Data" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+      </ItemGroup>
+    </Project>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>ComponentwithImage</FileName>
+      <FileExtension>.proj</FileExtension>
+      <RetainFileName>true</RetainFileName>
+      <GenerateOnly>true</GenerateOnly>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Defaults>
+    <Scenario Case="1">
+      <TextVariation ID="1">true</TextVariation>
+      <TextVariation ID="5">false</TextVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="2">
+      <AttributeVariation ID="13" AttributeName="Include" AttributeValue="..\Picture1.jpg" />
+      <TextVariation ID="1">true</TextVariation>
+      <TextVariation ID="5">false</TextVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="3">
+      <AttributeVariation ID="13" AttributeName="Include" AttributeValue="$(SystemDrive)\Picture1.jpg" />
+      <TextVariation ID="1">true</TextVariation>
+      <TextVariation ID="5">false</TextVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="4">
+      <AttributeVariation ID="13" AttributeName="Include" AttributeValue="Images\Picture1.jpg" />
+      <TextVariation ID="1">true</TextVariation>
+      <TextVariation ID="5">false</TextVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="5">
+      <NodeVariation ID="12">
+        <Content Include="Picture1.jpg">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+      </NodeVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="6">
+      <NodeVariation ID="12">
+        <Content Include="..\Picture1.jpg">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+      </NodeVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="7">
+      <NodeVariation ID="12">
+        <Content Include="$(SystemDrive)\Picture1.jpg">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+      </NodeVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="8">
+      <NodeVariation ID="12">
+        <Content Include="Images\Picture1.jpg">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+      </NodeVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="9">
+      <NodeVariation ID="10" ErrorCode="BC2008">
+        <Page Include="Simple.xaml" />
+      </NodeVariation>
+      <NodeVariation ID="2">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+    </Scenario>
+    <Scenario Case="10">
+      <TextVariation ID="1">true</TextVariation>
+      <TextVariation ID="5">false</TextVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="50" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualJSharp.targets" ErrorCode="MC6008" />
+    </Scenario>
+    <Scenario Case="11">
+      <TextVariation ID="0">winexe</TextVariation>
+      <NodeVariation ID="00">
+        <ApplicationDefinition Include="CompAppDef.xaml" />
+      </NodeVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="12">
+      <AttributeVariation ID="13" AttributeName="Include" AttributeValue="..\Picture1.jpg" />
+      <TextVariation ID="0">winexe</TextVariation>
+      <NodeVariation ID="00">
+        <ApplicationDefinition Include="CompAppDef.xaml" />
+      </NodeVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="13">
+      <TextVariation ID="0">winexe</TextVariation>
+      <NodeVariation ID="00">
+        <ApplicationDefinition Include="CompAppDef.xaml" />
+      </NodeVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="13" AttributeName="Include" AttributeValue="$(SystemDrive)\Picture1.jpg" />
+    </Scenario>
+    <Scenario Case="14">
+      <TextVariation ID="0">winexe</TextVariation>
+      <NodeVariation ID="00">
+        <ApplicationDefinition Include="CompAppDef.xaml" />
+      </NodeVariation>
+      <NodeVariation ID="4">
+        <UICulture>en-US</UICulture>
+      </NodeVariation>
+      <AttributeVariation ID="13" AttributeName="Include" AttributeValue="Images\Picture1.jpg" />
+    </Scenario>
+    
+  </Scenarios>
+</XMLVariationTemplate>

@@ -1,0 +1,80 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+   <Steps>
+      
+       <FileHostStep>
+         <FileHostStep.SupportFiles>
+           <SupportFile Name="deploy_markup1.xaml" IncludeDependencies="true" />
+           <SupportFile Name="deploy_markup2.xaml" IncludeDependencies="true" />
+           <SupportFile Name="deploy_XamlInIFrame.htm" IncludeDependencies="false" />
+         </FileHostStep.SupportFiles>
+
+         <TestLogStep Name="Loose Markup Hosted in an IFrame Test Log - LOCAL">
+           <ActivationStep Method="launch" Scheme="Local" FileName="deploy_XamlInIFrame.htm">
+              <ActivationStep.UIHandlers>
+                  <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="iexplore" />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="iexplore" />
+              </ActivationStep.UIHandlers>
+            </ActivationStep>
+         </TestLogStep>
+
+         <TestLogStep Name="Loose Markup Hosted in an IFrame Test Log - UNC">
+           <ActivationStep Method="launch" Scheme="UNC" FileName="deploy_XamlInIFrame.htm">
+              <ActivationStep.UIHandlers>
+                  <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="iexplore" />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="iexplore" />
+              </ActivationStep.UIHandlers>
+            </ActivationStep>
+         </TestLogStep>
+
+         <TestLogStep Name="Loose Markup Hosted in an IFrame Test Log - HTTP Intranet">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="deploy_XamlInIFrame.htm">
+              <ActivationStep.UIHandlers>
+                  <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="iexplore" />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="iexplore" />
+              </ActivationStep.UIHandlers>
+            </ActivationStep>
+         </TestLogStep>
+
+         <TestLogStep Name="Loose Markup Hosted in an IFrame Test Log - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="deploy_XamlInIFrame.htm">
+              <ActivationStep.UIHandlers>
+                  <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="iexplore" />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="iexplore" />
+              </ActivationStep.UIHandlers>
+            </ActivationStep>
+         </TestLogStep>
+
+         <TestLogStep Name="Loose Markup Hosted in an IFrame Test Log - HTTPS Intranet">
+           <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="deploy_XamlInIFrame.htm">
+              <ActivationStep.UIHandlers>
+                  <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="iexplore" />
+                  <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="iexplore" />
+              </ActivationStep.UIHandlers>
+            </ActivationStep>
+         </TestLogStep>
+
+        </FileHostStep>
+
+         <TestLogStep Name="Loose Markup Hosted in an IFrame Test Log - HTTPS Intranet">
+           <ActivationStep Method="launch" Scheme="HttpsInternet" FileName="deploy_XamlInIFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="iexplore" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="iexplore" />
+             </ActivationStep.UIHandlers>
+             <ActivationStep.SupportFiles>
+                <SupportFile Name="deploy_markup1.xaml" IncludeDependencies="true" />
+                <SupportFile Name="deploy_markup2.xaml" IncludeDependencies="true" />
+                <SupportFile Name="deploy_XamlInIFrame.htm" IncludeDependencies="false" />
+             </ActivationStep.SupportFiles>
+           </ActivationStep>
+         </TestLogStep>
+         
+     </Steps>
+</AppMonitorConfig>

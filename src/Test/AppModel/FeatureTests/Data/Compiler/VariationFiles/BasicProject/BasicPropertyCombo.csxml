@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<Steps>
+  <MSBuildErrors>
+    <Error ID="LH1000" Partial="true">
+      <Description>Property Install and HostInBrowser should not be both set to true.</Description>
+    </Error>
+    <Error ID="LH1001" Partial="true">
+      <Description>Property Install and HostInBrowser should not be both set to false.</Description>
+    </Error>
+
+<!--    <Error ID="LH1002" Partial="true">
+      <Description>For Browser application, Property SignManifests should be set to true.</Description>
+    </Error>
+    <Error ID="LH1003" Partial="true">
+      <Description>For Browser application, Property ManifestKeyFile must be set.</Description>
+    </Error>
+    <Error ID="LH1004" Partial="true">
+      <Description>For Browser application, Property ManifestCertificateThumbprint must be set.</Description>
+    </Error>
+-->
+
+    <Warning ID="MSB3245" Partial="True">
+      <Assembly>Microsoft.Build.Tasks</Assembly>
+      <ResourceName>Microsoft.Build.Tasks.Strings.resources</ResourceName>
+      <ErrorIdentifier>ResolveAssemblyReference.FailedToResolveReference</ErrorIdentifier>
+    </Warning>
+
+    <Error ID="MC3074" Partial="True">
+      <Assembly>PresentationBuildTasks</Assembly>
+      <ResourceName>MessageStringTable.resources</ResourceName>
+      <ErrorIdentifier>ParserUnknownTag</ErrorIdentifier>
+    </Error>    
+
+    <Error ID="MC6000" Partial="True">
+      <Assembly>PresentationBuildTasks</Assembly>
+      <ResourceName>MessageStringTable.resources</ResourceName>
+      <ErrorIdentifier>WinFXAssemblyMissing</ErrorIdentifier>
+    </Error>
+
+    <Error ID="LH1002" Partial="True">
+      <Description>The ClickOnce manifest for XAML Browser Applications must always be signed. You must specify properties: SignManifests (value set to True), ManifestKeyFile (with the name of your key file) and ManifestCertificateThumbprint (hexadecimal thumbprint value in SHA-1 format, of key file). Alternatively, you may use your IDE's Publish Wizard or Signing options.</Description>
+    </Error>
+    
+    
+    <Error ID="CS0012" Partial="True">
+      <Description>The type 'System.Windows.Threading.DispatcherObject' is defined in an assembly that is not referenced. You must add a reference to assembly 'WindowsBase, Version=</Description>
+    </Error>
+
+  </MSBuildErrors>
+  <Step ID="1">
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>3,4,5</Variation>
+    <ErrorCodes>LH1000</ErrorCodes>
+  </Step>
+  <Step ID="2">
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>2</Scenario>
+    <Variation>3,4,5</Variation>
+    <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+  </Step>
+  <Step ID="3">
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>3</Scenario>
+    <Variation>3,4,5</Variation>
+    <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+  </Step>
+  <Step ID="4">
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>4</Scenario>
+    <Variation>3,4,5</Variation>
+    <ErrorCodes>LH1001</ErrorCodes>
+  </Step>
+  <Step ID="5"> <!-- Should cause error but doesn't currently -->
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>5</Scenario>
+    <Variation>3,5</Variation>
+  </Step>
+  <Step ID="5"> <!-- Should cause error but doesn't currently -->
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>5</Scenario>
+    <Variation>3,5</Variation>
+  </Step>
+
+  <Step ID="6"> <!-- SignManifest is false with GenerateManifests set to true -->
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>6</Variation>
+  </Step>
+  <Step ID="7"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>7</Variation>
+    <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+  </Step>
+  <Step ID="8"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>8</Variation>
+    <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+  </Step>
+
+  <Step ID="9"> <!-- SignManifest is false with GenerateManifests set to true -->
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>3,6</Variation>
+  </Step>
+  <Step ID="10"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>3,7</Variation>
+    <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+<!--    <ErrorCodes>LH1003</ErrorCodes> -->
+  </Step>
+  <Step ID="11"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>3,8</Variation>
+    <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+<!--    <ErrorCodes>LH1004</ErrorCodes> -->
+  </Step>
+  
+  <Step ID="12"> <!-- SignManifest is false with GenerateManifests set to true -->
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>7</Scenario>
+    <Variation>6</Variation>
+  </Step>
+  <Step ID="13"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>7</Scenario>
+    <Variation>7</Variation>
+    <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    <ErrorCodes>LH1003</ErrorCodes>
+  </Step>
+  <Step ID="14"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>7</Scenario>
+    <Variation>8</Variation>
+    <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    <ErrorCodes>LH1004</ErrorCodes>
+  </Step>
+  
+  <Step ID="100"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>100</Scenario>
+    <Variation>21</Variation>
+  </Step>
+  <Step ID="101"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>100</Scenario>
+    <Variation>22</Variation>
+  </Step>
+  <Step ID="102"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>100</Scenario>
+    <Variation>23</Variation>
+  </Step>
+  <Step ID="103"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>100</Scenario>
+    <Variation>24</Variation>
+  </Step>
+  <Step ID="104"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>100</Scenario>
+    <Variation>25</Variation>
+  </Step>
+  
+  <Step ID="105"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>101</Scenario>
+    <Variation>23</Variation>
+  </Step>
+  
+  <Step ID="106"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>102</Scenario>
+    <Variation>23</Variation>
+  </Step>
+
+  <Step ID="107"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>103</Scenario>
+    <Variation>21</Variation>    
+  </Step>
+  <Step ID="108"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>103</Scenario>
+    <Variation>22</Variation>    
+  </Step>
+  <Step ID="109"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>103</Scenario>
+    <Variation>23</Variation>    
+  </Step>
+  <Step ID="110"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>103</Scenario>
+    <Variation>24</Variation>    
+  </Step>
+  <Step ID="111"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>100</Scenario>
+    <Variation>25</Variation>
+  </Step>
+  
+<!--
+  <Step ID="100"> 
+    <FileName>BasicOtherProject.xvar</FileName>
+    <Scenario>100</Scenario>
+    <Variation>23</Variation>
+  </Step>
+-->
+</Steps>

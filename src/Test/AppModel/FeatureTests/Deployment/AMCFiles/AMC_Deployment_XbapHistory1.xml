@@ -1,0 +1,64 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+          <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="Deploy_markup1.xaml" IncludeDependencies="true" />
+          </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Relaunch Browser-Hosted App from IE History Test Log - Local">
+          
+            <ActivationStep ClearIEHistory="true" Method="navigate" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+
+            <RelaunchStep RelaunchMethod="History" Scheme="Local" IERelaunchArgument="Deploy_markup1.xaml" AppName="SimpleBrowserHostedApplication|Simple Browser Hosted SEE Application" >
+                <RelaunchStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+        </TestLogStep>
+
+	<TestLogStep Name="Relaunch Browser-Hosted App from IE History Test Log - HTTP Intranet">
+
+            <ActivationStep ClearIEHistory="true" Method="navigate" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+
+            <RelaunchStep RelaunchMethod="History" Scheme="HTTPIntranet" IERelaunchArgument="Deploy_markup1.xaml" AppName="SimpleBrowserHostedApplication|Simple Browser Hosted SEE Application" >
+                <RelaunchStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+        </TestLogStep>
+
+<!-- Disabled due to IE bug WOSB # 1920847
+	<TestLogStep Name="Relaunch Browser-Hosted App from IE History Test Log - UNC">
+
+            <ActivationStep ClearIEHistory="true" Method="navigate" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+
+            <RelaunchStep RelaunchMethod="History" Scheme="UNC" IERelaunchArgument="Deploy_markup1.xaml" AppName="SimpleBrowserHostedApplication|Simple Browser Hosted SEE Application" >
+                <RelaunchStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+        </TestLogStep>
+    END DISABLED TEST --> 
+
+       </FileHostStep>
+    
+ </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,57 @@
+﻿<!--
+  **************************************************************
+  TC NAME:      window can as show threadModel dialog
+  Files:        Modal_dialogWindow.xaml
+                Modal_dialogWindow.proj
+                Modal_dialogWindow.xaml.cs
+
+  Test Logic:   (1) Create a normal window of size 500x500
+                (2) Create a dialogWin of size 200x200
+                (3) Place dialogWin inside Normal Window
+                (4) Click point X at (50,50) which is gurrenteed 
+                    to be outside DialogWin but inside NormalWin
+                (5) Start timer for 3 seconds. If Normal win did
+                    not receive activated event, log test pass.
+
+  TEST CASE Logic Diagram
+                  *******************************
+                  |NormalWindow                 |
+                  |                             |
+                  |    x (50,50)                |
+                  |                             |
+                  |                             |
+                  |    ****************         |
+                  |    |DialogWindow  |         |
+                  |    |              |         |500px
+                  |    |              |200px    |
+                  |    |              |         |
+                  |    |              |         |
+                  |    ******200px*****         |
+                  |                             |
+                  |                             |
+                  |                             |
+                  |                             |
+                  *************500px*************
+
+  Edit History: 1/12/2004   Created by eddieli
+
+**************************************************************
+-->
+
+
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="WindowTest.ModalDialogWindow"
+     ContentRendered="OnContentRendered"
+     Title="Avalon.Window.Test"
+     Top="0"
+     Left="0"
+     Width="500"
+     Height="500"
+     >
+	    
+		<StackPanel>
+			<Button>Button1</Button>
+		</StackPanel>
+		
+</Window>
+

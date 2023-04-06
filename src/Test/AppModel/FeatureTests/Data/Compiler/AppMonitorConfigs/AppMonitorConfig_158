@@ -1,0 +1,11 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="158 - Compile with Item Type=Components - .App">
+      <MSBuildStep CurrentStage="Run" Arguments="Component.proj " />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;WORKDIR&amp;\LoadComponent.proj " AlwaysRun="True" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;WORKDIR&amp;\Component.proj /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

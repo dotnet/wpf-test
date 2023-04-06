@@ -1,0 +1,201 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        
+
+	<TestLogStep Name="SimpleStandAloneApplication Update - UNC">
+	   <FileHostStep>
+             <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+             <ActivationStep Method="launch" Scheme="unc" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep> 
+
+             <UpdateStep PreUpdateVer="1.0000" PostUpdateVer="1.0001" Scheme="unc" AppName="SimpleStandAloneApplication">
+                 <UpdateStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </UpdateStep.UIHandlers>
+                 <UpdateStep.SupportFiles>
+                    <SupportFile Name=".\Update\SimpleStandAloneApplication.application" IncludeDependencies="true" />
+                 </UpdateStep.SupportFiles>
+             </UpdateStep>  
+
+             <RollbackStep AppName="SimpleStandAloneApplication" RemovedVersion="1.0001">
+                 <RollbackStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpIntranet" />
+                 </RollbackStep.UIHandlers>
+             </RollbackStep>
+
+             <UninstallStep AppName="SimpleStandAloneApplication"  />
+    
+	   </FileHostStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SimpleStandAloneApplication Update - HTTP Intranet">
+	   <FileHostStep>
+             <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+             <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep> 
+
+             <UpdateStep PreUpdateVer="1.0000" PostUpdateVer="1.0001" Scheme="HTTPIntranet" AppName="SimpleStandAloneApplication">
+                 <UpdateStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </UpdateStep.UIHandlers>
+                 <UpdateStep.SupportFiles>
+                    <SupportFile Name=".\Update\SimpleStandAloneApplication.application" IncludeDependencies="true" />
+                 </UpdateStep.SupportFiles>
+             </UpdateStep>  
+
+             <RollbackStep AppName="SimpleStandAloneApplication" RemovedVersion="1.0001">
+                 <RollbackStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpIntranet" />
+                 </RollbackStep.UIHandlers>
+             </RollbackStep>
+
+             <UninstallStep AppName="SimpleStandAloneApplication"  />
+    
+	   </FileHostStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SimpleStandAloneApplication Update - HTTP Internet">
+	   <FileHostStep>
+             <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+             <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep> 
+
+             <UpdateStep PreUpdateVer="1.0000" PostUpdateVer="1.0001" Scheme="HTTPInternet" AppName="SimpleStandAloneApplication">
+                 <UpdateStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </UpdateStep.UIHandlers>
+                 <UpdateStep.SupportFiles>
+                    <SupportFile Name=".\Update\SimpleStandAloneApplication.application" IncludeDependencies="true" />
+                 </UpdateStep.SupportFiles>
+             </UpdateStep>  
+
+             <RollbackStep AppName="SimpleStandAloneApplication" RemovedVersion="1.0001">
+                 <RollbackStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpIntranet" />
+                 </RollbackStep.UIHandlers>
+             </RollbackStep>
+
+             <UninstallStep AppName="SimpleStandAloneApplication"  />
+    
+	   </FileHostStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SimpleStandAloneApplication Update - HTTPS Intranet">
+	   <FileHostStep >
+             <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+             <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep> 
+
+             <UpdateStep PreUpdateVer="1.0000" PostUpdateVer="1.0001" Scheme="HTTPSIntranet" AppName="SimpleStandAloneApplication">
+                 <UpdateStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </UpdateStep.UIHandlers>
+                 <UpdateStep.SupportFiles>
+                    <SupportFile Name=".\Update\SimpleStandAloneApplication.application" IncludeDependencies="true" />
+                 </UpdateStep.SupportFiles>
+             </UpdateStep>  
+
+             <RollbackStep AppName="SimpleStandAloneApplication" RemovedVersion="1.0001">
+                 <RollbackStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpIntranet" />
+                 </RollbackStep.UIHandlers>
+             </RollbackStep>
+
+             <UninstallStep AppName="SimpleStandAloneApplication"  />
+    
+	   </FileHostStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SimpleStandAloneApplication Update - HTTPS Internet">
+         <MachineInfoStepDisabler IsServer="true" DoNotRunReason="HTTPS Internet-sourced .Application on Server bug : (DD bug 110008, WOSB 2011532)" >
+	   <FileHostStep >
+             <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+             <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep> 
+
+             <UpdateStep PreUpdateVer="1.0000" PostUpdateVer="1.0001" Scheme="HTTPSInternet" AppName="SimpleStandAloneApplication">
+                 <UpdateStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="unc" />
+                 </UpdateStep.UIHandlers>
+                 <UpdateStep.SupportFiles>
+                    <SupportFile Name=".\Update\SimpleStandAloneApplication.application" IncludeDependencies="true" />
+                 </UpdateStep.SupportFiles>
+             </UpdateStep>  
+
+             <RollbackStep AppName="SimpleStandAloneApplication" RemovedVersion="1.0001">
+                 <RollbackStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpIntranet" />
+                 </RollbackStep.UIHandlers>
+             </RollbackStep>
+
+             <UninstallStep AppName="SimpleStandAloneApplication"  />
+    
+	   </FileHostStep>
+         </MachineInfoStepDisabler>
+        </TestLogStep>
+
+	<TestLogStep Name="SimpleStandAloneApplication Update - Local">
+	   <FileHostStep>
+             <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+             <ActivationStep Method="launch" Scheme="local" FileName="SimpleStandAloneApplication.application">
+                 <ActivationStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="local" />
+                 </ActivationStep.UIHandlers>
+             </ActivationStep> 
+
+             <UpdateStep PreUpdateVer="1.0000" PostUpdateVer="1.0001" Scheme="local" AppName="SimpleStandAloneApplication">
+                 <UpdateStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="local" />
+                 </UpdateStep.UIHandlers>
+                 <UpdateStep.SupportFiles>
+                    <SupportFile Name=".\Update\SimpleStandAloneApplication.application" IncludeDependencies="true" />
+                 </UpdateStep.SupportFiles>
+             </UpdateStep>  
+
+             <RollbackStep AppName="SimpleStandAloneApplication" RemovedVersion="1.0001">
+                 <RollbackStep.UIHandlers>
+                     <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpIntranet" />
+                 </RollbackStep.UIHandlers>
+             </RollbackStep>
+
+             <UninstallStep AppName="SimpleStandAloneApplication"  />
+    
+	   </FileHostStep>
+        </TestLogStep>
+        
+     </Steps>
+</AppMonitorConfig>

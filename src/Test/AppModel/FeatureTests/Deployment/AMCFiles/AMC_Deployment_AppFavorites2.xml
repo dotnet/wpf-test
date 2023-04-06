@@ -1,0 +1,73 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+          <FileHostStep.SupportFiles>
+             <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+          </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Relaunch StandAlone App from favorites Test Log - HTTP Internet">
+            
+            <ActivationStep Method="navigate" Scheme="HTTPInternet" FileName="SimpleStandAloneApplication.application">
+                <ActivationStep.UIHandlers>
+                    <StandAloneApplicationVerifier AddAsFavorite="True" WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpInternet" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+            
+            <RelaunchStep RelaunchMethod="Favorites" AppName="SimpleStandAloneApplication" >
+                <RelaunchStep.UIHandlers>
+                    <StandAloneApplicationVerifier WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HTTPInternet" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+            <UninstallStep AppName="SimpleStandAloneApplication"/>
+
+        </TestLogStep>
+
+	<TestLogStep Name="Relaunch StandAlone App from favorites Test Log - HTTPS Intranet">
+            
+            <ActivationStep Method="navigate" Scheme="HTTPSIntranet" FileName="SimpleStandAloneApplication.application">
+                <ActivationStep.UIHandlers>
+                    <StandAloneApplicationVerifier AddAsFavorite="True" WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpsIntranet" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+            
+            <RelaunchStep RelaunchMethod="Favorites" AppName="SimpleStandAloneApplication" >
+                <RelaunchStep.UIHandlers>
+                    <StandAloneApplicationVerifier WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HTTPSIntranet" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+            <UninstallStep AppName="SimpleStandAloneApplication"/>
+
+        </TestLogStep>
+       </FileHostStep>
+
+       <FileHostStep >
+          <FileHostStep.SupportFiles>
+             <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+          </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Relaunch StandAlone App from favorites Test Log - HTTPS Internet">
+            
+            <ActivationStep Method="navigate" Scheme="HTTPSInternet" FileName="SimpleStandAloneApplication.application">
+                <ActivationStep.UIHandlers>
+                    <StandAloneApplicationVerifier AddAsFavorite="True" WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HttpsInternet" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+            
+            <RelaunchStep RelaunchMethod="Favorites" AppName="SimpleStandAloneApplication" >
+                <RelaunchStep.UIHandlers>
+                    <StandAloneApplicationVerifier WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HTTPSInternet" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+            <UninstallStep AppName="SimpleStandAloneApplication"/>
+ 
+       </TestLogStep>
+
+      </FileHostStep>
+    
+ </Steps>
+</AppMonitorConfig>

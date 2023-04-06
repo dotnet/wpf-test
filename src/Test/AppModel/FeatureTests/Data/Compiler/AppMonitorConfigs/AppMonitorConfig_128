@@ -1,0 +1,12 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="128 - Compile and Run when Resource is located in directory above project directory.">
+      <MSBuildStep CurrentStage="Run" Arguments="imageloadfromparentdirectory.proj " />
+      <ActivationStep FileName="&amp;ExecutableFullPath&amp;" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;Build /p:HostinBrowser=true" AlwaysRun="True" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,21 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Title>Get cookie and set New one</Title>
+<p id=daCookie></p>
+<p>This html file checks persistent cookie already set and if it is what expected sets a new cookie</p>
+<p>The new cookie is:</p>
+<p id=myCookie>COOKIE HAS NOT BEEN SET</p>
+<SCRIPT LANGUAGE = JavaScript>
+daCookie.innerText=document.cookie
+
+if (document.cookie.indexOf('PersistentCookieFromXBAP=1978') > -1) {
+document.cookie='NewPersistentCookie=Cookie_detected; expires=Tue, 21-Nov-2078 00:09:25 GMT'
+document.cookie='PersistentCookieFromXBAP=1978; expires=Tue, 21-Nov-1978 00:09:25 GMT'
+}
+
+myCookie.innerText=document.cookie
+document.title=document.cookie
+
+</SCRIPT>
+</html>

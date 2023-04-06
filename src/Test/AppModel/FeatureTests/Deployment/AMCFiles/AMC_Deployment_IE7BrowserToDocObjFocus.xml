@@ -1,0 +1,27 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/> 
+     <Steps>
+        
+	<TestLogStep Name="Verifying Focus can travel between browser and docobj - XBAP">
+         <MachineInfoStepDisabler IEVersion="6" DoNotRunReason="This test is specific to IE7" >
+          <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <IE7DocObjFocusHandler TabElementId="XbapRelXaml" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep>
+         </MachineInfoStepDisabler>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying Focus can travel between browser and docobj - XAML">
+         <MachineInfoStepDisabler IEVersion="6" DoNotRunReason="This test is specific to IE7" >
+          <ActivationStep Method="launch" Scheme="Local" FileName="Deploy_Markup1.xaml">
+             <ActivationStep.UIHandlers>
+                 <IE7DocObjFocusHandler TabElementId="ToHTTPIntra" WindowTitle="RegExp:(Loose XAML 1)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep>
+         </MachineInfoStepDisabler>
+	</TestLogStep>
+        
+     </Steps>
+</AppMonitorConfig>

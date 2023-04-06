@@ -1,0 +1,62 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Windows.Client.AppSec.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel and Restart Download - UNC">
+               <CancelDownloadStep Method="EscapeKey" RestartDownload="True" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap">
+                  <CancelDownloadStep.UIHandlers>
+                     <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+                  </CancelDownloadStep.UIHandlers>
+               </CancelDownloadStep>
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel and Restart Download - HTTP Intranet">
+               <CancelDownloadStep Method="EscapeKey" RestartDownload="True" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap" >
+                  <CancelDownloadStep.UIHandlers>
+                     <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+                  </CancelDownloadStep.UIHandlers>
+               </CancelDownloadStep>
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel and Restart Download - HTTP Internet">
+               <CancelDownloadStep Method="EscapeKey" RestartDownload="True" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap" >
+                  <CancelDownloadStep.UIHandlers>
+                     <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+                  </CancelDownloadStep.UIHandlers>
+               </CancelDownloadStep>
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel and Restart Download - HTTPS Intranet">
+               <CancelDownloadStep Method="EscapeKey" RestartDownload="True" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+                  <CancelDownloadStep.UIHandlers>
+                     <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+                  </CancelDownloadStep.UIHandlers>
+               </CancelDownloadStep>
+           </TestLogStep>    
+
+        </FileHostStep>
+
+        <FileHostStep  >
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel and Restart Download - HTTPS Internet">
+               <CancelDownloadStep RestartDownload="True" Method="EscapeKey" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap">
+                  <CancelDownloadStep.UIHandlers>
+                     <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+                  </CancelDownloadStep.UIHandlers>
+               </CancelDownloadStep>
+           </TestLogStep>    
+
+        </FileHostStep>
+
+        
+     </Steps>
+</AppMonitorConfig>

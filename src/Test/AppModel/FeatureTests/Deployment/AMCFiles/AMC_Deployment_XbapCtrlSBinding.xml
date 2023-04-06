@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="Verifying .Xbap Ctrl-S behavior (With CommandBInding on App)">
+           <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <PassIfSeenHandler WindowTitle="regExp:(Got Save Command)" />
+                   <CtrlSHandler WindowTitle="regExp:(Testing Security Zone ...)" />
+                   <GenericDialogHandler ButtonToClick="autoid:btnSecurityTester" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                   <BrowserAppExceptionHandler NamedRegistration="BrowserExceptionLogger" Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+  </Steps>
+</AppMonitorConfig>

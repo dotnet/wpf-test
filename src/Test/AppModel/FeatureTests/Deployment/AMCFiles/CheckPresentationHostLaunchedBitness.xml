@@ -1,0 +1,32 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       <MachineInfoStepDisabler ProcessorArch="x86" DoNotRunReason="Test is specific to 64-bit Operating systems" >
+
+	<TestLogStep Name="Ensuring PresentationHost.exe bitness - 64-bit IE">
+           <ActivationStep PropertyBagValue="PresentationHostShouldBe64Bit=true" Method="launch" Scheme="Local" FileName="%ProgramFiles%\Internet Explorer\iexplore.exe" Arguments="currentdir:SimpleBrowserHostedApplication.xbap" >
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier CheckPresentationHostBitness="true" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="PRESENTATIONHOST" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Ensuring PresentationHost.exe bitness - 32-bit IE">
+           <ActivationStep PropertyBagValue="PresentationHostShouldBe64Bit=false" Method="launch" Scheme="Local" FileName="%ProgramFiles(x86)%\Internet Explorer\iexplore.exe" Arguments="currentdir:SimpleBrowserHostedApplication.xbap" >
+               <ActivationStep.UIHandlers> 
+                   <BrowserHostedApplicationVerifier CheckPresentationHostBitness="true" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="PRESENTATIONHOST" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Ensuring PresentationHost.exe bitness - Non-specific shell-execute">
+           <ActivationStep PropertyBagValue="PresentationHostShouldBe64Bit=false" Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier CheckPresentationHostBitness="true" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="PRESENTATIONHOST" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+       </MachineInfoStepDisabler>
+  </Steps>
+</AppMonitorConfig>

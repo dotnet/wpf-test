@@ -1,0 +1,60 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+             <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+        <TestLogStep Name="Standalone .Application with URL Parameters Test Log - HTTP Intranet">
+          <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SimpleStandAloneApplication.application" Arguments="?TestingURLParameters">
+              <ActivationStep.UIHandlers>
+ 		 <PassIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AutomationElementAndValue="saParamBtn;TestingURLParameters" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+        </TestLogStep>
+
+        <TestLogStep Name="Standalone .Application with URL Parameters Test Log - HTTP Internet">
+ 
+          <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SimpleStandAloneApplication.application" Arguments="?TestingURLParameters">
+              <ActivationStep.UIHandlers>
+ 		 <PassIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AutomationElementAndValue="saParamBtn;TestingURLParameters" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+    
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+        </TestLogStep>
+
+        <TestLogStep Name="Standalone .Application with URL Parameters Test Log - HTTPS Intranet">
+ 
+          <ActivationStep Method="launch" Scheme="HttpsIntranet" FileName="SimpleStandAloneApplication.application" Arguments="?TestingURLParameters">
+              <ActivationStep.UIHandlers>
+ 		 <PassIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AutomationElementAndValue="saParamBtn;TestingURLParameters" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+    
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+        </TestLogStep>
+
+      </FileHostStep>
+
+
+        <TestLogStep Name="Standalone .Application with URL Parameters Test Log - HTTPS Internet">
+ 
+          <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SimpleStandAloneApplication.application" Arguments="?TestingURLParameters">
+              <ActivationStep.UIHandlers>
+ 		 <PassIfSeenHandler WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AutomationElementAndValue="saParamBtn;TestingURLParameters" />
+              </ActivationStep.UIHandlers>
+              <ActivationStep.SupportFiles>
+                <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+              </ActivationStep.SupportFiles>
+          </ActivationStep>
+    
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+        </TestLogStep>
+
+       
+   </Steps>
+</AppMonitorConfig>

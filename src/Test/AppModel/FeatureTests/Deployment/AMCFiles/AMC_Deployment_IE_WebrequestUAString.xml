@@ -1,0 +1,17 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+	<TestLogStep Name="Verifying UserAgent string on WebRequests - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <UserAgentStringTestVerifier WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" UserAgentTestValue="MSIE" />
+               </ActivationStep.UIHandlers>
+               <ActivationStep.SupportFiles>
+                   <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               </ActivationStep.SupportFiles>
+           </ActivationStep>
+	</TestLogStep>
+
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,17 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <TestLogStep Name="FIREFOX - RBW Resize behavior test">
+        <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+          <ActivationStep.UIHandlers>
+            <RootBrowserWindowResizeHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" />
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </TestLogStep>
+      
+    
+  </Steps>
+</AppMonitorConfig>

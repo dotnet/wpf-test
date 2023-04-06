@@ -1,0 +1,42 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Windows.Client.AppSec.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel Download - Refresh Browser - UNC">
+               <CancelDownloadStep Method="RefreshKey" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel Download - Refresh Browser - HTTP Intranet">
+               <CancelDownloadStep Method="RefreshKey" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel Download - Refresh Browser - HTTP Internet">
+               <CancelDownloadStep Method="RefreshKey" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel Download - Refresh Browser - HTTPS Intranet">
+               <CancelDownloadStep Method="RefreshKey" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+        </FileHostStep>
+
+        <FileHostStep  >
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel Download - HTTPS Internet">
+               <CancelDownloadStep Method="RefreshKey" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+        </FileHostStep>
+
+        
+     </Steps>
+</AppMonitorConfig>

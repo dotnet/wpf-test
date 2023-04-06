@@ -1,0 +1,21 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFileDialog test: Cancel opening a file [browser]">
+        <ActivationStep Method="launch" Scheme="HttpInternet" FileName="CommonFileDialogTest.xbap">
+          <ActivationStep.UIHandlers>
+            <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFileDialogTitle, TestRuntime" 
+                               ProcessName="PresentationHost" 
+                               Dialog="OpenFileCancel_browser"
+                               FileName="hello.txt"
+                               TestType="TypeFileNameAndCancel"/>
+
+          </ActivationStep.UIHandlers>
+          <ActivationStep.SupportFiles>
+            <SupportFile Name="CommonFileDialogTest.xbap" IncludeDependencies="true" />
+            <SupportFile Name="hello.txt" IncludeDependencies="true" />
+          </ActivationStep.SupportFiles>
+        </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

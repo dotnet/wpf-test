@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+    <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+      <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProductVersion>8.0.50215</ProductVersion>
+        <SchemaVersion>2.0</SchemaVersion>
+        <ProjectGuid>{01917685-FBBD-4FF7-8C3C-824AC48B47E4}</ProjectGuid>
+        <OutputType>WinExe</OutputType>
+        <GenerateManifests>true</GenerateManifests>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+<!--        <RootNamespace>WindowsApplication52</RootNamespace> -->
+        <AssemblyName>WinformsandAvalonInterop</AssemblyName>
+        
+        <NodeVariation ID="9">
+        </NodeVariation>
+      </PropertyGroup>
+      
+      <NodeVariation ID="20">
+        <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+          <DebugSymbols>true</DebugSymbols>
+          <DebugType>full</DebugType>
+          <Optimize>false</Optimize>
+          <OutputPath>bin\Debug\</OutputPath>
+          <DefineConstants>DEBUG;TRACE</DefineConstants>
+          <ErrorReport>prompt</ErrorReport>
+          <WarningLevel>4</WarningLevel>
+        </PropertyGroup>
+        <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+          <DebugType>pdbonly</DebugType>
+          <Optimize>true</Optimize>
+          <OutputPath>bin\Release\</OutputPath>
+          <DefineConstants>TRACE</DefineConstants>
+          <ErrorReport>prompt</ErrorReport>
+          <WarningLevel>4</WarningLevel>
+        </PropertyGroup>
+      </NodeVariation>
+      
+      <ItemGroup>
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="System" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Deployment" />
+        <Reference Include="System.Drawing" />
+        <Reference Include="System.Windows.Forms" />
+        <Reference Include="System.Xml" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+        <!-- , Version=6.0.4030.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL -->
+      </ItemGroup>
+      <ItemGroup>
+        <Compile Include="Form1.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Form1.Designer.cs">
+          <DependentUpon>Form1.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Program.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <EmbeddedResource Include="Form1.resx">
+          <DependentUpon>Form1.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Properties\Resources.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+          <SubType>Designer</SubType>
+        </EmbeddedResource>
+        <Compile Include="Properties\Resources.Designer.cs">
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <None Include="Properties\Settings.settings">
+          <Generator>SettingsSingleFileGenerator</Generator>
+          <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
+        <Page Include="Window1.xaml" />
+        <Compile Include="Properties\Settings.Designer.cs">
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Settings.settings</DependentUpon>
+          <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        </Compile>
+
+        <Compile Include="Window1.xaml.cs" />
+      </ItemGroup>
+      <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+      <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+      <Import Project="TestCommon.target" />
+    </Project>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileExtension>.csproj</FileExtension>
+      <CommandLineArgs>/t:TestCleanup;Build</CommandLineArgs>
+    </Defaults>
+    <Scenario Case="1"> 
+      <NodeVariation ID="20"> <!-- Remove configuration conditions -->
+        <PropertyGroup>
+          <OutputPath>bin\$(Configuration)\</OutputPath>
+        </PropertyGroup>
+      </NodeVariation> 
+    </Scenario>
+    <Scenario Case="2">
+      <NodeVariation ID="9">
+        <RootNamespace>WindowsApplication52</RootNamespace>
+      </NodeVariation> 
+    </Scenario>
+    <Scenario Case="3">
+    </Scenario>
+    <Scenario Case="4">
+    </Scenario>    
+  </Scenarios>
+</XMLVariationTemplate>    

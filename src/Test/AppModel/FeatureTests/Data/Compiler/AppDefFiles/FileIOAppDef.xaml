@@ -1,0 +1,96 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" x:Class="Application__"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="Simple.xaml">
+    
+    <x:Code><![CDATA[
+    
+    Microsoft.Test.Logging.TestLog log = null;
+     bool _browserhostedapp = false;
+    
+    protected override void OnStartup(System.Windows.StartupEventArgs e)
+    {    
+        log = Microsoft.Test.Logging.TestLog.Current;     
+        // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;        
+
+        if ( AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap") )        
+        {
+            _browserhostedapp = true;
+        }
+
+        log.LogStatus("Hooking up Navigation events");
+        this.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+
+        log.LogStatus("OnStartup method - done");
+
+        // log.Stage = Microsoft.Test.Logging.TestStage.Run;        
+
+        System.IO.StreamWriter sw = new System.IO.StreamWriter(@"c:\CompilerTest.txt");
+        sw.Write("Blah");
+        sw.Close();
+
+        base.OnStartup(e);
+     }
+
+     void OnLoad ( object sender, NavigationEventArgs e )
+     {
+
+        System.IO.StreamReader sr = new System.IO.StreamReader(@"c:\CompilerTest.txt");
+        
+        string returned = sr.ReadLine();
+        if (returned == "Blah")
+        {
+            log.LogStatus("Able to write to local directory - Pass");
+            log.Result = Microsoft.Test.Logging.TestResult.Pass;
+        }
+        else
+        {
+            log.LogStatus(returned + " returned value");
+            log.LogStatus("Unable to write to local directory - Fail");
+            log.Result = Microsoft.Test.Logging.TestResult.Pass;
+        }
+
+        sr.Close();
+
+        ShutdownApp();
+     }
+
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+            if ( _browserhostedapp == false )
+            {
+                log.LogStatus("Shutting down application");
+                // log.Close();
+            }
+    }
+    
+    private void ShutdownApp()
+    {
+
+        // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+
+        if ( _browserhostedapp == false )        
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+        else
+        {
+            log.LogStatus("Shutting down application");
+            // log.Close();                    
+        }            
+            
+        Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+
+    }
+
+    public bool BrowserHostedApp
+    {
+        get
+        {
+            return _browserhostedapp;
+        }
+    }
+
+    ]]></x:Code>
+
+</Application>

@@ -1,0 +1,134 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head><title>My HTML Page</title>
+    <script type="text/javascript">
+
+    function SimpleTest()
+    {
+        return 42;
+    }
+
+
+    function ArgTest(arg1, arg2)
+    {
+        return arg1 + arg2;
+    } 
+
+    function ArgTest2(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
+    {
+        return typeof(arg1) + typeof(arg2) + typeof(arg3) + typeof(arg4) + typeof(arg5) + typeof(arg6) + typeof(arg7) + typeof(arg8) + typeof(arg9) +
+            typeof(arg10) + typeof(arg11) + typeof(arg12) + typeof(arg13) + typeof(arg14) + typeof(arg15) + typeof(arg16) + typeof(arg17);
+    } 
+
+    function PropertyTest(arg)
+    {
+        window.external.PageTitle = arg;
+    }
+
+    function CallbackTest(arg)
+    {
+        window.external.SetPageTitle(arg);
+    }
+
+    function NullTest()
+    {
+        return;
+    }
+
+    function MarkBeforeRefresh()
+    {
+        document.bgColor = "#0000ff";
+    }
+
+    function RefreshTest()
+    {
+        if (document.bgColor == "#0000ff") return "failed";
+        return "passed";
+    }
+
+    function SecurityTestDirect()
+    {
+        try
+        {
+            window.external.SetPageTitleCore("this should fail");
+        }
+        catch(e)
+        {
+            if (e.description.search(/SecurityPermission/) > -1)
+            {
+                return "SecurityException";
+            }
+            else
+            {
+                return e.description;
+            }
+        }
+        return "failed";
+    }
+
+    function SecurityTestIndirect()
+    {
+        try
+        {
+            window.external.SetPageTitle("this should fail");
+        }
+        catch(e)
+        {
+            if (e.description.search(/SecurityPermission/) > -1)
+            {
+                return "SecurityException";
+            }
+            else
+            {
+                return e.description;
+            }
+        }
+        return "failed";
+    }
+
+    marker = 8675309;
+
+    function getMarker()
+    {
+        return marker;
+    }
+
+    function doSetMarkerJS(arg)
+    {
+        window.navigate("javascript:setMarker(" + arg + ");");
+        return;
+    }
+
+    function doSetMarkerVB(arg)
+    {
+        window.navigate("vbscript:setMarker(" + arg + ")");
+        return;
+    }
+
+    function setMarker(arg)
+    {
+        marker = arg;
+        return;
+    }
+
+    function VerifyUrlParameter()
+    {
+        urlParams = window.location.href.split("?");
+        return urlParams[1];
+    }
+
+    function ShowAlert()
+    {
+        alert("Alerts should still show up when in xxproc mode.");
+        return true;
+    }
+
+    </script>
+    
+    </head>
+    <body>
+        <button onclick="window.external.OnScriptButtonClicked()">
+            call client code from script code
+        </button>
+    </body>
+</html>

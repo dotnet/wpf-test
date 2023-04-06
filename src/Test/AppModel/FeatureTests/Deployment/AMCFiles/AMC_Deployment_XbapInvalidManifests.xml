@@ -1,0 +1,54 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+	<TestLogStep Name="Invalid Deployment Scenarios - Missing Component from Deployment manifest">
+            <ActivationStep Method="launch" Scheme="Local" FileName="MissingFile\SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <PassIfSeenHandler WindowTitle="RegExp:(Internet Explorer)" ProcessName="iexplore" AutomationElementAndValue="LogFileButton" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="Invalid Deployment Scenarios - Empty Deployment manifest">
+            <ActivationStep  Method="launch" Scheme="Local" FileName="EmptyXbap\SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <PassIfSeenHandler WindowTitle="RegExp:(Internet Explorer)" ProcessName="iexplore" AutomationElementAndValue="LogFileButton" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="Invalid Deployment Scenarios - Empty App manifest ">
+          <ActivationStep  Method="launch" Scheme="Local" FileName="EmptyAppManifest\SimpleBrowserHostedApplication.xbap">
+              <ActivationStep.UIHandlers>
+                  <PassIfSeenHandler WindowTitle="RegExp:(Internet Explorer)" ProcessName="iexplore" AutomationElementAndValue="LogFileButton" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="Invalid Deployment Scenarios - Corrupt Deployment Manifest">
+          <ActivationStep  Method="launch" Scheme="Local" FileName="CorruptXbap\SimpleBrowserHostedApplication.xbap">
+              <ActivationStep.UIHandlers>
+                  <PassIfSeenHandler WindowTitle="RegExp:(Internet Explorer)" ProcessName="iexplore" AutomationElementAndValue="LogFileButton" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="Invalid Deployment Scenarios - Corrupt Application Manifest">
+          <ActivationStep  Method="launch" Scheme="Local" FileName="CorruptAppManifest\SimpleBrowserHostedApplication.xbap">
+              <ActivationStep.UIHandlers>
+                  <PassIfSeenHandler WindowTitle="RegExp:(Internet Explorer)" ProcessName="iexplore" AutomationElementAndValue="LogFileButton" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Invalid Deployment Scenarios - Corrupt Exe">
+            <ActivationStep Method="launch" Scheme="Local" FileName="CorruptExe\SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <PassIfSeenHandler WindowTitle="RegExp:(Internet Explorer)" ProcessName="IExplore" AutomationElementAndValue="LogFileButton" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+       
+     </Steps>
+</AppMonitorConfig>

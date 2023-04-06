@@ -1,0 +1,32 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <StackPanel>
+    <TextBlock>
+      <Hyperlink Name="hlink_NavigateFrame1ToWebOC" NavigateUri="http://www.msnbc.com" TargetName="frame1">FRAME 1 :: Navigate to HTML</Hyperlink>
+      <LineBreak />
+      <Hyperlink Name="hlink_LaunchPFFromFrame1" NavigateUri="MarkupStrPF1.xaml" TargetName="frame1">FRAME 1 :: Launch PageFunction</Hyperlink>
+      <LineBreak />
+      <LineBreak />
+      <Hyperlink Name="hlink_NavigateFrame2ToWebOC" NavigateUri="http://www.microsoft.com" TargetName="frame2">FRAME 2 :: Navigate to HTML</Hyperlink>
+      <LineBreak />
+      <Hyperlink Name="hlink_NavigateFrame2ToPage" TargetName="frame2" NavigateUri="OverlapWebOCFrames_Frame1Contents.xaml">FRAME 2 :: Navigate to XAML</Hyperlink>
+      <LineBreak />
+    </TextBlock>
+    <Grid ShowGridLines="True" Background="AntiqueWhite">
+      <Grid.ColumnDefinitions>
+      <ColumnDefinition />
+      <ColumnDefinition />
+      <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+      <RowDefinition />
+      <RowDefinition />
+      <RowDefinition />
+      </Grid.RowDefinitions>
+
+      <Frame Name="frame1" Grid.Column="0" Grid.Row="0" Width="800" Height="500" Source="OverlapWebOCFrames_Frame1Contents.xaml" />
+      <Frame Name="frame2" Grid.Column="1" Grid.Row="0" Width="800" Height="500" Source="OverlapWebOCFrames_Frame2Contents.xaml" />
+
+    </Grid>
+  </StackPanel>
+</Page>

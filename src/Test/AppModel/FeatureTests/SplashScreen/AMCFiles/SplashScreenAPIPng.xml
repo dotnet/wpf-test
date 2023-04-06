@@ -1,0 +1,41 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary" />
+ <Using Namespace="Microsoft.Test.AppModel.SplashScreen" Assembly="SplashScreenLibrary" />
+
+     <Steps>
+
+	<TestLogStep Name="SplashScreen:Local Resource, Png content">
+            <ActivationStep Arguments="shell:splash2.png none false" FileName="SplashScreenTestApp.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestApp" ExpectedFadeTime="3000" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SplashScreen:DLL Resource, Png content">
+            <ActivationStep Arguments="shell:splash2.png SplashScreenLibrary.dll false" FileName="SplashScreenTestApp.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestApp" ExpectedFadeTime="3000" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SplashScreen:Local Resource, Png content, Force Premature Close">
+            <ActivationStep Arguments="shell:splash2.png none true" FileName="SplashScreenTestApp.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestApp" ExpectedFadeTime="3000" AppWillForceCloseSplash="True" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SplashScreen:DLL Resource, Png content, Force Premature Close">
+            <ActivationStep Arguments="shell:splash2.png SplashScreenLibrary.dll true" FileName="SplashScreenTestApp.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestApp" ExpectedFadeTime="3000" AppWillForceCloseSplash="True" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+    </Steps>
+
+</AppMonitorConfig>

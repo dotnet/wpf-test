@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <RootNamespace>Microsoft.Windows.Test.Client.AppSec.P1</RootNamespace>
+    <AssemblyName>DialogTests</AssemblyName>
+    <PublishDir>$(PublishDir)\DialogTests</PublishDir>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+    <UseTools>True</UseTools>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="CheckBlockage.cs" />
+    <Compile Include="DialogErrorCases.cs" />
+    <Compile Include="DialogModality1.cs" />
+    <Compile Include="DialogOnStarting.cs" />
+    <Compile Include="DialogReset.cs" />
+    <Compile Include="DialogRetValTests.cs" />
+    <Compile Include="DialogUtils.cs" />
+    <Compile Include="DialogWindowCount.cs" />
+    <Compile Include="ManualClose.cs" />
+    <Compile Include="multidialog.cs" />
+    <Compile Include="main.cs" />
+    <Compile Include="baseclasses.cs" />
+    <Content Include="automationperm.secman">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="automation_unmgd.secman">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="unresfs.secman">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+        <ProjectReference Include="$(InternalUtilitiesProject)" />
+        <ProjectReference Include="$(TestContractsProject)" />
+        <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+
+
+</Project>

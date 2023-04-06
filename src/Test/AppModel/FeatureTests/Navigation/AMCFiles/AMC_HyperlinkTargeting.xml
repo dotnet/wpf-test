@@ -1,0 +1,24 @@
+﻿<AppMonitorConfig>
+    <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Navigation" Assembly="NavigationTestLibrary"/>
+    <Using Namespace="Microsoft.Test.Deployment" Assembly="NavigationTestLibrary"/>
+    <Steps>
+      <TestLogStep Name="Hyperlink Targeting">
+        <FileHostStep UserDefinedDirectory="HyperlinkTargeting">
+
+            <FileHostStep.SupportFiles>
+                <SupportFile Name="HlinkTargeting_Loose.xaml" IncludeDependencies="true" />
+                <SupportFile Name="FramePage_Loose.xaml" IncludeDependencies="true" />
+                <SupportFile Name="WebPage1_Loose.html" IncludeDependencies="true" />
+            </FileHostStep.SupportFiles>
+
+            <ActivationStep Method="launch" Scheme="Local" FileName="HlinkTargeting_Loose.xaml">
+                <ActivationStep.UIHandlers>
+                  <HyperlinkTargetingHandlerBrowser WindowTitle="RegExp:(HyperlinkTargetingBVT)" />
+                  <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep> 
+
+        </FileHostStep>
+      </TestLogStep>
+    </Steps>
+</AppMonitorConfig>

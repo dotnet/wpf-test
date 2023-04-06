@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+    using System;
+    using System.Windows;
+    using System.Windows.Navigation;
+    using System.Data;
+    using System.Xml;
+    using System.Configuration;
+
+    namespace Microsoft.Test.AppModel.Compilation
+    {
+        /// &lt;summary&gt;
+        /// Interaction logic for MyApp.xaml
+        /// &lt;/summary&gt;  
+        public partial class TestApp : Application
+        {
+            Microsoft.Test.Logging.TestLog log = null;
+            bool _browserhostedapp = false;
+
+            /// &lt;summary&gt;
+            /// Application Startup custom setup.
+            /// &lt;/summary&gt;
+            /// &lt;param name="e"&gt;&lt;/param&gt;
+            protected override void OnStartup(System.Windows.StartupEventArgs e)
+            {
+                log = Microsoft.Test.Logging.TestLog.Current; 
+                // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+
+                if (AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap"))
+                {
+                    _browserhostedapp = true;
+                }
+
+                log.LogStatus("Hooking up Navigation events");
+                this.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+
+                log.LogStatus("OnStartup method - done");
+
+                // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+                base.OnStartup(e);
+            }
+
+            /// &lt;summary&gt;
+            /// All resources in the Application Xaml page are loaded.
+            /// &lt;/summary&gt;
+            /// &lt;param name="sender"&gt;&lt;/param&gt;
+            /// &lt;param name="e"&gt;&lt;/param&gt;
+            void OnLoad(object sender, NavigationEventArgs e)
+            {
+                log.LogStatus("LoadCompleted event fired");
+                log.Result = Microsoft.Test.Logging.TestResult.Pass;
+
+                ShutdownApp();
+            }
+
+            /// &lt;summary&gt;
+            /// Application closing down, do some cleanup.
+            /// &lt;/summary&gt;
+            /// &lt;param name="e"&gt;&lt;/param&gt;
+            protected override void OnExit(ExitEventArgs e)
+            {
+                if (_browserhostedapp == false)
+                {
+                    log.LogStatus("Shutting down application");
+                    // log.Close();
+                }
+            }
+
+            /// &lt;summary&gt;
+            /// If browserhosted do not call Application shutdown.
+            /// &lt;/summary&gt;
+            private void ShutdownApp()
+            {
+
+                // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+                log.LogStatus("ShutdownApp - BrowserHostedApp : " + _browserhostedapp.ToString());
+
+                if (_browserhostedapp == false)
+                {
+                    System.Windows.Application.Current.Shutdown();
+                }
+                else
+                {
+                    log.LogStatus("Shutting down application");
+                    // log.Close();
+                }
+
+                Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+
+            }
+
+            /// &lt;summary&gt;
+            /// Browserhosted property.
+            /// &lt;/summary&gt;
+            public bool BrowserHostedApp
+            {
+                get
+                {
+                    return _browserhostedapp;
+                }
+          }
+        }
+    }
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>BasicAppDefCodeBehind</FileName>
+      <FileExtension>.xaml.cs</FileExtension>
+      <IsXmlDocument>false</IsXmlDocument>
+      <RetainFileName>true</RetainFileName>
+    </Defaults>
+    <Scenario Case="1">
+    </Scenario>
+  </Scenarios>
+    
+</XMLVariationTemplate>

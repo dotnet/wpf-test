@@ -1,0 +1,9 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="170 - Compile with StrongNameKeyFile property set">
+      <MSBuildStep CurrentStage="Run" Arguments="SignedTest.proj /p:TargetType=winexe" />
+      <ActivationStep FileName="&amp;ExecutableFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

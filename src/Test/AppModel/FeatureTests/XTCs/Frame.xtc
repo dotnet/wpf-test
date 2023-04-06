@@ -1,0 +1,520 @@
+<XTC>
+<DEFAULTTESTINFO
+	Type="Functional" 
+     	Area="AppModel" 
+     	SubArea="Frame" >
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                  Assembly="TestRuntime" 
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  />
+    <Deployments>
+      <Deployment>FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment</Deployment>
+    </Deployments>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.dll" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+    </SupportFiles>
+</DEFAULTTESTINFO>
+	  
+<TEST Name="FrameLoadCompleted" 
+      Priority="0" 
+      Timeout="120"
+      Description="FrameLoadCompleted - Programmatic Navigation of FramesMajor action:  
+                  Programmatic navigation of frames" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe FrameLoadCompleted" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FrameRelativeUriStandalone" 
+      Priority="0" 
+      Timeout="120"
+      Description="FrameRelativeUriStandalone - Relative URIs for Frames work correctlyMajor 
+          action:  Relative URIs for Frames work correctly" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe FrameRelativeUri" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FrameJournaling" 
+      Priority="0" 
+      Timeout="120"
+      Description="FrameJournaling - Navigations in frames are entered in the journal and 
+           revisited in the correct order while on the same top-level pageMajor action:  
+           Navigations in frames are entered in the journal and revisited in the correct 
+           order while on the same top-level page" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe FrameJournaling" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="SubclassNavContainerStandalone" 
+      Priority="0" 
+      Timeout="120"
+      Description="SubclassNavContainerStandalone - Able to subclass NavigationContainer to build 
+           your own FrameMajor action:  Able to subclass NavigationContainer to build your own 
+           Frame" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe SubclassNavContainer" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+<!--
+<TEST Name="FrameRelativeUriBrowser" 
+      Priority="0" 
+      Timeout="120"
+      Description="FrameRelativeUriBrowser - Relative URIs for Frames work correctly - browserMajor 
+           action:  Verify that relative URIs for frames work in the browser." >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Browser.xbap FrameRelativeUri" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="SubclassNavContainerBrowser" 
+      Priority="0" 
+      Timeout="120"
+      Description="SubclassNavContainerBrowser - Able to subclass NavigationContainer to build 
+           your own Frame - browserMajor action:  Tests the ability to subclass NavigationContainer.
+           " >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Browser.xbap SubclassNavContainer" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="GetNavigationServiceBrowser" 
+      Priority="0" 
+      Timeout="120"
+      Description="GetNavigationServiceBrowser - browserMajor action:  Call GetNavigationService on 
+          a Frame, NavigationWindow, Frame/NavigationWindow content and an object with no 
+          NavigationService (not contained in Frame/NavWin)Pass condition:  Verify that 
+          NavigationService returned for the DependencyObj is equal to the NavigationService 
+          of its closest NavWin/Frame ancestor.  If the DependencyObj is a Frame/NavWin, then the 
+          NavigationService returned is the one set on it." >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Browser.xbap GetNavigationService" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+   </SupportFiles>
+</TEST>-->
+
+<TEST Name="GetNavigationServiceStandalone" 
+      Priority="0" 
+      Timeout="120"
+      Description="GetNavigationServiceStandalone - standaloneMajor action:  Call GetNavigationService 
+          on a Frame, NavigationWindow, Frame/NavigationWindow content and an object with no 
+          NavigationService (not contained in Frame/NavWin)Pass condition:  Verify that 
+          NavigationService returned for the DependencyObj is equal to the NavigationService 
+          of its closest NavWin/Frame ancestor.  If the DependencyObj is a Frame/NavWin, then 
+          the NavigationService returned is the one set on it." >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe GetNavigationService" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+<!--
+<TEST Name="NavigateToObjectBrowser" 
+      Priority="0" 
+      Timeout="120"
+      Description="NavigateToObjectBrowser - browserMajor action:  Navigate to displayable XAML, 
+           displayable object tree (created programmatically), String, Image, styled and unstyled 
+           FrameworkContentElementsPass condition:  Verify that for displayable objects (XAML, 
+           object tree, styled FrameworkContentElement), logical tree has the expected structure 
+           and content.  For non-displayable objects (String, Image, unstyled FrameworkContentElement),
+           the object becomes the direct content of the NavWin" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Browser.xbap NavigateToObject" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+   </SupportFiles>
+</TEST>-->
+
+<TEST Name="NavigateToObjectStandalone" 
+      Priority="0" 
+      Timeout="120"
+      Description="NavigateToObjectStandalone - standaloneMajor action:  Navigate to displayable XAML, 
+           displayable object tree (created programmatically), String, Image, styled and unstyled 
+           FrameworkContentElementsPass condition:  Verify that for displayable objects (XAML, 
+           object tree, styled FrameworkContentElement), logical tree has the expected structure 
+           and content.  For non-displayable objects (String, Image, unstyled FrameworkContentElement),
+           the object becomes the direct content of the NavWin" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe NavigateToObject" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+-->
+<TEST Name="NavigateFrameInPFStandalone" 
+      Priority="0" 
+      Timeout="120"
+      Description="NavigateFrameInPFStandalone - standaloneMajor action:  NavigateFrameInPF tests 
+          that we are able to:  [1] navigate via a Hyperlink to a PageFunction containing a Frame,   
+          [2] navigate the Frame within the PageFunction using a Hyperlink  [3] navigate away from 
+          the PF, without returning to its parent  [4] GoBack and check PF and Frame contents, as 
+          well as journal statePass condition:  Checks current Window title, back/fwd journal entries, 
+          whether back/fwd buttons are enabled and current NavigationWindow/Frame Source URIs after 
+          each navigation" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe NavigateFrameInPF" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+   <Keywords>
+     <Keyword>MicroSuite</Keyword>
+   </Keywords>
+</TEST>
+<!--
+<TEST Name="NavigateFrameInPFBrowser" 
+      Priority="0" 
+      Timeout="120"
+      Description="NavigateFrameInPFBrowser - browserMajor action:  NavigateFrameInPF tests that we 
+          are able to:  [1] navigate via a Hyperlink to a PageFunction containing a Frame,   
+          [2] navigate the Frame within the PageFunction using a Hyperlink  [3] navigate away from 
+          the PF, without returning to its parent  [4] GoBack and check PF and Frame contents, as 
+          well as journal statePass condition:  Checks current Window title, back/fwd journal entries, 
+          whether back/fwd buttons are enabled and current NavigationWindow/Frame Source URIs after 
+          each navigation" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Browser.xbap NavigateFrameInPF" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NavigateFrameToObjectBrowser" 
+      Priority="0" 
+      Timeout="120"
+      Description="NavigateFrameToObjectBrowser - browserMajor action:  NavigateFrameToObject tests 
+          several things using a Hyperlink contained in a Frame, including:  [1] Hyperlink navigation 
+          to PageFunction  [2] Hyperlink navigation to a non-Page/PageFunction object (i.e. Image?)  
+          [3] Hyperlink navigation to a Page containing a Frame, and then navigating the nested Frames 
+          Pass condition:  Checks current Window title, back/fwd journal entries, whether back/fwd 
+          buttons are enabled and current NavigationWindow/Frame Source URIs after each navigation" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Browser.xbap NavigateFrameToObject" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+   </SupportFiles>
+   <Bugs>
+      <Bug Id="40488" Source="IEOESE"  />
+      <Bug Id="1124899" Source="WOOBR" />
+   </Bugs>
+</TEST>-->
+
+<TEST Name="NavigateFrameToObjectStandalone" 
+      Priority="0" 
+      Timeout="120"
+      Description="NavigateFrameToObjectStandalone - standaloneMajor action:  NavigateFrameToObject 
+         tests several things using a Hyperlink contained in a Frame, including:  [1] Hyperlink 
+         navigation to PageFunction  [2] Hyperlink navigation to a non-Page/PageFunction object 
+         (i.e. Image?)  [3] Hyperlink navigation to a Page containing a Frame, and then navigating 
+         the nested Frames Pass condition:  Checks current Window title, back/fwd journal entries, 
+         whether back/fwd buttons are enabled and current NavigationWindow/Frame Source URIs after 
+         each navigation" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe NavigateFrameToObject" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="LooseXamlStandalone" 
+      Priority="0" 
+      Timeout="120"
+      Description="LooseXamlStandalone - standaloneMajor action:  The LooseXaml BVT suite checks the 
+         functionality of various navigations to loose xaml files.  The following scenarios are 
+         covered:[1] Navigate to uncompiled loose xaml Page1.xaml via absolute Uri[2] Go back to 
+         uncompiled loose xaml via the journal[3] Navigate to content loose xaml Page2.xaml via 
+         hyperlink in Page1.xaml (pack://siteoforigin:,,,/Page2.xaml)[4] Navigate to html containing 
+         IFrame with loose XAML source (http://wpfapps/testscratch/LooseXaml/banana.html)[5] Navigate 
+         to a fragment on a content loose xaml page[6] Return to fragment on a content loose xaml 
+         page via the journal.Pass condition:  All the navigations are successful." >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Standalone.exe LooseXaml"
+      LooseXaml_NavigationContainer="frame" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+<!--
+<TEST Name="LooseXamlBrowser" 
+      Priority="0"
+      Timeout="120"
+      Description="LooseXamlBrowser - browserMajor action:  The LooseXaml BVT suite checks the 
+         functionality of various navigations to loose xaml files.  The following scenarios are 
+         covered:[1] Navigate to uncompiled loose xaml Page1.xaml via absolute Uri[2] Go back to 
+         uncompiled loose xaml via the journal[3] Navigate to content loose xaml Page2.xaml via 
+         hyperlink in Page1.xaml (pack://siteoforigin:,,,/Page2.xaml)[4] Navigate to html containing 
+         IFrame with loose XAML source (http://wpfapps/testscratch/LooseXaml/banana.html)[5] Navigate 
+         to a fragment on a content loose xaml page[6] Return to fragment on a content loose xaml 
+         page via the journal.Pass condition:  All the navigations are successful." >
+   <Driver Executable="sti.exe" />
+   <DriverParameters MethodParams="NavigationTests_Browser.xbap LooseXaml" 
+      LooseXaml_NavigationContainer="frame" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+   </SupportFiles>
+   <Bugs>
+      <Bug Id="40488" Source="IEOESE"  />
+      <Bug Id="1124899" Source="WOOBR" />
+   </Bugs>
+</TEST>-->
+
+<TEST Name="FrameFocusStandalone"
+      Priority="1"
+      Timeout="120"
+      Description="FrameFocusStandalone - Verify control doesn't retain the focus after navigating 
+         back to the frame." >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Standalone.exe FrameFocus" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+<!--
+<TEST Name="FrameFocusBrowser"
+    Priority="1"      
+    Timeout="120"
+    Description="FrameFocusBrowser - Verify control doesn't retain the focus after navigating back 
+         to the frame." >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Browser.xbap FrameFocus" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="FrameNavigationEventsBrowser"
+      Priority="1"
+      Timeout="120"
+      Description="FrameNavigationEventsBrowser - Verify navigation events on a frame." >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Browser.xbap FrameNavigationEvents" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>-->
+
+<TEST Name="FrameNavigationEventsStandalone"
+      Priority="1"
+      Timeout="120"
+      Description="FrameNavigationEventsStandalone - Verify navigation events on a frame." >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Standalone.exe FrameNavigationEvents" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+<!--
+<TEST Name="FrameSourceNavigationBrowser"
+      Priority="1"
+      Timeout="120"
+      Description="FrameSourceNavigationBrowser - tests that the Frame Source public
+                   property is updated when the Navigating event is fired." >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Browser.xbap FrameSourceNavigation" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>-->
+
+<TEST Name="FrameSourceNavigationStandalone"
+      Priority="1"
+      Timeout="120"
+      Description="FrameSourceNavigationStandalone - tests that the Frame Source public
+                   property is updated when the Navigating event is fired." >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Standalone.exe FrameSourceNavigation" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+<!--
+<TEST Name="NestedFrameNavigationBrowser"
+      Priority="1"
+      Timeout="120"
+      Description="NestedFrameNavigationBrowser - NestedFrameNavigation tests navigations with inner and outer frames. 
+                 " >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Browser.xbap NestedFrameNavigation" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+   <Bugs>
+      <Bug Id="40488" Source="IEOESE"  />
+      <Bug Id="1124899" Source="WOOBR" />
+   </Bugs>
+</TEST>-->
+
+<TEST Name="NestedFrameNavigationStandalone"
+      Priority="1"
+      Timeout="120"
+      Description="NestedFrameNavigationStandalone - NestedFrameNavigation tests navigations with inner and outer frames. 
+                 " >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Standalone.exe NestedFrameNavigation" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="JournalOwnershipAutomatic"
+      Priority="1"
+      Timeout="120"
+      Description="JournalOwnershipAutomatic - Test case to verify the behaviour of JournalOwnership.Automatic property on a frame
+                 This will also verify NavigationUIVisibility property on a frame. 
+                 " >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Standalone.exe JournalOwnershipTest"
+                JournalOwnershipTest="Automatic"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="JournalOwnershipOwnsJournal"
+      Priority="1"
+      Timeout="120"
+      Description="JournalOwnershipOwnsJournal - Test case to verify the behaviour of JournalOwnership.OwnsJournal property on a frame
+               This will also verify NavigationUIVisibility property on a frame. 
+               " >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Standalone.exe JournalOwnershipTest"
+                JournalOwnershipTest="OwnsJournal"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="JournalOwnershipUsesParentJournal"
+      Priority="1"
+      Timeout="120"
+      Description="JournalOwnershipUsesParentJournal - Test case to verify the behaviour of JournalOwnership.UsesParentJournal property on a frame
+             This will also verify NavigationUIVisibility property on a frame. 
+             l" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters MethodParams="NavigationTests_Standalone.exe JournalOwnershipTest"
+                JournalOwnershipTest="UsesParentJournal"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+<!--
+<TEST Name="NavigateToNullUriWithRemoveBackEntry"
+      Priority="1"
+      Type="Functional"
+      Timeout="120"
+      Description="[ID: NavigateToNullUriWithRemoveBackEntry] [DESCRIPTION] Frame retains journal after navigating to NULL" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication"
+                MethodParams="NavigationTests_Browser.xbap FrameNavigateToNull"
+                NullVariation="Uri"
+                RemoveBackEntry="True"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="NavigateToNullObjectWithRemoveBackEntry"
+      Priority="1"
+      Type="Functional"
+      Timeout="120"
+      Description="[ID: NavigateToNullObjectWithRemoveBackEntry] [DESCRIPTION] Frame retains journal after navigating to NULL" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication"
+                MethodParams="NavigationTests_Browser.xbap FrameNavigateToNull"
+                NullVariation="Object"
+                RemoveBackEntry="True"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="NavigateToNullSourceWithRemoveBackEntry"
+      Priority="1"
+      Type="Functional"
+      Timeout="120"
+      Description="[ID: NavigateToNullSourceWithRemoveBackEntry] [DESCRIPTION] Frame retains journal after navigating to NULL" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication"
+                MethodParams="NavigationTests_Browser.xbap FrameNavigateToNull"
+                NullVariation="Source"
+                RemoveBackEntry="True"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="NavigateToNullUri"
+      Priority="1"
+      Type="Functional"
+      Timeout="120"
+      Description="[ID: NavigateToNullUri] [DESCRIPTION] Frame retains journal after navigating to NULL" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication"
+                MethodParams="NavigationTests_Browser.xbap FrameNavigateToNull"
+                NullVariation="Uri"
+                RemoveBackEntry="False"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="NavigateToNullObject"
+      Priority="1"
+      Type="Functional"
+      Timeout="120"
+      Description="[ID: NavigateToNullObject] [DESCRIPTION] Frame retains journal after navigating to NULL" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication"
+                MethodParams="NavigationTests_Browser.xbap FrameNavigateToNull"
+                NullVariation="Object"
+                RemoveBackEntry="False"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="NavigateToNullSource"
+      Priority="1"
+      Type="Functional"
+      Timeout="120"
+      Description="[ID: NavigateToNullSource] [DESCRIPTION] Frame retains journal after navigating to NULL" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication"
+                MethodParams="NavigationTests_Browser.xbap FrameNavigateToNull"
+                NullVariation="Source"
+                RemoveBackEntry="False"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+  </SupportFiles>
+</TEST>-->
+  
+</XTC>
+

@@ -1,0 +1,10 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="173 - Compile with Explicit Load - Deploy">
+      <MSBuildStep CurrentStage="Run" Arguments="MyWindowComponent.proj " />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="LoadExplicit.proj " AlwaysRun="True" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

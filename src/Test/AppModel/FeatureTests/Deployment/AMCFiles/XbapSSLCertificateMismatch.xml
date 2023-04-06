@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+   <Steps>
+
+ 	<TestLogStep Name="SSL Certificate Mismatch Error Case (Ensures no Watson/WER)">
+           <InvalidActivationStep Method="launch" InvalidateScheme="HTTPSMismatchedCertificate" FileName="SimpleBrowserHostedApplication.xbap">
+               <InvalidActivationStep.UIHandlers>
+                   <BrowserAppExceptionHandler NamedRegistration="BrowserExceptionLogger" Action="PassOnSpecificException" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ExceptionString="PresentationHost.exe" />
+               </InvalidActivationStep.UIHandlers>
+               <InvalidActivationStep.SupportFiles>
+                   <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               </InvalidActivationStep.SupportFiles>
+           </InvalidActivationStep>
+	</TestLogStep>
+  </Steps>
+</AppMonitorConfig>

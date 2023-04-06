@@ -1,0 +1,78 @@
+<AppMonitorConfig>
+<Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+ 	
+         <FileHostStep >
+             <FileHostStep.SupportFiles>
+              <SupportFile Name="WebOCXBAP_GetCookie.xbap" IncludeDependencies="true" />
+	      <SupportFile Name="GetnSetPersistentCookie.html" IncludeDependencies="false" />
+	      <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+	      <SupportFile Name="SimpleCleanup.html" IncludeDependencies="false" />
+             </FileHostStep.SupportFiles>
+
+
+	<TestLogStep Name="Verifying HTML cookie - HTTPS Internet">
+           <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="WebOCXBAP_GetCookie.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Ready for the next step)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NewPersistentCookie=Cookie_detected)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleCleanup.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+	</TestLogStep>
+       </FileHostStep>
+
+
+       <FileHostStep>
+           <FileHostStep.SupportFiles>
+              <SupportFile Name="WebOCXBAP_GetCookie.xbap" IncludeDependencies="true" />
+	      <SupportFile Name="GetnSetPersistentCookie.html" IncludeDependencies="false" />
+	      <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+	      <SupportFile Name="SimpleCleanup.html" IncludeDependencies="false" />
+       </FileHostStep.SupportFiles>
+      
+        <TestLogStep Name="Verifying HTML cookie - HTTPS Intranet">
+           <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="WebOCXBAP_GetCookie.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Ready for the next step)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+           <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NewPersistentCookie=Cookie_detected)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="SimpleCleanup.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+
+  </Steps>
+</AppMonitorConfig>

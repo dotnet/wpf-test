@@ -1,0 +1,71 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+                <SupportFile Name="deploy_markup2.xaml" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Navigate Loose .XAML Markup Test Log - Local">
+           <ActivationStep Method="Navigate" Scheme="Local" FileName="deploy_markup2.xaml">
+              <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 2)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Navigate Loose .XAML Markup Test Log - UNC">
+           <ActivationStep ClearFusionCache="False" Method="Navigate" Scheme="UNC" FileName="deploy_markup2.xaml">
+              <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 2)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Navigate Loose .XAML Markup Test Log - HTTP Intranet">
+           <ActivationStep ClearFusionCache="False" Method="Navigate" Scheme="HttpIntranet" FileName="deploy_markup2.xaml">
+              <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 2)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Navigate Loose .XAML Markup Test Log - HTTP Internet">
+           <ActivationStep ClearFusionCache="False" Method="Navigate" Scheme="HttpInternet" FileName="deploy_markup2.xaml">
+              <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 2)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Navigate Loose .XAML Markup Test Log - HTTPS Intranet">
+           <ActivationStep ClearFusionCache="False" Method="Navigate" Scheme="HttpsIntranet" FileName="deploy_markup2.xaml">
+              <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 2)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+        </FileHostStep>
+
+	<TestLogStep Name="Navigate Loose .XAML Markup Test Log - HTTPS Internet">
+         <ActivationStep ClearFusionCache="False" Method="Navigate" Scheme="HttpsInternet" FileName="deploy_markup2.xaml">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="xamlTestButton;LooseXaml" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 2)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+             </ActivationStep.UIHandlers>
+             <ActivationStep.SupportFiles>
+                <SupportFile Name="deploy_markup2.xaml" IncludeDependencies="true" />
+             </ActivationStep.SupportFiles>
+         </ActivationStep>
+	</TestLogStep>
+
+       
+     </Steps>
+</AppMonitorConfig>

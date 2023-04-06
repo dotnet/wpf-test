@@ -1,0 +1,130 @@
+<XMLVariationTemplate>
+    <TemplateData>
+
+    using System;
+
+    using System.Windows;
+    using System.Windows.Navigation;
+    using System.Windows.Controls;
+
+    namespace TestDll
+    {
+        public class OnStartupBVT : System.Windows.Application
+        {
+
+            Microsoft.Test.Logging.TestLog log = null;
+            bool _browserhostedapp = false;
+
+            protected override void OnStartup(System.Windows.StartupEventArgs e)
+            {
+                log = Microsoft.Test.Logging.TestLog.Current; 
+                // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+
+                if (AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap"))
+                {
+                _browserhostedapp = true;
+                }
+
+                this.StartupUri = new Uri(@"Simple.xaml", UriKind.RelativeOrAbsolute);
+                this.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+
+                // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+                base.OnStartup(e);
+            }
+
+            void OnLoad(object sender, NavigationEventArgs e)
+            {
+                log.LogStatus("LoadCompleted event fired");
+                log.Result = Microsoft.Test.Logging.TestResult.Pass;
+
+                ShutdownApp();
+            }
+
+            protected override void OnExit(ExitEventArgs e)
+            {
+                if (_browserhostedapp == false)
+                {
+                    log.LogStatus("Shutting down application");
+                    // log.Close();
+                }
+            }
+
+            private void ShutdownApp()
+            {
+
+                // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+
+                if (_browserhostedapp == false)
+                {
+                    System.Windows.Application.Current.Shutdown();
+                }
+                else
+                {
+                    log.LogStatus("Shutting down application");
+                    // log.Close();
+                }
+
+                Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+
+            }
+
+            public bool BrowserHostedApp
+            {
+                get
+                {
+                    return _browserhostedapp;
+                }
+            }
+        }
+
+        <NodeVariation ID="1" >
+            <NodeVariation ID="2"></NodeVariation>
+            <NodeVariation ID="3"></NodeVariation>
+        </NodeVariation>                        
+                    
+        /// <summary>
+        /// EntryPoint
+        ///</summary>
+        public class EntryPoint
+        {
+
+            /// <summary>
+            /// Application Entry Point: Main
+            /// </summary>
+            [System.STAThread()]
+            public static int Main(string[] args)
+            {
+            System.Threading.Thread.CurrentThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            OnStartupBVT app = new OnStartupBVT();
+            return app.Run();
+            }
+        }
+
+    }    
+
+
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>CodeforAppdef</FileName>
+            <FileExtension>.cs</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+            <NodeVariation ID="1"></NodeVariation>
+        </Scenario>
+        <Scenario Case="2">
+            <NodeVariation ID="1"></NodeVariation>
+        </Scenario>
+        <Scenario Case="3">
+            <NodeVariation ID="1"></NodeVariation>
+        </Scenario>
+        <Scenario Case="4">
+            <NodeVariation ID="1"></NodeVariation>
+        </Scenario>
+
+    </Scenarios>
+</XMLVariationTemplate>
+

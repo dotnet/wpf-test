@@ -1,0 +1,66 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <FileHostStep>
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="ExpressAppIntranetZone.xbap" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+        <TestLogStep Name="FIREFOX - Verifying Intranet Express app behavior test log - Local">
+          <ActivationStep Method="launch" Scheme="Local" FileName="ExpressAppIntranetZone.xbap">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Intranet) Granted"  ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="ExpressAppIntranetZone" IsAppShellVisible="false" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="FIREFOX - Verifying Intranet Express app behavior test log - UNC">
+          <ActivationStep Method="launch" Scheme="UNC" FileName="ExpressAppIntranetZone.xbap">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Intranet) Granted"  ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="ExpressAppIntranetZone" IsAppShellVisible="false" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="FIREFOX - Verifying Intranet Express app behavior test log - HTTP Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="ExpressAppIntranetZone.xbap">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Intranet) Granted"  ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="ExpressAppIntranetZone" IsAppShellVisible="false" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="FIREFOX - Verifying Intranet Express app behavior test log - HTTPS Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="ExpressAppIntranetZone.xbap">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Intranet) Granted"  ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="ExpressAppIntranetZone" IsAppShellVisible="false" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="FIREFOX - Verifying Intranet Express app behavior test log - HTTP internet (Expected to fail)">
+          <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="ExpressAppIntranetZone.xbap">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler AutomationElementAndValue="LogFileButton" ProcessName="firefox" WindowTitle="RegExp:(ExpressAppIntranetZone)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+      </FileHostStep>
+
+      <TestLogStep Name="FIREFOX - Verifying Intranet Express app behavior test log - HTTP internet (Expected to fail)">
+        <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="ExpressAppIntranetZone.xbap">
+          <ActivationStep.UIHandlers>
+            <PassIfSeenHandler AutomationElementAndValue="LogFileButton" ProcessName="firefox" WindowTitle="RegExp:(ExpressAppIntranetZone)"/>
+          </ActivationStep.UIHandlers>
+          <ActivationStep.SupportFiles>
+            <SupportFile Name="ExpressAppIntranetZone.xbap" IncludeDependencies="true" />
+          </ActivationStep.SupportFiles>
+        </ActivationStep>
+      </TestLogStep>
+      
+    
+  </Steps>
+</AppMonitorConfig>

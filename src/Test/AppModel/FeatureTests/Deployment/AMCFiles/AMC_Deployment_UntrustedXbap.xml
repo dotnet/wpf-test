@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+	<TestLogStep Name="SSL Cert test - Launching.xbap signed with &quot;Untrusted&quot; Publisher certificate ">
+            <SSLCertificateStep PathToCert="AvalonTestUntrusted.pfx" StoreName="Disallowed" StoreLocation="LocalMachine" />
+
+            <ActivationStep Method="launch" Scheme="Local" FileName="UntrustedExpressApp.xbap">
+               <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="IExplore" AutomationElementAndValue="LogFileButton" />
+               </ActivationStep.UIHandlers>
+            </ActivationStep>
+
+	</TestLogStep>
+     </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,34 @@
+﻿<AppMonitorConfig>
+
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+
+     <Steps>
+
+	<TestLogStep Name="Dev10 628682 Regression test - Hosted Win32 TextBox variation">
+           <ActivationStep Method="launch" Scheme="Local" FileName="SimpleStandAloneApplication.exe">
+               <ActivationStep.UIHandlers>
+                   <NestedTranslateAcceleratorRegressionHandler TestScenario="win32textbox" WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Dev10 628682 Regression test - Hosted Winforms Textbox Variation">
+           <ActivationStep Method="launch" Scheme="Local" FileName="SimpleStandAloneApplication.exe">
+               <ActivationStep.UIHandlers>
+                   <NestedTranslateAcceleratorRegressionHandler TestScenario="winFormstextbox" WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Dev10 628682 Regression test - Re-Hosted WPF textbox variation">
+           <ActivationStep Method="launch" Scheme="Local" FileName="SimpleStandAloneApplication.exe">
+               <ActivationStep.UIHandlers>
+                   <NestedTranslateAcceleratorRegressionHandler TestScenario="WpfTextBox" WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+     </Steps>
+
+</AppMonitorConfig>

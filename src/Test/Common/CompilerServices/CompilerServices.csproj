@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>CompilerServices</AssemblyName>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <OutputType>Library</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>$(DefineConstants);TRACE;TARGET_NET3_5</DefineConstants>
+    <!-- <SignAssembly>true</SignAssembly> -->
+    <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+    <DisableMSBuildAssemblyCopyCheck>true</DisableMSBuildAssemblyCopyCheck>
+
+    <!-- 
+        Due to conflicts in System.IO.Pipes.AccessControl, we need to turn this off here.  Microsoft.Build.Locator sets this
+        to true in its included props files. (see https://github.com/dotnet/corefx/issues/40978)
+    -->
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+
+  </PropertyGroup>  
+  
+  <ItemGroup>
+    <Compile Include="Microsoft\Test\CompilerServices\Logging\BuildError.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Logging\BuildLogger.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Logging\BuildLoggerInternal.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Logging\BuildStatus.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Logging\BuildStatusCollection.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Logging\BuildWarning.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Logging\ErrorWarningStore.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Logging\LogVerbosity.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Projects\Content.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Projects\Languages.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Projects\ProjectSettings.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Projects\Reference.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Projects\Resource.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\CompilationHelper_v40.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Compiler_v40.cs" />
+    <Compile Include="Microsoft\Test\CompilerServices\Projects\ProjectGenerator_v40.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+    <ProjectReference Include="$(TestContractsProject)"/>
+    <PackageReference Include="Microsoft.Build" Version="$(MicrosoftBuildPackageVersion)"/>
+    <PackageReference Include="Microsoft.Build.Framework" Version="$(MicrosoftBuildFrameworkPackageVersion)"/>
+    <PackageReference Include="Microsoft.Build.Locator" Version="$(MicrosoftBuildLocatorPackageVersion)" />
+  </ItemGroup>
+</Project>

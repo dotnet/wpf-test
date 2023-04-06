@@ -1,0 +1,49 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+          <FileHostStep.SupportFiles>
+             <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+          </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Relaunch StandAlone App from IE History Test Log - HTTP Intranet">
+
+            <ActivationStep ClearIEHistory="true" Method="navigate" Scheme="HTTPIntranet" FileName="SimpleStandAloneApplication.application">
+                <ActivationStep.UIHandlers>
+                    <StandAloneApplicationVerifier WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HTTPIntranet" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+            
+            <RelaunchStep RelaunchMethod="History" Scheme="HTTPIntranet" AppName="SimpleStandAloneApplication|Simple Stand Alone Application" >
+                <RelaunchStep.UIHandlers>
+                    <StandAloneApplicationVerifier WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HTTPIntranet" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+            <UninstallStep AppName="SimpleStandAloneApplication"/>            
+
+        </TestLogStep>
+
+	<TestLogStep Name="Relaunch StandAlone App from IE History Test Log - HTTP Internet">
+
+            <ActivationStep ClearIEHistory="true" Method="navigate" Scheme="HTTPInternet" FileName="SimpleStandAloneApplication.application">
+                <ActivationStep.UIHandlers>
+                    <StandAloneApplicationVerifier WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HTTPInternet" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+            
+            <RelaunchStep RelaunchMethod="History" Scheme="HTTPInternet" AppName="SimpleStandAloneApplication|Simple Stand Alone Application" >
+                <RelaunchStep.UIHandlers>
+                    <StandAloneApplicationVerifier WindowTitle="RegExp:(Simple Stand Alone Application)" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="HTTPInternet" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+            <UninstallStep AppName="SimpleStandAloneApplication"/>        
+
+        </TestLogStep>
+
+       </FileHostStep>
+    
+ </Steps>
+</AppMonitorConfig>

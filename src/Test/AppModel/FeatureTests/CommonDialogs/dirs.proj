@@ -1,0 +1,22 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--*****************************************************-->
+  <!--This MSBuild project file was automatically generated-->
+  <!--from the original SOURCES/DIRS file by the KBC tool.-->
+  <!--*****************************************************-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\test\Microsoft.Wpf.Test.Native.Settings.Targets" />
+  <!--Leaf project Properties-->
+  <!--Leaf Project Items-->
+  <!--The following projects will build during the default PHASE-->
+  <ItemGroup Condition="'$(BuildExePhase)' == ''">
+    <ProjectFile Include="DialogTests\DialogTests.csproj" />
+    <ProjectFile Include="CommonDialogs\dirs.proj" />
+    <ProjectFile Include="DialogResultConverter\DialogResultConverter.csproj" />
+  </ItemGroup>
+  <!-- These projects will only build for 4.0 or later -->
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5' ">
+    <ProjectFile Include="Dev10\dirs.proj" />
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\tools\Microsoft.DevDiv.Traversal.targets" />
+</Project>
