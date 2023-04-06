@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Windows.Test.Globalization.Sample.StringTable</RootNamespace>
+    <AssemblyName>StrTbl</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <UICulture>en-US</UICulture>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="strtbl_ad.xaml">
+    </ApplicationDefinition>
+    <Page Include="strtbl.xaml" />
+    <Compile Include="strtbl_ad.xaml.cs" />
+    <EmbeddedResource Include="stringtable.en-US.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(IntermediateOutputPath)\strtbl.baml">
+        <Link>%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(IntermediateOutputPath)\StrTbl.g.en-US.resources">
+        <Link>%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>GenerateWarning</AssemblyName>
+    <OutputType>winexe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="Generatewarning_App.xaml">
+    </ApplicationDefinition>
+    <Page Include="generatewarning.xaml">
+    </Page>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="$(IntermediateOutputPath)\generatewarning.baml">
+        <Link>%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(IntermediateOutputPath)\GenerateWarning.g.resources">
+        <Link>%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
