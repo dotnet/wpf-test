@@ -16,7 +16,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 {
 
     /// <summary>
-    /// This class is a regression test for DevDiv bugs # 108335:
+    /// This class is a regression test 
     /// AuthenticationManager.CredentialPolicy set by the user gets lost in NavigationService.cctor()
     /// This runs in full trust only.
     /// </summary>

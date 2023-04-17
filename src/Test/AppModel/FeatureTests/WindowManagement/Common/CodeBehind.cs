@@ -3244,7 +3244,7 @@ namespace WindowTest
         }
     }
 
-    // Regression test for DevDivBugs # 186010
+    // Regression test
     // Make sure HwndSourceParameters.Equals supports null input
     public partial class HwndSourceParametersEqualsNull
     {
@@ -3277,7 +3277,7 @@ namespace WindowTest
         }
     }
 
-    // Regression test for DevDivBugs # 189790
+    // Regression test 
     // Create a window, set Visibility to Visible, and call Close.  Expect the window to close, not be shown.
     public partial class VisibleBeforeClose
     {

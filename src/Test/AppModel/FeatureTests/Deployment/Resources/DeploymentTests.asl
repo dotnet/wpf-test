@@ -1808,7 +1808,7 @@
 
     </AppSecLoaderConfig>
 
-   <!-- WebOC Regression Scenario : Regression test for DD bug # 121501 -->
+   <!-- WebOC Regression Scenario : Regression test -->
     <AppSecLoaderConfig ID="80">
         <Owner>MattGal</Owner>
         <SubFeature>Browser Hosting</SubFeature>
@@ -1819,11 +1819,11 @@
            <application name="ExpressAppWebOC" />
            <applicationtype name="xbap" />
            <startupuri filename="Deploy_WebOCXbapMarkup.xaml" />
-           <resource filename="121501_Repro.html" SaveToPath="$(OutputPath)" />
+           <resource filename="1_Repro.html" SaveToPath="$(OutputPath)" />
         </BuildInfo>
         
         <RunInfo>
-           <appmonitorconfigfile filename="AMC_WebOC_Regression_121501.xml" SaveToPath="$(OutputPath)" />
+           <appmonitorconfigfile filename="AMC_WebOC_Regression_1.xml" SaveToPath="$(OutputPath)" />
         </RunInfo>
  
     </AppSecLoaderConfig>
@@ -1846,7 +1846,7 @@
         </RunInfo>
     </AppSecLoaderConfig>
 
-    <!-- Journal-out-of-sync Regression Scenario: Regression test for DD bug # 128689 -->
+    <!-- Journal-out-of-sync Regression Scenario: Regression test 1 -->
     <AppSecLoaderConfig ID="82">
         <Owner>MattGal</Owner>
         <SubFeature>Browser Hosting</SubFeature>
@@ -1860,7 +1860,7 @@
         </BuildInfo>
 
         <RunInfo>
-          <appmonitorconfigfile filename="AMC_128689_Regression.xml" SaveToPath="$(OutputPath)" />
+          <appmonitorconfigfile filename="AMC_1_Regression.xml" SaveToPath="$(OutputPath)" />
         </RunInfo>
     </AppSecLoaderConfig>
 

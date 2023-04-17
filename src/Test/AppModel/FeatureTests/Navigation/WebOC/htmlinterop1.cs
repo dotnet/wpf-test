@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,10 +13,10 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 {
 
     /// <summary>
-    /// This class is a regression test for DevDivBugs #193491.  Nav to an html page, then to a string.  Navigate back should not assert.
+    /// This class is a regression test 1.  Nav to an html page, then to a string.  Navigate back should not assert.
     /// This runs in partial trust and full trust.
     /// </summary>
-    public class HtmlInterop193491
+    public class htmlinterop1
     {
 
         #region Private Data

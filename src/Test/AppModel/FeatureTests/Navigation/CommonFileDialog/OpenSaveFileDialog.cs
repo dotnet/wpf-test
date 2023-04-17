@@ -76,7 +76,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
                     NavigationHelper.Output("Registering ContentRendered event handler for NavigationWindow");
                     _openSaveFileDialog_currNavWin.ContentRendered += new EventHandler(OpenSaveFileDialog_OnContentRendered_NavWin);
 
-                    // commenting out due to warning in devdiv. This var was not used
+                    // commenting out due to warning in . This var was not used
                     //if (BrowserInteropHelper.IsBrowserHosted)
                         //OpenSaveFileDialog_isBrowserHosted = true;
 

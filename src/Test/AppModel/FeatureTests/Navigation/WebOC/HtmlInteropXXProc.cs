@@ -12,7 +12,7 @@ using Microsoft.Test.Logging;
 namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 {
     /// <summary>
-    /// This class tests the Vista-only Cross-cross process security mitigation. See DevDivBugs # 196980.
+    /// This class tests the Vista-only Cross-cross process security mitigation.
     /// This only runs in partial trust.
     /// </summary>
     public class HtmlInteropXXProc

@@ -705,7 +705,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
             {
                 editMenu = IEAutomationHelper.ShowIEEditMenu(IEWindow);
 
-                GlobalLog.LogEvidence("Pressing \"Select All\" again to work around Dev10 bug 913337 (IE Menu Merging - IE edit menu commands disabled on first use for Xbaps on Win7) ...");
+                GlobalLog.LogEvidence("Pressing \"Select All\"  (IE Menu Merging - IE edit menu commands disabled on first use for Xbaps on Win7) ...");
                 selectAllMenuItem = IEAutomationHelper.WaitForElementWithName(editMenu, selectAll, 10);
                 // Using Win32 APIs exclusively to ensure the right codepath gets hit...
                 MTI.Input.MoveToAndClick(selectAllMenuItem);

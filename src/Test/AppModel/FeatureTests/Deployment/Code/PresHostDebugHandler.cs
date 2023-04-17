@@ -79,7 +79,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
         {
             string currDir = Environment.CurrentDirectory;
 
-            // Workaround for DD bugs #129532
+            // Workaround 
             if ((SystemInformation.Current.IsServer) && (SystemInformation.Current.OSVersion.StartsWith("6")))
             {
                 ApplicationDeploymentHelper.AddUrlToZone(IEUrlZone.URLZONE_TRUSTED, "about:security_PresentationHost.exe");

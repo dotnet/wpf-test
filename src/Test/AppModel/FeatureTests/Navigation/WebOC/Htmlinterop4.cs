@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -18,7 +18,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
     /// This class is a regression test for Dev10 573618 - Verify javascript: and vbscript: protocols can be navigated.
     /// This runs in partial trust and full trust.
     /// </summary>
-    public class HtmlInterop573618
+    public class Htmlinterop4
     {
         #region Private Data
 

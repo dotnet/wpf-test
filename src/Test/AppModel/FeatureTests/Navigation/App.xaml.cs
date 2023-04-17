@@ -479,11 +479,11 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
                     _delegateTable["CredentialPolicyPreserved_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(credentialPolicyPreserved.DispatcherUnhandledException);
                     break;
 
-                case "HtmlInterop193491":
-                    HtmlInterop193491 htmlInterop193491 = new HtmlInterop193491();
-                    _delegateTable["HtmlInterop193491_Startup"] = new Startup_Delegate(htmlInterop193491.Startup);
-                    _delegateTable["HtmlInterop193491_LoadCompleted"] = new LoadCompleted_Delegate(htmlInterop193491.LoadCompleted);
-                    _delegateTable["HtmlInterop193491_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(htmlInterop193491.DispatcherUnhandledException);
+                case "htmlinterop1":
+                    htmlinterop1 htmlinterop1 = new htmlinterop1();
+                    _delegateTable["htmlinterop1_Startup"] = new Startup_Delegate(htmlinterop1.Startup);
+                    _delegateTable["htmlinterop1_LoadCompleted"] = new LoadCompleted_Delegate(htmlinterop1.LoadCompleted);
+                    _delegateTable["htmlinterop1_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(htmlinterop1.DispatcherUnhandledException);
                     break;
 
                 case "HtmlInteropXXProc":
@@ -493,32 +493,32 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
                     _delegateTable["HtmlInteropXXProc_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(htmlInteropXXProc.DispatcherUnhandledException);
                     break;
 
-                case "HtmlInterop196538":
-                    HtmlInterop196538 htmlInterop196538 = new HtmlInterop196538();
-                    _delegateTable["HtmlInterop196538_Startup"] = new Startup_Delegate(htmlInterop196538.Startup);
-                    _delegateTable["HtmlInterop196538_LoadCompleted"] = new LoadCompleted_Delegate(htmlInterop196538.LoadCompleted);
-                    _delegateTable["HtmlInterop196538_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(htmlInterop196538.DispatcherUnhandledException);
+                case "Htmlinterop2":
+                    Htmlinterop2 Htmlinterop2 = new Htmlinterop2();
+                    _delegateTable["Htmlinterop2_Startup"] = new Startup_Delegate(Htmlinterop2.Startup);
+                    _delegateTable["Htmlinterop2_LoadCompleted"] = new LoadCompleted_Delegate(Htmlinterop2.LoadCompleted);
+                    _delegateTable["Htmlinterop2_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(Htmlinterop2.DispatcherUnhandledException);
                     break;
 
-                case "HtmlInterop520954":
-                    HtmlInterop520954 htmlInterop520954 = new HtmlInterop520954();
-                    _delegateTable["HtmlInterop520954_Startup"] = new Startup_Delegate(htmlInterop520954.Startup);
-                    _delegateTable["HtmlInterop520954_LoadCompleted"] = new LoadCompleted_Delegate(htmlInterop520954.LoadCompleted);
-                    _delegateTable["HtmlInterop520954_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(htmlInterop520954.DispatcherUnhandledException);
+                case "Htmlinterop3":
+                    Htmlinterop3 Htmlinterop3 = new Htmlinterop3();
+                    _delegateTable["Htmlinterop3_Startup"] = new Startup_Delegate(Htmlinterop3.Startup);
+                    _delegateTable["Htmlinterop3_LoadCompleted"] = new LoadCompleted_Delegate(Htmlinterop3.LoadCompleted);
+                    _delegateTable["Htmlinterop3_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(Htmlinterop3.DispatcherUnhandledException);
                     break;
 
-                case "HtmlInterop573618":
-                    HtmlInterop573618 htmlInterop573618 = new HtmlInterop573618();
-                    _delegateTable["HtmlInterop573618_Startup"] = new Startup_Delegate(htmlInterop573618.Startup);
-                    _delegateTable["HtmlInterop573618_LoadCompleted"] = new LoadCompleted_Delegate(htmlInterop573618.LoadCompleted);
-                    _delegateTable["HtmlInterop573618_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(htmlInterop573618.DispatcherUnhandledException);
+                case "Htmlinterop4":
+                    Htmlinterop4 Htmlinterop4 = new Htmlinterop4();
+                    _delegateTable["Htmlinterop4_Startup"] = new Startup_Delegate(Htmlinterop4.Startup);
+                    _delegateTable["Htmlinterop4_LoadCompleted"] = new LoadCompleted_Delegate(Htmlinterop4.LoadCompleted);
+                    _delegateTable["Htmlinterop4_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(Htmlinterop4.DispatcherUnhandledException);
                     break;
 
-                case "HtmlInterop674571":
-                    HtmlInterop674571 htmlInterop674571 = new HtmlInterop674571();
-                    _delegateTable["HtmlInterop674571_Startup"] = new Startup_Delegate(htmlInterop674571.Startup);
-                    _delegateTable["HtmlInterop674571_LoadCompleted"] = new LoadCompleted_Delegate(htmlInterop674571.LoadCompleted);
-                    _delegateTable["HtmlInterop674571_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(htmlInterop674571.DispatcherUnhandledException);
+                case "Htmlinterop5":
+                    Htmlinterop5 Htmlinterop5 = new Htmlinterop5();
+                    _delegateTable["Htmlinterop5_Startup"] = new Startup_Delegate(Htmlinterop5.Startup);
+                    _delegateTable["Htmlinterop5_LoadCompleted"] = new LoadCompleted_Delegate(Htmlinterop5.LoadCompleted);
+                    _delegateTable["Htmlinterop5_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(Htmlinterop5.DispatcherUnhandledException);
                     break;
 
                 case "HtmlInteropLMZLockdown":
@@ -778,11 +778,11 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             _delegateTable["StockPageFunction_Startup"] = new Startup_Delegate(StockPageFunction_Startup);
 
             // Regression case  
-            _delegateTable["Regression452004_Startup"] = new Startup_Delegate(Regression452004.Regression452004_Startup);
-            _delegateTable["Regression452004_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(Regression452004.Regression452004_DispatcherUnhandledException);
+            _delegateTable["Regression10_Startup"] = new Startup_Delegate(Regression10.Regression10_Startup);
+            _delegateTable["Regression10_DispatcherUnhandledException"] = new DispatcherUnhandledException_Delegate(Regression10.Regression10_DispatcherUnhandledException);
 
             // Regression case 
-            _delegateTable["Regression451868_Startup"] = new Startup_Delegate(Regression451868_Startup);
+            _delegateTable["Regression9_Startup"] = new Startup_Delegate(Regression9_Startup);
 
             #endregion
 
@@ -855,7 +855,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             // XamlJournalEntry delegates
             _delegateTable["XamlJournalEntry_Startup"] = new Startup_Delegate(XamlJournalEntry_Startup);
 
-            // Regression test for Dev10 bugs 451981 - Navigate from CustomContentState.Replay()
+            // Regression test  - Navigate from CustomContentState.Replay()
             _delegateTable["NavigateFromCCSReplay_Startup"] = new Startup_Delegate(NavigateFromCCSReplay_Startup);
             #endregion
         }

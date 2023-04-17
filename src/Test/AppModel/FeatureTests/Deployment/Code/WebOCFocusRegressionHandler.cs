@@ -108,7 +108,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
 
             PropertyCondition isComboBox = new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ComboBox);
 
-            AutomationElement webOCControl = IEAutomationHelper.WaitForElementWithName(ieWindow, "DevDiv Bugs # 121501 Repro Page", 30);
+            AutomationElement webOCControl = IEAutomationHelper.WaitForElementWithName(ieWindow, " Repro Page", 30);
             AutomationElement htmlSelect = webOCControl.FindFirst(TreeScope.Descendants, isComboBox);
 
             ieWindow.SetFocus();
@@ -130,7 +130,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
 
             if (windowTitle.ToLowerInvariant().StartsWith("navigation completed"))
             {
-                GlobalLog.LogEvidence("Passed! - No exceptions thrown clicking on HTML Select tag in WebOC (DD bug 121501 regression test)");
+                GlobalLog.LogEvidence("Passed! - No exceptions thrown clicking on HTML Select tag in WebOC (bug  regression test)");
                 TestLog.Current.Result = TestResult.Pass;
             }
             else

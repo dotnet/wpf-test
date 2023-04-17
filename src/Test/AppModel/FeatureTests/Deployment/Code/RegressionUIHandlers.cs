@@ -83,11 +83,11 @@ namespace Microsoft.Test.Deployment.CustomUIHandlers
             if (tryCount > 0)
             {
                 TestLog.Current.Result = TestResult.Pass;
-                GlobalLog.LogEvidence("Success: Tabbing did not cause crash in WPF browser content (Dev10 667849)");
+                GlobalLog.LogEvidence("Success: Tabbing did not cause crash in WPF browser content ");
             }
             else
             {
-                GlobalLog.LogEvidence("Failure: Something went badly with regression test for Dev10 667849, manually verify you can tab through Xbap / Xaml content");
+                GlobalLog.LogEvidence("Failure: Something went badly with regression test 6, manually verify you can tab through Xbap / Xaml content");
                 TestLog.Current.Result = TestResult.Fail;
             }
             return UIHandlerAction.Abort;
@@ -95,7 +95,7 @@ namespace Microsoft.Test.Deployment.CustomUIHandlers
     }
 
     /// <summary>
-    /// Regression tests for Dev10 743824 - WPF HyperLink can be used to bypass IE’s subframe navigation cross-domain restriction
+    /// Regression tests 7- WPF HyperLink can be used to bypass IEï¿½s subframe navigation cross-domain restriction
     /// </summary>
     public class CrossDomainFrameNavigationHandler : UIHandler
     {
@@ -441,7 +441,7 @@ namespace Microsoft.Test.Deployment.CustomUIHandlers
             // In case UIA doesnt find a window, try to find WinMail.exe (common handler for this)
             Process[] WinMailsBefore = Process.GetProcessesByName("WinMail");
 
-            // Can't invoke, even though that's the more robust way to do this, because of Dev10 543407
+            // Can't invoke, even though that's the more robust way to do this, 
             IEAutomationHelper.ClickCenterOfAutomationElement(hyperlink);
             Thread.Sleep(6000);
 
@@ -468,11 +468,11 @@ namespace Microsoft.Test.Deployment.CustomUIHandlers
 
     public class XbapHostedInHTMLVerifier : UIHandler
     {
-        // Regression test case for D10 bugs # 602543
+        // Regression test case 3 
         public override UIHandlerAction HandleWindow(IntPtr topLevelhWnd, IntPtr hwnd, Process process, string title, UIHandlerNotification notification)
         {
             GlobalLog.LogEvidence("Testing that in-browser focus can cycle through HTML -> WPF (All elements) -> HTML again");
-            GlobalLog.LogEvidence("Prevents regression of D10 bug: 602543");
+            GlobalLog.LogEvidence("Prevents regression 3");
 
             AutomationElement testWindow = AutomationElement.FromHandle(topLevelhWnd);
 
@@ -502,7 +502,7 @@ namespace Microsoft.Test.Deployment.CustomUIHandlers
 
             if (success)
             {
-                GlobalLog.LogEvidence("Success:  Was able to tab in and out of container with Xbap hosted in HTML (Regression case D10 602543)");
+                GlobalLog.LogEvidence("Success:  Was able to tab in and out of container with Xbap hosted in HTML (Regression case 3)");
                 TestLog.Current.Result = TestResult.Pass;
             }
             else
@@ -552,7 +552,7 @@ namespace Microsoft.Test.Deployment.CustomUIHandlers
         }
     }
 
-    // Regression test case for DD bugs # 186739
+    // Regression test 4
     public class PresentationHostTextLeakHandler : UIHandler
     {
         public override UIHandlerAction HandleWindow(IntPtr topLevelhWnd, IntPtr hwnd, System.Diagnostics.Process process, string title, UIHandlerNotification notification)
@@ -632,7 +632,7 @@ namespace Microsoft.Test.Deployment.CustomUIHandlers
             
             if (!SystemInformation.Current.OSVersion.StartsWith("6"))
             {
-                GlobalLog.LogEvidence("This test guards against regression for DD bugs 144447, which is specific to Vista.  Setting result to \"ignore\" and returning...");
+                GlobalLog.LogEvidence("This test guards against regression 2, which is specific to Vista.  Setting result to \"ignore\" and returning...");
                 TestLog.Current.Result = TestResult.Ignore;
                 return UIHandlerAction.Abort;
             }
@@ -737,12 +737,12 @@ namespace Microsoft.Test.Deployment.CustomUIHandlers
 
             if (ValidationButtonHasCorrectValue(TestScenario + " Accelerator Received 1", indicatorButton))
             {
-                GlobalLog.LogEvidence("Success! Scenario " + TestScenario + " succeeded (was able to listen to accelerator messages, D10 628682 Regression prevention");
+                GlobalLog.LogEvidence("Success! Scenario " + TestScenario + " succeeded (was able to listen to accelerator messages, Regression5 prevention");
                 TestLog.Current.Result = TestResult.Pass;
             }
             else
             {
-                GlobalLog.LogEvidence("ERROR: Scenario " + TestScenario + " failed (D10 628682 may have regressed, investigate)");
+                GlobalLog.LogEvidence("ERROR: Scenario " + TestScenario + " failed (Regression5 regressed, investigate)");
                 TestLog.Current.Result = TestResult.Fail;
             }
             return UIHandlerAction.Abort;

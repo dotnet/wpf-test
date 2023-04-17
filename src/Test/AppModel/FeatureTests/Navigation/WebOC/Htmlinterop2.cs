@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,10 +14,10 @@ using Microsoft.Win32;
 namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 {
     /// <summary>
-    /// This class is a regression test for DevDivBugs #196538.  Nav to a string on the UI thread while trying to nav to a page on another thread.  Expect an InvalidOperationException.
+    /// This class is a regression test.  Nav to a string on the UI thread while trying to nav to a page on another thread.  Expect an InvalidOperationException.
     /// This runs in partial trust and full trust.
     /// </summary>
-    public class HtmlInterop196538
+    public class Htmlinterop2
     {
         #region Private Data
 

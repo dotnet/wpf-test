@@ -61,12 +61,12 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
 
             if (vp.Current.Value.Length > 1)
             {
-                GlobalLog.LogEvidence("Success! Text box still accepting input (Saw " + vp.Current.Value + ") after escape-cancelled dialog (DD Bugs 172492 did not regress)");
+                GlobalLog.LogEvidence("Success! Text box still accepting input (Saw " + vp.Current.Value + ") after escape-cancelled dialog");
                 TestLog.Current.Result = TestResult.Pass;
             }
             else
             {
-                GlobalLog.LogEvidence("Fail! Text box no longer accepting input after escape-cancelled dialog (DD Bugs 172492 may have regressed!)");
+                GlobalLog.LogEvidence("Fail! Text box no longer accepting input after escape-cancelled dialog ");
                 TestLog.Current.Result = TestResult.Fail;
             }
                  

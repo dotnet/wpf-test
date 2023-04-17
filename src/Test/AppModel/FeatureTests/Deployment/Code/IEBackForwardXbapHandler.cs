@@ -137,7 +137,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
             if (SystemInformation.Current.IEVersion.StartsWith("6"))
             {
                 // No navigation integration Pre-IE7... so set result to Ignore and return.
-                GlobalLog.LogEvidence("128689 Regression test cannot run on IE6, ignoring result and returning...");
+                GlobalLog.LogEvidence(" Regression test 1 cannot run on IE6, ignoring result and returning...");
                 TestLog.Current.Result = TestResult.Ignore;
                 return UIHandlerAction.Abort;
             }

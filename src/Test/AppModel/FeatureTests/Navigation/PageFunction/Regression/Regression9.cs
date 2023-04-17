@@ -13,13 +13,13 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 {
     public partial class NavigationTests : Application
     {
-        void Regression451868_Startup(object sender, StartupEventArgs e)
+        void Regression9_Startup(object sender, StartupEventArgs e)
         {            
-            NavigationHelper.CreateLog("Regression Test: Dev10 451868");
+            NavigationHelper.CreateLog("Regression Test: Dev10 9");
             NavigationHelper.Output("Regression test for nested pagefunctions' access to parent window");
             NavigationHelper.Output("App Starting Up");
             NavigationWindow myWin = new NavigationWindow();
-            PFRepro451868 firstPage = new PFRepro451868();
+            PFRepro9 firstPage = new PFRepro9();
             firstPage.Name = "FirstInstance";
             myWin.Content = firstPage;
             Application.Current.MainWindow = myWin;
@@ -31,14 +31,14 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
     /// <summary>
     /// Page function that re-invokes itself to ensure that nested pagefunctions can still access the window.
     /// </summary>
-    public class PFRepro451868 : PageFunction<String>
+    public class PFRepro9 : PageFunction<String>
     {
         public bool shouldAutoReturn = false;
         private bool _runSecondPFReturn = false;
         private bool _haveRunLoadedHandler = false;
         private bool _hasAutoReturned = false;
 
-        public PFRepro451868()
+        public PFRepro9()
         {
             Grid niceYellowGrid = new Grid();
             niceYellowGrid.Background = Brushes.Yellow;
@@ -58,7 +58,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             {
                 _haveRunLoadedHandler = true;
                 NavigationHelper.Output("Setting up second Page Function... ");
-                PFRepro451868 secondPageFunction = new PFRepro451868();
+                PFRepro9 secondPageFunction = new PFRepro9();
                 secondPageFunction.shouldAutoReturn = true;
                 secondPageFunction.Return += new ReturnEventHandler<string>(SecondPageFunction_Return);
                 NavigationService.GetNavigationService(this).Navigate(secondPageFunction);

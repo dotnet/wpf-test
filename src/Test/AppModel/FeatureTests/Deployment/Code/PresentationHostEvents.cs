@@ -81,7 +81,7 @@ namespace Microsoft.Test.Windows.Client.AppSec.Deployment
     }
 
     /// <summary>
-    /// Test coverage for Dev10 451882 - Perf: Is PresentationHost restarting needed under LUA?
+    /// Test coverage  - Perf: Is PresentationHost restarting needed under LUA?
     /// </summary>
     public class PresentationHostUACRestartTest
     {
@@ -238,7 +238,7 @@ namespace Microsoft.Test.Windows.Client.AppSec.Deployment
 
             if (SystemInformation.Current.IsServer)
             {
-                GlobalLog.LogEvidence("This test cannot pass on Server due to DD bug #114690. Setting result to \"ignore\" and returning...");
+                GlobalLog.LogEvidence("This test cannot pass on Server. Setting result to \"ignore\" and returning...");
                 TestLog.Current.Result = TestResult.Ignore;
                 TestLog.Current.Close();
                 return;
@@ -436,7 +436,7 @@ namespace Microsoft.Test.Windows.Client.AppSec.Deployment
             if ((SystemInformation.Current.IsServer) ||
                ((Environment.GetEnvironmentVariable("ProgramFiles(x86)") != null) && (Environment.OSVersion.Version.Major < 6)))
             {
-                GlobalLog.LogEvidence("This test cannot pass on Server due to DD bug #114690.  Setting result to \"ignore\" and returning . . .");
+                GlobalLog.LogEvidence("This test cannot pass on Server.  Setting result to \"ignore\" and returning . . .");
                 TestLog.Current.Result = TestResult.Ignore;
                 TestLog.Current.Close(); 
                 return;

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -20,7 +20,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
     /// This class is a regression test for Dev10 520954 - WebBrowser.NavigateToStream fails silently if done from Navigating event.
     /// This runs in partial trust and full trust.
     /// </summary>
-    public class HtmlInterop520954
+    public class Htmlinterop3
     {
 
         #region Private Data
