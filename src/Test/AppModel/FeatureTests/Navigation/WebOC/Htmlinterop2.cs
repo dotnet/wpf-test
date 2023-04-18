@@ -32,7 +32,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
         {
             if (Log.Current == null)
             {
-                new TestLog("HTML interop bug 196538 regression test");
+                new TestLog("HTML interop  regression test");
             }
 
             NavigationHelper.SetStage(TestStage.Run);
@@ -105,11 +105,11 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
         {
             if (_caught)
             {
-                NavigationHelper.Pass("Caught expected exception trying to use WebBrowser from another thread.  HTML interop 196538 regression test passed");
+                NavigationHelper.Pass("Caught expected exception trying to use WebBrowser from another thread.  HTML interop  regression test passed");
             }
             else
             {
-                NavigationHelper.Fail("Did not catch expected exception. HTML interop 196538 regression test failed");
+                NavigationHelper.Fail("Did not catch expected exception. HTML interop  regression test failed");
             }
         }
         #endregion

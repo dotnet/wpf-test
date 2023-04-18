@@ -139,7 +139,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 
                 case MultipleFrames_CurrentTest.hlink_html_frame2:
                     _multipleFramesTest = MultipleFrames_CurrentTest.hlink_Page4_frame1;
-                    // DD bugs 157786 - Targeting does not work in standalone.  Workaround: Navigate window directly here.
+                    //  Targeting does not work in standalone.  Workaround: Navigate window directly here.
                     // BrowserHelper.NavigateHyperlinkViaEvent("Page4Self", _frameTest.StdFrame.Content as DependencyObject);
                     ((NavigationWindow)Application.Current.MainWindow).Navigate(new Uri("Page4.xaml", UriKind.Relative));
                     break;
@@ -205,7 +205,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 
                 case MultipleFrames_CurrentTest.back_frame1:
                     _multipleFramesTest = MultipleFrames_CurrentTest.hlink_Page3_win;
-                    // DD bugs 157786 - Targeting does not work in standalone.  Workaround: Navigate window directly here.
+                    //  - Targeting does not work in standalone.  Workaround: Navigate window directly here.
                     // BrowserHelper.NavigateHyperlinkViaEvent("Page3Self", _frameTest.StdFrame.Content as DependencyObject);
                     ((NavigationWindow)Application.Current.MainWindow).Navigate(new Uri("Page3.xaml", UriKind.Relative));
                     break;

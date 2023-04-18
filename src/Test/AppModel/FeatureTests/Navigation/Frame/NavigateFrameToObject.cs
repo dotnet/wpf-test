@@ -31,7 +31,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             hlink_PageFunction,
             hlink_PageWithFrame,
             hlink_NonPageObject,
-            #region BUGBUG 1309270
+            #region BUGBUG 
             hlink_JPEGFile,
             #endregion
             End
@@ -179,7 +179,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             }
         }
 
-        #region BUGBUG 1309270
+        #region BUGBUG 
         private void RouteJPEGFile()
         {
             NavigationWindow navWin = Application.Current.MainWindow as NavigationWindow;
@@ -220,7 +220,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
                     _frameTest.Output("Frame contains a non-Page object. In this case a JPG. Returning to previous content");
                     // GoBack to starting page
                     _frameTest.GoBack(navWin);
-                    #region BUGBUG 1309270
+                    #region BUGBUG 
                     // uncomment the line below and remove the next line after it
                 
                     //navFrameToObjTest = CurrentTest.hlink_JPEGFile;

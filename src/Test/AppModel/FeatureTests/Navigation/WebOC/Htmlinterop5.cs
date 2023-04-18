@@ -32,7 +32,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
         {
             if (Log.Current == null)
             {
-                new TestLog("HTML interop Navigate(string) test - Dev10 bug 674571");
+                new TestLog("HTML interop Navigate(string) test");
             }
 
             NavigationHelper.SetStage(TestStage.Run);

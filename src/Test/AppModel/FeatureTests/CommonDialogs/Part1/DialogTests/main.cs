@@ -88,7 +88,7 @@ namespace Microsoft.Test.WPF.AppModel.CommonDialogs
         public static void Usage()
         {
             Logging.LogStatus("Usage:");
-            Logging.LogStatus("DialogTestsDev10 /test:<testname>");
+            Logging.LogStatus("DialogTests /test:<testname>");
         }
 
         static void disableIme(object sender, StartupEventArgs e)

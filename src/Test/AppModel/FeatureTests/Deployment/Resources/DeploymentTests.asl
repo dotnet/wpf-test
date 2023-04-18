@@ -1,4 +1,4 @@
-﻿<AppSecLoaderConfigs>
+<AppSecLoaderConfigs>
     <CommonConfig>
         <FeatureTeam>Application Model</FeatureTeam>
         <FeatureArea>Application</FeatureArea>        
@@ -725,7 +725,7 @@
         <Owner>MattGal</Owner>
         <SubFeature>Deployment</SubFeature>
         <Priority>1</Priority>        
-        <Description>Regression test for WOS Bug #1637143 </Description>
+        <Description>Regression test  </Description>
 
         <BuildInfo>
            <application name="SimpleBrowserHostedApplication" />
@@ -737,7 +737,7 @@
         </BuildInfo>
         
         <RunInfo>
-           <appmonitorconfigfile filename="AMC_Deployment_IE71637143RegressionTest.xml" SaveToPath="$(OutputPath)" />
+           <appmonitorconfigfile filename="AMC_Deployment_IE8RegressionTest.xml" SaveToPath="$(OutputPath)" />
         </RunInfo>
 
     </AppSecLoaderConfig>
@@ -767,7 +767,7 @@
         <Owner>MattGal</Owner>
         <SubFeature>Regression</SubFeature>
         <Priority>0</Priority>        
-        <Description>Load content in WebOC Frame, move focus around the control, failing if exception thrown.  Regression Prevention for bug #1453368</Description>
+        <Description>Load content in WebOC Frame, move focus around the control, failing if exception thrown.  Regression Prevention for bug </Description>
 
         <BuildInfo>
            <application name="ExpressAppWebOC" />
@@ -788,7 +788,7 @@
         <Owner>MattGal</Owner>
         <SubFeature>Regression</SubFeature>
         <Priority>1</Priority>        
-        <Description>Load content in WebOC Frame, navigate away, making sure that webOC object is disposed.  Regression Prevention for bug #1521096</Description>
+        <Description>Load content in WebOC Frame, navigate away, making sure that webOC object is disposed.  Regression Prevention for bug </Description>
 
         <BuildInfo>
            <application name="StandaloneAppWebOC" />
@@ -1777,7 +1777,7 @@
         <Description>Launch and verify a basic Internet-Zone Browser-Hosted app (.xbap) over all common schemes (Local, UNC, HTTP/HTTPS Inter/Intranet) with UTF-8 characters in the path</Description>
 
         <BuildInfo>
-          <application name="Сценарий" />
+          <application name="????????" />
           <applicationtype name="xbap" />
           <startupuri filename="Deploy_BasicXbapMarkup.xaml" />
         </BuildInfo>
@@ -1828,7 +1828,7 @@
  
     </AppSecLoaderConfig>
 
-    <!-- Journal-out-of-sync Regression Scenario: Regression test for DD bug # 120574 -->
+    <!-- Journal-out-of-sync Regression Scenario: Regression test for DD bug  -->
     <AppSecLoaderConfig ID="81">
         <Owner>MattGal</Owner>
         <SubFeature>Browser Hosting</SubFeature>

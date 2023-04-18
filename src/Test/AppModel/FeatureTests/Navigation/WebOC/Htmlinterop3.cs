@@ -17,7 +17,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 {
 
     /// <summary>
-    /// This class is a regression test for Dev10 520954 - WebBrowser.NavigateToStream fails silently if done from Navigating event.
+    /// This class is a regression test  - WebBrowser.NavigateToStream fails silently if done from Navigating event.
     /// This runs in partial trust and full trust.
     /// </summary>
     public class Htmlinterop3
@@ -44,7 +44,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
         {
             if (Log.Current == null)
             {
-                new TestLog("HTML interop 520954 regression test");
+                new TestLog("HTML interop  regression test");
             }
 
             //Local machine lockdown disables scripting inside IE.  Re-enable it for testing purposes.
@@ -188,11 +188,11 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 
                     if (_oneOrMoreTestsFailed)
                     {
-                        NavigationHelper.Fail("One or more HTML interop 520954 regression tests failed");
+                        NavigationHelper.Fail("One or more HTML interop  regression tests failed");
                     }
                     else
                     {
-                       NavigationHelper.Pass("HTML interop 520954 regression tests passed");
+                       NavigationHelper.Pass("HTML interop  regression tests passed");
                     }
                 break;
             }

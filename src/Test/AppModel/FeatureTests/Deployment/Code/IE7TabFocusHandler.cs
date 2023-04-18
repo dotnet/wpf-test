@@ -61,7 +61,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
             Microsoft.Test.Input.Input.SendKeyboardInput(Key.T, false);
             Microsoft.Test.Input.Input.SendKeyboardInput(Key.LeftCtrl, false);
 
-            // Commented out due to WOSB 1862388
+            
             //// Find the part of the window with all the tabs ... 
             //PropertyCondition isTabBand = new PropertyCondition(AutomationElement.ClassNameProperty, "DirectUIHWND");
             //AutomationElement tabBand = IEWindow.FindFirst(TreeScope.Descendants, isTabBand);

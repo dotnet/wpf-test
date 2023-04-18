@@ -1495,7 +1495,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             get
             {
                 CheckIfDisposed();
-#if _bug_1110331_
+#if RegressionTest1
                 AutomationElement backButtonToolbar = BackForwardButtonToolbar;
                 AutomationElement backButtonElement = FindFirstSubElement(backButtonToolbar, "Back", AutomationElement.NameProperty);
                 if (backButtonElement == null)
@@ -1503,10 +1503,10 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
                     Logger.LogError("Could not find back button in the back-button toolbar");
                     throw new ApplicationException("Could not find back button in the back-button toolbar");
                 }
-                Logger.LogError("Due to bug 1110331, this value is unreliable");
+                Logger.LogError("Due to RegressionTest1, this value is unreliable");
                 return (bool)backButtonElement.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty);
 #endif
-                throw new NotImplementedException("Due to bug 1110331, this value is unreliable, hence not implemented");
+                throw new NotImplementedException("Due to RegressionTest1, this value is unreliable, hence not implemented");
             }
         }
 
@@ -1517,7 +1517,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             get
             {
                 CheckIfDisposed();
-#if _bug_1110331_
+#if RegressionTest1
                 AutomationElement fwdButtonToolbar = BackForwardButtonToolbar;
                 AutomationElement fwdButtonElement = FindFirstSubElement(fwdButtonToolbar, "Forward", AutomationElement.NameProperty);
                 if (fwdButtonElement == null)
@@ -1525,10 +1525,10 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
                     Logger.LogError("Could not find forward button in the fwd-button toolbar");
                     throw new ApplicationException("Could not find forward button in the fwd-button toolbar");
                 }
-                Logger.LogError("Due to bug 1110331, this value is unreliable");
+                Logger.LogError("Due to RegressionTest1, this value is unreliable");
                 return (bool)fwdButtonElement.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty);
 #endif
-                throw new NotImplementedException("Due to bug 1110331, this value is unreliable, hence not implemented");
+                throw new NotImplementedException("Due to RegressionTest1, this value is unreliable, hence not implemented");
             }
         }
 

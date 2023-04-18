@@ -181,7 +181,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
             }
             catch (System.NullReferenceException)
             {
-                GlobalLog.LogEvidence("Whoops, hit UI Automation bug with downlevel platforms + IE (WOSB 1883785 or 1985683, both not likely to ever be fixed) .  Setting result to Ignore and returning, since failure occurred before WPF even loaded.");
+                GlobalLog.LogEvidence("Whoops, hit UI Automation bug with downlevel platforms + IE (both not likely to ever be fixed) .  Setting result to Ignore and returning, since failure occurred before WPF even loaded.");
                 TestLog.Current.Result = TestResult.Ignore;
                 return;
             }

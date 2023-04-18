@@ -143,7 +143,7 @@ namespace Microsoft.Test.AddIn
             {
                 if(System.Environment.OSVersion.Version >= new Version(6, 1))
                 {
-                    Log.LogStatus("Due to a known issue on Win7 (Dev10 bug 741318) the addin's appdomain fails to unload, only on lab runs.  Ignoring.");
+                    Log.LogStatus("Due to a known issue on Win7 the addin's appdomain fails to unload, only on lab runs.  Ignoring.");
                     Log.LogStatus(exception.ToString());
                 }
                 else throw(exception);

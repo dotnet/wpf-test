@@ -39,7 +39,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
         {
             if (Log.Current == null)
             {
-                new TestLog("HTML interop bug 193491 regression test");
+                new TestLog("HTML interop regression test");
             }
 
             //Local machine lockdown disables scripting inside IE.  Re-enable it for testing purposes.

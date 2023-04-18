@@ -181,7 +181,6 @@ namespace Microsoft.Test.AppModel.SplashScreen
             passed &= DoSplashScreenAPITest("SplashTest2", true, AutomationElement.FromHandle(topLevelhWnd));
 #if TESTBUILD_CLR40
             // Basic Test variation 3: Invoke Splash and have the app self close it... FROM A DIFFERENT THREAD!!!!
-            // (Regression case for Dev10 502501)
             if (!AppWillForceCloseSplash)
             {
                 passed &= DoSplashScreenAPITest("SplashTest4", true, AutomationElement.FromHandle(topLevelhWnd));

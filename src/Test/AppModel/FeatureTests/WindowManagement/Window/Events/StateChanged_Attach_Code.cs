@@ -52,7 +52,7 @@ namespace WindowTest
             _expectedHitCount++;
             ValidateState();
 
-            // BVT BLOCKER #1230907: Setting Window.WindowState from Maximized to Minimized then to Normal does not work
+            // BVT BLOCKER: Setting Window.WindowState from Maximized to Minimized then to Normal does not work
             /*
             Logger.Status("[SET] Window.WindowState=Minimized - Expect HitCount");
             ExpectedValue=WindowState.Normal;

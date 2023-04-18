@@ -11,7 +11,7 @@ using Microsoft.Windows.Test.Client.AppSec.BVT.ELCommon;
 namespace WindowTest
 {
     /// <summary>
-    /// New for Dev10: WindowInteropHelper.EnsureHandle negative property-related tests
+    ///  WindowInteropHelper.EnsureHandle negative property-related tests
     /// </summary>
     public partial class EnsureHandleNegativeProperties
     {

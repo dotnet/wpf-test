@@ -4,7 +4,7 @@
 
 //
 //  Description: The CustomJournaling BVT suite checks the functionality 
-//  of the new journaling extensibility DCR.  
+//  of the new journaling extensibility  
 //
 
 using System;

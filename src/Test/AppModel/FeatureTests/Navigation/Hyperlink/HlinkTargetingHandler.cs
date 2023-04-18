@@ -73,7 +73,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             // look for the first hyperlink and ignore the test if it cannot be found
             if (IEAutomationHelper.FindHTMLHyperlinkByName(IEWindow, "DoClickNoTargetNameXaml") == null)
             {
-                Log.Current.CurrentVariation.LogMessage("Whoops, hit UI Automation bug with downlevel platforms + IE (WOSB 1883785 or 1985683, both not likely to ever be fixed) .  Setting result to Ignore and returning, since failure occurred before WPF even loaded.");
+                Log.Current.CurrentVariation.LogMessage("Whoops, hit UI Automation bug with downlevel platforms + IE ( both not likely to ever be fixed) .  Setting result to Ignore and returning, since failure occurred before WPF even loaded.");
                 NavigationHelper.CacheTestResult(Result.Ignore);
                 return;
             }

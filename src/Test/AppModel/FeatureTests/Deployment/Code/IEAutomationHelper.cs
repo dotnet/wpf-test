@@ -468,7 +468,7 @@ namespace Microsoft.Test.Deployment
         /// <param name="IEWindow"></param>
         public static void ClickIEAddrBarTwice(AutomationElement IEWindow)
         {
-            GlobalLog.LogDebug("Try to click IE address bar for workaround bug 491048.");
+            GlobalLog.LogDebug("Try to click IE address bar for workaround.");
             try
             {
                 AndCondition isAddrBar = IEAutomationHelper.GetIEAddressBarAndCondition();
@@ -586,7 +586,6 @@ namespace Microsoft.Test.Deployment
                             string resourceLoadPath = getBrowseLCPath();
                             IntPtr hMod = LoadLibraryEx(resourceLoadPath, IntPtr.Zero, LOAD_LIBRARY_AS_DATAFILE);
                             StringBuilder sb = new StringBuilder();
-                            // 58689 = IE6's string resource for back button
                             int ln = LoadString(hMod, 58689, sb, 255);
                             s_isBackButton = new AndCondition(
                                 new PropertyCondition(AutomationElement.NameProperty, sb.ToString()),
@@ -647,7 +646,7 @@ namespace Microsoft.Test.Deployment
                             string resourceLoadPath = getBrowseLCPath();
                             IntPtr hMod = LoadLibraryEx(resourceLoadPath, IntPtr.Zero, LOAD_LIBRARY_AS_DATAFILE);
                             StringBuilder sb = new StringBuilder();
-                            // 58690 = IE6's string resource for forward button
+                            // IE6's string resource for forward button
                             int ln = LoadString(hMod, 58690, sb, 255);
                             s_isFwdButton = new AndCondition(
                                 new PropertyCondition(AutomationElement.NameProperty, sb.ToString()),
@@ -697,7 +696,6 @@ namespace Microsoft.Test.Deployment
                         resourceLoadPath = @"@%ProgramFiles%\Internet Explorer\MUI\" + currentUILCIDHex + @"\browselc.dll,-";
                     }
                     GlobalLog.LogDebug("Using resource path " + resourceLoadPath);
-                    // 12647 = IE6 resource containing every menu's correct name separated by '|'
                     string allIE6Menus = UnmanagedStringHelper.LoadUnmanagedResourceString(resourceLoadPath + "12647");
                     GlobalLog.LogDebug("String for all IE6 Menus = " + allIE6Menus);
                     s_ie6MenuList = allIE6Menus.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);

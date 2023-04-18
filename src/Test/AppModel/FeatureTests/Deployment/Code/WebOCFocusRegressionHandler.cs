@@ -64,13 +64,13 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
                 giveUpCount--;
                 if (giveUpCount == 0)
                 {
-                    GlobalLog.LogEvidence("FAIL: Hit tab 20x without getting focus around WebOC Control...1453368 may have regressed");
+                    GlobalLog.LogEvidence("FAIL: Hit tab 20x without getting focus around WebOC Control... ");
                     TestLog.Current.Result = TestResult.Fail;
                     return UIHandlerAction.Abort;
                 }
             }
             
-            GlobalLog.LogEvidence("Passed! - No exceptions thrown trying to tab focus around WebOC control (1453368 Regression Prevention)");
+            GlobalLog.LogEvidence("Passed! - No exceptions thrown trying to tab focus around WebOC control ");
             TestLog.Current.Result = TestResult.Pass;
             return UIHandlerAction.Abort;
         }

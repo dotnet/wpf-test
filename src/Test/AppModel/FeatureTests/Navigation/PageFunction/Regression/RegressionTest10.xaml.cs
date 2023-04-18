@@ -34,7 +34,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 
             if (e.Exception is System.ExecutionEngineException)
             {
-                NavigationHelper.Fail("FAIL: ExecutionEngineException thrown (really Invariant Assert). Dev10 10 may have regressed.");                
+                NavigationHelper.Fail("FAIL: ExecutionEngineException thrown (really Invariant Assert). Part1 10 may have regressed.");                
             }
             else if (e.Exception is System.NotSupportedException)
             {

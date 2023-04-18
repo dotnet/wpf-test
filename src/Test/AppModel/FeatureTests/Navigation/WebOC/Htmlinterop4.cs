@@ -15,7 +15,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 {
 
     /// <summary>
-    /// This class is a regression test for Dev10 573618 - Verify javascript: and vbscript: protocols can be navigated.
+    /// This class is a regression test - Verify javascript: and vbscript: protocols can be navigated.
     /// This runs in partial trust and full trust.
     /// </summary>
     public class Htmlinterop4
@@ -46,7 +46,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
         {
             if (Log.Current == null)
             {
-                new TestLog("HTML interop 573618 regression tests");
+                new TestLog("HTML interop   regression tests");
             }
 
             //Local machine lockdown disables scripting inside IE.  Re-enable it for testing purposes.
@@ -201,11 +201,11 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
 
                     if (_oneOrMoreTestsFailed)
                     {
-                        NavigationHelper.Fail("One or more HTML interop 573618 regression tests failed");
+                        NavigationHelper.Fail("One or more HTML interop   regression tests failed");
                     }
                     else
                     {
-                       NavigationHelper.Pass("HTML interop 573618 regression tests passed");
+                       NavigationHelper.Pass("HTML interop   regression tests passed");
                     }
 
                     break;

@@ -24,7 +24,7 @@ namespace WindowTest
     {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
         void OnLoaded(object sender, EventArgs e)
         {
-            // BVT BLOCKER: 1223920
+            // BVT BLOCKER: 
             // Invariant Assert when calling Window.Show after setting Visibility=Hidden
             
             // Validate default visibility

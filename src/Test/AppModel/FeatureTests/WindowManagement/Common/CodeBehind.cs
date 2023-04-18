@@ -800,7 +800,7 @@ namespace WindowTest
                             Logger.Status("*** RESIZE MODE: Shrink From Upper Left Edge ***");
                             // Update fromPoint and toPoint for this resize mode.
                             // fromPoint needs to be 2 pixels more than top and left of a themed window
-                            // due to WinBug #921017 which was resolved by design
+                            // due to which was resolved by design
 
                             _fromPoint.X = currentLocationDeviceUnits.X + 2;
                             _fromPoint.Y = currentLocationDeviceUnits.Y + 2;

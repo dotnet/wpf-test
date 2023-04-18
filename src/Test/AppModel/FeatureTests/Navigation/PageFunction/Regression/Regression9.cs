@@ -15,7 +15,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
     {
         void Regression9_Startup(object sender, StartupEventArgs e)
         {            
-            NavigationHelper.CreateLog("Regression Test: Dev10 9");
+            NavigationHelper.CreateLog("Regression Test: Part1 9");
             NavigationHelper.Output("Regression test for nested pagefunctions' access to parent window");
             NavigationHelper.Output("App Starting Up");
             NavigationWindow myWin = new NavigationWindow();

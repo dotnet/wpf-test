@@ -600,7 +600,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
             AutomationElement FileMenu = IEAutomationHelper.ShowIEFileMenu(IEWindow);
             GlobalLog.LogEvidence("Pressing \"Save\"... ");
 
-            // Removed Invoke() call due to WOSB 1863652.
+            // Removed Invoke() call 
             // This is unlikely to get fixed in RTM
             // Direct clicking works but is a bit less reliable since it depends on visibility.
             // IEAutomationHelper.InvokeElementViaAutomationId(FileMenu, "Item 257", 15);
@@ -691,7 +691,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
             
             testPasses &= correctTextBoxContent(testTextBox, "copy test");
 
-            //Click address bar twice for workaround dev11 
+            //Click address bar twice for workaround
             IEAutomationHelper.ClickIEAddrBarTwice(IEWindow); 
 
             AutomationElement editMenu = IEAutomationHelper.ShowIEEditMenu(IEWindow);

@@ -46,7 +46,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
             else
                 _rbwTest.Output("[VALIDATION PASSED] Actual Dimension: " + _rbwTest.NavWin.ActualWidth + "x" + _rbwTest.NavWin.ActualHeight);
 
-            /***** BVT BLOCKER: WOSB#1160139 ******
+            /***** BVT BLOCKER:  ******
              * rbwTest.Output("[SET] Page.W/H = 0");
              * this.Width = 0;
              * this.Height = 0;

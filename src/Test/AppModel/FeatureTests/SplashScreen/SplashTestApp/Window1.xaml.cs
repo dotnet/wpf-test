@@ -76,7 +76,7 @@ namespace SplashScreenTestApp
                                 )).Start();
                         break;
                     }
-                // Regression case for Dev10 bugs 601397.  Closing a SplashScreen that has not been shown throws nullref
+                // Regression case .  Closing a SplashScreen that has not been shown throws nullref
                 case "SplashTest5":
                     {
                         try

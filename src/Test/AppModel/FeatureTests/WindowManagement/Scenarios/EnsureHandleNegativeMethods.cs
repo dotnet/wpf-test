@@ -10,7 +10,7 @@ using Microsoft.Windows.Test.Client.AppSec.BVT.ELCommon;
 namespace WindowTest
 {
     /// <summary>
-    /// New for Dev10: WindowInteropHelper.EnsureHandle
+    ///  WindowInteropHelper.EnsureHandle
     /// </summary>
     public partial class EnsureHandleNegativeMethods
     {

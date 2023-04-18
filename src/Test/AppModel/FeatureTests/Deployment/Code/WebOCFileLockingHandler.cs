@@ -142,12 +142,12 @@ namespace Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers
 
             if (succeeded)
             {
-                GlobalLog.LogEvidence("Success: PresentationHost.exe instances disposed after navigating away from WebOC Xaml page (1521096 Regression prevention)");
+                GlobalLog.LogEvidence("Success: PresentationHost.exe instances disposed after navigating away from WebOC Xaml page ");
                 TestLog.Current.Result = TestResult.Pass;
             }
             else
             {
-                GlobalLog.LogEvidence("FAILURE: PresentationHost.exe instances not disposed after navigating away from WebOC Xaml page (1521096 Regression prevention)");
+                GlobalLog.LogEvidence("FAILURE: PresentationHost.exe instances not disposed after navigating away from WebOC Xaml page ");
                 TestLog.Current.Result = TestResult.Fail;
             }
             return UIHandlerAction.Abort;
