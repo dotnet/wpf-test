@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="Verifying Calling App.Run() from within an app throws InvalidOperationException Test Log">
+         <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="CodeOnlyXbap.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" WindowTitle="RegExp:(PASSED)" ProcessName="IEXPLORE" ExpectedWindowTitle="PASSED - EXCEPTIONS THROWN" AppName="CodeOnlyXbap" IsAppShellVisible="false" />
+                 <FailIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(FAILED)"/>
+             </ActivationStep.UIHandlers>
+             <ActivationStep.SupportFiles>
+                <SupportFile Name="CodeOnlyXbap.xbap" IncludeDependencies="true" />
+             </ActivationStep.SupportFiles>
+         </ActivationStep>
+	</TestLogStep>
+     </Steps>
+</AppMonitorConfig>

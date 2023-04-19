@@ -1,0 +1,26 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+
+   <Steps>     
+       
+       <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+       <TestLogStep Name="FIREFOX - Refreshing Internet Express App">
+         <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+           <ActivationStep.UIHandlers>
+             <FireFoxRefreshHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox"  />
+           </ActivationStep.UIHandlers>
+         </ActivationStep>
+       </TestLogStep>
+
+       <TestLogStep Name="FIREFOX - Refreshing Loose Xaml">
+         <ActivationStep Method="launch" Scheme="Local" FileName="Deploy_Markup1_v4.xaml">
+           <ActivationStep.UIHandlers>
+             <FireFoxRefreshHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="FireFox"  />
+           </ActivationStep.UIHandlers>
+         </ActivationStep>
+       </TestLogStep>     
+
+  </Steps>
+</AppMonitorConfig>

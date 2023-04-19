@@ -1,0 +1,59 @@
+﻿<!--**************************************************************************
+//
+//  Description: No exception thrown when calling Window.Hide() from Window.Closing EventHandler
+//  Test Logic:   (1) Create a window
+//                (2) Register EventHandler for Closing Event
+//                (3) Within Handler attempt to call Window.Hide()
+//                (4) Pass if no exceptions thrown, fail otherwise
+//
+//
+//**************************************************************************-->
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="NoExceptionOnHideDuringClose"
+     ContentRendered="OnContentRendered"
+     Title="Avalon.Window.Test (Exception on Hide() during Closing event)"
+     Top="0"
+     Left="0"
+     Width="500"
+     Height="500" xmlns:MappingPIGen1="clr-namespace:Microsoft.Windows.Test.Client.AppSec.BVT.ELCommon" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Input"
+     >
+		<StackPanel>
+			<Button>Button1</Button>
+		</StackPanel>
+		
+    <x:Code>
+        <![CDATA[                     
+            AutomationHelper AH = new AutomationHelper();
+
+            void OnContentRendered(object sender, EventArgs e)
+            {               
+                this.Closing += windowClosing;
+                Logger.Status("Window loaded and registered Closing event handler... sleeping 4 seconds then closing...");
+                AH.Pause(4000, delegate {this.Close();} );
+            }
+           
+            void windowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+            {
+                bool hitException = false;
+                Logger.Status("Inside Window Closing event... ");
+                try 
+                {
+                    Logger.Status("Calling Window.Hide()...");
+                    this.Hide();   
+                    Logger.Status("Successfully called Hide() method...");
+                }
+                catch (System.InvalidOperationException)
+                {
+                    hitException = true;
+                    Logger.LogFail("Error: Got System.InvalidOperation on calling Window.Hide() inside closing event! ");
+                }
+        
+                if (!hitException)
+                {
+                    Logger.LogPass("[VALIDATION PASSED] : No unexpected exceptions thrown!  Closing...");
+                }
+            }
+        ]]>
+    </x:Code>
+</Window>
+

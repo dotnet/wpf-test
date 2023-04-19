@@ -1,0 +1,29 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BuildProjectReferences>true</BuildProjectReferences>
+  </PropertyGroup>
+
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\test\Microsoft.Wpf.Test.Native.Settings.Targets" />
+
+  <!--Leaf project Properties-->
+  <!--Leaf Project Items-->
+  <ItemGroup Condition="'$(BuildExePhase)' == ''">
+    <ProjectFile Include="AddIns\CountClicksAddIn\CountClicksAddIn.csproj" />
+    <ProjectFile Include="AddIns\DragDropAddIn\DragDropAddIn.csproj" />
+    <ProjectFile Include="AddIns\SequenceFocusAddIn\SequenceFocusAddIn.csproj" />
+    <ProjectFile Include="AddIns\WebOCAddIn\WebOCAddIn.csproj" />
+    <ProjectFile Include="AddIns\WinFormsHostAddIn\WinFormsHostAddIn.csproj" />
+    <ProjectFile Include="AddInSideAdapters\AddInSideAdapters.csproj" />
+    <ProjectFile Include="AddInViews\AddInViews.csproj" />
+    <ProjectFile Include="Contracts\Contracts.csproj" />
+    <ProjectFile Include="HostApp\ClickCountHostApp.csproj" />
+    <ProjectFile Include="Hosting\AddInTestHost.csproj" />
+    <ProjectFile Include="HostSideAdapters\HostSideAdapters.csproj" />
+    <ProjectFile Include="HostViews\HostViews.csproj" />
+    <ProjectFile Include="Xbap\AddInXbap.csproj" />
+  </ItemGroup>
+
+  <!--Import the targets-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\tools\Microsoft.devdiv.traversal.targets" />
+</Project>

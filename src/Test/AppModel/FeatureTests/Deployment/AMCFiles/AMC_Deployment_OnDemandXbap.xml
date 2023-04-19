@@ -1,0 +1,56 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="On-Demand Assembly from an .Xbap - UNC">
+          <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <OnDemandApplicationVerifier OnDemandAssemblyName="SimpleOnDemandAssembly.dll" WindowTitle="RegExp:(Simple Browser Hosted Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep> 
+	</TestLogStep>
+
+	<TestLogStep Name="On-Demand Assembly from an .Xbap - HTTP Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <OnDemandApplicationVerifier OnDemandAssemblyName="SimpleOnDemandAssembly.dll" WindowTitle="RegExp:(Simple Browser Hosted Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep> 
+	</TestLogStep>
+
+	<TestLogStep Name="On-Demand Assembly from an .Xbap - HTTP Internet">
+          <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <OnDemandApplicationVerifier OnDemandAssemblyName="SimpleOnDemandAssembly.dll" WindowTitle="RegExp:(Simple Browser Hosted Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep> 
+	</TestLogStep>
+
+	<TestLogStep Name="On-Demand Assembly from an .Xbap - HTTPS Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <OnDemandApplicationVerifier OnDemandAssemblyName="SimpleOnDemandAssembly.dll" WindowTitle="RegExp:(Simple Browser Hosted Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+             </ActivationStep.UIHandlers>
+          </ActivationStep> 
+	</TestLogStep>
+
+      </FileHostStep>
+
+	<TestLogStep Name="On-Demand Assembly from an .Xbap - HTTPS Internet">
+         <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <OnDemandApplicationVerifier OnDemandAssemblyName="SimpleOnDemandAssembly.dll" WindowTitle="RegExp:(Simple Browser Hosted Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+             </ActivationStep.UIHandlers>
+             <ActivationStep.SupportFiles>
+                <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+             </ActivationStep.SupportFiles>
+         </ActivationStep> 
+	</TestLogStep>
+        
+     </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,79 @@
+<AppMonitorConfig>
+
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+
+     <!-- NOTE: Multiple FileHost Steps used to ensure uniqueness of cookies written or read as cleanup was not reliable. -->
+     <Steps>
+
+       <FileHostStep UserDefinedDirectory="FrameContentRedirection">
+          <FileHostStep.SupportFiles>
+               <SupportFile Name="hijackMe.html" />
+               <SupportFile Name="framecontent.html" />
+           </FileHostStep.SupportFiles>
+ 
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+
+               <SupportFile Name="hijacked_iframe.html" />
+               <SupportFile Name="HijackFrame_Main_Intranet.html" />
+               <SupportFile Name="retargeting_hyperlinks.xaml" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="  Regression test - Intranet Zone  8 - Loose Xaml Variation, Positive test (Feature is enabled.  Ensure that we CAN hijack the frame)">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="HijackFrame_Main_Intranet.html">
+               <ActivationStep.UIHandlers>
+                   <CrossDomainFrameNavigationHandler Scheme="HttpIntranet" CrossDomainEnabled="True" WindowTitle="RegExp:(XAML Hyperlink SubFrame Hijacking test)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="hijacked_iframe.html" />
+               <SupportFile Name="HijackFrame_Main_Intranet.html" />
+               <SupportFile Name="retargeting_hyperlinks.xaml" />
+           </FileHostStep.SupportFiles>
+	<TestLogStep Name="  Regression test - Intranet Zone  8 - Loose Xaml Variation, Negative test (Feature is disabled.  Ensure that we can't hijack the frame)">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="HijackFrame_Main_Intranet.html">
+               <ActivationStep.UIHandlers>
+                   <CrossDomainFrameNavigationHandler Scheme="HttpIntranet" CrossDomainEnabled="False" WindowTitle="RegExp:(XAML Hyperlink SubFrame Hijacking test)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="hijacked_iframe.html" />
+               <SupportFile Name="HijackFrame_Main_Intranet_Xbap.html" />
+           </FileHostStep.SupportFiles>
+	<TestLogStep Name="  Regression test - Intranet Zone  8 - Xbap Variation, Positive test (Feature is enabled.  Ensure that we CAN hijack the frame)">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="HijackFrame_Main_Intranet_Xbap.html">
+               <ActivationStep.UIHandlers>
+                   <CrossDomainFrameNavigationHandler Scheme="HttpIntranet" CrossDomainEnabled="True" WindowTitle="RegExp:(XBAP Hyperlink SubFrame Hijacking test)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="hijacked_iframe.html" />
+               <SupportFile Name="HijackFrame_Main_Intranet_Xbap.html" />
+           </FileHostStep.SupportFiles>
+	<TestLogStep Name="  Regression test - Intranet Zone  8 - Xbap Variation, Negative test (Feature is disabled.  Ensure that we can't hijack the frame)">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="HijackFrame_Main_Intranet_Xbap.html">
+               <ActivationStep.UIHandlers>
+                   <CrossDomainFrameNavigationHandler Scheme="HttpIntranet" CrossDomainEnabled="False" WindowTitle="RegExp:(XBAP Hyperlink SubFrame Hijacking test)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+      </FileHostStep>
+    </Steps>
+
+</AppMonitorConfig>

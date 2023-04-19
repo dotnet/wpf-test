@@ -1,0 +1,382 @@
+﻿<DockPanel Background="White" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" x:Uid="DockPanel_1">
+    <DockPanel.Resources x:Uid="DockPanel.Resources_1">
+        <SolidColorBrush x:Key="GreenBrush" x:Uid="SolidColorBrush_1">
+            <SolidColorBrush.Color x:Uid="SolidColorBrush.Color_1">
+                <Color A="100" G="219" x:Uid="Color_1" />
+            </SolidColorBrush.Color>
+        </SolidColorBrush>
+        <Style x:Key="NoTargetTypeStyle" x:Uid="Style_1">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Canvas Height="20" Width="100" x:Uid="Canvas_1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Uid="Style_2" TargetType="{x:Type TextBlock}">
+            <Setter x:Uid="Setter_1" Property="FontSize" Value="8" />
+            <Setter x:Uid="Setter_2" Property="TextBlock.Foreground">
+                <Setter.Value x:Uid="Value_1">
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_1">
+                        <LinearGradientBrush.GradientStops x:Uid="LinearGradientBrush.GradientStops_1">
+                            <GradientStopCollection x:Uid="GradientStopCollection_1">
+                                <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_1" />
+                                <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_2" />
+                                <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_3" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MyButtonStyle" x:Uid="Style_3" TargetType="{x:Type Button}">
+            <Setter x:Uid="Setter_3" Property="Height" Value="50" />
+            <Setter x:Uid="Setter_4" Property="Margin" Value="5" />
+            <Setter x:Uid="Setter_5" Property="Cursor" Value="Hand" />
+            <Setter x:Uid="Setter_6" Property="Template">
+                <Setter.Value x:Uid="Value_2">
+                    <ControlTemplate x:Uid="ControlTemplate_1" TargetType="{x:Type Button}">
+                        <Canvas Height="20" Width="100" x:Uid="Canvas_2">
+                            <Rectangle RadiusX="10" RadiusY="10" Stroke="{DynamicResource GreenBrush}" StrokeThickness="2" x:Name="MainRect" x:Uid="MainRect">
+                                <Rectangle.Fill x:Uid="Rectangle.Fill_1">
+                                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_2">
+                                        <LinearGradientBrush.GradientStops x:Uid="LinearGradientBrush.GradientStops_2">
+                                            <GradientStopCollection x:Uid="GradientStopCollection_2">
+                                                <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_4" />
+                                                <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_5" />
+                                                <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_6" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter Content="{TemplateBinding Content}" DockPanel.Dock="{TemplateBinding DockPanel.Dock}" Margin="15,13,15,15" x:Uid="ContentPresenter_1" />
+                        </Canvas>
+                        <ControlTemplate.Triggers x:Uid="Triggers_1">
+                            <Trigger Property="IsPressed" Value="true" x:Uid="Trigger_1">
+                                <Setter Property="BorderBrush" x:Uid="Set_4">
+                                    <Setter.Value x:Uid="Set.Value_1">
+                                        <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_3">
+                                            <LinearGradientBrush.GradientStops x:Uid="LinearGradientBrush.GradientStops_3">
+                                                <GradientStopCollection x:Uid="GradientStopCollection_3">
+                                                    <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_7" />
+                                                    <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_8" />
+                                                    <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_9" />
+                                                </GradientStopCollection>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <MultiTrigger x:Uid="MultiTrigger_1">
+                                <MultiTrigger.Conditions x:Uid="MultiTrigger.Conditions_1">
+                                    <Condition Property="IsPressed" Value="True" x:Uid="Condition_1" />
+                                    <Condition Property="IsFocused" Value="True" x:Uid="Condition_2" />
+                                    <Condition Property="DockPanel.Dock" Value="Top" x:Uid="Condition_3" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="TextBlock.FontSize" Value="16" TargetName="MainRect" x:Uid="Set_7" />
+                                <Setter Property="BorderBrush" x:Uid="Set_8">
+                                    <Setter.Value x:Uid="Set.Value_2">
+                                        <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_4">
+                                            <LinearGradientBrush.GradientStops x:Uid="LinearGradientBrush.GradientStops_4">
+                                                <GradientStopCollection x:Uid="GradientStopCollection_4">
+                                                    <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_10" />
+                                                    <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_11" />
+                                                    <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_12" />
+                                                </GradientStopCollection>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                            <MultiTrigger x:Uid="MultiTrigger_2">
+                                <MultiTrigger.Conditions x:Uid="MultiTrigger.Conditions_2">
+                                    <Condition Property="DockPanel.Dock" Value="Top" x:Uid="Condition_4" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="TextBlock.FontSize" Value="16" TargetName="MainRect" x:Uid="Set_9" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers x:Uid="VisualTriggers_1">
+                <Trigger Property="IsPressed" Value="true" x:Uid="Trigger_4">
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" x:Uid="Set_1" />
+                    <Setter Property="TextBlock.FontSize" Value="16" x:Uid="Set_2" />
+                    <Setter Property="DockPanel.Dock" Value="Top" x:Uid="Set_3" />
+                    <Setter Property="BorderBrush" x:Uid="Set_16">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientBrush.GradientStops>
+                                    <GradientStopCollection>
+                                        <GradientStop Color="#FFFF0000" Offset="0" />
+                                        <GradientStop Color="#FF0000FF" Offset="1" />
+                                    </GradientStopCollection>
+                                </GradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" x:Uid="Set_17">
+                        <Setter.Value x:Uid="Value_3">
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_8">
+                                <LinearGradientBrush.GradientStops x:Uid="GradientStops_1">
+                                    <GradientStopCollection x:Uid="GradientStopCollection_9">
+                                        <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_21" />
+                                        <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_22" />
+                                        <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_23" />
+                                    </GradientStopCollection>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True" x:Uid="Trigger_2">
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" x:Uid="Set_5" />
+                </Trigger>
+                <MultiTrigger x:Uid="MultiTrigger_4">
+                    <MultiTrigger.Conditions x:Uid="Conditions_1">
+                        <Condition Property="IsPressed" Value="True" x:Uid="Condition_8" />
+                        <Condition Property="IsFocused" Value="True" x:Uid="Condition_9" />
+                        <Condition Property="DockPanel.Dock" Value="Top" x:Uid="Condition_10" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" x:Uid="Set_6" />
+                    <Setter Property="BorderBrush" x:Uid="Set_18">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientBrush.GradientStops>
+                                    <GradientStopCollection>
+                                        <GradientStop Color="#FFFF0000" Offset="0" />
+                                        <GradientStop Color="#FF0000FF" Offset="1" />
+                                    </GradientStopCollection>
+                                </GradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" x:Uid="Set_19">
+                        <Setter.Value x:Uid="Value_4">
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_9">
+                                <LinearGradientBrush.GradientStops x:Uid="GradientStops_2">
+                                    <GradientStopCollection x:Uid="GradientStopCollection_10">
+                                        <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_24" />
+                                        <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_25" />
+                                        <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_26" />
+                                    </GradientStopCollection>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonStyleWithoutVisualTreeorTriggers" x:Uid="Style_4" TargetType="{x:Type Button}">
+            <Setter x:Uid="Setter_7" Property="Height" Value="30" />
+            <Setter x:Uid="Setter_8" Property="Button.Foreground">
+                <Setter.Value x:Uid="Value_5">
+                    <SolidColorBrush x:Uid="SolidColorBrush_2">
+                        <SolidColorBrush.Color x:Uid="SolidColorBrush.Color_2">
+                            <Color A="255" B="255" x:Uid="Color_2" />
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </DockPanel.Resources>
+    <TextBlock x:Uid="Text_2"> Hello World! </TextBlock>
+    <Button Height="30" x:Uid="Button_3"> Click Me! </Button>
+    <Button Height="40" x:Uid="Button_4">
+        <TextBlock x:Uid="Text_3"> Click Me Again! </TextBlock>
+    </Button>
+    <Button Height="50" Command="CutCommand" x:Uid="Button_5">
+    </Button>
+    <Button Height="60" Command="ScrollViewer.PageDownCommand" x:Uid="Button_6">
+    </Button>
+    <TextBlock x:Uid="TextBlock_666">
+        <Hyperlink x:Uid="HyperLink_1">
+            <Button Height="30" x:Uid="Button_7">
+                <TextBlock x:Uid="Text_4"> Click Me Again and Again! </TextBlock>
+            </Button>
+        </Hyperlink>
+    </TextBlock>
+    <Button Height="40" x:Uid="Button_8">
+        <StackPanel x:Uid="FlowPanel_1">
+            <TextBlock x:Uid="Text_5"> Click Me Again and Again and Again! </TextBlock>
+            <TextBlock x:Uid="Text_6"> Click Me Again and Again and Again and Again! </TextBlock>
+        </StackPanel>
+    </Button>
+    <Canvas x:Uid="Canvas_3">
+        <Path Data="M100,200 C100,100 250,100 250,200 S400,300 400,200" Stroke="yellow" StrokeThickness="6" x:Uid="Path_1" />
+        <Ellipse x:Uid="Ellipse_1">
+            <Ellipse.Width>156</Ellipse.Width>
+            <Ellipse.Height>106</Ellipse.Height>
+            <Canvas.Left>228</Canvas.Left>
+            <Canvas.Top>28</Canvas.Top>
+            <Ellipse.StrokeThickness x:Uid="Ellipse.StrokeThickness_1">6</Ellipse.StrokeThickness>
+            <Ellipse.Fill x:Uid="Ellipse.Fill_2">blue</Ellipse.Fill>
+        </Ellipse>
+        <Line x:Uid="Line_1">
+            <Line.X1 x:Uid="Line.X1_2">455</Line.X1>
+            <Line.Y1 x:Uid="Line.Y1_2">255</Line.Y1>
+            <Line.X2 x:Uid="Line.X2_2">200</Line.X2>
+            <Line.Y2 x:Uid="Line.Y2_2">100</Line.Y2>
+            <Line.Fill x:Uid="Line.Fill_1">blue</Line.Fill>
+            <Line.Stroke x:Uid="Line.Stroke_2">red</Line.Stroke>
+            <Line.StrokeThickness x:Uid="Line.StrokeThickness_1">10</Line.StrokeThickness>
+            <Line.StrokeStartLineCap x:Uid="Line.StrokeStartLineCap_1">Round</Line.StrokeStartLineCap>
+            <Line.StrokeEndLineCap x:Uid="Line.StrokeEndLineCap_1">Round</Line.StrokeEndLineCap>
+        </Line>
+        <Path Fill="#4000FF00" Stroke="Yellow" x:Uid="Path_2">
+            <Path.Data x:Uid="Path.Data_1">
+                <PathGeometry x:Uid="PathGeometry_1">
+                    <PathGeometry.Transform>
+                        <TranslateTransform X="225" Y="25" />
+                    </PathGeometry.Transform>
+                    <PathGeometry.Figures x:Uid="PathGeometry.Figures_1">
+                        <PathFigureCollection x:Uid="PathFigureCollection_1">
+                            <PathFigure IsFilled="True" StartPoint="0 0" IsClosed="True" x:Uid="PathFigure_1">
+                                <PathFigure.Segments x:Uid="PathFigure.Segments_1">
+                                    <PathSegmentCollection x:Uid="PathSegmentCollection_1">
+                                        <LineSegment Point="100 0" x:Uid="LineSegment_1" />
+                                        <BezierSegment Point1="125 25" Point2="125 75" Point3="100 100" x:Uid="BezierSegment_1" />
+                                        <QuadraticBezierSegment Point1="50 50" Point2="0 100" x:Uid="QuadraticBezierSegment_1" />
+                                        <ArcSegment Point="100 150" Size="100 100" RotationAngle="45" IsLargeArc="False" SweepDirection="Clockwise" x:Uid="ArcSegment_1" />
+                                        <PolyLineSegment Points="100 175 0 175" x:Uid="PolyLineSegment_1" />
+                                        <PolyBezierSegment Points="50 225 50 275 0 300 50 325 50 375 0 400" x:Uid="PolyBezierSegment_1" />
+                                        <PolyQuadraticBezierSegment Points="50 450 0 500 50 550 0 600" x:Uid="PolyQuadraticBezierSegment_1" />
+                                    </PathSegmentCollection>
+                                </PathFigure.Segments>
+                            </PathFigure>
+                        </PathFigureCollection>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        <Polygon Fill="purple" Stroke="black" StrokeThickness="2" Points="100,10 150,35 150,65 100,90 50,65 50,35" x:Uid="Polygon_1">
+        </Polygon>
+        <Polyline Stroke="blue" StrokeThickness="6" Points="10,10 50,30 5,100 100,100 100,300 300,300 300,500" x:Uid="Polyline_1" />
+        <Rectangle Width="200px" Height="200px" StrokeThickness="15px" Stroke="red" Canvas.Top="200" Canvas.Left="500" Fill="gold" RadiusX="20" RadiusY="20" x:Uid="Rectangle_2" />
+        <Ellipse Name="Ellipse1" Width="152" Height="102" Canvas.Left="176" Canvas.Top="26" Stroke="black" StrokeThickness="2" x:Uid="Ellipse1">
+            <Ellipse.Fill x:Uid="Ellipse.Fill_1">
+                <RadialGradientBrush Opacity="0.5" x:Uid="RadialGradientBrush_1">
+                    <RadialGradientBrush.GradientStops x:Uid="RadialGradientBrush.GradientStops_1">
+                        <GradientStopCollection x:Uid="GradientStopCollection_5">
+                            <GradientStop Color="red" Offset="0" x:Uid="GradientStop_13" />
+                        </GradientStopCollection>
+                    </RadialGradientBrush.GradientStops>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+    </Canvas>
+    <Canvas x:Uid="Canvas_4">
+        <Line Name="Line1" x:Uid="Line1">
+            <Line.X1 x:Uid="Line.X1_1">455</Line.X1>
+            <Line.Y1 x:Uid="Line.Y1_1">255</Line.Y1>
+            <Line.X2 x:Uid="Line.X2_1">200</Line.X2>
+            <Line.Y2 x:Uid="Line.Y2_1">150</Line.Y2>
+            <Line.Stroke x:Uid="Line.Stroke_1">
+                <LinearGradientBrush Opacity="0.5" x:Uid="LinearGradientBrush_5">
+                    <LinearGradientBrush.GradientStops x:Uid="LinearGradientBrush.GradientStops_5">
+                        <GradientStopCollection x:Uid="GradientStopCollection_6">
+                            <GradientStop Color="green" Offset="0" x:Uid="GradientStop_14" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Line.Stroke>
+        </Line>
+    </Canvas>
+    <StackPanel Orientation="Horizontal" Cursor="Hand" x:Uid="FlowPanel_2">
+        <Button x:Uid="Button_9">
+            <Button.Style x:Uid="Button.Style_1">
+                <Style x:Uid="Style_5" TargetType="{x:Type Button}">
+                    <Setter x:Uid="Setter_9" Property="Margin" Value="5" />
+                    <Setter x:Uid="Setter_10" Property="Cursor" Value="Hand" />
+                    <Setter x:Uid="Setter_11" Property="Template">
+                        <Setter.Value x:Uid="Value_6">
+                            <ControlTemplate x:Uid="ControlTemplate_2" TargetType="{x:Type Button}">
+                                <Canvas Height="20" Width="100" x:Uid="Canvas_5">
+                                    <Rectangle RadiusX="10" RadiusY="10" Stroke="{DynamicResource GreenBrush}" StrokeThickness="2" x:Name="MainRect" x:Uid="Rectangle_1">
+                                        <Rectangle.Fill x:Uid="Rectangle.Fill_2">
+                                            <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_6">
+                                                <LinearGradientBrush.GradientStops x:Uid="LinearGradientBrush.GradientStops_6">
+                                                    <GradientStopCollection x:Uid="GradientStopCollection_7">
+                                                        <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_15" />
+                                                        <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_16" />
+                                                        <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_17" />
+                                                    </GradientStopCollection>
+                                                </LinearGradientBrush.GradientStops>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <ContentPresenter Content="{TemplateBinding Content}" DockPanel.Dock="{TemplateBinding DockPanel.Dock}" Margin="15,13,15,15" x:Uid="ContentPresenter_2" />
+                                </Canvas>
+                                <ControlTemplate.Triggers x:Uid="Triggers_2">
+                                    <MultiTrigger x:Uid="MultiTrigger_3">
+                                        <MultiTrigger.Conditions x:Uid="MultiTrigger.Conditions_3">
+                                            <Condition Property="IsPressed" Value="True" x:Uid="Condition_5" />
+                                            <Condition Property="IsFocused" Value="True" x:Uid="Condition_6" />
+                                            <Condition Property="DockPanel.Dock" Value="Top" x:Uid="Condition_7" />
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="BorderBrush" x:Uid="Set_15">
+                                            <Setter.Value x:Uid="Set.Value_3">
+                                                <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_7">
+                                                    <LinearGradientBrush.GradientStops x:Uid="LinearGradientBrush.GradientStops_7">
+                                                        <GradientStopCollection x:Uid="GradientStopCollection_8">
+                                                            <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_18" />
+                                                            <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_19" />
+                                                            <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_20" />
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </MultiTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers x:Uid="VisualTriggers_2">
+                        <Trigger Property="IsPressed" Value="true" x:Uid="Trigger_3">
+                            <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" x:Uid="Set_10" />
+                            <Setter Property="TextBlock.FontSize" Value="16" x:Uid="Set_11" />
+                            <Setter Property="DockPanel.Dock" Value="Top" x:Uid="Set_12" />
+                        </Trigger>
+                        <MultiTrigger x:Uid="MultiTrigger_5">
+                            <MultiTrigger.Conditions x:Uid="Conditions_2">
+                                <Condition Property="IsPressed" Value="True" x:Uid="Condition_11" />
+                                <Condition Property="IsFocused" Value="True" x:Uid="Condition_12" />
+                                <Condition Property="DockPanel.Dock" Value="Top" x:Uid="Condition_13" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="TextBlock.Foreground" Value="{DynamicResource GreenBrush}" x:Uid="Set_13" />
+                            <Setter Property="TextBlock.FontSize" Value="16" x:Uid="Set_14" />
+                            <Setter Property="BorderBrush" x:Uid="Set_20">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="#FFFF0000" Offset="0" />
+                                                <GradientStop Color="#FF0000FF" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="BorderBrush" x:Uid="Set_21">
+                                <Setter.Value x:Uid="Value_7">
+                                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0,1" x:Uid="LinearGradientBrush_10">
+                                        <LinearGradientBrush.GradientStops x:Uid="GradientStops_3">
+                                            <GradientStopCollection x:Uid="GradientStopCollection_11">
+                                                <GradientStop Color="#FFFF0000" Offset="0" x:Uid="GradientStop_27" />
+                                                <GradientStop Color="#FF00FF00" Offset="0.5" x:Uid="GradientStop_28" />
+                                                <GradientStop Color="#FF0000FF" Offset="1.0" x:Uid="GradientStop_29" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </StackPanel>
+</DockPanel>

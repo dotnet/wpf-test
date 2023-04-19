@@ -1,0 +1,40 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <PropertyGroup>
+    <AssemblyName>LocBaml</AssemblyName>
+    <TargetType>exe</TargetType>
+    <Configuration>Release</Configuration>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <ProductVersion>8.0.50215</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A0A49376-EEDB-42D2-A6B0-53CBB24CFC66}</ProjectGuid>
+    <GenerateManifests>true</GenerateManifests>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BamlLocalizabilityByReflection.cs" />
+    <Compile Include="commandline.cs" />
+    <Compile Include="const.cs" />
+    <Compile Include="DefaultAttributes.cs" />
+    <Compile Include="InputBamlStreamList.cs" />
+    <Compile Include="LocBaml.cs" />
+    <Compile Include="ResourceGenerator.cs" />
+    <Compile Include="ResourceTextReader.cs" />
+    <Compile Include="ResourceTextWriter.cs" />
+    <Compile Include="StringLoader.cs" />
+    <Compile Include="TranslationDictionaries.cs" />
+    <EmbeddedResource Include="Resources\StringTable.resText">
+	<LogicalName>Resources.StringTable.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+  </ItemGroup>
+</Project>

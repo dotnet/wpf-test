@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<Steps>
+  <MSBuildErrors>
+    <Error ID="CS0246" Partial="True">
+      <Source>CodeforAppdef.cs</Source>
+      <StartingMessage>error CS0246</StartingMessage>
+      <Description>The type or namespace name 'Generated' could not be found (are you missing a using directive or an assembly reference?)</Description>
+    </Error>
+
+    <Error ID="CS5001" Partial="True">
+      <Source>csc</Source>
+      <StartingMessage>error CS5001</StartingMessage>
+      <Description>Program 'c:\Work\obj\Release\AppDefAscode.exe' does not contain a static 'Main' method suitable for an entry point</Description>
+    </Error>
+
+    <Error ID="CS0101" Partial="True">
+      <Source></Source>
+      <StartingMessage>error CS0101</StartingMessage>
+      <Description>
+          The namespace 'TestDll' already contains a definition for 'ResourceLoader'
+      </Description>
+    </Error>
+
+  </MSBuildErrors>
+  <Step ID="0">
+    <FileName>CodeforAppdefasCode.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>none</Variation>
+  </Step>
+  
+  <Step ID="1" DependsOn="0">
+    <FileName>AppDefasCodeProject.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>4</Variation>
+  </Step>
+
+  <Step ID="2">
+    <FileName>CodeforAppdefasCode.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>2,3</Variation>
+  </Step>
+  <Step ID="3" DependsOn="2">
+    <FileName>AppDefasCodeProject.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>4,5</Variation>
+  </Step>
+    
+  <Step ID="4">
+    <FileName>CodeforAppdefasCode.xvar</FileName>
+    <Scenario>2</Scenario>
+    <Variation>2,3</Variation>
+  </Step>
+  <Step ID="5" DependsOn="4">
+    <FileName>AppDefasCodeProject.xvar</FileName>
+    <Scenario>2</Scenario>
+    <Variation>4,5</Variation>
+  </Step>
+  
+  <Step ID="6">
+    <FileName>CodeforAppdefasCode.xvar</FileName>
+    <Scenario>3</Scenario>
+    <Variation>2,3</Variation>
+  </Step>
+  <Step ID="7" DependsOn="6">
+    <FileName>AppDefasCodeProject.xvar</FileName>
+    <Scenario>3</Scenario>
+    <Variation>4,5</Variation>
+    <ErrorCodes>CS0101</ErrorCodes>
+  </Step>
+   
+  <Step ID="8">
+    <FileName>CodeforAppdefasCode.xvar</FileName>
+    <Scenario>4</Scenario>
+    <Variation>all</Variation>
+  </Step>  
+  <Step ID="9" DependsOn="8">
+    <FileName>AppDefasCodeProject.xvar</FileName>
+    <Scenario>4</Scenario>
+    <Variation>4,10</Variation>    
+  </Step>    
+  
+  <Step ID="10" DependsOn="0">
+    <FileName>AppDefasCodeProject.xvar</FileName>
+    <Scenario>5</Scenario>
+    <Variation>11</Variation>
+    <ErrorCodes>CS5001</ErrorCodes>
+  </Step>
+</Steps>

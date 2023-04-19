@@ -1,0 +1,20 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFileDialog test: Close OpenFileDialog using X button or Esc [browser]">
+      <ActivationStep Method="launch" Scheme="HttpInternet" FileName="CommonFileDialogTest.xbap">
+        <ActivationStep.UIHandlers>
+          <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFileDialogTitle, TestRuntime" 
+                             ProcessName="PresentationHost" 
+                             Dialog="OpenFileCloseWithXButtonOrEscKey_browser" 
+                             FileName="hello.txt" 
+                             TestType="CloseWindowWithXButton" />
+        </ActivationStep.UIHandlers>
+        <ActivationStep.SupportFiles>
+          <SupportFile Name="CommonFileDialogTest.xbap" IncludeDependencies="true" />
+          <SupportFile Name="hello.txt" IncludeDependencies="true" />
+        </ActivationStep.SupportFiles>
+      </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,33 @@
+<XMLVariationTemplate>
+    <TemplateData>
+        <AppMonitorConfig>
+            <Steps>
+                    <AttributeVariation ID="1">
+                        <MSBuildStep Arguments="WinFormsandAvalonProjectVariations.csxml /rst:1"  />
+                    </AttributeVariation>
+
+                    <NodeVariation ID="3">
+                        <ActivationStep Method="launch" ExecuteCompiledApp="true" />
+                    </NodeVariation>
+
+                    <MSBuildStep Arguments="/t:Clean;TestCleanup" AlwaysRun="True"   />
+            </Steps>
+        </AppMonitorConfig>
+    </TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>AppMonitorConfig</FileName>
+            <FileExtension>.xml</FileExtension>
+            <RetainFileName>true</RetainFileName>
+        </Defaults>
+        <Scenario Case="1">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="WinFormsandAvalonProjectVariations.csxml /rst:1" />
+        </Scenario>
+        <Scenario Case="2">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="WinFormsandAvalonProjectVariations.csxml /rst:2" />
+        </Scenario>        
+        <Scenario Case="3">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="WinFormsandAvalonProjectVariations.csxml /rst:3" />
+        </Scenario>        
+    </Scenarios>
+</XMLVariationTemplate>

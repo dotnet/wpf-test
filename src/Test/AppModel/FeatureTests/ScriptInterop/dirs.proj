@@ -1,0 +1,16 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\test\Microsoft.Wpf.Test.Native.Settings.Targets" />
+  <!--Leaf project Properties-->
+  <!--Leaf Project Items-->
+  <!--The following projects will build during the default PHASE-->
+  <ItemGroup Condition="'$(BuildExePhase)' == ''">
+    <ProjectFile Include="FTXbap\ScriptInteropFT.csproj" />
+    <ProjectFile Include="PTXbap\ScriptInteropPT.csproj" />
+    <ProjectFile Include="AMCs\AMCs.nativeproj" />
+    <ProjectFile Include="html\html.nativeproj" />
+  </ItemGroup>
+
+  <!--Import the targets-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\tools\Microsoft.DevDiv.Traversal.targets" />
+</Project>

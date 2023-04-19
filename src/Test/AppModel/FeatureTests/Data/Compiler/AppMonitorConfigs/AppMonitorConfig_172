@@ -1,0 +1,11 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="172 - Compile with Implicit load">
+      <MSBuildStep CurrentStage="Run" Arguments="MyButtonComponent.proj" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="LoadSubClassedComponent.proj" AlwaysRun="True" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+      <MSBuildStep Arguments="MyButtonComponent.proj /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

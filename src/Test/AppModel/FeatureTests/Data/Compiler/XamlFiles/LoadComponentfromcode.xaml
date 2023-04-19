@@ -1,0 +1,47 @@
+﻿
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:Class="LoadComponentfromcode"
+  xmlns:my="clr-namespace:TestDll" xmlns:MappingPIGen1="clr-namespace:TestDll"
+  >
+    <my:MyButton Width="150" Height="45" Loaded="startTest">Add</my:MyButton>    
+    
+    <x:Code><![CDATA[
+
+    Microsoft.Test.Logging.TestLog log = null;
+
+    MyNavApp MyApplication { 
+
+        get { return (MyNavApp)Application.Current; }
+
+    }
+
+
+    void startTest(object sender, RoutedEventArgs args)
+    {
+
+        log = Microsoft.Test.Logging.TestLog.Current;
+        // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+        log.LogStatus("Custom control loaded when referenced through local reference.");                                
+
+        log.Result = Microsoft.Test.Logging.TestResult.Pass;
+        
+        // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;          
+
+        if ( MyApplication.BrowserHostedApp == false )        
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+        else
+        {
+            log.LogStatus("Shutting down application");
+            // log.Close();                    
+        }            
+
+        Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+    }
+
+    ]]></x:Code>
+
+</Page>

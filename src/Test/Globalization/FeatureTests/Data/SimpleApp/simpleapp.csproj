@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Simpleapp</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <UICulture>en-US</UICulture>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="Simple_App.xaml">
+    </ApplicationDefinition>
+    <Page Include="simple.xaml">
+    </Page>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="$(IntermediateOutputPath)\simple.baml">
+        <Link>%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(IntermediateOutputPath)\Simpleapp.g.en-US.resources">
+        <Link>%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

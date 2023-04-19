@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <DiscoveryInfo AdaptorsAssembly="Infra\QualityVaultUtilities.dll" VersionOrder="VersionOrder.txt">
   <DefaultTestInfo Type="Functional" Disabled="false" ExecutionGroupingLevel="SharedSupportFiles">
     <SupportFiles>
@@ -109,6 +109,89 @@
           <Version>4.0+</Version>
           <Version>4.0Client+</Version>
         </Versions>
+      </DefaultTestInfo>
+    </Target>
+    
+    <!-- Area : Globalization -->
+    <!-- Globalization -->
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\Globalization\GlobTestCases.dll">
+      <DefaultTestInfo Area="Globalization" Disabled="False" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Globalization\GlobTestCases.dll" />
+          <SupportFile Source="FeatureTests\Globalization\GlobalizationTestCommon.dll" />
+          <SupportFile Source="FeatureTests\Globalization\GlobCustomControl.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!--Area : AppModel-->
+    <!-- App Model Tests : Deployment subarea, TestAttributeAdaptor -->
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\AppModel\Deployment\TestLibraries\DeploymentCommonLibrary.dll">
+      <DefaultTestInfo Area="AppModel" Type="Functional">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Fail" Method="Run" SecurityLevel="FullTrust" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\AppModel\Deployment\TestLibraries\DeploymentCommonLibrary.dll" />
+          <SupportFile Source="FeatureTests\AppModel\Deployment\Resources\XbapExpectedEvents.xml" />
+          <!-- Need the big file to ensure the Progress Page UI gets shown during execution -->
+          <SupportFile Source="FeatureTests\AppModel\Deployment\Apps\LargeXbap\*" />
+          <SupportFile Source="FeatureTests\AppModel\Deployment\Resources\Deploy_Markup1_v4.xaml" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!-- App Model Tests -->
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\AppModel\XTCs\*.xtc">
+      <DefaultTestInfo Area="AppModel">
+        <DriverParameters SecurityLevel="FullTrust" />
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+        <!-- <Target Adaptor="XtcAdaptor" Path="FeatureTests\AppModel\XTCs\Compilation\*.xtc">
+            <DefaultTestInfo Area="AppModel" Disabled="False">
+                <Versions>
+                    <Version>4.0</Version>
+                </Versions>
+            </DefaultTestInfo>
+        </Target> -->
+    
+    <!-- App Model Tests - Orcas 3.5 -->
+    <!-- <Target Adaptor="XtcAdaptor" Path="FeatureTests\AppModel\Orcas\XTCs\*.xtc">
+      <DefaultTestInfo Area="AppModel">
+        <Versions>
+          <Version>3.5+</Version>
+          <Version>AH+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target> -->
+    
+    <!-- AppModel Deployment/Hosting/Integration Orcas Specific tests -->
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\AppModel\Deployment\TestLibraries\OrcasDeploymentTestCodeLibrary.dll">
+      <DefaultTestInfo Area="AppModel" Type="Functional">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Fail" CreateLog="true" SecurityLevel="FullTrust" />
+        <Versions>
+          <Version>3.0SP1+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\AppModel\Deployment\TestLibraries\OrcasDeploymentTestCodeLibrary.dll" />
+          <SupportFile Source="FeatureTests\AppModel\Deployment\TestLibraries\DeploymentCommonLibrary.dll" />
+        </SupportFiles>
       </DefaultTestInfo>
     </Target>
   </Targets>

@@ -1,0 +1,22 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <TestLogStep Name="FIREFOX - Verifying internally-sourced navigation away from xbap: UNC">
+        <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap">
+          <ActivationStep.UIHandlers>
+            <NavigateAwayToHTMLHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" />
+            <PassIfSeenHandler WindowTitle="RegExp:(WPF Navigation Test Page)" ProcessName="FireFox" />
+          </ActivationStep.UIHandlers>
+          <ActivationStep.SupportFiles>
+            <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+            <SupportFile Name="deploy_htmlmarkup.htm" IncludeDependencies="False" />
+          </ActivationStep.SupportFiles>
+        </ActivationStep>
+      </TestLogStep>
+      
+    
+  </Steps>
+</AppMonitorConfig>

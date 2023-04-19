@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+
+<Steps>
+
+	<!-- =========================================	-->
+	<!-- 					     Generating AppDef file                            			-->
+	<!-- =========================================	-->
+
+	<Step ID="100"> <!-- Creating in Current Directory -->
+		<FileName>BasicAppDefVariations.xvar</FileName>
+		<Scenario>0</Scenario>
+		<Variation>none</Variation>
+	</Step>      
+
+	<Step ID="101"> <!-- Creating in Parenet Directory -->
+		<FileName>BasicAppDefVariations.xvar</FileName>
+		<Scenario>1</Scenario>
+		<Variation>none</Variation>
+	</Step>      
+
+	<Step ID="102"> <!-- Creating in Sub Directory -->
+		<FileName>BasicAppDefVariations.xvar</FileName>
+		<Scenario>2</Scenario>
+		<Variation>none</Variation>
+	</Step>      
+
+	<Step ID="103"> <!-- Creating in Sub\Sub Directory -->
+		<FileName>BasicAppDefVariations.xvar</FileName>
+		<Scenario>3</Scenario>
+		<Variation>none</Variation>
+	</Step>      
+
+	<!-- =========================================	-->
+	<!-- 					  Generating Resource file                             			-->
+	<!-- =========================================	-->
+
+	<Step ID="1000"> <!-- Creating in Current Directory -->
+		<FileName>BasicResourceFileVariation.xvar</FileName>
+		<Scenario>0</Scenario>
+		<Variation>none</Variation>
+	</Step>      
+
+	<Step ID="1001"> <!-- Creating in Parenet Directory --> 
+		<FileName>BasicResourceFileVariation.xvar</FileName>
+		<Scenario>1</Scenario>
+		<Variation>none</Variation>
+	</Step>      
+
+	<Step ID="1002"> <!-- Creating in Sub Directory --> 
+		<FileName>BasicResourceFileVariation.xvar</FileName>
+		<Scenario>2</Scenario>
+		<Variation>none</Variation>
+	</Step>      
+
+	<Step ID="1003"> <!-- Creating in Sub\Sub Directory --> 
+		<FileName>BasicResourceFileVariation.xvar</FileName>
+		<Scenario>3</Scenario>
+		<Variation>none</Variation>
+	</Step>      
+
+	<!-- =========================================	-->
+	<!-- 					     Generating Proj file                                 			-->
+	<!-- =========================================	-->
+
+	<!-- AppDef in Parent directory/ Simple.xaml in Current directory -->
+    <Step ID="1" DependsOn="101,1000"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>1</Scenario>
+        <Variation>11</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+    
+    <Step ID="2" DependsOn="101,1000"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>1</Scenario>
+        <Variation>11,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+	<!-- AppDef in Sub directory/ Simple.xaml in Current directory -->
+    <Step ID="3" DependsOn="102,1000"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>2</Scenario>
+        <Variation>11</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+    <Step ID="4" DependsOn="102,1000"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>2</Scenario>
+        <Variation>11,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+	<!-- AppDef in Sub\Sub directory/ Simple.xaml in Current directory -->
+    <Step ID="5" DependsOn="103,1000"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>3</Scenario>
+        <Variation>11</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+    <Step ID="6" DependsOn="103,1000"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>3</Scenario>
+        <Variation>11,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+	<!-- AppDef in Current directory (using absolute path)/ Simple.xaml in Current directory -->
+    <Step ID="7" DependsOn="100,1000"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>4</Scenario>
+        <Variation>11</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+    <Step ID="8" DependsOn="100,1000"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>4</Scenario>
+        <Variation>11,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+    
+    <!-- ====================================== -->
+	<!-- AppDef in Parent directory/ Simple.xaml in Parent directory -->
+    <Step ID="9" DependsOn="101,1001"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>5</Scenario>
+        <Variation>11,12</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+    
+    <Step ID="10" DependsOn="101,1001"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>5</Scenario>
+        <Variation>11,12,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+    
+	<!-- AppDef in Parent directory/ Simple.xaml in Sub directory -->
+    <Step ID="11" DependsOn="101,1002"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>6</Scenario>
+        <Variation>11,12</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+    
+    <Step ID="12" DependsOn="101,1002"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>6</Scenario>
+        <Variation>11,12,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+	<!-- AppDef in Sub directory/ Simple.xaml in Parent directory -->
+    <Step ID="13" DependsOn="102,1001"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>7</Scenario>
+        <Variation>11,12</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+    <Step ID="14" DependsOn="102,1001"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>7</Scenario>
+        <Variation>11,12,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+	<!-- AppDef in Sub directory/ Simple.xaml in Sub\Sub directory -->
+    <Step ID="15" DependsOn="102,1003"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>8</Scenario>
+        <Variation>11,12</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+    <Step ID="16" DependsOn="102,1003"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>8</Scenario>
+        <Variation>11,12,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+	<!-- AppDef in Sub\Sub directory/ Simple.xaml in Sub directory -->
+    <Step ID="17" DependsOn="103,1002"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>9</Scenario>
+        <Variation>11,12</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+    <Step ID="18" DependsOn="103,1002"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>9</Scenario>
+        <Variation>11,12,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+	<!-- AppDef in Sub\Sub directory/ Simple.xaml in Parent directory -->
+    <Step ID="19" DependsOn="103,1001"> <!-- Deploy -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>10</Scenario>
+        <Variation>11,12</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+
+    <Step ID="20" DependsOn="103,1001"> <!-- HIB -->
+        <FileName>AppDefInDiffDirectory.xvar</FileName>
+        <Scenario>10</Scenario>
+        <Variation>11,12,3</Variation>
+        <CommandLineArgs>/t:Clean,Build</CommandLineArgs>
+    </Step>
+    
+</Steps>

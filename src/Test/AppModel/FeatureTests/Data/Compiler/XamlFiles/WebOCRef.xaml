@@ -1,0 +1,91 @@
+﻿
+
+
+<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+    xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+    Name="win"
+    Loaded="RunTest" xmlns:MappingPIGen1="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:MappingPIGen2="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+    >
+
+
+    <DockPanel Background="Maroon">
+
+      <wfi:WindowsFormsHost Name="wfh" DockPanel.Dock="Top" Height="300" Width="600">
+        <wfi:WindowsFormsHost.Controls>
+          <wf:WebBrowser Url="http://www.google.com" Height="300" Width="600" DocumentCompleted="Test" /> 
+        </wfi:WindowsFormsHost.Controls>
+      </wfi:WindowsFormsHost>
+
+    </DockPanel>
+
+    <x:Code>
+    <![CDATA[
+
+    Microsoft.Test.Logging.TestLog log = null;
+    bool _browserhostedapp = false;
+    
+    void RunTest(object sender, RoutedEventArgs e)
+    {
+        log = Microsoft.Test.Logging.TestLog.Current; 
+        // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+
+        log.LogStatus("WinFx markup loaded.");
+        // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+        if ( AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap") )        
+        {
+            _browserhostedapp = true;
+        }
+
+    }
+
+    void Test(object sender, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e)
+    {
+        log.LogStatus("WebOC loaded.");
+
+        log.Result = Microsoft.Test.Logging.TestResult.Pass;
+
+        // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+
+        ShutdownApp();
+
+    }
+    
+    protected override void OnExit(ExitEventArgs e)
+    {
+        if ( _browserhostedapp == false )
+        {
+            log.LogStatus("Shutting down application");
+            // log.Close();
+        }
+    }
+    
+    private void ShutdownApp()
+    {
+
+        // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+        log.LogStatus("ShutdownApp - BrowserHostedApp : " + _browserhostedapp.ToString());
+
+        if ( _browserhostedapp == false)        
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+        else
+        {
+            log.LogStatus("Shutting down application");
+            // log.Close();
+        }
+            
+        Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+
+    }
+    
+    ]]>
+    </x:Code>
+
+
+</Page>
+

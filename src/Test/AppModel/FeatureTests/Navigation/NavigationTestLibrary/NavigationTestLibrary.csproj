@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+    <!-- <SignAssembly>true</SignAssembly> -->
+    <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+    <AssemblyName>NavigationTestLibrary</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PublishDir>$(PublishDir)\Navigation</PublishDir>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\..\Deployment\Code\BrowserAppExceptionHandler.cs" />
+    <Compile Include="..\Hyperlink\HlinkTargetingHandler.cs" />
+    <Compile Include="..\Hyperlink\HlinkNavigationHandler.cs" />
+    <Compile Include="AutomationIdsTable.cs" />
+    <Compile Include="BrowserHelper.cs" />
+    <Compile Include="IBrowserUIProvider.cs" />
+    <Compile Include="IE7Proxy.cs" />
+    <Compile Include="IEProxy.cs" />
+    <Compile Include="INavigationProvider.cs" />
+    <Compile Include="InteractionModes.cs" />
+    <Compile Include="IProvideJournalingState.cs" />
+    <Compile Include="JournalHelper.cs" />
+    <Compile Include="NavigationState.cs" />
+    <Compile Include="NavigationStateCollection.cs" />
+    <Compile Include="NavigationUtilities.cs" />
+    <Compile Include="TreeUtilities.cs" />
+    <Compile Include="WebBrowserProxy.cs" />
+    <Compile Include="WindowsXPIE6Proxy.cs" />
+    <Compile Include="..\Common\DispatcherHelper.cs" />
+    <Compile Include="..\Common\DispatcherSignalHelper.cs" />
+    <Compile Include="..\Common\NavigationHelper.cs" />
+    <Compile Include="..\Common\Reflection.cs" />
+    <Compile Include="..\..\Deployment\Code\IEAutomationHelper.cs" />
+    <Compile Include="..\..\Deployment\Code\UnmanagedStringHelper.cs" />
+
+    <None Include="$(AssemblyName).deployment">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,24 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        
+	<TestLogStep Name="Refresh Accelerator Key test - .xbap">
+           <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <RefreshAccelKeyHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Refresh Accelerator Key test - .xaml">
+           <ActivationStep Method="launch" Scheme="Local" FileName="deploy_markup1.xaml">
+               <ActivationStep.UIHandlers>
+                   <RefreshAccelKeyHandler WindowTitle="RegExp:(Loose Xaml 1)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+        
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5E9B8998-3AC5-4810-98A3-ADD4437176EF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SplashScreenTestApp</RootNamespace>
+    <AssemblyName>SplashScreenTestApp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <PublishDir>$(PublishDir)\SplashScreen\SplashTestApp</PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Window1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="..\Common\splash.bmp" />
+    <Resource Include="..\Common\splash2.png" />
+    <Resource Include="..\Common\splash3alpha.png" />
+  </ItemGroup>
+
+  <!-- error : The SplashScreen Build Action is not supported in the selected Target Framework.
+  <ItemGroup>
+    <SplashScreen Include="startupSplash.png" />
+  </ItemGroup>-->
+</Project>

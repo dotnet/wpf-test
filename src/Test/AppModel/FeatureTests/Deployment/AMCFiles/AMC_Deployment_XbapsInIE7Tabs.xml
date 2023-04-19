@@ -1,0 +1,38 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+      <TestLogStep Name="Launch Xapp In Tabbed browser BVT">
+       <MachineInfoStepDisabler IEVersion="8" DoNotRunReason="Windows SE bug - Can't launch content from Users folder (Wont fix)" >
+       <FileHostStep>
+        <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="ExpressAppIntranetZone.xbap" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+
+        <NavigationStep Method="launch" NavigationType="IENewBrowserTab" ClearFusionCache="true" Scheme="httpInternet" FileName="SimpleBrowserHostedApplication.xbap">
+            <NavigationStep.UIHandlers>
+                <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication"  IsAppShellVisible="false"/>
+            </NavigationStep.UIHandlers>
+        </NavigationStep>
+
+        <MachineInfoStepDisabler OSMajorVersion="6" DoNotRunReason="Can't navigate IE to xbap content in Users folder in Vista" >
+            <NavigationStep NavigationType="IENewBrowserTab" Scheme="Local" FileName="SimpleBrowserHostedNSVApplication.xbap">
+                <NavigationStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedNSVApplication" IsAppShellVisible="false" />
+                </NavigationStep.UIHandlers>
+            </NavigationStep>
+        </MachineInfoStepDisabler>
+
+        <NavigationStep IsFinalStep="True" NavigationType="IENewBrowserTab" Scheme="httpIntranet" FileName="ExpressAppIntranetZone.xbap">
+            <NavigationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier PresHostInstances="3" ZoneVerificationString="Partial Trust (Intranet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="ExpressAppIntranetZone" IsAppShellVisible="false" />
+            </NavigationStep.UIHandlers>
+        </NavigationStep>
+
+	<!-- Uninstall anything you install in these steps -->
+	</FileHostStep>
+       </MachineInfoStepDisabler>
+      </TestLogStep>
+    </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,42 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+
+
+
+    <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+    <FileHostStep>
+      <FileHostStep.SupportFiles>
+        <SupportFile Name="SimpleBrowserHostedNSVApplication.xbap" IncludeDependencies="true" />
+      </FileHostStep.SupportFiles>
+
+      <TestLogStep Name="Verifying Full Trust Express app prompt ownership and modality - FireFox, UNC path">
+        <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedNSVApplication.xbap">
+          <ActivationStep.UIHandlers>
+            <TrustDialogModalityHandler NamedRegistration="TrustManager" ProcessName="" WindowTitle="RegExp:(@@System.Windows.Forms,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089,processorArchitecture=MSIL;System.Windows.Forms;TrustManagerPromptUI_InstallTitle@@)|(@@System.Windows.Forms,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL;System.Windows.Forms;TrustManagerPromptUI_RunTitle@@)" />
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </TestLogStep>
+
+      <TestLogStep Name="Verifying Full Trust Express app prompt ownership and modality - FireFox, HTTP Intranet">
+        <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+          <ActivationStep.UIHandlers>
+            <TrustDialogModalityHandler NamedRegistration="TrustManager" ProcessName="" WindowTitle="RegExp:(@@System.Windows.Forms,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089,processorArchitecture=MSIL;System.Windows.Forms;TrustManagerPromptUI_InstallTitle@@)|(@@System.Windows.Forms,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL;System.Windows.Forms;TrustManagerPromptUI_RunTitle@@)" />
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </TestLogStep>
+
+      <TestLogStep Name="Verifying Full Trust Express app prompt ownership and modality - FireFox, HTTPS Intranet">
+        <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+          <ActivationStep.UIHandlers>
+            <TrustDialogModalityHandler NamedRegistration="TrustManager" ProcessName="" WindowTitle="RegExp:(@@System.Windows.Forms,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089,processorArchitecture=MSIL;System.Windows.Forms;TrustManagerPromptUI_InstallTitle@@)|(@@System.Windows.Forms,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL;System.Windows.Forms;TrustManagerPromptUI_RunTitle@@)" />
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </TestLogStep>
+
+    </FileHostStep>
+
+
+  </Steps>
+</AppMonitorConfig>

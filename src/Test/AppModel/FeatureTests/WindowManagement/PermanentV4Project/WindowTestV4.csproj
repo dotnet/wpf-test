@@ -1,0 +1,67 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <PropertyGroup>
+    <AllowCrossTargeting>true</AllowCrossTargeting>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <CrossTargetWinFxRefsVersion>v4.0</CrossTargetWinFxRefsVersion>
+    <CrossTargetWinFxToolsVersion>v4.0</CrossTargetWinFxToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputSubFolder>FeatureTests\AppModel\WindowManagement\</OutputSubFolder>
+    <AssemblyName>WindowTestsV4</AssemblyName>
+    <TargetType>winexe</TargetType>
+    <UICulture>en-US</UICulture>
+  </PropertyGroup>
+
+  <!-- Test and Validation code -->
+  <ItemGroup>
+    <Compile Include="..\Common\*.cs" />
+    <Page Include="..\common\*.xaml" />
+    <Page Include="..\Application\*.xaml" />
+    <Page Include="..\MessageBox\*.xaml" />
+    <Page Include="..\Window\Properties\*.xaml" />
+    <Compile Include="..\Window\Properties\*.cs" />
+    <Page Include="..\Window\Events\*.xaml" />
+    <Compile Include="..\Window\Events\*.cs" />
+    <Page Include="..\Window\Methods\*.xaml" />
+    <Compile Include="..\Window\Methods\*.cs" />
+    <Page Include="..\Scenarios\*.xaml" />
+    <Compile Include="..\Scenarios\*.cs" />
+    <Page Include="..\Regression\*.xaml" />
+    <Compile Include="..\Regression\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Page Include="..\Resources\*.xaml" />
+    <Resource Include="..\Resources\*_Embedded.*" />
+  </ItemGroup>
+
+  <!-- Reference Items Group  -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationClient" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+</Project>

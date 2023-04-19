@@ -1,0 +1,39 @@
+<XMLVariationTemplate>
+  <TemplateData>
+    <AppMonitorConfig>
+         <Steps>
+                <AttributeVariation ID="1">
+                    <MSBuildStep Arguments="TargetNameProjectVariations.csxml /rst:1" />
+                </AttributeVariation>            
+
+                <NodeVariation ID="3">
+
+                    <ActivationStep Method="launch" ExecuteCompiledApp="true" />
+
+                </NodeVariation>
+
+                <MSBuildStep Arguments="/t:Clean;TestCleanup" AlwaysRun="True" />
+         </Steps>
+    </AppMonitorConfig>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>AppMonitorConfig</FileName>
+      <FileExtension>.xml</FileExtension>
+      <RetainFileName>true</RetainFileName>
+    </Defaults>
+    <Scenario Case="1">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="TargetNameProjectVariations.csxml /rst:501" />
+    </Scenario>    
+    <Scenario Case="2">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="TargetNameProjectVariations.csxml /rst:502" />
+    </Scenario>    
+    <Scenario Case="3">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="TargetNameProjectVariations.csxml /rst:503" />
+    </Scenario>    
+    <Scenario Case="4">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="TargetNameProjectVariations.csxml /rst:504" />
+    </Scenario>    
+
+  </Scenarios>
+</XMLVariationTemplate>

@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<Steps>
+
+  <MSBuildErrors>
+    <Error ID="BC2008">
+      <Source>vbc</Source>
+      <StartingMessage>error BC2008</StartingMessage>
+      <Description>no input sources specified</Description>
+    </Error>
+  </MSBuildErrors>
+  <!-- SimpleImageVB.xaml Variations "do not call this seperately" -->
+  <Step ID="1">
+    <FileName>SimpleImageVB.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>None</Variation>
+  </Step>      
+  <Step ID="2">
+    <FileName>SimpleImageVB.xvar</FileName>
+    <Scenario>2</Scenario>
+    <Variation>3</Variation>
+  </Step>
+  <Step ID="3">
+    <FileName>SimpleImageVB.xvar</FileName>
+    <Scenario>3</Scenario>
+    <Variation>1</Variation>
+  </Step>
+  
+  <!-- CodeBehind for AppDef -->
+  <Step ID="4">
+    <FileName>CodeBehindAppDef.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>None</Variation>
+  </Step>      
+  
+  <!-- AppDef file generation -->
+  <Step ID="5" DependsOn="4">
+    <FileName>ShutdownVBAppdef.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>None</Variation>
+  </Step>      
+  
+  <!-- Project with Resource -->
+  <Step ID="6" DependsOn="1,5">
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>2</Variation>
+  </Step>    
+  <Step ID="7" DependsOn="1,5">
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>2</Scenario>
+    <Variation>15,2</Variation>
+  </Step>    
+  <Step ID="8" DependsOn="1,5">
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>3</Scenario>
+    <Variation>15,1</Variation>
+  </Step>    
+  <Step ID="9" DependsOn="2,5">
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>4</Scenario>
+    <Variation>15,1</Variation>
+  </Step>      
+  
+  <Step ID="36">
+    <FileName>SimpleImageVB.xvar</FileName>
+    <Scenario>5</Scenario>
+    <Variation>4</Variation>       
+  </Step>
+
+  <Step ID="37">
+    <FileName>SimpleImageVB.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>4</Variation>       
+  </Step>
+  
+  <Step ID="10" DependsOn="36,5">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>5</Scenario>
+    <Variation>16,1</Variation>     
+  </Step>
+
+  <Step ID="11" DependsOn="36,5">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>16,1</Variation>     
+  </Step>
+  
+  <Step ID="12" DependsOn="1,5">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>7</Scenario>
+    <Variation>16,1</Variation>     
+  </Step>
+  <Step ID="13" DependsOn="1,5">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>8</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>
+  <Step ID="14" DependsOn="1,5">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>9</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>
+  <Step ID="15" DependsOn="2,5">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>10</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>
+
+<!--  Until I figure out Exception handling removing this.
+    <Step ID="14" DependsOn="1">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>
+-->
+
+  <!-- SimpleImageVB.xaml variation with Image in component dll "do not call this seperately" -->
+  <Step ID="16">
+    <FileName>SimpleImageVB.xvar</FileName>
+    <Scenario>3</Scenario>
+    <Variation>1</Variation>
+  </Step>
+  <Step ID="17">
+    <FileName>SimpleImageVB.xvar</FileName>
+    <Scenario>4</Scenario>
+    <Variation>1</Variation>
+  </Step>
+
+  <!-- Dependent Project with Resource and Simple.xaml "do not call this seperately" -->
+
+  <Step ID="18" DependsOn="16">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>None</Variation>     
+  </Step>  
+  <Step ID="19" DependsOn="16">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>2</Scenario>
+    <Variation>13</Variation>     
+  </Step>    
+  <Step ID="20" DependsOn="16">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>3</Scenario>
+    <Variation>13</Variation>     
+  </Step>  
+  <Step ID="21" DependsOn="17">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>4</Scenario>
+    <Variation>13</Variation>     
+  </Step>  
+  <Step ID="22" DependsOn="1">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>5</Scenario>
+    <Variation>12</Variation>     
+  </Step>  
+  <Step ID="23" DependsOn="1">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>6</Scenario>
+    <Variation>12</Variation>     
+  </Step>  
+  <Step ID="24" DependsOn="1">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>7</Scenario>
+    <Variation>12</Variation>     
+  </Step>  
+  <Step ID="25" DependsOn="1">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>8</Scenario>
+    <Variation>12</Variation>     
+  </Step>  
+  <Step ID="24" DependsOn="1">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>7</Scenario>
+    <Variation>12</Variation>     
+  </Step>  
+  <Step ID="25" DependsOn="1">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>8</Scenario>
+    <Variation>12</Variation>     
+  </Step>  
+
+  <Step ID="38" DependsOn="37">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>None</Variation>     
+  </Step>  
+  <Step ID="39" DependsOn="37">  
+    <FileName>ImageLoadComponentProject.xvar</FileName>
+    <Scenario>9</Scenario>
+    <Variation>10</Variation>     
+  </Step>  
+
+  
+  <!-- CodeBehind for AppDef -->
+  <Step ID="26">
+    <FileName>CodeBehindAppDef.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>1,2</Variation>
+  </Step>      
+
+  <!-- AppDef file generation -->
+  <Step ID="27" DependsOn="26">
+    <FileName>ShutdownVBAppdef.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>None</Variation>
+  </Step>      
+  
+  <!-- Generate main project  -->
+  <Step ID="28" DependsOn="18,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>  
+  <Step ID="29" DependsOn="19,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>    
+  <Step ID="30" DependsOn="20,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>  
+  <Step ID="31" DependsOn="21,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>  
+  <Step ID="32" DependsOn="22,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1,16</Variation>     
+  </Step>  
+  <Step ID="33" DependsOn="23,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1,16</Variation>     
+  </Step>  
+  <Step ID="34" DependsOn="24,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1,16</Variation>     
+  </Step>  
+  <Step ID="40" DependsOn="38,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>  
+  <Step ID="41" DependsOn="39,27">  
+    <FileName>ImageLoadinVBProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>14,1</Variation>     
+  </Step>  
+  
+  <!-- Note ID 36 taken -->
+  
+</Steps>

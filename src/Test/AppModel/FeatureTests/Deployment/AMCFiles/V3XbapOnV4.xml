@@ -1,0 +1,60 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="V3 Xbap Running on V4 Runtime test log - Local">
+           <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="V3 Xbap Running on V4 Runtime test log - UNC">
+           <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="V3 Xbap Running on V4 Runtime test log - HTTP Intranet">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="V3 Xbap Running on V4 Runtime test log - HTTPS Intranet">
+           <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="V3 Xbap Running on V4 Runtime test log - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="V3 Xbap Running on V4 Runtime test log - HTTPS Internet">
+           <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+        </FileHostStep>
+
+  </Steps>
+</AppMonitorConfig>

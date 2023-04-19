@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFileDialog test: Verify CustomPlace shows up on Vista+ [standalone]">
+      <ActivationStep Method="launch" Scheme="Local" FileName="CommonFileDialogTest.exe">
+        <ActivationStep.UIHandlers>
+          <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFileDialogTitle, TestRuntime" 
+                             ProcessName="CommonFileDialogTest" 
+                             Dialog="OpenDialogCustomPlace_standalone"
+                             FileName="hello.txt"
+                             TestType="VerifyOpenDialogCustomPlace"/>
+        </ActivationStep.UIHandlers>
+      </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

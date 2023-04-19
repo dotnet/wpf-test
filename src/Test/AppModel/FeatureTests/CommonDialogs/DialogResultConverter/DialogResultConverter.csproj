@@ -1,0 +1,32 @@
+<!-- BVT Summary
+Owner: (Microsoft)
+Description:  Tests the basic, non-error, non-boundary cases for the public methods in the DialogResultConverter class [CanConvertFrom, CanConvertTo, ConvertFrom, ConvertTo, DialogResultConverter constructor]
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <!--Imports the target which contains all the common targets-->
+  <PropertyGroup>
+    <RootNamespace>Microsoft.Windows.Test.Client.AppSec.BVT</RootNamespace>
+    <AssemblyName>DialogResultConverter</AssemblyName>
+    <PublishDir>$(PublishDir)\DialogResultConverter</PublishDir>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+    <UseTools>True</UseTools>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="DialogResultConverter.xaml" />
+    <Compile Include="DialogResultConverter.xaml.cs" />
+    <Content Include="Security.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="$(WpfTest)\common\clickoncetest.pfx" />
+  </ItemGroup>
+
+   <ItemGroup>
+      <ProjectReference Include="$(TestRuntimeProject)" />
+   </ItemGroup>
+
+</Project>

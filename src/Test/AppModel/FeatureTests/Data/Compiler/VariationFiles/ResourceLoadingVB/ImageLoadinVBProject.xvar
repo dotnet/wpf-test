@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+    <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+      <PropertyGroup>
+        <AssemblyName>ImageLoadTest</AssemblyName>
+        <Configuration>Release</Configuration>
+        <OutputType>winexe</OutputType>
+        <TextVariation ID="1">
+          <HostInBrowser>false</HostInBrowser>
+        </TextVariation>
+        <OutputPath>bin\$(Configuration)\</OutputPath>
+        <NodeVariation ID="2">
+        </NodeVariation>
+        <SignManifests>true</SignManifests>
+        <ManifestKeyFile>ClickOnceTest.pfx</ManifestKeyFile>
+        <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+        <TextVariation ID="3">
+          <GenerateManifests>True</GenerateManifests>
+        </TextVariation>
+      </PropertyGroup>
+      <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+      <ItemGroup>
+        <!-- Application Markup -->
+        <NodeVariation ID="10">
+          <AttributeVariation ID="11">
+            <ApplicationDefinition Include="ShutdownVBAppdef.xaml" />
+          </AttributeVariation>
+        </NodeVariation>
+        <NodeVariation ID="12">
+          <AttributeVariation ID="13">
+            <Page Include="SimpleImageVB.xaml" />
+          </AttributeVariation>
+        </NodeVariation>
+        <NodeVariation ID="14">
+          <AttributeVariation ID="15">
+            <Resource Include="Picture1.jpg" />
+          </AttributeVariation>
+        </NodeVariation>
+        <NodeVariation ID="16">
+        </NodeVariation>
+        <Compile Include="CodeBehindAppDef.xaml.vb" />
+        <!--            <Compile Include="SimpleImageCodeBehind.xaml.vb"/> -->
+        <None Include="ClickOnceTest.pfx" />
+      </ItemGroup>
+      <!-- Included only for test run -->
+      <Import Project="TestCommon.target" />
+      <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Data" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+      </ItemGroup>
+    </Project>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>ResourceLoadinginVB</FileName>
+      <FileExtension>.proj</FileExtension>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Defaults>
+    <Scenario Case="1">
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="2">
+      <AttributeVariation ID="15" AttributeName="Include" AttributeValue="..\Picture1.jpg" />
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="3">
+      <AttributeVariation ID="15" AttributeName="Include" AttributeValue="$(SystemDrive)\Picture1.jpg" />
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="4">
+      <AttributeVariation ID="15" AttributeName="Include" AttributeValue="Images\Picture1.jpg" />
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="5">
+      <NodeVariation ID="16">
+        <Page Include="Simple.xaml" />
+      </NodeVariation>
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->      
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="6">
+      <NodeVariation ID="16">
+        <Page Include="Simple.xaml" />
+      </NodeVariation>
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->      
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="7">
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="14">
+        <Resource Include="Picture1.jpg">
+          <FileStorage>Loose</FileStorage>
+        </Resource>
+      </NodeVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="8">
+      <NodeVariation ID="14">
+        <Resource Include="..\Picture1.jpg">
+          <FileStorage>Loose</FileStorage>
+        </Resource>
+      </NodeVariation>
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="9">
+      <NodeVariation ID="14">
+        <Resource Include="$(SystemDrive)\Picture1.jpg">
+          <FileStorage>Loose</FileStorage>
+        </Resource>
+      </NodeVariation>
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="10">
+      <NodeVariation ID="14">
+        <Resource Include="Images\Picture1.jpg">
+          <FileStorage>Loose</FileStorage>
+        </Resource>
+      </NodeVariation>
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="11">
+      <NodeVariation ID="14">
+        <ProjectReference Include="ComponentwithImage.proj" />
+      </NodeVariation>
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation>
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+      <NodeVariation ID="16">
+          <Resource Include="Picture1.jpg">
+            <FileStorage>Loose</FileStorage>
+          </Resource>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="12">
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation> <!-- Generate Manifests -->
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+      <NodeVariation ID="16">
+          <Content Include="Picture1.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          </Content>
+      </NodeVariation>
+    </Scenario>    
+    <Scenario Case="13">
+      <TextVariation ID="1">true</TextVariation> <!-- Host in Browser -->
+      <TextVariation ID="3">false</TextVariation> <!-- Generate Manifests -->
+      <NodeVariation ID="2">
+        <UICulture>{Culture}</UICulture>
+      </NodeVariation>
+      <NodeVariation ID="16">
+          <Page Include="Simple.xaml" />
+          <Content Include="Simple.xaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          </Content>
+      </NodeVariation>
+    </Scenario>    
+  </Scenarios>
+</XMLVariationTemplate>

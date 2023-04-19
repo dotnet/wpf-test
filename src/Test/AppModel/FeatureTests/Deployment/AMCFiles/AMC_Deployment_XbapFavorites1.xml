@@ -1,0 +1,61 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+          <FileHostStep.SupportFiles>
+             <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+          </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Relaunch Browser Hosted App from favorites Test Log - Local">
+
+            <ActivationStep Method="navigate" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" AddAsFavorite="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+
+            <RelaunchStep RelaunchMethod="Favorites" AppName="Simple Browser Hosted SEE Application" >
+                <RelaunchStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+        </TestLogStep>            
+
+	<TestLogStep Name="Relaunch Browser Hosted App from favorites Test Log - UNC">
+
+            <ActivationStep Method="navigate" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" AddAsFavorite="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+
+            <RelaunchStep RelaunchMethod="Favorites" AppName="Simple Browser Hosted SEE Application" >
+                <RelaunchStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+        </TestLogStep>
+
+	<TestLogStep Name="Relaunch Browser Hosted App from favorites Test Log - HTTP Intranet">
+
+            <ActivationStep Method="navigate" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" AddAsFavorite="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+
+            <RelaunchStep RelaunchMethod="Favorites" AppName="Simple Browser Hosted SEE Application" >
+                <RelaunchStep.UIHandlers>
+                    <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="False" />
+                </RelaunchStep.UIHandlers>>
+            </RelaunchStep>
+
+        </TestLogStep>
+
+       </FileHostStep>
+    
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,75 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+          <FileHostStep.SupportFiles>
+             <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+          </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Simple stand-alone .Application Test Log - Local ">
+           <ActivationStep Method="launch" Scheme="Local" FileName="SimpleStandAloneApplication.application">
+               <ActivationStep.UIHandlers>
+                   <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+           <UninstallStep AppName="SimpleStandAloneApplication" />
+	</TestLogStep>
+
+	<TestLogStep Name="Simple stand-alone .Application Test Log - UNC">
+           <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleStandAloneApplication.application">
+               <ActivationStep.UIHandlers>
+                   <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+           <UninstallStep AppName="SimpleStandAloneApplication" />
+	</TestLogStep>
+
+	<TestLogStep Name="Simple stand-alone .Application Test Log - HTTP Intranet">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleStandAloneApplication.application">
+               <ActivationStep.UIHandlers>
+                   <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+           <UninstallStep AppName="SimpleStandAloneApplication" />
+	</TestLogStep>
+
+	<TestLogStep Name="Simple stand-alone .Application Test Log - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleStandAloneApplication.application">
+               <ActivationStep.UIHandlers>
+                   <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+           <UninstallStep AppName="SimpleStandAloneApplication" />
+	</TestLogStep>
+
+	<TestLogStep Name="Simple stand-alone .Application Test Log - HTTPS Intranet">
+           <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleStandAloneApplication.application">
+               <ActivationStep.UIHandlers>
+                   <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+           <UninstallStep AppName="SimpleStandAloneApplication" />
+	</TestLogStep>
+
+       </FileHostStep>
+
+
+	<TestLogStep Name="Simple stand-alone .Application Test Log - HTTPS Internet">
+         <MachineInfoStepDisabler IsServer="true" DoNotRunReason="HTTPS Internet-sourced .Application on Server bug :  " >
+           <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="SimpleStandAloneApplication.application">
+               <ActivationStep.UIHandlers>
+                   <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+               </ActivationStep.UIHandlers>
+               <ActivationStep.SupportFiles>
+                   <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+               </ActivationStep.SupportFiles>
+           </ActivationStep>
+
+           <UninstallStep AppName="SimpleStandAloneApplication" />
+          </MachineInfoStepDisabler>
+        </TestLogStep>
+
+      
+     </Steps>
+</AppMonitorConfig>

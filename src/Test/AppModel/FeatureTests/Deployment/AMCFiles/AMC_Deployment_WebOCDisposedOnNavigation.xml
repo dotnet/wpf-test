@@ -1,0 +1,16 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       <TestLogStep Name="SimpleStandAloneApplication WebOC Test Log">
+         <ActivationStep Method="launch" Scheme="local" FileName="StandaloneAppWebOC.application" PropertyBagValue="WebOCTestUrl=pack://siteoforigin:,,,/Deploy_XAMLInIFrame.htm" >
+            <ActivationStep.UIHandlers>
+              <WebOCDisposalRegressionHandler ProcessName="StandaloneAppWebOC" WindowTitle="RegExp:(Navigation Completed)" />
+            </ActivationStep.UIHandlers>
+         </ActivationStep>
+    
+         <UninstallStep AppName="StandaloneAppWebOC"/>
+
+        </TestLogStep>
+     </Steps>
+</AppMonitorConfig>

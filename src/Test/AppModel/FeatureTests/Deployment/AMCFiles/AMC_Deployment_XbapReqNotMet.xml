@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="Verifying Internet Express app behavior test log - HTTP Internet">
+
+         <InvalidateDeploymentStep DeploymentManifest="SimpleBrowserHostedApplication.xbap" Method="ChangeVersion" />
+
+         <ActivationStep SignAllApps="False" Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler WindowTitle="RegExp:(Internet Explorer)" ProcessName="IExplore" AutomationElementAndValue="GetWinFXButton" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+
+	</TestLogStep>
+     </Steps>
+</AppMonitorConfig>

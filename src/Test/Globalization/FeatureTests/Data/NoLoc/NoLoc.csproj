@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>NoLoc</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <UICulture>en-US</UICulture>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="NoLoc_App.xaml">
+      <Localizable>true</Localizable>
+    </ApplicationDefinition>
+    <Page Include="NoLoc.xaml">
+      <Localizable>true</Localizable>
+    </Page>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="$(IntermediateOutputPath)\noloc.baml">
+        <Link>%(FileName)%(Extension)</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

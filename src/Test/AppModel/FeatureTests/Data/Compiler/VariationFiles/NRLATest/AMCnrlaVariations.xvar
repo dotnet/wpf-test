@@ -1,0 +1,46 @@
+<XMLVariationTemplate>
+  <TemplateData>
+    <AppMonitorConfig>
+         <Steps>
+		<NodeVariation ID="100">
+			<AttributeVariation ID="1">
+			    <MSBuildStep Arguments="NRLASteps.csxml /rst:1" />
+			</AttributeVariation>            
+			<!--<ActivationStep Method="launch" ExecuteCompiledApp="true" />-->
+			<AttributeVariation ID="2">
+			    <MSBuildStep Arguments="NRLASteps.csxml /rst:2" />
+			</AttributeVariation>            
+			<NodeVariation ID="10000">
+			    <ActivationStep Method="launch" ExecuteCompiledApp="true">
+			      <!--
+			      	<ActivationStep.UIHandlers>
+			        	<StandAloneApplicationVerifier WindowTitle="xxx"/>
+		    	    	</ActivationStep.UIHandlers>
+		    	      -->
+		    	    </ActivationStep>
+
+			</NodeVariation>
+			
+		</NodeVariation>
+
+                <MSBuildStep Arguments="/t:Clean" AlwaysRun="True"  />
+         </Steps>
+    </AppMonitorConfig>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>AppMonitorConfig</FileName>
+      <FileExtension>.xml</FileExtension>
+      <RetainFileName>true</RetainFileName>
+    </Defaults>
+    <Scenario Case="1">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="NRLASteps.csxml /rst:1" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="NRLASteps.csxml /rst:2" />
+    </Scenario> 
+    <Scenario Case="2">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="NRLASteps.csxml /rst:3" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="NRLASteps.csxml /rst:4" />
+    </Scenario> 
+    
+  </Scenarios>
+</XMLVariationTemplate>

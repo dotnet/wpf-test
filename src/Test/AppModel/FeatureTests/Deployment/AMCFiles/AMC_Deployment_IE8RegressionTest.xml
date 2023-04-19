@@ -1,0 +1,20 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       <TestLogStep Name="IE Bug Regression Test -> Navigating IE forward to .xbap">
+
+         <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="deploy_htmlmarkup.htm">
+             <ActivationStep.UIHandlers>
+                 <IE7BackForwardHandler ProcessName="iexplore" WindowTitle="RegExp:(WPF Navigation Test Page)" />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+             </ActivationStep.UIHandlers>
+             <ActivationStep.SupportFiles>
+                 <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+                 <SupportFile Name="deploy_htmlmarkup.htm" IncludeDependencies="False" />
+             </ActivationStep.SupportFiles>
+         </ActivationStep>
+
+       </TestLogStep>
+     </Steps>
+</AppMonitorConfig>

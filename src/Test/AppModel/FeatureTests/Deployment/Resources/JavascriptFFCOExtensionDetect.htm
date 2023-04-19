@@ -1,0 +1,53 @@
+<html>
+<TITLE>FireFox User Agent test</title>
+<script>
+function Loaded()
+{
+    var a = navigator.userAgent.match(/\.NET CLR [0-9.]+/g);
+    if (!a)
+    {
+        document.title="Didnt find full SKU, checking client... ";
+        a = navigator.userAgent.match(/\.NET Client [0-9.]+/g);
+    }
+    // Next thing to try: Only .NET 4.0 on machine
+    if (!a)
+    {
+        document.title="Didnt find full or client SKU for 3.X format, checking v4 ";
+        a = navigator.userAgent.match(/\.NET4.0+/g);
+
+        if (a)
+        {
+            document.title = "Success! NET 3 or greater User agent string detected on FireFox";
+            return;
+        }
+    }
+
+
+    if (a)
+    {
+	document.title="Found Client SKU, checking for version 3.5+";
+	var majorVersion = a[0].match(/([0-9]+)\.([0-9]+)\./i);
+        if (majorVersion)
+        {
+            majorVersion = majorVersion.slice(1).toString().substr(0,1);
+
+            if (majorVersion >= 3)
+            {
+                document.title = "Success! NET 3 or greater User agent string detected on FireFox";
+            }
+	    else
+            { 
+                document.title = "Failure! NET 3 or greater User agent string not detected on FireFox";
+            }
+        }
+        else
+        {
+            document.title = "Failure! NET 3 or greater User agent string not detected on FireFox";
+        }
+   }
+}
+</script>
+<body onload="Loaded()" id=bodyElement>
+ 
+</body>
+</html>

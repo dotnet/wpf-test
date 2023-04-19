@@ -1,0 +1,56 @@
+﻿<!--
+  **************************************************************
+  TC NAME:      window can Resize Window while Content is showing.
+                LH Beta1 Ship Stopper 
+
+
+**************************************************************
+-->
+
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+       x:Class="WindowTest.ResizeWindowWithContentShowing"
+       Title="Window Test"
+       Background="Blue"
+       ResizeMode="CanResizeWithGrip" 
+       Top="0"
+       Left="0"
+       Width="0"
+       Height="0"
+       Name="AvalonWindow"
+       Loaded="OnLoaded"
+       SizeChanged="OnSizeChanged" 
+       xmlns:MappingPIGen1="clr-namespace:Microsoft.Windows.Test.Client.AppSec.BVT.ELCommon"
+       xmlns:MappingPIGen2="clr-namespace:System.Windows.Threading">
+
+        <Window.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard Name="resizeStoryBoard" TargetName="AvalonWindow">
+                        <DoubleAnimation  Storyboard.TargetProperty="(Window.Width)"
+                              BeginTime="0:0:2"
+                              From="100"
+                              To="300"
+                              Duration="0:0:14"
+                              RepeatBehavior="1x"
+                              AutoReverse="False" />
+                            
+                        <DoubleAnimation  Storyboard.TargetProperty="(Window.Height)"
+                              BeginTime="0:0:2"
+                              From="100"
+                              To="300"
+                              Duration="0:0:14"
+                              RepeatBehavior="1x"
+                              AutoReverse="False" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Window.Triggers>
+
+  <StackPanel Orientation="Horizontal">
+    <Button Width="100" Height="200" Background="Green">Button</Button>
+  </StackPanel>
+</Window>
+

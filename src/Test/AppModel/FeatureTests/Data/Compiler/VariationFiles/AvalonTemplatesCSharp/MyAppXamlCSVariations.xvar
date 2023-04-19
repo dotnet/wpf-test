@@ -1,0 +1,110 @@
+<XMLVariationTemplate>
+  <TemplateData>
+    using System;
+    using System.Windows;
+    using System.Data;
+    using System.Xml;
+    using System.Configuration;
+    <NodeVariation ID="1">
+    </NodeVariation>
+
+    namespace AvalonApplication1
+    {
+        /// <summary>
+        /// Interaction logic for MyApp.xaml
+        /// </summary>
+
+        public partial class MyApp : Application
+        {
+           <NodeVariation ID="2">
+           Microsoft.Test.Logging.TestLog log = null;
+           bool _browserhostedapp = false;
+
+            void AppStartup(object sender, StartupEventArgs args)
+            {
+
+                log = Microsoft.Test.Logging.TestLog.Current; 
+                // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+
+                if (System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
+                {
+                    _browserhostedapp = true;
+                }
+
+                log.LogStatus("Hooking up Navigation events");
+//                this.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+
+                log.LogStatus("OnStartup method - done");
+
+                // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+// Causes a recursive loop.                
+//base.OnStartup(e);
+
+                <NodeVariation ID="3">
+                Window1 mainWindow = new Window1();
+                mainWindow.Loaded += new System.Windows.RoutedEventHandler(WindowLoaded);
+                mainWindow.Show();
+                </NodeVariation>
+            }
+            
+            private void WindowLoaded(object sender, RoutedEventArgs args )
+            {
+                log.LogStatus("LoadCompleted event fired");
+                log.Result = Microsoft.Test.Logging.TestResult.Pass;
+                ShutdownApp();
+            }
+
+            protected override void OnExit(ExitEventArgs e)
+            {
+                if (_browserhostedapp == false)
+                {
+                    log.LogStatus("Shutting down application");
+                    // log.Close();
+                }
+            }
+
+            private void ShutdownApp()
+            {
+
+                // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+                log.LogStatus("ShutdownApp - BrowserHostedApp : " + _browserhostedapp.ToString());
+
+                if (_browserhostedapp == false)
+                {
+                    System.Windows.Application.Current.Shutdown();
+                }
+                else
+                {
+                    log.LogStatus("Shutting down application");
+                    // log.Close();
+                }
+
+                Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+
+            }
+            
+            public bool BrowserHostedApp
+            {
+                get
+                {
+                    return _browserhostedapp;
+                }
+            } 
+
+            </NodeVariation>
+
+        }
+    }
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>MyApp</FileName>
+      <FileExtension>.xaml.cs</FileExtension>
+      <RetainFileName>true</RetainFileName>
+      <IsXmlDocument>false</IsXmlDocument>
+    </Defaults>
+    <Scenario Case="1">      
+    </Scenario>    
+  </Scenarios>
+</XMLVariationTemplate>

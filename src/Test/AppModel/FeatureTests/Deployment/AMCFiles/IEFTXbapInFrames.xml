@@ -1,0 +1,43 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedNSVApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="FullTrustXbapInIFrame.htm" IncludeDependencies="false" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Full Trust Xbap in IFrame - UNC (Internet Explorer)">
+         <ActivationStep Method="launch" Scheme="UNC" FileName="FullTrustXbapInIFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Full Trust Express App in an IFrame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Full Trust Express App in an IFrame" AppName="SimpleBrowserHostedNSVApplication"/>
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="iexplore" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="iexplore" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Full Trust Xbap in IFrame - HTTP Intranet  (Internet Explorer)">
+         <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="FullTrustXbapInIFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Full Trust Express App in an IFrame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Full Trust Express App in an IFrame" AppName="SimpleBrowserHostedNSVApplication"/>
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="iexplore" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="iexplore" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Full Trust Xbap in IFrame - HTTPS Intranet  (Internet Explorer)">
+         <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="FullTrustXbapInIFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Full Trust Express App in an IFrame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Full Trust Express App in an IFrame" AppName="SimpleBrowserHostedNSVApplication"/>
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="iexplore" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="iexplore" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+    </FileHostStep>
+
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,40 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <AssemblyName>CodeOnlyXbap</AssemblyName>
+    <Configuration>Release</Configuration>
+    <OutputType>winexe</OutputType>
+    <HostInBrowser>true</HostInBrowser>
+    <Install>False</Install>
+    <TargetZone>Internet</TargetZone>
+    <OutputSubFolder>FeatureTests\AppModel\Deployment\Apps\CodeOnlyXbap</OutputSubFolder>
+    <SupportUrl>http://www.microsoft.com</SupportUrl>
+    <RootNamespace>Microsoft.Test.Windows.Client.AppModel</RootNamespace>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>True</SignManifests>
+    <ManifestKeyFile>$(WpfTest)\Common\clickoncetest.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Resources\Deploy_CodeOnlyXbap.cs" />
+    <None Include="$(WpfTest)\Common\clickoncetest.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Targets" />
+
+</Project>

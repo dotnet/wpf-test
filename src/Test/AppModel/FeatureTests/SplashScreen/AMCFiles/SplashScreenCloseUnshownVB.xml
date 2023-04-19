@@ -1,0 +1,18 @@
+﻿<AppMonitorConfig>
+
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary" />
+ <Using Namespace="Microsoft.Test.AppModel.SplashScreen" Assembly="SplashScreenLibrary" />
+
+     <Steps>
+	<TestLogStep Name="Verifying SplashScreen.Close on unshown Splash Screen does not throw - VB">
+            <ActivationStep FileName="SplashScreenTestAppVB.exe" >
+                <ActivationStep.UIHandlers>
+                    <GenericDialogHandler ButtonToClick="autoid:SplashTest5" ProcessName="SplashScreenTestAppVB" WindowTitle="Splash Screen Test App" />
+                    <PassIfSeenHandler  ProcessName="SplashScreenTestAppVB" WindowTitle="No Null Ref observed for closing un-Show()-n SplashScreen" />
+                    <FailIfSeenHandler  ProcessName="SplashScreenTestAppVB" WindowTitle="ERROR : Null Ref Exception caught" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+     </Steps>
+
+</AppMonitorConfig>

@@ -1,0 +1,20 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+   <Steps>
+
+ 	<TestLogStep Name="Invoke Watson Dialog - Registry Mis-ACL">
+           <InvalidActivationStep Method="launch" InvalidateScheme="MissingRegistryACL" ClearFusionCache="False" FileName="SimpleBrowserHostedApplication.xbap">
+               <InvalidActivationStep.UIHandlers>
+                   <PassIfSeenHandler ProcessName="dwwin" />
+                   <PassIfSeenHandler ProcessName="dw20" />
+               </InvalidActivationStep.UIHandlers>
+
+               <InvalidActivationStep.SupportFiles>
+                   <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               </InvalidActivationStep.SupportFiles>
+
+           </InvalidActivationStep>
+	</TestLogStep>
+
+  </Steps>
+</AppMonitorConfig>

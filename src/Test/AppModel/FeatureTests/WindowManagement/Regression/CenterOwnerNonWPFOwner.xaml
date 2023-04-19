@@ -1,0 +1,112 @@
+﻿<!--**************************************************************************
+//
+//  Description: Regression Test : WindowStartupLocation="CenterOwner" doesn't work if Owner is not an Avalon Window.
+//  Test Logic:   (1) Create a non-WPF window (Winforms in this case)
+//                (2) Create a WPF window and use WindowInteropHelper to set Winforms win as owner
+//                (3) Show with CenterOwner set
+//                (4) Pass if WPF window is properly centered
+//
+//
+//**************************************************************************-->
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="CenterOwnerNonWPFOwner"
+     ContentRendered="OnContentRendered"
+     Title="Avalon.Window.Test (Verify CenterOwner works when non-WPF owner)"
+     Top="0"
+     Left="0"
+     Width="500"
+     Height="500" xmlns:MappingPIGen1="clr-namespace:Microsoft.Windows.Test.Client.AppSec.BVT.ELCommon" xmlns:MappingPIGen2="clr-namespace:System.Windows.Forms" xmlns:MappingPIGen3="clr-namespace:System.Threading"
+     >
+<StackPanel></StackPanel>
+	
+    <x:Code>
+        <![CDATA[                     
+            AutomationHelper AH = new AutomationHelper();
+
+            void OnContentRendered(object sender, EventArgs e)
+            {               
+               bool testPassed = true;
+            Form winformsWindow = new Form();
+            
+            // Create a non-WPF window (Winforms is conveniently available... 
+            // Start out with the top left of the screen so the expected relative coordinates are easy to calculate.
+            winformsWindow.Width = 400;
+            winformsWindow.Height = 400;
+            winformsWindow.Show();
+            winformsWindow.SetDesktopLocation(0, 0);
+
+            // WPF window, smaller than owner window
+            Window wpfWindow = new Window();
+            wpfWindow.Height = 150;
+            wpfWindow.Width = 200;
+            // Expect to see this window perfectly centered on larger-sized owner window
+            wpfWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+            // Set the WPF Window's owner to the WinForms window and show it...
+            System.Windows.Interop.WindowInteropHelper interopHelper = new System.Windows.Interop.WindowInteropHelper(wpfWindow);
+            interopHelper.Owner = winformsWindow.Handle;            
+            wpfWindow.Show();
+
+            // Give the window time to show up (sleep is mostly so this is human-understandable), then make sure the owned window showed up in the right place.
+            Thread.Sleep(1000);
+            testPassed &= validateWindowCentering(winformsWindow, wpfWindow);
+            wpfWindow.Close();
+
+            // Now move the owner window and repeat.  This prevents false passing caused by the owned window randomly showing up in the right spot.
+            winformsWindow.SetDesktopLocation(400, 400);
+
+            // No comments needed here since this is just setting up windows as done above.
+            wpfWindow = new Window();
+            wpfWindow.Height = 150;
+            wpfWindow.Width = 200;
+            wpfWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            interopHelper = new System.Windows.Interop.WindowInteropHelper(wpfWindow);
+            interopHelper.Owner = winformsWindow.Handle;
+            wpfWindow.Show();
+
+            testPassed &= validateWindowCentering(winformsWindow, wpfWindow);
+
+            if (testPassed)
+            {
+                Logger.LogPass("Pass! - WindowStartupLocation.CenterOwner behaves correctly for non-WPF owner windows");
+            }
+            else
+            {
+                Logger.LogFail("Fail! - WindowStartupLocation.CenterOwner not behaving correctly for non-WPF owner windows.  May indicate regression of .");
+            }
+            wpfWindow.Close();
+            winformsWindow.Close();
+            this.Close();
+        }
+
+        private static bool validateWindowCentering(Form winformsWindow, Window wpfWindow)
+        {
+            //we need to do DPI conversion since we're mixing WinForms and WPF windows here
+            double dpiRatio = TestUtil.DPIXRatio;
+
+            Logger.Status("Validating owned-window placement:");
+
+            int expectedChildTop = winformsWindow.Top + ((winformsWindow.Height - (int)(wpfWindow.Height * dpiRatio)) / 2);
+            int expectedChildLeft = winformsWindow.Left + ((winformsWindow.Width - (int)(wpfWindow.Width * dpiRatio)) / 2);
+
+            Logger.Status("Owner window:     T: " + winformsWindow.Top + " L: " + winformsWindow.Left + " W: " + winformsWindow.Width + " H: " + winformsWindow.Height);
+            Logger.Status("Owned WPF window: T: " + (wpfWindow.Top * dpiRatio) + " L: " + (wpfWindow.Left * dpiRatio) + " W: " + (wpfWindow.Width * dpiRatio) + " H: " + (wpfWindow.Height* dpiRatio));
+
+            Logger.Status("Expected owned-window values: Top: " + expectedChildTop + " Left: " + expectedChildLeft);
+
+            if ((expectedChildTop == Convert.ToInt32(wpfWindow.Top * dpiRatio)) && (expectedChildLeft == Convert.ToInt32(wpfWindow.Left * dpiRatio)))
+            {
+                Logger.Status("Validation succeeded ... owned window found at expected location");
+                return true;
+            }
+            else
+            {
+                Logger.Status("Error: Expected values not seen.");
+                return false;
+            }
+        }
+           
+        ]]>
+    </x:Code>
+</Window>
+
