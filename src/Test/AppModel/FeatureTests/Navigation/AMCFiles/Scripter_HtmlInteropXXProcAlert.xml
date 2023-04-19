@@ -1,0 +1,21 @@
+﻿<Actions Description="ClickAlert">
+    <Context WindowText="RegEx:Loaded.*" ClassName="IEFrame" ContinueIfNotFound="false" />
+
+    <!-- Find the script alert that was shown -->
+    <Context ClassName="#32770" ContinueIfNotFound="false" />
+
+    <!-- Click the alert's OK button -->
+    <Action Name="LeftClick" >
+        <TargetProperty Name="AutomationId" Value="2" />
+    </Action>
+
+    <!-- Pass will be logged by the test code, but we need to tell it to do so -->
+    <Context WindowText="RegEx:Loaded.*" ClassName="IEFrame" ContinueIfNotFound="false" />
+    <Action Name="LeftClick" >
+        <TargetProperty Name="Name" Value="Click to Pass" />
+    </Action>
+
+    <!-- Avoid any chance of a race condition.  Let the test register pass and close down before this script closes. -->
+    <Action Name="Sleep" Milliseconds="2000" />
+
+</Actions>

@@ -1,0 +1,36 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Microsoft.Windows.Test.Client.AppSec.BVT.MySpecialTwoFramedPage"
+    Background="LightPink">
+
+      <StackPanel Name="hlinkContainer" Orientation="Vertical">
+        <TextBlock>
+          <Hyperlink Name="hlink_PageWithFrame" NavigateUri="NavigateFrameToObject_PageWithFrame.xaml" >Page With Frame</Hyperlink>
+        </TextBlock>
+        <TextBlock>
+          <Hyperlink Name="hlink_PageFunction" Click="LaunchPF" >PageFunction</Hyperlink>
+        </TextBlock>
+        <TextBlock>
+          <Hyperlink Name="hlink_NonPageObject" NavigateUri="NavigateFrameToObject_VomitWithLove.xaml" >Non-Page Object</Hyperlink>
+        </TextBlock>
+        <TextBlock>
+          <Hyperlink Name="hlink_JPEGFile" NavigateUri="NavigateFrameToObject_schnauzy.jpg" >Adorable Miniature Schnauzer!!!!11one</Hyperlink>
+        </TextBlock>
+      </StackPanel>
+  <x:Code>
+    <![CDATA[
+        private void LaunchPF(object sender, RoutedEventArgs e) {
+            MS.Windows.Client.Test.PageFunction.Markup.StringPFMarkup pfres = new MS.Windows.Client.Test.PageFunction.Markup.StringPFMarkup();
+            pfres.InitializeComponent();
+            NavigationWindow nw = System.Windows.Application.Current.MainWindow as NavigationWindow;
+            Frame homeFrame = LogicalTreeHelper.FindLogicalNode(nw.Content as DependencyObject, "testFrame") as Frame;
+
+            Console.WriteLine("Navigating from page to pagefunction");
+            homeFrame.Navigate(pfres);
+        }
+
+    ]]>
+  </x:Code>
+
+</Page>

@@ -1,0 +1,42 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Windows.Client.AppSec.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel Download - Navigate Browser Away During Install - UNC">
+               <CancelDownloadStep Method="NavigateAway" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel Download - Navigate Browser Away During Install - HTTP Intranet">
+               <CancelDownloadStep Method="NavigateAway" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+<!--  Internet zone scenarios disabled due to difficulties of automation w/ prompting and code path redundancy w/ HTTP Intranet
+           <TestLogStep Name="Cancel Download - Navigate Browser Away During Install - HTTP Internet">
+               <CancelDownloadStep Method="NavigateAway" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+-->
+           <TestLogStep Name="Cancel Download - Navigate Browser Away During Install - HTTPS Intranet">
+               <CancelDownloadStep Method="NavigateAway" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+        </FileHostStep>
+<!--  Internet zone scenarios disabled due to difficulties of automation w/ prompting and code path redundancy w/ HTTP Intranet
+        <FileHostStep  >
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel Download - Navigate Browser Away During Install - HTTPS Internet">
+               <CancelDownloadStep Method="NavigateAway" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+        </FileHostStep>
+-->
+        
+     </Steps>
+</AppMonitorConfig>

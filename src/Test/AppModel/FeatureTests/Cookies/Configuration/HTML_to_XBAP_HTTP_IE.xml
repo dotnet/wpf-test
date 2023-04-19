@@ -1,0 +1,95 @@
+<AppMonitorConfig>
+<Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+              <SupportFile Name="GetCookieXbap.xbap" IncludeDependencies="true" />
+	      <SupportFile Name="SetPersistentCookie.html" IncludeDependencies="false" />
+	      <SupportFile Name="SimpleCleanup.html" IncludeDependencies="false" />
+              <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+       </FileHostStep.SupportFiles>
+      
+       <TestLogStep Name="Verifying HTML cookie - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SetPersistentCookie.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_PersistentCookieFromHTML=value)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="GetCookieXbap.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_PersistentCookieFromHTML=value)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SimpleCleanup.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+       <TestLogStep Name="Verifying HTML cookie - HTTP Intranet">
+           <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SetPersistentCookie.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_PersistentCookieFromHTML=value)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="GetCookieXbap.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_PersistentCookieFromHTML=value)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SimpleCleanup.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+<!-- Disabling UNC tests due to bug in IE with setting different cookie urls in the ie6 vs ie7 and since this is not an important cookie scenario
+	 <TestLogStep Name="Verifying HTML cookie - UNC">
+           <ActivationStep Method="launch" Scheme="UNC" FileName="SetPersistentCookie.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_PersistentCookieFromHTML=value)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="UNC" FileName="GetCookieXbap.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_PersistentCookieFromHTML=value)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleCleanup.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+-->
+       </FileHostStep>
+
+  </Steps>
+</AppMonitorConfig>

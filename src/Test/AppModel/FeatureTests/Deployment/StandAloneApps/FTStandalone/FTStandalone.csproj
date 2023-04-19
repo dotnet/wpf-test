@@ -1,0 +1,79 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <AssemblyName>SimpleStandAloneApplication</AssemblyName>
+    <Configuration>Release</Configuration>
+    <OutputType>winexe</OutputType>
+    <HostinBrowser>False</HostinBrowser>
+    <UpdateEnabled>False</UpdateEnabled>
+    <TargetZone>Custom</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <Install>true</Install>
+    <PublisherName>WPF</PublisherName>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <UpdateUrlEnabled>false</UpdateUrlEnabled>
+    <trustURLParameters>true</trustURLParameters>
+    <SupportUrl>http://www.microsoft.com</SupportUrl>
+    <OutputSubFolder>FeatureTests\AppModel\Deployment\Apps\BasicFTStandalone</OutputSubFolder>
+    <RootNamespace>Microsoft.Test.WPF.AppModel.Deployment</RootNamespace>
+    <SignManifests>true</SignManifests>
+    <ManifestKeyFile>$(WpfTest)\Common\ClickOnceTest.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <ApplicationDefinition Include="..\..\Resources\BasicFTStandaloneAppDef.xaml" />
+
+    <Page Include="..\..\Markup\Deploy_BasicAppMarkup.xaml" />
+    <Page Include="..\..\Markup\Deploy_BasicAppContent.xaml" />
+
+    <!-- custom control for performing hosting accelerator regression testing -->
+    <Page Include="..\..\Markup\NestedToolbar.xaml" />
+    <Compile Include="..\..\Markup\NestedToolbar.xaml.cs"/>
+
+
+
+    <Compile Include="..\..\Code\BasicAppCode.cs"/>
+    <None Include="..\..\Resources\app.manifest" />
+
+    <None Include="$(WpfTest)\Common\clickoncetest.pfx" />
+ 
+    <Resource Include="..\..\Resources\deploy_picture1.jpg" />
+    <Resource Include="..\..\Resources\deploy_contentRendered.png" />
+
+    <Compile Include="..\..\Resources\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>..\..\Resources\Settings.settings</DependentUpon>
+    </Compile>
+
+    <None Include="..\..\Resources\app.config" />
+    <None Include="..\..\Resources\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>..\..\Resources\Settings.Designer.cs</LastGenOutput>
+    </None>
+
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+</Project>

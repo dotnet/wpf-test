@@ -1,0 +1,678 @@
+<XTC>
+<DEFAULTTESTINFO>
+    <Deployments>
+      <Deployment>FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment</Deployment>
+    </Deployments>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.dll" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment" />
+    </SupportFiles>
+</DEFAULTTESTINFO>
+<TEST Name="CheckDialogBlockageWhenOpeningDialog"
+      Priority="2"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] Dialog Test: Check dialog blockage when opening a dialog" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:checkdialogblockage" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CheckDialogModality"
+      Priority="2"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] Dialog Test: Check dialog modality" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:dialogmodality2" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CheckDialogOnStartup"
+      Priority="2"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] Dialog Test: Check dialog on starting up" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:dialogonstarting" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CheckWindowCountAftDialogDismissed"
+      Priority="2"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] Dialog Test: Check window count and Visibility after dialog is dismissed" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:dialogwindowcountvisibility" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="TestDialogResultConverter"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] Exercise DialogResultConverter public APIMajor action:  Call each public method for the DialogConverter class.Pass condition:  Verify that calls to ConvertFrom, ConvertTo always throw the expected InvalidOperationException.  Verify that calls to CanConvertFrom, CanConvertTo always return false.Test/Dev owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogResultConverter.exe" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogResultConverter\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="OpenFileDialogCurrentDir"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] OpenFileDialog: Open an existing file in the current directory - standaloneMajor action:  Open an existing file in the current directory (supply only the file name, no path), using the default extension.  All OpenFileDialog/FileDialog properties are left at their default values.Pass condition:  OpenFileDialog shows up.  OpenFile(s) returns Stream(s) that are readonly.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="OpenFileInCurrentDirectory_standalone.xml"
+                 TestStartupURI="OpenFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="OpenFileDialogAbsolutePath"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] OpenFileDialog: Open an existing file using an absolute path - standaloneMajor action:  Open an existing file in a directory whose absolute path is given. Complete file name is composed of the specifed file name + default extension.  All FileDialog and OpenFileDialog options are set to true.Pass condition:  OpenFileDialog shows up.  OpenFile(s) returns Stream(s) that are readonly if absolute path + filename + default extension are found.  If any part of the path is not found, throw an Exception.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="OpenFileAbsolutePath_standalone.xml"
+                 TestStartupURI="OpenFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="OpenFileDialogValidFileExtn"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] OpenFileDialog: Open an existing file with a valid extension - standaloneMajor action:  Open a file by supplying valid file name and valid file extension/filter. Complete file name is composed of the specifed file name + given extension.  All FileDialog and OpenFileDialog options are set to true.Pass condition:  OpenFileDialog shows up.  If this file is found, OpenFile(s) successfully return readonly Stream(s).  If any part of the path is incorrect and file cannot be found, throw an Exception.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="OpenFileValidExtension_standalone.xml"
+                 TestStartupURI="OpenFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="SaveFileDialogNewFile"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Save to a new file in the current directory - standaloneMajor action:  Save file by specifying a file name (not previously existing) but no initial directory. All FileDialog and SaveFileDialog options are set to true.  Default extension is provided.Pass condition:  SaveFileDialog shows up.  OpenFile should return a read/write Stream and dialog closes on Ok.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupURI="SaveFileDialogTest"
+                 MethodParams="SaveFileInCurrentDirectory_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="SaveFileDialogExistingFile"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Save to an existing file in the current directory - standaloneMajor action:  Save file by specifying a file name (previously existing) but no initial directory. All FileDialog and SaveFileDialog options are set to true.  Default extension is provided.Pass condition:  SaveFileDialog shows up.  OpenFile should return a read/write Stream and dialog closes on Ok.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="SaveExistingFileInCurrentDirectory_standalone.xml"
+                 TestStartupURI="SaveFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<!--<TEST Name="SaveFileDialogNewFileAbsolutePath"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Save to a new file using absolute path - standaloneMajor action:  Save file by specifying a file name (not previously existing) and an initial directory specified using its absolute path. All FileDialog and SaveFileDialog options are set to true.  Default extension is provided.Pass condition:  SaveFileDialog shows up.  OpenFile should return a read/write Stream and dialog closes on Ok.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="SaveFileAbsolutePath_standalone.xml"
+                 TestStartupURI="SaveFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>-->
+
+<TEST Name="SaveFileDialogExistingFileAbsolutePath"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Save to an existing file using absolute path - standaloneMajor action:  Save file by specifying a file name (previously existing) and an initial directory specified using its absolute path. All FileDialog and SaveFileDialog options are set to true.  Default extension is provided.Pass condition:  SaveFileDialog shows up.  OpenFile should return a read/write Stream and dialog closes on Ok.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="SaveExistingFileAbsolutePath_standalone.xml"
+                 TestStartupURI="SaveFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="SaveFileDialogNewFileValidFileExtn"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Save to a new file with valid extension - standaloneMajor action:  Save file by specifying a file name (not previously existing), a valid extension (specified in the filterString) and no initial directory (save in current directory). All FileDialog and SaveFileDialog options are set to true.Pass condition:  SaveFileDialog shows up.  OpenFile should return a read/write Stream and dialog closes on Ok.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="SaveFileValidExtension_standalone.xml"
+                 TestStartupURI="SaveFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="SaveFileDialogExistingFileValidFileExtn"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Save to an existing file with valid extension - standaloneMajor action:  Save file by specifying a file name (previously existing), a valid extension (specified in the filterString) and no initial directory (save in current directory). All FileDialog and SaveFileDialog options are set to true.Pass condition:  SaveFileDialog shows up.  OpenFile should return a read/write Stream and dialog closes on Ok.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="SaveExistingFileValidExtension_standalone.xml"
+                 TestStartupURI="SaveFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="SaveFileDialogNoFileExtn"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Save file by specifying file name but no extension - standaloneMajor action:  Save file by specifying a file name but no file extension. All FileDialog and SaveFileDialog options are set to true.  Default extension is provided, AddExtension is set for some tests and not set for others.Pass condition:  SaveFileDialog shows up.  If AddExtension is set, OpenFile should return a read/write stream for filename+defaultExt.  If it is not set, OpenFile should return a read/write stream for filename.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="SaveFileNoFileExtension_standalone.xml"
+                 TestStartupURI="SaveFileDialogTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CommonDialog_Save_CreatePrompt"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Save to a new file with CreatePrompt enabled - standaloneMajor action:  Save file by specifying a file name (not previously existing) but no initial directory. CreatePrompt option is set to true.  Default extension is provided.Pass condition:  SaveFileDialog shows up, and prompt for create shows up." >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 MethodParams="SavePromptFileCreate_standalone.xml"
+                 TestStartupURI="SaveFileDialogPromptTest"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CommonDialog_Open_Cancel"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] OpenFileDialog: Cancel open - standaloneMajor action:  Show open dialog, then cancel the dialog without opening" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupURI="OpenFileDialogCancelTest"
+                 MethodParams="OpenFileCancel_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CommonDialog_Save_Cancel"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] SaveFileDialog: Cancel save - standaloneMajor action:  Show save dialog, then cancel the dialog without saving" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupURI="SaveFileDialogCancelTest"
+                 MethodParams="SaveFileCancel_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CommonDialog_Open_WithWindowArg"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] OpenFileDialog: ShowDialog(Window) - standaloneMajor action:  Show open dialog using ShowDialog(Window win)" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupURI="OpenFileDialogWindowTest"
+                 MethodParams="OpenFileInCurrentDirectory_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CommonDialog_ErrorCases"
+      Priority="2"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] Dialog Test: Check specific error cases in CommonDialog code" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 MethodParams="DialogTests.exe /test:dialogErrorCases" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CommonDialog_Reset"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="[DESCRIPTION] Dialog Test: Check that Reset properly resets properties" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 MethodParams="DialogTests.exe /test:dialogReset" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="CommonDialog_OpenVistaOnVista"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFileDialog: VistaOnVista - standalone - Verify Vista-style dialog on Vista+ " >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFileDialogTest"
+                 MethodParams="OpenDialogVistaOnVista_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>
+
+<!--<TEST Name="CommonDialog_OpenCustomPlace"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFileDialog: OpenCustomPlace - standalone - Verify specifying a custom place, and clicking on it, opens the file in the custom place" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFileDialogCustomPlaceTest"
+                 MethodParams="OpenDialogCustomPlace_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>-->
+
+<TEST Name="CommonDialog_SaveCustomPlace"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFileDialog: SaveCustomPlace - standalone - Verify specifying a custom place, and clicking on it, saves the file in the custom place" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="SaveFileDialogCustomPlaceTest"
+                 MethodParams="SaveDialogCustomPlace_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>
+
+<TEST Name="CommonDialog_OpenAllCustomPlaces"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFileDialog: OpenAllCustomPlaces - standalone - Verify specifying all custom places will still allow the dialog to display" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFileDialogAllCustomPlacesTest"
+                 MethodParams="OpenDialogAllCustomPlaces_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>
+
+<TEST Name="CommonDialog_SaveInvalidCustomPlaces"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="SaveFileDialog: SaveInvalidCustomPlaces - standalone - Verify specifying invalid custom places will still allow the dialog to display" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="SaveFileDialogInvalidCustomPlacesTest"
+                 MethodParams="SaveDialogInvalidCustomPlaces_standalone.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\*" />
+      <SupportFile Source="FeatureTests\AppModel\CommonDialogs\Standalone" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>
+
+<!--<TEST Name="CommonDialog_CustomPlaceCases"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="Dialog Test: CustomPlace cases" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:customplacecases" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>-->
+
+<!--<TEST Name="CommonDialog_FileDialogCustomPlaceCases"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="Dialog Test: CustomPlace cases" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:filedialogcustomplacecases" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>-->
+
+<!--<TEST Name="CommonDialog_OpenFileBeforeShow"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="Dialog Test: Regression test for - Calling OpenFile before Show throws IndexOutOfRangeException" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:openfilebeforeshow" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>-->
+
+<!--<TEST Name="CommonDialog_OpenFileIsThreadModal"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="SaveFileDialog: Regression test for  - OpenFileIsThreadModal - Verify ComponentDispatcher.IsThreadModal is true when the OpenFileDialog is shown" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:openfileisthreadmodal" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>-->
+
+<!--<TEST Name="CommonDialog_SaveFileIsThreadModal"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="SaveFileDialog: Regression test for  - SaveFileIsThreadModal - Verify ComponentDispatcher.IsThreadModal is true when the SaveFileDialog is shown" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:savefileisthreadmodal" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>-->
+
+<!--<TEST Name="CommonDialog_OpenFileOnSecondThread"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Timeout="60"
+      Description="SaveFileDialog: Regression test  - OpenFileOnSecondThread - Verify OpenFileDialog can't be shown on a second thread" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:openfileonsecondthread" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>-->
+
+<!--<TEST Name="CommonDialog_SaveFileOnSecondThread"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Timeout="60"
+      Description="SaveFileDialog: Regression test  - SaveFileOnSecondThread - Verify SaveFileDialog can't be shown on a second thread" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="DialogTests.exe /test:savefileonsecondthread" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>-->
+
+</XTC>
+

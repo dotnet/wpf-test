@@ -1,0 +1,50 @@
+﻿
+<mod:MyApp
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mod="clr-namespace:Avalon.Test;assembly=ReferenceModule"
+    StartupUri="ReferenceModule\LoadImage.xaml" xmlns:MappingPIGen1="clr-namespace:Avalon.Test;assembly=ReferenceModule">
+
+    <x:Code><![CDATA[
+
+    Microsoft.Test.Logging.TestLog log = null;
+     bool _browserhostedapp = false;
+
+    protected override void OnStartup(System.Windows.StartupEventArgs e)
+    {
+        log = Microsoft.Test.Logging.TestLog.Current; 
+        // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+
+            if ( AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap") )        
+            {
+                _browserhostedapp = true;
+            }
+
+        System.Windows.Resources.ResourceLoaderService rlsvc = ((System.Windows.Resources.ResourceLoaderService)(this.GetService(typeof(System.Windows.Resources.ResourceLoaderService))));
+
+        rlsvc.RegisterResourceLoader(new Avalon.Test.ResourceLoader());
+
+        base.OnStartup(e);
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+            if ( _browserhostedapp == false )
+            {
+                log.LogStatus("Shutting down application");
+                // log.Close();
+            }
+    }
+
+
+    public bool BrowserHostedApp
+    {
+        get
+        {
+            return _browserhostedapp;
+        }
+    }
+
+    ]]></x:Code>
+
+</mod:MyApp>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <PropertyGroup>
+    <IsDependentProject>true</IsDependentProject>
+    <BinplacePath>client\wcptests\appsec\deployment\SimpleOnDemandAssembly\</BinplacePath>
+    <AssemblyName>SimpleOnDemandAssembly</AssemblyName>
+    <Configuration>Release</Configuration>
+    <OutputType>Library</OutputType>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputPath>bin\$(Configuration)</OutputPath>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <!-- Workaround to build/binplace Dependent Projects correctly within razzle -->
+  <!--  <PropertyGroup Condition="'$(O)' == ''">
+    <BuildArch Condition="'$(BuildArchitecture)' == 'i386'">i386</BuildArch>
+    <BuildArch Condition="'$(BuildArchitecture)' != 'i386'">$(RealBuildArchitecture)</BuildArch>
+    <O Condition="'$(BuildArchitecture)'=='i386'">obj$(BuildAltDir)\i386\</O>
+    <O Condition="'$(BuildArchitecture)'!='i386'">obj$(BuildAltDir)\$(RealBuildArchitecture)\</O>
+    <IntermediateOutputPath>$(O)</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(BinplacePath)' != ''">
+    <OutputPath>$(_NTTREE)\$(BinplacePath)</OutputPath>
+    <OutDir>$(_NTTREE)\$(BinplacePath)</OutDir>
+    <TargetDir>$(OutDir)</TargetDir>
+    <TargetPath>$(TargetDir)$(TargetFileName)</TargetPath>
+  </PropertyGroup> -->
+  <ItemGroup>
+    <Compile Include="Deploy_SimpleOnDemandAssembly.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System">
+    </Reference>
+    <Reference Include="System.Xml">
+    </Reference>
+    <Reference Include="System.Data">
+    </Reference>
+  </ItemGroup>
+</Project>

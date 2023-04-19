@@ -1,0 +1,11 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="162 - Compile Project with ApplicationVersion property set.">
+      <MSBuildStep CurrentStage="Run" Arguments="CodeCoverageVariations.csxml /rst:10" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;Build /p:HostinBrowser=true" AlwaysRun="True" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

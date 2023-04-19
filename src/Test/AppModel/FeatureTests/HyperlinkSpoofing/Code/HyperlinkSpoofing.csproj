@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <!-- Project Settings -->
+  <PropertyGroup>
+    <AssemblyName>HyperlinkSpoofing</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <OutputSubFolder>FeatureTests\AppModel\HyperlinkSpoofing</OutputSubFolder>
+    <Install>false</Install>
+    <Configuration>Release</Configuration>
+    <HostInBrowser>True</HostInBrowser>
+    <SignManifests>True</SignManifests>
+    <ManifestKeyFile>$(WpfTestKeyFile)</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <TargetZone>custom</TargetZone>
+    <GenerateAssemblyAttribute>false</GenerateAssemblyAttribute>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+
+  <!-- Compile Items Group -->
+  <ItemGroup>
+    <!-- Aplication markup -->
+    <ApplicationDefinition Include="App.xaml" />
+    <Compile Include="App.cs" />
+    <Compile Include="HyperlinkSpoofing.cs" />
+    <Page Include="HyperlinkSpoofing.Start.xaml" />
+  </ItemGroup>
+
+  <!-- Resource Items group -->
+  <ItemGroup>
+    <None Include="$(WpfTestKeyFile)" />
+    <None Include="app.manifest" />
+  </ItemGroup>
+
+  <!-- Reference Items Group  -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <!-- TestRuntime references TestAPICore References System.core, but we need to reference System.Core first for name resolution -->
+    <Reference Include="System.Core" Condition="'$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0'" />
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+</Project>

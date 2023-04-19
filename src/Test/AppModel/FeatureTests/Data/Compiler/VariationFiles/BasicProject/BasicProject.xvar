@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+    <TemplateData>
+        <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+            <PropertyGroup>
+                <TextVariation ID="1">
+                    <AssemblyName>BasicTest</AssemblyName>
+                </TextVariation>
+                <TextVariation ID="2">
+                    <Configuration>Release</Configuration>
+                </TextVariation>
+                <TextVariation ID="3">
+                    <OutputType>winexe</OutputType>
+                </TextVariation>
+                <TextVariation ID="4">
+                    <OutputPath>bin\\$(Configuration)\\</OutputPath>
+                </TextVariation>
+                <TextVariation ID="5">
+                    <HostinBrowser>false</HostinBrowser>
+                </TextVariation>
+                <NodeVariation ID="9">
+                </NodeVariation>
+                <SignManifests>true</SignManifests>
+                <ManifestKeyFile>ClickOnceTest.pfx</ManifestKeyFile>
+                <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+                <TextVariation ID="21">
+                  <GenerateManifests>True</GenerateManifests>
+                </TextVariation>
+            </PropertyGroup>
+            <AttributeVariation ID="100">
+              <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+            </AttributeVariation>
+            <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+            <ItemGroup>
+                <!-- Application Markup -->
+                <AttributeVariation ID="10">
+                    <ApplicationDefinition Include="BasicAppDef.xaml" />
+                </AttributeVariation>
+                <AttributeVariation ID="11">
+                    <Page Include="Simple.xaml" />
+                </AttributeVariation>
+                <None Include="ClickOnceTest.pfx" />
+            </ItemGroup>
+            <!-- Included only for test run -->
+            <ItemGroup>
+                <Reference Include="System" />
+                <Reference Include="System.Xml" />
+                <Reference Include="System.Data" />
+                <Reference Include="WindowsBase" />
+                <Reference Include="PresentationCore" />
+                <Reference Include="PresentationFramework" />
+                <Reference Include="UIAutomationTypes" />
+                <Reference Include="UIAutomationProvider" />
+                <NodeVariation ID="20">
+                </NodeVariation>
+            </ItemGroup>
+            <Import Project="TestCommon.target" />
+            <NodeVariation ID="50">
+            </NodeVariation>
+        </Project>
+    </TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>SimpleProjectFile</FileName>
+            <FileExtension>.proj</FileExtension>
+            <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+        </Defaults>
+        <Scenario Case="1">
+            <TextVariation ID="1" WarningCode="MSB3182">ReallyLongnamethatcangoonandonandonOnly240Bytesareallowedsousing240ReallyLongnamethatcangoonandonandonOnly240Bytesareallowedsousing240ReallyLongnamethatcangoonandonandonOnly240Bytesareallowedsousing240ReallyLongnamethatcangoon</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="2">
+            <TextVariation ID="1">.</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="3">
+            <TextVariation ID="1" ErrorCode="RG1000,MSB3541">!@#$%^*InvalidChars</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+            <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+        </Scenario>
+        <Scenario Case="4">
+            <!--<TextVariation ID="1" WarningCode="MSB3173"> -->
+            <TextVariation ID="1" ErrorCode="RG1000,MSB3541">ReallyLongnamethatcangoonandonandonOnly240Bytesareallowedsousing240ReallyLongnamethatcangoonandonandonOnly240Bytesareallowedsousing240ReallyLongnamethatcangoonandonandonOnly240Bytesareallowedsousing240ReallyLongnamethatcangoonando</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+            <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+        </Scenario>
+        <Scenario Case="5">
+            <TextVariation ID="1" WarningCode="MSB3482_Dup1">Basic%20Test</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="6">
+            <TextVariation ID="1">
+            </TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="7">
+            <TextVariation ID="1" ErrorCode="RG1000">Foo\\Bar</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+            <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+        </Scenario>
+        <Scenario Case="8">
+            <FileName>ExecutableWithSameNameasProjectFile</FileName>
+            <TextVariation ID="1">ExecutableWithSameNameasProjectFile</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="9">
+            <TextVariation ID="1">Simple</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="10">
+            <TextVariation ID="1">BasicAppDef</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="11">
+            <TextVariation ID="1">exe</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="12">
+            <TextVariation ID="1">application</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="13">
+            <TextVariation ID="1">xapp</TextVariation>
+            <TextVariation ID="2">Debug</TextVariation>
+            <TextVariation ID="5">true</TextVariation>
+            <TextVariation ID="21">false</TextVariation>
+        </Scenario>
+        <Scenario Case="14">
+            <AttributeVariation ID="11" AttributeName="Include" AttributeValue="Foo.xaml" ErrorCode="BG1002,BG1003" />
+            <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+        </Scenario>
+        <Scenario Case="15">
+            <AttributeVariation ID="10" AttributeName="Include" AttributeValue="Foo.xaml" ErrorCode="BG1002,BG1003" />
+            <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+        </Scenario>
+        <!--
+        <Scenario Case="10">
+            <AttributeVariation ID="10" AttributeName="Include" AttributeValue="LoadXamlWithWebOCRefAppDef.xaml" ErrorCode="UN1000" />
+            <AttributeVariation ID="11" AttributeName="Include" AttributeValue="WebOCRef.xaml" />
+            <NodeVariation ID="20">
+                <Reference Include="System.Windows.Forms">
+                    <Name>System.Windows.Forms</Name>
+                    <HintPath>$(MSBuildBinPath)\System.Windows.Forms</HintPath>
+                </Reference>            
+            </NodeVariation>
+        </Scenario>                
+-->
+        <Scenario Case="100">
+            <NodeVariation ID="9">
+                <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+            </NodeVariation>
+            <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+        </Scenario>
+        <Scenario Case="101">
+            <NodeVariation ID="9" ErrorCode="CS1591,CS1591_Dup1,CS1591_Dup2,CS1591_Dup3,CS1591_Dup4,CS1591_Dup5">
+                <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
+            </NodeVariation>
+            <NodeVariation ID="50">
+                <Target Name="VerifyDocFile">
+                    <!--                    <DocFile Condition=" ' Exists($(MSBuildProjectDirectory)\\$(AssemblyName).xml)' == true">true</DocFile> -->
+                    <Message Text="**** DocFileItem = $(DocumentationFile) ***" />
+                    <Error Condition="!Exists('$(DocumentationFile)')" Text="Documentation file was not generated!" />
+                    <Delete Files="$(DocumentationFile)" ContinueOnError="false" />
+                </Target>
+            </NodeVariation>
+            <CommandLineArgs>/t:Clean;Build;VerifyDocFile;Clean;TestCleanup</CommandLineArgs>
+        </Scenario>
+        <Scenario Case="102">
+            <NodeVariation ID="9">
+                <DelaySign>true</DelaySign>
+                <KeyOriginatorFile>target.snk</KeyOriginatorFile>
+            </NodeVariation>
+            <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+        </Scenario>
+        <Scenario Case="103">
+            <NodeVariation ID="9">
+                <Platform>ia64</Platform>
+            </NodeVariation>
+            <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+        </Scenario>
+        <Scenario Case="200">
+            <TextVariation ID="4" ErrorCode="LH1000">
+            </TextVariation>
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>

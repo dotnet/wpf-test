@@ -1,0 +1,31 @@
+<HTML>
+
+  <HEAD>
+    <TITLE>Test for the WPF plug-in for Firefox</TITLE>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+    <SCRIPT type="text/javascript">
+    <!--
+    function OnLoad()
+    {
+
+       // Check for the WPF plug-in for Firefox and report
+       var msg = "The WPF plug-in for Firefox is ";
+       var wpfPlugin = navigator.plugins["Windows Presentation Foundation"];
+       if( wpfPlugin != null )
+       {
+          document.writeln(msg + " installed. Version = " +  wpfPlugin.description );
+          document.title = "NPWPF Version = " + wpfPlugin.description;
+       }
+       else 
+       {
+          document.writeln(msg + " not installed.");
+          document.title = msg + " not installed.";
+       }
+    }
+    -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY onload="OnLoad()" />
+
+</HTML>

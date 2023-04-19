@@ -1,0 +1,19 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="SSL Cert test - Launching.xbap signed with &quot;Trusted&quot; Publisher certificate ">
+            <SSLCertificateStep PathToCert="AvalonTestTrusted.pfx" StoreName="TrustedPublisher" StoreLocation="LocalMachine" />
+            <SSLCertificateStep PathToCert="AvalonTestTrusted.pfx" StoreName="Root"             StoreLocation="LocalMachine" />
+
+            <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="TrustedExpressApp.xbap">
+               <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="TrustedExpressApp" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+               <ActivationStep.SupportFiles>
+                   <SupportFile Name="TrustedExpressApp.xbap" IncludeDependencies="true" />
+               </ActivationStep.SupportFiles>
+            </ActivationStep>
+
+	</TestLogStep>
+     </Steps>
+</AppMonitorConfig>

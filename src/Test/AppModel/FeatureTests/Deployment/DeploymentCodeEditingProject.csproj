@@ -1,0 +1,280 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{63BACCCD-DE12-48D8-B3B6-2A3A0554E688}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>DeploymentCodeEditingProject</AssemblyName>
+    <RootNamespace>DeploymentCodeEditingProject</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TestRuntime, Version=3.0.0.0, Culture=neutral, PublicKeyToken=e1e6160fdd198bb1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\WPF\binaries\x86ret\wpf\Test3.5\Common\TestRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="UIAutomationClient, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationClientsideProviders, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationTypes, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AppCodeLibrary\Deployment_BVT_AppSources.targets" />
+    <None Include="AppCodeLibrary\FeatureTests\Deployment\DeploymentTestApps.dll.config" />
+    <None Include="AppCodeLibrary\FeatureTests\Deployment\DeploymentTests.dll.config" />
+    <None Include="AppCodeLibrary\makefile" />
+    <None Include="AppCodeLibrary\sources" />
+    <None Include="dirs" />
+    <None Include="ResourceLibrary\Deployment_BVT_Resources.targets" />
+    <None Include="ResourceLibrary\makefile" />
+    <None Include="ResourceLibrary\sources" />
+    <None Include="Resources\app.config" />
+    <None Include="Resources\AvalonTestTrusted.pfx" />
+    <None Include="Resources\AvalonTestUntrusted.pfx" />
+    <None Include="Resources\DeploymentTests.asl" />
+    <None Include="Resources\deploy_stringtable.en-US.resText" />
+    <None Include="Resources\deploy_stringtable.es-ES.resText" />
+    <None Include="Resources\Deploy_un.known" />
+    <None Include="Resources\Settings.settings" />
+    <None Include="TestCodeLibrary\Deployment_BVT_TestCodeLibrary.targets" />
+    <None Include="TestCodeLibrary\makefile" />
+    <None Include="TestCodeLibrary\sources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AMCFiles\AMC_Deployment_AppCancel.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_AppFavorites1.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_AppFavorites2.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_AppHistory1.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_AppHistory2.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_AppUrlParams.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_BasicApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_BrowserContentPrinting.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_ClickOnceSameName.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_DhtmlFrameXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_DontRunApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_FullTrustXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_HtmlFrameXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IE8RegressionTest.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IE7BrowserToDocObjFocus.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IE7InputFiltering1.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IE7TabFocusTest.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IECtrlWAndF11.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IEFwdBkAccelKeyTest.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IEMenuMerging.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IFrameXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_InternetXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_IntranetXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_LaunchLooseXaml.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_LinksExplorerAccelKeys.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_LocalAppWebUpdate.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_NavigateBasicApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_NavigateFullTrustXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_NavigateInternetXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_NavigateIntranetXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_NavigateLooseXaml.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_NestedWebOCXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_OnDemandXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_PHostOrphanMitigation.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_PHostRespawnBehavior.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_PresHostDebug.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_PresHostEventTest.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_PresHostSOODebug.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_PresHostTimeoutTest.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_RefreshAccelKeys.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_RelaunchApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_RollBackApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_TrustedApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_TrustedXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_UntrustedApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_UntrustedXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_UpdateApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_WebOCApp.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_WebOCDisposedOnNavigation.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_WebOCFileLocking.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_WebOCFocusRegression.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_WebOCXbap.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XamlinIFrame.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XamlNavigation1.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XamlNavigation2.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapCancelCloseBrowser.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapCancelEscKey.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapCancelNavigateAway.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapCancelRestart.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapCancelStopBtn.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapCancelUIButton.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapCtrlN.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapCtrlSBinding.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapFavorites1.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapFavorites2.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapHistory1.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapHistory2.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapInvalidManifests.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapIsoStorage.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapNthRunRendering.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapRelaunchOptimization.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapReqNotMet.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapsInFramesInIE7Tabs.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapsInIE7Tabs.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapUnknownContent.xml" />
+    <Content Include="AMCFiles\AMC_Deployment_XbapUrlParams.xml" />
+    <Content Include="AppCodeLibrary\DeploymentTestCode.csproj" />
+    <Content Include="ResourceLibrary\DeploymentResourceLibrary.csproj" />
+    <Content Include="Resources\deploy_contentRendered.png" />
+    <Content Include="Resources\Deploy_ExpressAppInDHTMLFrame.htm" />
+    <Content Include="Resources\Deploy_ExpressAppInHTMLFrame.htm" />
+    <Content Include="Resources\Deploy_ExpressAppInIFrame.htm" />
+    <Content Include="Resources\deploy_htmlmarkup.htm" />
+    <Content Include="Resources\Deploy_IntranetExpressAppInIFrame.htm" />
+    <Content Include="Resources\deploy_picture1.jpg" />
+    <Content Include="Resources\Deploy_SimpleOnDemandAssembly.csproj" />
+    <Content Include="Resources\Deploy_XAMLInIFrame.htm" />
+    <Content Include="TestCodeLibrary\DeploymentTestCodeLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Component Include="AppCodeLibrary\FeatureTests\Deployment\DeploymentTestApps.dll" />
+    <Component Include="AppCodeLibrary\FeatureTests\Deployment\DeploymentTests.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\AppMaintenanceStep.cs" />
+    <Compile Include="Code\AppVerifier.cs" />
+    <Compile Include="Code\BasicAppCode.cs" />
+    <Compile Include="Code\BasicXbapCode.cs" />
+    <Compile Include="Code\BrowserAppExceptionHandler.cs" />
+    <Compile Include="Code\BrowserHostedApplicationVerifier.cs" />
+    <Compile Include="Code\BrowserNavigationStep.cs" />
+    <Compile Include="Code\CancelDownload.cs" />
+    <Compile Include="Code\CancelDownloadStep.cs" />
+    <Compile Include="Code\CheckXbapExitStep.cs" />
+    <Compile Include="Code\DismissMaintenanceDialog.cs" />
+    <Compile Include="Code\DoNotRunTrustManager.cs" />
+    <Compile Include="Code\ExceptionHandler.cs" />
+    <Compile Include="Code\HTMLVerifier.cs" />
+    <Compile Include="Code\IE7TabFocusHandler.cs" />
+    <Compile Include="Code\IEAutomationHelper.cs" />
+    <Compile Include="Code\IEBackForwardXbapHandler.cs" />
+    <Compile Include="Code\IECtrlWAndF11Handler.cs" />
+    <Compile Include="Code\IEForwardBackAcceleratorHandler.cs" />
+    <Compile Include="Code\IEMenuMergingValidator.cs" />
+    <Compile Include="Code\IEUnknownContentTestHandler.cs" />
+    <Compile Include="Code\InvalidActivationStep.cs" />
+    <Compile Include="Code\InvalidateDeploymentStep.cs" />
+    <Compile Include="Code\LinksExplorerHandler.cs" />
+    <Compile Include="Code\MachineStateVerifier.cs" />
+    <Compile Include="Code\NavigationStep.cs" />
+    <Compile Include="Code\OnDemandAppVerifier.cs" />
+    <Compile Include="Code\PresentationHostEvents.cs" />
+    <Compile Include="Code\PresHostDebugHandler.cs" />
+    <Compile Include="Code\RBWValidationHandlers.cs" />
+    <Compile Include="Code\RegressionUIHandlers.cs" />
+    <Compile Include="Code\RelaunchStep.cs" />
+    <Compile Include="Code\ResourceBaseAssembly.cs" />
+    <Compile Include="Code\RollbackStep.cs" />
+    <Compile Include="Code\SSLCertificateStep.cs" />
+    <Compile Include="Code\StandAloneApplicationVerifier.cs" />
+    <Compile Include="Code\StopRefreshMenuHandler.cs" />
+    <Compile Include="Code\UninstallStep.cs" />
+    <Compile Include="Code\UnmanagedStringHelper.cs" />
+    <Compile Include="Code\UpdateStep.cs" />
+    <Compile Include="Code\VisualVerifier.cs" />
+    <Compile Include="Code\WebOCFileLockingHandler.cs" />
+    <Compile Include="Code\WebOCFocusRegressionHandler.cs" />
+    <Compile Include="Code\XamlNavigationHandlers.cs" />
+    <Compile Include="Code\XAMLVerifier.cs" />
+    <Compile Include="Resources\Deploy_SimpleOnDemandAssembly.cs" />
+    <Compile Include="Resources\Settings.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Markup\Deploy_BasicAppMarkup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Markup\Deploy_BasicXbapMarkup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Markup\Deploy_BasicXbapMarkup2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Markup\Deploy_FocusTestPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Markup\Deploy_NavPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Markup\Deploy_NavPage2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Markup\Deploy_NavPage3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Markup\Deploy_WebOCAppMarkup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Markup\Deploy_WebOCXbapMarkup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Deploy_Markup1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Deploy_Markup2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Deploy_OnDemandAppDef.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Deploy_OnDemandXbap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Deploy_XamlFixedDoc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Deploy_XamlFlowDoc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

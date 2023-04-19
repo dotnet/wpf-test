@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="CustomClean;ResXGeneration" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>CLRResource</AssemblyName>
+    <Configuration>Release</Configuration>
+    <OutputType>winexe</OutputType>
+    <HostInBrowser>false</HostInBrowser>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>.\</IntermediateOutputPath>
+    <SignManifests>true</SignManifests>
+    <ManifestKeyFile>ClickOnceTest.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <ItemGroup>
+    <EmbeddedFiles Include="Picture1.jpg" />
+    <None Include="ClickOnceTest.pfx" />
+  </ItemGroup>
+
+  <Target Name="ResXGeneration" Inputs="@(EmbeddedFiles)" Outputs="$(IntermediateOutputPath)$(AssemblyName).resx">
+    <!--
+        This generates .resx files containing all the resources that are to be 
+        embedded in the main assembly and dont need to be localized
+    -->
+    <Message Text="(in) EmbeddedFiles: '@(EmbeddedFiles)'" Condition="'$(MSBuildTargetsVerbose)'=='true'" />
+    
+    <ResourcesGenerator 
+                   ResourceFiles="@(EmbeddedFiles)" 
+                   OutputPath="$(IntermediateOutputPath)" 
+                   OutputResourcesFile="$(AssemblyName).resources" 
+                   Condition="'@(EmbeddedFiles)' != ''">
+
+          <Output ItemName="ResxWithNoCulture" TaskParameter="OutputResourcesFile" />
+
+    </ResourcesGenerator>
+    
+  </Target>
+
+<!--  <Target Name="RenameGenResX">
+    <Exec WorkingDirectory="$(IntermediateOutputPath)" Command="ren $(AssemblyName).g.resX $(AssemblyName).resX" />
+    // ResxWithNoCulture 
+    <CreateItem Include="$(AssemblyName).resX" Condition="'$(AssemblyName).resX' != ''">
+      <Output TaskParameter="Include" ItemName="ResxWithNoCulture" />
+    </CreateItem>
+  </Target>
+-->  
+  <Target Name="CustomClean">
+    <Delete Files="$(IntermediateOutputPath)\\$(AssemblyName).resX" ContinueOnError="true" />
+    <Delete Files="$(IntermediateOutputPath)\\$(AssemblyName).resources" ContinueOnError="true" />
+    <Delete Files="$(IntermediateOutputPath)$(ProjectFileName).GenerateResource.Cache" ContinueOnError="true" />
+  </Target>
+</Project>

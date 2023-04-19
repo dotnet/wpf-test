@@ -1,0 +1,74 @@
+﻿<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <FileHostStep>
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+<!-- UNC now works but local is still blocked.
+        <TestLogStep Name="Simple stand-alone .Application Test Log - Local ">
+           <ActivationStep Method="Navigate" Scheme="Local" FileName="SimpleStandAloneApplication.application">
+               <ActivationStep.UIHandlers>
+                   <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+           <UninstallStep AppName="SimpleStandAloneApplication" />
+	</TestLogStep>
+-->
+
+        <TestLogStep Name="FireFox: Navigate Simple stand-alone .Application Test Log - UNC">
+          <ActivationStep Method="Navigate" Scheme="UNC" FileName="SimpleStandAloneApplication.application">
+            <ActivationStep.UIHandlers>
+              <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+        </TestLogStep>
+
+        <TestLogStep Name="FireFox: Navigate Simple stand-alone .Application Test Log - HTTP Intranet">
+          <ActivationStep Method="Navigate" Scheme="HTTPIntranet" FileName="SimpleStandAloneApplication.application">
+            <ActivationStep.UIHandlers>
+              <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+        </TestLogStep>
+
+        <TestLogStep Name="FireFox: Navigate Simple stand-alone .Application Test Log - HTTP Internet">
+          <ActivationStep Method="Navigate" Scheme="HTTPInternet" FileName="SimpleStandAloneApplication.application">
+            <ActivationStep.UIHandlers>
+              <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+        </TestLogStep>
+
+        <TestLogStep Name="FireFox: Navigate Simple stand-alone .Application Test Log - HTTPS Intranet">
+          <ActivationStep Method="Navigate" Scheme="HTTPSIntranet" FileName="SimpleStandAloneApplication.application">
+            <ActivationStep.UIHandlers>
+              <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+        </TestLogStep>
+
+      </FileHostStep>
+
+      <TestLogStep Name="FireFox: Navigate Simple stand-alone .Application Test Log - HTTPS Internet">
+          <ActivationStep Method="Navigate" Scheme="HTTPSInternet" FileName="SimpleStandAloneApplication.application">
+            <ActivationStep.UIHandlers>
+              <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+            </ActivationStep.UIHandlers>
+            <ActivationStep.SupportFiles>
+              <SupportFile Name="SimpleStandAloneApplication.application" IncludeDependencies="true" />
+            </ActivationStep.SupportFiles>
+          </ActivationStep>
+          <UninstallStep AppName="SimpleStandAloneApplication" />
+      </TestLogStep>
+   
+  </Steps>
+</AppMonitorConfig>

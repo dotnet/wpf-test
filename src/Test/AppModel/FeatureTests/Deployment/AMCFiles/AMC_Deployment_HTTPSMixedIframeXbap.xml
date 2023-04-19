@@ -1,0 +1,28 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="MixedHttpHttpsContent.htm" IncludeDependencies="false" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Mixed mode content .XBAP in IFrame - HTTPS Intranet / HTTP Internet">
+
+         <ServerTokenReplacementStep FileToModify="MixedHttpHttpsContent.htm" TargetFile="SimpleBrowserHostedApplication.xbap" UploadFileAfterModify="true" />
+
+         <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="MixedHttpHttpsContent.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier IgnoreIEZoneString="True" ShouldNotSeeTM="False" ZoneVerificationString="Partial Trust (Internet) Granted" PresHostInstances="2" WindowTitle="RegExp:(Express App in an IFrame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Express App in an IFrame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />    
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+
+        </FileHostStep>
+      
+  </Steps>
+</AppMonitorConfig>

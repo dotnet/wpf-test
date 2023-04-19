@@ -1,0 +1,107 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:Class="ReadStringFromResx"
+  Loaded="startTest"
+  >
+    <Button Width="150" Height="45">Add</Button>    
+    <Image Source="picture1.jpg" />
+    
+    <x:Code><![CDATA[
+    
+    Microsoft.Test.Logging.TestLog log = null;
+    string data = null;
+    string expectedvalue = "Custom Error 1";
+
+    void startTest(object sender, RoutedEventArgs args)
+    {
+
+        log = Microsoft.Test.Logging.TestLog.Current;
+        // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+        System.Reflection.Assembly exeAsm = System.Reflection.Assembly.GetExecutingAssembly();
+
+        System.Resources.ResourceManager rm = new System.Resources.ResourceManager("MyCustomResource", exeAsm);
+
+        if ( rm == null )
+        {
+            log.LogStatus("ResourceManger could not find MyCustomResource.resources");
+            goto Exit;
+        }
+
+        rm.IgnoreCase = true;
+
+        data = rm.GetString("1001");
+        if ( data == null )
+        {
+            log.LogEvidence("Could not get data from MyCustomResource.resx");
+            goto Exit;
+        }
+
+        log.LogStatus("Creating DockPanel with textbox and loading it to current window");
+        
+        System.Windows.Controls.DockPanel dp = new System.Windows.Controls.DockPanel();
+        
+        System.Windows.Controls.TextBox tb = new System.Windows.Controls.TextBox();
+        tb.Text = data;
+        tb.Loaded += new RoutedEventHandler(tb_Loaded);
+        tb.Width = 100;
+        tb.Height = 30;
+        
+        dp.Children.Add(tb);
+        
+        System.Windows.Application.Current.Windows[0].Content = dp;
+        
+        return;
+
+    Exit :
+        log.Result = Microsoft.Test.Logging.TestResult.Fail;        
+        ShutdownApp();
+
+    }
+
+
+    private void tb_Loaded(object sender, RoutedEventArgs e)
+    {
+        log.LogStatus("Textbox loaded event fired - test passed.");    
+
+        System.Windows.Controls.TextBox tb1 = (System.Windows.Controls.TextBox)sender;
+        
+        if ( tb1.Text == data && tb1.Text == expectedvalue)
+        {        
+            log.LogEvidence("Text box contained desired value.");
+            log.Result = Microsoft.Test.Logging.TestResult.Pass;
+        }
+        else
+        {
+            log.Result = Microsoft.Test.Logging.TestResult.Fail;
+            log.LogEvidence("Text box contained desired value.");
+            log.LogEvidence("Text box value = " + tb1.Text);
+            log.LogEvidence("data value = " + data);
+            log.LogEvidence("Expected value = " + expectedvalue);            
+        }
+        
+        log.LogStatus("Test Run completed, shutting down application.");  
+        
+        ShutdownApp();
+    }
+    
+    private void ShutdownApp()
+    {
+        // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+
+        if ( MyApplication.BrowserHostedApp == false )        
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+        else
+        {
+            log.LogStatus("Shutting down application");
+            // log.Close();                    
+        }            
+        
+        Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();    
+    }
+
+    ]]></x:Code>
+
+</DockPanel>

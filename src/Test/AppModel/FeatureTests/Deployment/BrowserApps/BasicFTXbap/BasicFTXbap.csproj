@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <AssemblyName>SimpleBrowserHostedNSVApplication</AssemblyName>
+    <Configuration>Release</Configuration>
+    <OutputType>winexe</OutputType>
+    <HostinBrowser>True</HostinBrowser>
+    <TargetZone>Custom</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <Install>False</Install>
+    <SupportUrl>http://www.microsoft.com</SupportUrl>
+    <OutputSubFolder>FeatureTests\AppModel\Deployment\Apps\BasicFTXbap</OutputSubFolder>
+    <RootNamespace>Microsoft.Test.Windows.Client.AppModel</RootNamespace>
+    <SignManifests>true</SignManifests>
+    <ManifestKeyFile>$(WpfTest)\Common\ClickOnceTest.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <ApplicationDefinition Include="..\..\Resources\BasicInternetXbapAppDef.xaml" />
+
+    <Page Include="..\..\Markup\Deploy_BasicXbapMarkup.xaml" />
+    <Page Include="..\..\Markup\Deploy_FocusTestPage1.xaml" />
+    <Page Include="..\..\Markup\Deploy_NavPage1.xaml" />
+    <Page Include="..\..\Markup\Deploy_NavPage2.xaml" />
+    <Page Include="..\..\Markup\Deploy_NavPage3.xaml" />
+
+    <Compile Include="..\..\Code\BasicXbapCode.cs"/>
+    <Compile Include="..\..\Code\AssemblyInfo.cs"/>
+    <None Include="$(WpfTest)\Common\clickoncetest.pfx" />
+ 
+<!-- Needed to make this a FT xbap --> 
+    <None Include="..\..\Resources\app.manifest" />
+
+    <Resource Include="..\..\Resources\deploy_picture1.jpg" />
+    <Resource Include="..\..\Resources\deploy_contentRendered.png" />
+
+    <Compile Include="..\..\Resources\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>..\..\Resources\Settings.settings</DependentUpon>
+    </Compile>
+
+    <None Include="..\..\Resources\app.config" />
+    <None Include="..\..\Resources\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>..\..\Resources\Settings.Designer.cs</LastGenOutput>
+    </None>
+
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+</Project>

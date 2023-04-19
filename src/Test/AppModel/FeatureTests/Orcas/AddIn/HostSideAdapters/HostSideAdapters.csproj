@@ -1,0 +1,57 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+<!-- Output path changed to include it as a resource for xbap -->
+    <OutputRoot>..\Xbap\HostSideAdapters</OutputRoot>
+    <UICulture>en-US</UICulture>
+    <RootNamespace>Microsoft.Test.AddIn</RootNamespace>
+    <AssemblyName>HostSideAdapters</AssemblyName>
+    <OutputType>Library</OutputType>
+    <ProjectGuid>{0DB18826-F0BD-4f9a-B412-BC270394859D}</ProjectGuid>
+  </PropertyGroup>
+
+
+  <!-- Code -->
+  <ItemGroup>
+    <Compile Include="..\Shared\AssemblyInfo.cs" />
+
+    <Compile Include="*.cs" />
+  </ItemGroup>
+  
+  <!-- Reference Items Group  -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.AddIn.Contract" >
+      <HintPath>$(WinFx35RefPath)\System.AddIn.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="System.AddIn" >
+      <HintPath>$(WinFx35RefPath)\System.AddIn.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Presentation"  >
+      <HintPath>$(WinFx35RefPath)\System.Windows.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+  <!-- Supporting Project -->
+  <ItemGroup>
+    <ProjectReference Include="$(HostViewsProject)">
+      <Project>{E373F227-4EAB-4587-BF36-724A025A6327}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(ContractsProject)">
+      <Project>{F822516C-3154-491e-B6B3-C7EAE224233A}</Project>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

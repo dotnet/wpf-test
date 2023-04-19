@@ -1,0 +1,40 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" x:Class="Application__"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="LoadImageFromSubdirectory.xaml">
+    
+    <x:Code><![CDATA[
+
+    Microsoft.Test.Logging.TestLog log = null;
+     bool _browserhostedapp = false;
+    
+    protected override void OnStartup(System.Windows.StartupEventArgs e)
+    {
+        log = Microsoft.Test.Logging.TestLog.Current;         
+        // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+            if ( AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap") )        
+            {
+                _browserhostedapp = true;
+            }
+
+    }
+    
+    protected override void OnExit(ExitEventArgs e)
+    {
+            if ( _browserhostedapp == false )
+            {
+                log.LogStatus("Shutting down application");
+                // log.Close();
+            }
+    }
+
+    public bool BrowserHostedApp
+    {
+        get
+        {
+            return _browserhostedapp;
+        }
+    }
+
+    ]]></x:Code>
+
+</Application>

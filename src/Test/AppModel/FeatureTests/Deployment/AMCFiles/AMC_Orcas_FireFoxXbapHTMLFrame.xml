@@ -1,0 +1,80 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <FileHostStep>
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+          <SupportFile Name="Deploy_ExpressAppInHTMLFrame.htm" IncludeDependencies="false" />
+        </FileHostStep.SupportFiles>
+
+        <TestLogStep Name="FIREFOX - Verifying Internet Express app behavior test log - Local">
+          <ActivationStep Method="launch" Scheme="Local" FileName="Deploy_ExpressAppInHTMLFrame.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Express App in an HTML Frame)" ProcessName="FireFox" ExpectedWindowTitle="Express App in an HTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="FIREFOX - Verifying Internet Express app behavior test log - UNC">
+          <ActivationStep Method="launch" Scheme="UNC" FileName="Deploy_ExpressAppInHTMLFrame.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Express App in an HTML Frame)" ProcessName="FireFox" ExpectedWindowTitle="Express App in an HTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="FIREFOX - Verifying Internet Express app behavior test log - HTTP Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="Deploy_ExpressAppInHTMLFrame.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Express App in an HTML Frame)" ProcessName="FireFox" ExpectedWindowTitle="Express App in an HTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="FIREFOX - Verifying Internet Express app behavior test log - HTTPS Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="Deploy_ExpressAppInHTMLFrame.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Express App in an HTML Frame)" ProcessName="FireFox" ExpectedWindowTitle="Express App in an HTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="FIREFOX - Verifying Internet Express app behavior test log - HTTP Internet">
+          <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="Deploy_ExpressAppInHTMLFrame.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Express App in an HTML Frame)" ProcessName="FireFox" ExpectedWindowTitle="Express App in an HTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+      </FileHostStep>
+
+      <TestLogStep Name="FIREFOX - Verifying Internet Express app behavior test log - HTTPS Internet">
+        <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="Deploy_ExpressAppInHTMLFrame.htm">
+          <ActivationStep.UIHandlers>
+            <FireFoxBrowserHostedApplicationVerifier PresHostInstances="2" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Express App in an HTML Frame)" ProcessName="FireFox" ExpectedWindowTitle="Express App in an HTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+            <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="firefox" />
+            <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="firefox" />
+          </ActivationStep.UIHandlers>
+          <ActivationStep.SupportFiles>
+            <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+            <SupportFile Name="Deploy_ExpressAppInHTMLFrame.htm" IncludeDependencies="false" />
+          </ActivationStep.SupportFiles>
+        </ActivationStep>
+      </TestLogStep>
+    
+  </Steps>
+</AppMonitorConfig>

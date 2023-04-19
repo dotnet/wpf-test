@@ -1,0 +1,44 @@
+<AppMonitorConfig>
+<Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+              <SupportFile Name="GetCookieXbap.xbap" IncludeDependencies="true" />
+	      <SupportFile Name="SetSessionCookie.html" IncludeDependencies="false" />
+              <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+       </FileHostStep.SupportFiles>
+      
+       <TestLogStep Name="Verifying HTML cookie - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SetSessionCookie.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_SessionCookieFromHTML=value)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+       <TestLogStep Name="Verifying HTML cookie - HTTP Intranet">
+           <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SetSessionCookie.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(_SessionCookieFromHTML=value)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+
+           <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+       </FileHostStep>
+  </Steps>
+</AppMonitorConfig>

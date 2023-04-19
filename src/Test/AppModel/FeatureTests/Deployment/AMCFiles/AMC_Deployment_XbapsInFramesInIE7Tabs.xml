@@ -1,0 +1,30 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+      <TestLogStep Name="Launch Xapp in IFrames In Tabbed browser BVT">
+       <MachineInfoStepDisabler IEVersion="8" DoNotRunReason="Windows SE bug  - Can't launch content from Users folder (Wont fix)" >
+       <FileHostStep>
+        <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="ExpressAppIntranetZone.xbap" IncludeDependencies="true" />
+               <SupportFile Name="Deploy_IntranetExpressAppInIFrame.htm" IncludeDependencies="false" />                
+               <SupportFile Name="Deploy_ExpressAppInIFrame.htm" IncludeDependencies="false" />
+        </FileHostStep.SupportFiles>
+
+        <NavigationStep Method="launch" NavigationType="IENewBrowserTab" ClearFusionCache="true" Scheme="httpInternet" FileName="Deploy_ExpressAppInIFrame.htm">
+            <NavigationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ShouldNotSeeTM="False" ZoneVerificationString="Partial Trust (Internet) Granted" PresHostInstances="2" WindowTitle="RegExp:(Express App in an IFrame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Express App in an IFrame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />  
+            </NavigationStep.UIHandlers>
+        </NavigationStep>
+
+        <NavigationStep IsFinalStep="True" NavigationType="IENewBrowserTab" Scheme="HTTPIntranet" FileName="Deploy_IntranetExpressAppInIFrame.htm">
+            <NavigationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier PresHostInstances="4" ZoneVerificationString="Partial Trust (Intranet) Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Intranet Express Apps in an IFrame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Intranet Express Apps in an IFrame" AppName="ExpressAppIntranetZone" IsAppShellVisible="false" />
+            </NavigationStep.UIHandlers>
+        </NavigationStep>
+
+	</FileHostStep>
+       </MachineInfoStepDisabler>
+      </TestLogStep>
+    </Steps>
+</AppMonitorConfig>

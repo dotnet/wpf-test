@@ -1,0 +1,14 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="Regression Test - Rapid IE7 forward/back navigation">
+           <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <IE7RapidNavigationHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                   <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+  </Steps>
+</AppMonitorConfig>

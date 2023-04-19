@@ -1,0 +1,599 @@
+<XTC>
+<DEFAULTTESTINFO>
+    <Deployments>
+      <Deployment>FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment</Deployment>
+    </Deployments>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.dll" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment" />
+    </SupportFiles>
+</DEFAULTTESTINFO>
+  
+<TEST Name="NavigateToObjectStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: NavigateToObjectStandalone] [DESCRIPTION] Programmatic Navigation of NavigationWindow 
+      to different objects" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe NavigateToObject" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+
+  
+<TEST Name="NavigationEventsStandalone" 
+      Priority="0" 
+      Disabled="true"
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: NavigationEventsStandalone] [DESCRIPTION] Navigation events get fired at the appropriate timesNavigation events get fired at the appropriate times" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe NavigationEvents" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NavigatePageToPage" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: NavigatePageToPage] [DESCRIPTION] Navigate from Page to Page [standalone]Ace.pl testcase" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe NavigatePageToPage" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="StopNavigationStandaloneCompiledXamlPage"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: StopNavigationStandaloneCompiledXamlPage] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation" 
+                NavigationPage="CompiledXamlPage"
+                StopLoading="True"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="StopNavigationStandaloneXamlSiteOfOrigin"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: StopNavigationStandaloneXamlSiteOfOrigin] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="XamlSiteOfOrigin"
+                StopLoading="True"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="StopNavigationStandaloneXamlComponent"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: StopNavigationStandaloneXamlComponent] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="XamlComponent"
+                StopLoading="True"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="StopNavigationStandaloneXamlLooseContent"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: StopNavigationStandaloneXamlLooseContent] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="XamlLooseContent"
+                StopLoading="True"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+  
+<TEST Name="StopNavigationStandaloneHtmlSiteOfOrigin"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: StopNavigationStandaloneHtmlSiteOfOrigin] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="HtmlSiteOfOrigin"
+                StopLoading="True"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="StopNavigationStandaloneHttp"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: StopNavigationStandaloneHttp] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="Http"
+                StopLoading="True" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+
+<TEST Name="CancelNavigationStandaloneCompiledXamlPage"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: CancelNavigationStandaloneCompiledXamlPage] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="CompiledXamlPage"
+                StopLoading="False"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="CancelNavigationStandaloneXamlSiteOfOrigin"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: CancelNavigationStandaloneXamlSiteOfOrigin] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="XamlSiteOfOrigin"
+                StopLoading="False"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="CancelNavigationStandaloneXamlComponent"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: CancelNavigationStandaloneXamlComponent] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="XamlComponent"
+                StopLoading="False"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="CancelNavigationStandaloneXamlLooseContent"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: CancelNavigationStandaloneXamlLooseContent] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="XamlLooseContent"
+                StopLoading="False"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+  
+<TEST Name="CancelNavigationStandaloneHtmlSiteOfOrigin"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: CancelNavigationStandaloneHtmlSiteOfOrigin] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="HtmlSiteOfOrigin"
+                StopLoading="False"/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="CancelNavigationStandaloneHttp"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="NavigationWindow"
+      Timeout="120"
+      Description="[ID: CancelNavigationStandaloneHttp] [DESCRIPTION] Testing stop navigation scenarios" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe StopNavigation"
+                NavigationPage="Http"
+                StopLoading="False" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="NavigateUriWithFragmentStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: NavigateUriWithFragmentStandalone] [DESCRIPTION] Call Navigate on a Uri with just a fragment [standalone]Click on a HyperLink which has just a fragment" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe NavigateUriWithFragment" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="ClearForwardStackStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: ClearForwardStackStandalone] [DESCRIPTION] Navigate Forward, Back, Navigate and make sure forward journal stack has been wiped out [standalone]Click on a HyperLink which has just a fragment" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe ClearForwardStack" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="TimeDelayedNavigationStandalone" 
+      Priority="1"
+      Timeout="150" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Description="[ID: TimeDelayedNavigationStandalone] [DESCRIPTION] Time Delayed Navigation [standalone]BVT for time delayed (5 minutes default) navigation inside the navigation applicationNavigate to StartupUri; then spawn a thread that sleeps for 5 minutes, and then posts a Navigate() operationfor the application's main thread.Pass Condition: Normal application shutdown with exit code 0 and currentState is Page2LoadComplete" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe TimeDelayedNavigation" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="ForwardBackStacksStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: ForwardBackStacksStandalone] [DESCRIPTION] Test ForwardStack and BackStack DPs, CanGoBack and CanGoForward [standalone]/// BVT for testing ForwardStack and BackStack DPs    /// We test N = 20 pages for Navigate(), GoBack and GoForward    /// operations    /// This BVT also verifies that the ForwardStack and BackStack properties    /// hold and return beyond 9 items (even though only 9 are displayed on    /// the drop down menus)    /// Tests:    /// 1) Blank test    ///    Clear State (ie remove all back entries and forward entries)    ///    Verify that CanGoBack and CanGoBack are false    ///    Verify that InvalidOperationException is thrown when GoBack is called    ///    with CanGoBack as false and GoForward is called with CanGoForward as false    /// 2) N pages test     ///    N = 20    ///    Navigate Pages 0..19    ///    Verify expected and actual back / forward stacks are same    ///    Go Back 19 times    ///    Verify expected and actual back / forward stacks are same    ///    Go Forward 19 times    ///    Verify expected and actual back / forward stacks are same" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe ForwardBackStacks" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="MenuEntries" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: MenuEntries] [DESCRIPTION] Back / Forward Menu entries (expose only 9) and addBackEntry()  [standalone]/// BVT that creates custom journal entries (each journal entry    /// corresponds to a change to a button's background)    /// Matches the counts of the actual Back / Forward Menus to the     /// expected counts (checks to see that only 9 are exposed)    /// Also matches the counts of the actual Back / Forward stack journal     /// entries" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe MenuEntries" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+   <Keywords>
+     <Keyword>Localization_Suite</Keyword>
+   </Keywords>
+</TEST>
+
+<TEST Name="NavigatingEventsStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: NavigatingEventsStandalone] [DESCRIPTION] Navigating, NavigationProgress and LoadStarted (when implemented) events are fired [standalone]
+      /// BVT that verifies the following NavigationWindow events    
+      /// 1) LoadStarted    
+      /// 2) Navigating      
+      /// 3) NavigationProgress events    
+      /// Also removes the event handlers (and checks to see that these are not called)" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe NavigatingEvents" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="RequestNavigateEventArgsStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: RequestNavigateEventArgsStandalone] [DESCRIPTION] Navigate using RequestNavigateEventArgs  [standalone]Click on a HyperLink which has just a fragment" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe Ponies" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NavigationEventArgsStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: NavigationEventArgsStandalone] [DESCRIPTION] Navigate all NavigationEventArgs  [standalone]Click on a HyperLink which has just a fragment" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe EvenMorePonies" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="VerifyChromeStandalone" 
+      Priority="1" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: VerifyChromeStandalone] [DESCRIPTION] Walkthrough Visual tree of NavigationWindow and verify if chrome present or not - [standalone] (currently test is for classic theme only)/// BVT that verifies visual trees of NavigationWindow with styles     /// set programatically    /// Initial style is the default style (ie with the NavigationChrome)    /// New style is with the chrome removed    /// On Standalone apps - this behavior is the same on LH and XP    /// For browser hosted apps - Inline Chrome is present in XP whereas    /// not in LH    /// Page1.xaml is a simple xaml file with a DockPanel     /// Page2.xaml is contains a DockPanel and also a style definition    /// for the NavigationWindow Type. It sets the style in its code behind    /// (Page2.xaml.cs) in the OnLoaded method" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe VerifyChrome" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="TapPage" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: TapPage] [DESCRIPTION] Navigate Page and tap its Properties  [standalone]Click on a HyperLink which has just a fragment" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe TapPage" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="ThreadedNavigateInvalidStandalone" 
+      Priority="2" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: ThreadedNavigateInvalidStandalone] [DESCRIPTION] Calling Navigate from another thread should throw an InvalidOperationException - standaloneCalling Navigate from another thread should thrown an InvalidOperationException - standalone" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe ThreadedNavigateInvalid" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="RemoveBackEntryStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: RemoveBackEntryStandalone] [DESCRIPTION] RemoveBackEntry removes the topmost Back stack entry  [standalone]/// BVT that has tests the RemoveBackEntry() api. Verifies that the correct/// journal entry (first entry on the backstack) is removed on calling RemoveBackEntry/// and that an exception is thrown when we try to RemoveBackEntry when the stack is empty" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe RemoveBackEntry" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+   <Keywords>
+     <Keyword>Localization_Suite</Keyword>
+   </Keywords>
+</TEST>
+
+<TEST Name="XamlJournalEntryStandalone" 
+      Priority="0" 
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: XamlJournalEntryStandalone] [DESCRIPTION] Navigate to Xaml Pages that set JournalEntry.Name property in Xaml and different string variations of JournalEntry.Name  [standalone]/// BVT that has tests the RemoveBackEntry() api. Verifies that the correct/// journal entry (first entry on the backstack) is removed on calling RemoveBackEntry/// and that an exception is thrown when we try to RemoveBackEntry when the stack is empty" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe XamlJournalEntry" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="MultithreadedApp" 
+      Priority="1"
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="[ID: MultithreadedApp] [DESCRIPTION] Window/NavigationWindow on Multiple threads [standalone]
+      /// summary    
+      /// BVT that creates and shows multiple Windows /NavigationWindows on multiple threads    
+      /// Verifies that only windows created on the Application main thread are added to the Application Windows collection    
+      /// Verifies that we can create, show, access / set properties such as Title, Content on Windows created on the same   thread    
+      /// Verifies that we can set content (navigate), goback, goforward, access cangoback / cangoforward, addbackentry and removebackentry on NavigationWindows created on the same thread    
+      /// /summary" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest" 
+                 Assembly="TestRuntime" 
+                 Method="RunApplication" 
+                 SecurityLevel="FullTrust" 
+                 MethodParams="NavigationTests_Standalone.exe MultithreadedApp" />
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="RefreshNavWinStandalone"
+      Priority="0"
+      Type="Functional" 
+      Area="AppModel" 
+      SubArea="NavigationWindow" 
+      Timeout="120"
+      Description="RefreshNavWinStandalone - It is possible to refresh the content in a NavigationWindow" >
+  <Driver Executable="sti.exe" />
+  <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                Assembly="TestRuntime"
+                Method="RunApplication" 
+                SecurityLevel="FullTrust"
+                MethodParams="NavigationTests_Standalone.exe RefreshNavWin" />
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+  </SupportFiles>
+</TEST>
+  
+</XTC>
+

@@ -1,0 +1,40 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+              <SupportFile Name="UnsignedFullTrustXbap.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Verifying unsigned Full Trust Express app behavior test log - UNC (App should run!)">
+           <ActivationStep Method="launch" Scheme="UNC" FileName="UnsignedFullTrustXbap.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="UnsignedFullTrustXbap" />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying unsigned Full Trust Express app behavior test log - HTTP Intranet  (App should run!)">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="UnsignedFullTrustXbap.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="UnsignedFullTrustXbap" />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying unsigned Full Trust Express app behavior test log - HTTPS Intranet  (App should run!)">
+           <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="UnsignedFullTrustXbap.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="UnsignedFullTrustXbap" />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+       </FileHostStep>
+      
+  </Steps>
+</AppMonitorConfig>

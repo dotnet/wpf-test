@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+	<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	  
+	  <PropertyGroup>
+	    <RootNamespace>Microsoft.Windows.Test.Client.AppSec.IncrementalBuildTest</RootNamespace>
+	    <AssemblyName>IncrementalBuildTest</AssemblyName>
+	    <OutputType>winexe</OutputType>
+	    <OutputPath>bin\\$(Configuration)\\</OutputPath>
+	    <Configuration>Release</Configuration>
+
+	    <TextVariation ID="1">
+	    	<HostinBrowser>false</HostinBrowser>
+	    </TextVariation>
+	    
+	    <NodeVariation ID="100">
+	    </NodeVariation>
+	    
+	    <SignManifests>True</SignManifests>
+	    <ManifestKeyFile>ClickOnceTest.pfx</ManifestKeyFile>
+	    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+	    <GenerateManifests>true</GenerateManifests>
+	  </PropertyGroup>  
+	  
+	  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+	  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+	  <Import Project="TestCommon.target" />
+
+	  <ItemGroup>
+
+	    <ApplicationDefinition Include="MyApp.xaml" />
+	    <NodeVariation ID="103"><Page Include="Start.xaml" /></NodeVariation>
+	    <NodeVariation ID="102"><Page Include="Foo.xaml" /></NodeVariation>
+	    <NodeVariation ID="101">
+	    </NodeVariation>
+	    
+
+	  </ItemGroup>
+	    
+	  <ItemGroup>
+		<Reference Include="System" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Data" />
+		<Reference Include="WindowsBase" />
+		<Reference Include="PresentationCore" />
+		<Reference Include="PresentationFramework" />
+		<Reference Include="UIAutomationTypes" />
+		<Reference Include="UIAutomationProvider" />
+   	  </ItemGroup>	  
+	</Project>
+  </TemplateData>
+  
+  <Scenarios>
+  
+    <Defaults>
+      <FileName>IncrementalBuildProject</FileName>
+      <FileExtension>.proj</FileExtension>
+      <IsXmlDocument>true</IsXmlDocument>
+      <RetainFileName>true</RetainFileName>      
+    </Defaults>
+    
+
+    <!-- Basic Project File -->
+    <Scenario Case="1">
+    </Scenario>
+    
+    <!-- Modify Start.xaml -->
+    <Scenario Case="2">
+    </Scenario>
+    
+    <!-- Adding xaml -->
+    <Scenario Case="3">
+      <NodeVariation ID="101">
+        <Page Include="Simple.xaml" />
+      </NodeVariation>
+    </Scenario>
+    
+    <!-- Adding xaml -->
+    <Scenario Case="31">
+      <NodeVariation ID="102" />
+    </Scenario>    
+
+    <!-- Adding Code file -->
+    <Scenario Case="4">
+      <NodeVariation ID="101">
+         <Compile Include="MyApp.xaml.cs">
+	     <DependentUpon>MyApp.xaml</DependentUpon>
+	     <SubType>Code</SubType>
+	 </Compile>	
+      </NodeVariation>
+      <NodeVariation ID="103" />
+    </Scenario>
+    
+    <!-- Adding Content file -->
+    <Scenario Case="5">
+      <NodeVariation ID="101">
+       	 <Content Include="ContentXaml.xaml">
+	     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	 </Content>
+      </NodeVariation>
+    </Scenario>
+    
+    <!-- Adding Resource file -->
+    <Scenario Case="6">
+      <NodeVariation ID="101">
+          <Resource Include="ResourceXaml.xaml" />
+      </NodeVariation>
+    </Scenario>    
+  </Scenarios>    
+</XMLVariationTemplate>	
+
+    <!-- 
+    ********************************************************
+    	App Hosted in Browser: 
+    	<TextVariation ID="1">true</TextVariation>
+    	<NodeVariation ID="100">
+            <TargetZone>Internet</TargetZone>
+        </NodeVariation>
+
+    ********************************************************
+    -->

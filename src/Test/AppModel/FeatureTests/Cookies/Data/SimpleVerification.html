@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Title>NO COOKIE SET</Title>
+<SCRIPT LANGUAGE = JavaScript>
+// It appears somehow Microsoft.com is setting server-side cookies which contain some weird metadata.
+// To prevent this from stalling the test, only set the title if it contains a substring of
+// every cookie ever set in the test suite, which happens to be "PersistentCookie" or "SessionCookie"
+
+if ((document.cookie !="") && ( (document.cookie.indexOf("PersistentCookie") > -1) || (document.cookie.indexOf("SessionCookie") > -1 )  )  )
+{
+    document.title=document.cookie;
+}
+
+/* Debug helper
+else
+{
+   alert(document.cookie.indexOf("PersistentCookie"));
+   alert(document.cookie.indexOf("SessionCookie"));
+   alert(document.cookie);
+}
+*/
+
+</SCRIPT>
+</html>

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>Microsoft.Test.WPF.AppModel.Compilation</RootNamespace>
+        <AssemblyName>CompilationTests</AssemblyName>
+        <Configuration>Release</Configuration>
+        <OutputType>library</OutputType>
+        <OutputSubFolder>FeatureTests\AppModel\Compilation</OutputSubFolder>
+        <!-- <SignAssembly>true</SignAssembly> -->
+        <SignAssemblyAttribute>true</SignAssemblyAttribute>
+        <AssemblyKeyFile>$(WpfTest)\Common\keys\TestTrusted.snk</AssemblyKeyFile>
+    </PropertyGroup>
+
+    <!-- Deployment Scenarios -->
+
+<!--Leaf Project Items-->
+    <ItemGroup>
+	    <Compile Include="MultiTargeting.cs" />
+	    <Compile Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    
+
+    <ItemGroup>
+      <ProjectReference Include="$(TestRuntimeProject)" />
+      <ProjectReference Include="$(CompilerServicesProject)" />
+      <ProjectReference Include="$(TestContractsProject)" />
+      <ProjectReference Include="$(InternalUtilitiesProject)" />
+    </ItemGroup>
+
+</Project>

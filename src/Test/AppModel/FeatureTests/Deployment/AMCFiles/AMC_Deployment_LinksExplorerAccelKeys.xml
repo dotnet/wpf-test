@@ -1,0 +1,15 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="Links Explorer Accelerator Key Verification">
+         <MachineInfoStepDisabler IEVersion="6" DoNotRunReason="This test is specific to IE7" >
+          <ActivationStep ClearFusionCache="False" Method="launch" Scheme="LOCAL" FileName="deploy_markup2.xaml">
+              <ActivationStep.UIHandlers>
+                  <LinksExplorerHandler ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 2)" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+         </MachineInfoStepDisabler>
+	</TestLogStep>
+     </Steps>
+</AppMonitorConfig>

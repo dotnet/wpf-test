@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>XBAP Hyperlink SubFrame Hijacking test</title></head>
+<body>
+
+<font size="2" face="Tahoma">
+<center>
+<h2>XAML_Hyperlink_SubFrame_Navigation</h2>
+If  regresses, then using a regular Hyperlink from loose xaml or Xbap, we can navigate frames/windows that we haven't opened and/or are not on our domain, bypassing the "Allow subframes to navigate across different domains" policy.<br /><br />
+</center>
+
+<hr /><br />
+<font size="5">First, <a href="#" onclick="openWindow();return false;">click here to open</a> Microsoft.com in a new window.</font><br /><br />
+<iframe src="SimpleBrowserHostedApplication.xbap" width="600" height="400"></iframe>
+<hr />
+
+All we are doing here is changing Microsoft.com's iframe's name (which is apparently legal/valid) via JavaScript and then,
+loading a new URL using the Hyperlink element of a regular, partial trust XAML or XBAP.<br /><br />
+
+<font face="Courier New" color="blue">
+JS&nbsp;&nbsp;&nbsp;--> theWindow[0].name = "HIJACKED_IFRAME";<br />
+XAML&nbsp;-->&nbsp;&lt;Hyperlink TargetName="<b>HIJACKED_IFRAME</b>" NavigateUri="hijacked_iframe.html"&gt;click here&lt;/Hyperlink&gt;<br />
+</font>
+<hr />
+The regular behavior is different: the link must be opened in a new window instead of Microsoft's IFRAME
+because it does not belong to us (not in our domain).<br />
+So, check out what happens with a regular link. Close the Nature window and <a href="#" onclick="openWindow();return false;">re-open it</a>. Then, try to change the URL of the iframe using a <a href="hijacked_iframe.html" target="HIJACKED_IFRAME">regular link</a>.
+<br />As you can see, the iframe's URL of Microsoft has not changed, instead, IE opened a new window with the name "HIJACKED_IFRAME". <br /><br />
+</font>
+
+<script language="JavaScript">
+    var newWindow, interval_setIFrameName;
+    function openWindow()
+    {
+        newWindow = window.open('http://www.microsoft.com','myNewIEwin','left=500,top=500,width=1024,height=768,toolbar=1,resizable=1');
+        interval_setIFrameName = setInterval('setIFrameName()', 1000);
+    }
+
+    function setIFrameName()
+    {
+        var strIframeName = "HIJACKED_IFRAME";
+        if (newWindow.length > 0)
+        {
+            //    Set a name to the IFRAME --> This is legal/valid/allowed.
+            newWindow[0].name = strIframeName;
+
+            //document.title = "I just set this";
+            //alert("Now click on the xaml link (click here to hijack...) to hijack the contents of nature's IFRAME");
+            clearInterval(interval_setIFrameName);
+        }
+
+    }
+</script>
+</body>
+</html>

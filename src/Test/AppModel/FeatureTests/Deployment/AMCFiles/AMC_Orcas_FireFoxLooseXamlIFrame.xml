@@ -1,0 +1,89 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <FileHostStep>
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="deploy_markup1_v4.xaml" IncludeDependencies="true" />
+          <SupportFile Name="deploy_markup2_v4.xaml" IncludeDependencies="true" />
+          <SupportFile Name="Deploy_XAMLInIFrame_v4.htm" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+        <TestLogStep Name="Fire Fox Loose Xaml test log - Local">
+          <ActivationStep Method="launch" Scheme="Local" FileName="Deploy_XAMLInIFrame_v4.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxXAMLVerifier AccessibilityTestElement="xamlTestButton" PresHostInstances="2" ProcessName="firefox" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+              <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Fire Fox Loose Xaml test log - UNC">
+          <ActivationStep Method="launch" Scheme="UNC" FileName="Deploy_XAMLInIFrame_v4.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxXAMLVerifier AccessibilityTestElement="xamlTestButton" PresHostInstances="2" ProcessName="firefox" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+              <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Fire Fox Loose Xaml test log - HTTP Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="Deploy_XAMLInIFrame_v4.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxXAMLVerifier AccessibilityTestElement="xamlTestButton" PresHostInstances="2" ProcessName="firefox" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+              <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Fire Fox Loose Xaml test log - HTTPS Intranet">
+          <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="Deploy_XAMLInIFrame_v4.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxXAMLVerifier AccessibilityTestElement="xamlTestButton" PresHostInstances="2" ProcessName="firefox" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+              <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Fire Fox Loose Xaml test log - HTTP Internet">
+          <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="Deploy_XAMLInIFrame_v4.htm">
+            <ActivationStep.UIHandlers>
+              <FireFoxXAMLVerifier AccessibilityTestElement="xamlTestButton" PresHostInstances="2" ProcessName="firefox" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+              <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="firefox" />
+              <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="firefox" />
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+      </FileHostStep>
+
+      <TestLogStep Name="Fire Fox Loose Xaml test log - HTTPS Internet">
+        <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="Deploy_XAMLInIFrame_v4.htm">
+          <ActivationStep.UIHandlers>
+            <FireFoxXAMLVerifier AccessibilityTestElement="xamlTestButton" PresHostInstances="2" ProcessName="firefox" WindowTitle="RegExp:(XAML Hosted in an IFrame)"  />
+            <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="firefox" />
+            <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 1)" ProcessName="firefox" />
+            <FailIfSeenHandler WindowTitle="RegExp:(Loose XAML 2)" ProcessName="firefox" />
+          </ActivationStep.UIHandlers>
+          <ActivationStep.SupportFiles>
+            <SupportFile Name="deploy_markup1_v4.xaml" IncludeDependencies="true" />
+            <SupportFile Name="deploy_markup2_v4.xaml" IncludeDependencies="true" />
+            <SupportFile Name="Deploy_XAMLInIFrame_v4.htm" IncludeDependencies="true" />
+          </ActivationStep.SupportFiles>
+        </ActivationStep>
+      </TestLogStep>
+      
+    
+  </Steps>
+</AppMonitorConfig>

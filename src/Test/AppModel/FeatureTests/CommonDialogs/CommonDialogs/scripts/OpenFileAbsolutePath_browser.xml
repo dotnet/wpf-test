@@ -1,0 +1,24 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFileDialog test: Open file using an absolute path [browser]">
+      <FileHostStep UserDefinedDirectory="CommonFileDialogs">
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="hello.txt" />
+          <SupportFile Name="CommonFileDialogTest.xbap" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+        <ActivationStep Method="launch" Scheme="HttpInternet" FileName="CommonFileDialogTest.xbap">
+          <ActivationStep.UIHandlers>
+            <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFileDialogTitle, TestRuntime" 
+                               ProcessName="PresentationHost" 
+                               Dialog="OpenFileAbsolutePath_browser"
+                               FileName="\\wpf\testscratch\CommonFileDialogs\hello.txt"
+                               TestType="TypeFileNameAndOpen"/>
+
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </FileHostStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

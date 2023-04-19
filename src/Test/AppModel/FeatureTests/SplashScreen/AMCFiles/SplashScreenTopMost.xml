@@ -1,0 +1,15 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary" />
+ <Using Namespace="Microsoft.Test.AppModel.SplashScreen" Assembly="SplashScreenLibrary" />
+
+     <Steps>
+	<TestLogStep Name="Verifying SplashScreen.Show with TopMost=True property set - CSharp">
+            <ActivationStep Arguments="shell:splash3alpha.png none false" FileName="SplashScreenTestApp.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier CheckSplashScreenTopMost="true" WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestApp" ExpectedFadeTime="3000" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+     </Steps>
+
+</AppMonitorConfig>

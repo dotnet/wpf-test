@@ -1,0 +1,18 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <TestLogStep Name="FIREFOX - Verifying script-based plugin detection">
+        <ActivationStep Method="launch" Scheme="Local" FileName="JavascriptFFCOExtensionDetect.htm">
+          <ActivationStep.UIHandlers>
+            <PassIfSeenHandler WindowTitle="RegExp:(Success! NET 3 or greater User agent string detected on FireFox)" ProcessName="FireFox"  />
+            <FailIfSeenHandler WindowTitle="RegExp:(Failure! NET 3 or greater User agent string not detected on FireFox)" ProcessName="FireFox"  />
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </TestLogStep>
+      
+    
+  </Steps>
+</AppMonitorConfig>

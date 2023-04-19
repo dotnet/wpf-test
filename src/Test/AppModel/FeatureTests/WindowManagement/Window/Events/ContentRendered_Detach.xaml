@@ -1,0 +1,52 @@
+﻿<!--**************************************************************************
+//
+// <copyright file="ContentRendered_Detach.xaml" company="Microsoft">
+//    Copyright (C) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//
+// Description: Test for Detaching ContentRendered Event in Code
+//
+// History
+  
+//
+//**************************************************************************-->
+
+
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="ContentRendered_Detach"
+     Loaded="OnLoaded"
+     Title="Avalon.Window.Test"
+     Left="0"
+     Top="0"
+     Width="200"
+     Height="200" xmlns:MappingPIGen1="clr-namespace:Microsoft.Windows.Test.Client.AppSec.BVT.ELCommon">
+	    
+		<StackPanel>
+			<Button>Button1</Button>
+		</StackPanel>
+		
+    <x:Code>
+        <![CDATA[            
+            void OnLoaded(object sender, EventArgs e)
+            {
+                Logger.Status("Attaching ContentRendered Event Handler");
+                this.ContentRendered += new EventHandler(OnContentRendered);
+
+                Logger.Status("Detaching ContentRendered Event Handler");
+                this.ContentRendered -= OnContentRendered;
+
+                Logger.Status("Change Window.Content");
+                this.Content = new DockPanel();
+
+
+                TestHelper.Current.TestCleanup();                
+            }
+            
+            void OnContentRendered(object sender, EventArgs e)
+            {
+                Logger.LogFail("ContentRendered Event Caught!");
+            }
+        ]]>
+    </x:Code>
+</Window>
+

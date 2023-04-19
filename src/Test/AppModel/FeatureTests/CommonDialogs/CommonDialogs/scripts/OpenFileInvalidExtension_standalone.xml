@@ -1,0 +1,20 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFileDialog test: Open file that has an invalid extension [standalone]">
+      <ActivationStep Method="launch" Scheme="Local" FileName="CommonFileDialogTest.exe">
+        <ActivationStep.UIHandlers>
+            <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFileDialogTitle, TestRuntime" 
+                               ProcessName="CommonFileDialogTest" 
+                               Dialog="OpenFileInvalidExtension_standalone"
+                               FileName="hello.?*?"
+                               TestType="TypeFileNameAndEnter"/>
+        </ActivationStep.UIHandlers>
+        <ActivationStep.SupportFiles>
+            <SupportFile Name="CommonFileDialogTest.exe" IncludeDependencies="true" />
+            <SupportFile Name="hello.txt" IncludeDependencies="true" />
+        </ActivationStep.SupportFiles>
+      </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

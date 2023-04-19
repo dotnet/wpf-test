@@ -1,0 +1,45 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+<Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+    <PropertyGroup>
+        <RootNamespace>Microsoft.Windows.Test.Client.AppSec</RootNamespace>
+        <AssemblyName>DeploymentTestApps</AssemblyName>
+        <Configuration>Release</Configuration>
+        <OutputType>library</OutputType>
+        <OutputSubFolder>FeatureTests\AppModel\Deployment</OutputSubFolder>
+        <AllowPartiallyTrustedCallers>true</AllowPartiallyTrustedCallers>
+    </PropertyGroup>
+
+    <!-- Deployment Scenarios -->
+    <Import Project="Deployment_BVT_AppSources.targets"/>
+
+
+    <ItemGroup>
+        <Compile Include="AssemblyInfo.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Drawing" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Printing" /> 
+        <Reference Include="System.Deployment.dll" />
+        <Reference Include="System.Web.Services" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+        <Reference Include="UIAutomationClient" />
+        <Reference Include="$(WpfInternalRefPath)\TestRuntime.dll" />
+
+        <ProjectReference Include="..\TestCodeLibrary\DeploymentTestCodeLibrary.csproj">
+        </ProjectReference>
+    </ItemGroup>
+
+
+    <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+    
+</Project>

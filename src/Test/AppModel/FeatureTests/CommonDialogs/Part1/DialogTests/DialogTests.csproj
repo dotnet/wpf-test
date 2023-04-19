@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Microsoft.Test.WPF.AppModel.CommonDialogs</RootNamespace>
+    <AssemblyName>DialogTests</AssemblyName>
+    <PublishDir>$(PublishDir)\DialogTests</PublishDir>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\DialogTests\baseclasses.cs" />
+    <Compile Include="CustomPlaceCases.cs" />
+    <Compile Include="FileDialogCustomPlaceCases.cs" />
+    <Compile Include="main.cs" />
+    <Compile Include="OpenFileBeforeShow.cs" />
+    <Compile Include="OpenFileIsThreadModal.cs" />
+    <Compile Include="OpenFileOnSecondThread.cs" />
+    <Compile Include="SaveFileIsThreadModal.cs" />
+    <Compile Include="SaveFileOnSecondThread.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+        <ProjectReference Include="$(InternalUtilitiesProject)" />
+        <ProjectReference Include="$(TestContractsProject)" />
+        <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,75 @@
+<XMLVariationTemplate>
+    <TemplateData>
+        
+        Imports System
+
+        Imports System.Windows
+        Imports System.Windows.Navigation
+        Imports System.Windows.Controls
+        <NodeVariation ID="1">                        
+        </NodeVariation>
+
+        Namespace TestDll
+
+            Partial Public Class CodeBehindTest 
+                Inherits System.Windows.Application
+
+                Private Shared log As Microsoft.Test.Logging.TestLog
+
+                Protected Overrides Sub OnStartup(ByVal e As System.Windows.StartupEventArgs)
+
+                    log = Microsoft.Test.Logging.TestLog.Current
+                    
+                    StartupUri = New System.Uri("SimpleImageVB.xaml", UriKind.RelativeOrAbsolute)
+                    log.LogStatus("OnStartup method - done")
+
+                    <NodeVariation ID="2">                        
+                    </NodeVariation>
+
+                    MyBase.OnStartup(e)
+
+                End Sub
+
+                Protected Overrides Sub OnExit(ByVal e As System.Windows.ExitEventArgs)
+
+                    <NodeVariation ID="3">                        
+                    </NodeVariation>
+                    
+                     if ( Not(Microsoft.Test.Logging.TestLog.Current = Nothing ) )
+                     
+                         log.LogStatus("Shutting down application")
+
+                     End if
+
+                    MyBase.OnExit(e)
+                End Sub
+                
+            End Class
+
+        End Namespace
+
+    </TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>CodeBehindAppDef</FileName>
+            <FileExtension>.xaml.vb</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+            <NodeVariation ID="1">
+                Imports System.Windows.Resources
+            </NodeVariation>
+            <NodeVariation ID="2">
+                'Dim rlsvc As ResourceLoaderService = CType(Me.GetService(GetType(ResourceLoaderService)), ResourceLoaderService) 
+
+                'rlsvc.RegisterResourceLoader(New Avalon.Test.AppModel.Component.ResourceLoader())
+            </NodeVariation>
+            <NodeVariation ID="3">
+                'Dim rlsvc As ResourceLoaderService = CType(Me.GetService(GetType(ResourceLoaderService)), ResourceLoaderService) 
+
+                'rlsvc.UnregisterResourceLoader(New Avalon.Test.AppModel.Component.ResourceLoader())
+            </NodeVariation>            
+        </Scenario>
+    </Scenarios>        
+</XMLVariationTemplate>

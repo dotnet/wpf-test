@@ -1,0 +1,137 @@
+<XMLVariationTemplate>
+  <TemplateData>
+    
+    <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+      <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{BE1DDCF2-83E6-45B8-997C-0226A3BB3E57}</ProjectGuid>
+        <RootNamespace>AvalonApplication1</RootNamespace>
+        <AssemblyName>AvalonApplication1</AssemblyName>
+        <WarningLevel>4</WarningLevel>
+        <OutputType>winexe</OutputType>
+        <ApplicationVersion>1.0.0.*</ApplicationVersion>
+        
+        <NodeVariation ID="2">
+          <HostInBrowser>True</HostInBrowser>
+          <Install>False</Install>
+          <TargetZone>Internet</TargetZone>
+          <StartAction>Program</StartAction>
+          <StartProgram>$(WINDIR)\Microsoft.NET\Windows\v6.0.4030\PresentationHost.exe</StartProgram>
+          <StartArguments>-debug $(MSBuildProjectDirectory)\bin\$(Configuration)\$(AssemblyName).xapp</StartArguments>        
+        </NodeVariation>
+        
+        <AttributeVariation ID="3">
+          <GenerateManifests>true</GenerateManifests>
+        </AttributeVariation>
+        
+        <!-- Most people will use Publish dialog in Visual Studio to increment this -->
+        <ProductVersion>8.0.50215</ProductVersion>
+        <SchemaVersion>2.0</SchemaVersion>
+      </PropertyGroup>
+      <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>.\bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+      </PropertyGroup>
+      <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugSymbols>false</DebugSymbols>
+        <Optimize>true</Optimize>
+        <OutputPath>.\bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+      </PropertyGroup>
+      <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="UIAutomationProvider" />
+        <Reference Include="System.ServiceModel" />
+        <Reference Include="System.Runtime.Serialization" />
+        <Reference Include="System.Transactions.Indigo" />
+        <Reference Include="System.Security.Authorization" />
+      </ItemGroup>
+      <ItemGroup>
+        
+        <NodeVariation ID="11">
+          <AttributeVariation ID="12">
+            <ApplicationDefinition Include="MyApp.xaml" />
+          </AttributeVariation>
+        </NodeVariation>
+        
+        <NodeVariation ID="13">
+          <AttributeVariation ID="14">
+            <Page Include="Window1.xaml" />
+          </AttributeVariation>
+        </NodeVariation>
+
+        <NodeVariation ID="15">
+          <AttributeVariation ID="16">
+            <Compile Include="MyApp.xaml.cs">
+              <TextVariation ID="17">
+                <DependentUpon>MyApp.xaml</DependentUpon>
+              </TextVariation>
+              <TextVariation ID="18">
+                <SubType>Code</SubType>
+              </TextVariation>
+            </Compile>
+          </AttributeVariation>
+        </NodeVariation>
+
+        <NodeVariation ID="19">
+          <AttributeVariation ID="20">
+            <Compile Include="Window1.xaml.cs">
+              <TextVariation ID="21">
+                <DependentUpon>Window1.xaml</DependentUpon>
+              </TextVariation>
+              <TextVariation ID="22">
+                <SubType>Code</SubType>
+              </TextVariation>
+            </Compile>
+          </AttributeVariation>
+        </NodeVariation>
+        
+        <NodeVariation ID="23">
+        </NodeVariation>
+
+      </ItemGroup>
+      <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <EmbeddedResource Include="Properties\Resources.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Resources.cs</LastGenOutput>
+        </EmbeddedResource>
+        <Compile Include="Properties\Resources.cs">
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <None Include="Properties\Settings.settings">
+          <Generator>SettingsSingleFileGenerator</Generator>
+          <LastGenOutput>Settings.cs</LastGenOutput>
+        </None>
+        <Compile Include="Properties\Settings.cs">
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Settings.settings</DependentUpon>
+        </Compile>
+        <AppDesigner Include="Properties\" />
+      </ItemGroup>
+      <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+      <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+    </Project>
+    
+  </NodeVariation>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>AvalonApplication1</FileName>
+      <FileExtension>.csproj</FileExtension>
+      <IsXmlDocument>true</IsXmlDocument>
+    </Defaults>
+    <Scenario Case="1">      
+    </Scenario>    
+  </Scenarios>
+</XMLVariationTemplate>

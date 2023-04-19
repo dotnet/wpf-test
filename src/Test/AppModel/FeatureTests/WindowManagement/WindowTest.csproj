@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PublishDir>$(PublishDir)\WindowManagement\</PublishDir>
+    <AssemblyName>WindowTests</AssemblyName>
+    <TargetType>winexe</TargetType>
+    <UICulture>en-US</UICulture>
+  </PropertyGroup>
+
+  <!-- Test and Validation code -->
+  <ItemGroup>
+    <Compile Include="Common\*.cs" />
+    <Page Include="common\*.xaml" />
+    <Page Include="Application\*.xaml" />
+    <Page Include="MessageBox\*.xaml" />
+    <Page Include="Window\Properties\*.xaml" />
+    <Compile Include="Window\Properties\*.cs" />
+    <Page Include="Window\Events\*.xaml" />
+    <Compile Include="Window\Events\*.cs" />
+    <Page Include="Window\Methods\*.xaml" />
+    <Compile Include="Window\Methods\*.cs" />
+    <Page Include="Scenarios\*.xaml" />
+    <Compile Include="Scenarios\*.cs" />
+    <Page Include="Regression\*.xaml" />
+    <Compile Include="Regression\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Page Include="Resources\*.xaml" />
+    <Content Include="Resources\*.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\*_Loose.*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\*_Embedded.*" />
+  </ItemGroup>
+
+  <!-- Reference Items Group  -->
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestApiCoreProject)" />
+    <ProjectReference Include="$(TestApiWpfProject)" />
+  </ItemGroup>
+
+</Project>

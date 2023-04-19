@@ -1,0 +1,12 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="147 - Compile with LocalReference specified in a MarkupResource file.">
+      <MSBuildStep CurrentStage="Run" Arguments="LoadLocalMarkupResourceReference.proj " />
+      <ActivationStep FileName="&amp;ExecutableFullPath&amp;" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;Build /p:HostinBrowser=true" AlwaysRun="True" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

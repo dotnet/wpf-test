@@ -1,0 +1,117 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="MyNavApp"
+    StartupUri="Simple.xaml"
+    >
+    
+    <x:Code><![CDATA[
+    
+    Microsoft.Test.Logging.TestLog log = null;
+     System.Windows.Application navapp = null;
+     bool _browserhostedapp = false;
+
+     protected override void OnStartup(System.Windows.StartupEventArgs e)
+     {    
+        log = Microsoft.Test.Logging.TestLog.Current;     
+        // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+
+        if ( AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap") )        
+        {
+            _browserhostedapp = true;
+        }
+
+        log.LogStatus("Hooking up Navigation error event");
+
+        this.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+          
+        // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+          
+        navapp = this;
+          
+        base.OnStartup(e);
+     }
+     
+    void RunTest(object sender, RoutedEventArgs e)
+    {
+        navapp = System.Windows.Application.Current;
+
+        if ( navapp == null )
+        {
+            throw new Exception("application returned is not of type Application");
+        }
+
+        log.Result = Microsoft.Test.Logging.TestResult.Pass;
+
+        if ( _browserhostedapp == false )
+        {
+          System.Windows.Application.Current.MainWindow.Close();
+        }
+ 
+        ShutdownApp();
+
+    }
+
+
+    void OnLoad ( object sender, NavigationEventArgs e )
+    {
+        log.LogStatus("LoadCompleted event fired");   
+
+        this.LoadCompleted -= new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+
+        log.LogStatus("LoadCompleted event detached");   
+
+        NavigationWindow win = (NavigationWindow)System.Windows.Application.Current.MainWindow;          
+        MyControls.MyButton mybutton = new MyControls.MyButton();   
+        mybutton.Height = 100;
+        mybutton.Width = 200;
+
+        log.LogStatus("Setting current window content");   
+        log.LogStatus(win.ToString());   
+
+        win.Content = mybutton as FrameworkElement;
+        mybutton.Loaded += new RoutedEventHandler(RunTest);
+//        win.Show();
+                             
+    }
+
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        if ( _browserhostedapp == false )
+        {
+            log.LogStatus("Shutting down application");
+            // log.Close();
+        }
+    }
+
+    private void ShutdownApp()
+    {
+ 
+        // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+        
+        if ( _browserhostedapp == false )        
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+        else
+        {
+            log.LogStatus("Shutting down application");
+            // log.Close();                    
+        }            
+             
+        Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+ 
+    }
+    
+
+    public bool BrowserHostedApp
+    {
+        get
+        {
+            return _browserhostedapp;
+        }
+    }
+
+    ]]></x:Code>
+
+</Application>

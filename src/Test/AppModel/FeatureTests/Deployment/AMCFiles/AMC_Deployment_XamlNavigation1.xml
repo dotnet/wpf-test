@@ -1,0 +1,22 @@
+﻿<AppMonitorConfig>
+    <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+    <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+    <Steps>
+      <TestLogStep Name="Xaml Navigation SCenario #1 - Xaml to Xaml">
+        <FileHostStep UserDefinedDirectory="XamlNavigation">
+
+            <FileHostStep.SupportFiles>
+                <SupportFile Name="deploy_markup1_v4.xaml" IncludeDependencies="true" />
+                <SupportFile Name="deploy_markup2_v4.xaml" IncludeDependencies="true" />
+            </FileHostStep.SupportFiles>
+
+            <ActivationStep Method="launch" Scheme="Local" FileName="deploy_markup1_v4.xaml">
+                <ActivationStep.UIHandlers>
+                    <XamlNavigationHandler1 WindowTitle="RegExp:(Loose Xaml 1 V4 Edition)" />
+                    <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep> 
+        </FileHostStep>
+      </TestLogStep>
+    </Steps>
+</AppMonitorConfig>

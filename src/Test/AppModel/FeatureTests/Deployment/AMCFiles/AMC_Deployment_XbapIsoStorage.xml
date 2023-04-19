@@ -1,0 +1,106 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	 
+         <FileHostStep>
+             <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="XBap Isolated Storage - Local">
+               <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Wrote to Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+    
+               <ActivationStep ClearFusionCache="False" Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Passed: Read Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+           </TestLogStep>
+
+           <TestLogStep Name="XBap Isolated Storage - UNC">
+               <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Wrote to Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+    
+               <ActivationStep ClearFusionCache="False" Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Passed: Read Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+           </TestLogStep>
+
+           <TestLogStep Name="XBap Isolated Storage - HTTP Intranet">
+               <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Wrote to Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+    
+               <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Passed: Read Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+           </TestLogStep>
+
+           <TestLogStep Name="XBap Isolated Storage - HTTP Internet">
+               <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Wrote to Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+    
+               <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Passed: Read Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+           </TestLogStep>
+
+
+           <TestLogStep Name="XBap Isolated Storage - HTTPS Intranet">
+               <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Wrote to Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+    
+               <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Passed: Read Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+           </TestLogStep>
+
+         </FileHostStep>
+
+         <FileHostStep >
+             <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+
+           <TestLogStep Name="XBap Isolated Storage - HTTPS Internet">
+               <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Wrote to Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+    
+               <ActivationStep ClearFusionCache="False" Method="launch" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap">
+                 <ActivationStep.UIHandlers>
+                     <PassIfSeenHandler AutomationElementAndValue="btnIsoStorage;Passed: Read Isolated Storage" ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+                 </ActivationStep.UIHandlers>
+               </ActivationStep>
+           </TestLogStep>
+
+         </FileHostStep>
+	 
+     </Steps>
+</AppMonitorConfig>

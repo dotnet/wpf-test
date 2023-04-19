@@ -1,0 +1,22 @@
+<AppMonitorConfig>
+<Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+ 	
+         <FileHostStep >
+             <FileHostStep.SupportFiles>
+              <SupportFile Name="baker.jpg" IncludeDependencies="true" UserDefinedDirectory="cookietests\image"/>
+              <SupportFile Name="SetPersistentCookie.html" IncludeDependencies="false" />
+             </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Verifying XBAP cookie - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HttpInternet" FileName="GetCookieXbap.xbap" UserDefinedDirectory="sessioncookie">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="iexplore" WindowTitle="RegExp:(PersistentCookieFromXBAP=19782)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+          
+	</TestLogStep>
+       </FileHostStep>
+  
+  </Steps>
+</AppMonitorConfig>

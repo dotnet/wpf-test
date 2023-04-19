@@ -1,0 +1,109 @@
+<XMLVariationTemplate>
+  <TemplateData>
+    <AppMonitorConfig>
+         <Steps>
+		<NodeVariation ID="100">
+			<AttributeVariation ID="1">
+			    <MSBuildStep Arguments="IncrementalBuildProjSteps.csxml /rst:1" />
+			</AttributeVariation>            
+			<!--<ActivationStep Method="launch" ExecuteCompiledApp="true" />-->
+			<AttributeVariation ID="2">
+			    <MSBuildStep Arguments="IncrementalBuildProjSteps.csxml /rst:2" />
+			</AttributeVariation>            
+			<NodeVariation ID="10000">
+			    <ActivationStep Method="launch" ExecuteCompiledApp="true">
+			      <!--
+			      	<ActivationStep.UIHandlers>
+			        	<StandAloneApplicationVerifier WindowTitle="xxx"/>
+		    	    	</ActivationStep.UIHandlers>
+		    	      -->
+		    	    </ActivationStep>
+
+			</NodeVariation>
+			
+		</NodeVariation>
+
+                <MSBuildStep Arguments="/t:Clean" AlwaysRun="True"  />
+         </Steps>
+    </AppMonitorConfig>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>AppMonitorConfig</FileName>
+      <FileExtension>.xml</FileExtension>
+      <RetainFileName>true</RetainFileName>
+    </Defaults>
+    <Scenario Case="1">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:1" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:2" />
+    </Scenario> 
+    <Scenario Case="2">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:1" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:3" />
+    </Scenario>    
+    <Scenario Case="3">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:1" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:31" />
+    </Scenario>        
+    <Scenario Case="4">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:1" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:4" />
+    </Scenario>    
+    <Scenario Case="5">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:10" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:5" />
+    </Scenario> 
+    <Scenario Case="6">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:10" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:2" />
+    </Scenario>    
+    <Scenario Case="7">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:1" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:6" />
+    </Scenario>    
+    <Scenario Case="8">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:6" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:7" />
+    </Scenario>    
+    <Scenario Case="9">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:6" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:1" />
+    </Scenario>  
+    <Scenario Case="10">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:1" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:8" />
+    </Scenario>   
+    <Scenario Case="11">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:8" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:9" />
+    </Scenario>  
+    <Scenario Case="12">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:8" />
+      <AttributeVariation ID="2" AttributeName="Arguments" AttributeValue="IncrementalBuildProjSteps.csxml /rst:1" />
+    </Scenario>     
+
+    
+  </Scenarios>
+</XMLVariationTemplate>
+
+
+
+		<!-- ========================================================================================================== -->
+		<!-- 				For HIB 									-->
+		<!-- ========================================================================================================== -->
+		<!--
+                <AttributeVariation ID="3">
+                    <MSBuildStep Arguments="UriTestsProjSteps.csxml" ScriptSwitches="/rst:101" />
+                </AttributeVariation>            
+
+		<FileHostStep PreserveDirectoryStructure="true" >
+			<FileHostStep.SupportFiles>
+		   		<SupportFile Name="bin\UriTests.xbap" IncludeDependencies="true" />
+			</FileHostStep.SupportFiles>
+			<ActivationStep Scheme="HTTPInternet" Method="launch" FileName="bin\UriTests.xbap">
+				<ActivationStep.UIHandlers>
+					<BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.AvalonDeploymentHelper.ErrorPageTitle, ClientTestRuntime" ProcessName="IEXPLORE" />
+				</ActivationStep.UIHandlers>
+			</ActivationStep>
+		</FileHostStep>
+		-->

@@ -1,0 +1,20 @@
+<AppMonitorConfig>
+    <Using Namespace="Microsoft.Test.Utilities.StepsEngine" Assembly="TestRuntime"/>
+    <Steps>
+
+        <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+        <FileHostStep UserDefinedDirectory="ScriptTestXD">
+           <FileHostStep.SupportFiles>
+              <SupportFile Name="ScriptInteropPT.xbap" IncludeDependencies="true" />
+              <SupportFile Name="ScriptTestXD.htm" IncludeDependencies="False" />
+              <SupportFile Name="code.js" IncludeDependencies="False" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="ScriptInterop_HostScriptXDomain_FireFox_PT">
+              <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="ScriptTestXD.htm" PropertyBagValue="TestToRun=HostScriptXDomain" />
+           </TestLogStep>
+        </FileHostStep>
+  
+    </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,12 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="148 - Load local reference page from relative directory.">
+      <MSBuildStep CurrentStage="Run" Arguments="LoadLocalReferenceRelativePage.proj " />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <ActivationStep FileName="&amp;ExecutableFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;Build /p:HostinBrowser=true" AlwaysRun="True" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

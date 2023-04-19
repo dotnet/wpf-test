@@ -1,0 +1,18 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="TestCleanup">
+    <Message Text="Removing directory IntermediateOutputPath - $(IntermediateOutputPath)" />
+    <Exec Command="rmdir $(IntermediateOutputPath)\.. /s/q" ContinueOnError="true" />
+    <Message Text="Removing directory OutputPath - $(OutputPath)" />
+    <Exec Command="rmdir $(OutputPath)\.. /s/q " ContinueOnError="true" />
+  </Target>
+
+  <!-- Test tools properties -->
+  <PropertyGroup>
+    <!-- TestWorkPath>$(SystemDrive)\Work</TestWorkPath -->
+    <TestWorkPath>.</TestWorkPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="TestRuntime" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,42 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Windows.Client.AppSec.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel Download - Close Browser During Install - UNC">
+               <CancelDownloadStep Method="CloseBrowser" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel Download - Close Browser During Install - HTTP Intranet">
+               <CancelDownloadStep Method="CloseBrowser" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel Download - Close Browser During Install - HTTP Internet">
+               <CancelDownloadStep Method="CloseBrowser" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel Download - Close Browser During Install - HTTPS Intranet">
+               <CancelDownloadStep Method="CloseBrowser" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+        </FileHostStep>
+
+        <FileHostStep  >
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel Download - Close Browser During Install - HTTPS Internet">
+               <CancelDownloadStep Method="CloseBrowser" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+        </FileHostStep>
+
+        
+     </Steps>
+</AppMonitorConfig>

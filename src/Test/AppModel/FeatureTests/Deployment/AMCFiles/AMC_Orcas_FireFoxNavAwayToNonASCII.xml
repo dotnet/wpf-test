@@ -1,0 +1,32 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <TestLogStep Name="Navigate FireFox Away to Non-ASCII path">
+        <FileHostStep UseUTF8Path="True" >
+          <FileHostStep.SupportFiles>
+            <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+            <SupportFile Name="Deploy_Markup2.xaml" IncludeDependencies="false" />
+          </FileHostStep.SupportFiles>
+
+          <NavigationStep Method="launch" NavigationType="IENavBar" ClearFusionCache="true" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+            <NavigationStep.UIHandlers>
+              <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+            </NavigationStep.UIHandlers>
+          </NavigationStep>
+
+          <NavigationStep IsFinalStep="True" NavigationType="IENavBar" Scheme="HTTPIntranet" FileName="Deploy_Markup2.xaml">
+            <NavigationStep.UIHandlers>
+              <FireFoxXAMLVerifier AccessibilityTestElement="xamlTestButton" ProcessName="firefox" WindowTitle="RegExp:(Loose XAML 2)"  />
+              <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="firefox" />
+            </NavigationStep.UIHandlers>
+          </NavigationStep>
+
+        </FileHostStep>
+      </TestLogStep>
+      
+    
+  </Steps>
+</AppMonitorConfig>

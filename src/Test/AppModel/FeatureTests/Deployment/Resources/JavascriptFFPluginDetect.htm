@@ -1,0 +1,34 @@
+<html>
+<TITLE>Express App in a DHTML Frame</title>
+<script>
+function Loaded()
+{
+    if (navigator.plugins != null) // Mozilla browser?
+    {
+        if (navigator.plugins["Windows Presentation Foundation"])
+        {
+             var WPFPlugin = navigator.plugins["Windows Presentation Foundation"];
+             if (WPFPlugin != null)
+             {
+                 document.title = "Success... WPF plugin detected!";
+             }
+             else
+             {
+                 document.title = "Failure ... WPF Plugin not detected";
+             }
+        }
+        else
+        {
+            document.title = "Failure ... WPF Plugin not detected!";
+        }
+    }
+    else
+    {
+        document.title = "Failure ... WPF Plugin not detected or not running under firefox!";
+    }
+}
+</script>
+<body onload="Loaded()" id=bodyElement>
+ 
+</body>
+</html>

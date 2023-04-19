@@ -1,0 +1,54 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    WindowTitle="HyperlinkNavigationBVT">
+<Grid>
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+        <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Width="200" Grid.Column="0">
+            <TextBlock Width="180" FontWeight="Bold" FontSize="14">
+                HyperLinks 
+            </TextBlock>
+            <TextBlock Width="180" Name="textblock1">
+              <Hyperlink Name="HlinkNavigation_Frame1_fragment1" NavigateUri="HlinkNavigation_Page2_Loose.xaml#fragment1" TargetName="frame1" >HlinkNavigation_Frame1_fragment1</Hyperlink>
+            </TextBlock>
+            <TextBlock Width="180" Name="textblock2">
+              <Hyperlink Name="HlinkNavigation_Frame1_fragment2" NavigateUri="HlinkNavigation_Page2_Loose.xaml#fragment2" TargetName="frame1" >HlinkNavigation_Frame1_fragment2</Hyperlink>
+            </TextBlock>
+            <TextBlock Width="180" Name="textblock3">
+              <Hyperlink Name="HlinkNavigation_Frame2_fragment4" NavigateUri="pack://siteoforigin:,,,/LooseXaml_FragmentNavigation_Page3.xaml#fragment4" TargetName="frame2" >HlinkNavigation_Frame2_fragment4</Hyperlink>
+            </TextBlock>
+            <TextBlock Width="180" Name="textblock4">
+              <Hyperlink Name="HlinkNavigation_Frame2_fragment5" NavigateUri="pack://siteoforigin:,,,/LooseXaml_FragmentNavigation_Page3.xaml#fragment5" TargetName="frame2" >HlinkNavigation_Frame2_fragment5</Hyperlink>
+            </TextBlock>
+            <TextBlock Width="180" Name="textblock5">
+              <Hyperlink Name="HlinkNavigation_hlinkFrame1" NavigateUri="#frame1" >HlinkNavigation_hlinkFrame1</Hyperlink>
+            </TextBlock>
+            <TextBlock Width="180" Name="textblock6">
+              <Hyperlink Name="HlinkNavigation_hlinkFrame2" NavigateUri="#frame2" >HlinkNavigation_hlinkFrame2</Hyperlink>
+            </TextBlock>
+            <TextBlock Width="180" FontWeight="Bold" FontSize="14">
+                Frame with links 
+            </TextBlock>
+            <Frame Width="180" Height="300" Name="hlinkframe" Source="HlinkNavigation_Page3_Loose.xaml" BorderThickness="1" BorderBrush="Black" />
+        </StackPanel>
+        <GridSplitter />                
+        <ScrollViewer Name="FragmentNavigation_frameScrollViewer" Grid.Column="1">
+        <StackPanel>
+            <Frame Height="300" Name="frame1" Source="HlinkNavigation_Page2_Loose.xaml" BorderThickness="5" BorderBrush="Green" />    
+            <Frame Height="300" Name="frame2" Source="pack://siteoforigin:,,,/LooseXaml_FragmentNavigation_Page3.xaml" BorderThickness="5" BorderBrush="Maroon" />
+            <Frame Height="300" Name="frame3" Source="pack://siteoforigin:,,,/LooseXaml_FragmentNavigation_Page3.xaml" BorderThickness="5" BorderBrush="Blue" />
+        </StackPanel>
+        </ScrollViewer>
+        <GridSplitter />
+        <StackPanel Grid.Column="2">
+            <TextBlock FontWeight="Bold" FontSize="14">
+                    Controls 
+            </TextBlock>
+            <TextBox Name="textBox" AcceptsReturn="true" FontSize="20" />
+            <CheckBox Name="checkBox" />
+        </StackPanel>
+</Grid>
+</Page>

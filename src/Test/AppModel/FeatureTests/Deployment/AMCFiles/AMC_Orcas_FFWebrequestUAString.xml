@@ -1,0 +1,20 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+	<TestLogStep Name="FIREFOX - Verifying Internet Express app behavior test log - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+               <ActivationStep.UIHandlers>
+                   <UserAgentStringTestVerifier WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" UserAgentTestValue="Firefox" />
+               </ActivationStep.UIHandlers>
+
+               <ActivationStep.SupportFiles>
+                   <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               </ActivationStep.SupportFiles>
+
+           </ActivationStep>
+	</TestLogStep>
+
+  </Steps>
+</AppMonitorConfig>
