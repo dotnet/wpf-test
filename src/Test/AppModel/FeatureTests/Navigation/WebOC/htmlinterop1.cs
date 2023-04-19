@@ -121,11 +121,11 @@ namespace Microsoft.Windows.Test.Client.AppSec.Navigation
                     // So both CanGoForward and CanGoBack should be false.
                     if (!_browser.CanGoForward && !_browser.CanGoBack)
                     {
-                        NavigationHelper.Pass("HTML interop 193491 regression test passed");
+                        NavigationHelper.Pass("HTML interop  regression test passed");
                     }
                     else
                     {
-                        NavigationHelper.Fail("HTML interop 193491 regression test failed");
+                        NavigationHelper.Fail("HTML interop  regression test failed");
                     }
                 break;
             }
