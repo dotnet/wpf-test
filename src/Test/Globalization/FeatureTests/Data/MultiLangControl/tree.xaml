@@ -1,0 +1,67 @@
+﻿<DockPanel Name="ControlsJournaling" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           x:Uid="ControlsJournaling">
+<DockPanel.Resources x:Uid="DockPanel.Resources_1">
+    <Style x:Key="Editable" x:Uid="Style_1" TargetType="{x:Type ComboBox}">
+    </Style>
+</DockPanel.Resources>
+
+
+<StackPanel Orientation="Horizontal" DockPanel.Dock="Top" x:Uid="FlowPanel_1">
+<TextBlock FontSize="20" x:Uid="Text_1">Page 1</TextBlock>
+<TextBlock Margin="5" Name="NavigateHyperlink" x:Uid="TextBlock_000">
+        <Hyperlink NavigateUri="ControlsPage2.xaml" x:Uid="NavigateHyperlink">Go to page 2</Hyperlink></TextBlock>
+</StackPanel>
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" x:Uid="FlowPanel_2">
+        <CheckBox Name="CheckBox1" Margin="5" x:Uid="CheckBox1" />
+        <ListBox Name="ListBox1" BorderBrush="Black" BorderThickness="2" Margin="5"
+                 x:Uid="ListBox1">
+            some item (not a ListBoxItem)
+        </ListBox>
+        <ListBox Name="ListBox2" BorderBrush="Black" BorderThickness="2" Margin="5"
+                 x:Uid="ListBox2">
+            <ListBoxItem x:Uid="ListItem_1">listitem 1</ListBoxItem>
+            <ListBoxItem x:Uid="ListItem_2">listitem 2</ListBoxItem>
+            <ListBoxItem x:Uid="ListItem_3">listitem 3</ListBoxItem>
+            <ListBoxItem x:Uid="ListItem_4">listitem 4</ListBoxItem>
+            <ListBoxItem x:Uid="ListItem_5">listitem 5</ListBoxItem>
+        </ListBox>
+        <ComboBox Name="ComboBox1" Margin="5" x:Uid="ComboBox1">
+            <ComboBoxItem x:Uid="ComboBoxItem_1">item 1</ComboBoxItem>
+            <ComboBoxItem IsSelected="true" x:Uid="ComboBoxItem_2">item 2 [Page sets IsSelected="true"]</ComboBoxItem>
+            <ComboBoxItem x:Uid="ComboBoxItem_3">item 3</ComboBoxItem>
+        </ComboBox>
+        <ComboBox Name="ComboBox2" Margin="5" SelectedIndex="2" x:Uid="ComboBox2">
+            <ComboBoxItem x:Uid="ComboBoxItem_4">item 1</ComboBoxItem>
+            <ComboBoxItem x:Uid="ComboBoxItem_5">item 2</ComboBoxItem>
+            <ComboBoxItem x:Uid="ComboBoxItem_6">item 3 [Page sets SelectedIndex="2"]</ComboBoxItem>
+        </ComboBox>
+        <RadioButton Name="RadioButtonList1" x:Uid="RadioButtonList1">
+            Test selection here too
+        </RadioButton>
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5" x:Uid="FlowPanel_3">
+        <ComboBox Margin="5" IsEditable="true" Style="{DynamicResource Editable}" Name="EditableComboBox1" x:Uid="EditableComboBox1">
+            <ComboBoxItem x:Uid="ComboBoxItem_7">editable item 1</ComboBoxItem>
+            <ComboBoxItem x:Uid="ComboBoxItem_8">foo </ComboBoxItem>
+            <ComboBoxItem x:Uid="ComboBoxItem_9">bar</ComboBoxItem>
+        </ComboBox>
+
+        <TextBox Text="{Binding Path=Text,ElementName=EditableComboBox1,UpdateSourceTrigger=PropertyChanged}" Width="100" Height="20"
+                 x:Uid="TextBox_1" />
+    </StackPanel>
+
+    <Border BorderBrush="Blue" BorderThickness="1" DockPanel.Dock="Top" Margin="5"
+            x:Uid="Border_1">
+        <DockPanel x:Uid="DockPanel_1">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" x:Uid="FlowPanel_4">
+        <TextBlock x:Uid="Text_2">Value = </TextBlock><TextBlock Text="{Binding Path=Value,ElementName=HorizontalSlider1}" x:Uid="Text_3" />
+        </StackPanel>
+        <Slider Minimum="0" Maximum="100" Width="300" Value="50" Name="HorizontalSlider1"
+                          x:Uid="HorizontalSlider1" />
+        </DockPanel>
+    </Border>
+
+    <Frame Name="Frame1" Source="GlobTestCase.xaml" x:Uid="Frame1" />
+
+</DockPanel>

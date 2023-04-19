@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <DiscoveryInfo AdaptorsAssembly="Infra\QualityVaultUtilities.dll" VersionOrder="VersionOrder.txt">
   <DefaultTestInfo Type="Functional" Disabled="false" ExecutionGroupingLevel="SharedSupportFiles">
     <SupportFiles>
@@ -99,8 +99,27 @@
         </Versions>
       </DefaultTestInfo>
     </Target>
-     <!--Area : AppModel-->
-  <!-- App Model Tests : Deployment subarea, TestAttributeAdaptor -->
+    
+    <!-- Area : Globalization -->
+    <!-- Globalization -->
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\Globalization\GlobTestCases.dll">
+      <DefaultTestInfo Area="Globalization" Disabled="False" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Globalization\GlobTestCases.dll" />
+          <SupportFile Source="FeatureTests\Globalization\GlobalizationTestCommon.dll" />
+          <SupportFile Source="FeatureTests\Globalization\GlobCustomControl.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!--Area : AppModel-->
+    <!-- App Model Tests : Deployment subarea, TestAttributeAdaptor -->
     <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\AppModel\Deployment\TestLibraries\DeploymentCommonLibrary.dll">
       <DefaultTestInfo Area="AppModel" Type="Functional">
         <Driver Executable="sti.exe" />
@@ -118,6 +137,7 @@
         </Versions>
       </DefaultTestInfo>
     </Target>
+
     <!-- App Model Tests -->
     <Target Adaptor="XtcAdaptor" Path="FeatureTests\AppModel\XTCs\*.xtc">
       <DefaultTestInfo Area="AppModel">
@@ -135,6 +155,7 @@
                 </Versions>
             </DefaultTestInfo>
         </Target> -->
+    
     <!-- App Model Tests - Orcas 3.5 -->
     <!-- <Target Adaptor="XtcAdaptor" Path="FeatureTests\AppModel\Orcas\XTCs\*.xtc">
       <DefaultTestInfo Area="AppModel">
@@ -145,6 +166,7 @@
         </Versions>
       </DefaultTestInfo>
     </Target> -->
+    
     <!-- AppModel Deployment/Hosting/Integration Orcas Specific tests -->
     <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\AppModel\Deployment\TestLibraries\OrcasDeploymentTestCodeLibrary.dll">
       <DefaultTestInfo Area="AppModel" Type="Functional">
