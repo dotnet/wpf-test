@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Microsoft.Wpf.AppModel.CommonDialogs</RootNamespace>
+    <AssemblyName>CommonFileDialogTest</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+    <Install>true</Install>
+    <PublishDir>$(PublishDir)\CommonDialogs\standalone\</PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5' ">
+    <Compile Include="..\OpenFileDialogCustomPlaceTest.xaml.cs" />
+    <Page Include="..\OpenFileDialogCustomPlaceTest.xaml" />
+    <Compile Include="..\OpenFileDialogAllCustomPlacesTest.xaml.cs" />
+    <Page Include="..\OpenFileDialogAllCustomPlacesTest.xaml" />
+    <Compile Include="..\SaveFileDialogCustomPlaceTest.xaml.cs" />
+    <Page Include="..\SaveFileDialogCustomPlaceTest.xaml" />
+    <Compile Include="..\SaveFileDialogInvalidCustomPlacesTest.xaml.cs" />
+    <Page Include="..\SaveFileDialogInvalidCustomPlacesTest.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="..\OpenSaveFileDialogAD.xaml" />
+    <Compile Include="..\Common.cs" />
+    <Compile Include="..\..\DialogTests\baseclasses.cs" />
+    <Compile Include="..\OpenDialogVerifyHelper.cs" />
+    <Compile Include="..\OpenSaveFileDialogAD.xaml.cs" />
+    <Compile Include="..\OpenFileDialogTest.xaml.cs" />
+    <Compile Include="..\OpenFileDialogCancelTest.xaml.cs" />
+    <Compile Include="..\OpenFileDialogWindowTest.xaml.cs" />
+    <Compile Include="..\SaveDialogVerifyHelper.cs" />
+    <Compile Include="..\SaveFileDialogTest.xaml.cs" />
+    <Compile Include="..\SaveFileDialogCancelTest.xaml.cs" />
+    <Compile Include="..\SaveFileDialogPromptTest.xaml.cs" />
+    <Page Include="..\OpenFileDialogTest.xaml" />
+    <Page Include="..\OpenFileDialogCancelTest.xaml" />
+    <Page Include="..\OpenFileDialogWindowTest.xaml" />
+    <Page Include="..\SaveFileDialogTest.xaml" />
+    <Page Include="..\SaveFileDialogCancelTest.xaml" />
+    <Page Include="..\SaveFileDialogPromptTest.xaml" />
+    <None Include="$(WpfTest)\common\clickoncetest.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\hello.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <DataFile Include="..\hi.txt">
+      <SubFolder>DummyDir</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+  <ItemGroup>
+      <ProjectReference Include="$(TestRuntimeProject)" />
+      <ProjectReference Include="$(InternalUtilitiesProject)" />
+      <ProjectReference Include="$(TestContractsProject)" />
+  </ItemGroup>
+
+</Project>

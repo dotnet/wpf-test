@@ -1,0 +1,25 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFileDialog test: Open file using an absolute path [standalone]">
+      <FileHostStep UserDefinedDirectory="CommonFileDialogs">
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="hello.txt" />
+        </FileHostStep.SupportFiles>
+
+        <ActivationStep Method="launch" Scheme="Local" FileName="CommonFileDialogTest.exe">
+          <ActivationStep.UIHandlers>
+            <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFileDialogTitle, TestRuntime" 
+                               ProcessName="CommonFileDialogTest" 
+                               Dialog="OpenFileAbsolutePath_standalone"
+                               FileName="\\wpf\testscratch\CommonFileDialogs\hello.txt"
+                               TestType="TypeFileNameAndOpen"/>
+          </ActivationStep.UIHandlers>
+          <ActivationStep.SupportFiles>
+            <SupportFile Name="CommonFileDialogTest.exe" IncludeDependencies="true" />
+          </ActivationStep.SupportFiles>
+        </ActivationStep>
+      </FileHostStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

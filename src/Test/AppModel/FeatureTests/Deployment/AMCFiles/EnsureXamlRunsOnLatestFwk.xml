@@ -1,0 +1,35 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+
+     <Steps>
+
+	<TestLogStep Name="Ensure v3.0-namespaced Loose Xaml runs on V3 OR Latest framework version">
+           <ActivationStep Method="launch" Scheme="Local" StrictHostingMode="True" FileName="deploy_markup1.xaml">
+              <ActivationStep.UIHandlers>
+                 <XamlVersionCheckHandler MajorMinorExpectedVersion="2.0" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 1)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+        <TestLogStep Name="Ensure v3.5-namespaced Loose Xaml runs on V3 OR Latest framework version">
+           <ActivationStep Method="launch" Scheme="Local" StrictHostingMode="True" FileName="Deploy_Markup1_v35.xaml">
+              <ActivationStep.UIHandlers>
+                 <XamlVersionCheckHandler MajorMinorExpectedVersion="2.0" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 1)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+        <TestLogStep Name="Ensure v4.X-namespaced Loose Xaml runs on V4 ">
+           <ActivationStep Method="launch" Scheme="Local" StrictHostingMode="True" FileName="deploy_markup1_v4.xaml">
+              <ActivationStep.UIHandlers>
+                 <XamlVersionCheckHandler MajorMinorExpectedVersion="4.0" ProcessName="iexplore" WindowTitle="RegExp:(Loose XAML 1 V4 Edition)"  />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />               
+              </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+     </Steps>
+
+</AppMonitorConfig>

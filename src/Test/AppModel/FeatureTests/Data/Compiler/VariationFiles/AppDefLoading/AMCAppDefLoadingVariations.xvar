@@ -1,0 +1,87 @@
+<XMLVariationTemplate>
+  <TemplateData>
+    <AppMonitorConfig>
+     <Using Namespace="Microsoft.Test.Deployment" Assembly="ClientTestLibrary"/>
+         <Steps>
+                <AttributeVariation ID="1">
+                    <MSBuildStep Arguments="AppDefInDiffDirectory.csxml /rst:1" />
+                </AttributeVariation>            
+
+                <NodeVariation ID="2">
+                    <ActivationStep Method="launch" ExecuteCompiledApp="true" />
+                </NodeVariation>
+
+				<!-- REMOVE THIS WHEN HIB STEP ADDED
+                <AttributeVariation ID="3">
+                    <MSBuildStep Arguments="AppDefInDiffDirectory.csxml /rst:1" />
+                </AttributeVariation>            
+
+                <NodeVariation ID="4">
+                    <ActivationStep Method="launch" ExecuteCompiledApp="true" />
+                </NodeVariation>
+                -->
+
+               <MSBuildStep Arguments="/t:Clean;TestCleanup" AlwaysRun="True"  />
+         </Steps>
+    </AppMonitorConfig>
+  </TemplateData>
+  <Scenarios>
+  
+	<Defaults>
+	  <FileName>AppMonitorConfig</FileName>
+	  <FileExtension>.xml</FileExtension>
+	  <RetainFileName>true</RetainFileName>
+	</Defaults>
+    
+    <Scenario Case="1">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:1" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:2" />-->
+    </Scenario>    
+
+    <Scenario Case="2">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:3" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:4" />-->
+    </Scenario>    
+
+    <Scenario Case="3">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:5" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:6" />-->
+    </Scenario>    
+
+    <Scenario Case="4">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:7" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:8" />-->
+    </Scenario>    
+
+    <Scenario Case="5">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:9" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:10" />-->
+    </Scenario>    
+
+    <Scenario Case="6">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:11" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:12" />-->
+    </Scenario>    
+
+    <Scenario Case="7">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:13" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:14" />-->
+    </Scenario>    
+
+    <Scenario Case="8">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:15" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:16" />-->
+    </Scenario>    
+
+    <Scenario Case="9">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:17" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:18" />-->
+    </Scenario>    
+
+    <Scenario Case="10">
+      <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:19" />
+      <!--<AttributeVariation ID="3" AttributeName="Arguments" AttributeValue="AppDefInDiffDirectory.csxml /rst:20" />-->
+    </Scenario>    
+
+  </Scenarios>
+</XMLVariationTemplate>

@@ -1,0 +1,23 @@
+﻿<PageFunction xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:sys="clr-namespace:System;assembly=mscorlib" x:TypeArguments="sys:Int32"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ x:Class="Microsoft.Windows.Test.Client.AppSec.Navigation.NavigateFrameInPF_PageFunction">
+  <StackPanel>
+    <TextBlock>
+      <Hyperlink Name="hlink_NavigatePageFunctionFrame" NavigateUri="ImagePage_Loose.xaml" TargetName="pfFrame">Navigate Frame using Hyperlink in markup PageFunction</Hyperlink>
+    </TextBlock>
+    <Button Name="pfButton" Margin="10,20,10,10" Height="25" Background="SteelBlue" Click="OnLinkClicked">Finish this PageFunction</Button>
+    <Frame Name="pfFrame" Height="300" BorderThickness="5" BorderBrush="Black" Source="FlowDocument_Loose.xaml" />
+  </StackPanel>
+
+  <x:Code>
+    <![CDATA[
+        private void OnLinkClicked (object sender, RoutedEventArgs e) 
+        {            
+            Control elt = sender as Control;
+            OnReturn(new ReturnEventArgs<Int32>(1000));            
+        }
+    ]]>
+  </x:Code>
+
+</PageFunction>

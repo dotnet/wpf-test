@@ -1,0 +1,73 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="Simple.xaml">
+    
+    <x:Code>
+            <![CDATA[
+    
+    Private Shared log As Microsoft.Test.Logging.TestLog
+    Private _browserhostedapp As Boolean
+
+    Protected Overrides Sub OnStartup(ByVal e As System.Windows.StartupEventArgs)
+
+      log = Microsoft.Test.Logging.TestLog.Current; 
+
+        _browserhostedapp = False
+
+        If (AppDomain.CurrentDomain.FriendlyName.Contains(".xbap") = True) Then
+            _browserhostedapp = True
+        End If
+
+        log.LogStatus("Hooking up Navigation events")
+
+        StartupUri = New System.Uri("Simple.xaml", UriKind.RelativeOrAbsolute)
+        log.LogStatus("OnStartup method - done")
+
+        AddHandler LoadCompleted, AddressOf OnLoad
+
+        MyBase.OnStartup(e)
+
+    End Sub
+
+    Private Sub OnLoad(ByVal sender As System.Object, ByVal e As System.Windows.Navigation.NavigationEventArgs)
+
+        log.LogStatus("OnLoad event fired")
+
+        log.Result = Microsoft.Test.Logging.TestResult.Pass
+
+        ShutdownApp()               
+
+    End Sub
+
+    Protected Overrides Sub OnExit(ByVal e As System.Windows.ExitEventArgs)                     
+
+        If ( _browserhostedapp = False )
+
+         log.LogStatus("Shutting down application")
+        End If
+        
+        MyBase.OnExit(e)
+    End Sub
+    
+    Private Sub ShutdownApp()
+    
+        If ( _browserhostedapp = False )        
+            System.Windows.Application.Current.Shutdown()
+        Else
+            
+            log.LogStatus("Shutting down application in.xbap")
+        End If
+            
+        Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring()
+
+    End Sub
+
+    Public ReadOnly Property BrowserHostedApp() As Boolean
+        Get
+            BrowserHostedApp = _browserhostedapp
+        End Get
+    End Property
+
+    ]]></x:Code>
+
+</Application>

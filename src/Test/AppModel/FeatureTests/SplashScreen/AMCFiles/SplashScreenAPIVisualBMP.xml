@@ -1,0 +1,25 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary" />
+ <Using Namespace="Microsoft.Test.AppModel.SplashScreen" Assembly="SplashScreenLibrary" />
+
+     <Steps>
+
+	<TestLogStep Name="SplashScreen Visual Validation: Local Resource, BMP content">
+            <ActivationStep Arguments="shell:splash.bmp none false" FileName="SplashScreenTestApp.exe" >
+                <ActivationStep.UIHandlers>
+			<SplashScreenVisualVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestApp" ReferenceImageFile="splash.bmp" DriveTestApp="true" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SplashScreen Visual Validation:DLL Resource, BMP content">
+            <ActivationStep Arguments="shell:splash.bmp SplashScreenLibrary.dll false" FileName="SplashScreenTestApp.exe" >
+                <ActivationStep.UIHandlers>
+			<SplashScreenVisualVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestApp" ReferenceImageFile="splash.bmp" DriveTestApp="true" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+    </Steps>
+
+</AppMonitorConfig>

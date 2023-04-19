@@ -1,0 +1,64 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    ShowsNavigationUI="true"
+    >
+<Grid>
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+        <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Width="200" Grid.Column="0">
+                <TextBlock>
+	            Links 
+                </TextBlock>
+                <TextBlock Name="hlink_fragment1">
+                  <Hyperlink Name="fragment1" NavigateUri="FragmentNavigation_Page2.xaml#fragment1" TargetName="frame1" >Frame1-fragment1</Hyperlink>
+                </TextBlock>
+                <TextBlock Name="hlink_fragment2">
+                  <Hyperlink Name="fragment2" NavigateUri="FragmentNavigation_Page2.xaml#fragment2" TargetName="frame1" >Frame1-fragment2</Hyperlink>
+                </TextBlock>
+                <TextBlock Name="hlink_fragment3">
+                  <Hyperlink Name="fragment3" NavigateUri="FragmentNavigation_Page2.xaml#fragment3" TargetName="frame1" >Frame1-fragment3</Hyperlink>                
+                </TextBlock>
+                <TextBlock Name="hlink_fragment4">
+                  <Hyperlink Name="fragment4" NavigateUri="pack://siteoforigin:,,,/LooseXaml_FragmentNavigation_Page3.xaml#fragment4" TargetName="frame2" >Frame2-fragment4</Hyperlink>
+                </TextBlock>
+                <TextBlock Name="hlink_fragment5">
+                  <Hyperlink Name="fragment5" NavigateUri="pack://siteoforigin:,,,/LooseXaml_FragmentNavigation_Page3.xaml#fragment5" TargetName="frame2" >Frame2-fragment5</Hyperlink>
+                </TextBlock>
+                <TextBlock Name="hlink_fragment6">
+                  <Hyperlink Name="fragment6" NavigateUri="pack://siteoforigin:,,,/LooseXaml_FragmentNavigation_Page3.xaml#fragment6" TargetName="frame2" >Frame2-fragment6</Hyperlink>
+                </TextBlock>
+                <TextBlock Name="hlink_frame1">
+                  <Hyperlink Name="hlinkFrame1" NavigateUri="#frame1" >Fragment - Frame1</Hyperlink>
+                </TextBlock>
+                <TextBlock Name="hlink_frame2">
+                  <Hyperlink Name="hlinkFrame2" NavigateUri="#frame2" >Fragment - Frame2</Hyperlink>
+                </TextBlock>
+                <TextBlock Name="hlink_frame3">
+                  <Hyperlink Name="hlinkFrame3" NavigateUri="#frame3" >Fragment - Frame3</Hyperlink>
+                </TextBlock>
+                <TextBlock Name="hlink_win_page4">
+                  <Hyperlink Name="hlink_page4" NavigateUri="FragmentNavigation_Page4.xaml" >Page4 - NavWin</Hyperlink>
+                </TextBlock>                                
+	       </StackPanel>
+        <GridSplitter />                
+        <ScrollViewer Name="FragmentNavigation_frameScrollViewer" Grid.Column="1">
+        <StackPanel>
+              <Frame Height="300" Name="frame1" Source="FragmentNavigation_Page2.xaml" BorderThickness="5" BorderBrush="Green" />    
+              <Frame Height="300" Name="frame2" Source="pack://siteoforigin:,,,/LooseXaml_FragmentNavigation_Page3.xaml" BorderThickness="5" BorderBrush="Maroon" />
+              <Frame Name="frame3">
+                  <Frame.Content>
+                      <Image Source="pack://siteoforigin:,,,/FragmentNavigation_rose.jpg" />
+                  </Frame.Content>
+               </Frame>
+          </StackPanel>
+        </ScrollViewer>
+        <GridSplitter />
+        <StackPanel Grid.Column="2">
+          <TextBox Name="textBox" AcceptsReturn="true" FontSize="20" />
+          <CheckBox Name="checkBox" />
+        </StackPanel>
+</Grid>
+</Page>

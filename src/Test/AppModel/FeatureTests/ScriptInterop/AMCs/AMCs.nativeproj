@@ -1,0 +1,18 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <OutputName>
+    </OutputName>
+    <TargetType>COPY</TargetType>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <DataFile Include="*.xml">
+      <SubFolder>FeatureTests\AppModel\ScriptInterop\AMCFiles</SubFolder>
+    </DataFile>
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.Native.targets" />
+</Project>

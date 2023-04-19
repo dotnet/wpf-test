@@ -1,0 +1,61 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+        <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+        <FileHostStep UseUTF8Path="True">
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="Сценарий.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Verifying Internet Express app behavior test log - UNC">
+           <ActivationStep Method="Navigate" Scheme="UNC" FileName="Сценарий.xbap">
+               <ActivationStep.UIHandlers>
+                   <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="Сценарий" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying Internet Express app behavior test log - HTTP Intranet">
+           <ActivationStep Method="Navigate" Scheme="HTTPIntranet" FileName="Сценарий.xbap">
+               <ActivationStep.UIHandlers>
+                   <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="Сценарий" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying Internet Express app behavior test log - HTTPS Intranet">
+           <ActivationStep Method="Navigate" Scheme="HTTPSIntranet" FileName="Сценарий.xbap">
+               <ActivationStep.UIHandlers>
+                   <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="Сценарий" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying Internet Express app behavior test log - HTTP Internet">
+           <ActivationStep Method="Navigate" Scheme="HTTPInternet" FileName="Сценарий.xbap">
+               <ActivationStep.UIHandlers>
+                   <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="Сценарий" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+       </FileHostStep>
+
+       <FileHostStep  UseUTF8Path="True" >
+        <FileHostStep.SupportFiles>
+            <SupportFile Name="Сценарий.xbap" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Verifying Internet Express app behavior test log - HTTPS Internet">
+           <ActivationStep Method="Navigate" Scheme="HTTPSInternet" FileName="Сценарий.xbap">
+               <ActivationStep.UIHandlers>
+                   <FireFoxBrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="FireFox" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="Сценарий" IsAppShellVisible="false" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+       </FileHostStep>
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+    <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+      <PropertyGroup>
+        <AssemblyName>BasicTest</AssemblyName>
+        <TextVariation ID="1">
+          <Configuration>Release</Configuration>
+        </TextVariation>
+        <TextVariation ID="2">
+          <OutputType>winexe</OutputType>
+        </TextVariation>
+        <TextVariation ID="3">
+          <OutputPath>bin\$(Configuration)\</OutputPath>
+        </TextVariation>
+        <TextVariation ID="4">
+          <HostinBrowser>false</HostinBrowser>
+        </TextVariation>
+        <TextVariation ID="5">
+          <UICulture>en-US</UICulture>
+        </TextVariation>
+        <NodeVariation ID="6">
+        </NodeVariation>
+        <GenerateManifests>true</GenerateManifests>
+        <SignManifests>true</SignManifests>
+        <ManifestKeyFile>ClickOnceTest.pfx</ManifestKeyFile>
+        <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+      </PropertyGroup>
+      <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+      <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+      <PropertyGroup>
+        <NodeVariation ID="20">
+        </NodeVariation>
+      </PropertyGroup>
+      <ItemGroup>
+        <!-- Application Markup -->
+        <NodeVariation ID="10">
+          <ApplicationDefinition Include="ShutdownAppdef.xaml">
+            <TextVariation ID="11">
+              <Localizable>false</Localizable>
+            </TextVariation>
+          </ApplicationDefinition>
+        </NodeVariation>
+        <NodeVariation ID="12">
+          <Page Include="SimpleImage.xaml">
+            <TextVariation ID="13">
+              <Localizable>false</Localizable>
+            </TextVariation>
+          </Page>
+        </NodeVariation>
+        <NodeVariation ID="14">
+          <Resource Include="Picture1.jpg">
+            <TextVariation ID="15">
+              <Localizable>false</Localizable>
+            </TextVariation>
+          </Resource>
+        </NodeVariation>
+        <NodeVariation ID="16">
+        </NodeVariation>
+        <None Include="ClickOnceTest.pfx" />
+      </ItemGroup>
+      <!-- Included only for test run -->
+      <ItemGroup>
+        <NodeVariation ID="50">
+          <Reference Include="System" />
+          <Reference Include="System.Xml" />
+          <Reference Include="System.Data" />
+          <Reference Include="WindowsBase" />
+          <Reference Include="PresentationCore" />
+          <Reference Include="PresentationFramework" />
+          <Reference Include="UIAutomationTypes" />
+          <Reference Include="UIAutomationProvider" />
+        </NodeVariation>
+      </ItemGroup>
+      <Import Project="TestCommon.target" />
+      
+      <!-- New targets -->
+      <NodeVariation ID="100">
+      </NodeVariation>
+    </Project>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>CodeCoverageProjectFile</FileName>
+      <FileExtension>.proj</FileExtension>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Defaults>
+    <Scenario Case="1">
+      <NodeVariation ID="14">
+        <EmbeddedFiles Include="Picture1.jpg">
+          <Localizable>false</Localizable>
+        </EmbeddedFiles>
+      </NodeVariation>
+      <NodeVariation ID="20">
+        <IntermediateOutputPath>bin\\$(Configuration)</IntermediateOutputPath>
+      </NodeVariation>
+      <CommandLineArgs>/t:TestCleanup;Clean;MainResourcesGeneration;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="2">
+      <NodeVariation ID="20" ErrorCode="MSB3110">
+        <IntermediateOutputPath>bin\\$(Configuration)</IntermediateOutputPath>
+      </NodeVariation>
+      <CommandLineArgs>/t:TestCleanup;Build;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="3">
+      <NodeVariation ID="6">
+        <ApplicationClass>MyClass</ApplicationClass>
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="4">
+      <NodeVariation ID="20" ErrorCode="MC6008,MC6009_Dup1">
+        <Language>mono</Language>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="5">
+      <!--<NodeVariation ID="20" ErrorCode="MC6008">-->
+      <NodeVariation ID="20" ErrorCode="CS1014,CS1513,CS0116,CS1514,CS1002,CS1519,CS1001,CS1520,CS1022">
+        <Language>jscript</Language>
+      </NodeVariation>
+      <CommandLineArgs>/t:TestCleanup;Build;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="6">
+      <NodeVariation ID="20" ErrorCode="MC6008">
+        <Language>j#</Language>
+      </NodeVariation>
+      <CommandLineArgs>/t:TestCleanup;Build;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="7">
+      <NodeVariation ID="20" ErrorCode="CS0542,CS1025,CS1001,CS1002,CS1003,CS1514,CS1519,CS1031,CS1633,CS1024,CS1041,CS0687,CS1518,CS1513,CS0116,CS0101">
+        <Language>c++</Language>
+      </NodeVariation>
+      <CommandLineArgs>/t:TestCleanup;Build;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="8">
+      <TextVariation ID="2" ErrorCode="BG1003,BG1004">invalidtype</TextVariation>
+      <CommandLineArgs>/t:TestCleanup;Build;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="9">
+      <NodeVariation ID="16" ErrorCode="BG1002,BG1003">
+        <Page Include="NonExistant.xaml" />
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;MarkupCompilePass1;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="10">
+      <NodeVariation ID="6">
+        <AssemblyVersion>1.0.2.4</AssemblyVersion>
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="11">
+      <NodeVariation ID="14" ErrorCode="MC6009">
+        <Resource Include="Picture1.jpg">
+          <FileStorage>false</FileStorage>
+        </Resource>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="12">
+      <NodeVariation ID="14" ErrorCode="MC6009">
+        <Resource Include="Picture1.jpg">
+          <FileStorage>false</FileStorage>
+          <Localizable>true</Localizable>
+        </Resource>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="13">
+      <NodeVariation ID="20" ErrorCode="MSB4044">
+        <OutputType>
+        </OutputType>
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;FileClassification;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="14">
+      <TextVariation ID="5" ErrorCode="FC1001">invalidculture</TextVariation>
+      <CommandLineArgs>/t:Clean;FileClassification;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="15" ErrorCode="MC6009">
+      <TextVariation ID="2" ErrorCode="BG1004">invalidtype</TextVariation>
+      <CommandLineArgs>/t:Clean;FileClassification;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="16">
+      <NodeVariation ID="14">
+        <SatelliteEmbeddedFiles Include="Picture1.jpg">
+          <Localizable>false</Localizable>
+        </SatelliteEmbeddedFiles>
+      </NodeVariation>
+      <TextVariation ID="5" ErrorCode="FC1001">invalidculture</TextVariation>
+      <CommandLineArgs>/t:Clean;SatelliteResourceGeneration;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    <Scenario Case="17">
+      <NodeVariation ID="14" ErrorCode="BG1002">
+        <SatelliteEmbeddedFiles Include="NonExistant.xaml">
+          <Localizable>false</Localizable>
+        </SatelliteEmbeddedFiles>
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;SatelliteResourceGeneration;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+    
+    <!-- Causes Exception in DoCompilation and thus exeuctes exception handling code in Execute method -->
+    <Scenario Case="18">
+      <NodeVariation ID="6" ErrorCode="MC6000">
+        <DoPreloadReferences>true</DoPreloadReferences>
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;MarkupCompilePass1;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+
+    <!-- Causes Exception in DoMarkupCompilation and thus exeuctes exception handling code for DoPreloadRefrences -->
+    <Scenario Case="19">
+      <NodeVariation ID="6" ErrorCode="MC3074">
+        <DoPreloadReferences>true</DoPreloadReferences>
+      </NodeVariation>
+      <NodeVariation ID="50">
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Data" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+<!--          <Reference Include="PresentationFramework" /> -->
+        <Reference Include="UIAutomationClient" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+
+    <!-- Causes Exception in DoMarkupCompilation and thus exeuctes exception handling code for DoPreloadRefrences -->
+    <Scenario Case="20">
+      <NodeVariation ID="6">
+        <DoPreloadReferences>true</DoPreloadReferences>
+      </NodeVariation>
+      <NodeVariation ID="16" ErrorCode="MC1000">
+        <ReferencePath Include="DummyLib" />
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+
+    <!-- Causes Exception in DoMarkupCompilation and thus exeuctes exception handling code for DoPreloadRefrences -->
+    <Scenario Case="20">
+      <NodeVariation ID="6">
+        <DoPreloadReferences>true</DoPreloadReferences>
+      </NodeVariation>
+      <NodeVariation ID="16" ErrorCode="MC1000">
+        <ReferencePath Include="DummyLib" />
+      </NodeVariation>
+      <CommandLineArgs>/t:Clean;Build;Clean;TestCleanup</CommandLineArgs>
+    </Scenario>
+
+    <Scenario Case="21">
+      <CommandLineArgs>/t:ResolveReferences;UpdateWinFXDeploymentManifest</CommandLineArgs>
+    </Scenario>
+
+    <Scenario Case="22">
+      <NodeVariation ID="50" ErrorCode="BG1002">
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Data" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" /> 
+        <Reference Include="UIAutomationClient" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+        <ReferencePath Include="WindowsBase.dll" />
+      </NodeVariation>
+      <CommandLineArgs>/t:UpdateWinFXDeploymentManifest</CommandLineArgs>
+    </Scenario>
+
+    <Scenario Case="23">
+      <NodeVariation ID="20">
+        <ReadOnlyFile>$(AssemblyName).application</ReadOnlyFile>
+        <FileDirectory>$(MSBuildProjectDirectory)\$(IntermediateOutputPath)\</FileDirectory>
+      </NodeVariation>      
+      <NodeVariation ID="100">
+        <Target Name="MakeReadOnly">
+          <Exec WorkingDirectory="$(FileDirectory)\"
+                  Command="attrib +r $(ReadOnlyFile)" />
+        </Target>
+        <Target Name="MakeReadWrite">
+          <Exec WorkingDirectory="$(FileDirectory)\"
+                  Command="attrib -r $(ReadOnlyFile)" />
+        </Target>
+      </NodeVariation> 
+    </Scenario>
+
+    <Scenario Case="24">
+      <NodeVariation ID="20">
+        <ReadOnlyFile>$(AssemblyName).application</ReadOnlyFile>
+        <FileDirectory>$(MSBuildProjectDirectory)\$(IntermediateOutputPath)\</FileDirectory>
+      </NodeVariation>      
+      <NodeVariation ID="100">
+        <Target Name="UpdateBrowserApplicationManifest1" >
+
+              <UpdateManifestForBrowserApplication
+                  ApplicationManifest="@(ApplicationManifest)"
+                  HostInBrowser="$(HostInBrowser)"
+                  />
+
+        </Target>        
+      </NodeVariation> 
+      <CommandLineArgs>/t:UpdateBrowserApplicationManifest1</CommandLineArgs>
+      
+    </Scenario>
+
+    <Scenario Case="25">
+      <TextVariation ID="4">true</TextVariation> <!-- Hostinbrowser flag -->
+      <NodeVariation ID="20">
+        <ReadOnlyFile>$(AssemblyName).exe.manifest</ReadOnlyFile>
+        <FileDirectory>$(MSBuildProjectDirectory)\$(IntermediateOutputPath)\</FileDirectory>
+      </NodeVariation>      
+      <NodeVariation ID="100">
+        <Target Name="MakeReadOnly">
+          <Exec WorkingDirectory="$(FileDirectory)\"
+                  Command="attrib +r $(ReadOnlyFile)" />
+        </Target>
+        <Target Name="MakeReadWrite">
+          <Exec WorkingDirectory="$(FileDirectory)\"
+                  Command="attrib -r $(ReadOnlyFile)" />
+        </Target>
+      </NodeVariation> 
+      <CommandLineArgs>/t:TestCleanup;Build;MakeReadOnly</CommandLineArgs>
+    </Scenario>
+
+  </Scenarios>
+</XMLVariationTemplate>

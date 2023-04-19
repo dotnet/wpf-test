@@ -1,0 +1,17 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <TestLogStep Name="FIREFOX - Verifying plugin version availability">
+        <ActivationStep Method="launch" Scheme="Local" FileName="CheckNPWPFVersion.html">
+          <ActivationStep.UIHandlers>
+            <PassIfSeenHandler WindowTitle="RegExp:(plug-in for Mozilla browsers, v4.0.)" ProcessName="FireFox"  />
+            <FailIfSeenHandler WindowTitle="RegExp:(The WPF plug-in for Firefox is not installed)" ProcessName="FireFox"  />
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </TestLogStep>
+   
+  </Steps>
+</AppMonitorConfig>

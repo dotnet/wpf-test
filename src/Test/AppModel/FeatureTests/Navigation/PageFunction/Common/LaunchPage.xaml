@@ -1,0 +1,63 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           Background="Indigo" 
+           Name="RootLaunch"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           x:Class="Microsoft.Windows.Test.Client.AppSec.Navigation.NonPFLaunchPage">
+
+  <DockPanel.Resources>
+    <Style x:Key="ButtonPFStyle" TargetType="{x:Type Button}">
+      <Setter Property="Background" Value="Olive" />
+      <Setter Property="BorderThickness" Value="10" />
+      <Setter Property="BorderBrush" Value="Black" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <StackPanel Orientation="Horizontal" Background="{TemplateBinding Background}" HorizontalAlignment="Center" x:Name="MainArea">
+              <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="5,5,5,5" />
+            </StackPanel>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <!--Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Set PropertyPath="Backgroud" Value="Red" Target="MainArea"/>
+                </Trigger>
+
+            </Style.Triggers-->
+    </Style>
+    <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
+      <Setter Property="FontSize" Value="50" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="White" />
+    </Style>
+  </DockPanel.Resources>
+
+  <TextBlock DockPanel.Dock="Top" FontSize="15pt" Foreground="White">Launch Page for PageFunction</TextBlock>
+  <TextBlock DockPanel.Dock="Top" Foreground="CornFlowerBlue">This is just a page to launch a pagefunction</TextBlock>
+  <Button Style="{DynamicResource ButtonPFStyle}"
+      Name="BtnLaunchPF"
+      Click="LaunchPF"
+      DockPanel.Dock="Top">
+    <TextBlock Foreground="Yellow">Get Result from PageFunction</TextBlock>
+  </Button>
+
+  <TextBlock DockPanel.Dock="Top" Foreground="White">Return Value: </TextBlock>
+
+  <FlowDocumentScrollViewer>
+    <FlowDocument>
+      <Paragraph>
+        <Italic Foreground="White" xml:space="preserve">
+
+        <TextBlock Style="{DynamicResource TextStyle}" Opacity="0.2"> Launch Page </TextBlock> <TextBlock Style="{DynamicResource TextStyle}" Opacity="0.4"> Launch Page </TextBlock>
+        <TextBlock Style="{DynamicResource TextStyle}" Opacity="0.6"> Launch Page </TextBlock><TextBlock Style="{DynamicResource TextStyle}" Opacity="0.2"> Launch Page </TextBlock>
+        <TextBlock Style="{DynamicResource TextStyle}" Opacity="0.4"> Launch Page </TextBlock><TextBlock Style="{DynamicResource TextStyle}" Opacity="0.6"> Launch Page </TextBlock>
+        <TextBlock Style="{DynamicResource TextStyle}" Opacity="0.2"> Launch Page </TextBlock><TextBlock Style="{DynamicResource TextStyle}" Opacity="0.4"> Launch Page </TextBlock>
+        <TextBlock Style="{DynamicResource TextStyle}" Opacity="0.6"> Launch Page </TextBlock><TextBlock Style="{DynamicResource TextStyle}" Opacity="0.2"> Launch Page </TextBlock>
+
+    </Italic>
+      </Paragraph>
+    </FlowDocument>
+  </FlowDocumentScrollViewer>
+
+</DockPanel>

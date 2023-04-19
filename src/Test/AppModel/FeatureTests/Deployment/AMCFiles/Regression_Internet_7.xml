@@ -1,0 +1,73 @@
+<AppMonitorConfig>
+
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+
+     <!-- NOTE: Multiple FileHost Steps used to ensure uniqueness of cookies written or read as cleanup was not reliable. -->
+     <Steps>
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="hijacked_iframe.html" />
+               <SupportFile Name="HijackFrame_Main.html" />
+               <SupportFile Name="HijackFrame_Main_Xbap.html" />
+               <SupportFile Name="retargeting_hyperlinks.xaml" />
+           </FileHostStep.SupportFiles>
+	<TestLogStep Name="Regression test - Internet Zone - Loose Xaml Variation, Positive test (Feature is enabled.  Ensure that we CAN hijack the frame)">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="HijackFrame_Main.html">
+               <ActivationStep.UIHandlers>
+                   <CrossDomainFrameNavigationHandler CrossDomainEnabled="True" WindowTitle="RegExp:(XAML Hyperlink SubFrame Hijacking test)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+
+
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="hijacked_iframe.html" />
+               <SupportFile Name="HijackFrame_Main.html" />
+               <SupportFile Name="retargeting_hyperlinks.xaml" />
+           </FileHostStep.SupportFiles>
+	<TestLogStep Name="Regression test - Internet Zone 7 - Loose Xaml Variation, Negative test (Feature is disabled.  Ensure that we can't hijack the frame)">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="HijackFrame_Main.html">
+               <ActivationStep.UIHandlers>
+                   <CrossDomainFrameNavigationHandler CrossDomainEnabled="False" WindowTitle="RegExp:(XAML Hyperlink SubFrame Hijacking test)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="hijacked_iframe.html" />
+               <SupportFile Name="HijackFrame_Main_Xbap.html" />
+           </FileHostStep.SupportFiles>
+	<TestLogStep Name="  Regression test - Internet Zone - Xbap Variation, Positive test (Feature is enabled.  Ensure that we CAN hijack the frame)">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="HijackFrame_Main_Xbap.html">
+               <ActivationStep.UIHandlers>
+                   <CrossDomainFrameNavigationHandler CrossDomainEnabled="True" WindowTitle="RegExp:(XBAP Hyperlink SubFrame Hijacking test)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="hijacked_iframe.html" />
+               <SupportFile Name="HijackFrame_Main_Xbap.html" />
+           </FileHostStep.SupportFiles>
+	<TestLogStep Name="  Regression test - Internet Zone - Xbap Variation, Negative test (Feature is disabled.  Ensure that we can't hijack the frame)">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="HijackFrame_Main_Xbap.html">
+               <ActivationStep.UIHandlers>
+                   <CrossDomainFrameNavigationHandler CrossDomainEnabled="False" WindowTitle="RegExp:(XBAP Hyperlink SubFrame Hijacking test)" ProcessName="IEXPLORE" />
+               </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+       </FileHostStep>
+
+    </Steps>
+
+</AppMonitorConfig>

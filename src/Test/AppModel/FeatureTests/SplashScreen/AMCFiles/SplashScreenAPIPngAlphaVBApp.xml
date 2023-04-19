@@ -1,0 +1,39 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary" />
+ <Using Namespace="Microsoft.Test.AppModel.SplashScreen" Assembly="SplashScreenLibrary" />
+
+     <Steps>
+	<TestLogStep Name="SplashScreen:Local Resource, Png content with Alpha, Visual Basic App">
+            <ActivationStep Arguments="shell:splash3alpha.png none false" FileName="SplashScreenTestAppVB.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestAppVB" ExpectedFadeTime="3000" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SplashScreen:DLL Resource, Png content with Alpha, Visual Basic App">
+            <ActivationStep Arguments="shell:splash3alpha.png SplashScreenLibrary.dll false" FileName="SplashScreenTestAppVB.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestAppVB" ExpectedFadeTime="3000" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SplashScreen:Local Resource, Png content with Alpha, Force Premature Close, Visual Basic App">
+            <ActivationStep Arguments="shell:splash3alpha.png none true" FileName="SplashScreenTestAppVB.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestAppVB" ExpectedFadeTime="3000" AppWillForceCloseSplash="True" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+	<TestLogStep Name="SplashScreen:DLL Resource, Png content with Alpha, Force Premature Close, Visual Basic App">
+            <ActivationStep Arguments="shell:splash3alpha.png SplashScreenLibrary.dll true" FileName="SplashScreenTestAppVB.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVerifier WindowTitle="Splash Screen Test App" ProcessName="SplashScreenTestAppVB" ExpectedFadeTime="3000" AppWillForceCloseSplash="True" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+    </Steps>
+
+</AppMonitorConfig>

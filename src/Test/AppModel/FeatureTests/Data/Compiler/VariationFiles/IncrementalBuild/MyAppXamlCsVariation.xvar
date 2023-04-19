@@ -1,0 +1,127 @@
+<XMLVariationTemplate>
+  <TemplateData>
+	using System;
+	using System.Windows;
+	using System.Data;
+	using System.Xml;
+	using System.Configuration;
+	using System.Windows.Navigation;
+	using System.Windows.Controls;
+
+	namespace IncrementalBuildTest
+	{
+	    /// <summary>
+	    /// Interaction logic for MyApp.xaml
+	    /// </summary>
+
+	    
+	    public partial class MyApp : Application
+	    {
+	    
+	    	<NodeVariation ID="100">
+	    	Microsoft.Test.Logging.TestLog log = null;
+	    	bool _browserHostedApp = false;
+	    	</NodeVariation>
+	    	
+		System.Windows.Application navapp = null;
+
+		protected override void OnStartup(System.Windows.StartupEventArgs e)
+		{
+
+		    this.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+		    navapp = this;
+		    base.OnStartup(e);
+		    <NodeVariation ID="101">
+          log = Microsoft.Test.Logging.TestLog.Current;
+          TestRun();
+        </NodeVariation>
+		}
+		<NodeVariation ID="102">
+		private void TestRun()
+		{
+		    // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+		    if (AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap"))
+		    {
+			_browserHostedApp = true;
+		    }            
+
+		    log.LogStatus("Test Run...");
+		    try 
+		    {
+			log.LogStatus("...");
+		    }
+		    catch(Exception e)
+		    {
+			log.LogStatus("****Exception Thrown...");
+			log.LogStatus(e.Message);
+		    }
+
+		    log.Result = Microsoft.Test.Logging.TestResult.Pass;
+		    ShutdownApp();        
+		}
+		
+		private void ShutdownApp()
+		{
+
+		    // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+
+		    if (_browserHostedApp == false)
+		    {
+			System.Windows.Application.Current.Shutdown();
+		    }
+
+		    log.LogStatus("Shutting down application");
+		    // log.Close();
+
+		    Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+		}		
+		</NodeVariation>
+
+		void OnLoad(object sender, NavigationEventArgs e)
+		{
+
+		    this.LoadCompleted -= new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+
+		    NavigationWindow win = (NavigationWindow)System.Windows.Application.Current.MainWindow;
+		    /*
+		    MyControls.MyButton mybutton = new MyControls.MyButton();   
+
+		    mybutton.Content="MyButton";
+
+		    win.Content = mybutton as FrameworkElement;
+		    mybutton.Loaded += new RoutedEventHandler(RunTest);
+		    */
+		    Button btn = new Button();
+		    <NodeVariation ID="1">
+		    	btn.Content = "Code File added successfully...";
+		    </NodeVariation>
+		    win.Content = btn as FrameworkElement;
+		}
+	    }
+	}
+  </TemplateData>
+  
+  <Scenarios>
+    <Defaults>
+      <FileName>MyApp</FileName>
+      <FileExtension>.xaml.cs</FileExtension>
+      <RetainFileName>true</RetainFileName>
+      <IsXmlDocument>false</IsXmlDocument>
+    </Defaults>
+    
+    <Scenario Case="1">
+    </Scenario>  
+    <Scenario Case="2">
+        <NodeVariation ID="1">
+            btn.Content = "Code File Updated successfully...";
+    	</NodeVariation>
+    </Scenario>  
+    <Scenario Case="3">
+        <NodeVariation ID="100" />
+        <NodeVariation ID="101" />
+        <NodeVariation ID="102" />        
+    </Scenario>     
+
+  </Scenarios>   	
+</XMLVariationTemplate>  

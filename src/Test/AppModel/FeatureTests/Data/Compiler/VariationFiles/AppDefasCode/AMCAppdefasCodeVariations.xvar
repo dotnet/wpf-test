@@ -1,0 +1,53 @@
+﻿<XMLVariationTemplate>
+    <TemplateData>
+        <AppMonitorConfig>
+            <Steps>
+                    <AttributeVariation ID="1">
+                        <MSBuildStep Arguments="AppDefasCodeProjectVariations.csxml /rst:1" />
+                    </AttributeVariation>
+
+                    <NodeVariation ID="3">
+                        <ActivationStep Method="launch" ExecuteCompiledApp="true" />
+                    </NodeVariation>
+
+                    <!--<AttributeVariation ID="2">
+                        <MSBuildStep Arguments="LocalizedTargetNameProjectVariations.csxml /rst:2"  />
+                    </AttributeVariation>
+
+                    <NodeVariation ID="4">
+                        <ActivationStep Method="launch" ExecuteCompiledApp="true" />
+                    </NodeVariation>-->
+
+                    <MSBuildStep Arguments="/t:Clean;TestCleanup" AlwaysRun="True"   />
+            </Steps>
+        </AppMonitorConfig>
+    </TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>AppMonitorConfig</FileName>
+            <FileExtension>.xml</FileExtension>
+            <RetainFileName>true</RetainFileName>
+        </Defaults>
+        <Scenario Case="1">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefasCodeProjectVariations.csxml /rst:1" />
+        </Scenario>
+        <Scenario Case="2">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefasCodeProjectVariations.csxml /rst:3" />
+        </Scenario>
+        <Scenario Case="3">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefasCodeProjectVariations.csxml /rst:5" />
+        </Scenario>
+        <Scenario Case="4">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefasCodeProjectVariations.csxml /rst:7" />
+            <NodeVariation ID="3"></NodeVariation>
+        </Scenario>
+        <Scenario Case="5">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefasCodeProjectVariations.csxml /rst:9" />
+            <NodeVariation ID="3"></NodeVariation>
+        </Scenario>
+        <Scenario Case="6">
+            <AttributeVariation ID="1" AttributeName="Arguments" AttributeValue="AppDefasCodeProjectVariations.csxml /rst:10" />
+            <NodeVariation ID="3"></NodeVariation>
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>

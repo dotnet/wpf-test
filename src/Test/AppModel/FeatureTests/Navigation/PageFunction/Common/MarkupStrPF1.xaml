@@ -1,0 +1,53 @@
+﻿<PageFunction xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" x:TypeArguments="sys:String"
+    x:Class="Microsoft.Windows.Test.Client.AppSec.Navigation.StringPFMarkup"
+    Initialized="Loaded_PF"
+    Loaded="Loaded_PF2">
+<DockPanel Name="MarkupStrPF1Root">
+    <Border Background="SteelBlue">
+        <DockPanel DockPanel.Dock="Left">
+            <TextBlock FontSize="14" Foreground="White"
+                    FontWeight="Bold"
+                    FontStyle="Italic"
+                    Margin="10,20,10,10">Markup BVT (String PF)</TextBlock>
+        </DockPanel>
+    </Border>
+    
+    <DockPanel Background="White">
+        <TextBlock DockPanel.Dock="Top"
+                Name="LNK2"
+                FontSize="14"
+                FontWeight="Bold"
+
+                Margin="10,20,10,10">Next PF Link 2</TextBlock>
+
+        <Button
+            DockPanel.Dock="Top"
+            Margin="10,20,10,10"
+            Name="LNKNext" Height="25"
+            Click="OnLinkClicked"
+            Background="SteelBlue">Next PF (Child)</Button>
+
+        <Button DockPanel.Dock="Top"
+            Margin="10,20,10,10"
+            Name="LNKNextNoAttach"
+            Height="25"
+            Click="OnLinkClicked" Background="SteelBlue">Next PF (Child), don't attach return event handler</Button>
+            
+        <Button DockPanel.Dock="Top"
+                Margin="10,20,10,10"
+                Name="LNKDone"
+                Height="25"
+                Click="OnLinkClicked">Done</Button>
+                
+        <Button DockPanel.Dock="Top"
+                Margin="10,20,10,10"
+                Name="LNKBack"
+                Height="25"
+                Click="OnLinkClicked">Back</Button>
+        
+            
+    </DockPanel>
+</DockPanel>
+</PageFunction>

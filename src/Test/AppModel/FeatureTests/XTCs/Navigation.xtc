@@ -1,0 +1,1208 @@
+<XTC>
+  <DEFAULTTESTINFO>
+    <Deployments>
+      <Deployment>FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment</Deployment>
+    </Deployments>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.dll" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+  
+  <!--<TEST Name="NavigateUri"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: NavigateUri] [DESCRIPTION] Verify Source, JournalEntry.Name property on Navigation to compiled xaml specified thru absolute / relative uri, xaml at site of origin, xaml within a component assembly in Partial Trust app; Also verify NavigationService BaseUriVerify Source, JournalEntry.Name property on Navigation to compiled xaml specified thru absolute / relative uri, xaml at site of origin, xaml within a component assembly in Partial Trust appAlso verify BaseUri" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe NavigateUri" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+  </TEST>-->
+
+  <!--<TEST Name="FragmentNavigationStandalone"
+        Priority="0"
+        Disabled="true"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: FragmentNavigationStandalone] [DESCRIPTION] Fragment Navigation in Multiple frames + Control State + Grouping journal entries - standalone
+        /// summary
+        /// Tests fragment navigation on multiple frames; journaling of control state (checkbox/textbox) and exercises ShowsNavigationUI property on Page
+        /// 1) Navigate to Page2.xaml#fragment2 on frame1
+        /// 2) Navigate to ~/Page3.xaml#fragment6 on frame2
+        /// 3) Navigate to Page2.xaml#fragment3 on frame1
+        /// 4) Navigate to ~/Page4.xaml#fragment5 on frame2
+        /// 5) Set TextBox content to This is some text
+        /// 6) Navigate to #frame3 containing image
+        /// 7) Check the checkbox
+        /// 8) Go back all the way
+        /// 9) Go forward all the way
+        /// 10) Navigate away from page to Page4.xaml
+        /// 11) Page4.xaml sets ShowsNavigationUI to false - will add a verification step here (journal entries should be grouped)
+        /// 12) Go back to Page1.xaml
+        /// 13) Navigate to #frame1 - but handle the fragment navigation so that the scroll position does not change
+        /// Look at the results.xml file for recorded navigation state at different steps
+        /// This will be used for verification when actual test is run    /// /summary" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe FragmentNavigation" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+  </TEST>-->
+
+  <TEST Name="FragmentNavigationProgrammaticObject"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="Navigation"
+      Timeout="120"
+      Description="[ID: FragmentNavigationProgrammaticObject] [DESCRIPTION] Fragment Navigation to objects in code">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe FragmentNavigationToObject" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+  </TEST>
+  <!--
+  <TEST Name="FragmentNavigationBrowser"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: FragmentNavigationBrowser] [DESCRIPTION] Fragment Navigation in Multiple frames + Control State + Grouping journal entries - browser
+          /// summary
+          /// Tests fragment navigation on multiple frames; journaling of control state (checkbox/textbox) and exercises ShowsNavigationUI property on Page
+          /// 1) Navigate to Page2.xaml#fragment2 on frame1
+          /// 2) Navigate to ~/Page3.xaml#fragment6 on frame2
+          /// 3) Navigate to Page2.xaml#fragment3 on frame1
+          /// 4) Navigate to ~/Page4.xaml#fragment5 on frame2
+          /// 5) Set TextBox content to This is some text
+          /// 6) Navigate to #frame3 containing image
+          /// 7) Check the checkbox
+          /// 8) Go back all the way
+          /// 9) Go forward all the way
+         /// 10) Navigate away from page to Page4.xaml
+         /// 11) Page4.xaml sets ShowsNavigationUI to false - will add a verification step here (journal entries should be grouped)
+         /// 12) Go back to Page1.xaml
+         /// 13) Navigate to #frame1 - but handle the fragment navigation so that the scroll position does not change
+         /// Look at the results.xml file for recorded navigation state at different steps
+         /// This will be used for verification when actual test is run
+         /// /summary" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap FragmentNavigation" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="VerifyIETravelogHyperlinkNavigation"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: VerifyIETravelogHyperlinkNavigation] [DESCRIPTION] Verify IE Travellog (IE7+) chrome journaling (downlevel) for Hyperlink navigations to compiled xaml and xaml in site of origin
+          /// summary
+          /// Performs multiple hyperlink navigations in an avalon xbap, goes browser back then goes browser forward
+          /// and verifies IE 7 Travelog state at the end of each of these operations
+          /// /summary" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HlinkNavigation" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="VerifyIETravelogGeneralNavigation"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: VerifyIETravelogGeneralNavigation] [DESCRIPTION] Test IEJournal navigation scenarios other than hyperlink
+          /// summary
+          /// Navigate to XAML files in different scenarios
+          /// and verifies IE 7 Travelog state at the end of each of these operations
+          /// /summary" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap VerifyIETravelog" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+  </TEST>-->
+
+  <TEST Name="WebOCGeneral"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="Navigation"
+      Timeout="120"
+      Description="WebOCGeneral - Frame/NavigationWindow WebOC navigations and Hyperlink targeting - standalone
+          /// BVT for WebOC navigation
+          /// Also override Application Navigation protected virtuals
+          /// Navigate NavWin to Google
+          /// Navigate NavWin to HTML at site of origin
+          /// Navigate Frame to Google
+          /// Navigate Frame to HTML at site of origin
+          /// Cancel WebOC navigation in a frame
+          /// Refresh WebOC frame and call StopLoading on the Refresh" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe WebOCGeneral" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="OverlapWebOCFrames"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="Navigation"
+      Timeout="120"
+      Description="OverlapWebOCFrames - WebOC navigations on overlapped frames
+          /// Have a NavigationWindow hosting two Frames that overlap
+          /// The Frames start off with some standard XAML content
+          /// Navigate both Frames to HTML content so that both now host WebOCs
+          /// Navigate Frame1 to a PageFunction
+          /// Navigate Frame2 to some other XAML page
+          /// then GoBack to WebOC/HTML
+        " >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe OverlapWebOCFrames" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="MultipleFramesStandalone"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: MultipleFramesStandalone] [DESCRIPTION] Multiple Frames + HTML using ~/ syntax - standalone
+          /// summary
+          /// Hyperlink targeting - multiple frames, navigationWindow; and JournalEntry grouping
+          /// of multiple frames (all hyperlinks in frame1 targetting self, frame2 and navWin)
+          /// 1) Navigate to Page5.xaml in frame2
+          /// 2) Navigate to Page6.xaml in frame2
+          /// 3) Navigate to ~/test.html in frame2
+          /// 4) Navigate Self to Page4.xaml
+          /// 5) Go back
+          /// 6) Navigate window to Page3.xaml
+          /// 7) Go back
+          /// /summary" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe MultipleFrames" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+  </TEST>
+  <!--
+  <TEST Name="MultipleFramesBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: MultipleFramesBrowser] [DESCRIPTION] Multiple Frames + HTML using ~/ syntax - browser
+          /// summary
+          /// Hyperlink targeting - multiple frames, navigationWindow; and JournalEntry grouping
+          /// of multiple frames (all hyperlinks in frame1 targetting self, frame2 and navWin)
+          /// 1) Navigate to Page5.xaml in frame2
+          /// 2) Navigate to Page6.xaml in frame2
+          /// 3) Navigate to ~/test.html in frame2
+          /// 4) Navigate Self to Page4.xaml
+          /// 5) Go back
+          /// 6) Navigate window to Page3.xaml
+          /// 7) Go back
+          /// /summary" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap MultipleFrames" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Bugs>
+      <Bug Source="IEOESE"  />
+      <Bug  Source="WOOBR" />
+    </Bugs>
+  </TEST>
+-->
+  <TEST Name="LooseXaml"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="Navigation"
+      Timeout="120"
+      Description="[ID: LooseXaml] [DESCRIPTION] Loose Xaml Navigation - standaloneMajor action:  The LooseXaml BVT suite checks the functionality of various navigations to loose xaml files.  The following scenarios are covered:[1] Navigate to uncompiled loose xaml Page1.xaml via absolute Uri[2] Go back to uncompiled loose xaml via the journal[3] Navigate to content loose xaml Page2.xaml via hyperlink in Page1.xaml (pack://siteoforigin:,,,/Page2.xaml)[4] Navigate to html containing IFrame with loose XAML source (http://wpfapps/testscratch/LooseXaml/banana.html)[5] Navigate to a fragment on a content loose xaml page[6] Return to fragment on a content loose xaml page via the journal.Pass condition:  All the navigations are successful.Test owner:  Microsoft" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe LooseXaml"
+                  LooseXaml_NavigationContainer="navwin"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Keywords>
+      <Keyword>MicroSuite</Keyword>
+    </Keywords>
+  </TEST>
+
+<!--<TEST Name="RedirectOutsideSOO"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: RedirectOutsideSOO] [DESCRIPTION] Redirection to URI outside of SiteOfOrigin should failRedirection to URI outside of SiteOfOrigin should fail" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunConfigurationFile"
+                  MethodParams="AMC_RedirectOutsideSOO.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\AMCFiles\AMC_RedirectOutsideSOO.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="HyperlinkTargetingProgrammaticBrowser"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: HyperlinkTargetingProgrammaticBrowser] [DESCRIPTION] Hyperlink targeting: Programmatically clicking Hyperlinks with special TargetNames in a partially trusted XBAP failsMajor action:  Programmatically click on Hyperlinks with TargetNames set to unrecognized string (no element has that string as its Name property), _blank, _top, _parent, _self using Hyperlink's public DoClick() method and raising the RequestNavigate event with the Hyperlink.Pass Condition: System.Exception gets thrown with the message Failed to navigate using the Hyperlink targetTest" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HlinkTargeting" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="HyperlinkTargetingOutOfProcBrowser"
+        Timeout="180"
+        Priority="1"
+        Type="Functional"
+        UacElevation="Elevated"
+        Area="AppModel"
+        SubArea="Navigation"
+        Description="[ID: HyperlinkTargetingOutOfProcBrowser] [DESCRIPTION] Clicking hyperlinks with special TargetNames in a partially trusted XBAP">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                   Assembly="TestRuntime"
+                   Method="RunConfigurationFile"
+                   MethodParams="AMC_HyperlinkTargeting.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\AMCFiles\AMC_HyperlinkTargeting.xml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\HlinkTargeting_Loose.xaml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\FramePage_Loose.xaml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\WebPage1_Loose.html" />
+    </SupportFiles>
+  </TEST>-->
+
+  <!-- Disabled - Navigating to http: Urls  from nested (in frames) Loose Xaml broken due to erroneous security exception -->
+ <!--<TEST Name="HyperlinkNavigationOutOfProcBrowser"
+      Disabled="True"
+      Timeout="180"
+      Priority="1"
+      Type="Functional"
+      UacElevation="Elevated"
+      Area="AppModel"
+      SubArea="Navigation"
+      Description="[ID: HyperlinkNavigationOutOfProBrowser] [DESCRIPTION] Clicking hyperlinks and verifying the navigation">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                   Assembly="TestRuntime"
+                   SecurityLevel="FullTrust"
+                   Method="RunConfigurationFile"
+                   MethodParams="AMC_HlinkNavigation.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\AMCFiles\AMC_HlinkNavigation.xml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\HlinkNavigation_Page1_Loose.xaml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\HlinkNavigation_Page2_Loose.xaml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\HlinkNavigation_Page3_Loose.xaml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\HlinkNavigation_Page4_Loose.xaml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\LooseXaml_FragmentNavigation_Page3.xaml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\Page1_Loose.xaml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser\FlowDocument_Loose.xaml" />
+    </SupportFiles>
+  </TEST>-->
+
+  <!--<TEST Name="SandboxExternalContentStandalone"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: SandboxExternalContentStandalone] [DESCRIPTION] SandboxExternalContent/Navigation test - standaloneMajor action:  The SandboxExternalContent navigation test checks that:  [1] Setting SandboxExternalContent = true throws SecurityException (PT app only)  [2] BUGBUG :  Navigating to pack://siteoforigin:,, and pack://siteoforigin:,,,      treats both these prefixes equivalently  [3] Navigating Frame to non-built in XAML when we specify SandboxExternalContent = true (FT app only)  [4] Navigating NavigationWindow non-built in XAML when we specify SandboxExternalContent = true (FT app only)Pass Condition:  For each of the above scenarios, the pass conditions are the following:  [1] SecurityException is thrown when we try setting the SandboxExternalContent property from partial trust  [2] Navigation to Uris that start with either of these prefixes is successful, no exceptions thrown and the Source property is updated appropriately  [3, 4] Navigation is successful, Source property reflects the external location of the XAML file (Navigation/SandboxExternalContent/standalone/Page3.xaml)Test Owner:  Microsoft" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe SandboxExternalContent" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+  </TEST>-->
+  <!--
+  <TEST Name="SandboxExternalContentBrowser"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: SandboxExternalContentBrowser] [DESCRIPTION] SandboxExternalContent/Navigation test - browserMajor action:  The SandboxExternalContent navigation test checks that:  [1] Setting SandboxExternalContent = true throws SecurityException (PT app only)  [2] BUGBUG :  Navigating to pack://siteoforigin:,, and pack://siteoforigin:,,,      treats both these prefixes equivalently  [3] Navigating Frame to non-built in XAML when we specify SandboxExternalContent = true (FT app only)  [4] Navigating NavigationWindow non-built in XAML when we specify SandboxExternalContent = true (FT app only)Pass Condition:  For each of the above scenarios, the pass conditions are the following:  [1] SecurityException is thrown when we try setting the SandboxExternalContent property from partial trust  [2] Navigation to Uris that start with either of these prefixes is successful, no exceptions thrown and the Source property is updated appropriately  [3, 4] Navigation is successful, Source property reflects the external location of the XAML file (Navigation/SandboxExternalContent/standalone/Page3.xaml)Test Owner:  Microsoft" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap SandboxExternalContent" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="LooseXamlNavWin"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: LooseXamlNavWin] [DESCRIPTION] Loose Xaml Navigation - browserMajor action:  The LooseXaml BVT suite checks the functionality of various navigations to loose xaml files.  The following scenarios are covered:[1] Navigate to uncompiled loose xaml Page1.xaml via absolute Uri[2] Go back to uncompiled loose xaml via the journal[3] Navigate to content loose xaml Page2.xaml via hyperlink in Page1.xaml (pack://siteoforigin:,,,/Page2.xaml)[4] Navigate to html containing IFrame with loose XAML source (http://wpfapps/testscratch/LooseXaml/banana.html)[5] Navigate to a fragment on a content loose xaml page[6] Return to fragment on a content loose xaml page via the journal.Pass condition:  All the navigations are successful.Test owner:  Microsoft" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap LooseXaml"
+                  LooseXaml_NavigationContainer="navwin"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\browser" />
+    </SupportFiles>
+  </TEST>-->
+
+  <!--<TEST Name="NavigationFailedStandalone"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: NavigationFailedStandalone] [DESCRIPTION] NavigationFailed event testing - standalone
+        /// summary
+        ///  Step1 : Navigate to NavigationFailed_Page1.xaml
+        ///  Step2 : Navigate to nonexisting page (NavigationFailed_NoneExistingPage.xaml),
+        ///            Verify NavigationFailed event fired
+        ///  Step3 : Navigate to a page with a frame (NavigationFailed_Frame.xaml)
+        ///  Step4 : In the frame navigate to a non existing page and Verify NavigationFailed event fired
+        ///  Step5 : In the frame navigate to a fragment of a page (FragmentNavigation_Page2.xaml#fragment2)
+        ///  Step6 : In the frame navigate to a non existing fragment (FragmentNavigation_Page2.xaml#nonexisting)
+        ///  Step7 : Navigate to a non existing external Uri and Verify NavigationFailed event fired
+        /// /summary" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe NavigationFailed" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+  </TEST>-->
+  <!--
+  <TEST Name="NavigationFailedBrowser"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="[ID: NavigationFailedBrowser] [DESCRIPTION] NavigationFailed event testing - Browser
+        /// summary
+        ///  Step1 : Navigate to NavigationFailed_Page1.xaml
+        ///  Step2 : Navigate to nonexisting page (NavigationFailed_NoneExistingPage.xaml),
+        ///            Verify NavigationFailed event fired
+        ///  Step3 : Navigate to a page with a frame (NavigationFailed_Frame.xaml)
+        ///  Step4 : In the frame navigate to a non existing page and Verify NavigationFailed event fired
+        ///  Step5 : In the frame navigate to a fragment of a page (FragmentNavigation_Page2.xaml#fragment2)
+        ///  Step6 : In the frame navigate to a non existing fragment (FragmentNavigation_Page2.xaml#nonexisting)
+        ///  Step7 : Navigate to a non existing external Uri and Verify NavigationFailed event fired
+        /// /summary" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap NavigationFailed" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\browser" />
+    </SupportFiles>
+  </TEST>-->
+
+
+  <TEST Name="HtmlInteropEvents"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop events (Navigating, Navigated, LoadCompleted) with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropEvents" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <!-- Disbale -->
+  <!--<TEST Name="HtmlInteropObjectForScripting"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop ObjectForScripting property with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropObjectForScripting" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+  <!--<TEST Name="HtmlInteropInvokeScript"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop InvokeScript method with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropInvokeScript" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+  <TEST Name="HtmlInteropForwardBack"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop GoForward, GoBack, CanGoForward, and CanGoBack with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropForwardBack" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropNavigate"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop Navigate (with and w/o arguments) with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropNavigate" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropLoad"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop  LoadFromString, and LoadFromStream with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropLoad" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropSubframes"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop involving subframes with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropSubframes" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+  <!--
+  <TEST Name="HtmlInteropEventsBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop events (Navigating, Navigated, LoadCompleted) with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropEvents" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropObjectForScriptingBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop ObjectForScripting property with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropObjectForScripting" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropInvokeScriptBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop InvokeScript method with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropInvokeScript" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropForwardBackBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop GoForward, GoBack, CanGoForward, and CanGoBack with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropForwardBack" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropNavigateBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="150"
+        Description="Test HTML Interop Navigate (with and w/o arguments) with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropNavigate" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropLoadBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop NavigateToString and NavigateToStream with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropLoad" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropSubframesBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop with subframes with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropSubframes" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropSecurityBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop InvokeScript with security demand, and Navigate to outside the site of origin with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropSecurity" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+  <TEST Name="HtmlInteropRefresh"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop Refresh with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropRefresh" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+  <!--
+  <TEST Name="HtmlInteropRefreshBrowser"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop Refresh with the WebBrowser in an .xbap" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropRefresh" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+  <TEST Name="HtmlInteropDocument"
+        Priority="0"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop Document with the WebBrowser" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe HtmlInteropDocument" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <!--<TEST Name="CredentialPolicyPreserved"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="Navigation"
+        Timeout="120"
+        Description="Test that WPF doesn't stomp on user-set credential policy when navigating.  Regression test: AuthenticationManager.CredentialPolicy set by the user gets lost in NavigationService.cctor()" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe CredentialPolicyPreserved" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+
+  <TEST Name="htmlinterop1"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop - GoBack from NavigateToString shouldn't InvariantAssert" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe htmlinterop1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+  <!--
+  <TEST Name="htmlinterop1Browser"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop in an .xbap - GoBack from NavigateToString shouldn't InvariantAssert" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap htmlinterop1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropXXProcBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test that the WebBrowser in an .xbap on Vista+ is hosted in the IE process, not PresentationHost's process" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunConfigurationFile"
+                  MethodParams="AMC_HtmlInteropXXProc.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\AMCFiles\AMC_HtmlInteropXXProc.xml" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropXXProcLocalBrowser"
+        Priority="2"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test that the WebBrowser in a local V4 .xbap is hosted in the IE process, not PresentationHost's process" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropXXProc" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="HtmlInteropXXProcAlertBrowser"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test that html alerts show up when in XXProc." >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunConfigurationFile"
+                  MethodParams="AMC_HtmlInteropXXProcAlert.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\AMCFiles\AMC_HtmlInteropXXProcAlert.xml" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\AMCFiles\Scripter_HtmlInteropXXProcAlert.xml" />
+    </SupportFiles>
+    <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+  <TEST Name="Htmlinterop2"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop - trying to use WebBrowser from another thread should throw an InvalidOperationException" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe Htmlinterop2" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+  <!--
+  <TEST Name="Htmlinterop2Browser"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop in an .xbap - trying to use WebBrowser from another thread should throw an InvalidOperationException" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap Htmlinterop2" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>3.0SP2+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+  <TEST Name="Htmlinterop3"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop - NavigateToStream, then Navigate immediately, or Navigate, then NavigateToStream in Navigating, should succeed" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe Htmlinterop3" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <!-- Test has difficult-to-trace timing issue.  Disable until MQ. -->
+<!--<TEST Name="Htmlinterop3Browser"
+        Priority="1"
+        Disabled="true"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop in an .xbap - NavigateToStream, then Navigate immediately, or Navigate, then NavigateToStream in Navigating, should succeed" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap Htmlinterop3" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+  <!--<TEST Name="Htmlinterop4"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop - Verify javascript: and vbscript: protocols can be navigated." >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Standalone.exe Htmlinterop4" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone" />
+    </SupportFiles>
+    <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+  <!--
+  <TEST Name="Htmlinterop4Browser"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop in an .xbap - Verify javascript: and vbscript: protocols can be navigated." >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap Htmlinterop4" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+  <!-- This case no longer makes sense.  For v4, the WebOC is always in the iexplore.exe process.  This no longer tests the PresentationHost LMZ feature key. -->
+<!--<TEST Name="HtmlInteropLMZLockdownBrowser"
+        Priority="1"
+        Disabled="True"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="HTML Interop - Verify that LMZ lockdown goldbar shows up" >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunApplication"
+                  SecurityLevel="FullTrust"
+                  MethodParams="NavigationTests_Browser.xbap HtmlInteropLMZLockdown" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+    </SupportFiles>
+    <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>
+
+  <TEST Name="Htmlinterop5Browser"
+        Priority="1"
+        Type="Functional"
+        Area="AppModel"
+        SubArea="HtmlInterop"
+        Timeout="120"
+        Description="Test HTML Interop - Verify Navigate(string) method works and passes Url parameters properly." >
+    <Driver Executable="sti.exe" />
+    <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                  Assembly="TestRuntime"
+                  Method="RunConfigurationFile"
+                  MethodParams="AMC_Htmlinterop5.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\Navigation\Browser" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\AMCFiles\AMC_Htmlinterop5.xml" />
+    </SupportFiles>
+    <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+    </Versions>
+  </TEST>-->
+
+</XTC>
+

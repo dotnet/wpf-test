@@ -1,0 +1,49 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <OutputSubFolder>FeatureTests\AppModel\Cookies</OutputSubFolder>
+    <AssemblyName>WebRequestSendTest</AssemblyName>
+    <TargetType>winexe</TargetType>
+    <HostInBrowser>True</HostInBrowser>
+    <SignManifests>True</SignManifests>
+    <TargetZone>Internet</TargetZone>
+    <ManifestKeyFile>$(WpfTestKeyFile)</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <DependencyType>Prerequisite</DependencyType>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+ 
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="System.Printing" />
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Private>False</Private>
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+	    
+  </ItemGroup>
+  <ItemGroup>
+       <Compile Include="..\..\Common\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\Common\App.xaml" />
+   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Page1.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Page1.xaml" />
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>

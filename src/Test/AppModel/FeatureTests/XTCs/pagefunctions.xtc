@@ -1,0 +1,615 @@
+<XTC>
+<DEFAULTTESTINFO>
+  <Deployments>
+    <Deployment>FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment</Deployment>
+  </Deployments>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.dll" />
+    <SupportFile Source="FeatureTests\AppModel\Navigation\NavigationTestLibrary.deployment" />
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\NavigationTests_Standalone.exe" />
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\en-US\NavigationTests_Standalone.resources.dll" Destination="en-US"/>
+    </SupportFiles>
+</DEFAULTTESTINFO>
+
+<TEST Name="Regression_Standalone"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" - PageFunction cannot get the Window handle using Window.GetWindow()" >
+
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe Regression9" />
+
+   <SupportFiles>
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>
+
+<TEST Name="Regression_Standalone"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description="Regression case 10 - Invariant.Assert failing when calling a PageFunction from within a UserControl
+                   Ensures that the correct exception is thrown" >
+
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe Regression10" />
+   <SupportFiles>
+   </SupportFiles>
+   <Versions>
+      <Version>4.0+</Version>
+      <Version>4.0Client+</Version>
+   </Versions>
+</TEST>
+
+<TEST Name="FinishChildMarkupPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] OnReturn test: Navigate to and return from a markup child PageFunction (visual verification included)Major action: Navigate to a child PageFunction (created in XAML) with its own OnReturn eventhandler, then click on a button to cause the child PageFunction to return to its parent.Pass condition:  After navigating to and returning from the child PageFunction, we check that the state of the child PF is what we expect it to be, the journal reflects the navigations, and that the child PF rendered correctly (visual verification).  After the child PF returns, we check that the correct object is returned by the OnReturn eventhandler, the parent PF is in the expected state and the correct markup content for the parent PF is loaded, and the parent PF rendered correctly.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe FinishChildMarkupPF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupObjPF1_Loose.bmp"/>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupStrPF1_Loose.bmp"/>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="BasicMarkupPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Create and render a basic markup PageFunction  (visual verification included)Major action: Creates a basic PageFunctionString in markup.Pass condition: Checks that the markup content loaded is what we expect, that journal state is what we expect, that PageFunction has no children and that it renders correctly (compared to its baseline image).Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe BasicMarkupPF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupPF1_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="MarkupPFNavigateToChild"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Navigate a markup PageFunction to its child PageFunctionMajor action: Create a PageFunction from XAML and navigate it to its child PageFunction (object PageFunction)Pass condition:  When starting PageFunction is loaded, verify that the correct markup content is loaded.  After navigating to the child PF, verify that the correct markup child PF is loaded, the child PF's journal state is what we expect.  No visual verification.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe MarkupPFNavigateToChild"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="RemoveFromJournalMarkupPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Get RemoveFromJournal property's default value and set RemoveFromJournal from markup PFsMajor action: Checks RemoveFromJournal's default value and navigates to a child PageFunction.  While at the child PageFunction, set the child PF's RemoveFromJournal = true and return from the child PF to the parent PF.Pass condition:  RemoveFromJournal property's default value is false.  Child PF is checked to see if the correct markup content is shown and it has the expected journal state.  After returning to parent PF once child PF is done, the child PF should not appear in the parent PF's journal, the parent PF's Start method should not be invoked on return and the Return eventhandlers were called the correct number of times.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe RemoveFromJournalMarkupPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="PageToMarkupPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Navigate from Page to markup PageFunctionMajor action: Navigate from a Page to its child PageFunction (defined in markup)Pass condition:  At the starting Page, check that the correct content is loaded.  At the child PageFunction, check that the correct markup String PF is loaded and check that the child PF has no children and the journal state is what we expect it to be.  When we return to the parent Page, check that TESTSTRING is returned by the child PFString, check that the correct content is loaded as the Page's root element and the app's journal state is correct after returning from the child PF (PF should appear in the Back stack).Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe PageToMarkupPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="RemoveFromJournalFinishChildMarkupPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Set RemoveFromJournal = true and return from a markup child PageFunctionMajor action: Navigate from a parent PageFunction to a child PageFunction, set the child PF's RemoveFromJournal property to true and then return from the child PF to the parent PF.  *** NOTE:  A couple of hacks to RemoveFromJournal included to make this test case work. Needs to be removed after the associated bugs are fixed. ***Pass condition:  At each navigation to a PF (start, nav to child, return to parent), check the following against the expected value for the current PageFunction:- whether or not it has a child PageFunction- journal state matches expected journal- RemoveFromJournal has the expected value- correct markup content for the PageFunction was loaded.After returning to the parent PF, check that the child PF does not appear in the journal and Start method was not called when navigating back to the parent PF.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe RemoveFromJournalFinishChildMarkupPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="BasicPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Create and render a basic code PageFunction Test (visual verification included)Major action:  Creates a basic PageFunction in codePass condition:   Checks that the content-children loaded are what we expect (rectangle), hit-testing at 410, 350 in navigation client are succeeds, and that it renders correctly (compared to its baseline image within a certain given rectangle).Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe BasicPF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\BasicPageFunction_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NavigateToChildPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Basic test of navigation to a child pagefunctionMajor action: PageFunction BVT Test (basic test of navigation to a child pagefunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe NavigateToChildPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="ChildPropertyPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Testing Get/Set of Child property of a PageFunctionMajor action:  PageFunction BVT Test (test Get/Set for the Child property for PageFunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe ChildPropertyPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="ChildPropertyMultiplePF"
+      Priority="0"
+      Disabled="true"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Get and Set Child property multiple timesMajor action:  PageFunction BVT Test (test Get/Set multiple times for the Child property of PageFunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe ChildPropertyMultiplePF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildMultipleGetSetPF_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="ParentPFStateOnNavigate"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of Parent PageFunction State on navigation to Child PageFunctionMajor action: PageFunction BVT Test (tests parent PageFunction state on navigation to its child PageFunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe ParentPFStateOnNavigate"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="KeepAlivePF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of KeepAlive property of  PageFunctionsMajor action:  PageFunction BVT Test (tests KeepAlive property of PageFunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe KeepAlivePF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="RemoveFromJournalFalsePF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of RemoveFromJournal property (set to false)Major action: PageFunction BVT Test (tests setting the RemoveFromJournal property to false)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe RemoveFromJournalFalsePF"
+/>
+
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ParentBoolPF_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="RemoveFromJournalTruePF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of RemoveFromJournal property (set to true)Major action:  PageFunction BVT Test (tests setting RemoveFromJournal = true)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe RemoveFromJournalTruePF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="GoingBackPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test going Back between PageFunctionsMajor action:  PageFunction BVT Test (tests going back between PageFunctions)Pass condition:  Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe GoingBackPF"
+/>
+  <SupportFiles>
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+    <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ParentBoolPF_Loose.bmp" />
+  </SupportFiles>
+</TEST>
+
+<TEST Name="GoingForwardPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test going Forward between PageFunctionsMajor action:  PageFunction BVT Test (tests going forward between PageFunctions)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication" SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe GoingForwardPF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NavBackFwdFinishedChildPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test navigating back/fwd to a finished child PageFunctionMajor action:  PageFunction BVT Test (test navigating back/forward to a finished child PageFunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe NavBackFwdFinishedChildPF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ParentBoolPF_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="DifferentTypesPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of PageFunctions of different types (int, string, object, structtype, reftype, bool)Major action:  PageFunction BVT Test (tests PageFunctions of different types)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe DifferentTypesPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="StartMethodPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Basic test of Start Method in a PageFunctionMajor action:  PageFunction BVT Test (tests Start method in a PageFunction)Pass condition:  Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe StartMethodPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="StartMethodFinishChildPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of Start Method in a PageFunction upon finish of the child pagefunctionMajor action:  PageFunction BVT Test (tests Start method in a PageFunction after the child PageFunction has returned)Pass condition:  Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe StartMethodFinishChildPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="StartMethodNavBackPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of Start Method in a PageFunction upon navigating back into the PageFunctionMajor action:  PageFunction BVT Test (tests Start method in a PageFunction upon navigating back into the PageFunction)Pass condition:  Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe StartMethodNavBackPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="StartMethodNavFwdPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of Start Method in a PageFunction upon navigating forward into the PageFunctionMajor action:  PageFunction BVT Test (tests Start method in a PageFunction upon navigating forward into the PageFunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe StartMethodNavFwdPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NavCodeToMarkupPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Navigate to a markup PageFunction from a code PageFunctionMajor action:  PageFunction BVT Test (tests navigating to a markup PageFunction from a code PageFunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe NavCodeToMarkupPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="BasicUILessPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Basic UILess PageFunction testMajor action:  PageFunction BVT Test (basic UI-less PageFunction test)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe BasicUILessPF"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="JournalingUILessPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test Journaling of UILess PageFunctionMajor action:  PageFunction BVT Test (tests journaling of UILess PageFunction)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe JournalingUILessPF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ParentBoolPF_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NavBackMultiplePF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of navigating Back multiple times between pagefunctionsMajor action:  PageFunction BVT Test (tests navigating back multiple times between PageFunctions)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe NavBackMultiplePF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ParentBoolPF_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NavFwdMultiplePF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Test of navigating Forward multiple times between pagefunctionsMajor action:  PageFunction BVT Test (tests navigating forward multiple times between PageFunctions)Pass condition:Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe NavFwdMultiplePF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ChildPF_String_Loose.bmp" />
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ParentBoolPF_Loose.bmp" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="StockPageFunction"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Exercise StockPageFunction public APIMajor action:  Call each public method/property for the classes in StockPageFunction.cs:  StringReturnEventArgs, StringPageFunction, ObjectReturnEventArgs, ObjectPageFunction, Int32ReturnEventArgs, Int32PageFunction, BooleanReturnEventArgs, BooleanPageFunction.Pass condition:  Verify that constructors return non-null instances of the classes and that the Result property equals the argument passed into the constructor.  To add: coverage for OnFinish methods.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe StockPageFunction"
+/>
+   <SupportFiles>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="ReuseReturnedPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Reusing a finished PageFunctionMajor action:  Restart/reuse a PageFunction object after it has returned by launching it from its parent.Pass condition:  Check journal state, check rendering via VScan, verify content and current source after each navigation and verify the number of PageFunction return events fired.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe ReuseReturnedPF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupObjPF1_Loose.bmp"/>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupStrPF1_Loose.bmp"/>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="NoReturnEventHandlerPF"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Return a PageFunction which has no Return eventhandler attachedMajor action:  From a parent PageFunction, launch a child PageFunction which has no eventhandler registered for the Return event.  The parent PF launches its child and the child returns (via a button click) to its parent.  Even if no Return eventhandler is registered, the child PF should still return successfully to its parent PF.Pass condition:  Check journal state, check rendering via VScan, verify content and current source after each navigation and verify the number of PageFunction return events fired.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe NoReturnEventHandlerPF"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupObjPF1_Loose.bmp"/>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupStrPF1_Loose.bmp"/>
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FinishPFWithNonEmptyFwdJournal"
+      Priority="0"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="PageFunctions"
+      Description=" [DESCRIPTION] Finish PageFunction which has a non-empty forward journalMajor action:  From a child PageFunction (launched from a parent PageFunction), navigate to an unrelated external Page, then GoBack to the child PageFunction so that this page appears in the forward journal.  Click on a button within the child PageFunction to return to the parent PageFunction.Pass condition:  Check journal state, check rendering via VScan, verify content and current source after each navigation and verify the number of PageFunction return events fired.  Once we return to the parent PageFunction, check that the forward stack is empty.  Any navigations from the child PF forward should be [1] removed from journal if RemoveFromJournal is true (default) or [2] in the back stack if RemoveFromJournal is false.Test owner:  Microsoft" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="NavigationTests_Standalone.exe FinishPFWithNonEmptyFwdJournal"
+/>
+   <SupportFiles>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupObjPF1_Loose.bmp"/>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\ImagePage_Loose.xaml"/>
+     <SupportFile Source="FeatureTests\AppModel\Navigation\Standalone\MarkupStrPF1_Loose.bmp"/>
+   </SupportFiles>
+</TEST>
+
+</XTC>
+

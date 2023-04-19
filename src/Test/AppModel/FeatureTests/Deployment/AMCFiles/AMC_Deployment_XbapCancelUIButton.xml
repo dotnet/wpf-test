@@ -1,0 +1,44 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Test.Windows.Client.AppSec.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+        
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel Download - UI button - UNC">
+               <CancelDownloadStep ExpectedAppName="SimpleBrowserHostedApplication" ExpectedPublisherName="Microsoft" Method="UICancelButton" Scheme="UNC" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+           <TestLogStep Name="Cancel Download - UI button - HTTP Intranet">
+               <CancelDownloadStep ExpectedAppName="SimpleBrowserHostedApplication" ExpectedPublisherName="Microsoft" Method="UICancelButton" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+<!--  Internet zone scenarios disabled due to difficulties of automation w/ prompting and code path redundancy w/ HTTP Intranet
+           <TestLogStep Name="Cancel Download - UI button - HTTP Internet">
+               <CancelDownloadStep ExpectedAppName="SimpleBrowserHostedApplication" ExpectedPublisherName="Microsoft" Method="UICancelButton" Scheme="HTTPInternet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+-->
+           <TestLogStep Name="Cancel Download - UI button - HTTPS Intranet">
+               <CancelDownloadStep ExpectedAppName="SimpleBrowserHostedApplication" ExpectedPublisherName="Microsoft" Method="UICancelButton" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+        </FileHostStep>
+
+<!--  Internet zone scenarios disabled due to difficulties of automation w/ prompting and code path redundancy w/ HTTP Intranet
+        <FileHostStep  >
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+           <TestLogStep Name="Cancel Download - HTTPS Internet">
+               <CancelDownloadStep ExpectedAppName="SimpleBrowserHostedApplication" ExpectedPublisherName="Microsoft" Method="UICancelButton" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedApplication.xbap" />
+           </TestLogStep>    
+
+        </FileHostStep>
+-->
+        
+     </Steps>
+</AppMonitorConfig>

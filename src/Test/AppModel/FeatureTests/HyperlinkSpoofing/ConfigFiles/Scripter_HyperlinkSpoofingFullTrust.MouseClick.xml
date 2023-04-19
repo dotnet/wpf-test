@@ -1,0 +1,13 @@
+﻿<Actions Description="ClickHyperlink">
+    <Context WindowText="RegEx:Loaded.*" ClassName="IEFrame" ContinueIfNotFound="false" />
+    <Action Name="LeftClick" >
+        <TargetProperty Name="AutomationId" Value="hl" />
+    </Action>
+
+    <Context WindowText="RegEx:(Microsoft)" ClassName="IEFrame" ContinueIfNotFound="false" />
+    <Action Name="VerifyWindowText" ExpectedText="(Microsoft)" />
+
+    <!-- All run, pass -->
+    <Action Name="PassMessage" Message="Hyperlink navigated properly, Test Passed!!!" />
+
+</Actions>

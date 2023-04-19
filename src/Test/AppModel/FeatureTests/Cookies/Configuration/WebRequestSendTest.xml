@@ -1,0 +1,46 @@
+<AppMonitorConfig>
+<Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+ 	
+       <BrowserStateStep ThirdPartyBrowser="FireFox20" Installed="True" DefaultBrowser="True" />
+
+         <FileHostStep >
+             <FileHostStep.SupportFiles>
+              <SupportFile Name="WebRequestSendTest.xbap" IncludeDependencies="true" />
+              <SupportFile Name="SetCookieXbap.xbap" IncludeDependencies="true" />
+	      <SupportFile Name="SimpleVerification.html" IncludeDependencies="true" />
+	      <SupportFile Name="SimpleCleanup.html" IncludeDependencies="true" />
+             </FileHostStep.SupportFiles>
+
+
+	<TestLogStep Name="Verifying XBAP cookie - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SetCookieXbap.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(PersistentCookieFromXBAP=1978)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="WebRequestSendTest.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(PersistentCookieFromXBAP=1978)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleCleanup.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleVerification.html">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(NO COOKIE SET)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+        </TestLogStep>
+       </FileHostStep>
+
+
+  
+  </Steps>
+</AppMonitorConfig>

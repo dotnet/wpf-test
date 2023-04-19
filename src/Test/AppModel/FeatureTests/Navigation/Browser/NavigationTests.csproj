@@ -1,0 +1,131 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <OutputSubFolder>FeatureTests\AppModel\Navigation\Browser</OutputSubFolder>
+    <AssemblyName>NavigationTests_Browser</AssemblyName>
+    <TargetType>winexe</TargetType>
+    <UICulture>en-US</UICulture>
+    <HostInBrowser>True</HostInBrowser>
+    <TargetZone>Internet</TargetZone>
+    <SignManifests>True</SignManifests>
+    <ManifestKeyFile>$(WpfTestKeyFile)</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <DependencyType>Prerequisite</DependencyType>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+
+  <!-- Test and Validation code -->
+  <ItemGroup>
+    <ApplicationDefinition Include="..\App.xaml" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Page    Include="..\common\*.xaml" />
+    <Compile Include="..\*.cs" />
+
+    <Compile Include="..\Common\NavigationBaseClass.cs" />
+
+    <Page     Include="Pages\VerifyIETravelog_Page1.xaml" />
+    <Page     Include="VerifyIETravelog_Page2.xaml" />
+    <Page     Include="VerifyIETravelog_Page4.xaml" />
+    <Content  Include="LoosePages\*.*">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Page     Include="..\Frame\*.xaml" />
+    <Compile  Include="..\Frame\*.cs" />
+    <Resource Include="..\Frame\*.jpg" />
+    <Resource Include="..\Frame\*.html" />
+
+    <Page     Include="..\GeneralNavigation\*.xaml" />
+    <Compile  Include="..\GeneralNavigation\*.cs" />
+    <Resource Include="..\GeneralNavigation\*.jpg" />
+    <Resource Include="..\GeneralNavigation\*.html" />
+    <Content  Include="..\GeneralNavigation\LooseXaml_*.xaml">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Page     Include="..\Journal\*.xaml" />
+    <Compile  Include="..\Journal\*.cs" />
+    <Resource Include="..\Journal\*.jpg" />
+    <Resource Include="..\Journal\*.html" />
+
+    <Page     Include="..\NavigationWindow\*.xaml" />
+    <Compile  Include="..\NavigationWindow\*.cs" />
+    <Resource Include="..\NavigationWindow\*.jpg" />
+    <Resource Include="..\NavigationWindow\*.html" />
+    <Resource Include="..\NavigationWindow\*.xml" />
+
+    <Page     Include="..\RootBrowserWindow\*.xaml" />
+    <Compile  Include="..\RootBrowserWindow\*.cs" />
+    <Resource Include="..\RootBrowserWindow\*.jpg" />
+    <Resource Include="..\RootBrowserWindow\*.html" />
+
+    <Page     Include="..\CommonFileDialog\*.xaml" />
+    <Compile  Include="..\CommonFileDialog\*.cs" />
+    <Resource Include="..\CommonFileDialog\*.jpg" />
+
+    <Page     Include="..\WebOC\*.xaml" />
+    <Compile  Include="..\WebOC\*.cs" />
+    <Resource Include="..\WebOC\*.jpg" />
+    <Resource Include="..\WebOC\*.html" />
+    <Content  Include="..\WebOC\HtmlInterop*.htm" >
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Page     Include="..\Hyperlink\*.xaml" />
+<!-- THIS IS WHERE THE UIA WARNING COMES FROM (IT's NOT APTCA) -->
+    <Compile  Include="..\Hyperlink\*.cs" />
+    <Resource Include="..\Hyperlink\*.jpg" />
+    <Resource Include="..\Hyperlink\*.html" />
+    <Content  Include="..\Hyperlink\*_Loose.*">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Page     Include="..\PageFunction\*.xaml" />
+    <Compile  Include="..\PageFunction\*.cs" />
+    <Resource Include="..\PageFunction\*.jpg" />
+    <Resource Include="..\PageFunction\*.html" />
+    <Page     Include="..\PageFunction\Common\*.xaml" />
+    <Compile  Include="..\PageFunction\Common\*.cs" />
+    <Resource Include="..\PageFunction\Common\*.bmp" />
+    <Page     Include="..\PageFunction\Regression\*.xaml" />
+    <Compile  Include="..\PageFunction\Regression\*.cs" />
+    
+    <Content Include="..\Resources\*_Loose.*">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Resources\*_Embedded.*" />
+    <Page    Include="..\Resources\*_Page.xaml" />
+    <Compile Include="..\Resources\*.cs" />
+
+    <Content  Include="..\GeneralNavigation\test.html">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+
+  <!-- Reference Items Group  -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationClient" />
+    <!-- TestRuntime references TestAPICore References System.core, but we need to reference System.Core first for name resolution -->
+    <Reference Include="System.Core" Condition="'$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0'" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(NavigationTestLibraryProject)" />
+
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+</Project>

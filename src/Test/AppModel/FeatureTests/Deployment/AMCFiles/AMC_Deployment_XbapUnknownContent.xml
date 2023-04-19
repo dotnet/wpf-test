@@ -1,0 +1,21 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="Verify SameSite Hyperlink --> unknown file type behavior test log">
+        <FileHostStep UserDefinedDirectory="samesitetest" >
+           <FileHostStep.SupportFiles>
+                <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+                <SupportFile Name="deploy_un.known" IncludeDependencies="False" />
+           </FileHostStep.SupportFiles>
+
+         <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SimpleBrowserHostedApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <IEUnknownContentTestHandler ProcessName="iexplore" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep> 
+
+         </FileHostStep>  
+	</TestLogStep>
+
+     </Steps>
+</AppMonitorConfig>

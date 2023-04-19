@@ -1,0 +1,69 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+               <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+               <SupportFile Name="Deploy_ExpressAppInDHTMLFrame.htm" IncludeDependencies="false" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name=".XBAP in DHTML Frame - UNC">
+         <ActivationStep Method="launch" Scheme="UNC" FileName="Deploy_ExpressAppInDHTMLFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" ZoneVerificationString="Partial Trust (Internet) Granted" PresHostInstances="2" WindowTitle="RegExp:(Express App in a DHTML Frame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Express App in a DHTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />  
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name=".XBAP in DHTML Frame - HTTP Intranet">
+         <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="Deploy_ExpressAppInDHTMLFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" ZoneVerificationString="Partial Trust (Internet) Granted" PresHostInstances="2" WindowTitle="RegExp:(Express App in a DHTML Frame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Express App in a DHTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />  
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name=".XBAP in DHTML Frame - HTTPS Intranet">
+         <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="Deploy_ExpressAppInDHTMLFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" ZoneVerificationString="Partial Trust (Internet) Granted" PresHostInstances="2" WindowTitle="RegExp:(Express App in a DHTML Frame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Express App in a DHTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />  
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name=".XBAP in DHTML Frame - HTTP Internet">
+         <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="Deploy_ExpressAppInDHTMLFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" ZoneVerificationString="Partial Trust (Internet) Granted" PresHostInstances="2" WindowTitle="RegExp:(Express App in a DHTML Frame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Express App in a DHTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />  
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+	</TestLogStep>
+
+        </FileHostStep>
+
+	<TestLogStep Name=".XBAP in DHTML Frame - HTTPS Internet">
+         <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="Deploy_ExpressAppInDHTMLFrame.htm">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ShouldNotSeeTM="True" ZoneVerificationString="Partial Trust (Internet) Granted" PresHostInstances="2" WindowTitle="RegExp:(Express App in a DHTML Frame)" ProcessName="IEXPLORE" ExpectedWindowTitle="Express App in a DHTML Frame" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />  
+                 <FailIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                 <FailIfSeenHandler WindowTitle="RegExp:(Testing Security Zone ...)" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+             <ActivationStep.SupportFiles>
+                 <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+                 <SupportFile Name="Deploy_ExpressAppInDHTMLFrame.htm" IncludeDependencies="false" />
+             </ActivationStep.SupportFiles>
+           </ActivationStep>
+	</TestLogStep>
+
+      
+  </Steps>
+</AppMonitorConfig>

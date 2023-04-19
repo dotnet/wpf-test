@@ -1,0 +1,10 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="143 - Compile when TargetName same as the AppDef file included">
+      <MSBuildStep CurrentStage="Run" Arguments="TargetNameProjectVariations.csxml /rst:10" />
+      <ActivationStep FileName="&amp;ExecutableFullPath&amp;" />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

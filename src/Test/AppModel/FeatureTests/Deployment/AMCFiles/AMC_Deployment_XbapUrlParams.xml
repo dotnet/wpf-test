@@ -1,0 +1,49 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+         <FileHostStep.SupportFiles>
+              <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+         </FileHostStep.SupportFiles>
+
+        <TestLogStep Name="Browser-Hosted .xbap with URL Parameters Test Log - HTTP Intranet">
+          <ActivationStep Method="launch" Scheme="HttpIntranet" FileName="SimpleBrowserHostedApplication.xbap" Arguments="?TestingURLParameters">
+              <ActivationStep.UIHandlers>
+ 		 <PassIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="iexplore" AutomationElementAndValue="bhParamBtn;TestingURLParameters" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Browser-Hosted .xbap with URL Parameters Test Log - HTTP Internet">
+          <ActivationStep Method="launch" Scheme="HttpInternet" FileName="SimpleBrowserHostedApplication.xbap" Arguments="?TestingURLParameters">
+              <ActivationStep.UIHandlers>
+ 		 <PassIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="iexplore" AutomationElementAndValue="bhParamBtn;TestingURLParameters" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+        <TestLogStep Name="Browser-Hosted .xbap with URL Parameters Test Log - HTTPS Intranet">
+          <ActivationStep Method="launch" Scheme="HttpsIntranet" FileName="SimpleBrowserHostedApplication.xbap" Arguments="?TestingURLParameters">
+              <ActivationStep.UIHandlers>
+ 		 <PassIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="iexplore" AutomationElementAndValue="bhParamBtn;TestingURLParameters" />
+              </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+
+      </FileHostStep>
+
+        <TestLogStep Name="Browser-Hosted .xbap with URL Parameters Test Log - HTTPS Internet">
+          <ActivationStep Method="launch" Scheme="HttpsInternet" FileName="SimpleBrowserHostedApplication.xbap" Arguments="?TestingURLParameters">
+              <ActivationStep.UIHandlers>
+ 		 <PassIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="iexplore" AutomationElementAndValue="bhParamBtn;TestingURLParameters" />
+              </ActivationStep.UIHandlers>
+              <ActivationStep.SupportFiles>
+                 <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+              </ActivationStep.SupportFiles>
+          </ActivationStep>
+        </TestLogStep>
+
+       
+   </Steps>
+</AppMonitorConfig>

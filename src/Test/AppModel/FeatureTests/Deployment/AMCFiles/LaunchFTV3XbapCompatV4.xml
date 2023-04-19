@@ -1,0 +1,78 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+        <FileHostStep>
+           <FileHostStep.SupportFiles>
+              <SupportFile Name="SimpleBrowserHostedNSVApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Verifying V3 Full Trust Express with v4 compatibleframeworks - Local">
+          <ActivationStep Method="launch" Scheme="Local" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedNSVApplication"/>
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying V3 Full Trust Express with v4 compatibleframeworks - UNC (App should run!)">
+           <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedNSVApplication"/>
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying V3 Full Trust Express with v4 compatibleframeworks - HTTP Intranet  (App should run!)">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedNSVApplication"/>
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying V3 Full Trust Express with v4 compatibleframeworks - HTTPS Intranet  (App should run!)">
+           <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedNSVApplication"/>
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying V3 Full Trust Express with v4 compatibleframeworks - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="Title;PresentationFramework%%TrustNotGrantedTitle" ProcessName="presentationhost" />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying V3 Full Trust Express with v4 compatibleframeworks - HTTPS Internet">
+           <ActivationStep Method="launch" Scheme="HTTPSInternet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler AutomationElementAndValue="Title;PresentationFramework%%TrustNotGrantedTitle" ProcessName="presentationhost" />
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+        <TestLogStep Name="Verifying V3 Full Trust Express with v4 compatibleframeworks - HTTP Internet + Trusted Sites  (App should run!)">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier IgnoreIEZoneString="True" ZoneVerificationString="Full Trust Granted" ShouldNotSeeTM="False" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedNSVApplication"/>
+                 <BrowserAppExceptionHandler Action="LogAndFailIfSeen" WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.ErrorPageTitle, TestRuntime" ProcessName="IEXPLORE" />
+             </ActivationStep.UIHandlers>
+                <AddToTrustedSites />
+           </ActivationStep>
+           <RemoveFromTrustedSites />
+        </TestLogStep>
+ 
+       </FileHostStep>
+      
+  </Steps>
+</AppMonitorConfig>

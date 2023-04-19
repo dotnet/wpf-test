@@ -1,0 +1,28 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+ <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Deployment.CustomUIHandlers" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+
+        <MachineInfoStepDisabler ProcessorArch="amd64" DoNotRunReason="Debug test gets confused on 64 bit systems and devenv is always x86" >         
+
+	   <TestLogStep Name="Verifying PresentationHost Debug behavior - App Store Variation">
+              <ActivationStep PresentationHostDebugMode="True" Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                   <BrowserHostedApplicationVerifier AppShouldBeInStore="False" ZoneVerificationString="Partial Trust (Internet) Granted" ShouldNotSeeTM="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleBrowserHostedApplication" IsAppShellVisible="false" />
+                </ActivationStep.UIHandlers>
+              </ActivationStep>
+           </TestLogStep>
+
+	   <TestLogStep Name="Verifying PresentationHost Debug behavior - Launching non-debug apps while debugging ">
+              <ActivationStep PresentationHostDebugMode="True" Method="launch" Scheme="Local" FileName="SimpleBrowserHostedApplication.xbap">
+                <ActivationStep.UIHandlers>
+                   <PresHostDebugHandler WindowTitle="regexp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" />
+                   <PassIfSeenHandler WindowTitle="RegExp:(Simple Browser Hosted Application)" ProcessName="IEXPLORE" />
+                </ActivationStep.UIHandlers>
+              </ActivationStep>
+           </TestLogStep>
+
+        </MachineInfoStepDisabler>
+         
+     </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,9 @@
+<AppMonitorConfig>
+  <Steps>
+    <TestLogStep Name="120 - Compile with LocalReference.">
+      <MSBuildStep CurrentStage="Run" Arguments="LoadLocalReference.proj " />
+      <ActivationStep FileName="&amp;DeployFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:Clean;TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,22 @@
+<html>
+<head><title>IFRAME was not hijacked if this is a Window Title</title></head>
+<BODY onLoad="setCookie();">
+THIS CONTENT SHOULDNT BE HERE<br />
+<a href="http://www.evil.com">Go to Evil.com</a> <br />
+</body>
+<script language="JavaScript">
+function setCookie()
+{
+    if (top != window)
+    {
+        // Hosted
+        document.cookie = "Hosted=true; expires=Sat, 01-Jan-2063 00:00:00 GMT"
+    }
+    else
+    {
+        // Not Hosted
+        document.cookie = "Hosted=false; expires=Sat, 01-Jan-2063 00:00:00 GMT"
+    }
+}
+</script>
+</html>

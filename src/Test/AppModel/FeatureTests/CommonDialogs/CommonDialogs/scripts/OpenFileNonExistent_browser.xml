@@ -1,0 +1,24 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFileDialog test: Open a non-existent file [browser]">
+      <FileHostStep UserDefinedDirectory="CommonFileDialogs">
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="hello.txt" IncludeDependencies="true" />
+          <SupportFile Name="CommonFileDialogTest.xbap" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+        <ActivationStep Method="launch" Scheme="HttpInternet" FileName="CommonFileDialogTest.xbap">
+          <ActivationStep.UIHandlers>
+            <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFileDialogTitle, TestRuntime" 
+                               ProcessName="PresentationHost" 
+                               Dialog="OpenFileNonExistent_browser"
+                               FileName="i_do_not_exist.txt"
+                               TestType="TypeFileNameAndEnter"/>
+
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </FileHostStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,59 @@
+<XMLVariationTemplate>
+  <TemplateData>
+    
+      using System;
+      using System.Windows;
+      using System.Windows.Controls;
+      using System.Windows.Data;
+      using System.Windows.Documents;
+      using System.Windows.Media;
+      using System.Windows.Shapes;
+
+
+      namespace AvalonApplication1
+      {
+          /// <summary>
+          /// Interaction logic for Window1.xaml
+          /// </summary>
+
+          <NodeVariation ID="2">
+          
+            <NodeVariation ID="3">
+            public partial class Window1 : Window
+            </NodeVariation>
+            {
+                <NodeVariation ID="4">
+                public Window1()
+                {
+                    InitializeComponent();
+                }
+                </NodeVariation>
+
+                // To use Loaded event put Loaded="WindowLoaded" attribute in root element of .xaml file.
+                // private void WindowLoaded(object sender, RoutedEventArgs e) {}
+
+                // Sample event handler:  
+                // private void ButtonClick(object sender, RoutedEventArgs e) {}
+
+            }
+          
+          </NodeVariation>
+      }
+      
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>Window1</FileName>
+      <FileExtension>.xaml.cs</FileExtension>
+      <RetainFileName>true</RetainFileName>
+      <IsXmlDocument>false</IsXmlDocument>
+    </Defaults>
+    <Scenario Case="1">      
+      <NodeVariation ID="3">
+          public partial class Page1 : Page
+      </NodeVariation>
+      <NodeVariation ID="4">
+      </NodeVariation>
+    </Scenario>    
+  </Scenarios>
+</XMLVariationTemplate>

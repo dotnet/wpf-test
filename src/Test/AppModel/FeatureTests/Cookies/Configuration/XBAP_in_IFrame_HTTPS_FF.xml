@@ -1,0 +1,77 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+
+
+      <BrowserStateStep ThirdPartyBrowser="FireFox20" Installed="True" DefaultBrowser="True" />
+
+      <FileHostStep >
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="SetCookieXbap.xbap" IncludeDependencies="true" />
+          <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+          <SupportFile Name="SimpleCleanup.html" IncludeDependencies="false" />
+          <SupportFile Name="XBAPinIFrame_Set.html" IncludeDependencies="false" />
+        </FileHostStep.SupportFiles>
+
+
+        <TestLogStep Name="Verifying XBAP cookie - HTTPS Internet">
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="XBAPinIFrame_Set.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(PersistentCookieFromXBAP=1978)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleVerification.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(PersistentCookieFromXBAP=1978)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleCleanup.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleVerification.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(NO COOKIE SET)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+        </TestLogStep>
+      </FileHostStep>
+
+
+      <FileHostStep>
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="SetCookieXbap.xbap" IncludeDependencies="true" />
+          <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+          <SupportFile Name="SimpleCleanup.html" IncludeDependencies="false" />
+          <SupportFile Name="XBAPinIFrame_Set.html" IncludeDependencies="false" />
+        </FileHostStep.SupportFiles>
+
+        <TestLogStep Name="Verifying XBAP cookie - HTTPS Intranet">
+          <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="XBAPinIFrame_Set.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(PersistentCookieFromXBAP=1978)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="SimpleCleanup.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="SimpleVerification.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(NO COOKIE SET)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+        </TestLogStep>
+      </FileHostStep>
+
+    
+  </Steps>
+</AppMonitorConfig>

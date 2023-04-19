@@ -1,0 +1,85 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+
+
+      <BrowserStateStep ThirdPartyBrowser="FireFox20" Installed="True" DefaultBrowser="True" />
+
+      <FileHostStep >
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="WebOCXBAP_GetCookie.xbap" IncludeDependencies="true" />
+          <SupportFile Name="GetnSetPersistentCookie.html" IncludeDependencies="false" />
+          <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+          <SupportFile Name="SimpleCleanup.html" IncludeDependencies="false" />
+        </FileHostStep.SupportFiles>
+
+
+        <TestLogStep Name="Verifying HTML cookie - HTTPS Internet">
+         <MachineInfoStepDisabler OSMajorVersion="6" OSMinorVersion="1" DoNotRunReason="Blocked by XXProcess WebOC Hosting issues" >
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="WebOCXBAP_GetCookie.xbap">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(Ready for the next step)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleVerification.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(NewPersistentCookie=Cookie_detected)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleCleanup.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleVerification.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(NO COOKIE SET)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+         </MachineInfoStepDisabler>
+        </TestLogStep>
+      </FileHostStep>
+
+
+      <FileHostStep>
+        <FileHostStep.SupportFiles>
+          <SupportFile Name="WebOCXBAP_GetCookie.xbap" IncludeDependencies="true" />
+          <SupportFile Name="GetnSetPersistentCookie.html" IncludeDependencies="false" />
+          <SupportFile Name="SimpleVerification.html" IncludeDependencies="false" />
+          <SupportFile Name="SimpleCleanup.html" IncludeDependencies="false" />
+        </FileHostStep.SupportFiles>
+
+        <TestLogStep Name="Verifying HTML cookie - HTTPS Intranet">
+         <MachineInfoStepDisabler OSMajorVersion="6" OSMinorVersion="1" DoNotRunReason="Blocked by XXProcess WebOC Hosting issues" >
+          <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="WebOCXBAP_GetCookie.xbap">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(Ready for the next step)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+          <ActivationStep Method="launch" Scheme="HttpSInternet" FileName="SimpleVerification.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(NewPersistentCookie=Cookie_detected)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="SimpleCleanup.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(Cleaning up the persistent cookies)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+
+          <ActivationStep Method="launch" Scheme="HttpSIntranet" FileName="SimpleVerification.html">
+            <ActivationStep.UIHandlers>
+              <PassIfSeenHandler ProcessName="firefox" WindowTitle="RegExp:(NO COOKIE SET)"/>
+            </ActivationStep.UIHandlers>
+          </ActivationStep>
+         </MachineInfoStepDisabler>
+        </TestLogStep>
+      </FileHostStep>
+
+    
+  </Steps>
+</AppMonitorConfig>

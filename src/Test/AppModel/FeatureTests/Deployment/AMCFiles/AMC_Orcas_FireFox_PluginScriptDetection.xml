@@ -1,0 +1,18 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+  <Steps>
+    
+      <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+      <TestLogStep Name="FIREFOX - Verifying script-based plugin detection">
+        <ActivationStep Method="launch" Scheme="Local" FileName="JavascriptFFPluginDetect.htm">
+          <ActivationStep.UIHandlers>
+            <PassIfSeenHandler WindowTitle="RegExp:(Success... WPF plugin detected)" ProcessName="FireFox"  />
+            <FailIfSeenHandler WindowTitle="RegExp:(Failure ... WPF Plugin not detected)" ProcessName="FireFox"  />
+          </ActivationStep.UIHandlers>
+        </ActivationStep>
+      </TestLogStep>
+      
+    
+  </Steps>
+</AppMonitorConfig>

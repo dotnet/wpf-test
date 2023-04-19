@@ -1,0 +1,17 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary" />
+ <Using Namespace="Microsoft.Test.AppModel.SplashScreen" Assembly="SplashScreenLibrary" />
+
+     <Steps>
+
+	<TestLogStep Name="SplashScreen:Visual Validation of Splash Screen shown at startup">
+            <ActivationStep Arguments="shell:pauseonstartup" FileName="SplashScreenTestApp.exe" >
+                <ActivationStep.UIHandlers>
+                    <SplashScreenVisualVerifier ProcessName="SplashScreenTestApp" ReferenceImageFile="startupSplash.png" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep>
+        </TestLogStep>
+
+    </Steps>
+
+</AppMonitorConfig>

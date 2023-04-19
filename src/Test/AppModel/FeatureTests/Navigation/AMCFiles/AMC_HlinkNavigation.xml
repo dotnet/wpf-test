@@ -1,0 +1,26 @@
+﻿<AppMonitorConfig>
+    <Using Namespace="Microsoft.Windows.Test.Client.AppSec.Navigation" Assembly="NavigationTestLibrary"/>
+    <Using Namespace="Microsoft.Test.Deployment" Assembly="NavigationTestLibrary"/>
+    <Steps>
+      <TestLogStep Name="Hyperlink Navigation">
+        <FileHostStep UserDefinedDirectory="HyperlinkNavigation">
+
+            <FileHostStep.SupportFiles>
+                <SupportFile Name="HlinkNavigation_Page1_Loose.xaml" IncludeDependencies="true" />
+                <SupportFile Name="HlinkNavigation_Page2_Loose.xaml" IncludeDependencies="true" />
+                <SupportFile Name="HlinkNavigation_Page3_Loose.xaml" IncludeDependencies="true" />
+                <SupportFile Name="LooseXaml_FragmentNavigation_Page3.xaml" IncludeDependencies="true" />
+                <SupportFile Name="Page1_Loose.xaml" IncludeDependencies="true" />
+                <SupportFile Name="FlowDocument_Loose.xaml" IncludeDependencies="true" />
+            </FileHostStep.SupportFiles>
+
+            <ActivationStep Method="launch" Scheme="Local" FileName="HlinkNavigation_Page1_Loose.xaml">
+                <ActivationStep.UIHandlers>
+                  <HyperlinkNavigationHandlerBrowser WindowTitle="RegExp:(HyperlinkNavigationBVT)" />
+                </ActivationStep.UIHandlers>
+            </ActivationStep> 
+
+        </FileHostStep>
+      </TestLogStep>
+    </Steps>
+</AppMonitorConfig>

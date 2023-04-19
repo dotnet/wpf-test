@@ -1,0 +1,27 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+       
+      <BrowserStateStep ThirdPartyBrowser="FireFox20" Installed="True" DefaultBrowser="True" />
+
+      <FileHostStep>
+        <FileHostStep.SupportFiles>
+            <SupportFile Name="SimpleBrowserHostedApplication.xbap" IncludeDependencies="true" />
+            <SupportFile Name="Deploy_Markup1_v4.xaml" IncludeDependencies="true" />
+        </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="FIREFOX - Browser Exception Page - HTTP Internet">
+           <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="Deploy_Markup1_v4.xaml">
+             <ActivationStep.UIHandlers>
+                <BrowserAppExceptionRestartHandler  WindowTitle="RegExp:(Loose Xaml 1)" ProcessName="FireFox" />
+                <!-- Disable the browser exception logger -->
+                <FailIfSeenHandler NamedRegistration="BrowserExceptionLogger" ProcessName="NeverGoingToRunThis" />
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+      </FileHostStep>
+         
+         
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,68 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="MilSample.xaml">
+    
+    <x:Code><![CDATA[
+    
+    Microsoft.Test.Logging.TestLog log = null;
+     bool _browserhostedapp = false;
+
+    protected override void OnStartup(System.Windows.StartupEventArgs e)
+    {
+        log = Microsoft.Test.Logging.TestLog.Current;     
+        // log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+
+        if ( AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap") )        
+        {
+            _browserhostedapp = true;
+        }
+
+        log.LogStatus("Hooking up Navigation error event");
+
+        this.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+
+        log.LogStatus("OnStartup method - done");
+        // log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+        base.OnStartup(e);
+    }
+
+     void OnLoad ( object sender, NavigationEventArgs e )
+     {
+        log.LogEvidence("LoadCompleted event fired");
+
+        log.Result = Microsoft.Test.Logging.TestResult.Pass;
+
+        // log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+
+        if ( _browserhostedapp == false )        
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+            
+        Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+
+     }
+
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+            if ( _browserhostedapp == false )
+            {
+                log.LogStatus("Shutting down application");
+                // log.Close();
+            }
+    }
+
+
+    public bool BrowserHostedApp
+    {
+        get
+        {
+            return _browserhostedapp;
+        }
+    }
+
+    ]]></x:Code>
+
+</Application>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+	#region Using directives
+
+	using System.Reflection;
+	using System.Runtime.CompilerServices;
+	using System.Globalization;
+	using System.Security;
+	using System.Resources;
+
+	#endregion
+
+	//***Make the fall back for the resource lookup to check the {-Culture} folder
+	//In order to begin building localizable applications, set 
+	//&lt;UICulture&gt;CultureYouAreCodingWith&lt;/UICulture&gt; in your .csproj file
+	//inside a &lt;PropertyGroup&gt;.  For example, if you are using US english
+	//in your source files, set the &lt;UICulture&gt; to en-US.  Then uncomment
+	//the NeutralResourceLanguage attribute below.  Update the "en-US" in
+	//the line below to match the UICulture setting in the project file.
+
+	<NodeVariation ID="N0">
+	     //[assembly: NeutralResourcesLanguageAttribute("ja", UltimateResourceFallbackLocation.Satellite)]
+	</NodeVariation>
+  </TemplateData>
+  
+  <Scenarios>
+    <Defaults>
+      <FileName>AssemblyInfo</FileName>
+      <FileExtension>.cs</FileExtension>
+      <RetainFileName>true</RetainFileName>
+      <!--<CommandLineArgs>/t:Clean;Build</CommandLineArgs>-->
+      <IsXmlDocument>false</IsXmlDocument>      
+    </Defaults>
+
+    <Scenario Case="0">
+    </Scenario>
+    
+    <Scenario Case="1">
+    	<NodeVariation ID="N0">[assembly: NeutralResourcesLanguageAttribute("{DifferentCulture}", UltimateResourceFallbackLocation.Satellite)]</NodeVariation>
+    </Scenario>
+
+    <Scenario Case="2">
+    	<NodeVariation ID="N0">[assembly: NeutralResourcesLanguageAttribute("{InvalidCulture}", UltimateResourceFallbackLocation.Satellite)]</NodeVariation>
+    </Scenario>
+
+  </Scenarios>
+</XMLVariationTemplate>	
+	
+
+
+
+
+
+
+
+

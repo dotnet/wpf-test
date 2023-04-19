@@ -1,0 +1,44 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	 <TestLogStep Name="Verifying .xbap and .application with same name behavior test log">
+
+         <ActivationStep Method="launch" Scheme="Local" FileName="App\SimpleStandAloneApplication.application">
+             <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="Local" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+
+         <!-- Launch App once with same name and pass if we see error UI -->
+         <ActivationStep ClearFusionCache="False" SignAllApps="False" Method="launch" Scheme="Local" FileName="xbap\SimpleStandAloneApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="IExplore" AutomationElementAndValue="LogFileButton" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+
+         <!-- Launch App again to verify that despite the error trust decisions still work -->
+         <!-- this will hang looking for the error UI if the app crashes, indicating failure. -->
+         <ActivationStep ClearFusionCache="False" SignAllApps="False" Method="launch" Scheme="Local" FileName="xbap\SimpleStandAloneApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <PassIfSeenHandler ProcessName="IExplore" AutomationElementAndValue="LogFileButton" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+
+         <!-- Now we repeat the same test but this time cleaning the cache between runs.  If this fails, ApplicationDeploymentHelper.CleanClickOnceCache() is busted -->
+
+         <ActivationStep Method="launch" Scheme="Local" FileName="App\SimpleStandAloneApplication.application">
+             <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" IgnoreTrustDialog="True" ProcessName="SimpleStandAloneApplication" AppName="SimpleStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" Scheme="Local" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+
+         <!-- Launch App once with same name and pass if we see error UI -->
+         <ActivationStep Method="launch" Scheme="Local" FileName="xbap\SimpleStandAloneApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <BrowserHostedApplicationVerifier ZoneVerificationString="Partial Trust (Internet) Granted" IgnoreTrustDialog="True" WindowTitle="RegExp:(Simple Browser Hosted SEE Application)" ProcessName="IEXPLORE" ExpectedWindowTitle="Simple Browser Hosted SEE Application" AppName="SimpleStandAloneApplication" IsAppShellVisible="false" />
+             </ActivationStep.UIHandlers>
+         </ActivationStep>
+
+	</TestLogStep>
+     </Steps>
+</AppMonitorConfig>

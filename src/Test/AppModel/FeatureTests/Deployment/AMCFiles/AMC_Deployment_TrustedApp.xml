@@ -1,0 +1,21 @@
+﻿<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+     <Steps>
+	<TestLogStep Name="SSL Cert test - Launching Avalon .Application signed with &quot;Trusted&quot; Publisher certificate ">
+            <SSLCertificateStep PathToCert="AvalonTestTrusted.pfx" StoreName="TrustedPublisher" StoreLocation="LocalMachine" />
+            <SSLCertificateStep PathToCert="AvalonTestTrusted.pfx" StoreName="Root"             StoreLocation="LocalMachine" />
+
+            <ActivationStep Method="launch" Scheme="HTTPInternet" FileName="TrustedStandAloneApplication.application">
+               <ActivationStep.UIHandlers>
+                 <StandAloneApplicationVerifier WindowTitle="Simple Stand Alone Application" ShouldNotSeeTM="True" ProcessName="TrustedStandAloneApplication" AppName="TrustedStandAloneApplication" ExpectedWindowTitle="Simple Stand Alone Application" IsAppShellVisible="true" />
+               </ActivationStep.UIHandlers>
+               <ActivationStep.SupportFiles>
+                   <SupportFile Name="TrustedStandAloneApplication.application" IncludeDependencies="true" />
+               </ActivationStep.SupportFiles>
+            </ActivationStep>
+
+            <UninstallStep AppName="TrustedStandAloneApplication"/>
+
+	</TestLogStep>
+     </Steps>
+</AppMonitorConfig>

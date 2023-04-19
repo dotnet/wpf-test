@@ -1,0 +1,85 @@
+<XMLVariationTemplate>
+    <TemplateData>
+        
+        <NodeVariation ID="1">        
+        </NodeVariation>
+        
+        <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          x:Class="TestDll.SimpleImageCodeBehind"
+          >
+            <DockPanel>
+                <NodeVariation ID="2">
+                </NodeVariation>
+                <Button Width="150" Height="45">Add</Button>    
+
+                <NodeVariation ID="4">
+                    <AttributeVariation ID="3">
+                        <Image Source="picture1.jpg" Loaded="OnLoad"/>
+                    </AttributeVariation>
+                </NodeVariation>
+            </DockPanel>
+
+            <x:Code><![CDATA[
+
+                Private Shared log As Microsoft.Test.Logging.TestLog
+
+                Private Sub OnLoad(ByVal sender As System.Object, ByVal e As RoutedEventArgs)
+
+                    log = Microsoft.Test.Logging.TestLog.Current
+                    log.LogStatus("Image load event")
+                    
+                    log.Result = Microsoft.Test.Logging.TestResult.Pass
+
+
+                    If ( AppDomain.CurrentDomain.FriendlyName.ToString().Contains(".xbap") = False )        
+            
+                        System.Windows.Application.Current.Shutdown()
+                        
+                    Else
+                        
+                    End If
+
+                    Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring()
+
+                End Sub
+
+
+            ]]></x:Code>
+
+        </Page>
+    </TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>SimpleImageVB</FileName>
+            <FileExtension>.xaml</FileExtension>
+            <RetainFileName>true</RetainFileName>
+        </Defaults>
+        <Scenario Case="1">
+        </Scenario>
+        <Scenario Case="2">
+            <AttributeVariation ID="3" AttributeName="Source" AttributeValue="Images\Picture1.jpg" />
+        </Scenario>
+        <Scenario Case="3">
+            <NodeVariation ID="1">
+<!--                <?Mapping XmlNamespace="comp" ClrNamespace="Avalon.Test.AppModel.Component" Assembly="ImageLoadComponent" ?> -->
+            </NodeVariation>
+            <AttributeVariation ID="3" AttributeName="Source" AttributeValue="ImageLoadComponent;component\Picture1.jpg" />            
+        </Scenario>
+        <Scenario Case="4">
+            <NodeVariation ID="1">
+            </NodeVariation>
+            <AttributeVariation ID="3" AttributeName="Source" AttributeValue="ImageLoadComponent;component\Images\Picture1.jpg" />            
+        </Scenario>
+        <Scenario Case="5">
+            <NodeVariation ID="4">
+                <Frame Source="Simple.xaml" Loaded="OnLoad"/>            
+            </NodeVariation>
+        </Scenario>        
+        <Scenario Case="6">
+            <NodeVariation ID="4">
+                <Frame Source="ImageLoadComponent;component\Simple.xaml" Loaded="OnLoad"/>            
+            </NodeVariation>
+        </Scenario>        
+    </Scenarios>        
+</XMLVariationTemplate>

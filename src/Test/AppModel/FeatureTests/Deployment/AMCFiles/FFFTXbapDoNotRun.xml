@@ -1,0 +1,38 @@
+<AppMonitorConfig>
+ <Using Namespace="Microsoft.Test.Deployment" Assembly="DeploymentCommonLibrary"/>
+    <Steps>
+       
+       <BrowserStateStep ThirdPartyBrowser="FireFox30" Installed="True" DefaultBrowser="True" />
+
+       <FileHostStep>
+           <FileHostStep.SupportFiles>
+              <SupportFile Name="SimpleBrowserHostedNSVApplication.xbap" IncludeDependencies="true" />
+           </FileHostStep.SupportFiles>
+
+	<TestLogStep Name="Verifying Do-not-run behavior for Full Trust Xbaps - UNC (FireFox)">
+           <ActivationStep Method="launch" Scheme="UNC" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <DoNotRunTrustManager IsBrowserHostedApp="True" AppName="SimpleBrowserHostedNSVApplication" NamedRegistration="TrustManager" ProcessName="" WindowTitle="RegExp:(@@System.Windows.Forms,Version=4.0.0.0;System.Windows.Forms;TrustManagerPromptUI_InstallTitle@@)|(@@System.Windows.Forms,Version=4.0.0.0;System.Windows.Forms;TrustManagerPromptUI_RunTitle@@)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying Do-not-run behavior for Full Trust Xbaps - HTTP Intranet (FireFox)">
+           <ActivationStep Method="launch" Scheme="HTTPIntranet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <DoNotRunTrustManager IsBrowserHostedApp="True" AppName="SimpleBrowserHostedNSVApplication" NamedRegistration="TrustManager" ProcessName="" WindowTitle="RegExp:(@@System.Windows.Forms,Version=4.0.0.0;System.Windows.Forms;TrustManagerPromptUI_InstallTitle@@)|(@@System.Windows.Forms,Version=4.0.0.0;System.Windows.Forms;TrustManagerPromptUI_RunTitle@@)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+	<TestLogStep Name="Verifying Do-not-run behavior for Full Trust Xbaps - HTTPS Intranet (FireFox)">
+           <ActivationStep Method="launch" Scheme="HTTPSIntranet" FileName="SimpleBrowserHostedNSVApplication.xbap">
+             <ActivationStep.UIHandlers>
+                 <DoNotRunTrustManager IsBrowserHostedApp="True" AppName="SimpleBrowserHostedNSVApplication" NamedRegistration="TrustManager" ProcessName="" WindowTitle="RegExp:(@@System.Windows.Forms,Version=4.0.0.0;System.Windows.Forms;TrustManagerPromptUI_InstallTitle@@)|(@@System.Windows.Forms,Version=4.0.0.0;System.Windows.Forms;TrustManagerPromptUI_RunTitle@@)"/>
+             </ActivationStep.UIHandlers>
+           </ActivationStep>
+	</TestLogStep>
+
+       </FileHostStep>
+    </Steps>
+</AppMonitorConfig>

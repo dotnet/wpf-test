@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<Steps>
+  <MSBuildErrors>
+    <Error ID="FC1001" Partial="True">
+      <!--<Description>1007: The UICulture name 'invalidculture' set in the project file is invalid.</Description>-->
+      <Description>The UICulture value 'en-uss' set in the project file is not valid.</Description>
+      <Assembly>PresentationBuildTasks</Assembly>
+      <ResourceName>MessageStringTable.resources</ResourceName>
+      <ErrorIdentifier>InvalidCulture</ErrorIdentifier>
+    </Error>
+  </MSBuildErrors>
+  <!-- ************************************************************* -->
+  <!--             * Generating project file *			     -->
+  <!-- ************************************************************* -->
+  
+  <Step ID="1" DependsOn="1001">
+    <FileName>NRLAprojVariations.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>all</Variation>
+  </Step>  
+
+  <Step ID="2" DependsOn="1001">
+    <FileName>NRLAprojVariations.xvar</FileName>
+    <Scenario>2</Scenario>
+    <Variation>all</Variation>
+  </Step>  
+
+  <Step ID="3" DependsOn="1002">
+    <FileName>NRLAprojVariations.xvar</FileName>
+    <Scenario>3</Scenario>
+    <Variation>all</Variation>
+    <ErrorCodes>FC1001</ErrorCodes>
+  </Step>  
+
+  <Step ID="4" DependsOn="1002">
+    <FileName>NRLAprojVariations.xvar</FileName>
+    <Scenario>4</Scenario>
+    <Variation>all</Variation>
+    <ErrorCodes>FC1001</ErrorCodes>    
+  </Step>  
+
+
+  <!-- ******************************************************** -->
+  <!--             * Generating AssemblyInfo.cs * 		-->
+  <!-- ********************************************************	-->
+  
+  
+  <Step ID="1000"> 
+    <FileName>AssemblyInfoCsVariations.xvar</FileName>
+    <Scenario>0</Scenario>
+    <Variation>none</Variation>
+  </Step> 
+  
+  <Step ID="1001">
+    <!-- with [assembly: NeutralResourcesLanguageAttribute("{-Culture}", UltimateResourceFallbackLocation.Satellite)] -->
+    <FileName>AssemblyInfoCsVariations.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>all</Variation>
+  </Step> 
+  
+    <Step ID="1002">
+      <!-- with [assembly: NeutralResourcesLanguageAttribute("{-Culture}", UltimateResourceFallbackLocation.Satellite)] -->
+      <FileName>AssemblyInfoCsVariations.xvar</FileName>
+      <Scenario>2</Scenario>
+      <Variation>all</Variation>
+    </Step> 
+
+</Steps>
