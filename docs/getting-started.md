@@ -1,10 +1,69 @@
+# Building, Running Tests
 
-## Running Tests Locally
+## Building Tests
 
-In order to run the tests on your local machine,
+In the root of the repo, we have a script `build.cmd` which works similar to the build scripts in other dotnet repos.
 
-- Build the tests with `build.cmd` script. Use `/help` parameter to check the different arguments that can be passed along with the build command.
-- cd into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test` and run `RunDrts.cmd` to run the tests. You can use `/Area` and `/Name` parameters to run tests from a specific area or with a certain name.
+For building the tests, you can simply execute the following command:
+```
+  .\build.cmd -platform $(Platform) -configuration $(Configuration)
+```
+
+where, 
+  `$(Configration)` can be either 'Debug' or 'Release',
+  `$(Platform)` can be x86 or x64
+
+Use `/help` parameter to check the different arguments that can be passed along with the build command.
+
+### Building Tests Suite or Area wise
+
+By default the command above builds the whole test suite as it picks the solution file in the folder where the script exists
+
+In order to build the tests for a single area, use the `-projects` argument like this
+```
+  .\build.cmd -project .\src\Test\Annotations.sln
+```
+Each area has it's own sln file which can be used to build the area seperately.
+
+As of now we don't have a seperate sln file for DRTs 
+
+### Understanding build outputs
+
+The repo is designed in a way that the final results we get after the build are in a matter of speaking self-contained.
+Once, the build is complete, navigate to `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test` and you will see the following structure:
+
+```
+Test
+ |
+ |--  Common
+ |
+ |--  DRT
+ |
+ |--  FeatureTests
+ |      |
+ |      |-- Annotations
+ |      |-- Diagnostics
+ |      |-- ...
+ |      
+ |--  Infra
+ |--  CTRunDrts.cmd
+ |--  CommonData.deps.json
+ |--  DiscoveryInfor.xaml
+ |--  DiscoverInfoDrts.xml
+ |--  DQV.cmd
+ |--  QV.cmd
+ |--  DrtReportToHtml.cmd
+ |--  RunDrts.cmd
+ |--  RunDrtsDebug.cmd
+ |--  RunTests.cmd
+ |--  RunTestsDebug.cmd
+```
+
+By self-contained we mean, you can copy this folder to any machine with WPF installed and use `.\RunDrts.cmd` and `.\RunTests.cmd` to run the tests. 
+
+## Running Tests
+
+Once, you have built the tests,`cd` into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test`. and run `RunDrts.cmd` to run the tests. You can use `/Area` and `/Name` parameters to run tests from a specific area or with a certain name.
 
 At the end of the run, you should see something like this:
 
