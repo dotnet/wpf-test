@@ -1,0 +1,27 @@
+﻿<UniformGrid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Microsoft.Test.DataServices">
+  <UniformGrid.Resources>    
+    <local:UnwrapperConverter x:Key="UnwrapperConverter" />
+    <local:WrapperConverter x:Key="WrapperConverter" />
+  </UniformGrid.Resources>
+
+  <StackPanel>
+    <TextBlock>
+      <TextBlock.Text>
+        <MultiBinding>
+          <MultiBinding.Converter>
+            <local:UnwrapperConverter />
+          </MultiBinding.Converter>
+          <Binding ElementName="tb2" Path="Text">
+            <Binding.Converter>
+              <local:WrapperConverter />
+            </Binding.Converter>
+          </Binding>
+        </MultiBinding>
+      </TextBlock.Text>
+    </TextBlock>
+    <TextBox Name="tb2">Hello</TextBox>
+  </StackPanel>
+
+</UniformGrid>

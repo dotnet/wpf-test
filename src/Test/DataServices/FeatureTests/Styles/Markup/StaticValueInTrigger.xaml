@@ -1,0 +1,58 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Media="clr-namespace:System.Windows.Media;assembly=PresentationCore"
+    Background="cornsilk" 
+    >
+
+    <DockPanel.Resources>
+        <!-- DataTriggers -->
+        <DataTemplate x:Key="CheckedWhenRedAndBoldWhenBlueTemplate">
+            <CheckBox x:Name="CheckBox" Background="{Binding}" Content="DataTemplate for SolidColorBrush" />
+            <DataTemplate.Triggers>
+                <!-- This trigger works properly. -->
+                <DataTrigger Binding="{Binding Path=Color}">
+                    <DataTrigger.Value>
+                        <Color>Red</Color>
+                    </DataTrigger.Value>
+                    <Setter TargetName="CheckBox" Property="IsChecked" Value="True" />
+                </DataTrigger>
+                <!-- This trigger used to fail: Object reference not set to an instance of an object. -->
+                <DataTrigger Binding="{Binding Path=Color}" Value="{x:Static Media:Colors.Blue}">
+                    <Setter TargetName="CheckBox" Property="FontWeight" Value="Bold" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <!-- Triggers -->
+        <Style x:Key="CheckedWhenRedAndBoldWhenBlueStyle" TargetType="{x:Type CheckBox}">
+            <Style.Triggers>
+                <!-- This trigger works properly. -->
+                <Trigger Property="Background" Value="Red">
+                    <Setter Property="IsChecked" Value="True" />
+                </Trigger>
+                <!-- This trigger used to fail. -->
+                <Trigger Property="Background" Value="{x:Static Media:Brushes.Blue}">
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </DockPanel.Resources>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGray">
+        <!-- DataTriggers -->
+        <ContentControl Margin="5,5,5,5" ContentTemplate="{StaticResource CheckedWhenRedAndBoldWhenBlueTemplate}" Name="cc1">
+            <SolidColorBrush Color="{x:Static Media:Colors.Yellow}" />
+        </ContentControl>
+        <ContentControl Margin="5,5,5,5" ContentTemplate="{StaticResource CheckedWhenRedAndBoldWhenBlueTemplate}" Name="cc2">
+            <SolidColorBrush Color="{x:Static Media:Colors.Red}" />
+        </ContentControl>
+        <ContentControl Margin="5,5,5,5" ContentTemplate="{StaticResource CheckedWhenRedAndBoldWhenBlueTemplate}" Name="cc3">
+            <SolidColorBrush Color="{x:Static Media:Colors.Blue}" />
+        </ContentControl>
+
+        <!-- Triggers -->
+        <CheckBox Style="{StaticResource CheckedWhenRedAndBoldWhenBlueStyle}" Margin="5,25,5,5" Content="Nothing special" Background="Yellow" Name="cb1" />
+        <CheckBox Style="{StaticResource CheckedWhenRedAndBoldWhenBlueStyle}" Margin="5,5,5,5" Content="Should be checked" Background="Red" Name="cb2" />
+        <CheckBox Style="{StaticResource CheckedWhenRedAndBoldWhenBlueStyle}" Margin="5,5,5,5" Content="Should be bold" Background="Blue" Name="cb3" />
+    </StackPanel>
+</DockPanel>

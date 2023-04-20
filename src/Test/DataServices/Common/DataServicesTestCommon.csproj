@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--Automatically converted using custom WPF settings-->
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <AssemblyName>DataServicesTestCommon</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <Compile Include="Controls\*.cs" />
+    <Compile Include="DataSources\*.cs" />
+    <Compile Include="TestCaseHelpers\*.cs" />
+    <Compile Include="Utilities\*.cs" />
+    <Compile Include="Verifiers\*.cs" />
+<!-- System.Web is not part of .Net Core. Review if needed for non-microsuite tests -->
+<!--<Compile Include="WebServices\*.cs" /> -->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <PackageReference Include="System.Data.SqlClient" Version="$(SystemDataSqlClientVersion)" />
+  </ItemGroup>
+</Project>

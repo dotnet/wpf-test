@@ -1,0 +1,21 @@
+﻿<DockPanel Width="210" Height="500" Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase" 
+    >
+
+    <DockPanel.Resources>
+        <src:GreekGods x:Key="greekGods" />
+
+        <CollectionViewSource Source="{StaticResource greekGods}" x:Key="cvs">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription Direction="Descending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </DockPanel.Resources>
+
+    <StackPanel>
+        <ItemsControl ItemsSource="{Binding Source={StaticResource cvs}}" Name="itemsControl" />
+    </StackPanel>
+</DockPanel>

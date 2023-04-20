@@ -1,0 +1,69 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+  <!-- 
+  <Customers>
+  <Customer Name="Jimmy" Preferences="Digital Media">
+  -->
+  <DockPanel.Resources>
+
+    <XmlDataProvider x:Key="DSO" XPath="/Customers/Customer" Source="CustomerOrders.xml" />
+
+    <DataTemplate x:Key="ItemOrderedTemplate">
+      <DockPanel>
+        <TextBlock Text="{Binding XPath=@Title}" Width="200" Name="ItemTitle" />
+        <TextBlock Text="{Binding XPath=@Price}" Width="100" />
+      </DockPanel>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="OrderTemplate">
+      <StackPanel>
+        <DockPanel>
+          <TextBlock Text="{Binding XPath=@Number}" Width="100" Name="OrderNumber" />
+          <TextBlock Text="{Binding XPath=@Date}" Width="100" />
+        </DockPanel>
+
+        <ListBox ItemsSource="{Binding}" ItemTemplate="{StaticResource ItemOrderedTemplate}" Name="ItemsLB">
+          <ListBox.DataContext>
+            <CollectionViewSource Source="{Binding XPath=Items/Item}">
+              <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="@Title" Direction="Descending" />
+              </CollectionViewSource.SortDescriptions>
+            </CollectionViewSource>
+          </ListBox.DataContext>
+        </ListBox>
+        
+      </StackPanel>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="CustomerTemplate">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=@Name}" Name="CustomerName" />
+
+        <ListBox ItemsSource="{Binding}" ItemTemplate="{StaticResource OrderTemplate}" Name="OrdersLB">
+          <ListBox.DataContext>
+            <CollectionViewSource Source="{Binding XPath=Orders/Order}">
+              <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="@Number" Direction="Ascending" />
+              </CollectionViewSource.SortDescriptions>
+            </CollectionViewSource>
+          </ListBox.DataContext>
+        </ListBox>
+
+      </StackPanel>
+    </DataTemplate>
+
+    <CollectionViewSource Source="{StaticResource DSO}" x:Key="cvs">
+      <CollectionViewSource.SortDescriptions>
+        <scm:SortDescription PropertyName="@Name" Direction="Descending" />
+      </CollectionViewSource.SortDescriptions>
+    </CollectionViewSource>
+
+  </DockPanel.Resources>
+
+  <ListBox ItemsSource="{Binding Source={StaticResource cvs}}"
+           ItemTemplate="{StaticResource CustomerTemplate}" Name="CustomersLB" />
+</DockPanel>

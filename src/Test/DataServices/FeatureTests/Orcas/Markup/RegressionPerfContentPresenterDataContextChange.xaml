@@ -1,0 +1,22 @@
+<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    xmlns:custom="clr-namespace:Microsoft.Test.DataServices"    
+    >
+  <DockPanel.Resources>
+    <custom:DataContextChangeConverter x:Key="DataContextChangeConverter" />
+    <custom:MyObj x:Key="MyObj" />
+  </DockPanel.Resources>
+
+  <Grid>
+      <StackPanel DataContext="{StaticResource MyObj}">
+        <ContentPresenter Name="contentPresenter" Tag="{Binding Background, Converter={StaticResource DataContextChangeConverter}}">
+          <ContentPresenter.Content>
+            <Button Name="b1" Content="Hello" Background="Green"/>
+          </ContentPresenter.Content>
+        </ContentPresenter>
+      </StackPanel>
+    </Grid>
+</DockPanel>

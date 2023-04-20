@@ -1,0 +1,19 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:testdata="clr-namespace:Microsoft.Test.DataServices"
+    Name="root" Background="cornsilk" DockPanel.Dock="Top" >
+
+    <DockPanel.Resources>
+        <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type testdata:Dwarfs}" />
+    </DockPanel.Resources>
+
+		<!-- Property exists -->
+		<Button Name="btn1" Content="{Binding Path=Name,FallbackValue=UseFallbackValue,Source={StaticResource DSO} }" DockPanel.Dock="Top" Width="125" Height="35" />
+
+		<!-- Property doesn't exist -->
+		<Button Name="btn2" Content="{Binding Path=SomeName, Source={StaticResource DSO}, FallbackValue=UseFallbackValue}" DockPanel.Dock="Top" Width="125" Height="35" />
+
+		<!-- Invalid index -->
+		<Button Name="btn3" Content="{Binding Path=[7].Name,  Source={StaticResource DSO}, FallbackValue=UseFallbackValue}" DockPanel.Dock="Top" Width="125" Height="35" />
+
+</DockPanel>

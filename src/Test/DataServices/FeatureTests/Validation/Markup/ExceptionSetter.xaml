@@ -1,0 +1,23 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+    <DockPanel.Resources>
+		<dataSources:Player dataSources:PlayerName="Mike Piazza" dataSources:Votes="6" x:Key="player1" />
+    </DockPanel.Resources>
+
+	<StackPanel>
+		<TextBox Name="textBox" Height="30">
+			<TextBox.Text>
+				<Binding Source="{StaticResource player1}"
+     Path="Votes"
+     UpdateSourceTrigger="Explicit"
+     Mode="TwoWay">
+
+					<Binding.ValidationRules><ExceptionValidationRule /></Binding.ValidationRules>
+				</Binding>
+			</TextBox.Text>
+		</TextBox>
+	</StackPanel>
+
+</DockPanel>

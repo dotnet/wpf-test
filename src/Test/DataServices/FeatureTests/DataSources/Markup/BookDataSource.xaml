@@ -1,0 +1,16 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:test="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+
+    <DockPanel.Resources>
+        <test:BookDataSource x:Key="DSO" />
+    </DockPanel.Resources>
+
+    <TextBlock Name="testText" DockPanel.Dock="Top">
+        <TextBlock.Text>
+            <Binding Source="{StaticResource DSO}" Path="Title" />
+        </TextBlock.Text>
+    </TextBlock>
+
+</DockPanel>

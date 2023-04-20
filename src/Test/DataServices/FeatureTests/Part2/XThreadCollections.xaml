@@ -1,0 +1,20 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    xmlns:local="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestPart2">
+
+    <StackPanel>
+        <ListView Name="lv" ItemsSource="{Binding}">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="local:Order">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding Path=Number}" />
+                        <TextBlock DockPanel.Dock="Right" Text="{Binding Path=Time}" />
+                        <TextBlock DockPanel.Dock="Right" Text="    " />
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackPanel>
+</Page>
+

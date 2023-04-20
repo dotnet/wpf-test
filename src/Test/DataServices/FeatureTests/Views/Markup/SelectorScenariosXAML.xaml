@@ -1,0 +1,43 @@
+﻿<Page 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <Page.Resources>
+        <!-- AmbiguousSelectedValue -->
+        <XmlDataProvider x:Key="Bugs" XPath="/Bugs/Bug">
+            <x:XData>
+                <Bugs xmlns="">
+                    <Bug Pri="1" AssignedTo="actComp" Title="SelectedValue has inconsistent behavior"/>
+                    <Bug Pri="2" AssignedTo="actComp" Title="ListBox crashes"/>
+                    <Bug Pri="1" AssignedTo="actData" Title="Binding doesn't work"/>
+                    <Bug Pri="2" AssignedTo="actData" Title="Binding is slow"/>
+                </Bugs>
+            </x:XData>
+        </XmlDataProvider>
+
+        <DataTemplate DataType="Bug">
+            <DockPanel>
+                <TextBlock Text="{Binding XPath=@Pri}" />
+                <TextBlock Text="{Binding XPath=@AssignedTo}" />
+                <TextBlock Text="{Binding XPath=@Title}" />
+            </DockPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <StackPanel>
+        <!-- AmbiguousSelectedValue -->
+        <ListBox Name="BugLB" ItemsSource="{Binding Source={StaticResource Bugs}}"
+                SelectedValuePath="@Pri" />
+        <TextBlock Text="{Binding ElementName=BugLB, Path=SelectedValue}"/>
+
+        <!-- CrashNullValue -->
+        <ComboBox Name="cb">
+            <ComboBox.ItemsSource>
+                <x:Array Type='{x:Type sys:Object}'>
+                    <x:Null/>
+                </x:Array>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+    </StackPanel>
+</Page>

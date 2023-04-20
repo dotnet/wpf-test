@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>DataServicesTestPart2</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AssemblyType>Library</AssemblyType>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <!-- Xaml Files below -->
+    <Page Include="*.xaml" />
+	<None Include="Content\*" >
+      <Link>Content\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- Code Files below -->
+    <Compile Include="*.cs" />
+    <Compile Include="INotifyDataErrorInfoTest\*.cs" />
+    <Compile Include="INotifyDataErrorInfoTest\*\*.cs" />
+    <Compile Include="Regression\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(DataServicesTestCommonProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+  
+</Project>

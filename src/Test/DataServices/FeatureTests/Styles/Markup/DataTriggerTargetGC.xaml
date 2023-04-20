@@ -1,0 +1,35 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Microsoft.Test.DataServices"
+    Name="Root"
+    >
+  <DockPanel.Resources>
+    <local:PulseTimer x:Key="PulseTimer"/>
+    <local:PulseConverter x:Key="PulseConverter"/>
+    <Style x:Key="Flash" TargetType="Button">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="75"/>
+        <Setter Property="Content" Value="Alarm"/>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Value="True">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{StaticResource PulseConverter}">
+                                <Binding Source="{StaticResource PulseTimer}" Path="Pulse"/>
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Control.Foreground" Value="White"/>
+                <Setter Property="Control.Background" Value="Red"/>
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+  </DockPanel.Resources>
+
+  <Button Style="{StaticResource Flash}"/>
+
+</DockPanel>

@@ -1,0 +1,106 @@
+﻿<DockPanel 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:local="clr-namespace:Microsoft.Test.DataServices"
+    Name="root" Background="cornsilk" 
+    >
+    <DockPanel.Resources>
+        <ObjectDataProvider x:Key="Employees" ObjectType="{x:Type dataSources:EmployeeCollection}" />
+        <ObjectDataProvider x:Key="MLB" ObjectType="{x:Type dataSources:ListLeagueList}" />
+
+        <XmlDataProvider x:Key="Library" XPath="/root/*">
+            <x:XData>
+                <root xmlns="">
+                    <Book Title="East of Eden" Author="John Steinbeck" />
+                    <Magazine Title="Newsweek" Date="3/15/2002" />
+                    <CD Artist="Yo-Yo Ma" Composer="Britten" Title="Cello Suites" />
+                    <Book Title="Persuasion" Author="Jane Austen" />
+                    <CD Artist="The Beatles" Title="Revolver" Composer="Lennon/McCartney" />
+                </root>
+            </x:XData>
+        </XmlDataProvider>
+
+        <!-- Styles and templates for non hierarchical ObjectDataProvider -->
+        <local:EmployeeStyleSelector x:Key="EmployeeStyleSelector" />
+
+        <Style x:Key="EmployeeContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="salmon" />
+        </Style>
+
+        <Style x:Key="DevContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="cyan" />
+            <Setter Property="Canvas.Left" Value="{Binding Path=BugsFixed}" />
+        </Style>
+
+        <Style x:Key="PMContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="red" />
+        </Style>
+
+        <Style x:Key="TesterContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="green" />
+        </Style>
+
+        <DataTemplate DataType="{x:Type dataSources:Employee}">
+            <DockPanel Dock="Top">
+                <TextBlock Width="100" Text="{Binding Path=Name}" />
+                <TextBlock Width="70" Text="{Binding Path=Phone}" />
+            </DockPanel>
+        </DataTemplate>
+
+        <!-- Styles and templates for XmlDataProvider -->
+        <DataTemplate DataType="Book">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100" Text="{Binding XPath=@Title}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="Magazine">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100" Text="{Binding XPath=@Title}" />
+                <TextBlock Width="70" Text="{Binding XPath=@Date}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="CD">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="100" Text="{Binding XPath=@Title}" />
+                <TextBlock Width="70" Text="{Binding XPath=@Artist}" />
+                <TextBlock Width="70" Text="{Binding XPath=@Composer}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- Styles and templates for hierarchical data -->
+        <HierarchicalDataTemplate DataType="{x:Type dataSources:League}"
+                                    ItemsSource="{Binding Path=Divisions}">
+            <TextBlock Text="{Binding Path=Name}" />
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate DataType="{x:Type dataSources:Division}"
+                                    ItemsSource="{Binding Path=Teams}">
+            <TextBlock Text="{Binding Path=Name}" />
+        </HierarchicalDataTemplate>
+
+        <DataTemplate DataType="{x:Type dataSources:Team}">
+            <TextBlock Text="{Binding Path=Name}" />
+        </DataTemplate>
+
+        <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="IsSubmenuOpen" Value="true" />
+        </Style>
+    </DockPanel.Resources>
+    <StackPanel>
+
+    <!-- Non hierarchical ObjectDataProvider -->
+    <ListBox Name="lb1" DockPanel.Dock="Top" Margin="10,10,10,10" ItemsSource="{Binding Source={StaticResource Library}}" />
+
+    <!-- XmlDataProvider -->
+    <ListBox Name="lb2" DockPanel.Dock="Top" Margin="10,10,10,10" ItemsSource="{Binding Source={StaticResource Employees}}"
+                ItemContainerStyleSelector="{StaticResource EmployeeStyleSelector}" />
+
+    <!-- Hierarchical data -->
+    <Menu Name="menu1" DockPanel.Dock="Top" Margin="10,10,10,10" Width="Auto">
+        <MenuItem Name="mi1" Header="MLB" ItemsSource="{Binding Source={StaticResource MLB}}" />
+    </Menu>
+    </StackPanel>
+</DockPanel>

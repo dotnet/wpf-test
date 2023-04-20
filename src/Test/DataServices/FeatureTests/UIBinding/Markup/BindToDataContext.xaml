@@ -1,0 +1,59 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+    <Page.Resources>
+        <sources:EarthDataSource x:Key="earth" />
+
+        <!--Scenario 2 - Test binding to DataContext in DataTemplate-->
+        <ControlTemplate TargetType="{x:Type ContentControl}" x:Key="tbTemplate1">
+            <ListBox ItemsSource="{Binding Path=Regions}" DisplayMemberPath="RegionName" Name="lbTemplate" />
+        </ControlTemplate>
+
+        <DataTemplate x:Key="hemisphereTemplate1">
+            <ContentControl DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContentPresenter}, AncestorLevel=1}, Path=DataContext}" Template="{StaticResource tbTemplate1}" />
+        </DataTemplate>
+
+        <ControlTemplate TargetType="{x:Type ContentControl}" x:Key="tbTemplate2">
+            <ListBox ItemsSource="{Binding}" DisplayMemberPath="RegionName" Name="lbTemplate" />
+        </ControlTemplate>
+
+        <DataTemplate x:Key="hemisphereTemplate2">
+            <ContentControl DataContext="{Binding Path=Regions}" Template="{StaticResource tbTemplate2}" />
+        </DataTemplate>
+
+        <!--Scenario 4 - ContentPresenter in template with Content explicitly data bound-->
+        <DataTemplate x:Key="helloTemplate">
+            <Border BorderBrush="RoyalBlue" BorderThickness="3">
+                <ContentPresenter Content="{Binding}" Name="cp" />
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <StackPanel>
+        <!--Scenario 1 - Test binding to DataContext outside template-->
+        <StackPanel DataContext="{Binding Source={StaticResource earth}}">
+            <ListBox DataContext="{Binding Path=Hemispheres}" ItemsSource="{Binding}"
+                DisplayMemberPath="HemisphereName" Name="lb1" />
+            <ListBox DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type FrameworkElement}, AncestorLevel=1}, Path=DataContext}"
+                ItemsSource="{Binding Path=Hemispheres}" DisplayMemberPath="HemisphereName" Name="lb2" />
+        </StackPanel>
+
+        <!--Scenario 2 - Test binding to DataContext in DataTemplate-->
+        <ListBox ItemsSource="{Binding Source={StaticResource earth}, Path=Hemispheres}"
+                 ItemTemplate="{StaticResource hemisphereTemplate1}" Name="lb3" />
+        <ListBox ItemsSource="{Binding Source={StaticResource earth}, Path=Hemispheres}"
+                 ItemTemplate="{StaticResource hemisphereTemplate2}" Name="lb4" />
+
+        <!--Scenario 3 - Remove source DataContext, make sure binding in target DataContext gets updated using the correct DataContext-->
+        <StackPanel DataContext="{Binding Source={StaticResource earth}, Path=Hemispheres[0]}" Name="sp1">
+            <StackPanel DataContext="{Binding Source={StaticResource earth}, Path=Hemispheres[1]}" Name="sp2">
+                <TextBlock DataContext="{Binding Path=HemisphereName}" Text="{Binding}" Name="tb" />
+            </StackPanel>
+        </StackPanel>
+
+        <!--Scenario 4 - ContentPresenter in template with Content explicitly data bound-->
+        <Button Content="Hello" ContentTemplate="{StaticResource helloTemplate}" Name="btn" />
+    </StackPanel>
+</Page>
+

@@ -1,0 +1,34 @@
+﻿<Page 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    >
+
+<Page.Resources>
+
+     <Style TargetType="{x:Type TextBlock}">
+	<Setter Property="Foreground" Value="Blue" /> 
+          <Style.Triggers>
+		<DataTrigger Binding="{Binding ElementName=textbox, Path=Text}" Value="ChangeColorToGreen">
+		        <Setter Property="Foreground" Value="Green" />
+		</DataTrigger>
+
+          </Style.Triggers>
+    </Style>
+
+
+</Page.Resources>
+
+  <StackPanel  >
+  
+         <TextBox Name="textbox" Text="ColorBlue"/>
+
+	    <TextBlock DockPanel.Dock="Top"  Name="textblock" >
+		<TextBlock.Text>
+		  Color Me  2.2
+   	      </TextBlock.Text>
+	</TextBlock>
+
+  </StackPanel>
+
+</Page>
+

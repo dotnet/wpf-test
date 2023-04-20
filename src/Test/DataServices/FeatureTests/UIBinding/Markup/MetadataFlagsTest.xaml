@@ -1,0 +1,15 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:custom="clr-namespace:Microsoft.Test.DataServices" 
+    >
+	
+	<DockPanel.Resources>
+		<custom:MyDS custom:IntProp="4" x:Key="myDS" />
+	</DockPanel.Resources>
+	
+	<custom:MyButton custom:MyDp="{Binding Source={StaticResource myDS},Path=IntProp}"
+  custom:MyNotDataBindableDp="9" x:Name="btn1" />
+		
+</DockPanel>
+

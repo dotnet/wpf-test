@@ -1,0 +1,30 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:System="clr-namespace:System;assembly=Mscorlib" 
+  xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+  >
+    <DockPanel.Resources>
+        <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type datasources:Library}">
+            <ObjectDataProvider.ConstructorParameters><System:String>100</System:String></ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+
+        <DataTemplate x:Key="BookTemplate">
+            <DockPanel Dock="Top" Height="20px" Name="BookItem">
+                <TextBlock DockPanel.Dock="Left" Width="50" Text="{Binding Path=ISBN}" />
+                <TextBlock DockPanel.Dock="Left" Width="50" Text="{Binding Path=Price}" />
+                <TextBlock DockPanel.Dock="Left" Width="50" Text="{Binding Path=Genre}" />
+                <TextBlock DockPanel.Dock="Left" Width="150" Text="{Binding Path=Publisher}" />
+                <TextBlock DockPanel.Dock="Left" Width="150" Text="{Binding Path=Author}" />
+                <TextBlock DockPanel.Dock="Left" Width="150" Text="{Binding Path=Title}" />
+            </DockPanel>
+        </DataTemplate>
+
+        <Style x:Key="Foo" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Height" Value="20px" />
+        </Style>
+
+    </DockPanel.Resources>
+
+    <ListBox Name="testListBox" DockPanel.Dock="Top" SelectionMode="Multiple" DataContext="{Binding Source={StaticResource DSO}}" ItemsSource="{Binding }" ItemTemplate="{StaticResource BookTemplate}" ItemContainerStyle="{StaticResource Foo}" />
+
+</DockPanel>

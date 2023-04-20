@@ -1,0 +1,50 @@
+﻿<StackPanel Background="cornsilk" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices" 
+    >
+    <StackPanel.Resources>
+
+            <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type src:LeagueHierarchicalList}" />
+
+            <CollectionViewSource x:Key="div1" Source="{Binding Source={StaticResource DSO}, Path=Divisions}" />
+            <CollectionViewSource x:Key="team1" Source="{Binding Source={StaticResource div1}, Path=Teams}" />
+
+        <DataTemplate x:Key="DataTemplate">
+            <TextBlock Text="{Binding Path=Name}" />
+        </DataTemplate>
+
+    </StackPanel.Resources>
+
+<DockPanel DataContext="{Binding Source={StaticResource DSO}}">
+    <DockPanel Dock="Left" Name="panel1">
+    <DockPanel Dock="Left" Margin="10,0,10,0">
+        <TextBlock Name="divisionCaption" Text="{Binding Path=Name}" DockPanel.Dock="Top" />
+        <ListBox Name="divisionLB" ItemTemplate="{StaticResource DataTemplate}" SelectedIndex="0" IsSynchronizedWithCurrentItem="true" DockPanel.Dock="Top" ItemsSource="{Binding Path=Divisions}" />
+    </DockPanel>
+
+    <DockPanel Dock="Left" Margin="10,0,10,0">
+        <TextBlock Name="teamCaption" Text="{Binding Path=Divisions/Name}" DockPanel.Dock="Top" />
+        <ListBox Name="teamLB" ItemTemplate="{StaticResource DataTemplate}" SelectedIndex="0" IsSynchronizedWithCurrentItem="true" DockPanel.Dock="Top" ItemsSource="{Binding Path=Divisions/Teams}" />
+    </DockPanel>
+
+    </DockPanel>
+
+    <DockPanel Dock="Left" Name="panel2">
+
+
+     <DockPanel Dock="Left" Margin="10,0,10,0">
+        <TextBlock Name="divisionCaption1" Text="{Binding Path=Name}" DockPanel.Dock="Top" />
+        <ListBox Name="divisionLB1" ItemTemplate="{StaticResource DataTemplate}" SelectedIndex="0" IsSynchronizedWithCurrentItem="true" DockPanel.Dock="Top" ItemsSource="{Binding Source={StaticResource div1}}" />
+     </DockPanel>
+
+     <DockPanel Dock="Left" Margin="10,0,10,0">
+        <TextBlock Name="teamCaption1" Text="{Binding Source={StaticResource div1}, Path=Name}" DockPanel.Dock="Top" />
+        <ListBox Name="teamLB1" ItemTemplate="{StaticResource DataTemplate}" SelectedIndex="0" IsSynchronizedWithCurrentItem="true" DockPanel.Dock="Top" ItemsSource="{Binding Source={StaticResource team1}}" />
+     </DockPanel>
+
+   </DockPanel>
+ </DockPanel>
+
+
+</StackPanel>

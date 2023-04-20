@@ -1,0 +1,70 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:System="clr-namespace:System;assembly=Mscorlib" 
+  xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+  >
+    <DockPanel.Resources>
+        <ObjectDataProvider x:Key="DSO_Stack" ObjectType="{x:Type datasources:LibraryStack}">
+            <ObjectDataProvider.ConstructorParameters>
+                <System:Int32>2</System:Int32>
+                <System:Double>0.1</System:Double>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="DSO_Queue" ObjectType="{x:Type datasources:LibraryQueue}">
+            <ObjectDataProvider.ConstructorParameters>
+                <System:Int32>2</System:Int32>
+                <System:Double>0.2</System:Double>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="DSO_GenList" ObjectType="{x:Type datasources:LibraryGenericList}">
+            <ObjectDataProvider.ConstructorParameters>
+                <System:Int32>2</System:Int32>
+                <System:Double>0.3</System:Double>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="DSO_Enumer" ObjectType="{x:Type datasources:LibraryEnumerable}">
+            <ObjectDataProvider.ConstructorParameters>
+                <System:Int32>2</System:Int32>
+                <System:Double>0.4</System:Double>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="DSO_EnumerNotfy" ObjectType="{x:Type datasources:LibraryEnumerableNotify}">
+            <ObjectDataProvider.ConstructorParameters>
+                <System:Int32>2</System:Int32>
+                <System:Double>0.5</System:Double>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="DSO_ALDC" ObjectType="{x:Type datasources:Library}">
+            <ObjectDataProvider.ConstructorParameters>
+                <System:Int32>2</System:Int32>
+                <System:Double>0.6</System:Double>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+
+        <DataTemplate x:Key="BookTemplate">
+            <DockPanel Dock="Top" Height="20px" Name="BookItem">
+                <TextBlock DockPanel.Dock="Left" Width="150" Text="{Binding Path=Title}" />
+                <TextBlock DockPanel.Dock="Left" Width="50" Text="{Binding Path=ISBN}" />
+                <TextBlock DockPanel.Dock="Left" Width="50" Text="{Binding Path=Price}" />
+                <TextBlock DockPanel.Dock="Left" Width="50" Text="{Binding Path=Genre}" />
+                <TextBlock DockPanel.Dock="Left" Width="150" Text="{Binding Path=Publisher}" />
+                <TextBlock DockPanel.Dock="Left" Width="150" Text="{Binding Path=Author}" />
+            </DockPanel>
+        </DataTemplate>
+
+    </DockPanel.Resources>
+
+    <ListBox DockPanel.Dock="Top" SelectionMode="Multiple" ItemTemplate="{StaticResource BookTemplate}" Name="testListBox" Height="500px">
+        <ListBox.ItemsSource>
+            <CompositeCollection>
+                <CollectionContainer Collection="{Binding Source={StaticResource DSO_Stack}}" />
+                <CollectionContainer Collection="{Binding Source={StaticResource DSO_Queue}}" />
+                <CollectionContainer Collection="{Binding Source={StaticResource DSO_GenList}}" />
+                <CollectionContainer Collection="{Binding Source={StaticResource DSO_Enumer}}" />
+                <CollectionContainer Collection="{Binding Source={StaticResource DSO_EnumerNotfy}}" />
+                <CollectionContainer Collection="{Binding Source={StaticResource DSO_ALDC}}" />
+            </CompositeCollection>
+        </ListBox.ItemsSource>
+    </ListBox>
+
+</DockPanel>

@@ -1,0 +1,29 @@
+﻿<DockPanel Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    Name="myDockPanel" 
+    >
+
+    <DockPanel.Resources>
+        <ObjectDataProvider x:Key="ods" ObjectType="{x:Type datasources:Places}" />
+
+        <DataTemplate x:Key="itemTemplate">
+            <TextBlock Text="{Binding Path=Name}" />
+        </DataTemplate>
+    </DockPanel.Resources>
+
+    <ListBox Name="myListBox1" DockPanel.Dock="Top" ItemsSource="{Binding Source={StaticResource ods}}" 
+             ItemTemplate="{StaticResource itemTemplate}" SelectedValuePath="Name" SelectedValue="Redmond"/>
+
+    <ListBox Name="myListBox2" DockPanel.Dock="Top" ItemsSource="{Binding Source={StaticResource ods}}" 
+             ItemTemplate="{StaticResource itemTemplate}" SelectedValuePath="{Binding ElementName=txt2,Path=Text}" 
+        SelectedValue="{Binding ElementName=txt1,Path=Text}"/>
+
+    <TextBlock Text="CA" Name="txt1" DockPanel.Dock="Top" />
+    <TextBlock Text="State" Name="txt2" DockPanel.Dock="Top" />
+
+    <TextBlock Text="Bellingham" Name="txt3" DockPanel.Dock="Top" />
+    <TextBlock Text="Name" Name="txt4" DockPanel.Dock="Top" />
+
+</DockPanel>
