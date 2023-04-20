@@ -1,0 +1,38 @@
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" BorderThickness="3" BorderBrush="Black" Name="TestElement" UseLayoutRounding="True">
+  <StackPanel Name="testElement">
+    <Grid ShowGridLines="True">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="auto"/>
+      </Grid.RowDefinitions>
+      <Button Content="Foo" />
+      <Button Content="Bar" Grid.Column="1"/>
+      <Button Content="Foo" Grid.Row="1"/>
+      <Button Content="Bar" Grid.Row="1" Grid.Column="1"/>
+    </Grid>
+    <StackPanel Orientation="Horizontal">
+      <Canvas Width="40" Height="40" Background="Green" />
+      <Canvas Width="40" Height="40" Background="Yellow" Grid.Column="1"/>
+      <Canvas Width="40" Height="40" Background="Red" Grid.Column="1"/>
+    </StackPanel>
+    <WrapPanel>
+      <Canvas Width="600" Height="40" Background="Orange" />
+      <Canvas Width="400" Height="40" Background="Gray" />
+      <Canvas Width="200" Height="40" Background="Purple" />
+      <Canvas Width="100" Height="40" Background="LightBlue" />
+      <Canvas Width="50" Height="40" Background="LightGreen" />
+      <Canvas Width="50" Height="40" Background="Crimson" />
+      <Canvas Width="50" Height="40" Background="Silver" />
+    </WrapPanel>
+    <DockPanel Height="300">
+      <Button Content="Foo" DockPanel.Dock="Right"/>
+      <Button Content="Bar" DockPanel.Dock="Top"/>
+      <Button Content="Foo Foo" DockPanel.Dock="Bottom" Margin="5"/>
+      <Button Content="Bar Bar" DockPanel.Dock="Left"/>
+    </DockPanel>
+  </StackPanel>
+</Border>
