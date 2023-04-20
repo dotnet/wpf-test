@@ -1,0 +1,208 @@
+<!-- Window containing Button Content properties for which Localization.Attributes set LocalizationCategory as Modifiable -->
+<Window
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Class = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest">
+
+   <StackPanel>
+        <Button x:Uid="Button_1"
+            Content="LLLMicrosoft1"
+            Localization.Attributes = "Content (Modifiable Content Readable)">
+        </Button>
+
+        <Button x:Uid="Button_2"
+            Content="LLLMicrosoft2"
+            Localization.Attributes = "Content (Readable Modifiable Content">
+        </Button>
+
+        <Button x:Uid="Button_3"
+            Content="LLLMicrosoft3"
+            Localization.Attributes = "Content (Modifiable Readable Content)">
+        </Button>
+
+        <Button x:Uid="Button_4"
+            Content="LLLMicrosoft4"
+            Localization.Attributes = "Content (Readable Content Modifiable)">
+        </Button>
+
+        <Button x:Uid="Button_5"
+            Content="LLLMicrosoft5"
+            Localization.Attributes = "Content (Content Modifiable Readable)">
+        </Button>
+
+        <Button x:Uid="Button_6"
+            Content="LLLMicrosoft6"
+            Localization.Attributes = "Content (Content Readable Modifiable)">
+        </Button>
+
+        <Button x:Uid="Button_7"
+            Content="LLLMicrosoft7"
+            Localization.Attributes = "Content (Modifiable Readable)">
+        </Button>
+
+        <Button x:Uid="Button_8"
+            Content="LLLMicrosoft8"
+            Localization.Attributes = "Content (Readable Modifiable)">
+        </Button>
+
+        <Button x:Uid="Button_9"
+            Content="LLLMicrosoft9"
+            Localization.Attributes = "Content (Modifiable Content)">
+        </Button>
+
+        <Button x:Uid="Button_10"
+            Content="LLLMicrosoft10"
+            Localization.Attributes = "Content (Content Modifiable)">
+        </Button>
+
+        <Button x:Uid="Button_11"
+            Content="LLLMicrosoft11"
+            Localization.Attributes = "Content (Readable)">
+        </Button>
+
+        <Button x:Uid="Button_12"
+            Content="LLLMicrosoft12"
+            Localization.Attributes = "Content (Content)">
+        </Button>
+
+        <Button x:Uid="Button_13"
+            Content="LLLMicrosoft13"
+            Localization.Attributes = "Content (Modifiable)">
+        </Button>
+
+        <Button x:Uid="Button_14"
+            Content="LLLMicrosoft14"
+            Localization.Attributes = "Content (a b c)">
+        </Button>
+
+        <!-- Nested with parent having no x:Uid, Modifiable -->
+        <Button>
+            <Button x:Uid="Button_15"
+                Content="LLLMicrosoft15"
+                Localization.Attributes = "Content (Content Modifiable Readable)">
+            </Button>
+        </Button>
+
+        <!-- Nested with parent having an x:Uid, Modifiable -->
+        <Button x:Uid="Parent_16">
+            <Button x:Uid="Button_16"
+                Content="LLLMicrosoft16"
+                Localization.Attributes = "Content (Content Modifiable Readable)">
+            </Button>
+        </Button>
+
+        <!-- Modifiable, but no content -->
+        <Button x:Uid="Parent_17"
+            Localization.Attributes = "Content (Content Modifiable Readable)">
+        </Button>
+
+        <!-- Attributes set on the parent only -->
+        <Button x:Uid="Parent_18"
+            Localization.Attributes = "Content (Content Modifiable Readable)">
+            <Button x:Uid="Button_18" Content="LLLMicrosoft18"></Button>
+        </Button>
+
+        <!-- Modifiable set on both parent and child -->
+        <Button x:Uid="Parent_19"
+            Localization.Attributes = "Content (Content Modifiable Readable)">
+            <Button x:Uid="Button_19"
+                Content="LLLMicrosoft19"
+                Localization.Attributes = "Content (Content Modifiable Readable)">
+            </Button>
+        </Button>
+
+        <!-- Unmodifiable set on parent and Modifiable on child -->
+        <Button x:Uid="Parent_20"
+            Localization.Attributes = "Content (Content Unmodifiable Readable)">
+            <Button x:Uid="Button_20"
+                Content="LLLMicrosoft20"
+                Localization.Attributes = "Content (Content Modifiable Readable)">
+            </Button>
+        </Button>
+
+        <!-- Bogus first and second attributes, Unmodifiable set -->
+        <Button x:Uid="Button_21"
+            Content="LLLMicrosoft21"
+            Localization.Attributes = "Content (a b Unmodifiable)">
+        </Button>
+
+        <!-- Bogus second and third attributes -->
+        <Button x:Uid="Button_22"
+            Content="LLLMicrosoft22"
+            Localization.Attributes = "Content (Unmodifiable b c)">
+        </Button>
+
+        <!-- Bogus first and third attributes -->
+        <Button x:Uid="Button_23"
+            Content="LLLMicrosoft23"
+            Localization.Attributes = "Content (a Unmodifiable c)">
+        </Button>
+
+        <!-- Conflicting modifiability attribute -->
+        <Button x:Uid="Button_24"
+            Content="LLLMicrosoft24"
+            Localization.Attributes = "Content (Unmodifiable Modifiable Readable)">
+        </Button>
+
+        <!-- Attributes set on the parent only -->
+        <Button x:Uid="Parent_25"
+            Localization.Attributes = "Content (Text Unmodifiable Readable)">
+            <Button x:Uid="Button_25" Content="LLLMicrosoft25"></Button>
+        </Button>
+
+        <!-- Empty String -->
+        <Button x:Uid="Button_26"
+            Content="LLLMicrosoft26"
+            Localization.Attributes = "">
+        </Button>
+
+        <!-- Empty Parens -->
+        <Button x:Uid="Button_27"
+            Content="LLLMicrosoft27"
+            Localization.Attributes = "Content ()">
+        </Button>
+
+        <!-- Empty Parens with no initial category -->
+        <Button x:Uid="Button_28"
+            Content="LLLMicrosoft28"
+            Localization.Attributes = "()">
+        </Button>
+
+        <!-- Incorrect initial category: Modifiable -->
+        <Button x:Uid="Button_29"
+            Content="LLLMicrosoft29"
+            Localization.Attributes = "ComboBox (Text Modifiable Readable)">
+        </Button>
+
+        <!-- Bogus initial category: Modifiable -->
+        <Button x:Uid="Button_30"
+            Content="LLLMicrosoft30"
+            Localization.Attributes = "abc (Text Modifiable Readable)">
+        </Button>
+
+        <!-- Incorrect initial category: Unmodifiable -->
+        <Button x:Uid="Button_31"
+            Content="LLLMicrosoft31"
+            Localization.Attributes = "ComboBox (Text Unmodifiable Readable)">
+        </Button>
+
+        <!-- Bogus initial category: Unmodifiable -->
+        <Button x:Uid="Button_32"
+            Content="LLLMicrosoft32"
+            Localization.Attributes = "abc (Text Unmodifiable Readable)">
+        </Button>
+
+        <!-- Duplicate categories (Modifiable) -->
+        <Button x:Uid="TextBlock_33"
+            Content="LLLMicrosoft33"
+            Localization.Attributes = "Content (Modifiable Modifiable Modifiable)">
+        </Button>
+
+        <!-- $Content used instead of Content: Unmodifiable -->
+        <Button x:Uid="TextBlock_34"
+            Content="LLLMicrosoft34"
+            Localization.Attributes = "$Content (Unmodifiable)">
+        </Button>
+
+    </StackPanel>
+</Window>

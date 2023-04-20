@@ -1,0 +1,35 @@
+<XTC>
+  <TEST Name="DefSharedVerification" Priority="1" SubArea="Parser\xShared" >
+    <DriverParameters XamlTestType="LoadExceptionTest" File="DefSharedVerification.xaml" ExceptionType="System.Windows.Markup.XamlParseException" Mode="WPF" ParseMode="ParseStringContext,ParseString,LoadStream,LoadStreamContext,LoadXmlReader" /> 
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\XAML\Data\Xaml\NonBuildable\DefSharedVerification.xaml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="AnchoredBlock_SelectionTestContent_Bug" Priority="1" SubArea="Parser\FlowLayout" Timeout="90"  ExecutionGroup="AnchoredBlock_SelectionTestContent_Bug">
+    <DriverParameters XamlTestType="LoadTest" ParseMode="LoadAsyncStream"  File="AnchoredBlock_SelectionTestContent.xaml" Mode="WPF" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\AnchoredBlock_SelectionTestContent.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="reptiles_Flow_Bug" Priority="1" SubArea="Parser\FlowLayout" Timeout="240">
+    <DriverParameters XamlTestType="LoadTest" ParseMode="LoadAsyncStreamContext"  File="reptiles_Flow.xaml" SecurityLevel="FullTrust" Mode="WPF" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\reptiles_Flow.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Common\bg.jpg" />
+    </SupportFiles>
+  </TEST><!-- .NET Core 3.0, unported assembly, re-enable when porting P0s
+  <TEST Name="RegressionIssue6" Priority="0" SubArea="Parser\MarkupExt" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.MarkupCompiler.RegressionIssue6" TestMethod="DeferredContentMarkupExtensionProvideValue" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Assemblies\RegressionIssue6\*.dll" />
+    </SupportFiles>
+  </TEST>-->
+
+  <TEST Name="UidPropertyElementWPF" Priority="1" SubArea="Parser\Uid" Timeout="90" ExecutionGroup="UidPropertyElement">
+    <DriverParameters XamlTestType="LoadTest" ParseMode="LoadAsyncStream"  File="UidPropertyElement.xaml" Mode="WPF" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\UidPropertyElement.xaml" />
+    </SupportFiles>
+  </TEST>
+</XTC>

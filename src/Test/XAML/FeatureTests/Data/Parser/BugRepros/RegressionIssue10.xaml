@@ -1,0 +1,50 @@
+﻿<cmn:CustomDockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Name="DOCKPANEL1"
+    Background="#CCCCCC" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+    <RichTextBox Width="500" Height="500">
+        <FlowDocument>
+        <Paragraph>
+        <Path Name="Animate" StrokeThickness="50" Stroke="red">
+            <Path.Data>
+                <LineGeometry />
+            </Path.Data>
+			<Path.Triggers>
+				<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+					<EventTrigger.Actions>
+						<BeginStoryboard>
+							<Storyboard>
+								<ParallelTimeline FillBehavior="Stop" BeginTime="0:0:0" Storyboard.TargetProperty="(Path.Data).(LineGeometry.StartPoint)">
+									<PointAnimation
+          From="100,150"
+          To="200,150"
+          BeginTime="0:0:5"
+          Duration="0:0:2"
+          FillBehavior="HoldEnd" />
+								</ParallelTimeline>
+							</Storyboard>
+						</BeginStoryboard>
+						<BeginStoryboard>
+							<Storyboard>
+								<ParallelTimeline FillBehavior="Stop" BeginTime="0:0:0" Storyboard.TargetProperty="(Path.Data).(LineGeometry.EndPoint)">
+									<PointAnimation
+          From="400,150"
+          To="300,150"
+          BeginTime="0:0:5"
+          Duration="0:0:2"
+          FillBehavior="HoldEnd" />
+								</ParallelTimeline>
+							</Storyboard>
+						</BeginStoryboard>
+
+					</EventTrigger.Actions>
+				</EventTrigger>
+			</Path.Triggers>
+        </Path>
+        </Paragraph>
+        </FlowDocument>
+    </RichTextBox>
+
+</cmn:CustomDockPanel>

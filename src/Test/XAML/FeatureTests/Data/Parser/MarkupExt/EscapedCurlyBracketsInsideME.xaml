@@ -1,0 +1,92 @@
+﻿
+<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:xt="http://XamlTestTypes"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <Page.Resources>
+        <sys:String x:Key="xString1">xString{}{test}</sys:String>
+        <TextBlock x:Key="TBres" Text="TBRes{}{test}"/>
+        <xt:CustomME_StringValue x:Key="SE1" StringValue="{}{testMERes}"/>
+        <xt:CustomME_StringValue x:Key="S{}E1" StringValue="{}{testMERes1}"/>
+        <xt:CustomME_StringValue x:Key="S{}{}E1" StringValue="{}{testMERes2}"/>
+        <xt:CustomME_StringValue x:Key="S\{\}E1" StringValue="{}{testMERes3}"/>
+    </Page.Resources>
+
+    <Grid>
+        <StackPanel>
+            <TextBox Name="Title">foo</TextBox>
+            <!--{} on Binding.StringFormat-->
+            <TextBlock Background="red" Text="{Binding ElementName=Title, Path=Text, StringFormat={}{0} test1(s)}" />
+            <!--{} on Binding.StringFormat (reverse order)-->
+            <TextBlock Background="red" Text="{Binding StringFormat={}{0}test2(s), ElementName=Title, Path=Text }"/>
+            <!--{} on Binding.StringFormat in quotes (reverse order)-->
+            <TextBlock Background="red" Text="{Binding StringFormat='{}{0} test3(s)', ElementName=Title, Path=Text }"/>
+            <!--\{\} on Binding.StringFormat-->
+            <TextBlock Background="red" Text="{Binding ElementName=Title, Path=Text, StringFormat=\{0\} test4(s)}" />
+            <!--\{\} on Binding.StringFormat (reverse order)-->
+            <TextBlock Background="red" Text="{Binding StringFormat=\{0\}test5(s), ElementName=Title, Path=Text }"/>
+            <!--\{\} on Binding.StringFormat in quotes (reverse order)-->
+            <TextBlock Background="red" Text="{Binding StringFormat='\{0\} test6(s)', ElementName=Title, Path=Text }"/>
+            <!--{} on Binding.StringFormat in quotes-->
+            <TextBlock Background="red" Text="{Binding ElementName=Title, Path=Text, StringFormat='{}{0} test7(s)'}" />
+            <!--\{\} on Binding.StringFormat in quotes-->
+            <TextBlock Background="red" Text="{Binding ElementName=Title, Path=Text, StringFormat='\{0\} test8(s)'}" />
+            <!--{} on Binding.StringFormat with nested \{\}-->
+            <TextBlock Background="red" Text="{}{Binding ElementName=Title, Path=Text, StringFormat='\{0\} test9(s)'}" />
+            <!--{} on Binding.StringFormat with nested {}-->
+            <TextBlock Background="red" Text="{}{Binding ElementName=Title, Path=Text, StringFormat={}{0} test(s)}" />
+            <!--{} on Binding.StringFormat (brackets alone)-->
+            <TextBlock Background="red" Text="{Binding ElementName=Title, Path=Text, StringFormat={}}" />
+            <!--{} on Binding.StringFormat (brackets with string object)-->
+            <TextBlock Background="red" Text="{Binding ElementName=Title, Path=Text, StringFormat={}xString1}" />
+            <!--{} on Binding.StringFormat (brackets within text)-->
+            <TextBlock Background="red" Text="{Binding ElementName=Title, Path=Text, StringFormat=a{}b}" />
+            <!--{} on Binding.StringFormat (multiple brackets)-->
+            <TextBlock Background="red" Text="{Binding ElementName=Title, Path=Text, StringFormat={}{}{}{} testing}" />
+
+            <!--{} on Custom ME-->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue={}{test} }"/>
+            <!--Multiple {} on Custom ME-->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue={}{test}{}{test2} }"/>
+            <!--\{\} on Custom ME-->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue=\{\}{test} }"/>
+            <!--{} and \{\} on Custom ME-->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue={}\{\}{test} }"/>            
+            <!--{} on Custom ME with nested \{\}-->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue='{}{Binding ElementName=Title, Path=Text, StringFormat=\{0\} test(s)}'}"/>
+            <!--{} on Custom ME with property set -->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue='{}{Binding ElementName=Title}' }"/>
+            <!--\{\} on Custom ME with property set-->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue='\{Binding ElementName=Title\}' }"/>
+            <!--\{\} on Custom ME escaped quotes-->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue='\{Binding ElementName=\'Title\'\}' }"/>
+            <!--{} on Custom ME nested \{\} and escaped quotes-->
+            <TextBlock Text="{xt:CustomME_StringValue StringValue='ElementName=Title, Path=Text, StringFormat=\{0\} test(s)' }"/>
+
+            <!--Binding.StringFormat set via custom ME with {} -->
+            <TextBlock Background="red" Text="{Binding ElementName={xt:CustomME_StringValue StringValue='Title'}, Path=Text, StringFormat={xt:CustomME_StringValue StringValue={}{0}test(s){0} } }" />
+            <!--Binding.StringFormat set via custom ME with {} (reverse order)-->
+            <TextBlock Background="red" Text="{Binding StringFormat={xt:CustomME_StringValue StringValue={}{0}test(s){0} }, ElementName={xt:CustomME_StringValue StringValue='Title'}, Path=Text }" />
+
+            <!--{} on Custom ME (PE syntax)-->
+            <TextBlock >
+                <xt:CustomME_StringValue StringValue="{}{test}"/>
+            </TextBlock>
+
+            <!--StaticResource with {} in value-->
+            <TextBlock Text="{StaticResource xString1}"/>
+            <!--StaticResource with {} in value-->
+            <TextBlock Text="{Binding Source={StaticResource TBres}, Path=Text}"/>
+            <!--Custom ME as StaticResource with {} in value-->
+            <TextBlock Text="{Binding Source={StaticResource SE1}}"/>
+            <!--Custom ME as StaticResource with {} in key-->
+            <TextBlock Text="{Binding Source={StaticResource S{}E1}}"/>
+            <!--Custom ME as StaticResource with {}{} in key-->
+            <TextBlock Text="{Binding Source={StaticResource S{}{}E1}}"/>
+            <!--Custom ME as StaticResource with \{\} in key-->
+            <TextBlock Text="{Binding Source={StaticResource S\\{\\}E1}}"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

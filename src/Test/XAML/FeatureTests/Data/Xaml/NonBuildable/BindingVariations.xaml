@@ -1,0 +1,35 @@
+<!-- Binding with different ordering and content -->
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    
+    <ListBox>
+        <Button Background='{Binding Path=Text, ElementName=Background, Mode=OneWay}' />
+        <Button Background='{Binding Path=Text, Mode=OneWay, ElementName=Background}' />
+        <Button Background='{Binding ElementName=Background, Path=Text, Mode=OneWay}' />
+        <Button Background='{Binding ElementName=Background, Mode=OneWay, Path=Text}' />
+        <Button Background='{Binding Mode=OneWay, Path=Text, ElementName=Background}' />
+        <Button Background='{Binding Mode=OneWay, ElementName=Background, Path=Text}' />
+        <Button Background='{Binding Mode=OneWay, ElementName=Background, Path=Text}' />
+
+        <Button Background="{Binding ElementName='Background', Path='Text'}" />         <!-- Inner quotes 1 -->
+        <Button Background="{Binding ElementName=Background, Path=&apos;Text&apos;}" /> <!-- Inner quotes 2 -->
+        <Button Background='{Binding ElementName=Background, Path=abc[0]}' />           <!-- With index -->
+        <Button Background='{Binding ElementName=Background, Path="[(sys:Int32)42,(sys:Int32)24]"}' />  <!-- With multiple indexers -->
+        <Button Background='{Binding ElementName=Background, Path=abc.def}' />          <!-- With sub-property -->
+        <Button Background='{Binding ElementName="Background", Path="abc[def,ghi]"}' /> <!-- With mixed index and sub-property -->
+
+
+        <Button Background='{Binding ElementName=Background, Path=(DockPanel.Dock)}' /> <!-- With parens for attached property -->
+        <Button Background='{Binding ElementName=Background}' />                        <!-- Single clause -->
+        <Button Background='{}' />                                                      <!-- Empty brackets -->
+        <Button Background='{Binding}' />                                               <!-- Just Binding -->
+        <Button Background='{Binding Path=IsDropDownOpen,RelativeSource={RelativeSource TemplatedParent}}' /> <!-- With RelativeSource -->
+        <Button Background='{Binding abc, ElementName=Background}'  />                  <!-- first item not named -->
+        <Button Background='{Binding abc, def, ElementName=Background}'  />             <!-- first two items not named -->
+        <Button Background='{Binding ElementName=Background, Path=a&amp;c}'  />         <!-- embedded escape character -->
+        <Button Background='{Binding ElementName=Background, Path=x:Null}'  />          <!-- contains x:Null -->
+        <Button Background='{Binding XPath=@Name}'  />                                  <!-- contains @Name -->
+
+        <TextBox Name="Background" Text="Lavender" />
+    </ListBox>
+
+</Page>

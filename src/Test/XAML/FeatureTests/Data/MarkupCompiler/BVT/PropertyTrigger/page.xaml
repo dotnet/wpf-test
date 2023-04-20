@@ -1,0 +1,22 @@
+﻿<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    x:Class="Avalon.Test.ComponentModel.PropertyTriggerClass"
+    Loaded="OnLoaded">
+
+    <StackPanel.Resources>
+
+        <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="true">
+                    <Setter Property="Foreground" Value="Green" />
+                    <Setter Property="Background" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>                
+        
+    </StackPanel.Resources>
+
+    <Button Name="Button1">MouseOver Me</Button>
+
+</StackPanel>

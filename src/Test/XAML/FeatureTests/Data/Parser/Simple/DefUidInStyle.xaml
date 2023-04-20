@@ -1,0 +1,61 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<DockPanel Name="root" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:y="http://schemas.microsoft.com/winfx/2006/xaml" y:Uid="0">
+  <DockPanel.Resources y:Uid="1">
+    <Style y:Key="http://schemas.microsoft.com/winfx/2006/xaml/ComboBox/TransparentButtonStyle" y:Uid="5" TargetType="{y:Type Button}">
+        <Setter Property="Background" Value="Red" />
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Button.Foreground">
+        <Setter.Value>
+          <SolidColorBrush Color="Black" y:Uid="8" />
+        </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{y:Type Button}">
+        <Border y:Name="BorderStyle" Background="{TemplateBinding Background}" BorderBrush="Yellow" y:Uid="10">
+          <StackPanel Height="{TemplateBinding Width}" Width="{TemplateBinding  Width }"
+                                                y:Uid="11">
+            <ContentPresenter Content="{TemplateBinding Content}" y:Uid="12" />
+          </StackPanel>
+        </Border>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsMouseOver" y:Uid="14">
+        <Trigger.Value y:Uid="19">        
+                                True
+                        </Trigger.Value>
+        <Setter TargetName="BorderStyle" Property="BorderBrush" y:Uid="16">
+            <Setter.Value y:Uid="17">
+              Green
+            </Setter.Value>
+        </Setter>
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsMouseOver" y:Uid="14">
+        <Trigger.Value y:Uid="19">        
+                                True
+                        </Trigger.Value>
+        <Setter Property="Background" Value="Blue" y:Uid="15" />
+        <Setter Property="Foreground" Value="Yellow" y:Uid="20" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+        </Trigger>
+        <MultiTrigger y:Uid="21" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <MultiTrigger.Conditions y:Uid="22">
+            <Condition Property="IsMouseCaptured" Value="true" y:Uid="23" />
+            <Condition Property="IsMouseDirectlyOver" y:Uid="24">
+                                <Condition.Value>
+                                        false        
+                                </Condition.Value>
+            </Condition>
+          </MultiTrigger.Conditions>
+        <Setter Property="Background" Value="Blue" y:Uid="26" />
+        </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+  </DockPanel.Resources>
+  <Button y:Uid="4" Style="{DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ComboBox/TransparentButtonStyle}"> Hello World! </Button>
+</DockPanel>
+</Page>

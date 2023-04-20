@@ -1,0 +1,48 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>VBBVT</AssemblyName>
+    <OutputType>exe</OutputType>
+    <Configuration>Release</Configuration>
+    <ProductVersion>8.0.40903</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8D0E51ED-9A8E-4C81-A05C-21C3082FF984}</ProjectGuid>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <GenerateManifests>true</GenerateManifests>
+    <OptionStrict>Off</OptionStrict>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <ItemGroup>
+    <Reference Include="Library">
+      <HintPath>bin\Release\Library.dll</HintPath>
+      <Name>Library</Name>
+    </Reference>
+    <Reference Include="HelperClasses">
+      <HintPath>bin\Release\HelperClasses.dll</HintPath>
+      <Name>HelperClasses</Name>
+    </Reference>
+
+    <ApplicationDefinition Include="app.xaml" />
+    <Page Include="page.xaml" />
+    <Compile Include="page.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="LocalCC.xaml" />
+    <Compile Include="LocalCC.xaml.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+  </ItemGroup>
+  <Import Project="TestCommon.target" /> 
+</Project>

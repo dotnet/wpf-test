@@ -1,0 +1,36 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+  <PropertyGroup>
+    <RootNamespace>CustomControl</RootNamespace>
+    <AssemblyName>Library</AssemblyName>
+    <OutputType>Library</OutputType>
+    <OutputType>Library</OutputType>
+    <Configuration>Release</Configuration>
+    <ProductVersion>8.0.40903</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9F8F525-2A7E-4A8E-8643-F986730DD87E}</ProjectGuid>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <OptionStrict>On</OptionStrict>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <ItemGroup>
+    <Compile Include="LibraryCC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="LibraryCC.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationProvider" />
+  </ItemGroup>
+  <Import Project="TestCommon.target" />
+</Project>

@@ -1,0 +1,24 @@
+<Window x:Class="RegressionIssue64.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:RegressionIssue64"
+    Title="Window1" Height="300" Width="300" Loaded="OnLoaded">
+    <Window.Resources>
+        <XmlDataProvider x:Key="dataProvider">
+            <x:XData>
+                <Numbers xmlns="" Content="Numbers">
+                    <Number Content="One" />
+                </Numbers>
+            </x:XData>
+        </XmlDataProvider>
+    </Window.Resources>
+    <Grid>
+        <TreeView Name="MyTree" ItemsSource="{Binding Source={StaticResource dataProvider},XPath=*}">
+            <TreeView.ItemTemplate>
+                <local:MyHierarchicalDataTemplate ItemsSource="{Binding XPath=*}">
+                    <TextBlock Text="{Binding XPath=@Content}" />
+                </local:MyHierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</Window>

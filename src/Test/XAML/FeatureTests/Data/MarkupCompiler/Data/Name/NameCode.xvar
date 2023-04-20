@@ -1,0 +1,34 @@
+<XMLVariationTemplate>
+    <TemplateData>
+    using System;
+    using System.Windows;
+    using System.Windows.Navigation;
+    using System.Windows.Controls;
+    using System.IO;
+    using System.Windows.Markup;
+    using System.Reflection;
+    using Microsoft.Test.Serialization;
+
+    public partial class MyAppName : Application
+    {
+        void AppStartup(object sender, StartupEventArgs args)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+    }
+
+    <NodeVariation ID="1"></NodeVariation>
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>NameCode</FileName>
+            <FileExtension>.cs</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+            <NodeVariation ID="1" />
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>
+

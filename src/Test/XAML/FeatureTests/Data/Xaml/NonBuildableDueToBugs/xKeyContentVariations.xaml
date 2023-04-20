@@ -1,0 +1,30 @@
+<!-- x:Key Directive Property Element with various contents -->
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Ellipse><x:Key><Button /></x:Key></Ellipse>
+    <Ellipse><x:Key><Brush /></x:Key></Ellipse>
+
+    <Button><x:Key></x:Key></Button>
+    <Button><x:Key><!-- comment --></x:Key></Button>
+
+    <Button><x:Key><x:Static /></x:Key></Button>
+    <Button><x:Key><x:Null /></x:Key></Button>
+    <Button><x:Key><x:String>abc</x:String></x:Key></Button>
+    <Button><x:Key><x:String></x:String></x:Key></Button>
+    <Button><x:Key><x:Array><x:String></x:String></x:Array></x:Key></Button>
+    <Button><x:Key><x:Type>rrr</x:Type></x:Key></Button>
+    <Button><x:Key><x:Shared>true</x:Shared></x:Key></Button>
+    <Button><x:Key><XmlDataProvider x:Key="DSO1"><x:XData><TextBox /></x:XData>
+        </XmlDataProvider></x:Key></Button>
+    <Button><x:Key><x:Code>bbb</x:Code></x:Key></Button>
+
+<!-- These Directive Properties are not acceptable
+    <Button><x:Key><x:FieldModifier>aaa</x:FieldModifier></x:Key></Button>
+    <Button><x:Key><x:Name>KeyName</x:Name></x:Key></Button>
+    <Button><x:Key><x:Uid>1234</x:Uid></x:Key></Button>
+    <Button><x:Key xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">zzz</x:Key></Button>
+-->
+
+</Page>

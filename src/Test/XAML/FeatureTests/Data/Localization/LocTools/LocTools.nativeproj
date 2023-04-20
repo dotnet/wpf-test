@@ -1,0 +1,57 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <TargetType>COPY</TargetType>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5'">    
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\lsbuild*.exe">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\lsbuild*.dll">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\lsbuild*.manifest">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <!-- Special copy of exe.config for SxS testing: expresses preference for v4 but also supports v2 CLRs since lsbuild is a CLR 2.0 exe -->
+    <DataFile Include=".\lsbuild.exe.config">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\*.dll">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\*.lss">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\*.locconfig">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\*.macros">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\*.tasks">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <DataFile Include="$(_NTDRIVE)$(_NTROOT)\tools\devdiv\loc\current\*.xml">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+
+    <!-- Overlay msvc*.dll assemblies with ones that will work on Win8 machines (for both 4.0 and 4.5) -->
+    <DataFile Condition="'$(BuildArchitecture)'=='amd64'" Include=".\SupportFiles40\AMD\*.dll">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+    <DataFile Condition="'$(BuildArchitecture)'=='i386'" Include=".\SupportFiles40\X86\*.dll">
+      <SubFolder>FeatureTests\XAML\Data\Localization\LocTools</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.Native.targets" />
+
+</Project>
+
+
+

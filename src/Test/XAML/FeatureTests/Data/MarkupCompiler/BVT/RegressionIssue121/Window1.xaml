@@ -1,0 +1,20 @@
+﻿<Window x:Class="breadcrumb.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="300" Width="300">
+    <StackPanel x:Uid="StackPanel_2" FlowDirection="LeftToRight" CanHorizontallyScroll="False" Orientation="Horizontal" Background="#FFCCCCCC" >
+        <ItemsControl x:Uid="breadCrumbListBox" x:Name="breadCrumbListBox" HorizontalAlignment="Left" >
+            <!-- breadcrumb container style : make it focusable for actual objects and non focusable for arrow connector
+                           register for mouse left button down and key down (Enter) events -->
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Style.Setters>
+                        <Setter Property="Control.Background" Value="Red"/>
+                        <EventSetter Event="Button.Click" Handler="OnButtonClick"/>
+                    </Style.Setters>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <Button Content="Some Text" x:Name="button"/>
+        </ItemsControl>
+    </StackPanel>
+</Window>

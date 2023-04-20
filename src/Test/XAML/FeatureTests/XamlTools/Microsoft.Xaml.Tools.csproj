@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Microsoft.Xaml.Tools</AssemblyName>
+    <OutputType>Library</OutputType>
+    <DefineConstants>$(DefineConstants);OLDRESOURCES</DefineConstants>
+    <GenerateResxSource>true</GenerateResxSource>
+    <NoWarn>$(NoWarn);1058</NoWarn>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Strings.resx" ClassName="MS.Utility.SRID" ManifestResourceName="MessageStringTable" GenerateSource="true"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(WpfSharedRoot)\MS\Internal\ResourceIDHelper.cs" />
+    <Compile Include="DiagnosticWriter.cs" />
+    <Compile Include="SR.cs" />
+    <Compile Include="Dom\XamlDomNamespace.cs" />
+    <Compile Include="Dom\XamlDomReader.cs" />
+    <Compile Include="Dom\XamlDomReaderSettings.cs" />
+    <Compile Include="Dom\XamlDomWriter.cs" />
+    <Compile Include="Dom\XamlDomNode.cs" />
+    <Compile Include="Dom\XamlDomItem.cs" />
+    <Compile Include="Dom\XamlDomMember.cs" />
+    <Compile Include="Dom\XamlNodeCollection.cs" />
+    <Compile Include="Dom\XamlDomObject.cs" />
+    <Compile Include="Dom\SealableNamespaceCollection.cs" />
+    <Compile Include="Dom\XamlDomValue.cs" />
+    <Compile Include="Dom\XamlDomServices.cs" />
+    <Compile Include="UISchemaContext\UISchemaContext.cs" />
+    <Compile Include="UISchemaContext\WrapperXamlMember.cs" />
+    <Compile Include="UISchemaContext\WrapperXamlType.cs" />
+    <Compile Include="UISchemaContext\WrapperXamlValueConverter.cs" />
+    <Compile Include="Uid\Tasks\*.cs" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dom\XamlDom.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="$(MicrosoftBuildFrameworkPackageVersion)" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="$(MicrosoftBuildUtilitiesCorePackageVersion)" />
+  </ItemGroup>
+</Project>

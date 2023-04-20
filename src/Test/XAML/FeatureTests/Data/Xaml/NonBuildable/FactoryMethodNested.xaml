@@ -1,0 +1,19 @@
+<!-- Scenario: x:FactoryMethod PropertyElement nested within a tag having x:FactoryMethod as a property  -->
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:co    = "http://XamlTestTypes">
+
+    <co:CustomFactoryWithCustomProp x:FactoryMethod="Factory">
+        <co:CustomFactoryWithCustomProp.CustomProp>
+
+            <co:CustomFactoryWithColorProp ColorProp="LemonChiffon" x:FactoryMethod="Factory">
+                    <x:Arguments>
+                        <x:Double>33</x:Double>
+                    </x:Arguments>
+            </co:CustomFactoryWithColorProp>
+
+        </co:CustomFactoryWithCustomProp.CustomProp>
+    </co:CustomFactoryWithCustomProp>
+
+</Page>

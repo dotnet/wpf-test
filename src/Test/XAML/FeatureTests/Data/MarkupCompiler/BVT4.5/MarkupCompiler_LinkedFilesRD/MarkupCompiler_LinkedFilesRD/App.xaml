@@ -1,0 +1,17 @@
+﻿<Application x:Class="Dev11_4391_LinkedFilesRD.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Startup="Application_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- 
+                Before Fix: If colors.xaml is a link, markup compiler incorrectly named the baml as colors.baml.
+                Below reference will fail with the error "Cannot locate resource 'resources/colors.xaml'."
+                After Fix: Markup compiler correctly names the baml as "Resources/colors.baml" and below reference will work.
+                -->
+                <ResourceDictionary Source="Resources/colors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

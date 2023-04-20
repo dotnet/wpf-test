@@ -1,0 +1,26 @@
+<CustomDockPanel Background="#FFFFFFFF" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <av:Canvas Height="500" Name="Canvas" Width="500">
+    <av:Rectangle Height="100" Name="Rectangle" Stroke="#FF000000" StrokeThickness="1" Width="100">
+      <av:Rectangle.Fill>
+        <av:RadialGradientBrush GradientOrigin="1,1" RadiusX="1" RadiusY="1">
+          <av:GradientStop Color="#FF0000FF" Offset="0" />
+          <av:GradientStop Color="#FFFF0000" Offset="1" />
+        </av:RadialGradientBrush>
+      </av:Rectangle.Fill>
+      <av:Rectangle.Triggers>
+        <av:EventTrigger RoutedEvent="av:FrameworkElement.Loaded">
+          <av:BeginStoryboard>
+            <av:Storyboard BeginTime="00:00:00" Duration="Forever" FillBehavior="HoldEnd" Name="storyboard1">
+              <av:DoubleAnimation AutoReverse="True" BeginTime="00:00:05" Duration="00:00:02" FillBehavior="HoldEnd" From="50" RepeatBehavior="2x" To="300" />
+            </av:Storyboard>
+          </av:BeginStoryboard>
+          <av:BeginStoryboard>
+            <av:Storyboard BeginTime="00:00:00" Duration="Forever" FillBehavior="HoldEnd" Name="storyboard2">
+              <av:DoubleAnimation AutoReverse="True" BeginTime="00:00:05" Duration="00:00:02" FillBehavior="HoldEnd" From="50" RepeatBehavior="2x" To="300" />
+            </av:Storyboard>
+          </av:BeginStoryboard>
+        </av:EventTrigger>
+      </av:Rectangle.Triggers>
+    </av:Rectangle>
+  </av:Canvas>
+</CustomDockPanel>

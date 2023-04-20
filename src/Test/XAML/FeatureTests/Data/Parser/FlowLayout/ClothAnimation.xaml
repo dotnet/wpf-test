@@ -1,0 +1,197 @@
+﻿<FlowDocumentPageViewer xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"> 
+<FlowDocument FontFamily="Times New Roman">
+    <FlowDocument.Resources>
+        <Style x:Key="MainHeading" TargetType="{x:Type Paragraph}">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="TextAlignment" Value="Left" />
+        </Style>
+        <Style x:Key="Authors" TargetType="{x:Type Paragraph}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextAlignment" Value="Left" />
+        </Style>
+        <Style x:Key="Abstract" TargetType="{x:Type Paragraph}">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="TextAlignment" Value="Left" />
+        </Style>
+        <Style x:Key="Text" TargetType="{x:Type Paragraph}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Normal" />
+        </Style>
+        <Style TargetType="{x:Type List}">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="MarkerStyle" Value="Decimal" />
+        </Style>
+    </FlowDocument.Resources>
+
+    <!--<Paragraph>
+    <Figure Width="1Column" HorizontalAnchor="ColumnLeft">-->
+    <Paragraph Style="{StaticResource MainHeading}">
+    Cloth Animation with Self-Collision Detection
+    </Paragraph>
+    <Paragraph Style="{StaticResource Authors}">
+    Benoit Laflteur, Nadia Magnenat Thalmann, and Daniel Thalmann
+    </Paragraph>
+    <!--</Figure>
+    </Paragraph>-->
+
+    <Paragraph Style="{StaticResource Abstract}">
+    ABSTRACT
+    </Paragraph>
+    <Paragraph Style="{StaticResource Text}">
+    This paper addresses the probltem of detecting collisions of very fltexiblte objects, such as clothes with
+    almost rigid bodies, such as human bodies. In our method, collision avoidance consists of creating a very
+    thin force field around the obstaclte surface to avoid collisions. This force field acts like a shield rejecting
+    the points. This volume is divided into small contiguous non-overlapped cells which compltetely surround
+    the surface. As soon as a point enters into a cell, a repulsive force is applied. The direction and the
+    magnitude of this force are dependent on the velocities, the normals and the distance between the point and
+    the surface. Particular cases are discussed with the ways of solving them.
+    </Paragraph>
+    <Paragraph Style="{StaticResource Text}">
+    We also briefly present various approaches for simulating fltexiblte objects and the difficulties, due to the
+    numerical methods of solving the differential equations involved. Finally, we briefly describe the
+    impltementation of our software for creating and animating clothes.
+    </Paragraph>
+    <Paragraph><Bold> Keywords:</Bold> collision, clothes, human animation, fltexiblte objects, self-collision</Paragraph>
+    <List FontWeight="Bold">
+        <ListItem>
+        <Paragraph>INTRODUCTION</Paragraph><Paragraph />
+        <Paragraph Style="{StaticResource Text}">
+        Computer Animation has become more and more interdisciplinary and now uses techniques from very
+        different areas such as art, robotics or cinema. For several years, animators have used models with littlte
+        consideration for the physical laws which drive the real world. Most of the time, animation sequences have
+        showed geometric and rigid objects moving and changing according to simplte or compltex predefined
+        transformations. These traditional methods have become tedious and even unablte to recreate the simpltest
+        realistic effects.
+        </Paragraph>
+
+        <Paragraph />
+
+        <Paragraph Style="{StaticResource Text}">
+        In the last five years, researchers in Computer Animation have proved that only physics-based animation
+        laws may efficiently simulate the laws of nature. Almost all natural phenomena can be modelted with
+        differential equations. Now the question is: how to find suitablte models and stablte and efficient numerical
+        methods for solving the equations.
+        </Paragraph>
+
+        <Paragraph />
+
+        <Paragraph Style="{StaticResource Text}">
+        The use of these methods not only improves the realism of motion, but also it reduces the work of the
+        animator by introducing automatic motion control. However, the systems are often difficult to control and
+        the constraints which are used tend to make the systems unstablte. Moreover, the numerical methods require
+        a lot of CPU time. Fortunately, in Computer Animation we are more interested in the appearance than in a
+        strict simulation of the motion. Consequently, it is possiblte to accept compromises and heuristic methods
+        can be introduced, which do not change the look of the animation.
+        </Paragraph>
+
+        <Paragraph />
+
+        <Paragraph Style="{StaticResource Text}">
+        For several years, our research has dealt with human animation. In particular, we have introduced
+        operators, callted JLD operators (Magnenat Thalmann and Thalmann 1987; Magnenat Thalmann et al. 1988)
+        to automatically adapt the human body to the skelteton. However, clothes were simulated as a part of the
+        body with no autonomous motion. Two separate probltems have to be solved for cloth animation: the
+        motion of the cloth without collision detection and the collision detection of the cloth with the body and
+        with itself. The first probltem was addressed by Weil (1986) and Terzopoulos et al (1987). Kunii and
+        Gotoda (1990) have solved the probltem of garment wrinklte formation.
+        </Paragraph>
+        
+        <Paragraph />
+
+        <Paragraph Style="{StaticResource Text}">
+        In this paper, we propose a method of collision detection especially efficient for dynamic models. Particular
+        cases are discussed with ways of solving them. We also briefly present various approaches for simulating
+        fltexiblte objects and discuss the difficulties due to the numerical methods for solving the differential
+        equations involved. Finally, we briefly describe the impltementation of our software for creating and
+        animating clothes.
+        </Paragraph>
+
+        <Paragraph />
+
+        </ListItem>
+
+        <ListItem>
+        <Paragraph>COLLISION DETECTION FOR FLEXIBLE OBJECTS</Paragraph><Paragraph />
+
+        <Paragraph Style="{StaticResource Text}">
+        A fltexiblte or deformablte object is different from a rigid object because it cannot be computed from a small
+        set of its points. The fltexiblte object must be divided into small parts and each point submitted to a set of
+        local and global constraints. These constraints create forces which prevent the violation of these constraints.
+        Solving the dynamic system requires finding an equilibrium between all these forces. Collision detection
+        adds extra constraints and requires a specific algorithm. For very fltexiblte objects like clothes, it is
+        necessary to solve self-collisions. Moore and Wilhelms (1988) have described a method to solve collision
+        detection for fltexiblte objects composed of polygons. Van Herzen et al. (1990) developed an algorithm to
+        detect geometric collisions betweeb pairs of time-dependent parametric surfaces. Our method is a
+        modification of the Moore-Wilhelms method for processing dynamic cases like clothes on a body during a
+        walking animation. Let us review this method.
+        </Paragraph>
+        
+        <Paragraph />
+
+        <Paragraph Style="{StaticResource Text}">
+        Consider two non-parametric objects A and B with triangular facets. We have to detect points of A which
+        come into collision with the facets of B during a certain period of time. The displacement volume of a
+        trianglte is limited by the edges and the line segments corresponding to the paths of the three points P0, P1
+        and P2 in the directions V0, V1 and V2 (see Fig.1). This volume is compared with the path of the point P in
+        the direction V. The intersection is found by solving the equation:
+        </Paragraph>
+
+        <Paragraph />
+
+        <Paragraph Style="{StaticResource Text}" FontFamily="Palatino Linotype">
+        <!--<TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis">-->
+        P + <Span Typography.Variants="Superscript">V*</Span>t = 
+        <Span Typography.Variants="Subscript">P0</Span> + 
+        <Span Typography.Variants="Subscript">V1<Span Typography.Variants="Superscript">*</Span></Span>t + 
+        ((<Span Typography.Variants="Subscript">P1</Span>-<Span Typography.Variants="Subscript">P0</Span>) + 
+        (<Span Typography.Variants="Subscript">V1</Span>-<Span Typography.Variants="Subscript">V0</Span>)*t)*u + 
+        ((<Span Typography.Variants="Subscript">P2</Span>-<Span Typography.Variants="Subscript">P0</Span>) + 
+        (<Span Typography.Variants="Subscript">V2</Span>-<Span Typography.Variants="Subscript">V0</Span>)*t)*v     (1)
+        <!--</TextBlock>-->
+        </Paragraph>
+
+        <Paragraph />
+
+        <Paragraph Style="{StaticResource Text}">
+        where the lteft term is the path of the point A and the right term the displacement volume of the trianglte of B.
+        The variabltes u and v define the trianglte surface, and the variablte t, the time. Vector equation (1)
+        corresponds to three scalar equations in x, y and z with three unknown u, v and t. There is an intersection
+        when 0 &#x2264; t &#x2264; t<Span Typography.Variants="Subscript" FontFamily="Palatino Linotype">max</Span>, u &#x2265; 0, v &#x2265; 0 and u+v &#x2264; 1.
+        </Paragraph>
+        
+        <Paragraph Style="{StaticResource Text}"> 
+        <TextBlock TextWrapping="WrapWithOverFlow">        
+        <Image Source="Fig1.gif" Stretch="None" Margin="10,0,0,0" />
+        <LineBreak />
+        Fig.1 The point P of object A following the direction V and triangle of object B, built with
+        points P<Span Typography.Variants="Subscript" FontFamily="Palatino Linotype">i</Span> following the directions V<Span Typography.Variants="Subscript" FontFamily="Palatino Linotype">i</Span>
+        </TextBlock>
+        </Paragraph>
+        
+        <Paragraph />
+
+        <Paragraph Style="{StaticResource Text}">
+        An exact solution of Equation (1) implies that points follow exactly the directions defined by the direction
+        vectors. In a dynamic model, V and Vi correspond to the velocity vectors of points P and Pi.
+        Unfortunately, when the differential equation system is solvec numerically, the velocities at t=0 are not the
+        only parameters involved in the calculation of the new position of the points. Forces modify the velocity
+        direction and magnitudes when t varies from 0 to tmax. In this case, a point may go across a triangle
+        without being detected (see Fig.2). One way of solving this problem is to increase the range of u, v and t
+        when an intersection is considered. However, several intersection triangles are obtained for a point and this
+        makes the calculation of the force more complex. Moreover, there are cases where it is not sufficient to
+        circumvent the problem. It would be possible to perform the intersection test after calculation of the new
+        positions and repeat again, taking into account forces until there are no more intersections. This is timeconsuming
+        when there are numerous intersections and a infinite loop can even occur if there are a very large
+        number of intersections in a short time. For example, the intersection of a cloth with the human body
+        implies several hundreds of simultaneous collisions.
+        </Paragraph>
+
+        <Paragraph />
+
+       </ListItem>
+    </List>
+</FlowDocument>
+</FlowDocumentPageViewer>

@@ -1,0 +1,71 @@
+<XMLVariationTemplate>
+    <TemplateData>
+        <AppMonitorConfig>
+            <Using Namespace="Microsoft.Test.Deployment" Assembly="ClientTestLibrary"/>
+            <Steps>
+                <VariationContextStep>
+                    <AttributeVariation ID="1">
+                        <CompilationStep ScriptCommand="Name.csxml" ScriptSwitches="/rst:101" UseCtr="true" />
+                    </AttributeVariation>
+
+                    <NodeVariation ID="2">
+                    </NodeVariation>
+
+                    <CompilationStep Cleanup="True" ScriptSwitches="/t:Clean;TestCleanup" AlwaysRun="True" UseCtr="true"  />
+
+                    <AttributeVariation ID="3">
+                        <CompilationStep ScriptCommand="Name.csxml" ScriptSwitches="/rst:201" UseCtr="true" />
+                    </AttributeVariation>
+
+                    <NodeVariation ID="4">
+                    </NodeVariation>
+
+                    <CompilationStep Cleanup="True" ScriptSwitches="/t:Clean;TestCleanup" AlwaysRun="True" UseCtr="true"  />
+                </VariationContextStep>
+            </Steps>
+        </AppMonitorConfig>
+    </TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>AppMonitorConfig</FileName>
+            <FileExtension>.xml</FileExtension>
+            <RetainFileName>true</RetainFileName>
+        </Defaults>
+        <Scenario Case="1">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:101" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:101" />
+        </Scenario>
+        <Scenario Case="2">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:102" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:102" />
+        </Scenario>
+        <Scenario Case="3">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:103" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:103" />
+        </Scenario>
+        <Scenario Case="4">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:104" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:104" />
+        </Scenario>
+        <Scenario Case="5">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:105" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:105" />
+        </Scenario>
+        <Scenario Case="6">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:106" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:206" />
+        </Scenario>
+        <Scenario Case="7">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:107" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:107" />
+        </Scenario>
+        <Scenario Case="8">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:108" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:108" />
+        </Scenario>
+        <Scenario Case="9">
+            <AttributeVariation ID="1" AttributeName="ScriptSwitches" AttributeValue="/rst:109" />
+            <AttributeVariation ID="3" AttributeName="ScriptSwitches" AttributeValue="/rst:109" />
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>

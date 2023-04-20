@@ -1,0 +1,19 @@
+<!-- Scenarios: x:FactoryMethod property with no other properties / x:FactoryMethod as a PropertyElement -->
+
+<StackPanel
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:co    = "http://XamlTestTypes">
+
+    <StackPanel.Resources>
+
+        <co:CustomFactoryWithNoArgs x:Key="key1" x:FactoryMethod="Factory" />
+
+        <co:CustomFactoryWithNoArgs>
+            <x:FactoryMethod>Factory</x:FactoryMethod>
+            <x:Key>key2</x:Key>
+        </co:CustomFactoryWithNoArgs>
+
+    </StackPanel.Resources>       
+
+</StackPanel>

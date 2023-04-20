@@ -1,0 +1,49 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:System="clr-namespace:System;assembly=mscorlib" 
+    mc:Ignorable="d"
+    x:Class="StyleConnectorException.MainWindow"
+    x:Name="Window"
+    Title="MainWindow"
+    Width="640" Height="480">
+
+  <Window.Resources>
+    <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+      <Setter Property="FontStyle" Value="Italic"/>
+    </Style>
+
+    <XmlDataProvider x:Key="BookData" XPath="/Books">
+      <x:XData>
+        <Books xmlns="">
+          <Category Title="Category1">
+            <Book Title="Title1"/>
+            <Book Title="Title2"/>
+          </Category>
+          <Category Title="Category2">
+            <Book Title="Title3"/>
+            <Book Title="Title4"/>
+          </Category>
+        </Books>
+      </x:XData>
+    </XmlDataProvider>
+  </Window.Resources>
+
+  <DockPanel LastChildFill="True" DataContext="{Binding Source={StaticResource BookData}}">
+    <ListBox ItemsSource="{Binding XPath=Category}" >
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <ListBox ItemsSource="{Binding XPath=Book}">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding XPath=@Title}" Loaded="TextBlock_Loaded" Style="{StaticResource TextBlockStyle}" />
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </DockPanel>
+</Window>

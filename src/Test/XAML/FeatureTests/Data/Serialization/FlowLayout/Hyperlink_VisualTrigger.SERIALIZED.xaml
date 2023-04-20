@@ -1,0 +1,48 @@
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Border.Resources>
+    <Style TargetType="Hyperlink" x:Key="{x:Type Hyperlink}">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Style.Triggers>
+        <Trigger Property="UIElement.IsMouseOver">
+          <Setter Property="TextElement.FontStyle">
+            <Setter.Value>
+              <FontStyle>Italic</FontStyle>
+            </Setter.Value>
+          </Setter>
+          <Setter Property="TextElement.Foreground">
+            <Setter.Value>
+              <SolidColorBrush>#FF008000</SolidColorBrush>
+            </Setter.Value>
+          </Setter>
+          <Trigger.Value>
+            <s:Boolean>True</s:Boolean>
+          </Trigger.Value>
+        </Trigger>
+        <Trigger Property="UIElement.IsMouseOver">
+          <Setter Property="TextElement.FontStyle">
+            <Setter.Value>
+              <FontStyle>Normal</FontStyle>
+            </Setter.Value>
+          </Setter>
+          <Setter Property="TextElement.Foreground">
+            <Setter.Value>
+              <SolidColorBrush>#FF0000FF</SolidColorBrush>
+            </Setter.Value>
+          </Setter>
+          <Trigger.Value>
+            <s:Boolean>False</s:Boolean>
+          </Trigger.Value>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+  </Border.Resources>
+  <FlowDocumentScrollViewer Height="400" Width="400">
+    <FlowDocument>
+      <Paragraph>
+        <Hyperlink FontSize="40" NavigateUri="pack://siteoforigin:,,,/SimpleNavigation.xaml">This is a basic Hyperlink with the default hover style changed via Triggers</Hyperlink>
+      </Paragraph>
+    </FlowDocument>
+  </FlowDocumentScrollViewer>
+</Border>

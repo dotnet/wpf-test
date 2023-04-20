@@ -1,0 +1,154 @@
+<ct:CustomRoot xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:ct="http://XamlTestTypes"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ct:Custom_TemplateHost Name="Test1">
+        <ct:Custom_TemplateHost.Template> 
+                <!--Xaml taken from FeatureTests\Data\Parser\FlowLayout\SectionBVT.xaml-->        
+            <FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" PageWidth="800" PageHeight="550">
+                <Section xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    BorderBrush="Maroon" BorderThickness="2" Background="LightBlue"
+                    FontFamily="Times New Roman" FontStretch="Condensed" FontStyle="Oblique" FontWeight="Light"
+                    LineHeight="14" FlowDirection="RightToLeft"
+                    TextAlignment="Right"
+                    Padding="15,15,0,0">
+                    <Paragraph>
+                        Microsoft Confidential - Do Not Forward
+                    </Paragraph>
+                    <Paragraph>
+                        <Bold>Longhorn Project Status, 051605</Bold>
+                        We started Lockdown last week. What this means is that we focus on
+                        full test passes, fixing bugs, and meeting our Escrow entrance criteria.
+                        The bug bar begins to go up over the next 6 weeks, details are
+                        <Hyperlink NavigateUri="http://windows/C14/Planning/default.aspx">here</Hyperlink>
+                        (see graphic at the bottom of the page, levels are defined in
+                        the spreadsheet). Once we enter escrow we’ll take a limited amount of severity
+                        3/4 issues and recall-class fixes. <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph>
+                        <Bold Foreground="Blue">Progress Over the Past Week</Bold>
+                        <LineBreak />
+                    </Paragraph>
+
+                    <List Margin="15,0,0,0">
+                        <ListItem>
+                            <Paragraph Margin="0">Complete DNSRV RI (RI of all remaining Server SP1 Bugfixes) - DONE!</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph Margin="0">Get Lockdown started - DONE!</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph Margin="0">Start full test passes - DONE!</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph Margin="0">Get first bugfix RI - NOT DONE!</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph Margin="0">Bug Targets:  NOT DONE! Missed goal of 5810 by 260 bugs</Paragraph>
+                        </ListItem>
+                    </List>
+
+                    <Paragraph>
+                            Three out of five isn't bad, but it's not good enough.
+                            The key thing you can do is drive on bugs: find them, report them, fix them,
+                            test the fixes. Selfhosting is a GREAT way to do these things.
+                            Get a new Longhorn build on your machine and get after it! 
+                            <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph>
+                        <Bold Foreground="Blue">Goals This Week</Bold>
+                        <LineBreak />
+                    </Paragraph>
+
+                    <List Margin="15,0,0,0">
+                        <ListItem>
+                            <Paragraph Margin="0">Take one round of bug fix Reverse Integrates (RIs) - one from each vbl</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph Margin="0">Start the M9 Internal Developer Workstation (IDW) drive - fork into IDX source branch</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph Margin="0">Start test pass reporting in Ship Room</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph Margin="0">Bug Targets:</Paragraph>
+                        </ListItem>
+                    </List>
+
+                    <Paragraph>
+                            For the bugfix RIs, we are taking two virtual build labs (vbls) at the same time after they have passed both Build Verification Tests (BVTs) and the relevant set of quality gates. The schedule is here.
+                            Getting an IDW on the code complete build ("M9") is important so we can provide that build to our development partners for them to make progress on drivers and other deliverables. IDW defines the level of quality they can expect from the build. In addition, groups outside Windows but internal to MS standardize on IDW builds for testing and development.
+                            <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph>
+                        <Bold Foreground="Blue">Cross-Product Initiative Updates</Bold>
+                        <LineBreak />
+                        <Bold Foreground="Red">Longhorn Quality Gut Check!</Bold>
+                        <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph Background="LightYellow" BorderBrush="Black" BorderThickness="2">
+                            In order to get a better feel across the division for the quality of Longhorn client and server we have constructed a small 5 question survey to gather your feedback over time. We're calling this the "Official Longhorn Gut Check".
+                            Please fill out this <Hyperlink NavigateUri="http://consensus/Consensus/Survey.aspx?SurveyID=74223">survey</Hyperlink>
+                            each week (we’ll remind you in this mail). The goal here is to get an informal, very broad indication of what you think of the quality and progress of the build
+                            <LineBreak />
+                    </Paragraph>
+                </Section>
+
+                <Section>
+
+                    <Paragraph>
+                        <Bold Foreground="Blue">Beta 2 IP Patent Protection - early notice</Bold>
+                        <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph>
+                        Feature Inventory Tool 1.2 (FIT 1.2) was deployed last week and can now track patent claim filing. Prior to merging into winmain, all Beta 2 features must have this done.  Please work with your Legal and Corporate Affairs (LCA) contact - the goal is to have all patent claims filed by the end of July.
+                        <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph>
+                        <Bold Foreground="Blue">Beta 2 Localization - early notice</Bold>
+                        <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph>
+                        We have finalized the localization plans for Beta2.  Beta2 will ship in English, German and Japanese for all SKUs (client/server) as well as Hindi for Starter Edition only. Implementation plans will be finalized over the next 2 weeks with the goal of having a pseudo-loc build available in June. (Note that Beta 1 is English-only.)
+                        <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph>
+                        <Bold Foreground="Blue">Bug Progress</Bold>
+                        <LineBreak />
+                    </Paragraph>
+
+                    <Paragraph>
+                        Last week a large number of Prefix bugs were filed against Beta 2, which skews the graph. While those bugs don’t block Beta 1, they must be fixed prior to any Beta 2 feature merge. To see how your team is doing, check out the daily updated graphs here, or the more detailed data here. All Beta1 Exit Criteria can be found here
+                        <LineBreak />
+                    </Paragraph>
+                    
+                    <Paragraph>
+                        Image Redacted
+                    </Paragraph>
+
+                    <Paragraph>
+                        Now that we are entering lockdown,
+                        this is the right time for me to hand over project status to SvenH.
+                        Sven has been running the Longhorn project and ship room since the beginning of M9,
+                        and taking on more and more responsibilities over that time. Beginning next week,
+                        you’ll get mail from him rather than me (early notice on fixing up your inbox rules J).
+                        He has a whole new set of jokes for you to get sick of, with 50% fewer references to Monty Python and Australia.
+                        On a personal note, I’ve been writing these since XP was in development, and I just wanted to say Thank You!
+                        to all of you who have offered support, encouragement, and feedback (as well as serving as a captive audience for my attempted humor)
+                        over the past 4+ years. It’s been a privilege and an honor to have the opportunity to "speak" to each of you every week or so
+                        about the project(s). <LineBreak />
+                        Thanks, <LineBreak />
+                        Jack
+                    </Paragraph>
+                </Section>
+            </FlowDocument>
+        </ct:Custom_TemplateHost.Template>
+    </ct:Custom_TemplateHost>
+</ct:CustomRoot>

@@ -1,0 +1,82 @@
+<!-- Binding that uses XData -->
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:data  = "clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    xmlns:sys   = "clr-namespace:System;assembly=mscorlib"
+    >
+
+    <Page.Resources>
+        <XmlDataProvider x:Key="DSO1" XPath="/root">
+            <x:XData>
+                <root xmlns="">
+                    <brush>DarkGreen</brush>
+                    <fontsize>36</fontsize>
+                    <greeting>Hello World</greeting>
+                </root>
+            </x:XData>
+        </XmlDataProvider>
+    </Page.Resources>
+
+    <StackPanel>
+        <TextBlock
+            Foreground  = "{Binding Mode=OneWay,Source={StaticResource ResourceKey=DSO1},XPath=brush}"
+            FontSize    = "{Binding Mode=OneWay,Source={StaticResource ResourceKey=DSO1},XPath=fontsize}">
+            <TextBlock.Text>
+                <Binding Mode="OneWay" Source="{StaticResource ResourceKey=DSO1}" XPath="greeting" />
+            </TextBlock.Text>
+        </TextBlock>
+
+        <!-- Integration tests: NullExt, StaticExtension inside Binding -->
+        <TextBlock
+            Foreground="{Binding Mode=OneWay,Source={StaticResource ResourceKey=DSO1},XPath={x:Null}}"
+            FontSize="{Binding Mode={x:Static data:BindingMode.OneWay},Source={StaticResource ResourceKey=DSO1},XPath=fontsize}"
+        />
+
+        <!-- Set properties explicitly using new Binding xaml elements -->
+        <TextBlock>
+            <TextBlock.Foreground>
+                <Binding>
+                    <Binding.Mode>
+                        OneWay
+                    </Binding.Mode>
+                    <Binding.XPath>
+                        brush
+                    </Binding.XPath>
+                    <Binding.Source>
+                        <StaticResource ResourceKey="DSO1" />
+                    </Binding.Source>   
+                </Binding>
+            </TextBlock.Foreground>
+
+            <TextBlock.FontSize>
+                <Binding>
+                    <Binding.Mode>
+                        OneWay
+                    </Binding.Mode>
+                    <Binding.XPath>
+                        fontsize
+                    </Binding.XPath>
+                    <Binding.Source>
+                        <StaticResource ResourceKey="DSO1" />
+                    </Binding.Source>   
+                </Binding>  
+            </TextBlock.FontSize>
+
+            <TextBlock.Text>
+                <Binding>
+                    <Binding.Mode>
+                        OneWay
+                    </Binding.Mode>
+                    <Binding.XPath>
+                        greeting
+                    </Binding.XPath>
+                    <Binding.Source>
+                        <StaticResource ResourceKey="DSO1" />
+                    </Binding.Source>   
+                </Binding>
+            </TextBlock.Text>
+        </TextBlock>
+
+    </StackPanel>
+</Page>

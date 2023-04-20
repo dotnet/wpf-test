@@ -1,0 +1,38 @@
+<!-- x:Key Directive Property Element in a Style in different combination with other properties -->
+
+<StackPanel 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel.Resources>
+
+        <Style><x:Key>Value1</x:Key></Style>
+
+        <Style TargetType="{x:Type TextBox}"><x:Key>Value1</x:Key><Setter Property="Background" Value="Blue"/></Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <x:Key>Value2</x:Key>
+            <Setter Property="Background" Value="Green"/>
+        </Style>
+
+        <Style>
+            <Style.TargetType>{x:Type TextBox}</Style.TargetType>
+            <x:Key>Value3</x:Key>
+            <Setter Property="Background" Value="OrangeRed"/>
+        </Style>
+
+        <Style>
+            <x:Key>Value4</x:Key>
+            <Style.TargetType>{x:Type TextBox}</Style.TargetType>
+            <Setter Property="Background" Value="Black"/>
+        </Style>
+
+        <Style>
+            <Setter Property="Background" Value="Lavender"/>
+            <x:Key>Value5</x:Key>
+            <Style.TargetType>{x:Type TextBox}</Style.TargetType>
+        </Style>
+
+    </StackPanel.Resources>
+
+</StackPanel>

@@ -1,0 +1,32 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>WpfCustomControlLibrary1</AssemblyName>
+    <OutputType>Library</OutputType> <!-- Should be "exe" for Console.WriteLine to work -->
+    <Configuration>Release</Configuration>
+    <OutputPath>bin\Release\</OutputPath>
+    <OptionStrict>true</OptionStrict>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="CustomControl1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+ 
+</Project>

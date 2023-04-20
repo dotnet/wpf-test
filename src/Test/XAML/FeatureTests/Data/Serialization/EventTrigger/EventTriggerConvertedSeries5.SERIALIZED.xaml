@@ -1,0 +1,95 @@
+<CustomCanvas Background="#FFFFFFFF" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <CustomCanvas.Triggers>
+    <av:EventTrigger RoutedEvent="av:ButtonBase.Click">
+      <av:BeginStoryboard Name="TestStory">
+        <av:Storyboard>
+          <av:Storyboard.Children>
+            <av:ParallelTimeline FillBehavior="Stop" BeginTime="00:00:00" Name="ChangeWidthInStoryboards">
+              <av:ParallelTimeline.Children>
+                <av:DoubleAnimation To="300" From="300" FillBehavior="Stop" Duration="00:00:01" av:Storyboard.TargetProperty="Width" />
+              </av:ParallelTimeline.Children>
+            </av:ParallelTimeline>
+          </av:Storyboard.Children>
+        </av:Storyboard>
+      </av:BeginStoryboard>
+    </av:EventTrigger>
+    <av:EventTrigger RoutedEvent="av:ToggleButton.Checked">
+      <av:StopStoryboard BeginStoryboardName="TestStory" />
+    </av:EventTrigger>
+  </CustomCanvas.Triggers>
+  <av:Canvas>
+    <av:StackPanel>
+      <av:StackPanel.Resources>
+        <av:Style TargetType="av:Button" x:Key="{x:Type av:Button}">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.Triggers>
+            <av:EventTrigger RoutedEvent="av:ButtonBase.Click">
+              <av:BeginStoryboard Name="TestStory">
+                <av:Storyboard>
+                  <av:Storyboard.Children>
+                    <av:ParallelTimeline FillBehavior="Stop" BeginTime="00:00:00" Name="ChangeWidthInStoryboards">
+                      <av:ParallelTimeline.Children>
+                        <av:DoubleAnimation To="300" From="300" FillBehavior="Stop" Duration="00:00:01" av:Storyboard.TargetProperty="Width" />
+                      </av:ParallelTimeline.Children>
+                    </av:ParallelTimeline>
+                  </av:Storyboard.Children>
+                </av:Storyboard>
+              </av:BeginStoryboard>
+            </av:EventTrigger>
+            <av:EventTrigger RoutedEvent="av:ToggleButton.Checked">
+              <av:StopStoryboard BeginStoryboardName="TestStory" />
+            </av:EventTrigger>
+          </av:Style.Triggers>
+        </av:Style>
+      </av:StackPanel.Resources>
+      <av:Button />
+    </av:StackPanel>
+  </av:Canvas>
+  <av:Canvas>
+    <av:StackPanel>
+      <av:Button />
+    </av:StackPanel>
+  </av:Canvas>
+  <av:Canvas>
+    <av:Canvas.Resources>
+      <av:Style TargetType="av:Control" x:Key="{x:Type av:Control}">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Setter Property="av:Control.Template">
+          <av:Setter.Value>
+            <av:ControlTemplate TargetType="av:Control">
+              <av:StackPanel>
+                <av:Button Name="testBtn">Event Trigger Test 5.21</av:Button>
+                <av:Button Name="stopBtn">Stop</av:Button>
+              </av:StackPanel>
+              <av:ControlTemplate.Triggers>
+                <av:EventTrigger RoutedEvent="av:ButtonBase.Click" SourceName="testBtn">
+                  <av:BeginStoryboard Name="TestStory">
+                    <av:Storyboard>
+                      <av:Storyboard.Children>
+                        <av:ParallelTimeline FillBehavior="Stop" BeginTime="00:00:00" Name="ChangeWidthInStoryboards">
+                          <av:ParallelTimeline.Children>
+                            <av:DoubleAnimation To="300" From="300" FillBehavior="Stop" Duration="00:00:01" av:Storyboard.TargetProperty="Width" />
+                          </av:ParallelTimeline.Children>
+                        </av:ParallelTimeline>
+                      </av:Storyboard.Children>
+                    </av:Storyboard>
+                  </av:BeginStoryboard>
+                </av:EventTrigger>
+                <av:EventTrigger RoutedEvent="av:ButtonBase.Click" SourceName="stopBtn">
+                  <av:StopStoryboard BeginStoryboardName="TestStory" />
+                </av:EventTrigger>
+              </av:ControlTemplate.Triggers>
+            </av:ControlTemplate>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:Canvas.Resources>
+    <av:StackPanel>
+      <av:Control />
+    </av:StackPanel>
+  </av:Canvas>
+</CustomCanvas>

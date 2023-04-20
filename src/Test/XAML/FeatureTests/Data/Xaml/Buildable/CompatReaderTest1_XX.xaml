@@ -1,0 +1,88 @@
+﻿<!-- 
+The following Xaml tests different aspects of Markup-compatibility attributes, such
+as mc:Ignorable and mc:ProcessContent
+
+
+We will parse this Xaml under different conditions, depending on what
+versions of ParserTestControls assembly (assembly containing TransButton, TransListBox etc.)
+are loaded).
+1. V1 not loaded, V2 not loaded 
+2. V1 loaded, V2 not loaded
+3. V1 loaded, V2 loaded (but V2 doesn't subsume V1)
+4. V1 loaded, V2 loaded (and V2 subsumes V1), V3 loaded (and V3 subsumes V2).
+-->
+
+
+<cmn:CustomStackPanel Name="CustomStackPanel0"
+    xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:v1='http://ns.controlstore.com/avalon/2005'
+    xmlns:v2='http://ns.controlstore.com/avalon/2007'
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="v1" 
+>
+    <!-- The following block ensures that a nested element with 2 different 
+    sets of Ignorable namespaces on parent and grandparent considers a union of 
+    those 2 sets as its own set.
+
+    This block also verifies that wildcard works in mc:ProcessContent
+    -->
+    <StackPanel xmlns:vtwo='http://ns.controlstore.com/avalon/2007' Name="StackPanel0" mc:Ignorable="v2 vtwo" mc:ProcessContent="v2:*"
+    >
+        <!-- TODO: enable after these 2 attributes are recognized by Compat reader.        
+        mc:PreserveElements="vtwo:TransButton"                
+        mc:PreserveAttributes="vtwo:Background"
+       -->
+        <v1:TransButton v1:Background="Blue">
+            <v2:TransButton />
+        </v1:TransButton>
+        <v2:TransButton v2:Background="Blue">
+            <v1:TransButton />
+        </v2:TransButton>
+        <vtwo:TransListBox>
+            <v1:TransListBoxItem>Joey</v1:TransListBoxItem>
+            <v1:TransListBoxItem>Ross</v1:TransListBoxItem>
+            <v1:TransListBoxItem>Chandler</v1:TransListBoxItem>
+        </vtwo:TransListBox>
+    </StackPanel>
+
+    <!-- The following block is to test a variant of mc:ProcessContent 
+    The block above uses a wildcard, while this block lists elements separately.
+    It also verifies that it's the namespaces and not prefixes that matter.
+    -->
+    <StackPanel xmlns:vtwo='http://ns.controlstore.com/avalon/2007' Name="StackPanel1" mc:Ignorable="v2" mc:ProcessContent="vtwo:TransButton v2:TransListBox"
+    >
+        <v2:TransButton>
+            <v1:TransButton />
+        </v2:TransButton>
+        <vtwo:TransListBox>
+            <v1:TransListBoxItem>Joey</v1:TransListBoxItem>
+        </vtwo:TransListBox>
+    </StackPanel>
+
+    <!-- The following block verifies the content is not processed in the absense 
+    of mc:ProcessContent. It also verifies that mc:Ignorable="v2" on a v2 element
+    works fine. See bug 1179512 -->
+    <StackPanel xmlns:vtwo='http://ns.controlstore.com/avalon/2007' Name="StackPanel2" mc:Ignorable="v2"
+    >
+        <v2:TransButton mc:Ignorable="v2" mc:ProcessContent="v2:TransButton">
+            <v1:TransButton />
+        </v2:TransButton>
+        <vtwo:TransListBox>
+            <v1:TransListBoxItem>Joey</v1:TransListBoxItem>
+        </vtwo:TransListBox>
+    </StackPanel>
+
+    <!-- The following block verifies that presence of an Ignorable attribute resets 
+    the content-processing and preservation behavior for all elements and attributes 
+    in the namespaces referenced by the Ignorable attribute value.
+    
+    <StackPanel xmlns:vtwo='http://ns.controlstore.com/avalon/2007' Name="StackPanel3" mc:Ignorable="v2" mc:ProcessContent="v2:TransButton">
+        <v1:TransButton mc:Ignorable="v2">
+            <v2:TransButton>
+                <v1:TransListBox/>
+            </v2:TransButton>
+        </v1:TransButton>
+    </StackPanel>
+    -->
+</cmn:CustomStackPanel>

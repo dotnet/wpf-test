@@ -1,0 +1,25 @@
+﻿<!--
+XmlContentControl is a test control. Its Content property (pointed to by a ContentProperty 
+attribute) is of a type that implements IXmlSerializable. So, content under
+XmlContentControl tag can be any valid Xml (doesn't have to be Xaml)
+and it will be stored (and later processed) as a LiteralContent record in Baml. 
+We implemented this test to test parser's ability to process Baml records of
+type LiteralContent. 
+-->
+
+
+
+<cmn:CustomDockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="http://XamlTestTypes" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+> 
+	<cc:XmlContentControl Name="XmlContentControl0">
+   <x:XData>
+    <Foo xmlns="">
+      <Bar />
+    </Foo>
+   </x:XData>  
+	</cc:XmlContentControl>
+</cmn:CustomDockPanel>

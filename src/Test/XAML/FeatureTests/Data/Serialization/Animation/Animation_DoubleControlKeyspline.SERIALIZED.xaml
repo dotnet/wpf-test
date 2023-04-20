@@ -1,0 +1,34 @@
+<CustomDockPanel Background="#FFFFFFFF" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <av:Canvas Height="500" Width="500" Name="Canvas">
+    <av:TextBlock Text="Animate!" Height="80" FontWeight="Bold" Width="200" FontFamily="Comic Sans MS" Name="myText" FontSize="45" Opacity="1" Foreground="#FF0000FF" av:Canvas.Left="50" av:Canvas.Top="200">
+      <av:TextBlock.Triggers>
+        <av:EventTrigger RoutedEvent="av:FrameworkElement.Loaded">
+          <av:BeginStoryboard>
+            <av:Storyboard FillBehavior="Stop" BeginTime="00:00:00" Name="storyboard1" av:Storyboard.TargetProperty="(av:Canvas.Top)">
+              <av:Storyboard.Children>
+                <av:DoubleAnimationUsingKeyFrames AutoReverse="True" BeginTime="00:00:05" FillBehavior="HoldEnd" RepeatBehavior="2x" Duration="00:00:02">
+                  <av:DoubleAnimationUsingKeyFrames.KeyFrames>
+                    <av:SplineDoubleKeyFrame KeySpline="0.7,0.2,1,0.8" KeyTime="00:00:00" Value="200" />
+                    <av:SplineDoubleKeyFrame KeySpline="0.9,0.2,1,1" KeyTime="100%" Value="50" />
+                  </av:DoubleAnimationUsingKeyFrames.KeyFrames>
+                </av:DoubleAnimationUsingKeyFrames>
+              </av:Storyboard.Children>
+            </av:Storyboard>
+          </av:BeginStoryboard>
+          <av:BeginStoryboard>
+            <av:Storyboard FillBehavior="Stop" BeginTime="00:00:00" Name="storyboard2" av:Storyboard.TargetProperty="(av:Canvas.Left)">
+              <av:Storyboard.Children>
+                <av:DoubleAnimationUsingKeyFrames AutoReverse="True" BeginTime="00:00:05" FillBehavior="HoldEnd" RepeatBehavior="10x" Duration="00:00:02">
+                  <av:DoubleAnimationUsingKeyFrames.KeyFrames>
+                    <av:DiscreteDoubleKeyFrame KeyTime="00:00:00" Value="25" />
+                    <av:DiscreteDoubleKeyFrame KeyTime="100%" Value="75" />
+                  </av:DoubleAnimationUsingKeyFrames.KeyFrames>
+                </av:DoubleAnimationUsingKeyFrames>
+              </av:Storyboard.Children>
+            </av:Storyboard>
+          </av:BeginStoryboard>
+        </av:EventTrigger>
+      </av:TextBlock.Triggers>
+    </av:TextBlock>
+  </av:Canvas>
+</CustomDockPanel>

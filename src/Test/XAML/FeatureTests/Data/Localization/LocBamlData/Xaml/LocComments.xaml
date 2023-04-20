@@ -1,0 +1,70 @@
+<Window
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Class     = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest"
+    >
+
+    <!-- NOTE:  Comments are removed in LocBaml's generate step, so validation consists of comparing the
+         .csv file created by the parse step to a master .MasterCsv file -->
+
+    <DockPanel>
+
+        <!-- Scenario #1: Comment on Button with Content property element-->
+        <Button x:Uid="Button_1"
+            Localization.Comments = "$Content (Comment #1)">
+            LLLMyButtonContent1
+        </Button>
+
+        <!-- Scenario #2: Comment on Button with Content property-->
+        <Button x:Uid="Button_2" Content="LLLMyButtonContent2"
+            Localization.Comments = "$Content (Comment #2)">
+        </Button>
+
+        <!-- Scenario #3: Comment on TextBox with Text property -->
+        <TextBox x:Uid="TextBox_1" Text="LLLMyTextBoxText"
+            Localization.Comments = "Text (Comment #3)">
+        </TextBox>
+
+        <!-- Scenario #4: Comment on CheckBox with Content property element -->
+        <CheckBox x:Uid="CheckBox_1" Localization.Comments="CheckBox (Comment #4)">LLLCheckBox1</CheckBox>
+
+        <!-- Scenario #5: Comment on TextBlock with no localizable property -->
+        <TextBlock x:Uid="TextBlock_1" Localization.Comments="TextBlock (Comment #5)" />
+
+        <!-- Scenario #6: Comment with missing initial value on Comment -->
+        <TextBlock x:Uid="TextBlock_2" Localization.Comments=" (Comment #6)" Text="LLLTextBlock2" />
+
+        <!-- Scenario #7: Comment with empty parens after initial value -->
+        <Label x:Uid="Label_1" Localization.Comments="Label ()">LLLabel1</Label>
+
+        <!-- Scenario #8: Comment with only empty parens -->
+        <HeaderedContentControl x:Uid="HeaderedContentControl_2" Localization.Comments="()" />
+
+        <!-- Scenario #9: Comment as empty string -->
+        <TextBox x:Uid="TextBox_2" Localization.Comments="" Text="LLLTextBox2" />
+
+        <!-- Scenario #10: Comment with LocAttribute -->
+        <Button x:Uid="Button_3"
+            Localization.Comments = "$Content (Comment #7)"
+            Localization.Attributes = "$Content (Modifiable)">
+            LLLMyButtonContent3
+        </Button>
+
+        <!-- Scenario #11: Comment with escape character -->
+        <RepeatButton x:Uid="RepeatButton_1"
+            Localization.Comments = "$Content (Comment \\n #8)"
+            Localization.Attributes = "$Content (RepeatButton Modifiable)">
+            LLLMyRepeatButtonContent1
+        </RepeatButton>
+
+        <!-- Scenario #9: Comments on nested elements -->
+        <TextBlock x:Uid="TextBlock_3" Localization.Comments="Text (Comment #9)">
+                <TextBlock x:Uid="TextBlock_4" Localization.Comments="Text (Comment #10)">LLLTextBlock4</TextBlock>
+        </TextBlock>
+
+        <!-- Scenario #10: Comment on element with no x:Uid -->
+        <TextBlock Localization.Comments="Text (Comment #11)">TextBlock5</TextBlock>
+
+    </DockPanel>
+
+</Window>

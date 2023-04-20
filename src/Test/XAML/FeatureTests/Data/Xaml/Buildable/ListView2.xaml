@@ -1,0 +1,39 @@
+<!-- ListView, with databound ListViewItems and using a DataTemplate -->
+<Page
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+    <StackPanel
+        xmlns:ds = "clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+        <StackPanel.Resources>
+            <XmlDataProvider XPath="DataRows" x:Key="Testing">
+              <x:XData>
+                <DataRows xmlns="">
+                    <Row><Item>1</Item><Team>Red Sox</Team></Row>
+                    <Row><Item>2</Item><Team>Mets</Team></Row>
+                    <Row><Item>3</Item><Team>Yankees</Team></Row>
+                </DataRows>
+              </x:XData>
+            </XmlDataProvider>
+            <DataTemplate DataType="Row">
+                <StackPanel>
+                    <ListViewItem Content="{Binding XPath=Team}" />
+                </StackPanel>
+            </DataTemplate>
+        </StackPanel.Resources>
+        <TextBox
+            DataContext         = "{Binding ElementName=CONTROLTOTEST, Path=SelectedItem}"
+            Text                = "{Binding XPath=Team}"
+            >
+        </TextBox>
+        <ListView
+            VirtualizingStackPanel.IsVirtualizing       = "True"
+            ItemsSource                                 = "{Binding XPath=*}">
+            <ListView.DataContext>
+                <Binding Source="{StaticResource Testing}" />
+            </ListView.DataContext>
+        </ListView>
+    </StackPanel>
+
+</Page>

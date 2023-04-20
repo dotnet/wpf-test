@@ -1,0 +1,17 @@
+<!-- Verify no exception when Value of a trigger is a markup extension -->
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <Window.Resources>
+        <Style x:Key="MyStyle" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding}" Value="{x:Type Button}" />
+                <Trigger Property="Tag" Value="{x:Type Button}" />
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <Button Style="{StaticResource MyStyle}" />
+    </StackPanel>
+</Window>

@@ -1,0 +1,92 @@
+<XTC>
+  <!--Ambient Tests-->
+   <TEST Name="AmbientSiblingME" Priority="0" SubArea="Parser\Ambient">
+    <DriverParameters XamlTestType="LoadTest" File="AmbientSiblingME.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.Ambient.AmbientSiblingME_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\AmbientSiblingME.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="AmbientParentME" Priority="0" SubArea="Parser\Ambient">
+    <DriverParameters XamlTestType="LoadTest" File="AmbientParentME.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.Ambient.AmbientParentME_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\AmbientParentME.xaml" />
+    </SupportFiles>
+    <Keywords>
+        <Keyword>Setup_SanitySuite</Keyword>
+        <Keyword>Localization_Suite</Keyword>
+    </Keywords>
+  </TEST>
+  <TEST Name="AmbientSiblingTC" Priority="0" SubArea="Parser\Ambient">
+    <DriverParameters XamlTestType="LoadTest" File="AmbientSiblingTC.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.Ambient.AmbientSiblingTC_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\AmbientSiblingTC.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="AmbientParentTC" Priority="0" SubArea="Parser\Ambient">
+    <DriverParameters XamlTestType="LoadTest" File="AmbientParentTC.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.Ambient.AmbientParentTC_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\AmbientParentTC.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="NameScopeBasic" Priority="0" SubArea="Parser\NameScope">
+    <DriverParameters XamlTestType="LoadTest" File="NameScopeBasic.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.NameScope.NameScopeBasic_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\NameScopeBasic.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="IXamlSchemaContextProvider" Priority="0" SubArea="Parser\IXSCP" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.IXSCP.IXamlSchemaContextProviderTest" TestMethod="RunTest" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\IXSCP.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="LocalAssembly_Clrns_NoAssembly" Priority="0" SubArea="Parser\LocalAssembly" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.LocalAssembly.LocalAssemblyTests" TestMethod="RunClrnsNoAssemblyTest" TestParams="Clrns_NoAssembly.xaml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\NonBuildable\Clrns_NoAssembly.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="LocalAssembly_Clrns_NoAssembly_InternalTypes" Priority="0" SubArea="Parser\LocalAssembly" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.LocalAssembly.LocalAssemblyTests" TestMethod="RunClrnsNoAssemblyTest" TestParams="Clrns_NoAssembly_InternalTypes.xaml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\NonBuildable\Clrns_NoAssembly_InternalTypes.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="LocalAssembly_PartialTrust" Priority="2" SubArea="Parser\LocalAssembly"  Disabled="true" >
+
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.LocalAssembly.LocalAssemblyTests" TestMethod="RunPartialTrustLocalAssemblyTest" TestParams="Clrns_NoAssembly_InternalTypes.xaml" SecurityLevel="PartialTrust"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\NonBuildable\Clrns_NoAssembly_InternalTypes.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="IXamlTemplate_BVT" Priority="0" SubArea="Parser\Template">
+    <DriverParameters XamlTestType="LoadTest" File="IXamlTemplate_BVT.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.Template.IXamlTemplate_BVT_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\IXamlTemplate_BVT.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="IXamlTemplate_Object" Priority="1" SubArea="Parser\Template">
+    <DriverParameters XamlTestType="LoadTest" File="IXamlTemplate_Object.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.Template.IXamlTemplate_Object_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\IXamlTemplate_Object.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="IXamlTemplate_NestedSingleLevel" Priority="1" SubArea="Parser\Template">
+    <DriverParameters XamlTestType="LoadTest" File="IXamlTemplate_NestedSingleLevel.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.Template.IXamlTemplate_NestedSingleLevel_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\IXamlTemplate_NestedSingleLevel.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="IXamlTemplate_NestedMultipleLevel" Priority="1" SubArea="Parser\Template">
+    <DriverParameters XamlTestType="LoadTest" File="IXamlTemplate_NestedMultipleLevel.xaml" TestAssembly="XamlWpfTests40" Verifier="Microsoft.Test.Xaml.Parser.Verifiers.Template.IXamlTemplate_NestedMultipleLevel_Verify" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\IXamlTemplate_NestedMultipleLevel.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="IXamlTemplate_LargeTemplate" Priority="1" SubArea="Parser\Template">
+    <DriverParameters XamlTestType="LoadTest" File="IXamlTemplate_LargeTemplate.xaml"  />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\IXamlTemplate_LargeTemplate.xaml" />
+    </SupportFiles>
+  </TEST>
+</XTC>

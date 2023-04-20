@@ -1,0 +1,50 @@
+﻿
+<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:l="clr-namespace:System.Windows.Controls"
+            x:Class="Something.MyClass"
+     Loaded="OnLoaded" xmlns:MappingPIGen1="clr-namespace:System.Windows.Controls">
+
+    <StackPanel.Resources>
+        <Style TargetType="{x:Type l:LocalButton}" x:Key="{x:Type l:LocalButton}">
+            <Style.Setters>
+                <Setter Property="Button.VerticalAlignment" Value="Top" />
+                <EventSetter Event="Mouse.PreviewMouseDown" Handler="_OnPreviewMouseDown" />
+                <EventSetter Event="l:LocalButton.Loaded" Handler="_OnStyleTarget_Loaded" />
+            </Style.Setters>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="{x:Type Button}">
+            <Style.Setters>
+                <EventSetter Event="Button.Loaded" Handler="_OnStyleTarget_Loaded" />
+                <EventSetter Event="Click" Handler="OnClick" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Margin="{TemplateBinding Padding}">
+                                <DockPanel>
+                                    <l:LocalButton Name="LocalButtonPart"
+                                                  Loaded="_On_Loaded"
+                                                  VerticalAlignment="Center">LocalButtonPart</l:LocalButton>
+                                    <CheckBox Margin="{TemplateBinding Padding}"
+                                              Name="CheckBoxPart"
+                                              DockPanel.Dock="Left"
+                                              IsChecked="true"
+                                              Checked="OnCheckedChanged"
+                                              Unchecked="OnCheckedChanged"
+                                              Mouse.PreviewMouseDown="_OnPreviewMouseDown">CheckBoxPart</CheckBox>
+                                    <ContentPresenter x:Name="ContentSite" Margin="0,0,1,1" />
+                                </DockPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <EventSetter Event="Mouse.PreviewMouseDown" Handler="_OnPreviewMouseDown" />
+            </Style.Setters>
+        </Style>
+    </StackPanel.Resources>
+
+    <Button Name="Button" Loaded="_On_Loaded">Button</Button>
+    <l:LocalButton x:Name="LocalButton" Loaded="_On_Loaded">LocalButton</l:LocalButton>
+    <TextBox Name="Text1" x:FieldModifier="public">Start.</TextBox>
+
+</StackPanel>

@@ -1,0 +1,72 @@
+NS  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"     
+NS  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+SO Page     
+ SM xml:base     
+  V "FILE LOCATION STRING"
+ EM     
+ SM Content     
+  SO DockPanel     
+   SM MouseLeftButtonDown     
+    V "OnMouseDown"     
+   EM     
+   SM Children     
+    GO     
+     SM x:_Items     [Implicit]     
+      SO Button     
+       SM Width     
+        V "100"     
+       EM     
+       SM Height     
+        V "50"     
+       EM     
+       SM Click     
+        V "OnClick"     
+       EM     
+       SM Content     
+        V "ClickMe"     
+       EM     
+      EO     
+      SO TextBlock     
+       SM Name     
+        V "Text1"     
+       EM     
+       SM Inlines     
+        GO     
+         SM x:_Items     [Implicit]     
+          V "Waiting for Click!"     
+         EM     
+        EO     
+       EM     
+      EO     
+     EM     
+    EO     
+   EM     
+   SM x:Code     
+    V "void OnClick(object sender, System.Windows.RoutedEventArgs e) { Text1.TextRange.Text = "Clicked Text"; }"     
+   EM     
+   SM Children     
+    GO     
+     SM x:_Items     [Implicit]     
+      SO TextBlock     
+       SM Name     
+        V "Text2"     
+       EM     
+       SM Inlines     
+        GO     
+         SM x:_Items     [Implicit]     
+          V "Waiting for Click!"     
+         EM     
+        EO     
+       EM     
+      EO     
+     EM     
+    EO     
+   EM     
+   SM x:Code     
+    V "void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) { Text2.TextRange.Text = "MouseDown Text"; }"     
+   EM     
+  EO     
+ EM     
+EO     
+Closed.
+

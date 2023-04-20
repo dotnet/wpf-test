@@ -1,0 +1,44 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+  <PropertyGroup>
+    <AssemblyName>SchemaTest</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <Configuration>Debug</Configuration>
+    <OutputPath>bin\Debug</OutputPath>
+    <OptionStrict>true</OptionStrict>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Projects\*.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xaml"/>
+    <Reference Include="System.Xml">
+        <SpecificVersion>true</SpecificVersion>
+    </Reference>
+    <Reference Include="TestRuntime.dll">
+        <SpecificVersion>true</SpecificVersion>
+    </Reference>
+    <Reference Include="XamlCommon.dll">
+	<SpecificVersion>true</SpecificVersion>
+        <Private>true</Private>
+    </Reference>
+    <Reference Include="AssemblyA.dll" >
+        <SpecificVersion>true</SpecificVersion>
+        <Private>true</Private>
+    </Reference>
+    <Reference Include="AssemblyB.dll" >
+        <SpecificVersion>true</SpecificVersion>
+        <Private>true</Private>
+    </Reference>
+    <Reference Include="AssemblyC.dll" >
+        <SpecificVersion>true</SpecificVersion>
+        <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

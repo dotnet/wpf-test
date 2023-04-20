@@ -1,0 +1,111 @@
+NS  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"     
+NS  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+SO Page     
+ SM xml:base     
+  V "FILE LOCATION STRING"
+ EM     
+ SM Resources     
+  GO     
+   SM x:_Items     [Implicit]     
+    SO ControlTemplate     
+     SM x:Key     
+      V "TestTemplate"     
+     EM     
+     SM Template     
+      SO Border     
+       SM Name     
+        V "border1"     
+       EM     
+       SM BorderThickness     
+        V "5"     
+       EM     
+       SM BorderBrush     
+        V "Black"     
+       EM     
+       SM Width     
+        V "55"     
+       EM     
+       SM Height     
+        V "55"     
+       EM     
+       SM Background     
+        SO SolidColorBrush     
+         SM Color     
+          V "DarkOrange"     
+         EM     
+        EO     
+       EM     
+      EO     
+     EM     
+     SM Triggers     
+      GO     
+       SM x:_Items     [Implicit]     
+        SO Trigger     
+         SM Property     
+          V "IsMouseOver"     
+         EM     
+         SM Value     
+          V "true"     
+         EM     
+         SM EnterActions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO BeginStoryboard     
+             SM Storyboard     
+              SO Storyboard     
+               SM Children     
+                GO     
+                 SM x:_Items     [Implicit]     
+                  SO ColorAnimation     
+                   SM Duration     
+                    V "0:0:0.5"     
+                   EM     
+                   SM Storyboard.TargetName     
+                    V "border1"     
+                   EM     
+                   SM Storyboard.TargetProperty     
+                    V "Background.Color"     
+                   EM     
+                   SM To     
+                    V "Red"     
+                   EM     
+                  EO     
+                 EM     
+                EO     
+               EM     
+              EO     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+       EM     
+      EO     
+     EM     
+    EO     
+   EM     
+  EO     
+ EM     
+ SM Content     
+  SO DockPanel     
+   SM Children     
+    GO     
+     SM x:_Items     [Implicit]     
+      SO Button     
+       SM Template     
+        SO StaticResourceExtension     
+         SM x:_PositionalParameters     [Implicit]     
+          V "TestTemplate"     
+         EM     
+        EO     
+       EM     
+      EO     
+     EM     
+    EO     
+   EM     
+  EO     
+ EM     
+EO     
+Closed.
+

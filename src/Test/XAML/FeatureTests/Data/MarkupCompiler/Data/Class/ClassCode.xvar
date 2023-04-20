@@ -1,0 +1,111 @@
+<XMLVariationTemplate>
+    <TemplateData>
+    using System;
+    using System.Windows;
+    using System.Windows.Navigation;
+    using System.Windows.Controls;
+    using System.IO;
+    using System.Windows.Markup;
+    using Microsoft.Test.Serialization;
+
+    public partial class Application__ : Application
+    {
+        void AppStartup(object sender, StartupEventArgs args)
+        {
+        }
+    }
+
+<NodeVariation ID="10">
+</NodeVariation>
+    public partial class MyAppName : Application
+    {
+        void AppStartup(object sender, StartupEventArgs args)
+        {
+            Microsoft.Test.Logging.TestLog log = new Microsoft.Test.Logging.TestLog("CompilerTest");
+            log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+            log.Stage = Microsoft.Test.Logging.TestStage.Run;
+
+            FileStream fs = new FileStream(".\\obj\\release\\ClassMarkup.baml", FileMode.Open);
+            BamlReaderWrapper reader = new BamlReaderWrapper(fs);
+            reader.Read();
+            reader.Read();
+            string name = reader.Name;
+
+            <NodeVariation ID="3">
+            if (name == "MyNamespace.MyClassNameLogic")
+            </NodeVariation>
+            {
+                log.LogStatus("BAML has correct name as defined by x:Subclass");
+                log.Result = Microsoft.Test.Logging.TestResult.Pass;
+            }
+            else
+            {
+                log.LogStatus("BAML record has incorrect value: " + name);
+                log.Result = Microsoft.Test.Logging.TestResult.Fail;
+            }
+            log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+            log.Close();
+            System.Windows.Application.Current.Shutdown();
+
+            <NodeVariation ID="1">
+              Page instance = new Page();
+            </NodeVariation>
+            instance.Title="Foo";
+        }
+    }
+<NodeVariation ID="11">
+</NodeVariation>
+
+    <NodeVariation ID="2">
+    </NodeVariation>
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>ClassCode</FileName>
+            <FileExtension>.cs</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+        </Scenario>
+        <Scenario Case="2">
+            <NodeVariation ID="1">MyClassName instance = new MyClassName();</NodeVariation>
+        </Scenario>
+        <Scenario Case="3">
+            <NodeVariation ID="1">MyNamespace.MyClassName instance = new MyNamespace.MyClassName();</NodeVariation>
+        </Scenario>
+        <Scenario Case="4">
+            <NodeVariation ID="1">MyClassName instance = new MyClassName();</NodeVariation>
+            <NodeVariation ID="3">if (name == "MyClassName")</NodeVariation>
+        </Scenario>
+        <Scenario Case="5">
+            <NodeVariation ID="1">MyClassNameLogic instance = new MyClassNameLogic();</NodeVariation>
+            <NodeVariation ID="2">public class MyClassNameLogic : MyClassName
+                                  {
+                                  }</NodeVariation>
+        </Scenario>
+        <Scenario Case="6">
+            <NodeVariation ID="1">MyNamespace.MyClassNameLogic instance = new MyNamespace.MyClassNameLogic();</NodeVariation>
+            <NodeVariation ID="3">if (name == "MyNamespace.MyClassNameLogic")</NodeVariation>
+            <NodeVariation ID="2">namespace MyNamespace
+                                  {
+                                    public class MyClassNameLogic : MyClassName
+                                    {
+                                    }
+                                  }</NodeVariation>
+        </Scenario>
+        <Scenario Case="7">
+            <NodeVariation ID="1">MyClassNameLogic instance = new MyClassNameLogic();</NodeVariation>
+            <NodeVariation ID="3">if (name == "MyClassNameLogic")</NodeVariation>
+            <NodeVariation ID="2">public class MyClassNameLogic : MyClassName
+                                  {
+                                  }</NodeVariation>
+        </Scenario>
+        <Scenario Case="8">
+            <NodeVariation ID="3">
+            if (name == "MyNamespace.MyClassName")
+            </NodeVariation>
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>
+

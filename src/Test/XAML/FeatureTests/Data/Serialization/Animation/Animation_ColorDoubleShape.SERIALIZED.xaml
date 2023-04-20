@@ -1,0 +1,27 @@
+<CustomDockPanel Background="#FFFFFFFF" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <av:Canvas Height="500" Width="500" Name="Canvas">
+    <av:Ellipse Height="80" Width="80" Name="ball1" av:Canvas.Left="10" av:Canvas.Top="60">
+      <av:Ellipse.Triggers>
+        <av:EventTrigger RoutedEvent="av:FrameworkElement.Loaded">
+          <av:BeginStoryboard>
+            <av:Storyboard FillBehavior="Stop" BeginTime="00:00:00" Name="storyboard1" av:Storyboard.TargetProperty="(av:Shape.Fill).(av:SolidColorBrush.Color)">
+              <av:Storyboard.Children>
+                <av:ColorAnimation AccelerationRatio="0.1" To="#FF0000FF" From="#FFFF0000" BeginTime="00:00:05" FillBehavior="HoldEnd" Duration="00:00:05" DecelerationRatio="0.9" />
+              </av:Storyboard.Children>
+            </av:Storyboard>
+          </av:BeginStoryboard>
+          <av:BeginStoryboard>
+            <av:Storyboard FillBehavior="Stop" BeginTime="00:00:00" Name="storyboard2" av:Storyboard.TargetProperty="Width">
+              <av:Storyboard.Children>
+                <av:DoubleAnimation BeginTime="00:00:05" By="50" FillBehavior="HoldEnd" RepeatBehavior="5x" Duration="00:00:02" IsCumulative="True" />
+              </av:Storyboard.Children>
+            </av:Storyboard>
+          </av:BeginStoryboard>
+        </av:EventTrigger>
+      </av:Ellipse.Triggers>
+      <av:Ellipse.Fill>
+        <av:SolidColorBrush Color="#FFFF0000" />
+      </av:Ellipse.Fill>
+    </av:Ellipse>
+  </av:Canvas>
+</CustomDockPanel>

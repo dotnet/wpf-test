@@ -1,0 +1,102 @@
+<XMLVariationTemplate>
+    <TemplateData>
+    Imports System
+    Imports System.Windows
+    Imports System.Windows.Navigation
+    Imports System.Windows.Controls
+    Imports System.IO
+    Imports System.Windows.Markup
+    Imports Microsoft.Test.Serialization
+ 
+    Public partial Class Application__
+	 Inherits Application
+        Private  Sub AppStartup(ByVal sender As Object, ByVal args As StartupEventArgs)
+        End Sub
+    End Class
+ 
+    Public partial Class MyAppName
+	 Inherits Application
+        Private  Sub AppStartup(ByVal sender As Object, ByVal args As StartupEventArgs)
+            Dim log As Microsoft.Test.Logging.TestLog =  New Microsoft.Test.Logging.TestLog("CompilerTest") 
+            log.Stage = Microsoft.Test.Logging.TestStage.Initialize
+            log.Stage = Microsoft.Test.Logging.TestStage.Run
+ 
+            Dim fs As FileStream =  New FileStream(".\\obj\\release\\ClassMarkup.baml",FileMode.Open) 
+            Dim reader As BamlReaderWrapper =  New BamlReaderWrapper(fs) 
+            reader.Read()
+            reader.Read()
+            Dim name As String =  reader.Name 
+ 
+            <NodeVariation ID="3">
+            If name = "MyNamespace.MyClassNameLogic" Then
+            </NodeVariation>
+                log.LogStatus("BAML has correct name as defined by x:Subclass")
+                log.Result = Microsoft.Test.Logging.TestResult.Pass
+            Else 
+                log.LogStatus("BAML record has incorrect value: " + name)
+                log.Result = Microsoft.Test.Logging.TestResult.Fail
+            End If
+            log.Stage = Microsoft.Test.Logging.TestStage.Cleanup
+            log.Close()
+            System.Windows.Application.Current.Shutdown()
+ 
+            <NodeVariation ID="1">
+              Dim instance As Page =  New Page() 
+            </NodeVariation>
+
+            instance.Title="Foo"
+        End Sub
+    End Class
+
+    <NodeVariation ID="2">
+    </NodeVariation>
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>ClassCode</FileName>
+            <FileExtension>.vb</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+        </Scenario>
+        <Scenario Case="2">
+            <NodeVariation ID="1">Dim instance As MyClassName = new MyClassName()</NodeVariation>
+        </Scenario>
+        <Scenario Case="3">
+            <NodeVariation ID="1">Dim instance As MyNamespace.MyClassName = new MyNamespace.MyClassName()</NodeVariation>
+        </Scenario>
+        <Scenario Case="4">
+            <NodeVariation ID="1">Dim instance As MyRootNamespace.MyClassName = new MyRootNamespace.MyClassName()</NodeVariation>
+            <NodeVariation ID="3">If name = "MyRootNamespace.MyClassName" Then</NodeVariation>
+        </Scenario>
+        <Scenario Case="5">
+            <NodeVariation ID="1">Dim instance As MyClassNameLogic = new MyClassNameLogic()</NodeVariation>
+            <NodeVariation ID="2">Public Class MyClassNameLogic
+                                    inherits MyClassName
+                                  End Class</NodeVariation>
+        </Scenario>
+        <Scenario Case="6">
+            <NodeVariation ID="1">Dim instance As MyNamespace.MyClassNameLogic = new MyNamespace.MyClassNameLogic()</NodeVariation>
+            <NodeVariation ID="3">If name = "MyRootNamespace.MyNamespace.MyClassNameLogic" Then</NodeVariation>
+            <NodeVariation ID="2">Namespace MyNamespace
+                                    Public Class MyClassNameLogic
+                                      inherits MyClassName
+                                    End Class
+                                  End Namespace</NodeVariation>
+        </Scenario>
+        <Scenario Case="7">
+            <NodeVariation ID="1">Dim instance As MyClassNameLogic = new MyClassNameLogic()</NodeVariation>
+            <NodeVariation ID="3">If name = "MyRootNamespace.MyClassNameLogic" Then</NodeVariation>
+            <NodeVariation ID="2">Public Class MyClassNameLogic
+                                    inherits MyClassName
+                                  End Class</NodeVariation>
+        </Scenario>
+        <Scenario Case="8">
+            <NodeVariation ID="1">Dim instance As MyNamespace.MyClassName = new MyNamespace.MyClassName()</NodeVariation>
+            <NodeVariation ID="3">If name = "MyRootNamespace.MyNamespace.MyClassName" Then</NodeVariation>
+        </Scenario>
+
+    </Scenarios>
+</XMLVariationTemplate>
+

@@ -1,0 +1,35 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Border Name="root" Background="#FFFFFFFF">
+    <StackPanel>
+      <StackPanel.Resources>
+        <Style TargetType="ListBox" x:Key="ScrollingListBox">
+          <Style.Resources>
+            <ResourceDictionary />
+          </Style.Resources>
+          <Setter Property="Control.Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="ListBox">
+                <Border Height="{TemplateBinding FrameworkElement.Height}" BorderBrush="{TemplateBinding Border.BorderBrush}" Width="{TemplateBinding FrameworkElement.Width}" BorderThickness="{TemplateBinding Border.BorderThickness}">
+                  <Canvas>
+                    <TextBox Height="{TemplateBinding FrameworkElement.Height}" Width="{TemplateBinding FrameworkElement.Width}" xml:space="preserve" />
+                    <ScrollViewer Height="94" Width="98" Canvas.Top="5">
+                      <DockPanel IsItemsHost="True" />
+                    </ScrollViewer>
+                  </Canvas>
+                </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </StackPanel.Resources>
+      <ListBox Height="150" Margin="50,50,50,50" Width="360" Style="{DynamicResource ScrollingListBox}" Name="l" DockPanel.Dock="Top">
+        <ListBoxItem>ListBoxItem 1</ListBoxItem>
+        <ListBoxItem>ListBoxItem 2</ListBoxItem>
+        <ListBoxItem>ListBoxItem 3</ListBoxItem>
+        <ListBoxItem>ListBoxItem 4</ListBoxItem>
+        <ListBoxItem>ListBoxItem 5</ListBoxItem>
+        <ListBoxItem>ListBoxItem 6</ListBoxItem>
+      </ListBox>
+    </StackPanel>
+  </Border>
+</Page>

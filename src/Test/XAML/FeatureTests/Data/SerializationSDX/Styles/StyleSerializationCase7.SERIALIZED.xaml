@@ -1,0 +1,39 @@
+<CustomCanvas Background="#FFFFFFFF" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <CustomCanvas.Resources>
+    <s:String x:Key="myString">This is a string</s:String>
+    <s:String x:Key="myString1">This is another string 1</s:String>
+    <av:Style TargetType="av:Button" x:Key="{x:Type av:Button}">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:ContentControl.Content">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="myString" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Panel.Background">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FFFFFFFF</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.Foreground">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.FontSize">
+        <av:Setter.Value>
+          <s:Double>20</s:Double>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:Button">
+            <av:TextBlock Text="{av:DynamicResource myString1}" Name="myText" />
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+  </CustomCanvas.Resources>
+  <av:Button Name="Button2" />
+</CustomCanvas>

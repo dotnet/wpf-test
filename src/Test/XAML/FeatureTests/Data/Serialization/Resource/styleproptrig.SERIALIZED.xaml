@@ -1,0 +1,44 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <DockPanel>
+    <DockPanel.Resources>
+      <Style TargetType="Button" x:Key="myCustomStyle">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Style.Triggers>
+          <Trigger Property="DockPanel.Dock">
+            <Setter Property="Panel.Background">
+              <Setter.Value>
+                <SolidColorBrush>#FFFFFFFF</SolidColorBrush>
+              </Setter.Value>
+            </Setter>
+            <Trigger.Value>
+              <x:Static Member="Dock.Right" />
+            </Trigger.Value>
+          </Trigger>
+          <Trigger Property="Canvas.Top">
+            <Setter Property="Panel.Background">
+              <Setter.Value>
+                <SolidColorBrush>#FFFF0000</SolidColorBrush>
+              </Setter.Value>
+            </Setter>
+            <Trigger.Value>
+              <s:Double>10</s:Double>
+            </Trigger.Value>
+          </Trigger>
+        </Style.Triggers>
+        <Setter Property="Control.Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="Button">
+              <Rectangle Height="100" Margin="10,10,10,10" Width="100" RadiusY="10" Fill="#FF0000FF" RadiusX="10" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+    </DockPanel.Resources>
+    <Canvas Width="100" DockPanel.Dock="Left">
+      <Button Style="{DynamicResource myCustomStyle}" Canvas.Top="10" />
+    </Canvas>
+    <Button Style="{DynamicResource myCustomStyle}" DockPanel.Dock="Right" />
+  </DockPanel>
+</Page>

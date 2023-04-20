@@ -1,0 +1,12 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="ClientTestLibrary" />
+  <Steps>
+    <TestLogStep>
+      <MSBuildStep CurrentStage="Run" Arguments="cs\MappingPIProject.csproj /e:cs\OldError.xml /t:Clean;Build  " />
+      <ActivationStep Method="launch" FileName="&amp;ExecutableFullPath&amp;" />
+      <MSBuildStep CurrentStage="Run" Arguments="vb\MappingPIProject.vbproj /e:vb\OldError.xml /t:Clean;Build  " />
+      <ActivationStep Method="launch" FileName="&amp;ExecutableFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

@@ -1,0 +1,22 @@
+<!-- ControlTemplate within a Resource -->
+<Window
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest"
+    >
+
+    <Window.Resources>
+        <ControlTemplate x:Uid="ControlTemplate_1" x:Key='TestTemplate'>
+            <TextBlock x:Uid="textblock_1" Width="150" Height="45" Margin="1" Text="LLLMyTextBlock1">
+                <TextBlock.Background>
+                    <SolidColorBrush x:Uid="SolidColorBrush_1" Color="OrangeRed" />
+                </TextBlock.Background>
+            </TextBlock>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <WrapPanel x:Uid="WrapPanel_1">
+        <TextBox x:Uid="textbox_2" Template="{StaticResource TestTemplate}" />
+    </WrapPanel>
+  
+</Window>

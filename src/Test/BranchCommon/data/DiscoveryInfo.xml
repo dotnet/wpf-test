@@ -194,5 +194,139 @@
         </SupportFiles>
       </DefaultTestInfo>
     </Target>
+
+        <!--Area : XAML-->
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\XAML\Data\XTC\3.0\Client\*.xtc">
+      <DefaultTestInfo Area="XamlV3" Priority="2" UacElevation="Elevated" Type="Functional" >
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        <SupportFiles>
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="Common\CompilerServices.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlCommon.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlTests35.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlClrTypes.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlWpfTypes.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>3.5+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\XAML\Data\XTC\3.0\Full\*.xtc">
+      <DefaultTestInfo Area="XamlV3" Priority="2" UacElevation="Elevated" Type="Functional" >
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        <SupportFiles>
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="Common\CompilerServices.dll" />
+          <SupportFile Source="Infra\sti.exe*" />
+          <SupportFile Source="FeatureTests\XAML\XamlCommon.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlTests35.dll" />
+          <SupportFile Source="FeatureTests\XAML\MarkupCompiler\Common\TestCommon.target" />
+          <SupportFile Source="FeatureTests\Xaml\XamlClrTypes.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlWpfTypes.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0-3.0SP2</Version>
+          <Version>3.5+</Version>
+          <Version>4.0+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <!--System.Xaml-->
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\XAML\Data\XTC\4.0\Client\*.xtc">
+      <DefaultTestInfo Area="XamlV4" Priority="2" UacElevation="Elevated" Type="Functional" ExecutionGroup="XamlV4" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="PartialTrust" Mode="SDX" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        <SupportFiles>
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlCommon.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlTests35.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlWpfTests40.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlClrTypes.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlWpfTypes.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!-- <Target Adaptor="XtcAdaptor" Path="FeatureTests\XAML\Data\XTC\4.0\Full\ExecutionGroupNoPolicy\*.xtc">
+      <DefaultTestInfo Area="XamlV4" Priority="2" UacElevation="Elevated" Type="Functional" ExecutionGroup="XamlV4" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="PartialTrust" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        <SupportFiles>
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlCommon.dll" />
+          <SupportFile Source="FeatureTests\XAML\Microsoft.Build.Utilities.Core.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlWpfTests40.dll" />
+          <SupportFile Source="Common\CompilerServices.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlClrTypes.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlWpfTypes.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.0+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target> -->
+                
+    <!-- Note that these tests are FullTrust as they require Compilation -->
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\XAML\Data\XTC\4.0\Full\ExecutionGroupMaximalPerformance\*.xtc">
+      <DefaultTestInfo Area="XamlV4" Priority="2" UacElevation="Elevated" Type="Functional"  ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        <SupportFiles>
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlCommon.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlWpfTests40.dll" />
+          <SupportFile Source="Common\CompilerServices.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlClrTypes.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlWpfTypes.dll" />
+          <SupportFile Source="FeatureTests\XAML\MarkupCompiler\Common\TestCommon.target" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.0+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\XAML\Data\XTC\4.0\Full\NoExecutionGroup\*.xtc">
+      <DefaultTestInfo Area="XamlV4" Priority="2" UacElevation="Elevated" Type="Functional">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="PartialTrust" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        <SupportFiles>
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlCommon.dll" />
+          <SupportFile Source="Common\CompilerServices.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlClrTypes.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlWpfTypes.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.0+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!-- CDF XAML tests -->
+    <Target Adaptor="CDFTestHostAdaptor" Path="FeatureTests\Xaml\XamlClrTests40.dll">
+      <DefaultTestInfo Area="XamlV4" Type="Functional" UacElevation="Elevated" Timeout="600" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="PartialTrust" Mode="SDX"/>
+        <SupportFiles>
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="FeatureTests\XAML\XamlCommon.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlClrTests40.dll" />
+          <SupportFile Source="FeatureTests\Xaml\XamlClrTypes.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
   </Targets>
 </DiscoveryInfo>

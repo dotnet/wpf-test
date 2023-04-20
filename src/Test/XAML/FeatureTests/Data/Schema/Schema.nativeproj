@@ -1,0 +1,16 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <TargetType>COPY</TargetType>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5'">
+    <DataFile Include="**">
+      <SubFolder>FeatureTests\XAML\Schema</SubFolder>
+    </DataFile>
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.Native.targets" />
+</Project>

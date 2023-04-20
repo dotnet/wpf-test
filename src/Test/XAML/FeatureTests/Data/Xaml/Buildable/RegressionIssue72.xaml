@@ -1,0 +1,13 @@
+<!--
+    Setting any property on an object with a template property will cause the template property 
+    to be interpreted as a regular property instead of a template.  This causes ObjectWriter to 
+    look for a non-existent set method and fail. -->
+<CustomRoot xmlns="http://XamlTestTypes"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <Custom_TemplateHost Name="Test1">
+        <Custom_TemplateHost.Template>
+            <sys:String>TestTemplateString</sys:String>
+        </Custom_TemplateHost.Template>
+    </Custom_TemplateHost>
+</CustomRoot>

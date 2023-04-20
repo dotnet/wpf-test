@@ -1,0 +1,26 @@
+<!-- x:Double with different values inside a ComboBox / inside Trigger.Value -->
+<DockPanel
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DockPanel.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+				<Trigger Property="Width">
+					<Trigger.Value>
+						<x:Double>24</x:Double>
+					</Trigger.Value>
+				</Trigger>
+            </Style.Triggers>
+        </Style>
+    </DockPanel.Resources>
+    
+    <Button />  
+
+	<ComboBox>
+		<x:Double> NaN  </x:Double>
+		<x:Double> 35   </x:Double>
+		<x:Double> 0.10 </x:Double>
+	</ComboBox>
+
+</DockPanel>

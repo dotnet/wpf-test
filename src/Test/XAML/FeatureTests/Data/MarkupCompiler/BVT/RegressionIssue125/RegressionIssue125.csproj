@@ -1,0 +1,33 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>RegressionIssue125</AssemblyName>
+    <OutputType>exe</OutputType> <!-- Should be "exe" for Console.WriteLine to work -->
+    <Configuration>Release</Configuration>
+    <OutputPath>bin\Release\</OutputPath>
+    <OptionStrict>true</OptionStrict>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
+    <Compile Include="App.xaml.cs" />
+    <Page Include="Window1.xaml" />
+    <Compile Include="Window1.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PostBuildEvent>
+      mkdir Dir1
+      Copy $(TargetFileName) Dir1\$(TargetFileName)
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

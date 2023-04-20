@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+<!-- want TestCleanup; step in targets, but deletes dll -->
+    <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+      <PropertyGroup>
+        <Platform>AnyCPU</Platform>
+        <AssemblyName>MappingPI</AssemblyName>
+        <Configuration>Release</Configuration>
+        <OutputType>winexe</OutputType>
+        <TextVariation ID="1">
+          <UICulture></UICulture>
+        </TextVariation>
+        <OutputPath>bin\$(Configuration)\</OutputPath>
+        <OptionStrict>On</OptionStrict>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      </PropertyGroup>
+      <AttributeVariation ID="3">
+        <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+      </AttributeVariation>
+      <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+      <ItemGroup>
+        <Page Include="MappingPIMarkup.xaml" />
+        <AttributeVariation ID="4">
+          <Compile Include="MappingPICode.cs" />
+        </AttributeVariation>
+      </ItemGroup>
+      <!-- Included only for test run -->
+      <Import Project="TestCommon.target" />
+      <ItemGroup>
+        <NodeVariation ID="2" />
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Data" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="UIAutomationClient" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+      </ItemGroup>
+    </Project>
+  </TemplateData>
+
+  <Scenarios>
+    <Defaults>
+      <FileName>MappingPIProject</FileName>
+      <FileExtension>.csproj</FileExtension>
+      <RetainFileName>true</RetainFileName>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Defaults>
+    <Scenario Case="1" />
+    <Scenario Case="2">
+      <TextVariation ID="1">{Culture}</TextVariation>
+    </Scenario>
+    <Scenario Case="3">
+      <NodeVariation ID="2">
+        <Reference Include="bin\\$(Configuration)\\MappingPILibrary.dll">
+          <Private>true</Private>
+        </Reference>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="4">
+      <TextVariation ID="1">{Culture}</TextVariation>
+      <NodeVariation ID="2">
+        <Reference Include="bin\\$(Configuration)\\MappingPILibrary.dll">
+          <Private>true</Private>
+        </Reference>
+      </NodeVariation>
+    </Scenario>
+
+    <Scenario Case="11">
+      <FileExtension>.vbproj</FileExtension>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="MappingPICode.vb" />
+    </Scenario>
+    <Scenario Case="12">
+      <FileExtension>.vbproj</FileExtension>
+      <TextVariation ID="1">{Culture}</TextVariation>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="MappingPICode.vb" />
+    </Scenario>
+    <Scenario Case="13">
+      <FileExtension>.vbproj</FileExtension>
+      <NodeVariation ID="2">
+        <Reference Include="bin\\$(Configuration)\\MappingPILibrary.dll">
+          <Private>true</Private>
+        </Reference>
+      </NodeVariation>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="MappingPICode.vb" />
+    </Scenario>
+    <Scenario Case="14">
+      <FileExtension>.vbproj</FileExtension>
+      <TextVariation ID="1">{Culture}</TextVariation>
+      <NodeVariation ID="2">
+        <Reference Include="bin\\$(Configuration)\\MappingPILibrary.dll">
+          <Private>true</Private>
+        </Reference>
+      </NodeVariation>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="MappingPICode.vb" />
+    </Scenario>
+  </Scenarios>
+</XMLVariationTemplate>

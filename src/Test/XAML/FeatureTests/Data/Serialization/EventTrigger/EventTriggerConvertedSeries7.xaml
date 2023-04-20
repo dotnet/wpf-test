@@ -1,0 +1,27 @@
+﻿
+
+<cmn:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cc="core" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:S="sys" Background="White" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType='{x:Type Button}'>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Click">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ParallelTimeline FillBehavior="Stop" BeginTime="0:0:0">
+                                        <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:1" />
+                                    </ParallelTimeline>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <Trigger Property='Button.Width' Value='300'>
+                        <Setter Property="Background" Value="Red" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </StackPanel.Resources>
+        <Button Content='Event Trigger Test 7.1' />
+    </StackPanel>
+</cmn:CustomCanvas>

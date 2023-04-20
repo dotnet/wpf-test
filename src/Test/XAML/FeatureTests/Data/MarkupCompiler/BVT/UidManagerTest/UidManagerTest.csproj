@@ -1,0 +1,37 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+  <PropertyGroup>
+    <AssemblyName>UidManagerTest</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <Configuration>Release</Configuration>
+    <OutputPath>bin\Release</OutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+
+    <Page Include="Window1.xaml" />
+    <Compile Include="Window1.xaml.cs" />
+
+    <Page Include="CheckUidPage.xaml" />
+    <Compile Include="CheckUidPage.xaml.cs" />
+
+    <Page Include="UpdateUidPage.xaml" />
+    <Compile Include="UpdateUidPage.xaml.cs" />
+
+    <Page Include="RemoveUidPage.xaml" />
+    <Compile Include="RemoveUidPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <Import Project="TestCommon.target" />
+  <Target Name="BeforeBuild">
+    <UidManager Task="Check" MarkupFiles="CheckUidPage.xaml" />
+    <UidManager Task="Update" MarkupFiles="UpdateUidPage.xaml" />
+    <UidManager Task="Remove" MarkupFiles="RemoveUidPage.xaml" />
+  </Target>
+</Project>

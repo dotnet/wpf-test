@@ -1,0 +1,270 @@
+﻿<Window x:Class="PropertyOrderWithTemplatesAndStyles.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PropertyOrderWithTemplatesAndStyles"
+    Title="Window1" Height="300" Width="300"
+    Loaded="Window_Loaded">
+    
+    <Window.Resources>
+        <local:Bookings x:Key="Bookings1"/>
+        <local:Bookings x:Key="Bookings2"/>
+
+        <CollectionViewSource x:Key="cvsResidents"/>
+        <CollectionViewSource x:Key="cvsTariffs"/>
+
+        <local:MyConverter x:Key="MyConverter"/>
+        
+        <DataTemplate x:Key="BookingTemplate">
+            <DockPanel>
+                <local:TestComboBox TestID="Resource1"
+                          ItemsSource="{Binding Source={StaticResource cvsResidents}}"
+                          SelectedIndex="{Binding Path=resident, Mode=TwoWay}"
+                          IsSynchronizedWithCurrentItem="False"/>
+            </DockPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OuterTemplate">
+            <StackPanel>
+                <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                ItemTemplate="{StaticResource BookingTemplate}" Background="Honeydew" ItemsSource="{StaticResource Bookings2}">
+                </ListBox>
+            </StackPanel>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="OuterInlineTemplate">
+            <StackPanel>
+                <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Honeydew" ItemsSource="{StaticResource Bookings2}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate >
+                            <DockPanel>
+                                <local:TestComboBox TestID="Resource2"
+                          ItemsSource="{Binding Source={StaticResource cvsResidents}}"
+                          SelectedIndex="{Binding Path=resident, Mode=TwoWay}"
+                          IsSynchronizedWithCurrentItem="False"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </DataTemplate>
+
+        <Style x:Key="CBStyle">
+            <Setter Property="local:TestComboBox.ItemsSource" Value="{Binding Source={StaticResource cvsResidents}}" />
+            <Setter Property="local:TestComboBox.SelectedIndex" Value="{Binding Path=resident, Mode=TwoWay}"/>
+            <Setter Property="local:TestComboBox.IsSynchronizedWithCurrentItem" Value="False"/>
+        </Style>
+
+        <Style x:Key="LBStyle">
+            <Setter Property="ListBox.ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <DockPanel>
+                            <local:TestComboBox TestID="Resource3"
+                                ItemsSource="{Binding Source={StaticResource cvsResidents}}"
+                                SelectedIndex="{Binding Path=resident, Mode=TwoWay}"
+                                IsSynchronizedWithCurrentItem="False"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="LBStyle2">
+            <Setter Property="ListBox.ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <DockPanel>
+                            <local:TestComboBox Style="{StaticResource CBStyle}" TestID="Resource4" >
+
+                            </local:TestComboBox>
+                        </DockPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <ScrollViewer>
+    <StackPanel >
+        <Label Content="Resource Template"/>
+        <ListBox ItemsSource="{StaticResource Bookings1}"
+                 ItemTemplate="{StaticResource BookingTemplate}"/>
+        
+        <Label Content="Inline Template" Foreground="Red"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <local:TestComboBox TestID="Inline1"
+                                ItemsSource="{Binding Source={StaticResource cvsResidents}}"
+                                SelectedIndex="{Binding Path=resident, Mode=TwoWay}"
+                                IsSynchronizedWithCurrentItem="False"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <Label Content=" Nested Resource Templates"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}" ItemTemplate="{StaticResource OuterTemplate}">
+            
+        </ListBox>
+
+        <Label Content="Inline Nested Resource Template"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                ItemTemplate="{StaticResource BookingTemplate}" Background="Honeydew" ItemsSource="{StaticResource Bookings2}">
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+        
+        <Label Content="Nested Inline Templates"  Foreground="Red"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Honeydew" ItemsSource="{StaticResource Bookings2}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate >
+                                    <DockPanel>
+                                        <local:TestComboBox TestID="Inline2"
+                          ItemsSource="{Binding Source={StaticResource cvsResidents}}"
+                          SelectedIndex="{Binding Path=resident, Mode=TwoWay}"
+                          IsSynchronizedWithCurrentItem="False"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Label Content="Resource With Nested Inline Template"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}" ItemTemplate="{StaticResource OuterInlineTemplate}">
+        </ListBox>
+        
+        <Label Content="Inline Template within an Inline Style" Foreground="Red"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.Style>
+                <Style>
+                    <Setter Property="ListBox.ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <local:TestComboBox TestID="Inline3"
+                                ItemsSource="{Binding Source={StaticResource cvsResidents}}"
+                                SelectedIndex="{Binding Path=resident, Mode=TwoWay}"
+                                IsSynchronizedWithCurrentItem="False"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.Style>
+        </ListBox>
+        
+        <Label Content="Resource Template within an Inline Style pointing to resource template, prop set via template"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.Style>
+                <Style>
+                    <Setter Property="ListBox.ItemTemplate" Value="{StaticResource BookingTemplate}" />
+                </Style>
+            </ListBox.Style>
+        </ListBox>
+        
+        <Label Content="Inline Template within a Resource Style"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}" Style="{StaticResource LBStyle}"/>
+
+        <Label Content="Inline Template with  inline Style, prop set via style" Foreground="Red"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <local:TestComboBox TestID="Inline4">
+                            <local:TestComboBox.Style>
+                                <Style>
+                                    <Setter Property="local:TestComboBox.ItemsSource" Value="{Binding Source={StaticResource cvsResidents}}" />
+                                    <Setter Property="local:TestComboBox.SelectedIndex" Value="{Binding Path=resident, Mode=TwoWay}"/>
+                                    <Setter Property="local:TestComboBox.IsSynchronizedWithCurrentItem" Value="False"/>
+                                </Style>
+                            </local:TestComboBox.Style>
+
+                        </local:TestComboBox>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Label Content="Inline Template with  resource Style, prop set via style" Foreground="Red"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <local:TestComboBox Style="{StaticResource CBStyle}" TestID="Inline5">
+
+                        </local:TestComboBox>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        
+        
+        <Label Content="Nested resource Styles, prop set via second style" />
+        <ListBox ItemsSource="{StaticResource Bookings2}" Style="{StaticResource LBStyle}">
+        </ListBox> 
+        
+        <Label Content="Inline Style with nested resource style" Foreground="Red"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.Style>
+                    <Style >
+                        <Setter Property="ListBox.ItemTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <DockPanel>
+                                    <local:TestComboBox Style="{StaticResource CBStyle}" TestID="Inline6">
+
+                                        </local:TestComboBox>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+            </ListBox.Style>
+        </ListBox>
+
+        <Label Content="Nested inline styles" Foreground="Red"/>
+        <ListBox ItemsSource="{StaticResource Bookings2}">
+            <ListBox.Style>
+                <Style >
+                    <Setter Property="ListBox.ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <local:TestComboBox TestID="Inline7">
+                                        <local:TestComboBox.Style>
+                                            <Style >
+                                                <Setter Property="local:TestComboBox.ItemsSource" Value="{Binding Source={StaticResource cvsResidents}}" />
+                                                <Setter Property="local:TestComboBox.SelectedIndex" Value="{Binding Path=resident, Mode=TwoWay}"/>
+                                                <Setter Property="local:TestComboBox.IsSynchronizedWithCurrentItem" Value="False"/>
+                                            </Style>
+                                        </local:TestComboBox.Style>
+                                    </local:TestComboBox>
+                                </DockPanel>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.Style>
+        </ListBox>
+        
+        <TextBox x:Name="OutputBox"/>
+    </StackPanel>
+    </ScrollViewer>
+</Window>

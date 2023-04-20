@@ -1,0 +1,153 @@
+<!--    We are trying to verify that whitespace collapses correctly for various controls. -->
+
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+<!-- TextBlock Whitespace Collapsing Test -->
+<TextBlock Name="Text1"> 
+    abc1    <Button >       abc2 </Button>      <Button>       abc3
+      </Button>     <Button >       abc4 
+
+     </Button>  abc5     
+ abc6  
+        <Button >  </Button>
+    <Button > </Button>
+    <Button ></Button>  abc7 
+
+    <LineBreak> </LineBreak>    abc8
+
+     <Button >   abc11 </Button>   abc12
+</TextBlock>
+
+
+
+
+<!-- TextBlock Whitespace Collapsing Test : Implict and Explicit CPA on LineBreak(TrimWS = true)-->
+<TextBlock Name="Text2"> 
+    <!-- <TextBlock.Inlines> -->
+        abc13   <Button >       abc14 </Button>     <Button>       abc15
+      </Button>     <Button ><Button.Content>       abc16 
+
+     </Button.Content></Button>  abc17     
+ abc18  
+        <Button >  </Button>
+    <Button> </Button>
+    <Button ></Button>  abc19 
+
+    <LineBreak> </LineBreak>    abc20
+
+     <Button >   abc23 </Button>   abc24
+        
+    <!-- </TextBlock.Inlines> -->
+</TextBlock>
+
+
+
+<!-- RichTextBox Whitespace Collapsing Test -->
+<RichTextBox Width="200">
+    <FlowDocument>
+        <Paragraph>
+            First Paragraph. Making this Paragraph long enough so that it will wrap at least one line.
+        </Paragraph>
+        <Paragraph>
+            Second Paragraph
+        </Paragraph>
+
+    </FlowDocument>
+</RichTextBox>
+
+
+
+<!-- RichTextBox Whitespace Collapsing Test : Implict and Explicit CPA on Paragraph, LineBreak(TrimWS = true)  -->
+<RichTextBox Width="200">
+    <FlowDocument>
+
+        <Paragraph>
+        <Paragraph.Inlines>
+            First Paragraph. Making this Paragraph long enough so that it will wrap at least one line.
+
+
+        what a dya  
+
+        </Paragraph.Inlines></Paragraph>
+
+    
+        <Paragraph>
+            Second Paragraph
+        <LineBreak/>
+        wakkka wakk akkkakkk 
+
+
+
+asdf
+
+a
+        <Button >   abc26 </Button>   abc27
+        <LineBreak/>
+        <Button >   abc30    </Button>   abc31
+clark kent      bill bixby
+hulk spiderman 
+
+la</Paragraph>
+
+
+    </FlowDocument>
+</RichTextBox>
+
+
+
+<!-- ListBox Whitespace Collapsing Test : Implict and Explicit CPA -->
+<ListBox >
+    <ListBoxItem> abc32   </ListBoxItem>
+    <ListBoxItem>   abc33   
+</ListBoxItem>
+    <ListBoxItem>abc34</ListBoxItem>
+    <ListBoxItem>abc35  </ListBoxItem>
+    <ListBoxItem>     
+abc36
+</ListBoxItem>
+    <ListBoxItem> <ListBoxItem.Content> abc37   </ListBoxItem.Content> </ListBoxItem>
+    <ListBoxItem> <ListBoxItem.Content>   
+abc38   
+
+</ListBoxItem.Content> </ListBoxItem>
+    <ListBoxItem><ListBoxItem.Content>abc39</ListBoxItem.Content> </ListBoxItem>
+    <ListBoxItem><ListBoxItem.Content>abc40     </ListBoxItem.Content> </ListBoxItem>
+    <ListBoxItem><ListBoxItem.Content>      
+abc41
+</ListBoxItem.Content></ListBoxItem>
+</ListBox>
+
+
+
+
+<!-- ComboBox Whitespace Collapsing Test : Implicit CPA -->
+<ComboBox >
+    <ComboBoxItem> abc42   </ComboBoxItem>
+    <ComboBoxItem> abc43    
+</ComboBoxItem>
+    <ComboBoxItem>abc44</ComboBoxItem>
+    <ComboBoxItem>abc45     </ComboBoxItem>
+    <ComboBoxItem>     
+abc46
+</ComboBoxItem>
+</ComboBox>
+
+
+
+<!-- ComboBox Whitespace Collapsing Test : Explicit CPA-->
+<ComboBox >
+    <ComboBoxItem><ComboBoxItem.Content>     abc47    </ComboBoxItem.Content></ComboBoxItem>
+    <ComboBoxItem><ComboBoxItem.Content>
+
+ abc48      
+</ComboBoxItem.Content></ComboBoxItem>
+    <ComboBoxItem><ComboBoxItem.Content>abc49</ComboBoxItem.Content></ComboBoxItem>
+    <ComboBoxItem><ComboBoxItem.Content>    abc50   </ComboBoxItem.Content></ComboBoxItem>
+    <ComboBoxItem><ComboBoxItem.Content>     
+abc51   
+</ComboBoxItem.Content></ComboBoxItem>
+</ComboBox>
+
+
+
+</DockPanel>

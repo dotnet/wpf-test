@@ -1,0 +1,208 @@
+<!-- Window containing TextBlock Text properties for which Localization.Attributes set LocalizationCategory as Modifiable -->
+<Window
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Class = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest">
+
+    <StackPanel>
+        <TextBlock x:Uid="TextBlock_1"
+            Text="LLLMicrosoft1"
+            Localization.Attributes = "Text (Modifiable Text Readable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_2"
+            Text="LLLMicrosoft2"
+            Localization.Attributes = "Text (Readable Modifiable Text">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_3"
+            Text="LLLMicrosoft3"
+            Localization.Attributes = "Text (Modifiable Readable Text)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_4"
+            Text="LLLMicrosoft4"
+            Localization.Attributes = "Text (Readable Text Modifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_5"
+            Text="LLLMicrosoft5"
+            Localization.Attributes = "Text (Text Modifiable Readable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_6"
+            Text="LLLMicrosoft6"
+            Localization.Attributes = "Text (Text Readable Modifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_7"
+            Text="LLLMicrosoft7"
+            Localization.Attributes = "Text (Modifiable Readable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_8"
+            Text="LLLMicrosoft8"
+            Localization.Attributes = "Text (Readable Modifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_9"
+            Text="LLLMicrosoft9"
+            Localization.Attributes = "Text (Modifiable Text)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_10"
+            Text="LLLMicrosoft10"
+            Localization.Attributes = "Text (Text Modifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_11"
+            Text="LLLMicrosoft11"
+            Localization.Attributes = "Text (Readable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_12"
+            Text="LLLMicrosoft12"
+            Localization.Attributes = "Text (Text)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_13"
+            Text="LLLMicrosoft13"
+            Localization.Attributes = "Text (Modifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_14"
+            Text="LLLMicrosoft14"
+            Localization.Attributes = "Text (a b c)">
+        </TextBlock>
+
+        <!-- Nested with parent having no x:Uid, Modifiable -->
+        <TextBlock>
+            <TextBlock x:Uid="TextBlock_15"
+                Text="LLLMicrosoft15"
+                Localization.Attributes = "Text (Text Modifiable Readable)">
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Nested with parent having an x:Uid -->
+        <TextBlock x:Uid="TextBlockParent_16">
+            <TextBlock x:Uid="TextBlock_16"
+                Text="LLLMicrosoft16"
+                Localization.Attributes = "Text (Text Modifiable Readable)">
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Modifiable, but no content -->
+        <TextBlock x:Uid="TextBlock_17"
+            Localization.Attributes = "Text (Text Modifiable Readable)">
+        </TextBlock>
+
+        <!-- Attributes set on the parent only -->
+        <TextBlock x:Uid="TextBlockParent_18"
+            Localization.Attributes = "Text (Text Modifiable Readable)">
+            <TextBlock x:Uid="TextBlock_18" Text="LLLMicrosoft18"></TextBlock>
+        </TextBlock>
+
+        <!-- Attributes set on both parent and child -->
+        <TextBlock x:Uid="TextBlockParent_19"
+            Localization.Attributes = "Text (Text Modifiable Readable)">
+            <TextBlock x:Uid="TextBlock_19"
+                Text="LLLMicrosoft19"
+                Localization.Attributes = "Text (Text Modifiable Readable)">
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Unmodifiable set on parent and Modifiable on child -->
+        <TextBlock x:Uid="Parent_20"
+            Localization.Attributes = "Text (Text Unmodifiable Readable)">
+            <TextBlock x:Uid="TextBlock_20"
+                Text="LLLMicrosoft20"
+                Localization.Attributes = "Text (Text Modifiable Readable)">
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Bogus first and second attributes -->
+        <TextBlock x:Uid="TextBlock_21"
+            Text="LLLMicrosoft21"
+            Localization.Attributes = "Text (a b Unmodifiable)">
+        </TextBlock>
+
+        <!-- Bogus second and third attributes -->
+        <TextBlock x:Uid="TextBlock_22"
+            Text="LLLMicrosoft22"
+            Localization.Attributes = "Text (Unmodifiable b c)">
+        </TextBlock>
+
+        <!-- Bogus first and third attributes -->
+        <TextBlock x:Uid="TextBlock_23"
+            Text="LLLMicrosoft23"
+            Localization.Attributes = "Text (a Unmodifiable c)">
+        </TextBlock>
+
+        <!-- Conflicting modifiability attribute -->
+        <TextBlock x:Uid="TextBlock_24"
+            Text="LLLMicrosoft24"
+            Localization.Attributes = "Text (Unmodifiable Modifiable Readable)">
+        </TextBlock>
+
+        <!-- Unmodifiable attribute set on the parent only -->
+        <TextBlock x:Uid="Parent_25"
+            Localization.Attributes = "Text (Text Unmodifiable Readable)">
+            <TextBlock x:Uid="TextBlock_25" Text="LLLMicrosoft25"></TextBlock>
+        </TextBlock>
+
+        <!-- Empty String -->
+        <TextBlock x:Uid="TextBlock_26"
+            Text="LLLMicrosoft26"
+            Localization.Attributes = "">
+        </TextBlock>
+
+        <!-- Empty Parens -->
+        <TextBlock x:Uid="TextBlock_27"
+            Text="LLLMicrosoft27"
+            Localization.Attributes = "Text ()">
+        </TextBlock>
+
+        <!-- Empty Parens with no initial category -->
+        <TextBlock x:Uid="TextBlock_28"
+            Text="LLLMicrosoft28"
+            Localization.Attributes = "()">
+        </TextBlock>
+
+        <!-- Incorrect initial category: Modifiable -->
+        <TextBlock x:Uid="TextBlock_29"
+            Text="LLLMicrosoft29"
+            Localization.Attributes = "ComboBox (Text Modifiable Readable)">
+        </TextBlock>
+
+        <!-- Bogus initial category: Modifiable -->
+        <TextBlock x:Uid="TextBlock_30"
+            Text="LLLMicrosoft30"
+            Localization.Attributes = "abc (Text Modifiable Readable)">
+        </TextBlock>
+
+        <!-- Incorrect initial category: Unmodifiable -->
+        <TextBlock x:Uid="TextBlock_31"
+            Text="LLLMicrosoft31"
+            Localization.Attributes = "ComboBox (Text Unmodifiable Readable)">
+        </TextBlock>
+
+        <!-- Bogus initial category: Unmodifiable -->
+        <TextBlock x:Uid="TextBlock_32"
+            Text="LLLMicrosoft32"
+            Localization.Attributes = "abc (Text Unmodifiable Readable)">
+        </TextBlock>
+
+        <!-- Duplicate categories (Modifiable) -->
+        <TextBlock x:Uid="TextBlock_33"
+            Text="LLLMicrosoft33"
+            Localization.Attributes = "Text (Modifiable Modifiable Modifiable)">
+        </TextBlock>
+
+        <!-- $Content used instead of Text: Unmodifiable -->
+        <TextBlock x:Uid="TextBlock_34"
+            Text="LLLMicrosoft34"
+            Localization.Attributes = "$Content (Unmodifiable)">
+        </TextBlock>
+
+    </StackPanel>
+</Window>

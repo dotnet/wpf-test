@@ -1,0 +1,19 @@
+<CustomDockPanel xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <CustomDockPanel.Triggers>
+    <av:EventTrigger RoutedEvent="av:FrameworkElement.Loaded">
+      <av:BeginStoryboard>
+        <av:Storyboard BeginTime="01:00:00" Duration="Forever" av:Storyboard.TargetName="button1" av:Storyboard.TargetProperty="(av:Panel.Background).(av:SolidColorBrush.Color)">
+          <av:Storyboard.Children>
+            <av:ColorAnimation AutoReverse="True" To="#FF0000FF" From="#FFFF0000" BeginTime="00:00:00" RepeatBehavior="100x" Duration="00:00:05" />
+          </av:Storyboard.Children>
+        </av:Storyboard>
+      </av:BeginStoryboard>
+    </av:EventTrigger>
+  </CustomDockPanel.Triggers>
+  <av:Button Background="#FF008000">Hello World</av:Button>
+  <av:Button Name="button1">
+    <av:Button.Background>
+      <av:SolidColorBrush Color="#FFFF0000" />
+    </av:Button.Background>
+  </av:Button>
+</CustomDockPanel>

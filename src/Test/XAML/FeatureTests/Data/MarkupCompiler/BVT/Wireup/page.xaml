@@ -1,0 +1,55 @@
+﻿<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    x:Class="Avalon.Test.ComponentModel.WireupClass"
+    Loaded="OnLoaded"
+    Name="Root">
+
+    <Button>No Name, No Event Handler</Button>
+    <Button Name="Button2">Name, No Event Handler</Button>
+    <Button Click="HandleButton3Click">No Name, Event Handler</Button>
+    <Button Name="Button4" Click="HandleButton4Click">Name, Event Handler</Button>
+
+  <x:Code>
+    <![CDATA[
+
+    // This checks for the contents of each button, so any changes made in either markup or code need to be synced.
+    // Code behind also references content and elemnt type explicitly.
+    void CheckContents()
+    {
+	// Index will be used to track which button we are looking at.
+	int i = 0;
+	// Content of each button, corresponding to the XAML declarations above. Need to keep them synchronized.
+	String[] contents = {"No Name, No Event Handler", "Name, No Event Handler", "No Name, Event Handler", "Name, Event Handler"};
+
+	// Walk through each UIElement child and verify it is both a button and that it's content matches the expectation.
+	foreach (UIElement myElement in Root.Children)
+	{
+	    if (myElement.GetType().FullName == "System.Windows.Controls.Button")
+	    {
+	    	Button myButton = myElement as Button;
+	        if (myButton.Content as String == contents[i])
+	        {
+		    Console.WriteLine("Button " + (i + 1) + "'s content of '" + (myButton.Content as String) + "' matched expectation.");
+	        }
+		else
+		{
+		    Console.WriteLine("Button " + (i + 1) + "'s content of '" + (myButton.Content as String) + "' did not match expectation of '" + contents[i] + "'.");
+		}
+	    }
+	    else
+	    {
+		Console.WriteLine("Element " + (i + 1) + " was of type '" + myElement.GetType().FullName + "' when it should have been of type System.Windows.Controls.Button.");
+	    }
+	    i++;
+	}
+    }
+
+    ]]>
+  </x:Code>
+
+
+</StackPanel>
+
+
+

@@ -1,0 +1,114 @@
+<CustomCanvas xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <CustomCanvas.Resources>
+    <av:LinearGradientBrush EndPoint="0,1" StartPoint="0,0" x:Key="myBrush">
+      <av:LinearGradientBrush.GradientStops>
+        <av:GradientStop Offset="0" Color="#FFFF0000" />
+        <av:GradientStop Offset="0.5" Color="#FF00FF00" />
+        <av:GradientStop Offset="1" Color="#FF0000FF" />
+      </av:LinearGradientBrush.GradientStops>
+    </av:LinearGradientBrush>
+    <av:Style TargetType="av:Button" x:Key="typeof(Button)">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Style.Triggers>
+        <av:Trigger Property="av:DockPanel.Dock">
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:DrawingBrush TileMode="None" Viewbox="0,0,1,1" Viewport="0,0,1,1">
+                <av:DrawingBrush.Drawing>
+                  <av:DrawingGroup>
+                    <av:DrawingGroup.Children>
+                      <av:GeometryDrawing>
+                        <av:GeometryDrawing.Brush>
+                          <av:RadialGradientBrush>
+                            <av:RadialGradientBrush.GradientStops>
+                              <av:GradientStop Offset="0" Color="#FF008000" />
+                              <av:GradientStop Offset="1" Color="#FF0000FF" />
+                            </av:RadialGradientBrush.GradientStops>
+                          </av:RadialGradientBrush>
+                        </av:GeometryDrawing.Brush>
+                        <av:GeometryDrawing.Geometry>
+                          <av:EllipseGeometry Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5" />
+                        </av:GeometryDrawing.Geometry>
+                      </av:GeometryDrawing>
+                      <av:GeometryDrawing>
+                        <av:GeometryDrawing.Brush>
+                          <av:DrawingBrush TileMode="FlipXY" Viewbox="0,0.2,1,0.6" Viewport="0,0,0.2,0.15">
+                            <av:DrawingBrush.Drawing>
+                              <av:DrawingGroup>
+                                <av:DrawingGroup.Children>
+                                  <av:GeometryDrawing>
+                                    <av:GeometryDrawing.Brush>
+                                      <av:LinearGradientBrush EndPoint="1,0" StartPoint="0,0" Opacity="0.7">
+                                        <av:LinearGradientBrush.GradientStops>
+                                          <av:GradientStop Offset="0" Color="#FFFF0000" />
+                                          <av:GradientStop Offset="1" Color="#FFFFFF00" />
+                                        </av:LinearGradientBrush.GradientStops>
+                                      </av:LinearGradientBrush>
+                                    </av:GeometryDrawing.Brush>
+                                    <av:GeometryDrawing.Geometry>
+                                      <av:EllipseGeometry Center="0.5,0.5" RadiusX="0.5" RadiusY="0.3" />
+                                    </av:GeometryDrawing.Geometry>
+                                  </av:GeometryDrawing>
+                                  <av:GeometryDrawing>
+                                    <av:GeometryDrawing.Geometry>
+                                      <av:LineGeometry EndPoint="1,1" StartPoint="0,0" />
+                                    </av:GeometryDrawing.Geometry>
+                                    <av:GeometryDrawing.Pen>
+                                      <av:Pen Thickness="0.03" Brush="#FF0000FF" />
+                                    </av:GeometryDrawing.Pen>
+                                  </av:GeometryDrawing>
+                                  <av:GeometryDrawing>
+                                    <av:GeometryDrawing.Geometry>
+                                      <av:PathGeometry Figures="M0,0L0.8,0.2 0,0.4 0.6,0.8 0.8,0.2" />
+                                    </av:GeometryDrawing.Geometry>
+                                    <av:GeometryDrawing.Pen>
+                                      <av:Pen Thickness="0.05" Brush="#FF008000" />
+                                    </av:GeometryDrawing.Pen>
+                                  </av:GeometryDrawing>
+                                </av:DrawingGroup.Children>
+                              </av:DrawingGroup>
+                            </av:DrawingBrush.Drawing>
+                          </av:DrawingBrush>
+                        </av:GeometryDrawing.Brush>
+                        <av:GeometryDrawing.Geometry>
+                          <av:EllipseGeometry Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5" />
+                        </av:GeometryDrawing.Geometry>
+                      </av:GeometryDrawing>
+                    </av:DrawingGroup.Children>
+                  </av:DrawingGroup>
+                </av:DrawingBrush.Drawing>
+              </av:DrawingBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Trigger.Value>
+            <x:Static Member="av:Dock.Top" />
+          </av:Trigger.Value>
+        </av:Trigger>
+      </av:Style.Triggers>
+      <av:Setter Property="av:Panel.Background">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="myBrush" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:DockPanel.Dock">
+        <av:Setter.Value>
+          <x:Static Member="av:Dock.Right" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:Button">
+            <av:Border>
+              <av:TextBlock>
+                <av:TextBlock Name="myText" Foreground="{av:TemplateBinding av:TextElement.Foreground}" />
+              </av:TextBlock>
+            </av:Border>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+  </CustomCanvas.Resources>
+  <av:Button />
+</CustomCanvas>

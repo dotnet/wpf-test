@@ -1,0 +1,14 @@
+<Window x:Class="RegressionIssue63_SubclassingControlTemplate.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:RegressionIssue63_SubclassingControlTemplate"
+    Title="Window1" Height="300" Width="300" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:CT x:Key="DerivedControlTemplate" TargetType="{x:Type Button}" >
+            <TextBlock>Derived control template</TextBlock>
+        </local:CT>
+    </Window.Resources>
+    <Grid>
+        <Button Template="{StaticResource DerivedControlTemplate}"></Button>
+    </Grid>
+</Window>

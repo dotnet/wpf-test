@@ -1,0 +1,17 @@
+<StackPanel Name="CustomStackPanel0"
+    xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:v1='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="v1"
+>
+    <!-- The following block tests an attribute and an xmlns declaration on mc:AlternateContent. 
+    It also tests an empty mc:Fallback
+    -->
+    <mc:AlternateContent Name="AlternateContent" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <mc:Choice Requires="v1">
+            <v1:Button Background="{x:Static Brushes.Red}">This is a v2 button</v1:Button>
+        </mc:Choice>
+        <mc:Fallback>
+        </mc:Fallback>
+    </mc:AlternateContent>
+</StackPanel>

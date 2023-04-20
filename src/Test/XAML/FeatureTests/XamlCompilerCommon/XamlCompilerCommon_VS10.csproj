@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <AssemblyName>XamlCompilerCommon</AssemblyName>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <OutputType>Library</OutputType>
+    <OutputSubFolder>FeatureTests\XAML</OutputSubFolder>
+    <AllowPartialTrustedCalls>true</AllowPartialTrustedCalls>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <ProjectGuid>{B94B8280-250A-4DF9-ADE0-FA16DF2E3B53}</ProjectGuid>
+	<OutputPath>Bin\Debug</OutputPath>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <Reference Include="Microsoft.Xaml.Tools">
+      <HintPath>.\Microsoft.Xaml.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Tools.Silverlight">
+      <HintPath>.\Microsoft.Xaml.Tools.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <!-- Framework and Custom type code that ALWAYS builds -->
+  <ItemGroup>
+    <Compile Include="Proxies\*.cs" />
+    <Compile Include="ExpectedException.cs" />
+    <Compile Include="XamlHarvesterTest.cs" />
+    <Compile Include="TestLogger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="XamlCompilerCore.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Microsoft.Xaml.Tools.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Microsoft.Xaml.Tools.Silverlight.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

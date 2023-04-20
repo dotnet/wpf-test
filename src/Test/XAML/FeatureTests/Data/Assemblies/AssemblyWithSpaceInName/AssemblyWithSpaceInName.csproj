@@ -1,0 +1,28 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <AssemblyName>Assembly With Space In Name</AssemblyName>
+    <OutputType>Library</OutputType>
+    <OutputSubFolder>FeatureTests\XAML</OutputSubFolder>
+    <OptionStrict>true</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <BinplaceFlags Include="@(BinplaceFlags)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TypeInAssemblyWithSpaceInName.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+</Project>

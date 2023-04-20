@@ -1,0 +1,59 @@
+﻿
+
+
+<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:custom="clr-namespace:CustomControl;assembly=Library"
+           xmlns:custom3="clr-namespace:CustomControl.CustomControl;assembly=Library"
+           xmlns:custom2="clr-namespace:Avalon.Test.ComponentModel"
+
+    x:Class="VBBVT"
+    Loaded="OnVBLoaded" xmlns:MappingPIGen1="clr-namespace:CustomControl;assembly=Library" xmlns:MappingPIGen2="clr-namespace:CustomControl.CustomControl;assembly=Library" xmlns:MappingPIGen3="clr-namespace:">
+
+    <custom3:LibraryVBButton Click="HandleClick"
+            Name="LibVBButton">Custom Control defined externally in VB</custom3:LibraryVBButton>
+    <custom:LibraryXAMLButton Click="HandleClick"
+            Name="LibXAMLButton">Custom Control defined externally in XAML</custom:LibraryXAMLButton>
+    <custom2:LocalVBButton Click="HandleClick"
+            x:Name="LocVBButton">Custom Control defined locally in VB</custom2:LocalVBButton>
+    <custom2:LocalXAMLButton Click="HandleClick"
+            x:Name="LocXAMLButton">Custom Control defined locally in XAML</custom2:LocalXAMLButton>
+
+    <Button Name="GlobalText">Text using masculin, 按钮, ボタン, 단추, кнопка, κουμπί</Button>
+    <Button Name="masculin">ID using Language1</Button>
+    <Button Name="按钮">ID using Language2</Button>
+    <Button Name="ボタン">ID using Language3</Button>
+    <Button Name="단추">ID using Language4</Button>
+    <Button Name="кнопка">ID using Language5</Button>
+    <Button Name="κουμπί">ID using Language6</Button>
+
+    <StackPanel Name="Wireup">
+        <Button>No ID, No Event Handler</Button>
+        <Button Name="Button2Wireup">ID, No Event Handler</Button>
+        <Button Click="HandleButton3WireupClick">No ID, Event Handler</Button>
+        <Button Name="Button4Wireup" Click="HandleButton4WireupClick">ID, Event Handler</Button>
+    </StackPanel>
+
+    <Button Click="HandleClickCodeBeside"
+            Name="CodeBeside">Click Me</Button>
+
+    <Button Click="HandleClickCodeBehind"
+            Name="CodeBehind">Click Me</Button>
+
+  <x:Code>
+    <![CDATA[
+    Sub HandleClickCodeBeside(ByVal sender As Object, ByVal e As RoutedEventArgs) 
+        Console.WriteLine("We verified click handler defined in Code-Beside works.")
+        casePassed = True
+    
+    End Sub 'HandleClickCodeBeside
+
+    Sub MethodInCodeBeside() 
+        Console.WriteLine("We verified a method defined in Code-Beside can be called from Code-Behind.")
+        MethodInCodeBehind()
+    
+    End Sub 'MethodInCodeBeside
+    ]]>
+  </x:Code>
+
+</StackPanel>
