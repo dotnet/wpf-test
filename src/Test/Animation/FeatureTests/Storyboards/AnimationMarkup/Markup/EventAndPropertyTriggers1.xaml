@@ -1,0 +1,64 @@
+<Grid
+    Name            = "Root"
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag             = "Color White Background"
+    ShowGridLines   = "true">
+    
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+    </Grid.RowDefinitions>
+    
+    <Grid.Resources>
+        <Style x:Key="PropertyTriggerExampleCanvasStyle" TargetType="{x:Type Canvas}">
+            <Setter Property="Opacity" Value="0.25" />
+            <Setter Property="Canvas.Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="Orange" />
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+            
+                <Trigger Property="Opacity" Value="1">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation 
+                                    Storyboard.TargetProperty   = "(Canvas.Background).(SolidColorBrush.Color)"
+                                    From                        = "Orange"
+                                    To                          = "White"
+                                    BeginTime                   = "0:0:0"
+                                    Duration                    = "0:0:3"
+                                    />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "Opacity"
+                                    To                          = "1"
+                                    BeginTime                   = "0:0:0"
+                                    Duration                    = "0:0:1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+
+            </Style.Triggers>
+        </Style>
+    </Grid.Resources>
+    
+    <Canvas Name="AnimatedFE" Height="150" Width="150" Grid.Column="1" Grid.Row="1" Style="{StaticResource PropertyTriggerExampleCanvasStyle}"></Canvas>
+
+  </Grid>

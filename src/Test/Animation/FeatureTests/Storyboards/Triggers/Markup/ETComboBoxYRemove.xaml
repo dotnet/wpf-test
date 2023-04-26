@@ -1,0 +1,39 @@
+<Page
+    Name            = "Root"
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background      = "White" >
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(ComboBox.RenderTransform).(TranslateTransform.Y)"
+                                Storyboard.TargetName       = "FocusElement"
+                                By                          = "-300"
+                                Duration                    = "0:0:6"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <RemoveStoryboard BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="White">
+        <Button Name="SourceElement" Canvas.Left="0" Canvas.Top="120" Background="LightSeaGreen" FontSize="24" Content="Click Here!"/>
+        <ComboBox Name="FocusElement" Background="CornflowerBlue" Text="Animating!" IsEditable="True">
+            <ComboBox.RenderTransform>
+                <TranslateTransform X="0" Y="300" />
+            </ComboBox.RenderTransform>
+        </ComboBox>
+    </Canvas>
+    
+</Page>

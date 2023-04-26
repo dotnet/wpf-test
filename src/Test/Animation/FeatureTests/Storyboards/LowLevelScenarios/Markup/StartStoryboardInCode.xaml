@@ -1,0 +1,29 @@
+<Canvas
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Name        = "Root"
+    Background  = "DarkSeaGreen">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard BeginTime="{x:Null}">
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Image.Opacity)"
+                                Storyboard.TargetName       = "Animate"
+                                From                        = "1"
+                                To                          = "0"
+                                BeginTime                   = "0:0:0"
+                                Duration                    = "0:0:1" />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <Image Name="Animate" Source="pack://siteoforigin:,,,/clubtrid.gif" Canvas.Left="50" Canvas.Top="50" Height="100" Width="100" />
+     
+</Canvas>

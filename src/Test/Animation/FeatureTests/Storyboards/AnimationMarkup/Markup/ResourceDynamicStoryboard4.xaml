@@ -1,0 +1,35 @@
+<!-- Storyboard inside Page Resources: Direct Targeting / Simple Property Name (Dynamic) -->
+
+<Page
+    Name    = "Root"
+    Tag     = "Double 1 Opacity"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    <Page.Resources>
+        <Storyboard x:Key="AnimOpacity">
+            <DoubleAnimation
+                Storyboard.TargetProperty   = "Opacity"
+                Storyboard.TargetName       = "AnimatedAnimatable"
+                To                          = "1"
+                BeginTime                   = "0:0:2"
+                Duration                    = "0:0:4"
+                  />
+        </Storyboard>
+    </Page.Resources>
+    
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard Storyboard="{DynamicResource AnimOpacity}" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+ 
+    <Canvas Background="White">
+        <ComboBox Name="TargetElement" Height="150" Width="150" Canvas.Top="0">
+            <ComboBox.Background>
+                <SolidColorBrush x:Name="AnimatedAnimatable" Color="Black" Opacity="0" />
+            </ComboBox.Background>
+        </ComboBox>
+    </Canvas>
+</Page>

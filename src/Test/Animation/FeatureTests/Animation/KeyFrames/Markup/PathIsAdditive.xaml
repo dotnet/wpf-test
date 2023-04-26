@@ -1,0 +1,44 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="White">
+
+    <Canvas>
+        <Rectangle Name="Animate" Width="50" Height="100">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="MediumPurple" />
+            </Rectangle.Fill>
+            
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                      <DoubleAnimationUsingKeyFrames
+                                        Storyboard.TargetProperty   = "Width"
+                                        BeginTime                   = "0:0:0"
+                                        Duration                    = "0:0:1"
+                                        IsAdditive                  = "True">
+                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                          <LinearDoubleKeyFrame Value="50"  KeyTime="0%" />
+                                          <LinearDoubleKeyFrame Value="75"  KeyTime="50%" />
+                                          <LinearDoubleKeyFrame Value="100" KeyTime="100%" />
+                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                      </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Rectangle.Triggers>
+            
+        </Rectangle>
+        <Line X1="50"  Y1="0" X2="50"  Y2="300" Stroke="Blue"   StrokeThickness="2" />
+        <Line X1="100" Y1="0" X2="100" Y2="300" Stroke="Red"    StrokeThickness="2" />
+        <Line X1="150" Y1="0" X2="150" Y2="300" Stroke="Green"  StrokeThickness="2" />
+        <Line X1="200" Y1="0" X2="200" Y2="300" Stroke="Brown"  StrokeThickness="2" />
+        <Line X1="250" Y1="0" X2="250" Y2="300" Stroke="Purple" StrokeThickness="2" />
+        
+        <Button Name="button1" Height="25" Width="50" Canvas.Left="300" />
+        
+ </Canvas>
+    
+</Page>

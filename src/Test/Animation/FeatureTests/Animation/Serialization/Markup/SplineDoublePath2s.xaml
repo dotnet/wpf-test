@@ -1,0 +1,45 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent" Background="Black" >
+
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Path}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames
+                                        Storyboard.TargetProperty="(Path.Data).(EllipseGeometry.RadiusX)"
+                                        BeginTime="0:1:0"
+                                        Duration="0:0:5"
+                                        FillBehavior="HoldEnd"
+                                        AutoReverse="true"
+                                        >
+                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                            <DoubleKeyFrameCollection>
+                                                <SplineDoubleKeyFrame Value="50" KeyTime="0" KeySpline="0 0 1 1" />
+                                                <SplineDoubleKeyFrame Value="0" KeyTime="100%" KeySpline="0 0 1 1" />
+                                            </DoubleKeyFrameCollection>
+                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <Path Name="Animate" Style="{DynamicResource StyleKey}" Fill="OrangeRed" Stroke="Black"><Path.Data><EllipseGeometry Center="60 60" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     <Path Name="Animate2" Fill="Green" Stroke="Black"><Path.Data><EllipseGeometry Center="90 90" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     <Path Name="Animate3" Fill="Blue" Stroke="Black"><Path.Data><EllipseGeometry Center="120 120" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     <Path Name="Animate4" Fill="Red" Stroke="Black"><Path.Data><EllipseGeometry Center="150 150" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     <Path Name="Animate5" Fill="Purple" Stroke="Black"><Path.Data><EllipseGeometry Center="180 180" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     <Path Name="Animate6" Fill="Orange" Stroke="Black"><Path.Data><EllipseGeometry Center="210 210" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     <Path Name="Animate7" Fill="Yellow" Stroke="Black"><Path.Data><EllipseGeometry Center="240 240" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     <Path Name="Animate8" Fill="Brown" Stroke="Black"><Path.Data><EllipseGeometry Center="270 270" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     <Path Name="Animate9" Fill="White" Stroke="Black"><Path.Data><EllipseGeometry Center="300 300" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     
+</tst:CustomCanvas>

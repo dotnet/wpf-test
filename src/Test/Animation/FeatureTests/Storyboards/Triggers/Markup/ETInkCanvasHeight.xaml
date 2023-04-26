@@ -1,0 +1,28 @@
+﻿<Page
+ Name="Root"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Canvas Background="White">
+        <InkCanvas Name="TargetElement" Height="4" Width="100" Background="Purple">
+            <InkCanvas.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseUp">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Height"
+                                        To="100"
+                                        BeginTime="0:0:0"
+                                        Duration="0:0:1.5"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </InkCanvas.Triggers>
+        </InkCanvas>
+    </Canvas>
+</Page>

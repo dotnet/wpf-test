@@ -1,0 +1,47 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 100 Width"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "SandyBrown">
+    
+    <Page.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="200" />
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Rectangle x:Name="r1" Width="0" Height="100" Fill="DeepSkyBlue" />
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <BeginStoryboard.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty   = "(Rectangle.Width)"
+                                                    Storyboard.TargetName       = "r1"
+                                                    By                          = "100"
+                                                    BeginTime                   = "0:0:2"
+                                                    Duration                    = "0:0:4"
+                                                  />
+                                            </Storyboard>  
+                                        </BeginStoryboard.Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+   
+    <Canvas>
+        <Button Name="AnimatedFE" Background="SlateBlue" Style="{DynamicResource StyleKey}" />
+    </Canvas>
+     
+</Page>

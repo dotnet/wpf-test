@@ -1,0 +1,23 @@
+<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Navy">
+    <Border Name="border1" Height="100" Width="100" Background="Orange" BorderBrush="Red" BorderThickness="5,5,5,5">
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <ColorAnimation
+                                    Storyboard.TargetProperty   = "(Border.BorderBrush).(SolidColorBrush.Color)"
+                                    From                        = "Red"
+                                    To                          = "Blue"
+                                    BeginTime                   = "0:0:0.1"
+                                    Duration                    = "0:0:1"
+                                    />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Border.Triggers>
+    </Border>
+</StackPanel>

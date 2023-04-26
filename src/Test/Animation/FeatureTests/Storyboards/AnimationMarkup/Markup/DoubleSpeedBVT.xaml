@@ -1,0 +1,25 @@
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="MediumPurple">
+
+    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Name="AnimatedFE" Fill="Navy" Width="100" Height="100">
+        <Rectangle.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Opacity)"
+                                    From="1"
+                                    To="0"
+                                    BeginTime="0:0:2"
+                                    Duration="0:0:3"
+                                    SpeedRatio="2"
+                                      />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Rectangle.Triggers>
+    </Rectangle>
+</Grid>

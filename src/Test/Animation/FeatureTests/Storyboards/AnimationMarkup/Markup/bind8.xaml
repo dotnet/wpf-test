@@ -1,0 +1,37 @@
+<!-- Binding on both Animation and Element - DoubleAnimation-->
+
+<Page
+    Name        = "Root"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag         = "Double 400 Width"
+    Background  = "Black">
+   
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Width" TargetName="TargetElement">
+                        <DoubleAnimation
+                             BeginTime                      = "00:00:02"
+                             Duration                       = "00:00:04"
+                             To                             = "{Binding ElementName=TargetElement, Path=Text}"
+                             />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas>
+
+        <TextBox Name='TargetElement' Background="Red"   Text="400" Height="100" Width="200" Canvas.Top="0" Canvas.Left="0" />
+        
+        <TextBox Name='txt2' Background="Blue"  Text="{Binding ElementName=TargetElement, Path=Text}" Height="100" Width="{Binding ElementName=TargetElement, Path=Width}" Canvas.Top="210" />
+
+        <!-- "Animated" via Binding to the TargetElement -->
+        <TextBox Name='AnimatedFE' Background="Green" Text="{Binding ElementName=TargetElement, Path=Text}" Height="100" Width="{Binding ElementName=TargetElement, Path=Width}" Canvas.Left="0" Canvas.Top="420" />
+
+    </Canvas>
+
+</Page>

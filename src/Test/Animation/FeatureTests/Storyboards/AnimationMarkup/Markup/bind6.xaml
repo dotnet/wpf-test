@@ -1,0 +1,35 @@
+<!-- Animate the bound property - DoubleAnimation -->
+<Page
+    Name        = "Root"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag         = "Double 0 Opacity"
+    Background  = "Black">
+    
+    <Canvas>
+
+        <Rectangle Name='rect1' Fill="Red" Height="100" Width="100" Canvas.Top="0" Canvas.Left="0" />
+        
+        <Rectangle Name='AnimatedFE' Fill="Blue" Opacity="{Binding ElementName=rect3, Path='Opacity'}" Height="100" Width="100" Canvas.Top="100">
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity">
+                                <DoubleAnimation
+                                     BeginTime                      = "00:00:02"
+                                     Duration                       = "00:00:04"
+                                     To                             = "0"
+                                     />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+
+        <Rectangle Name='rect3' Fill="Green" Opacity="{Binding ElementName=rect1, Path=Opacity}" Height="100" Width="100" Canvas.Top="200" />
+
+    </Canvas>
+
+</Page>

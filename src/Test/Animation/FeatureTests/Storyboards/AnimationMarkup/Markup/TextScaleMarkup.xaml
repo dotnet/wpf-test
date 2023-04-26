@@ -1,0 +1,57 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 1.5 ScaleX"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Black">
+
+    <Canvas>
+    <Border
+        Name            = "Border1"
+        Height          = "200"
+        Width           = "400"
+        BorderBrush     = "Orange"
+        BorderThickness = "1px"
+        Background      = "Brown"
+        >     
+        <TextBlock
+            Name        = "TargetElement"
+            FontWeight  = "Bold"
+            FontSize    = "72"
+            Foreground  = "Moccasin"
+            Background  = "Brown"
+            >Avalon!!
+            <TextBlock.LayoutTransform>
+                <ScaleTransform x:Name="AnimatedAnimatable" ScaleX=".1" ScaleY=".1" />
+            </TextBlock.LayoutTransform>
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty   = "(TextBlock.LayoutTransform).(ScaleTransform.ScaleX)"
+                                            From                        = ".1"
+                                            To                          = "1.5"
+                                            FillBehavior                = "HoldEnd"
+                                            BeginTime                   = "0:0:2"
+                                            Duration                    = "0:0:4" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty   = "(TextBlock.LayoutTransform).(ScaleTransform.ScaleY)"
+                                            From                        = ".1"
+                                            To                          = "1.75"
+                                            FillBehavior                = "HoldEnd"
+                                            BeginTime                   = "0:0:2"
+                                            Duration                    = "0:0:1" />
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+        </TextBlock>
+    </Border>
+    </Canvas>
+    
+</Page>

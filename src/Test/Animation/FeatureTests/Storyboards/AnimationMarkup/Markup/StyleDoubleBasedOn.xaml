@@ -1,0 +1,62 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 180 Angle"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "SandyBrown">
+
+    <Page.Resources>
+        <Style x:Key="BaseStyle" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(TextBox.RenderTransform).(RotateTransform.Angle)"
+                                        To                          = "0"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:1"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="NewStyle" BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(TextBox.RenderTransform).(RotateTransform.Angle)"
+                                        To                          = "180"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
+    <!-- The NewStyle overrides the BaseStyle -->
+    <Canvas>
+        <TextBox Name="TargetElement" Background="LightGreen" Style="{DynamicResource NewStyle}" Height="110" Width="110" Canvas.Left="95" Canvas.Top="95">
+            <TextBox.RenderTransform>
+                <RotateTransform x:Name="AnimatedAnimatable" CenterX="7" CenterY="7" Angle="80" />
+            </TextBox.RenderTransform>
+        </TextBox>
+    </Canvas>
+     
+</Page>

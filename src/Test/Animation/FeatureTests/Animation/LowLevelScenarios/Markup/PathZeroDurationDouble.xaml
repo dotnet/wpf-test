@@ -1,0 +1,36 @@
+<Grid 
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "#FFFFFFFF" 
+    x:Name      = "DocumentRoot">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Storyboard x:Key="OnLoaded">
+                <DoubleAnimationUsingPath
+                    FillBehavior                = "HoldEnd"
+                    BeginTime                   = "00:00:00"
+                    Storyboard.TargetName       = "Rectangle1"
+                    Storyboard.TargetProperty   = "Width"
+                    Source                      = "X"
+                    Duration                    = "00:00:00"
+                    >
+                    <DoubleAnimationUsingPath.PathGeometry>
+                        <PathGeometry Figures="M 10,100 C 35,0 135,0 160,100 180,190 285,200 310,100" />
+                    </DoubleAnimationUsingPath.PathGeometry>
+                </DoubleAnimationUsingPath>
+            </Storyboard>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard Storyboard="{DynamicResource OnLoaded}"/>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Grid.Triggers>
+    
+    <Rectangle x:Name="Rectangle1" Height="150" Width="150" Fill="RoyalBlue"  />
+    
+</Grid>

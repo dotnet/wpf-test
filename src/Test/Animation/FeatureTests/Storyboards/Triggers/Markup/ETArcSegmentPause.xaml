@@ -1,0 +1,50 @@
+<Page
+    Name    = "Root"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    
+    <Canvas Background="Black">
+        <Path Name="TargetElement" Fill="White">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure StartPoint="0 0" IsClosed="True">
+                            <PathFigure.Segments>
+                                    <ArcSegment Size="150,150" IsLargeArc="true" Point="200,0" RotationAngle="45" />
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseDown">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Name="BeginStory">
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                        <PointAnimation
+                                            Storyboard.TargetProperty   = "(Path.Data).(PathGeometry.Figures)[0].(PathFigure.Segments)[0].(ArcSegment.Point)"
+                                            To                          = "3,3"
+                                            Duration                    = "0:0:7"
+                                            />
+                                        <SizeAnimation
+                                            Storyboard.TargetProperty   = "(Path.Data).(PathGeometry.Figures)[0].(PathFigure.Segments)[0].(ArcSegment.Size)"
+                                            To                          = "80,80"
+                                            Duration                    = "0:0:7"
+                                            />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <PauseStoryboard BeginStoryboardName="BeginStory" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
+
+        <TextBox Name="FocusElement" Width="25" Height="25" Canvas.Top="250" Canvas.Left="200" />
+        
+    </Canvas>
+</Page>

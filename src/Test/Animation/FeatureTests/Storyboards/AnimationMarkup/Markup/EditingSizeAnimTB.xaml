@@ -1,0 +1,29 @@
+<ScrollViewer
+    Name        = "Root"
+    Tag         = "Double 200 Width"
+    xmlns       = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x     = 'http://schemas.microsoft.com/winfx/2006/xaml'>
+    <StackPanel>
+    
+        <StackPanel.Resources>
+            <Storyboard x:Key="SizeAnim" BeginTime="0:0:2">
+                <DoubleAnimation Storyboard.TargetProperty="Height" From="75"  To="100" Duration="0:0:4" FillBehavior="HoldEnd" />
+                <DoubleAnimation Storyboard.TargetProperty="Width"  From="150" To="200" Duration="0:0:4" FillBehavior="HoldEnd" />
+            </Storyboard>
+        </StackPanel.Resources>
+
+        <!--Height/Width Animation on TextBox-->
+        <TextBox Name="AnimatedFE" Height="75" Width="150" Background="Lavender">
+            <TextBox.Triggers>
+                <EventTrigger RoutedEvent="TextBox.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource SizeAnim}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBox.Triggers>
+            TextBox
+        </TextBox>
+                
+    </StackPanel>
+    
+</ScrollViewer>

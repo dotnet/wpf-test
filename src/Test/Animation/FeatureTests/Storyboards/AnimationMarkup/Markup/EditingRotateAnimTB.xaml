@@ -1,0 +1,33 @@
+<ScrollViewer
+    Name        = "Root"
+    Tag         = "Double 180 Angle"
+    xmlns       = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x     = 'http://schemas.microsoft.com/winfx/2006/xaml'>
+    
+    <StackPanel>
+    
+        <StackPanel.Resources>
+            <Storyboard x:Key="RotateAnim" BeginTime="0:0:2">
+                <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="180" Duration="0:0:4" />
+            </Storyboard>
+        </StackPanel.Resources>
+
+        <!--Rotation effect on TextBox-->
+        <TextBox Height="75" Width="150" AcceptsReturn="True">
+            <TextBox.Triggers>
+                <EventTrigger RoutedEvent="TextBox.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource RotateAnim}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBox.Triggers>
+
+            <TextBox.RenderTransform>
+                <RotateTransform x:Name="AnimatedAnimatable" CenterX="100" CenterY="50" Angle="0" />
+            </TextBox.RenderTransform>
+            TextBox Rotation
+        </TextBox>
+                
+    </StackPanel>
+    
+</ScrollViewer>

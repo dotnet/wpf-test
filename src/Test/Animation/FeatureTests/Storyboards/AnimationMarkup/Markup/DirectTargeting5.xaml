@@ -1,0 +1,51 @@
+<!-- Direct Targeting of multiple GradientStop properties-->
+
+<Page
+    Name    = "Root"
+    Tag     = "double 0 Offset"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas Background="LightBlue">
+        <Rectangle Name="TargetElement" Canvas.Top="0" Canvas.Left="0" Width="125" Height="125">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="Navy" Offset="0" />
+                            <GradientStop x:Name="AnimatedAnimatable" Color="Navy" Offset=".5" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Canvas>
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                 Storyboard.TargetProperty  = "Color"
+                                 Storyboard.TargetName      = "AnimatedAnimatable"
+                                 BeginTime                  = "0:0:2"
+                                 Duration                   = "0:0:4"
+                                 To                         = "MediumPurple"
+                                 />
+                            <DoubleAnimation
+                                 Storyboard.TargetProperty  = "(GradientStop.Offset)"
+                                 Storyboard.TargetName      = "AnimatedAnimatable"
+                                 BeginTime                  = "0:0:2"
+                                 Duration                   = "0:0:4"
+                                 To                         = "0"
+                                 />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+    
+</Page>

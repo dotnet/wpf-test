@@ -1,0 +1,46 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 0 Offset"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "CornflowerBlue">
+     
+    <Canvas>
+        <TextBlock Name="TargetElement" FontSize="96" Width="100" Height="100" Canvas.Top="50" Canvas.Left="50">TX
+            <TextBlock.Foreground>
+                <LinearGradientBrush
+                    StartPoint  = "0,0"
+                    EndPoint    = "1,1"
+                    MappingMode="RelativeToBoundingBox">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="Navy"          Offset=".1" />
+                            <GradientStop Color="MediumPurple"  Offset=".9" x:Name="AnimatedAnimatable" />
+                            <GradientStop Color="LightBlue"     Offset="1" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(TextBlock.Foreground).(LinearGradientBrush.GradientStops)[1].(GradientStop.Offset)"
+                                        From                        = ".9"
+                                        To                          = "0"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        FillBehavior                = "HoldEnd" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+    </Canvas>
+
+</Page>

@@ -1,0 +1,53 @@
+<!-- Databinding Animation To Property: Triggers inside Animated Element -->
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    DataContext = "{Binding ElementName=listbox1, Path=&apos;SelectedItem&apos;}">
+
+    <Canvas Background="Navy">
+    
+        <Path
+            Name            = "AnimatedFE"
+            Fill            = "MediumPurple"
+            Stroke          = "MediumPurple"
+            StrokeThickness = "120"
+            >
+
+            <Path.Data>
+                <LineGeometry StartPoint="200,50" EndPoint="300,50" />
+            </Path.Data>
+
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <PointAnimation
+                                        Storyboard.TargetProperty   = "(Path.Data).(LineGeometry.StartPoint)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:5"
+                                        From                        = "200,50"
+                                        To                          = "{Binding Path=&apos;Content&apos;}"
+                                        />
+                                    <PointAnimation
+                                        Storyboard.TargetProperty   = "(Path.Data).(LineGeometry.EndPoint)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:5"
+                                        From                        = "300,50"
+                                        To                          = "200,50"
+                                        />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
+        
+        <ListBox Name="listbox1" Background="MistyRose" SelectedIndex="0" Canvas.Top="150" Padding="25" FontSize="18">
+            <ListBoxItem>0,50</ListBoxItem>
+            <ListBoxItem>0,100</ListBoxItem>
+        </ListBox>
+
+    </Canvas>
+</Page>

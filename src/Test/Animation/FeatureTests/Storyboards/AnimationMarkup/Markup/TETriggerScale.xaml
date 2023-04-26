@@ -1,0 +1,70 @@
+<!-- Animates properties by using storyboard animations. -->
+
+<Page
+    Name        = "Root"
+    Tag         = "Double 2 ScaleX"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    WindowTitle = "Animate Properties with Storyboards">
+
+    <Page.Resources>
+        <Style x:Key="ScaleAnim" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Name="beginStory">
+                            <Storyboard>    
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Button.Content).(TextBlock.TextEffects)[0].(TextEffect.Transform).(ScaleTransform.ScaleX)"
+                                    From                        = "1"
+                                    To                          = "2"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    />
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Button.Content).(TextBlock.TextEffects)[0].(TextEffect.Transform).(ScaleTransform.ScaleY)"
+                                    From                        = "1"
+                                    To                          = "2.5"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <StopStoryboard BeginStoryboardName="beginStory" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+ 
+    <Border Background="White">
+        <StackPanel Margin="30" HorizontalAlignment="Left">
+
+            <TextBlock>Triggers: Text Effect Scale Animation Example</TextBlock>
+
+            <Button Name="myTextAnimatedButton" Style="{StaticResource ScaleAnim}" Height="35" Width="400" Margin="20,20,20,20" FontSize="20" Foreground="Purple">
+                <TextBlock Name="myButtonTextBlock">
+                    <TextBlock.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="4" />
+                    </TextBlock.BitmapEffect>
+                    <TextBlock.TextEffects>
+                        <TextEffectCollection>
+                            <TextEffect PositionStart="0" PositionCount="300">
+                                <TextEffect.Transform>
+                                    <ScaleTransform x:Name="AnimatedAnimatable" ScaleX="1" ScaleY="1" />
+                                </TextEffect.Transform>
+                            </TextEffect>
+                        </TextEffectCollection>
+                    </TextBlock.TextEffects>
+                    A Scaling Text Button
+                </TextBlock>                
+            </Button>
+
+        </StackPanel>
+    </Border>
+
+</Page>

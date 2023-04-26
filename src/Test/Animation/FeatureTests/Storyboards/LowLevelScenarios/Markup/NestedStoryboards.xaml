@@ -1,0 +1,58 @@
+<Page 
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Name        = "Root">
+
+    <Canvas Background="LawnGreen">
+        <Rectangle
+            Name            = "rectangle1"
+            Fill            = "White"
+            Stroke          = "MidnightBlue"
+            StrokeThickness = "1"
+            Width           = "150"
+            Height          = "150">
+
+            <Rectangle.RenderTransform>
+                <TranslateTransform  x:Name="AnimateAnimatable" />
+            </Rectangle.RenderTransform>
+
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard BeginTime="0:0:0">
+                            <DoubleAnimation 
+                                Storyboard.TargetName       = "AnimateAnimatable" 
+                                Storyboard.TargetProperty   = "X"
+                                From                        = "0"
+                                To                          = "250"
+                                BeginTime                   = "0:0:1"
+                                Duration                    = "0:0:1">
+                            </DoubleAnimation>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetName       = "rectangle1" 
+                                    Storyboard.TargetProperty   = "Width"
+                                    From                        = "150"
+                                    To                          = "20"
+                                    BeginTime                   = "0:0:1"
+                                    Duration                    = "0:0:1">
+                                </DoubleAnimation>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        Storyboard.TargetName       = "rectangle1" 
+                                        Storyboard.TargetProperty   = "StrokeThickness"
+                                        To                          = "10"
+                                        BeginTime                   = "0:0:1"
+                                        Duration                    = "0:0:1">
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
+
+        </Rectangle>
+    </Canvas>
+
+</Page>

@@ -1,0 +1,43 @@
+﻿<Page
+    Name       = "Root"
+    xmlns:x    = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns      = "http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Canvas Background="White">
+        <ListBox Name="TargetElement" Background="HotPink" Width="100" Height="100">
+            <ListBox.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Name="BeginStory">
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <RectAnimation
+                                        Storyboard.TargetProperty   = "(ListBox.Clip).(RectangleGeometry.Rect)"
+                                        To                          = "0,0,100,100"
+                                        BeginTime                   = "0:0:0"
+                                        Duration                    = "0:0:1.5"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseUp">
+                    <EventTrigger.Actions>
+                        <SeekStoryboard BeginStoryboardName="BeginStory" Offset="0:0:0" Origin="BeginTime" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseUp">
+                    <EventTrigger.Actions>
+                        <PauseStoryboard BeginStoryboardName="BeginStory" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </ListBox.Triggers>
+            
+            <ListBox.Clip>
+                <RectangleGeometry Rect="150,150,300,300" />
+            </ListBox.Clip>
+        </ListBox>
+    </Canvas>
+
+</Page>

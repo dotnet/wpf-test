@@ -1,0 +1,46 @@
+<Page Name="Root" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+<Canvas Background="Navy">
+    <Ellipse Canvas.Left="-125" Name="AnimatedFE" Fill="MediumPurple">
+        <Ellipse.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <RectAnimation
+                                    Storyboard.TargetProperty="(Ellipse.OpacityMask).(DrawingBrush.Viewport)"
+                                    To="0,0,5,5"
+                                    BeginTime="0:0:2"
+                                    Duration="0:0:4"
+                                    FillBehavior="HoldEnd" />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Ellipse.Triggers>
+
+        <Ellipse.Width>351</Ellipse.Width>
+        <Ellipse.Height>241</Ellipse.Height>
+
+        <Ellipse.OpacityMask>
+            <DrawingBrush Viewport="0,0,0.15,0.15" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing>
+                            <GeometryDrawing.Pen>
+                                <Pen Brush="Navy" Thickness="0.08" />
+                            </GeometryDrawing.Pen>
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0.0, 0.0, 0.9, 0.9" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+            </DrawingBrush>
+        </Ellipse.OpacityMask>
+    </Ellipse>
+</Canvas>
+</Page>

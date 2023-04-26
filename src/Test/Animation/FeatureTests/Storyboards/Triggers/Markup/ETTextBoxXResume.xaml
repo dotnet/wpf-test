@@ -1,0 +1,51 @@
+<Page
+ Name="Root"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Page.Resources>
+        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type TextBox}">
+            <Setter Property="Width"><Setter.Value>120</Setter.Value></Setter>
+            <Setter Property="Height"><Setter.Value>100</Setter.Value></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBox.RenderTransform).(TranslateTransform.X)"
+                                Storyboard.TargetName       = "FocusElement"
+                                From                        = "350"
+                                To                          = "0"
+                                Duration                    = "0:0:6"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.PreviewMouseDown" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <PauseStoryboard BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <ResumeStoryboard BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="White">
+        <TextBox Name="SourceElement" Canvas.Left="0" Canvas.Top="120" Background="LightSeaGreen" FontSize="24" Text="Click Here!" />
+        <TextBox Name="FocusElement" Background="CornflowerBlue">
+            <TextBox.RenderTransform>
+                <TranslateTransform X="350" Y="0" />
+            </TextBox.RenderTransform>
+        </TextBox>
+    </Canvas>
+    
+</Page>

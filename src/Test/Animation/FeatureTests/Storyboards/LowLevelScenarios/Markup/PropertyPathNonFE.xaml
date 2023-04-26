@@ -1,0 +1,85 @@
+<Grid 
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml" 
+    Background  = "#FFFFFFFF" 
+    Width       = "640"
+    Height      = "480">
+
+    <Grid.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Timeline1">
+                                <Rotation3DAnimationUsingKeyFrames BeginTime="00:00:01" Duration="00:00:02" Storyboard.TargetName="Viewport3D" Storyboard.TargetProperty="(Viewport3D.Children)[0].(ModelVisual3D.Content).(Model3DGroup.Children)[2].(Model3D.Transform).(Transform3DGroup.Children)[2].(RotateTransform3D.Rotation)">
+                                    <SplineRotation3DKeyFrame KeySpline="0.5,0.5,0.5,0.5" KeyTime="00:00:01">
+                                        <SplineRotation3DKeyFrame.Value>
+                                            <AxisAngleRotation3D Axis="-1,0,0" Angle="30"/>
+                                        </SplineRotation3DKeyFrame.Value>
+                                    </SplineRotation3DKeyFrame>
+                                </Rotation3DAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Viewport3D MinWidth="100" MinHeight="100" ClipToBounds="True" x:Name="Viewport3D" RenderTransformOrigin="0.5,0.5">
+                            <Viewport3D.Camera>
+                                <PerspectiveCamera x:Name="Camera" NearPlaneDistance="0.1" FarPlaneDistance="100" Position="1,1,5.86274169979695" LookDirection="0,0,-4.86274169979695" UpDirection="0,1,0" FieldOfView="45"/>
+                            </Viewport3D.Camera>
+                            <ModelVisual3D x:Name="ModelVisual3D">
+                                <ModelVisual3D.Content>
+                                    <Model3DGroup x:Name="World">
+                                        <AmbientLight x:Name="AmbientLight" Color="DarkGreen"/>
+                                        <DirectionalLight x:Name="DirectionalLight" Color="RoyalBlue" Direction="0,0,-1">
+                                            <DirectionalLight.Transform>
+                                                <TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="3"/>
+                                            </DirectionalLight.Transform>
+                                        </DirectionalLight>
+                                        <GeometryModel3D x:Name="Cube_obj">
+                                            <GeometryModel3D.Geometry>
+                                                <MeshGeometry3D x:Name="DefaultMesh" Positions="0,2,2 0,0,2 2,0,2 2,2,2 2,2,0 2,0,0 0,0,0 0,2,0 2,2,2 2,0,2 2,0,0 2,2,0 0,2,0 
+0,2,2 2,2,2 0,0,0 0,0,2 0,2,2 0,0,2 2,0,2 " Normals="" TextureCoordinates="0,1 0,0 1,0 1,1 0,1 0,0 1,0 1,1 0,1 0,0 1,0 1,1 0,1 0,0 1,0 0,0 1,0 1,1 0,1 1,1 " TriangleIndices="0 1 2 0 2 3 4 5 6 4 6 7 8 9 10 8 10 11 12 13 14 12 14 11 12 15 16 12 16 17 18 15 10 18 10 19"/>
+                                            </GeometryModel3D.Geometry>
+                                            <GeometryModel3D.Material>
+                                                <DiffuseMaterial Brush="#FFFFFFFF"/>
+                                            </GeometryModel3D.Material>
+                                            <GeometryModel3D.Transform>
+                                                <Transform3DGroup>
+                                                    <TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0"/>
+                                                    <ScaleTransform3D ScaleX="1" ScaleY="1" ScaleZ="1"/>
+                                                    <RotateTransform3D CenterX="0" CenterY="0" CenterZ="0">
+                                                        <RotateTransform3D.Rotation>
+                                                            <AxisAngleRotation3D Axis="1,0,0" Angle="0"/>
+                                                        </RotateTransform3D.Rotation>
+                                                    </RotateTransform3D>
+                                                    <TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0"/>
+                                                    <TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0"/>
+                                                </Transform3DGroup>
+                                            </GeometryModel3D.Transform>
+                                        </GeometryModel3D>
+                                    </Model3DGroup>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                        </Viewport3D>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard Storyboard="{StaticResource Timeline1}"/>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Grid.Resources>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition/>
+    </Grid.RowDefinitions>
+
+    <Button Style="{DynamicResource ButtonStyle1}" Width="Auto" Height="Auto" MinWidth="0" MinHeight="0" RenderTransformOrigin="0.5,0.5"/>
+
+</Grid>

@@ -1,0 +1,55 @@
+<!-- Rectangle will be scaled and ScrollBars appears -->
+<WrapPanel
+    xmlns                   = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x                 = 'http://schemas.microsoft.com/winfx/2006/xaml'
+    VerticalAlignment       = "Top"
+    HorizontalAlignment     = "Left"
+    Name                    = "Root"
+    Tag                     = "Double 3 ScaleY"
+    >
+    
+    <WrapPanel.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "ScaleX"
+                                Storyboard.TargetName       = "AnimatedAnimatable"
+                                To                          = "3"
+                                BeginTime                   = "00:00:02"
+                                Duration                    = "00:00:03"
+                                />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "ScaleY"
+                                Storyboard.TargetName       = "AnimatedAnimatable"
+                                To                          = "3"
+                                BeginTime                   = "00:00:02"
+                                Duration                    = "00:00:03"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </WrapPanel.Triggers>
+
+    <Button Name="SourceElement" VerticalAlignment="Top">Change the size of Rectangle</Button>
+    
+    <ScrollViewer
+        Width="200"
+        Height="200"
+        Background="DarkKhaki"
+        HorizontalScrollBarVisibility="Auto"
+        VerticalScrollBarVisibility="Auto">
+        
+        <Rectangle Height="80" Width="80" Fill="Silver">
+            <Rectangle.LayoutTransform>
+                <ScaleTransform x:Name="AnimatedAnimatable" />
+            </Rectangle.LayoutTransform>
+        </Rectangle>
+        
+    </ScrollViewer>
+    
+</WrapPanel>

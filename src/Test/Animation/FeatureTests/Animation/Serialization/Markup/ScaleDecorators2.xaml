@@ -1,0 +1,52 @@
+<tst:CustomCanvas
+    xmlns                 = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:tst             = "clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier              = "AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+    Background            = "Yellow"
+    xmlns:MappingPIGen1   = "clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="(Decorator.RenderTransform).(ScaleTransform.ScaleX)"
+                            Storyboard.TargetName="Animate"
+                            BeginTime="0:1:0"
+                            Duration="0:0:8"
+                            From="1"
+                            To="3">
+                        </DoubleAnimation>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="(Decorator.RenderTransform).(ScaleTransform.ScaleY)"
+                            Storyboard.TargetName="Animate2"
+                            BeginTime="0:1:0"
+                            Duration="0:0:8"
+                            From="1"
+                            To="3">
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <Canvas Background="Green" Height="150" Width="150" Canvas.Top="20" Canvas.Left="200">
+        <Decorator Name="Animate">
+            <Button>Avalon!</Button>
+            <Decorator.RenderTransform>
+                <ScaleTransform />
+            </Decorator.RenderTransform>
+        </Decorator>
+    </Canvas>
+    <Canvas Background="Blue" Height="150" Width="150" Canvas.Top="220" Canvas.Left="200">
+        <Decorator Name="Animate2">
+            <Decorator.RenderTransform>
+                <ScaleTransform />
+            </Decorator.RenderTransform>
+            <Button>Avalon!</Button>
+        </Decorator>
+    </Canvas>
+    
+</tst:CustomCanvas>

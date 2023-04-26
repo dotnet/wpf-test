@@ -1,0 +1,37 @@
+<!-- Databinding Animation To Property: Inside Style Resources -->
+<!-- This scenario is not supported in V1 -->
+
+<Page
+    Name    = "Root"
+    Tag     = "double 1 Opacity"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="DeepSkyBlue">
+        <Canvas.Resources>
+            <Style x:Key="AnimStyle" TargetType="{x:Type ListBox}">
+                <Style.Resources>
+                    <Storyboard x:Key="StoryboardKey">
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "Opacity"
+                            To                          = "{Binding ElementName=textbox, Path=&apos;Text&apos;}"
+                            BeginTime                   = "0:0:2"
+                            Duration                    = "0:0:4" />
+                    </Storyboard>
+                </Style.Resources>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard Storyboard="{StaticResource StoryboardKey}" />
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </Canvas.Resources>
+        
+        <ListBox Name="AnimatedFE" Width="100" Height="100" Background="DarkGreen" Style="{StaticResource AnimStyle}" />
+        <TextBox Name='textbox' Width="100" Canvas.Top="110">1</TextBox>
+        
+    </Canvas>
+    
+</Page>

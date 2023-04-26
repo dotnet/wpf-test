@@ -1,0 +1,44 @@
+<Page
+    Name="Root"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="Black">
+    
+    <Canvas>
+    <ComboBox Name="AnimatedFE" Canvas.Top="0" Canvas.Left="0" Height="150" Width="150" FontSize="32" Text="Combo!">
+    
+        <ComboBoxItem><TextBlock>Item1</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item2</TextBlock></ComboBoxItem>
+        <ComboBox.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="MediumPurple" Offset="0" />
+                    <GradientStop Color="Navy" Offset=".01" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </ComboBox.Background>
+        
+        <ComboBox.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <PointAnimation
+                                     Storyboard.TargetProperty="(ComboBox.Background).(LinearGradientBrush.StartPoint)"
+                                     BeginTime="0:0:2"
+                                     Duration="0:0:4"
+                                     From="0,0"
+                                     To=".7,.7"
+                                     FillBehavior="HoldEnd"
+                                       />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ComboBox.Triggers>
+
+    </ComboBox>
+    </Canvas>
+
+</Page>

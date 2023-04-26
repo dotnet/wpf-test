@@ -1,0 +1,56 @@
+<!-- Databinding Animation To Property: Triggers inside Animated Element -->
+
+<Page
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag     = "double 45 AngleY"
+    Name    = "Root"> 
+
+    <Canvas Background="MediumPurple">
+
+        <Button Name="button" Width="100" Canvas.Left="0" Canvas.Top="220">Click
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Button.RenderTransform).(SkewTransform.AngleX)"
+                                Storyboard.TargetName       = "TargetElement"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4"
+                                From                        = "0"
+                                To                          = "{Binding ElementName=textbox, Path=&apos;Text&apos;}"
+                                  />
+                                <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Button.RenderTransform).(SkewTransform.AngleY)"
+                                Storyboard.TargetName       = "TargetElement"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4"
+                                From                        = "0"
+                                To                          = "{Binding ElementName=textbox, Path=&apos;Text&apos;}"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        
+        <TextBox Name='textbox' Width="100" Canvas.Left="0" Canvas.Top="150">45</TextBox>
+
+        <Button
+            Name        = "TargetElement"
+            Foreground  = "Yellow"
+            Background  = "Navy"
+            Canvas.Left = "0"
+            Canvas.Top  = "0"
+            Height      = "100"
+            Width       = "100"
+            Content     = "Animate!">
+                <Button.RenderTransform>
+                    <SkewTransform x:Name="AnimatedAnimatable" AngleX="0" AngleY="0" CenterX="20" CenterY="15" />
+                </Button.RenderTransform>
+        </Button>        
+
+    </Canvas>
+    
+</Page>

@@ -1,0 +1,59 @@
+<Canvas
+    Name        = "Root"
+    Tag         = "Point 300,300 Point"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "White"
+    Width       = "500"
+    Height      = "500">
+    <Path Fill="MediumPurple">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigure StartPoint="0 120" IsClosed="True">
+                        <PathFigure.Segments>
+                                <LineSegment Point="245,255" />
+                                <ArcSegment x:Name="AnimatedAnimatable" Size="1,1" IsLargeArc="true" Point="205,220" RotationAngle="25" />
+                                <LineSegment Point="245,255" />
+                        </PathFigure.Segments>
+                    </PathFigure>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(Path.Data).(PathGeometry.Figures)[0].(PathFigure.Segments)[1].(ArcSegment.RotationAngle)"
+                                        From                        = "25"
+                                        To                          = "100"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:3"
+                                          />
+                                    <PointAnimation
+                                        Storyboard.TargetProperty   = "(Path.Data).(PathGeometry.Figures)[0].(PathFigure.Segments)[1].(ArcSegment.Point)"
+                                        From                        = "200,200"
+                                        To                          = "300,300"
+                                        Duration                    = "0:0:3"
+                                        BeginTime                   = "0:0:2"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                    <SizeAnimation
+                                        Storyboard.TargetProperty   = "(Path.Data).(PathGeometry.Figures)[0].(PathFigure.Segments)[1].(ArcSegment.Size)"
+                                        From                        = "1,1"
+                                        To                          = "100,100"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:3"
+                                          />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Path.Triggers>
+    </Path>
+
+</Canvas>

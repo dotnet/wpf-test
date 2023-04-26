@@ -1,0 +1,35 @@
+<!-- Storyboard inside Page Resources: Extra Target (Static) -->
+
+<Page
+    Name    = "Root"
+    Tag     = "Double 1 Opacity"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="PeachPuff">
+        <Canvas.Resources>
+            <Storyboard x:Key="AnimOpacity">
+                <DoubleAnimation
+                    Storyboard.TargetProperty   = "(Button.Opacity)"
+                    Storyboard.TargetName       = "AnimatedFE"
+                    To                          = "1"
+                    BeginTime                   = "0:0:2"
+                    Duration                    = "0:0:4"
+                      />
+            </Storyboard>
+        </Canvas.Resources>
+
+        <Canvas.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Storyboard="{StaticResource AnimOpacity}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Canvas.Triggers>
+ 
+        <Button Name='AnimatedFE' Height="100" Width="100" Canvas.Top="0"  Background="Gray"   Opacity="0" />
+        <Button Name='textbox2'   Height="100" Width="100" Canvas.Top="50" Background="Orange" Opacity="0" />
+    
+    </Canvas>
+    
+</Page>

@@ -1,0 +1,38 @@
+﻿<Page
+ Name="Root"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ Background="DarkBlue">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="Animate">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <ThicknessAnimation
+                                Storyboard.TargetProperty="Margin"
+                                Storyboard.TargetName="Animate"
+                                To="110"
+                                BeginTime="0"
+                                Duration="0:0:1.5"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas>
+        <Border BorderThickness="3,3,3,3" BorderBrush="DodgerBlue">
+            <Rectangle
+                Name="Animate"
+                Margin="0,0,0,0"
+                Fill="White"
+                Height="100"
+                Width="100">
+            </Rectangle>
+        </Border>
+    </Canvas>
+</Page>

@@ -1,0 +1,44 @@
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Azure"
+    Name        = "Root"
+    Tag         = "Double 0.5 Opacity"
+    >
+    
+    <Canvas>
+        <ComboBox Canvas.Top="100" Canvas.Left="150" Height="150" Width="150">
+
+            <ComboBoxItem><TextBlock>Item1</TextBlock></ComboBoxItem>
+            <ComboBoxItem><TextBlock>Item2</TextBlock></ComboBoxItem>
+            <ComboBox.Background>
+                <LinearGradientBrush x:Name="AnimatedAnimatable" Opacity="1" StartPoint=".7,.7" EndPoint="1,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="DodgerBlue" Offset="0"   />
+                        <GradientStop Color="Black"      Offset=".01" />
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+
+            <ComboBox.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetProperty="(ComboBox.Background).(LinearGradientBrush.Opacity)">
+                                    <DoubleAnimation
+                                         BeginTime                      = "0:0:2"
+                                         Duration                       = "0:0:4"
+                                         From                           = "1"
+                                         To                             = "0.5"
+                                         />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </ComboBox.Triggers>
+
+        </ComboBox>
+    </Canvas>
+</Page>

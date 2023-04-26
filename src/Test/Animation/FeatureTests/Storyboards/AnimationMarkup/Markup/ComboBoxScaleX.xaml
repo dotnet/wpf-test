@@ -1,0 +1,36 @@
+<Page
+    Name="Root"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="Navy">
+
+    <Canvas>
+    <ComboBox Name="AnimatedFE" Background="MediumPurple" Height="100" Canvas.Left="0" Canvas.Top="0" FontSize="48" Text="Combo!">
+        <ComboBoxItem><TextBlock>Item1</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item2</TextBlock></ComboBoxItem>
+        <ComboBox.LayoutTransform>
+           <ScaleTransform ScaleX=".01" ScaleY="1" />
+        </ComboBox.LayoutTransform>
+
+        <ComboBox.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty="(ComboBox.LayoutTransform).(ScaleTransform.ScaleX)"
+                                     BeginTime="0:0:2"
+                                     Duration="0:0:4"
+                                     To="3"
+                                       />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ComboBox.Triggers>
+
+    </ComboBox>
+    </Canvas>
+
+</Page>

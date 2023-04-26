@@ -1,0 +1,29 @@
+ 
+<Canvas
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Name        = "Root"
+    Tag         = "Double 0 Opacity"
+    Background  = "SpringGreen">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Image.Opacity)"
+                                Storyboard.TargetName       = "AnimatedFE"
+                                By                          = "-1.0"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4" />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <Image Name="AnimatedFE" Source="pack://siteoforigin:,,,/clubtrid.gif" Canvas.Left="100" Canvas.Top="100" Height="110" Width="110" />
+     
+</Canvas>

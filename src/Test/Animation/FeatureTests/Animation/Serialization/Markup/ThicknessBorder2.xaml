@@ -1,0 +1,29 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="BurlyWood" >
+
+    <Border Name="Animate" Canvas.Left="10" Canvas.Top="10" BorderThickness="4" BorderBrush="#FFD6E9CD">
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <ThicknessAnimation
+                                    Storyboard.TargetProperty="(Border.BorderThickness)"
+                                    BeginTime="0:1:0"
+                                    From="2, 2, 2, 2"
+                                    To="10, 10, 10, 10"
+                                  />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Border.Triggers>
+        <TextBlock FontSize="24" Width="75" Height="75"><Run Name="Run1">Avalon!</Run></TextBlock>
+    </Border>
+    
+</tst:CustomCanvas>

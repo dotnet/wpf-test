@@ -1,0 +1,64 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Moccasin" >
+
+    <RadioButton Canvas.Left="100" Canvas.Top="50">1</RadioButton>
+    <RadioButton Canvas.Left="100" Canvas.Top="100">2</RadioButton>
+    <RadioButton Canvas.Left="100" Canvas.Top="150" Content="Avalon!" Name="Animate" FontSize="36">
+        <RadioButton.Background>
+            <SolidColorBrush Opacity="0" Color="BurlyWood" />
+        </RadioButton.Background>
+        <RadioButton.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty="(RadioButton.Background).(SolidColorBrush.Opacity)"
+                                     BeginTime="0:1:3"
+                                     Duration="0:0:2"
+                                     From="0"
+                                     To=".25"
+                                     FillBehavior="HoldEnd"
+                                     >
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty="(RadioButton.Background).(SolidColorBrush.Opacity)"
+                                     BeginTime="0:1:3"
+                                     Duration="0:0:2"
+                                     To=".5"
+                                     FillBehavior="HoldEnd"
+                                     >
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty="(RadioButton.Background).(SolidColorBrush.Opacity)"
+                                     BeginTime="0:1:3"
+                                     Duration="0:0:2"
+                                     From=".5"
+                                     To=".75"
+                                     FillBehavior="HoldEnd"
+                                     >
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty="(RadioButton.Background).(SolidColorBrush.Opacity)"
+                                     BeginTime="0:0:3"
+                                     Duration="0:0:2"
+                                     To="1"
+                                     FillBehavior="HoldEnd"
+                                     >
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </RadioButton.Triggers>
+    </RadioButton>
+    <RadioButton Canvas.Left="100" Canvas.Top="200">3</RadioButton>
+    <RadioButton Canvas.Left="100" Canvas.Top="250">4</RadioButton>
+    <RadioButton Canvas.Left="100" Canvas.Top="300">5</RadioButton>
+
+</tst:CustomCanvas>

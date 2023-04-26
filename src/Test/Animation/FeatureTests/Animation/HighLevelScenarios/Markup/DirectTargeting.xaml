@@ -1,0 +1,33 @@
+<Canvas
+    xmlns     = "http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x   = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Rectangle Name="rectangle1" Width="100" Height="50" Stroke="Black" StrokeThickness="1">
+        <Rectangle.Fill>
+            <SolidColorBrush x:Name="solidColorBrush1" Color="Blue" />
+        </Rectangle.Fill>
+    </Rectangle>
+
+    <Button Name="restartButton">Restart
+        <Button.Triggers>
+            <EventTrigger RoutedEvent="Button.Loaded">
+                <EventTrigger.Actions>
+
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation 
+                                Storyboard.TargetProperty   = "(SolidColorBrush.Color)"
+                                Storyboard.TargetName       = "solidColorBrush1"
+                                From                        = "DarkOrange"
+                                To                          = "DarkTurquoise"
+                                Duration                    = "0:0:1"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard>
+
+                </EventTrigger.Actions>
+            </EventTrigger>          
+        </Button.Triggers>
+    </Button>
+
+</Canvas>

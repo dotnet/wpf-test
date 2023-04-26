@@ -1,0 +1,52 @@
+<!-- DoubleAnimation DataTrigger in Style containing Style.Resources and Style.Triggers -->
+<Page
+    Name    = "Root"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="SteelBlue">
+        <Canvas.Resources>
+            <Style TargetType="{x:Type Rectangle}">
+                <Style.Resources>
+                    <Storyboard x:Key="EnterKey">
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "Opacity"
+                            BeginTime                   = "0:0:0"
+                            Duration                    = "0:0:1.5"
+                            To                          = "0"
+                            />
+                    </Storyboard>
+                    <Storyboard x:Key="ExitKey">
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "Opacity"
+                            BeginTime                   = "0:0:0"
+                            Duration                    = "0:0:1.5"
+                            To                          = "1"
+                            />
+                    </Storyboard>
+                </Style.Resources>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=TargetElement, Path=IsMouseOver}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard Storyboard="{StaticResource EnterKey}" />
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard Storyboard="{StaticResource ExitKey}" />
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Canvas.Resources>
+        
+        <Rectangle
+            Name            = "TargetElement"
+            Fill            = "White"
+            Height          = "200"
+            Width           = "200">
+        </Rectangle>
+        
+        <TextBox Name="FocusElement" Width="20" Height="20" Canvas.Top="250" Canvas.Left="250" />
+        
+    </Canvas>
+    
+</Page>

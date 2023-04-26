@@ -1,0 +1,41 @@
+<Page
+    Name="Root"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    
+    <Canvas Background="Blue">
+        <InkCanvas Name="TargetElement" Height="200" Width="200">
+           <InkCanvas.Triggers>
+                <EventTrigger RoutedEvent="FrameworkContentElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(InkCanvas.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Offset)"
+                                        From                        = ".99"
+                                        To                          = ".5"
+                                        BeginTime                   = "0:0:0"
+                                        Duration                    = "0:0:1.5"
+                                        />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </InkCanvas.Triggers>
+            
+            <InkCanvas.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <LinearGradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="White"     Offset=".9" />
+                        <GradientStop Color="Brown"     Offset=".99" />
+                    </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </InkCanvas.Background>
+        </InkCanvas>
+    </Canvas>
+
+</Page>

@@ -1,0 +1,32 @@
+<!-- Storyboard inside Page Resources (Dynamic) -->
+
+<Page
+    Name    = "Root"
+    Tag     = "Double 1 Opacity"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Resources>
+        <Storyboard x:Key="AnimOpacity">
+            <DoubleAnimation
+                Storyboard.TargetProperty   = "(TextBox.Opacity)"
+                Storyboard.TargetName       = "AnimatedFE"
+                To                          = "1"
+                BeginTime                   = "0:0:2"
+                Duration                    = "0:0:4"
+                  />
+        </Storyboard>
+    </Page.Resources>
+    
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard Storyboard="{DynamicResource AnimOpacity}" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+ 
+    <Canvas Background="White">
+        <TextBox Name='AnimatedFE' Height="100" Width="100" Canvas.Top="0" Background="Red" Opacity="0" />
+    </Canvas>
+</Page>

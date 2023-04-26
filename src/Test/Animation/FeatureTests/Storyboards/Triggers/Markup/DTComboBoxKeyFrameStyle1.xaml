@@ -1,0 +1,58 @@
+<!-- ColorAnimation DataTrigger inside Style inside the Animated Element -->
+<Page
+    Name        = "Root"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Canvas Background="White">
+        <TextBox
+            Name        = "TargetElement"
+            Canvas.Left = "0"
+            Canvas.Top  = "0"
+            Height      = "200"
+            Width       = "200"
+            Background  = "White"
+            >
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=TargetElement, Path=IsFocused}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames
+                                            Storyboard.TargetProperty="(TextBox.Background).(SolidColorBrush.Color)">
+                                            <ColorAnimationUsingKeyFrames.KeyFrames>
+                                                <ColorKeyFrameCollection>
+                                                    <DiscreteColorKeyFrame Value="Red"  KeyTime="0:0:0" />
+                                                </ColorKeyFrameCollection>
+                                            </ColorAnimationUsingKeyFrames.KeyFrames>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames
+                                            Storyboard.TargetProperty="(TextBox.Background).(SolidColorBrush.Color)">
+                                            <ColorAnimationUsingKeyFrames.KeyFrames>
+                                                <ColorKeyFrameCollection>
+                                                    <DiscreteColorKeyFrame Value="White" KeyTime="0:0:0" />
+                                                </ColorKeyFrameCollection>
+                                            </ColorAnimationUsingKeyFrames.KeyFrames>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                     </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox Name="FocusElement"  Width="20" Height="20" Canvas.Top="200" Canvas.Left="250" />
+    </Canvas>
+
+</Page>
+

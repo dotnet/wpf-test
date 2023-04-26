@@ -1,0 +1,48 @@
+<Page
+    Name        = "Root"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background  = "Silver">
+
+    <Canvas>
+        <Button Name="button1" Background="White" Height="30" Width="200" Canvas.Top="20" Canvas.Left="20">
+
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty   = "(Button.Background).(SolidColorBrush.Color)"
+                                        From                        = "Red"
+                                        To                          = "Blue"
+                                        BeginTime                   = "0:0:0"
+                                        Duration                    = "0:0:1"
+                                      />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(Button.Height)"
+                                        To                          = "200"
+                                        BeginTime                   = "0:0:0"
+                                        Duration                    = "0:0:1"
+                                      />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Button.Triggers>
+
+        </Button>
+    </Canvas>
+    
+</Page>

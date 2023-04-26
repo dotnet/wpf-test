@@ -1,0 +1,44 @@
+<!-- Bind a single DP to a DP with a ThicknessAnimation, inside a ControlTemplate -->
+<Page
+    Name        = "Root"
+    Tag         = "Thickness 2,2,2,2 BorderThickness"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Resources>
+        <ControlTemplate x:Key='TestTemplate' TargetType="{x:Type ContentControl}">
+            <ControlTemplate.Resources>
+                <Storyboard x:Key="StoryKey">
+                    <ThicknessAnimation
+                        Storyboard.TargetProperty   = "BorderThickness"
+                        Storyboard.TargetName       = "TargetElement"
+                        To                          = "2, 2, 2, 2"
+                        From                        = "50, 50, 50, 50"
+                        BeginTime                   = "0:0:2"
+                        Duration                    = "0:0:4"
+                      />
+                </Storyboard>
+            </ControlTemplate.Resources>
+            
+            <Canvas>
+                <Border x:Name="TargetElement" BorderThickness="50" BorderBrush="MediumPurple" Canvas.Left="20" Canvas.Top="20">
+                    <TextBlock FontSize="24" Margin="10" Foreground="MediumPurple" Width="175" Height="175">Avalon!</TextBlock>
+                </Border>
+                <Border x:Name="TemplateControl" BorderThickness="{Binding ElementName=TargetElement, Path=&apos;BorderThickness&apos;}" Width='125' Height='75' BorderBrush="White" />
+            </Canvas>
+            
+            <ControlTemplate.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource StoryKey}"/>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
+    
+    <Canvas>
+        <ContentControl Name='AnimateTemplate' Template='{StaticResource TestTemplate}' Width='100' Height='100' Canvas.Left="50" Canvas.Top="50" />
+    </Canvas>
+
+</Page>

@@ -1,0 +1,43 @@
+<Canvas
+        Name        = "Root"
+        Tag         = "Double 20 OriginX"
+        xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+        Background  = "MidnightBlue">
+  
+  <Glyphs 
+        Name                = "AnimatedFE"
+        FontUri             = "C:\Windows\Fonts\arial.TTF" 
+        FontRenderingEmSize = "20"
+        OriginX             = "150"
+        OriginY             = "200"
+        BidiLevel           = "2"
+        Fill                = "LightPink"
+        UnicodeString       = "Avalon!">
+        <Glyphs.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty  = "(Glyphs.OriginX)"
+                                     BeginTime                  = "0:0:2"
+                                     Duration                   = "0:0:4"
+                                     To                         = "20">
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty  = "(Glyphs.OriginY)"
+                                     BeginTime                  = "0:0:2"
+                                     Duration                   = "0:0:4"
+                                     To                         = "20">
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Glyphs.Triggers>
+  </Glyphs>
+
+</Canvas>

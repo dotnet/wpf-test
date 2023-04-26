@@ -1,0 +1,31 @@
+<ScrollViewer
+    Name        = "Root"
+    Tag         = "Double .999 Opacity"
+    xmlns       = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x     = 'http://schemas.microsoft.com/winfx/2006/xaml'>
+    <StackPanel>
+    
+        <StackPanel.Resources>
+            <Storyboard x:Key="OpacityAnim" BeginTime="0:0:2">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To=".999" Duration="0:0:4" />
+            </Storyboard>
+
+            <Style TargetType="{x:Type PasswordBox}">
+                <Setter Property="Opacity" Value="0" />
+            </Style>
+        </StackPanel.Resources>
+
+        <!--Opacity Animation on PasswordBox-->
+        <PasswordBox Name="AnimatedFE" Height="50" Width="100" Password="abc">
+            <PasswordBox.Triggers>
+                <EventTrigger RoutedEvent="PasswordBox.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource OpacityAnim}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </PasswordBox.Triggers>
+        </PasswordBox>
+                
+    </StackPanel>
+    
+</ScrollViewer>

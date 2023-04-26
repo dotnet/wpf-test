@@ -1,0 +1,51 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 45 AngleX"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Button.LayoutTransform).(SkewTransform.AngleX)"
+                                Storyboard.TargetName       = "TargetElement"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4"
+                                From                        = "0"
+                                To                          = "45"
+                                  />
+                                <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Button.LayoutTransform).(SkewTransform.AngleY)"
+                                Storyboard.TargetName       = "TargetElement"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4"
+                                From                        = "0"
+                                To                          = "45"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+    
+    <Canvas Background="LightSkyBlue">
+        <Button
+            Name        = "TargetElement"
+            Foreground  = "Yellow"
+            Background  = "Navy"
+            Canvas.Left = "0"
+            Canvas.Top  = "0"
+            Height      = "100"
+            Width       = "100"
+            Content="Animate!">
+                <Button.LayoutTransform>
+                    <SkewTransform x:Name="AnimatedAnimatable" AngleX="0" AngleY="0" CenterX="20" CenterY="15" />
+                </Button.LayoutTransform>
+        </Button>
+    </Canvas>
+</Page>

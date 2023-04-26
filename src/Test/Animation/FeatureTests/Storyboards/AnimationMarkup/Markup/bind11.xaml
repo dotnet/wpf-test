@@ -1,0 +1,67 @@
+<!-- Bind a single DP to a DP with a PointAnimation -->
+
+<Grid
+    Name        = "Root"
+    Tag         = "Point 0.8,0.8 GradientOrigin"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="MidnightBlue">
+        <Button
+            Name        = "TargetElement"
+            Canvas.Top  = "50"
+            Canvas.Left = "50"
+            Width       = "150"
+            Height      = "75"> 
+
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <PointAnimation
+                                        Storyboard.TargetProperty   = "(Button.Background).(RadialGradientBrush.GradientOrigin)"
+                                        To                          = ".8,.8"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                      />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Button.Triggers>
+
+            <Button.Background>
+                <RadialGradientBrush GradientOrigin="0, 0">
+                    <RadialGradientBrush.GradientStops>
+                        <GradientStop Color="LightGreen"        Offset="0" />
+                        <GradientStop Color="MediumSpringGreen" Offset="0.5" />
+                        <GradientStop Color="MediumSeaGreen"    Offset="0.75" />
+                        <GradientStop Color="DarkSeaGreen"      Offset="1.0" />
+                    </RadialGradientBrush.GradientStops>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+        
+        <!-- "Animated" via Binding to the TargetElement -->
+        <Button
+            Canvas.Top  = "50"
+            Canvas.Left = "210"
+            Width       = "150"
+            Height      = "75"> 
+            <Button.Background>
+                    <RadialGradientBrush x:Name="AnimatedAnimatable" GradientOrigin="{Binding ElementName=TargetElement, Path=(Button.Background).(RadialGradientBrush.GradientOrigin)}">
+                    <RadialGradientBrush.GradientStops>
+                        <GradientStop Color="LightBlue"     Offset="0" />
+                        <GradientStop Color="RoyalBlue"     Offset="0.5" />
+                        <GradientStop Color="DodgerBlue"    Offset="0.75" />
+                        <GradientStop Color="SlateBlue"     Offset="1.0" />
+                    </RadialGradientBrush.GradientStops>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+    </Canvas>
+    
+</Grid>

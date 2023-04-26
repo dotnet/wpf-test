@@ -1,0 +1,43 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Lavender" >
+                  
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="(Decorator.RenderTransform).(RotateTransform.CenterX)"
+                            Storyboard.TargetName="Animate"
+                             BeginTime="0:1:3"
+                             Duration="0:0:11"
+                             From="660"
+                             To="90"
+                             >
+                        </DoubleAnimation>
+                        <DoubleAnimation
+                            Storyboard.TargetName="Animate"
+                            Storyboard.TargetProperty="(Decorator.RenderTransform).(RotateTransform.CenterX)"
+                            BeginTime="0:1:3"
+                            Duration="0:0:4"
+                            From="60"
+                            To="150"
+                            >
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <Decorator Name="Animate">
+          <Decorator.RenderTransform>
+               <RotateTransform CenterX="60" CenterY="60" Angle="120" />
+          </Decorator.RenderTransform>
+        <Button Background="Green" Canvas.Top="200" Canvas.Left="200">Avalon!</Button>
+    </Decorator>
+     
+</tst:CustomCanvas>

@@ -1,0 +1,40 @@
+<!-- Scaling Rectangle using LayoutTransform in StackPanel. -->
+
+<StackPanel
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Name    = "Root"
+    Tag     = "Double 2 ScaleY"
+    >
+    
+    <Rectangle Height="50" Fill="Orange">
+        <Rectangle.LayoutTransform>
+            <ScaleTransform x:Name="AnimatedAnimatable" />
+        </Rectangle.LayoutTransform>
+    </Rectangle>
+    <Rectangle Height="50" Fill="Yellow" />
+    <Rectangle Height="50" Fill="LightGreen" />
+
+    <StackPanel.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "ScaleY"
+                                Storyboard.TargetName       = "AnimatedAnimatable"
+                                From                        = "0"
+                                To                          = "2"
+                                BeginTime                   = "00:00:02"
+                                Duration                    = "00:00:04"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </StackPanel.Triggers>
+
+</StackPanel>
+

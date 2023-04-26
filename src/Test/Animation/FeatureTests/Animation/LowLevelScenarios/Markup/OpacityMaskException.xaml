@@ -1,0 +1,34 @@
+<Page   Opacity     = "0.8"
+        Name        = "page1"
+        xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Resources>
+        <Storyboard x:Key="StoryKey">
+            <ObjectAnimationUsingKeyFrames
+                Storyboard.TargetProperty   = "OpacityMask"
+                Storyboard.TargetName       = "page1"
+                Duration                    = "0:0:2"
+                RepeatBehavior              = "Forever">
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                        <DiscreteObjectKeyFrame.Value>
+                            <ImageBrush />
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:2">
+                        <DiscreteObjectKeyFrame.Value>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Button Opacity="0.4"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </Page.Resources>
+
+</Page>

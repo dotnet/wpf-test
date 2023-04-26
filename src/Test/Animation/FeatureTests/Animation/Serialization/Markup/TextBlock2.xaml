@@ -1,0 +1,44 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Azure" >
+                  
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="Mouse.PreviewMouseDown">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(TextBlock.Height)"
+                                Storyboard.TargetName="Animate"
+                                BeginTime="0:1:0"
+                                Duration="0:0:3"
+                                By="50"
+                                >
+                            </DoubleAnimation>
+                        </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.PreviewMouseUp">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(TextBlock.Width)"
+                                Storyboard.TargetName="Animate"
+                                BeginTime="0:1:0"
+                                Duration="0:0:3"
+                                By="50"
+                                >
+                            </DoubleAnimation>
+                        </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <TextBlock Name="Animate" FontSize="24" Background="SlateBlue" Foreground="Blue" Canvas.Left="10" Height="50" Width="50"><Run Name="Run1">Avalon!</Run></TextBlock>
+     
+</tst:CustomCanvas>

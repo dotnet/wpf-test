@@ -1,0 +1,33 @@
+<tst:CustomCanvas
+    xmlns                 = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Verifier              = "AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+    Background            = "MediumAquamarine"
+    xmlns:MappingPIGen1   = "clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+    <TextBox Name="Animate"
+            Background  = "Lavender"
+            Canvas.Top  = "50"
+            Canvas.Left = "100"
+            Text        = "Avalon!">
+        <TextBox.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <Int32Animation
+                                    Storyboard.TargetProperty   = "(TextBox.MaxLength)"
+                                    BeginTime                   = "00:01:02"
+                                    Duration                    = "00:00:04"
+                                    To                          = "0"
+                                    RepeatBehavior              = "100x"
+                                  />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </TextBox.Triggers>
+    </TextBox>
+     
+</tst:CustomCanvas>

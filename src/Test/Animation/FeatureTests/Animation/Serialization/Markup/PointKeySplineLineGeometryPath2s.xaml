@@ -1,0 +1,45 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="DarkTurquoise" >
+
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Path}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                      <PointAnimationUsingKeyFrames BeginTime="0:1:3" Storyboard.TargetProperty="(Path.Data).(LineGeometry.StartPoint)" Duration="0:0:3" FillBehavior="HoldEnd">
+                                          <PointAnimationUsingKeyFrames.KeyFrames>
+                                                  <PointKeyFrameCollection>
+                                                      <SplinePointKeyFrame Value="100,100" KeyTime="0" KeySpline="0 0 1 1" />
+                                                      <SplinePointKeyFrame Value="200,100" KeyTime="100%" KeySpline="0 0 1 1" />
+                                                  </PointKeyFrameCollection>
+                                          </PointAnimationUsingKeyFrames.KeyFrames>
+                                      </PointAnimationUsingKeyFrames>
+                                      <PointAnimationUsingKeyFrames BeginTime="0:1:3" Storyboard.TargetProperty="(Path.Data).(LineGeometry.StartPoint)" Duration="0:0:3" FillBehavior="HoldEnd">
+                                          <PointAnimationUsingKeyFrames.KeyFrames>
+                                                  <PointKeyFrameCollection>
+                                                      <SplinePointKeyFrame Value="300,100" KeyTime="0" KeySpline="0 0 1 1" />
+                                                      <SplinePointKeyFrame Value="100,100" KeyTime="100%" KeySpline="0 0 1 1" />
+                                                  </PointKeyFrameCollection>
+                                          </PointAnimationUsingKeyFrames.KeyFrames>
+                                      </PointAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <Path Name="Animate" Style="{DynamicResource StyleKey}" Fill="Red" Stroke="CornFlowerBlue" StrokeThickness="50">
+          <Path.Data>
+               <LineGeometry StartPoint="100,100" EndPoint="300,100" />
+          </Path.Data>
+     </Path>
+</tst:CustomCanvas>

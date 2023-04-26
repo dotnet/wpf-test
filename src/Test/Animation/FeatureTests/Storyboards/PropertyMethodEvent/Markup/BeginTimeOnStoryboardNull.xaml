@@ -1,0 +1,31 @@
+<Page xmlns     = "http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+      xmlns:x   = "http://schemas.microsoft.com/winfx/2006/xaml">
+  
+    <Canvas Background="Lavender">
+        <Rectangle Name="r2" Canvas.ZIndex="3" Width="100" Height="100" Fill="Purple"     Canvas.Left="150"/>  
+        <Rectangle Name="r3" Canvas.ZIndex="2" Width="100" Height="100" Fill="HotPink"    Canvas.Left="100"/>  
+        <Rectangle Name="r1" Canvas.ZIndex="1" Width="100" Height="100" Fill="BlueViolet" Canvas.Left="50"> 
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard BeginTime="{x:Null}">
+                            <DoubleAnimation 
+                                Storyboard.TargetProperty   = "(Canvas.Left)"
+                                Duration                    = "0:0:2"
+                                From                        = "50"
+                                To                          = "200"
+                                />
+                            <Int32Animation 
+                                Storyboard.TargetProperty   = "(Canvas.ZIndex)"
+                                Duration                    = "0:0:2"
+                                From                        = "0"
+                                To                          = "5"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+
+    </Canvas>
+</Page>

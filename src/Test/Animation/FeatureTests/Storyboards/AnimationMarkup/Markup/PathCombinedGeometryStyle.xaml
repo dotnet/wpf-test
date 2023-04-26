@@ -1,0 +1,43 @@
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Name        = "Root"
+    Tag         = "Rect 0,0,200,200 Rect"
+    Background  = "DarkRed">
+    <Page.Resources>
+        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Path}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Path.Data).(CombinedGeometry.Geometry2).(EllipseGeometry.RadiusX)" BeginTime="0:0:2" Duration="0:0:4" To="75" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(Path.Data).(CombinedGeometry.Geometry2).(EllipseGeometry.RadiusY)" BeginTime="0:0:2" Duration="0:0:4" To="75" />
+                                    <RectAnimation   Storyboard.TargetProperty="(Path.Data).(CombinedGeometry.Geometry1).(RectangleGeometry.Rect)"  BeginTime="0:0:2" Duration="0:0:4" To="0 0 200 200" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Canvas>
+        <Path Name="TargetElement" Fill="DarkBlue">
+            <Path.Data>
+                <CombinedGeometry GeometryCombineMode="Xor">
+                    <CombinedGeometry.Transform>
+                        <TranslateTransform X="1" Y="1" />
+                    </CombinedGeometry.Transform>
+                    <CombinedGeometry.Geometry1>
+                        <RectangleGeometry x:Name="AnimatedAnimatable" Rect="0 0 100 100" />
+                    </CombinedGeometry.Geometry1>
+                    <CombinedGeometry.Geometry2>
+                        <EllipseGeometry RadiusX="50" RadiusY="50" Center="50,50" />
+                    </CombinedGeometry.Geometry2>
+                </CombinedGeometry>
+            </Path.Data>
+        </Path>
+    </Canvas>
+</Page>

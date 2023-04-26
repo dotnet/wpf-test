@@ -1,0 +1,38 @@
+﻿<Page
+    Name="Root"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Canvas.Left" Value="0" />
+            <Setter Property="Canvas.Top" Value="0" />
+            <Setter Property="Height" Value="120" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Background" Value="RoyalBlue" />
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="ListBox.GotKeyboardFocus">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ThicknessAnimation
+                                        Storyboard.TargetProperty="(ListBox.Padding)"
+                                        Duration="00:00:1.5"
+                                        To="101" />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Canvas Background="RoyalBlue">
+        <ListBox Name="TargetElement" Padding="0">
+            <ListBoxItem Height="115" Width="115" Background="White"></ListBoxItem>
+        </ListBox>
+    </Canvas>
+</Page>

@@ -1,0 +1,52 @@
+<Page
+    Name        = "Root"
+    Tag         = "Rect 0,0,300,300 Rect"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "SandyBrown">
+
+    <Page.Resources>
+        <Style
+            x:Key       = "{x:Type DockPanel}"
+            TargetType  = "{x:Type DockPanel}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <RectAnimation
+                                        Storyboard.TargetProperty   = "(DockPanel.Clip).(RectangleGeometry.Rect)"
+                                        To                          = "0,0,300,300"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                      />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Canvas>
+        <DockPanel Name="TargetElement" Width="500" Height="500">
+            <DockPanel.Clip>
+                <RectangleGeometry x:Name="AnimatedAnimatable" Rect="0,0,2,2" RadiusX="10" RadiusY="10" />
+            </DockPanel.Clip>
+            <DockPanel.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="LightGreen" Offset=".2" />
+                            <GradientStop Color="Green"      Offset=".5" />
+                            <GradientStop Color="DarkGreen"  Offset=".8" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </DockPanel.Background>
+        </DockPanel>
+    </Canvas>
+      
+</Page>

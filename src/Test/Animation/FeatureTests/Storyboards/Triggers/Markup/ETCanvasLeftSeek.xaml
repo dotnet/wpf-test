@@ -1,0 +1,40 @@
+﻿<Page
+ Name="Root"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Canvas.Left)"
+                                Storyboard.TargetName="Animate"
+                                By="300"
+                                Duration="0:0:6"
+                                FillBehavior="HoldEnd"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseUp" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <SeekStoryboard BeginStoryboardName="BeginStory" Offset="0:0:0" Origin="BeginTime" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseUp" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <PauseStoryboard BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="MidnightBlue">
+        <Canvas Name="Animate" Left="0" Top="0" Height="100" Width="100" Background="White" />
+        <Canvas Name="SourceElement" Top="120" Height="100" Width="100" Background="LightSeaGreen" />
+    </Canvas>
+</Page>

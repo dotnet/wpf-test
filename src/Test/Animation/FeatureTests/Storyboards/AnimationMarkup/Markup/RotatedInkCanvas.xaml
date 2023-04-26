@@ -1,0 +1,35 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 270 Angle"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+>
+    
+    <InkCanvas Width="500" Height="500" Name="rotatedInkCanvas" Background="LightBlue" Strokes="ANwIAxdIEUSAyKEGUCNFTxsCAHcBRjUbAgCt/wUBOBkgMgkA9P8CAekiOkUzCQD4nwIBWiA6RTgIAP4DAAAAgH8SwmCaP7Bfmj8fERJs371PGEzzPzW/cf/1S/M/CnYyg/4N3v4N4Y5Y1rljkZnfHfNONYxqqiJiaioLnOeM8bjnrYCH7cTtr5BLJdKpNOI1GIDDZLI5bP5/OZjLYvE4XAINDolFIlGIZDIdDoVBIRCIZAoJBYTA4fFYbG4fF4PyuozYiZiSUkSRNTCJipIlfHeePF4wCmApg/4W1v4WwdajSt3vPHjvjvLdTU8q1rHTXLlw10nFbgCG8E53gm3iYeFkYWPkY+HiYOERkZKSk5PTUtFS0URs3FyNDLz8zGyaLhiD1UxKZmCJpMTNXUyJmZTnPPrmOwAKRRmD/htq/huJ1OGIxjhyrXJiZs667ofwDseAhGSRSLRiLR6KSKKQ6EQCAw2Kx2TyeUyGVw2VgIRzG0imjOEYpxrXLe8OUAq2AVKE/D2F+Hs+c4JYJYqYKSRRjWEKyjCUaY7WnStK4sM5Tmved748OHPhyzrGEraM1tWLZmxbNGbJmwLZdOXh5YbwFXeApeemqagnpCQhImNn6Wpra2no5WRhYKMkpSkmqCWmpKSiImDlZWZn6GfmZeTkYuHgICGhIiIiJKQlJaalJSMhoCFh42PjY2PjZGJj4OLREBKAgvu+L47vdzdWrUq5ZYmUqasqBYsXEsWUpYsWb34fr8vACpYBQoT8KFX4UFdMJxVglCUoFKRtDBamCGCEBeNbzjjjnrlx68OvDOd5SZJZKZsWzFi3SIbwl4eEw2CioqUnJKgloyGg4mPn5mfmZWPiYWKgo6YkpKSioiHg4uNkZeVl5Wbk52TkYOAhoqWnKSgopqanoiSg4CHlYObAgvH4E9223u73NtyyWRZdSliDEEtspa298/H8tnwACrsBUIT8N/34cJ5VSpCGK1LYsFsFqUlGFazrlrlw487TC8pyoxWtgzW0bLaMFmDbLg4dN8uWfFY5TlPFmzQtgjaH8LZnhbpgkAQKDQqFQ6CQ6DQhAIDDYPDYjE4rDYrC4PB4LAoJAYVCodCopDIZCoNBIHBYLCYPBUBgkGQqDYLwtEofCofBorhDEtgxHG0bgkViF9xhBIZDoBDAg8elHPdbm52uSVSFECLgiZiZJBAjwQTHSO0SJnx+ffqeQAo8FIT8RQ34ikcGmEJUWlgwQyRxYr6AhvCNl4Rn5qYjpSYjI6Ei4mRk6GZoZWViwITdmYdck06xvXDOdYcoCpABPoP+Jlr+JnvvnPHgjHLh4HTt08DhiKueN3xvjfHObnMZrOLicMa4cO3Dl0rp04cWpIbwo7eFJeGiIqGkJKQiI6ChoKDiYmJkYeXi5mNkZGNlY2LiYGFhYqIkIyUhpqQmJCYmJqeqpiSjoCAlZuvpbOrn6MCD8zEXO83czcylKYiIQVMwECEkylaVz4u9969w">
+        <InkCanvas.RenderTransform>
+            <RotateTransform x:Name="AnimatedAnimatable" Angle="0" CenterX="200" CenterY="200" />
+        </InkCanvas.RenderTransform>
+    </InkCanvas>
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "Angle"
+                                Storyboard.TargetName       = "AnimatedAnimatable"
+                                From                        = "0"
+                                To                          = "270"
+                                BeginTime                   = "00:00:02"
+                                Duration                    = "00:00:04"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+</Page>

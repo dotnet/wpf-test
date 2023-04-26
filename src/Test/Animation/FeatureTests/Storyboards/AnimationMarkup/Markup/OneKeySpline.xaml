@@ -1,0 +1,39 @@
+ 
+
+<Page
+    Name        = "Root"
+    Tag         = "Color Black Color"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Name="TargetElement" Width="200" Height="200">
+        <Rectangle.Fill>
+            <SolidColorBrush x:Name="AnimatedAnimatable" Color="BlueViolet" />
+        </Rectangle.Fill>
+
+        <Rectangle.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty   = "(Rectangle.Fill).(SolidColorBrush.Color)"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    >
+                                    <ColorAnimationUsingKeyFrames.KeyFrames>
+                                        <ColorKeyFrameCollection>
+                                            <SplineColorKeyFrame KeySpline="0 0 1 1" />
+                                        </ColorKeyFrameCollection>
+                                    </ColorAnimationUsingKeyFrames.KeyFrames>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Rectangle.Triggers>
+    </Rectangle>
+    
+</Page>

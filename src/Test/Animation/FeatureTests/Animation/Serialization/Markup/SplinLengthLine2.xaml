@@ -1,0 +1,35 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="BlueViolet" >
+
+    <Line Name="Animate" Canvas.Left="25" Canvas.Top="25" X1="1" X2="50" Y1="1" Y2="50" Fill="Turquoise" Stroke="Blue">
+        <Line.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty="(Line.Y2)"
+                                     BeginTime="0:1:0"
+                                     Duration="0:0:3"
+                                     FillBehavior="HoldEnd"
+                                     AutoReverse="true">
+                                     <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                          <DoubleKeyFrameCollection>
+                                               <SplineDoubleKeyFrame Value="50" KeyTime="0" KeySpline="0 0 1 1" />
+                                               <SplineDoubleKeyFrame Value="150" KeyTime="100%" KeySpline="0 0 1 1" />
+                                          </DoubleKeyFrameCollection>
+                                     </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Line.Triggers>
+    </Line>
+     
+</tst:CustomCanvas>

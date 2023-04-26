@@ -1,0 +1,28 @@
+<Canvas
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "PeachPuff" >
+
+    <Canvas.Resources>
+        <Storyboard
+            x:Key          = "StoryKey"
+            Duration       = "Forever" 
+            TargetName     = "button1"
+            TargetProperty = "(Button.IsDefaulted)">
+                <BooleanAnimationUsingKeyFrames
+                    BeginTime   = "0:0:3"
+                    Duration    = "0:0:8">
+                    <BooleanAnimationUsingKeyFrames.KeyFrames>
+                        <BooleanKeyFrameCollection>
+                            <DiscreteBooleanKeyFrame Value="True"  KeyTime="0"/>
+                            <DiscreteBooleanKeyFrame Value="False" KeyTime="50%"/>
+                            <DiscreteBooleanKeyFrame Value="True"  KeyTime="100%"/>
+                        </BooleanKeyFrameCollection>
+                    </BooleanAnimationUsingKeyFrames.KeyFrames>
+                </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
+    </Canvas.Resources>
+    
+    <Button Name="button1">Avalon!</Button>    
+ 
+</Canvas>

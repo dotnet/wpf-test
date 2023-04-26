@@ -1,0 +1,36 @@
+ 
+<Page
+    Name    = "Root"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.PreviewMouseDown" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Canvas.Left)"
+                                Storyboard.TargetName       = "SourceElement"
+                                From                        = "200"
+                                By                          = "-200"
+                                Duration                    = "0:0:2"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        
+        <EventTrigger RoutedEvent="Mouse.PreviewMouseDown" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <SetStoryboardSpeedRatio BeginStoryboardName="BeginStory" SpeedRatio="3"/>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="White">
+        <Rectangle Name="SourceElement" Height="150" Width="150" Fill="DodgerBlue" Canvas.Left="200" />
+    </Canvas>
+</Page>

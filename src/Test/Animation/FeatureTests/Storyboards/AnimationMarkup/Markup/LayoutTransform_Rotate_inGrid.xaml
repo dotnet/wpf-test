@@ -1,0 +1,49 @@
+<!-- Rotating Rectangle using LayoutTransform in Grid. 
+    Grid cell should be resized as rotated -->
+
+<Grid
+    Name                = "Root"
+    Tag                 = "Double 225 Angle"
+    xmlns               = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x             = "http://schemas.microsoft.com/winfx/2006/xaml"
+    ShowGridLines       = "True"
+    >
+    
+    <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="Auto" />
+    <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+    <RowDefinition Height="Auto" />
+    <RowDefinition />
+    </Grid.RowDefinitions>
+
+    <Rectangle Width="100" Height="200" Fill="Orange">
+        <Rectangle.LayoutTransform>
+            <RotateTransform  x:Name="AnimatedAnimatable" />
+        </Rectangle.LayoutTransform>
+    </Rectangle>
+
+    <Grid.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "Angle"
+                                Storyboard.TargetName       = "AnimatedAnimatable"
+                                From                        = "0"
+                                To                          = "225"
+                                BeginTime                   = "00:00:02"
+                                Duration                    = "00:00:04"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Grid.Triggers>
+
+</Grid>
+

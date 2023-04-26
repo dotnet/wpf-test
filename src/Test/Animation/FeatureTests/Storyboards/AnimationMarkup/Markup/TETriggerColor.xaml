@@ -1,0 +1,61 @@
+<!-- Animates properties by using storyboard animations. -->
+
+<Page
+    Name        = "Root"
+    Tag         = "Color Pink Color"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="myButtonTextBlock">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="beginStory">
+                    <Storyboard>
+                        <ColorAnimation
+                            Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Foreground).(SolidColorBrush.Color)"
+                            Storyboard.TargetName       = "myButtonTextBlock"
+                            To                          = "Pink"
+                            BeginTime                   = "0:0:2"
+                            Duration                    = "0:0:4"
+                            />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Foreground).(SolidColorBrush.Opacity)"
+                            Storyboard.TargetName       = "myButtonTextBlock"
+                            To                          = "0.5"
+                            BeginTime                   = "0:0:2"
+                            Duration                    = "0:0:4"
+                            />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+ 
+    <Border Background="White">
+        <StackPanel HorizontalAlignment="Left">
+
+            <Button Name="myTextAnimatedButton" Height="35" Width="200" Margin="20,20,20,20" FontSize="20" Foreground="Purple">
+                <TextBlock Name="myButtonTextBlock">
+                    <TextBlock.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="4" />
+                    </TextBlock.BitmapEffect>
+                    <TextBlock.TextEffects>
+                        <TextEffectCollection>
+                            <TextEffect PositionStart="0" PositionCount="300">
+                                <TextEffect.Foreground>
+                                    <SolidColorBrush x:Name="AnimatedAnimatable" Color="Blue" />
+                                </TextEffect.Foreground>
+                            </TextEffect>
+                        </TextEffectCollection>
+                    </TextBlock.TextEffects>
+                    A Text Button
+                </TextBlock>                
+            </Button>
+
+            <TextBlock TextWrapping="Wrap">Text Effect Color Animation Example</TextBlock>
+
+        </StackPanel>
+    </Border>
+
+</Page>

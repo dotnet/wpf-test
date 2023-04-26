@@ -1,0 +1,64 @@
+﻿<Page
+    Name="Root"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard RepeatBehavior="3x">
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Button.RenderTransform).(RotateTransform.Angle)"
+                                Storyboard.TargetName="Animate"
+                                From="0"
+                                To="180"
+                                Duration="0:0:3.5"
+                                  />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Button.RenderTransform).(RotateTransform.CenterX)"
+                                Storyboard.TargetName="Animate"
+                                To="200"
+                                Duration="0:0:3.5"
+                                  />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Button.RenderTransform).(RotateTransform.CenterY)"
+                                Storyboard.TargetName="Animate"
+                                To="200"
+                                Duration="0:0:3.5"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.PreviewMouseDown" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <SkipStoryboardToFill BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+
+    <Canvas Background="Navy">
+        <Button Name="SourceElement" Canvas.Left="10" Canvas.Top="210" Content="SkipToFill" Width="60" Height="40"/>
+        <Button Name="Animate" Height="200" Width="200" Canvas.Left="0" Canvas.Top="0">
+            <Button.RenderTransform>
+                   <RotateTransform CenterX="100" CenterY="100" Angle="0" />
+            </Button.RenderTransform>
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="White" Offset=".6" />
+                            <GradientStop Color="LightGreen" Offset="1" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>     
+    </Canvas>
+    
+</Page>

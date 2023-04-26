@@ -1,0 +1,34 @@
+<!-- Style containing Style.Resources and Style.Triggers: Simple Animation (Dynamic) -->
+<Page
+    Name    = "Root"
+    Tag     = "Double 1 Opacity"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="Red">
+        <Canvas.Resources>
+            <Style x:Key="AnimStyle" TargetType="{x:Type ListBox}">
+                <Style.Resources>
+                    <Storyboard x:Key="StoryboardKey">
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "Opacity"
+                            To                          = "1"
+                            BeginTime                   = "0:0:2"
+                            Duration                    = "0:0:4" />
+                    </Storyboard>
+                </Style.Resources>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard Storyboard="{StaticResource StoryboardKey}" />
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </Canvas.Resources>
+        
+        <ListBox Name="AnimatedFE" Width="100" Height="100" Opacity="0" Background="White" Style="{DynamicResource AnimStyle}" />
+        
+    </Canvas>
+    
+</Page>

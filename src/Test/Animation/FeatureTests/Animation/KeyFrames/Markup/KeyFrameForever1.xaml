@@ -1,0 +1,38 @@
+<Canvas
+  xmlns         = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  Background    = "Plum">
+
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type RadioButton}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames
+                                        Storyboard.TargetProperty   = "(Canvas.Top)"
+                                        BeginTime                   = "0:0:0.1"
+                                        Duration                    = "Forever">
+                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                            <DoubleKeyFrameCollection>
+                                                <DiscreteDoubleKeyFrame Value="5"   KeyTime="0:0:0" />
+                                                <DiscreteDoubleKeyFrame Value="55"  KeyTime="0:0:1" />
+                                                <DiscreteDoubleKeyFrame Value="110" KeyTime="0:0:2" />
+                                                <DiscreteDoubleKeyFrame Value="165" KeyTime="0:0:3" />
+                                                <DiscreteDoubleKeyFrame Value="220" KeyTime="0:0:4" />
+                                            </DoubleKeyFrameCollection>
+                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <RadioButton Name="radio1" Style="{DynamicResource StyleKey}" Canvas.Left="10" Canvas.Top="5">Avalon!</RadioButton>
+   
+</Canvas>

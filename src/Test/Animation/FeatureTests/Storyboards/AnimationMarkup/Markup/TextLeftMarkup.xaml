@@ -1,0 +1,45 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double -5 Left"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas
+        Name        = "Canvas1"
+        Background  = "Navy">
+        <TextBlock
+            Name            = "AnimatedFE"
+            FontFamily      = "Comic Sans MS"
+            FontSize        = "96"
+            Background      = "Purple"
+            Foreground      = "#FFFFFFFF"
+            ClipToBounds    = "True"
+            Height          = "100"
+            Width           = "100"
+            Canvas.Top      = "0"
+            Canvas.Left     = "200"
+            >A
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(Canvas.Left)"
+                                        From                        = "150"
+                                        To                          = "-5"
+                                        FillBehavior                = "HoldEnd"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+    </Canvas>
+
+</Page>

@@ -1,0 +1,43 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 403 Height"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Black">
+
+    <Canvas>
+        <ScrollViewer Name="AnimatedFE" Height="3" Canvas.Left="0" Background="RoyalBlue">
+            <StackPanel Width="120" Height="500" Background="MediumPurple">
+                <Button Margin="15" Content="Button1" Background="Red" />
+                <Button Margin="15" Content="Button2" Background="Yellow" />
+                <Button Margin="15" Content="Button3" Background="Blue" />
+                <Button Margin="15" Content="Button4" Background="Green" />
+                <Button Margin="15" Content="Button5" Background="Brown" />
+                <Button Margin="15" Content="Button6" Background="Orange" />
+                <Button Margin="15" Content="Button7" Background="Navy" />
+                <Button Margin="15" Content="Button8" Background="Pink" />
+                <Button Margin="15" Content="Button9" Background="Purple" />
+            </StackPanel>
+
+            <ScrollViewer.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(ScrollViewer.Height)"
+                                    By                          = "400"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                  />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </ScrollViewer.Triggers>
+        </ScrollViewer>
+    </Canvas>
+    
+</Page>

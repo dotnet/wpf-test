@@ -1,0 +1,43 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 10 AngleY"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "LightBlue">
+    
+    <InkPresenter Width="600" Height="600" Name="skewedInkPresenter" Strokes="AJQFASAaXjDOCA7jRYzc5Au0UG8hMccmNXnuiEm5PnDZL4kH7QMxSBFEyMkBUCNXCQAAAEWHARsCAMH/Rn9HAWUGAAMAAAAAAGQDAAsAAWUGAAMAAAAAAAQDATgAGDYgMgkA9P8CAekiOkUzCQD4nwIBWiA6RTgIAP4DAAAAgH8UMggA8BUCAABoQjMIALQQAgAAaEIPDhLCYJo/sF+aPxFVValBHxoSbN+9TxhM8z81v3H/9UvzPxGrqqqqqio1QAo6FYP+IH7+IH+YxGqpUy3e93x2hvCNF4R14yWnJ6imJqWhoCJk5mbp6eZo5UCD9Dpx3e7u7ZTxzzmYoApFGYbw8SeHo+KkIqKhoiCioSWhpqSmqCSkoKAg4+RowIT8InH4Rq+Rq4GzJkUrDSy1vWMYWZCEyUojCKc5oxTjPDp23g7gCl0lhPxGHfiL3lopklCF758OvTp06cdYzpDVizYtGTNqzZMlMACF+FUj4VObaaa676aYY5pLqsBZhMNiMNgrJIpacHg8PXh8HPg4gITiYNqMZxmQCEQRIzMeHLnjLoAKXCqE/FAF+KBudbwjCEsFMlMGjJi0UwJ4c+nfp5OHbhzoUyZNG7Jig/4S7P4S/+XLp0x0xSb3nd3mLqIqlS3e+ed3vddeAIPyPC65m93dxMxKJgQRMEpud558dveACjoThPxZ9fi0HxsN7RlDBipujgxMQIbwfpeD8uOlp6SnJSOhoGJjY+VoZGjhwITtRhpz4YzRTne+useACjcRhvFNZ4p75iGjp6QmpSUlpKgioCBiwIP+FDT+FCHHfees73nnOOfDIITZxoS4OO8aznh4ukyADQEaARcBChkKh+Ek4Q+jS+G0KYymCwGD/CdfhNeXG0yA">
+        <InkPresenter.RenderTransform>
+            <SkewTransform x:Name="AnimatedAnimatable" CenterX="350" CenterY="350" />
+        </InkPresenter.RenderTransform>
+    </InkPresenter>
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   ="(InkPresenter.RenderTransform).(SkewTransform.AngleX)"
+                                Storyboard.TargetName       = "skewedInkPresenter"
+                                From                        = "10"
+                                To                          = "70"
+                                BeginTime                   = "00:00:02"
+                                Duration                    = "00:00:04"
+                                  />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "AngleY"
+                                Storyboard.TargetName       = "AnimatedAnimatable"
+                                From                        = "70"
+                                To                          = "10"
+                                BeginTime                   = "00:00:02"
+                                Duration                    = "00:00:04"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+</Page>

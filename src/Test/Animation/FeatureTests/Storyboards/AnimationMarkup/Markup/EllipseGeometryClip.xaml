@@ -1,0 +1,45 @@
+<Canvas Name="Root" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="LightYellow">
+
+    <Button Name="AnimatedFE" FontSize="36" Canvas.Left="125" Canvas.Top="150" Content="Avalon!">
+        <Button.Clip>
+            <EllipseGeometry RadiusX="50" RadiusY="50" Center="30,20" />
+        </Button.Clip>
+        <Button.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="Brown" Offset="0" />
+                    <GradientStop Color="BurlyWood" Offset=".9" />
+                    <GradientStop Color="Moccasin" Offset="1" />
+                </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Button.Background>
+        
+        <Button.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty="(Button.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Offset)"
+                                     BeginTime="00:00:01"
+                                     Duration="00:00:04"
+                                     From="0"
+                                     To=".85"
+                                       />
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty="(Button.Clip).(EllipseGeometry.RadiusX)"
+                                     BeginTime="00:00:02"
+                                     Duration="00:00:04"
+                                     To="200"
+                                       />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Button.Triggers>
+    </Button>
+</Canvas>

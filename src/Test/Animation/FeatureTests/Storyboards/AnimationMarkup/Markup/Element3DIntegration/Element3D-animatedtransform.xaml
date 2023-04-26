@@ -1,0 +1,63 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<!--
+
+      This scenario animates the transform of a nested element within the Viewport2DVisual3D's Visual
+
+-->
+  <Page.Resources>
+
+    <Storyboard BeginTime="0:0:0" x:Key="sb">
+        <DoubleAnimation BeginTime="0:0:2" Duration="0:0:3" From="0" To="70"
+         Storyboard.TargetProperty="(StackPanel.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="Canvas3"/>
+    </Storyboard>
+
+  </Page.Resources>
+  <Page.Triggers>
+            <EventTrigger RoutedEvent="FrameworkContentElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Name="ActionTarget2" Storyboard="{StaticResource sb}" /> 
+                </EventTrigger.Actions>
+            </EventTrigger>
+  </Page.Triggers>
+
+<Viewport3D Name="visual" >
+
+ <Viewport2DVisual3D x:Name="vv" >
+
+ <Viewport2DVisual3D.Material>
+       <MaterialGroup>
+            <DiffuseMaterial  Viewport2DVisual3D.IsVisualHostMaterial="true" Color="White" Brush="Green"/>
+       </MaterialGroup>
+ </Viewport2DVisual3D.Material>
+ <Viewport2DVisual3D.Geometry>
+       <MeshGeometry3D Positions="-2 2 0, 2 2 0, 2 -1 0, -2 -1 0"
+                       TriangleIndices="1 0 2, 2 0 3"
+                       TextureCoordinates="0 0, 1 0, 1 1, 0 1" />
+ </Viewport2DVisual3D.Geometry>
+ <Viewport2DVisual3D.Visual>
+       <Canvas Name="Canvas1" Width="150" Height="70" Background="Red">
+         <Canvas Name="Canvas2" Width="200" Height="50"  Background="Orange"/>
+         <Canvas Name="Canvas3" Width="100" Height="50"  Background="Blue">
+           <Canvas.RenderTransform>
+             <TranslateTransform Y="0"/>
+           </Canvas.RenderTransform>
+         </Canvas>
+       </Canvas>
+ </Viewport2DVisual3D.Visual>
+ </Viewport2DVisual3D>
+
+      <ModelVisual3D>
+        <ModelVisual3D.Content>
+          <PointLight Color="White" Position="0 0 20"/>
+        </ModelVisual3D.Content>
+      </ModelVisual3D>
+ 
+      <!-- Camera. -->
+      <Viewport3D.Camera>
+        <PerspectiveCamera Position="0 -1 1" LookDirection="0 1 -1"
+                           UpDirection="0 2 0" FieldOfView="160" x:Name="myPerspectiveCamera"/>
+      </Viewport3D.Camera>
+</Viewport3D>    
+
+
+</Page>

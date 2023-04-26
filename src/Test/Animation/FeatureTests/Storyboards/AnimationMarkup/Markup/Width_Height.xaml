@@ -1,0 +1,79 @@
+<!-- Animating Width and Height -->
+<Page
+    Name                = "Root"
+    Tag                 = "Double 300 Width"
+    xmlns               = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x             = "http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    
+    <Grid
+        Name                = "AnimatedFE"
+        Background          = "Lavender"
+        ShowGridLines       = "True"
+        HorizontalAlignment = "Left"
+        VerticalAlignment   = "Top"
+        ClipToBounds        = "True"
+        >
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <FlowDocumentScrollViewer>
+            <FlowDocument><Paragraph>This is the test with Animating.</Paragraph></FlowDocument>
+        </FlowDocumentScrollViewer>
+        <DockPanel Grid.Column="1">
+            <Rectangle Height="20" Fill="DarkViolet" DockPanel.Dock="Top" />
+            <Rectangle Width="20" Fill="MediumTurquoise" DockPanel.Dock="Left" />
+            <Rectangle Fill="BlueViolet" />
+
+        </DockPanel>
+        <WrapPanel Grid.Row="1">
+            <Rectangle Width="30" Height="30" Fill="lightblue" />
+            <Rectangle Width="30" Height="30" Fill="LightPink" />
+            <Rectangle Width="30" Height="30" Fill="lightblue" />
+            <Rectangle Width="30" Height="30" Fill="LightPink" />
+            <Rectangle Width="30" Height="30" Fill="lightblue" />
+            <Rectangle Width="30" Height="30" Fill="LightPink" />
+        </WrapPanel>
+        <Canvas Grid.Column="1" Grid.Row="1" Background="HoneyDew">
+            <Rectangle Width="50" Height="50" Fill="DarkTurquoise"
+                Canvas.Top="50" Canvas.Left="50" />
+        </Canvas>
+
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Grid.Width)"
+                                    Storyboard.TargetName       = "AnimatedFE"
+                                    From                        = "0"
+                                    To                          = "300"
+                                    BeginTime                   = "00:00:02"
+                                    Duration                    = "00:00:04"
+                                    />
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Grid.Height)"
+                                    Storyboard.TargetName       = "AnimatedFE"
+                                    From                        = "0"
+                                    To                          = "305"
+                                    BeginTime                   = "00:00:02"
+                                    Duration                    = "00:00:04"
+                                    />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Grid.Triggers>
+
+    </Grid>
+
+</Page>

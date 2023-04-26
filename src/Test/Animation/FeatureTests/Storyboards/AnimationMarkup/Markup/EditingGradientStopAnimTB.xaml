@@ -1,0 +1,45 @@
+<ScrollViewer
+    Name        = "Root"
+    Tag         = "Color Green Color"
+    xmlns       = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x     = 'http://schemas.microsoft.com/winfx/2006/xaml'>
+    
+    <StackPanel>
+    
+        <WrapPanel Height="150">
+
+            <!--Gradient Animations on TextBox-->
+            <TextBox Height="75" Width="150" FontSize="24">
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBox.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                                    From                        = "Blue"
+                                    To                          = "Green"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    Storyboard.TargetName       = "AnimatedAnimatable"
+                                    Storyboard.TargetProperty   = "Color" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBox.Triggers>
+                <TextBox.Background>
+                    <LinearGradientBrush EndPoint="1,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="White" Offset="0" />
+                                <GradientStop x:Name="AnimatedAnimatable" Offset="1" />
+                                <GradientStop Color="Red" Offset="1" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </TextBox.Background>
+                TextBox
+            </TextBox>
+            
+        </WrapPanel>
+                
+    </StackPanel>
+</ScrollViewer>

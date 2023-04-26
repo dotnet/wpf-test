@@ -1,0 +1,57 @@
+<!-- Bind a DP to a animation defined in a Style - DoubleAnimation -->
+<Page
+    Name        = "Root"
+    Tag         = "Double 0 Height"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "DarkSlateblue">
+    
+    <Page.Resources>
+        <Style TargetType="{x:Type Ellipse}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Ellipse.RenderTransform).(TranslateTransform.Y)"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    By                          = "-150"
+                                    />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
+    <Canvas>
+        <!-- "Animated" via Binding to the TargetElement -->
+        <ListBox
+            Name            = "AnimatedFE"
+            Height          = "{Binding ElementName=TargetElement, Path=(Ellipse.RenderTransform).(TranslateTransform.Y)}"
+            Foreground      = "White"
+            Background      = "MediumPurple"
+            Width           = "250"
+            FontSize        = "24"
+            FontFamily      = "Courier New">
+            <ListBoxItem><TextBlock>Avalon!</TextBlock></ListBoxItem>
+            <ListBoxItem><TextBlock>Avalon!</TextBlock></ListBoxItem>
+            <ListBoxItem><TextBlock>Avalon!</TextBlock></ListBoxItem>
+            <ListBoxItem><TextBlock>Avalon!</TextBlock></ListBoxItem>
+            <ListBox.RenderTransform>
+                <TranslateTransform X="0" Y="150" />
+            </ListBox.RenderTransform>
+        </ListBox>
+        
+        <Ellipse Name="TargetElement" Height="150" Width="150" Fill="DarkTurquoise">
+            <Ellipse.RenderTransform>
+                <TranslateTransform X="150" Y="150" />
+            </Ellipse.RenderTransform>
+        </Ellipse>
+    </Canvas>
+</Page>

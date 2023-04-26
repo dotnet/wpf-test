@@ -1,0 +1,54 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="HotPink" >
+
+    <Canvas.Triggers>
+        <EventTrigger SourceName="Animate" RoutedEvent="Mouse.MouseEnter">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Animate">
+                        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Left)" To="500" Duration="0:0:5" />
+                        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="500" Duration="0:0:5" />
+                    </Storyboard>  
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger SourceName="Animate" RoutedEvent="Mouse.MouseLeave">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Animate">
+                        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Left)" To="50" Duration="0:0:5" />
+                        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="50" Duration="0:0:5" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <Canvas.Resources>
+        <Style x:Key="BallButton" TargetType="{x:Type Button}">
+            <Setter Property="Canvas.Top" Value="50" />
+            <Setter Property="Canvas.Left" Value="50" />
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="{TemplateBinding Background}" Opacity="0.5" />
+                            <ContentPresenter VerticalAlignment="center" HorizontalAlignment="center" />
+                        </Grid>  
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>  
+        </Style>
+    </Canvas.Resources>
+
+    <Canvas Height="700" Width="700">
+        <Button Name="Animate" Style="{DynamicResource BallButton}" Background="RoyalBlue">Avalon!</Button>
+    </Canvas>
+
+</tst:CustomCanvas>

@@ -1,0 +1,47 @@
+﻿<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="HotPink" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+     <Button Name="Animate" Canvas.Top="200" Canvas.Left="200" Height="25" Width="50" Content="Avalon!">
+        <Button.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <BooleanAnimationUsingKeyFrames
+                                Storyboard.TargetProperty="(Button.IsEnabled)"
+                                BeginTime   = "0:1:2"
+                                Duration    = "0:0:3">
+                                <BooleanAnimationUsingKeyFrames.KeyFrames>
+                                    <BooleanKeyFrameCollection>
+                                        <DiscreteBooleanKeyFrame Value="True"  KeyTime="0" />
+                                        <DiscreteBooleanKeyFrame Value="False" KeyTime="25%" />
+                                        <DiscreteBooleanKeyFrame Value="True"  KeyTime="50%" />
+                                        <DiscreteBooleanKeyFrame Value="False" KeyTime="75%" />
+                                        <DiscreteBooleanKeyFrame Value="True"  KeyTime="100%" />
+                                    </BooleanKeyFrameCollection>
+                                </BooleanAnimationUsingKeyFrames.KeyFrames>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames
+                                Storyboard.TargetProperty="(Button.IsEnabled)"
+                                BeginTime   = "0:1:5"
+                                Duration    = "0:0:4">
+                                <BooleanAnimationUsingKeyFrames.KeyFrames>
+                                    <BooleanKeyFrameCollection>
+                                        <DiscreteBooleanKeyFrame Value="True"  KeyTime="0" />
+                                        <DiscreteBooleanKeyFrame Value="False" KeyTime="25%" />
+                                        <DiscreteBooleanKeyFrame Value="True"  KeyTime="50%" />
+                                        <DiscreteBooleanKeyFrame Value="False" KeyTime="75%" />
+                                        <DiscreteBooleanKeyFrame Value="True"  KeyTime="100%" />
+                                    </BooleanKeyFrameCollection>
+                                </BooleanAnimationUsingKeyFrames.KeyFrames>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Button.Triggers>
+     </Button>
+     
+</tst:CustomCanvas>

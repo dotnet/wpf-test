@@ -1,0 +1,31 @@
+﻿<Page
+ Name       = "Root"
+ xmlns:x    = "http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns      = "http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Button.Click" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "Opacity"
+                                Storyboard.TargetName       = "Animate"
+                                To                          = "0"
+                                Duration                    = "0:0:1.5"
+                                FillBehavior                = "HoldEnd"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="DarkViolet">
+        <Button Name="Animate" Canvas.Top="0" Width="100" Height="100" Opacity="1" Background="White" FontSize="24" />
+        <Button Name="SourceElement" Canvas.Top="120" Width="80">Source</Button>
+    </Canvas>
+
+</Page>

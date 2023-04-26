@@ -1,0 +1,55 @@
+ 
+<!-- SPECIAL CASE: using the Tag to specify that the Height of the Border is to be verified,
+     rather than the animated Rectangle -->
+<Page
+    Name            = "Root"
+    Tag             = "Double 151 Height"
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background      = "Black">
+    
+    <FrameworkElement.Resources>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <BeginStoryboard.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty   = "(ScrollViewer.LayoutTransform).(RotateTransform.Angle)"
+                                                    Storyboard.TargetName       = "PART_ContentHost"
+                                                    From                        = "15"
+                                                    To                          = "60.0"
+                                                    Duration                    = "0:0:4"
+                                                    BeginTime                   = "0:0:2"
+                                                    />
+                                            </Storyboard>
+                                        </BeginStoryboard.Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                        
+                        <Border x:Name="TemplateControl" Background="LightGreen">
+                            <ScrollViewer x:Name="PART_ContentHost">
+                                    <ScrollViewer.LayoutTransform>
+                                        <RotateTransform Angle="15" CenterX="0" CenterY="0"/>
+                                    </ScrollViewer.LayoutTransform>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </FrameworkElement.Resources>
+
+    <Canvas>
+    <TextBox Name='AnimateTemplate' Canvas.Left="50" Canvas.Top="100" Width="200" FontSize="72" Background="Yellow">abc</TextBox>
+    </Canvas>
+</Page>

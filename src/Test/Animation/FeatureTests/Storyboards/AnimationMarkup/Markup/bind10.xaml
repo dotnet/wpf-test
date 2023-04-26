@@ -1,0 +1,50 @@
+<!-- Binding when the Storyboard is inside Page Resources (Static) - StringAnimationUsingKeyFrames -->
+<Page
+    Name    = "Root"
+    Tag     = "String E Content"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Page.Resources>
+        <Storyboard x:Key="AnimKey">
+            <StringAnimationUsingKeyFrames
+                Storyboard.TargetProperty   = "Content"
+                BeginTime                   = "00:00:02"
+                Duration                    = "00:00:04">
+                <StringAnimationUsingKeyFrames.KeyFrames>
+                    <StringKeyFrameCollection>
+                        <DiscreteStringKeyFrame Value="A" KeyTime="0" />
+                        <DiscreteStringKeyFrame Value="B" KeyTime="25%" />
+                        <DiscreteStringKeyFrame Value="C" KeyTime="50%" />
+                        <DiscreteStringKeyFrame Value="D" KeyTime="75%" />
+                        <DiscreteStringKeyFrame Value="E" KeyTime="99%" />
+                    </StringKeyFrameCollection>
+                </StringAnimationUsingKeyFrames.KeyFrames>
+            </StringAnimationUsingKeyFrames>
+        </Storyboard>  
+    </Page.Resources>
+    
+ 
+    <Canvas Background="DarkSlateBlue">
+        <Button Name='TargetElement' FontSize="36" Height="75" Width="100" Canvas.Top="0" Background="MediumVioletRed">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource AnimKey}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+
+        <!-- "Animated" via Binding to the TargetElement -->
+        <Button
+            Name            = "AnimatedFE"
+            FontSize        = "36"
+            Height          = "75"
+            Width           = "100"
+            Canvas.Top      = "150"
+            Background      = "DarkTurquoise"
+            Content         = "{Binding ElementName=TargetElement, Path=Content}"/>
+    </Canvas>
+    
+</Page>

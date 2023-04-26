@@ -1,0 +1,72 @@
+<!-- Animates properties by using storyboard animations. -->
+
+<Page
+    Name        = "Root"
+    Tag         = "Double -45 CenterY"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    WindowTitle = "Animate Properties with Storyboards">
+
+    <Page.Resources>
+        <Style x:Key="SkewAnim" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Name="beginStory">
+                            <Storyboard>    
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Button.Content).(TextBlock.TextEffects)[0].(TextEffect.Transform).(SkewTransform.AngleX)"
+                                    From                        = "-45"
+                                    To                          = "45"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    />
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Button.Content).(TextBlock.TextEffects)[0].(TextEffect.Transform).(SkewTransform.AngleY)"
+                                    To                          = "45"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    />
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Button.Content).(TextBlock.TextEffects)[0].(TextEffect.Transform).(SkewTransform.CenterY)"
+                                    From                        = ".00001"
+                                    To                          = "-45"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+
+    <Border Background="White">
+        <StackPanel Margin="30" HorizontalAlignment="Left">
+
+            <TextBlock>Triggers: Text Effect Skew Animation Example</TextBlock>
+
+            <Button Name="myTextAnimatedButton" Style="{StaticResource SkewAnim}" Height="35" Width="400" Margin="20,20,20,20" FontSize="20" Foreground="Purple">
+                <TextBlock Name="myButtonTextBlock">
+                    <TextBlock.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="4" />
+                    </TextBlock.BitmapEffect>
+                    <TextBlock.TextEffects>
+                        <TextEffectCollection>
+                            <TextEffect PositionStart="0" PositionCount="300">
+                                <TextEffect.Transform>
+                                    <SkewTransform x:Name="AnimatedAnimatable" CenterX="50" CenterY="0" AngleX="20" AngleY="0" />
+                                </TextEffect.Transform>
+                            </TextEffect>
+                        </TextEffectCollection>
+                    </TextBlock.TextEffects>
+                    A Text Button with Skew
+                </TextBlock>                
+            </Button>
+
+        </StackPanel>
+    </Border>
+
+</Page>

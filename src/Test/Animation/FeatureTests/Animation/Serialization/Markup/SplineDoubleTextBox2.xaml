@@ -1,0 +1,35 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="PaleVioletRed" >
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetProperty="(TextBox.Opacity)"
+                                Storyboard.TargetName="Animate"
+                                BeginTime="0:1:1"
+                                Duration="0:0:2"
+                                FillBehavior="HoldEnd">
+                                <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                    <DoubleKeyFrameCollection>
+                                        <SplineDoubleKeyFrame Value="0" KeyTime="0" KeySpline="0 0 1 1" />
+                                        <SplineDoubleKeyFrame Value="1" KeyTime="100%" KeySpline="0 0 1 1" />
+                                    </DoubleKeyFrameCollection>
+                                </DoubleAnimationUsingKeyFrames.KeyFrames>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <TextBox Name="Animate" Background="Lavender">Avalon!</TextBox>                                                                                     
+     
+</tst:CustomCanvas>

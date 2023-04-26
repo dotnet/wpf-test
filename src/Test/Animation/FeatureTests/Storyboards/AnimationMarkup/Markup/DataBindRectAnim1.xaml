@@ -1,0 +1,33 @@
+<!-- Databinding Animation To Property: Triggers inside Animated Element -->
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Canvas Background="Navy">
+    
+        <Path Name="AnimatedFE" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="MediumPurple">
+            <Path.Data>
+                <RectangleGeometry Rect="100,100,100,100" />
+            </Path.Data>
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <RectAnimation
+                                        Storyboard.TargetProperty="(Path.Data).(RectangleGeometry.Rect)"
+                                        To="{Binding ElementName=textblock, Path=&apos;Text&apos;}"
+                                        BeginTime="0:0:2"
+                                        Duration="0:0:4"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
+
+        <TextBlock Name='textblock' Foreground="Gold" Width="100" Canvas.Left="50" Canvas.Top="210">0,0,100,100</TextBlock>
+
+    </Canvas>
+</Page>

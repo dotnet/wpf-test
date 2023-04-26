@@ -1,0 +1,32 @@
+<Page
+    Name        = "Root"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background  = "HotPink">
+
+    <Canvas>
+        <Button Name="AnimatedFE" Background="Navy" Height="150" Width="150" Canvas.Left="0" Canvas.Top="0">
+            <Button.Clip>
+                <EllipseGeometry RadiusX="90" RadiusY="90" Center="20,20" />
+            </Button.Clip>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <PointAnimation
+                                        Storyboard.TargetProperty   = "(Button.Clip).(EllipseGeometry.Center)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        To                          = "200,200"
+                                        />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+    </Canvas>
+    
+</Page>

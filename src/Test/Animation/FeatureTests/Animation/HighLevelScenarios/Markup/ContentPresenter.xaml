@@ -1,0 +1,71 @@
+<Grid 
+    xmlns       ="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     ="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width       ="640"
+    Height      ="480"
+    Background  ="Azure"> 
+    <Grid.Resources>
+        <Storyboard x:Key="myAnimation2">
+            <DoubleAnimationUsingKeyFrames
+                FillBehavior                            = "HoldEnd"
+                BeginTime                               = "00:00:01"
+                DoubleAnimationUsingKeyFrames.IsAdditive= "True"
+                Duration                                = "00:00:01"
+                Storyboard.TargetProperty               = "(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                Storyboard.TargetName                   = "ListBox2">
+                <DoubleAnimationUsingKeyFrames.KeyFrames>
+                    <DoubleKeyFrameCollection>
+                        <SplineDoubleKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="0" KeyTime="00:00:00"/>
+                        <SplineDoubleKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="0.99" KeyTime="00:00:03"/>
+                    </DoubleKeyFrameCollection>
+                </DoubleAnimationUsingKeyFrames.KeyFrames>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                FillBehavior                            = "HoldEnd"
+                BeginTime                               = "00:00:01"
+                DoubleAnimationUsingKeyFrames.IsAdditive= "True"
+                Duration                                = "00:00:01"
+                Storyboard.TargetProperty               = "(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                Storyboard.TargetName                   = "ListBox1">
+                <DoubleAnimationUsingKeyFrames.KeyFrames>
+                    <DoubleKeyFrameCollection>
+                        <SplineDoubleKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="0" KeyTime="00:00:00"/>
+                        <SplineDoubleKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="1" KeyTime="00:00:03"/>
+                    </DoubleKeyFrameCollection>
+                </DoubleAnimationUsingKeyFrames.KeyFrames>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Grid.Resources>
+    
+    <FrameworkElement.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="Button1">
+            <EventTrigger.Actions>
+                <BeginStoryboard Storyboard="{StaticResource myAnimation2}"/>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </FrameworkElement.Triggers>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition />
+    </Grid.RowDefinitions>
+    <Grid>
+
+    <ContentPresenter Content="this is invisible"  Name="ListBox1" Margin="20" HorizontalAlignment="Left" >
+      <UIElement.RenderTransform>
+        <ScaleTransform ScaleX="0" ScaleY="1"/>
+      </UIElement.RenderTransform>
+    </ContentPresenter>
+
+    <ContentPresenter Content="this is visible" Visibility="Hidden" Name="ListBox2" Margin="20" HorizontalAlignment="Right" >
+      <UIElement.RenderTransform>
+        <ScaleTransform ScaleX="0.01" ScaleY="1"/>
+      </UIElement.RenderTransform>
+    </ContentPresenter>
+
+    <Button Name="Button1" Content="Animate Scale X" Margin="73,0,0,137" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="136" Height="37"></Button>
+
+    </Grid>
+</Grid>

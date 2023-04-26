@@ -1,0 +1,36 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent" Background="Moccasin" >
+
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Path}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(Path.Data).(EllipseGeometry.RadiusX)"
+                                        Name="DoubleAnimWithStyle1"
+                                        BeginTime="00:01:02"
+                                        Duration="00:00:03"
+                                        By="100"
+                                        FillBehavior="HoldEnd"
+                                        AutoReverse="True"
+                                        RepeatBehavior="00:00:30"
+                                        AccelerationRatio=".5"
+                                        DecelerationRatio=".5"
+                                        SpeedRatio="1"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <Path Name="Animate" Style="{DynamicResource StyleKey}" Fill="MediumTurquoise" Stroke="Black"><Path.Data><EllipseGeometry Center="60 60" RadiusX="50" RadiusY="50" /></Path.Data></Path>
+     
+</tst:CustomCanvas>

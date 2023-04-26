@@ -1,0 +1,58 @@
+<Canvas
+    Name        = "Root"
+    Tag         = "Point 100,100 EndPoint"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "DarkTurquoise">
+
+     <Canvas.Resources>
+
+        <Style x:Key="StyleKey" TargetType="{x:Type Path}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <PointAnimationUsingKeyFrames
+                                        Storyboard.TargetProperty   = "(Path.Data).(LineGeometry.StartPoint)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        FillBehavior                = "HoldEnd"
+                                        >
+                                        <PointAnimationUsingKeyFrames.KeyFrames>
+                                              <PointKeyFrameCollection>
+                                                  <SplinePointKeyFrame Value="100,100" KeyTime="0"    KeySpline="0 0 1 1" />
+                                                  <SplinePointKeyFrame Value="200,100" KeyTime="100%" KeySpline="0 0 1 1" />
+                                              </PointKeyFrameCollection>
+                                        </PointAnimationUsingKeyFrames.KeyFrames>
+                                    </PointAnimationUsingKeyFrames>
+                                        <PointAnimationUsingKeyFrames
+                                        Storyboard.TargetProperty   = "(Path.Data).(LineGeometry.EndPoint)"
+                                        BeginTime                   = "00:0:2"
+                                        Duration                    = "0:0:4"
+                                        FillBehavior                = "HoldEnd"
+                                        >
+                                        <PointAnimationUsingKeyFrames.KeyFrames>
+                                              <PointKeyFrameCollection>
+                                                  <SplinePointKeyFrame Value="300,100" KeyTime="0"    KeySpline="0 0 1 1" />
+                                                  <SplinePointKeyFrame Value="100,100" KeyTime="100%" KeySpline="0 0 1 1" />
+                                              </PointKeyFrameCollection>
+                                        </PointAnimationUsingKeyFrames.KeyFrames>
+                                    </PointAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+     </Canvas.Resources>
+
+     <Path Name="TargetElement" Style="{DynamicResource StyleKey}" Fill="Red" Stroke="CornFlowerBlue" StrokeThickness="50">
+          <Path.Data>
+               <LineGeometry x:Name="AnimatedAnimatable" StartPoint="100,100" EndPoint="300,100" />
+          </Path.Data>
+     </Path>
+</Canvas>

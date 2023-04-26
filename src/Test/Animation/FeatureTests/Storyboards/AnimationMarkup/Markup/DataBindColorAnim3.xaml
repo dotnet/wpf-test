@@ -1,0 +1,31 @@
+<!-- Databinding Animation To Property: Inside Root Element Resources -->
+
+<Page
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag     = "Color LightCyan Background"
+    Name    = "Root"> 
+        
+    <Page.Resources>
+        <Storyboard x:Key="AnimColor">
+            <Storyboard TargetName="AnimatedFE" TargetProperty="Background.Color">
+                <ColorAnimation To="{Binding ElementName=textbox, Path=&apos;Text&apos;}" BeginTime="0:0:2" Duration="0:0:4" />
+            </Storyboard>
+        </Storyboard>
+    </Page.Resources>
+    
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard Storyboard="{StaticResource AnimColor}" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="CadetBlue">
+    
+        <TextBox Name='textbox' Width="100" Canvas.Left="0" Canvas.Top="150">LightCyan</TextBox>
+        <Canvas Name="AnimatedFE" Background="Navy" Width='100' Height='100' Canvas.Left="0" Canvas.Top="0" />
+        
+    </Canvas>
+</Page>

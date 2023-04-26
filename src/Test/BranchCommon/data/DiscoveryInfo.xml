@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <DiscoveryInfo AdaptorsAssembly="Infra\QualityVaultUtilities.dll" VersionOrder="VersionOrder.txt">
   <DefaultTestInfo Type="Functional" Disabled="false" ExecutionGroupingLevel="SharedSupportFiles">
     <SupportFiles>
@@ -192,6 +192,39 @@
           <SupportFile Source="FeatureTests\AppModel\Deployment\TestLibraries\OrcasDeploymentTestCodeLibrary.dll" />
           <SupportFile Source="FeatureTests\AppModel\Deployment\TestLibraries\DeploymentCommonLibrary.dll" />
         </SupportFiles>
+      </DefaultTestInfo>
+    </Target>
+
+  <!-- Area: Animation -->
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\Animation\AnimationTest.dll">
+      <DefaultTestInfo Area="Animation" Disabled="False" Priority="1" Type="Functional" Timeout="160">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Animation\AnimationTest.dll" />
+          <SupportFile Source="FeatureTests\Animation\AnimationTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\Animation\AnimationMultiMonTest.dll">
+      <DefaultTestInfo Area="Animation"   Disabled="False" Priority="1" Type="Functional" Timeout="160">
+        <Configurations>
+          <Configuration>Infra\Configurations\MultiMon.xml</Configuration>
+        </Configurations>
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Animation\AnimationMultiMonTest.dll" />
+          <SupportFile Source="FeatureTests\Animation\AnimationTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
       </DefaultTestInfo>
     </Target>
   </Targets>

@@ -1,0 +1,29 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Canvas Background="Black">
+        <TextBox Name="textbox1" Background="PeachPuff" Width="50" Height="0" Canvas.Top="100" Canvas.Left="100">
+            <TextBox.Triggers>
+                <EventTrigger RoutedEvent="TextBox.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard BeginTime="0:0:2" Duration="0:0:25">
+                                    <ParallelTimeline BeginTime="0:0:0" Duration="0:0:10">
+                                        <DoubleAnimation
+                                            BeginTime                   = "0:0:0"
+                                            Duration                    = "0:0:1"
+                                            From                        = "0"
+                                            To                          = "50"
+                                            Storyboard.TargetProperty   = "Height"
+                                            />
+                                    </ParallelTimeline>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBox.Triggers>
+        </TextBox>
+    </Canvas>
+    
+</Page>

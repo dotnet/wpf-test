@@ -1,0 +1,59 @@
+<!-- Animating Grid.Column and Row -->
+
+<Page
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag             = "Int32 4 Row"
+    Name            = "Root">
+    
+    <Grid ShowGridLines="true">
+
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+        <ColumnDefinition />
+        <ColumnDefinition />
+        <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Rectangle Name="AnimatedFE" Width="100" Height="100" Fill="Orange" />
+
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <Int32Animation
+                                    Storyboard.TargetProperty   = "(Grid.Column)"
+                                    Storyboard.TargetName       = "AnimatedFE"
+                                    From                        = "0"
+                                    To                          = "4"
+                                    BeginTime                   = "00:00:01"
+                                    Duration                    = "00:00:04"
+                                    />
+                                <Int32Animation
+                                    Storyboard.TargetProperty   = "(Grid.Row)"
+                                    Storyboard.TargetName       = "AnimatedFE"
+                                    From                        = "0"
+                                    To                          = "4"
+                                    BeginTime                   = "00:00:01"
+                                    Duration                    = "00:00:04"
+                                    />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Grid.Triggers>
+
+    </Grid>
+    
+</Page>

@@ -1,0 +1,43 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Lavender" >
+
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Polyline}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        BeginTime="0:1:0"
+                                        Duration="0:0:4"
+                                        To="Purple"
+                                        FillBehavior="HoldEnd"
+                                        Storyboard.TargetProperty="(Polyline.Stroke).(SolidColorBrush.Color)"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+    <Polyline
+        Name="Animate"
+        Style="{DynamicResource StyleKey}"
+        Points="50 50 150 50 150 100 100 100 100 75 125 75 125 150 50 150 50 50"
+        StrokeThickness="3">
+           <Polyline.Stroke>
+                <SolidColorBrush>
+                    <SolidColorBrush.Color>Green</SolidColorBrush.Color>
+            </SolidColorBrush>
+           </Polyline.Stroke>  
+    </Polyline>     
+
+</tst:CustomCanvas>

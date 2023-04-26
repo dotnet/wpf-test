@@ -1,0 +1,39 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent" >
+
+
+     <Decorator Name="Animate" Canvas.Top="140" Canvas.Left="140">
+        <Decorator.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(Decorator.LayoutTransform).(RotateTransform.Angle)"
+                                        BeginTime="0:1:4"
+                                        Duration="0:0:6"
+                                        From="0"
+                                        To="180"
+                                        FillBehavior="HoldEnd"
+                                        >
+                                    </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Decorator.Triggers>
+        <Decorator.LayoutTransform>
+               <RotateTransform CenterX="140" CenterY="140" />
+          </Decorator.LayoutTransform>     
+          <Frame
+               Height="200"
+               Width="200"
+               Source="DoubleRotateSCBFrame2f.xaml">
+          </Frame>
+     </Decorator>
+
+</tst:CustomCanvas>

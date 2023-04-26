@@ -1,0 +1,35 @@
+﻿<Page
+    Name    = "Root"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Canvas.Top)"
+                                Storyboard.TargetName       = "Animate"
+                                Duration                    = "0:0:8"
+                                To                          = "0"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Keyboard.KeyUp" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <PauseStoryboard BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="White">
+        <Rectangle Name="Animate" Canvas.Left="0" Canvas.Top="200" Height="100" Width="100" Fill="DarkTurquoise" />
+        <TextBox Name="SourceElement" Canvas.Left="150" Canvas.Top="0" Background="DarkMagenta" />
+    </Canvas>
+    
+</Page>

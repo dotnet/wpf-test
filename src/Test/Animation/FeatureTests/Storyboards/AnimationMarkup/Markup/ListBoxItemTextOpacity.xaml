@@ -1,0 +1,124 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 0.1 Opacity"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background  = "Navy">
+
+    <Page.Resources>
+        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="FontSize" Value="32" />
+        </Style>
+        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type TextBlock}">
+            <Setter Property="Opacity" Value="0" />
+        </Style>
+    </Page.Resources>
+
+    <Canvas>
+    <Border Name="Border1" BorderThickness="1" Height="250" Width="150" BorderBrush="Blue" Canvas.Left="250" Canvas.Top="0">
+        <Border.Background><SolidColorBrush>MistyRose</SolidColorBrush></Border.Background>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)" BeginTime="0:0:2" Duration="0:0:4" From="1" To="0" />
+                                <DoubleAnimation Storyboard.TargetName="Border1" Storyboard.TargetProperty="(Canvas.Left)" BeginTime="0:0:2" Duration="0:0:4" From="250" To="0" />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Border.Triggers>
+
+        <ListBox Background="MediumPurple">
+            <ListBoxItem>
+                <TextBlock Name="Item1">Avalon!
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)" BeginTime="0:0:2" Duration="0:0:4" From="1" To="0" FillBehavior="HoldEnd" />
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                 </TextBlock>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Name="Item2">Avalon!
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)" BeginTime="0:0:2" Duration="0:0:4" From="1" To="0" FillBehavior="HoldEnd" />
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                 </TextBlock>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Name="AnimatedFE">Avalon!
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)" BeginTime="0:0:2" Duration="0:0:4" From="1" To="0.1" FillBehavior="HoldEnd" />
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                 </TextBlock>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Name="Item4">Avalon!
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)" BeginTime="0:0:2" Duration="0:0:4" From="1" To="0" FillBehavior="HoldEnd" />
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                 </TextBlock>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Name="Item5">Avalon!
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)" BeginTime="0:0:2" Duration="0:0:4" From="1" To="0" FillBehavior="HoldEnd" />
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                 </TextBlock>
+            </ListBoxItem>
+        </ListBox>
+
+    </Border>
+    </Canvas>
+</Page>

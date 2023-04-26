@@ -1,0 +1,33 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="White">
+
+    <Canvas>
+
+        <TextBlock Name="AnimatedElement" Opacity="0.3" Canvas.Left="150" Canvas.Top="200" Background="SlateBlue" Width="150" Height="150" Text="Avalon!" FontSize="24">
+            
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                      <DoubleAnimation
+                                        Storyboard.TargetProperty   = "Opacity"
+                                        From                        = "0.2"
+                                        By                          = "0.1"
+                                        BeginTime                   = "0:0:0"
+                                        Duration                    = "0:0:0.5"
+                                        IsAdditive                  = "True" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBlock.Triggers>
+            
+        </TextBlock>
+
+        <Button Name="FocusElement" Canvas.Left="50" Canvas.Top="50" Width="25" Height="25" />
+
+    </Canvas>
+
+</Page>

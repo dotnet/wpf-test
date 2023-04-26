@@ -1,0 +1,30 @@
+﻿<Page
+    Name    = "Root"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Keyboard.KeyDown" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "Height"
+                                Storyboard.TargetName       = "Animate"
+                                Duration                    = "0:0:1"
+                                To                          = "150"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="White">
+        <ListBox Name="Animate" Canvas.Left="0" Canvas.Top="0" Height="0" Width="150" Background="DarkViolet" />
+        <TextBox Name="SourceElement" Height="50" Width="100" Canvas.Left="20" Canvas.Top="220" Background="LightSeaGreen" />
+    </Canvas>
+    
+</Page>

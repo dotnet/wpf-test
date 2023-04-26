@@ -1,0 +1,34 @@
+<!-- Storyboard inside Page Resources: Resources inside Child (Dynamic) -->
+
+<Page
+    Name    = "Root"
+    Tag     = "Double 1 Opacity"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="White">
+        <Canvas.Resources>
+            <Storyboard x:Key="AnimOpacity">
+                <DoubleAnimation
+                    Storyboard.TargetProperty   = "(InkCanvas.Opacity)"
+                    Storyboard.TargetName       = "AnimatedFE"
+                    To                          = "1"
+                    BeginTime                   = "0:0:2"
+                    Duration                    = "0:0:4"
+                      />
+            </Storyboard>
+        </Canvas.Resources>
+
+        <InkCanvas Name='AnimatedFE' Height="100" Width="100" Canvas.Top="0" Background="DarkGreen" Opacity="0">
+            <InkCanvas.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{DynamicResource AnimOpacity}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </InkCanvas.Triggers>
+        </InkCanvas>
+    
+    </Canvas>
+    
+</Page>

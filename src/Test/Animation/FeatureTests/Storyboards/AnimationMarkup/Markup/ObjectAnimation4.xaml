@@ -1,0 +1,42 @@
+<Page
+    Name    = "Root"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"> 
+    
+    <Page.Resources>
+        <Style TargetType="{x:Type Ellipse}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                          <ObjectAnimationUsingKeyFrames
+                                Storyboard.TargetProperty   = "StrokeDashCap">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static PenLineCap.Triangle}" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:2" Value="{x:Static PenLineCap.Round}" />
+                            <DiscreteObjectKeyFrame KeyTime="0:0:4" Value="{x:Static PenLineCap.Square}" />
+                          </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Canvas Background="Azure">
+        
+        <Ellipse
+            Name                = "AnimatedFE"
+            Height              = "150"
+            Width               = "150"
+            Fill                = "Navy"
+            Canvas.Left         = "100"
+            Canvas.Top          = "100"
+            Stroke              = "Red"
+            StrokeThickness     = "5"
+            StrokeDashArray     = "1 1"
+            StrokeDashCap       = "Flat"
+            >
+        </Ellipse>        
+    </Canvas>
+    
+</Page>

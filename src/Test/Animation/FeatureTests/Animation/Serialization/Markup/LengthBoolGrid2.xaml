@@ -1,0 +1,67 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Navy" >
+
+    <Grid
+        Name="Animate"
+        Height="400"
+        Width="400"
+        ShowGridLines="true">
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+        <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Background="Green">Avalon!</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Background="LightYellow">Button2</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Background="MistyRose">Button3</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Background="Lavender">Button4</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Background="BurlyWood">Button5</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Background="Moccasin">Button6</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Background="DarkTurquoise">Button7</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Background="Chartreuse">Button8</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Background="Orange">Button9</Button>
+        
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Grid.Width)"
+                                BeginTime="00:01:03"
+                                Duration="00:00:05"
+                                To="200"
+                                FillBehavior="HoldEnd"
+                                >
+                            </DoubleAnimation>
+                            <BooleanAnimationUsingKeyFrames
+                                Storyboard.TargetProperty="(Grid.IsEnabled)"
+                                BeginTime="00:01:03"
+                                Duration="00:00:05"
+                                >
+                                <BooleanAnimationUsingKeyFrames.KeyFrames>
+                                    <BooleanKeyFrameCollection>
+                                        <DiscreteBooleanKeyFrame Value="True" KeyTime="0" />
+                                        <DiscreteBooleanKeyFrame Value="False" KeyTime="25%" />
+                                        <DiscreteBooleanKeyFrame Value="True" KeyTime="50%" />
+                                        <DiscreteBooleanKeyFrame Value="False" KeyTime="75%" />
+                                        <DiscreteBooleanKeyFrame Value="True" KeyTime="100%" />
+                                    </BooleanKeyFrameCollection>
+                                </BooleanAnimationUsingKeyFrames.KeyFrames>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Grid.Triggers>
+    </Grid> 
+
+</tst:CustomCanvas>

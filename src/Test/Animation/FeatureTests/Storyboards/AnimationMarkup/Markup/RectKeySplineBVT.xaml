@@ -1,0 +1,38 @@
+﻿<Grid
+    Name        = "Root"
+    Tag         = "Rect 0,0,125,125 Rect"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "DarkViolet">
+
+    <Path HorizontalAlignment="Left" VerticalAlignment="Top" Name="TargetElement" Fill="DarkGreen">
+        <Path.Data>
+            <RectangleGeometry x:Name="AnimatedAnimatable" Rect="150,150,125,125" />
+        </Path.Data>
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <RectAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty   = "(Path.Data).(RectangleGeometry.Rect)"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    >
+                                    <RectAnimationUsingKeyFrames.KeyFrames>
+                                        <RectKeyFrameCollection>
+                                            <SplineRectKeyFrame Value="150,150,125,125" KeyTime="0"    KeySpline="0 0 1 1" />
+                                            <SplineRectKeyFrame Value="0,0,125,125"     KeyTime="100%" KeySpline="0 0 1 1" />
+                                        </RectKeyFrameCollection>
+                                    </RectAnimationUsingKeyFrames.KeyFrames>
+                                </RectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Path.Triggers>
+    </Path>
+
+</Grid>

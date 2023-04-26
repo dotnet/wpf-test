@@ -1,0 +1,46 @@
+<!-- Bind a single DP to an animating DP - DoubleAnimation -->
+<Page
+    Name        = "Root"
+    Tag         = "Double 0 Height"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "LemonChiffon">
+    
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="AnimatedFE">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Height" TargetName="TargetElement">
+                        <DoubleAnimation
+                             BeginTime                      = "00:00:02"
+                             Duration                       = "00:00:03.5"
+                             From                           = "400"
+                             To                             = "0"
+                             />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+    
+    <Canvas>
+        <!-- "Animated" via Binding to the TargetElement -->
+        <ComboBox
+            Name                = "AnimatedFE"
+            Canvas.Top          = "100"
+            Canvas.Left         = "150"
+            Height              = "{Binding ElementName=TargetElement, Path=&apos;Height&apos;}"
+            Width               = "150"
+            FontSize            = "32"
+            Text                = "Combo!">
+
+            <ComboBoxItem><TextBlock>Item1</TextBlock></ComboBoxItem>
+            <ComboBoxItem><TextBlock>Item2</TextBlock></ComboBoxItem>
+
+        </ComboBox>
+        
+        <TextBox Name='TargetElement' Height="400" Width="100" Canvas.Left="0" Canvas.Top="100"></TextBox>
+
+    </Canvas>
+
+</Page>

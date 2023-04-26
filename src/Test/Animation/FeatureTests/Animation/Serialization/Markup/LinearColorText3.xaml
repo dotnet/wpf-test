@@ -1,0 +1,35 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent" >
+
+     <TextBlock Name="Animate"><Run Name="Run1">Avalon!</Run>
+        <TextBlock.Foreground>
+            <SolidColorBrush />
+        </TextBlock.Foreground>            
+        <TextBlock.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                    BeginTime="{x:Null}"
+                                    Duration="0:0:8"
+                                    >
+                                    <ColorAnimationUsingKeyFrames.KeyFrames>
+                                        <ColorKeyFrameCollection>
+                                        </ColorKeyFrameCollection>
+                                    </ColorAnimationUsingKeyFrames.KeyFrames>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </TextBlock.Triggers>
+     </TextBlock>
+
+</tst:CustomCanvas>

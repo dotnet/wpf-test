@@ -1,0 +1,44 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Color ForestGreen Background"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "SandyBrown">
+    
+    <Canvas>
+        <Canvas.Resources>
+            <SolidColorBrush x:Key="AnimListBox" Color="Cyan" />
+            <Style TargetType="{x:Type ListBox}">
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetProperty   = "(ListBox.Background).(SolidColorBrush.Color)"
+                                            To                          = "ForestGreen"
+                                            BeginTime                   = "0:0:2"
+                                            Duration                    = "0:0:4"
+                                            FillBehavior                = "HoldEnd"
+                                         />
+                                    </Storyboard>  
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </Canvas.Resources>
+
+        <Border BorderThickness="1" BorderBrush="Purple">
+            <ListBox
+                Name            = "AnimatedFE"
+                Height          = "100"
+                Width           = "100"
+                Background      = "{DynamicResource AnimListBox}"
+            />
+        </Border>
+    </Canvas>
+    
+</Page>

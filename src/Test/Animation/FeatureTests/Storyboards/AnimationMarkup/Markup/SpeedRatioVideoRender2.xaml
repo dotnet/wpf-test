@@ -1,0 +1,22 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="SeaGreen">
+    <Button Width="320" Height="240" Background="White">
+        <Button.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <MediaTimeline
+                                    Source                  = "pack://siteoforigin:,,,/duck.wmv"
+                                    Storyboard.TargetName   = "media2"
+                                    SpeedRatio              = "0.5"
+                                    />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Button.Triggers>
+        <MediaElement Width="320" Height="240" Name="media2" Stretch="UniformToFill" />
+    </Button>
+</Page>

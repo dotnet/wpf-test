@@ -1,0 +1,38 @@
+<Grid
+    Name        = "Root"
+    Tag         = "Double 180 Angle"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Lime">
+
+    <Grid.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(Button.RenderTransform).(RotateTransform.Angle)"
+                                        By                          = "180"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4" />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Grid.Resources>
+
+    <Canvas>
+        <Button Name="TargetElement" Style="{DynamicResource StyleKey}" Background="LightYellow" Height="100" Width="100" Canvas.Left="0" Canvas.Top="0">
+            <Button.RenderTransform>
+                   <RotateTransform x:Name="AnimatedAnimatable" CenterX="60" CenterY="20" Angle="0" />
+            </Button.RenderTransform>
+        </Button>
+    </Canvas>
+
+</Grid>

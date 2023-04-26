@@ -1,0 +1,127 @@
+<Canvas
+    Name        = "Root"
+    Tag         = "Double 500 X"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "White">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard BeginTime="0:0:2" Duration="0:0:4">
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Transform).(ScaleTransform.ScaleX)"
+                                Storyboard.TargetName       = "Animate1"
+                                From                        = "1"
+                                To                          = "2"
+                                DecelerationRatio           = "0.5"
+                                AccelerationRatio           = "0.5"
+                                AutoReverse                 = "true"
+                                RepeatBehavior              = "5x"
+                                  />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[1].(TextEffect.Transform).(ScaleTransform.ScaleY)"
+                                Storyboard.TargetName       = "Animate1"
+                                From                        = "1"
+                                To                          = "2"
+                                DecelerationRatio           = "0.5"
+                                AccelerationRatio           = "0.5"
+                                AutoReverse                 = "true"
+                                RepeatBehavior              = "5x"
+                                  />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Transform).(RotateTransform.Angle)"
+                                Storyboard.TargetName       = "Animate2"
+                                From                        = "-60"
+                                To                          = "60"
+                                DecelerationRatio           = "0.5"
+                                AccelerationRatio           = "0.5"
+                                AutoReverse                 = "true"
+                                RepeatBehavior              = "5x"
+                                  />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Transform).(TranslateTransform.X)"
+                                Storyboard.TargetName       = "Animate3"
+                                From                        = "0"
+                                To                          = "500"
+                                DecelerationRatio           = "0.5"
+                                AccelerationRatio           = "0.5"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+
+    <TextBlock Name="Animate1" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="Black">
+        <TextBlock.TextEffects>
+            <TextEffectCollection>
+                <TextEffect PositionStart="0" PositionCount="12">
+                    <TextEffect.Transform>
+                            <ScaleTransform ScaleX="1" />
+                    </TextEffect.Transform>
+                </TextEffect>
+                <TextEffect PositionStart="21" PositionCount="8">
+                    <TextEffect.Transform>
+                            <ScaleTransform ScaleY="1" />
+                    </TextEffect.Transform>
+                </TextEffect>
+            </TextEffectCollection>
+        </TextBlock.TextEffects>Harry Potter and the Prisoner of Azkaban
+  </TextBlock>
+  <TextBlock Name="Animate2" TextWrapping="WrapWithOverflow" FontSize="50" Canvas.Top="200"
+   Canvas.Left="200"
+   FontWeight="Bold">
+        <TextBlock.Foreground>
+           <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="Red"    Offset="0" />
+                            <GradientStop Color="Blue"   Offset="0.25" />
+                            <GradientStop Color="Orange" Offset="0.75" />
+                            <GradientStop Color="Yellow" Offset="1" />
+                        </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>                                               
+                    </LinearGradientBrush>
+        </TextBlock.Foreground>
+
+        <TextBlock.TextEffects>
+            <TextEffectCollection>
+                <TextEffect PositionStart="0" PositionCount="1">
+                    <TextEffect.Transform>
+                            <RotateTransform Angle="0" CenterX="0" CenterY="-200" />
+                    </TextEffect.Transform>
+                </TextEffect>
+            </TextEffectCollection>
+        </TextBlock.TextEffects> O
+  </TextBlock>
+  <TextBlock Name="Animate3" TextWrapping="WrapWithOverflow" FontSize="50" Canvas.Top="400"
+   Canvas.Left="0" FontWeight="Bold">
+        <TextBlock.Foreground>
+           <RadialGradientBrush>
+                        <RadialGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="Red"    Offset="0" />
+                            <GradientStop Color="Blue"   Offset="0.25" />
+                            <GradientStop Color="Orange" Offset="0.75" />
+                            <GradientStop Color="Yellow" Offset="1" />
+                        </GradientStopCollection>
+                        </RadialGradientBrush.GradientStops>         
+           </RadialGradientBrush>
+        </TextBlock.Foreground>
+        <TextBlock.TextEffects>
+            <TextEffectCollection>
+                <TextEffect PositionStart="0" PositionCount="5">
+                    <TextEffect.Transform>
+                            <TranslateTransform x:Name="AnimatedAnimatable" X="0" Y="0" />
+                    </TextEffect.Transform>
+                </TextEffect>
+            </TextEffectCollection>
+        </TextBlock.TextEffects> Slide
+  </TextBlock>
+  <Rectangle Canvas.Top="0" Canvas.Left="200" Width="10" Height="10" Fill="Red" />
+</Canvas>

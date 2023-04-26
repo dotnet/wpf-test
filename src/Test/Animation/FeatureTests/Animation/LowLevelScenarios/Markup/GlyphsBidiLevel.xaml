@@ -1,0 +1,65 @@
+<Canvas xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+        Background  = "LemonChiffon">
+        
+  <Glyphs 
+        Name                = "glyphs1"
+        FontUri             = "C:\Windows\Fonts\arial.TTF" 
+        FontRenderingEmSize = "20"
+        OriginX             = "150"
+        OriginY             = "50"
+        BidiLevel           = "1"
+        Fill                = "Black"
+        UnicodeString       = "Hello World!">
+        <Glyphs.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <Int32Animation
+                                     Storyboard.TargetProperty  = "(Glyphs.BidiLevel)"
+                                     BeginTime                  = "0:0:0"
+                                     Duration                   = "0:0:1"
+                                     From                       = "1"
+                                     To                         = "2">
+                                </Int32Animation>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Glyphs.Triggers>
+  </Glyphs>
+  
+  <Glyphs 
+        Name                = "glyphs2"
+        FontUri             = "C:\Windows\Fonts\arial.TTF" 
+        FontRenderingEmSize = "20"
+        OriginX             = "150"
+        OriginY             = "200"
+        BidiLevel           = "2"
+        Fill                = "Red"
+        UnicodeString       = "Hello World!">
+        <Glyphs.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <Int32Animation
+                                     Storyboard.TargetProperty  = "(Glyphs.BidiLevel)"
+                                     BeginTime                  = "0:0:0"
+                                     Duration                   = "0:0:1"
+                                     From                       = "2"
+                                     To                         = "1">
+                                </Int32Animation>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Glyphs.Triggers>
+  </Glyphs>
+
+</Canvas>

@@ -1,0 +1,51 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 60 AngleX"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Black">
+    
+    <Canvas>
+        <Border
+            BorderBrush     = "#FFFFAACC"
+            BorderThickness = "1px"
+            Canvas.Top      = "0"
+            Canvas.Left     = "0">
+            <TextBlock
+                Name            = "TargetElement"
+                Height          = "100"
+                Width           = "300"
+                FontFamily      = "Tahoma"
+                FontSize        = "36"
+                Foreground      = "Blue"
+                Background      = "Navy"
+                TextAlignment   = "Right"
+                >Londo Mollari
+                <TextBlock.LayoutTransform>
+                    <SkewTransform x:Name="AnimatedAnimatable" AngleX="0" />
+                </TextBlock.LayoutTransform>
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty   = "(TextBlock.LayoutTransform).(SkewTransform.AngleX)"
+                                            From                        = "0"
+                                            To                          = "60"
+                                            FillBehavior                = "HoldEnd"
+                                            BeginTime                   = "0:0:2"
+                                            Duration                    = "0:0:4" />
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+        </Border>
+    </Canvas>
+    
+</Page>
+     

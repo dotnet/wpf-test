@@ -1,0 +1,54 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Moccasin" >
+
+    <Decorator Name="Animate1" Canvas.Top="20" Canvas.Left="200">
+        <Decorator.RenderTransform>
+            <ScaleTransform />
+        </Decorator.RenderTransform>
+        <Canvas Background="Green" Height="150" Width="150"><Button>Avalon!</Button></Canvas>
+        <Decorator.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Decorator.RenderTransform).(ScaleTransform.ScaleX)"
+                                BeginTime="0:1:0"
+                                Duration="0:0:8"
+                                From="1"
+                                To="3">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Decorator.Triggers>
+    </Decorator>
+     
+    <Decorator Name="Animate2" Canvas.Top="220" Canvas.Left="200">
+        <Decorator.RenderTransform>
+            <ScaleTransform />
+        </Decorator.RenderTransform>
+        <Canvas Background="Blue" Height="150" Width="150"><Button>Avalon!</Button></Canvas>
+        <Decorator.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="(Decorator.RenderTransform).(ScaleTransform.ScaleY)"
+                            BeginTime="0:0:0"
+                            Duration="0:0:8"
+                            From="1"
+                            To="3" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        </Decorator.Triggers>
+    </Decorator>
+     
+</tst:CustomCanvas>

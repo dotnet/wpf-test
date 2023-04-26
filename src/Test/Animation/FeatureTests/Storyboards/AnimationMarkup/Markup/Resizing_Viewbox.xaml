@@ -1,0 +1,39 @@
+<Grid
+    Name            = "Root"
+    Tag             = "Double 200 Width"
+    xmlns           = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x         = 'http://schemas.microsoft.com/winfx/2006/xaml'
+    ShowGridLines   = "true"> 
+    
+    <Grid.ColumnDefinitions>
+    <ColumnDefinition />
+    <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+
+    <Border BorderThickness="2" BorderBrush="Blue" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Viewbox Width="0" Name="AnimatedFE">
+            <TextBlock Foreground="OrangeRed">This is test</TextBlock>
+        </Viewbox>
+    </Border>
+
+    <Grid.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(Viewbox.Width)"
+                                Storyboard.TargetName       = "AnimatedFE"
+                                To                          = "200"
+                                BeginTime                   = "00:00:02"
+                                Duration                    = "00:00:04"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Grid.Triggers>
+
+</Grid>

@@ -1,0 +1,33 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Black" >
+    
+    <Canvas Background="Navy">
+        <Canvas.Resources>
+            <Storyboard x:Key="AnimOpacity">
+                <DoubleAnimation
+                    Storyboard.TargetProperty="(Polyline.Opacity)"
+                    Storyboard.TargetName="Animate"
+                    To="1"
+                    BeginTime="0:1:3"
+                    Duration="0:0:2"
+                      />
+            </Storyboard>
+        </Canvas.Resources>
+
+        <Polyline Name="Animate" Style="{DynamicResource StyleKey}" Points="30, 70, 60, 80, 90, 70" Opacity="0" StrokeThickness="10" Stroke="Purple">
+            <Polyline.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{DynamicResource AnimOpacity}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Polyline.Triggers>
+        </Polyline>
+    
+    </Canvas>
+    
+</tst:CustomCanvas>

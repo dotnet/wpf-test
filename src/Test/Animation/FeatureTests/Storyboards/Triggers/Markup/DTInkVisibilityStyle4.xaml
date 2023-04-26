@@ -1,0 +1,33 @@
+<!-- DataTrigger with StaticResource pointing to a Style containing a Trigger, pointing to a Storyboard in a Resource (Static)  -->
+<Page
+    Name    = "Root"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Page.Resources>
+        <Storyboard x:Key="RectStory">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0"  Value="{x:Static Visibility.Collapsed}" />
+                <DiscreteObjectKeyFrame KeyTime="0:0:3"  Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>  
+
+        <Style x:Key="RectStyle" TargetType="{x:Type InkCanvas}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=TargetElement, Path=IsFocused}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource RectStory}" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
+    <DockPanel Background="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
+    
+        <InkCanvas Name="TargetElement" Background="White" Style="{StaticResource RectStyle}" Height="150" Width="150"/>
+        <InkCanvas Name="FocusElement"  Background="Blue" Height="150" Width="150"/>
+
+    </DockPanel>
+    
+</Page>

@@ -1,0 +1,40 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 100 Width"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "LightSeaGreen">
+
+    <Canvas>
+        <TextBlock
+            Name            = "AnimatedFE"
+            Height          = "100"
+            Width           = "0"
+            Background      = "MediumTurquoise"
+            Canvas.Top      = "0"
+            Canvas.Left     = "0"
+            FontFamily      = "Comic Sans MS"
+            FontSize        = "48"
+            Foreground      = "White">WPF
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(TextBlock.Width)"
+                                        By                          = "100"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+    </Canvas>
+     
+</Page>

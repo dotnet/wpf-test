@@ -1,0 +1,41 @@
+ 
+<Grid
+    Name            = "Root"
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+    > 
+    <Grid.Resources>
+        <Style x:Key="GelButton" TargetType="{x:Type Button}">
+            <Setter Property="Button.RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform x:Name="AnimatedAnimatable" CenterX="0" CenterY="0" ScaleX="1" ScaleY="1" />
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>    
+                                <DoubleAnimation Duration="5:5:5" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)" To="1.5" AccelerationRatio=".9" />
+                                <DoubleAnimation Duration="0:0:4" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)" To="1.5" AccelerationRatio=".9" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>    
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleX)" AccelerationRatio=".9" />
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="(Button.RenderTransform).(ScaleTransform.ScaleY)" AccelerationRatio=".9" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Grid.Resources>
+
+<Button Style="{StaticResource GelButton}" Width="100" Height="100"/>
+
+</Grid>

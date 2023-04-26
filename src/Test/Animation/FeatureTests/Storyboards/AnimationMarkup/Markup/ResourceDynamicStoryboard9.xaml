@@ -1,0 +1,53 @@
+<!-- Storyboard inside Page Resources: Multiple Storyboards, Same Target (Dynamic) -->
+
+<Page
+    Name    = "Root"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag     = "Double 100 Width">
+    
+    <Canvas Background="White">
+        <Canvas.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="DodgerBlue" />
+                <Setter Property="Opacity"    Value="0" />
+            </Style>
+
+            <Storyboard x:Key="AnimOpacity1">
+                <DoubleAnimation
+                    Storyboard.TargetProperty   = "(Button.Opacity)"
+                    Storyboard.TargetName       = "AnimatedFE"
+                    To                          = "1"
+                    BeginTime                   = "0:0:2"
+                    Duration                    = "0:0:4"
+                      />
+            </Storyboard>
+            <Storyboard x:Key="AnimOpacity2">
+                <DoubleAnimation
+                    Storyboard.TargetProperty   = "(Button.Width)"
+                    Storyboard.TargetName       = "AnimatedFE"
+                    To                          = "100"
+                    BeginTime                   = "0:0:2"
+                    Duration                    = "0:0:4"
+                      />
+            </Storyboard>
+        </Canvas.Resources>
+
+        <Canvas.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Storyboard="{DynamicResource AnimOpacity1}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Storyboard="{DynamicResource AnimOpacity2}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Canvas.Triggers>
+ 
+        <Button Name='AnimatedFE' Height="100" Width="0" />
+    
+    </Canvas>
+    
+</Page>

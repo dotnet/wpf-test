@@ -1,0 +1,42 @@
+<!-- Bind multiple DOs to a single animating DO - DoubleAnimation -->
+<Page
+    Name        = "Root"
+    Tag         = "Double 200 Height"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "DarkSlateBlue">
+    
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Width" TargetName="TargetElement">
+                        <DoubleAnimation
+                             BeginTime                      = "0:0:2"
+                             Duration                       = "0:0:3.75"
+                             To                             = "200"
+                             />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+    
+    <Canvas>
+        <Ellipse
+            Name        = "TargetElement"
+            Fill        = "DarkTurquoise"
+            Canvas.Top  = "100"
+            Canvas.Left = "150"
+            Height      = "150"
+            Width       = "100">
+        </Ellipse>
+        
+        <Rectangle Fill="Azure" Height="{Binding ElementName=TargetElement, Path=&apos;Width&apos;}" Width="100" Canvas.Top="100" />
+
+        <!-- "Animated" via Binding to the TargetElement -->
+        <Button Name='AnimatedFE' Background="LightBlue" Height="{Binding ElementName=TargetElement, Path=&apos;Width&apos;}" Canvas.Top="0" >Avalon!</Button>
+
+    </Canvas>
+
+</Page>
