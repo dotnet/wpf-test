@@ -7,14 +7,14 @@ https://dnceng-public.visualstudio.com/public/_build?definitionId=81
 
 This repository contains the source code of the tests for WPF UI Framework. It has the test infrastructure and different suites of tests ( DRTs, Microsuites and Feature Tests) for testing different areas of WPF. 
 
-This repo is currently under the process of being open-sourced. We are tracking the progress here []()
+This repo is currently under the process of being open-sourced. We are tracking the progress here [Test Repository Migration](https://github.com/orgs/dotnet/projects/145)
 
 
 ## Getting started
 
 * [Building, Debugging and Testing](docs/getting-started.md)
 * [Test Infrastructure Notes](docs/test-infrastructure.md)
-* [Test Suites Categorization](docs/tests-suites-categorization.md)
+* [Test Suites and Test Categorization](docs/tests-suites.md)
 * [New Test Coverage Guideline](docs/test-coverage-addition.md)
 
 
@@ -23,7 +23,7 @@ This repo is currently under the process of being open-sourced. We are tracking 
 In order to run the tests on your local machine,
 
 - Build the tests with `build.cmd` script. Use `/help` parameter to check the different arguments that can be passed along with the build command.
-- cd into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test` and run `RunDrts.cmd` to run the tests. You can use `/Area` and `/Name` parameters to run tests from a specific area or with a certain name.
+- cd into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test` and run `RunDrts.cmd` to run the DRT tests.
 
 At the end of the run, you should see something like this:
 
@@ -40,7 +40,7 @@ Once the tests run, the results are generated here `C:\Users\$(CurrentUser)\AppD
 
 ## Contributing
 
-Some of the best ways to contribute are to try things out, file bugs and fix issues. Since not all the tests have been ported yet, we maintain an internal repo of test code along with this repo. Both core team members and external contributors shall send pull requests here, which will be reviewed and then backported to internal repo as well.
+Some of the best ways to contribute are to try things out, file bugs and fix issues. Since not all the tests have been ported yet, we maintain an internal repo of test code along with this repo. Both core team members and external contributors shall **send pull requests here**, which will be reviewed and then backported to internal repo as well.
 
 In order to start contributing directly to the code base, checkout the [contributing guide](docs/getting-started.md)
 

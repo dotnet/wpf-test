@@ -2,7 +2,8 @@
 
 The tests in this repo belong to one of these main categories : 
 
-- **DRT ( Daily Regression Tests)**
+- **DRT ( Daily Regression Tests)** : This is a small suite of tests, that are meant to cover the most basic scenarios of different components of WPF. The general idea, regarding this test suite is to provide a basic validation that the changes are not causing regressions. There are around 90 DRTs, and it takes roughly 20-40 mins to run the whole suite.
+   
 - **Feature Tests**
   - **Microsuites**
   - **P0/P1/..** 
