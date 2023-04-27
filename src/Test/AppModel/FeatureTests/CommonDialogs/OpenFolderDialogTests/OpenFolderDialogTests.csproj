@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Microsoft.Test.WPF.AppModel.CommonDialogs</RootNamespace>
+    <AssemblyName>OpenFolderDialogTests</AssemblyName>
+    <PublishDir>$(PublishDir)\OpenFolderDialogTests</PublishDir>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="TestAppDef.xaml" />
+    <Compile Include="..\CommonDialogs\Common.cs" />
+    <Compile Include="..\DialogTests\baseclasses.cs" />
+    <Compile Include="TestAppDef.xaml.cs" />
+    <Compile Include="FolderDialogVerifyHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="OpenFolderDialogCustomPlaceTest.xaml.cs" />
+    <Page Include="OpenFolderDialogCustomPlaceTest.xaml" />
+    <Compile Include="OpenFolderDialogAllCustomPlacesTest.xaml.cs" />
+    <Page Include="OpenFolderDialogAllCustomPlacesTest.xaml" />
+    <Compile Include="OpenFolderDialogMultiSelect.xaml.cs" />
+    <Page Include="OpenFolderDialogMultiSelect.xaml" />
+    <Compile Include="OpenFolderDialogCancelTest.xaml.cs" />
+    <Page Include="OpenFolderDialogCancelTest.xaml" />
+  </ItemGroup>
+
+  <!-- <ItemGroup>
+    <Content Include="testdata">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>   -->
+
+  <ItemGroup>
+        <ProjectReference Include="$(InternalUtilitiesProject)" />
+        <ProjectReference Include="$(TestContractsProject)" />
+        <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+
+</Project>

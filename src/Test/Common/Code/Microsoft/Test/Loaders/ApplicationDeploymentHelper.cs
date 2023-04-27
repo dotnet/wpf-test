@@ -55,6 +55,7 @@ namespace Microsoft.Test.Loaders
         private static string cancelPageUIButtonName = null;
         private static string openFileDialogTitle = null;
         private static string saveFileDialogTitle = null;
+        private static string openFolderDialogTitle = null;
         #endregion
 
         #region Private Methods
@@ -495,6 +496,22 @@ namespace Microsoft.Test.Loaders
                 return saveFileDialogTitle;
             }
         }
+
+        /// <summary>
+        /// Returns the correct title for the ComDlg32.dll Open File Dialog
+        /// </summary>
+        public static string OpenFolderDialogTitle
+        {
+            get
+            {
+                if (openFolderDialogTitle == null)
+                {
+                    openFolderDialogTitle = "Select Folder";
+                }
+                return openFolderDialogTitle;
+            }
+        }
+
 
         // Methods for extracting the localized text for the Browser-app exception page
         /// <summary>
