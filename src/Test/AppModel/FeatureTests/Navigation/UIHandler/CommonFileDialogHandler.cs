@@ -298,7 +298,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.BVT
                 {
                     //conditional for running against WPF4 vs 3.  V3 should use "saveTextBoxId".  V4 on Vista needs "vistaSaveTextBoxId".
 #if TESTBUILD_CLR20
-                    return TypeFileNameAndPressButton(param, SAVEBUTTONNAME, OK_AUTOID, saveTextBoxId, hWnd);
+                    return TypeFileNameAndPressButton(param, s_SAVEBUTTONNAME, s_OK_AUTOID, s_saveTextBoxId, hWnd);
 #else
                     return TypeFileNameAndPressButton(param, s_SAVEBUTTONNAME, s_OK_AUTOID, s_vistaSaveTextBoxId, hWnd);
 #endif
@@ -338,7 +338,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.BVT
                 {
                     //conditional for running against WPF4 vs 3.  V3 should use "saveTextBoxId".  V4 on Vista needs "vistaSaveTextBoxId".
 #if TESTBUILD_CLR20
-                    return TypeFileNameAndPressButton(param, CANCELBUTTONNAME, CANCEL_AUTOID, saveTextBoxId, hWnd);
+                    return TypeFileNameAndPressButton(param, s_CANCELBUTTONNAME, s_CANCEL_AUTOID, s_saveTextBoxId, hWnd);
 #else
                     return TypeFileNameAndPressButton(param, s_CANCELBUTTONNAME, s_CANCEL_AUTOID, s_vistaSaveTextBoxId, hWnd);
 #endif
@@ -437,7 +437,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.BVT
                 else //we're on Vista or newer, should see Vista-style dialog
                 {
 #if TESTBUILD_CLR20
-                    return TypeFileNameAndPressButton(param, SAVEBUTTONNAME, OK_AUTOID, saveTextBoxId, hWnd);
+                    return TypeFileNameAndPressButton(param, s_SAVEBUTTONNAME, s_OK_AUTOID, s_saveTextBoxId, hWnd);
 #else
                     return TypeFileNameAndPressButton(param, s_SAVEBUTTONNAME, s_OK_AUTOID, s_vistaSaveTextBoxId, hWnd);
 #endif

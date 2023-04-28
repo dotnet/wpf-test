@@ -25,7 +25,6 @@ namespace Microsoft.Wpf.AppModel.CommonDialogs
         /// [2] grabbing the currentTest type, so we can set the Application StartupUri
         /// [3] grabbing a reference to the Application (so we can later grab a reference to the NavWin)
         /// [4] registering application-level eventhandlers
-        /// [5] creating test data structure
         /// </summary>
         protected override void OnStartup(StartupEventArgs e)
         {

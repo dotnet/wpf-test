@@ -498,15 +498,24 @@ namespace Microsoft.Test.Loaders
         }
 
         /// <summary>
-        /// Returns the correct title for the ComDlg32.dll Open File Dialog
+        /// Returns the correct title for the ComDlg32.dll Open Folder Dialog
         /// </summary>
         public static string OpenFolderDialogTitle
         {
             get
             {
-                if (openFolderDialogTitle == null)
+                if (saveFileDialogTitle == null)
                 {
-                    openFolderDialogTitle = "Select Folder";
+                    try
+                    {
+                        // 439 = String resource ID for Select Folder in ComDlg32
+                        saveFileDialogTitle = getComDlgStringResource(439).Replace("(&S)", "").Replace("&", "");
+                    }
+                    // Fall back to English.  This is good because the #1 reason we have to fall back is lack of LOC resources
+                    catch
+                    {
+                        saveFileDialogTitle = "Select Folder";
+                    }
                 }
                 return openFolderDialogTitle;
             }

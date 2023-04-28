@@ -16,7 +16,7 @@ namespace Microsoft.Wpf.AppModel.CommonDialogs
         OpenFolderDialog folderDialog = null;
 
         private static string folderName = "testdata";
-        private static string[] expextedFileNames = new string[] {"dir1", "dir3"};
+        private static string[] expectedSafeFileNames = new string[] {"dir1", "dir3"};
         
         private void OnLoadedShowOpenFolderDlg(object sender, RoutedEventArgs e)
         {     
@@ -45,7 +45,7 @@ namespace Microsoft.Wpf.AppModel.CommonDialogs
             
             // Set starting dir to current directory so that previous tests do not
             // affect the starting location of the OpenFolderDialog
-            string initialDirectory = Path.Combine(Directory.GetCurrentDirectory(), "testdata");
+            string initialDirectory = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             folderDialog.InitialDirectory = initialDirectory;
 
             // setting multiselect on dialog
@@ -62,11 +62,24 @@ namespace Microsoft.Wpf.AppModel.CommonDialogs
             // [1] check multiple files are selected
             GlobalLog.LogEvidence("Checking the number of files selected ...");
             testResult = folderDialog.FileNames.Length > 1;
+            
+            if(!testResult)
+            {
+                statusText.Text = "Expected multiple files to be returned. Actual Count :" + folderDialog.FileNames.Length;
+                Common.ExitWithError(statusText.Text);
+            }
 
             // [2] check selected Folders
             GlobalLog.LogEvidence("Checking if the selected folders are the expected ones...");
-            testResult = testResult && FolderDialogVerifyHelper.CheckSelectedFolders(folderDialog.FileNames, expextedFileNames);
-            
+            GlobalLog.LogEvidence("Selected Folders : ");
+            GlobalLog.LogEvidence(string.Join("\n", folderDialog.FileNames));
+
+            string initialDirectory = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            string[] expectedFileNames = FolderDialogVerifyHelper.GetFileNamesFromSafeFileNames(initialDirectory, expectedSafeFileNames);
+
+            testResult = FolderDialogVerifyHelper.CheckSelectedFolders(folderDialog.FileNames, expectedFileNames);
+            testResult = testResult && FolderDialogVerifyHelper.CheckSelectedFolders(folderDialog.SafeFileNames, expectedSafeFileNames);
+
             if (!testResult)
             {
                 Common.ExitWithError(statusText.Text);
