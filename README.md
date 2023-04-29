@@ -1,7 +1,5 @@
 # Windows Presentation Foundation (WPF) Test
 
-https://dnceng-public.visualstudio.com/public/_build?definitionId=81
-
 [![Build Status](https://dnceng-public.visualstudio.com/public/_apis/build/status/dotnet/wpf/dotnet.wpf-test%20CI)](https://dnceng-public.visualstudio.com/public/_build?definitionId=81)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/dotnet/wpf/blob/master/LICENSE.TXT)
 
@@ -15,7 +13,7 @@ This repo is currently under the process of being open-sourced. We are tracking 
 * [Building, Debugging and Testing](docs/getting-started.md)
 * [Test Infrastructure Notes](docs/test-infrastructure.md)
 * [Test Suites and Test Categorization](docs/tests-suites.md)
-* [New Test Coverage Guideline](docs/test-coverage-addition.md)
+* [New Test Addition Guideline](docs/test-addition-guidelines.md)
 
 
 ## Quickstart
