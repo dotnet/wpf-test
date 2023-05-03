@@ -10,7 +10,8 @@ This repo is currently under the process of being open-sourced. We are tracking 
 
 ## Getting started
 
-* [Building, Debugging and Testing](docs/getting-started.md)
+* [Developer Guide](docs/developer-guide.md)
+* [Building, Debugging and Testing](docs/building-running-debugging.md)
 * [Test Infrastructure Notes](docs/test-infrastructure.md)
 * [Test Suites and Test Categorization](docs/tests-suites.md)
 * [New Test Addition Guideline](docs/test-addition-guidelines.md)

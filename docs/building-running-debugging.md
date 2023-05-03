@@ -1,5 +1,9 @@
 # Building, Running Tests
 
+## Prerequisites
+
+Follow the prerequisites listed at [Machine Setup](developer-guide.md) before building the repo.
+
 ## Building Tests
 
 In the root of the repo, we have a script `build.cmd` which works similar to the build scripts in other dotnet repos.
@@ -46,9 +50,9 @@ Test
  |      |-- ...
  |      
  |--  Infra
- |--  CTRunDrts.cmd
+ |--  CIRunDrts.cmd            // For running tests in CI
  |--  CommonData.deps.json
- |--  DiscoveryInfor.xaml
+ |--  DiscoveryInfo.xml
  |--  DiscoverInfoDrts.xml
  |--  DQV.cmd
  |--  QV.cmd
@@ -59,11 +63,31 @@ Test
  |--  RunTestsDebug.cmd
 ```
 
-By self-contained we mean, you can copy this folder to any machine with WPF installed and use `.\RunDrts.cmd` and `.\RunTests.cmd` to run the tests. 
+- `RunDrts.cmd` and `RunTests.cmd` : These are used to runthe DRTs and Feature Tests respectively. These files call `QV.cmd` which is responsible for lauching the test infra.
+- `RunDrtsDebug.cmd` and `RunTestsDebug.cmd` : They are similar to `RunDrts.cmd` and `RunTests.cmd`, the only difference being that they use `DQV.cmd` ( Debug Quality Vault ) to run the tests. These files are used when we need to debug the **test infrastructure**.
+- `QV.cmd` and `DQV.cmd`: These scripts are responsible for an xcopy deployment of QualityVault ( test infra ). They are not supposed to be used directly. Developers\testers need to call `RunDrts*` or `RunTests*` to run the tests. The difference between these two is that `DQV.cmd` launches the test infra with a debugger attached.
+- `DiscoveryInfoDrts.xml` and `DiscoveryInfo.xml` : These file are used by the test infra to discover all the tests that need to be run for the current command. 
+- `Common` and `Infra` :  These folders contain binaries corresponsing to the test infrastructure.
+- `DRT` : Contains all the files required for running the DRT Test suite.
+- `FeatureTests` : Consists of subdirectories corresponding to each feature area. Each subdirectory contains the files required by that area to run the tests specific to that area.
+
+*PS: By self-contained we mean, you can copy this folder to any machine with WPF installed and use `.\RunDrts.cmd` and `.\RunTests.cmd` to run the tests.*
 
 ## Running Tests
 
-Once, you have built the tests,`cd` into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test`. and run `RunDrts.cmd` to run the tests. You can use `/Area` and `/Name` parameters to run tests from a specific area or with a certain name.
+Once, you have built the tests,`cd` into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test`. and run the tests using `RunDrts.cmd` or `RunTests.cmd`. `RunDrts.cmd` will run the DRT test suite whereas `RunTests.cmd` are used to run feature tests.
+
+### Running DRTs
+
+### Running Feature Tests
+
+### Running Microsuites
+
+### Running P0/P1/.. tests
+
+### Running specific tests
+
+ You can use `/Area` and `/Name` parameters to run tests from a specific area or with a certain name.
 
 At the end of the run, you should see something like this:
 
@@ -75,6 +99,10 @@ At the end of the run, you should see something like this:
    Ignore: 0
 
 ```
+
+### Running tests on locally built WPF assemblies
+
+### Debugging Tests
 
 If there were any failures, run the tests manually with the `/debugtests` flag using the `RunDrts.cmd` script. Note that you do not run the `RunDrtsDebug` script, as this will debug the test infrastructure, `QualityVault`. When you pass the `/debugtests` flag, a cmd window will open where you can open the test executable in Visual Studio and debug it. When the cmd pops up, you will see instructions for debugging using a few different commands, however these commands will enable you to debug the `Simple Test Invocation` executable, `sti.exe`, which simply launches the test executable you are most likely interested in debugging. Using `DrtXaml.exe` as an example, this is how you can debug the test executable. Any MSBuild style properties should be replaced with actual values:
 
