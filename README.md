@@ -10,7 +10,7 @@ This repo is currently under the process of being open-sourced. We are tracking 
 
 ## Getting started
 
-Follow the [Developer Guide](docs/developer-guide.md) instrutions for machine setup and understanding the workflow.
+Follow the [Developer Guide](docs/developer-guide.md) instructions for machine setup and understanding the workflow.
 
 ### Quickstart
 
@@ -32,7 +32,7 @@ At the end of the run, you should see something like this:
 
 Once the tests run, the results are generated here `C:\Users\$(CurrentUser)\AppData\Roaming\QualityVault\Run\Report`. You can see the result of the run in `testResults.xml` file.
 
-Check out the [building, running and deugging tests](docs/building-running-debugging.md) doc for more information.
+Check out the [building, running and debugging tests](docs/building-running-debugging.md) doc for more information.
 
 For more information regarding the test infrastructure and test addition guidelines, check out the following docs:
 

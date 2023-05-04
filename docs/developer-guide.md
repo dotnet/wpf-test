@@ -23,4 +23,6 @@ You first need to [fork][fork] then [clone][clone] this Windows Forms repository
 
 ## More Information
 
---
+* [Test Infrastructure Notes](docs/test-infrastructure.md)
+* [Test Suites and Categorization](docs/tests-suites.md)
+* [New Test Addition Guideline](docs/test-addition-guidelines.md)

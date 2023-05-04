@@ -8,9 +8,9 @@ We always welcome bug reports and overall feedback. Here are a few tips on how y
 
 Test failures can mean either of two things: 
 - There is a bug in WPF product itself.
-- Or, the tests are failing due to test infra issues ( tests may not have been updated to reflect new behaviour in WPF, test infra is failing, updates in drivers and dependencies).
+- Or, the tests are failing due to test infra issues ( tests may not have been updated to reflect new behavior in WPF, test infra is failing, updates in drivers and dependencies).
 
-For any such case, please [file an issue]() in this repository. Depending on the nature of failure, the issue may be transferred to dotnet/wpf repo.
+For any such case, please [file an issue](https://github.com/dotnet/wpf-test/issues) in this repository. Depending on the nature of failure, the issue may be transferred to dotnet/wpf repo.
 
 ### Finding Existing Issues
 
@@ -34,13 +34,11 @@ When ready to submit a bug report, please use the [Bug Report issue template]().
 
 Project maintainers will merge changes that improve the product significantly.
 
-The [Pull Request Guide](docs/workflow/pr-guide.md) and [Copyright](docs/project/copyright.md) docs define additional guidance.
-
 ### DOs and DON'Ts
 
 Please do:
 
-* **DO** follow our [coding style]() (C# code-specific).
+* **DO** follow our [coding style](https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/coding-style.md) (C# code-specific).
 * **DO** give priority to the current style of the project or file you're changing even if it diverges from the general guidelines.
 * **DO** keep the discussions focused. When a new or related topic comes up
   it's often better to create new issue than to side track the discussion.
@@ -137,4 +135,4 @@ Microsoft team and community members will provide feedback on your change. Commu
 
 One or more Microsoft team members will review every PR prior to merge. They will often reply with "LGTM, modulo comments". That means that the PR will be merged once the feedback is resolved. "LGTM" == "looks good to me".
 
-There are lots of thoughts and [approaches]() for how to efficiently discuss changes. It is best to be clear and explicit with your feedback. Please be patient with people who might not understand the finer details about your approach to feedback.
+There are lots of thoughts and approaches for how to efficiently discuss changes. It is best to be clear and explicit with your feedback. Please be patient with people who might not understand the finer details about your approach to feedback.

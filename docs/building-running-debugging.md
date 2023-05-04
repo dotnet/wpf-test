@@ -14,7 +14,7 @@ For building the tests, you can simply execute the following command:
 ```
 
 where, 
-  `$(Configration)` can be either 'Debug' or 'Release',
+  `$(Configuration)` can be either 'Debug' or 'Release',
   `$(Platform)` can be x86 or x64
 
 Use `/help` parameter to check the different arguments that can be passed along with the build command.
@@ -27,9 +27,9 @@ In order to build the tests for a single area, use the `-projects` argument like
 ```
   .\build.cmd -project .\src\Test\Annotations.sln
 ```
-Each area has it's own sln file which can be used to build the area seperately.
+Each area has it's own sln file which can be used to build the area separately.
 
-As of now we don't have a seperate sln file for DRTs 
+As of now we don't have a separate .sln file for DRTs 
 
 ### Understanding build outputs
 
@@ -63,11 +63,11 @@ Test
  |--  RunTestsDebug.cmd
 ```
 
-- `RunDrts.cmd` and `RunTests.cmd` : These are used to runthe DRTs and Feature Tests respectively. These files call `QV.cmd` which is responsible for lauching the test infra.
+- `RunDrts.cmd` and `RunTests.cmd` : These are used to run the DRTs and Feature Tests respectively. These files call `QV.cmd` which is responsible for launching the test infra.
 - `RunDrtsDebug.cmd` and `RunTestsDebug.cmd` : They are similar to `RunDrts.cmd` and `RunTests.cmd`, the only difference being that they use `DQV.cmd` ( Debug Quality Vault ) to run the tests. These files are used when we need to debug the **test infrastructure**.
 - `QV.cmd` and `DQV.cmd`: These scripts are responsible for an xcopy deployment of QualityVault ( test infra ). They are not supposed to be used directly. Developers\testers need to call `RunDrts*` or `RunTests*` to run the tests. The difference between these two is that `DQV.cmd` launches the test infra with a debugger attached.
 - `DiscoveryInfoDrts.xml` and `DiscoveryInfo.xml` : These file are used by the test infra to discover all the tests that need to be run for the current command. 
-- `Common` and `Infra` :  These folders contain binaries corresponsing to the test infrastructure.
+- `Common` and `Infra` :  These folders contain binaries corresponding to the test infrastructure.
 - `DRT` : Contains all the files required for running the DRT Test suite.
 - `FeatureTests` : Consists of subdirectories corresponding to each feature area. Each subdirectory contains the files required by that area to run the tests specific to that area.
 
@@ -80,7 +80,7 @@ Once, you have built the tests,`cd` into `$(RepoRoot)\publish\test\$(Configurati
 At the end of the run, you should see something like this:
 
 ```
-  A total of 84 test Infos were processed, with the following results.
+  A total of 84 test infos were processed, with the following results.
    Passed: 84
    Failed (need to analyze): 0
    Failed (with BugIDs): 0
@@ -95,7 +95,7 @@ Once the tests run, the results are generated here `C:\Users\$(CurrentUser)\AppD
 
 ### Running DRTs, Feature Tests and MicroSuites:
 
-Once, you have opened `cmd` with admin privileges and nativated to `$(TestBinDir)` you can use the following to run the different suites:
+Once, you have opened `cmd` with admin privileges and navigated to `$(TestBinDir)` you can use the following to run the different suites:
 
 * To run DRT suite:
   ```
@@ -173,7 +173,7 @@ $(RunDirectory)
 - `$(RunDirectory)\<desktop-name>` : Contains all the data from the run. This directory is generated while the tests are running and support files or other data needed for tests are copied here for running that test.
 - `$(RunDirectory)\Report` : Contains all the report files generated after the tests execution is complete.
 - `AreaReport` : Area specific reports related to the tests.
-- `AreaReport\TestInfos` : Test infos for the failed tests are stored here.
+- `AreaReport\TestInfos` : Test Infos for the failed tests are stored here.
 - `AreaReport\<area>VariationReport.xml` : Area specific test run summary of the results.
 - `DrtReport.xml` : Contains the result of `RunDrts.cmd` command.
 - `FilteringReport.xml` : List of tests that are ignored. A test can be ignored either if it is disabled or else when it is filtered out ( this happens when we pass in arguments `/Area`, `/Subarea` or `/Name` )
@@ -186,7 +186,7 @@ For running tests on locally built WPF assemblies, the rest of the process ( bui
 
 ### Replace locally built WPF binaries to your local SDK installation
 
-Clone and build [WPF]() repo using `build.cmd` and copy the resulting assembly(-ies) to your local SDK installation
+Clone and build [WPF](https://github.com/dotnet/wpf) repo using `build.cmd` and copy the resulting assembly(-ies) to your local SDK installation
 
 - Built assemblies are located at :
     - x86 and AnyCPU : `$(WpfRepoRoot)\artifacts\packaging\Debug\Microsoft.DotNet.Wpf.GitHub.Debug\lib\net8.0`
