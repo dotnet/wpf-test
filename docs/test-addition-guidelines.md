@@ -12,7 +12,7 @@ Writing tests for new public API changes is tricky because the installers/SDKs a
 
 1. **Build WPF binaries and copy your binaries into the local SDK**
 
-    Build WPF repo using `build.cmd` and copy the resulting assembly(-ies) from your to local SDK installation
+    Build WPF repo using `build.cmd` and copy the resulting assembly(-ies) to your local SDK installation
 
     - Built assemblies are located at :
         - x86 and AnyCPU : `$(RepoRoot)\artifacts\packaging\Debug\Microsoft.DotNet.Wpf.GitHub.Debug\lib\net8.0`
