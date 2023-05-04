@@ -7,7 +7,7 @@ The tests in this repo belong to one of these main categories :
    
 - **Feature Tests** : They are the bulk of all the WPF tests. They include various scenarios and are meant for testing each component ( area ) more rigourously. 
   - **Microsuites** : They are a very small subset of the feature tests and are intended to be run along with all the standard fixes. 
-  - **P0/P1/..** : All the tests in the suite have a priority ( 0,1,2,... ) assigned to them. P0 ( i.e. Priority 0 ) are the most important of the feature tests. Then comes P1, P2 and so on. 
+  - **P0/P1/..** : All the tests in the suite have a priority ( 0,1,2,3,4 ) assigned to them. P0 ( i.e. Priority 0 ) are the most important of the feature tests. Then comes P1, P2 and so on. 
 
 
 ## Categorization on the basis of area
@@ -34,7 +34,7 @@ Another categorization of the tests in this repo is on the basis of componenent 
 - Speech
 - Tablet
 - Text
-- XAML
+- XAML ( XamlV3 and XamlV4 )
 - WindowsFormsIntegration
 
 PS: *You can navigate to each area and see the subareas*

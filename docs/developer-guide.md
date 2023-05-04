@@ -4,7 +4,7 @@ The following document describes the setup and workflow that is recommended for 
 
 ## Machine Setup
 
-WPF requires the following workloads and components be selected when installing Visual Studio 2022 (17.0.0):
+WPF Test requires the following workloads and components be selected when installing Visual Studio 2022 (17.0.0):
 
 * Required Workloads: [wpf-test.vsconfig](wpf-test.vsconfig)
     *  Also see [Import or export installation configurations](https://docs.microsoft.com/en-us/visualstudio/install/import-export-installation-configurations?view=vs-2019)
@@ -17,9 +17,9 @@ We use the following workflow for building tests and running them against WPF as
 
 You first need to [fork][fork] then [clone][clone] this Windows Forms repository. This is a one-time task. This is a one-time task.
 
-1. [Build]() the repository.
-2. [Run]() the tests.
-3. [Debug]() the tests.
+1. [Build](building-running-debugging.md#building-tests) the repository.
+2. [Run](building-running-debugging.md#running-tests) the tests.
+3. [Debug](building-running-debugging.md#debugging-tests-and-test-infrastructure) the tests.
 
 ## More Information
 

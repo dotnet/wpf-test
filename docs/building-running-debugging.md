@@ -75,19 +75,7 @@ Test
 
 ## Running Tests
 
-Once, you have built the tests,`cd` into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test`. and run the tests using `RunDrts.cmd` or `RunTests.cmd`. `RunDrts.cmd` will run the DRT test suite whereas `RunTests.cmd` are used to run feature tests.
-
-### Running DRTs
-
-### Running Feature Tests
-
-### Running Microsuites
-
-### Running P0/P1/.. tests
-
-### Running specific tests
-
- You can use `/Area` and `/Name` parameters to run tests from a specific area or with a certain name.
+Once, you have built the tests,`cd` into `$(RepoRoot)\publish\test\$(Configuration)\$(Platform)\Test` ( from here onwards, we will be referring to this directory/path as `$(TestBinDir)` ) and run the tests using `RunDrts.cmd` or `RunTests.cmd`. 
 
 At the end of the run, you should see something like this:
 
@@ -97,25 +85,138 @@ At the end of the run, you should see something like this:
    Failed (need to analyze): 0
    Failed (with BugIDs): 0
    Ignore: 0
-
 ```
 
-### Running tests on locally built WPF assemblies
+Once the tests run, the results are generated here `C:\Users\$(CurrentUser)\AppData\Roaming\QualityVault\Run\Report`. You can see the result of the run in `testResults.xml` file.
 
-### Debugging Tests
+***NOTE: Some tests require the screen resolution to be set to 1920 x 1080.***
 
-If there were any failures, run the tests manually with the `/debugtests` flag using the `RunDrts.cmd` script. Note that you do not run the `RunDrtsDebug` script, as this will debug the test infrastructure, `QualityVault`. When you pass the `/debugtests` flag, a cmd window will open where you can open the test executable in Visual Studio and debug it. When the cmd pops up, you will see instructions for debugging using a few different commands, however these commands will enable you to debug the `Simple Test Invocation` executable, `sti.exe`, which simply launches the test executable you are most likely interested in debugging. Using `DrtXaml.exe` as an example, this is how you can debug the test executable. Any MSBuild style properties should be replaced with actual values:
+***NOTE: This requires being run from an admin window at the moment.***
+
+### Running DRTs, Feature Tests and MicroSuites:
+
+Once, you have opened `cmd` with admin privileges and nativated to `$(TestBinDir)` you can use the following to run the different suites:
+
+* To run DRT suite:
+  ```
+  .\RunDrts.cmd [/Area=<area-name>] [/SubArea=<subarea-name>] [/Name=<name-of-test>]
+  ```
+* To run Features Tests suite:
+  ```
+  .\RunTests.cmd [/Area=<area-name>] [/SubArea=<subarea-name>] [/Name=<name-of-test>]
+  ```
+* To run Microsuite tests:
+  ```
+  .\RunTests.cmd /Keywords=Microsuite [/Area=<area-name>] [/SubArea=<subarea-name>] [/Name=<name-of-test>]
+  ```
+* To run P0/P1/.. tests:
+  ```
+  .\RunTests.cmd /Priority=0,1 [/Area=<area-name>] [/SubArea=<subarea-name>] [/Name=<name-of-test>]
+  ```
+  This command above runs will run the P0 and P1 tests. The priorities range from 0-4.
+
+
+### Running specific tests
+
+When our changes are contained with one component, say controls like Datagrid, VSP or an area like XAML, data binding, we can avoid running the whole test suite by specifying the `/Area`, `/SubArea` and `/Name` arguments while running the `RunDrts.cmd` or `RunTests.cmd` scripts.
+
+Here are some examples:
+
+* `.\RunTests.cmd /Area=Controls /Subarea=Datagrid`
+    This will run all the feature tests related to Datagrid control.
+* `.\RunTests.cmd /Area=Controls /Subarea=VirtualizingStackPanel,VirtualizedScrolling`
+    This will run the feature tests related to virtualization and VSP
+* `.\RunTests.cmd /Area=XamlV3,XamlV4 /Keywords=Microsuite`
+    This will run the microsuites from XAML area ( PS : XAML area tests are included in 2 areas `XamlV3` and `XamlV4`)
+* `.\RunDrts.cmd /Name=DrtWindow`
+    This will run the DRT named `DrtWindow`.
+
+You can find the list of all the areas and subareas in [test suites](test-suites.md#categorization-on-the-basis-of-area).
+
+### Understanding run outputs
+
+When you run the tests all the run information are stored in a `RunDirectory`. By default, we use this `C:\Users\$(CurrentUser)\AppData\Roaming\QualityVault\Run` for storing all the run information.
+
+Once, the run tests command completes, reports for the tests are generated at `$(RunDirectory)\Report`. By default this location is `C:\Users\$(CurrentUser)\AppData\Roaming\QualityVault\Run\Report`.
+
+The general structure of the directory is as follows:
+```
+$(RunDirectory)
+ |
+ |--  RunInfo.xml
+ |--  TestCollection.xml
+ |
+ |--  <desktop-name>                  // Contains all the run data information
+ |
+ |--	Report                          // Contains the reports generated after the run
+    	 |--  AreaReport
+    	 |      |
+    	 |      |-- TestInfos
+    	 |      |-- TestLogs
+    	 |      |-- <area>VariationReport.xml
+    	 |      
+     	 |--  DrtReport.xml             // Only when you run RunDrts.cmd
+     	 |--  DrtReport.xsl            
+     	 |--  FilteringReport.xml           
+     	 |--  FilteringReport.xsl
+     	 |--  InfraTrackingReport.xml
+     	 |--  InfraTrackingReport.xsl
+     	 |--  LabReport.xml
+     	 |--  LabReport.xsl
+     	 |--  MachineSummary.xml
+     	 |--  MachineSummary.xml
+     	 |--  Summary.xml
+     	 |--  Summary.xsl
+     	 |--  testResults.xml
+     	 |--  VariationReport.xsl
+```
+- `$(RunDirectory)\<desktop-name>` : Contains all the data from the run. This directory is generated while the tests are running and support files or other data needed for tests are copied here for running that test.
+- `$(RunDirectory)\Report` : Contains all the report files generated after the tests execution is complete.
+- `AreaReport` : Area specific reports related to the tests.
+- `AreaReport\TestInfos` : Test infos for the failed tests are stored here.
+- `AreaReport\<area>VariationReport.xml` : Area specific test run summary of the results.
+- `DrtReport.xml` : Contains the result of `RunDrts.cmd` command.
+- `FilteringReport.xml` : List of tests that are ignored. A test can be ignored either if it is disabled or else when it is filtered out ( this happens when we pass in arguments `/Area`, `/Subarea` or `/Name` )
+- `Summary.xml` : Contains the area-wise summary of the run.
+- `testResults.xml` : Contains the result of all the tests that were run. If the test failed, you can find it here. You will also get the repro arguments related to the failing test here.
+ 
+## Running tests on locally built WPF assemblies
+
+For running tests on locally built WPF assemblies, the rest of the process ( building and running tests will remain the same ), however, we will need to replace the installed WPF binaries with our locally built ones. Once done, run the tests as mentioned above.
+
+### Replace locally built WPF binaries to your local SDK installation
+
+Clone and build [WPF]() repo using `build.cmd` and copy the resulting assembly(-ies) to your local SDK installation
+
+- Built assemblies are located at :
+    - x86 and AnyCPU : `$(WpfRepoRoot)\artifacts\packaging\Debug\Microsoft.DotNet.Wpf.GitHub.Debug\lib\net8.0`
+    - x64 : `$(WpfRepoRoot)\artifacts\packaging\Debug\x64\Microsoft.DotNet.Wpf.GitHub.Debug\lib\net8.0`
+- And need to be copied to the system dotnet folder `%Program Files%\dotnet\shared\Microsoft.WindowsDesktop.App\[Version]`
+
+If you have updated any public APIs, you'll need to overwrite the ref assemblies too:
+- The ref assemblies compile to :
+    - x86 and AnyCPU : `$(WpfRepoRoot)\artifacts\packaging\Debug\Microsoft.DotNet.Wpf.GitHub.Debug\ref\net8.0`
+    - x64 : `$(WpfRepoRoot)\artifacts\packaging\Debug\x64\Microsoft.DotNet.Wpf.GitHub.Debug\ref\net8.0`
+- These need to be copied to `%Program Files%\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\[Version]`
+
+`%Program Files%` will be the path to `Program Files` or `Program Files(x86)` depending on the build architecture.
+
+## Debugging Tests and Test Infrastructure
+
+If there were any failures, run the tests manually with the `/debugtests` flag using the `RunDrts.cmd` or `RunTests.cmd` script. Note that you do not run the `RunDrtsDebug` or `RunTestsDebug` script, as this will debug the test infrastructure, `QualityVault`. 
+
+When you pass the `/debugtests` flag, a cmd window will open where you can open the test executable in Visual Studio and debug it. When the cmd pops up, you will see instructions for debugging using a few different commands, however these commands will enable you to debug the `Simple Test Invocation` executable, `sti.exe`, which simply launches the test executable you are most likely interested in debugging. Using `DrtXaml.exe` as an example, this is how you can debug the test executable. Any MSBuild style properties should be replaced with actual values:
 
 1. `$(RepoRoot)\artifacts\test\$(Configuration)\$(Platform)\Test\RunDrts.cmd /name=DrtXaml /debugtests`
 2. Enter following command into the cmd window that pops up:
 `"%ProgramFiles%\Microsoft Visual Studio\2022\Preview\Common7\IDE\devenv.exe" DrtXaml.exe`
-1. Once Visual Studio is open, go to `Debug-> DrtXaml Properties` and do the following:
+3. Once Visual Studio is open, go to `Debug-> DrtXaml Properties` and do the following:
     - Manually change the `Debugger Type` from `Auto` to `Mixed (CoreCLR)`.
     - Change the `Environment` from `Default` to a custom one that properly defines the `DOTNET_ROOT` variable so that the host is able to locate the install of `Microsoft.NETCore.App`.
       - x86 (Default): Name: `DOTNET_ROOT(x86)` Value: `$(RepoRoot).dotnet\x86`
       - x64 (/p:Platform=x64): Name: `DOTNET_ROOT` Value: `$(RepoRoot).dotnet` 
-2. From there you can F5 and the test will execute.
+4. From there you can F5 and the test will execute.
 
-*NOTE: Some tests require the screen resolution to be set to 1920 x 1080.*
+### Debugging DRTs with -wait parameter
 
-*NOTE: This requires being run from an admin window at the moment.*
+Some of the DRTs derive from `DrtBase` which supports passing a `-wait` parameter which stops the execution of the DRT until a debugger is attached. Once, you attach a debugger to the process the execution starts again and you can debug the test.
