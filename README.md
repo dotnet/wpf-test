@@ -10,14 +10,9 @@ This repo is currently under the process of being open-sourced. We are tracking 
 
 ## Getting started
 
-* [Developer Guide](docs/developer-guide.md)
-* [Building, Debugging and Testing](docs/building-running-debugging.md)
-* [Test Infrastructure Notes](docs/test-infrastructure.md)
-* [Test Suites and Test Categorization](docs/tests-suites.md)
-* [New Test Addition Guideline](docs/test-addition-guidelines.md)
+Follow the [Developer Guide](docs/developer-guide.md) instrutions for machine setup and understanding the workflow.
 
-
-## Quickstart
+### Quickstart
 
 In order to run the tests on your local machine,
 
@@ -37,11 +32,23 @@ At the end of the run, you should see something like this:
 
 Once the tests run, the results are generated here `C:\Users\$(CurrentUser)\AppData\Roaming\QualityVault\Run\Report`. You can see the result of the run in `testResults.xml` file.
 
-## Contributing
+Check out the [building, running and deugging tests](docs/building-running-debugging.md) doc for more information.
 
-Some of the best ways to contribute are to try things out, file bugs and fix issues. Since not all the tests have been ported yet, we maintain an internal repo of test code along with this repo. Both core team members and external contributors shall **send pull requests here**, which will be reviewed and then backported to internal repo as well.
+For more information regarding the test infrastructure and test addition guidelines, check out the following docs:
 
-In order to start contributing directly to the code base, checkout the [contributing guide](docs/getting-started.md)
+* [Building, Running and Debugging Tests](docs/building-running-debugging.md)
+* [Test Infrastructure Notes](docs/test-infrastructure.md)
+* [Test Suites and Categorization](docs/tests-suites.md)
+* [New Test Addition Guideline](docs/test-addition-guidelines.md)
+
+
+## How to engage, contribute, and give feedback
+
+Some of the best ways to contribute are to try things out, file bugs and fix issues. 
+
+Since not all the tests have been ported yet, we maintain an internal repo of test code along with this repo. Both core team members and external contributors shall **send pull requests here**, which will be reviewed and then backported to internal repo as well.
+
+In order to start contributing directly to the code base, checkout the [contributing guide](CONTRIBUTING.md)
 
 
 ## Code of Conduct
