@@ -1,0 +1,53 @@
+<XTC>
+  <TEST Name="TestWhiteListScenarioGood" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="TestWhiteListScenarioGood" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\XAML\Data\Assemblies\*" />
+    </SupportFiles>
+  </TEST> 
+  <TEST Name="TestWhiteListScenarioBad" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="TestWhiteListScenarioBad" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\XAML\Data\Assemblies\*" />
+    </SupportFiles>
+  </TEST> 
+  <TEST Name="TestWhiteListScenarioBadXmlns" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="TestWhiteListScenarioBadXmlns" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\XAML\Data\Assemblies\*" />
+    </SupportFiles>
+  </TEST> 
+  <TEST Name="LoadInvalidInPT" Priority="0" SubArea="Security" Disabled="true" >
+    <DriverParameters XamlTestType="LoadExceptionTest" ExceptionType="System.Reflection.TargetInvocationException" File="HarmfulInPartialTrust.xaml" TrustLevel="PartialTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\NonBuildable\HarmfulInPartialTrust.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="LoadInvalidInPT1" Priority="0" SubArea="Security" Disabled="true" >
+    <DriverParameters XamlTestType="LoadExceptionTest" ExceptionType="System.Security.SecurityException" File="SecurityTest1.xaml" TrustLevel="PartialTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\NonBuildable\SecurityTest1.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="LoadProtectedWithoutPermission" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="LoadProtectedWithoutPermission" SecurityLevel="PartialTrust" />
+  </TEST>
+  <TEST Name="LoadInternalWithoutPermission" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="LoadInternalWithoutPermission" SecurityLevel="PartialTrust" />
+  </TEST>
+  <TEST Name="LoadPrivateWithoutPermission" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="LoadPrivateWithoutPermission" SecurityLevel="PartialTrust" />
+  </TEST>
+  <TEST Name="XamlLoadPermissionNullRefTests" Priority="0" SubArea="Security"  Disabled="true" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="XamlLoadPermissionNullRefTests" SecurityLevel="PartialTrust" />
+  </TEST>
+  <TEST Name="LoadXamlExternal" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="LoadXamlExternal" SecurityLevel="PartialTrust" />
+  </TEST>
+  <TEST Name="SpoofRuntimeType" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="SpoofRuntimeType" SecurityLevel="FullTrust" />
+  </TEST>
+    <TEST Name="SpoofRuntimeTypeWpfSchemaContext" Priority="0" SubArea="Security" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Security.MethodTests.SecurityTests" TestMethod="SpoofRuntimeTypeWpfSchemaContext" SecurityLevel="FullTrust" />
+  </TEST>
+</XTC>

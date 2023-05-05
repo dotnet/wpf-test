@@ -1,0 +1,29 @@
+<!-- Namespace on a Style -->
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Canvas>
+        <Canvas.Resources>
+            <Style TargetType="{x:Type Button}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard BeginTime="{x:Null}">
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty   = "(Button.Opacity)"
+                                            Storyboard.TargetName       = "Animate"
+                                            To                          = "0"
+                                            Duration                    = "0:0:1" />
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </Canvas.Resources>
+        <Button Height="100" Width="200" />
+    </Canvas>
+
+</Page>

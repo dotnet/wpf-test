@@ -1,0 +1,18 @@
+<!--************************* Int32Collection ************************** -->
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys   = "clr-namespace:System;assembly=mscorlib" 
+    >
+    <Page.Resources>
+        <sys:Int32 x:Key="IntA">0</sys:Int32>
+        <sys:Int32 x:Key="IntB">10</sys:Int32>
+        <Int32Collection x:Key="Int32Key">
+            <StaticResource ResourceKey="IntA"/>
+            <StaticResource ResourceKey="IntB"/>
+        </Int32Collection>
+    </Page.Resources>
+    <Grid>
+        <Button Content='{DynamicResource Int32Key}' />
+    </Grid>
+</Page>

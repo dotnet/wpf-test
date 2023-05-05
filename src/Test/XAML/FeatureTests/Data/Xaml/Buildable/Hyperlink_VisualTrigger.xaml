@@ -1,0 +1,27 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border.Resources>
+        <Style TargetType="{x:Type Hyperlink}">
+            <Style.Triggers>
+                        <Trigger Property="Hyperlink.IsMouseOver" Value="True">
+                                <Setter Property="FontStyle" Value="Italic" />
+                                <Setter Property="Foreground" Value="Green" />
+                        </Trigger>
+
+                        <Trigger Property="Hyperlink.IsMouseOver" Value="False">
+                                <Setter Property="FontStyle" Value="Normal" />
+                                <Setter Property="Foreground" Value="Blue" />
+                        </Trigger>
+                </Style.Triggers>
+
+        </Style>        
+    </Border.Resources>
+        <FlowDocumentScrollViewer Width="400" Height="400"><FlowDocument>
+        
+        <Paragraph>                        
+                <Hyperlink FontSize="40" Foreground="MistyRose" FontStyle="Oblique" FontWeight="Bold" FontFamily="Tahoma" NavigateUri="pack://siteoforigin:,,,/SimpleNavigation.xaml">                
+                        This is a basic Hyperlink with the default hover style changed via Triggers
+                </Hyperlink>
+                                        
+        </Paragraph>
+    </FlowDocument></FlowDocumentScrollViewer>
+</Border>

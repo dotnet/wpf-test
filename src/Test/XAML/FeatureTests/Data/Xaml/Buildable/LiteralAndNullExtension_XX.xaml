@@ -1,0 +1,23 @@
+﻿<!-- We are trying to verify that :
+1. The new MarkupExtension called NullExtension works fine
+2. Literal strings (with '{' escaped) work fine. 
+-->
+
+<cmn:CustomDockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:cc="clr-namespace:Microsoft.Test.Xaml.CustomTypes;assembly=XamlCommon" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+ 
+>  
+        <!-- These do not need escaping they don't start with '{' -->
+	<Button Name="Button0" Content="a{Foo}" />
+	<Button Name="Button1" Content="}" />
+
+        <!-- These need escaping with {} -->
+	<Button Name="Button2" Content="{}{Foo}" />
+	<Button Name="Button3" Content="{}{" />
+	<Button Name="Button4" Content="{}{{}}" />
+	
+	<!-- NullExtension -->
+	<Button Name="Button5" Background="{x:Null}" />
+</cmn:CustomDockPanel>

@@ -1,0 +1,10 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="ClientTestLibrary" />
+  <Steps>
+    <TestLogStep>
+      <MSBuildStep CurrentStage="Run" Arguments="cs\ClassProject.csproj /e:cs\OldError.xml /err:MC6022 /t:Clean;Build  " />
+      <MSBuildStep CurrentStage="Run" Arguments="vb\ClassProject.vbproj /e:vb\OldError.xml /err:MC6022 /t:Clean;Build  " />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

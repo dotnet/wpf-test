@@ -1,0 +1,39 @@
+﻿
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+<!-- Making sure that everything works correctly with y:Uid.
+     So this file has complex properties, array, IList, IDictionary properties, x:Include tags etc.-->
+<DockPanel xmlns:cc="http://XamlTestTypes" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" y:Uid="0" xmlns:y="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- IDictionary property and x:Include -->
+    <DockPanel.Resources>
+        <Color y:Key="GreenColor" A="100" G="219" y:Uid="19" />
+        <SolidColorBrush y:Key="GreenBrush" y:Uid="20">
+            <SolidColorBrush.Color>
+                <StaticResource ResourceKey="GreenColor" y:Uid="22" />
+            </SolidColorBrush.Color>
+        </SolidColorBrush>
+    </DockPanel.Resources>
+    <Button Background="Blue" y:Uid="23" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"> Hello world </Button>
+    <Button Name="Button0" y:Uid="1">
+        <Button.Background>
+            <SolidColorBrush Color="Red" y:Uid="3" />
+        </Button.Background>
+    </Button>
+    <!-- Complex attached property -->
+    <Button Name="Button1" y:Uid="6" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <cc:MyClass.MyColor>
+            <cc:MyColor Color="Blue" y:Uid="8" />
+        </cc:MyClass.MyColor>
+    </Button>
+    <!-- Complex attached array property -->
+    <Button Name="Button2" y:Uid="9" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    </Button>
+    <!-- IList property -->
+    <ListBox Name="ListBox0" y:Uid="13" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <ListBox.Items>
+            <ListBoxItem y:Uid="15">Hello 0</ListBoxItem>
+            <ListBoxItem y:Uid="16">Hello 1</ListBoxItem>
+            <ListBoxItem y:Uid="17">Hello 2</ListBoxItem>
+        </ListBox.Items>
+    </ListBox>
+</DockPanel>
+</Page>

@@ -1,0 +1,35 @@
+<Window
+    x:Uid   = "Page_1"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest"
+    >
+
+    <DockPanel>
+
+        <DockPanel.Resources>
+
+            <!-- Scenario #1: Style (with Key), on an element with a localizable property, that sets a non-localizable property. -->
+            <Style x:Uid="Style_1" x:Key="TextStyle1" TargetType="{x:Type TextBox}">
+                <Setter x:Uid="Setter_1" Property="Width" Value="100" />
+            </Style>
+
+            <!-- Scenario #2: Style (with Key) that sets a localizable property. -->
+            <Style x:Uid="Style_2" x:Key="TextStyle2" TargetType="{x:Type TextBlock}">
+                <Setter x:Uid="Setter_2" Property="Text" Value="MyText2" />
+            </Style>
+
+            <!-- Scenario #3: Style (with no Key) that sets a localizable property. -->
+            <Style x:Uid="Style_3" TargetType="{x:Type ComboBox}">
+                <Setter x:Uid="Setter_3" Property="Text" Value="MyText3" />
+            </Style>
+
+        </DockPanel.Resources>
+
+        <TextBox   x:Uid="TextBox_1"  Text="LLLTextBox1"  />
+        <TextBlock x:Uid="Button_1"   />
+        <ComboBox  x:Uid="ComboBox_1" />
+
+    </DockPanel>
+
+</Window>

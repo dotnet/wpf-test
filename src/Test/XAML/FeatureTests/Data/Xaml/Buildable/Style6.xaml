@@ -1,0 +1,22 @@
+<!-- Multiple Styles: StaticResource and DynamicResource specified -->
+<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DockPanel.Resources>
+        <Style x:Key="Style1" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Foreground" Value="Olive" />
+        </Style>
+        <Style x:Key="Style2" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="PaleGoldenRod" />
+            <Setter Property="Background" Value="Black" />
+        </Style>
+    </DockPanel.Resources>
+
+    <StackPanel>
+        <TextBlock Style="{StaticResource Style1}" FontSize="36" Height="75" Width="200">WPF!</TextBlock>
+        <TextBlock Style="{DynamicResource Style2}" FontSize="36" Height="75" Width="200">WPF!</TextBlock>
+    </StackPanel>
+
+</DockPanel>

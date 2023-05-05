@@ -1,0 +1,79 @@
+<!-- These scenarios produce ObjectWriter errors in WPF, but are acceptable in the InfoSet -->
+
+<DockPanel
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"> 
+
+
+    <DockPanel.Resources>
+        <!-- (1) Setter error -->
+        <Style x:Key="Key1">
+            <Setter Property="SelectionMode" Value="Extended" />
+        </Style>
+
+
+        <!-- (2) Invalid object inside Setter.Value -->
+        <Style x:Key="Key2" TargetType="{x:Type Button}">
+            <Setter Property="Panel.Background">
+                <Setter.Value>
+                    <Button />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <!-- (3) Invalid nested Styles -->
+        <Style x:Key="Key3" TargetType="{x:Type Button}">
+          <Style.Setters>
+            <Setter Property="Style">
+                <Setter.Value>
+                    <Style />
+                </Setter.Value>
+            </Setter>
+          </Style.Setters>
+        </Style>
+
+
+        <!-- (4) Missing x:Key -->
+        <SolidColorBrush Color="Red" />
+
+
+        <!-- (5) Missing x:Key in ControlTemplate -->
+        <ControlTemplate TargetType="{x:Type Button}"><Canvas Background="Blue" /></ControlTemplate>
+
+
+        <!-- (6) Duplicate Names -->
+        <Button x:Key="key1" x:Name="abc" />
+        <Button x:Key="key2" x:Name="abc" />
+    </DockPanel.Resources>
+
+
+    <!-- (7) Extra stuff inside a Property Element -->
+    <Button>
+        <Button.Background>
+            <SolidColorBrush Color="Red" />
+            <StaticResource ResourceKey="GreenBrush" />
+        </Button.Background>
+    </Button>
+
+
+    <!-- (8) Invalid squiggles inside Button.Background  -->
+    <Button>
+        <Button.Background>
+            {StaticResource RedBrush}
+        </Button.Background>
+    </Button>
+
+
+    <!-- (9) Missing ResourceKey on the StaticResource  -->
+    <Button>
+        <Button.Background>            
+            <SolidColorBrush><SolidColorBrush.Color><StaticResource /></SolidColorBrush.Color></SolidColorBrush>
+        </Button.Background>
+    </Button>
+    
+
+    <!-- (10) Extra argument to StaticResource  -->
+   <Button Background="{StaticResource RedBrush, BlueBrush}" />    
+
+</DockPanel>

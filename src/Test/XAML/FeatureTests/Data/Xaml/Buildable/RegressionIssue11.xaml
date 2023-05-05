@@ -1,0 +1,40 @@
+﻿<!--
+/*******************************************************************
+ * Purpose: RichTextBox: Pasted animated geometry looks different than the original
+********************************************************************/
+-->
+
+
+<cmn:CustomDockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Name="DOCKPANEL1"
+    Background="#CCCCCC" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+    <DockPanel.Triggers>
+        <EventTrigger RoutedEvent="DockPanel.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <PointAnimation
+                            From="100,150"
+                            To="200,150"
+                            BeginTime="0:0:5"
+                            Duration="0:0:2"
+                            FillBehavior="HoldEnd" />
+                        <PointAnimation
+                            From="100,150"
+                            To="200,150"
+                            BeginTime="0:0:5"
+                            Duration="0:0:2"
+                            FillBehavior="HoldEnd" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </DockPanel.Triggers>
+    <Path Name="Animate" StrokeThickness="50" Stroke="red">
+        <Path.Data>
+            <LineGeometry StartPoint="100,150" EndPoint="300,150" />
+         </Path.Data>
+    </Path>
+</cmn:CustomDockPanel>

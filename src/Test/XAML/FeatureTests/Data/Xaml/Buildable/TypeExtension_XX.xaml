@@ -1,0 +1,48 @@
+﻿<!-- We are trying to verify that the new MarkupExtension called
+TypeExtension works fine. It's a replacement for the old *typeof 
+TODO: Introduce some positional (constructor) parameters, once 
+bug 1050693 is fixed.
+-->
+
+<cmn:CustomDockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:cc="clr-namespace:Microsoft.Test.Xaml.CustomTypes;assembly=XamlCommon" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+ xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  
+>
+	<cmn:CustomDockPanel.Resources>
+		<Style TargetType="{x:Type TypeName=Button}"> 		
+			<Setter Property="Background" Value="Yellow" />
+		</Style>		
+		<Style>
+			<Style.TargetType>
+				<x:Type TypeName='ListBox' />
+			</Style.TargetType>
+			<Setter Property="Background" Value="Blue" />
+		</Style>		
+
+		<!-- Right now there are not many places we can use x:Type, so we are using it 
+		inside a resource name
+		-->
+		<Color x:Key="{x:Type &apos;Color&apos;}" A="255" R="255" G="0" B="0" />
+		<SelectionMode x:Key="{x:Type TypeName=&apos;SelectionMode&apos;}" />
+		<!-- TODO: Enable the following, it's usage on Button0, 
+		and the corresponding verification code, once 1096932 is fixed 
+		<cc:MyColor x:Key="{x:Type TypeName='cc:MyColor'}" Color="Blue"/>
+		-->
+	</cmn:CustomDockPanel.Resources>
+	
+	<Button Name="Button0"> <!--cc:MyClass.MyColor="{DynamicResource ResourceKey={x:Type TypeName='cc:MyColor'}}"-->
+		<Button.Foreground> 
+			<SolidColorBrush Color="{StaticResource ResourceKey={x:Type TypeName=&apos;Color&apos;}}" />
+		</Button.Foreground>		
+		<Button.Content>	
+			<x:Array x:Type="{x:Type TypeName=sys:String}"> 
+				<sys:String> Hello </sys:String>
+				<sys:String> World </sys:String>
+			</x:Array>	
+		</Button.Content>		
+	</Button>	
+	<ListBox Name="ListBox0" SelectionMode="{StaticResource ResourceKey={x:Type TypeName=&apos;SelectionMode&apos;}}" />
+</cmn:CustomDockPanel>

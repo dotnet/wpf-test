@@ -1,0 +1,29 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <AssemblyName>AssemblyWithXmlns</AssemblyName>
+    <OutputType>Library</OutputType>
+    <OutputSubFolder>FeatureTests\XAML\Data\Assemblies</OutputSubFolder>
+    <OptionStrict>true</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <BinplaceFlags Include="@(BinplaceFlags)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyWithXmlns.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Windowsbase" />
+    <Reference Include="System.Xaml" />
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+
+</Project>

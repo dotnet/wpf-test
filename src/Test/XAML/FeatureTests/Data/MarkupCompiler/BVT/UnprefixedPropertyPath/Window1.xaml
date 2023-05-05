@@ -1,0 +1,24 @@
+﻿<Page x:Class="UnprefixedPropertyPath.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="300" Width="300" Initialized="PageInitialized">
+      
+    <DockPanel>
+        <DockPanel.Resources>
+            <Style x:Key="MyStyle">
+                <Setter Property="Button.Background">
+                    <Setter.Value>
+                        <Binding>
+                            <Binding.Path>(ListBox.Background)</Binding.Path>
+                        </Binding>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ListBox x:Key="RandomObject" Background="Aqua" />
+        </DockPanel.Resources>
+        <DockPanel.DataContext>
+            <Binding Source="{StaticResource RandomObject}" />
+        </DockPanel.DataContext>
+        <Button Style="{StaticResource MyStyle}">Click me</Button>
+    </DockPanel>
+</Page>

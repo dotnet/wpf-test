@@ -1,0 +1,23 @@
+<!-- x:Key Directive Property Element containing MarkupExtension tags -->
+
+<StackPanel 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel.Resources>
+
+        <!-- Markup Extension inside an attribute -->
+        <SolidColorBrush x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type local:ControlResource},ResourceId=YellowBrush}" Color="Yellow" />
+
+        <!-- Markup Extension applied as tags -->
+        <SolidColorBrush Color="Yellow">
+            <x:Key>
+                <ComponentResourceKey TypeInTargetAssembly="{x:Type local:ControlResource}" ResourceId="YellowBrush" />
+            </x:Key>
+        </SolidColorBrush>
+
+
+    </StackPanel.Resources>
+
+</StackPanel>
+

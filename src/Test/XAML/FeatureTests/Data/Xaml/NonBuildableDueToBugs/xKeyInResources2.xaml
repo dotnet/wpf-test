@@ -1,0 +1,37 @@
+<!-- x:Key Directive Property Element on an object inside Resources / ResourceDictionary / MergedDictionaries / etc. -->
+<StackPanel
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel.Resources>
+
+        <RadialGradientBrush><x:Key>Key1</x:Key></RadialGradientBrush>
+
+        <Button>
+            <Button.Foreground>    
+                <StaticResource ResourceKey="foo5"><x:Key>Key2</x:Key></StaticResource>
+            </Button.Foreground>
+        </Button>
+
+        <ResourceDictionary>
+            <Style><x:Key>Key2</x:Key></Style>
+            <DoubleAnimation><x:Key>Key3</x:Key></DoubleAnimation>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <SolidColorBrush Color="cyan"><x:Key>RDKey</x:Key></SolidColorBrush>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+        <SolidColorBrush xmlns="clr-namespace:System.Windows.Media;assembly=PresentationCore" x:Key="GreenBrush">
+            <SolidColorBrush.Color>
+                <Color A="100" x:Key="ColorKey">
+                    <Color.G>219</Color.G>
+                </Color>
+            </SolidColorBrush.Color>
+        </SolidColorBrush>
+
+    </StackPanel.Resources>
+    
+</StackPanel>

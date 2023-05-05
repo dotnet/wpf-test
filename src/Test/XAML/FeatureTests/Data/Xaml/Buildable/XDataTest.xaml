@@ -1,0 +1,165 @@
+﻿<cmn:CustomDockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    DockPanel.LastChildFill="true"
+    Background="white" 
+    xmlns:cc="http://XamlTestTypes" 
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+  >
+    <DockPanel.Resources>
+        <XmlDataProvider x:Key="DSO1" XPath="/root">
+          <x:XData>
+            <root xmlns="">
+                <brush>Red</brush>
+                <fontsize>200</fontsize>
+                <fontstyle>Italic</fontstyle>
+            </root>
+          </x:XData>
+        </XmlDataProvider>
+      <XmlDataProvider x:Key="DSO2" XPath="/root">
+        <XmlDataProvider.XmlSerializer>
+         <x:XData>
+          <root xmlns="">
+            <brush>Red</brush>
+            <fontsize>200</fontsize>
+            <fontstyle>Italic</fontstyle>
+          </root>
+         </x:XData>        
+        </XmlDataProvider.XmlSerializer>
+      </XmlDataProvider>
+      <cc:CustomXDataHost x:Key="DSO3" >
+        <x:XData>
+          <root xmlns="">
+            <brush>Red</brush>
+            <fontsize>200</fontsize>
+            <fontstyle>Italic</fontstyle>
+          </root>
+        </x:XData>
+      </cc:CustomXDataHost>
+      <cc:CustomXDataHost x:Key="DSO4" >
+        <cc:CustomXDataHost.XmlSerializer>
+          <x:XData>
+            <root xmlns="">
+              <brush>Red</brush>
+              <fontsize>200</fontsize>
+              <fontstyle>Italic</fontstyle>
+            </root>
+          </x:XData>
+        </cc:CustomXDataHost.XmlSerializer>
+      </cc:CustomXDataHost>
+      <cc:CustomXDataHost2 x:Key="DSO5" >
+        <x:XData>
+          <root xmlns="">
+            <brush>Red</brush>
+            <fontsize>200</fontsize>
+            <fontstyle>Italic</fontstyle>
+          </root>
+        </x:XData>
+      </cc:CustomXDataHost2>
+      <cc:CustomXDataHost2 x:Key="DSO6" >
+        <cc:CustomXDataHost2.XmlSerializer>
+          <x:XData>
+            <root xmlns="">
+              <brush>Red</brush>
+              <fontsize>200</fontsize>
+              <fontstyle>Italic</fontstyle>
+            </root>
+          </x:XData>
+        </cc:CustomXDataHost2.XmlSerializer>
+      </cc:CustomXDataHost2>
+    </DockPanel.Resources>
+    <TextBlock
+        Name="textblock1" 
+        Text="Test1"
+        Foreground="{Binding XPath=brush,Source={StaticResource DSO1},Mode=OneWay}"
+        FontSize="{Binding XPath=fontsize,Source={StaticResource DSO1}}"
+        FontStyle="{Binding XPath=fontstyle,Source={StaticResource DSO1}}" />
+    <TextBlock
+      Name="textblock2" 
+      Text="Test2"
+      Foreground="{Binding XPath=brush,Source={StaticResource DSO2},Mode=OneWay}"
+      FontSize="{Binding XPath=fontsize,Source={StaticResource DSO2}}"
+      FontStyle="{Binding XPath=fontstyle,Source={StaticResource DSO2}}" />
+    
+    <TextBlock Text="Test3" Name="textblock3" > 
+        <TextBlock.Foreground>
+          <Binding XPath="brush">
+             <Binding.Source>
+              <XmlDataProvider XPath="/root">
+                <x:XData>
+                  <root xmlns="">
+                      <brush>Red</brush>
+                  </root>
+                </x:XData>
+              </XmlDataProvider>
+             </Binding.Source>
+          </Binding>           
+        </TextBlock.Foreground> 
+    </TextBlock>
+  <TextBlock Text="Test4" Name="textblock4" >
+    <TextBlock.Foreground>
+      <Binding XPath="brush">
+        <Binding.Source>
+          <XmlDataProvider XPath="/root">
+            <XmlDataProvider.XmlSerializer>
+              <x:XData>
+                <root xmlns="">
+                  <brush>Red</brush>
+                </root>
+              </x:XData>
+            </XmlDataProvider.XmlSerializer>
+          </XmlDataProvider>
+        </Binding.Source>
+      </Binding>
+    </TextBlock.Foreground>
+  </TextBlock>
+  <Button Name="button1">
+    <cc:CustomXDataHost >
+      <x:XData>
+        <root xmlns="">
+          <brush>Red</brush>
+          <fontsize>200</fontsize>
+          <fontstyle>Italic</fontstyle>
+        </root>
+      </x:XData>
+    </cc:CustomXDataHost>
+  </Button>
+
+  <Button Name="button2">
+    <cc:CustomXDataHost >
+      <cc:CustomXDataHost.XmlSerializer>
+        <x:XData>
+          <root xmlns="">
+            <brush>Red</brush>
+            <fontsize>200</fontsize>
+            <fontstyle>Italic</fontstyle>
+          </root>
+        </x:XData>
+      </cc:CustomXDataHost.XmlSerializer>
+    </cc:CustomXDataHost>
+  </Button>
+  <Button Name="button3">
+    <cc:CustomXDataHost2 >
+      <x:XData>
+        <root xmlns="">
+          <brush>Red</brush>
+          <fontsize>200</fontsize>
+          <fontstyle>Italic</fontstyle>
+        </root>
+      </x:XData>
+    </cc:CustomXDataHost2>
+  </Button>
+
+  <Button Name="button4">
+    <cc:CustomXDataHost2 >
+      <cc:CustomXDataHost2.XmlSerializer>
+        <x:XData>
+          <root xmlns="">
+            <brush>Red</brush>
+            <fontsize>200</fontsize>
+            <fontstyle>Italic</fontstyle>
+          </root>
+        </x:XData>
+      </cc:CustomXDataHost2.XmlSerializer>
+    </cc:CustomXDataHost2>
+  </Button>
+</cmn:CustomDockPanel>

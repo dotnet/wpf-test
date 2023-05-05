@@ -1,0 +1,50 @@
+<Page   xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml" >
+
+    <DockPanel  xmlns:cc="http://XamlTestTypes"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                x:Uid="0">
+
+        <DockPanel.Resources>
+            <Color x:Key="GreenColor" A="100" G="219" x:Uid="19" />
+            <SolidColorBrush x:Key="GreenBrush" x:Uid="20">
+                <SolidColorBrush.Color>
+                    <StaticResource ResourceKey="GreenColor" x:Uid="22" />
+                </SolidColorBrush.Color>
+            </SolidColorBrush>
+        </DockPanel.Resources>
+
+        <Button Background="{DynamicResource GreenBrush}" DockPanel.Dock="Top" xmlns:y="http://schemas.microsoft.com/winfx/2006/xaml" y:Uid="23"> Hello world </Button>
+
+        <FlowDocumentScrollViewer><FlowDocument xmlns:u="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Table u:Uid="4">
+              <Table.Columns>
+                <TableColumn Name="Column0" u:Uid="5" />
+              </Table.Columns>
+                <TableRowGroup><TableRow><TableCell><Paragraph /></TableCell></TableRow></TableRowGroup>
+            </Table>
+        </FlowDocument></FlowDocumentScrollViewer>
+
+        <Button Name="Button1" xmlns:v="http://schemas.microsoft.com/winfx/2006/xaml" v:Uid="6">
+            <cc:MyClass.MyColor>
+                <cc:MyColor Color="Blue" v:Uid="8" />
+            </cc:MyClass.MyColor>
+        </Button>
+
+        <Button Name="Button2" xmlns:w="http://schemas.microsoft.com/winfx/2006/xaml" w:Uid="9">
+            <cc:MyClass.MyBrushes>
+                <SolidColorBrush Color="Red" w:Uid="11" />
+                <SolidColorBrush Color="Green" w:Uid="12" />
+            </cc:MyClass.MyBrushes>
+        </Button>
+
+        <ListBox Name="ListBox0" DockPanel.Dock="Right" xmlns:z="http://schemas.microsoft.com/winfx/2006/xaml" z:Uid="13">
+            <ListBox.Items>
+                <ListBoxItem z:Uid="15">Hello 0</ListBoxItem>
+                <ListBoxItem z:Uid="16">Hello 1</ListBoxItem>
+                <ListBoxItem z:Uid="17">Hello 2</ListBoxItem>
+            </ListBox.Items>
+        </ListBox>
+    </DockPanel>
+
+</Page>

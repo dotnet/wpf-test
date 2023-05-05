@@ -1,0 +1,50 @@
+﻿<!--
+ This Xaml is used by a security test, which runs in Partial trust.
+ 
+ Following Xaml contains a tag <io:FileSystemWatcher/>, which corresponds
+ to the class System.IO.FileSystemWatcher
+ 
+ Since we are in Partial trust, we don't have FileIOPermission,
+ so we can't instantiate <io:FileSystemWatcher/> 
+ 
+ The remaining tags are chosen in such a way that the hierarchy 
+ is possible, inspite of all the restrictions in place in Avalon
+ (such as a ContentControl cannot have more than one child, 
+ a TextBlock can only accept UIElements as children etc.)
+-->
+
+
+<DockPanel
+    xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+    xmlns:io='clr-namespace:System.IO;assembly=System'
+    x:SynchronousMode='Async'
+    x:AsyncRecords='1'
+    xmlns:MappingPIGen1='clr-namespace:System.IO;assembly=System'
+>
+    <Button>
+        <Button>
+            <Button>
+                <Button>
+                    <Button>
+                        <TextBlock>
+                            <Button />
+                            <Button />
+                            <Button />
+                            <Button />
+                            <Button />
+                            <Button>
+                                <io:FileSystemWatcher />
+                            </Button>
+                            <Button />
+                            <Button />
+                            <Button />
+                            <Button />
+                            <Button />
+                        </TextBlock>
+                    </Button>
+                </Button>
+            </Button>
+        </Button>
+    </Button>
+</DockPanel>

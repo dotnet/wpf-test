@@ -1,0 +1,103 @@
+<!-- Window containing TextBlock Text properties for which Localization.Attributes set LocalizationCategory as Unmodifiable -->
+<Window
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Class = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest">
+
+    <StackPanel>
+        <TextBlock x:Uid="TextBlock_1"
+            Text="Microsoft1"
+            Localization.Attributes = "Text (Unmodifiable Text Readable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_2"
+            Text="Microsoft2"
+            Localization.Attributes = "Text(Readable Unmodifiable Text)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_3"
+            Text="Microsoft3"
+            Localization.Attributes = "Text (Unmodifiable Readable Text)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_4"
+            Text="Microsoft4"
+            Localization.Attributes = "Text (Readable Text Unmodifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_5"
+            Text="Microsoft5"
+            Localization.Attributes = "Text (Text Unmodifiable Readable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_6"
+            Text="Microsoft6"
+            Localization.Attributes = "Text (Text Readable Unmodifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_7"
+            Text="Microsoft7"
+            Localization.Attributes = "Text (Unmodifiable Readable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_8"
+            Text="Microsoft8"
+            Localization.Attributes = "Text (Readable Unmodifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_9"
+            Text="Microsoft9"
+            Localization.Attributes = "Text (Unmodifiable Text)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_10"
+            Text="Microsoft10"
+            Localization.Attributes = "Text (Text Unmodifiable)">
+        </TextBlock>
+
+        <TextBlock x:Uid="TextBlock_11"
+            Text="Microsoft11"
+            Localization.Attributes = "Text (Unmodifiable)">
+        </TextBlock>
+
+        <!-- Nested with parent having no x:Uid, Unmodifiable -->
+        <TextBlock>
+            <TextBlock x:Uid="TextBlock_12"
+                Text="Microsoft12"
+                Localization.Attributes = "Text (Text Unmodifiable Readable)">
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Nested with parent having an x:Uid, Unmodifiable -->
+        <TextBlock x:Uid="TextBlockParent_13">
+            <TextBlock x:Uid="TextBlock_13"
+                Text="Microsoft13"
+                Localization.Attributes = "Text (Text Unmodifiable Readable)">
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Unmodifiable, but no content -->
+        <TextBlock x:Uid="TextBlock_14"
+            Localization.Attributes = "Text (Text Unmodifiable Readable)">
+        </TextBlock>
+
+        <!-- Attributes set on both parent and child -->
+        <TextBlock x:Uid="TextBlockParent_15"
+            Localization.Attributes = "Text (Text Unmodifiable Readable)">
+            <TextBlock x:Uid="TextBlock_15"
+                Text="Microsoft15"
+                Localization.Attributes = "Text (Text Unmodifiable Readable)">
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Modifiable set on parent and Unmodifiable on child -->
+        <TextBlock x:Uid="Parent_16"
+            Localization.Attributes = "Text (Text Modifiable Readable)">
+            <TextBlock x:Uid="TextBlock_16"
+                Text="Microsoft16"
+                Localization.Attributes = "Text (Text Unmodifiable Readable)">
+            </TextBlock>
+        </TextBlock>
+
+    </StackPanel>
+</Window>

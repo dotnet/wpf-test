@@ -1,0 +1,25 @@
+<CustomDockPanel Background="#FFFFFFFF" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <av:Canvas Height="500" Name="Canvas" Width="500">
+    <av:Button Height="80" Name="myText" Width="200">
+      <av:Button.Triggers>
+        <av:EventTrigger RoutedEvent="av:FrameworkElement.Loaded">
+          <av:BeginStoryboard>
+            <av:Storyboard BeginTime="00:00:00" FillBehavior="Stop" Name="storyboard1">
+              <av:DoubleAnimationUsingKeyFrames AutoReverse="True" BeginTime="00:00:05" Duration="00:00:02" FillBehavior="HoldEnd" RepeatBehavior="2x">
+                <av:SplineDoubleKeyFrame KeySpline="0.7,0.2,1,0.8" KeyTime="00:00:00" Value="200" />
+                <av:SplineDoubleKeyFrame KeySpline="0.9,0.2,1,1" KeyTime="100%" Value="50" />
+              </av:DoubleAnimationUsingKeyFrames>
+            </av:Storyboard>
+          </av:BeginStoryboard>
+          <av:BeginStoryboard>
+            <av:Storyboard BeginTime="00:00:00" FillBehavior="Stop" Name="storyboard2">
+              <av:DoubleAnimationUsingKeyFrames AutoReverse="True" BeginTime="00:00:05" Duration="00:00:02" FillBehavior="HoldEnd" RepeatBehavior="10x">
+                <av:DiscreteDoubleKeyFrame KeyTime="00:00:00" Value="25" />
+                <av:DiscreteDoubleKeyFrame KeyTime="100%" Value="75" />
+              </av:DoubleAnimationUsingKeyFrames>
+            </av:Storyboard>
+          </av:BeginStoryboard>
+        </av:EventTrigger>
+      </av:Button.Triggers>Animate!</av:Button>
+  </av:Canvas>
+</CustomDockPanel>

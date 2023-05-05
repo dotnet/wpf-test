@@ -1,0 +1,43 @@
+<CustomCanvas xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <CustomCanvas.Resources>
+    <av:Dock x:Key="myDock">Top</av:Dock>
+    <av:Style TargetType="av:Button" x:Key="style1">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:DockPanel.Dock">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="myDock" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Panel.Background">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:Style TargetType="av:Button" x:Key="style2">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:TextElement.Foreground">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FFFFFFFF</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:DockPanel.Dock">
+        <av:Setter.Value>
+          <x:Static Member="av:Dock.Bottom" />
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:Style TargetType="av:Button" x:Key="{x:Type av:Button}">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+    </av:Style>
+  </CustomCanvas.Resources>
+  <av:Button Name="Button1" />
+  <av:Button Name="Button2" Style="{av:DynamicResource style1}" />
+  <av:Button Name="Button3" Style="{av:DynamicResource style2}" />
+</CustomCanvas>

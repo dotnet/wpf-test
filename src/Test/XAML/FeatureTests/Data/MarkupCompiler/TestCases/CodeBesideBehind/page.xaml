@@ -1,0 +1,25 @@
+﻿<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    x:Class="Avalon.Test.ComponentModel.CodeBesideBehindClass"
+    Loaded="OnLoaded">
+
+    <Button Click="HandleClickCodeBeside"
+            Name="Button1">Click Me</Button>
+
+    <Button Click="HandleClickCodeBehind"
+            Name="Button2">Click Me</Button>
+
+    <x:Code>
+        <![CDATA[
+        void HandleClickCodeBeside(object sender, RoutedEventArgs e)
+        {
+	    log.LogStatus("Verified click handler defined in Code-Beside works.");
+	    log.LogStatus("About to click on the button with handler defined in Code-Behind.");
+	    Microsoft.Test.Input.UserInput.MouseLeftClickCenter (Button2);
+	    log.LogStatus("Just clicked on the button.");
+        }
+	]]>
+    </x:Code>
+
+</StackPanel>

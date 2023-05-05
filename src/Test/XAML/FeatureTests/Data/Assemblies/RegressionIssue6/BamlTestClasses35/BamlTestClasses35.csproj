@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="dogfood" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <WPF_TESTBUILD_TARGETVERSION>v3.5</WPF_TESTBUILD_TARGETVERSION>
+  </PropertyGroup>
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <PropertyGroup>
+    <RootNamespace>BamlTestClasses35</RootNamespace>
+    <AssemblyName>BamlTestClasses35</AssemblyName>
+    <OutputType>Library</OutputType>
+    <ProjectGuid>{E9961F25-68D0-4E1B-9932-91347306176B}</ProjectGuid>
+    <DefineConstants>$(DefineConstants);OLDRESOURCES</DefineConstants>
+    <TestCode>true</TestCode>
+    <OutputSubFolder>FeatureTests\Xaml\Data\Assemblies\RegressionIssue6</OutputSubFolder>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Page Include="DeferContMEPV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="DeferContMEPV.xaml.cs">
+      <DependentUpon>DeferContMEPV.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>

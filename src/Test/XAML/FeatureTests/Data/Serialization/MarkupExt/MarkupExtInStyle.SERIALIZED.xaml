@@ -1,0 +1,262 @@
+<CustomDockPanel xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <CustomDockPanel.Resources>
+    <av:SolidColorBrush x:Key="BlueBrush">#FF0000FF</av:SolidColorBrush>
+    <av:Style TargetType="av:Button" x:Key="ButtonStyle1">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Style.BasedOn>
+        <av:Style TargetType="av:Button">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Setter Property="av:Panel.Background">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontSize">
+            <av:Setter.Value>
+              <s:Double>48</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:DockPanel.Dock">
+            <av:Setter.Value>
+              <av:DynamicResource ResourceKey="LeftDock" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontStyle">
+            <av:Setter.Value>
+              <av:Binding XPath="fontstyle" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:ContentControl.Content">
+            <av:Setter.Value>
+              <s:String>{Hello}</s:String>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:Style.BasedOn>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:Button">
+            <av:Canvas Name="Canvas0" Background="{av:TemplateBinding av:Panel.Background}">
+              <av:ContentPresenter Name="CP0" Content="{av:TemplateBinding av:ContentControl.Content}" />
+            </av:Canvas>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:Style TargetType="av:Button" x:Key="ButtonStyle2">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Style.Triggers>
+        <av:Trigger Property="av:Panel.Background">
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FF0000FF</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Trigger.Value>
+            <av:SolidColorBrush>#FF008000</av:SolidColorBrush>
+          </av:Trigger.Value>
+        </av:Trigger>
+        <av:Trigger Property="av:TextElement.Foreground">
+          <av:Setter Property="av:ContentControl.Content">
+            <av:Setter.Value>
+              <x:Array Type="av:TextBlock">
+                <av:TextBlock Text="Text 0" />
+                <av:TextBlock Text="Text 1" />
+                <av:TextBlock Text="Text 2" />
+              </x:Array>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Trigger.Value>
+            <av:SolidColorBrush>#FF0000FF</av:SolidColorBrush>
+          </av:Trigger.Value>
+        </av:Trigger>
+      </av:Style.Triggers>
+      <av:Setter Property="av:Panel.Background">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FF008000</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:DockPanel.Dock">
+        <av:Setter.Value>
+          <x:Static Member="av:Dock.Left" />
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:XmlDataProvider XPath="/root" x:Key="DSO">
+      <x:XData>
+        <root xmlns="">
+          <fontstyle>Italic</fontstyle>
+        </root>
+      </x:XData>
+    </av:XmlDataProvider>
+    <s:Double x:Key="FourtyEight">48</s:Double>
+    <av:Color x:Key="Indigo Color">#FF4B0082</av:Color>
+    <av:Dock x:Key="LeftDock">Left</av:Dock>
+    <av:Style TargetType="av:IFrameworkInputElement" x:Key="OpenEndedStyle">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:Panel.Background">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FF9280FF</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:DockPanel.Dock">
+        <av:Setter.Value>
+          <x:Static Member="av:Dock.Left" />
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:Style TargetType="av:Button" x:Key="{x:Type av:Button}">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:Panel.Background">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.FontSize">
+        <av:Setter.Value>
+          <s:Double>48</s:Double>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:DockPanel.Dock">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="LeftDock" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.FontStyle">
+        <av:Setter.Value>
+          <av:Binding XPath="fontstyle" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:ContentControl.Content">
+        <av:Setter.Value>
+          <s:String>{Hello}</s:String>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+  </CustomDockPanel.Resources>
+  <av:Button Name="Button0" />
+  <av:Button Name="Button1">
+    <av:Button.Style>
+      <av:Style TargetType="av:Button">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Style.BasedOn>
+          <av:Style TargetType="av:Button">
+            <av:Style.Resources>
+              <av:ResourceDictionary />
+            </av:Style.Resources>
+            <av:Setter Property="av:Panel.Background">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontSize">
+              <av:Setter.Value>
+                <s:Double>48</s:Double>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:DockPanel.Dock">
+              <av:Setter.Value>
+                <av:DynamicResource ResourceKey="LeftDock" />
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontStyle">
+              <av:Setter.Value>
+                <av:Binding XPath="fontstyle" />
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:ContentControl.Content">
+              <av:Setter.Value>
+                <s:String>{Hello}</s:String>
+              </av:Setter.Value>
+            </av:Setter>
+          </av:Style>
+        </av:Style.BasedOn>
+        <av:Setter Property="av:Control.Template">
+          <av:Setter.Value>
+            <av:ControlTemplate TargetType="av:Button">
+              <av:Canvas Name="Canvas0" Background="{av:TemplateBinding av:Panel.Background}">
+                <av:ContentPresenter Name="CP0" Content="{av:TemplateBinding av:ContentControl.Content}" />
+              </av:Canvas>
+            </av:ControlTemplate>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:Button.Style>
+  </av:Button>
+  <av:Button Name="Button2">
+    <av:Button.Style>
+      <av:Style TargetType="av:Button">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Style.Triggers>
+          <av:Trigger Property="av:Panel.Background">
+            <av:Setter Property="av:TextElement.Foreground">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FF0000FF</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Trigger.Value>
+              <av:SolidColorBrush>#FF008000</av:SolidColorBrush>
+            </av:Trigger.Value>
+          </av:Trigger>
+          <av:Trigger Property="av:TextElement.Foreground">
+            <av:Setter Property="av:ContentControl.Content">
+              <av:Setter.Value>
+                <x:Array Type="av:TextBlock">
+                  <av:TextBlock Text="Text 0" />
+                  <av:TextBlock Text="Text 1" />
+                  <av:TextBlock Text="Text 2" />
+                </x:Array>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Trigger.Value>
+              <av:SolidColorBrush>#FF0000FF</av:SolidColorBrush>
+            </av:Trigger.Value>
+          </av:Trigger>
+        </av:Style.Triggers>
+        <av:Setter Property="av:Panel.Background">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FF008000</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:DockPanel.Dock">
+          <av:Setter.Value>
+            <x:Static Member="av:Dock.Left" />
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:Button.Style>
+  </av:Button>
+  <av:Button Name="Button3">
+    <av:Button.Style>
+      <av:Style TargetType="av:IFrameworkInputElement">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Setter Property="av:Panel.Background">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FF9280FF</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:DockPanel.Dock">
+          <av:Setter.Value>
+            <x:Static Member="av:Dock.Left" />
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:Button.Style>
+  </av:Button>
+</CustomDockPanel>

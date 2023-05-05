@@ -1,0 +1,97 @@
+﻿<FlowDocumentPageViewer xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <FlowDocument ColumnRuleBrush="Black" ColumnRuleWidth="2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      FontFamily="Georgia" FontSize="10" ColumnWidth="700"
+>
+    <Paragraph Name="Para1" Margin="0,30,10,30" BorderBrush="Red" BorderThickness="1">
+      Margin Here. 0, 30, 10, 30 (LTRB). <LineBreak />
+      Left Margin = 0. <LineBreak />
+      Bottom Margin = 30
+    </Paragraph>
+    <Paragraph Name="Para2" Margin="20,20,10,10" BorderBrush="Red" BorderThickness="1">
+      Top Margin = 20. <LineBreak />
+      Left Margin = 20. <LineBreak />
+      Margin Here. 20, 20, 10, 10 (LTRB) <LineBreak />
+      The Margin with the Paragraph above is collapsed to 30 .
+    </Paragraph>
+    <Paragraph Name="Para3" BorderBrush="Red" BorderThickness="1" Margin="0">
+      <TextBlock Name="TextBlock1" Margin="20,30,10,0">
+        Text in a TextBlock inside a Paragraph with Margin=0. <LineBreak />
+        TextBlock Margin = 20, 30, 10, 0 (LTRB) <LineBreak />
+        Paragraph Bottom Margin = 0
+      </TextBlock>
+    </Paragraph>
+    <BlockUIContainer Name="BUC1" BorderBrush="Red" BorderThickness="1" Margin="10,20,60,10">
+      <StackPanel>
+        <Image Name="Image1" HorizontalAlignment="Left" Width="30" Height="30" Margin="40,5,20,20" Source="pack://siteoforigin:,,,/1_1024.jpg" Stretch="Fill">
+          <Image.LayoutTransform>
+            <RotateTransform Angle="30" />
+          </Image.LayoutTransform>
+        </Image>
+        <TextBlock Name="TextBlock2">
+          Image Sized to 30, 30 inside a BlockUIContainer with Margin = 10, 20, 60, 10 (LTRB). <LineBreak />
+          Image Horizontal Alignment = Left. Image Margin = 40, 5, 20, 20 (LTRB)
+        </TextBlock>
+      </StackPanel>
+    </BlockUIContainer>
+    <Paragraph Margin="0" Padding="2" BorderBrush="Red" BorderThickness="1" Name="Para4">
+      <Border BorderBrush="Green" BorderThickness="1">
+      <FlowDocumentScrollViewer Name="TextFlow1" Margin="12,1,19,0"><FlowDocument FontFamily="Georgia" FontSize="10">
+        <Paragraph Name="ParaInside">
+          Paragraph with Margin=0, Padding=2 contains a TextFlow with Margin = 12, 1, 19, 0 (LTRB)<LineBreak />
+          TextFlow Left Margin = 12 <LineBreak />
+          TextFlow Top Margin = 1 <LineBreak />
+          TextFlow Bottom Margin = 0  
+        </Paragraph>
+      </FlowDocument></FlowDocumentScrollViewer>
+      </Border>
+    </Paragraph>
+    <Paragraph Margin="0,5,0,0" BorderBrush="Red" BorderThickness="1" Name="Para5">
+      <Figure Name="Fig1" VerticalAnchor="ParagraphTop" HorizontalAnchor="ColumnLeft" Margin="52,1,119,1" BorderBrush="Green" BorderThickness="1" WrapDirection="None" Padding="0">
+        <Paragraph>
+          <Image Name="Image2" HorizontalAlignment="Left" Width="20" Height="20" Source="pack://siteoforigin:,,,/1_1024.jpg" Stretch="Fill">
+          </Image>
+        </Paragraph>
+      </Figure>
+      <Run Name="Run1">Paragraph </Run> with Margin=0, 5, 0, 0, contains a Figure with Margin = 52, 1, 119, 1 (LTRB)<LineBreak />
+      Figure Left Margin = 52, Figure Top Margin = 1, <LineBreak />
+      Figure Bottom Margin = 1 <LineBreak />
+      <Figure Name="Fig2" VerticalAnchor="ParagraphTop" HorizontalAnchor="ColumnRight" Margin="0,1,329,1" BorderBrush="Green" BorderThickness="1" WrapDirection="None" Padding="0">
+        <Paragraph>
+          <Image Name="Image3" HorizontalAlignment="Left" Width="20" Height="20" Source="pack://siteoforigin:,,,/1_1024.jpg" Stretch="Fill">
+          </Image>
+        </Paragraph>
+      </Figure>
+      Another Figure with Margin = "0, 1, 329, 1" <LineBreak />
+      Figure Right Margin = 329
+    </Paragraph>
+    <Paragraph Margin="0,5,0,0" BorderBrush="Red" BorderThickness="1" Name="Para6">
+      <Floater Name="Float1" Margin="52,1,119,1" BorderBrush="Green" BorderThickness="1" Padding="0" HorizontalAlignment="Left">
+        <Paragraph>
+          <Image Name="Image4" HorizontalAlignment="Left" Width="20" Height="20" Source="pack://siteoforigin:,,,/1_1024.jpg" Stretch="Fill">
+          </Image>
+        </Paragraph>
+      </Floater>
+      <Run Name="Run2">Paragraph </Run> with Margin=0, 5, 0, 0, contains a Floater with Margin = 52, 1, 119, 1 (LTRB)<LineBreak />
+      Floater Left Margin = 52, Figure Right Margin = 119, <LineBreak />
+      Floater Bottom Margin = 1 
+    </Paragraph>
+    <Section Margin="13,8,17,0" BorderBrush="Red" BorderThickness="1" Name="Sec1">
+      <Paragraph Margin="10,5,0,0" BorderBrush="Green" BorderThickness="1" Name="Para7">
+        Paragraph7 10,5,0,0 inside Section 13,8,17,0
+      </Paragraph>      
+    </Section>
+    <Table Margin="7,6,13,0" BorderBrush="Red" BorderThickness="1" Name="Table1">
+      <TableRowGroup>
+        <TableRow>
+          <TableCell>
+            <Paragraph Margin="10,5,0,0" BorderBrush="Green" BorderThickness="1" Name="Para9">
+              Paragraph9 10,5,0,0 inside Table 7,6,13,0
+            </Paragraph>
+          </TableCell>
+        </TableRow>        
+      </TableRowGroup>
+    </Table>
+  </FlowDocument>
+</FlowDocumentPageViewer>

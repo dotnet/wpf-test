@@ -1,0 +1,41 @@
+<StackPanel Background="#FFFFFFE0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <FlowDocumentScrollViewer>
+    <FlowDocument Foreground="#FF4169E1" Background="#FFFFFFE0" Name="solidcolor">
+      <Paragraph FontWeight="Bold">foreground (solid)</Paragraph>
+    </FlowDocument>
+  </FlowDocumentScrollViewer>
+  <FlowDocumentScrollViewer>
+    <FlowDocument Background="#FFDC143C" Name="radial">
+      <FlowDocument.Foreground>
+        <RadialGradientBrush>
+          <RadialGradientBrush.GradientStops>
+            <GradientStop Color="#FF008000" Offset="0" />
+            <GradientStop Color="#FFFFC0CB" Offset="1" />
+          </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+      </FlowDocument.Foreground>
+      <Paragraph FontWeight="Bold">foreground (radial gradient)</Paragraph>
+    </FlowDocument>
+  </FlowDocumentScrollViewer>
+  <FlowDocumentScrollViewer>
+    <FlowDocument Background="#FFFFFFE0" Name="linear">
+      <FlowDocument.Foreground>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+          <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#FF5F9EA0" Offset="0" />
+            <GradientStop Color="#FFDC143C" Offset="1" />
+          </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+      </FlowDocument.Foreground>
+      <Paragraph FontWeight="Bold">foreground (linear gradient)</Paragraph>
+    </FlowDocument>
+  </FlowDocumentScrollViewer>
+  <FlowDocumentScrollViewer>
+    <FlowDocument Background="#FFDC143C" Name="image">
+      <FlowDocument.Foreground>
+        <ImageBrush ImageSource="pack://siteoforigin:,,,/avalon.png" Stretch="None" TileMode="Tile" />
+      </FlowDocument.Foreground>
+      <Paragraph FontWeight="Bold">foreground (image)</Paragraph>
+    </FlowDocument>
+  </FlowDocumentScrollViewer>
+</StackPanel>

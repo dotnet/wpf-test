@@ -1,0 +1,49 @@
+<!-- Disabling for .NET Core 3.0, these tests verify that compiling .NET Framework 3.5 does not bring references to .NET Framework 4.0, no longer relevant -->
+<XTC>
+  <!--Baml2006Reference Tests-->
+
+  <!-- Lengthy .xaml files -->
+  <TEST Name="BREF_Elements" Priority="0" SubArea="BamlReference" >
+    <DriverParameters XamlTestType="BAMLREFERENCETEST" XamlFile="Elements.xaml" Target="v3.5" UnexpectedVersion="4.0" ValuesMustBeString="false" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\Elements.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Parser\XamlBaml\XamlToBaml\*.*" />
+    </SupportFiles>
+    <Keywords>
+      <Keyword>MicroSuite</Keyword>
+    </Keywords>
+  </TEST>
+  <TEST Name="BREF_Elements_BRAT" Priority="0" SubArea="BamlReference" >
+    <DriverParameters XamlTestType="BAMLREFERENCETEST" XamlFile="Elements.xaml" Target="v3.5" UnexpectedVersion="4.0" ValuesMustBeString="true" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\Elements.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Parser\XamlBaml\XamlToBaml\*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BREF_ClothAnimation" Priority="0" SubArea="BamlReference" >
+    <DriverParameters XamlTestType="BAMLREFERENCETEST" XamlFile="ClothAnimation.xaml" Target="v3.5" UnexpectedVersion="4.0" ValuesMustBeString="false" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\ClothAnimation.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Parser\XamlBaml\XamlToBaml\*.*" />
+    </SupportFiles>
+  </TEST>
+
+  <!-- Contains references to mscorlib.dll -->
+  <TEST Name="BREF_xArray" Priority="0" SubArea="BamlReference" >
+    <DriverParameters XamlTestType="BAMLREFERENCETEST" XamlFile="xArray.xaml" Target="v3.5" UnexpectedVersion="4.0" ValuesMustBeString="false" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\xArray.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Parser\XamlBaml\XamlToBaml\*.*" />
+    </SupportFiles>
+  </TEST>
+
+  <!-- Contains references to system.dll -->
+  <TEST Name="BREF_SystemAssembly" Priority="0" SubArea="BamlReference" >
+    <DriverParameters XamlTestType="BAMLREFERENCETEST" XamlFile="SystemAssembly.xaml" Target="v3.5" UnexpectedVersion="4.0" ValuesMustBeString="false" SecurityLevel="FullTrust" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Xaml\Data\Xaml\Buildable\SystemAssembly.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Parser\XamlBaml\XamlToBaml\*.*" />
+    </SupportFiles>
+  </TEST>
+
+</XTC>

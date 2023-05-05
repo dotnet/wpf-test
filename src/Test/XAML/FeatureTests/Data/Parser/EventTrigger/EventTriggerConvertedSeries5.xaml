@@ -1,0 +1,108 @@
+﻿<!--Converted from EventTrigger.cs series 5
+    One action starts Timeline in Style.Storyboards. 
+    The other action Stop the same Timeline
+    Sequence is: StartAction, StopAction
+-->
+
+
+
+
+<cmn:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cc="http://XamlTestTypes" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:S="clr-namespace:System;assembly=Mscorlib" Background="White"  xmlns:MappingPIGen2="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen3="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent='Button.Click'>
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="TestStory">
+                    <Storyboard>
+                        <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                            <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:1" />
+                        </ParallelTimeline>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent='CheckBox.Checked'>
+            <EventTrigger.Actions>
+                <StopStoryboard BeginStoryboardName="TestStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+    <!-- 5_1  EventTrigger(2) in Style.Triggers. 
+    The timeline contains three setters
+    Style in Resources-->
+    <Canvas>
+        <StackPanel>
+            <Button />
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent='Click'>
+                            <EventTrigger.Actions>
+                                <BeginStoryboard Name="TestStory">
+                                    <Storyboard>
+                                        <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                                            <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:1" />
+                                        </ParallelTimeline>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent='CheckBox.Checked'>
+                            <EventTrigger.Actions>
+                                <StopStoryboard BeginStoryboardName="TestStory" />
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+        </StackPanel>
+    </Canvas>
+    <!-- 5_11  EventTrigger(2) in FE.Triggers
+Target its child element -->
+    <Canvas>
+        <StackPanel>
+            <Button />
+        </StackPanel>
+    </Canvas>
+    <!-- 5_21  EventTrigger(2) in ControlTemplate.Triggers
+ControlTemplate in Style, Style in Resources -->
+    <Canvas>
+        <Canvas.Resources>
+            <Style TargetType='{x:Type Control}'>
+                <Style.Setters>
+                    <Setter Property='Template'>
+                        <Setter.Value>
+                            <ControlTemplate TargetType='{x:Type Control}'>
+                                <StackPanel>
+                                    <Button x:Name='testBtn' Content='Event Trigger Test 5.21' />
+                                    <Button x:Name='stopBtn' Content='Stop' />
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <EventTrigger RoutedEvent='Button.Click' SourceName='testBtn'>
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard Name="TestStory">
+                                                <Storyboard>
+                                                    <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                                                        <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:1" />
+                                                    </ParallelTimeline>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent='Button.Click' SourceName='stopBtn'>
+                                        <EventTrigger.Actions>
+                                            <StopStoryboard BeginStoryboardName="TestStory" />
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style.Setters>
+            </Style>
+        </Canvas.Resources>
+        <StackPanel>
+            <Control />
+        </StackPanel>
+    </Canvas>
+</cmn:CustomCanvas>
+

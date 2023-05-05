@@ -1,0 +1,86 @@
+<CustomDockPanel xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <av:StackPanel>
+    <av:StackPanel.Resources>
+      <av:Style TargetType="av:Button" x:Key="Style1">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Style.Triggers>
+          <av:Trigger Property="av:UIElement.IsMouseOver">
+            <av:Setter Property="av:Panel.Background">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FF0000FF</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Trigger.Value>
+              <s:Boolean>True</s:Boolean>
+            </av:Trigger.Value>
+          </av:Trigger>
+        </av:Style.Triggers>
+        <av:Setter Property="av:Panel.Background">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:FrameworkElement.Width">
+          <av:Setter.Value>
+            <s:Double>200</s:Double>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:Control.Template">
+          <av:Setter.Value>
+            <av:ControlTemplate TargetType="av:Button">
+              <av:Border Background="{av:TemplateBinding av:Panel.Background}">
+                <av:StackPanel Height="{av:TemplateBinding av:FrameworkElement.Width}" Width="{av:TemplateBinding av:FrameworkElement.Width}">
+                  <av:ContentPresenter Content="{av:TemplateBinding av:ContentControl.Content}" />
+                </av:StackPanel>
+              </av:Border>
+            </av:ControlTemplate>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:StackPanel.Resources>
+    <av:Button Name="Button0" Style="{av:DynamicResource Style1}">Hi there</av:Button>
+  </av:StackPanel>
+  <av:StackPanel>
+    <av:StackPanel.Resources>
+      <av:Style TargetType="av:Button" x:Key="NewStyle">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Setter Property="av:Border.BorderThickness">
+          <av:Setter.Value>
+            <av:Thickness>5,5,5,5</av:Thickness>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:Control.Template">
+          <av:Setter.Value>
+            <av:ControlTemplate TargetType="av:Button">
+              <av:Border Margin="{av:TemplateBinding av:Border.BorderThickness}" BorderBrush="{av:TemplateBinding av:Border.BorderBrush}" BorderThickness="{av:TemplateBinding av:Border.BorderThickness}" Background="#FF8B0000">
+                <av:StackPanel>
+                  <av:ContentPresenter Content="{av:TemplateBinding av:ContentControl.Content}" />
+                </av:StackPanel>
+              </av:Border>
+            </av:ControlTemplate>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+      <av:Style TargetType="av:Button" x:Key="OriginalStyle">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Setter Property="av:Panel.Background">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:Border.BorderBrush">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:StackPanel.Resources>
+    <av:Button Name="Button1" Style="{av:DynamicResource NewStyle}">Hello world</av:Button>
+  </av:StackPanel>
+</CustomDockPanel>

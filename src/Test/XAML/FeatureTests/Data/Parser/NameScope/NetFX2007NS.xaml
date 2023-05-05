@@ -1,0 +1,40 @@
+<cmn:CustomStackPanel Name="CustomStackPanel0"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:o7="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
+    >
+<!--Verify new property on old NS-->
+    <Grid Name="Grid1">
+        <RichTextBox IsDocumentEnabled="true">
+            <FlowDocument>
+                <Paragraph LineHeight="18" TextAlignment="Center">RichTextBox1</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+<!--Verify new NS as root-->
+    <Grid Name="Grid2" xmlns="http://schemas.microsoft.com/netfx/2007/xaml/presentation">
+        <RichTextBox IsDocumentEnabled="true">
+            <FlowDocument>
+                <Paragraph LineHeight="18" TextAlignment="Center">RichTextBox2</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+<!--Verify new NS marked Ignorable-->
+    <Grid Name="Grid3" mc:Ignorable="o7">
+        <o7:RichTextBox IsDocumentEnabled="true">
+            <FlowDocument>
+                <Paragraph LineHeight="18" TextAlignment="Center">RichTextBox3</Paragraph>
+            </FlowDocument>
+        </o7:RichTextBox>
+    </Grid>
+<!--Verify new NS + old NS-->
+    <Grid Name="Grid4">
+        <o7:RichTextBox IsDocumentEnabled="true">
+            <FlowDocument>
+                <Paragraph LineHeight="18" TextAlignment="Center">RichTextBox4</Paragraph>
+            </FlowDocument>
+        </o7:RichTextBox>
+    </Grid>
+
+</cmn:CustomStackPanel>

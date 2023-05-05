@@ -1,0 +1,22 @@
+<CustomCanvas xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <CustomCanvas.Resources>
+    <s:String x:Key="myString">This is a string</s:String>
+    <av:Style TargetType="av:Button" x:Key="Style">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:Button">
+            <av:Border>
+              <av:TextBlock>
+                <av:TextBlock Text="{av:DynamicResource myString}" Name="myText" />
+              </av:TextBlock>
+            </av:Border>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+  </CustomCanvas.Resources>
+  <av:Button Style="{av:DynamicResource Style}" />
+</CustomCanvas>

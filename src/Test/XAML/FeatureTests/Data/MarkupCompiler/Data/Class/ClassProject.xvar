@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+    <Project DefaultTargets="TestCleanup;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+      <PropertyGroup>
+        <Platform>AnyCPU</Platform>
+        <AssemblyName>Class</AssemblyName>
+        <Configuration>Release</Configuration>
+        <OutputType>winexe</OutputType>
+        <OutputPath>bin\$(Configuration)\</OutputPath>
+        <TextVariation ID="5">
+          <RootNamespace></RootNamespace>
+        </TextVariation>
+        <OptionStrict>On</OptionStrict>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      </PropertyGroup>
+      <AttributeVariation ID="3">
+        <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+      </AttributeVariation>
+      <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+      <ItemGroup>
+        <ApplicationDefinition Include="ClassApp.xaml" />
+        <Page Include="ClassMarkup.xaml" />
+        <AttributeVariation ID="4">
+          <Compile Include="ClassCode.cs" />
+        </AttributeVariation>
+      </ItemGroup>
+      <!-- Included only for test run -->
+      <Import Project="TestCommon.target" />
+      <ItemGroup>
+        <Reference Include="TestRuntime" />
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Data" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="UIAutomationClient" />
+        <Reference Include="UIAutomationTypes" />
+        <Reference Include="UIAutomationProvider" />
+      </ItemGroup>
+      <NodeVariation ID="50">
+        <Target Name="VerifyGenFile">
+            <Error Text="ClassApp.g.cs file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassApp.g.cs')" />
+            <Error Text="ClassMarkup.g.cs file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassMarkup.g.cs')" />
+        </Target>
+      </NodeVariation>
+    </Project>
+  </TemplateData>
+
+  <Scenarios>
+    <Defaults>
+      <FileName>ClassProject</FileName>
+      <FileExtension>.csproj</FileExtension>
+      <RetainFileName>true</RetainFileName>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Defaults>
+
+    <Scenario Case="1" />
+    <Scenario Case="2">
+      <TextVariation ID="5">MyRootNamespace</TextVariation>
+    </Scenario>
+    <Scenario Case="3">
+      <CommandLineArgs>/t:Clean,Build,VerifyGenFile</CommandLineArgs>
+      <NodeVariation ID="50">
+        <Target Name="VerifyGenFile">
+            <Error Text="ClassApp.g.cs file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassApp.g.cs')" />
+            <Error Text="ClassMarkup.g.cs file exists in $(IntermediateOutputPath) although x:Class was not specified" Condition="Exists('$(IntermediateOutputPath)\ClassMarkup.g.cs')" />
+        </Target>
+      </NodeVariation> 
+    </Scenario>
+    <Scenario Case="4">
+      <CommandLineArgs>/t:Clean,Build,VerifyGenFile</CommandLineArgs>
+      <NodeVariation ID="50">
+        <Target Name="VerifyGenFile">
+            <Error Text="ClassApp.g.cs file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassApp.g.cs')" />
+            <Error Text="ClassMarkup.g.cs file does not exist in $(IntermediateOutputPath) although x:Class was specified" Condition="!Exists('$(IntermediateOutputPath)\ClassMarkup.g.cs')" />
+        </Target>
+      </NodeVariation>
+      <TextVariation ID="5">MyRootNamespace</TextVariation>
+    </Scenario>
+    <Scenario Case="5">
+      <TextVariation ID="5">My!InvalidRootNamespace</TextVariation>
+    </Scenario>
+
+
+    <Scenario Case="11">
+      <FileExtension>.vbproj</FileExtension>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="ClassCode.vb" />
+      <NodeVariation ID="50">
+        <Target Name="VerifyGenFile">
+            <Error Text="ClassApp.g.vb file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassApp.g.vb')" />
+            <Error Text="ClassMarkup.g.vb file does not exist in $(IntermediateOutputPath) although x:Class was specified" Condition="!Exists('$(IntermediateOutputPath)\ClassMarkup.g.vb')" />
+        </Target>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="12">
+      <FileExtension>.vbproj</FileExtension>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="ClassCode.vb" />
+      <TextVariation ID="5">MyRootNamespace</TextVariation>
+      <NodeVariation ID="50">
+        <Target Name="VerifyGenFile">
+            <Error Text="ClassApp.g.vb file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassApp.g.vb')" />
+            <Error Text="ClassMarkup.g.vb file does not exist in $(IntermediateOutputPath) although x:Class was specified" Condition="!Exists('$(IntermediateOutputPath)\ClassMarkup.g.vb')" />
+        </Target>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="13">
+      <FileExtension>.vbproj</FileExtension>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="ClassCode.vb" />
+      <CommandLineArgs>/t:Clean,Build,VerifyGenFile</CommandLineArgs>
+      <NodeVariation ID="50">
+        <Target Name="VerifyGenFile">
+            <Error Text="ClassApp.g.vb file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassApp.g.vb')" />
+            <Error Text="ClassMarkup.g.vb file exists in $(IntermediateOutputPath) although x:Class was not specified" Condition="Exists('$(IntermediateOutputPath)\ClassMarkup.g.vb')" />
+        </Target>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="14">
+      <FileExtension>.vbproj</FileExtension>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="ClassCode.vb" />
+      <CommandLineArgs>/t:Clean,Build,VerifyGenFile</CommandLineArgs>
+      <NodeVariation ID="50">
+        <Target Name="VerifyGenFile">
+            <Error Text="ClassApp.g.vb file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassApp.g.vb')" />
+            <Error Text="ClassMarkup.g.vb file does not exist in $(IntermediateOutputPath) although x:Class was specified" Condition="!Exists('$(IntermediateOutputPath)\ClassMarkup.g.vb')" />
+        </Target>
+      </NodeVariation>
+      <TextVariation ID="5">MyRootNamespace</TextVariation>
+    </Scenario>
+    <Scenario Case="15">
+      <FileExtension>.vbproj</FileExtension>
+      <AttributeVariation ID="3" AttributeName="Project" AttributeValue="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+      <AttributeVariation ID="4" AttributeName="Include" AttributeValue="ClassCode.vb" />
+      <TextVariation ID="5">My!InvalidRootNamespace</TextVariation>
+      <NodeVariation ID="50">
+        <Target Name="VerifyGenFile">
+            <Error Text="ClassApp.g.vb file does not exist in $(IntermediateOutputPath)" Condition="!Exists('$(IntermediateOutputPath)\ClassApp.g.vb')" />
+            <Error Text="ClassMarkup.g.vb file does not exist in $(IntermediateOutputPath) although x:Class was specified" Condition="!Exists('$(IntermediateOutputPath)\ClassMarkup.g.vb')" />
+        </Target>
+      </NodeVariation>
+    </Scenario>
+  </Scenarios>
+</XMLVariationTemplate>

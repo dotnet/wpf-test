@@ -1,0 +1,12 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Test.Deployment" Assembly="ClientTestLibrary" />
+  <Steps>
+    <TestLogStep>
+      <MSBuildStep CurrentStage="Run" Arguments="cs\ClassProject.csproj /e:cs\OldError.xml /err:MC6016 /t:Clean;Build  " />
+      <ActivationStep Method="launch" FileName="&amp;ExecutableFullPath&amp;" />
+      <MSBuildStep CurrentStage="Run" Arguments="vb\ClassProject.vbproj /e:vb\OldError.xml /err:MC6016 /t:Clean;Build  " />
+      <ActivationStep Method="launch" FileName="&amp;ExecutableFullPath&amp;" />
+      <MSBuildStep CurrentStage="Cleanup" Arguments="&amp;ProjectFile&amp; /t:TestCleanup" AlwaysRun="True" />
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

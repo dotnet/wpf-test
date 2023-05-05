@@ -1,0 +1,67 @@
+<Window x:Class="RegressionIssue129.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
+        Title="Window1" Height="300" Width="300" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="a" TargetType="Button">
+            <Style.Resources>
+                <s:String x:Key="s">StyleARes</s:String>
+            </Style.Resources>
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+        <Style x:Key="b" TargetType="Button" BasedOn="{StaticResource a}">
+            <Style.Resources>
+                <s:String x:Key="s">StyleBRes</s:String>
+            </Style.Resources>
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+        <Style x:Key="c" TargetType="Button" BasedOn="{StaticResource b}">
+            <Style.Resources>
+                <s:String x:Key="s">StyleCRes</s:String>
+            </Style.Resources>
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+        
+        <!--Defaults to B-->
+        <Style x:Key="d" TargetType="Button" BasedOn="{StaticResource b}">
+            <!--No Resources-->
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+        
+        <!--Defaults to A-->
+        <Style x:Key="e" TargetType="Button" BasedOn="{StaticResource a}">
+            <!--No Resources-->
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+        <Style x:Key="f" TargetType="Button" BasedOn="{StaticResource e}">
+            <!--No Resources-->
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+        
+        <!--Defaults to Application.Resources-->
+        <Style x:Key="g" TargetType="Button" >
+            <!--No Resources-->
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+        <Style x:Key="h" TargetType="Button" BasedOn="{StaticResource g}">
+            <!--No Resources-->
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+        <Style x:Key="i" TargetType="Button" BasedOn="{StaticResource h}">
+            <!--No Resources-->
+            <Setter Property="Content" Value="{StaticResource s}"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <Button x:Name="ButtonA" Style="{StaticResource a}"/>
+        <Button x:Name="ButtonB" Style="{StaticResource b}"/>
+        <Button x:Name="ButtonC" Style="{StaticResource c}"/>
+        <Button x:Name="ButtonD" Style="{StaticResource d}"/>
+        <Button x:Name="ButtonE" Style="{StaticResource e}"/>
+        <Button x:Name="ButtonF" Style="{StaticResource f}"/>
+        <Button x:Name="ButtonG" Style="{StaticResource g}"/>
+        <Button x:Name="ButtonH" Style="{StaticResource h}"/>
+        <Button x:Name="ButtonI" Style="{StaticResource i}"/>
+    </StackPanel>
+</Window>

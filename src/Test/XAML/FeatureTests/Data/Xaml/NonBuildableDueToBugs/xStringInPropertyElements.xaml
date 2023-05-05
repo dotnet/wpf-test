@@ -1,0 +1,38 @@
+<!-- x:String insde different Property Elements / StringCollection -->
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cols  = "clr-namespace:System.Collections.Specialized;assembly=System"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Resources>
+
+        <CollectionViewSource x:Key="ExplicitSortedView">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription>
+                    <PropertyGroupDescription.GroupNames>
+                        <x:String>Today</x:String>
+                        <x:String>Yesterday</x:String>
+                        <x:String>This Week</x:String>
+                        <x:String>Last Week</x:String>
+                        <x:String>Last Month</x:String>
+                        <x:String>Last Year</x:String>
+                        <x:String>Older</x:String>
+                    </PropertyGroupDescription.GroupNames>
+                </PropertyGroupDescription>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <ObjectDataProvider x:Key="asyncods" ObjectType="{x:Type drt:numberclass}" IsAsynchronous="true">
+            <ObjectDataProvider.ConstructorParameters>
+                <x:String>1</x:String>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+
+        <cols:StringCollection x:Key="StringData">
+            <x:String>111</x:String>
+            <x:String>222</x:String>
+        </cols:StringCollection>
+
+    </Page.Resources>
+
+</Page>

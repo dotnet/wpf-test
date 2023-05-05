@@ -1,0 +1,33 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootNamespace>Avalon.Test.ComponentModel</RootNamespace>
+    <AssemblyName>Wireup</AssemblyName>
+    <OutputType>exe</OutputType>
+    <Configuration>Release</Configuration>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <GenerateManifests>true</GenerateManifests>
+    <OptionStrict>On</OptionStrict>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <ItemGroup>
+    <ApplicationDefinition Include="app.xaml" />
+    <Page Include="page.xaml" />
+    <Compile Include="page.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Reference Include="System" />
+    
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationProvider" />
+  </ItemGroup>
+  <Import Project="TestCommon.target" />
+</Project>

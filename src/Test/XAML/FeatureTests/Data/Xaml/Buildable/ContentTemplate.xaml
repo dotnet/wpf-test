@@ -1,0 +1,28 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="510"
+        Width="547" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <Page.Resources>
+
+        <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle Fill="{TemplateBinding Background}" Margin="5" RadiusX="19" RadiusY="19" />
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Margin="10" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Button Background="Blue" Style="{DynamicResource CloseButtonStyle}" Content="Test"
+                Margin="0.00314285714280516,0,-0.0031428571427341,0" />
+        <Button Background="Blue" Margin="0,95,-502,-95" Style="{DynamicResource CloseButtonStyle}"
+                HorizontalAlignment="Right" Width="525">Test</Button>
+    </Grid>
+</Page>

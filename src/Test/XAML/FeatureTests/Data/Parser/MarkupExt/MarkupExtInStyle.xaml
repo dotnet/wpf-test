@@ -1,0 +1,108 @@
+﻿<!-- 
+In this file we try to use MarkupExtensions all over the place in Styles. 
+In setters, templates, triggers... everywhere, to make sure they work fine.
+-->
+
+    <cmn:CustomDockPanel
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:cc="http://XamlTestTypes" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    >
+        <cmn:CustomDockPanel.Resources>
+            <Dock x:Key="LeftDock">Left</Dock>
+            <sys:Double x:Key="FourtyEight">48</sys:Double>
+            <SolidColorBrush x:Key="BlueBrush" Color="Blue" />
+            <Color x:Key="Indigo Color">Indigo</Color>
+            <XmlDataProvider x:Key="DSO" XPath="/root">
+              <x:XData>
+                <root xmlns="">
+                    <fontstyle>Italic</fontstyle>
+                </root>
+              </x:XData>
+            </XmlDataProvider>
+
+            <!-- This style uses MarkupExtensions in Setters -->
+            <Style TargetType="{x:Type Button}">
+                <Style.Setters>
+                    <Setter Property="Control.Background" Value="{cc:CustomColorBlender {x:Null},Red}" />
+                    <Setter Property="Button.FontSize" Value="{StaticResource FourtyEight}" />
+                    <Setter Property="DockPanel.Dock">
+                        <Setter.Value>
+                            <DynamicResource ResourceKey="LeftDock" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontStyle" Value="{Binding Source={StaticResource DSO},XPath=fontstyle}" />
+                    <Setter Property="Content" Value="{}{Hello}"></Setter>
+                </Style.Setters>
+            </Style>
+
+            <!-- This style uses MarkupExtensions in a ControlTemplate.
+                 This style is BasedOn the style above.
+            -->
+            <Style x:Key="ButtonStyle1" BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Canvas x:Name="Canvas0">
+                                <Canvas.Background>
+                                    <TemplateBindingExtension Property="Background" />
+                                </Canvas.Background>
+                                <ContentPresenter x:Name="CP0" Content="{TemplateBinding Content}" />
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- This style uses MarkupExtensions in Triggers -->
+            <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{x:Static Brushes.Green}" />   
+                <Setter Property="DockPanel.Dock" Value="{x:Static Dock.Left}" />
+
+                <Style.Triggers>
+                    <Trigger Property="Background">
+                        <Trigger.Value>
+                            <x:Static Member="Brushes.Green" />
+                        </Trigger.Value>
+                        <Trigger.Setters>
+                            <Setter Property="Foreground" Value="{StaticResource BlueBrush}" />
+                        </Trigger.Setters>
+                    </Trigger>
+
+                    <Trigger Property="Foreground" Value="{StaticResource BlueBrush}">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <x:Array Type="{x:Type TextBlock}">
+                                    <TextBlock>Text 0</TextBlock>
+                                    <TextBlock>Text 1</TextBlock>
+                                    <TextBlock>Text 2</TextBlock>
+                                </x:Array>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Testing MarkupExtensions in a style without a TargetType ("open-ended" styles)) -->
+            <Style x:Key="OpenEndedStyle">
+                <Style.Setters>
+                    <Setter Property="Control.Background">
+                        <Setter.Value>
+                            <cc:CustomColorBlender Core="Maroon" Additive="Navy">
+                                <x:Static Member="Colors.Green" />
+                                <StaticResource ResourceKey="Indigo Color"/>
+                                <Color>Blue</Color>
+                            </cc:CustomColorBlender>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="DockPanel.Dock" Value="{x:Static Dock.Left}" />
+                </Style.Setters>
+            </Style>
+        </cmn:CustomDockPanel.Resources>
+
+        <!-- Elements that apply each of the above styles -->
+        <Button Name="Button0" />
+        <Button Name="Button1" Style="{StaticResource ResourceKey=ButtonStyle1}" />
+        <Button Name="Button2" Style="{StaticResource ResourceKey=ButtonStyle2}" />
+        <Button Name="Button3" Style="{StaticResource ResourceKey=OpenEndedStyle}" />
+    </cmn:CustomDockPanel>

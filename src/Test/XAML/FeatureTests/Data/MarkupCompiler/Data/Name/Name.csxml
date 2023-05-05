@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Steps>
+  <MSBuildErrors>
+    <Error ID="CS0246" Partial="True">
+      <Description>The type or namespace name</Description>
+    </Error>
+    <Error ID="MC6002" Partial="True">
+      <Assembly>PresentationBuildTasks</Assembly>
+      <ResourceName>MessageStringTable.resources</ResourceName>
+      <ErrorIdentifier>DefnTagsCannotBeNested</ErrorIdentifier>
+    </Error>
+    <Error ID="MC6026" Partial="True">
+      <Assembly>PresentationBuildTasks</Assembly>
+      <ResourceName>MessageStringTable.resources</ResourceName>
+      <ErrorIdentifier>MissingClassDefinitionForCodeTag</ErrorIdentifier>
+    </Error>
+    <Error ID="MC6028" Partial="True">
+      <Assembly>PresentationBuildTasks</Assembly>
+      <ResourceName>MessageStringTable.resources</ResourceName>
+      <ErrorIdentifier>InvalidTypeName</ErrorIdentifier>
+    </Error>
+  </MSBuildErrors>
+
+  <Step ID="1">
+    <FileName>NameCode.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>all</Variation>
+  </Step>
+
+  <Step ID="61">
+    <FileName>NameCodeVB.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>all</Variation>
+  </Step>
+
+  <Step ID="11">
+    <FileName>NameMarkup.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>all</Variation>
+  </Step>
+
+  <Step ID="40">
+    <FileName>NameApp.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>all</Variation>
+  </Step>
+
+  <Step ID="101" DependsOn="1,11,40">
+    <FileName>NameProject.xvar</FileName>
+    <Scenario>1</Scenario>
+    <Variation>all</Variation>
+  </Step>
+
+  <Step ID="201" DependsOn="61,11,40">
+    <FileName>NameProject.xvar</FileName>
+    <Scenario>11</Scenario>
+    <Variation>all</Variation>
+  </Step>
+</Steps>

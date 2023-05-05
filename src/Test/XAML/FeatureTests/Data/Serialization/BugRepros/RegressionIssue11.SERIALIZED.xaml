@@ -1,0 +1,19 @@
+<CustomDockPanel Name="DOCKPANEL1" Background="#FFCCCCCC" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <CustomDockPanel.Triggers>
+    <av:EventTrigger RoutedEvent="av:FrameworkElement.Loaded">
+      <av:BeginStoryboard>
+        <av:Storyboard>
+          <av:Storyboard.Children>
+            <av:PointAnimation To="200,150" From="100,150" BeginTime="00:00:05" FillBehavior="HoldEnd" Duration="00:00:02" av:Storyboard.TargetName="Animate" av:Storyboard.TargetProperty="(av:Path.Data).(av:LineGeometry.StartPoint)" />
+            <av:PointAnimation To="200,150" From="100,150" BeginTime="00:00:05" FillBehavior="HoldEnd" Duration="00:00:02" av:Storyboard.TargetName="Animate" av:Storyboard.TargetProperty="(av:Path.Data).(av:LineGeometry.EndPoint)" />
+          </av:Storyboard.Children>
+        </av:Storyboard>
+      </av:BeginStoryboard>
+    </av:EventTrigger>
+  </CustomDockPanel.Triggers>
+  <av:Path Name="Animate" Stroke="#FFFF0000" StrokeThickness="50">
+    <av:Path.Data>
+      <av:LineGeometry EndPoint="300,150" StartPoint="100,150" />
+    </av:Path.Data>
+  </av:Path>
+</CustomDockPanel>

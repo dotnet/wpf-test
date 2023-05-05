@@ -1,0 +1,91 @@
+<XMLVariationTemplate>
+    <TemplateData>
+    using System;
+    using System.Windows;
+    using System.Windows.Navigation;
+    using System.Windows.Controls;
+    <NodeVariation ID="1" />
+
+    [assembly:CLSCompliant(true)]
+
+    <NodeVariation ID="2" />
+
+    <NodeVariation ID="3">
+    namespace Local
+    {
+        public class MyButton : Button
+        {
+        }
+    }
+    </NodeVariation>
+
+    namespace Harness
+    {
+        public class OnStartupBVT : System.Windows.Application
+        {
+            Microsoft.Test.Logging.TestLog log = null;
+
+            protected override void OnStartup(System.Windows.StartupEventArgs e)
+            {
+                log = new Microsoft.Test.Logging.TestLog("CompilerTest");
+                log.Stage = Microsoft.Test.Logging.TestStage.Initialize;
+                this.StartupUri = new Uri(@"MappingPIMarkup.xaml", UriKind.RelativeOrAbsolute);
+                this.LoadCompleted += new System.Windows.Navigation.LoadCompletedEventHandler(OnLoad);
+                log.Stage = Microsoft.Test.Logging.TestStage.Run;
+                base.OnStartup(e);
+            }
+
+            void OnLoad(object sender, NavigationEventArgs e)
+            {
+                log.LogStatus("LoadCompleted event fired");
+                log.Result = Microsoft.Test.Logging.TestResult.Pass;
+
+                ShutdownApp();
+            }
+
+            protected override void OnExit(ExitEventArgs e)
+            {
+                    log.LogStatus("Shutting down application");
+                    log.Close();
+            }
+
+            private void ShutdownApp()
+            {
+                log.Stage = Microsoft.Test.Logging.TestStage.Cleanup;
+                System.Windows.Application.Current.Shutdown();
+                Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring();
+            }
+        }
+           
+        public class EntryPoint
+        {
+            [System.STAThread()]
+            public static int Main(string[] args)
+            {
+                System.Threading.Thread.CurrentThread.SetApartmentState(System.Threading.ApartmentState.STA);
+                OnStartupBVT app = new OnStartupBVT();
+                return app.Run();
+            }
+        }
+    }    
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>MappingPICode</FileName>
+            <FileExtension>.cs</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+        </Scenario>
+        <Scenario Case="2">
+            <NodeVariation ID="2">public class MyButton : Button { }</NodeVariation>
+            <NodeVariation ID="3"></NodeVariation>
+        </Scenario>
+        <Scenario Case="3">
+            <NodeVariation ID="1">using Library;</NodeVariation>
+            <NodeVariation ID="3"></NodeVariation>
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>
+

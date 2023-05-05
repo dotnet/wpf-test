@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:RegressionIssue61_CrossRefThemeScope">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <local:LinkedControl x:Key="Eight" >
+                <Button>8</Button>
+            </local:LinkedControl>
+            <local:LinkedControl x:Key="Seven" Next="{StaticResource Eight}">
+                <Button>7</Button>
+            </local:LinkedControl>
+        </ResourceDictionary>
+        <ResourceDictionary Source="FiveSix.xaml" />
+        <ResourceDictionary Source="ThreeFour.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <local:LinkedControl x:Key="Two" Next="{StaticResource Three}">
+        <Button>2</Button>
+    </local:LinkedControl>
+    <local:LinkedControl x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type local:LinkedControl},ResourceId=One}" Next="{StaticResource Two}">
+        <Button>1</Button>
+    </local:LinkedControl>
+</ResourceDictionary>

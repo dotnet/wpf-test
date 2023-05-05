@@ -1,0 +1,17 @@
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="RegressionIssue55.Window1"
+    xmlns:local="clr-namespace:RegressionIssue55" Loaded="OnLoaded"
+    >
+    <StackPanel>
+        <TextBlock
+            Name="textBlock1"
+            local:DemoControl.DemoProperty="1"
+            Text="{Binding (local:DemoControl.DemoProperty), RelativeSource={RelativeSource Self}}" />
+        <TextBlock
+            Name="textBlock2"
+            local:DemoControl.DemoProperty="2"
+            Text="{Binding (local:DemoControl.DemoProperty), RelativeSource={RelativeSource Self}}" />
+    </StackPanel>
+</Window>
