@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFolderDialog: MultiSelect - Verify specifying multiselect allow the dialog to return multiple paths">
+      <ActivationStep Method="launch" Scheme="Local" FileName="OpenFolderDialogTests.exe">
+        <ActivationStep.UIHandlers>
+          <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFolderDialogTitle, TestRuntime" 
+                             ProcessName="OpenFolderDialogTests" 
+                             Dialog="OpenFolderDialogMultiselect"
+                             FileName="dir1;dir3"
+                             TestType="TypeFileNameAndOpen"/>
+        </ActivationStep.UIHandlers>
+      </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

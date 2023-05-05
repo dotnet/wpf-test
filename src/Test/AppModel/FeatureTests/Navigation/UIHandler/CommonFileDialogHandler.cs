@@ -38,6 +38,8 @@ namespace Microsoft.Windows.Test.Client.AppSec.BVT
         private static String s_SAVEBUTTONNAME = "Save";
         private static String s_OPENBUTTONNAME = "Open";
         private static String s_CLOSEBUTTONNAME = "Close";
+        private static String s_OPENFOLDERBUTTONNAME = "Select Folder";
+
         // Modal MessageBox button names
         private static String s_YESBUTTONNAME = "Yes";
         private static String s_OKBUTTONNAME = "OK";
@@ -51,6 +53,7 @@ namespace Microsoft.Windows.Test.Client.AppSec.BVT
 
         private static string s_openTextBoxId = "1148";
         private static string s_saveTextBoxId = "1148";
+        private static string s_folderTextBoxId = "1152";
         private static string s_vistaSaveTextBoxId = "1001";
 
         #region const class names
@@ -295,11 +298,15 @@ namespace Microsoft.Windows.Test.Client.AppSec.BVT
                 {
                     //conditional for running against WPF4 vs 3.  V3 should use "saveTextBoxId".  V4 on Vista needs "vistaSaveTextBoxId".
 #if TESTBUILD_CLR20
-                    return TypeFileNameAndPressButton(param, SAVEBUTTONNAME, OK_AUTOID, saveTextBoxId, hWnd);
+                    return TypeFileNameAndPressButton(param, s_SAVEBUTTONNAME, s_OK_AUTOID, s_saveTextBoxId, hWnd);
 #else
                     return TypeFileNameAndPressButton(param, s_SAVEBUTTONNAME, s_OK_AUTOID, s_vistaSaveTextBoxId, hWnd);
 #endif
                 }
+            }
+            else if (Dialog.ToLowerInvariant().Contains("folder"))
+            {
+                return TypeFileNameAndPressButton(param, s_OPENFOLDERBUTTONNAME, s_OK_AUTOID, s_folderTextBoxId, hWnd);
             }
             else if (Dialog.ToLowerInvariant().Contains("open"))
             {
@@ -331,11 +338,15 @@ namespace Microsoft.Windows.Test.Client.AppSec.BVT
                 {
                     //conditional for running against WPF4 vs 3.  V3 should use "saveTextBoxId".  V4 on Vista needs "vistaSaveTextBoxId".
 #if TESTBUILD_CLR20
-                    return TypeFileNameAndPressButton(param, CANCELBUTTONNAME, CANCEL_AUTOID, saveTextBoxId, hWnd);
+                    return TypeFileNameAndPressButton(param, s_CANCELBUTTONNAME, s_CANCEL_AUTOID, s_saveTextBoxId, hWnd);
 #else
                     return TypeFileNameAndPressButton(param, s_CANCELBUTTONNAME, s_CANCEL_AUTOID, s_vistaSaveTextBoxId, hWnd);
 #endif
                 }
+            }
+            else if (Dialog.ToLowerInvariant().Contains("folder"))
+            {
+                return TypeFileNameAndPressButton(param, s_CANCELBUTTONNAME, s_CANCEL_AUTOID, s_folderTextBoxId, hWnd);
             }
             else if (Dialog.ToLowerInvariant().Contains("open"))
             {
@@ -426,11 +437,15 @@ namespace Microsoft.Windows.Test.Client.AppSec.BVT
                 else //we're on Vista or newer, should see Vista-style dialog
                 {
 #if TESTBUILD_CLR20
-                    return TypeFileNameAndPressButton(param, SAVEBUTTONNAME, OK_AUTOID, saveTextBoxId, hWnd);
+                    return TypeFileNameAndPressButton(param, s_SAVEBUTTONNAME, s_OK_AUTOID, s_saveTextBoxId, hWnd);
 #else
                     return TypeFileNameAndPressButton(param, s_SAVEBUTTONNAME, s_OK_AUTOID, s_vistaSaveTextBoxId, hWnd);
 #endif
                 }
+            }
+            else if (Dialog.ToLowerInvariant().Contains("folder"))
+            {
+                textBoxId = s_folderTextBoxId;
             }
             else if (Dialog.ToLowerInvariant().Contains("open"))
             {

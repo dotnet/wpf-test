@@ -674,5 +674,115 @@
    </Versions>
 </TEST>
 
+<TEST Name="FolderDialog_AllCustomPlaces"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFolderDialog: AllCustomPlaces - Verify specifying all custom places will still allow the dialog to display" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFolderDialogAllCustomPlacesTest"
+                 MethodParams="OpenFolderDialogAllCustomPlaces_config.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\OpenFolderDialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_CancelTest"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFolderDialog: CancelTest - Show open folder dialog, then cancel the dialog without opening" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFolderDialogCancelTest"
+                 MethodParams="OpenFolderDialogCancelTest_config.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\OpenFolderDialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_CustomPlaceTest"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFolderDialog: CustomPlaces - Verify specifying a custom place, and clicking on it, opens the folder in the custom place" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFolderDialogCustomPlaceTest"
+                 MethodParams="OpenFolderDialogCustomPlaceTest_config.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\OpenFolderDialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_MultiSelect"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFolderDialog: MultiSelect - Verify specifying multiselect allow the dialog to return multiple paths" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFolderDialogMultiSelect"
+                 MethodParams="OpenFolderDialogMultiSelect_config.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\OpenFolderDialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_OpenFolderIsThreadModal"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="FolderDialog - OpenFolderIsThreadModal - Verify ComponentDispatcher.IsThreadModal is true when the OpenFileDialog is shown" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="FolderDialogTests.exe /test:openfolderisthreadmodal" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\FolderDialogTests\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_OpenFolderDialogCustomPlaceCases"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="Folder Dialog Test: CustomPlace cases" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="FolderDialogTests.exe /test:openfolderdialogcustomplacecases" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\FolderDialogTests\*" />
+   </SupportFiles>
+</TEST>
+
 </XTC>
 

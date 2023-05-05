@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFolderDialog: AllCustomPlaces - Verify specifying all custom places will still allow the dialog to display">
+      <ActivationStep Method="launch" Scheme="Local" FileName="OpenFolderDialogTests.exe">
+        <ActivationStep.UIHandlers>
+          <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFolderDialogTitle, TestRuntime" 
+                             ProcessName="OpenFolderDialogTests" 
+                             Dialog="OpenFolderDialogAllCustomPlaces_config"
+                             FileName="dir1"
+                             TestType="CloseWindowWithXButton"/>
+        </ActivationStep.UIHandlers>
+      </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

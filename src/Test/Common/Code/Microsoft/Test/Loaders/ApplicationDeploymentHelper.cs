@@ -55,6 +55,7 @@ namespace Microsoft.Test.Loaders
         private static string cancelPageUIButtonName = null;
         private static string openFileDialogTitle = null;
         private static string saveFileDialogTitle = null;
+        private static string openFolderDialogTitle = null;
         #endregion
 
         #region Private Methods
@@ -495,6 +496,31 @@ namespace Microsoft.Test.Loaders
                 return saveFileDialogTitle;
             }
         }
+
+        /// <summary>
+        /// Returns the correct title for the ComDlg32.dll Open Folder Dialog
+        /// </summary>
+        public static string OpenFolderDialogTitle
+        {
+            get
+            {
+                if (saveFileDialogTitle == null)
+                {
+                    try
+                    {
+                        // 439 = String resource ID for Select Folder in ComDlg32
+                        saveFileDialogTitle = getComDlgStringResource(439).Replace("(&S)", "").Replace("&", "");
+                    }
+                    // Fall back to English.  This is good because the #1 reason we have to fall back is lack of LOC resources
+                    catch
+                    {
+                        saveFileDialogTitle = "Select Folder";
+                    }
+                }
+                return openFolderDialogTitle;
+            }
+        }
+
 
         // Methods for extracting the localized text for the Browser-app exception page
         /// <summary>
