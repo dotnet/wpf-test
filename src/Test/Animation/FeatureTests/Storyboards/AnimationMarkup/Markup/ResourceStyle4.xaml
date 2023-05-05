@@ -1,0 +1,41 @@
+<!-- Style containing Style.Resources and Style.Triggers: Inside Animated Element (Static) -->
+
+<Page
+    Name    = "Root"
+    Tag     = "Double 0 Opacity"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="LightSkyBlue">
+
+        <InkCanvas Name="TargetElement" Width="125" Height="125">
+            <InkCanvas.Background>
+                <SolidColorBrush x:Name="AnimatedAnimatable" Color="DarkBlue" Opacity="1" />
+            </InkCanvas.Background>
+
+            <InkCanvas.Resources>
+                <Style TargetType="{x:Type InkCanvas}">
+                    <Style.Resources>
+                        <Storyboard x:Key="StoryboardKey">
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(InkCanvas.Background).(SolidColorBrush.Opacity)"
+                                To                          = "0"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4" />
+                        </Storyboard>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardKey}" />
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </InkCanvas.Resources>
+
+        </InkCanvas>
+        
+    </Canvas>
+    
+</Page>

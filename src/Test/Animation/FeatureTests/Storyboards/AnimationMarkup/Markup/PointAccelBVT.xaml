@@ -1,0 +1,37 @@
+﻿<Canvas
+    Name        = "Root"
+    Tag         = "Point 40,40 Center"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas Background="MidnightBlue" Width="500" Height="500">
+        <Path Name="TargetElement" Fill="Chocolate">
+            <Path.Data>
+                <EllipseGeometry x:Name="AnimatedAnimatable" RadiusX="125" RadiusY="125" Center="300,300" />
+            </Path.Data>
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <PointAnimation
+                                        Storyboard.TargetProperty   = "(Path.Data).(EllipseGeometry.Center)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:2"
+                                        From                        = "300,300"
+                                        To                          = "40,40"
+                                        AccelerationRatio           = "1"
+                                        RepeatBehavior              = "2x"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
+    </Canvas>
+    
+</Canvas>

@@ -1,0 +1,36 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Black" >
+
+    <Canvas.Resources>
+        <Storyboard x:Key="AnimOpacity">
+            <DoubleAnimation
+                Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Opacity)"
+                Storyboard.TargetName="Animate"
+                To="1"
+                BeginTime="0:1:3"
+                Duration="0:0:2"
+                  />
+        </Storyboard>
+    </Canvas.Resources>
+    
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard Storyboard="{DynamicResource AnimOpacity}" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+ 
+    <Canvas Background="Navy">
+        <Rectangle Name="Animate" Height="150" Width="150">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="LightBlue" Opacity=".5" />
+            </Rectangle.Fill>
+        </Rectangle>
+    </Canvas>
+    
+</tst:CustomCanvas>

@@ -1,0 +1,48 @@
+<Grid
+    Name        = "Root"
+    Tag         = "Size 350,350 Size"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Black">
+
+    <Path HorizontalAlignment="Left" VerticalAlignment="Top" Fill="MediumAquamarine">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigure StartPoint="100 0" IsClosed="True">
+                        <PathFigure.Segments>
+                            <LineSegment Point="45,125" />
+                            <ArcSegment x:Name="AnimatedAnimatable" Size="50,0" IsLargeArc="true" Point="180,60" />
+                            <LineSegment Point="245,255" />
+                        </PathFigure.Segments>
+                    </PathFigure>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <SizeAnimationUsingKeyFrames BeginTime="0:0:1" RepeatBehavior="6x"
+                                    Storyboard.TargetProperty   = "(Path.Data).(PathGeometry.Figures)[0].(PathFigure.Segments)[1].(ArcSegment.Size)"
+                                    >
+                                    <SizeAnimationUsingKeyFrames.KeyFrames>
+                                        <SizeKeyFrameCollection>
+                                            <SplineSizeKeyFrame Value="5,5"     KeyTime="0:0:0" KeySpline="0 0 1 1" />
+                                            <SplineSizeKeyFrame Value="350,350" KeyTime="0:0:1" KeySpline="0 0 1 1" />
+                                        </SizeKeyFrameCollection>
+                                    </SizeAnimationUsingKeyFrames.KeyFrames>
+                                </SizeAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Path.Triggers>
+
+    </Path>
+
+</Grid>

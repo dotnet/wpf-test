@@ -1,0 +1,43 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 100 Height"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Black">
+
+    <Canvas>
+        <Border>
+        <TextBlock
+            Name            = "AnimatedFE"
+            FontFamily      = "Tahoma"
+            FontSize        = "48"
+            ClipToBounds    = "True"
+            Height          = "0"
+            Width           = "100"
+            Background      = "MediumPurple"
+            Foreground      = "Pink">ABC
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "Height"
+                                        From                        = "0"
+                                        To                          = "100"
+                                        FillBehavior                = "HoldEnd"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        </Border>
+    </Canvas>
+    
+</Page>

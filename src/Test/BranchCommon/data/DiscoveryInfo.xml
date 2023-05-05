@@ -315,7 +315,24 @@
       </DefaultTestInfo>
     </Target>
 
-        <!--Area : XAML-->
+
+    <!-- Area: Animation -->
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\Animation\AnimationTest.dll">
+      <DefaultTestInfo Area="Animation" Disabled="False" Priority="1" Type="Functional" Timeout="160">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Animation\AnimationTest.dll" />
+          <SupportFile Source="FeatureTests\Animation\AnimationTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!--Area : XAML-->
     <Target Adaptor="XtcAdaptor" Path="FeatureTests\XAML\Data\XTC\3.0\Client\*.xtc">
       <DefaultTestInfo Area="XamlV3" Priority="2" UacElevation="Elevated" Type="Functional" >
         <Driver Executable="sti.exe" />
@@ -335,6 +352,25 @@
         </Versions>
       </DefaultTestInfo>
     </Target>
+
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\Animation\AnimationMultiMonTest.dll">
+      <DefaultTestInfo Area="Animation"   Disabled="False" Priority="1" Type="Functional" Timeout="160">
+        <Configurations>
+          <Configuration>Infra\Configurations\MultiMon.xml</Configuration>
+        </Configurations>
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Animation\AnimationMultiMonTest.dll" />
+          <SupportFile Source="FeatureTests\Animation\AnimationTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
     <Target Adaptor="XtcAdaptor" Path="FeatureTests\XAML\Data\XTC\3.0\Full\*.xtc">
       <DefaultTestInfo Area="XamlV3" Priority="2" UacElevation="Elevated" Type="Functional" >
         <Driver Executable="sti.exe" />

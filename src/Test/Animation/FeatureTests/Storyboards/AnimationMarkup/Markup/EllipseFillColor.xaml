@@ -1,0 +1,34 @@
+<Page
+    Name="Root"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="Navy">
+    
+    <Canvas>
+        <Ellipse Name="AnimatedFE" Height="200" Width="200" Canvas.Left="-50" Canvas.Top="-50">
+            <Ellipse.Fill>  
+                <SolidColorBrush Color="Navy" />
+            </Ellipse.Fill> 
+
+            <Ellipse.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
+                                        BeginTime="0:0:2"
+                                        Duration="0:0:4"
+                                        To="MediumPurple"
+                                      />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Ellipse.Triggers>
+
+        </Ellipse>
+    </Canvas>
+    
+</Page>

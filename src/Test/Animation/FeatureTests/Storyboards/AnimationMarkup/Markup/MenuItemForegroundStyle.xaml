@@ -1,0 +1,45 @@
+<Grid
+    Name    = "Root"
+    Tag     = "Color MediumPurple Foreground"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type MenuItem}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty   = "(MenuItem.Foreground).(SolidColorBrush.Color)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        To                          = "MediumPurple"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Grid.Resources>
+     
+    <Canvas>
+        <Menu Background="Pink" Margin="0,0,0,0">
+            <MenuItem Name="AnimatedFE" Style="{DynamicResource StyleKey}" Margin="0,0,0,0" Header="GG" Foreground="Navy" FontSize="72" FontWeight="Bold">
+                <MenuItem Header="New..." />
+                <MenuItem Header="Open..." IsEnabled="True" />
+                <MenuItem Name="menuItemSave" Header="Save" IsEnabled="True" />
+                <MenuItem Name="menuItemSaveAs" Header="Save As..." IsEnabled="True" />
+                <Separator />
+                <MenuItem Header="Import..." IsEnabled="True" />
+                <Separator />
+                <MenuItem Header="Exit" />
+            </MenuItem>
+        </Menu>
+    </Canvas>
+</Grid>

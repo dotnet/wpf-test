@@ -1,0 +1,47 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 1 Opacity"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background  = "DarkGoldenRod">
+    <Page.Resources>
+        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="StyleKey" TargetType="{x:Type ListBox}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames
+                                        Storyboard.TargetProperty   = "Opacity"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        FillBehavior                = "HoldEnd">
+                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                        <DoubleKeyFrameCollection>
+                                            <DiscreteDoubleKeyFrame Value="0"   KeyTime="0" />
+                                            <DiscreteDoubleKeyFrame Value="0.4" KeyTime="10%" />
+                                            <DiscreteDoubleKeyFrame Value="0.6" KeyTime="50%" />
+                                            <DiscreteDoubleKeyFrame Value="0.8" KeyTime="85%" />
+                                            <DiscreteDoubleKeyFrame Value="1"   KeyTime="100%" />
+                                        </DoubleKeyFrameCollection>
+                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Canvas>
+        <ListBox Name="AnimatedFE" Style="{DynamicResource StyleKey}" Foreground="Navy" FontSize="24" Opacity="0" Canvas.Left="0" Canvas.Top="0" Height="200" Width="200" Background="OldLace">
+            <ListBoxItem HorizontalAlignment="Right"><TextBlock>Avalon!</TextBlock></ListBoxItem>
+            <ListBoxItem HorizontalAlignment="Right"><TextBlock>Avalon!</TextBlock></ListBoxItem>
+            <ListBoxItem HorizontalAlignment="Right"><TextBlock>Avalon!</TextBlock></ListBoxItem>
+            <ListBoxItem HorizontalAlignment="Right"><TextBlock>Avalon!</TextBlock></ListBoxItem>
+            <ListBoxItem HorizontalAlignment="Right"><TextBlock>Avalon!</TextBlock></ListBoxItem>
+        </ListBox>
+    </Canvas>
+</Page>

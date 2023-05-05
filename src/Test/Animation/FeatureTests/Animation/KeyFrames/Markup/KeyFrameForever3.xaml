@@ -1,0 +1,36 @@
+<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Page.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <StringAnimationUsingKeyFrames Storyboard.TargetProperty="Content" BeginTime="0" Duration="00:00:03">
+                                        <StringAnimationUsingKeyFrames.KeyFrames>
+                                            <StringKeyFrameCollection>
+                                                <DiscreteStringKeyFrame Value="a" KeyTime="0:0:1" />
+                                                <DiscreteStringKeyFrame Value="b" KeyTime="0:0:2" />
+                                                <DiscreteStringKeyFrame Value="c" KeyTime="0:0:3" />
+                                                <DiscreteStringKeyFrame Value="d" KeyTime="0:0:4" />
+                                                <DiscreteStringKeyFrame Value="e" KeyTime="0:0:5" />
+                                            </StringKeyFrameCollection>
+                                        </StringAnimationUsingKeyFrames.KeyFrames>
+                                    </StringAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Canvas Background="Navy">
+        <Button Name="Animate" Style="{DynamicResource StyleKey}" FontSize="72" Foreground="MediumPurple" FontWeight="Bold" Height="120" Width="120" />
+    </Canvas>
+
+</Page>

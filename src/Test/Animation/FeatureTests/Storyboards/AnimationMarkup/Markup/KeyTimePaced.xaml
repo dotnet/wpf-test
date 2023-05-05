@@ -1,0 +1,40 @@
+ 
+
+<Page 
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "PapayaWhip"
+    Name        = "Root"
+    Tag         = "Double 300 X"
+    >
+    <Canvas>
+        <!-- This rectangle is animated with KeyTimes using Paced Values. 
+         The rectangle moves between key frames at uniform rate except for first key frame
+         because using a Paced value on the first KeyFrame in a collection of frames gives a time of zero. -->
+
+        <Rectangle Fill="Orange" Stroke="Black" StrokeThickness="5" Width="50" Height="50">
+            <Rectangle.RenderTransform>
+                <TranslateTransform  x:Name="AnimatedAnimatable" />
+            </Rectangle.RenderTransform>
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames 
+                                Storyboard.TargetName       = "AnimatedAnimatable" 
+                                Storyboard.TargetProperty   = "X"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4">
+
+                                <LinearDoubleKeyFrame Value="100" KeyTime="Paced" />
+                                <LinearDoubleKeyFrame Value="200" KeyTime="Paced" />
+                                <LinearDoubleKeyFrame Value="300" KeyTime="Paced" />
+
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Canvas>
+</Page>

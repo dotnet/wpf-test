@@ -1,0 +1,55 @@
+<!-- Storyboard inside Page Resources: Multiple Storyboards, Different Targets (Static) -->
+<!-- Verifying GetValue for the second Animation -->
+
+<Page
+    Name    = "Root"
+    Tag     = "Double 1 Opacity"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="PeachPuff">
+        <Canvas.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Purple" />
+                <Setter Property="Opacity"    Value="0" />
+            </Style>
+
+            <Storyboard x:Key="AnimOpacity1">
+                <DoubleAnimation
+                    Storyboard.TargetProperty   = "(Button.Opacity)"
+                    Storyboard.TargetName       = "Animate2"
+                    To                          = "1"
+                    BeginTime                   = "0:0:2"
+                    Duration                    = "0:0:4"
+                      />
+            </Storyboard>
+            <Storyboard x:Key="AnimOpacity2">
+                <DoubleAnimation
+                    Storyboard.TargetProperty   = "(Button.Opacity)"
+                    Storyboard.TargetName       = "AnimatedFE"
+                    To                          = "1"
+                    BeginTime                   = "0:0:2"
+                    Duration                    = "0:0:4"
+                      />
+            </Storyboard>
+        </Canvas.Resources>
+
+        <Canvas.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Storyboard="{StaticResource AnimOpacity1}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Storyboard="{StaticResource AnimOpacity2}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Canvas.Triggers>
+ 
+        <Button Name='AnimatedFE' Height="50" Width="100" Canvas.Top="0" />
+        <Button Name='Animate2'   Height="50" Width="100" Canvas.Top="50" />
+    
+    </Canvas>
+    
+</Page>

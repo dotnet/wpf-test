@@ -1,0 +1,48 @@
+<Page
+    Name        = "Root"
+    Tag         = "Point .8,.8 GradientOrigin"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Teal">
+
+    <Canvas>
+        <ScrollViewer
+            Width   = "500"
+            Height  = "300"> 
+
+            <ListBox Name="TargetElement">
+                <ListBox.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <PointAnimation
+                                            Storyboard.TargetProperty   = "(ListBox.Background).(RadialGradientBrush.GradientOrigin)"
+                                            To                          = ".8,.8"
+                                            BeginTime                   = "0:0:2"
+                                            Duration                    = "0:0:4"
+                                          />
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </ListBox.Triggers>
+
+                <ListBox.Background>
+                    <RadialGradientBrush x:Name="AnimatedAnimatable" GradientOrigin="0, 0">
+                        <RadialGradientBrush.GradientStops>
+                            <GradientStop Color="DarkSeaGreen" Offset="0" />
+                            <GradientStop Color="DarkSeaGreen" Offset="0.5" />
+                            <GradientStop Color="SeaGreen" Offset="0.75" />
+                            <GradientStop Color="SeaGreen" Offset="1.0" />
+                        </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </ListBox.Background>
+            </ListBox>
+
+        </ScrollViewer>
+    </Canvas>
+    
+</Page>

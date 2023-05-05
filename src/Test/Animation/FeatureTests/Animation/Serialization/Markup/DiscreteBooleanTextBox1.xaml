@@ -1,0 +1,43 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="MediumTurquoise" >
+
+     <TextBox Name="Animate" Width="40" Height="70" Background="MistyRose" Text="Avalon!">
+        <TextBox.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames
+                                     Storyboard.TargetProperty="(TextBox.AcceptsTab)"
+                                     BeginTime="00:01:02"
+                                     Duration="00:00:03"
+                                     FillBehavior="HoldEnd"
+                                     AutoReverse="True"
+                                     RepeatBehavior="00:01:09"
+                                     AccelerationRatio="1"
+                                     DecelerationRatio="0"
+                                     SpeedRatio="1"
+                                     >
+                                     <BooleanAnimationUsingKeyFrames.KeyFrames>
+                                          <BooleanKeyFrameCollection>
+                                               <DiscreteBooleanKeyFrame Value="True" KeyTime="0" />
+                                               <DiscreteBooleanKeyFrame Value="False" KeyTime="25%" />
+                                               <DiscreteBooleanKeyFrame Value="True" KeyTime="50%" />
+                                               <DiscreteBooleanKeyFrame Value="False" KeyTime="75%" />
+                                               <DiscreteBooleanKeyFrame Value="True" KeyTime="100%" />
+                                          </BooleanKeyFrameCollection>
+                                     </BooleanAnimationUsingKeyFrames.KeyFrames>
+                                </BooleanAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </TextBox.Triggers>
+     </TextBox>
+     
+</tst:CustomCanvas>

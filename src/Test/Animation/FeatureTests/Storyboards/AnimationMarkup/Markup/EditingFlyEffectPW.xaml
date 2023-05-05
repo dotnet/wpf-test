@@ -1,0 +1,34 @@
+<ScrollViewer
+    Name        = "Root"
+    Tag         = "Double 150 Width"
+    xmlns       = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x     = 'http://schemas.microsoft.com/winfx/2006/xaml'>
+    
+    <StackPanel>
+    
+        <StackPanel.Resources>
+            <Storyboard x:Key="FlyEffect" BeginTime="0:0:0.5">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1"   Duration="0:0:4" />
+                <DoubleAnimation Storyboard.TargetProperty="Height"  From="0" To="75"  Duration="0:0:4" />
+                <DoubleAnimation Storyboard.TargetProperty="Width"   From="0" To="150" Duration="0:0:4" />
+                <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:4" />
+            </Storyboard>
+        </StackPanel.Resources>
+
+        <!--Fly effect on PasswordBox-->
+        <PasswordBox Name="AnimatedFE" Height="0" Width="0" Opacity="0" Password="abc">
+            <PasswordBox.Triggers>
+                <EventTrigger RoutedEvent="PasswordBox.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource FlyEffect}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </PasswordBox.Triggers>
+
+            <PasswordBox.RenderTransform>
+                <RotateTransform CenterX="100" CenterY="50" Angle="0" />
+            </PasswordBox.RenderTransform>
+        </PasswordBox>
+                
+    </StackPanel>
+</ScrollViewer>

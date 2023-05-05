@@ -1,0 +1,101 @@
+﻿<Canvas
+    Name        = "Root"
+    Tag         = "Double 270 Angle"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Black">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+    <!--  Foreground -->       
+                            <ColorAnimation
+                                Name                        = "ColorAnimationForeground"
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Foreground).(SolidColorBrush.Color)"
+                                Storyboard.TargetName       = "Text1"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:1"
+                                From                        = "red"
+                                To                          = "yellow"
+                                />
+                            <ColorAnimation
+                                Name                        = "ColorAnimationForeground2"
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[1].(TextEffect.Foreground).(SolidColorBrush.Color)"
+                                Storyboard.TargetName       = "Text1"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:1"
+                                From                        = "red"
+                                To                          = "violet"
+                                />
+
+                            <DoubleAnimation
+                                Name                        = "ColorAnimationOpacity"
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[1].(TextEffect.Foreground).(SolidColorBrush.Opacity)"
+                                Storyboard.TargetName       = "Text1"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:1"
+                                From                        = "0"
+                                To                          = ".91"
+                                />
+                            <DoubleAnimation
+                                Name                        = "ColorAnimationTransform"
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[2].(TextEffect.Foreground).(LinearGradientBrush.Transform).(RotateTransform.Angle)"
+                                Storyboard.TargetName       = "Text1"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4"
+                                From                        = "0"
+                                To                          = "270"
+                                />
+
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+
+    <TextBlock Name="Text1" FontFamily="ComicSans" FontSize="25" FontWeight="Bold" Foreground="Blue" TextWrapping="WrapWithOverflow" Width="200">
+      Color Animation Effect: Red to Yellow ????? ?????????? ?? ???????. Animation. 123
+      <TextBlock.TextEffects>
+            <TextEffectCollection>
+                <TextEffect PositionStart="24" PositionCount="14"> 
+                   <TextEffect.Foreground>
+                       <SolidColorBrush Color="Red" />
+                   </TextEffect.Foreground>
+                </TextEffect>
+
+                
+         <TextEffect PositionStart="38" PositionCount="16"> 
+                   <TextEffect.Foreground>
+                       <SolidColorBrush Color="Red" />
+                   </TextEffect.Foreground>
+                </TextEffect>
+                 
+                    
+                <TextEffect PositionStart="0" PositionCount="23">
+                   <TextEffect.Foreground>
+                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="Red"    Offset="0"    />
+                            <GradientStop Color="Blue"   Offset="0.25" />
+                            <GradientStop Color="Orange" Offset="0.75" />
+                            <GradientStop Color="Yellow" Offset="1"    />
+                        </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                        <LinearGradientBrush.Transform>
+                              <RotateTransform x:Name="AnimatedAnimatable" Angle="0" />
+                        </LinearGradientBrush.Transform>                          
+                    </LinearGradientBrush>
+                   </TextEffect.Foreground>                    
+                </TextEffect>
+
+            </TextEffectCollection>
+        </TextBlock.TextEffects>      
+    </TextBlock>      
+</Canvas>
+

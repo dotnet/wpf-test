@@ -1,0 +1,42 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 1 Opacity"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "SandyBrown">
+        
+        <Page.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Button.Background">
+                    <Setter.Value>White</Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty   = "(Button.Foreground).(SolidColorBrush.Opacity)"
+                                            To                          = "1"
+                                            BeginTime                   = "0:0:2"
+                                            Duration                    = "0:0:4"
+                                          />
+                                    </Storyboard>  
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </Page.Resources>
+
+    <Canvas>
+        <Button Name="AnimatedFE" FontWeight="Bold" FontSize="72">Avalon!
+            <Button.Foreground>
+                <SolidColorBrush x:Name="AnimatedAnimatable" Opacity="0" Color="Red" />
+            </Button.Foreground>
+        </Button>
+    </Canvas>
+
+</Page>

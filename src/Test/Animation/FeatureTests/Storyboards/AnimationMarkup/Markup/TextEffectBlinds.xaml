@@ -1,0 +1,93 @@
+<Canvas
+    Name        = "Root"
+    Tag         = "Double 31 Y"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard BeginTime="0:0:1.5">
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Clip).(GeometryGroup.Children)[0].(RectangleGeometry.Transform).(TranslateTransform.Y)"
+                                Storyboard.TargetName       = "Text1"
+                                By                          = "20"
+                                Duration                    = "0:0:1"
+                                AutoReverse                 = "true"
+                                />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Clip).(GeometryGroup.Children)[1].(RectangleGeometry.Transform).(TranslateTransform.Y)"
+                                Storyboard.TargetName       = "Text1"
+                                By                          = "20"
+                                Duration                    = "0:0:1"
+                                AutoReverse                 = "true"
+                                />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Clip).(GeometryGroup.Children)[2].(RectangleGeometry.Transform).(TranslateTransform.Y)"
+                                Storyboard.TargetName       = "Text1"
+                                By                          = "30"
+                                Duration                    = "0:0:4"
+                                />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Clip).(GeometryGroup.Children)[3].(RectangleGeometry.Transform).(TranslateTransform.Y)"
+                                Storyboard.TargetName       = "Text1"
+                                By                          = "20"
+                                Duration                    = "0:0:1"
+                                AutoReverse                 = "true"
+                                />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Clip).(GeometryGroup.Children)[4].(RectangleGeometry.Transform).(TranslateTransform.Y)"
+                                Storyboard.TargetName       = "Text1"
+                                By                          = "20"
+                                Duration                    = "0:0:1"
+                                AutoReverse                 = "true"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+
+    <TextBlock Name="Text1" Background="MidnightBlue" TextWrapping="Wrap" FontSize="30" Foreground="Yellow" Width="500">
+        <TextBlock.TextEffects>
+            <TextEffectCollection>
+                <TextEffect PositionStart="0" PositionCount="5000">
+                    <TextEffect.Clip>
+                        <GeometryGroup FillRule="Nonzero">
+                            <RectangleGeometry Rect="0,0, 1000, 4">
+                                <RectangleGeometry.Transform>
+                                    <TranslateTransform X="0" Y="0" />
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                            <RectangleGeometry Rect="0,5, 1000, 9">
+                                <RectangleGeometry.Transform>
+                                    <TranslateTransform X="0" Y="0" />
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                            <RectangleGeometry Rect="0,10, 1000, 14">
+                                <RectangleGeometry.Transform>
+                                    <TranslateTransform x:Name="AnimatedAnimatable" X="1" Y="1" />
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                            <RectangleGeometry Rect="0,15, 1000, 20">
+                                <RectangleGeometry.Transform>
+                                    <TranslateTransform X="0" Y="0" />
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                            <RectangleGeometry Rect="0,20, 1000, 25">
+                                <RectangleGeometry.Transform>
+                                    <TranslateTransform X="0" Y="0" />
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                        </GeometryGroup>
+                    </TextEffect.Clip>
+                </TextEffect>
+            </TextEffectCollection>
+        </TextBlock.TextEffects>
+        The Blinds Effect
+  </TextBlock>
+</Canvas>

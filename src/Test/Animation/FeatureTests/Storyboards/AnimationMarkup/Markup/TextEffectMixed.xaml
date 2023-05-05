@@ -1,0 +1,73 @@
+<Canvas
+    Name        = "Root"
+    Tag         = "Rect 0,0,300,50 Rect"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Black">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+<!--  Transform    -->      
+                            <DoubleAnimation
+                                Name="DoubleAnimationTranslate"
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Transform).(TranslateTransform.X)"
+                                Storyboard.TargetName       = "Text1"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:1"
+                                To                          = "200"
+                                />
+<!--  Clip     -->    
+                            <RectAnimation
+                                Name="RectAnimationClip"
+                                Storyboard.TargetProperty   = "(TextBlock.TextEffects)[0].(TextEffect.Clip).(RectangleGeometry.Rect)"
+                                Storyboard.TargetName       = "Text1"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4"
+                                From                        = "5,5,200,50"
+                                To                          = "0,0,300,50"
+                                />
+<!--  Foreground         -->
+                            <ColorAnimation
+                                Name="ColorAnimationForeground"
+                                Storyboard.TargetProperty   ="(TextBlock.TextEffects)[0].(TextEffect.Foreground).(SolidColorBrush.Color)"
+                                Storyboard.TargetName       = "Text1"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:1"
+                                From                        = "pink"
+                                To                          = "lemonchiffon"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+
+    <TextBlock Name="Text1" FontFamily="Comic Sans MS" FontSize="25" FontWeight="Bold" Foreground="Yellow">
+      Clip + Color + Transform: All in one! 
+     <TextBlock.TextEffects>
+            <TextEffectCollection>
+                <TextEffect PositionStart="0" PositionCount="24"> 
+                   <TextEffect.Transform>
+                      <TranslateTransform X="0" Y="0" />
+                   </TextEffect.Transform>
+
+                   <TextEffect.Clip>
+                      <RectangleGeometry x:Name="AnimatedAnimatable" Rect="5,5,40,20" />
+                   </TextEffect.Clip>
+
+                   <TextEffect.Foreground>
+                       <SolidColorBrush Color="Red" />
+                   </TextEffect.Foreground>
+               </TextEffect>
+            </TextEffectCollection>
+        </TextBlock.TextEffects>
+    </TextBlock>
+
+</Canvas>
+

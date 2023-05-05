@@ -1,0 +1,44 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Yellow" >
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Button}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Name="DoubleAnimWithStyle1"
+                                        BeginTime="00:01:02"
+                                        Duration="00:00:03"
+                                        To="0"
+                                        FillBehavior="HoldEnd"
+                                        AutoReverse="True"
+                                        RepeatBehavior="1x"
+                                        AccelerationRatio="0"
+                                        DecelerationRatio="1"
+                                        SpeedRatio="1"
+                                        Storyboard.TargetProperty="(Button.Opacity)"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <StackPanel Orientation="Horizontal">
+
+        <Button Name="Animate" Opacity="1" Style="{DynamicResource StyleKey}">Avalon!</Button>
+        <Button Opacity="1">Avalon!</Button>
+        <Button Opacity="1">Avalon!</Button>
+        
+     </StackPanel>
+     
+</tst:CustomCanvas>

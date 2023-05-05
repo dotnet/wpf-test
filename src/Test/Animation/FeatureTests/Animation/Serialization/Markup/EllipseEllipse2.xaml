@@ -1,0 +1,68 @@
+
+<tst:CustomCanvas
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+    Background="BlueViolet" >
+    
+    <Canvas.Resources>
+        <Style x:Key="BaseStyle" TargetType="{x:Type Ellipse}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ParallelTimeline BeginTime="0:0:3" Duration="Forever">
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="(Canvas.Width)"
+                                            BeginTime="0:1:2"
+                                            Duration="0:0:6"
+                                            To="150"
+                                            FillBehavior="HoldEnd">
+                                        </DoubleAnimation>
+                                    </ParallelTimeline>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="NewStyle" BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type Ellipse}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ParallelTimeline BeginTime="0:0:3" Duration="Forever">
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="(Canvas.Width)"
+                                            BeginTime="0:1:2"
+                                            Duration="0:0:6"
+                                            To="300"
+                                            FillBehavior="HoldEnd">
+                                        </DoubleAnimation>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="(Canvas.Height)"
+                                            BeginTime="0:1:2"
+                                            Duration="0:0:6"
+                                            To="300"
+                                            FillBehavior="HoldEnd">
+                                        </DoubleAnimation>
+                                    </ParallelTimeline>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <Ellipse Name="Animate" Style="{DynamicResource NewStyle}" Canvas.Left="150" Canvas.Top="150" Width="200" Height="200" Fill="MistyRose" Stroke="Black" />
+
+</tst:CustomCanvas>

@@ -1,0 +1,70 @@
+<!-- DoubleAnimation DataTrigger in Style containing Style.Resources and Style.Triggers using a StaticResource -->
+<Page
+    Name    = "Root"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Canvas Background="White">
+        <Canvas.Resources>
+            <Style x:Key="AnimStyle" TargetType="{x:Type ScrollViewer}">
+                <Style.Resources>
+                    <Storyboard x:Key="EnterKey">
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "(Canvas.Left)"
+                            BeginTime                   = "0:0:0"
+                            Duration                    = "0:0:1.5"
+                            By                          = "-250"
+                            />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "(Canvas.Top)"
+                            BeginTime                   = "0:0:0"
+                            Duration                    = "0:0:1.5"
+                            To                          = "0"
+                            />
+                    </Storyboard>
+                    <Storyboard x:Key="ExitKey">
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "(Canvas.Left)"
+                            BeginTime                   = "0:0:0"
+                            Duration                    = "0:0:1.5"
+                            By                          = "250"
+                            />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "(Canvas.Top)"
+                            BeginTime                   = "0:0:0"
+                            Duration                    = "0:0:1.5"
+                            To                          = "250"
+                            />
+                    </Storyboard>
+                </Style.Resources>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=TargetElement, Path=IsFocused}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard Storyboard="{StaticResource EnterKey}" />
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard Storyboard="{StaticResource ExitKey}" />
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Canvas.Resources>
+        
+        <ScrollViewer
+            Name                        = "TargetElement"
+            Background                  = "PaleVioletRed"
+            Height                      = "200"
+            Width                       = "200"
+            Padding                     = "100"
+            Focusable                   = "True"
+            Canvas.Left                 = "250"
+            Canvas.Top                  = "250"
+            VerticalScrollBarVisibility = "Hidden"
+            Style                       = "{StaticResource AnimStyle}">Avalon!
+        </ScrollViewer>
+        
+        <TextBox Name="FocusElement" Width="20" Height="20" Canvas.Top="0" Canvas.Left="300" />
+        
+    </Canvas>
+    
+</Page>

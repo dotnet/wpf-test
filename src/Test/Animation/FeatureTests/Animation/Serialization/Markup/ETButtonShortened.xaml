@@ -1,0 +1,36 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Black" >
+    <Canvas.Resources>
+        <Style x:Key="GelButton" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>    
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.5" AccelerationRatio=".9" />
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.5" AccelerationRatio=".9" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>    
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.ScaleX" AccelerationRatio=".9" />
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.ScaleY" AccelerationRatio=".9" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+    
+    <Button Name="Animate" Style="{StaticResource GelButton}" Width="100" Height="100">Avalon!</Button>
+    
+</tst:CustomCanvas>

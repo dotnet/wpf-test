@@ -1,0 +1,41 @@
+ 
+<!-- SPECIAL CASE: using the Tag to specify that the Width of the Border is to be verified,
+     rather than the animated Rectangle -->
+<Grid
+    Name        = "Root"
+    Tag         = "Double 100 Width"
+    Background  = "wheat"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+    <Grid.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "(Rectangle.LayoutTransform).(RotateTransform.Angle)"
+                            Storyboard.TargetName       = "TargetElement"
+                            BeginTime                   = "0:0:2"
+                            Duration                    = "0:0:4"
+                            To                          = "90"
+                            />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Grid.Triggers>
+
+    <Border Name="AnimatedFE" Background="Yellow" HorizontalAlignment="center" VerticalAlignment="center">
+        <Rectangle Name="TargetElement" Width="500" Height="100" Fill="Red">
+            <Rectangle.LayoutTransform>
+                <RotateTransform Angle="45"/>
+            </Rectangle.LayoutTransform>
+        </Rectangle>
+    </Border>
+
+</Grid>
+
+
+

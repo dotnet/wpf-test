@@ -1,0 +1,58 @@
+<!-- STORYBOARD TEST 5:  In DataTrigger, within animated element's Template -->
+
+<StackPanel
+    Name        = "Root"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "DarkTurquoise">
+
+    <!-- The following Storyboard in Resources is not used directly in this Markup, but may be used in code -->
+    <StackPanel.Resources>
+        <Storyboard x:Key="RotateAnim" >
+            <DoubleAnimation
+                Storyboard.TargetProperty   = "(TextBox.LayoutTransform).(RotateTransform.Angle)"
+                Storyboard.TargetName       = "Animate"
+                By                          = "60"
+                BeginTime                   = "0:0:0"
+                Duration                    = "0:0:2"
+                />
+        </Storyboard>
+    </StackPanel.Resources>
+    
+    <Button />
+
+    <Button Name='AnimateTemplate'>
+        <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+                <StackPanel>
+                    <TextBox Name="Animate" Width="150" Height="150" Background="DarkMagenta">
+                        <TextBox.LayoutTransform>
+                            <RotateTransform x:Name="AnimateAnimatable" Angle="0.01" CenterX="75" CenterY="75" />
+                        </TextBox.LayoutTransform>
+                    </TextBox>
+                </StackPanel>
+                <ControlTemplate.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=Animate, Path=IsMouseOver}" Value="true">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard HandoffBehavior="SnapshotAndReplace">
+                                <Storyboard TargetName="Animate">
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(TextBox.LayoutTransform).(RotateTransform.Angle)"
+                                        By                          = "60"
+                                        BeginTime                   = "0:0:0"
+                                        Duration                    = "0:0:2"
+                                    />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
+
+    <Button Name="FocusButton" />
+ 
+</StackPanel>
+
+

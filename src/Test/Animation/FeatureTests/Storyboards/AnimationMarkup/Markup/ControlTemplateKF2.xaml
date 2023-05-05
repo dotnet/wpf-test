@@ -1,0 +1,51 @@
+<Grid
+    Name        = "Root"
+    Tag         = "Color HotPink Color"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "#FFFFFFFF" 
+    Width       = "640"
+    Height      = "480">
+
+    <Grid.Resources>
+        <ControlTemplate x:Uid="CT" x:Key='TestTemplate' TargetType="{x:Type ContentControl}">
+            <ControlTemplate.Resources>
+                <Storyboard
+                        x:Uid                       = "Storyboard_1"
+                        x:Key                       = "StoryKey"
+                        FillBehavior                = "HoldEnd">
+                        <ColorAnimationUsingKeyFrames
+                            Storyboard.TargetName       = "AnimatedAnimatable"
+                            Storyboard.TargetProperty   = "Color">
+                            <ColorAnimationUsingKeyFrames.KeyFrames>
+                                <ColorKeyFrameCollection>
+                                    <DiscreteColorKeyFrame Value="Red"     KeyTime="0" />
+                                    <DiscreteColorKeyFrame Value="Yellow"  KeyTime="0:0:1" />
+                                    <DiscreteColorKeyFrame Value="Green"   KeyTime="0:0:2" />
+                                    <DiscreteColorKeyFrame Value="White"   KeyTime="0:0:3" />
+                                    <DiscreteColorKeyFrame Value="HotPink" KeyTime="0:0:4" />
+                                </ColorKeyFrameCollection>
+                            </ColorAnimationUsingKeyFrames.KeyFrames>
+                    </ColorAnimationUsingKeyFrames>
+                </Storyboard>
+            </ControlTemplate.Resources>
+
+            <Rectangle x:Uid="Rectangle_31" x:Name="TemplateControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RadiusX="2" RadiusY="2" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="1" Margin="0,0,0,0" Width="Auto" Height="Auto">
+                <Rectangle.Fill>  
+                    <SolidColorBrush x:Name="AnimatedAnimatable" Color="SlateBlue" />
+                </Rectangle.Fill> 
+            </Rectangle>
+            
+            <ControlTemplate.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard x:Uid="BeginStoryboard_2" Storyboard="{StaticResource StoryKey}"/>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Grid.Resources>
+    
+    <ContentControl Name='AnimateTemplate' Template='{StaticResource TestTemplate}' Width='100' Height='100' />
+
+</Grid>

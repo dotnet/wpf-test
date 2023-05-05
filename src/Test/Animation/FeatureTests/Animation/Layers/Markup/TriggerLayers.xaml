@@ -1,0 +1,70 @@
+<Grid 
+  xmlns         = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x       = "http://schemas.microsoft.com/winfx/2006/xaml"
+  Background    = "#FFFFFFFF" 
+  Width         = "640"
+  Height        = "480">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Storyboard x:Key="OnLoaded"/>
+            <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
+                <Style.Resources>
+                    <Storyboard x:Key="Timeline1">
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="{x:Null}" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Timeline.BeginTime="00:00:00">
+                            <SplineColorKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="sc#1, 1, 0, 0" KeyTime="00:00:01"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="Timeline2">
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="{x:Null}" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Timeline.BeginTime="00:00:00">
+                            <SplineColorKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="sc#1, 1, 1, 1" KeyTime="00:00:01"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </Style.Resources>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard Storyboard="{StaticResource Timeline1}" x:Name="Timeline1_BeginStoryboard"/>
+                        </Trigger.EnterActions>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger.ExitActions>
+                            <BeginStoryboard Storyboard="{StaticResource Timeline2}" x:Name="Timeline2_BeginStoryboard"/>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard x:Name="OnLoaded_BeginStoryboard" Storyboard="{DynamicResource OnLoaded}"/>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Grid.Triggers>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition/>
+    </Grid.RowDefinitions>
+  
+    <Rectangle
+        Stroke                  = "#FF000000"
+        Fill                    = "#FFFFFFFF"
+        StrokeMiterLimit        = "2"
+        x:Name                  = "Rectangle1"
+        RenderTransformOrigin   = "0.5,0.5"
+        Margin                  = "202,114,212,193"
+        HorizontalAlignment     = "Stretch"
+        VerticalAlignment       = "Stretch"
+        Width                   = "Auto"
+        Height                  = "Auto"
+        Style                   = "{DynamicResource RectangleStyle1}"
+        />
+        
+    <Button Name="button2" Height="25" Width="25" />
+
+</Grid>

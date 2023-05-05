@@ -1,0 +1,37 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="DarkOrchid" >
+
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Image}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(Image.Width)"
+                                        BeginTime="00:01:02"
+                                        Duration="00:00:03"
+                                        By="-100"
+                                        FillBehavior="Stop"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <Image Name="Animate" Style="{DynamicResource StyleKey}" Stretch="Uniform" Source="clubtrid.gif" Canvas.Left="10" Canvas.Top="10" Height="110" Width="110" />
+     <Image Name="Animate2" Stretch="Uniform" Source="pack://siteoforigin:,,,/clubtrid.gif" Canvas.Left="60" Canvas.Top="60" Height="110" Width="110" />
+     <Image Name="Animate3" Stretch="Uniform" Source="pack://siteoforigin:,,,/clubtrid.gif" Canvas.Left="110" Canvas.Top="110" Height="110" Width="110" />
+     <Image Name="Animate4" Stretch="Uniform" Source="pack://siteoforigin:,,,/clubtrid.gif" Canvas.Left="160" Canvas.Top="160" Height="110" Width="110" />
+     <Image Name="Animate5" Stretch="Uniform" Source="pack://siteoforigin:,,,/clubtrid.gif" Canvas.Left="160" Canvas.Top="160" Height="110" Width="110" />
+     
+</tst:CustomCanvas>

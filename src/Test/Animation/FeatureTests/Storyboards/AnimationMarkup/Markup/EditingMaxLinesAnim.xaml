@@ -1,0 +1,28 @@
+<ScrollViewer
+    Name        = "Root"
+    Tag         = "Int32 7 MaxLines"
+    xmlns       = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x     = 'http://schemas.microsoft.com/winfx/2006/xaml'>
+    <StackPanel>
+    
+        <StackPanel.Resources>
+            <Storyboard x:Key="MaxLinesAnim" BeginTime="0:0:1.5">
+                <Int32Animation Storyboard.TargetProperty="MaxLines" From="3" To="7" Duration="0:0:4" />
+            </Storyboard>
+
+        </StackPanel.Resources>
+        
+        <!--MaxLines Animation-->
+        <TextBox Name="AnimatedFE" MaxLines="3" Width="50" TextWrapping="Wrap" AcceptsReturn="True">
+            <TextBox.Triggers>
+                <EventTrigger RoutedEvent="TextBox.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource MaxLinesAnim}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBox.Triggers>
+            TextBox TextBoxTextBox TextBoxTextBoxTextBox TextBoxTextBoxTextBoxTextBox
+        </TextBox>
+                
+    </StackPanel>
+</ScrollViewer>

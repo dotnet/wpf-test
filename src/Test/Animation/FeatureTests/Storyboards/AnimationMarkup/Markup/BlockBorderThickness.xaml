@@ -1,0 +1,58 @@
+ 
+<Page
+    Name        = "Root"
+    Tag         = "Thickness 4 BorderThickness"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "PaleVioletRed">  
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <ThicknessAnimation
+                                Storyboard.TargetProperty   = "(BlockUIContainer.BorderThickness)"
+                                Storyboard.TargetName       = "AnimatedFE"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4"
+                                To                          = "4"
+                                >
+                            </ThicknessAnimation>
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <FlowDocumentReader Width="250" Height="250" Margin="10" BorderBrush="Black" BorderThickness="1">
+        <FlowDocument>
+            <Section Background="GhostWhite">
+                <BlockUIContainer Name="AnimatedFE" BorderBrush="Purple" BorderThickness="0">
+                    <StackPanel>
+                        <Button Content="1" Width="25" Background="LightGreen"/>
+                        <Button Content="2" Width="25" Background="LightPink"/>
+                        <Button Content="3" Width="25" Background="LightBlue"/>
+                        <Button Content="4" Width="25" Background="LemonChiffon"/>
+                        <Button Content="5" Width="25" Background="PaleGreen"/>
+                        <Button Content="6" Width="25" Background="Wheat"/>
+                        <Button Content="7" Width="25" Background="BlueViolet"/>
+                    </StackPanel>
+                </BlockUIContainer>
+                <Paragraph>
+                    A UIElement element may be embedded directly in flow content
+                    by enclosing it in a BlockUIContainer element.
+                </Paragraph>
+                <Paragraph>
+                    The BlockUIContainer element may host no more than one top-level
+                    UIElement.  However, other UIElements may be nested within the
+                    UIElement contained by an BlockUIContainer element.  For example,
+                    a StackPanel can be used to host multiple UIElement elements within
+                    a BlockUIContainer element.
+                </Paragraph>
+            </Section>
+        </FlowDocument>
+    </FlowDocumentReader>
+</Page>

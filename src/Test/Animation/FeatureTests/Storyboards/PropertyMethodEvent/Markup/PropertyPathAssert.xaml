@@ -1,0 +1,30 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="SpringGreen">
+    <Canvas>
+        <Rectangle Name="Animate" Fill="MediumSeaGreen" Width="125" Height="125">
+            <Rectangle.LayoutTransform>
+               <RotateTransform CenterX="0" CenterY="0" Angle="60" />
+            </Rectangle.LayoutTransform>
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(Rectangle.RenderTransform).(RotateTransform.Angle)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:2"
+                                        From                        = "120"
+                                        To                          = "0"
+                                        FillBehavior                = "HoldEnd"
+                                        >
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Canvas>
+</Page>

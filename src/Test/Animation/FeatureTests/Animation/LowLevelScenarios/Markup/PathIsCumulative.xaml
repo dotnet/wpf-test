@@ -1,0 +1,55 @@
+<Page   xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml" >
+
+<Canvas>
+
+    <Path Fill="Blue">
+        <Path.Resources>
+            <PathFigureCollection x:Key="starFigureCollection">
+                <PathFigure StartPoint="100 100" IsClosed="False">
+                    <LineSegment Point="150 100" />
+                </PathFigure>
+            </PathFigureCollection>
+            <PathGeometry x:Key="myGeometry" Figures="{StaticResource starFigureCollection}"></PathGeometry>
+        </Path.Resources>
+
+        <Path.Data>
+            <EllipseGeometry x:Name="MyAnimatedEllipseGeometry" Center="10,100" RadiusX="15" RadiusY="15" />
+        </Path.Data>
+        
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="Path.Loaded">
+                <BeginStoryboard Name="MyBeginStoryboard">
+                    <Storyboard>
+                        <PointAnimationUsingPath
+                            IsCumulative                = "True"
+                            PathGeometry                = "{StaticResource myGeometry}"
+                            Duration                    = "0:0:1"
+                            RepeatBehavior              = "Forever"
+                            Storyboard.TargetName       = "MyAnimatedEllipseGeometry"
+                            Storyboard.TargetProperty   = "Center" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Path.Triggers>
+    </Path>
+
+    <Path Fill="Red">
+        <Path.Data>
+            <EllipseGeometry x:Name="MyAnimatedEllipseGeometry2" Center="10,200" RadiusX="15" RadiusY="15" />
+        </Path.Data>
+
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="Path.Loaded">
+                <BeginStoryboard Name="MyBeginStoryboard2">
+                    <Storyboard>
+                        <PointAnimation Storyboard.TargetName="MyAnimatedEllipseGeometry2" Storyboard.TargetProperty="Center" Duration="0:0:1" IsCumulative="True" RepeatBehavior="Forever" From="100,200" To="150,200"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Path.Triggers>
+    </Path>
+    
+</Canvas>
+
+</Page>

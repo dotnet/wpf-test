@@ -1,0 +1,52 @@
+<Page
+    Name        = "Root"
+    Tag         = "Color MediumPurple Background"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "MediumAquaMarine">
+
+    <Page.Resources>
+
+        <Style x:Key="StyleKey" TargetType="{x:Type Canvas}">
+
+            <Setter Property="Height" Value="100" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Canvas.Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="Orange" />
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty   = "(Canvas.Background).(SolidColorBrush.Color)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        To                          = "MediumPurple"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+
+        </Style>
+
+    </Page.Resources>
+    
+    <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Canvas Background="Navy"   Style="{DynamicResource StyleKey}" />
+        <Canvas                     Style="{DynamicResource StyleKey}" />
+        <Canvas Background="Red"    Style="{DynamicResource StyleKey}" Name="AnimatedFE" />
+        <Canvas                     Style="{DynamicResource StyleKey}" />
+        <Canvas Background="Yellow" Style="{DynamicResource StyleKey}" />
+    </DockPanel>
+    
+</Page>

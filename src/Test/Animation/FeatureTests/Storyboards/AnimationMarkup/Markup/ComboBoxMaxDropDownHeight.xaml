@@ -1,0 +1,58 @@
+<Canvas
+    Name        = "Root"
+    Tag         = "Double 300 MaxDropDownHeight"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background  = "Orange">
+ 
+    <ComboBox
+        Name                = "AnimatedFE"
+        IsEditable          = "true"
+        MaxDropDownHeight   = "0"
+        Background          = "LightYellow"
+        Canvas.Left         = "150"
+        Canvas.Top          = "100"
+        FontSize            = "48"
+        Text                = "Combo!">
+        <ComboBoxItem><TextBlock>Item1</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item2</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item3</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item4</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item5</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item6</TextBlock></ComboBoxItem>
+        
+        <ComboBox.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty   = "(ComboBox.IsDropDownOpen)"
+                                    BeginTime                   = "0:0:1"
+                                    Duration                    = "0:0:0.1"
+                                    FillBehavior                = "HoldEnd"
+                                    >
+                                    <BooleanAnimationUsingKeyFrames.KeyFrames>
+                                        <BooleanKeyFrameCollection>
+                                            <DiscreteBooleanKeyFrame Value="True"  KeyTime="100%" />
+                                        </BooleanKeyFrameCollection>
+                                    </BooleanAnimationUsingKeyFrames.KeyFrames>
+                                </BooleanAnimationUsingKeyFrames>
+                                <DoubleAnimation
+                                     Storyboard.TargetProperty  = "(ComboBox.MaxDropDownHeight)"
+                                     BeginTime                  = "0:0:2"
+                                     Duration                   = "0:0:4"
+                                     From                       = "0"
+                                     To                         = "300"
+                                     FillBehavior               = "HoldEnd">
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ComboBox.Triggers>
+
+    </ComboBox>
+
+</Canvas>

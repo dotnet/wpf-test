@@ -1,0 +1,29 @@
+<!-- Databinding Animation To Property: Triggers inside Root Element -->
+
+<Page
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag     = "double 0 Opacity"
+    Name    = "Root"> 
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard TargetName="AnimatedFE" TargetProperty="Opacity">
+                    <DoubleAnimation
+                        To          = "{Binding ElementName=textbox, Path=&apos;Text&apos;}"
+                        BeginTime   = "0:0:2"
+                        Duration    = "0:0:4" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="MidnightBlue">
+    
+        <TextBox Name='textbox' Width="100" Canvas.Left="0" Canvas.Top="210">0</TextBox>
+        <Ellipse Name="AnimatedFE" Fill="PaleTurquoise" Opacity="1" Width='200' Height='200' Canvas.Left="-50" Canvas.Top="-50" />
+        
+    </Canvas>
+    
+</Page>

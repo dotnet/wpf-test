@@ -1,0 +1,34 @@
+<!-- Targeting using a DO's x:Name -->
+<Page
+    Name    = "Root"
+    Tag     = "double 125 Left"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+   
+    <Canvas Background="MediumAquaMarine">
+        <Canvas x:Name="AnimatedFE" Height="40" Width="40" Background="Wheat">
+            <Canvas.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "Left"
+                                        Storyboard.TargetName       = "AnimatedFE"
+                                        From                        = "0"
+                                        To                          = "125"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        FillBehavior                = "HoldEnd"
+                                        />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Canvas.Triggers>
+        </Canvas>
+    </Canvas>
+    
+</Page>

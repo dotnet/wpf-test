@@ -1,0 +1,53 @@
+<Page   Name    = "Root"
+        xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <RectAnimation
+                                Storyboard.TargetProperty   = "(Ellipse.OpacityMask).(DrawingBrush.Viewport)"
+                                Storyboard.TargetName       = "Animate"
+                                To                          = "0,0,8,8"
+                                Duration                    = "0:0:30"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Button.Click" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <SkipStoryboardToFill BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+    
+    <Canvas Background="White">
+        <Ellipse Name="Animate" Fill="MediumTurquoise" Canvas.Left="-135" Canvas.Top="-10">
+            <Ellipse.Width>351</Ellipse.Width>
+            <Ellipse.Height>241</Ellipse.Height>
+            <Ellipse.OpacityMask>
+                <DrawingBrush Viewport="0,0,0.25,0.25" TileMode="Tile">
+                <DrawingBrush.Drawing>
+                    <DrawingGroup>
+                        <DrawingGroup.Children>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="RoyalBlue" Thickness="0.09" />
+                                </GeometryDrawing.Pen>
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0.0, 0.0, 0.9, 0.9" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup.Children>
+                    </DrawingGroup>
+                </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Ellipse.OpacityMask>
+        </Ellipse>
+        <Button Name="SourceElement" Canvas.Left="250" Canvas.Top="50" Content="SkipToFill" />
+    </Canvas>
+</Page>

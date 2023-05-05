@@ -1,0 +1,47 @@
+<!-- Storyboard inside Page Resources: Multiple Resources (Static) -->
+
+<Page
+    Name    = "Root"
+    Tag     = "Color DarkOrange Background"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Page.Resources>
+        <!-- This one should be ignored -->
+        <Storyboard x:Key="StoryKey">
+            <DoubleAnimation
+                Storyboard.TargetProperty   = "(Button.Opacity)"
+                Storyboard.TargetName       = "AnimatedFE"
+                To                          = ".5"
+                BeginTime                   = "0:0:2"
+                Duration                    = "0:0:4"
+                  />
+        </Storyboard>
+    </Page.Resources>
+    
+    <Canvas Background="PeachPuff">
+        <Canvas.Resources>
+            <Storyboard x:Key="StoryKey">
+                <ColorAnimation
+                    Storyboard.TargetProperty   = "(Button.Background).(SolidColorBrush.Color)"
+                    Storyboard.TargetName       = "AnimatedFE"
+                    To                          = "DarkOrange"
+                    BeginTime                   = "0:0:2"
+                    Duration                    = "0:0:4"
+                      />
+            </Storyboard>
+        </Canvas.Resources>
+
+        <Canvas.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Storyboard="{StaticResource StoryKey}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Canvas.Triggers>
+ 
+        <Button Name='AnimatedFE' Height="100" Width="100" Canvas.Top="0" Background="PeachPuff" Opacity="1" />
+    
+    </Canvas>
+    
+</Page>

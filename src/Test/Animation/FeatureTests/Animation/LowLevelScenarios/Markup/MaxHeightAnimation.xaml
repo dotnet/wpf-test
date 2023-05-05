@@ -1,0 +1,30 @@
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Canvas Canvas.Left="50" Canvas.Top="50" Background="Lavender">
+        <Grid Name="grid1" Canvas.Left="50" Canvas.Top="50" MaxHeight="0" Height="200" Width="200" Background="HotPink">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="MaxHeight">
+                                <DoubleAnimation
+                                    By              = "350"
+                                    BeginTime       = "0:0:0"
+                                    Duration        = "0:0:0.25" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Grid.Triggers>
+        </Grid>
+    </Canvas>
+
+</Canvas>

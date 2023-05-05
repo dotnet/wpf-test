@@ -1,0 +1,48 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="LightYellow" >
+
+    <Button Name="Animate" FontSize="36" Canvas.Left="150" Canvas.Top="150" Content="Avalon!">
+        <Button.Clip>
+            <EllipseGeometry RadiusX="50" RadiusY="50" Center="30,20" />
+        </Button.Clip>
+        <Button.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="Brown" Offset="0" />
+                    <GradientStop Color="BurlyWood" Offset=".9" />
+                    <GradientStop Color="Moccasin" Offset="1" />
+                </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Button.Background>
+        <Button.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                 Storyboard.TargetProperty="(Button.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Offset)"
+                                 BeginTime="0:1:1"
+                                 Duration="0:0:5"
+                                 From="0"
+                                 To=".85"
+                                 >
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                 Storyboard.TargetProperty="(Button.Clip).(EllipseGeometry.RadiusX)"
+                                 BeginTime="0:1:0"
+                                 Duration="0:0:5"
+                                 To="200"
+                                 FillBehavior="HoldEnd"
+                                   />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Button.Triggers> 
+    </Button>
+</tst:CustomCanvas>

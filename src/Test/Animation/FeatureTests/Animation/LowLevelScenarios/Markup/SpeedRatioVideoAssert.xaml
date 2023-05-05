@@ -1,0 +1,21 @@
+<Page   xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml" >
+
+    <StackPanel>
+        <Canvas Left="400">
+            <MediaElement Name="myvideo" Width="900" Height="400" Canvas.Left="0" Canvas.Top="0">
+                <MediaElement.Triggers>
+                    <EventTrigger RoutedEvent="MediaElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard SpeedRatio="23">
+                                        <MediaTimeline Source="duck.wmv" BeginTime="0:0:0" Duration="0:0:40"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </MediaElement.Triggers>
+            </MediaElement>
+        </Canvas>
+    </StackPanel>
+</Page>

@@ -1,0 +1,41 @@
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml" 
+    Background  = "#00000000">
+    
+    <FrameworkElement.Resources>
+        <Storyboard x:Key="PlayUri">
+            <StringAnimationUsingKeyFrames
+                BeginTime                   = "0:0:1"
+                Duration                    = "0:0:0"
+                Storyboard.TargetName       = "StatusBlock"
+                Storyboard.TargetProperty   = "(TextBlock.Text)">
+                <DiscreteStringKeyFrame
+                    KeyTime = "0:0:0"
+                    Value   = "{Binding ElementName=MediaSourceList, Path=(ListBox.SelectedValue).Content}"
+                    />
+            </StringAnimationUsingKeyFrames>
+        </Storyboard>
+    </FrameworkElement.Resources>
+
+    <FrameworkElement.Triggers>
+        <EventTrigger RoutedEvent="Button.Loaded" SourceName="Play">
+            <EventTrigger.Actions>
+                <BeginStoryboard Storyboard="{StaticResource PlayUri}" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </FrameworkElement.Triggers>
+
+    <StackPanel>
+        <ListBox Name="MediaSourceList">
+            <ListBoxItem Content="AAA" IsSelected="True"/>
+            <ListBoxItem Content="BBB" />
+            <ListBoxItem Content="CCC" />
+            <ListBoxItem Content="DDD"/>
+        </ListBox>
+
+        <Button Name="Play" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto"/>
+        <TextBlock Name="StatusBlock" Background="Lavender" FontFamily="Tahoma" FontSize="24" Width="100">Ready</TextBlock>
+    </StackPanel>
+  
+</Page>

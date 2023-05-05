@@ -1,0 +1,39 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Black" >
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type Canvas}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames
+                                        Storyboard.TargetProperty="(Canvas.Opacity)"
+                                        BeginTime="00:01:02"
+                                        Duration="0:0:8"
+                                        >
+                                       <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                            <DoubleKeyFrameCollection>
+                                                <DiscreteDoubleKeyFrame Value="1.0" KeyTime="0" />
+                                                <DiscreteDoubleKeyFrame Value="0" KeyTime="100%" />
+                                            </DoubleKeyFrameCollection>
+                                       </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <Canvas Name="Animate" Style="{DynamicResource StyleKey}" Height="50" Width="50" Background="Brown">
+          <TextBlock><Run Name="Run1">Avalon!</Run></TextBlock>
+     </Canvas>
+   
+</tst:CustomCanvas>

@@ -1,0 +1,38 @@
+﻿<Page
+    Name="Root"
+    Tag="Skip"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.PreviewMouseDown" SourceName="Animate">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <StringAnimationUsingKeyFrames
+                                Storyboard.TargetProperty="Text"
+                                Storyboard.TargetName="Animate"
+                                Duration="0:0:1.5">
+                                <StringAnimationUsingKeyFrames.KeyFrames>
+                                    <StringKeyFrameCollection>
+                                        <DiscreteStringKeyFrame Value="When in" KeyTime="0" />
+                                        <DiscreteStringKeyFrame Value="the Course" KeyTime="25%" />
+                                        <DiscreteStringKeyFrame Value="of human" KeyTime="50%" />
+                                        <DiscreteStringKeyFrame Value="events" KeyTime="75%" />
+                                        <DiscreteStringKeyFrame Value="" KeyTime="99%" />
+                                    </StringKeyFrameCollection>
+                                </StringAnimationUsingKeyFrames.KeyFrames>
+                            </StringAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas>
+        <TextBlock Name="Animate" Background="MediumVioletRed" Width="150" Height="100" Foreground="White" FontSize="24" Text="When in" />
+    </Canvas>
+
+</Page>

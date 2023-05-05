@@ -1,0 +1,27 @@
+<Page   xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+        Name    = "Root"> 
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard >
+                <Storyboard TargetName="AnimatedFE"  >
+                    <Storyboard TargetProperty="Width">
+                        <DoubleAnimation BeginTime="0:0:2" Duration="0:0:4" To="{Binding ElementName=textbox, Path='Text'}"/>
+                    </Storyboard>
+                    <Storyboard TargetName="AnimatedFE" TargetProperty="Height" >
+                        <DoubleAnimation BeginTime="0:0:2" Duration="0:0:4" To="{Binding ElementName=textbox, Path='Text';}" />
+                    </Storyboard>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="White">
+    
+        <TextBox Name='textbox' Width="100" Canvas.Left="150" Canvas.Top="50">260</TextBox>
+        <TextBox Name="AnimatedFE" Background="Black" Width='100' Height='60' Canvas.Left="150" Canvas.Top="150" />
+        
+    </Canvas>
+    
+</Page>

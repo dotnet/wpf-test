@@ -1,0 +1,49 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="Navy">
+
+    <Canvas>
+    <Path Name="AnimatedFE" Fill="MediumPurple">
+        <Path.Data>
+            <EllipseGeometry RadiusX="25" RadiusY="25" Center="300,300" />
+        </Path.Data>
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <PointAnimation
+                                    Storyboard.TargetProperty="(Path.Data).(EllipseGeometry.Center)"
+                                    BeginTime="0:0:2"
+                                    Duration="0:0:2"
+                                    From="300,300"
+                                    To="40,40"
+                                    FillBehavior="HoldEnd"
+                                      />
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="(Path.Data).(EllipseGeometry.RadiusX)"
+                                    BeginTime="0:0:2"
+                                    Duration="0:0:2"
+                                    From="25"
+                                    To="100"
+                                    FillBehavior="HoldEnd"
+                                      />
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="(Path.Data).(EllipseGeometry.RadiusY)"
+                                    BeginTime="0:0:2"
+                                    Duration="0:0:2"
+                                    From="25"
+                                    To="100"
+                                    FillBehavior="HoldEnd"
+                                      />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Path.Triggers>
+    </Path>
+    </Canvas>
+    
+</Page>

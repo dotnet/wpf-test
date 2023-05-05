@@ -1,0 +1,42 @@
+<Page
+    Name        = "Root"
+    Tag         = "Color Black Color"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "BlanchedAlmond">
+
+    <Canvas>
+        <Rectangle Name="TargetElement" Width="125" Height="125">
+            <Rectangle.Fill>
+                <SolidColorBrush x:Name="AnimatedAnimatable" Color="Orange" Opacity="0" />
+            </Rectangle.Fill>
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.Fill).(SolidColorBrush.Opacity)"
+                                         BeginTime                  = "0:0:2"
+                                         Duration                   = "0:0:3"
+                                         From                       = "0"
+                                         To                         = "1"
+                                           />
+                                    <ColorAnimation
+                                         Storyboard.TargetProperty  ="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                         BeginTime                  = "0:0:2"
+                                         Duration                   = "0:0:3"
+                                         From                       = "BlanchedAlmond"
+                                         To                         = "Black"
+                                           />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Canvas>
+
+</Page>

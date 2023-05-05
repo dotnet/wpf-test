@@ -1,0 +1,50 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent" >
+
+    <TextBlock
+        Name="Animate"
+        FontSize="36"
+        Canvas.Left="200"
+        Canvas.Top="200">
+        <Run Name="Run1">Avalon!</Run>
+        <TextBlock.Foreground>
+            <SolidColorBrush />
+        </TextBlock.Foreground>            
+        <TextBlock.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                    BeginTime="0:1:2"
+                                    Duration="0:0:8"
+                                    FillBehavior="HoldEnd"
+                                    AutoReverse="True"
+                                    RepeatBehavior="111x"
+                                    AccelerationRatio="1"
+                                    DecelerationRatio="0"
+                                    SpeedRatio="1"
+                                    >
+                                    <ColorAnimationUsingKeyFrames.KeyFrames>
+                                        <ColorKeyFrameCollection>
+                                            <LinearColorKeyFrame Value="Red" KeyTime="0" />
+                                            <LinearColorKeyFrame Value="Yellow" KeyTime="25%" />
+                                            <LinearColorKeyFrame Value="Green" KeyTime="50%" />
+                                            <LinearColorKeyFrame Value="White" KeyTime="75%" />
+                                            <LinearColorKeyFrame Value="Blue" KeyTime="100%" />
+                                        </ColorKeyFrameCollection>
+                                    </ColorAnimationUsingKeyFrames.KeyFrames>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </TextBlock.Triggers>
+    </TextBlock>
+     
+</tst:CustomCanvas>

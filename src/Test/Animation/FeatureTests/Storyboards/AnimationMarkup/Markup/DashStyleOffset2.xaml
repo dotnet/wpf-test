@@ -1,0 +1,53 @@
+
+<Page
+    Name            = "Root"
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background      = "Black"
+    Tag             = "Double 16 Offset"
+    > 
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty   = "(DashStyle.Offset)"
+                                Storyboard.TargetName       = "AnimatedAnimatable"
+                                From                        = "1"
+                                To                          = "16"
+                                BeginTime                   = "0:0:2"
+                                Duration                    = "0:0:4"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <TextBlock Name="TargetElement" Foreground="Yellow" FontSize="48" FontFamily="Palatino Linotype" FontWeight="Normal" FontStyle="Normal">
+        <TextBlock.TextDecorations>
+            <TextDecorationCollection>
+                <TextDecoration Location="Underline">
+                    <TextDecoration.Pen>
+                        <Pen 
+                            Brush           = "OrangeRed"
+                            Thickness       = "1.5" 
+                            StartLineCap    = "Triangle"
+                            EndLineCap      = "Triangle"
+                            DashCap         = "Round"
+                            MiterLimit      = "2">
+                            <Pen.DashStyle>
+                                <DashStyle x:Name="AnimatedAnimatable" Offset="0" Dashes="5 50 10" />
+                            </Pen.DashStyle>
+                        </Pen>
+                    </TextDecoration.Pen>
+                </TextDecoration>
+            </TextDecorationCollection>
+        </TextBlock.TextDecorations>
+    Avalon!
+    </TextBlock>
+
+</Page>

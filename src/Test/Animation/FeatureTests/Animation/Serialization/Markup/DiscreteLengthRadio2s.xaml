@@ -1,0 +1,44 @@
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Plum" >
+
+    <Canvas.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type RadioButton}" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty="(Canvas.Top)"
+                                    BeginTime="0:1:2"
+                                    Duration="Forever">
+                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                            <DoubleKeyFrameCollection>
+                                                <DiscreteDoubleKeyFrame Value="5"   KeyTime="0:0:0" />
+                                                <DiscreteDoubleKeyFrame Value="110" KeyTime="0:0:2" />
+                                                <DiscreteDoubleKeyFrame Value="220" KeyTime="0:0:4" />
+                                            </DoubleKeyFrameCollection>
+                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+     <RadioButton Name="Animate" Style="{DynamicResource StyleKey}" Canvas.Left="10" Canvas.Top="5">Avalon!</RadioButton>
+     <RadioButton Name="Animate2" Canvas.Left="70" Canvas.Top="5">Avalon!</RadioButton>
+     <RadioButton Name="Animate3" Canvas.Left="130" Canvas.Top="5">Avalon!</RadioButton>
+     <RadioButton Name="Animate4" Canvas.Left="200" Canvas.Top="5">Avalon!</RadioButton>
+     <RadioButton Name="Animate5" Canvas.Left="260" Canvas.Top="5">Avalon!</RadioButton>
+     <RadioButton Name="Animate6" Canvas.Left="320" Canvas.Top="5">Avalon!</RadioButton>
+     <RadioButton Name="Animate7" Canvas.Left="380" Canvas.Top="5">Avalon!</RadioButton>
+     <RadioButton Name="Animate8" Canvas.Left="440" Canvas.Top="5">Avalon!</RadioButton>
+   
+</tst:CustomCanvas>

@@ -1,0 +1,35 @@
+<ScrollViewer
+    Name        = "Root"
+    Tag         = "Double 180 Angle"
+    xmlns       = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x     = 'http://schemas.microsoft.com/winfx/2006/xaml'>
+    
+    <StackPanel>
+    
+        <StackPanel.Resources>
+            <Storyboard x:Key="RotateAnim" BeginTime="0:0:2">
+                <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="180" Duration="0:0:4" />
+            </Storyboard>
+        </StackPanel.Resources>
+
+        <!--Rotation effect on RichTextBox-->
+        <RichTextBox Height="75" Width="150" AcceptsReturn="True">
+            <RichTextBox.Triggers>
+                <EventTrigger RoutedEvent="RichTextBox.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource RotateAnim}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </RichTextBox.Triggers>
+
+            <RichTextBox.RenderTransform>
+                <RotateTransform x:Name="AnimatedAnimatable" CenterX="100" CenterY="50" Angle="0" />
+            </RichTextBox.RenderTransform>
+            <FlowDocument>
+                <Paragraph>RichTB Rotation</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+                
+    </StackPanel>
+    
+</ScrollViewer>

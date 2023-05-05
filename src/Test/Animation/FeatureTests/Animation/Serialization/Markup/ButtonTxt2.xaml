@@ -1,0 +1,47 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="Moccasin" >
+                  
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+<!-- ******** STORYBOARD #1 ********  -->
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Button.Height)"
+                                Storyboard.TargetName="Animate"
+                                BeginTime="0:1:2"
+                                Duration="0:0:3"
+                                To="25"
+                                >
+                            </DoubleAnimation>
+                        </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+<!-- ******** STORYBOARD #2 ********  -->    
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(TextBlock.Width)"
+                                Storyboard.TargetName="Animate2"
+                                BeginTime="0:1:2"
+                                Duration="0:0:3"
+                                By="25"
+                                >
+                            </DoubleAnimation>
+                        </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <Button Canvas.Left="10" Height="35" Width="75" Name="Animate">Avalon!</Button>
+    <Button Canvas.Left="90" Height="35" Width="75" Name="Animate2"><TextBlock>Avalon!</TextBlock></Button>
+     
+</tst:CustomCanvas>

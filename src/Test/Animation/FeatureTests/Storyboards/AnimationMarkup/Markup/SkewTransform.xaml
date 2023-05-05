@@ -1,0 +1,56 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 35 CenterY"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Khaki">
+
+    <Canvas>
+        <Rectangle Name="TargetElement" Fill="GoldenRod" Width="125" Height="125">
+            <Rectangle.RenderTransform>
+               <SkewTransform x:Name="AnimatedAnimatable" AngleX="90" AngleY="90" />
+            </Rectangle.RenderTransform>
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.RenderTransform).(SkewTransform.CenterX)"
+                                         BeginTime                  = "0:0:.5"
+                                         Duration                   = "0:0:5"
+                                         To                         = "25"
+                                         FillBehavior               = "HoldEnd"
+                                           />
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.RenderTransform).(SkewTransform.CenterY)"
+                                         BeginTime                  = "0:0:.5"
+                                         Duration                   = "0:0:4"
+                                         To                         = "35"
+                                         FillBehavior               = "HoldEnd"
+                                           />
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.RenderTransform).(SkewTransform.AngleX)"
+                                         BeginTime                  = "0:0:.5"
+                                         Duration                   = "0:0:2"
+                                         To                         = "0"
+                                         FillBehavior               = "HoldEnd"
+                                           />
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(Rectangle.RenderTransform).(SkewTransform.AngleY)"
+                                        BeginTime                   = "0:0:.5"
+                                        Duration                    = "0:0:5"
+                                        To                          = "0"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Canvas>
+    
+</Page>

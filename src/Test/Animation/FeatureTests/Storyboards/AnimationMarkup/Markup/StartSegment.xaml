@@ -1,0 +1,44 @@
+﻿<Grid
+    Name        = "Root"
+    Tag         = "Point 250,100 StartPoint"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "DeepPink">
+
+    <Canvas>
+        <Path Name="TargetElement" Fill="MediumPurple" Stroke="MediumPurple" StrokeThickness="100">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure x:Name="AnimatedAnimatable" StartPoint="100 100" IsClosed="True">
+                            <PathFigure.Segments>
+                                <LineSegment Point="300,300" />
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <PointAnimation
+                                        Storyboard.TargetProperty   = "(Path.Data).(PathGeometry.Figures)[0].(PathFigure.StartPoint)"
+                                        From                        = "100,100"
+                                        To                          = "250,100"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
+    </Canvas>
+    
+</Grid>

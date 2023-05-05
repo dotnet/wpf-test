@@ -1,0 +1,48 @@
+<Page
+    Name            = "Root"
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background      = "White">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.GotFocus" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <PointAnimation
+                                Storyboard.TargetProperty   = "(Path.Data).(LineGeometry.StartPoint)"
+                                Storyboard.TargetName       = "Animate"
+                                Duration                    = "0:0:5"
+                                From                        = "200,50"
+                                To                          = "0,50"
+                                />
+                            <PointAnimation
+                                Storyboard.TargetProperty   = "(Path.Data).(LineGeometry.EndPoint)"
+                                Storyboard.TargetName       = "Animate"
+                                Duration                    = "0:0:5"
+                                From                        = "300,50"
+                                To                          = "250,50"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.LostFocus" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <RemoveStoryboard BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas>
+        <Path Name="Animate" Fill="Maroon" Stroke="Maroon" StrokeThickness="100" >
+            <Path.Data>
+                <LineGeometry StartPoint="200,50" EndPoint="300,50" />
+            </Path.Data>
+        </Path>
+
+        <Button Name="SourceElement" Canvas.Left="50" Canvas.Top="200" Content="Button" />
+        <TextBox Name="FocusElement" Canvas.Left="150" Canvas.Top="200" Width="25" Height="25" />
+    </Canvas>
+</Page>

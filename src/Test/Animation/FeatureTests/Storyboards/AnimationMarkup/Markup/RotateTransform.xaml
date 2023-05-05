@@ -1,0 +1,52 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 25 CenterY"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Brown">
+
+    <Canvas>
+        <Rectangle Name="TargetElement" Fill="Moccasin" Width="125" Height="125">
+            <Rectangle.RenderTransform>
+               <RotateTransform x:Name="AnimatedAnimatable" CenterX="0" CenterY="0" Angle="60" />
+            </Rectangle.RenderTransform>
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.RenderTransform).(RotateTransform.CenterX)"
+                                         BeginTime                  = "0:0:2"
+                                         Duration                   = "0:0:4"
+                                         To                         = "50"
+                                         FillBehavior               = "HoldEnd"
+                                         >
+                                    </DoubleAnimation>
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.RenderTransform).(RotateTransform.CenterY)"
+                                         BeginTime                  = "0:0:2"
+                                         Duration                   = "0:0:4"
+                                         To                         = "25"
+                                         FillBehavior               = "HoldEnd"
+                                         >
+                                    </DoubleAnimation>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(Rectangle.RenderTransform).(RotateTransform.Angle)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        From                        = "120"
+                                        To                          = "0"
+                                        FillBehavior                = "HoldEnd"
+                                        >
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Canvas>
+</Page>

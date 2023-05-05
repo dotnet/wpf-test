@@ -1,0 +1,38 @@
+<Page Name="Root" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="MediumPurple">
+
+    <Canvas>
+
+        <Ellipse Name="AnimatedFE" Fill="Navy" Height="200" Width="200">
+            <Ellipse.RenderTransform>
+                <RotateTransform CenterX="90" CenterY="30" Angle="90" />
+            </Ellipse.RenderTransform>
+
+            <Ellipse.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(Ellipse.RenderTransform).(RotateTransform.CenterX)"
+                                        BeginTime="0:0:2"
+                                        Duration="0:0:4"
+                                        To="250"
+                                          />
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(Ellipse.RenderTransform).(RotateTransform.CenterY)"
+                                        BeginTime="0:0:2"
+                                        Duration="0:0:4"
+                                        To="250"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Ellipse.Triggers>
+        </Ellipse>
+
+    </Canvas>
+
+</Page>

@@ -1,0 +1,34 @@
+﻿<Grid 
+    Name        = "Root"
+    Tag         = "Rect 0,0,100,100 Rect"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Black">
+
+    <Path Name="TargetElement" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Lime">
+        <Path.Data>
+            <RectangleGeometry x:Name="AnimatedAnimatable" Rect="100,100,100,100" />
+        </Path.Data>
+
+        <Path.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <RectAnimation
+                                    Storyboard.TargetProperty   = "(Path.Data).(RectangleGeometry.Rect)"
+                                    To                          = "0,0,100,100"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:4"
+                                    AccelerationRatio           = "1"
+                                    FillBehavior                = "HoldEnd" />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Path.Triggers>
+    </Path>
+
+</Grid>

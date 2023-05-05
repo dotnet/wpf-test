@@ -1,0 +1,22 @@
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Pink">
+
+     <Canvas Height="200" Width="200" Canvas.Left="50" Canvas.Top="50" Background="Lavender">
+         <WrapPanel Name="wrappanel1" Canvas.Left="50" Canvas.Top="50" Height="100" Width="100" Background="Purple">
+            <WrapPanel.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Margin">
+                                <ThicknessAnimation
+                                    By              = "50, 50, 50, 50"
+                                    BeginTime       = "0:0:0"
+                                    Duration        = "0:0:1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </WrapPanel.Triggers>
+         </WrapPanel>
+     </Canvas>
+
+</Canvas>

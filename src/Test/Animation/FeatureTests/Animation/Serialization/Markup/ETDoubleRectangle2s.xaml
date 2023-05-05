@@ -1,0 +1,172 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent" 
+                  >
+<Canvas.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+        <EventTrigger.Actions>
+            <BeginStoryboard>
+                <BeginStoryboard.Storyboard>
+                    <Storyboard>
+                    <DoubleAnimation From="0" To="360" BeginTime="0:1:0" Duration="0:0:10" RepeatBehavior="Forever"
+                        Storyboard.TargetName="rotatingRectangle1"
+                        Storyboard.TargetProperty="LayoutTransform.Angle" />  <!-- Simplified PropertyPath syntax -->
+                    <DoubleAnimation From="0" To="360" BeginTime="0:1:0" Duration="0:0:10" RepeatBehavior="Forever"
+                        Storyboard.TargetName="rotatingRectangle2"
+                        Storyboard.TargetProperty="(Canvas.LayoutTransform).(RotateTransform.Angle)" />
+                    </Storyboard>
+                </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+        </EventTrigger.Actions>
+    </EventTrigger>
+</Canvas.Triggers>
+
+ <Canvas.Resources>
+    <Style x:Key="StyleForRect" TargetType="{x:Type Rectangle}">
+        <Setter Property="Fill" Value="Blue" />
+        <Style.Triggers>
+
+            <!-- Complex (multi-step) property path in a Style for a FrameworkElement -->
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1.0" To="0.5" Duration="0:0:0.5" Storyboard.TargetProperty="Fill.Opacity" />
+                            </Storyboard>  
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+            <!-- Simple (single-step) property path in a Style for a FrameworkElement -->
+            <EventTrigger RoutedEvent="Mouse.MouseDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation From="100" To="75" Duration="0:0:0.5" Storyboard.TargetProperty="Height" />
+                            </Storyboard>  
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="StyleForBold" TargetType="{x:Type Bold}">
+        <Setter Property="Foreground" Value="Blue" />
+        <Style.Triggers>
+
+            <!-- Complex (multi-step) property path in a Style for a FrameworkContentElement -->
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation From="1.0" To="0.5" Duration="0:0:0.5" Storyboard.TargetProperty="Foreground.Opacity" />
+                            </Storyboard>  
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+            <!-- Simple (single-step) property path in a Style for a FrameworkContentElement -->
+            <EventTrigger RoutedEvent="Mouse.MouseDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation From="24" To="36" Duration="0:0:0.5" Storyboard.TargetProperty="FontSize" />
+                            </Storyboard>  
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+        </Style.Triggers>
+    </Style>
+</Canvas.Resources>
+
+<Canvas Background="White">
+    <!-- Sample FrameworkElement for Style Storyboard -->
+    <Rectangle Style="{DynamicResource StyleForRect}" Width="100" Height="100" Canvas.Top="100" Canvas.Left="100" />
+    <TextBlock Canvas.Top="100" Canvas.Left="100">
+        <Bold FontSize="24" Foreground="White">FE+Style</Bold>
+    </TextBlock>
+
+    <!-- Sample FrameworkContentElement for Style Storyboard -->
+    <TextBlock Canvas.Top="100" Canvas.Left="300">
+        <Bold FontSize="24" Style="{DynamicResource StyleForBold}">FCE+Style</Bold>
+    </TextBlock>
+
+    <!-- FrameworkElement with element Storyboard -->
+  
+    <Rectangle Name="Animate" Width="100" Height="100" Canvas.Top="300" Canvas.Left="100" Fill="Red">
+        <Rectangle.Triggers>
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                            <DoubleAnimation From="1.0" To="0.1" Duration="0:0:1.0"
+                                    Storyboard.TargetProperty="Fill.Opacity" />
+                            <DoubleAnimation From="1.0" To="0.1" Duration="0:0:1.0"
+                                    Storyboard.TargetName="BoldNoTrigger"
+                                    Storyboard.TargetProperty="Foreground.Opacity" />
+                            </Storyboard>  
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Mouse.MouseDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation From="100" To="150" Duration="0:0:1.0"
+                                        Storyboard.TargetProperty="Height" />
+                                <DoubleAnimation From="24" To="36" Duration="0:0:1.0"
+                                        Storyboard.TargetName="BoldNoTrigger"
+                                        Storyboard.TargetProperty="FontSize" />
+                            </Storyboard>  
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Rectangle.Triggers>
+    </Rectangle>
+    
+    <TextBlock Canvas.Top="300" Canvas.Left="100">
+        <Bold FontSize="24" Foreground="White">FE+Element</Bold>
+    </TextBlock>
+
+  <!-- FrameworkContentElement serving as target for the storyboard on FE+Element. -->
+  <!-- No Triggers here because FrameworkContentElement doesn't have Triggers property. -->
+
+    <TextBlock Canvas.Top="300" Canvas.Left="300">
+        <Bold Name="BoldNoTrigger" FontSize="24" Foreground="Red">FCE+Element (Triggered elsewhere)</Bold>
+    </TextBlock>
+
+    <!-- Constantly running animation -->
+    <Border Canvas.Left="600" Canvas.Top="100" BorderThickness="5" BorderBrush="Black">
+        <StackPanel>
+            <Rectangle Name="rotatingRectangle1" Width="50" Height="50" Fill="DodgerBlue">
+                <Rectangle.LayoutTransform>
+                    <RotateTransform CenterX="25" CenterY="25" Angle="20" />
+                </Rectangle.LayoutTransform>
+            </Rectangle>
+            <Rectangle Name="rotatingRectangle2" Width="50" Height="50" Fill="DodgerBlue">
+                <Rectangle.LayoutTransform>
+                    <RotateTransform CenterX="25" CenterY="25" Angle="20" />
+                </Rectangle.LayoutTransform>
+            </Rectangle>
+        </StackPanel>
+    </Border>
+    
+</Canvas>
+
+</tst:CustomCanvas>

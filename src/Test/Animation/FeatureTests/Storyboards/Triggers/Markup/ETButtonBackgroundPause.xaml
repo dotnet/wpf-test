@@ -1,0 +1,36 @@
+<Page
+ Name="Root"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="BeginStory">
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty   = "(Button.Background).(SolidColorBrush.Color)"
+                                Storyboard.TargetName       = "Animate"
+                                To                          = "Black"
+                                Duration                    = "0:0:6"
+                                FillBehavior                = "HoldEnd"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.PreviewMouseDown" SourceName="SourceElement">
+            <EventTrigger.Actions>
+                <PauseStoryboard BeginStoryboardName="BeginStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas>
+        <Button Name="Animate" Canvas.Top="0" Width="100" Height="100" Background="White" FontSize="24" />
+        <Button Name="SourceElement" Canvas.Top="150" Width="80">Click Here</Button>
+    </Canvas>
+
+</Page>

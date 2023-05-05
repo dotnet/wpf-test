@@ -1,0 +1,31 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Navy">
+
+    <Canvas>
+        <Rectangle Name="AnimatedFE" Width="200" Height="200">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="MediumPurple" Opacity="0" />
+            </Rectangle.Fill>
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Opacity)"
+                                        From="0"
+                                        To="1"
+                                        BeginTime="0:0:2"
+                                        Duration="0:0:3"
+                                        AccelerationRatio="1"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Canvas>
+    
+</Page>

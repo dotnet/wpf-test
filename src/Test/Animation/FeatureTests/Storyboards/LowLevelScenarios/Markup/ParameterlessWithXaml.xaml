@@ -1,0 +1,238 @@
+<Page
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background  = "Black"
+    Name        = "Root"
+    >
+    
+    <Page.Resources>
+        <Storyboard x:Key="FrameworkElement">
+            <DoubleAnimation
+                Storyboard.TargetProperty   = "Width"
+                Storyboard.TargetName       = "Rectangle1"
+                Duration                    = "0:0:1"
+                To                          = "200" />
+        </Storyboard>
+
+        <Storyboard x:Key="Animatable">
+            <ColorAnimation
+                 Storyboard.TargetProperty  = "(Rectangle.Fill).(SolidColorBrush.Color)"
+                 Storyboard.TargetName      = "Rectangle1"
+                 To                         = "Green"
+                 Duration                   = "0:0:1" />
+        </Storyboard>
+
+        <Storyboard x:Key="DirectTargeting">
+            <ColorAnimation
+                Storyboard.TargetProperty   = "(SolidColorBrush.Color)"
+                Storyboard.TargetName       = "directSCB"
+                To                          = "Green"
+                Duration                    = "0:0:1" />
+        </Storyboard>
+
+        <Storyboard x:Key="Nested">
+            <DoubleAnimation 
+                Storyboard.TargetName       = "Rectangle1" 
+                Storyboard.TargetProperty   = "Height"
+                To                          = "200"
+                Duration                    = "0:0:1" />
+            <Storyboard>
+                <DoubleAnimation 
+                    Storyboard.TargetName       = "Rectangle1" 
+                    Storyboard.TargetProperty   = "Width"
+                    To                          = "200"
+                    Duration                    = "0:0:1" />
+                <Storyboard>
+                    <DoubleAnimation 
+                        Storyboard.TargetName       = "Rectangle1" 
+                        Storyboard.TargetProperty   = "(Rectangle.Fill).(SolidColorBrush.Opacity)"
+                        To                          = "1"
+                        Duration                    = "0:0:1" />
+                </Storyboard>
+            </Storyboard>
+        </Storyboard>
+
+        <Storyboard x:Key="Viewport2D_Visual3D">
+            <DoubleAnimation
+                Duration                    = "0:0:1"
+                To                          = "1" 
+                Storyboard.TargetProperty   = "(Rectangle.Opacity)"
+                Storyboard.TargetName       = "Rectangle2" />
+        </Storyboard>
+
+        <Storyboard x:Key="DataBinding">
+            <Storyboard TargetName="Rectangle1" TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                <ColorAnimation To="{Binding ElementName=textbox1, Path=&apos;Text&apos;}" Duration="0:0:1" />
+            </Storyboard>
+        </Storyboard>
+
+    </Page.Resources>
+
+
+    <Canvas>
+
+<!-- Scenario:  ("FrameworkElement") the Storyboard is inside the root Resources and is applied to a FrameworkElement -->
+<!-- Scenario:  ("Animatable") the Storyboard is inside the root Resources and is applied to a Animatable -->
+<!-- Scenario:  ("Nested") the Storyboard is nested inside other Storyboards -->
+<!-- Scenario:  ("DataBinding") the Animation's To value is databound -->
+        <Rectangle
+            Visibility      = "Collapsed"
+            Name            = "Rectangle1"
+            Width           = "200"
+            Height          = "200">
+            <Rectangle.Fill>
+                <SolidColorBrush x:Name="RectangleSCB" Color="Black" />
+            </Rectangle.Fill>
+        </Rectangle>
+
+<!-- Scenario:  the Animated Element is inside a Viewport2DVisual3D -->
+        <Viewport3D Name="Viewport3D2" Visibility="Collapsed" MinWidth="800" MinHeight="800" ClipToBounds="False" >
+            <Viewport3D.Camera>
+                <PerspectiveCamera x:Name="Camera" NearPlaneDistance="0" FarPlaneDistance="200" Position="0,0,5" LookDirection="1,0,-2." UpDirection="0,1,1" FieldOfView="25"/>
+            </Viewport3D.Camera>
+            <Viewport2DVisual3D>
+                <Viewport2DVisual3D.Material>
+                    <MaterialGroup>
+                        <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="true" Color="White" Brush="White"/>
+                    </MaterialGroup>
+                </Viewport2DVisual3D.Material>
+                <Viewport2DVisual3D.Geometry>
+                    <MeshGeometry3D Positions="0 1 1, 0 2 2, 12 -2 0, 3 -1 0"
+                    TriangleIndices="2 0 2, 2 1 3"
+                    TextureCoordinates="0 0, 1 0, 1 1, 0 1" />
+                </Viewport2DVisual3D.Geometry>
+                <Viewport2DVisual3D.Visual>
+                    <Rectangle
+                        Name            = "Rectangle2"
+                        Fill            = "White"
+                        Opacity         = "0"
+                        Width           = "800"
+                        Height          = "800">
+                    </Rectangle>
+                </Viewport2DVisual3D.Visual>
+            </Viewport2DVisual3D>
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <PointLight Color="White" Position="0 -24 32"/>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+        </Viewport3D>
+
+        <!-- Used for the DataBinding scenario -->
+        <TextBox Name='textbox1' Width="5" Height="5" Canvas.Left="300" Canvas.Top="300">Green</TextBox>
+
+<!-- Scenario:  ("InParent") the Storyboard is located on the direct Parent (a child of the Root) of the animated Element  -->
+        <Canvas Name="Canvas3a" Visibility="Collapsed">
+            <Canvas Name="Canvas3b">
+                <Canvas.Resources>
+                    <Storyboard x:Key="InParent">
+                        <DoubleAnimation
+                            Storyboard.TargetProperty   = "(Canvas.Left)"
+                            Storyboard.TargetName       = "Canvas3c"
+                            Duration                    = "0:0:1"
+                            To                          = "0">
+                        </DoubleAnimation>
+                    </Storyboard>
+                </Canvas.Resources>
+                <Canvas
+                    Name            = "Canvas3c"
+                    Background      = "Green"
+                    Left            = "500"
+                    Width           = "200"
+                    Height          = "200">
+                </Canvas>
+            </Canvas>
+        </Canvas>
+
+<!-- Scenario:  ("InElement") the Storyboard is located inside the animated Element -->
+        <ListBox
+            Name            = "ListBox1"
+            Visibility      = "Collapsed"
+            Opacity         = "0.2"
+            Background      = "Green"
+            Width           = "200"
+            Height          = "200">
+            <ListBox.Resources>
+                <Storyboard x:Key="InElement">
+                    <DoubleAnimation
+                        Storyboard.TargetProperty   = "Opacity"
+                        Storyboard.TargetName       = "ListBox1"
+                        Duration                    = "0:0:1"
+                        To                          = "1">
+                    </DoubleAnimation>
+                </Storyboard>
+            </ListBox.Resources>
+        </ListBox>
+
+<!-- Scenario:  ("InSibling") the Storyboard is located inside the sibling of an animated Element -->
+        <Button
+            Name            = "Button1"
+            Visibility      = "Collapsed"
+            Opacity         = "0.2"
+            Width           = "200"
+            Height          = "200">
+            <Button.Resources>
+                <Storyboard x:Key="InSibling">
+                    <DoubleAnimation
+                        Storyboard.TargetProperty   = "Opacity"
+                        Storyboard.TargetName       = "Polygon1"
+                        Duration                    = "0:0:1"
+                        To                          = "1">
+                    </DoubleAnimation>
+                </Storyboard>
+            </Button.Resources>
+        </Button>
+        <Polygon
+            Name            = "Polygon1"
+            Visibility      = "Collapsed"
+            Opacity         = "0"
+            Height          = "200"
+            Width           = "200"
+            Points          = "0,0 0,150 150,150 150,0"
+            StrokeLineJoin  = "Round"
+            Fill            = "Green"> 
+        </Polygon>
+        
+
+<!-- Scenario:  ("DirectTargeting") the TargetName uses direct targeting on an Animatable -->
+        <TextBox
+            Name        = "TextBox1"
+            Visibility  = "Collapsed"
+            Height      = "200"
+            Width       = "200">
+            <TextBox.Background>
+                <SolidColorBrush x:Name="directSCB" Color="Brown" />
+            </TextBox.Background>
+        </TextBox>
+
+<!-- Scenario:  ("MultipleAnimations")  the Storyboard contains Multiple Animations -->
+        <Expander
+            Name            = "Expander1"
+            Visibility      = "Collapsed"
+            Background      = "Green"
+            ExpandDirection = "Left"
+            Width           = "0"
+            Height          = "200">
+            <Expander.Resources>
+                <Storyboard x:Key="MultipleAnimations">
+                    <DoubleAnimation
+                        Storyboard.TargetProperty   = "Width"
+                        Storyboard.TargetName       = "Expander1"
+                        Duration                    = "0:0:1"
+                        To                          = "200" />
+                    <DoubleAnimation
+                        Storyboard.TargetProperty   = "(Expander.RenderTransform).(TranslateTransform.X)"
+                        Storyboard.TargetName       = "Expander1"
+                        Duration                    = "0:0:1"
+                        To                          = "0" />
+                 </Storyboard>
+            </Expander.Resources>
+            <Expander.RenderTransform>
+                <TranslateTransform X="300" Y="0"/>
+            </Expander.RenderTransform>
+        </Expander>
+
+    </Canvas>
+
+
+</Page>

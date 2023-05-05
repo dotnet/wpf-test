@@ -1,0 +1,58 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Color OrangeRed Background"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "SandyBrown" >
+
+    <Page.Resources>
+        <Style x:Key="BaseStyle" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty   = "(TextBox.Background).(SolidColorBrush.Color)"
+                                        To                          = "Yellow"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:1"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="NewStyle" BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty   = "(TextBox.Background).(SolidColorBrush.Color)"
+                                        To                          = "OrangeRed"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
+    <Canvas>
+        <TextBox Name="AnimatedFE" Background="Navy" Margin="0" Style="{DynamicResource NewStyle}" Width="100px" Height="100"></TextBox>
+    </Canvas> 
+    
+</Page>

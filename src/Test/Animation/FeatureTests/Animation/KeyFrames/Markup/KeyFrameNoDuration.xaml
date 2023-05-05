@@ -1,0 +1,32 @@
+<Canvas
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Red">
+    
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard
+                            TargetName     = "textbox1"
+                            TargetProperty = "(TextBox.IsEnabled)">
+                            <BooleanAnimationUsingKeyFrames>
+                                <BooleanAnimationUsingKeyFrames.KeyFrames>
+                                    <BooleanKeyFrameCollection>
+                                        <DiscreteBooleanKeyFrame Value="False"  KeyTime="0"/>
+                                        <DiscreteBooleanKeyFrame Value="True"   KeyTime="50%"/>
+                                        <DiscreteBooleanKeyFrame Value="False"  KeyTime="100%"/>
+                                    </BooleanKeyFrameCollection>
+                                </BooleanAnimationUsingKeyFrames.KeyFrames>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <TextBox Name="textbox1">Avalon!</TextBox>
+     
+</Canvas>

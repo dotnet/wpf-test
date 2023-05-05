@@ -1,0 +1,28 @@
+<!-- Databinding Animation To Property: Binding on Animate -->
+
+<Page
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag     = "Color White Background"
+    Name    = "Root"> 
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard TargetName="AnimatedFE" TargetProperty="Background.Color">
+                    <ColorAnimation
+                        To          = "{Binding ElementName=AnimatedFE, Path=&apos;Text&apos;}"
+                        BeginTime   = "0:0:2"
+                        Duration    = "0:0:4" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Canvas Background="Maroon">
+    
+        <TextBox Name='AnimatedFE' Padding="10" Height="100" Width="100" Background="Navy">White</TextBox>
+        
+    </Canvas>
+    
+</Page>

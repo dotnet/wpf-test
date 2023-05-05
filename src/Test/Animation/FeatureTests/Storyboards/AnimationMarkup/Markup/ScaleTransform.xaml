@@ -1,0 +1,58 @@
+﻿<Page
+    Name        = "Root"
+    Tag         = "Double 25 CenterY"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background  = "Azure">
+
+    <Canvas>
+        <Rectangle Name="TargetElement" Fill="Teal" Width="70" Height="70">
+            <Rectangle.RenderTransform>
+               <ScaleTransform x:Name="AnimatedAnimatable" ScaleX=".01" ScaleY=".01" />
+            </Rectangle.RenderTransform>
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.RenderTransform).(ScaleTransform.CenterX)"
+                                         BeginTime                  = "0:0:2"
+                                         Duration                   = "0:0:1"
+                                         To                         = "25"
+                                         FillBehavior               = "HoldEnd"
+                                           />
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.RenderTransform).(ScaleTransform.CenterY)"
+                                         BeginTime                  = "0:0:2"
+                                         Duration                   = "0:0:4"
+                                         To                         = "25"
+                                         FillBehavior               = "HoldEnd"
+                                           />
+                                    <DoubleAnimation
+                                         Storyboard.TargetProperty  = "(Rectangle.RenderTransform).(ScaleTransform.ScaleX)"
+                                         BeginTime                  = "0:0:2"
+                                         Duration                   = "0:0:1"
+                                         From                       = "1"
+                                         To                         = "3"
+                                         FillBehavior               = "HoldEnd"
+                                           />
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(Rectangle.RenderTransform).(ScaleTransform.ScaleY)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:1"
+                                        From                        = "1"
+                                        To                          = "3"
+                                        FillBehavior                = "HoldEnd"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Canvas>
+    
+</Page>

@@ -1,0 +1,40 @@
+<Page
+    Name        = "Root"
+    Tag         = "Double 0.25 Opacity"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background  = "DarkOrange">
+
+    <Page.Resources>
+        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="StyleKey" TargetType="{x:Type Shape}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty   = "(UIElement.Opacity)"
+                                        BeginTime                   = "0:0:2"
+                                        Duration                    = "0:0:4"
+                                        To                          = "0.25"
+                                          />
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Canvas>
+        <Polygon
+            Name            = "AnimatedFE"
+            Style           = "{DynamicResource StyleKey}"
+            Points          = "0,0 0,150 150,150 150,0"
+            StrokeLineJoin  = "Round"
+            Fill            = "PapayaWhip"> 
+        </Polygon>
+    </Canvas>
+   
+</Page>

@@ -1,0 +1,50 @@
+<Page
+    Name    = "Root"
+    Tag     = "String GG Header"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+    <Page.Resources>
+        <Style x:Key="StyleKey" TargetType="{x:Type MenuItem}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <StringAnimationUsingKeyFrames
+                                        Storyboard.TargetProperty="(MenuItem.Header)"
+                                        BeginTime="0:0:2"
+                                        Duration="0:0:4">
+                                        <StringAnimationUsingKeyFrames.KeyFrames>
+                                            <StringKeyFrameCollection>
+                                                <DiscreteStringKeyFrame Value="a" KeyTime="0" />
+                                                <DiscreteStringKeyFrame Value="b" KeyTime="25%" />
+                                                <DiscreteStringKeyFrame Value="c" KeyTime="50%" />
+                                                <DiscreteStringKeyFrame Value="d" KeyTime="75%" />
+                                                <DiscreteStringKeyFrame Value="GG" KeyTime="100%" />
+                                            </StringKeyFrameCollection>
+                                        </StringAnimationUsingKeyFrames.KeyFrames>
+                                    </StringAnimationUsingKeyFrames>
+                                </Storyboard>  
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+     
+    <Menu Background="Navy" Margin="0,0,0,0">
+        <MenuItem Name="AnimatedFE" Margin="0,0,0,0" Style="{DynamicResource StyleKey}" Foreground="MediumPurple" FontSize="72" FontWeight="Bold">
+            <MenuItem Header="New..." />
+            <MenuItem Header="Open..." />
+            <MenuItem Name="menuItemSave" Header="Save" />
+            <MenuItem Name="menuItemSaveAs" Header="Save As..." />
+            <Separator />
+            <MenuItem Header="Import..." />
+            <Separator />
+            <MenuItem Header="Exit" />
+        </MenuItem>
+    </Menu>
+        
+</Page>

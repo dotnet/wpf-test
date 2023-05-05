@@ -1,0 +1,29 @@
+﻿<Page
+ Name="Root"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <Canvas Background="Azure">
+        <TextBox Name="TargetElement" Height="110" Width="110" Background="#FFFFFFFF">
+            <TextBox.Triggers>
+                <EventTrigger RoutedEvent="TextBox.TextChanged">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Opacity"
+                                        By="-1"
+                                        BeginTime="0:0:0"
+                                        Duration="0:0:1.5"
+                                          />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </TextBox.Triggers>
+        </TextBox>
+    </Canvas>
+
+</Page>

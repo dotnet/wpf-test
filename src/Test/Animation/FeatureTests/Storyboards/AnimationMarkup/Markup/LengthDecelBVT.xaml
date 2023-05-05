@@ -1,0 +1,32 @@
+﻿<Grid
+    Name            = "Root"
+    Tag             = "Double 125 Width"
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Background      = "Violet">
+
+    <Canvas>
+    <Rectangle Name="AnimatedFE" Fill="Black" Width="2" Height="125">
+        <Rectangle.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty   = "(Rectangle.Width)"
+                                    DecelerationRatio           = "1"
+                                    To                          = "125"
+                                    BeginTime                   = "0:0:2"
+                                    Duration                    = "0:0:3"
+                                      />
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Rectangle.Triggers>
+    </Rectangle>
+    </Canvas>
+
+</Grid>

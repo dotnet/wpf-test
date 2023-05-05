@@ -1,0 +1,33 @@
+<Canvas
+    xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background      = "Teal">
+
+    <ComboBox Name="combobox1" Text="Avalon!" Width="150" Background="Turquoise" IsDropDownOpen="True" IsEditable="true">
+        <ComboBox.Triggers>
+            <EventTrigger RoutedEvent="ComboBox.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty   = "IsEditable"
+                                    BeginTime                   = "0:0:0"
+                                    Duration                    = "0:0:1">
+                                    <BooleanAnimationUsingKeyFrames.KeyFrames>
+                                        <DiscreteBooleanKeyFrame Value="True"     KeyTime="0%" />
+                                        <DiscreteBooleanKeyFrame Value="False"    KeyTime="50%" />
+                                    </BooleanAnimationUsingKeyFrames.KeyFrames>
+                                </BooleanAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ComboBox.Triggers>
+
+        <ComboBoxItem>
+            <Button Content="One"/>
+        </ComboBoxItem>
+    </ComboBox>
+
+</Canvas>

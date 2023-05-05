@@ -1,0 +1,31 @@
+<Page   Opacity="1.0" 
+        xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+        xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'>
+        
+    <Page.Resources>
+        <ControlTemplate x:Key='TestTemplate' TargetType="{x:Type ContentControl}">
+        
+            <Frame x:Name="ControlTemplateRoot" Background="Blue" />
+            
+            <ControlTemplate.Triggers >
+                <EventTrigger RoutedEvent="Frame.MouseUp">
+                    <EventTrigger.Actions>
+                        <SetStoryboardSpeedRatio BeginStoryboardName="MyStory" SpeedRatio="-1" /> 
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Frame.Loaded">
+                    <EventTrigger.Actions>    
+                        <BeginStoryboard x:Name="MyStory">
+                            <Storyboard TargetName="ControlTemplateRoot" TargetProperty="Background.Color" FillBehavior="HoldEnd">
+                                <ColorAnimation To="Red" Duration="0:0:1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>    
+    </Page.Resources>
+    
+    <ContentControl Name='AnimateTemplate' Template='{StaticResource TestTemplate}' Width='Auto' Height='Auto' />
+    
+</Page>

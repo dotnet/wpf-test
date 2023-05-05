@@ -1,0 +1,31 @@
+<ScrollViewer
+    Name        = "Root"
+    Tag         = "Double 100 Height"
+    xmlns       = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x     = 'http://schemas.microsoft.com/winfx/2006/xaml'>
+    <StackPanel>
+    
+        <StackPanel.Resources>
+            <Storyboard x:Key="SizeAnim" BeginTime="0:0:2">
+                <DoubleAnimation Storyboard.TargetProperty="Height" From="75"  To="100" Duration="0:0:4" FillBehavior="HoldEnd" />
+                <DoubleAnimation Storyboard.TargetProperty="Width"  From="150" To="200" Duration="0:0:4" FillBehavior="HoldEnd" />
+            </Storyboard>
+        </StackPanel.Resources>
+
+        <!--Height/Width Animation on RichTextBox-->
+        <RichTextBox Name="AnimatedFE" Height="75" Width="150">
+            <RichTextBox.Triggers>
+                <EventTrigger RoutedEvent="RichTextBox.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource SizeAnim}" />
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </RichTextBox.Triggers>
+            <FlowDocument>
+                <Paragraph>RichTB</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+                
+    </StackPanel>
+    
+</ScrollViewer>

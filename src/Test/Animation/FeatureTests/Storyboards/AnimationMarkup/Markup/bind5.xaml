@@ -1,0 +1,37 @@
+<!-- Circular binding, with base value set by the Animation - DoubleAnimation -->
+<Page
+    Name        = "Root"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    Tag         = "Double 125 Height"
+    Background  = "Black">
+    
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Height" TargetName="TargetElement">
+                        <DoubleAnimation
+                             BeginTime                      = "00:00:02"
+                             Duration                       = "00:00:04"
+                             From                           = "0"
+                             To                             = "125"
+                             />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+    
+    <Canvas>
+
+        <Rectangle Name='TargetElement' Fill="Red"   Height="{Binding ElementName=rect2, Path=Height}" Width="125" Canvas.Top="0" />
+        
+        <Rectangle Name='rect2'         Fill="Blue"  Height="{Binding ElementName=Animate, Path=Height}" Width="125" Canvas.Top="125" />
+
+        <!-- "Animated" via Binding to the TargetElement -->
+        <Rectangle Name='AnimatedFE'    Fill="Green" Height="{Binding ElementName=TargetElement, Path=Height}" Width="125" Canvas.Top="250" />
+
+    </Canvas>
+
+</Page>

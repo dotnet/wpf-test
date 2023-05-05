@@ -1,0 +1,65 @@
+<Canvas
+    Name        = "Root"
+    Tag         = "Int32 6 SelectedIndex"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background  = "Gainsboro">
+
+    <ComboBox
+        Name            = "AnimatedFE"
+        SelectedIndex   = "2"
+        Background      = "DarkKhaki"
+        Canvas.Left     = "150"
+        Canvas.Top      = "100"
+        Text            = "Combo!">
+        <ComboBoxItem><TextBlock>Item1</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item2</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item3</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item4</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item5</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item6</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item7</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item8</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item9</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item10</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item11</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item12</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item13</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item14</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item15</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item16</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item17</TextBlock></ComboBoxItem>
+        <ComboBoxItem><TextBlock>Item18</TextBlock></ComboBoxItem>
+        
+        <ComboBox.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty   = "(ComboBox.IsDropDownOpen)"
+                                    BeginTime                   = "0:0:1"
+                                    Duration                    = "0:0:0.1"
+                                    FillBehavior                = "HoldEnd"
+                                    >
+                                    <BooleanAnimationUsingKeyFrames.KeyFrames>
+                                        <BooleanKeyFrameCollection>
+                                            <DiscreteBooleanKeyFrame Value="True"  KeyTime="100%" />
+                                        </BooleanKeyFrameCollection>
+                                    </BooleanAnimationUsingKeyFrames.KeyFrames>
+                                </BooleanAnimationUsingKeyFrames>
+                                <Int32Animation
+                                     Storyboard.TargetProperty  = "(ComboBox.SelectedIndex)"
+                                     BeginTime                  = "0:0:2"
+                                     Duration                   = "0:0:4"
+                                     By                         = "4">
+                                </Int32Animation>
+                            </Storyboard>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ComboBox.Triggers>
+    </ComboBox>
+
+</Canvas>

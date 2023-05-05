@@ -1,0 +1,52 @@
+
+<tst:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:tst="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+                  Verifier="AnimationTest.exe#Microsoft.Test.Animation.SerializeAnimationTest.VerifyContent"
+                  Background="MediumAquamarine" >
+    
+    <Canvas Background="MediumAquamarine">
+        <InkCanvas
+            Focusable="True"
+            MoveEnabled="True"
+            ResizeEnabled="True"
+            Name="Animate"
+            Opacity=".1"
+            Height="150"
+            Width="150"
+            Background="Azure"
+            Canvas.Top="100"
+            Canvas.Left="100">
+            <TextBlock FontSize="36" Margin="15"><Run Name="Run1">Avalon!</Run></TextBlock>
+            <InkCanvas.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(InkCanvas.Opacity)"
+                                        BeginTime="0:1:1"
+                                        Duration="0:0:3"
+                                        From=".9"
+                                        To=".3"
+                                        AutoReverse="True">
+                                    </DoubleAnimation>
+
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(InkCanvas.Opacity)"
+                                        BeginTime="0:1:4"
+                                        Duration="0:0:3"
+                                        By="-.9"
+                                        AutoReverse="True">
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </InkCanvas.Triggers>
+        </InkCanvas>
+    </Canvas>
+     
+</tst:CustomCanvas>
+

@@ -1,0 +1,39 @@
+<Page
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    
+    <Page.Resources>
+        <Storyboard x:Key="StoryKey1">
+            <DoubleAnimation
+                Storyboard.TargetProperty   = "Width"
+                Storyboard.TargetName       = "textblock1"
+                Duration                    = "0:0:1"
+                To                          = "350">
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="StoryKey2">
+            <ColorAnimation
+                Storyboard.TargetProperty   = "(SolidColorBrush.Color)"
+                Storyboard.TargetName       = "textblockSCB"
+                Duration                    = "0:0:1"
+                To                          = "White">
+            </ColorAnimation>
+        </Storyboard>
+    </Page.Resources>
+
+
+    <Canvas Name="canvas1" Background="MediumSlateBlue">
+        <TextBlock
+            Name        = "textblock1"
+            Foreground  = "Pink"
+            Width       = "100"
+            Height      = "100"
+            FontSize    = "24"
+            Text        = "Avalon!">
+            <TextBlock.Background>
+                <SolidColorBrush x:Name="textblockSCB" Color="MediumVioletRed" Opacity="0" />
+            </TextBlock.Background>
+        </TextBlock>
+    </Canvas>
+
+</Page>

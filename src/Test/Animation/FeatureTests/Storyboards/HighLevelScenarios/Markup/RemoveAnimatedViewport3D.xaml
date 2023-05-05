@@ -1,0 +1,100 @@
+<Page
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Name        = "ThePage">
+     
+     <Page.Resources>
+         <Storyboard x:Key="StoryKey" >
+            <DoubleAnimationUsingKeyFrames
+                 Storyboard.TargetProperty   = "(FrameworkElement.Width)"
+                 Storyboard.TargetName       = "Rectangle1"
+                 BeginTime                   = "00:00:00" >
+                <DoubleAnimationUsingKeyFrames.KeyFrames>
+                    <DoubleKeyFrameCollection>
+                        <SplineDoubleKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="50"  KeyTime="0"/>
+                        <SplineDoubleKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="100" KeyTime="00:00:01"/>
+                    </DoubleKeyFrameCollection>
+                </DoubleAnimationUsingKeyFrames.KeyFrames>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames
+                 Storyboard.TargetProperty   = "(Viewport3D.Children)[0].(ModelVisual3D.Content).(Model3DGroup.Children)[1].(Model3D.Transform).(Transform3DGroup.Children)[1].(TranslateTransform3D.OffsetX)"
+                 Storyboard.TargetName       = "TheViewport"
+                 BeginTime                   = "00:00:00" >
+                <DoubleAnimationUsingKeyFrames.KeyFrames>
+                    <DoubleKeyFrameCollection>
+                        <SplineDoubleKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="0.04" KeyTime="00:00:00"/>
+                        <SplineDoubleKeyFrame KeySpline="0.5,0.5,0.5,0.5" Value="1.40" KeyTime="00:00:01"/>
+                    </DoubleKeyFrameCollection>
+                </DoubleAnimationUsingKeyFrames.KeyFrames>
+            </DoubleAnimationUsingKeyFrames>
+         </Storyboard>
+ 
+     </Page.Resources>
+
+    <StackPanel Background="Blue">
+
+        <Rectangle Height="50" Width="25" Name="Rectangle1" Fill="Green"/>
+
+        <Viewport3D ClipToBounds="False" Width="400" Height="400" Name="TheViewport">
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup>
+                        <AmbientLight Color="#FFFF0000"/>
+                        <GeometryModel3D>
+                            <GeometryModel3D.Geometry>
+                                <MeshGeometry3D Positions="0,2,0 0,0,0 0,0,2 0,2,0 0,0,2 0,2,2" Normals="-4,0,0 -4,0,0 -4,0,0 -4,0,0 -4,0,0 -4,0,0" TextureCoordinates="0,0 0,0 0,0 0,0 0,0 0,0" TriangleIndices="0 1 2 3 4 5"/>
+                            </GeometryModel3D.Geometry>
+                            <GeometryModel3D.Material>
+                                <MaterialGroup>
+                                    <MaterialGroup.Children>
+                                        <MaterialCollection>
+                                            <EmissiveMaterial Brush="sc#1.000000, 0.000000, 1.000000, 1.000000"/>
+                                            <DiffuseMaterial Brush="sc#1.000000, 0.000000, 1.000000, 1.000000"/>
+                                            <SpecularMaterial Brush="sc#1.000000, 0.000000, 1.000000, 1.000000" SpecularPower="65.89"/>
+                                        </MaterialCollection>
+                                    </MaterialGroup.Children>
+                                </MaterialGroup>
+                            </GeometryModel3D.Material>
+                            <Model3D.Transform>
+                                <Transform3DGroup>
+                                    <Transform3DGroup.Children>
+                                        <Transform3DCollection>
+                                            <RotateTransform3D CenterX="0" CenterY="0" CenterZ="0">
+                                                <RotateTransform3D.Rotation>
+                                                    <AxisAngleRotation3D Axis="0,1,0" Angle="52.878713497125588"/>
+                                                </RotateTransform3D.Rotation>
+                                            </RotateTransform3D>
+                                            <TranslateTransform3D OffsetX="0.0393150084917657" OffsetY="1.48635764338629" OffsetZ="0.0297566746601357"/>
+                                        </Transform3DCollection>
+                                    </Transform3DGroup.Children>
+                                </Transform3DGroup>
+                            </Model3D.Transform>
+                        </GeometryModel3D>
+                        <!-- The following child will be removed -->
+                        <GeometryModel3D>
+                            <GeometryModel3D.Geometry>
+                                <MeshGeometry3D Positions="0,2,2 0,0,2 2,0,2 0,2,2 2,0,2 2,2,2" Normals="0,0,4 0,0,4 0,0,4 0,0,4 0,0,4 0,0,4" TextureCoordinates="0,0 0,0 0,0 0,0 0,0 0,0" TriangleIndices="0 1 2 3 4 5"/>
+                            </GeometryModel3D.Geometry>
+                            <GeometryModel3D.Material>
+                                <MaterialGroup>
+                                    <MaterialGroup.Children>
+                                        <MaterialCollection>
+                                            <EmissiveMaterial Brush="sc#1.000000, 0.444900, 0.000000, 0.000000"/>
+                                            <DiffuseMaterial Brush="sc#1.000000, 0.771400, 0.000000, 0.000000"/>
+                                            <SpecularMaterial Brush="sc#1.000000, 0.885700, 0.000000, 0.000000" SpecularPower="136.43"/>
+                                        </MaterialCollection>
+                                    </MaterialGroup.Children>
+                                </MaterialGroup>
+                            </GeometryModel3D.Material>
+                        </GeometryModel3D>
+                     </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+            <Viewport3D.Camera>
+                <PerspectiveCamera FieldOfView="45" NearPlaneDistance="0.1" FarPlaneDistance="100" Position="1,1,5.86274169979695" LookDirection="0,0,-1" UpDirection="0,1,0"/>
+            </Viewport3D.Camera>
+        </Viewport3D>
+
+    </StackPanel>
+</Page>
