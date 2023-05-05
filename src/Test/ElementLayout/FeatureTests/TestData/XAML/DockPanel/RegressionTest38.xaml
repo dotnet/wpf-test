@@ -1,0 +1,22 @@
+﻿<!-- Regression Bug : Button Border is not visible when a dockpanel is docked Top of the parent of the Button -->
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="ParentWindowDockPanel" DockPanel.Dock="Top" Background="white">
+    <Border DockPanel.Dock="Top" Name="ParentBorder" BorderThickness="4" BorderBrush="Red">
+        <Button Name="Buttonsam" />
+    </Border>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <DockPanel.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="LightGray" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </DockPanel.Background>
+            <Rectangle DockPanel.Dock="right" Width="50" Fill="orange" />
+            <Rectangle Fill="pink" />
+        </DockPanel>
+    </DockPanel>
+</DockPanel>
