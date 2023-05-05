@@ -1,0 +1,22 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:dataTest="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTest"
+    xmlns:local="clr-namespace:Microsoft.Test.DataServices"
+    xmlns:sysdata="clr-namespace:System.Data;assembly=System.Data"
+    xmlns:cp="clr-namespace:Codeplex;assembly=DataServicesTestCommon"
+    Name="Root" Background="cornsilk"
+    >
+  <DockPanel.Resources>
+    <cp:XLinqDataProvider x:Key="XLinqPath" Source="pack://application:,,,/DataServicesTestOrcas;component/Resource\CountriesHierarchical.xml" />
+    <DataTemplate DataType="Hemisphere">
+      <TextBlock Text="{Binding Path=Element[HemisphereName].Value}" />
+    </DataTemplate>
+    <DataTemplate DataType="Region">
+      <TextBlock Text="{Binding Path=Element[RegionName].Value}" />
+    </DataTemplate>
+  </DockPanel.Resources>
+  <ListBox Name="MasterListBox" ItemsSource="{Binding Path=Elements[Hemisphere], Source={StaticResource XLinqPath}}" IsSynchronizedWithCurrentItem="true" />
+  <ListBox Name="DetailListBox" DataContext="{Binding ElementName=MasterListBox, Path=SelectedItem}" ItemsSource="{Binding Path=Element[Regions].Elements[Region]}" IsSynchronizedWithCurrentItem="true" />
+</DockPanel>

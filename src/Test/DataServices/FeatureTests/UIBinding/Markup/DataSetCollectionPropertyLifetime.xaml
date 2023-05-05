@@ -1,0 +1,17 @@
+<UniformGrid x:Name="panel" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel>
+        <TextBlock Text="Parent table"/>
+        <TextBlock Text="{Binding Parent.Count}" x:Name="parentCount"/>
+        <TextBlock Text="{Binding Parent[0].ParentName}"/>
+    </StackPanel>
+
+    <StackPanel>
+        <TextBlock Text="Child table"/>
+        <TextBlock Text="{Binding Parent[0].Children.Count}" x:Name="childCount"/>
+        <TextBlock Text="{Binding Parent[0].Children[0].ChildName}"/>
+    </StackPanel>
+
+</UniformGrid>
+

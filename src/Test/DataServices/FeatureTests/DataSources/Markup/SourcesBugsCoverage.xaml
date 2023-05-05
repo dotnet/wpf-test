@@ -1,0 +1,23 @@
+﻿<Page 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    >
+    <Page.Resources>
+        <dataSources:PlacesDataTable x:Key="src2" />
+
+        <DataTemplate x:Key="PlaceTemplate">
+            <TextBlock Text="{Binding Path=Name}"/>
+        </DataTemplate>
+    </Page.Resources>
+
+    <StackPanel>
+        <ListBox Name="lb" ItemsSource="{Binding Source={StaticResource src2}}" Height="152" ItemTemplate="{StaticResource PlaceTemplate}"
+                IsSynchronizedWithCurrentItem="true"/>
+        <DockPanel Name="detail" DataContext="{Binding Source={StaticResource src2}, Path=/}">
+            <TextBlock Width="100" Text="{Binding Path=Name}" Name="tb1"/>
+            <TextBlock Width="100" Text="{Binding Path=State}"/>
+            <TextBlock Width="100" Text="{Binding Path=Population}"/>
+        </DockPanel>
+    </StackPanel>
+</Page>

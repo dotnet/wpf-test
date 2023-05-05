@@ -1,0 +1,38 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel.Resources>
+        <XmlDataProvider XPath="Library" x:Key="DSO">
+          <x:XData>
+            <Library xmlns="">
+                <Book ISBN="0-7356-1448-2">
+                    <Title>Microsoft C# Language Specification</Title>
+                    <Price>29.99</Price>
+                </Book>
+                <Book ISBN="0-7356-1288-9">
+                    <Title>Inside C#</Title>
+                    <Price>49.99</Price>
+                </Book>
+                <Book ISBN="0-7356-0562-9">
+                    <Title>Xml in Action</Title>
+                    <Price>39.99</Price>
+                </Book>
+            </Library>
+          </x:XData>
+        </XmlDataProvider>
+
+        <DataTemplate DataType="Book">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Name="listItem">
+                <TextBlock DockPanel.Dock="Left" Width="200" Text="{Binding XPath=Title}" />
+                <TextBlock DockPanel.Dock="Left" Width="50" Text="{Binding XPath=Price}" />
+                <TextBlock DockPanel.Dock="Left" Width="100" Text="{Binding XPath=@ISBN}" />
+            </StackPanel>
+        </DataTemplate>
+
+    </DockPanel.Resources>
+
+    <ListBox Name="testSort" ItemsSource="{Binding XPath=Book}">
+        <ListBox.DataContext>
+            <Binding Source="{StaticResource DSO}" />
+        </ListBox.DataContext>
+    </ListBox>
+
+</DockPanel>

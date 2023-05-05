@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <DiscoveryInfo AdaptorsAssembly="Infra\QualityVaultUtilities.dll" VersionOrder="VersionOrder.txt">
   <DefaultTestInfo Type="Functional" Disabled="false" ExecutionGroupingLevel="SharedSupportFiles">
     <SupportFiles>
@@ -96,6 +96,126 @@
         </SupportFiles>
         <Versions>
           <Version>4.6.2+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!-- Area : DataServices -->
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\DataServices\DataServicesTest.dll">
+      <DefaultTestInfo Area="DataServices" Disabled="False" Type="Functional" UacElevation="Elevated" ExecutionGroup="DataServicesOriginal" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTest.dll" />
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    
+    <!-- Area : ElementLayout -->
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\ElementLayout\ElementLayoutLibrary.dll">
+      <DefaultTestInfo Area="ElementLayout" Type="Functional" ExecutionGroupingLevel="SharedAppDomains">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" CreateLog="true" SecurityLevel="FullTrust" MasterFileArea="ElementLayout" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementLayout\ElementLayoutLibrary.dll" />
+          <SupportFile Source="FeatureTests\ElementLayout\Content\*" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\DataServices\DataServicesTestOrcas.dll">
+      <DefaultTestInfo Area="DataServices" Disabled="False" Type="Functional" UacElevation="Elevated" ExecutionGroup="DataServicesOrcas" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestOrcas.dll" />
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTest.dll" />
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0SP1+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\DataServices\DataServicesTestPart1.dll">
+      <DefaultTestInfo Area="DataServices" Disabled="False" Type="Functional" UacElevation="Elevated" ExecutionGroup="DataServicesPart1" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestPart1.dll" />
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTest.dll" />
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\ElementLayout\ElementLayoutTestPart1.dll">
+      <DefaultTestInfo Area="ElementLayout" Type="Functional" ExecutionGroupingLevel="SharedAppDomains">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" MasterFileArea="ElementLayout" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementLayout\ElementLayoutTestPart1.dll" />
+          <SupportFile Source="FeatureTests\ElementLayout\ElementLayoutLibrary.dll" />
+          <SupportFile Source="FeatureTests\ElementLayout\Content\*" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\DataServices\DataServicesTestPart2.dll">
+      <DefaultTestInfo Area="DataServices" Disabled="False" Type="Functional" UacElevation="Elevated" ExecutionGroup="DataServicesPart2" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestPart2.dll" />
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.5+</Version>
+          <Version>4.5Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\DataServices\DataServicesTest2016.dll">
+      <DefaultTestInfo Area="DataServices" Disabled="False" Type="Functional" UacElevation="Elevated" ExecutionGroup="DataServices2016" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTest2016.dll" />
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.6.2+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\DataServices\DataServicesTest2017.dll">
+      <DefaultTestInfo Area="DataServices" Disabled="False" Type="Functional" UacElevation="Elevated" ExecutionGroup="DataServices2016" ExecutionGroupingLevel="MaximalPerformance">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTest2017.dll" />
+          <SupportFile Source="FeatureTests\DataServices\DataServicesTestCommon.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>4.7.1+</Version>
         </Versions>
       </DefaultTestInfo>
     </Target>

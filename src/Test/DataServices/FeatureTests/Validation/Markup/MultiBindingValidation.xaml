@@ -1,0 +1,27 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+    <DockPanel.Resources>
+ 		<helpers:NameConverter x:Key="NameConverter" />
+                <DataTemplate x:Key="myItemTemplate">
+                    <TextBox>
+                        <TextBox.Text>
+                            <MultiBinding Converter="{StaticResource NameConverter}" Mode="TwoWay" UpdateSourceTrigger="Explicit" NotifyOnValidationError="True">
+                                <Binding Path="FirstName" />
+                                <Binding Path="LastName" />
+                                <Binding Path="Age" />
+                                <MultiBinding.ValidationRules>
+                                    <helpers:MinCharsRule Min="5" ErrorContent="Must have 5 characters or more" />
+                                </MultiBinding.ValidationRules>
+                            </MultiBinding>
+                        </TextBox.Text>
+                    </TextBox>
+                </DataTemplate>
+    </DockPanel.Resources>
+
+        <ListBox ItemTemplate="{StaticResource myItemTemplate}" Name="listBox" />
+
+        <ListBox ItemTemplate="{StaticResource myItemTemplate}" Name="listBox2" />
+
+</DockPanel>

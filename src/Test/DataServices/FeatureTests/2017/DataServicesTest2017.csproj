@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>DataServicesTest2017</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AssemblyType>Library</AssemblyType>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Xaml Files below -->
+    <Page Include="*.xaml" />
+    <Content Include="Content\*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Code Files below -->
+    <Compile Include="*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(DataServicesTestCommonProject)"/>
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,20 @@
+﻿<DockPanel Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices" 
+    >
+
+    <DockPanel.Resources>
+	    <ObjectDataProvider x:Key="dso2" ObjectType="{x:Type datasources:Places}" />
+		<src:MyTemplateSelector x:Key="myItemTemplateSelector" />
+		<src:MyUIStyleSelector x:Key="myItemUIStyleSelector" />
+	</DockPanel.Resources>
+
+    <DockPanel.DataContext>
+		<Binding Source="{StaticResource dso2}" />
+    </DockPanel.DataContext>
+
+	<ListBox Name="lb" Width="300" ItemsSource="{Binding }" ItemTemplateSelector="{DynamicResource myItemTemplateSelector}" ItemContainerStyleSelector="{DynamicResource myItemUIStyleSelector}" />
+
+</DockPanel>

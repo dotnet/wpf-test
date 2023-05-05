@@ -1,0 +1,64 @@
+﻿<Page Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="System"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+    <Page.Resources>
+        <!-- GroupingTreeView -->
+        <src:Places x:Key="places" />
+
+        <CollectionViewSource Source="{StaticResource places}" x:Key="cvs">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="State"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <DataTemplate x:Key="nameTemplate">
+            <TextBlock Text="{Binding Path=Name}" />
+        </DataTemplate>
+
+        <HierarchicalDataTemplate x:Key="stateTemplate"
+        ItemsSource="{Binding Path=Items}" 
+        ItemTemplate="{StaticResource nameTemplate}">
+            <TextBlock Text="{Binding Path=Name}" />
+        </HierarchicalDataTemplate>
+
+        <Style TargetType="{x:Type TreeViewItem}" x:Key="expandedStyle">
+            <Setter Value="True" Property="IsExpanded" />
+        </Style>
+
+        <!-- SimulateHierarchicalDataTemplate -->
+        <src:Mountains x:Key="mountains"/>
+
+        <DataTemplate x:Key="runTemplate">
+            <TextBlock Text="{Binding}" />
+        </DataTemplate>
+
+        <HierarchicalDataTemplate x:Key="liftTemplate" ItemsSource="{Binding Path=Runs}"
+			ItemTemplate="{StaticResource runTemplate}">
+            <TextBlock Text="{Binding Path=Name}" />
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate x:Key="mountainTemplate" ItemsSource="{Binding Path=Lifts}" 
+			ItemTemplate="{StaticResource liftTemplate}">
+            <TextBlock Text="{Binding Path=Name}"/>
+        </HierarchicalDataTemplate>
+
+        <Style x:Key="mountainStyle" BasedOn="{StaticResource expandedStyle}" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="Foreground" Value="Blue"/>
+        </Style>
+
+    </Page.Resources>
+
+    <StackPanel>
+        <!-- GroupingTreeView -->
+        <TreeView ItemsSource="{Binding Source={StaticResource cvs}, Path=Groups}" 
+            ItemTemplate="{StaticResource stateTemplate}" ItemContainerStyle="{StaticResource expandedStyle}" Name="tv"/>
+
+        <!-- SimulateHierarchicalDataTemplate -->
+        <TreeView ItemsSource="{StaticResource mountains}" ItemTemplate="{StaticResource mountainTemplate}" 
+            ItemContainerStyle="{StaticResource mountainStyle}" Name="tv1"/>
+
+    </StackPanel>
+</Page>

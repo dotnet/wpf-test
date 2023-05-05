@@ -1,0 +1,15 @@
+<DockPanel Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"    
+    xmlns:custom="clr-namespace:Microsoft.Test.DataServices"    
+    >
+  <DockPanel.Resources>
+    <custom:CountryList x:Key="countryList" />
+    <CollectionViewSource x:Key="cvs" Source="{StaticResource countryList}"/>
+  </DockPanel.Resources>
+
+  <StackPanel DataContext="{Binding Source={StaticResource cvs}}">
+    <ListBox Name="listBox" Height="200" ItemsSource="{Binding}"/>
+  </StackPanel>
+</DockPanel>

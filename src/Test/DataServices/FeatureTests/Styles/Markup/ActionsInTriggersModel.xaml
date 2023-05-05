@@ -1,0 +1,317 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    Background="cornsilk" 
+    >
+
+    <DockPanel.Resources>
+        <src:Places x:Key="places" />
+        <src:Place Name="Los Angeles" State="CA" x:Key="place" />
+        <src:ListLeagueList x:Key="leagues" />
+
+        <!-- DataTemplate + DataTrigger -->
+        <DataTemplate x:Key="dataTemplateSingle">
+            <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+                <TextBlock Text="{Binding Path=State}" Foreground="Red" x:Name="tb" />
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=State}" Value="CA">
+                    <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Blue" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Red" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <!-- DataTemplate + MultiDataTrigger -->
+        <DataTemplate x:Key="dataTemplateMulti">
+            <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+                <TextBlock Text="{Binding Path=State}" Foreground="Red" x:Name="tb" />
+            </Border>
+            <DataTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Name}" Value="Los Angeles"></Condition>
+                        <Condition Binding="{Binding Path=State}" Value="CA"></Condition>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+                    </MultiDataTrigger.Setters>
+                    <MultiDataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Blue" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                    <MultiDataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Red" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.ExitActions>
+                </MultiDataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <!-- Breaking change TableTemlate removed -->
+        <!-- TableTemplate + DataTrigger -->
+        <!-- 
+        <TableTemplate x:Key="tableTemplateSingle">
+            <TableRow>
+                <TableCell Background="AliceBlue" >
+                    <Paragraph>
+                        <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+                            <TextBlock Text="{Binding Path=Name, ConverterCulture=en-US}" Foreground="Red" x:Name="tb"/>
+                        </Border>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=State}" Value="CA">
+                    <Setter Property="Foreground" Value="Blue" TargetName="tb"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Blue" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Red" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </TableTemplate.Triggers>
+        </TableTemplate>
+        -->
+
+        <!-- Breaking change TableTemlate removed -->
+        <!-- TableTemplate + MultiDataTrigger-->
+        <!-- 
+        <TableTemplate x:Key="tableTemplateMulti">
+            <TableRow>
+                <TableCell Background="AliceBlue" >
+                    <Paragraph>
+                        <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+                            <TextBlock Text="{Binding Path=Name, ConverterCulture=en-US}" Foreground="Red" x:Name="tb"/>
+                        </Border>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Name}" Value="Los Angeles"></Condition>
+                        <Condition Binding="{Binding Path=State}" Value="CA"></Condition>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Foreground" Value="Blue" TargetName="tb"/>
+                    </MultiDataTrigger.Setters>
+                    <MultiDataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Blue" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                    <MultiDataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Red" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.ExitActions>
+                </MultiDataTrigger>
+            </TableTemplate.Triggers>
+        </TableTemplate>
+        -->
+        
+        <!-- HierarchicalDataTemplate + DataTrigger -->
+        <DataTemplate x:Key="hdtTeamSingle">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=Teams}"
+    ItemTemplate="{StaticResource hdtTeamSingle}" x:Key="hdtDivisionSingle">
+            <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+                <TextBlock Text="{Binding Name}" Foreground="Red" x:Name="tb" />
+            </Border>
+            <HierarchicalDataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Name}" Value="East">
+                    <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Blue" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Red" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </HierarchicalDataTemplate.Triggers>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=Divisions}"
+            ItemTemplate="{StaticResource hdtDivisionSingle}" x:Key="hdtLeagueSingle">
+            <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+                <TextBlock Text="{Binding Name}" Foreground="Red" x:Name="tb" />
+            </Border>
+            <HierarchicalDataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Name}" Value="American League">
+                    <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Blue" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Red" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </HierarchicalDataTemplate.Triggers>
+        </HierarchicalDataTemplate>
+
+        <!-- HierarchicalDataTemplate + MultiDataTrigger -->
+        <DataTemplate x:Key="hdtTeamMulti">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=Teams}"
+    ItemTemplate="{StaticResource hdtTeamMulti}" x:Key="hdtDivisionMulti">
+            <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+                <TextBlock Text="{Binding Name}" Foreground="Red" x:Name="tb" />
+            </Border>
+            <HierarchicalDataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Name}" Value="East">
+                    <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Blue" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Red" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </HierarchicalDataTemplate.Triggers>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=Divisions}"
+            ItemTemplate="{StaticResource hdtDivisionMulti}" x:Key="hdtLeagueMulti">
+            <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+                <TextBlock Text="{Binding Name}" Foreground="Red" x:Name="tb" />
+            </Border>
+            <HierarchicalDataTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Name}" Value="American League"></Condition>
+                        <Condition Binding="{Binding Path=Divisions.Count}">
+                            <Condition.Value>
+                                <system:Int32>3</system:Int32>
+                            </Condition.Value>
+                        </Condition>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+                    </MultiDataTrigger.Setters>
+                    <MultiDataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Blue" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                    <MultiDataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <BeginStoryboard.Storyboard>
+                                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                                    <ColorAnimation To="Red" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard.Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.ExitActions>            
+            </MultiDataTrigger>
+            </HierarchicalDataTemplate.Triggers>
+        </HierarchicalDataTemplate>        
+    </DockPanel.Resources>
+
+    <StackPanel>
+        <ContentControl Content="{StaticResource place}" Name="contentControl" />
+        <ItemsControl ItemsSource="{StaticResource places}" Name="itemsControl" />
+        <!-- Breaking change Table.ItemsSource removed -->
+        <!--
+        <FlowDocumentScrollViewer><FlowDocument>
+            <Table>
+                <TableRowGroup ItemsSource="{StaticResource places}" Name="tableRowGroup"/>
+            </Table>
+        </FlowDocument></FlowDocumentScrollViewer>
+        -->
+        <TreeView ItemsSource="{StaticResource leagues}" Name="treeView" />
+    </StackPanel>
+</DockPanel>

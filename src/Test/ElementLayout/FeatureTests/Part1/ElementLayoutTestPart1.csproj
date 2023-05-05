@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>ElementLayoutTestPart1</AssemblyName>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <!-- Source Code -->
+  <ItemGroup>
+    <Compile Include="$(TestDirectory)\Property\HeightWidthTest.cs" />
+    <Compile Include="$(TestDirectory)\BaseTests\FrameworkElementPropertiesTest.cs" />
+    <Compile Include="$(TestDirectory)\Part1\LayoutRounding\*.cs" />
+    <Compile Include="$(TestDirectory)\Part1\*.cs" />
+  </ItemGroup>
+  <!-- Common Code -->
+  <ItemGroup>
+    <Compile Include="$(ElementLayoutCommon)\ElementLayoutCommon.cs" />
+  </ItemGroup>
+  <!-- References -->
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+</Project>

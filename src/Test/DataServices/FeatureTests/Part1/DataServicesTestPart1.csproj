@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>DataServicesTestPart1</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AssemblyType>Library</AssemblyType>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Xaml Files below -->
+    <Page Include="*.xaml" /> 				
+    <None Include="Content\*" >
+      <Link>Content\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Regression\Code\*.cs" />
+    <Page Include="Regression\Markup\RegressionTest1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Regression\Markup\RegressionTest1.xaml.cs">
+      <DependentUpon>Regression\Markup\RegressionTest1.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup> 
+
+  <ItemGroup>
+    <!-- Code Files below -->
+    <Compile Include="*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TestApiCoreProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(DataServicesTestCommonProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+
+</Project>

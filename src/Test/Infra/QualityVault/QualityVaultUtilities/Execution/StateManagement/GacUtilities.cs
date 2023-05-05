@@ -77,9 +77,12 @@ namespace Microsoft.Test.Execution.StateManagement.GacUtilities
             //Get the full assembly name including processor architecure
             AssemblyName asmName = AssemblyName.GetAssemblyName(fileName);
             string fullAsmName = asmName.FullName;
+#pragma warning disable SYSLIB0037 // Type or member is obsolete
             if (asmName.ProcessorArchitecture != ProcessorArchitecture.None)
             {
+#pragma warning disable SYSLIB0037 // Type or member is obsolete
                 fullAsmName += ", processorArchitecture=" + asmName.ProcessorArchitecture.ToString().ToUpperInvariant();
+#pragma warning restore SYSLIB0037 // Type or member is obsolete
             }
             else
             {

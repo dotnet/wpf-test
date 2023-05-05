@@ -1,0 +1,15 @@
+<UniformGrid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Microsoft.Test.DataServices">
+    <UniformGrid.Resources>
+        <local:CustomConverter x:Key="CustomConverter" />
+    </UniformGrid.Resources>
+
+    <StackPanel>
+        <TextBlock Text="initial text" Name="textBlock"/>
+        <TextBox Text="{Binding ElementName=textBlock, Path=Text, Converter={StaticResource CustomConverter}, UpdateSourceTrigger=PropertyChanged}" Name="textBox"/>
+        <Button Name="button"/>
+    </StackPanel>
+    
+</UniformGrid>
+

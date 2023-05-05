@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>DataServicesTestOrcas</AssemblyName>
+        <OutputType>Library</OutputType>
+        <AssemblyType>Library</AssemblyType>
+        <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Xaml Files below -->
+        <Page Include="Markup\*.xaml" />
+        <Resource Include="Resource\*.xaml" />
+        <Resource Include="Resource\*.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Code Files below -->
+        <Compile Include="AssemblyAttributes.cs" />
+        <Compile Include="Code\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(TestContractsProject)" />
+        <ProjectReference Include="$(DataServicesTestCommonProject)" />
+        <ProjectReference Include="$(WpfTestBasePath)\DataServices\FeatureTests\BuildSources\DataServicesTest.csproj" />
+        <ProjectReference Include="$(TestRuntimeProject)" />
+    </ItemGroup>
+</Project>

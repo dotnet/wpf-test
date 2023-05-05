@@ -1,0 +1,17 @@
+﻿<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <Canvas Name="sourceCanvas" Height="30" Width="30" Left="200" Top="100">
+        <Canvas.Background>
+            <Binding ElementName="targetText" Path="Foreground" />
+        </Canvas.Background>
+    </Canvas>
+
+    <TextBox Name="targetText" Canvas.Top="35" Height="30" Foreground="Red">
+        <TextBox.Text>
+			<Binding ElementName="sourceCanvas" Path="Background" UpdateSourceTrigger="PropertyChanged" />
+        </TextBox.Text>
+    </TextBox>
+
+</Canvas>
+

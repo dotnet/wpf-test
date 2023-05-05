@@ -1,0 +1,16 @@
+<AppMonitorConfig>
+  <Using Namespace="Microsoft.Windows.Test.Client.AppSec.BVT" Assembly="CommonFileDialogHandler"/>
+  <Steps>
+    <TestLogStep Name="OpenFolderDialog: CancelTest - Show open folder dialog, then cancel the dialog without opening">
+      <ActivationStep Method="launch" Scheme="Local" FileName="OpenFolderDialogTests.exe">
+        <ActivationStep.UIHandlers>
+          <CommonFileDialogHandler WindowTitle="property:Microsoft.Test.Loaders.ApplicationDeploymentHelper.OpenFolderDialogTitle, TestRuntime" 
+                             ProcessName="OpenFolderDialogTests" 
+                             Dialog="OpenFolderDialogCancelTest"
+                             FileName="dir1"
+                             TestType="TypeFileNameAndCancel"/>
+        </ActivationStep.UIHandlers>
+      </ActivationStep>
+    </TestLogStep>
+  </Steps>
+</AppMonitorConfig>

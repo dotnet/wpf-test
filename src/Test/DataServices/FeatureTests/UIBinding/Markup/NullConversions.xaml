@@ -1,0 +1,151 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:cols="clr-namespace:System.Collections.Specialized;assembly=System"  
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" 
+    xmlns:sources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon">
+    <!--  
+        Source type: SqlTypes, Nullable types 
+        Target type: string, object, int, DateTime, non-convertible type 
+        Data transfer direction: source to target, target to source
+        Objects in testing: Binding, MultiBinding, PriorityBinding
+    
+        Scenarios - each has the 2 binding directions (S2T, T2S): 
+            w/ or w/o TargetNullValue set - Back Compat issue: must have TargetNullValue set
+            w/ or w/o value Converter 
+            w/ or w/o StringFormat  -  SqlTypes excluded
+    -->
+    <Page.Resources>
+        <sources:DataTableSource x:Key="dts"/> 
+        <sources:SqlTypesDataSource x:Key="sqldts"/> 
+        <sources:EarthDataSource x:Key="earth" />
+        <sources:CountriesDataSource x:Key="countries" />
+        <sources:People x:Key="peoplelist" />
+        <sources:FirstValueConverter x:Key="conv" />
+        <sources:CultureConverter x:Key="con" />
+        <sources:PeopleNameConverter x:Key="pconv" />
+        <sys:Double x:Key="dData">18934.1879</sys:Double>
+    </Page.Resources>
+
+    <Grid Width="800" Height="800">
+        <Grid.RowDefinitions>
+            <RowDefinition /> 
+            <RowDefinition /> 
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Nullable types -->
+        <StackPanel Name="sp" Width="500" Height="300" Background="GoldenRod" >
+            <TextBlock Name="tb" Text="{Binding Path=Date, Mode=TwoWay, FallbackValue=fallback, TargetNullValue=null, StringFormat=MM/dd/yyyy}"/>
+            <Slider Name="sl" Minimum="0" Maximum="100" MinWidth="80" Value="{Binding Path=Value, Mode=TwoWay, TargetNullValue=0}"/>          
+            <TextBox Name="tbox" Text="{Binding Path=Price, Mode=TwoWay, StringFormat=C2, TargetNullValue=0, UpdateSourceTrigger=Explicit}" />
+            <CheckBox Name="cb" IsThreeState="true" IsChecked="{Binding Path=Flag, Mode=TwoWay, TargetNullValue={x:Null}}" />
+            <ListBox Name="lb" IsSynchronizedWithCurrentItem="True"
+                     DisplayMemberPath="Name" SelectedValuePath="Name"
+                     ItemsSource="{Binding Path=Name, TargetNullValue=null}" /> 
+             <TextBlock Name="tbshadow"  Text="{Binding Path=Price, Mode=OneWay, StringFormat=C2, TargetNullValue=0}" />           
+        </StackPanel>
+
+        <!-- SqlTypes -->
+        <StackPanel Name="sp2" Width="500" Height="500" Background="RoyalBlue" Grid.Row="1">
+            <!-- table view is a more general use for SqlTypes than other forms --> 
+            <ListView Name="lv" ItemsSource="{Binding Source={StaticResource sqldts}}" 
+                      BorderBrush="BlueViolet" BorderThickness="5" Margin="0, 10, 0, 0">
+                <ListView.View>
+                    <GridView ColumnHeaderToolTip="SQLTypes">
+                        <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Path=ID, TargetNullValue=FANCY}" />
+                        <GridViewColumn Header="myBool" Width="50" DisplayMemberBinding="{Binding Path=MyBool, TargetNullValue=FANCY}"/>
+                        <GridViewColumn Header="myByte" Width="100" DisplayMemberBinding="{Binding Path=MyByte, TargetNullValue=FANCY}"/>
+                        <GridViewColumn Header="myDateTime" Width="40" DisplayMemberBinding="{Binding Path=MyDateTime, TargetNullValue=FANCY}"/>
+                        <GridViewColumn Header="myDecimal" Width="50" DisplayMemberBinding="{Binding Path=MyDecimal, TargetNullValue=FANCY}" />
+                        <GridViewColumn Header="myDouble" Width="50" DisplayMemberBinding="{Binding Path=MyDouble, TargetNullValue=FANCY}"/>
+                        <GridViewColumn Header="myGuid" Width="100" DisplayMemberBinding="{Binding Path=MyGuid, TargetNullValue=FANCY}"/>
+                        <GridViewColumn Header="myInt32" Width="40" DisplayMemberBinding="{Binding Path=MyInt32, TargetNullValue=FANCY}"/>
+                        <GridViewColumn Header="myMoney" Width="50" DisplayMemberBinding="{Binding Path=MyMoney, TargetNullValue=FANCY}" />
+                        <GridViewColumn Header="mySingle" Width="50" DisplayMemberBinding="{Binding Path=MySingle, TargetNullValue=FANCY}"/>
+                        <GridViewColumn Header="myString" Width="100" DisplayMemberBinding="{Binding Path=MyString, TargetNullValue=FANCY}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+
+        <!-- MultiBinding -->
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <StackPanel.Resources>
+                <DataTemplate x:Key="PersonItemTemplate">
+                    <TextBlock>
+                        <TextBlock.Text>
+                          <MultiBinding Converter="{StaticResource pconv}">
+                            <Binding Path="Name" TargetNullValue="awesome"/>
+                            <Binding Path="Nationality"/>
+                          </MultiBinding> 
+                        </TextBlock.Text>
+                      </TextBlock>
+                </DataTemplate>
+            </StackPanel.Resources>
+           
+            <ListBox Width="200" Name="lbmb" SelectedIndex="0"
+                     ItemsSource="{Binding Source={StaticResource peoplelist}}"
+                     ItemTemplate="{StaticResource PersonItemTemplate}"
+                     IsSynchronizedWithCurrentItem="True"/>
+            
+            <TextBlock Padding="0,10,0,0" FontSize="11" Background="White">Normal Format:</TextBlock>
+            <TextBlock Name="tbmb1" DataContext="{StaticResource peoplelist}">
+              <TextBlock.Text>
+                <MultiBinding Converter="{StaticResource pconv}" ConverterParameter="FormatNormal"
+                              UpdateSourceTrigger="Explicit" Mode="TwoWay" StringFormat="{}{0}">
+                    <Binding Path="Name" Mode="TwoWay" TargetNullValue="awesome" FallbackValue="fallback1"/>
+                    <Binding Path="Nationality" Mode="TwoWay"/>
+                </MultiBinding> 
+              </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock Padding="0,10,0,0" FontSize="11" Background="White">Last Name First Format:</TextBlock>
+            <TextBlock Name="tbmb2" DataContext="{StaticResource peoplelist}">
+              <TextBlock.Text> 
+                <MultiBinding Converter="{StaticResource pconv}" ConverterParameter="FormatLastFirst"
+                              StringFormat="{}{0}" TargetNullValue="awesome">
+                    <Binding Path="Name" TargetNullValue="awesome"/>
+                    <Binding Path="Nationality"/>
+                </MultiBinding> 
+              </TextBlock.Text>
+            </TextBlock>  
+        </StackPanel>
+
+        <!-- PriorityBinding -->
+        <StackPanel Name="sppb"  Grid.Row="3" Grid.Column="0" DataContext="{Binding Source={StaticResource dData}}">
+            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="PriorityBinding Tests" Background="Gold"/>
+            <TextBlock Name="tbpb1" Background="Honeydew" Width="100" HorizontalAlignment="Center">
+                <TextBlock.Text>
+                    <PriorityBinding FallbackValue="defaultvalue" StringFormat="C" TargetNullValue="4.0d">  
+                        <Binding ElementName="pbNonExist" Path="Text" />
+                        <Binding Path="." />
+                    </PriorityBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            
+            <TextBlock Name="tbpb2" Background="Honeydew" Width="100" HorizontalAlignment="Center">
+                <TextBlock.Text>
+                    <PriorityBinding FallbackValue="defaultvalue">  
+                        <Binding ElementName="pbNonExist" Path="Text" />
+                        <Binding Path="." StringFormat="C3" TargetNullValue="4.0d" /> 
+                    </PriorityBinding>
+                </TextBlock.Text>
+            </TextBlock>    
+            
+            <TextBlock Name="tbpb3" Background="Honeydew" Width="100" HorizontalAlignment="Center">
+                <TextBlock.Text>
+                    <PriorityBinding FallbackValue="defaultvalue" StringFormat="C">  
+                        <Binding ElementName="pbNonExist" Path="Text" />
+                        <Binding Path="." StringFormat="F0" TargetNullValue="4.0d" /> 
+                    </PriorityBinding>
+                </TextBlock.Text>
+            </TextBlock>                     
+         </StackPanel>
+    </Grid>    
+</Page>
