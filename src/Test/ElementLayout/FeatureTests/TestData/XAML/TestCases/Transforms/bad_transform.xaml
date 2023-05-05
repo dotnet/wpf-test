@@ -1,0 +1,52 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" > 
+  <Grid Background="LightBlue">
+	<Grid.Triggers>
+    <EventTrigger RoutedEvent="Page.Loaded">
+      <BeginStoryboard Name="myBeginStoryboard">
+        <Storyboard Name="myStoryboard">
+          <DoubleAnimation Storyboard.TargetName="MinuteAngle"
+            Storyboard.TargetProperty="(RotateTransform.Angle)" From="0" To="359"
+            Duration="0:0:5" AutoReverse="False" RepeatBehavior="Forever" />
+          <DoubleAnimation Storyboard.TargetName="HourAngle"
+            Storyboard.TargetProperty="(RotateTransform.Angle)" From="0" To="359"
+            Duration="0:1:0" AutoReverse="False" RepeatBehavior="Forever" />
+	 </Storyboard>
+      </BeginStoryboard>
+    </EventTrigger>
+
+	</Grid.Triggers>
+
+	<Rectangle x:Name="HourHand" Fill="#FF000000" RenderTransformOrigin="0.5,1" Margin="75.8,47,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="2.2" Height="30">
+		<Rectangle.RenderTransform>
+			<TransformGroup>
+				<TransformGroup.Children>
+					<TransformCollection>
+						<ScaleTransform ScaleX="1" ScaleY="1"/>
+						<SkewTransform AngleX="0" AngleY="0"/>
+						<RotateTransform x:Name="HourAngle" Angle="60"/>
+						<TranslateTransform X="0" Y="0"/>
+					</TransformCollection>
+				</TransformGroup.Children>
+			</TransformGroup>
+		</Rectangle.RenderTransform>
+	</Rectangle>
+
+	<Rectangle x:Name="MinuteHand" Fill="#FF000000" RenderTransformOrigin="0.5,1" Margin="75.8,27,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="2.2" Height="50">
+		<Rectangle.RenderTransform>
+			<TransformGroup>
+				<TransformGroup.Children>
+					<TransformCollection>
+						<ScaleTransform ScaleX="1" ScaleY="1"/>
+						<SkewTransform AngleX="0" AngleY="0"/>
+						<RotateTransform x:Name="MinuteAngle" Angle="60"/>
+						<TranslateTransform X="0" Y="0"/>
+					</TransformCollection>
+				</TransformGroup.Children>
+			</TransformGroup>
+		</Rectangle.RenderTransform>
+	</Rectangle>
+
+	
+  </Grid>
+</Page>
+

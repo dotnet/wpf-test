@@ -1,0 +1,140 @@
+using System;
+using System.Collections;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Input;
+using Microsoft.Test.Logging;
+
+namespace Microsoft.Test.WPF.AppModel.CommonDialogs
+{
+    public class AppEntry
+    {
+        [STAThread]
+        public static void Main(string[] args)
+        {
+            if (args.Length < 1 || args == null)
+            {
+                Logging.LogFail("Wrong Usage.");
+                Usage();
+                return;
+            }
+
+            int index;
+
+            for (index = 0; index < args.Length; ++index)
+            {
+                if (args[index].IndexOf("/test:") == 0)
+                {
+                    break;
+                }
+            }
+
+            string[] splitArgs = args[index].Split(':');
+            
+            if (splitArgs.Length < 2)
+            {
+                Logging.LogFail("Wrong Usage.");
+                Usage();
+                return;
+            }
+
+            Application app = null;
+
+            switch (splitArgs[1].ToLower(CultureInfo.InvariantCulture))
+            {
+                // case "clientguid":
+                //     app = new CustomPlaceCases();
+                //     break;
+
+                case "openfolderdialogcustomplacecases":
+                    app = new FolderDialogCustomPlaceCases();
+                    break;
+
+                // case "openfolderbeforeshow":
+                //     app = new OpenFolderBeforeShow();
+                //     break;
+
+                case "openfolderisthreadmodal":
+                    app = new OpenFolderIsThreadModal();
+                    break;
+
+                default:
+                    Logging.LogFail("Unknown test: '" + splitArgs[1] + "'");
+                    return;
+            }
+
+            app.Exit += new ExitEventHandler(CloseTheLog);
+            app.Startup += new StartupEventHandler(disableIme);
+            app.Run();
+
+        }
+
+        public static void Usage()
+        {
+            Logging.LogStatus("Usage:");
+            Logging.LogStatus("DialogTestsDev10 /test:<testname>");
+        }
+
+        static void disableIme(object sender, StartupEventArgs e)
+        {
+            InputMethod.Current.ImeState = InputMethodState.Off;
+        }
+
+        static void CloseTheLog(object sender, ExitEventArgs e)
+        {
+            if (Variation.Current != null)
+            {
+                Variation.Current.LogMessage("Closing Log...");
+                Variation.Current.LogResult(Logging.CurrentLog.NewResult);                
+                Variation.Current.Close();
+            }
+            else
+            {
+                LogManager.LogMessageDangerously("No left-over variation to close on app shutdown");
+            }
+        }
+    }
+
+    #region Logging
+    public class Logging
+    {
+        public static Microsoft.Windows.Test.Client.AppSec.FrameworkLoggerWrapper CurrentLog;
+
+        static Logging()
+        {
+            CurrentLog = new Microsoft.Windows.Test.Client.AppSec.FrameworkLoggerWrapper();
+        }
+
+        public static void LogStatus(string message)
+        {
+            CurrentLog.LogEvidence(message);
+        }
+
+        public static void SetPass(string message)
+        {
+            CurrentLog.LogEvidence(message);
+            CurrentLog.Result = TestResult.Pass;
+        }
+
+        public static void LogPass(string message)
+        {
+            CurrentLog.LogEvidence(message);
+            CurrentLog.Result = TestResult.Pass;
+            CurrentLog.Close();
+        }
+
+        public static void SetFail(string message)
+        {
+            CurrentLog.LogEvidence(message);
+            CurrentLog.Result = TestResult.Fail;
+        }
+
+        public static void LogFail(string message)
+        {
+            CurrentLog.LogEvidence(message);
+            CurrentLog.Result = TestResult.Fail;
+            CurrentLog.Close();
+        }
+    }
+    #endregion    
+}

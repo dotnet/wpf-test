@@ -525,7 +525,7 @@
    </Versions>
 </TEST>
 
-<!--<TEST Name="CommonDialog_CustomPlaceCases"
+<TEST Name="CommonDialog_CustomPlaceCases"
       Priority="1"
       Type="Functional"
       Area="AppModel"
@@ -536,17 +536,17 @@
                  Assembly="TestRuntime"
                  Method="RunApplication"
                  SecurityLevel="FullTrust"
-                 MethodParams="DialogTests.exe /test:customplacecases" />
+                 MethodParams="DialogTestsPart1.exe /test:customplacecases" />
    <SupportFiles>
-      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\DialogTestsPart1\*" />
    </SupportFiles>
    <Versions>
       <Version>4.0+</Version>
       <Version>4.0Client+</Version>
    </Versions>
-</TEST>-->
+</TEST>
 
-<!--<TEST Name="CommonDialog_FileDialogCustomPlaceCases"
+<TEST Name="CommonDialog_FileDialogCustomPlaceCases"
       Priority="1"
       Type="Functional"
       Area="AppModel"
@@ -557,17 +557,17 @@
                  Assembly="TestRuntime"
                  Method="RunApplication"
                  SecurityLevel="FullTrust"
-                 MethodParams="DialogTests.exe /test:filedialogcustomplacecases" />
+                 MethodParams="DialogTestsPart1.exe /test:filedialogcustomplacecases" />
    <SupportFiles>
-      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\DialogTestsPart1\*" />
    </SupportFiles>
    <Versions>
       <Version>4.0+</Version>
       <Version>4.0Client+</Version>
    </Versions>
-</TEST>-->
+</TEST>
 
-<!--<TEST Name="CommonDialog_OpenFileBeforeShow"
+<TEST Name="CommonDialog_OpenFileBeforeShow"
       Priority="1"
       Type="Functional"
       Area="AppModel"
@@ -578,17 +578,17 @@
                  Assembly="TestRuntime"
                  Method="RunApplication"
                  SecurityLevel="FullTrust"
-                 MethodParams="DialogTests.exe /test:openfilebeforeshow" />
+                 MethodParams="DialogTestsPart1.exe /test:openfilebeforeshow" />
    <SupportFiles>
-      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\DialogTestsPart1\*" />
    </SupportFiles>
    <Versions>
       <Version>4.0+</Version>
       <Version>4.0Client+</Version>
    </Versions>
-</TEST>-->
+</TEST>
 
-<!--<TEST Name="CommonDialog_OpenFileIsThreadModal"
+<TEST Name="CommonDialog_OpenFileIsThreadModal"
       Priority="1"
       Type="Functional"
       Area="AppModel"
@@ -599,17 +599,17 @@
                  Assembly="TestRuntime"
                  Method="RunApplication"
                  SecurityLevel="FullTrust"
-                 MethodParams="DialogTests.exe /test:openfileisthreadmodal" />
+                 MethodParams="DialogTestsPart1.exe /test:openfileisthreadmodal" />
    <SupportFiles>
-      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\DialogTestsPart1\*" />
    </SupportFiles>
    <Versions>
       <Version>4.0+</Version>
       <Version>4.0Client+</Version>
    </Versions>
-</TEST>-->
+</TEST>
 
-<!--<TEST Name="CommonDialog_SaveFileIsThreadModal"
+<TEST Name="CommonDialog_SaveFileIsThreadModal"
       Priority="1"
       Type="Functional"
       Area="AppModel"
@@ -620,17 +620,17 @@
                  Assembly="TestRuntime"
                  Method="RunApplication"
                  SecurityLevel="FullTrust"
-                 MethodParams="DialogTests.exe /test:savefileisthreadmodal" />
+                 MethodParams="DialogTestsPart1.exe /test:savefileisthreadmodal" />
    <SupportFiles>
-      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\DialogTestsPart1\*" />
    </SupportFiles>
    <Versions>
       <Version>4.0+</Version>
       <Version>4.0Client+</Version>
    </Versions>
-</TEST>-->
+</TEST>
 
-<!--<TEST Name="CommonDialog_OpenFileOnSecondThread"
+<TEST Name="CommonDialog_OpenFileOnSecondThread"
       Priority="1"
       Type="Functional"
       Area="AppModel"
@@ -642,17 +642,17 @@
                  Assembly="TestRuntime"
                  Method="RunApplication"
                  SecurityLevel="FullTrust"
-                 MethodParams="DialogTests.exe /test:openfileonsecondthread" />
+                 MethodParams="DialogTestsPart1.exe /test:openfileonsecondthread" />
    <SupportFiles>
-      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\DialogTestsPart1\*" />
    </SupportFiles>
    <Versions>
       <Version>4.0+</Version>
       <Version>4.0Client+</Version>
    </Versions>
-</TEST>-->
+</TEST>
 
-<!--<TEST Name="CommonDialog_SaveFileOnSecondThread"
+<TEST Name="CommonDialog_SaveFileOnSecondThread"
       Priority="1"
       Type="Functional"
       Area="AppModel"
@@ -664,15 +664,125 @@
                  Assembly="TestRuntime"
                  Method="RunApplication"
                  SecurityLevel="FullTrust"
-                 MethodParams="DialogTests.exe /test:savefileonsecondthread" />
+                 MethodParams="DialogTestsPart1.exe /test:savefileonsecondthread" />
    <SupportFiles>
-      <SupportFile Source="FeatureTests\AppModel\DialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\DialogTestsPart1\*" />
    </SupportFiles>
    <Versions>
       <Version>4.0+</Version>
       <Version>4.0Client+</Version>
    </Versions>
-</TEST>-->
+</TEST>
+
+<TEST Name="FolderDialog_AllCustomPlaces"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFolderDialog: AllCustomPlaces - Verify specifying all custom places will still allow the dialog to display" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFolderDialogAllCustomPlacesTest"
+                 MethodParams="OpenFolderDialogAllCustomPlaces_config.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\OpenFolderDialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_CancelTest"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFolderDialog: CancelTest - Show open folder dialog, then cancel the dialog without opening" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFolderDialogCancelTest"
+                 MethodParams="OpenFolderDialogCancelTest_config.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\OpenFolderDialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_CustomPlaceTest"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFolderDialog: CustomPlaces - Verify specifying a custom place, and clicking on it, opens the folder in the custom place" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFolderDialogCustomPlaceTest"
+                 MethodParams="OpenFolderDialogCustomPlaceTest_config.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\OpenFolderDialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_MultiSelect"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="OpenFolderDialog: MultiSelect - Verify specifying multiselect allow the dialog to return multiple paths" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunConfigurationFile"
+                 TestStartupUri="OpenFolderDialogMultiSelect"
+                 MethodParams="OpenFolderDialogMultiSelect_config.xml"
+                 SecurityLevel="FullTrust"/>
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\OpenFolderDialogTests\*" />
+      <SupportFile Source="FeatureTests\AppModel\Navigation\CommonFileDialogHandler.dll" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_OpenFolderIsThreadModal"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="FolderDialog - OpenFolderIsThreadModal - Verify ComponentDispatcher.IsThreadModal is true when the OpenFileDialog is shown" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="FolderDialogTests.exe /test:openfolderisthreadmodal" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\FolderDialogTests\*" />
+   </SupportFiles>
+</TEST>
+
+<TEST Name="FolderDialog_OpenFolderDialogCustomPlaceCases"
+      Priority="1"
+      Type="Functional"
+      Area="AppModel"
+      SubArea="CommonDialogs"
+      Description="Folder Dialog Test: CustomPlace cases" >
+   <Driver Executable="sti.exe" />
+   <DriverParameters Class="Microsoft.Test.TestTypes.ApplicationMonitorTest"
+                 Assembly="TestRuntime"
+                 Method="RunApplication"
+                 SecurityLevel="FullTrust"
+                 MethodParams="FolderDialogTests.exe /test:openfolderdialogcustomplacecases" />
+   <SupportFiles>
+      <SupportFile Source="FeatureTests\AppModel\FolderDialogTests\*" />
+   </SupportFiles>
+</TEST>
 
 </XTC>
 

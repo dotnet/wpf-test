@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>ElementLayoutLibrary</AssemblyName>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <!-- Source Code -->
+  <ItemGroup>
+    <Compile Include="$(TestDirectory)\BaseTests\*.cs" />
+    <Compile Include="$(TestDirectory)\LayoutSystem\*.cs" />
+    <Compile Include="$(TestDirectory)\Panels\*.cs" />
+    <Compile Include="$(TestDirectory)\Property\*.cs" />
+    <Compile Include="$(TestDirectory)\Scenario\*.cs" />
+    <Compile Include="$(TestDirectory)\Scrolling\*.cs" />
+    <Compile Include="$(TestDirectory)\Transforms\*.cs" />
+  </ItemGroup>
+
+  <!-- Common Code -->
+  <ItemGroup>
+    <Compile Include="$(ElementLayoutCommon)\ElementLayoutCommon.cs" />
+  </ItemGroup>
+  
+  <!-- Resources -->
+  <ItemGroup>
+    <!--<Page Include="$(TestDirectory)\TestData\XAML\Resources\genericcontrols.xaml" />-->
+    <Resource Include="$(TestDirectory)\TestData\XAML\Resources\*.xaml" />
+    <Resource Include="$(TestDirectory)\TestData\XAML\StackPanel\*.xaml" />
+  </ItemGroup>
+
+  <!-- References -->
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+ 
+</Project>
