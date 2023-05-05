@@ -1,0 +1,23 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Page.Resources>
+    <Style x:Key="StyleKey" TargetType="{x:Type Button}">
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{y:Type Button}" xmlns:y="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Ellipse Height="50" Fill="#FFFF4500">
+              <Ellipse.Resources>
+                <Style TargetType="{y:Type Ellipse}">
+                  <Setter Property="FrameworkElement.Width" Value="50" />
+                  <y:Key>
+                    <y:Type Type="Ellipse" />
+                  </y:Key>
+                </Style>
+              </Ellipse.Resources>
+            </Ellipse>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Page.Resources>
+  <Button Style="{DynamicResource StyleKey}" />
+</Page>

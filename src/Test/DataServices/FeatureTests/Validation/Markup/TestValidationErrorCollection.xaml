@@ -1,0 +1,63 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:test="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+    <DockPanel.Resources>
+
+        <XmlDataProvider XPath="Books" x:Key="dso">
+          <x:XData>
+            <Books xmlns="">
+                <Book ISBN="0-7356-1448-2">
+                    <Title>Microsoft C# Language Specification</Title>
+                    <Price>5</Price>
+                </Book>
+                <Book ISBN="0-7356-1288-9">
+                    <Title>Inside C#</Title>
+                    <Price>12</Price>
+                </Book>
+                <Book ISBN="0-7356-0562-9">
+                    <Title>Xml in Action</Title>
+                    <Price>40</Price>
+                </Book>
+                <Book ISBN="0-321-15491-6">
+                    <Title>The C# Programming Language</Title>
+                    <Price>30</Price>
+                </Book>
+            </Books>
+          </x:XData>
+        </XmlDataProvider>
+
+    </DockPanel.Resources>
+
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+        <TextBox Name="tbPrice1" Height="30">
+            <TextBox.Text>
+                <Binding Source="{StaticResource dso}" XPath="Book[1]/Price" UpdateSourceTrigger="Explicit" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <test:RangeRule
+                            Min="0"
+                            Max="10"
+                            ErrorContent="must lie between 0 and 10"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <TextBox.ToolTip>
+                <Binding Source="{StaticResource dso}" XPath="Book[2]/Price" UpdateSourceTrigger="Explicit" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <test:EvenRule
+                            ErrorContent="must be even"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.ToolTip>
+            <TextBox.MaxLength>
+                <Binding Source="{StaticResource dso}" XPath="Book[3]/Price" UpdateSourceTrigger="Explicit" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <test:EvenRule
+                            ErrorContent="must be even"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.MaxLength>
+        </TextBox>
+    </StackPanel>
+
+</DockPanel>

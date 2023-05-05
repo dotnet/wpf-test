@@ -1,0 +1,62 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:local="clr-namespace:Microsoft.Test.DataServices"
+    xmlns:sysdata="clr-namespace:System.Data;assembly=System.Data"
+    Name="Root" Background="cornsilk"
+    >
+  <DockPanel.Resources>
+    <dataSources:EarthDataSource x:Key="EarthObject" />
+
+    <DataTemplate DataType="{x:Type dataSources:Country}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=CountryName}" />
+        <TextBlock Text="ImplicitObjectCountry" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate DataType="{x:Type dataSources:Region}"
+                              ItemsSource="{Binding Path=Countries}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=RegionName}" />
+        <TextBlock Text="ImplicitObjectRegion" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate DataType="{x:Type dataSources:Hemisphere}"
+                        ItemsSource="{Binding Path=Regions}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=HemisphereName}" />
+        <TextBlock Text="ImplicitObjectHemisphere" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <Style x:Key="ItemContainerStyleSelectorStyle">
+      <Style.Setters>
+        <Setter Property="TreeViewItem.Background" Value="Red" />
+      </Style.Setters>
+    </Style>
+    <Style x:Key="ItemContainerStyleStyle">
+      <Style.Setters>
+        <Setter Property="TreeViewItem.Background" Value="Blue" />
+      </Style.Setters>
+    </Style>
+
+    <local:FixedStyleSelector x:Key="ItemContainerStyleSelector" Style="{StaticResource ItemContainerStyleSelectorStyle}"/>
+
+    <!-- HierarchicalDataTemplate.ItemStringFormat causing XamlParseException in TemplateXamlParser -->
+    <HierarchicalDataTemplate ItemsSource="{x:Null}" ItemTemplate="{x:Null}" ItemTemplateSelector="{x:Null}" ItemStringFormat="{x:Null}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="ItemStringFormatParseExceptionHDT"/>
+
+  </DockPanel.Resources>
+
+  <TreeView ItemsSource="{Binding Source={StaticResource EarthObject}, Path=Hemispheres}"
+            ItemTemplate="{StaticResource ItemStringFormatParseExceptionHDT}"
+            Name="ItemStringFormatParseExceptionTreeView" />
+
+  <TreeView ItemsSource="{Binding Source={StaticResource EarthObject}, Path=Hemispheres}"
+      ItemContainerStyle="{StaticResource ItemContainerStyleStyle}"
+      Name="ItemContainerStyleTreeView" />
+
+  <TreeView ItemsSource="{Binding Source={StaticResource EarthObject}, Path=Hemispheres}"
+            ItemContainerStyleSelector="{StaticResource ItemContainerStyleSelector}"
+            Name="ItemContainerStyleSelectorTreeView" />
+</DockPanel>

@@ -1,0 +1,14 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:testdata="clr-namespace:Microsoft.Test.DataServices" 
+    >
+    <DockPanel.Resources>
+        <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type testdata:NullTItem}" />
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </DockPanel.Resources>
+
+    <TextBlock DockPanel.Dock="Top" Name="testText" Text="{Binding Path=TheInt, Source={StaticResource DSO}}" />
+
+</DockPanel>

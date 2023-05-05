@@ -1,0 +1,41 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootNamespace>LocallyDefinedControl</RootNamespace>
+    <AssemblyName>LocallyDefinedControl</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <UICulture>en-US</UICulture>
+    <Configuration>Release</Configuration>
+    <OutputPath>.\</OutputPath>
+    <GenerateManifests>true</GenerateManifests>
+    <OptionStrict>On</OptionStrict>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <ItemGroup>
+    <Reference Include=".\ControlsCommon.dll">
+    </Reference>
+    <ApplicationDefinition Include="app.xaml">
+      <Localizable>False</Localizable>
+    </ApplicationDefinition>
+    <Page Include="page.xaml">
+      <Localizable>False</Localizable>
+    </Page>
+    <Compile Include="page.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Reference Include="System" />
+    
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationProvider" />
+  </ItemGroup>
+  <!--  Need for MSBuild2 target for cleanup -->
+  <Import Project="TestCommon.target" />
+</Project>

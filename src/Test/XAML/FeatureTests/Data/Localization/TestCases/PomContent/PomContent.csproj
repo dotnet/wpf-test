@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <!--Automatically converted using custom WPF settings-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <AssemblyName>PomContent</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <OutputSubFolder>FeatureTests\XAML\Data\Localization\TestCases\PomContent</OutputSubFolder>
+    <AllowPartialTrustedCalls>true</AllowPartialTrustedCalls>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <DefineConstants>$(DefineConstants);TRACE;TARGET_NET3_5</DefineConstants>
+    <DocumentationFile>$(IntermediateOutputDirectory)\$(AssemblyName).xml</DocumentationFile>
+    <ProjectGuid>{B88CD6F6-836F-4128-B4AA-FF15C807EA37}</ProjectGuid>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <PublisherName>Microsoft Corp.</PublisherName>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>    
+    <UICulture>en-US</UICulture>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <BinplaceFlags Include="@(BinplaceFlags)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xaml"/>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  
+  
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+  
+</Project>

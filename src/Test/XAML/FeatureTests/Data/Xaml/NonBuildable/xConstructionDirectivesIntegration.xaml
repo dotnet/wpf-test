@@ -1,0 +1,59 @@
+<CustomRootWithCollection
+    xmlns="http://XamlTestTypes"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+    <GenericTypeWithFactoryMethod
+        IntProp="123"
+        x:FactoryMethod="Factory" 
+        DoubleProp="123.456"
+        x:TypeArguments="x:String"
+        StringProp="ABCDE"
+        >
+        <x:Arguments>
+            <x:Int32>123</x:Int32>
+            <x:Double>123.456</x:Double>
+            <x:String>abcde</x:String>
+            <x:Boolean>false</x:Boolean>
+            <GenericTypeWithFactoryMethod x:FactoryMethod="Factory" IntProp="123" x:TypeArguments="x:String" DoubleProp="123.456">
+                <x:Arguments>
+                    <x:Int32>123</x:Int32>
+                    <x:Double>123.456</x:Double>
+                    <x:String>abcde</x:String>
+                    <x:Boolean>true</x:Boolean>
+                    <x:Null />
+                </x:Arguments>
+            </GenericTypeWithFactoryMethod>
+        </x:Arguments>
+    </GenericTypeWithFactoryMethod>
+
+    <GenericTypeWithFactoryMethod x:TypeArguments="x:String">
+        <x:FactoryMethod>
+            Factory
+        </x:FactoryMethod>
+    </GenericTypeWithFactoryMethod>
+
+    <GenericTypeWithFactoryMethod x:TypeArguments="x:String">
+        <x:Arguments>
+            <x:Int32>123</x:Int32>
+        </x:Arguments>
+    </GenericTypeWithFactoryMethod>
+
+    <GenericTypeWithFactoryMethod x:TypeArguments="x:String">
+        <x:FactoryMethod>
+            Factory
+        </x:FactoryMethod>
+        <x:Arguments>
+            <x:Int32>123</x:Int32>
+        </x:Arguments>
+    </GenericTypeWithFactoryMethod>
+
+    <GenericTypeWithFactoryMethod x:TypeArguments="x:String">
+        <x:Arguments>
+            <x:Int32>123</x:Int32>
+        </x:Arguments>
+        <x:FactoryMethod>
+            Factory
+        </x:FactoryMethod>
+    </GenericTypeWithFactoryMethod>
+</CustomRootWithCollection>

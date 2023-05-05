@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>BamlTools</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <DefineConstants>$(DefineConstants);TRACE;TARGET_NET3_5</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <BinplaceFlags Include="@(BinplaceFlags)" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="Baml\Utilities\BamlBinaryReader.cs" />
+    <Compile Include="Baml\Utilities\BamlDisassembler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Baml\Utilities\BamlDisassemblerSettings.cs" />
+    <Compile Include="Baml\Utilities\BamlFields.cs" />
+    <Compile Include="Baml\Utilities\BamlRecords.cs" />
+    <Compile Include="Baml\Utilities\BamlFieldType.cs" />
+    <Compile Include="Baml\Utilities\BamlRecordType.cs" />
+    <Compile Include="Baml\Utilities\BamlString.cs" />
+    <Compile Include="Baml\Utilities\KnownProperties.cs" />
+    <Compile Include="Baml\Utilities\XmlBamlDisassembler.cs" />
+    <Compile Include="Baml\Utilities\KnownTypes.cs" />
+    <Compile Include="Baml\Utilities\StaticBamlRecords.cs" />
+    <Compile Include="Baml\Utilities\XmlDasmStringExtractor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Baml\Readme.txt" />
+  </ItemGroup>
+</Project>

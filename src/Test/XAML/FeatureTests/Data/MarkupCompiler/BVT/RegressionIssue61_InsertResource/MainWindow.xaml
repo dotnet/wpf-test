@@ -1,0 +1,83 @@
+<Window x:Class="RegressionIssue61_InsertResource.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!-- Case1 resources -->
+        <sys:String x:Key="string1">OK</sys:String>
+
+        <!-- Case2 resources -->
+        <sys:String x:Key="string2">OK</sys:String>
+
+        <!-- Case3 resources -->
+        <sys:String x:Key="string3">OK</sys:String>
+
+        <!-- Case4 resources -->
+        <sys:String x:Key="string4">OK</sys:String>
+
+        <!-- Case5 resources -->
+        <sys:String x:Key="string5">OK</sys:String>
+    </Window.Resources>
+    <Grid x:Name="panel">
+        <StackPanel>
+            <StackPanel.Resources>
+                <!-- Case1 resources -->
+                <ControlTemplate x:Key="template1" TargetType="Button">
+                    <Button Content="{StaticResource string1}" />
+                </ControlTemplate>
+
+                <!-- Case3 resources -->
+                <ControlTemplate x:Key="template3b" TargetType="Button">
+                    <Button Content="{StaticResource string3}" />
+                </ControlTemplate>
+                <ControlTemplate x:Key="template3a" TargetType="Button">
+                    <Button Template="{StaticResource template3b}" />
+                </ControlTemplate>
+
+                <!-- Case4 resources -->
+                <ControlTemplate x:Key="template4" TargetType="Button">
+                    <Button Content="{StaticResource string4}" />
+                </ControlTemplate>
+
+                <!-- Case5 resources -->
+                <ControlTemplate x:Key="template5" TargetType="Button">
+                    <Button>
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Button Content="{StaticResource string5}" />
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </ControlTemplate>
+            </StackPanel.Resources>
+            <!-- Case1: RD Template - > Resource -->
+            <Button x:Name="button1" Template="{StaticResource template1}"></Button>
+            
+            <!-- Case2: Inline Template - > Resource -->
+            <Button x:Name="button2">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Button Content="{StaticResource string2}" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Case3: RD Template - > RD Template - > Resource -->
+            <Button x:Name="button3" Template="{StaticResource template3a}"></Button>
+
+            <!-- Case4: Inline Template - > RD Template - > Resource -->
+            <Button x:Name="button4">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Button Template="{StaticResource template4}" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Case5: RD Template - > Inline Template - > Resource -->
+            <Button x:Name="button5" Template="{StaticResource template5}"></Button>
+            
+        </StackPanel>
+    </Grid>
+</Window>

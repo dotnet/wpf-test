@@ -1,0 +1,47 @@
+<Window
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Class     = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest"
+    >
+
+    <StackPanel x:Uid="StackPanel_1">
+
+        <StackPanel.Resources>
+            <!-- Scenario #1: TemplateBinding to a ScrollViewer's Content -->
+            <Style TargetType="{x:Type ScrollViewer}">
+              <Setter Property="Template">
+                <Setter.Value>
+                  <ControlTemplate>
+                      <Border x:Uid="TextBlock6" Background="MistyRose">
+                          <ScrollContentPresenter x:Uid="ScrollContentPresenter1" Content="{TemplateBinding ScrollViewer.Content}" />
+                      </Border>
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+        </StackPanel.Resources>
+
+        <!-- Scenario #2: Binding of a Label's Content to a Button's Content -->
+        <Button x:Uid="button1" Name="b1" Content="LLLButtonContent" Height="75" Width="125" Background="Coral" />
+        <Label  x:Uid="label1"  Content="{Binding ElementName=b1,Path=Content,FallbackValue=Fallback}" Height="75" Width="125" Background="Lavender" />
+        <!-- Label .csv entry: ...,label1:System.Windows.Controls.Label.$Content,Label,True,True,, -->
+
+        <!-- Scenario #3: Binding of a TextBlock's Text to another TextBlock's Text -->
+        <TextBlock x:Uid="TextBlock2" Name="TargetElement" Height="75" Width="125" Background="LightGreen">LLLMyText</TextBlock>
+        <TextBlock Text="{Binding ElementName=TargetElement,Path=Text,FallbackValue=Fallback;}" x:Uid="TextBlock1" Height="75" Width="125" Background="LightBlue" />
+
+        <!-- Scenario #4: Binding of a ComboBoxItem's Content to another TextBlock's Text -->
+        <ComboBox x:Uid="ComboBox1">
+            <ComboBoxItem x:Uid="ComboBoxItem1" Content="{Binding ElementName=TargetElement, Path=&apos;Text&apos;}"></ComboBoxItem>
+        </ComboBox>
+
+        <ScrollViewer x:Uid="ScrollViewer1" Height="125" Width="150">
+            <StackPanel  x:Uid="StackPanel2">
+                <TextBlock x:Uid="TextBlock3" FontSize="25" Text="LLLabc"/>
+                <TextBlock x:Uid="TextBlock4" FontSize="25" Text="LLLxyz"/>
+            </StackPanel>
+        </ScrollViewer>
+
+    </StackPanel>
+
+</Window>

@@ -1,0 +1,38 @@
+<DockPanel 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Grid>
+    <Grid.Resources>
+      <ResourceDictionary>
+        <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+          <Rectangle Stroke="#FF000000" StrokeMiterLimit="2" x:Name="Rectangle1" RenderTransformOrigin="0.5,0.5" Width="98" Height="40">
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStopCollection>
+                    <GradientStop Color="sc#1, 0.858422935, 0.255880952, 0.191624016" Offset="0"/>
+                    <GradientStop Color="sc#1, 0.879044056, 0.879044056, 0.114664845" Offset="0.9"/>
+                  </GradientStopCollection>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+        </ControlTemplate>
+      </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <Button x:Name="Button1" Content="Button1" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="1" Margin="168,155,297,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="70" RenderTransformOrigin="0.5,0.5" 
+        Template="{DynamicResource ButtonControlTemplate1}"
+        />
+  </Grid>
+
+
+</DockPanel>
+

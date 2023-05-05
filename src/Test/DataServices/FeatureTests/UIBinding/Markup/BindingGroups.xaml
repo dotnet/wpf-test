@@ -1,0 +1,32 @@
+﻿<UniformGrid Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    Name="myUniformGrid"
+    >
+  <UniformGrid.Resources>
+    <DataTemplate DataType="{x:Type datasources:Place}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Name}" />
+        <TextBlock Text="{Binding Path=State}" />
+      </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type datasources:Country}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=CountryName}" />
+        <TextBlock Text="ImplicitObjectCountry" />
+      </StackPanel>
+    </DataTemplate>
+  </UniformGrid.Resources>
+
+  <UniformGrid.DataContext>
+    <datasources:Place Name="Brea" State="CA" />
+  </UniformGrid.DataContext>
+
+  <UniformGrid.BindingGroup>
+    <BindingGroup Name="bgName" />
+  </UniformGrid.BindingGroup>
+
+  <TextBox Name="tb" Text="{Binding Path=Name, BindingGroupName=bgName}" />
+</UniformGrid>

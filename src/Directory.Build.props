@@ -2,7 +2,7 @@
   <Import Condition="Exists('../Directory.Build.props')" Project="../Directory.Build.props" />
   <PropertyGroup>
     <!-- Ignore CLS compliant warnings-->
-    <NoWarn>CS3005;CS3001;CS300;CS3005;CS3008;CS0436</NoWarn>
+    <NoWarn>CS3005;CS3001;CS300;CS3005;CS3008;CS0436;CS8981;AD0001</NoWarn>
     <!-- Temporarily disable warning -->
     <!-- CA2200: Re-throwing caught exception changes stack information -->
     <!-- SYSLIB0004: ReliabilityContractAttribute' is obsolete: 'The Constrained Execution Region (CER) feature is not supported. -->
@@ -11,13 +11,14 @@
     <!-- SYSLIB0013: 'Uri.EscapeUriString(string)' is obsolete -->
     <!-- SYSLIB0014: 'WebRequest.Create(Uri)' is obsolete -->
 
-    <NoWarn>$(NoWarn);CA1416;CA2200;SYSLIB0004;SYSLIB0006;SYSLIB0011;SYSLIB0013;SYSLIB0014</NoWarn>
+    <NoWarn>$(NoWarn);CA1416;CA2200;CA2259;SYSLIB0004;SYSLIB0006;SYSLIB0011;SYSLIB0013;SYSLIB0014</NoWarn>
     <!-- Temporarily disable more warnings (7/23/2021) -->
     <!-- SYSLIB0021: 'MD5CryptoServiceProvider' is obsolete -->
     <!-- SYSLIB0024: 'AppDomain.Unload(AppDomain)' is obsolete -->
     <!-- SYSLIB0018: 'Assembly.ReflectionOnlyLoadFrom(string)' is obsolete -->
+    <!-- SYSLIB0044: 'AssemblyName.CodeBase' is obsolete -->
+    <NoWarn>$(NoWarn);SYSLIB0021;SYSLIB0024;SYSLIB0018;SYSLIB0044</NoWarn>
 
-    <NoWarn>$(NoWarn);SYSLIB0021;SYSLIB0024;SYSLIB0018</NoWarn>
     <!-- Temporarily disable more warnings (10/28/2021) -->
     <!-- SYSLIB0032: ''HandleProcessCorruptedStateExceptionsAttribute' is obsolete -->
     <!-- CA2018:  'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument -->

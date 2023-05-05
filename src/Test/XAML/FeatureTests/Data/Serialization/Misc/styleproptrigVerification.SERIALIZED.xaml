@@ -1,0 +1,42 @@
+<CustomDockPanel xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <CustomDockPanel.Resources>
+    <av:Style TargetType="av:Button" x:Key="myCustomStyle">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:Button">
+            <av:Rectangle Height="100" Margin="10,10,10,10" Width="100" RadiusY="10" Fill="#FF0000FF" Name="R1" RadiusX="10" />
+            <av:ControlTemplate.Triggers>
+              <av:Trigger Property="av:DockPanel.Dock">
+                <av:Setter Property="av:Shape.Fill" TargetName="R1">
+                  <av:Setter.Value>
+                    <av:SolidColorBrush>#FFFFFFFF</av:SolidColorBrush>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Trigger.Value>
+                  <x:Static Member="av:Dock.Right" />
+                </av:Trigger.Value>
+              </av:Trigger>
+              <av:Trigger Property="av:Canvas.Top">
+                <av:Setter Property="av:Shape.Fill" TargetName="R1">
+                  <av:Setter.Value>
+                    <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Trigger.Value>
+                  <s:Double>10</s:Double>
+                </av:Trigger.Value>
+              </av:Trigger>
+            </av:ControlTemplate.Triggers>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+  </CustomDockPanel.Resources>
+  <av:Canvas Width="100" av:DockPanel.Dock="Left">
+    <av:Button Style="{av:DynamicResource myCustomStyle}" av:Canvas.Top="10" />
+  </av:Canvas>
+  <av:Button Style="{av:DynamicResource myCustomStyle}" av:DockPanel.Dock="Right" />
+</CustomDockPanel>

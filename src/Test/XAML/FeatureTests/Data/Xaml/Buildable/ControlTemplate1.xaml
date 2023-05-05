@@ -1,0 +1,25 @@
+<!-- ControlTemplate within a Style -->
+<Page
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Page.Resources>
+        <Style x:Key="BallButton" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="150" />
+            <Setter Property="Height" Value="150" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="{TemplateBinding Background}" />
+                            <ContentPresenter VerticalAlignment="center" HorizontalAlignment="center" />
+                        </Grid>  
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>  
+        </Style>
+    </Page.Resources>
+
+    <Button Style="{DynamicResource BallButton}" Background="RoyalBlue" />
+
+</Page>

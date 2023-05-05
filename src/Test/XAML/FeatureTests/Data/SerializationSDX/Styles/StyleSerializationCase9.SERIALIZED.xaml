@@ -1,0 +1,34 @@
+<CustomCanvas xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <CustomCanvas.Resources>
+    <av:Style TargetType="av:Button" x:Key="Style1">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:TextElement.Foreground">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FFFFFFFF</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:Button">
+            <av:TextBlock Text="Text content" Name="myText" />
+            <av:ControlTemplate.Triggers>
+              <av:Trigger Property="av:ButtonBase.IsPressed">
+                <av:Setter Property="av:TextElement.Foreground" TargetName="myText">
+                  <av:Setter.Value>
+                    <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Trigger.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Trigger.Value>
+              </av:Trigger>
+            </av:ControlTemplate.Triggers>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+  </CustomCanvas.Resources>
+  <av:Button Name="Button2" />
+</CustomCanvas>

@@ -1,0 +1,30 @@
+﻿
+
+
+
+<cmn:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cc="http://XamlTestTypes" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"  xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+    <Canvas.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="Green" Offset="0" />
+                    <GradientStop Color="White" Offset="1" />
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Canvas.Background>
+    <!--************************* Skew ************************** -->
+    <Decorator Name="TransformDecorator">
+        <Decorator.LayoutTransform>
+            <TransformGroup>
+                <TransformGroup.Children>
+                    <TransformCollection>
+                        <SkewTransform AngleY="-20" />
+                        <SkewTransform AngleX="-20" />
+                    </TransformCollection>
+                </TransformGroup.Children>
+            </TransformGroup>
+        </Decorator.LayoutTransform>
+        <Rectangle Name="Rectangle" Stroke="red" StrokeThickness="3" Canvas.Top="10" Canvas.Left="5" Width="150" Height="50" Fill="pink" />
+    </Decorator>
+</cmn:CustomCanvas>

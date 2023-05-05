@@ -1,0 +1,151 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    >
+<Border Background="cornsilk">
+    <Border.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+
+        <!-- The theme-supplied styles for ListBox et al. doesn't work well for grouping.
+            So we override them here. -->
+        <ItemsPanelTemplate x:Key="DockPanelFactory">
+            <DockPanel />
+        </ItemsPanelTemplate>
+
+        <!--Style x:Key="*typeof(ItemsControl}"-->
+        <Style x:Key="myControlStyle" TargetType="{x:Type ItemsControl}">
+            <Setter Property="ItemsPanel" Value="{DynamicResource DockPanelFactory}" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Grid>
+                        <Border Margin="{TemplateBinding Padding}">
+                            <ItemsPresenter Name="Presenter" />
+                        </Border>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Border.Resources>
+
+
+    <StackPanel Name="panel">
+
+
+    <!--  Two levels of grouping - Group employees first by team, then by title-->
+
+    <DockPanel Margin="10,10,10,10">
+        <DockPanel.Resources>
+            <ObjectDataProvider x:Key="Employees" ObjectType="{x:Type datasources:EmployeeCollection}" />
+
+            <DataTemplate x:Key="EmployeeTemplate">
+                <DockPanel Dock="Top">
+                    <TextBlock Name="name" Text="{Binding Path=Name}" />
+                    <TextBlock Name="phone" Text="{Binding Path=Phone}" />
+                </DockPanel>
+            </DataTemplate>
+
+            <Style x:Key="TitleGroupStyle" TargetType="{x:Type GroupItem}">
+                <Setter Property="DockPanel.Dock" Value="Left" />
+                <Setter Property="Template">
+                <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupItem}">
+                    <DockPanel>
+                        <ContentPresenter DockPanel.Dock="Top" />
+                        <ItemsPresenter DockPanel.Dock="Top" />
+                    </DockPanel>
+                </ControlTemplate>
+                </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="TeamGroupStyle" TargetType="{x:Type GroupItem}">
+                <Setter Property="DockPanel.Dock" Value="Top" />
+                <Setter Property="Template">
+                <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupItem}">
+                    <DockPanel>
+                        <ContentPresenter DockPanel.Dock="Top" />
+                        <ItemsPresenter DockPanel.Dock="Top" />
+                    </DockPanel>
+                </ControlTemplate>
+                </Setter.Value>
+                </Setter>
+            </Style>
+
+            <DataTemplate x:Key="GroupHeaderTemplate">
+                <DockPanel>
+                    <TextBlock Text="{Binding Path=Name}" />
+                    <TextBlock Name="cnt" Text="{Binding Path=ItemCount}" />
+                </DockPanel>
+            </DataTemplate>
+        </DockPanel.Resources>
+
+        <TextBlock DockPanel.Dock="Top">Employees</TextBlock>
+
+        <ItemsControl Name="itemscontrol" DockPanel.Dock="Top" DataContext="{Binding Source={StaticResource Employees}}"
+                    Style="{StaticResource myControlStyle}"
+                    ItemTemplate="{StaticResource EmployeeTemplate}"
+                    ItemsSource="{Binding }">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate><StackPanel /></ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.GroupStyle>
+                <GroupStyle
+                    ContainerStyle="{StaticResource TeamGroupStyle}"
+                    HeaderTemplate="{StaticResource GroupHeaderTemplate}">
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate><DockPanel /></ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+                <GroupStyle
+                    ContainerStyle="{StaticResource TitleGroupStyle}"
+                    HeaderTemplate="{StaticResource GroupHeaderTemplate}">
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate><DockPanel /></ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </ItemsControl.GroupStyle>
+        </ItemsControl>
+
+        <!--ListBox Name="empLB"  DockPanel.Dock="Top" DataContext="{Binding Source={StaticResource Employees}}"
+                    ItemTemplate="{StaticResource EmployeeTemplate}"
+                    ItemsSource="{Binding }">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate><DockPanel/></ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.GroupBy>
+                <Grouping
+                    Style="{StaticResource TeamGroupStyle}"
+                    HeaderTemplate="{StaticResource GroupHeaderTemplate}"
+                    Property="{Binding Path=Team}">
+                    <Grouping.Panel>
+                        <FrameworkElementFactory Type="{x:Type DockPanel}" />
+                    </Grouping.Panel>
+                    <Grouping.GroupBy>
+                        <Grouping
+                            Style="{StaticResource TitleGroupStyle}"
+                            HeaderTemplate="{StaticResource GroupHeaderTemplate}"
+                            Property="{Binding Path=Title}">
+                            <Grouping.Panel>
+                                <FrameworkElementFactory Type="{x:Type DockPanel}" />
+                            </Grouping.Panel>
+                        </Grouping>
+                    </Grouping.GroupBy>
+                </Grouping>
+            </ListBox.GroupBy>
+        </ListBox-->
+    </DockPanel>
+
+    </StackPanel>
+</Border>
+
+</Page>

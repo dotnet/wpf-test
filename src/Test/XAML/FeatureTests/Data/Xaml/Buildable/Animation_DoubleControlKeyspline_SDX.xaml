@@ -1,0 +1,44 @@
+﻿<cmn:CustomDockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="White"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:cc="http://XamlTestTypes"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+<Canvas Name="Canvas" Width="500" Height="500">
+<Button Name="myText" Height="80" Width="200">
+    <Button.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard FillBehavior="Stop" BeginTime="0:0:0" x:Name="storyboard1">
+                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:5" Duration="0:0:2" FillBehavior="HoldEnd" RepeatBehavior="2x" AutoReverse="true">
+                            <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                <DoubleKeyFrameCollection>
+                                    <SplineDoubleKeyFrame Value="200" KeyTime="0" KeySpline=".7 .2 1 .8" />
+                                    <SplineDoubleKeyFrame Value="50" KeyTime="100%" KeySpline=".9 .2 1 1" />
+                                </DoubleKeyFrameCollection>
+                            </DoubleAnimationUsingKeyFrames.KeyFrames>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard FillBehavior="Stop" BeginTime="0:0:0"  x:Name="storyboard2">
+                        <DoubleAnimationUsingKeyFrames BeginTime="0:0:5" Duration="0:0:2" FillBehavior="HoldEnd" RepeatBehavior="10x" AutoReverse="true">
+                            <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                <DoubleKeyFrameCollection>
+                                    <DiscreteDoubleKeyFrame Value="25" KeyTime="0" />
+                                    <DiscreteDoubleKeyFrame Value="75" KeyTime="100%" />
+                                </DoubleKeyFrameCollection>
+                            </DoubleAnimationUsingKeyFrames.KeyFrames>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>              
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Button.Triggers>
+Animate!
+</Button>
+
+</Canvas>
+</cmn:CustomDockPanel>

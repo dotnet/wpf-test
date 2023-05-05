@@ -1,0 +1,20 @@
+﻿<DockPanel Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=Mscorlib"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+
+        <DockPanel.Resources>
+                <DataTemplate x:Key="myItemTemplate">
+                    <TextBlock Text="in style" Name="inStyle" />
+                </DataTemplate>
+        </DockPanel.Resources>
+
+        <ListBox Name="lb" Width="300" ItemTemplate="{StaticResource myItemTemplate}">
+                <src:Place src:Name="MyPlaceNameOne" src:State="MyPlaceStateOne" />
+                <System:String>string</System:String>
+                <ListBoxItem>ListBoxItem</ListBoxItem>
+                <Button>button</Button>
+        </ListBox>
+</DockPanel>

@@ -1,0 +1,102 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    >
+    <Border Background="cornsilk">
+        <Border.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Margin" Value="2" />
+            </Style>
+
+            <ItemsPanelTemplate x:Key="DockPanelFactory">
+                <DockPanel />
+            </ItemsPanelTemplate>
+
+            <Style x:Key="myControlStyle" TargetType="{x:Type ItemsControl}">
+                <Setter Property="ItemsPanel" Value="{DynamicResource DockPanelFactory}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid>
+                                    <Border Margin="{TemplateBinding Padding}">
+                                        <ItemsPresenter Name="Presenter" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Border.Resources>
+
+
+        <StackPanel Name="panel">
+
+            <!--   grouping - Group files by extension -->
+            <DockPanel Margin="10,10,10,10">
+                <DockPanel.Resources>
+                    <ObjectDataProvider x:Key="Files" ObjectType="{x:Type datasources:FileList}" />
+
+                    <DataTemplate x:Key="FileTemplate">
+                        <DockPanel>
+                            <TextBlock Name="name" Text="{Binding Path=Name}" />
+                            <TextBlock Name="ext" Text="{Binding Path=Extension}" />
+                            <TextBlock Name="size" Text="{Binding Path=Size}" />
+                            <TextBlock Name="mod" Text="{Binding Path=DateModified}" />
+                        </DockPanel>
+                    </DataTemplate>
+
+
+                    <Style x:Key="FileGroupStyle" TargetType="{x:Type GroupItem}">
+                        <Setter Property="DockPanel.Dock" Value="Top" />
+                        <Setter Property="Margin" Value="0,2,0,2" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                    <DockPanel>
+                                        <ContentPresenter DockPanel.Dock="Top" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                        <ItemsPresenter DockPanel.Dock="Top" />
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                    <DataTemplate x:Key="FileHeaderTemplate">
+                        <DockPanel>
+                            <TextBlock Text="{Binding Path=Name}" />
+                            <TextBlock Name="cnt" Text="{Binding Path=ItemCount}" />
+                        </DockPanel>
+                    </DataTemplate>
+                </DockPanel.Resources>
+
+                <TextBlock DockPanel.Dock="Top">Files</TextBlock>
+
+                <ItemsControl Name="itemscontrol" DockPanel.Dock="Top" DataContext="{Binding Source={StaticResource Files}}"
+                                Style="{StaticResource myControlStyle}"
+                            ItemTemplate="{StaticResource FileTemplate}"
+                            ItemsSource="{Binding }">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.GroupStyle>
+                        <GroupStyle
+                            ContainerStyle="{StaticResource FileGroupStyle}"
+                            HeaderTemplate="{StaticResource FileHeaderTemplate}">
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <DockPanel />
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle>
+                    </ItemsControl.GroupStyle>
+                </ItemsControl>
+            </DockPanel>
+        </StackPanel>
+    </Border>
+
+</Page>

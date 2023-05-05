@@ -1,0 +1,39 @@
+<CustomDockPanel Name="DOCKPANEL1" Background="#FFCCCCCC" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <av:RichTextBox Height="500" Width="500">
+    <av:FlowDocument AllowDrop="True" PagePadding="5,0,5,0">
+      <av:Paragraph>
+        <av:Path Name="Animate" Stroke="#FFFF0000" StrokeThickness="50">
+          <av:Path.Data>
+            <av:LineGeometry />
+          </av:Path.Data>
+          <av:Path.Triggers>
+            <av:EventTrigger RoutedEvent="av:FrameworkElement.Loaded">
+              <av:BeginStoryboard>
+                <av:Storyboard>
+                  <av:Storyboard.Children>
+                    <av:ParallelTimeline FillBehavior="Stop" BeginTime="00:00:00" av:Storyboard.TargetProperty="(av:Path.Data).(av:LineGeometry.StartPoint)">
+                      <av:ParallelTimeline.Children>
+                        <av:PointAnimation To="200,150" From="100,150" BeginTime="00:00:05" FillBehavior="HoldEnd" Duration="00:00:02" />
+                      </av:ParallelTimeline.Children>
+                    </av:ParallelTimeline>
+                  </av:Storyboard.Children>
+                </av:Storyboard>
+              </av:BeginStoryboard>
+              <av:BeginStoryboard>
+                <av:Storyboard>
+                  <av:Storyboard.Children>
+                    <av:ParallelTimeline FillBehavior="Stop" BeginTime="00:00:00" av:Storyboard.TargetProperty="(av:Path.Data).(av:LineGeometry.EndPoint)">
+                      <av:ParallelTimeline.Children>
+                        <av:PointAnimation To="300,150" From="400,150" BeginTime="00:00:05" FillBehavior="HoldEnd" Duration="00:00:02" />
+                      </av:ParallelTimeline.Children>
+                    </av:ParallelTimeline>
+                  </av:Storyboard.Children>
+                </av:Storyboard>
+              </av:BeginStoryboard>
+            </av:EventTrigger>
+          </av:Path.Triggers>
+        </av:Path>
+      </av:Paragraph>
+    </av:FlowDocument>
+  </av:RichTextBox>
+</CustomDockPanel>

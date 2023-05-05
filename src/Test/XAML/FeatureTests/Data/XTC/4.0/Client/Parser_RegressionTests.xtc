@@ -1,0 +1,78 @@
+<XTC>
+  <DEFAULTTESTINFO Area="XamlV4" ExecutionGroup="Parser_RegressionTests">
+  </DEFAULTTESTINFO>
+
+  <TEST Name="RegressionIssue137" Priority="0" SubArea="Parser\RegressionTests" Disabled="True">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.UnresolvableTypeInAssemblyTest" TestMethod="RunTest" />
+  </TEST>
+  <TEST Name="RegressionIssue138" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.IXamlTypeResolverTests" TestMethod="RegressionIssue138" />
+  </TEST> 
+  <TEST Name="RegressionIssue139" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.AmbientTypeTest" TestMethod="RegressionIssue139" />
+  </TEST>
+  <TEST Name="RegressionIssue140" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.UnknownCollectionInXxrXxwRoundtrip" TestMethod="RegressionIssue140" />
+  </TEST>
+
+  <TEST Name="NameScopeCoverage" Priority="0" SubArea="Parser\RegressionTests" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.NameScopeTest" TestMethod="NameScopeCoverage" />
+  </TEST>
+  <TEST Name="ServiceProvidersCoverage" Priority="0" SubArea="Parser\RegressionTests" >
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.ServiceProvidersTest" TestMethod="ServiceProvidersCoverage" />
+  </TEST>
+
+  <!-- XamlReader's Load and LoadAsync methods which dont take XmlReader as input block DTD processing -->
+  <TEST Name="DtdProcessing_WPF" Priority="1" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="LoadExceptionTest" File="DtdProcessing.xaml" ExceptionType="System.Windows.Markup.XamlParseException" ParseMode="LoadStream,LoadStreamContext,LoadAsyncStream,LoadAsyncStreamContext,ParseString,ParseStringContext" Mode="WPF" /> 
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\XAML\Data\Xaml\NonBuildable\DtdProcessing.xaml" />
+    </SupportFiles>
+  </TEST>
+
+  <!-- XamlReader's Load and LoadAsync methods which take XmlReader as input respect the ProhibitDtd setting of the passed in XmlReader -->
+  <TEST Name="DtdProcessingXmlReader_WPF" Priority="1" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="LoadTest" File="DtdProcessing.xaml" ParseMode="LoadXmlReader,LoadAsyncXmlReader" Mode="WPF" /> 
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\XAML\Data\Xaml\NonBuildable\DtdProcessing.xaml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="DtdProcessing_SDX" Priority="1" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="LoadExceptionTest" File="DtdProcessing.xaml" ExceptionType="System.Xml.XmlException" Mode="SDX" /> 
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\XAML\Data\Xaml\NonBuildable\DtdProcessing.xaml" />
+    </SupportFiles>
+  </TEST>
+  
+  <TEST Name="RegressionIssue141" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.XmlNamespaceMapsTests" TestMethod="RegressionIssue141" />
+  </TEST>
+  
+  <TEST Name="RegressionIssue141_1" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.XmlNamespaceMapsTests" TestMethod="RegressionIssue141_1" />
+  </TEST>
+  
+  <TEST Name="RegressionIssue142" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.JournalingTest" TestMethod="RegressionIssue142" />
+  </TEST>
+
+  <TEST Name="RegressionIssue143_ObjectElementSyntaxTest" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.RegressionIssue143.XmlNodeReaderTests" TestMethod="ObjectElementSyntaxTest" />
+  </TEST>
+  <TEST Name="RegressionIssue143_PropertyElementSyntaxTest" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.RegressionIssue143.XmlNodeReaderTests" TestMethod="PropertyElementSyntaxTest" />
+  </TEST>
+  <TEST Name="RegressionIssue143_PocoTypeTest" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.RegressionIssue143.XmlNodeReaderTests" TestMethod="PocoTypeTest" />
+  </TEST>
+  <TEST Name="RegressionIssue143_GenericTypeTest" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.RegressionIssue143.XmlNodeReaderTests" TestMethod="GenericTypeTest" />
+  </TEST>
+  <TEST Name="RegressionIssue143_XmlnsIgnoreTest" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.RegressionIssue143.XmlNodeReaderTests" TestMethod="XmlnsIgnoreTest" />
+  </TEST>
+  <TEST Name="RegressionIssue143_XmlnsIgnoreWithPrefixTest" Priority="0" SubArea="Parser\RegressionTests">
+    <DriverParameters XamlTestType="MethodTest" TestAssembly="XamlWpfTests40"  SecurityLevel="FullTrust" TestClass="Microsoft.Test.Xaml.Parser.MethodTests.RegressionTests.RegressionIssue143.XmlNodeReaderTests" TestMethod="XmlnsIgnoreWithPrefixTest" />
+  </TEST>
+</XTC>

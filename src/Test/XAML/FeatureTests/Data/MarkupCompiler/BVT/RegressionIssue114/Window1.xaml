@@ -1,0 +1,16 @@
+<Window x:Class="RegressionIssue114.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:InternalTypes="clr-namespace:InternalTypes;assembly=InternalTypes"
+    Title="Window1" Height="300" Width="300" Loaded="OnLoaded">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type InternalTypes:SuperSecretType}">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <ListBox Name="listBox1">
+            <InternalTypes:SuperSecretType />
+        </ListBox>
+    </Grid>
+</Window>

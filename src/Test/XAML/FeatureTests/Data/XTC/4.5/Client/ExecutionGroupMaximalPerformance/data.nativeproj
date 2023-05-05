@@ -1,0 +1,17 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <TargetType>COPY</TargetType>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5'">
+    <DataFile Include="*.xtc">
+      <SubFolder>FeatureTests\XAML\Data\XTC\4.5\Client\ExecutionGroupMaximalPerformance</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.Native.targets" />
+
+</Project>

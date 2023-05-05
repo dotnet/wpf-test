@@ -1,0 +1,26 @@
+<!-- Bind to a single freezable -->
+<Grid
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <StackPanel>
+        <Button Name = "TargetElement"> 
+            <Button.Background>
+                <RadialGradientBrush GradientOrigin="0, 0">
+                    <RadialGradientBrush.GradientStops>
+                        <GradientStop Color="LightBlue"     Offset="0" />
+                        <GradientStop Color="RoyalBlue"     Offset="0.5" />
+                        <GradientStop Color="DodgerBlue"    Offset="0.75" />
+                        <GradientStop Color="SlateBlue"     Offset="1.0" />
+                    </RadialGradientBrush.GradientStops>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button
+            Width       = "150"
+            Height      = "75" 
+            Background  = "{Binding ElementName=TargetElement, Path=&apos;Background&apos;}">
+        </Button>
+    </StackPanel>
+    
+</Grid>

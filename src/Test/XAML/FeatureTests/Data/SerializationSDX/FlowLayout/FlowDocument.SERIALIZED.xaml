@@ -1,0 +1,790 @@
+<FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <FlowDocument.Resources>
+    <Style TargetType="Line" x:Key="adDottedLine">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="Shape.Stroke">
+        <Setter.Value>
+          <SolidColorBrush>#FF808080</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Shape.StrokeDashArray">
+        <Setter.Value>
+          <DoubleCollection>1 2</DoubleCollection>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Line.X1">
+        <Setter.Value>
+          <s:Double>0</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Line.Y1">
+        <Setter.Value>
+          <s:Double>5</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Line.X2">
+        <Setter.Value>
+          <s:Double>270</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Line.Y2">
+        <Setter.Value>
+          <s:Double>5</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="FrameworkElement.Margin">
+        <Setter.Value>
+          <Thickness>0,0,0,6</Thickness>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Hyperlink" x:Key="adLink1">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="TextElement.FontSize">
+        <Setter.Value>
+          <s:Double>12</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.FontWeight">
+        <Setter.Value>
+          <FontWeight>Bold</FontWeight>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.Foreground">
+        <Setter.Value>
+          <SolidColorBrush>#FF000080</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Hyperlink" x:Key="adLink2">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="TextElement.FontSize">
+        <Setter.Value>
+          <s:Double>10</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.Foreground">
+        <Setter.Value>
+          <SolidColorBrush>#FF008000</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Hyperlink" x:Key="adLinkTop">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="TextElement.FontSize">
+        <Setter.Value>
+          <s:Double>10</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.FontFamily">
+        <Setter.Value>
+          <FontFamily>Veranda</FontFamily>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.Foreground">
+        <Setter.Value>
+          <SolidColorBrush>#FF000080</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="adText">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="TextElement.FontSize">
+        <Setter.Value>
+          <s:Double>10</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.FontFamily">
+        <Setter.Value>
+          <FontFamily>Veranda</FontFamily>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextBlock.TextWrapping">
+        <Setter.Value>
+          <x:Static Member="TextWrapping.WrapWithOverflow" />
+        </Setter.Value>
+      </Setter>
+      <Setter Property="FrameworkElement.Width">
+        <Setter.Value>
+          <s:Double>250</s:Double>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="adTextLinkTop">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="Block.TextAlignment">
+        <Setter.Value>
+          <x:Static Member="TextAlignment.Center" />
+        </Setter.Value>
+      </Setter>
+      <Setter Property="FrameworkElement.Width">
+        <Setter.Value>
+          <s:Double>53</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Canvas.Top">
+        <Setter.Value>
+          <s:Double>-14</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Canvas.Right">
+        <Setter.Value>
+          <s:Double>0</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.Background">
+        <Setter.Value>
+          <SolidColorBrush>#FFFFFFFF</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="adTextTop">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="Block.TextAlignment">
+        <Setter.Value>
+          <x:Static Member="TextAlignment.Center" />
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.FontSize">
+        <Setter.Value>
+          <s:Double>11</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.FontFamily">
+        <Setter.Value>
+          <FontFamily>Veranda</FontFamily>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.Foreground">
+        <Setter.Value>
+          <SolidColorBrush>#FF808080</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="FrameworkElement.Width">
+        <Setter.Value>
+          <s:Double>78</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Canvas.Top">
+        <Setter.Value>
+          <s:Double>-14</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Canvas.Left">
+        <Setter.Value>
+          <s:Double>8</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.Background">
+        <Setter.Value>
+          <SolidColorBrush>#FFFFFFFF</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Hyperlink" x:Key="endLink">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Style.Triggers>
+        <Trigger Property="UIElement.IsMouseOver">
+          <Setter Property="Inline.TextDecorations">
+            <Setter.Value>
+              <TextDecorationCollection>
+                <TextDecoration Location="Underline" />
+              </TextDecorationCollection>
+            </Setter.Value>
+          </Setter>
+          <Trigger.Value>
+            <s:Boolean>True</s:Boolean>
+          </Trigger.Value>
+        </Trigger>
+      </Style.Triggers>
+      <Setter Property="TextElement.Foreground">
+        <Setter.Value>
+          <SolidColorBrush>#FFDC143C</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.FontFamily">
+        <Setter.Value>
+          <FontFamily>verdana</FontFamily>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Inline.TextDecorations">
+        <Setter.Value>
+          <TextDecorationCollection />
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Image" x:Key="imageLinks">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="FrameworkElement.Margin">
+        <Setter.Value>
+          <Thickness>0,0,1,0</Thickness>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Viewbox.Stretch">
+        <Setter.Value>
+          <x:Static Member="Stretch.None" />
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Paragraph" x:Key="normaPara">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="TextElement.FontSize">
+        <Setter.Value>
+          <s:Double>12</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Block.Margin">
+        <Setter.Value>
+          <Thickness>0,20,0,0</Thickness>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Paragraph.MinWidowLines">
+        <Setter.Value>
+          <s:Int32>2</s:Int32>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Paragraph.MinOrphanLines">
+        <Setter.Value>
+          <s:Int32>2</s:Int32>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Section" x:Key="normaSect">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="TextElement.FontSize">
+        <Setter.Value>
+          <s:Double>12</s:Double>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Block.Margin">
+        <Setter.Value>
+          <Thickness>0,20,0,0</Thickness>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Table" x:Key="statTable">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="Block.BorderThickness">
+        <Setter.Value>
+          <Thickness>2,2,2,2</Thickness>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Block.BorderBrush">
+        <Setter.Value>
+          <SolidColorBrush>#FF000000</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Block.Margin">
+        <Setter.Value>
+          <Thickness>20,20,20,0</Thickness>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Figure" x:Key="{x:Type Figure}">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="Block.Margin">
+        <Setter.Value>
+          <Thickness>0,0,0,0</Thickness>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Block.Padding">
+        <Setter.Value>
+          <Thickness>0,0,0,0</Thickness>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Floater" x:Key="{x:Type Floater}">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="Block.Margin">
+        <Setter.Value>
+          <Thickness>0,0,0,0</Thickness>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Block.Padding">
+        <Setter.Value>
+          <Thickness>0,0,0,0</Thickness>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Paragraph" x:Key="{x:Type Paragraph}">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="Block.Margin">
+        <Setter.Value>
+          <Thickness>0,0,0,0</Thickness>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="TableRow" x:Key="tableWhiteText">
+      <Style.Resources>
+        <ResourceDictionary />
+      </Style.Resources>
+      <Setter Property="TextElement.Foreground">
+        <Setter.Value>
+          <SolidColorBrush>#FFFFFFFF</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.Background">
+        <Setter.Value>
+          <SolidColorBrush>#FF000000</SolidColorBrush>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="TextElement.FontWeight">
+        <Setter.Value>
+          <FontWeight>Bold</FontWeight>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </FlowDocument.Resources>
+  <Paragraph FontWeight="Bold" FontSize="32" Foreground="#FF000080">Relief Efforts</Paragraph>
+  <Paragraph FontSize="26" Foreground="#FF000080">White Sox closer's job still up for grabs</Paragraph>
+  <Paragraph Margin="0,10,0,0" FontWeight="Bold">Posted: Monday May 9, 2005 2:25PM; Updated: Monday May 9, 2005 2:25PM</Paragraph>
+  <Paragraph>
+    <Line X2="1000" X1="0" Stroke="#FF808080" Y2="0" Y1="0" />
+  </Paragraph>
+  <Paragraph FontWeight="Bold" Style="{DynamicResource normaPara}" Foreground="#FF000080">By Brian McKitish, Special to SI.com</Paragraph>
+  <Paragraph>
+    <Line X2="1000" X1="0" Stroke="#FF000080" Y2="0" Y1="0" />
+  </Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">It's officially a dogfight between <Bold>Shingo Takatsu</Bold> and <Bold>Dustin Hermanson</Bold> for the closers gig on the South Side of Chicago. Of course, <Bold>Damaso Marte</Bold> will see a few save chances, but he's more valuable as a set-up man because of his ability to shut down left-handed bats. Take a look at the last seven save opportunities for the White Sox:</Paragraph>
+  <Section Margin="0,20,0,0" Style="{DynamicResource normaSect}">
+    <Paragraph>April 24: Takatsu</Paragraph>
+    <Paragraph>April 30: Hermanson</Paragraph>
+    <Paragraph>May 3: Takatsu</Paragraph>
+    <Paragraph>May 4: Hermanson</Paragraph>
+    <Paragraph>May 5: Takatsu</Paragraph>
+    <Paragraph>May 6: Hermanson</Paragraph>
+    <Paragraph>May 8: Marte</Paragraph>
+  </Section>
+  <Paragraph Name="FirstParagraph" Style="{DynamicResource normaPara}">Before Marte popped his head in there, <Bold>Ozzie Guillen</Bold> had a nice little rotation with Takatsu and Hermanson switching off every other day. Marte struggled to record his second save of the season Sunday, but Guillen chose to stick with him even though he had Takatsu warmed up in the pen. That shows the manager's confidence in Shingo has diminished in recent weeks.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">Who is going to win the dogfight? A lot is going to depend future performance. We just have to see how this plays out. If both guys continue to nail down saves, we might see this two-headed monster for a little while. That said, a blown save by either candidate could quickly settle the argument. Thanks to a 0.00 ERA, Hermanson probably has a little more wiggle room than Takatsu right now, but don't count Takatsu out just yet.</Paragraph>
+  <Section>
+    <Paragraph Style="{DynamicResource normaPara}">Let's see if the past can tell us anything about the future of the two closer candidates.</Paragraph>
+    <Table Style="{DynamicResource statTable}">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <Table.Resources>
+        <Style TargetType="Paragraph" x:Key="{x:Type Paragraph}">
+          <Style.Resources>
+            <ResourceDictionary />
+          </Style.Resources>
+          <Setter Property="Block.TextAlignment">
+            <Setter.Value>
+              <x:Static Member="TextAlignment.Center" />
+            </Setter.Value>
+          </Setter>
+          <Setter Property="Block.Padding">
+            <Setter.Value>
+              <Thickness>2,4,2,4</Thickness>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </Table.Resources>
+      <TableRowGroup>
+        <TableRow Background="#FF000080" Style="{DynamicResource tableWhiteText}">
+          <TableCell ColumnSpan="9">
+            <Paragraph KeepWithNext="True">Shingo Takatsu</Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow Style="{DynamicResource tableWhiteText}">
+          <TableCell>
+            <Paragraph>Year</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>IP</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>SV</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>BS</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>ERA</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>WHIP</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>BB</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>K</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph KeepWithNext="True">BAA</Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow Background="#FFFFFFFF">
+          <TableCell>
+            <Paragraph>2004</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>62.1</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>19</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>1</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>2.31</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>0.98</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>21</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>50</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph KeepWithNext="True">.182</Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow Background="#FFD3D3D3">
+          <TableCell>
+            <Paragraph>2005</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>8.2</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>8</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>1</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>6.23</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>1.62</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>5</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>11</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>.265</Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+  </Section>
+  <Paragraph Style="{DynamicResource normaPara}">Has the league caught up to Takatsu in his second year or has he just run into a string of bad outings? It's impossible to tell with such a small sample size, but Takatsu has a very good track record in closing out games.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">I'd be a little more worried if this implosion occurred in September. Takatsu slumped for a stretch in 2004, but managed to bounce back. It looks like Shingo can overcome his poor start to be an effective closer for the White Sox this season. He will, however, need to break out of this mini-slump soon before Hermanson snatches the job out of his hands.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">Hermanson was a nice surprise last year when he took over the closer's gig in San Francisco. Despite his 4.33 ERA, he saved 17 games and turned himself into a key contributor in fantasy leagues down the stretch. But what a difference a year makes. What's troublesome is that opposing hitters are still seeing the ball pretty well when facing Hermanson, as evidenced by the similar BAA. Part of his success can be attributed to his improved control, but it seems more likely that he will come back to earth in the near future.</Paragraph>
+  <Table Style="{DynamicResource statTable}">
+    <Table.Columns>
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+      <TableColumn />
+    </Table.Columns>
+    <Table.Resources>
+      <Style TargetType="Paragraph" x:Key="{x:Type Paragraph}">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="Block.TextAlignment">
+          <Setter.Value>
+            <x:Static Member="TextAlignment.Center" />
+          </Setter.Value>
+        </Setter>
+        <Setter Property="Block.Padding">
+          <Setter.Value>
+            <Thickness>2,4,2,4</Thickness>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="Paragraph.KeepWithNext">
+          <Setter.Value>
+            <s:Boolean>True</s:Boolean>
+          </Setter.Value>
+        </Setter>
+      </Style>
+    </Table.Resources>
+    <TableRowGroup>
+      <TableRow Style="{DynamicResource tableWhiteText}">
+        <TableCell ColumnSpan="9">
+          <Paragraph Background="#FF000080">Dustin Hermanson</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow Style="{DynamicResource tableWhiteText}">
+        <TableCell>
+          <Paragraph>Year</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>IP</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>SV</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>BS</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>ERA</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>WHIP</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>BB</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>K</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>BAA</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow Background="#FFFFFFFF">
+        <TableCell>
+          <Paragraph>2004<Span Typography.Variants="Superscript">*</Span></Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>27.0</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>17</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>3</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>4.33</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>1.22</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>11</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>28</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>.224</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow Background="#FFD3D3D3">
+        <TableCell>
+          <Paragraph>2005</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>13.2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>5</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>0</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>0.00</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>0.95</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>2</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>10</Paragraph>
+        </TableCell>
+        <TableCell>
+          <Paragraph>.234</Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow Background="#FFFFFFFF">
+        <TableCell ColumnSpan="9">
+          <Paragraph TextAlignment="Left">
+            <Span Typography.Variants="Superscript">*</Span> - relief stats only</Paragraph>
+        </TableCell>
+      </TableRow>
+    </TableRowGroup>
+  </Table>
+  <Paragraph Style="{DynamicResource normaPara}">Given his hot start, Hermanson certainly has the upper hand but don't give up on Takatsu just yet. Marte will be third in line for saves and will mostly be used as a situational closer. Pay close attention to the battle on the South Side in the upcoming weeks. In the meantime it would be wise for Takatsu owners to try to get their hands on Hermanson and vice versa.</Paragraph>
+  <Section>
+    <Paragraph FontWeight="Bold" FontSize="20" Style="{DynamicResource normaPara}" Foreground="#FF000080">Save Ferris</Paragraph>
+    <Paragraph FontWeight="Bold" Style="{DynamicResource normaPara}">National League</Paragraph>
+    <Paragraph Style="{DynamicResource normaPara}">
+      <Bold>Atlanta Braves:</Bold> In last year's 39-save season, <Bold>Danny Kolb</Bold> learned that a pitcher does not need to strike everyone out to be successful. He attacked the strike zone and pitched to contact, rather than shying away from it and finished the year with only 15 walks in 57 1/3 innings. Kolb's control has deserted him this season - 10 walks in 12 innings. Granted, he has thrown three shutout innings since his implosion against the Mets on April 26, but he's allowed two free passes during that time. Since his stuff is not dominating (only 21 Ks last year) Kolb must rely on his command of the strike zone to get batters out. If he can't bear down and hit his spots, it's going to be a long year for the Braves closer. With <Bold>Chris Reitsma</Bold> (14 1/3 IP, 0.63 ERA) and <Bold>Adam Bernero</Bold> (15 IP, 3.00 ERA) waiting in the wings, Kolb better figure things out soon.</Paragraph>
+  </Section>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>Arizona Diamondbacks:</Bold> Everyone's talking about <Bold>Brandon Lyon's</Bold> 11 saves and 1.93 ERA but his underlying numbers suggest that his success may be a bit of a mirage. Opposing batters are hitting .310 against Lyon, which is not far off from his career .292 BAA. In case you were wondering, pitchers who give up that many hits do not usually finish the season with a low ERA. Lyon's job is safe and he'll be valuable for saves but expect his ERA to climb sooner rather than later.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}" />
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>Chicago Cubs</Bold>: After another blown save on Friday, <Bold>LaTroy Hawkins</Bold> most likely will be removed from the closer's role within the week. Again. Hawk has never been comfortable as a stopper as evidenced by his 30 career blown saves. In fact, as a Hawkins owner, I can't wait until he is removed from the closer's role because he may be more valuable as a setup man. <Bold>Dusty Baker</Bold> seems to be initiating the move already as he had <Bold>Ryan Dempster</Bold> (Monday's scheduled starter) warming up towards the end of the Cubs' 2-1 victory over the Phillies Sunday. Dempster saved two games last season for the Cubs but he still walks too many guys (22 BB in 33 2/3 innings). If Dempster is anointed the closer in Chicago, it may be short lived because <Bold>Joe Borowski</Bold> has looked good in his two rehab appearances, and Baker might just hand the job over to him.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>Cincinnati Reds</Bold>: <Bold>Danny Graves</Bold> blew his first save of the season last Monday against St. Louis. Two of the runs were unearned, but Graves did plenty to lose the game, surrendering two home runs. Graves isn't in danger of losing his job but he better look in the rear-view mirror because future closer <Bold>Ryan Wagner</Bold> (3.12 ERA, 1.03 WHIP 17/3 K/BB rate) is right on his tail.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>Florida Marlins:</Bold> Elbow inflammation is never a good sign when you are talking about pitchers. <Bold>Guillermo Mota</Bold> is the third prominent National League closer to hit the DL in the past two weeks. The beneficiary in this case is <Bold>Todd Jones</Bold>. Yes, the same Todd Jones who recorded 42 saves for Detroit in 2000. He's not the same pitcher that he once was but he'll be serviceable as a short-term option in all leagues. There's talk that Mota's injury may be more serious than originally expected so Jones could have plenty of value over the next month. Future closer <Bold>Tim Spooneybarger</Bold> is still recovering from Tommy John surgery and won't figure into the mix until later in the year.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>Los Angeles Dodgers: Yhency Brazoban</Bold> has done an admirable job filling in for <Bold>Eric Gagne</Bold> with nine saves in 10 opportunities. Brazoban's emergence has allowed to Dodgers to play it safe and take their time with Gagne's inflamed right elbow. Gagne has targeted a return on May 14. So if all goes well in his rehab, Brazoban will be used as a setup man and will be one of the top vulture relievers this season.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>Milwaukee Brewers</Bold>: It's <Bold>Derrick Turnbow's</Bold> world, we're just living in it ... for now. Despite blowing his most recent save opportunity, Turnbow has been lights out since taking over as the closer for the Brewers. He certainly has the stuff to be a successful stopper although he might not know where the ball is going all of the time. His control (13/7 K/BB rate) is worrisome so his 0.91 WHIP and 1.88 ERA are bound to climb, but he's distanced himself from <Bold>Mike Adams</Bold> and appears to be headed in the right direction. In the meantime, four wins in eight days will make that missed save opportunity a lot easier to swallow.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>San Francisco Giants:</Bold> No one in the Giants pen is pitching well and the pressure is on GM <Bold>Brian Sabean</Bold> to find someone to rely on at the end of games. The latest bullpen implosion came on Saturday when rookie <Bold>Jeremy Accardo</Bold> and <Bold>Jim Brower</Bold> combined to blow a one-run lead against the Nationals. The job still seems to be Brower's by default, but <Bold>Matt Herges</Bold>, <Bold>Jeff Fassero</Bold>, Accardo, <Bold>Scott Eyre</Bold> and <Bold>Tyler Walker</Bold> are still in the mix. This could truly end up being a bullpen-by-committee until one guy separates himself from the pack. Look for the Giants to either recall <Bold>David Aardsma</Bold> or make a trade for some help. My money is on the latter.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>St. Louis Cardinals: Jason Isringhausen's</Bold> recovery from an abdominal strain is going well and he should return from the DL on Wednesday. If he's not ready by then, <Bold>Julian Tavarez</Bold> and <Bold>Al Reyes</Bold> will continue to get the save opportunities for the Cards.</Paragraph>
+  <Paragraph FontWeight="Bold" Style="{DynamicResource normaPara}">American League</Paragraph>
+  <Section ClearFloaters="Both">
+    <Paragraph Style="{DynamicResource normaPara}">
+      <Bold>Cleveland Indians:</Bold> The Indians bullpen has been nothing short of dominant during their first 29 games of the season:</Paragraph>
+    <Table Style="{DynamicResource statTable}">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <Table.Resources>
+        <Style TargetType="Paragraph" x:Key="{x:Type Paragraph}">
+          <Style.Resources>
+            <ResourceDictionary />
+          </Style.Resources>
+          <Setter Property="Block.TextAlignment">
+            <Setter.Value>
+              <x:Static Member="TextAlignment.Center" />
+            </Setter.Value>
+          </Setter>
+          <Setter Property="Block.Padding">
+            <Setter.Value>
+              <Thickness>2,4,2,4</Thickness>
+            </Setter.Value>
+          </Setter>
+          <Setter Property="Paragraph.KeepWithNext">
+            <Setter.Value>
+              <s:Boolean>True</s:Boolean>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </Table.Resources>
+      <TableRowGroup>
+        <TableRow Style="{DynamicResource tableWhiteText}">
+          <TableCell>
+            <Paragraph>Player</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>IP</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>ERA</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>WHIP</Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow Background="#FFFFFFFF">
+          <TableCell>
+            <Paragraph>David Riske</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>14.1</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>0.00</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>0.56</Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow Background="#FFD3D3D3">
+          <TableCell>
+            <Paragraph>Rafael Betancourt</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>15.1</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>1.17</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>0.39</Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow Background="#FFFFFFFF">
+          <TableCell>
+            <Paragraph>Arthur Rhodes</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>14.2</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>1.23</Paragraph>
+          </TableCell>
+          <TableCell>
+            <Paragraph>0.61</Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+  </Section>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>Bob Wickman</Bold> is going to have to be on his game the way these guys are pitching. <Bold>Arthur Rhodes</Bold> is probably more valuable as a lefty specialist, but both <Bold>Rafael Betancourt</Bold> and <Bold>David Riske</Bold> could see save opportunities if Wickman falters. Just something to keep in mind if you are the speculating type.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>Kansas City Royals:</Bold> It's still <Bold>Ambiorix Burgos'</Bold> job to lose, but the 8-23 Royals haven't been able to win enough games to give anyone a ton of save chances. In fact, Burgos ended up having to save his own win on Sunday after the Royals surprised him with run support after he'd entered a tie game. The Royals have yet to decide what to do with <Bold>Jeremy Affeldt</Bold> when he returns from an injured groin and he's still throwing from flat ground, so they'll have plenty of time to make up their minds. <Bold>Andy Sisco</Bold> continues his dominance despite allowing a few runs last week. The 6-foot-10 lefty struck out four hitters in 1 1/3 innings on Saturday.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">
+    <Bold>New York Yankees:</Bold> Tough week for <Bold>George</Bold>. First, his Yankees lose five of seven, then <Bold>Bellamy Road</Bold> finishes a disappointing seventh in the Kentucky Derby. As the Yankees struggle, <Bold>Mariano Rivera</Bold> finds himself watching from the bullpen with only 9 2/3 innings on the season. Now is an ideal time to offer up a buy-low deal for the closer, as he will inevitably be given more save opportunities as the Yankees turn things around.</Paragraph>
+  <Section>
+    <Paragraph FontWeight="Bold" FontSize="20" Style="{DynamicResource normaPara}" Foreground="#FF000080">Vulture Club</Paragraph>
+    <Paragraph Style="{DynamicResource normaPara}">
+      <Bold>Jermaine Dye's</Bold> sixth-inning home run off <Bold>Pete Walker</Bold> Sunday snapped an 10 2/3-inning streak of no-hit ball by the Blue Jays bullpen. Quite impressive for a relief corps consisting of the aforementioned Walker, <Bold>Justin Speier, Jason Frasor, Vinnie Chulk, Scott Schoeneweis</Bold> and <Bold>Miguel Batista</Bold>. With those type of numbers, it's not surprising that the Jays took four out of six on their road trip against the Yanks and Orioles.</Paragraph>
+  </Section>
+  <Paragraph Style="{DynamicResource normaPara}">We have a few new additions to the vulture club this week:</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">4 wins: Turnbow (MIL)</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">3 wins: <Bold>Danys Baez</Bold> (TB), <Bold>Scot Shields</Bold> (LAA), <Bold>Todd Williams</Bold> (BAL), <Bold>Chris Hammond</Bold> (SD), <Bold>Giovanni Carrara</Bold> (LAD)</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">Notables with 2 wins: Bernero (ATL), <Bold>Roberto Hernandez</Bold> (NYM), <Bold>Tyler Walker</Bold> (SF), <Bold>Kiko Calero</Bold> (OAK), <Bold>Justin Duchscherer</Bold> (OAK), <Bold>Bob Howry</Bold> (CLE), <Bold>Steve Kline</Bold> (BAL), <Bold>Damaso Marte</Bold> (CWS), <Bold>Juan Rincon</Bold> (MIN), <Bold>Luis Vizcaino</Bold> (CWS)</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">Be sure to check out <Bold>Ryan Madson</Bold> and <Bold>Mike Gonzalez</Bold>, both of whom are heating up after slow starts. Madson has thrown 7 1/3 scoreless innings with 11 K's while Gonzalez hasn't allowed a run in 6 2/3 innings. Both will end up as valuable middle relievers in fantasy leagues.</Paragraph>
+  <Paragraph Style="{DynamicResource normaPara}">Next week we'll return to your regularly scheduled program with <Bold>David Young</Bold> at the helm. Until then, shut 'em down.</Paragraph>
+  <Paragraph FontStyle="Italic" Style="{DynamicResource normaPara}">Brian "Littlemac" McKitish at the <Hyperlink Style="{DynamicResource endLink}" NavigateUri="http://www.talentedmrroto.com/">Talented Mr. Roto</Hyperlink> is a veteran of all three major fantasy sports. Brian's experience includes four years of college baseball at Columbia University. His column, Uncommon Thievery was recognized by the Fantasy Sports Writers' Association as 2004's Web-based Article of the Year. He would be happy to answer any questions at <Hyperlink Style="{DynamicResource endLink}">littlemac@talentedmrroto.com</Hyperlink></Paragraph>
+</FlowDocument>

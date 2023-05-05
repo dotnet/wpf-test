@@ -1,0 +1,57 @@
+﻿
+
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media.Animation;assembly=PresentationCore">
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Canvas.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<EventTrigger.Actions>
+				<BeginStoryboard>
+					<Storyboard
+      TargetName="border1"
+      Storyboard.TargetProperty="(Canvas.Left)"
+      BeginTime="00:00:00"
+      Duration="Forever"
+     >
+						<DoubleAnimation xmlns="clr-namespace:System.Windows.Media.Animation;assembly=PresentationCore" From="badvalue" To="300" AutoReverse="true" RepeatBehavior="0:0:4" BeginTime="0:0:0" Duration="0:0:1.2" />
+					</Storyboard>
+				</BeginStoryboard>
+				<BeginStoryboard>
+					<Storyboard
+      TargetName="border1"
+      Storyboard.TargetProperty="(Canvas.Top)"
+      BeginTime="00:00:00"
+      Duration="Forever"
+                    >
+						<DoubleAnimation xmlns="clr-namespace:System.Windows.Media.Animation;assembly=PresentationCore" From="10" To="180" AutoReverse="true" RepeatBehavior="0:0:4" BeginTime="0:0:0" Duration="0:0:3.2" />
+					</Storyboard>
+				</BeginStoryboard>
+				<BeginStoryboard>
+					<Storyboard
+      TargetName="border1"
+      Storyboard.TargetProperty="(Border.Height)"
+      BeginTime="00:00:00"
+      Duration="Forever"
+     >
+						<DoubleAnimation xmlns="clr-namespace:System.Windows.Media.Animation;assembly=PresentationCore" From="10" To="180" AutoReverse="true" RepeatBehavior="badvalue" BeginTime="0:0:0" Duration="badvalue" />
+					</Storyboard>
+				</BeginStoryboard>
+				<BeginStoryboard>
+					<Storyboard
+      TargetName="border1"
+      Storyboard.TargetProperty="(Border.Width)"
+      BeginTime="00:00:00"
+      Duration="Forever"
+     >
+						<DoubleAnimation xmlns="clr-namespace:System.Windows.Media.Animation;assembly=PresentationCore" From="10" To="470" AutoReverse="true" RepeatBehavior="0:0:4" BeginTime="0:0:0" Duration="0:0:0.79" />
+					</Storyboard>
+				</BeginStoryboard>
+			</EventTrigger.Actions>
+		</EventTrigger>
+	</Canvas.Triggers>
+
+		<Border Name="border1" Height="10" Width="10" BorderBrush="#80ff80" BorderThickness="4px"
+        Canvas.Top="10" Canvas.Left="10" />
+
+</Canvas>
+
+</Page>

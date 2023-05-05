@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <!--Automatically converted using custom WPF settings-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <Choose>
+      <When Condition="'$(WPF_TESTBUILD_IA64)' == 'true'">
+        <PropertyGroup>
+            <AssemblyName>XamlCommon</AssemblyName>
+            <OutputSubFolder>FeatureTests\XAML</OutputSubFolder>
+        </PropertyGroup>
+      </When>
+      <Otherwise>
+        <PropertyGroup>
+            <AssemblyName>XamlCommonIA64</AssemblyName>
+            <OutputSubFolder>FeatureTests\XAML\IA64BuildCheck</OutputSubFolder>
+        </PropertyGroup>
+      </Otherwise>
+  </Choose>
+  <PropertyGroup>   
+    <OutputType>Library</OutputType>
+    
+    <!--<AssemblyName>XamlCommon</AssemblyName>-->
+    <AllowPartialTrustedCalls>true</AllowPartialTrustedCalls>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <DefineConstants>$(DefineConstants);TRACE;TARGET_NET3_5</DefineConstants>
+    <DocumentationFile>$(IntermediateOutputDirectory)\$(AssemblyName).xml</DocumentationFile>
+    <!-- Included Project files -->
+    <AsyncCodeLocation>$(WpfTest)\Xaml\FeatureTests\XamlCommon\Microsoft\Test\Xaml\Async</AsyncCodeLocation>
+    <FrameworkCodeLocation>$(WpfTest)\Xaml\FeatureTests\XamlCommon\Microsoft\Test\Xaml\Framework</FrameworkCodeLocation>
+    <ParserCodeLocation>$(WpfTest)\Xaml\FeatureTests\XamlCommon\Microsoft\Test\Xaml\Parser</ParserCodeLocation>
+    <TesttypesCodeLocation>$(WpfTest)\Xaml\FeatureTests\XamlCommon\Microsoft\Test\Xaml\TestTypes</TesttypesCodeLocation>
+    <ProjectGuid>{CCD7C340-E987-44CA-B994-65364DEA7325}</ProjectGuid>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <PublisherName>Microsoft Corp.</PublisherName>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <BinplaceFlags Include="@(BinplaceFlags)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Data" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <!-- Framework and Custom type code that ALWAYS builds -->
+  <ItemGroup>
+    <Compile Include="FxCopSuppressions.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestTypes\XamlTestType.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Utilities\ReflectionServices.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Utilities\Assert.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <!--Framework and custom type code that builds only for 4.0 -->
+  <ItemGroup Condition="'$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5'">
+    <Compile Include="Microsoft\Test\Xaml\TestTypes\CDFMethodTest.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestTypes\CDFTestInfrastructure.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\CustomNamespacePrefixLookup.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\CustomXamlNamespaceResolver.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\ExtensionMethods.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\GetAllXamlNamespacesTest.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\GetPreferredPrefixTest.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\GetXamlNamespacesTest.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\SchemaTestAttribute.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\SchemaTestBase.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\SchemaTestFailedException.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Schema\TryGetCompatibleXamlNamespaceTest.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Framework\FrameworkHelper.cs" />
+    <Complie Include="Microsoft\Test\Xaml\Utilities\ExceptionHelpers.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Framework\XamlTestRunner_v40_IA64.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\DataTestException.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\Global.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\Logger.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\Namespaces.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\NodeList.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\NodeListFactory.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\NodeListXmlWriter.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\PropertyBag.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\TestMetadata.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\Nodes.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\NodeListTransforms.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\XamlNodeReader.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\XamlNodeWriter.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XamlOM\XamlReaderWriterTest.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\NodeWriterXamlXmlReaderTestDriver.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\XamlXmlWriterXamlXmlReaderTestDriver.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XName.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Common\XNamespace.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\ObjectDoubleRoundtripDriver.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\XamlDoubleRoundtripDriver.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\XamlTestDriverBase.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\SchemaExtensibilityTestCaseInfo.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\TestCaseInfo.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\TestDrivers.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\XamlFirstTestCaseInfo.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Driver\XamlTestDriver.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Utilities\ExceptionMessageHelper.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Utilities\ObjectDumper.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestHost\DummyNamespaces.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Microsoft\Test\Xaml\TestHost\DummyNamespace1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Microsoft\Test\Xaml\TestHost\DummyNamespace2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Microsoft\Test\Xaml\Utilities\DirectoryAssistance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Microsoft\Test\Xaml\Utilities\ExceptionHelpers.cs" />
+    <Compile Include="Microsoft\Test\Xaml\Utilities\XPathInspector.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\XamlObjectComparer\CompareResult.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\XamlObjectComparer\IgnoreProperty.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\XamlObjectComparer\PropertyToIgnore.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\XamlObjectComparer\TreeComparer.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\XamlObjectComparer\XamlObjectComparer.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphCore\GraphNode.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphCore\IGraphNode.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphCore\ITestDependencyObject.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphCore\TestDependencyObject.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphOperations\Builders\IXamlObjectGraphBuilder.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphOperations\Builders\ObjectGraphWalker.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphOperations\Builders\XamlObjectGraphBuilder.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphOperations\Comparers\CompareError.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphOperations\Comparers\CompareMode.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphOperations\Comparers\GraphCompareResults.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphOperations\Comparers\ObjectGraphComparer.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\GraphOperations\Viewers\Dotty.cs" />
+    <Compile Include="Microsoft\Test\Xaml\TestObjects\Xaml\ObjectGraph.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeIA64Project)">
+      <Name>TestRuntimeIA64</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>

@@ -1,0 +1,53 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:dataTest="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTest"
+    xmlns:local="clr-namespace:Microsoft.Test.DataServices"
+    xmlns:sysdata="clr-namespace:System.Data;assembly=System.Data"
+    xmlns:cp="clr-namespace:Codeplex;assembly=DataServicesTestCommon"
+    Name="Root" Background="cornsilk"
+    >
+  <DockPanel.Resources>
+    <cp:XLinqDataProvider x:Key="XLinqPath" Source="pack://application:,,,/DataServicesTestOrcas;component/Resource\XLinqPath.xml" />
+    
+    <DataTemplate DataType="{}{http://namespace}MultipleElements">
+      <TextBlock Text="{Binding Path=Element[{http://namespace}ElementValue].Value, Mode=TwoWay}" />
+    </DataTemplate>
+
+    <DataTemplate DataType="MultipleElements">
+      <TextBlock Text="{Binding Path=Element[ElementValue].Value, Mode=TwoWay}" />
+    </DataTemplate>
+    
+    <DataTemplate DataType="NamespaceAttributeElement">
+        <TextBlock Text="{Binding Path=Attribute[{http://namespace}AttributeValue].Value, Mode=TwoWay}" />
+    </DataTemplate>
+    
+    <DataTemplate DataType="AttributeElement">
+        <TextBlock Text="{Binding Path=Attribute[AttributeValue].Value, Mode=TwoWay}" />
+    </DataTemplate>
+    
+    <DataTemplate DataType="XmlElement">
+        <TextBlock Text="{Binding Path=Xml}" />
+    </DataTemplate>
+
+    <DataTemplate DataType="{}{http://namespace}ElementValue">
+      <TextBlock Text="{Binding Path=Value, Mode=TwoWay}" />
+    </DataTemplate>
+    
+    <DataTemplate DataType="ElementValue">
+      <TextBlock Text="{Binding Path=Value, Mode=TwoWay}" />
+    </DataTemplate>
+    
+  </DockPanel.Resources>
+
+  <ListBox Name="NamespaceMultipleElements" ItemsSource="{Binding Path=Elements[{http://namespace}MultipleElements], Source={StaticResource XLinqPath}}" />
+  <ListBox Name="MultipleElements" ItemsSource="{Binding Path=Elements[MultipleElements], Source={StaticResource XLinqPath}}" />
+  <ListBox Name="NamespaceAttributeElement" ItemsSource="{Binding Path=Elements[NamespaceAttributeElement], Source={StaticResource XLinqPath}}" />
+  <ListBox Name="AttributeElement" ItemsSource="{Binding Path=Elements[AttributeElement], Source={StaticResource XLinqPath}}" />
+  <ListBox Name="XmlElement" ItemsSource="{Binding Path=Elements[XmlElement], Source={StaticResource XLinqPath}}" />
+  <ListBox Name="AllElements" ItemsSource="{Binding Path=Elements, Source={StaticResource XLinqPath}}" />
+  <ListBox Name="NamespaceDescendants" ItemsSource="{Binding Path=Descendants[{http://namespace}ElementValue], Source={StaticResource XLinqPath}}" />
+  <ListBox Name="Descendants" ItemsSource="{Binding Path=Descendants[ElementValue], Source={StaticResource XLinqPath}}" />
+  <ListBox Name="AllDescendants" ItemsSource="{Binding Path=Descendants, Source={StaticResource XLinqPath}}" />
+</DockPanel>

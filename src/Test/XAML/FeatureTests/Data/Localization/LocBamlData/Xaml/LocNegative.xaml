@@ -1,0 +1,82 @@
+<!-- Window containing elements with properties that are not localizable -->
+<Window
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:col   = "clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:sys   = "clr-namespace:System;assembly=mscorlib"
+    x:Class     = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest"
+    >
+
+    <StackPanel x:Uid="StackPanel_1" Tag="xyz"> <!-- Tag has [Localizability(LocalizationCategory.NeverLocalize)] -->
+
+        <StackPanel.Resources>
+            <XmlDataProvider x:Key="xdp" x:Uid="TextBlock_1" XPath="abc" />
+        </StackPanel.Resources>
+
+        <ComboBox x:Uid="ComboBox_1" SelectedValuePath="cb" />
+
+        <ContentControl x:Uid="ContentControl_1" ContentStringFormat="ccformat" Content="MyControlControl" />
+
+        <ContentPresenter x:Uid="ContentPresenter_1" ContentSource="csource" ContentStringFormat="cpformat" />
+
+        <Expander x:Uid="Expander_1">expandercontent</Expander>
+
+        <Frame x:Uid="Frame_1" Content="framecontent1" />  
+
+        <GridViewRowPresenter x:Uid="GridViewRowPresenter_1" Content="gvrpcontent" />
+
+        <GridViewHeaderRowPresenter x:Uid="GridViewHeaderRowPresenter_1" ColumnHeaderStringFormat="gvhrpformat" />
+
+        <GroupBox x:Uid="GroupBox_1">groupboxcontent</GroupBox>
+
+        <GroupBox x:Uid="GroupBox_2">
+            <GroupItem x:Uid="GroupItem_1">groupitemcontent</GroupItem>
+         </GroupBox>
+
+        <ListView>
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn x:Uid="GridViewColumn_1" Header="Name" HeaderStringFormat="gvcformat" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView>
+            <ListViewItem x:Uid="ListViewItem_1" Content="lvicontent" />
+        </ListView>
+
+        <ListBox x:Uid="ListBox_1" SelectedValuePath="lb">
+           <ListBoxItem x:Uid="ListBoxItem_2" Content="Item4" />
+        </ListBox>
+
+        <ListView>
+            <ListView.View>
+                <GridView x:Uid="GridView_1" ColumnHeaderStringFormat="gvformat" />
+            </ListView.View>
+        </ListView>
+
+        <PasswordBox x:Uid="PasswordBox_1" Password="pb" />
+
+        <RichTextBox x:Uid="RichTextBox_1">
+            <FlowDocument>
+                <Paragraph>
+                    <Run x:Uid="Run_1" Text="runtext" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <ScrollViewer x:Uid="ScrollViewer_1">scrollviewercontent</ScrollViewer>
+
+        <StatusBar x:Uid="StatusBar_1" ItemStringFormat="sbformat" DisplayMemberPath="sbpath">
+            <StatusBarItem x:Uid="StatusBarItem_1" Content="statusbaritemcontent" />
+        </StatusBar>
+
+        <TabControl x:Uid="TabControl_1" ContentStringFormat="tcformat">tabcontrolcontent</TabControl>
+
+        <TreeView x:Uid="TreeView_1" SelectedValuePath="tvsvpath" ItemStringFormat="tvformat" DisplayMemberPath="tvpath">treeviewcontent</TreeView>
+
+        <UserControl x:Uid="UserControl_1" Content="uccontent" />
+
+    </StackPanel>
+
+</Window>

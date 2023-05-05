@@ -1,0 +1,32 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>RegressionIssue54</AssemblyName>
+    <OutputType>Exe</OutputType> <!-- Should be "exe" for Console.WriteLine to work -->
+    <Configuration>Release</Configuration>
+    <OutputPath>bin\Release\</OutputPath>
+    <OptionStrict>true</OptionStrict>
+    <DebugSymbols>true</DebugSymbols>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System" >
+       <SpecificVersion>true</SpecificVersion>
+    </Reference>
+    <Reference Include="PresentationFramework" >
+       <SpecificVersion>true</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include=".\ClassLibrary1\ClassLibrary1.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+
+</Project>

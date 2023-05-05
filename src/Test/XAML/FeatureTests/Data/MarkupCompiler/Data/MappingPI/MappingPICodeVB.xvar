@@ -1,0 +1,88 @@
+<XMLVariationTemplate>
+    <TemplateData>
+    Imports System
+    Imports System.Windows
+    Imports System.Windows.Navigation
+    Imports System.Windows.Controls
+    <NodeVariation ID="1" />
+
+    &lt;assembly:CLSCompliant(true)&gt; _
+
+    <NodeVariation ID="2" />
+
+    <NodeVariation ID="3">
+    Namespace Local
+        Public Class MyButton
+            Inherits Button
+        End Class
+    End Namespace
+    </NodeVariation>
+
+    Namespace Harness
+        Public Class OnStartupBVT
+            Inherits System.Windows.Application
+
+            Dim log As Microsoft.Test.Logging.TestLog
+
+            Protected Overrides  Sub OnStartup(ByVal e As System.Windows.StartupEventArgs)
+                log = New Microsoft.Test.Logging.TestLog("CompilerTest")
+                log.Stage = Microsoft.Test.Logging.TestStage.Initialize
+                Me.StartupUri = New Uri("MappingPIMarkup.xaml", UriKind.RelativeOrAbsolute)
+                AddHandler Me.LoadCompleted, AddressOf OnLoad
+                log.Stage = Microsoft.Test.Logging.TestStage.Run
+                MyBase.OnStartup(e)
+            End Sub
+ 
+            Private  Sub OnLoad(ByVal sender As Object, ByVal e As NavigationEventArgs)
+                log.LogStatus("LoadCompleted event fired")
+                log.Result = Microsoft.Test.Logging.TestResult.Pass
+ 
+                ShutdownApp()
+            End Sub
+ 
+            Protected Overrides  Sub OnExit(ByVal e As ExitEventArgs)
+                    log.LogStatus("Shutting down application")
+                    log.Close()
+            End Sub
+ 
+            Private  Sub ShutdownApp()
+                log.Stage = Microsoft.Test.Logging.TestStage.Cleanup
+                System.Windows.Application.Current.Shutdown()
+                Microsoft.Test.Loaders.ApplicationMonitor.NotifyStopMonitoring()
+            End Sub
+        End Class
+
+        Class EntryPoint
+            &lt;System.STAThread()&gt; _ 
+            Public Shared Function Main(ByVal args() As String) As Integer
+                System.Threading.Thread.CurrentThread.SetApartmentState(System.Threading.ApartmentState.STA)
+                Dim app As OnStartupBVT =  New OnStartupBVT() 
+                Return app.Run()
+            End Function
+        End Class
+           
+    End Namespace  
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>MappingPICode</FileName>
+            <FileExtension>.vb</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+        </Scenario>
+        <Scenario Case="2">
+            <NodeVariation ID="2">
+                Public Class MyButton
+	            Inherits Button
+                End Class</NodeVariation>
+            <NodeVariation ID="3"></NodeVariation>
+        </Scenario>
+        <Scenario Case="3">
+            <NodeVariation ID="1">Imports Library</NodeVariation>
+            <NodeVariation ID="3"></NodeVariation>
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>
+

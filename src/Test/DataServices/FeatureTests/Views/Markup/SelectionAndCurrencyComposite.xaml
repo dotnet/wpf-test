@@ -1,0 +1,40 @@
+﻿<DockPanel Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="System"
+    xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+
+    <DockPanel.Resources>
+        <XmlDataProvider XPath="GreekHeroes/Hero" x:Key="xds">
+          <x:XData>
+            <GreekHeroes xmlns="">
+                <Hero Name="Jason" />
+                <Hero Name="Hercules" />
+                <Hero Name="Bellerophon" />
+                <Hero Name="Theseus" />
+                <Hero Name="Odysseus" />
+                <Hero Name="Perseus" />
+            </GreekHeroes>
+          </x:XData>
+        </XmlDataProvider>
+
+        <ObjectDataProvider ObjectType="{x:Type datasources:GreekGods}" x:Key="ods" />
+
+        <DataTemplate DataType="Hero">
+            <TextBlock Text="{Binding XPath=@Name}" Foreground="Blue"/>
+        </DataTemplate>
+    </DockPanel.Resources>
+
+    <StackPanel>
+        <ListBox Name="lb">
+            <ListBox.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer Collection="{Binding Source={StaticResource xds}}" />
+                    <CollectionContainer Collection="{Binding Source={StaticResource ods}}" />
+                    <ListBoxItem Foreground="Green" Name="lbi">Some other item</ListBoxItem>
+                </CompositeCollection>
+            </ListBox.ItemsSource>
+        </ListBox>
+    </StackPanel>
+</DockPanel>

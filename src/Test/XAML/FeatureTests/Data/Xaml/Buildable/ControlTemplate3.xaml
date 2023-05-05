@@ -1,0 +1,32 @@
+<!-- ControlTemplate containing a Trigger -->
+<Page
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml" > 
+
+    <Page.Resources>
+        <ControlTemplate x:Key='TestTemplate'>
+            <Border Name="border1" BorderThickness="5" BorderBrush="Black" Width="55" Height="55">
+                <Border.Background>
+                    <SolidColorBrush Color="DarkOrange" />
+                </Border.Background>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard >
+                                <ColorAnimation Duration="0:0:0.5" Storyboard.TargetName="border1" Storyboard.TargetProperty="Background.Color" To="Red" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+   </Page.Resources>
+
+    <DockPanel>
+        <Button Template='{StaticResource TestTemplate}' />
+    </DockPanel>
+  
+</Page>
+

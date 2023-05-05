@@ -1,0 +1,129 @@
+﻿<Page 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    xmlns:helper="clr-namespace:Microsoft.Test.DataServices"
+    >
+    <Page.Resources>
+        <src:Places x:Key="places"/>
+
+        <!-- GetContainerVisualsOnly -->
+        <DataTemplate x:Key="dt1">
+            <TextBlock Text="{Binding Path=Name}" Name="tb1"/>
+        </DataTemplate>
+
+        <!-- GetContainerNonVisuals -->
+        <helper:MyBlueConverter x:Key="myBlueConverter" />
+
+        <DataTemplate x:Key="dt2">
+            <Button Content="{Binding Path=Name}">
+                <Button.Background>
+                    <!-- Notice that if I don't add the Binding, this freezable will be shared by all 
+                    ListBoxItem instances and the ContainerFromElement will not help. It is not possible
+                    to walk up the InheritanceContext tree of a freezable with several parents. -->
+                    <SolidColorBrush Color="{Binding Path=Name, Converter={StaticResource myBlueConverter}}" />
+                </Button.Background>
+            </Button>
+        </DataTemplate>
+
+        <!-- GetContainerVisualBrush -->
+        <DataTemplate x:Key="dt3">
+            <Button>
+                <Button.Background>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Button.Background>
+            </Button>
+        </DataTemplate>
+
+        <!-- GetContainerToolTip -->
+        <DataTemplate x:Key="dt4">
+            <Button Content="{Binding Path=Name}">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{Binding Path=Name}" />
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </DataTemplate>
+
+        <!-- GetContainerContextMenu -->
+        <DataTemplate x:Key="dt5">
+            <Button Content="{Binding Path=Name}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <TextBlock Text="{Binding Path=Name}" />
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+        </DataTemplate>
+
+        <!-- GetContainerGrouping -->
+        <CollectionViewSource Source="{StaticResource places}" x:Key="cvs6">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="State" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <DataTemplate x:Key="dt6">
+            <TextBlock Text="{Binding Path=Name}" />
+        </DataTemplate>
+
+        <!-- GetContainerHierarchy -->
+        <CollectionViewSource Source="{StaticResource places}" x:Key="cvs">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="State" />
+                <PropertyGroupDescription PropertyName="Name" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <DataTemplate x:Key="placeTemplate">
+            <TextBlock Text="{Binding Path=Name}" />
+        </DataTemplate>
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=Items}" ItemTemplate="{StaticResource placeTemplate}" x:Key="placeGroupTemplate">
+            <TextBlock Text="{Binding Path=Name}" />
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=Items}" ItemTemplate="{StaticResource placeGroupTemplate}"  x:Key="stateTemplate">
+            <TextBlock Text="{Binding Path=Name}" />
+        </HierarchicalDataTemplate>
+
+        <Style TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="true" />
+        </Style>
+
+    </Page.Resources>
+    <StackPanel Orientation="Horizontal">
+        <!-- GetContainerVisualsOnly -->
+        <ListBox ItemsSource="{StaticResource places}" ItemTemplate="{StaticResource dt1}" Name="lb1"/>
+
+        <!-- GetContainerNonVisuals -->
+        <ListBox ItemsSource="{StaticResource places}" ItemTemplate="{StaticResource dt2}" Name="lb2"/>
+
+        <!-- GetContainerVisualBrush -->
+        <ListBox ItemsSource="{StaticResource places}" ItemTemplate="{StaticResource dt3}" Name="lb3"/>
+
+        <!-- GetContainerToolTip -->
+        <ListBox ItemsSource="{StaticResource places}" ItemTemplate="{StaticResource dt4}" Name="lb4"/>
+
+        <!-- GetContainerContextMenu -->
+        <ListBox ItemsSource="{StaticResource places}" ItemTemplate="{StaticResource dt5}" Name="lb5"/>
+
+        <!-- GetContainerGrouping -->
+        <ListBox ItemsSource="{Binding Source={StaticResource cvs6}}" ItemTemplate="{StaticResource dt6}" Name="lb6">
+            <ListBox.GroupStyle>
+                <x:Static Member="GroupStyle.Default" />
+            </ListBox.GroupStyle>
+        </ListBox>
+
+        <!-- GetContainerHierarchy -->
+        <TreeView ItemsSource="{Binding Source={StaticResource cvs}, Path=Groups}" ItemTemplate="{StaticResource stateTemplate}" Name="tv1"/>
+
+        <!-- GetContainerListBoxItem -->
+        <ListBox ItemsSource="{StaticResource places}" DisplayMemberPath="Name"  Name="lb7"/>
+    </StackPanel>    
+</Page>

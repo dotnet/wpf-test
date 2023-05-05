@@ -1,0 +1,30 @@
+﻿<!-- DynamicResource should be shared if target type is IList -->
+<Window x:Class="WpfApplication3.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:WpfApplication3"
+        xmlns:sca="clr-namespace:System.Collections;assembly=mscorlib"
+        Title="Window1" Height="300" Width="300">
+    <Window.Resources>
+        <sca:ArrayList x:Key="buttonCollection">
+            <Button>Hello</Button>
+            <Button>World</Button>
+        </sca:ArrayList>
+    </Window.Resources>
+    <StackPanel>
+        <ContentControl x:Name="control1" >
+            <ContentControl.Template>
+                <ControlTemplate>
+                    <my:MyControl x:Name="myc1" MyArrayList="{DynamicResource buttonCollection}" />
+                </ControlTemplate>
+            </ContentControl.Template>
+        </ContentControl>
+        <ContentControl x:Name="control2" >
+            <ContentControl.Template>
+                <ControlTemplate>
+                    <my:MyControl x:Name="myc2" MyArrayList="{DynamicResource buttonCollection}" />
+                </ControlTemplate>
+            </ContentControl.Template>
+        </ContentControl>
+    </StackPanel>
+</Window>

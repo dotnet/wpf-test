@@ -1,0 +1,28 @@
+﻿
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+<cc:PanelFlow xml:space="preserve" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cc="http://XamlTestTypes" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<DockPanel>
+<DockPanel.Resources>
+<Style x:Key="{x:Type cc:Item}" TargetType="{x:Type cc:Item}" xml:space="default">
+    <Setter Property="cc:CCHeight" Value="130" />
+    <Setter Property="cc:CCWidth" Value="150" />
+    <Setter Property="cc:Item.SolidBackgroundBrush">
+    <Setter.Value>
+            <cc:FakeSolidColorBrush Color="Red" Opacity="0.8" />
+    </Setter.Value>
+    </Setter>
+</Style>
+<Style TargetType="{x:Type cc:Label}">
+    <Setter Property="cc:FakeFontSize" Value="10" />
+    <Setter Property="cc:Text" Value="Style here" />
+    <Setter Property="cc:Foreground" Value="#FFFF0000" />
+</Style>
+</DockPanel.Resources>
+    <cc:Item Style="{StaticResource {x:Type cc:Item}}" />
+    <cc:Item cc:BackgroundBrush="#FFFF0000" cc:CCHeight="15" cc:Color="#FF0000FF" cc:CCWidth="100" />
+    <cc:Label cc:FakeFontSize="14" cc:Text="Text here" cc:Foreground="#FFFFFFFF" />
+    <cc:Label Style="{DynamicResource {x:Type cc:Label}}" />
+</DockPanel>
+</cc:PanelFlow>
+
+</Page>

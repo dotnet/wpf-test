@@ -1,0 +1,26 @@
+<!-- Scenario: x:FactoryMethod as a PropertyElement before and after other PropertyElements -->
+<StackPanel
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:co    = "http://XamlTestTypes">
+
+    <co:CustomFactoryWithArgAndProps>
+        <x:Arguments><x:String>TheString</x:String></x:Arguments>
+        <co:CustomFactoryWithArgAndProps.DoubleProp><x:Double>777</x:Double></co:CustomFactoryWithArgAndProps.DoubleProp>
+        <x:FactoryMethod>Factory</x:FactoryMethod>
+        <co:CustomFactoryWithArgAndProps.StringProp><x:String>Prop2</x:String></co:CustomFactoryWithArgAndProps.StringProp>
+    </co:CustomFactoryWithArgAndProps>
+
+    <co:CustomFactoryWithArgAndProps>
+        <x:Arguments><x:String>TheString</x:String></x:Arguments>
+        <co:CustomFactoryWithArgAndProps.DoubleProp><x:Double>987</x:Double></co:CustomFactoryWithArgAndProps.DoubleProp>
+        <x:FactoryMethod>Factory</x:FactoryMethod>
+    </co:CustomFactoryWithArgAndProps>
+
+    <co:CustomFactoryWithArgAndProps>
+        <x:Arguments><x:String>TheString</x:String></x:Arguments>
+        <x:FactoryMethod>Factory</x:FactoryMethod>
+        <co:CustomFactoryWithArgAndProps.DoubleProp><x:Double>434</x:Double></co:CustomFactoryWithArgAndProps.DoubleProp>
+    </co:CustomFactoryWithArgAndProps>
+
+</StackPanel>

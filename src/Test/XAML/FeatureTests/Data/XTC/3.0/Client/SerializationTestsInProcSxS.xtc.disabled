@@ -1,0 +1,159 @@
+<XTC>
+  <DEFAULTTESTINFO Timeout="120">
+    <Driver Executable="Common\ManagedSxSDriver.exe" />
+    <SupportFiles>
+      <!-- Files for In-Proc SxS support... -->
+      <SupportFile Source="Common\SxSHostExeWrapper.dll" />
+      <SupportFile Source="Common\SxSHost.exe" />
+      <SupportFile Source="sti.exe" />
+      <SupportFile Source="FeatureTests\XAML\XamlCommon.dll" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\BamlizedTheme\BamlizedThemeTest.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\BamlizedTheme\BamlizedThemeTest.SERIALIZED.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\Text\Text_under_element2.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\Text\Text_under_element2.SERIALIZED.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\Basic\defArrayTest.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\Basic\defArrayTest.SERIALIZED.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\MarkupExt\StaticExtension.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\MarkupExt\StaticExtension.SERIALIZED.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\MarkupExt\ResourceExtension.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\MarkupExt\ResourceExtension.SERIALIZED.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\Animation\Animation_ColorDoubleShape.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\Animation\Animation_ColorDoubleShape.SERIALIZED.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\ComponentModel\ComboBoxBVTComponentModel.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\ComponentModel\ComboBoxBVTComponentModel.SERIALIZED.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\ComponentModel\ListBoxBVTComponentModel.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\ComponentModel\ListBoxBVTComponentModel.SERIALIZED.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\IDictionary\XamlForIDictionarySerializer.xaml" />
+      <SupportFile Source="FeatureTests\XAML\Data\Serialization\IDictionary\XamlForIDictionarySerializer.SERIALIZED.xaml" />
+    </SupportFiles>
+    <Versions>
+      <Version>V4sxsV3</Version>
+    </Versions>
+  </DEFAULTTESTINFO>
+  <TEST Name="BamlizedThemeTest" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="BamlizedThemeTest_CLR2" Priority="0" SubArea="Serialization\BamlizedTheme">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="BamlizedThemeTest.xaml" Mode="WPF"/>
+        </TEST>
+        <TEST Name="BamlizedThemeTest_CLR4" Priority="0" SubArea="Serialization\BamlizedTheme">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="BamlizedThemeTest.xaml" Mode="WPF"/>
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+  <TEST Name="Text_under_element2" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="Text_under_element2_CLR2" Priority="0" SubArea="Serialization\Text">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="Text_under_element2.xaml" Mode="WPF" SupportingAssemblies="XamlClrTypes,XamlWpfTypes"  />
+        </TEST>
+        <TEST Name="Text_under_element2_CLR4" Priority="0" SubArea="Serialization\Text">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="Text_under_element2.xaml" Mode="WPF" SupportingAssemblies="XamlClrTypes,XamlWpfTypes"  />
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+  <TEST Name="defArrayTest" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="defArrayTest_CLR2" Priority="0" SubArea="Serialization\Basic">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="defArrayTest.xaml" Mode="WPF" />
+        </TEST>
+        <TEST Name="defArrayTest_CLR4" Priority="0" SubArea="Serialization\Basic">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="defArrayTest.xaml" Mode="WPF" />
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+  <TEST Name="StaticExtension" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="StaticExtension_CLR2" Priority="0" SubArea="Serialization\MarkupExt">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="StaticExtension.xaml" Mode="WPF" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        </TEST>
+        <TEST Name="StaticExtension_CLR4" Priority="0" SubArea="Serialization\MarkupExt">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="StaticExtension.xaml" Mode="WPF" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+  <TEST Name="ResourceExtension" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="ResourceExtension_CLR2" Priority="0" SubArea="Serialization\MarkupExt">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="ResourceExtension.xaml" Mode="WPF" />
+        </TEST>
+        <TEST Name="ResourceExtension_CLR4" Priority="0" SubArea="Serialization\MarkupExt">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="ResourceExtension.xaml" Mode="WPF" />
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+  <TEST Name="Animation_ColorDoubleShape" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="Animation_ColorDoubleShape_CLR2" Priority="0" SubArea="Serialization\Animation">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="Animation_ColorDoubleShape.xaml" Mode="WPF" />
+        </TEST>
+        <TEST Name="Animation_ColorDoubleShape_CLR4" Priority="0" SubArea="Serialization\Animation">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="Animation_ColorDoubleShape.xaml" Mode="WPF" />
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+  <TEST Name="ComboBoxBVTComponentModel" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="ComboBoxBVTComponentModel_CLR2" Priority="0" SubArea="Serialization\ComponentModel">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="ComboBoxBVTComponentModel.xaml" Mode="WPF" />
+        </TEST>
+        <TEST Name="ComboBoxBVTComponentModel_CLR4" Priority="0" SubArea="Serialization\ComponentModel">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="ComboBoxBVTComponentModel.xaml" Mode="WPF" />
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+  <TEST Name="ListBoxBVTComponentModel" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="ListBoxBVTComponentModel_CLR2" Priority="0" SubArea="Serialization\ComponentModel">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="ListBoxBVTComponentModel.xaml" Mode="WPF" />
+        </TEST>
+        <TEST Name="ListBoxBVTComponentModel_CLR4" Priority="0" SubArea="Serialization\ComponentModel">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="ListBoxBVTComponentModel.xaml" Mode="WPF" />
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+  <TEST Name="XamlForIDictionarySerializer" Priority="0" Type="Functional" SubArea="Serialization\InProcSxS" >
+    <DriverParameters>
+      <XTC>
+        <TEST Name="XamlForIDictionarySerializer_CLR2" Priority="0" SubArea="Serialization\IDictionary">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="XamlForIDictionarySerializer.xaml" Mode="WPF" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        </TEST>
+        <TEST Name="XamlForIDictionarySerializer_CLR4" Priority="0" SubArea="Serialization\IDictionary">
+          <Driver Executable="sti.exe" />
+          <DriverParameters Assembly="XamlCommon" Class="Microsoft.Test.Xaml.Framework.XamlTestRunner" Method="RunTest" SecurityLevel="FullTrust" XamlTestType="XamlRoundTripTest" File="XamlForIDictionarySerializer.xaml" Mode="WPF" SupportingAssemblies="XamlClrTypes,XamlWpfTypes" />
+        </TEST>
+      </XTC>
+    </DriverParameters>
+  </TEST>
+</XTC>

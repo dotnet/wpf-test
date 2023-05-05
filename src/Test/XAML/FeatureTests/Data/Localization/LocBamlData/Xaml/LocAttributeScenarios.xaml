@@ -1,0 +1,66 @@
+<!-- Testing specific Localization.Attributes scenarios -->
+<!-- Scenario #1: Localization.Attributes on Window Title: Bug #568106 appears fixed -->
+<Window
+    x:Uid                   = "Window_1"
+    xmlns:x                 = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns                   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Class                 = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest"
+    Title                   = "LLLmytitle"
+    Localization.Attributes = "Title (Title Modifiable)"
+    >
+    
+    <Canvas>
+
+        <!-- Scenario #2: Nested elements with Localization.Attributes set (Modifiable) -->
+        <TextBlock x:Uid="TextBlock_1">
+            <TextBlock x:Uid="TextBlock_2">
+                <TextBox x:Uid="TextBox_1"
+                    Text="LLLMicrosoft1"
+                    Localization.Attributes = "Text (Text Modifiable Readable)">
+                </TextBox>
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Scenario #3: Nested elements with Localization.Attributes set (Unmodifiable) -->
+        <TextBlock x:Uid="TextBlock_2">
+            <TextBlock x:Uid="TextBlock_3">
+                <TextBox x:Uid="TextBox_2"
+                    Text="Microsoft2"
+                    Localization.Attributes = "Text (Text Unmodifiable Readable)">
+                </TextBox>
+            </TextBlock>
+        </TextBlock>
+
+        <!-- Scenario #3: Wrong Category specified (Modifiable) -->
+        <TextBox x:Uid="TextBox_3"
+            Text="LLLMicrosoft3"
+            Localization.Attributes = "Text (ComboBox Modifiable Readable)">
+        </TextBox>
+
+        <!-- Scenario #4: Wrong Category specified (Unmodifiable) -->
+        <TextBox x:Uid="TextBox_4"
+            Text="Microsoft4"
+            Localization.Attributes = "Text (ComboBox Unmodifiable Readable)">
+        </TextBox>
+
+        <!-- Scenario #5: Bogus Category specified (Modifiable) -->
+        <TextBox x:Uid="TextBox_5"
+            Text="LLLMicrosoft5"
+            Localization.Attributes = "Text (abc Modifiable Readable)">
+        </TextBox>
+
+        <!-- Scenario #6: Bogus Category specified (Unmodifiable) -->
+        <TextBox x:Uid="TextBox_6"
+            Text="LLLMicrosoft6"
+            Localization.Attributes = "Text (abc Unmodifiable Readable)">
+        </TextBox>
+
+        <!-- Scenario #7: Modifiable attribute set on parent, unmodifiable on child -->
+        <TextBlock x:Uid="TextBlock_4"
+            Localization.Attributes = "Text (Modifiable XmlData Readable)">
+            <TextBox x:Uid="TextBox_7" Localization.Attributes = "$Content(Unmodifiable Text)">textbox7</TextBox>
+        </TextBlock>
+
+    </Canvas>
+
+</Window>

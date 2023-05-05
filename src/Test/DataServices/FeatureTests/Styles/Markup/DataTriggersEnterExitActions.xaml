@@ -1,0 +1,166 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:sysdata="clr-namespace:System.Data;assembly=System.Data"
+    xmlns:System="clr-namespace:System;assembly=Mscorlib"
+    Name="Root" Background="cornsilk"
+    >
+  <DockPanel.Resources>
+    <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type dataSources:MediaCollection}">
+      <ObjectDataProvider.ConstructorParameters>
+        <System:Int32>3</System:Int32>
+        <System:Double>1</System:Double>
+      </ObjectDataProvider.ConstructorParameters>
+    </ObjectDataProvider>
+
+    <DataTemplate DataType="{x:Type dataSources:Book}">
+      <Border BorderBrush="Red" BorderThickness="4" x:Name="myborder">
+        <TextBlock Text="{Binding Path=Title}" Foreground="Red" x:Name="tb" />
+      </Border>
+      <DataTemplate.Triggers>
+        <DataTrigger Binding="{Binding Path=IsSpecialEdition}" Value="false">
+          <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+          <DataTrigger.EnterActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Blue" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.EnterActions>
+          <DataTrigger.ExitActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Red" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.ExitActions>
+        </DataTrigger>
+
+        <DataTrigger Binding="{Binding Path=ReleaseDate}" Value="3/14/1592">
+          <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+          <DataTrigger.EnterActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Blue" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.EnterActions>
+          <DataTrigger.ExitActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Red" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.ExitActions>
+        </DataTrigger>
+
+        <DataTrigger Binding="{Binding Path=Price}" Value="42">
+          <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+          <DataTrigger.EnterActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Blue" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.EnterActions>
+          <DataTrigger.ExitActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Red" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.ExitActions>
+        </DataTrigger>
+
+        <DataTrigger Binding="{Binding Path=Genre}" Value="Comic">
+          <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+          <DataTrigger.EnterActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Blue" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.EnterActions>
+          <DataTrigger.ExitActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Red" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.ExitActions>
+        </DataTrigger>
+
+        <DataTrigger Binding="{Binding Path=ISBN}" Value="StringTriggerValue">
+          <Setter Property="Foreground" Value="Blue" TargetName="tb" />
+          <DataTrigger.EnterActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Blue" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.EnterActions>
+          <DataTrigger.ExitActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Red" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.ExitActions>
+        </DataTrigger>
+
+        <!--
+            This DataTrigger exists to test regressions.
+            ISBN should never be null, and therefore this trigger shouldn't ever
+            evaluate. If it does the Foreground and BorderBrush properties will
+            be set to random values that will break validation and cause a failure. 
+        -->
+        <DataTrigger Binding="{Binding Path=ISBN}" Value="{x:Null}">
+          <Setter Property="Foreground" Value="Green" TargetName="tb" />
+          <DataTrigger.EnterActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Green" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.EnterActions>
+          <DataTrigger.ExitActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetName="myborder" TargetProperty="BorderBrush.Color">
+                  <ColorAnimation To="Yellow" Duration="0:0:0" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </DataTrigger.ExitActions>
+        </DataTrigger>
+        
+      </DataTemplate.Triggers>
+    </DataTemplate>
+  </DockPanel.Resources>
+
+  <ListBox Width="400" Height="400" Name="mediaItemsListBox" Background="LightBlue"
+      ItemsSource="{Binding }" DataContext="{Binding Source={StaticResource DSO}}" />
+</DockPanel>

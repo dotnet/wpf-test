@@ -1,0 +1,191 @@
+﻿<Window x:Class="PropertyOrderUsingNestedME.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PropertyOrderUsingNestedME"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ControlTemplate x:Key="TBTemp1" >
+            <StackPanel>
+                <local:TestButton  x:Name="TestButton1">
+                    <local:TestButton.NonSharableProp>
+                        <Button Content="Testing"/>
+                    </local:TestButton.NonSharableProp>
+                    <local:TestButton.ShareableProp>10</local:TestButton.ShareableProp>
+                    <local:TestButton.PropInQuestion>
+                        <local:CustomME />
+                    </local:TestButton.PropInQuestion>
+                </local:TestButton>
+
+                <TextBox Text="{Binding ElementName=TestButton1, Path=Order}" />
+
+            </StackPanel>
+        </ControlTemplate>
+        
+        <ControlTemplate x:Key="TBParentTemp1">
+            <Button Template="{StaticResource TBTemp1}"/>
+        </ControlTemplate>
+        
+        <ControlTemplate x:Key="TBTemp2" >
+            <StackPanel>
+                <local:TestButton  x:Name="TestButton1">
+                    <local:TestButton.NonSharableProp>
+                        <Button Content="Testing"/>
+                    </local:TestButton.NonSharableProp>
+                    <local:TestButton.ShareableProp>10</local:TestButton.ShareableProp>
+                    <local:TestButton.PropInQuestion>
+                        <local:CustomMEGrandParent />
+                    </local:TestButton.PropInQuestion>
+                </local:TestButton>
+
+                <TextBox Text="{Binding ElementName=TestButton1, Path=Order}" />
+
+            </StackPanel>
+        </ControlTemplate>
+        
+        <ControlTemplate x:Key="TBParentTemp2">
+            <Button Template="{StaticResource TBTemp2}"/>
+        </ControlTemplate>
+    </Window.Resources>
+    <StackPanel>
+        
+        <TextBox x:Name="MainTextBox"  />
+        
+        
+        <Label>Resource Template</Label>
+        <Button Template="{StaticResource TBTemp1}"/>
+        
+        <Label>Resource Nested Template</Label>
+        <Button Template="{StaticResource TBParentTemp1}"/>
+        
+        <Label>Inline Template</Label>
+        <Button>
+            <Button.Template>
+                <ControlTemplate>
+                    <StackPanel>
+                        <local:TestButton  x:Name="TestButton1">
+                            <local:TestButton.NonSharableProp>
+                                <Button Content="Testing"/>
+                            </local:TestButton.NonSharableProp>
+                            <local:TestButton.ShareableProp>10</local:TestButton.ShareableProp>
+                            <local:TestButton.PropInQuestion>
+                                <local:CustomME />
+                            </local:TestButton.PropInQuestion>
+                        </local:TestButton>
+
+                        <TextBox Text="{Binding ElementName=TestButton1, Path=Order}" />
+
+                    </StackPanel>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        
+        <Label>Inline Nested Template</Label>
+        <Button>
+            <Button.Template>
+                <ControlTemplate>
+                    <Button>
+                        <Button.Template>
+                            <ControlTemplate>
+                                <StackPanel>
+                                    <local:TestButton  x:Name="TestButton1">
+                                        <local:TestButton.NonSharableProp>
+                                            <Button Content="Testing"/>
+                                        </local:TestButton.NonSharableProp>
+                                        <local:TestButton.ShareableProp>10</local:TestButton.ShareableProp>
+                                        <local:TestButton.PropInQuestion>
+                                            <local:CustomME />
+                                        </local:TestButton.PropInQuestion>
+                                    </local:TestButton>
+
+                                    <TextBox Text="{Binding ElementName=TestButton1, Path=Order}" />
+
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        
+        <Label>Resource Template (4 level ME)</Label>
+        <Button Template="{StaticResource TBTemp2}"/>
+        
+        <Label>Resource Nested Template (4 level ME)</Label>
+        <Button Template="{StaticResource TBParentTemp2}"/>
+        
+        <Label>Inline Template (4 level ME)</Label>
+        <Button>
+            <Button.Template>
+                <ControlTemplate>
+                    <StackPanel>
+                        <local:TestButton  x:Name="TestButton1">
+                            <local:TestButton.NonSharableProp>
+                                <Button Content="Testing"/>
+                            </local:TestButton.NonSharableProp>
+                            <local:TestButton.ShareableProp>10</local:TestButton.ShareableProp>
+                            <local:TestButton.PropInQuestion>
+                                <local:CustomMEGrandParent />
+                            </local:TestButton.PropInQuestion>
+                        </local:TestButton>
+
+                        <TextBox Text="{Binding ElementName=TestButton1, Path=Order}" />
+
+                    </StackPanel>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Label>Inline Nested Template (4 level ME)</Label>
+        <Button>
+            <Button.Template>
+                <ControlTemplate>
+                    <Button>
+                        <Button.Template>
+                            <ControlTemplate>
+                                <StackPanel>
+                                    <local:TestButton  x:Name="TestButton1">
+                                        <local:TestButton.NonSharableProp>
+                                            <Button Content="Testing"/>
+                                        </local:TestButton.NonSharableProp>
+                                        <local:TestButton.ShareableProp>10</local:TestButton.ShareableProp>
+                                        <local:TestButton.PropInQuestion>
+                                            <local:CustomMEGrandParent />
+                                        </local:TestButton.PropInQuestion>
+                                    </local:TestButton>
+
+                                    <TextBox Text="{Binding ElementName=TestButton1, Path=Order}" />
+
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Label>Inline Style</Label>
+        <local:TestButton x:Name="TestButtonIS1">
+            <local:TestButton.Style>
+                <Style>
+                    <Setter Property="local:TestButton.NonSharableProp">
+                        <Setter.Value>
+                            <Button Content="Testing"/>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="local:TestButton.ShareableProp">
+                        <Setter.Value>10</Setter.Value>
+                    </Setter>
+
+                    <Setter Property="local:TestButton.PropInQuestion">
+                        <Setter.Value>
+                            <local:CustomME />
+                        </Setter.Value>
+                    </Setter>                    
+                </Style>
+            </local:TestButton.Style>            
+        </local:TestButton>
+        <TextBox Text="{Binding ElementName=TestButtonIS1, Path=Order}" />
+        
+    </StackPanel>
+</Window>

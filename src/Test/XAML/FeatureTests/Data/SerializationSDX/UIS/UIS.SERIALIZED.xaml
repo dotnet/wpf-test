@@ -1,0 +1,1928 @@
+<CustomStackPanel Orientation="Vertical" xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFF0">
+    <av:DockPanel.Resources>
+      <av:Style TargetType="av:TextBoxBase" x:Key="MyBox">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Setter Property="av:Control.Template">
+          <av:Setter.Value>
+            <av:ControlTemplate TargetType="av:TextBoxBase">
+              <av:Border BorderBrush="#FFEE82EE" BorderThickness="3,3,3,3" Background="#FF90EE90">
+                <av:ScrollViewer Name="PART_ContentHost" />
+              </av:Border>
+            </av:ControlTemplate>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+      <av:Style TargetType="av:PasswordBox" x:Key="MyPassBox">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Setter Property="av:Control.Template">
+          <av:Setter.Value>
+            <av:ControlTemplate TargetType="av:PasswordBox">
+              <av:Border BorderBrush="#FFEE82EE" BorderThickness="3,3,3,3" Background="#FFADD8E6">
+                <av:ScrollViewer Name="PART_ContentHost" />
+              </av:Border>
+            </av:ControlTemplate>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:DockPanel.Resources>
+    <av:TextBox Height="100" Width="200" av:DockPanel.Dock="Top">
+      <av:TextBox.Style>
+        <av:Style TargetType="av:TextBoxBase">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Setter Property="av:Control.Template">
+            <av:Setter.Value>
+              <av:ControlTemplate TargetType="av:TextBoxBase">
+                <av:Border BorderBrush="#FFEE82EE" BorderThickness="3,3,3,3" Background="#FF90EE90">
+                  <av:ScrollViewer Name="PART_ContentHost" />
+                </av:Border>
+              </av:ControlTemplate>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:TextBox.Style>Inside TB</av:TextBox>
+    <av:RichTextBox Height="100" Width="200" HorizontalAlignment="Left" av:DockPanel.Dock="Top">
+      <av:RichTextBox.Style>
+        <av:Style TargetType="av:TextBoxBase">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Setter Property="av:Control.Template">
+            <av:Setter.Value>
+              <av:ControlTemplate TargetType="av:TextBoxBase">
+                <av:Border BorderBrush="#FFEE82EE" BorderThickness="3,3,3,3" Background="#FF90EE90">
+                  <av:ScrollViewer Name="PART_ContentHost" />
+                </av:Border>
+              </av:ControlTemplate>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:RichTextBox.Style>
+      <av:FlowDocument AllowDrop="True" PagePadding="5,0,5,0">
+        <av:Paragraph>hello inside RTB</av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+    <av:PasswordBox Height="100" Width="200" av:DockPanel.Dock="Top">
+      <av:PasswordBox.Style>
+        <av:Style TargetType="av:PasswordBox">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Setter Property="av:Control.Template">
+            <av:Setter.Value>
+              <av:ControlTemplate TargetType="av:PasswordBox">
+                <av:Border BorderBrush="#FFEE82EE" BorderThickness="3,3,3,3" Background="#FFADD8E6">
+                  <av:ScrollViewer Name="PART_ContentHost" />
+                </av:Border>
+              </av:ControlTemplate>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:PasswordBox.Style>
+    </av:PasswordBox>
+  </av:DockPanel>
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFF0">
+    <av:DockPanel.Resources>
+      <av:Style TargetType="av:IFrameworkInputElement" x:Key="StyleForBox">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Style.Triggers>
+          <av:EventTrigger RoutedEvent="av:Mouse.MouseEnter">
+            <av:BeginStoryboard>
+              <av:Storyboard>
+                <av:Storyboard.Children>
+                  <av:ColorAnimation AccelerationRatio="0.9" To="#FFFFFF00" Duration="00:00:00.5000000" av:Storyboard.TargetProperty="(av:Panel.Background).(av:SolidColorBrush.Color)" />
+                </av:Storyboard.Children>
+              </av:Storyboard>
+            </av:BeginStoryboard>
+          </av:EventTrigger>
+          <av:EventTrigger RoutedEvent="av:Mouse.MouseLeave">
+            <av:BeginStoryboard>
+              <av:Storyboard>
+                <av:Storyboard.Children>
+                  <av:ColorAnimation AccelerationRatio="0.9" Duration="00:00:00.5000000" av:Storyboard.TargetProperty="(av:Panel.Background).(av:SolidColorBrush.Color)" />
+                </av:Storyboard.Children>
+              </av:Storyboard>
+            </av:BeginStoryboard>
+          </av:EventTrigger>
+        </av:Style.Triggers>
+        <av:Setter Property="av:Panel.Background">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:DockPanel.Resources>
+    <av:TextBox Style="{av:DynamicResource StyleForBox}" av:DockPanel.Dock="Top">hello</av:TextBox>
+    <av:PasswordBox Style="{av:DynamicResource StyleForBox}" av:DockPanel.Dock="Top" />
+    <av:RichTextBox Style="{av:DynamicResource StyleForBox}" av:DockPanel.Dock="Top" />
+  </av:DockPanel>
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFFF">
+    <av:DockPanel.Resources>
+      <av:Style TargetType="av:IFrameworkInputElement" x:Key="StyleForRect">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Style.Triggers>
+          <av:EventTrigger RoutedEvent="av:Mouse.MouseEnter">
+            <av:BeginStoryboard>
+              <av:Storyboard>
+                <av:Storyboard.Children>
+                  <av:DoubleAnimation To="36" From="24" Duration="00:00:00.5000000" av:Storyboard.TargetProperty="FontSize" />
+                </av:Storyboard.Children>
+              </av:Storyboard>
+            </av:BeginStoryboard>
+          </av:EventTrigger>
+        </av:Style.Triggers>
+      </av:Style>
+    </av:DockPanel.Resources>
+    <av:TextBox Width="200" FontSize="24" Style="{av:DynamicResource StyleForRect}" Foreground="#FF000000" av:DockPanel.Dock="Top">Animate</av:TextBox>
+    <av:PasswordBox Width="200" HorizontalAlignment="Left" FontSize="24" Style="{av:DynamicResource StyleForRect}" Foreground="#FF000000" av:DockPanel.Dock="Top" />
+    <av:RichTextBox Width="200" Style="{av:DynamicResource StyleForRect}" Foreground="#FF000000">
+      <av:FlowDocument AllowDrop="True" PagePadding="5,0,5,0">
+        <av:Paragraph>Animate</av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+  </av:DockPanel>
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFFF">
+    <av:DockPanel.Resources>
+      <av:Style TargetType="av:IFrameworkInputElement" x:Key="Style3">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Style.Triggers>
+          <av:Trigger Property="av:UIElement.IsMouseOver">
+            <av:Setter Property="av:Panel.Background">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.Foreground">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:UIElement.AllowDrop">
+              <av:Setter.Value>
+                <s:Boolean>False</s:Boolean>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:UIElement.IsEnabled">
+              <av:Setter.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:UIElement.AllowDrop">
+              <av:Setter.Value>
+                <s:Boolean>False</s:Boolean>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:Border.BorderBrush">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:Border.BorderThickness">
+              <av:Setter.Value>
+                <av:Thickness>3,3,3,3</av:Thickness>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:FrameworkElement.FlowDirection">
+              <av:Setter.Value>
+                <x:Static Member="av:FlowDirection.RightToLeft" />
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontFamily">
+              <av:Setter.Value>
+                <av:FontFamily>Arial</av:FontFamily>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontSize">
+              <av:Setter.Value>
+                <s:Double>20</s:Double>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontWeight">
+              <av:Setter.Value>
+                <av:FontWeight>ExtraBold</av:FontWeight>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:FrameworkElement.Height">
+              <av:Setter.Value>
+                <s:Double>100</s:Double>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontStyle">
+              <av:Setter.Value>
+                <av:FontStyle>Italic</av:FontStyle>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:FrameworkElement.Width">
+              <av:Setter.Value>
+                <s:Double>200</s:Double>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:Control.Padding">
+              <av:Setter.Value>
+                <av:Thickness>10,10,0,0</av:Thickness>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Trigger.Value>
+              <s:Boolean>True</s:Boolean>
+            </av:Trigger.Value>
+          </av:Trigger>
+        </av:Style.Triggers>
+      </av:Style>
+      <av:Style TargetType="av:IFrameworkInputElement" x:Key="Style4">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Style.Triggers>
+          <av:Trigger Property="av:UIElement.IsMouseOver">
+            <av:Setter Property="av:ScrollViewer.HorizontalScrollBarVisibility">
+              <av:Setter.Value>
+                <x:Static Member="av:ScrollBarVisibility.Visible" />
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:ScrollViewer.VerticalScrollBarVisibility">
+              <av:Setter.Value>
+                <x:Static Member="av:ScrollBarVisibility.Visible" />
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Trigger.Value>
+              <s:Boolean>True</s:Boolean>
+            </av:Trigger.Value>
+          </av:Trigger>
+        </av:Style.Triggers>
+        <av:Style.BasedOn>
+          <av:Style TargetType="av:IFrameworkInputElement">
+            <av:Style.Resources>
+              <av:ResourceDictionary />
+            </av:Style.Resources>
+            <av:Style.Triggers>
+              <av:Trigger Property="av:UIElement.IsMouseOver">
+                <av:Setter Property="av:Panel.Background">
+                  <av:Setter.Value>
+                    <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:TextElement.Foreground">
+                  <av:Setter.Value>
+                    <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:UIElement.AllowDrop">
+                  <av:Setter.Value>
+                    <s:Boolean>False</s:Boolean>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:UIElement.IsEnabled">
+                  <av:Setter.Value>
+                    <s:Boolean>True</s:Boolean>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:UIElement.AllowDrop">
+                  <av:Setter.Value>
+                    <s:Boolean>False</s:Boolean>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:Border.BorderBrush">
+                  <av:Setter.Value>
+                    <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:Border.BorderThickness">
+                  <av:Setter.Value>
+                    <av:Thickness>3,3,3,3</av:Thickness>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:FrameworkElement.FlowDirection">
+                  <av:Setter.Value>
+                    <x:Static Member="av:FlowDirection.RightToLeft" />
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:TextElement.FontFamily">
+                  <av:Setter.Value>
+                    <av:FontFamily>Arial</av:FontFamily>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:TextElement.FontSize">
+                  <av:Setter.Value>
+                    <s:Double>20</s:Double>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:TextElement.FontWeight">
+                  <av:Setter.Value>
+                    <av:FontWeight>ExtraBold</av:FontWeight>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:FrameworkElement.Height">
+                  <av:Setter.Value>
+                    <s:Double>100</s:Double>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:TextElement.FontStyle">
+                  <av:Setter.Value>
+                    <av:FontStyle>Italic</av:FontStyle>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:FrameworkElement.Width">
+                  <av:Setter.Value>
+                    <s:Double>200</s:Double>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Setter Property="av:Control.Padding">
+                  <av:Setter.Value>
+                    <av:Thickness>10,10,0,0</av:Thickness>
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Trigger.Value>
+                  <s:Boolean>True</s:Boolean>
+                </av:Trigger.Value>
+              </av:Trigger>
+            </av:Style.Triggers>
+          </av:Style>
+        </av:Style.BasedOn>
+      </av:Style>
+    </av:DockPanel.Resources>
+    <av:TextBox Height="50" Width="200" FlowDirection="LeftToRight" AllowDrop="False" av:DockPanel.Dock="Top">
+      <av:TextBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.Triggers>
+            <av:Trigger Property="av:UIElement.IsMouseOver">
+              <av:Setter Property="av:Panel.Background">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.Foreground">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.IsEnabled">
+                <av:Setter.Value>
+                  <s:Boolean>True</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderBrush">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderThickness">
+                <av:Setter.Value>
+                  <av:Thickness>3,3,3,3</av:Thickness>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.FlowDirection">
+                <av:Setter.Value>
+                  <x:Static Member="av:FlowDirection.RightToLeft" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontFamily">
+                <av:Setter.Value>
+                  <av:FontFamily>Arial</av:FontFamily>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontSize">
+                <av:Setter.Value>
+                  <s:Double>20</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontWeight">
+                <av:Setter.Value>
+                  <av:FontWeight>ExtraBold</av:FontWeight>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Height">
+                <av:Setter.Value>
+                  <s:Double>100</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontStyle">
+                <av:Setter.Value>
+                  <av:FontStyle>Italic</av:FontStyle>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Width">
+                <av:Setter.Value>
+                  <s:Double>200</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Control.Padding">
+                <av:Setter.Value>
+                  <av:Thickness>10,10,0,0</av:Thickness>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Trigger.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Trigger.Value>
+            </av:Trigger>
+          </av:Style.Triggers>
+        </av:Style>
+      </av:TextBox.Style>Hello - aufweiderschen1</av:TextBox>
+    <av:PasswordBox Width="200" HorizontalAlignment="Left" FlowDirection="LeftToRight" av:DockPanel.Dock="Top">
+      <av:PasswordBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.Triggers>
+            <av:Trigger Property="av:UIElement.IsMouseOver">
+              <av:Setter Property="av:Panel.Background">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.Foreground">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.IsEnabled">
+                <av:Setter.Value>
+                  <s:Boolean>True</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderBrush">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderThickness">
+                <av:Setter.Value>
+                  <av:Thickness>3,3,3,3</av:Thickness>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.FlowDirection">
+                <av:Setter.Value>
+                  <x:Static Member="av:FlowDirection.RightToLeft" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontFamily">
+                <av:Setter.Value>
+                  <av:FontFamily>Arial</av:FontFamily>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontSize">
+                <av:Setter.Value>
+                  <s:Double>20</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontWeight">
+                <av:Setter.Value>
+                  <av:FontWeight>ExtraBold</av:FontWeight>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Height">
+                <av:Setter.Value>
+                  <s:Double>100</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontStyle">
+                <av:Setter.Value>
+                  <av:FontStyle>Italic</av:FontStyle>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Width">
+                <av:Setter.Value>
+                  <s:Double>200</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Control.Padding">
+                <av:Setter.Value>
+                  <av:Thickness>10,10,0,0</av:Thickness>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Trigger.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Trigger.Value>
+            </av:Trigger>
+          </av:Style.Triggers>
+        </av:Style>
+      </av:PasswordBox.Style>
+    </av:PasswordBox>
+    <av:RichTextBox Height="50" Width="200" FlowDirection="LeftToRight" av:DockPanel.Dock="Top">
+      <av:RichTextBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.Triggers>
+            <av:Trigger Property="av:UIElement.IsMouseOver">
+              <av:Setter Property="av:Panel.Background">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.Foreground">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.IsEnabled">
+                <av:Setter.Value>
+                  <s:Boolean>True</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderBrush">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderThickness">
+                <av:Setter.Value>
+                  <av:Thickness>3,3,3,3</av:Thickness>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.FlowDirection">
+                <av:Setter.Value>
+                  <x:Static Member="av:FlowDirection.RightToLeft" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontFamily">
+                <av:Setter.Value>
+                  <av:FontFamily>Arial</av:FontFamily>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontSize">
+                <av:Setter.Value>
+                  <s:Double>20</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontWeight">
+                <av:Setter.Value>
+                  <av:FontWeight>ExtraBold</av:FontWeight>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Height">
+                <av:Setter.Value>
+                  <s:Double>100</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontStyle">
+                <av:Setter.Value>
+                  <av:FontStyle>Italic</av:FontStyle>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Width">
+                <av:Setter.Value>
+                  <s:Double>200</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Control.Padding">
+                <av:Setter.Value>
+                  <av:Thickness>10,10,0,0</av:Thickness>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Trigger.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Trigger.Value>
+            </av:Trigger>
+          </av:Style.Triggers>
+        </av:Style>
+      </av:RichTextBox.Style>
+      <av:FlowDocument AllowDrop="True" PagePadding="5,0,5,0">
+        <av:Paragraph>hello - aufweiderschen</av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+    <av:TextBox TextWrapping="Wrap" Width="200" HorizontalAlignment="Left" AllowDrop="True" av:DockPanel.Dock="Top">
+      <av:TextBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.Triggers>
+            <av:Trigger Property="av:UIElement.IsMouseOver">
+              <av:Setter Property="av:ScrollViewer.HorizontalScrollBarVisibility">
+                <av:Setter.Value>
+                  <x:Static Member="av:ScrollBarVisibility.Visible" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:ScrollViewer.VerticalScrollBarVisibility">
+                <av:Setter.Value>
+                  <x:Static Member="av:ScrollBarVisibility.Visible" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Trigger.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Trigger.Value>
+            </av:Trigger>
+          </av:Style.Triggers>
+          <av:Style.BasedOn>
+            <av:Style TargetType="av:IFrameworkInputElement">
+              <av:Style.Resources>
+                <av:ResourceDictionary />
+              </av:Style.Resources>
+              <av:Style.Triggers>
+                <av:Trigger Property="av:UIElement.IsMouseOver">
+                  <av:Setter Property="av:Panel.Background">
+                    <av:Setter.Value>
+                      <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.Foreground">
+                    <av:Setter.Value>
+                      <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:UIElement.AllowDrop">
+                    <av:Setter.Value>
+                      <s:Boolean>False</s:Boolean>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:UIElement.IsEnabled">
+                    <av:Setter.Value>
+                      <s:Boolean>True</s:Boolean>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:UIElement.AllowDrop">
+                    <av:Setter.Value>
+                      <s:Boolean>False</s:Boolean>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:Border.BorderBrush">
+                    <av:Setter.Value>
+                      <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:Border.BorderThickness">
+                    <av:Setter.Value>
+                      <av:Thickness>3,3,3,3</av:Thickness>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:FrameworkElement.FlowDirection">
+                    <av:Setter.Value>
+                      <x:Static Member="av:FlowDirection.RightToLeft" />
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.FontFamily">
+                    <av:Setter.Value>
+                      <av:FontFamily>Arial</av:FontFamily>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.FontSize">
+                    <av:Setter.Value>
+                      <s:Double>20</s:Double>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.FontWeight">
+                    <av:Setter.Value>
+                      <av:FontWeight>ExtraBold</av:FontWeight>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:FrameworkElement.Height">
+                    <av:Setter.Value>
+                      <s:Double>100</s:Double>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.FontStyle">
+                    <av:Setter.Value>
+                      <av:FontStyle>Italic</av:FontStyle>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:FrameworkElement.Width">
+                    <av:Setter.Value>
+                      <s:Double>200</s:Double>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:Control.Padding">
+                    <av:Setter.Value>
+                      <av:Thickness>10,10,0,0</av:Thickness>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Trigger.Value>
+                    <s:Boolean>True</s:Boolean>
+                  </av:Trigger.Value>
+                </av:Trigger>
+              </av:Style.Triggers>
+            </av:Style>
+          </av:Style.BasedOn>
+        </av:Style>
+      </av:TextBox.Style>Hello - aufweiderschen</av:TextBox>
+    <av:RichTextBox Width="200" AllowDrop="True" av:DockPanel.Dock="Top">
+      <av:RichTextBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.Triggers>
+            <av:Trigger Property="av:UIElement.IsMouseOver">
+              <av:Setter Property="av:ScrollViewer.HorizontalScrollBarVisibility">
+                <av:Setter.Value>
+                  <x:Static Member="av:ScrollBarVisibility.Visible" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:ScrollViewer.VerticalScrollBarVisibility">
+                <av:Setter.Value>
+                  <x:Static Member="av:ScrollBarVisibility.Visible" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Trigger.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Trigger.Value>
+            </av:Trigger>
+          </av:Style.Triggers>
+          <av:Style.BasedOn>
+            <av:Style TargetType="av:IFrameworkInputElement">
+              <av:Style.Resources>
+                <av:ResourceDictionary />
+              </av:Style.Resources>
+              <av:Style.Triggers>
+                <av:Trigger Property="av:UIElement.IsMouseOver">
+                  <av:Setter Property="av:Panel.Background">
+                    <av:Setter.Value>
+                      <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.Foreground">
+                    <av:Setter.Value>
+                      <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:UIElement.AllowDrop">
+                    <av:Setter.Value>
+                      <s:Boolean>False</s:Boolean>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:UIElement.IsEnabled">
+                    <av:Setter.Value>
+                      <s:Boolean>True</s:Boolean>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:UIElement.AllowDrop">
+                    <av:Setter.Value>
+                      <s:Boolean>False</s:Boolean>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:Border.BorderBrush">
+                    <av:Setter.Value>
+                      <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:Border.BorderThickness">
+                    <av:Setter.Value>
+                      <av:Thickness>3,3,3,3</av:Thickness>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:FrameworkElement.FlowDirection">
+                    <av:Setter.Value>
+                      <x:Static Member="av:FlowDirection.RightToLeft" />
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.FontFamily">
+                    <av:Setter.Value>
+                      <av:FontFamily>Arial</av:FontFamily>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.FontSize">
+                    <av:Setter.Value>
+                      <s:Double>20</s:Double>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.FontWeight">
+                    <av:Setter.Value>
+                      <av:FontWeight>ExtraBold</av:FontWeight>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:FrameworkElement.Height">
+                    <av:Setter.Value>
+                      <s:Double>100</s:Double>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:TextElement.FontStyle">
+                    <av:Setter.Value>
+                      <av:FontStyle>Italic</av:FontStyle>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:FrameworkElement.Width">
+                    <av:Setter.Value>
+                      <s:Double>200</s:Double>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Setter Property="av:Control.Padding">
+                    <av:Setter.Value>
+                      <av:Thickness>10,10,0,0</av:Thickness>
+                    </av:Setter.Value>
+                  </av:Setter>
+                  <av:Trigger.Value>
+                    <s:Boolean>True</s:Boolean>
+                  </av:Trigger.Value>
+                </av:Trigger>
+              </av:Style.Triggers>
+            </av:Style>
+          </av:Style.BasedOn>
+        </av:Style>
+      </av:RichTextBox.Style>
+      <av:FlowDocument AllowDrop="True" PagePadding="5,0,5,0">
+        <av:Paragraph>
+          <av:Run>
+            <av:Run.TextDecorations>
+              <av:TextDecoration Location="Underline" />
+            </av:Run.TextDecorations>hello - aufweiderschen</av:Run>
+        </av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+  </av:DockPanel>
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFFF">
+    <av:DockPanel.Resources>
+      <av:Style TargetType="av:IFrameworkInputElement" x:Key="Style1">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Setter Property="av:Panel.Background">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:TextElement.Foreground">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:UIElement.AllowDrop">
+          <av:Setter.Value>
+            <s:Boolean>False</s:Boolean>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:UIElement.IsEnabled">
+          <av:Setter.Value>
+            <s:Boolean>False</s:Boolean>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:UIElement.AllowDrop">
+          <av:Setter.Value>
+            <s:Boolean>False</s:Boolean>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:Border.BorderBrush">
+          <av:Setter.Value>
+            <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:Border.BorderThickness">
+          <av:Setter.Value>
+            <av:Thickness>3,3,3,3</av:Thickness>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:FrameworkElement.FlowDirection">
+          <av:Setter.Value>
+            <x:Static Member="av:FlowDirection.RightToLeft" />
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:TextElement.FontFamily">
+          <av:Setter.Value>
+            <av:FontFamily>Arial</av:FontFamily>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:TextElement.FontSize">
+          <av:Setter.Value>
+            <s:Double>20</s:Double>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:TextElement.FontWeight">
+          <av:Setter.Value>
+            <av:FontWeight>ExtraBold</av:FontWeight>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:FrameworkElement.Height">
+          <av:Setter.Value>
+            <s:Double>100</s:Double>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:TextElement.FontStyle">
+          <av:Setter.Value>
+            <av:FontStyle>Italic</av:FontStyle>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:FrameworkElement.Width">
+          <av:Setter.Value>
+            <s:Double>200</s:Double>
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+      <av:Style TargetType="av:IFrameworkInputElement" x:Key="Style2">
+        <av:Style.Resources>
+          <av:ResourceDictionary />
+        </av:Style.Resources>
+        <av:Style.BasedOn>
+          <av:Style TargetType="av:IFrameworkInputElement">
+            <av:Style.Resources>
+              <av:ResourceDictionary />
+            </av:Style.Resources>
+            <av:Setter Property="av:Panel.Background">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.Foreground">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:UIElement.AllowDrop">
+              <av:Setter.Value>
+                <s:Boolean>False</s:Boolean>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:UIElement.IsEnabled">
+              <av:Setter.Value>
+                <s:Boolean>False</s:Boolean>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:UIElement.AllowDrop">
+              <av:Setter.Value>
+                <s:Boolean>False</s:Boolean>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:Border.BorderBrush">
+              <av:Setter.Value>
+                <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:Border.BorderThickness">
+              <av:Setter.Value>
+                <av:Thickness>3,3,3,3</av:Thickness>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:FrameworkElement.FlowDirection">
+              <av:Setter.Value>
+                <x:Static Member="av:FlowDirection.RightToLeft" />
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontFamily">
+              <av:Setter.Value>
+                <av:FontFamily>Arial</av:FontFamily>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontSize">
+              <av:Setter.Value>
+                <s:Double>20</s:Double>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontWeight">
+              <av:Setter.Value>
+                <av:FontWeight>ExtraBold</av:FontWeight>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:FrameworkElement.Height">
+              <av:Setter.Value>
+                <s:Double>100</s:Double>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:TextElement.FontStyle">
+              <av:Setter.Value>
+                <av:FontStyle>Italic</av:FontStyle>
+              </av:Setter.Value>
+            </av:Setter>
+            <av:Setter Property="av:FrameworkElement.Width">
+              <av:Setter.Value>
+                <s:Double>200</s:Double>
+              </av:Setter.Value>
+            </av:Setter>
+          </av:Style>
+        </av:Style.BasedOn>
+        <av:Setter Property="av:Control.Padding">
+          <av:Setter.Value>
+            <av:Thickness>10,10,0,0</av:Thickness>
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:ScrollViewer.HorizontalScrollBarVisibility">
+          <av:Setter.Value>
+            <x:Static Member="av:ScrollBarVisibility.Visible" />
+          </av:Setter.Value>
+        </av:Setter>
+        <av:Setter Property="av:ScrollViewer.VerticalScrollBarVisibility">
+          <av:Setter.Value>
+            <x:Static Member="av:ScrollBarVisibility.Visible" />
+          </av:Setter.Value>
+        </av:Setter>
+      </av:Style>
+    </av:DockPanel.Resources>
+    <av:TextBox Height="50" FlowDirection="LeftToRight" av:DockPanel.Dock="Top">
+      <av:TextBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Setter Property="av:Panel.Background">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.AllowDrop">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.IsEnabled">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.AllowDrop">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Border.BorderBrush">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Border.BorderThickness">
+            <av:Setter.Value>
+              <av:Thickness>3,3,3,3</av:Thickness>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.FlowDirection">
+            <av:Setter.Value>
+              <x:Static Member="av:FlowDirection.RightToLeft" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontFamily">
+            <av:Setter.Value>
+              <av:FontFamily>Arial</av:FontFamily>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontSize">
+            <av:Setter.Value>
+              <s:Double>20</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontWeight">
+            <av:Setter.Value>
+              <av:FontWeight>ExtraBold</av:FontWeight>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.Height">
+            <av:Setter.Value>
+              <s:Double>100</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontStyle">
+            <av:Setter.Value>
+              <av:FontStyle>Italic</av:FontStyle>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.Width">
+            <av:Setter.Value>
+              <s:Double>200</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:TextBox.Style>Hello - aufweiderschen</av:TextBox>
+    <av:PasswordBox HorizontalAlignment="Left" FlowDirection="LeftToRight" av:DockPanel.Dock="Top">
+      <av:PasswordBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Setter Property="av:Panel.Background">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.AllowDrop">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.IsEnabled">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.AllowDrop">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Border.BorderBrush">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Border.BorderThickness">
+            <av:Setter.Value>
+              <av:Thickness>3,3,3,3</av:Thickness>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.FlowDirection">
+            <av:Setter.Value>
+              <x:Static Member="av:FlowDirection.RightToLeft" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontFamily">
+            <av:Setter.Value>
+              <av:FontFamily>Arial</av:FontFamily>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontSize">
+            <av:Setter.Value>
+              <s:Double>20</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontWeight">
+            <av:Setter.Value>
+              <av:FontWeight>ExtraBold</av:FontWeight>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.Height">
+            <av:Setter.Value>
+              <s:Double>100</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontStyle">
+            <av:Setter.Value>
+              <av:FontStyle>Italic</av:FontStyle>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.Width">
+            <av:Setter.Value>
+              <s:Double>200</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:PasswordBox.Style>
+    </av:PasswordBox>
+    <av:RichTextBox Height="50" FlowDirection="LeftToRight" av:DockPanel.Dock="Top">
+      <av:RichTextBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Setter Property="av:Panel.Background">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.AllowDrop">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.IsEnabled">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:UIElement.AllowDrop">
+            <av:Setter.Value>
+              <s:Boolean>False</s:Boolean>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Border.BorderBrush">
+            <av:Setter.Value>
+              <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Border.BorderThickness">
+            <av:Setter.Value>
+              <av:Thickness>3,3,3,3</av:Thickness>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.FlowDirection">
+            <av:Setter.Value>
+              <x:Static Member="av:FlowDirection.RightToLeft" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontFamily">
+            <av:Setter.Value>
+              <av:FontFamily>Arial</av:FontFamily>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontSize">
+            <av:Setter.Value>
+              <s:Double>20</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontWeight">
+            <av:Setter.Value>
+              <av:FontWeight>ExtraBold</av:FontWeight>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.Height">
+            <av:Setter.Value>
+              <s:Double>100</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontStyle">
+            <av:Setter.Value>
+              <av:FontStyle>Italic</av:FontStyle>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.Width">
+            <av:Setter.Value>
+              <s:Double>200</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:RichTextBox.Style>
+      <av:FlowDocument AllowDrop="False" PagePadding="5,0,5,0">
+        <av:Paragraph>hello - aufweiderschen</av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+    <av:TextBox TextWrapping="Wrap" HorizontalAlignment="Left" AllowDrop="True" IsEnabled="True" av:DockPanel.Dock="Top">
+      <av:TextBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.BasedOn>
+            <av:Style TargetType="av:IFrameworkInputElement">
+              <av:Style.Resources>
+                <av:ResourceDictionary />
+              </av:Style.Resources>
+              <av:Setter Property="av:Panel.Background">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.Foreground">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.IsEnabled">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderBrush">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderThickness">
+                <av:Setter.Value>
+                  <av:Thickness>3,3,3,3</av:Thickness>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.FlowDirection">
+                <av:Setter.Value>
+                  <x:Static Member="av:FlowDirection.RightToLeft" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontFamily">
+                <av:Setter.Value>
+                  <av:FontFamily>Arial</av:FontFamily>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontSize">
+                <av:Setter.Value>
+                  <s:Double>20</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontWeight">
+                <av:Setter.Value>
+                  <av:FontWeight>ExtraBold</av:FontWeight>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Height">
+                <av:Setter.Value>
+                  <s:Double>100</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontStyle">
+                <av:Setter.Value>
+                  <av:FontStyle>Italic</av:FontStyle>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Width">
+                <av:Setter.Value>
+                  <s:Double>200</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+            </av:Style>
+          </av:Style.BasedOn>
+          <av:Setter Property="av:Control.Padding">
+            <av:Setter.Value>
+              <av:Thickness>10,10,0,0</av:Thickness>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:ScrollViewer.HorizontalScrollBarVisibility">
+            <av:Setter.Value>
+              <x:Static Member="av:ScrollBarVisibility.Visible" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:ScrollViewer.VerticalScrollBarVisibility">
+            <av:Setter.Value>
+              <x:Static Member="av:ScrollBarVisibility.Visible" />
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:TextBox.Style>Hello - aufweiderschen</av:TextBox>
+    <av:RichTextBox AllowDrop="True" IsEnabled="True" av:DockPanel.Dock="Top">
+      <av:RichTextBox.Style>
+        <av:Style TargetType="av:IFrameworkInputElement">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.BasedOn>
+            <av:Style TargetType="av:IFrameworkInputElement">
+              <av:Style.Resources>
+                <av:ResourceDictionary />
+              </av:Style.Resources>
+              <av:Setter Property="av:Panel.Background">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FF000000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.Foreground">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFFFF00</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.IsEnabled">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:UIElement.AllowDrop">
+                <av:Setter.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderBrush">
+                <av:Setter.Value>
+                  <av:SolidColorBrush>#FFFF0000</av:SolidColorBrush>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderThickness">
+                <av:Setter.Value>
+                  <av:Thickness>3,3,3,3</av:Thickness>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.FlowDirection">
+                <av:Setter.Value>
+                  <x:Static Member="av:FlowDirection.RightToLeft" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontFamily">
+                <av:Setter.Value>
+                  <av:FontFamily>Arial</av:FontFamily>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontSize">
+                <av:Setter.Value>
+                  <s:Double>20</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontWeight">
+                <av:Setter.Value>
+                  <av:FontWeight>ExtraBold</av:FontWeight>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Height">
+                <av:Setter.Value>
+                  <s:Double>100</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontStyle">
+                <av:Setter.Value>
+                  <av:FontStyle>Italic</av:FontStyle>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:FrameworkElement.Width">
+                <av:Setter.Value>
+                  <s:Double>200</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+            </av:Style>
+          </av:Style.BasedOn>
+          <av:Setter Property="av:Control.Padding">
+            <av:Setter.Value>
+              <av:Thickness>10,10,0,0</av:Thickness>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:ScrollViewer.HorizontalScrollBarVisibility">
+            <av:Setter.Value>
+              <x:Static Member="av:ScrollBarVisibility.Visible" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:ScrollViewer.VerticalScrollBarVisibility">
+            <av:Setter.Value>
+              <x:Static Member="av:ScrollBarVisibility.Visible" />
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:RichTextBox.Style>
+      <av:FlowDocument AllowDrop="True" PagePadding="5,0,5,0">
+        <av:Paragraph>
+          <av:Run>
+            <av:Run.TextDecorations>
+              <av:TextDecoration Location="Underline" />
+            </av:Run.TextDecorations>hello - aufweiderschen</av:Run>
+        </av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+  </av:DockPanel>
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFFF">
+    <av:TextBox Height="100" TextWrapping="NoWrap" Width="100" FontFamily="Times New Roman" ToolTip="Hi" Background="#FF000000" HorizontalScrollBarVisibility="Visible" FontSize="20" AllowDrop="False" Foreground="#FFFFFF00" av:DockPanel.Dock="Top" xml:space="preserve">hello world!! hello world!!  </av:TextBox>
+    <av:TextBox Height="100" MaxWidth="150" Width="500" HorizontalAlignment="Left" FontFamily="Tahoma" ToolTip="Hi" Background="#FF000000" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" FontSize="30" AcceptsReturn="True" AcceptsTab="True" Foreground="#FFFF0000" av:DockPanel.Dock="Top">Hello World</av:TextBox>
+    <av:TextBox Height="30" MaxWidth="500" TextWrapping="Wrap" BorderBrush="#FFFF0000" Width="300" HorizontalAlignment="Right" FontFamily="Tahoma" ToolTip="Hi" Background="#FF000000" FlowDirection="RightToLeft" VerticalScrollBarVisibility="Visible" FontSize="30" AcceptsReturn="True" AcceptsTab="True" Foreground="#FFFFFFFF" av:DockPanel.Dock="Top">another hi</av:TextBox>
+    <av:RichTextBox Height="200" BorderBrush="#FFFF0000" Width="200" HorizontalAlignment="Left" av:DockPanel.Dock="Top">
+      <av:FlowDocument FontWeight="ExtraBold" FontFamily="Arial" FontSize="20" AllowDrop="True" PagePadding="5,0,5,0">
+        <av:Paragraph FlowDirection="LeftToRight" FontSize="30">d1313131312aasdasd</av:Paragraph>
+        <av:Paragraph FontWeight="Thin" FontFamily="Times New Roman" FlowDirection="RightToLeft">11111111111111111daasdasd</av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+    <av:RichTextBox Height="100" BorderBrush="#FFFF0000" Width="200" HorizontalAlignment="Right" HorizontalScrollBarVisibility="Visible" av:DockPanel.Dock="Top">
+      <av:FlowDocument FontWeight="ExtraBold" FontFamily="Arial" FontSize="20" AllowDrop="True" PagePadding="5,0,5,0">
+        <av:Paragraph Background="#FF000000" FlowDirection="LeftToRight" FontSize="30" Foreground="#FFFFFF00">
+          <av:Run Background="#FFFFFF00" Foreground="#FF000000" FontStyle="Italic">
+            <av:Run.TextDecorations>
+              <av:TextDecoration Location="Baseline" />
+            </av:Run.TextDecorations>d13</av:Run> <av:Run Background="#FF000000" Foreground="#FFFFFF00" FontStyle="Oblique"><av:Run.TextDecorations><av:TextDecoration Location="Underline" /></av:Run.TextDecorations>111d1313131312aasdasd</av:Run></av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+    <av:RichTextBox Height="100" BorderBrush="#FFFF0000" Width="100" HorizontalAlignment="Left" Background="#FFFFFFFF" VerticalScrollBarVisibility="Visible" AllowDrop="False" IsReadOnly="True" av:DockPanel.Dock="Top">
+      <av:FlowDocument FontWeight="ExtraBold" FontFamily="Arial" FontSize="20" AllowDrop="False" PagePadding="5,0,5,0">
+        <av:Paragraph FlowDirection="LeftToRight" FontSize="30">d1313131312aasdasd</av:Paragraph>
+        <av:Paragraph FlowDirection="LeftToRight" FontSize="30">1111111111111111111111111111111</av:Paragraph>
+      </av:FlowDocument>
+    </av:RichTextBox>
+    <av:PasswordBox Height="80" Width="100" FontFamily="Times New Roman" ToolTip="Hi" Background="#FF000000" FontSize="20" AllowDrop="False" IsEnabled="False" Foreground="#FFFFFF00" av:DockPanel.Dock="Top" />
+    <av:PasswordBox Height="100" MaxWidth="150" FontWeight="Black" Width="500" HorizontalAlignment="Right" FontFamily="Tahoma" ToolTip="Hi" Background="#FF000000" FontSize="30" AllowDrop="True" Foreground="#FFFF0000" Padding="50,50,0,0" av:DockPanel.Dock="Top" />
+    <av:PasswordBox Height="100" MaxWidth="500" BorderBrush="#FFFF0000" Width="700" HorizontalAlignment="Left" FontFamily="Tahoma" ToolTip="Hi" FontStyle="Italic" Background="#FF000000" FlowDirection="RightToLeft" FontSize="30" Foreground="#FFFFFFFF" av:DockPanel.Dock="Top" />
+  </av:DockPanel>
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFFF">
+    <av:StackPanel Height="25" Background="#FFADD8E6" Orientation="Horizontal" av:DockPanel.Dock="Top">
+      <av:CheckBox Name="AllowDrop2" IsChecked="True" av:DockPanel.Dock="Top">AllowDrop</av:CheckBox>
+      <av:CheckBox Name="Enabled2" IsChecked="True" av:DockPanel.Dock="Top">Enabled</av:CheckBox>
+      <av:Label av:DockPanel.Dock="Top">--------PASSWORDBOX-----------</av:Label>
+    </av:StackPanel>
+    <av:Grid Height="125" Background="#FFFFFFE0" ShowGridLines="False" av:DockPanel.Dock="Top">
+      <av:Grid.ColumnDefinitions>
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+      </av:Grid.ColumnDefinitions>
+      <av:Grid.RowDefinitions>
+        <av:RowDefinition />
+        <av:RowDefinition />
+        <av:RowDefinition />
+      </av:Grid.RowDefinitions>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="0">
+        <av:TextBlock Text="Background" />
+        <av:TextBox ToolTip="Any color" Name="Background2" av:DockPanel.Dock="Top">White</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="0">
+        <av:TextBlock Text="BorderBrush" />
+        <av:TextBox ToolTip="Any color" Name="BorderBrush2" av:DockPanel.Dock="Top">Red</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="0">
+        <av:TextBlock Text="BorderThickness" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="BorderThickness2" av:DockPanel.Dock="Top">1,1,1,1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="0">
+        <av:TextBlock Text="FlowDirection" />
+        <av:TextBox ToolTip="0 = LTR; 1 = RTL" Name="FlowDirection2" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="0">
+        <av:TextBlock Text="Foreground" />
+        <av:TextBox ToolTip="Any color" Name="Foreground2" av:DockPanel.Dock="Top">Black</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="1">
+        <av:TextBlock Text="FontFamily" />
+        <av:TextBox ToolTip="Any Font Family" Name="FontFamily2" av:DockPanel.Dock="Top">Arial</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="1">
+        <av:TextBlock Text="FontSize" />
+        <av:TextBox Name="FontSize2" av:DockPanel.Dock="Top">18</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="1">
+        <av:TextBlock Text="FontWeight" />
+        <av:TextBox ToolTip="400 = Normal; 100 = Thin; 200 = ExtraThin; 300 = Light; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black" Name="FontWeight2" av:DockPanel.Dock="Top">400</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="1">
+        <av:TextBlock Text="FontStyle" />
+        <av:TextBox ToolTip="Normal; Oblique; Italic" Name="FontStyle2" av:DockPanel.Dock="Top">Normal</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="1">
+        <av:TextBlock Text="Height" />
+        <av:TextBox Name="Height2" av:DockPanel.Dock="Top">200</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="2">
+        <av:TextBlock Text="Padding" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="Padding2" av:DockPanel.Dock="Top">4,1,4,1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="2">
+        <av:TextBlock Text="Width" />
+        <av:TextBox Name="Width2" av:DockPanel.Dock="Top">400</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="2">
+        <av:TextBlock Text="Margin" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="Margin2" av:DockPanel.Dock="Top">Auto,Auto,Auto,Auto</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="2">
+        <av:TextBlock Text="HorizontalAlignment" />
+        <av:TextBox ToolTip="0 = Left; 1 = Center; 2 = Right 3=Stretch" Name="HorizontalAlignment2" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+    </av:Grid>
+    <av:Grid Height="50" Background="#FFADD8E6" ShowGridLines="False" av:DockPanel.Dock="Top">
+      <av:Grid.ColumnDefinitions>
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+      </av:Grid.ColumnDefinitions>
+      <av:Grid.RowDefinitions>
+        <av:RowDefinition />
+      </av:Grid.RowDefinitions>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="0">
+        <av:TextBlock Text="MaxHeight" />
+        <av:TextBox Name="MaxHeight2" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="0">
+        <av:TextBlock Text="MinHeight" />
+        <av:TextBox Name="MinHeight2" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="0">
+        <av:TextBlock Text="MaxWidth" />
+        <av:TextBox Name="MaxWidth2" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="0">
+        <av:TextBlock Text="MinWidth" />
+        <av:TextBox Name="MinWidth2" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="0">
+        <av:TextBlock Text="Opacity" />
+        <av:TextBox Name="Opacity2" av:DockPanel.Dock="Top">1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="5" av:Grid.Row="0">
+        <av:TextBlock Text="Visibility" />
+        <av:TextBox ToolTip="0 = Visible; 1 = Hidden; 2 = Collapsed" Name="Visibility2" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+    </av:Grid>
+    <av:StackPanel av:DockPanel.Dock="Bottom">
+      <av:PasswordBox MinWidth="0" Height="200" MaxHeight="Infinity" MaxWidth="Infinity" Margin="0,0,0,0" BorderBrush="#FFFF0000" FontWeight="Normal" Width="400" Visibility="Visible" HorizontalAlignment="Left" FontFamily="Arial" BorderThickness="1,1,1,1" Name="TestPB" FontStyle="Normal" Background="#FFFFFFFF" FlowDirection="LeftToRight" FontSize="18" AllowDrop="True" MinHeight="0" Opacity="1" IsEnabled="True" Foreground="#FF000000" Padding="4,1,4,1" />
+    </av:StackPanel>
+  </av:DockPanel>
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFFF">
+    <av:StackPanel Height="25" Background="#FFADD8E6" Orientation="Horizontal" av:DockPanel.Dock="Top">
+      <av:CheckBox Name="AcceptsReturn1" IsChecked="True" av:DockPanel.Dock="Top">AcceptsReturn</av:CheckBox>
+      <av:CheckBox Name="AcceptsTab1" av:DockPanel.Dock="Top">AcceptsTab</av:CheckBox>
+      <av:CheckBox Name="AllowDrop1" IsChecked="True" av:DockPanel.Dock="Top">AllowDrop</av:CheckBox>
+      <av:CheckBox Name="Focusable1" IsChecked="True" av:DockPanel.Dock="Top">Focusable</av:CheckBox>
+      <av:CheckBox Name="Enabled1" IsChecked="True" av:DockPanel.Dock="Top">Enabled</av:CheckBox>
+      <av:CheckBox Name="IsReadOnly1" av:DockPanel.Dock="Top">IsReadOnly</av:CheckBox>
+      <av:Label av:DockPanel.Dock="Top">--------RICHTEXTBOX-----------</av:Label>
+    </av:StackPanel>
+    <av:Grid Height="125" Background="#FFFFFFE0" ShowGridLines="False" av:DockPanel.Dock="Top">
+      <av:Grid.ColumnDefinitions>
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+      </av:Grid.ColumnDefinitions>
+      <av:Grid.RowDefinitions>
+        <av:RowDefinition />
+        <av:RowDefinition />
+        <av:RowDefinition />
+      </av:Grid.RowDefinitions>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="0">
+        <av:TextBlock Text="Background" />
+        <av:TextBox ToolTip="Any color" Name="Background1" av:DockPanel.Dock="Top">White</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="0">
+        <av:TextBlock Text="BorderBrush" />
+        <av:TextBox ToolTip="Any color" Name="BorderBrush1" av:DockPanel.Dock="Top">Red</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="0">
+        <av:TextBlock Text="BorderThickness" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="BorderThickness1" av:DockPanel.Dock="Top">1,1,1,1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="0">
+        <av:TextBlock Text="HorizontalAlignment" />
+        <av:TextBox ToolTip="0 = Left; 1 = Center; 2 = Right 3=Stretch" Name="HorizontalAlignment" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="0">
+        <av:TextBlock Text="FlowDirection" />
+        <av:TextBox ToolTip="0 = LTR; 1 = RTL" Name="FlowDirection1" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="5" av:Grid.Row="0">
+        <av:TextBlock Text="Foreground" />
+        <av:TextBox ToolTip="Any color" Name="Foreground1" av:DockPanel.Dock="Top">Black</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="6" av:Grid.Row="0">
+        <av:TextBlock Text="FontFamily" />
+        <av:TextBox ToolTip="Any Font Family" Name="FontFamily1" av:DockPanel.Dock="Top">Arial</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="1">
+        <av:TextBlock Text="FontSize" />
+        <av:TextBox Name="FontSize1" av:DockPanel.Dock="Top">18</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="1">
+        <av:TextBlock Text="FontWeight" />
+        <av:TextBox ToolTip="400 = Normal; 100 = Thin; 200 = ExtraThin; 300 = Light; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black" Name="FontWeight1" av:DockPanel.Dock="Top">400</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="1">
+        <av:TextBlock Text="FontStyle" />
+        <av:TextBox ToolTip="Normal; Oblique; Italic" Name="FontStyle1" av:DockPanel.Dock="Top">Normal</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="1">
+        <av:TextBlock Text="Wrap" />
+        <av:TextBox ToolTip="Wrap, Nowrap" Name="Wrap1" av:DockPanel.Dock="Top">Nowrap</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="1">
+        <av:TextBlock Text="HScrollBarV" />
+        <av:TextBox ToolTip="Auto; Hidden; Visible" Name="HScrollBarV1" av:DockPanel.Dock="Top">Auto</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="5" av:Grid.Row="1">
+        <av:TextBlock Text="Height" />
+        <av:TextBox Name="Height1" av:DockPanel.Dock="Top">200</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="6" av:Grid.Row="1">
+        <av:TextBlock Text="Padding" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="Padding1" av:DockPanel.Dock="Top">4,1,4,1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="2">
+        <av:TextBlock Text="Margin" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="Margin1" av:DockPanel.Dock="Top">Auto,Auto,Auto,Auto</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="2">
+        <av:TextBlock Text="VScrollBarV" />
+        <av:TextBox ToolTip="Auto; Hidden; Visible" Name="VScrollBarV1" av:DockPanel.Dock="Top">Auto</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="2">
+        <av:TextBlock Text="Width" />
+        <av:TextBox Name="Width1" av:DockPanel.Dock="Top">400</av:TextBox>
+      </av:StackPanel>
+    </av:Grid>
+    <av:Grid Height="50" Background="#FFADD8E6" ShowGridLines="False" av:DockPanel.Dock="Top">
+      <av:Grid.ColumnDefinitions>
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+      </av:Grid.ColumnDefinitions>
+      <av:Grid.RowDefinitions>
+        <av:RowDefinition />
+      </av:Grid.RowDefinitions>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="0">
+        <av:TextBlock Text="MaxHeight" />
+        <av:TextBox Name="MaxHeight1" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="0">
+        <av:TextBlock Text="MinHeight" />
+        <av:TextBox Name="MinHeight1" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="0">
+        <av:TextBlock Text="MaxWidth" />
+        <av:TextBox Name="MaxWidth1" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="0">
+        <av:TextBlock Text="MinWidth" />
+        <av:TextBox Name="MinWidth1" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="0">
+        <av:TextBlock Text="Opacity" />
+        <av:TextBox Name="Opacity1" av:DockPanel.Dock="Top">1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="5" av:Grid.Row="0">
+        <av:TextBlock Text="Visibility" />
+        <av:TextBox ToolTip="0 = Visible; 1 = Hidden; 2 = Collapsed" Name="Visibility1" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+    </av:Grid>
+    <av:StackPanel av:DockPanel.Dock="Bottom">
+      <av:RichTextBox MinWidth="0" Height="200" MaxHeight="Infinity" MaxWidth="Infinity" Margin="0,0,0,0" BorderBrush="#FFFF0000" Width="400" Visibility="Visible" HorizontalAlignment="Left" FontFamily="Arial" BorderThickness="1,1,1,1" Name="TestRTB1" FontStyle="Normal" Background="#FFFFFFFF" HorizontalScrollBarVisibility="Auto" FlowDirection="LeftToRight" VerticalScrollBarVisibility="Auto" FontSize="18" MinHeight="0" FontWeight="Normal" AllowDrop="True" AcceptsReturn="True" IsReadOnly="False" AcceptsTab="False" Opacity="1" IsEnabled="True" Foreground="#FF000000" Focusable="True" Padding="4,1,4,1" />
+    </av:StackPanel>
+  </av:DockPanel>
+  <av:DockPanel Margin="5,5,5,5" Background="#FFFFFFFF">
+    <av:StackPanel Height="25" Background="#FFADD8E6" Orientation="Horizontal" av:DockPanel.Dock="Top">
+      <av:CheckBox Name="AcceptsReturn" IsChecked="True" av:DockPanel.Dock="Top">AcceptsReturn</av:CheckBox>
+      <av:CheckBox Name="AcceptsTab" av:DockPanel.Dock="Top">AcceptsTab</av:CheckBox>
+      <av:CheckBox Name="AllowDrop" IsChecked="True" av:DockPanel.Dock="Top">AllowDrop</av:CheckBox>
+      <av:CheckBox Name="Focusable" IsChecked="True" av:DockPanel.Dock="Top">Focusable</av:CheckBox>
+      <av:CheckBox Name="Enabled" IsChecked="True" av:DockPanel.Dock="Top">Enabled</av:CheckBox>
+      <av:CheckBox Name="IsReadOnly" av:DockPanel.Dock="Top">IsReadOnly</av:CheckBox>
+      <av:Label av:DockPanel.Dock="Top">--------TEXTBOX-----------</av:Label>
+    </av:StackPanel>
+    <av:Grid Height="125" Background="#FFFFFFE0" ShowGridLines="False" av:DockPanel.Dock="Top">
+      <av:Grid.ColumnDefinitions>
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+      </av:Grid.ColumnDefinitions>
+      <av:Grid.RowDefinitions>
+        <av:RowDefinition />
+        <av:RowDefinition />
+        <av:RowDefinition />
+      </av:Grid.RowDefinitions>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="0">
+        <av:TextBlock Text="Background" />
+        <av:TextBox ToolTip="Any color" Name="Background" av:DockPanel.Dock="Top">White</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="0">
+        <av:TextBlock Text="BorderBrush" />
+        <av:TextBox ToolTip="Any color" Name="BorderBrush" av:DockPanel.Dock="Top">Red</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="0">
+        <av:TextBlock Text="BorderThickness" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="BorderThickness" av:DockPanel.Dock="Top">1,1,1,1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="0">
+        <av:TextBlock Text="CharacterCasing" />
+        <av:TextBox ToolTip="0 = Normal; 1 = Lower; 2 = Upper Affects text typed after setting" Name="CharacterCasing" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="0">
+        <av:TextBlock Text="FlowDirection" />
+        <av:TextBox ToolTip="0 = LTR; 1 = RTL" Name="FlowDirection" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="5" av:Grid.Row="0">
+        <av:TextBlock Text="Foreground" />
+        <av:TextBox ToolTip="Any color" Name="Foreground" av:DockPanel.Dock="Top">Black</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="6" av:Grid.Row="0">
+        <av:TextBlock Text="FontFamily" />
+        <av:TextBox ToolTip="Any Font Family" Name="FontFamily" av:DockPanel.Dock="Top">Arial</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="1">
+        <av:TextBlock Text="FontSize" />
+        <av:TextBox Name="FontSize" av:DockPanel.Dock="Top">18</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="1">
+        <av:TextBlock Text="FontWeight" />
+        <av:TextBox ToolTip="400 = Normal; 100 = Thin; 200 = ExtraThin; 300 = Light; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black" Name="FontWeight" av:DockPanel.Dock="Top">400</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="1">
+        <av:TextBlock Text="FontStyle" />
+        <av:TextBox ToolTip="Normal; Oblique; Italic" Name="FontStyle" av:DockPanel.Dock="Top">Normal</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="1">
+        <av:TextBlock Text="Wrap" />
+        <av:TextBox ToolTip="Wrap, Nowrap" Name="Wrap" av:DockPanel.Dock="Top">Nowrap</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="1">
+        <av:TextBlock Text="HScrollBarV" />
+        <av:TextBox ToolTip="Auto; Hidden; Visible" Name="HScrollBarV" av:DockPanel.Dock="Top">Auto</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="5" av:Grid.Row="1">
+        <av:TextBlock Text="Height" />
+        <av:TextBox Name="Height" av:DockPanel.Dock="Top">200</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="6" av:Grid.Row="1">
+        <av:TextBlock Text="MaxLength" />
+        <av:TextBox ToolTip="Max Length of text 0:default" Name="MaxLength" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="2">
+        <av:TextBlock Text="Padding" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="Padding" av:DockPanel.Dock="Top">4,1,4,1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="2">
+        <av:TextBlock Text="Margin" />
+        <av:TextBox ToolTip="Left, Top, Right, Bottom" Name="Margin" av:DockPanel.Dock="Top">Auto,Auto,Auto,Auto</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="2">
+        <av:TextBlock Text="VScrollBarV" />
+        <av:TextBox ToolTip="Auto; Hidden; Visible" Name="VScrollBarV" av:DockPanel.Dock="Top">Auto</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="2">
+        <av:TextBlock Text="Width" />
+        <av:TextBox Name="Width" av:DockPanel.Dock="Top">400</av:TextBox>
+      </av:StackPanel>
+    </av:Grid>
+    <av:Grid Height="50" Background="#FFADD8E6" ShowGridLines="False" av:DockPanel.Dock="Top">
+      <av:Grid.ColumnDefinitions>
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+        <av:ColumnDefinition />
+      </av:Grid.ColumnDefinitions>
+      <av:Grid.RowDefinitions>
+        <av:RowDefinition />
+      </av:Grid.RowDefinitions>
+      <av:StackPanel av:Grid.Column="0" av:Grid.Row="0">
+        <av:TextBlock Text="MaxHeight" />
+        <av:TextBox Name="MaxHeight" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="1" av:Grid.Row="0">
+        <av:TextBlock Text="MinHeight" />
+        <av:TextBox Name="MinHeight" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="2" av:Grid.Row="0">
+        <av:TextBlock Text="MaxWidth" />
+        <av:TextBox Name="MaxWidth" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="3" av:Grid.Row="0">
+        <av:TextBlock Text="MinWidth" />
+        <av:TextBox Name="MinWidth" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="4" av:Grid.Row="0">
+        <av:TextBlock Text="MaxLines" />
+        <av:TextBox ToolTip="Height, MaxHeight, MinHeight properties shouldnt have any value for this property to work" Name="MaxLines" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="5" av:Grid.Row="0">
+        <av:TextBlock Text="MinLines" />
+        <av:TextBox ToolTip="Height, MaxHeight, MinHeight properties shouldnt have any value for this property to work" Name="MinLines" av:DockPanel.Dock="Top" xml:space="preserve" />
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="6" av:Grid.Row="0">
+        <av:TextBlock Text="Opacity" />
+        <av:TextBox Name="Opacity" av:DockPanel.Dock="Top">1</av:TextBox>
+      </av:StackPanel>
+      <av:StackPanel av:Grid.Column="7" av:Grid.Row="0">
+        <av:TextBlock Text="Visibility" />
+        <av:TextBox ToolTip="0 = Visible; 1 = Hidden; 2 = Collapsed" Name="Visibility" av:DockPanel.Dock="Top">0</av:TextBox>
+      </av:StackPanel>
+    </av:Grid>
+    <av:StackPanel av:DockPanel.Dock="Bottom">
+      <av:TextBox Height="200" MaxHeight="Infinity" MaxWidth="Infinity" TextWrapping="NoWrap" Margin="0,0,0,0" BorderBrush="#FFFF0000" MaxLines="2147483647" FontStretch="Normal" Width="400" Visibility="Visible" FontFamily="Arial" BorderThickness="1,1,1,1" MaxLength="0" Name="TestTB" FontStyle="Normal" Background="#FFFFFFFF" HorizontalScrollBarVisibility="Auto" FlowDirection="LeftToRight" VerticalScrollBarVisibility="Auto" FontSize="18" MinLines="1" FontWeight="Normal" AllowDrop="True" AcceptsReturn="True" IsReadOnly="False" AcceptsTab="False" MinWidth="0" Opacity="1" IsEnabled="True" Foreground="#FF000000" MinHeight="0" Focusable="True" Padding="4,1,4,1" xml:space="preserve" />
+    </av:StackPanel>
+  </av:DockPanel>
+</CustomStackPanel>

@@ -1,0 +1,268 @@
+<CustomDockPanel xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <CustomDockPanel.Resources>
+    <av:Style TargetType="av:ContentControl" x:Key="DropShadowEffect">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:ContentControl">
+            <av:DockPanel LastChildFill="True">
+              <av:DockPanel LastChildFill="True" Width="4" av:DockPanel.Dock="Right">
+                <av:Rectangle Height="4" Margin="0,4,0,0" av:DockPanel.Dock="Top">
+                  <av:Rectangle.Fill>
+                    <av:RadialGradientBrush Center="0,1" RadiusX="0.9" RadiusY="0.9" GradientOrigin="0,1">
+                      <av:RadialGradientBrush.GradientStops>
+                        <av:GradientStop Color="#99000000" Offset="0" />
+                        <av:GradientStop Color="#00FFFFFF" Offset="1" />
+                      </av:RadialGradientBrush.GradientStops>
+                    </av:RadialGradientBrush>
+                  </av:Rectangle.Fill>
+                </av:Rectangle>
+                <av:Rectangle Height="4" Margin="0,0,0,0" av:DockPanel.Dock="Bottom">
+                  <av:Rectangle.Fill>
+                    <av:RadialGradientBrush Center="0,0" RadiusX="0.9" RadiusY="0.9" GradientOrigin="0,0">
+                      <av:RadialGradientBrush.GradientStops>
+                        <av:GradientStop Color="#88000000" Offset="0" />
+                        <av:GradientStop Color="#00FFFFFF" Offset="1" />
+                      </av:RadialGradientBrush.GradientStops>
+                    </av:RadialGradientBrush>
+                  </av:Rectangle.Fill>
+                </av:Rectangle>
+                <av:Rectangle>
+                  <av:Rectangle.Fill>
+                    <av:LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                      <av:LinearGradientBrush.GradientStops>
+                        <av:GradientStop Color="#99000000" Offset="0" />
+                        <av:GradientStop Color="#00FFFFFF" Offset="1" />
+                      </av:LinearGradientBrush.GradientStops>
+                    </av:LinearGradientBrush>
+                  </av:Rectangle.Fill>
+                </av:Rectangle>
+              </av:DockPanel>
+              <av:DockPanel LastChildFill="True" Height="5" av:DockPanel.Dock="Bottom">
+                <av:Rectangle Width="4" Margin="4,0,0,0" av:DockPanel.Dock="Left">
+                  <av:Rectangle.Fill>
+                    <av:RadialGradientBrush Center="1,0" RadiusX="0.9" RadiusY="0.9" GradientOrigin="1,0">
+                      <av:RadialGradientBrush.GradientStops>
+                        <av:GradientStop Color="#99000000" Offset="0" />
+                        <av:GradientStop Color="#00FFFFFF" Offset="1" />
+                      </av:RadialGradientBrush.GradientStops>
+                    </av:RadialGradientBrush>
+                  </av:Rectangle.Fill>
+                </av:Rectangle>
+                <av:Rectangle>
+                  <av:Rectangle.Fill>
+                    <av:LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                      <av:LinearGradientBrush.GradientStops>
+                        <av:GradientStop Color="#99000000" Offset="0" />
+                        <av:GradientStop Color="#00FFFFFF" Offset="1" />
+                      </av:LinearGradientBrush.GradientStops>
+                    </av:LinearGradientBrush>
+                  </av:Rectangle.Fill>
+                </av:Rectangle>
+              </av:DockPanel>
+              <av:ContentPresenter Content="{av:TemplateBinding av:ContentControl.Content}" ContentTemplate="{av:TemplateBinding av:ContentControl.ContentTemplate}" Width="{av:TemplateBinding av:FrameworkElement.Width}" Height="{av:TemplateBinding av:FrameworkElement.Height}" />
+            </av:DockPanel>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:Style TargetType="av:Button" x:Key="http://schemas.microsoft.com/2003/xaml/ComboBox/TransparentButtonStyle">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:Button">
+            <av:DockPanel LastChildFill="True">
+              <av:Border Background="{av:DynamicResource ComboBoxButtonNormalBackground}" Name="DropDownButton" Width="{av:DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/VerticalScrollBarWidth}" av:DockPanel.Dock="Right" />
+              <av:Border Background="#00FFFFFF" />
+            </av:DockPanel>
+            <av:ControlTemplate.Triggers>
+              <av:Trigger Property="av:UIElement.IsMouseOver">
+                <av:Setter Property="av:Panel.Background" TargetName="DropDownButton">
+                  <av:Setter.Value>
+                    <av:DynamicResource ResourceKey="ComboBoxButtonMouseOverBackground" />
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Trigger.Value>
+                  <s:Boolean>True</s:Boolean>
+                </av:Trigger.Value>
+              </av:Trigger>
+              <av:Trigger Property="av:ButtonBase.IsPressed">
+                <av:Setter Property="av:Panel.Background" TargetName="DropDownButton">
+                  <av:Setter.Value>
+                    <av:DynamicResource ResourceKey="ComboBoxButtonPressedBackground" />
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Trigger.Value>
+                  <s:Boolean>True</s:Boolean>
+                </av:Trigger.Value>
+              </av:Trigger>
+              <av:Trigger Property="av:UIElement.IsEnabled">
+                <av:Setter Property="av:Panel.Background" TargetName="DropDownButton">
+                  <av:Setter.Value>
+                    <av:DynamicResource ResourceKey="ComboBoxButtonDisabledBackground" />
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Trigger.Value>
+                  <s:Boolean>False</s:Boolean>
+                </av:Trigger.Value>
+              </av:Trigger>
+            </av:ControlTemplate.Triggers>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:Style TargetType="av:ComboBox" x:Key="{x:Type av:ComboBox}">
+      <av:Style.Triggers>
+        <av:Trigger Property="av:UIElement.IsEnabled">
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/GrayTextBrush" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Trigger.Value>
+            <s:Boolean>False</s:Boolean>
+          </av:Trigger.Value>
+        </av:Trigger>
+        <av:Trigger Property="av:UIElement.IsKeyboardFocusWithin">
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/HighlightTextBrush" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Trigger.Value>
+            <s:Boolean>True</s:Boolean>
+          </av:Trigger.Value>
+        </av:Trigger>
+      </av:Style.Triggers>
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:FrameworkElement.OverridesDefaultStyle">
+        <av:Setter.Value>
+          <s:Boolean>True</s:Boolean>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.FontFamily">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/MessageFontFamily" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.FontSize">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/MessageFontSize" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.FontStyle">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/MessageFontStyle" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.FontWeight">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/MessageFontWeight" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.Foreground">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/ControlTextBrush" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Panel.Background">
+        <av:Setter.Value>
+          <av:SolidColorBrush>#FFFFFFFF</av:SolidColorBrush>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Border.BorderBrush">
+        <av:Setter.Value>
+          <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/ActiveBorderBrush" />
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Border.BorderThickness">
+        <av:Setter.Value>
+          <av:Thickness>1,1,1,1</av:Thickness>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:FrameworkElement.Margin">
+        <av:Setter.Value>
+          <av:Thickness>0,0,0,0</av:Thickness>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Control.Padding">
+        <av:Setter.Value>
+          <av:Thickness>2,2,2,2</av:Thickness>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:FrameworkElement.MinWidth">
+        <av:Setter.Value>
+          <s:Double>10</s:Double>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:FrameworkElement.MinHeight">
+        <av:Setter.Value>
+          <s:Double>10</s:Double>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:FrameworkElement.Width">
+        <av:Setter.Value>
+          <s:Double>150</s:Double>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:FrameworkElement.Height">
+        <av:Setter.Value>
+          <s:Double>20</s:Double>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:UIElement.ClipToBounds">
+        <av:Setter.Value>
+          <s:Boolean>True</s:Boolean>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:ComboBox">
+            <av:Border BorderThickness="{av:TemplateBinding av:Border.BorderThickness}" BorderBrush="{av:TemplateBinding av:Border.BorderBrush}" Background="{av:TemplateBinding av:Panel.Background}" Width="{av:TemplateBinding av:FrameworkElement.Width}" Height="{av:TemplateBinding av:FrameworkElement.Height}">
+              <av:Canvas>
+                <av:DockPanel LastChildFill="True">
+                  <av:Border Width="{av:DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/VerticalScrollBarWidth}" av:DockPanel.Dock="Right" />
+                  <av:Border>
+                    <av:Border Name="SelectedItemBorder" Margin="{av:TemplateBinding av:Control.Padding}">
+                      <av:ContentPresenter Content="{av:TemplateBinding av:ComboBox.SelectionBoxItem}" ContentTemplate="{av:TemplateBinding av:ComboBox.SelectionBoxItemTemplate}" Name="ContentSite" Margin="1,1,1,1" Focusable="True" />
+                    </av:Border>
+                  </av:Border>
+                </av:DockPanel>
+                <av:Button Style="{av:DynamicResource http://schemas.microsoft.com/winfx/2006/xaml/xaml/ComboBox/TransparentButtonStyle}" MinHeight="0" />
+                <av:Popup IsOpen="False" Placement="Bottom" StaysOpen="False" HorizontalOffset="-1" Focusable="False">
+                  <av:ContentControl Style="{av:DynamicResource DropShadowEffect}">
+                    <av:Border BorderThickness="{av:TemplateBinding av:Border.BorderThickness}" BorderBrush="{av:TemplateBinding av:Border.BorderBrush}" Background="{av:TemplateBinding av:Panel.Background}" MinWidth="{av:TemplateBinding av:FrameworkElement.Width}" MaxHeight="{av:TemplateBinding av:ComboBox.MaxDropDownHeight}" ClipToBounds="True">
+                      <av:StackPanel>
+                        <av:Border Margin="{av:TemplateBinding av:Control.Padding}">
+                          <av:StackPanel IsItemsHost="True" />
+                        </av:Border>
+                      </av:StackPanel>
+                    </av:Border>
+                  </av:ContentControl>
+                </av:Popup>
+              </av:Canvas>
+            </av:Border>
+            <av:ControlTemplate.Triggers>
+              <av:Trigger Property="av:UIElement.IsKeyboardFocusWithin">
+                <av:Setter Property="av:Panel.Background" TargetName="SelectedItemBorder">
+                  <av:Setter.Value>
+                    <av:DynamicResource ResourceKey="http://schemas.microsoft.com/winfx/2006/xaml/xaml/SystemResources/HighlightBrush" />
+                  </av:Setter.Value>
+                </av:Setter>
+                <av:Trigger.Value>
+                  <s:Boolean>True</s:Boolean>
+                </av:Trigger.Value>
+              </av:Trigger>
+            </av:ControlTemplate.Triggers>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+  </CustomDockPanel.Resources>
+</CustomDockPanel>

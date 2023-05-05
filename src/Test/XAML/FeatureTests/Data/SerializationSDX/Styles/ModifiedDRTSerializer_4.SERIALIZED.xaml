@@ -1,0 +1,281 @@
+<CustomCanvas xmlns="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <CustomCanvas.Resources>
+    <av:Style TargetType="av:Button" x:Key="ButtonStyleWithoutVisualTreeorTriggers">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:TextElement.Foreground">
+        <av:Setter.Value>
+          <av:RadialGradientBrush Opacity="0.5">
+            <av:RadialGradientBrush.GradientStops>
+              <av:GradientStop Offset="0" Color="#FFFF0000" />
+              <av:GradientStop Offset="1" Color="#FFFFFF00" />
+              <av:GradientStop Offset="0.5" Color="#FF0000FF" />
+            </av:RadialGradientBrush.GradientStops>
+          </av:RadialGradientBrush>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:SolidColorBrush x:Key="myBrush">#FF0000FF</av:SolidColorBrush>
+    <av:Style TargetType="av:Button" x:Key="MyButtonStyle">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Style.Triggers>
+        <av:Trigger Property="av:ButtonBase.IsPressed">
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:DynamicResource ResourceKey="myBrush" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:TextElement.FontSize">
+            <av:Setter.Value>
+              <s:Double>16</s:Double>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:DockPanel.Dock">
+            <av:Setter.Value>
+              <x:Static Member="av:Dock.Top" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Border.BorderBrush">
+            <av:Setter.Value>
+              <av:LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                <av:LinearGradientBrush.GradientStops>
+                  <av:GradientStop Offset="0" Color="#FFFF0000" />
+                  <av:GradientStop Offset="0.5" Color="#FF00FF00" />
+                  <av:GradientStop Offset="1" Color="#FF0000FF" />
+                </av:LinearGradientBrush.GradientStops>
+              </av:LinearGradientBrush>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Trigger.Value>
+            <s:Boolean>True</s:Boolean>
+          </av:Trigger.Value>
+        </av:Trigger>
+        <av:MultiTrigger>
+          <av:MultiTrigger.Conditions>
+            <av:Condition Property="av:ButtonBase.IsPressed">
+              <av:Condition.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Condition.Value>
+            </av:Condition>
+            <av:Condition Property="av:UIElement.IsKeyboardFocused">
+              <av:Condition.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Condition.Value>
+            </av:Condition>
+            <av:Condition Property="av:DockPanel.Dock" Value="{x:Static av:Dock.Top}" />
+          </av:MultiTrigger.Conditions>
+          <av:Setter Property="av:TextElement.Foreground">
+            <av:Setter.Value>
+              <av:DynamicResource ResourceKey="myBrush" />
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Border.BorderBrush">
+            <av:Setter.Value>
+              <av:LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                <av:LinearGradientBrush.GradientStops>
+                  <av:GradientStop Offset="0" Color="#FFFF0000" />
+                  <av:GradientStop Offset="0.5" Color="#FF00FF00" />
+                  <av:GradientStop Offset="1" Color="#FF0000FF" />
+                </av:LinearGradientBrush.GradientStops>
+              </av:LinearGradientBrush>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:MultiTrigger>
+      </av:Style.Triggers>
+      <av:Setter Property="av:FrameworkElement.Margin">
+        <av:Setter.Value>
+          <av:Thickness>5,5,5,5</av:Thickness>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:FrameworkElement.Cursor">
+        <av:Setter.Value>
+          <av:Cursor>Hand</av:Cursor>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate TargetType="av:Button">
+            <av:Canvas Height="20" Width="100">
+              <av:Rectangle RadiusY="10" Name="MainRect" Stroke="{av:DynamicResource myBrush}" RadiusX="10" StrokeThickness="2">
+                <av:Rectangle.Fill>
+                  <av:LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <av:LinearGradientBrush.GradientStops>
+                      <av:GradientStop Offset="0" Color="#FFFF0000" />
+                      <av:GradientStop Offset="0.5" Color="#FF00FF00" />
+                      <av:GradientStop Offset="1" Color="#FF0000FF" />
+                    </av:LinearGradientBrush.GradientStops>
+                  </av:LinearGradientBrush>
+                </av:Rectangle.Fill>
+              </av:Rectangle>
+              <av:ContentPresenter Margin="15,13,15,15" Content="{av:TemplateBinding av:ContentControl.Content}" av:DockPanel.Dock="{av:TemplateBinding av:DockPanel.Dock}" />
+            </av:Canvas>
+            <av:ControlTemplate.Triggers>
+              <av:MultiTrigger>
+                <av:MultiTrigger.Conditions>
+                  <av:Condition Property="av:ButtonBase.IsPressed">
+                    <av:Condition.Value>
+                      <s:Boolean>True</s:Boolean>
+                    </av:Condition.Value>
+                  </av:Condition>
+                  <av:Condition Property="av:UIElement.IsKeyboardFocused">
+                    <av:Condition.Value>
+                      <s:Boolean>True</s:Boolean>
+                    </av:Condition.Value>
+                  </av:Condition>
+                  <av:Condition Property="av:DockPanel.Dock" Value="{x:Static av:Dock.Top}" />
+                </av:MultiTrigger.Conditions>
+                <av:Setter Property="av:TextElement.FontSize" TargetName="MainRect">
+                  <av:Setter.Value>
+                    <s:Double>16</s:Double>
+                  </av:Setter.Value>
+                </av:Setter>
+              </av:MultiTrigger>
+              <av:MultiTrigger>
+                <av:Setter Property="av:TextElement.FontSize" TargetName="MainRect">
+                  <av:Setter.Value>
+                    <s:Double>16</s:Double>
+                  </av:Setter.Value>
+                </av:Setter>
+              </av:MultiTrigger>
+            </av:ControlTemplate.Triggers>
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:Style TargetType="av:IFrameworkInputElement" x:Key="NoTargetTypeStyle">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:Control.Template">
+        <av:Setter.Value>
+          <av:ControlTemplate>
+            <av:Canvas Height="20" Width="100" />
+          </av:ControlTemplate>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+    <av:Style TargetType="av:TextBlock" x:Key="{x:Type av:TextBlock}">
+      <av:Style.Resources>
+        <av:ResourceDictionary />
+      </av:Style.Resources>
+      <av:Setter Property="av:TextElement.FontSize">
+        <av:Setter.Value>
+          <s:Double>8</s:Double>
+        </av:Setter.Value>
+      </av:Setter>
+      <av:Setter Property="av:TextElement.Foreground">
+        <av:Setter.Value>
+          <av:LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            <av:LinearGradientBrush.GradientStops>
+              <av:GradientStop Offset="0" Color="#FFFF0000" />
+              <av:GradientStop Offset="0.5" Color="#FF00FF00" />
+              <av:GradientStop Offset="1" Color="#FF0000FF" />
+            </av:LinearGradientBrush.GradientStops>
+          </av:LinearGradientBrush>
+        </av:Setter.Value>
+      </av:Setter>
+    </av:Style>
+  </CustomCanvas.Resources>
+  <av:StackPanel>
+    <av:Button>
+      <av:Button.Style>
+        <av:Style TargetType="av:Button">
+          <av:Style.Resources>
+            <av:ResourceDictionary />
+          </av:Style.Resources>
+          <av:Style.Triggers>
+            <av:Trigger Property="av:ButtonBase.IsPressed">
+              <av:Setter Property="av:TextElement.Foreground">
+                <av:Setter.Value>
+                  <av:DynamicResource ResourceKey="myBrush" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontSize">
+                <av:Setter.Value>
+                  <s:Double>16</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:DockPanel.Dock">
+                <av:Setter.Value>
+                  <x:Static Member="av:Dock.Top" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Trigger.Value>
+                <s:Boolean>True</s:Boolean>
+              </av:Trigger.Value>
+            </av:Trigger>
+            <av:MultiTrigger>
+              <av:MultiTrigger.Conditions>
+                <av:Condition Property="av:ButtonBase.IsPressed">
+                  <av:Condition.Value>
+                    <s:Boolean>True</s:Boolean>
+                  </av:Condition.Value>
+                </av:Condition>
+                <av:Condition Property="av:UIElement.IsKeyboardFocused">
+                  <av:Condition.Value>
+                    <s:Boolean>True</s:Boolean>
+                  </av:Condition.Value>
+                </av:Condition>
+                <av:Condition Property="av:DockPanel.Dock" Value="{x:Static av:Dock.Top}" />
+              </av:MultiTrigger.Conditions>
+              <av:Setter Property="av:TextElement.Foreground">
+                <av:Setter.Value>
+                  <av:DynamicResource ResourceKey="myBrush" />
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:TextElement.FontSize">
+                <av:Setter.Value>
+                  <s:Double>16</s:Double>
+                </av:Setter.Value>
+              </av:Setter>
+              <av:Setter Property="av:Border.BorderBrush">
+                <av:Setter.Value>
+                  <av:LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <av:LinearGradientBrush.GradientStops>
+                      <av:GradientStop Offset="0" Color="#FFFF0000" />
+                      <av:GradientStop Offset="0.5" Color="#FF00FF00" />
+                      <av:GradientStop Offset="1" Color="#FF0000FF" />
+                    </av:LinearGradientBrush.GradientStops>
+                  </av:LinearGradientBrush>
+                </av:Setter.Value>
+              </av:Setter>
+            </av:MultiTrigger>
+          </av:Style.Triggers>
+          <av:Setter Property="av:FrameworkElement.Margin">
+            <av:Setter.Value>
+              <av:Thickness>5,5,5,5</av:Thickness>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:FrameworkElement.Cursor">
+            <av:Setter.Value>
+              <av:Cursor>Hand</av:Cursor>
+            </av:Setter.Value>
+          </av:Setter>
+          <av:Setter Property="av:Control.Template">
+            <av:Setter.Value>
+              <av:ControlTemplate TargetType="av:Button">
+                <av:Canvas Height="20" Width="100">
+                  <av:Rectangle RadiusY="10" Name="MainRect" Stroke="{av:DynamicResource myBrush}" RadiusX="10" StrokeThickness="2">
+                    <av:Rectangle.Fill>
+                      <av:LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <av:LinearGradientBrush.GradientStops>
+                          <av:GradientStop Offset="0" Color="#FFFF0000" />
+                          <av:GradientStop Offset="0.5" Color="#FF00FF00" />
+                          <av:GradientStop Offset="1" Color="#FF0000FF" />
+                        </av:LinearGradientBrush.GradientStops>
+                      </av:LinearGradientBrush>
+                    </av:Rectangle.Fill>
+                  </av:Rectangle>
+                  <av:ContentPresenter Margin="15,13,15,15" Content="{av:TemplateBinding av:ContentControl.Content}" av:DockPanel.Dock="{av:TemplateBinding av:DockPanel.Dock}" />
+                </av:Canvas>
+              </av:ControlTemplate>
+            </av:Setter.Value>
+          </av:Setter>
+        </av:Style>
+      </av:Button.Style>
+    </av:Button>
+  </av:StackPanel>
+</CustomCanvas>

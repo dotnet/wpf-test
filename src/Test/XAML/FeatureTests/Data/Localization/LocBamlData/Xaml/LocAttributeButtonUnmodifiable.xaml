@@ -1,0 +1,103 @@
+<!-- Window containing Button Content properties for which Localization.Attributes set LocalizationCategory as Modifiable -->
+<Window
+    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Class = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest">
+
+   <StackPanel>
+        <Button x:Uid="Button_1"
+            Content="Microsoft1"
+            Localization.Attributes = "Content (Unmodifiable Text Readable)">
+        </Button>
+
+        <Button x:Uid="Button_2"
+            Content="Microsoft2"
+            Localization.Attributes = "Content (Readable Unmodifiable Text)">
+        </Button>
+
+        <Button x:Uid="Button_3"
+            Content="Microsoft3"
+            Localization.Attributes = "Content (Unmodifiable Readable Text)">
+        </Button>
+
+        <Button x:Uid="Button_4"
+            Content="Microsoft4"
+            Localization.Attributes = "Content (Readable Text Unmodifiable)">
+        </Button>
+
+        <Button x:Uid="Button_5"
+            Content="Microsoft5"
+            Localization.Attributes = "Content (Text Unmodifiable Readable)">
+        </Button>
+
+        <Button x:Uid="Button_6"
+            Content="Microsoft6"
+            Localization.Attributes = "Content (Text Readable Unmodifiable)">
+        </Button>
+
+        <Button x:Uid="Button_7"
+            Content="Microsoft7"
+            Localization.Attributes = "Content (Unmodifiable Readable)">
+        </Button>
+
+        <Button x:Uid="Button_8"
+            Content="Microsoft8"
+            Localization.Attributes = "Content (Readable Unmodifiable)">
+        </Button>
+
+        <Button x:Uid="Button_9"
+            Content="Microsoft9"
+            Localization.Attributes = "Content (Unmodifiable Text)">
+        </Button>
+
+        <Button x:Uid="Button_10"
+            Content="Microsoft10"
+            Localization.Attributes = "Content (Text Unmodifiable)">
+        </Button>
+
+        <Button x:Uid="Button_11"
+            Content="Microsoft11"
+            Localization.Attributes = "Content (Unmodifiable)">
+        </Button>
+
+        <!-- Nested with parent having no x:Uid -->
+        <Button>
+            <Button x:Uid="Button_12"
+                Content="Microsoft12"
+                Localization.Attributes = "Content (Text Unmodifiable Readable)">
+            </Button>
+        </Button>
+
+        <!-- Nested with parent having an x:Uid -->
+        <Button x:Uid="Parent_13">
+            <Button x:Uid="Button_13"
+                Content="Microsoft13"
+                Localization.Attributes = "Content (Text Unmodifiable Readable)">
+            </Button>
+        </Button>
+
+        <!-- Unmodifiable, but no content -->
+        <Button x:Uid="Button_14"
+            Localization.Attributes = "Content (Text Unmodifiable Readable)">
+        </Button>
+
+        <!-- Unmodifiable set on both parent and child -->
+        <Button x:Uid="Parent_15"
+            Localization.Attributes = "Content (Text Unmodifiable Readable)">
+            <Button x:Uid="Button_15"
+                Content="Microsoft15"
+                Localization.Attributes = "Content (Text Unmodifiable Readable)">
+            </Button>
+        </Button>
+
+        <!-- Modifiable set on parent and Unmodifiable on child -->
+        <Button x:Uid="Parent_16"
+            Localization.Attributes = "Content (Text Modifiable Readable)">
+            <Button x:Uid="Button_16"
+                Content="Microsoft16"
+                Localization.Attributes = "Content (Text Unmodifiable Readable)">
+            </Button>
+        </Button>
+
+    </StackPanel>
+</Window>

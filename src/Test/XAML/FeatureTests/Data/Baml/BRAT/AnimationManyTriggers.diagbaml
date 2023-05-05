@@ -1,0 +1,230 @@
+NS  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"     
+NS  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+SO Page     
+ SM Width     
+  V "800"     
+ EM     
+ SM Resources     
+  GO     
+   SM x:_Items     [Implicit]     
+    SO Storyboard     
+     SM x:Key     
+      V "TestAnimation"     
+     EM     
+     SM Children     
+      GO     
+       SM x:_Items     [Implicit]     
+        SO DoubleAnimation     
+         SM Storyboard.TargetProperty     
+          V "Width"     
+         EM     
+         SM By     
+          V "300"     
+         EM     
+         SM BeginTime     
+          V "0:0:0"     
+         EM     
+         SM Duration     
+          V "0:0:5"     
+         EM     
+        EO     
+       EM     
+      EO     
+     EM     
+    EO     
+    SO Style     
+     SM x:Key     
+      SO x:TypeExtension     
+       SM _PositionalParameters     [Implicit]     
+        V "Button"     
+       EM     
+      EO     
+     EM     
+     SM TargetType     
+      SO x:TypeExtension     
+       SM _PositionalParameters     [Implicit]     
+        V "Button"     
+       EM     
+      EO     
+     EM     
+     SM Triggers     
+      GO     
+       SM x:_Items     [Implicit]     
+        SO EventTrigger     
+         SM RoutedEvent     
+          V "Mouse.MouseEnter"     
+         EM     
+         SM Actions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO BeginStoryboard     
+             SM Name     
+              V "BeginStory"     
+             EM     
+             SM Storyboard     
+              SO StaticResourceExtension     
+               SM x:_PositionalParameters     [Implicit]     
+                V "TestAnimation"     
+               EM     
+              EO     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+        SO EventTrigger     
+         SM RoutedEvent     
+          V "Mouse.MouseLeave"     
+         EM     
+         SM Actions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO StopStoryboard     
+             SM BeginStoryboardName     
+              V "BeginStory"     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+        SO EventTrigger     
+         SM RoutedEvent     
+          V "ButtonBase.Click"     
+         EM     
+         SM Actions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO RemoveStoryboard     
+             SM BeginStoryboardName     
+              V "BeginStory"     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+        SO EventTrigger     
+         SM RoutedEvent     
+          V "Mouse.PreviewMouseDown"     
+         EM     
+         SM Actions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO SeekStoryboard     
+             SM BeginStoryboardName     
+              V "BeginStory"     
+             EM     
+             SM Offset     
+              V "0:0:0"     
+             EM     
+             SM Origin     
+              V "BeginTime"     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+        SO EventTrigger     
+         SM RoutedEvent     
+          V "Keyboard.KeyUp"     
+         EM     
+         SM Actions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO ResumeStoryboard     
+             SM BeginStoryboardName     
+              V "BeginStory"     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+        SO EventTrigger     
+         SM RoutedEvent     
+          V "Keyboard.KeyDown"     
+         EM     
+         SM Actions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO PauseStoryboard     
+             SM BeginStoryboardName     
+              V "BeginStory"     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+        SO EventTrigger     
+         SM RoutedEvent     
+          V "Mouse.PreviewMouseDown"     
+         EM     
+         SM Actions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO SetStoryboardSpeedRatio     
+             SM BeginStoryboardName     
+              V "BeginStory"     
+             EM     
+             SM SpeedRatio     
+              V "3"     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+        SO EventTrigger     
+         SM RoutedEvent     
+          V "Button.Click"     
+         EM     
+         SM Actions     
+          GO     
+           SM x:_Items     [Implicit]     
+            SO SkipStoryboardToFill     
+             SM BeginStoryboardName     
+              V "BeginStory"     
+             EM     
+            EO     
+           EM     
+          EO     
+         EM     
+        EO     
+       EM     
+      EO     
+     EM     
+    EO     
+   EM     
+  EO     
+ EM     
+ SM Content     
+  SO Button     
+   SM x:ConnectionId     
+    V "1"     
+   EM     
+   SM Name     
+    V "button1"     
+   EM     
+   SM Height     
+    V "35"     
+   EM     
+   SM Width     
+    V "100"     
+   EM     
+   SM FontSize     
+    V "20"     
+   EM     
+   SM Foreground     
+    V "#FF800080"     
+   EM     
+   SM Content     
+    V "WPF!"     
+   EM     
+  EO     
+ EM     
+EO     
+Closed.

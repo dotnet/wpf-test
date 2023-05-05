@@ -1,0 +1,45 @@
+﻿
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media;assembly=PresentationCore">
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:mil="clr-namespace:System.Windows.Media;assembly=PresentationCore"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <DockPanel.Resources>
+        <mil:SolidColorBrush x:Key="GreenBrush">
+          <mil:SolidColorBrush.Color>
+            <mil:Color A="255" G="255" />
+          </mil:SolidColorBrush.Color>
+        </mil:SolidColorBrush>
+        <mil:SolidColorBrush x:Key="YellowBrush" Color="Yellow" />
+        <mil:SolidColorBrush x:Key="RedBrush">
+          <mil:SolidColorBrush.Color>
+            <mil:Color A="255" R="255" />
+          </mil:SolidColorBrush.Color>
+        </mil:SolidColorBrush>
+        <mil:SolidColorBrush x:Key="BlueBrush">
+            <mil:SolidColorBrush.Color>
+                Blue
+            </mil:SolidColorBrush.Color>
+        </mil:SolidColorBrush>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{DynamicResource GreenBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource BlueBrush}" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <DockPanel>
+                  <Button />
+              </DockPanel>  
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+  </DockPanel.Resources>
+        <Button Name="res1" Width="100" Height="50" Background="{DynamicResource RedBrush}" Foreground="{DynamicResource YellowBrush}">ClickMe</Button>
+        <Button Width="100" Height="50" Background="{DynamicResource GreenBrush}">ClickMe</Button>
+        <Button Width="100" Height="50" Background="{DynamicResource BlueBrush}">ClickMe</Button>
+        <Button Name="B1" Style="{DynamicResource ButtonStyle}" />
+        <Button Name="B2" />
+        <Button Name="B3"> Hello </Button>
+</DockPanel>
+
+</Page>

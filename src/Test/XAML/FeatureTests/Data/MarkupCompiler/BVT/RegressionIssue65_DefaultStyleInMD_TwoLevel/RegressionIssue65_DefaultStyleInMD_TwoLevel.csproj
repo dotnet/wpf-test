@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>RegressionIssue65_DefaultStyleInMD_TwoLevel</AssemblyName>
+    <OutputType>exe</OutputType> <!-- Should be "exe" for Console.WriteLine to work -->
+    <Configuration>Release</Configuration>
+    <OutputPath>bin\Release</OutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+    <Compile Include="App.xaml.cs" />
+    <Page Include="MainWindow.xaml" />
+    <Compile Include="MainWindow.xaml.cs" />
+    <Page Include="Dictionary1.xaml" />
+    <Page Include="Dictionary2.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,862 @@
+﻿<!-- Styling the Template-->
+<cmn:CustomStackPanel Orientation="Vertical"
+    xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+    >
+
+    <!-- Templates for controls-->
+    <DockPanel Background="Ivory" Margin="5">
+        <DockPanel.Resources>
+            <Style x:Key="MyBox" TargetType="{x:Type TextBoxBase}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                            <Border Background="LightGreen" BorderThickness="3" BorderBrush="violet">
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="MyPassBox" TargetType="{x:Type PasswordBox}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type PasswordBox}">
+                            <Border Background="LightBlue" BorderThickness="3" BorderBrush="violet">
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DockPanel.Resources>
+
+
+        <TextBox Style="{StaticResource MyBox}" Height="100" Width="200" DockPanel.Dock='Top'>Inside TB</TextBox>
+        <RichTextBox Style="{StaticResource MyBox}" Height="100" Width="200" HorizontalAlignment="Left" DockPanel.Dock='Top'>
+            <FlowDocument>
+                <Paragraph>
+                    hello inside RTB
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <PasswordBox Password="inside PB" Style="{StaticResource MyPassBox}" Height="100" Width="200" DockPanel.Dock='Top' />
+
+    </DockPanel>
+
+    <!-- Animating Controls - color -->
+    <DockPanel Background="Ivory" Margin="5">
+        <DockPanel.Resources>
+            <Style x:Key="StyleForBox">
+                <Setter Property="Control.Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="Red" x:Name="myBrush" />
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.5" Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" To="Yellow" AccelerationRatio=".9" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.5" Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" AccelerationRatio=".9" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </DockPanel.Resources>
+
+        <TextBox Text="hello" Style="{DynamicResource StyleForBox}" DockPanel.Dock='Top' />
+        <PasswordBox Password="hello" Style="{DynamicResource StyleForBox}" DockPanel.Dock='Top' />
+        <RichTextBox Style="{DynamicResource StyleForBox}" DockPanel.Dock='Top' />
+    </DockPanel>
+
+    <!-- Animating Controls - FontSize -->
+    <DockPanel Background="white" Margin="5">
+        <DockPanel.Resources>
+            <Style x:Key="StyleForRect">
+                <Style.Triggers>
+
+                    <!-- Complex (multi-step) property path in a Style for a FrameworkElement -->
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="24" To="36" Duration="0:0:0.5"
+                                         Storyboard.TargetProperty="FontSize" />
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+
+                </Style.Triggers>
+            </Style>
+        </DockPanel.Resources>
+
+        <!-- Sample FrameworkElement for Style Storyboard -->
+        <TextBox FontSize="24" FontStyle="Oblique" FontWeight="Bold" FontFamily="Tahoma" Width="200" Foreground="Black" Style="{DynamicResource StyleForRect}" Text="Animate" DockPanel.Dock='Top' />
+        <PasswordBox FontSize="24" FontStyle="Oblique" FontWeight="Bold" FontFamily="Tahoma" Width="200" HorizontalAlignment="Left" Foreground="Black" Style="{DynamicResource StyleForRect}" Password="Animate" DockPanel.Dock='Top ' />
+        <RichTextBox Width="200" Foreground="Black" Style="{DynamicResource StyleForRect}">
+            <FlowDocument>
+                <Paragraph> Animate </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </DockPanel>
+
+    <!-- Styling with triggers -->
+    <DockPanel Background="white" Margin="5">
+        <DockPanel.Resources>
+            <Style x:Key="Style3">
+                <Style.Triggers>
+                    <Trigger Property="Control.IsMouseOver" Value="true">
+                        <Setter Property="Control.Background" Value="Black" />
+                        <Setter Property="Control.Foreground" Value="Yellow" />
+                        <Setter Property="Control.AllowDrop" Value="False" />
+                        <Setter Property="Control.IsEnabled" Value="true" />
+                        <Setter Property="Control.AllowDrop" Value="False" />
+                        <Setter Property="Control.BorderBrush" Value="Red" />
+                        <Setter Property="Control.BorderThickness" Value="3,3,3,3" />
+                        <Setter Property="Control.FlowDirection" Value="RightToLeft" />
+                        <Setter Property="Control.FontFamily" Value="Arial" />
+                        <Setter Property="Control.FontSize" Value="20" />
+                        <Setter Property="Control.FontWeight" Value="800" />
+                        <Setter Property="Control.Height" Value="100" />
+                        <Setter Property="Control.FontStyle" Value="Italic" />
+                        <Setter Property="Control.Width" Value="200" />
+                        <Setter Property="Control.Padding" Value="10,10,0,0" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="Style4" BasedOn="{StaticResource Style3}">
+                <Style.Triggers>
+                    <Trigger Property="Control.IsMouseOver" Value="true">
+
+
+                        <Setter Property="TextBoxBase.HorizontalScrollBarVisibility" Value="Visible" />
+                        <Setter Property="TextBoxBase.VerticalScrollBarVisibility" Value="Visible" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </DockPanel.Resources>
+
+        <TextBox Width="200" Text="Hello - aufweiderschen1" Style="{StaticResource Style3}" AllowDrop="false" FlowDirection="LeftToRight" DockPanel.Dock='Top' Height="50" />
+        <PasswordBox Width="200" Password="Hello " Style="{StaticResource Style3}" FlowDirection="LeftToRight" HorizontalAlignment="Left" DockPanel.Dock='Top' />
+        <RichTextBox Width="200" Style="{StaticResource Style3}" FlowDirection="LeftToRight" DockPanel.Dock='Top' Height="50">
+            <FlowDocument>
+                <Paragraph>hello - aufweiderschen</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+
+        <TextBox Width="200" Text="Hello - aufweiderschen" Style="{StaticResource Style4}" DockPanel.Dock='Top'
+                TextWrapping="Wrap" AllowDrop="true" HorizontalAlignment="Left" />
+        <RichTextBox Width="200" Style="{StaticResource Style4}" DockPanel.Dock='Top' AllowDrop="true">
+            <FlowDocument>
+                <Paragraph>
+                    <Run TextDecorations="Underline">hello - aufweiderschen </Run>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </DockPanel>
+
+    <!-- Simple Styling with setting properties -->
+    <DockPanel Background="white" Margin="5">
+        <DockPanel.Resources>
+            <Style x:Key="Style1">
+                <Setter Property="Control.Background" Value="Black" />
+                <Setter Property="Control.Foreground" Value="Yellow" />
+                <Setter Property="Control.AllowDrop" Value="False" />
+                <Setter Property="Control.IsEnabled" Value="False" />
+                <Setter Property="Control.AllowDrop" Value="False" />
+                <Setter Property="Control.BorderBrush" Value="Red" />
+                <Setter Property="Control.BorderThickness" Value="3,3,3,3" />
+                <Setter Property="Control.FlowDirection" Value="RightToLeft" />
+                <Setter Property="Control.FontFamily" Value="Arial" />
+                <Setter Property="Control.FontSize" Value="20" />
+                <Setter Property="Control.FontWeight" Value="800" />
+                <Setter Property="Control.Height" Value="100" />
+                <Setter Property="Control.FontStyle" Value="Italic" />
+                <Setter Property="Control.Width" Value="200" />
+
+            </Style>
+            <Style x:Key="Style2" BasedOn="{StaticResource Style1}">
+                <Setter Property="Control.Padding" Value="10,10,0,0" />
+                <Setter Property="TextBoxBase.HorizontalScrollBarVisibility" Value="Visible" />
+                <Setter Property="TextBoxBase.VerticalScrollBarVisibility" Value="Visible" />
+            </Style>
+        </DockPanel.Resources>
+
+        <TextBox Text="Hello - aufweiderschen" Style="{StaticResource Style1}" FlowDirection="LeftToRight" DockPanel.Dock='Top' Height="50" />
+        <PasswordBox Password="Hello " Style="{StaticResource Style1}" FlowDirection="LeftToRight" HorizontalAlignment="Left" DockPanel.Dock='Top' />
+        <RichTextBox Style="{StaticResource Style1}" FlowDirection="LeftToRight" DockPanel.Dock='Top' Height="50">
+            <FlowDocument>
+                <Paragraph>hello - aufweiderschen</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <TextBox Text="Hello - aufweiderschen" Style="{StaticResource Style2}" DockPanel.Dock='Top' HorizontalAlignment="Left" IsEnabled="true"
+          TextWrapping="Wrap" AllowDrop="true" />
+        <RichTextBox Style="{StaticResource Style2}" DockPanel.Dock='Top' IsEnabled="true" AllowDrop="true">
+            <FlowDocument>
+                <Paragraph>
+                    <Run TextDecorations="Underline">hello - aufweiderschen </Run>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </DockPanel>
+
+
+    <!-- Setting properties of Controls -->
+    <DockPanel Background="white" Margin="5">
+        <TextBox Text="hello world!! hello world!!  " ToolTip="Hi" Background="black" Foreground="Yellow" FontSize="20" FontFamily="Times New Roman"
+                 Width="100" Height="100" HorizontalScrollBarVisibility="Visible" TextWrapping="NoWrap" AllowDrop="false" DockPanel.Dock='Top'></TextBox>
+        <TextBox AcceptsReturn="true" AcceptsTab="true" ToolTip="Hi" Background="black" Foreground="Red" FontSize="30" FontFamily="Tahoma"
+                 Width="500" Height="100" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible"
+        HorizontalAlignment="Left" MaxWidth="150" DockPanel.Dock='Top'>
+            Hello       World
+        </TextBox>
+        <TextBox AcceptsReturn="true" AcceptsTab="true" ToolTip="Hi" Background="black" Foreground="White" FontSize="30" FontFamily="Tahoma"
+                 Width="300" Height="30" VerticalScrollBarVisibility="Visible" BorderBrush="red" FlowDirection="RightToLeft"
+                 HorizontalAlignment="Right" MaxWidth="500" TextWrapping="Wrap" DockPanel.Dock='Top'>
+            another hi
+        </TextBox>
+
+        <RichTextBox BorderBrush="Red" Width="200" Height="200" HorizontalAlignment="Left" DockPanel.Dock='Top'>
+            <FlowDocument FontSize="20" FontFamily="Arial">
+                <Paragraph FontSize="30" FontStyle="Oblique" FontWeight="Bold" FontFamily="Times New Roman" FlowDirection="LeftToRight">d1313131312aasdasd </Paragraph>
+                <Paragraph FontSize="28" FontWeight="100" FontStyle="Oblique" FontFamily="Times New Roman" FlowDirection="RightToLeFT">11111111111111111daasdasd </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <RichTextBox BorderBrush="Red" Width="200" Height="100" HorizontalAlignment="Right" DockPanel.Dock='Top' HorizontalScrollBarVisibility="visible">
+            <RichTextBox.Document>
+                <FlowDocument FontSize="20" FontFamily="Arial" FontWeight="800" FontStyle="Oblique" Foreground="Navy">
+                    <Paragraph FontSize="30" FontStyle="Oblique" FontWeight="Bold" FontFamily="Times New Roman" FlowDirection="LeftToRight" Background="black" Foreground="yellow">
+                        <Run Background="yellow" Foreground="black" FontSize="24" FontStyle="Italic" FontWeight="Bold" FontFamily="Times New Roman" TextDecorations="Baseline"> d13 </Run>
+                        <Run FontSize="18" FontStyle="Oblique" FontWeight="Bold" FontFamily="Times New Roman" TextDecorations="Underline" Background="black" Foreground="yellow"> 111d1313131312aasdasd </Run>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox.Document>
+        </RichTextBox>
+        <RichTextBox Background="white" BorderBrush="Red" Width="100" Height="100" DockPanel.Dock='Top' AllowDrop="false" VerticalScrollBarVisibility="visible"
+           IsReadOnly="true" HorizontalAlignment="Left">
+            <FlowDocument FontSize="20" FontFamily="Arial" FontWeight="800" FontStyle="Oblique" AllowDrop="false" Foreground="Brown">
+                <Paragraph FontSize="30" FlowDirection="LeftToRight">d1313131312aasdasd </Paragraph>
+                <Paragraph FontSize="30" FlowDirection="LeftToRight">1111111111111111111111111111111 </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <PasswordBox Password="hello world!! hello world!!  " ToolTip="Hi" Background="black" Foreground="Yellow" FontSize="20" FontFamily="Times New Roman" FontStyle="Oblique" FontWeight="Bold"
+                 Width="100" Height="80" AllowDrop="false" IsEnabled="false" DockPanel.Dock='Top'></PasswordBox>
+        <PasswordBox Password="hello" ToolTip="Hi" Background="black" Foreground="Red" FontSize="30" FontFamily="Tahoma" AllowDrop="true" FontWeight="900" FontStyle="Oblique"
+        Width="500" Height="100" HorizontalAlignment="Right" MaxWidth="150" DockPanel.Dock='Top' Padding="50,50,0,0">
+        </PasswordBox>
+        <PasswordBox Password="Hello        World !!!" ToolTip="Hi" Background="black" Foreground="White" FontSize="30" FontFamily="Tahoma"
+                 Width="700" Height="100" BorderBrush="red" FlowDirection="RightToLeft" FontStyle="iTALIC" FontWeight="800"
+                 HorizontalAlignment="Left" MaxWidth="500" DockPanel.Dock='Top'></PasswordBox>
+
+    </DockPanel>
+
+    <!-- DataBinding of PasswordBox -->
+    <DockPanel Background="white" Margin="5">
+        <StackPanel Orientation='Horizontal' DockPanel.Dock='Top' Background='Lightblue' Height='25'>
+            <CheckBox DockPanel.Dock='Top' Name='AllowDrop2' IsChecked='true'>AllowDrop</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='Enabled2' IsChecked='true'>Enabled</CheckBox>
+            <Label DockPanel.Dock='Top'> --------PASSWORDBOX-----------            </Label>
+        </StackPanel>
+
+        <Grid ShowGridLines="false" DockPanel.Dock='Top' Background='Lightyellow' Height='125'>
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row='0' Grid.Column='0'>
+                <TextBlock>Background</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Background2' ToolTip='Any color'>White</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='1'>
+                <TextBlock>BorderBrush</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='BorderBrush2' ToolTip='Any color'>Red</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='2'>
+                <TextBlock>BorderThickness</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='BorderThickness2' ToolTip='Left, Top, Right, Bottom'>1,1,1,1</TextBox>
+            </StackPanel>
+
+
+            <StackPanel Grid.Row='0' Grid.Column='3'>
+                <TextBlock>FlowDirection</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FlowDirection2' ToolTip="0 = LTR; 1 = RTL">0</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='4'>
+                <TextBlock>Foreground</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Foreground2' ToolTip='Any color'>Black</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='0'>
+                <TextBlock>FontFamily</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontFamily2' ToolTip='Any Font Family'>Arial</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='1'>
+                <TextBlock>FontSize</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontSize2'>18</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='2'>
+                <TextBlock>FontWeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontWeight2' ToolTip="400 = Normal; 100 = Thin; 200 = ExtraThin; 300 = Light; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black">400</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='3'>
+                <TextBlock>FontStyle</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontStyle2' ToolTip="Normal; Oblique; Italic">Normal</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='4'>
+                <TextBlock>Height</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Height2'>200</TextBox>
+            </StackPanel>
+
+
+            <StackPanel Grid.Row='2' Grid.Column='0'>
+                <TextBlock>Padding</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Padding2' ToolTip='Left, Top, Right, Bottom'>4,1,4,1</TextBox>
+            </StackPanel>
+
+
+            <StackPanel Grid.Row='2' Grid.Column='1'>
+                <TextBlock>Width</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Width2'>400</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='2'>
+                <TextBlock>Margin</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Margin2' ToolTip='Left, Top, Right, Bottom'>Auto,Auto,Auto,Auto</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='3'>
+                <TextBlock>HorizontalAlignment</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='HorizontalAlignment2' ToolTip="0 = Left; 1 = Center; 2 = Right 3=Stretch">0</TextBox>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid ShowGridLines="false" DockPanel.Dock='Top' Background='LightBlue' Height="50">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row='0' Grid.Column='0'>
+                <TextBlock>MaxHeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MaxHeight2'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='1'>
+                <TextBlock>MinHeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MinHeight2'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='2'>
+                <TextBlock>MaxWidth</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MaxWidth2'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='3'>
+                <TextBlock>MinWidth</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MinWidth2'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='4'>
+                <TextBlock>Opacity</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Opacity2'>1</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='5'>
+                <TextBlock>Visibility</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Visibility2' ToolTip="0 = Visible; 1 = Hidden; 2 = Collapsed">0</TextBox>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel DockPanel.Dock='Bottom'>
+            <PasswordBox Name='TestPB'
+            AllowDrop='{Binding Path=IsChecked, ElementName=AllowDrop2, Mode=OneWay}'
+            IsEnabled='{Binding Path=IsChecked, ElementName=Enabled2, Mode=OneWay}'
+
+            Background='{Binding Path=Text, ElementName=Background2, Mode=OneWay}'
+            Foreground='{Binding Path=Text, ElementName=Foreground2, Mode=OneWay}'
+            FontFamily='{Binding Path=Text, ElementName=FontFamily2, Mode=OneWay}'
+            FontStyle='{Binding Path=Text, ElementName=FontStyle2, Mode=OneWay}'
+            FontSize='{Binding Path=Text, ElementName=FontSize2, Mode=OneWay}'
+            FontWeight='{Binding Path=Text, ElementName=FontWeight2, Mode=OneWay}'
+            Height='{Binding Path=Text, ElementName=Height2, Mode=OneWay}'
+            Width='{Binding Path=Text, ElementName=Width2, Mode=OneWay}'
+            HorizontalAlignment='{Binding Path=Text, ElementName=HorizontalAlignment2, Mode=OneWay}'
+
+            FlowDirection='{Binding Path=Text, ElementName=FlowDirection2, Mode=OneWay}'
+            BorderBrush='{Binding Path=Text, ElementName=BorderBrush2, Mode=OneWay}'
+            BorderThickness='{Binding Path=Text, ElementName=BorderThickness2, Mode=OneWay}'
+            Margin='{Binding Path=Text, ElementName=Margin2, Mode=OneWay}'
+            Padding='{Binding Path=Text, ElementName=Padding2, Mode=OneWay}'
+
+            MaxHeight='{Binding Path=Text, ElementName=MaxHeight2, Mode=OneWay}'
+            MinHeight='{Binding Path=Text, ElementName=MinHeight2, Mode=OneWay}'
+            MaxWidth='{Binding Path=Text, ElementName=MaxWidth2, Mode=OneWay}'
+            MinWidth='{Binding Path=Text, ElementName=MinWidth2, Mode=OneWay}'
+
+            Visibility='{Binding Path=Text, ElementName=Visibility2, Mode=OneWay}'
+            Opacity='{Binding Path=Text, ElementName=Opacity2, Mode=OneWay}'
+      />
+        </StackPanel>
+    </DockPanel>
+
+    <!-- DataBinding of RichTextBox -->
+    <DockPanel Background="white" Margin="5">
+        <StackPanel Orientation='Horizontal' DockPanel.Dock='Top' Background='Lightblue' Height='25'>
+            <CheckBox DockPanel.Dock='Top' Name='AcceptsReturn1' IsChecked='true'>AcceptsReturn</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='AcceptsTab1'>AcceptsTab</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='AllowDrop1' IsChecked='true'>AllowDrop</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='Focusable1' IsChecked='true'>Focusable</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='Enabled1' IsChecked='true'>Enabled</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='IsReadOnly1'>IsReadOnly</CheckBox>
+            <Label DockPanel.Dock='Top'> --------RICHTEXTBOX-----------            </Label>
+        </StackPanel>
+
+        <Grid ShowGridLines="false" DockPanel.Dock='Top' Background='Lightyellow' Height='125'>
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row='0' Grid.Column='0'>
+                <TextBlock>Background</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Background1' ToolTip='Any color'>White</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='1'>
+                <TextBlock>BorderBrush</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='BorderBrush1' ToolTip='Any color'>Red</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='2'>
+                <TextBlock>BorderThickness</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='BorderThickness1' ToolTip='Left, Top, Right, Bottom'>1,1,1,1</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='3'>
+                <TextBlock>HorizontalAlignment</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='HorizontalAlignment' ToolTip="0 = Left; 1 = Center; 2 = Right 3=Stretch">0</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='4'>
+                <TextBlock>FlowDirection</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FlowDirection1' ToolTip="0 = LTR; 1 = RTL">0</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='5'>
+                <TextBlock>Foreground</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Foreground1' ToolTip='Any color'>Black</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='6'>
+                <TextBlock>FontFamily</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontFamily1' ToolTip='Any Font Family'>Arial</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='0'>
+                <TextBlock>FontSize</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontSize1'>18</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='1'>
+                <TextBlock>FontWeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontWeight1' ToolTip="400 = Normal; 100 = Thin; 200 = ExtraThin; 300 = Light; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black">400</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='2'>
+                <TextBlock>FontStyle</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontStyle1' ToolTip="Normal; Oblique; Italic">Normal</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='3'>
+                <TextBlock>Wrap</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Wrap1' ToolTip='Wrap, Nowrap'>Nowrap</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='4'>
+                <TextBlock>HScrollBarV</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='HScrollBarV1' ToolTip="Auto; Hidden; Visible">Auto</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='5'>
+                <TextBlock>Height</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Height1'>200</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='6'>
+                <TextBlock>Padding</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Padding1' ToolTip='Left, Top, Right, Bottom'>4,1,4,1</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='0'>
+                <TextBlock>Margin</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Margin1' ToolTip='Left, Top, Right, Bottom'>Auto,Auto,Auto,Auto</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='1'>
+                <TextBlock>VScrollBarV</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='VScrollBarV1' ToolTip="Auto; Hidden; Visible">Auto</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='2'>
+                <TextBlock>Width</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Width1'>400</TextBox>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid ShowGridLines="false" DockPanel.Dock='Top' Background='LightBlue' Height="50">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row='0' Grid.Column='0'>
+                <TextBlock>MaxHeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MaxHeight1'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='1'>
+                <TextBlock>MinHeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MinHeight1'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='2'>
+                <TextBlock>MaxWidth</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MaxWidth1'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='3'>
+                <TextBlock>MinWidth</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MinWidth1'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='4'>
+                <TextBlock>Opacity</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Opacity1'>1</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='5'>
+                <TextBlock>Visibility</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Visibility1' ToolTip="0 = Visible; 1 = Hidden; 2 = Collapsed">0</TextBox>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel DockPanel.Dock='Bottom'>
+            <RichTextBox Name='TestRTB1'
+            AcceptsReturn='{Binding Path=IsChecked, ElementName=AcceptsReturn1, Mode=OneWay}'
+            AcceptsTab='{Binding Path=IsChecked, ElementName=AcceptsTab1, Mode=OneWay}'
+            IsReadOnly='{Binding Path=IsChecked, ElementName=IsReadOnly1, Mode=OneWay}'
+            AllowDrop='{Binding Path=IsChecked, ElementName=AllowDrop1, Mode=OneWay}'
+            Focusable='{Binding Path=IsChecked, ElementName=Focusable1, Mode=OneWay}'
+            IsEnabled='{Binding Path=IsChecked, ElementName=Enabled1, Mode=OneWay}'
+
+            Background='{Binding Path=Text, ElementName=Background1, Mode=OneWay}'
+            HorizontalAlignment='{Binding Path=Text, ElementName=HorizontalAlignment, Mode=OneWay}'
+            Foreground='{Binding Path=Text, ElementName=Foreground1, Mode=OneWay}'
+            FontFamily='{Binding Path=Text, ElementName=FontFamily1, Mode=OneWay}'
+            FontStyle='{Binding Path=Text, ElementName=FontStyle1, Mode=OneWay}'
+            FontSize='{Binding Path=Text, ElementName=FontSize1, Mode=OneWay}'
+            FontWeight='{Binding Path=Text, ElementName=FontWeight1, Mode=OneWay}'
+            HorizontalScrollBarVisibility='{Binding Path=Text, ElementName=HScrollBarV1, Mode=OneWay}'
+            VerticalScrollBarVisibility='{Binding Path=Text, ElementName=VScrollBarV1, Mode=OneWay}'
+            Height='{Binding Path=Text, ElementName=Height1, Mode=OneWay}'
+            Width='{Binding Path=Text, ElementName=Width1, Mode=OneWay}'
+
+            FlowDirection='{Binding Path=Text, ElementName=FlowDirection1, Mode=OneWay}'
+            BorderBrush='{Binding Path=Text, ElementName=BorderBrush1, Mode=OneWay}'
+            BorderThickness='{Binding Path=Text, ElementName=BorderThickness1, Mode=OneWay}'
+            Margin='{Binding Path=Text, ElementName=Margin1, Mode=OneWay}'
+            Padding='{Binding Path=Text, ElementName=Padding1, Mode=OneWay}'
+
+            MaxHeight='{Binding Path=Text, ElementName=MaxHeight1, Mode=OneWay}'
+            MinHeight='{Binding Path=Text, ElementName=MinHeight1, Mode=OneWay}'
+            MaxWidth='{Binding Path=Text, ElementName=MaxWidth1, Mode=OneWay}'
+            MinWidth='{Binding Path=Text, ElementName=MinWidth1, Mode=OneWay}'
+            Visibility='{Binding Path=Text, ElementName=Visibility1, Mode=OneWay}'
+            Opacity='{Binding Path=Text, ElementName=Opacity1, Mode=OneWay}'
+      />
+        </StackPanel>
+    </DockPanel>
+
+    <!-- DataBinding of TextBox -->
+    <DockPanel Background="white" Margin="5">
+        <StackPanel Orientation='Horizontal' DockPanel.Dock='Top' Background='Lightblue' Height='25'>
+            <CheckBox DockPanel.Dock='Top' Name='AcceptsReturn' IsChecked='true'>AcceptsReturn</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='AcceptsTab'>AcceptsTab</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='AllowDrop' IsChecked='true'>AllowDrop</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='Focusable' IsChecked='true'>Focusable</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='Enabled' IsChecked='true'>Enabled</CheckBox>
+            <CheckBox DockPanel.Dock='Top' Name='IsReadOnly'>IsReadOnly</CheckBox>
+            <Label DockPanel.Dock='Top'> --------TEXTBOX-----------            </Label>
+        </StackPanel>
+
+        <Grid ShowGridLines="false" DockPanel.Dock='Top' Background='Lightyellow' Height='125'>
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row='0' Grid.Column='0'>
+                <TextBlock>Background</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Background' ToolTip='Any color'>White</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='1'>
+                <TextBlock>BorderBrush</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='BorderBrush' ToolTip='Any color'>Red</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='2'>
+                <TextBlock>BorderThickness</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='BorderThickness' ToolTip='Left, Top, Right, Bottom'>1,1,1,1</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='3'>
+                <TextBlock>CharacterCasing</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='CharacterCasing' ToolTip="0 = Normal; 1 = Lower; 2 = Upper Affects text typed after setting">0</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='4'>
+                <TextBlock>FlowDirection</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FlowDirection' ToolTip="0 = LTR; 1 = RTL">0</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='5'>
+                <TextBlock>Foreground</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Foreground' ToolTip='Any color'>Black</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='6'>
+                <TextBlock>FontFamily</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontFamily' ToolTip='Any Font Family'>Arial</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='0'>
+                <TextBlock>FontSize</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontSize'>18</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='1'>
+                <TextBlock>FontWeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontWeight' ToolTip="400 = Normal; 100 = Thin; 200 = ExtraThin; 300 = Light; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black">400</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='2'>
+                <TextBlock>FontStyle</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='FontStyle' ToolTip="Normal; Oblique; Italic">Normal</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='3'>
+                <TextBlock>Wrap</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Wrap' ToolTip='Wrap, Nowrap'>Nowrap</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='4'>
+                <TextBlock>HScrollBarV</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='HScrollBarV' ToolTip="Auto; Hidden; Visible">Auto</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='5'>
+                <TextBlock>Height</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Height'>200</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='1' Grid.Column='6'>
+                <TextBlock>MaxLength</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MaxLength' ToolTip='Max Length of text 0:default'>0</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='0'>
+                <TextBlock>Padding</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Padding' ToolTip='Left, Top, Right, Bottom'>4,1,4,1</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='1'>
+                <TextBlock>Margin</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Margin' ToolTip='Left, Top, Right, Bottom'>Auto,Auto,Auto,Auto</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='2'>
+                <TextBlock>VScrollBarV</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='VScrollBarV' ToolTip="Auto; Hidden; Visible">Auto</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='2' Grid.Column='3'>
+                <TextBlock>Width</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Width'>400</TextBox>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid ShowGridLines="false" DockPanel.Dock='Top' Background='LightBlue' Height="50">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row='0' Grid.Column='0'>
+                <TextBlock>MaxHeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MaxHeight'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='1'>
+                <TextBlock>MinHeight</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MinHeight'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='2'>
+                <TextBlock>MaxWidth</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MaxWidth'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='3'>
+                <TextBlock>MinWidth</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MinWidth'></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='4'>
+                <TextBlock>MaxLines</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MaxLines' ToolTip="Height, MaxHeight, MinHeight properties shouldnt have any value for this property to work"></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='5'>
+                <TextBlock>MinLines</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='MinLines' ToolTip="Height, MaxHeight, MinHeight properties shouldnt have any value for this property to work"></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='6'>
+                <TextBlock>Opacity</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Opacity'>1</TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row='0' Grid.Column='7'>
+                <TextBlock>Visibility</TextBlock>
+                <TextBox DockPanel.Dock='Top' Name='Visibility' ToolTip="0 = Visible; 1 = Hidden; 2 = Collapsed">0</TextBox>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel DockPanel.Dock='Bottom'>
+            <TextBox Name='TestTB'
+            AcceptsReturn='{Binding Path=IsChecked, ElementName=AcceptsReturn, Mode=OneWay}'
+            AcceptsTab='{Binding Path=IsChecked, ElementName=AcceptsTab, Mode=OneWay}'
+            IsReadOnly='{Binding Path=IsChecked, ElementName=IsReadOnly, Mode=OneWay}'
+            TextWrapping='{Binding Path=Text, ElementName=Wrap, Mode=OneWay}'
+            AllowDrop='{Binding Path=IsChecked, ElementName=AllowDrop, Mode=OneWay}'
+            Focusable='{Binding Path=IsChecked, ElementName=Focusable, Mode=OneWay}'
+            IsEnabled='{Binding Path=IsChecked, ElementName=Enabled, Mode=OneWay}'
+
+            Background='{Binding Path=Text, ElementName=Background, Mode=OneWay}'
+            Foreground='{Binding Path=Text, ElementName=Foreground, Mode=OneWay}'
+            FontFamily='{Binding Path=Text, ElementName=FontFamily, Mode=OneWay}'
+            FontStyle='{Binding Path=Text, ElementName=FontStyle, Mode=OneWay}'
+            FontSize='{Binding Path=Text, ElementName=FontSize, Mode=OneWay}'
+            FontStretch='{Binding Path=Text, ElementName=FontStretch, Mode=OneWay}'
+            FontWeight='{Binding Path=Text, ElementName=FontWeight, Mode=OneWay}'
+            HorizontalScrollBarVisibility='{Binding Path=Text, ElementName=HScrollBarV, Mode=OneWay}'
+            VerticalScrollBarVisibility='{Binding Path=Text, ElementName=VScrollBarV, Mode=OneWay}'
+            Height='{Binding Path=Text, ElementName=Height, Mode=OneWay}'
+            Width='{Binding Path=Text, ElementName=Width, Mode=OneWay}'
+
+            FlowDirection='{Binding Path=Text, ElementName=FlowDirection, Mode=OneWay}'
+            BorderBrush='{Binding Path=Text, ElementName=BorderBrush, Mode=OneWay}'
+            BorderThickness='{Binding Path=Text, ElementName=BorderThickness, Mode=OneWay}'
+            Margin='{Binding Path=Text, ElementName=Margin, Mode=OneWay}'
+            Padding='{Binding Path=Text, ElementName=Padding, Mode=OneWay}'
+
+            MaxHeight='{Binding Path=Text, ElementName=MaxHeight, Mode=OneWay}'
+            MinHeight='{Binding Path=Text, ElementName=MinHeight, Mode=OneWay}'
+            MaxWidth='{Binding Path=Text, ElementName=MaxWidth, Mode=OneWay}'
+            MinWidth='{Binding Path=Text, ElementName=MinWidth, Mode=OneWay}'
+            MaxLines='{Binding Path=Text, ElementName=MaxLines, Mode=OneWay}'
+            MinLines='{Binding Path=Text, ElementName=MinLines, Mode=OneWay}'
+
+            MaxLength='{Binding Path=Text, ElementName=MaxLength, Mode=TwoWay}'
+
+            Visibility='{Binding Path=Text, ElementName=Visibility, Mode=OneWay}'
+            Opacity='{Binding Path=Text, ElementName=Opacity, Mode=OneWay}'
+      />
+        </StackPanel>
+    </DockPanel>
+
+</cmn:CustomStackPanel>

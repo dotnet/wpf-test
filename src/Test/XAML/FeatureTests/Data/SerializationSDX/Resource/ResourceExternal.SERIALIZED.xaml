@@ -1,0 +1,165 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <DockPanel>
+    <DockPanel.Resources>
+      <Style TargetType="Button" x:Key="BottomToolBar">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="FrameworkElement.Margin">
+          <Setter.Value>
+            <Thickness>10,10,10,10</Thickness>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="DockPanel.Dock">
+          <Setter.Value>
+            <x:Static Member="Dock.Bottom" />
+          </Setter.Value>
+        </Setter>
+      </Style>
+      <Style TargetType="Button" x:Key="ButtonStyler">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="FrameworkElement.Margin">
+          <Setter.Value>
+            <Thickness>0,0,20,20</Thickness>
+          </Setter.Value>
+        </Setter>
+      </Style>
+      <Style TargetType="Button" x:Key="CustomBackground">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="Panel.Background">
+          <Setter.Value>
+            <SolidColorBrush>#FFFFFFFF</SolidColorBrush>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.MinWidth">
+          <Setter.Value>
+            <s:Double>400</s:Double>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.MinHeight">
+          <Setter.Value>
+            <s:Double>300</s:Double>
+          </Setter.Value>
+        </Setter>
+      </Style>
+      <Style TargetType="Button" x:Key="LOGO">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="DockPanel.Dock">
+          <Setter.Value>
+            <x:Static Member="Dock.Left" />
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.Width">
+          <Setter.Value>
+            <s:Double>200</s:Double>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.Height">
+          <Setter.Value>
+            <s:Double>200</s:Double>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="Control.Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="Button">
+              <Canvas>
+                <Rectangle Height="100" Fill="#FFFF0000" Name="ss1" />
+                <Rectangle Height="50" Fill="#FFFFD700" Name="ss2" />
+              </Canvas>
+              <ControlTemplate.Triggers>
+                <Trigger Property="UIElement.IsMouseOver">
+                  <Setter Property="Panel.Background" TargetName="ss1">
+                    <Setter.Value>
+                      <SolidColorBrush>#FF32CD32</SolidColorBrush>
+                    </Setter.Value>
+                  </Setter>
+                  <Setter Property="Panel.Background" TargetName="ss2">
+                    <Setter.Value>
+                      <SolidColorBrush>#FFFF0000</SolidColorBrush>
+                    </Setter.Value>
+                  </Setter>
+                  <Trigger.Value>
+                    <s:Boolean>True</s:Boolean>
+                  </Trigger.Value>
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+      <Style TargetType="Button" x:Key="ManageUsersButton">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Style.BasedOn>
+          <Style TargetType="Button">
+            <Style.Resources>
+              <ResourceDictionary />
+            </Style.Resources>
+            <Setter Property="FrameworkElement.Margin">
+              <Setter.Value>
+                <Thickness>0,0,20,20</Thickness>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </Style.BasedOn>
+      </Style>
+      <Style TargetType="Image" x:Key="UserTile">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="FrameworkElement.Width">
+          <Setter.Value>
+            <s:Double>120</s:Double>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.Height">
+          <Setter.Value>
+            <s:Double>120</s:Double>
+          </Setter.Value>
+        </Setter>
+      </Style>
+      <Style TargetType="TextBlock" x:Key="UserTileText">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="DockPanel.Dock">
+          <Setter.Value>
+            <x:Static Member="Dock.Top" />
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.HorizontalAlignment">
+          <Setter.Value>
+            <x:Static Member="HorizontalAlignment.Center" />
+          </Setter.Value>
+        </Setter>
+      </Style>
+      <Style TargetType="Button" x:Key="VerticalDockStacker">
+        <Style.Resources>
+          <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="DockPanel.Dock">
+          <Setter.Value>
+            <x:Static Member="Dock.Top" />
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.HorizontalAlignment">
+          <Setter.Value>
+            <x:Static Member="HorizontalAlignment.Center" />
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.Margin">
+          <Setter.Value>
+            <Thickness>10,10,10,10</Thickness>
+          </Setter.Value>
+        </Setter>
+      </Style>
+    </DockPanel.Resources>
+  </DockPanel>
+</Page>

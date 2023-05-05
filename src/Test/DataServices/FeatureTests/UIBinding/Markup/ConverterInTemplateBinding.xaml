@@ -1,0 +1,22 @@
+﻿<DockPanel Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Name="myDockPanel"
+    xmlns:helpers="clr-namespace:Microsoft.Test.DataServices" 
+    >
+
+	<DockPanel.Resources>
+		<helpers:BooleanToColorConverterWithParam x:Key="converter" />
+
+		<ControlTemplate TargetType="{x:Type Button}" x:Key="ctButton">
+			<Border BorderThickness="2" BorderBrush="{TemplateBinding Property=IsTabStop, Converter={StaticResource converter}, ConverterParameter=0}">
+				<Button Content="{TemplateBinding Content}"></Button>
+			</Border>
+		</ControlTemplate>
+    </DockPanel.Resources>
+
+	<StackPanel>
+		<Button IsTabStop="true" Template="{StaticResource ctButton}" Width="150" Name="IsTabStopTrue">IsTabStop=true</Button>
+		<Button IsTabStop="false" Template="{StaticResource ctButton}" Width="150" Name="IsTabStopFalse">IsTabStop=false</Button>
+	</StackPanel>
+</DockPanel>

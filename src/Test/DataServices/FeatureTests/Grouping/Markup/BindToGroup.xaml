@@ -1,0 +1,37 @@
+﻿<Page Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ >
+    <StackPanel Name="stackpanel" Orientation="Horizontal">
+        <Panel.Resources>
+            <XmlDataProvider x:Key="DSO" XPath="/root/item">
+              <x:XData>
+                <root xmlns="">
+                    <item value="1" kind="z" />
+                    <item value="2" kind="z" />
+                    <item value="3" kind="y" />
+                    <item value="1" kind="y" />
+                    <item value="3" kind="x" />
+                    <item value="1" kind="y" />
+                    <item value="4" kind="w" />
+                    <item value="1" kind="w" />
+                    <item value="1" kind="w" />
+                </root>
+              </x:XData>
+            </XmlDataProvider>
+
+            <CollectionViewSource x:Key="view1" Source="{Binding Source={StaticResource DSO}}">
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="@value" />
+                </CollectionViewSource.GroupDescriptions>
+            </CollectionViewSource>
+
+        </Panel.Resources>
+
+        <StackPanel>
+            <TreeView ItemsSource="{Binding Source={StaticResource view1}, Path=Groups}" Name="treeview" />
+        </StackPanel>
+
+    </StackPanel>
+
+</Page>

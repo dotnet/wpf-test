@@ -1,0 +1,302 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:cols="clr-namespace:System.Collections.Specialized;assembly=System"  
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" 
+    xmlns:sources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon">
+    <!--  
+        Source type: string, object, int, DateTime, non-convertible type??
+        Target type: string, object, int, DateTime, non-convertible type
+        Data change location: source, target
+        Binding Mode: one time, one way, two way
+    
+        Scenario 1 - Number of parameters to StringFormat (P0)
+                        a. no parameter - B/MB both work; "{}" type
+                        b. 1 param - B/MB both work
+                        c. multiple params - 
+                            B: error and BindingExpression.Status = BindingStatus.UpdateTargetError
+                            MB's: works when # of params = # of bindings 
+                                  error when # of params > # of bindings    
+        Scenario 2 - Basic Conditions Tests (P0):
+               Initial: 
+                        a. Pass: S2T binding; Error: T2S
+                        b. Pass: T is string; Try: s = Int, DateTime, Object converted to String, others 
+                        c. Pass: StringFormat is not null or empty
+                Update: 
+                        For 2 way binding, if the source updated, the converter/formatting are re-applied.
+    
+        Scenario 3 - User Converter (P1)  
+                a. B: both Converter and StringFormat provided -> converter first and then StringFormat
+                b. MB: if both provided, 
+                            Oneway S2T: Converter is used first, then StringFormat;
+                            2Way: s2t as above; T2S only use the ConvertBack method
+                       if only StringFormat, 
+                            Oneway S2T: StringFormat is used from S2T
+                            2Way: Error for T2S for converter is needed for ConvertBack            
+        Scenario 4 - Update Direction (S2T, T2S, etc.) and binding error trace, $10 case, etc.  
+        Scenario 6 - Binding Culture tests (both converterculture and language)
+            
+        Tests can be combined with a few controls, but for scenario clarity, each sceario has 
+        its own controls.  
+    -->
+    <Page.Resources>
+        <sources:EarthDataSource x:Key="earth" />
+        <sources:CountriesDataSource x:Key="countries" />
+        <sources:People x:Key="peoplelist" />
+        <sources:FirstValueConverter x:Key="conv" />
+        <sources:CultureConverter x:Key="con" />
+        <sources:PeopleNameConverter x:Key="pconv" />
+
+        <cols:StringCollection x:Key="StringData">
+            <sys:String>1111111111</sys:String>
+            <sys:String>222222222222222222222</sys:String>
+            <sys:String>3333333333333333333333333333</sys:String>
+            <sys:String>44444</sys:String>
+        </cols:StringCollection>
+    </Page.Resources>
+
+    <Grid Width="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28*" /> 
+            <RowDefinition Height="29*" /> 
+            <RowDefinition Height="57*" /> 
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/> 
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- (A)Binding: R0,C0,1,2: parameter (0,1,2,); -->
+                
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="B w/o Param" Background="Gold"/>
+            <!--0 param w/ default -->
+            <TextBlock Text="Choose a number:"></TextBlock>            
+            <ComboBox Name="myComboBox" SelectedIndex="0"> 
+				<ComboBoxItem>168.361</ComboBoxItem>
+                <ComboBoxItem>456.9832</ComboBoxItem>
+            </ComboBox>
+            <TextBlock Width="30" Height="30" Name="Btb1">
+                <TextBlock.Text>
+                    <Binding ElementName="myComboBox" Path="SelectedItem.Content" 
+							 StringFormat="The value is: {0}" /> 
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="B w 1 Param and 1 converter" Background="Gold"/>       
+            <!-- 1 param w/ OneWay -->
+            <TextBlock Name="Btb2" Background="Aqua">
+		        <TextBlock.Text> <!-- en culture converter -->
+		            <Binding Converter="{StaticResource con}" Mode="OneTime"
+                             RelativeSource="{RelativeSource Self}" Path="Name" 
+                             StringFormat="My Name is: {0}"/>
+   	            </TextBlock.Text>
+	        </TextBlock>            
+        </StackPanel>
+        
+        <StackPanel Grid.Column="2">
+            <TextBlock Text="B w/ 2 Params and OneTime" Background="Gold"/>          
+            <!--2 params w/ OneTime --> 
+            <TextBlock Name="Btb3">
+		        <TextBlock.Text>
+		            <Binding Mode="OneTime" RelativeSource="{RelativeSource Self}" 
+                             Path="Name" StringFormat="{}{0} and {1}" />
+   	            </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="3">            
+            <StackPanel.Resources>
+                <DataTemplate x:Key="data" >
+                    <TextBlock Name="DataTemplate" 
+                               Text="{Binding RelativeSource={RelativeSource Self}, Path=Name, Converter={StaticResource con}, StringFormat={}{0} }" /> 
+                </DataTemplate >
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Text" 
+                            Value="{Binding Path=Name, RelativeSource={RelativeSource Self}, 
+                                            ConverterCulture=tr-TR,  
+                                            Converter={StaticResource con},
+                                            StringFormat={}{0} }" />                     
+                </Style>
+            </StackPanel.Resources>
+            <!-- both converterculture and language are used -->
+            <TextBlock Text="B w/ BindingCulture Tests" Background="Gold"/>            
+            <TextBlock Name="UStextblock" Background="DarkMagenta">
+		        <TextBlock.Text>
+		            <Binding ConverterCulture="en-US" Converter="{StaticResource con}" 
+                             RelativeSource="{RelativeSource Self}" Path="Name" 
+                             FallbackValue="fallback" StringFormat="{}{0}" />  
+   	            </TextBlock.Text>
+	        </TextBlock>
+            <TextBlock Name="TRtextblock" Background="LimeGreen" />            
+            <Button xml:lang="en-US" Name="button2" Height="25" Content="{Binding }" 
+                    ContentTemplate="{DynamicResource data}"/>
+        </StackPanel>
+
+        <!-- (B)MultiBinding: R2,C0,1,2,3: param(0,1,2,3); w/ or w/o converter; binding mode and direction -->
+                
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <TextBlock Name="MBtb1" Background="Blue"> 
+                <TextBlock.Text> <!-- firstvalueconverter -->
+                    <MultiBinding Converter="{StaticResource conv}" StringFormat="C2">
+                        <MultiBinding.Bindings>
+                            <Binding ElementName="MBtb3" Path="Text" />
+                            <Binding ElementName="MBtb2" Path="Text" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding> 
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Text="12345.6789" Name="MBtb2" Background="DarkOrange"/>
+            <TextBlock Text="There" Name="MBtb3"/>
+         </StackPanel>
+
+        <!-- w/ 1 param and 2 bindings, no converter, only StringFormat; first binding will be used! -->
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Name="MBtb4" Background="RoyalBlue">
+                <TextBlock.Text> 
+                    <MultiBinding StringFormat="{}{0:D8}" 
+                                  UpdateSourceTrigger="Explicit" Mode="TwoWay"> 
+                        <MultiBinding.Bindings>
+                            <Binding ElementName="MBtb5" Path="Text" Mode="TwoWay" />
+                            <Binding ElementName="MBtb6" Path="Text" Mode="TwoWay" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Text="12345" Name="MBtb5" Background="Beige"/>
+            <TextBlock Text="67891" Name="MBtb6"/>
+        </StackPanel>
+        
+        <!-- w/ 2 param and 2 bindings, TwoWay w/ converter -->
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <TextBlock Name="MBtb7" Background="GreenYellow">
+                <TextBlock.Text> 
+                    <MultiBinding Converter="{StaticResource pconv}" ConverterParameter="FormatNormal"
+                                  UpdateSourceTrigger="Explicit" Mode="TwoWay"
+                                  StringFormat="{}{0}!">
+                        <MultiBinding.Bindings>
+                            <Binding ElementName="MBtb5" Path="Text" Mode="TwoWay" />
+                            <Binding ElementName="MBtb6" Path="Text" Mode="TwoWay" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+        
+        <!-- w/ 3 param and 2 bindings, this will generate an Error -->
+        <StackPanel Grid.Row="1" Grid.Column="3">
+            <TextBlock Name="MBtb8" Background="Red">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource conv}" StringFormat="{}{0} : {1} : {2}">
+                        <MultiBinding.Bindings>
+                            <Binding ElementName="MBtb5" Path="Text" />
+                            <Binding ElementName="MBtb6" Path="Text" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Name="MBtb9" Background="Red">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource conv}" StringFormat="First Value is: {0}">
+                        <MultiBinding.Bindings>
+                            <Binding ElementName="MBtb5" Path="Text" />
+                            <Binding ElementName="MBtb6" Path="Text" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- (C): Basic conditions: S2T, String at T, StringFormat is not null or empty -->
+        <StackPanel Grid.Row="2">
+            <!-- S: int, obj, datetime, enum, null -->
+            <TextBlock Text="Test Basic Conditions: S types" Background="Gold"/>
+            <ListBox Name="lb0" SelectedIndex="0" DisplayMemberPath="Population"
+                     ItemsSource="{Binding Source={StaticResource countries}, Path=Countries}" 
+                     ItemStringFormat="{}{0}" /> 
+                
+            <ListBox Name="lb1" SelectedIndex="1"
+                     ItemsSource="{Binding Source={StaticResource earth},Path=Hemispheres}"
+                     DisplayMemberPath="HemisphereName" ItemStringFormat="{}{0}" />
+                 
+            <ListBox Name="lb2" SelectedIndex="1" Height="54"
+                     ItemsSource="{Binding Source={StaticResource countries},Path=Countries}"
+                     DisplayMemberPath="IndependenceDay" ItemStringFormat="MM/dd/yyyy" /> 
+            
+            <ListBox Name="lb3" SelectedIndex="0" Height="54"
+                     ItemsSource="{Binding Source={StaticResource countries},Path=Countries}"
+                     DisplayMemberPath="Government" ItemStringFormat="{}{0}" />          
+            
+            <TextBlock Name="tbNull" Text="{Binding x:Null, StringFormat={}{0}}" /> 
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="Test Basic Conditions: T types" Background="Gold"/>
+            <!-- T: non-string -->
+            <TextBlock Name="tbT" Text="Aha!" 
+                       Foreground="{Binding ElementName=tbT2, Path=Text, StringFormat={}{0}}" />
+            <TextBlock Name="tbT2" Text="This is me" />            
+        </StackPanel>
+
+        <!-- Update Direction -->
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <StackPanel.Resources>
+                <DataTemplate x:Key="PersonItemTemplate">
+                    <TextBlock>
+                        <TextBlock.Text>
+                          <MultiBinding Converter="{StaticResource pconv}" StringFormat="{}{0}">
+                            <Binding Path="Name"/>
+                            <Binding Path="Nationality"/>
+                          </MultiBinding> 
+                        </TextBlock.Text>
+                      </TextBlock>  
+                </DataTemplate>
+            </StackPanel.Resources>
+            <TextBlock Text="Binding Update Direction Tests" Background="Gold"/>
+            
+            <ListBox Width="200" Name="udLB" SelectedIndex="0"
+                     ItemsSource="{Binding Source={StaticResource peoplelist}}"
+                     ItemTemplate="{StaticResource PersonItemTemplate}"
+                     IsSynchronizedWithCurrentItem="True"/>
+            
+            <TextBlock Padding="0,10,0,0" FontSize="11" Background="White">Normal Format:</TextBlock>
+            <TextBlock Name="udTB1" DataContext="{StaticResource peoplelist}">
+              <TextBlock.Text>
+                <MultiBinding Converter="{StaticResource pconv}" ConverterParameter="FormatNormal"
+                              UpdateSourceTrigger="Explicit" Mode="TwoWay" StringFormat="{}{0}">
+                    <Binding Path="Name" Mode="TwoWay" FallbackValue="fallback1"/>
+                    <Binding Path="Nationality" Mode="TwoWay"/>
+                </MultiBinding> 
+              </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock Padding="0,10,0,0" FontSize="11" Background="White">Last Name First Format:</TextBlock>
+            <TextBlock Name="udTB2" DataContext="{StaticResource peoplelist}">
+              <TextBlock.Text> 
+                <MultiBinding Converter="{StaticResource pconv}" ConverterParameter="FormatLastFirst"
+                              StringFormat="{}{0}">
+                    <Binding Path="Name"/>
+                    <Binding Path="Nationality"/>
+                </MultiBinding> 
+              </TextBlock.Text>
+            </TextBlock>  
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.Column="3">
+            <TextBlock Text="$10 Tests" Background="Gold"/>
+            <ComboBox Name="cb10" SelectedIndex="0">  
+                <ComboBoxItem>168.36</ComboBoxItem>
+                <ComboBoxItem>$456.98</ComboBoxItem>
+            </ComboBox>            
+            <TextBox Name="tBox">    
+                <TextBox.Text>
+                    <Binding ElementName="cb10" Path="SelectedItem.Content" StringFormat="C2" />
+                </TextBox.Text>
+            </TextBox>    
+        </StackPanel>
+    </Grid>
+</Page>

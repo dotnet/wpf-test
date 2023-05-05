@@ -1,0 +1,45 @@
+<XMLVariationTemplate>
+    <TemplateData>
+    Imports System
+    Imports System.Windows
+    Imports System.Windows.Navigation
+    Imports System.Windows.Controls
+    Imports System.IO
+    Imports System.Windows.Markup
+    Imports System.Reflection
+    Imports Microsoft.Test.Serialization
+
+    Public partial Class MyAppName
+	 Inherits Application
+
+        Private  Sub AppStartup(ByVal sender As Object, ByVal args As StartupEventArgs)
+            System.Windows.Application.Current.Shutdown()
+        End Sub
+
+    End Class
+ 
+    <NodeVariation ID="1"></NodeVariation>
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>TypeArgumentsCode</FileName>
+            <FileExtension>.vb</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+        </Scenario>
+        <Scenario Case="2">
+            <NodeVariation ID="1">namespace TypeArguments
+                                      Public Class PageFunction(Of T1, T2)
+                                      End Class
+                                  end namespace</NodeVariation>
+        </Scenario>
+        <Scenario Case="3">
+            <NodeVariation ID="1">    Public Class LocallyDefinedType
+                                          Inherits Button
+                                      End Class</NodeVariation>
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>
+

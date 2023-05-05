@@ -1,0 +1,45 @@
+<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="LightYellow">
+        <FlowDocumentScrollViewer><FlowDocument Name="solidcolor" Background="LightYellow" Foreground="RoyalBlue">
+            <Paragraph FontWeight="Bold">
+				foreground (solid)
+			</Paragraph>
+        </FlowDocument></FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer><FlowDocument Name="radial" Background="Crimson">
+            <FlowDocument.Foreground>
+                <RadialGradientBrush>
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="Green" Offset="0" />
+                            <GradientStop Color="Pink" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </RadialGradientBrush>
+            </FlowDocument.Foreground>
+            <Paragraph FontWeight="Bold">
+				foreground (radial gradient)
+			</Paragraph>
+        </FlowDocument></FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer><FlowDocument Name="linear" Background="LightYellow">
+            <FlowDocument.Foreground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="CadetBlue" Offset="0" />
+                            <GradientStop Color="Crimson" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </FlowDocument.Foreground>
+			<Paragraph FontWeight="Bold">
+					foreground (linear gradient)
+			</Paragraph>
+        </FlowDocument></FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer><FlowDocument Name="image" Background="Crimson">
+                <FlowDocument.Foreground>
+                    <ImageBrush ImageSource="pack://siteoforigin:,,,/avalon.png" Stretch="None" TileMode="Tile" />
+                </FlowDocument.Foreground>
+				<Paragraph FontWeight="Bold">
+					foreground (image)
+				</Paragraph>
+        </FlowDocument></FlowDocumentScrollViewer>
+</StackPanel>

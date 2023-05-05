@@ -1,0 +1,85 @@
+<TypesToSkip>
+  <!--  Some Types fail on serializing because they insert generic\internal objects or a method call is unsupported -->
+                           <!--PresentationFramework -->
+  <Type TypeName="Microsoft.Win32.OpenFileDialog" SkipOn="CreateObject"/>
+  <Type TypeName="Microsoft.Win32.SaveFileDialog"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Condition"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.DataTemplateKey"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.SectionStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.ParagraphStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.FigureStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.ListStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.ListItemStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.TableStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.TableRowGroupStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.TableRowStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.TableCellStructure"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.StoryFragments"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Documents.DocumentStructures.StoryFragment"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Trigger"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Controls.AdornedElementPlaceholder"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Data.RelativeSource"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.DataTrigger"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.DynamicResourceExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.StaticResourceExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.TemplateBindingExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.ThemeDictionaryExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Setter"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.ColorConvertedBitmapExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Controls.WebBrowser"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Controls.GridViewHeaderRowPresenter"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Controls.GridViewRowPresenter"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Markup.ArrayExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Markup.NullExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Markup.StaticExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Markup.TypeExtension"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Markup.XamlReader"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Markup.ContentPropertyAttribute"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Markup.WhitespaceSignificantCollectionAttribute"  SkipOn="CreateObject"/>
+                           <!--PresentationCore -->
+  <Type TypeName="System.Windows.Media.Imaging.BmpBitmapEncoder"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.GifBitmapEncoder"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.PngBitmapEncoder"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.JpegBitmapEncoder"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.TiffBitmapEncoder"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.WmpBitmapEncoder"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.BitmapImage"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.ColorConvertedBitmap"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.CroppedBitmap"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.FormatConvertedBitmap"  SkipOn="CreateObject"/>
+  <Type TypeName="System.Windows.Media.Imaging.TransformedBitmap"  SkipOn="CreateObject"/>
+
+
+  <!--  Some Types fail on creation because they need to initialize but the default values throw  
+      PC classes throw exceptions on getting the default values  -->
+                      <!--PresentationFramework -->
+  <Type TypeName="System.Windows.Data.XmlNamespaceMapping"  SkipOn="Start"/>
+  <Type TypeName="System.Windows.Application"  SkipOn="Start"/>
+                     <!--PresentationCore -->
+  <Type TypeName="System.Windows.Media.GlyphRun"  SkipOn="Start"/>
+  <Type TypeName="System.Windows.Media.GlyphTypeface"  SkipOn="Start"/>
+
+
+  <!--  Serializing some type causes insertion of properties - so the xaml compare fails. 
+      Also reloading will throw as it is required that these properties are properly set-->
+                      <!--PresentationFramework -->
+  <Type TypeName="System.Windows.Controls.AccessText"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.HierarchicalDataTemplate"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.ComponentResourceKey"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Controls.Primitives.Track"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Controls.PrintDialog"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.EventSetter"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.EventTrigger"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.FrameworkElementFactory"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Markup.NamespaceMapEntry"  SkipOn="Serialize"/>
+                      <!--PresentationCore -->
+  <Type TypeName="System.Windows.RoutedEventArgs"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Input.CommandBinding"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Input.KeyBinding"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Input.MouseBinding"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Input.InertiaExpansionBehavior"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Input.InertiaRotationBehavior"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Input.InertiaTranslationBehavior"  SkipOn="Serialize"/>
+  <Type TypeName="System.Windows.Media.FamilyTypeface"  SkipOn="Serialize"/>
+
+</TypesToSkip>

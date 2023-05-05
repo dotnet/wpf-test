@@ -1,0 +1,112 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    Background="cornsilk" 
+    >
+
+	<DockPanel.Resources>
+		<ObjectDataProvider x:Key="writers" ObjectType="{x:Type datasources:Writers}" />
+
+		<Style x:Key="listBoxItemStyle">
+			<Setter Property="ListBoxItem.Background" Value="Tan"></Setter>
+			<Setter Property="ListBoxItem.Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<TextBox Text="{Binding Path=FirstName}" Background="{TemplateBinding Background}"></TextBox>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding Path=LastName}" Value="Sagan">
+					<Setter Property="ListBoxItem.Background" Value="Brown" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="listBoxItemStyleMulti">
+			<Setter Property="ListBoxItem.Background" Value="Tan"></Setter>
+			<Setter Property="ListBoxItem.Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<TextBox Text="{Binding Path=FirstName}" Background="{TemplateBinding Background}"></TextBox>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding Path=FirstName}" Value="Carl"></Condition>
+						<Condition Binding="{Binding Path=LastName}" Value="Sagan"></Condition>
+					</MultiDataTrigger.Conditions>
+					<MultiDataTrigger.Setters>
+						<Setter Property="ListBoxItem.Background" Value="Brown" />
+					</MultiDataTrigger.Setters>
+				</MultiDataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="listBoxItemStyle2">
+			<Setter Property="ListBoxItem.Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<TextBox Text="{Binding Path=FirstName}" Background="Tan" Name="tb"></TextBox>
+						<ControlTemplate.Triggers>
+							<DataTrigger Binding="{Binding Path=LastName}" Value="Tolkien">
+								<Setter Property="Background" Value="Brown" TargetName="tb" />
+							</DataTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style x:Key="listBoxItemStyleMulti2">
+			<Setter Property="ListBoxItem.Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<TextBox Text="{Binding Path=FirstName}" Background="Tan" Name="tb"></TextBox>
+						<ControlTemplate.Triggers>
+							<MultiDataTrigger>
+								<MultiDataTrigger.Conditions>
+									<Condition Binding="{Binding Path=FirstName}" Value="J.R.R."></Condition>
+									<Condition Binding="{Binding Path=LastName}" Value="Tolkien"></Condition>
+								</MultiDataTrigger.Conditions>
+								<MultiDataTrigger.Setters>
+									<Setter Property="ListBoxItem.Background" Value="Brown" TargetName="tb" />
+								</MultiDataTrigger.Setters>
+							</MultiDataTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<DataTemplate x:Key="writerDataTemplate">
+			<TextBox Text="{Binding Path=FirstName}" Background="Tan" Name="tb"></TextBox>
+			<DataTemplate.Triggers>
+				<DataTrigger Binding="{Binding Path=LastName}" Value="Verne">
+					<Setter Property="Background" Value="Brown" TargetName="tb" />
+				</DataTrigger>
+			</DataTemplate.Triggers>
+		</DataTemplate>
+
+		<DataTemplate x:Key="writerDataTemplateMulti">
+			<TextBox Text="{Binding Path=FirstName}" Background="Tan" Name="tb"></TextBox>
+			<DataTemplate.Triggers>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition Binding="{Binding Path=FirstName}" Value="Jules"></Condition>
+						<Condition Binding="{Binding Path=LastName}" Value="Verne"></Condition>
+					</MultiDataTrigger.Conditions>
+					<MultiDataTrigger.Setters>
+						<Setter Property="ListBoxItem.Background" Value="Brown" TargetName="tb" />
+					</MultiDataTrigger.Setters>
+				</MultiDataTrigger>
+			</DataTemplate.Triggers>
+		</DataTemplate>
+	</DockPanel.Resources>
+
+	<StackPanel>
+		<ListBox ItemsSource="{Binding Source={StaticResource writers}}" Name="lb" />
+	</StackPanel>
+</DockPanel>

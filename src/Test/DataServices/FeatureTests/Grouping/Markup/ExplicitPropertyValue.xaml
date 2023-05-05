@@ -1,0 +1,44 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comon="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    >
+
+    <DockPanel.Resources>
+        <!-- CLR -->
+        <comon:CountriesDataSource x:Key="clrCountries" />
+        <comon:PopulationConverterClr x:Key="populationConverterClr" />
+
+        <CollectionViewSource Source="{Binding Source={StaticResource clrCountries}, Path=Countries}" x:Key="clrCvs">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription Converter="{StaticResource populationConverterClr}" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <!-- XML -->
+        <XmlDataProvider XPath="/Countries/Country" Source="Countries.xml" x:Key="xmlCountries" />
+        <comon:PopulationConverterXml x:Key="populationConverterXml" />
+
+        <CollectionViewSource Source="{Binding Source={StaticResource xmlCountries}}" x:Key="xmlCvs">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription Converter="{StaticResource populationConverterXml}" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </DockPanel.Resources>
+
+    <StackPanel Orientation="Horizontal">
+        <!-- CLR -->
+        <ListBox ItemsSource="{Binding Source={StaticResource clrCvs}}" DisplayMemberPath="CountryName" Name="clrListBox">
+            <ListBox.GroupStyle>
+                <x:Static Member="GroupStyle.Default" />
+            </ListBox.GroupStyle>
+        </ListBox>
+
+        <!-- XML -->
+        <ListBox ItemsSource="{Binding Source={StaticResource xmlCvs}}" DisplayMemberPath="CountryName" Name="xmlListBox">
+            <ListBox.GroupStyle>
+                <x:Static Member="GroupStyle.Default" />
+            </ListBox.GroupStyle>
+        </ListBox>
+    </StackPanel>
+</DockPanel>

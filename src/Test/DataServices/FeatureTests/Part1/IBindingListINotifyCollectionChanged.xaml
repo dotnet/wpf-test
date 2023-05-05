@@ -1,0 +1,20 @@
+﻿<DockPanel Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ >    
+	<DockPanel.Resources>
+		<Style TargetType="{x:Type ListView}">
+			<Setter Property="ItemsPanel">
+				<Setter.Value>
+					<ItemsPanelTemplate>
+						<DockPanel Name="dockPanel"/>
+					</ItemsPanelTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style TargetType="{x:Type ListViewItem}">
+			<Setter Property="DockPanel.Dock" Value="Top" />
+		</Style>
+	</DockPanel.Resources>
+	<ListView Width="100" Height="100" Background="Aquamarine" x:Name="listView"/>
+</DockPanel>

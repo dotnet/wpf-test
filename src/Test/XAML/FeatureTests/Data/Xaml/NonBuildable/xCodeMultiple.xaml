@@ -1,0 +1,33 @@
+<!-- Multiple instances of x:Code  -->
+<Page   xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DockPanel MouseLeftButtonDown="OnMouseDown">
+
+        <Button Width="100" Height="50" Click="OnClick">ClickMe</Button>
+
+        <TextBlock Name="Text1">Waiting for Click!</TextBlock>
+
+        <x:Code>
+        <![CDATA[
+            void OnClick(object sender, System.Windows.RoutedEventArgs e)
+            {
+                Text1.TextRange.Text = "Clicked Text";
+            }
+            ]]>
+        </x:Code>
+
+        <TextBlock Name="Text2">Waiting for Click!</TextBlock>
+
+        <x:Code>
+        <![CDATA[
+            void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+            {
+                Text2.TextRange.Text = "MouseDown Text";
+            }
+        ]]>
+        </x:Code>
+
+    </DockPanel>
+
+</Page>

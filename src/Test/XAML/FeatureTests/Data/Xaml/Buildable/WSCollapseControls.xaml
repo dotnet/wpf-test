@@ -1,0 +1,167 @@
+<!-- 	We are trying to verify that whitespace collapses correctly for various controls.
+-->
+
+<cmn:CustomDockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:cc="http://XamlTestTypes" 
+ xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+
+	
+
+
+<!-- TextBlock Whitespace Collapsing Test -->
+<TextBlock Name="Text1"> 
+ 	abc  	<Button >       abc </Button>    	<Button>       abc
+	  </Button>   	<Button >       abc 
+
+	 </Button>  abc    <cc:Custom_Inline></cc:Custom_Inline> 
+ abc  
+		<Button >  </Button>
+	<Button > </Button>
+	<Button ></Button> 	abc 
+
+	<LineBreak> </LineBreak>  	abc
+
+	 <cc:Custom_Button > ab  </cc:Custom_Button>   abc	  
+	 <Button >   ab </Button>   abc
+</TextBlock>
+
+
+
+
+<!-- TextBlock Whitespace Collapsing Test : Implict and Explicit CPA on Custom_Button, Custom_button(TrimWS=true), LineBreak(TrimWS = true) next to Custom_Inline(TrimWS = false) -->
+<!-- Inlines call Commented out for Serialization Error TODO: reinstate when error resolved -->
+<TextBlock Name="Text2"> 
+	<!-- <TextBlock.Inlines> -->
+	 	abc  	<Button >       abc </Button>    	<Button>       abc
+	  </Button>   	<Button ><Button.Content>       abc 
+
+	 </Button.Content></Button>  abc    <cc:Custom_Inline></cc:Custom_Inline> 
+ abc  
+		<Button >  </Button>
+	<Button> </Button>
+	<Button ></Button> 	abc 
+
+	<LineBreak> </LineBreak>  	abc
+
+	 <cc:Custom_Button ><cc:Custom_Button.Content>   ab	  </cc:Custom_Button.Content></cc:Custom_Button>   	abc	  
+	 <Button >   ab </Button>   abc
+		
+	<!-- </TextBlock.Inlines> -->
+</TextBlock>
+
+
+
+<!-- RichTextBox Whitespace Collapsing Test -->
+<RichTextBox Width="200">
+	<FlowDocument>
+		<Paragraph>
+			First Paragraph. Making this Paragraph long enough so that it will wrap at least one line.
+		</Paragraph>
+		<Paragraph>
+			Second Paragraph
+		</Paragraph>
+
+	</FlowDocument>
+</RichTextBox>
+
+
+
+<!-- RichTextBox Whitespace Collapsing Test : Implict and Explicit CPA on Paragraph, Custom_button(TrimWS=true), LineBreak(TrimWS = true) next to Custom_Inline(TrimWS = false) -->
+<RichTextBox Width="200">
+	<FlowDocument>
+
+		<Paragraph>
+		<Paragraph.Inlines>
+			First Paragraph. Making this Paragraph long enough so that it will wrap at least one line.
+
+
+		what a dya	
+
+		</Paragraph.Inlines></Paragraph>
+
+	
+		<Paragraph>
+			Second Paragraph
+		<LineBreak/>
+		wakkka wakk akkkakkk 
+		<cc:Custom_Inline/>
+
+
+asdf
+
+a
+		<cc:Custom_Button > ab  </cc:Custom_Button>   abc	  
+	 	<Button >   ab </Button>   abc
+  		<LineBreak/>
+		<cc:Custom_Inline/>
+	 	<cc:Custom_Button> ab  </cc:Custom_Button>   abc	  
+	 	<Button >   ab	 </Button>   abc
+clark kent  	bill bixby
+hulk spiderman 
+
+la</Paragraph>
+
+
+	</FlowDocument>
+</RichTextBox>
+
+
+
+<!-- ListBox Whitespace Collapsing Test : Implict and Explicit CPA -->
+<ListBox >
+	<ListBoxItem> abc   </ListBoxItem>
+	<ListBoxItem> 	abc 	
+</ListBoxItem>
+	<ListBoxItem>abc</ListBoxItem>
+	<ListBoxItem>abc 	</ListBoxItem>
+	<ListBoxItem>     
+abc
+</ListBoxItem>
+	<ListBoxItem> <ListBoxItem.Content> abc   </ListBoxItem.Content> </ListBoxItem>
+	<ListBoxItem> <ListBoxItem.Content>   
+abc 	
+
+</ListBoxItem.Content> </ListBoxItem>
+	<ListBoxItem><ListBoxItem.Content>abc</ListBoxItem.Content> </ListBoxItem>
+	<ListBoxItem><ListBoxItem.Content>abc 	</ListBoxItem.Content> </ListBoxItem>
+	<ListBoxItem><ListBoxItem.Content>      
+abc
+</ListBoxItem.Content></ListBoxItem>
+</ListBox>
+
+
+
+
+<!-- ComboBox Whitespace Collapsing Test : Implicit CPA -->
+<ComboBox >
+	<ComboBoxItem> abc   </ComboBoxItem>
+	<ComboBoxItem> abc 	
+</ComboBoxItem>
+	<ComboBoxItem>abc</ComboBoxItem>
+	<ComboBoxItem>abc 	</ComboBoxItem>
+	<ComboBoxItem>     
+abc
+</ComboBoxItem>
+</ComboBox>
+
+
+
+<!-- ComboBox Whitespace Collapsing Test : Explicit CPA-->
+<ComboBox >
+	<ComboBoxItem><ComboBoxItem.Content> 	 abc 	  </ComboBoxItem.Content></ComboBoxItem>
+	<ComboBoxItem><ComboBoxItem.Content>
+
+ abc 		
+</ComboBoxItem.Content></ComboBoxItem>
+	<ComboBoxItem><ComboBoxItem.Content>abc</ComboBoxItem.Content></ComboBoxItem>
+	<ComboBoxItem><ComboBoxItem.Content> 	abc 	</ComboBoxItem.Content></ComboBoxItem>
+	<ComboBoxItem><ComboBoxItem.Content>     
+abc	
+</ComboBoxItem.Content></ComboBoxItem>
+</ComboBox>
+
+
+
+</cmn:CustomDockPanel>

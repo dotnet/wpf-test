@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLVariationTemplate>
+  <TemplateData>
+    <NodeVariation ID="1">
+      <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:custom="clr-namespace:Local">
+        <DockPanel>
+          <custom:MyButton />   
+        </DockPanel>
+      </Page>
+    </NodeVariation>
+  </TemplateData>
+  <Scenarios>
+    <Defaults>
+      <FileName>MappingPIMarkup</FileName>
+      <FileExtension>.xaml</FileExtension>
+      <RetainFileName>true</RetainFileName>
+      <CommandLineArgs>/t:Clean;Build</CommandLineArgs>
+    </Defaults>
+    <Scenario Case="1">
+      <NodeVariation ID="1">
+        <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:custom="clr-namespace:Local">
+          <DockPanel>
+            <custom:MyButton />   
+          </DockPanel>
+        </Page>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="2">
+      <NodeVariation ID="1">
+        <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:custom="clr-namespace:Local;assembly=">
+          <DockPanel>
+            <custom:MyButton />   
+          </DockPanel>
+        </Page>
+      </NodeVariation>
+   </Scenario>
+    <Scenario Case="3">
+      <NodeVariation ID="1">
+        <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:custom="clr-namespace:">
+          <DockPanel>
+            <custom:MyButton />   
+          </DockPanel>
+        </Page>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="4">
+<!-- not setting clrnamespace doesn't make sense in new world -->
+    </Scenario>
+    <Scenario Case="5">
+<!-- not setting xmlnamespace doesn't make sense in new world -->
+    </Scenario>
+    <Scenario Case="6">
+      <NodeVariation ID="1">
+        <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:custom="clr-namespace:Local;assembly=DoesNotExist">
+          <DockPanel>
+            <custom:MyButton />   
+          </DockPanel>
+        </Page>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="7">
+<!-- pi missing an equals sign doesn't make sense in new world -->
+    </Scenario>
+    <Scenario Case="8">
+<!-- pi missing a quote doesn't make sense in new world -->
+    </Scenario>
+    <Scenario Case="9">
+<!-- pi setting a nonexistent key doesn't make sense in new world -->
+    </Scenario>
+    <Scenario Case="10">
+<!-- several versions - space between semicolon, colon, trailing, etc... -->
+      <NodeVariation ID="1"><?Mapping XmlNamespace="local" ClrNamespace="Local " ?></NodeVariation>
+    </Scenario>
+    <Scenario Case="11">
+      <NodeVariation ID="1">
+        <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:custom="clr-namespace:Library;assembly=MappingPILibrary">
+          <DockPanel>
+            <custom:MyButton />   
+          </DockPanel>
+        </Page>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="12">
+      <NodeVariation ID="1">
+        <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:custom="mapping">
+          <DockPanel>
+            <custom:MyButton />   
+          </DockPanel>
+        </Page>
+      </NodeVariation>
+    </Scenario>
+    <Scenario Case="13">
+    </Scenario>
+  </Scenarios>
+</XMLVariationTemplate>

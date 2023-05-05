@@ -1,0 +1,30 @@
+<XMLVariationTemplate>
+    <TemplateData>
+    Imports System.Windows.Controls
+    Imports System
+    <NodeVariation ID="1"/>
+    Namespace Library
+        Public Class MyButton
+            Inherits Button
+        End Class
+    End Namespace
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>MappingPILibraryCode</FileName>
+            <FileExtension>.vb</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+        </Scenario>
+        <Scenario Case="2">
+            <NodeVariation ID="1">
+                Imports System.Windows.Markup
+                &lt;assembly:CLSCompliant(true)&gt; _
+                &lt;assembly:XmlnsDefinitionAttribute("mapping", "Library")&gt; _
+            </NodeVariation>
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>
+

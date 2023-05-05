@@ -1,0 +1,46 @@
+﻿
+
+
+
+
+<cmn:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cc="http://XamlTestTypes" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:S="clr-namespace:System;assembly=Mscorlib"  xmlns:MappingPIGen2="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen3="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+        <cmn:CustomCanvas.Resources>
+
+            <S:Double x:Key="myDouble"> 12 </S:Double>
+            <S:String x:Key="myString">This is a string</S:String>
+            <S:String x:Key="myString2">This is string 2</S:String>
+            <!-- 36 in style2 matrix -->
+            <Style x:Key="Style1" TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="120" />
+                <Setter Property="Content" Value="{DynamicResource myString}" />
+            </Style>
+            <!-- 38 in style2 matrix -->
+            <Style x:Key="Style2" TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="120" />
+                <Setter Property="Canvas.Top" Value="{DynamicResource myDouble}" />
+                <Setter Property="DockPanel.Dock">
+                <Setter.Value>
+                        Left
+                    </Setter.Value>
+                </Setter>
+            </Style>    
+            <!-- 31 in style2 matrix -->    
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="120" />
+                <Setter Property="Canvas.Top" Value="20" />
+                <Setter Property="Content" Value="{DynamicResource myString2}" />
+                <Setter Property="Button.Background">
+                <Setter.Value>
+                        <SolidColorBrush Color="Pink" />
+                </Setter.Value>
+                </Setter>
+            </Style>                    
+        </cmn:CustomCanvas.Resources>
+
+    <Button Name="Button1" Style="{DynamicResource Style1}" />
+    <Button Name="Button2" Style="{DynamicResource Style2}" />
+    <Button Name="Button3" />
+
+</cmn:CustomCanvas>
+

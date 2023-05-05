@@ -1,0 +1,72 @@
+<!-- Setting Modifiable for Content for a variety of elements (including Property Elements) -->
+<Window
+    xmlns       = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x     = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:col   = "clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:sys   = "clr-namespace:System;assembly=mscorlib"
+    x:Class     = "Microsoft.Test.Xaml.Localization.GenericLocBamlTest"
+    >
+
+    <StackPanel>
+
+        <Button x:Uid="Button_1" Localization.Attributes ="$Content(Modifiable Text Readable)">LLLbuttoncontent1</Button>
+
+        <Button>
+            <Button.ContextMenu>
+                <ContextMenu x:Uid="ContextMenu_1" Localization.Attributes ="$Content(Modifiable Text Readable)">LLLcontextmenucontent</ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+
+        <ComboBox x:Uid="ComboBox_1" Localization.Attributes ="$Content(Modifiable Text Readable)">LLLcomboboxcontent</ComboBox>
+
+        <ComboBox x:Uid="ComboBox_2">
+            <ComboBoxItem x:Uid="ComboBoxItem_2" Localization.Attributes ="$Content(Modifiable Text Readable)">LLLcomboboxitemcontent</ComboBoxItem>
+        </ComboBox>
+
+        <HeaderedContentControl x:Uid="HeaderedContentControl_1" Localization.Attributes ="$Content(Modifiable Text Readable)">LLLMyHeaderedContentControl</HeaderedContentControl>        
+
+        <ListView x:Uid="ListView_1" Localization.Attributes ="$Content(Modifiable Text Readable)">LLLlistviewcontent</ListView>
+
+        <Menu x:Uid="Menu_1" Localization.Attributes ="$Content(Modifiable Text Readable)">LLLmenucontent</Menu>
+        
+        <TextBlock x:Uid="TextBlock_1" Localization.Attributes ="$Content(Modifiable Text Readable)">LLLtextblock1content</TextBlock>
+
+        <TextBox x:Uid="TextBox_1" Localization.Attributes="$Content(Modifiable Text Readable)">LLLtextboxcontent1</TextBox>
+
+        <!-- Scenario: omitting the '$' from 'Content'. -->
+        <TextBox x:Uid="TextBox_2" Localization.Attributes="Content(Unmodifiable Text Readable)">LLLtextboxcontent2</TextBox>
+
+
+        <!-- Property Elements -->
+        
+        <Button x:Uid="Button_2" Localization.Attributes ="Content(Modifiable Text Readable)">
+            <Button.Content>LLLbuttoncontent2</Button.Content>
+        </Button>
+
+        <CheckBox x:Uid="CheckBox_1" Localization.Attributes ="Content(Modifiable Text Readable)">
+            <CheckBox.Content>LLLcheckboxcontent</CheckBox.Content>
+        </CheckBox>
+
+        <HeaderedContentControl x:Uid="HeaderedContentControl_2" Localization.Attributes ="Content(Modifiable Text Readable)">
+            <HeaderedContentControl.Content>LLLheaderedcontentcontrolcontent2</HeaderedContentControl.Content>
+        </HeaderedContentControl>        
+
+        <Label x:Uid="Label_1" Localization.Attributes ="Content(Modifiable Text Readable)">
+            <Label.Content>LLLlabelcontent</Label.Content>
+        </Label>
+
+        <RepeatButton x:Uid="RepeatButton_1" Localization.Attributes ="Content(Modifiable Text Readable)">
+            <RepeatButton.Content>LLLrepeatbuttoncontent</RepeatButton.Content>
+        </RepeatButton>
+
+        <Button>
+            <Button.ToolTip>
+                <ToolTip x:Uid="ToolTip_1" Localization.Attributes ="Content(Modifiable Text Readable)">
+                    <ToolTip.Content>LLLtooltipcontent</ToolTip.Content>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+
+  </StackPanel>
+
+</Window>

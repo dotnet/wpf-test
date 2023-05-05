@@ -1,0 +1,84 @@
+<XMLVariationTemplate>
+    <TemplateData>
+    Imports System
+    Imports System.Windows
+    Imports System.Windows.Navigation
+    Imports System.Windows.Controls
+    Imports System.IO
+    Imports System.Windows.Markup
+    Imports System.Reflection
+    Imports Microsoft.Test.Serialization
+
+    Public partial Class MyAppName
+	 Inherits Application
+
+        Private  Sub AppStartup(ByVal sender As Object, ByVal args As StartupEventArgs)
+            Dim log As Microsoft.Test.Logging.TestLog =  New Microsoft.Test.Logging.TestLog("CompilerTest") 
+            log.Stage = Microsoft.Test.Logging.TestStage.Initialize
+            log.Stage = Microsoft.Test.Logging.TestStage.Run
+ 
+            Dim fi As FieldInfo =  GetType(MyClassName).GetField("NameField", BindingFlags.Public Or BindingFlags.NonPublic Or BindingFlags.Instance) 
+ 
+            <NodeVariation ID="3">
+            If fi.IsPublic Then
+            </NodeVariation>
+                log.LogStatus("Field has correct access level defined by x:FieldModifier")
+                log.Result = Microsoft.Test.Logging.TestResult.Pass
+            Else
+                log.LogStatus("Field has incorrect access level")
+                log.Result = Microsoft.Test.Logging.TestResult.Fail
+            End If
+ 
+            log.Stage = Microsoft.Test.Logging.TestStage.Cleanup
+            log.Close()
+            System.Windows.Application.Current.Shutdown()
+        End Sub
+
+    End Class
+ 
+    <NodeVariation ID="1">Public</NodeVariation> partial Class MyClassName
+	 Inherits Page
+        Private  Sub StubFunction()
+        End Sub
+    End Class
+</TemplateData>
+    <Scenarios>
+        <Defaults>
+            <FileName>ModifierCode</FileName>
+            <FileExtension>.vb</FileExtension>
+            <RetainFileName>true</RetainFileName>
+            <IsXmlDocument>false</IsXmlDocument>
+        </Defaults>
+        <Scenario Case="1">
+            <NodeVariation ID="1">public</NodeVariation>
+        </Scenario>
+        <Scenario Case="2">
+            <NodeVariation ID="1">friend</NodeVariation>
+        </Scenario>
+        <Scenario Case="3">
+            <NodeVariation ID="1">protected</NodeVariation>
+        </Scenario>
+        <Scenario Case="4">
+            <NodeVariation ID="1">protected friend</NodeVariation>
+        </Scenario>
+        <Scenario Case="5">
+            <NodeVariation ID="1">private</NodeVariation>
+        </Scenario>
+
+        <Scenario Case="11">
+        </Scenario>
+        <Scenario Case="12">
+            <NodeVariation ID="3">If fi.IsAssembly Then</NodeVariation>
+        </Scenario>
+        <Scenario Case="13">
+            <NodeVariation ID="3">If fi.IsFamily Then</NodeVariation>
+        </Scenario>
+        <Scenario Case="14">
+            <NodeVariation ID="3">If fi.IsFamilyOrAssembly Then</NodeVariation>
+        </Scenario>
+        <Scenario Case="15">
+            <NodeVariation ID="3">If fi.IsPrivate Then</NodeVariation>
+        </Scenario>
+    </Scenarios>
+</XMLVariationTemplate>
+

@@ -1,0 +1,30 @@
+<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DockPanel >
+        <DockPanel.Resources>
+            <AlternationConverter x:Key="BackgroundConverter">
+                <SolidColorBrush>White</SolidColorBrush>
+                <SolidColorBrush>LightBlue</SolidColorBrush>
+            </AlternationConverter>
+
+            <DataTemplate x:Key="TeamTemplate">
+                <StackPanel>
+                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=PreviousData}, Path=Name}" />
+                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=Items.Count}" />
+                </StackPanel>
+            </DataTemplate>
+
+            <Style TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Background" 
+                  Value="{Binding RelativeSource={RelativeSource Self},
+                         Path=(ItemsControl.AlternationIndex),
+                         Converter={StaticResource BackgroundConverter}}"/>
+
+            </Style>
+        </DockPanel.Resources>
+
+    </DockPanel>
+
+</Page>

@@ -1,0 +1,18 @@
+<Window x:Class="RegressionIssue127.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="300" Width="300" Activated="WindowActivated">
+    <ItemsControl ItemsSource="{Binding Children}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <ItemsControl ItemsSource="{Binding Children}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="Text" Click="ButtonClick"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</Window>

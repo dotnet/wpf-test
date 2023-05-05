@@ -1,0 +1,32 @@
+﻿<DockPanel Background="cornsilk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  
+  <Canvas>
+    <Canvas.Resources>
+      <XmlDataProvider x:Key="DSO" XPath="root" IsAsynchronous="false">
+       <x:XData>
+        <root xmlns="">
+          <content>pack://siteoforigin:,,,/ContentImage.jpg</content>
+          <resource>ResourceImage.jpg</resource>
+        </root>
+       </x:XData>
+    </XmlDataProvider>
+    </Canvas.Resources>
+
+    <TextBlock Canvas.Top="0">Set in Markup</TextBlock>
+
+    <Image Canvas.Top="20" Source="pack://siteoforigin:,,,/ContentImage.jpg" Name="UnboundContent" />
+    <Image Canvas.Top="20" Canvas.Left="210" Source="ResourceImage.jpg" Name="UnboundResource" />
+
+    <TextBlock Canvas.Top="130">Databound</TextBlock>
+    
+    <Image Canvas.Top="150" Source="{Binding Source={StaticResource DSO}, XPath=content}" Name="BoundContent" />
+    <Image Canvas.Top="150" Canvas.Left="210" Source="{Binding Source={StaticResource DSO}, XPath=resource}" Name="BoundResource" />
+
+  </Canvas>
+
+
+</DockPanel>
+
+

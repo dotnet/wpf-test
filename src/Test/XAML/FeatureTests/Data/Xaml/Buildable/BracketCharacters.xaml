@@ -1,0 +1,47 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:ct="http://XamlTestTypes">
+  <!--Single Argument in MarkupExtension constructor variations-->
+  <TextBlock Text='{ct:BC_MarkupExtension Animals["poodle,doodle"]}' Tag='Path: Animals["poodle,doodle"] , Mode: '/>
+  <TextBlock Text='{ct:BC_MarkupExtension Animals("poodle,doodle")}' Tag='Path: Animals("poodle,doodle") , Mode: '/>
+  <TextBlock Text='{ct:BC_MarkupExtension Animals[poodle,doodle,moodle]}' Tag='Path: Animals[poodle,doodle,moodle] , Mode: '/>
+  <TextBlock Text='{ct:BC_MarkupExtension Animals["poodle,doodle(a,b,c)"]}' Tag='Path: Animals["poodle,doodle(a,b,c)"] , Mode: '/>
+  <TextBlock Text='{ct:BC_MarkupExtension Animals["poodle,doodle"](a,b,c,d=e)}' Tag='Path: Animals["poodle,doodle"](a,b,c,d=e) , Mode: '/>
+
+  <!--Two Arguments in MarkupExtension constructor variations-->
+  <TextBlock Text='{ct:BC_MarkupExtension fn1(a,b), fn2$a,b^}' Tag='Path: fn1(a,b) , Mode: fn2$a,b^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension fn1(a,b), fn2}' Tag='Path: fn1(a,b) , Mode: fn2'/>
+  <TextBlock Text='{ct:BC_MarkupExtension fn1(a,b=c,d), fn2$a,b=c,d^}' Tag='Path: fn1(a,b=c,d) , Mode: fn2$a,b=c,d^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension fn1, fn2$a,b^}' Tag='Path: fn1 , Mode: fn2$a,b^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension fn1(a,[,,],b), $a,b^}' Tag='Path: fn1(a,[,,],b) , Mode: $a,b^'/>
+
+  <!--One constructor argument, One property variations-->
+  <TextBlock Text='{ct:BC_MarkupExtension fn1(a,b), Mode = fn2$a,b^}' Tag='Path: fn1(a,b) , Mode: fn2$a,b^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension fn1(a,b), Mode = fn2}' Tag='Path: fn1(a,b) , Mode: fn2'/>
+  <TextBlock Text='{ct:BC_MarkupExtension fn1(a,b=c,d), Mode = fn2$a,b=c,d^}' Tag='Path: fn1(a,b=c,d) , Mode: fn2$a,b=c,d^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension fn1, Mode= fn2$a,b^}' Tag='Path: fn1 , Mode: fn2$a,b^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension fn1(a,[,,],b), Mode= $a,b^}' Tag='Path: fn1(a,[,,],b) , Mode: $a,b^'/>
+
+  <!--Zero constructor argument, Two properties variations-->
+  <TextBlock Text='{ct:BC_MarkupExtension Path = fn1(a,b), Mode = fn2$a,b^}' Tag='Path: fn1(a,b) , Mode: fn2$a,b^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension Path = fn1(a,b), Mode = fn2}' Tag='Path: fn1(a,b) , Mode: fn2'/>
+  <TextBlock Text='{ct:BC_MarkupExtension Path = fn1(a,b=c,d), Mode = fn2$a,b=c,d^}' Tag='Path: fn1(a,b=c,d) , Mode: fn2$a,b=c,d^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension Path = fn1, Mode= fn2$a,b^}' Tag='Path: fn1 , Mode: fn2$a,b^'/>
+  <TextBlock Text='{ct:BC_MarkupExtension Path =  fn1(a,[,,],b), Mode= $a,b^}' Tag='Path: fn1(a,[,,],b) , Mode: $a,b^'/>
+
+  <!--Nested MarkupExtension Variation-->
+  <TextBlock Text='{ct:BC_MarkupExtension Path = {ct:BCNested_MarkupExtension fn1(a,b)}}' Tag='Path: fn1(a,b) , Mode: '/>
+  <TextBlock Text='{ct:BC_MarkupExtension {ct:BCNested_MarkupExtension fn1(a,b)}}' Tag='Path: fn1(a,b) , Mode: '/>
+  <TextBlock Text='{ct:BC_MarkupExtension {ct:BCNested_MarkupExtension fn1(a,b)}, {ct:BCNested_MarkupExtension fn2(a[,]b)}}' Tag='Path: fn1(a,b) , Mode: fn2(a[,]b)'/>
+
+  <TextBlock Text="{ct:BC_MarkupExtension Animals['poodle,doodle']}" Tag="Path: Animals['poodle,doodle'] , Mode: "/>
+  <TextBlock Text="{ct:BC_MarkupExtension Animals('poodle,doodle')}" Tag="Path: Animals('poodle,doodle') , Mode: "/>
+  <TextBlock Text="{ct:BC_MarkupExtension Animals[poodle,doodle,moodle]}" Tag="Path: Animals[poodle,doodle,moodle] , Mode: "/>
+  <TextBlock Text="{ct:BC_MarkupExtension Animals['poodle ,doodle(a,b,c)']}" Tag="Path: Animals['poodle ,doodle(a,b,c)'] , Mode: "/>
+  <TextBlock Text="{ct:BC_MarkupExtension Animals['poodle,doodle'](a,b,c,d=e)}" Tag="Path: Animals['poodle,doodle'](a,b,c,d=e) , Mode: "/>
+
+  <!--Escape character within BracketCharacters variation-->
+  <TextBlock Text='{ct:BC_MarkupExtension Animals[\"poodle\"]}' Tag='Path: Animals["poodle"] , Mode: ' />
+  <TextBlock Text="{ct:BC_MarkupExtension Animals[\'poodle\']}" Tag="Path: Animals['poodle'] , Mode: " />
+
+</Grid>

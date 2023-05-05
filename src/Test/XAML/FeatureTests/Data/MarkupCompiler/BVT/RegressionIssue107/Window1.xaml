@@ -1,0 +1,12 @@
+<Window x:Class="MarkupCompiler.RegressionIssue107.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MarkupCompiler.RegressionIssue107" 
+    Height="100" Width="100" SizeToContent="WidthAndHeight" 
+    Loaded="OnLoaded">
+    <StackPanel>
+        <Button Name="button1" Content="Test using shortcut" Tag="{local:Test TypeValue=Panel}" />
+        <Button Name="button2" Content="Test using x:Type with ctor" Tag="{local:Test {x:Type Panel}}" />
+        <Button Name="button3" Content="Test using x:Type" Tag="{local:Test TypeValue={x:Type Panel}}" />
+    </StackPanel>
+</Window>

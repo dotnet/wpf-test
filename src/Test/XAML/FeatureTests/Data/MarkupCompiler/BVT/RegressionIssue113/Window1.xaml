@@ -1,0 +1,19 @@
+<Window x:Class="RegressionIssue113.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Custom="clr-namespace:RegressionIssue113"
+    x:Name="Window" Title="Window1" Width="640" Height="480" Loaded="OnLoaded"
+    >
+    <Canvas x:Name="LayoutRoot">
+        <Label>
+            <Label.Template>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Canvas>
+                        <Custom:UserControl1 Canvas.Left="0" Background="Red" Window.Initialized="OnInitialized"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Label.Template>
+        </Label>
+    </Canvas>
+</Window>
+

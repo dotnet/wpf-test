@@ -1,0 +1,31 @@
+<Window x:Class="RegressionIssue61_CrossRefWindowScope.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RegressionIssue61_CrossRefWindowScope"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:LinkedControl x:Key="Eight" >
+                        <Button>8</Button>
+                    </local:LinkedControl>
+                    <local:LinkedControl x:Key="Seven" Next="{StaticResource Eight}">
+                        <Button>7</Button>
+                    </local:LinkedControl>
+                </ResourceDictionary>
+                <ResourceDictionary Source="FiveSix.xaml" />
+                <ResourceDictionary Source="ThreeFour.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:LinkedControl x:Key="Two" Next="{StaticResource Three}">
+                <Button>2</Button>
+            </local:LinkedControl>
+            <local:LinkedControl x:Key="One" Next="{StaticResource Two}">
+                <Button>1</Button>
+            </local:LinkedControl>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <StaticResource ResourceKey="One" />
+    </Grid>
+</Window>
