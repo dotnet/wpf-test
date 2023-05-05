@@ -1,0 +1,160 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+    
+    <Grid ShowGridLines="true">
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+        <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- Scenario 1 - Source is CompositeCollection -->
+        <StackPanel Name="sp1" Grid.Row="0" Grid.Column="0" Margin="5">
+            <StackPanel.Resources>
+                <src:MyCompositeCollection x:Key="composite" />
+
+                <CollectionViewSource Source="{StaticResource composite}" x:Key="cvs1" />
+                <CollectionViewSource Source="{StaticResource composite}" x:Key="cvs11" />
+
+                <DataTemplate DataType="{x:Type src:Places}">
+                    <ItemsControl ItemsSource="{Binding}" />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type src:GreekGods}">
+                    <ItemsControl ItemsSource="{Binding}" />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type src:Place}">
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </StackPanel.Resources>
+            
+            <ListBox Name="lb1" Height="100" />
+            <ListBox Name="lb11" Height="100" />
+        </StackPanel>
+        
+        <!-- Scenario 3 - Source is IEnumerable -->
+        <StackPanel Name="sp3" Grid.Row="0" Grid.Column="2" Margin="5">
+            <StackPanel.Resources>
+                <src:MyIEnumerable x:Key="ienumerable" />
+
+                <CollectionViewSource Source="{StaticResource ienumerable}" x:Key="cvs3" />
+                <CollectionViewSource Source="{StaticResource ienumerable}" x:Key="cvs33" />
+            </StackPanel.Resources>
+
+            <ListBox Name="lb3" Height="100" />
+            <ListBox Name="lb33" Height="100" />
+        </StackPanel>
+
+        <!-- Scenario 4 - Source is IList -->
+        <StackPanel Name="sp4" Grid.Row="1" Grid.Column="0" Margin="5">
+            <StackPanel.Resources>
+                <src:Places x:Key="places" />
+
+                <CollectionViewSource Source="{StaticResource places}" x:Key="cvs4" />
+                <CollectionViewSource Source="{StaticResource places}" x:Key="cvs44" />
+            </StackPanel.Resources>
+
+            <ListBox Name="lb4" Height="100" DisplayMemberPath="Name" />
+            <ListBox Name="lb44" Height="100" DisplayMemberPath="Name" />
+        </StackPanel>
+
+        <!-- Scenario 5 - Source is IBindingList -->
+        <StackPanel Name="sp5" Grid.Row="1" Grid.Column="1" Margin="5">
+            <StackPanel.Resources>
+                <src:PlacesDataTable x:Key="placesDataTable" />
+
+                <CollectionViewSource Source="{StaticResource placesDataTable}" x:Key="cvs5" />
+                <CollectionViewSource Source="{StaticResource placesDataTable}" x:Key="cvs55" />
+            </StackPanel.Resources>
+
+            <ListBox Name="lb5" Height="100" DisplayMemberPath="Name" />
+            <ListBox Name="lb55" Height="100" DisplayMemberPath="Name" />
+        </StackPanel>
+
+        <!-- Scenario 6 - Source derives from CollectionView -->
+        <StackPanel Name="sp6" Grid.Row="1" Grid.Column="2" Margin="5">
+            <StackPanel.Resources>
+                <CollectionViewSource x:Key="cvs6" />
+            </StackPanel.Resources>
+
+            <ListBox Name="lb6" Height="100" />
+        </StackPanel>
+
+        <!-- Scenario 7 - Source does not derive from CollectionView but implements ICollectionView -->
+        <StackPanel Name="sp7" Grid.Row="2" Grid.Column="0" Margin="5">
+            <StackPanel.Resources>
+                <CollectionViewSource x:Key="cvs7" />
+            </StackPanel.Resources>
+
+            <ListBox Name="lb7" Height="100" />
+        </StackPanel>
+
+        <!-- Scenario 8 - Source is XmlDataProvider-->
+        <StackPanel Name="sp8" Grid.Row="2" Grid.Column="1" Margin="5">
+            <StackPanel.Resources>
+                <XmlDataProvider XPath="Library/*" x:Key="xdp">
+                  <x:XData>
+                    <Library xmlns="">
+                        <Book ISBN="0-7356-1448-2">
+                            <Title>Microsoft C# Language Specification</Title>
+                            <Price>29.99</Price>
+                        </Book>
+                        <DVD Rating="G">
+                            <Title>Finding Nemo</Title>
+                            <Price>19.99</Price>
+                        </DVD>
+                        <Book ISBN="0-7356-1288-9">
+                            <Title>Inside C#</Title>
+                            <Price>29.99</Price>
+                        </Book>
+                        <DVD Rating="PG-13">
+                            <Title>Pirates of the Caribbean</Title>
+                            <Price>19.99</Price>
+                        </DVD>
+                        <DVD Rating="R">
+                            <Title>The Usual Suspects</Title>
+                            <Price>19.99</Price>
+                        </DVD>
+                        <Book ISBN="0-7356-0562-9">
+                            <Title>Xml in Action</Title>
+                            <Price>29.99</Price>
+                        </Book>
+                    </Library>
+                  </x:XData>
+                </XmlDataProvider>
+
+                <DataTemplate DataType="Book">
+                    <DockPanel>
+                        <TextBlock Text="{Binding XPath=Title}" />
+                        <TextBlock Text="-" />
+                        <TextBlock Text="{Binding XPath=@ISBN}" />
+                    </DockPanel>
+                </DataTemplate>
+
+                <DataTemplate DataType="DVD">
+                    <DockPanel>
+                        <TextBlock Text="{Binding XPath=Title}" />
+                        <TextBlock Text="-" />
+                        <TextBlock Text="{Binding XPath=@Rating}" />
+                    </DockPanel>
+                </DataTemplate>
+                
+                <CollectionViewSource Source="{StaticResource xdp}" x:Key="cvs8" />
+                <CollectionViewSource Source="{StaticResource xdp}" x:Key="cvs88" />
+            </StackPanel.Resources>
+
+            <ListBox Name="lb8" Height="100" />
+            <ListBox Name="lb88" Height="100" />
+        </StackPanel>
+    </Grid>
+</DockPanel>

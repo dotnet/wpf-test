@@ -1,0 +1,63 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+
+    <Page.Resources>
+        <!-- CLR -->
+        <src:CountriesDataSource x:Key="clrCountries" />
+
+        <CollectionViewSource Source="{Binding Source={StaticResource clrCountries}, Path=Countries}" x:Key="clrCvs">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Government" />
+                <PropertyGroupDescription PropertyName="Region" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <DataTemplate x:Key="clrItemTemplate">
+            <TextBlock Text="{Binding Path=CountryName}" Foreground="Green" />
+        </DataTemplate>
+
+        <!-- XML -->
+        <XmlDataProvider XPath="/Countries/Country" Source="Countries.xml" x:Key="xmlCountries" />
+
+        <CollectionViewSource Source="{Binding Source={StaticResource xmlCountries}}" x:Key="xmlCvs">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Government" />
+                <PropertyGroupDescription PropertyName="Region" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <DataTemplate x:Key="xmlItemTemplate">
+            <TextBlock Text="{Binding XPath=CountryName}" Foreground="Green" />
+        </DataTemplate>
+
+        <!-- Common to CLR and XML-->
+        <DataTemplate x:Key="groupTemplateLevel1">
+            <TextBlock Text="{Binding Path=Name}" Foreground="Red" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="groupTemplateLevel2">
+            <TextBlock Text="{Binding Path=Name}" Foreground="Blue" />
+        </DataTemplate>
+    </Page.Resources>
+    
+    <StackPanel Orientation="Horizontal">
+        <!-- CLR -->
+        <ListBox ItemsSource="{Binding Source={StaticResource clrCvs}}" ItemTemplate="{StaticResource clrItemTemplate}" Name="clrListBox">
+            <ListBox.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource groupTemplateLevel1}" />
+                <GroupStyle HeaderTemplate="{StaticResource groupTemplateLevel2}" />
+            </ListBox.GroupStyle>
+        </ListBox>
+        
+        <!-- XML -->
+        <ListBox ItemsSource="{Binding Source={StaticResource xmlCvs}}" ItemTemplate="{StaticResource xmlItemTemplate}" Name="xmlListBox">
+            <ListBox.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource groupTemplateLevel1}" />
+                <GroupStyle HeaderTemplate="{StaticResource groupTemplateLevel2}" />
+            </ListBox.GroupStyle>
+        </ListBox>
+    </StackPanel>
+</Page>

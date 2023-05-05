@@ -1,0 +1,22 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:sys="clr-namespace:System;assembly=Mscorlib"
+    Background="cornsilk" 
+    >
+
+    <StackPanel Margin="10,10,10,10">
+        <TextBox Name="tb">
+            <TextBox.Text>
+                <Binding Path="Votes" UpdateSourceTrigger="PropertyChanged">
+                  <Binding.ValidationRules>
+                    <ExceptionValidationRule />
+                  </Binding.ValidationRules>
+                    <Binding.Source>
+                        <src:Player PlayerName="player name" Votes="10" />
+                    </Binding.Source>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+    </StackPanel>
+</Page>

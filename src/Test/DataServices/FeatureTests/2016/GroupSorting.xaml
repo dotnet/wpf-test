@@ -1,0 +1,143 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    >
+<Border Background="cornsilk">
+    <Border.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+
+        <!-- The theme-supplied styles for ListBox et al. doesn't work well for grouping.
+            So we override them here. -->
+        <ItemsPanelTemplate x:Key="DockPanelFactory">
+            <DockPanel />
+        </ItemsPanelTemplate>
+
+        <!--Style x:Key="*typeof(ItemsControl}"-->
+        <Style x:Key="myControlStyle" TargetType="{x:Type ItemsControl}">
+            <Setter Property="ItemsPanel" Value="{DynamicResource DockPanelFactory}" />
+            <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Grid>
+                        <Border Margin="{TemplateBinding Padding}">
+                            <ItemsPresenter Name="Presenter" />
+                        </Border>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Border.Resources>
+
+
+    <StackPanel Name="panel">
+        <Panel.Resources>
+            <CollectionViewSource x:Key="GroupedCustomers">     <!-- Source set at runtime -->
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="State" CustomSort="{x:Static PropertyGroupDescription.CompareNameAscending}"/>
+                    <PropertyGroupDescription PropertyName="Age">
+                        <PropertyGroupDescription.SortDescriptions>
+                            <scm:SortDescription PropertyName="Name"/>
+                        </PropertyGroupDescription.SortDescriptions>
+                    </PropertyGroupDescription>
+                </CollectionViewSource.GroupDescriptions>
+            </CollectionViewSource>
+        </Panel.Resources>
+
+
+    <!--  Two levels of grouping - Group first by state, then by age-->
+
+    <DockPanel Margin="10,10,10,10">
+        <DockPanel.Resources>
+            <DataTemplate x:Key="CustomerTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="name" Text="{Binding Path=Name}" Width="50"/>
+                    <TextBlock Name="age" Text="{Binding Path=Age}" Width="40" />
+                    <TextBlock Name="state" Text="{Binding Path=State}" Width="70" />
+                </StackPanel>
+            </DataTemplate>
+
+            <Style x:Key="StateGroupStyle" TargetType="{x:Type GroupItem}">
+                <Setter Property="DockPanel.Dock" Value="Left" />
+                <Setter Property="Template">
+                <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupItem}">
+                    <DockPanel>
+                        <ContentPresenter DockPanel.Dock="Top" />
+                        <ItemsPresenter DockPanel.Dock="Top" Margin="5,0,0,0"/>
+                    </DockPanel>
+                </ControlTemplate>
+                </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="AgeGroupStyle" TargetType="{x:Type GroupItem}">
+                <Setter Property="DockPanel.Dock" Value="Top" />
+                <Setter Property="Template">
+                <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupItem}">
+                    <DockPanel>
+                        <ContentPresenter DockPanel.Dock="Top" />
+                        <ItemsPresenter DockPanel.Dock="Top" Margin="5,0,0,0"/>
+                    </DockPanel>
+                </ControlTemplate>
+                </Setter.Value>
+                </Setter>
+            </Style>
+
+            <DataTemplate x:Key="StateHeaderTemplate">
+                <DockPanel>
+                    <TextBlock Name="groupName" Text="{Binding Path=Name}" />
+                    <TextBlock Name="cnt" Text="{Binding Path=ItemCount}" Margin="3,0,0,0"/>
+                </DockPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="AgeHeaderTemplate">
+                <DockPanel>
+                    <TextBlock Text="Age "/>
+                    <TextBlock Name="groupName" Text="{Binding Path=Name}" />
+                    <TextBlock Name="cnt" Text="{Binding Path=ItemCount}" Margin="3,0,0,0"/>
+                </DockPanel>
+            </DataTemplate>
+        </DockPanel.Resources>
+
+        <TextBlock DockPanel.Dock="Top">Customers</TextBlock>
+
+        <ItemsControl Name="itemscontrol" DockPanel.Dock="Top"
+                    Style="{StaticResource myControlStyle}"
+                    ItemTemplate="{StaticResource CustomerTemplate}"
+                    ItemsSource="{Binding Source={StaticResource GroupedCustomers}}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate><StackPanel/></ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.GroupStyle>
+                <GroupStyle
+                    ContainerStyle="{StaticResource StateGroupStyle}"
+                    HeaderTemplate="{StaticResource StateHeaderTemplate}">
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate><DockPanel/></ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+                <GroupStyle
+                    ContainerStyle="{StaticResource AgeGroupStyle}"
+                    HeaderTemplate="{StaticResource AgeHeaderTemplate}">
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate><StackPanel/></ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </ItemsControl.GroupStyle>
+        </ItemsControl>
+    </DockPanel>
+
+    </StackPanel>
+</Border>
+
+</Page>
+

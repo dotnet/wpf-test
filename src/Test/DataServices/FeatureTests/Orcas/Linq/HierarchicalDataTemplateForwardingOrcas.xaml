@@ -1,0 +1,77 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:dataTest="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTest"
+    xmlns:local="clr-namespace:Microsoft.Test.DataServices"
+    xmlns:sysdata="clr-namespace:System.Data;assembly=System.Data"
+    xmlns:cp="clr-namespace:Codeplex;assembly=DataServicesTestCommon"
+    Name="Root" Background="cornsilk"
+    >
+  <DockPanel.Resources>
+    <cp:XLinqDataProvider x:Key="EarthXLinq" Source="pack://application:,,,/DataServicesTestOrcas;component/Resource\CountriesHierarchical.xml" />
+
+    <DataTemplate DataType="Country">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[CountryName].Value}" />
+        <TextBlock Text="ImplicitXLinqCountry" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate DataType="Region" ItemsSource="{Binding Path=Element[Countries].Elements[Country]}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[RegionName].Value}" />
+        <TextBlock Text="ImplicitXLinqRegion" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate DataType="Hemisphere" ItemsSource="{Binding Path=Element[Regions].Elements[Region]}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[HemisphereName].Value}" />
+        <TextBlock Text="ImplicitXLinqHemisphere" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ExplicitXLinqCountry">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[CountryName].Value}" />
+        <TextBlock Text="ExplicitXLinqCountry" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitXLinqRegion"  ItemsSource="{Binding Path=Element[Countries].Elements[Country]}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[RegionName].Value}" />
+        <TextBlock Text="ExplicitXLinqRegion" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitXLinqHemisphere"  ItemsSource="{Binding Path=Element[Regions].Elements[Region]}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[HemisphereName].Value}" />
+        <TextBlock Text="ExplicitXLinqHemisphere" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ExplicitXLinqCountrySelectorTemplate">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[CountryName].Value}" />
+        <TextBlock Text="ExplicitXLinqCountrySelector" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitXLinqRegionSelectorTemplate"  ItemsSource="{Binding Path=Element[Countries].Elements[Country]}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[RegionName].Value}" />
+        <TextBlock Text="ExplicitXLinqRegionSelector" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitXLinqHemisphereSelectorTemplate"  ItemsSource="{Binding Path=Element[Regions].Elements[Region]}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=Element[HemisphereName].Value}" />
+        <TextBlock Text="ExplicitXLinqHemisphereSelector" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <dataTest:HDTSelector x:Key="ExplicitXLinqCountrySelector" HDT="{StaticResource ExplicitXLinqCountrySelectorTemplate}"/>
+    <dataTest:HDTSelector x:Key="ExplicitXLinqRegionSelector" HDT="{StaticResource ExplicitXLinqRegionSelectorTemplate}"/>
+    <dataTest:HDTSelector x:Key="ExplicitXLinqHemisphereSelector" HDT="{StaticResource ExplicitXLinqHemisphereSelectorTemplate}"/>
+  </DockPanel.Resources>
+
+  <TreeView ItemsSource="{Binding Source={StaticResource EarthXLinq}, Path=Elements[Hemisphere]}" Name="MyXLinqTreeView" />
+</DockPanel>

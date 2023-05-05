@@ -1,0 +1,64 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:test="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+    <DockPanel.Resources>
+
+        <XmlDataProvider XPath="Books" x:Key="dso">
+          <x:XData>
+            <Books xmlns="">
+                <Book ISBN="0-7356-1448-2">
+                    <Title>Microsoft C# Language Specification</Title>
+                    <Price>30</Price>
+                </Book>
+                <Book ISBN="0-7356-1288-9">
+                    <Title>Inside C#</Title>
+                    <Price>50</Price>
+                </Book>
+                <Book ISBN="0-7356-0562-9">
+                    <Title>Xml in Action</Title>
+                    <Price>40</Price>
+                </Book>
+                <Book ISBN="0-321-15491-6">
+                    <Title>The C# Programming Language</Title>
+                    <Price>30</Price>
+                </Book>
+            </Books>
+          </x:XData>
+        </XmlDataProvider>
+
+        <Style x:Key="txtStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="TextBox.Text">
+            <Setter.Value>
+                <Binding Source="{StaticResource dso}" XPath="Book[1]/Price" UpdateSourceTrigger="Explicit" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <test:RangeRule Min="0" Max="10" ErrorContent="must lie between 0 and 10" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="txtStyle2" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextBlock.Text">
+            <Setter.Value>
+                <Binding Source="{StaticResource dso}" XPath="Book[1]/Price" />
+            </Setter.Value>
+            </Setter>
+        </Style>
+
+    </DockPanel.Resources>
+
+    <StackPanel>
+        <TextBox Name="tbPrice1" Height="30" Style="{StaticResource txtStyle1}" />
+        <TextBlock>Text bound to the same data source:</TextBlock>
+        <TextBlock Name="txtSource" Style="{StaticResource txtStyle2}"></TextBlock>
+        <TextBlock>Number of validation errors:</TextBlock>
+        <TextBlock Name="txtErrors">
+            <TextBlock.Text>
+                <Binding ElementName="tbPrice1" Path="(Validation.Errors).Count" />
+            </TextBlock.Text>
+        </TextBlock>
+    </StackPanel>
+
+</DockPanel>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XamlTransformer xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- 1. Binding 2D objects under 3D elements to 2D object under another 3D element (between FE's) under a common 3D viewport parent. -->
+  <XmlTransform Name="BindingUnderA3DViewport">
+    <!-- Insert background property with red color to binding source. -->
+    <AddAttribute TargetElement="//*[@Name='vp2d_first_child']" Property="Background" Value="Red"/>
+
+    <!-- Insert binding to binding targets. -->
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Background" Value="{Binding ElementName=vp2d_first_child, Path=Background}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="Background" Value="{Binding ElementName=vp2d_first_child, Path=Background}"/>
+    <AddAttribute TargetElement="//*[@Name='modelElement_vp2d_FE']" Property="Background" Value="{Binding ElementName=vp2d_first_child, Path=Background}"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="Background" Value="{Binding ElementName=vp2d_first_child, Path=Background}"/>
+  </XmlTransform>
+
+
+  <!-- 2. Binding multiple 2D objects under a common 3D viewport parent to multiple 2D objects under another common 3D viewport parent. -->
+  <XmlTransform Name="Viewport3DBindToAnotherViewport3D">
+    <!-- Insert background property with red color to binding source. -->
+    <AddAttribute TargetElement="//*[@Name='vp2d_first_child']" Property="Background" Value="Red"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="Background" Value="Red"/>
+    <AddAttribute TargetElement="//*[@Name='modelElement_vp2d_FE']" Property="Background" Value="Red"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="Background" Value="Red"/>
+    
+    <!-- Insert binding to binding target. -->
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Background" Value="{Binding ElementName=vp2d_first_child, Path=Background}"/>
+
+    <!-- Append xaml. -->
+    <AppendXml TargetElement="//av:Grid[@Name='testGrid']">
+
+      <Viewport3D>
+
+        <ModelUIElement3D>
+          <ModelUIElement3D.Model>
+            <GeometryModel3D Material="{StaticResource grayMaterial}" Geometry="{StaticResource pyramidMesh}"/>
+          </ModelUIElement3D.Model>
+          <ModelUIElement3D.Transform>
+            <TranslateTransform3D OffsetX="-8"/>
+          </ModelUIElement3D.Transform>
+        </ModelUIElement3D>
+
+        <Viewport2DVisual3D Geometry="{StaticResource pyramidMesh}">
+          <Viewport2DVisual3D.Material>
+            <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True"/>
+          </Viewport2DVisual3D.Material>
+          <Viewport2DVisual3D.Transform>
+            <Transform3DGroup>
+              <ScaleTransform3D ScaleZ="1.0"/>
+              <RotateTransform3D >
+                <RotateTransform3D.Rotation>
+                  <AxisAngleRotation3D Axis="0 1 0" Angle="40"/>
+                </RotateTransform3D.Rotation>
+              </RotateTransform3D>
+              <TranslateTransform3D OffsetX="-4"/>
+            </Transform3DGroup>
+          </Viewport2DVisual3D.Transform>
+          <StackPanel>
+            <Button Name="vp2d_first_child_2" Content="Button 1" Background="{Binding ElementName=vp2d_second_child, Path=Background}"/>
+            <Button Name="vp2d_second_child_2" Content="Button 2" Background="{Binding ElementName=vp2d_first_child_2, Path=Background}"/>
+          </StackPanel>
+        </Viewport2DVisual3D>
+
+        <Viewport2DVisual3D Geometry="{StaticResource pyramidMesh}">
+          <Viewport2DVisual3D.Material>
+            <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True"/>
+          </Viewport2DVisual3D.Material>
+          <Viewport2DVisual3D.Transform>
+            <Transform3DGroup>
+              <TranslateTransform3D OffsetX="-1"/>
+            </Transform3DGroup>
+          </Viewport2DVisual3D.Transform>
+          <StackPanel>
+            <Button Name="vp2d_with_child_2">
+              <Button Name="vp2d_nested_child_2" Background="{Binding ElementName=vp2d_nested_child, Path=Background}">Nested FE</Button>
+            </Button>
+          </StackPanel>
+        </Viewport2DVisual3D>
+
+        <ContainerUIElement3D>
+          <ContainerUIElement3D.Transform>
+            <TranslateTransform3D OffsetX="2"/>
+          </ContainerUIElement3D.Transform>
+
+          <ContainerUIElement3D.Children>
+            <Viewport2DVisual3D Geometry="{StaticResource pyramidMesh}">
+              <Viewport2DVisual3D.Material>
+                <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True"/>
+              </Viewport2DVisual3D.Material>
+              <Viewport2DVisual3D.Transform>
+                <Transform3DGroup>
+                  <TranslateTransform3D OffsetY="-1" OffsetX="0.5" OffsetZ="0.5"/>
+                </Transform3DGroup>
+              </Viewport2DVisual3D.Transform>
+              <StackPanel>
+                <Button Name="modelElement_vp2d_FE_2" Content="UIElement3DChild Viewport" Background="{Binding ElementName=modelElement_vp2d_FE, Path=Background}"/>
+              </StackPanel>
+            </Viewport2DVisual3D>
+          </ContainerUIElement3D.Children>
+        </ContainerUIElement3D>
+
+
+
+        <ModelVisual3D>
+          <ModelVisual3D.Transform>
+            <TranslateTransform3D OffsetX="5"/>
+          </ModelVisual3D.Transform>
+
+          <ModelVisual3D.Content>
+            <GeometryModel3D Material="{StaticResource grayMaterial}" Geometry="{StaticResource pyramidMesh}"/>
+          </ModelVisual3D.Content>
+
+          <ModelVisual3D.Children>
+            <Viewport2DVisual3D Geometry="{StaticResource pyramidMesh}">
+              <Viewport2DVisual3D.Material>
+                <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True"/>
+              </Viewport2DVisual3D.Material>
+              <Viewport2DVisual3D.Transform>
+                <Transform3DGroup>
+                  <TranslateTransform3D OffsetY="-1" OffsetX="0.5" OffsetZ="0.5"/>
+                </Transform3DGroup>
+              </Viewport2DVisual3D.Transform>
+              <StackPanel>
+                <Button Name="modelVisual_vp2d_FE_2" Content="Visual3DChild Viewport" Background="{Binding ElementName=modelVisual_vp2d_FE, Path=Background}"/>
+              </StackPanel>
+            </Viewport2DVisual3D>
+          </ModelVisual3D.Children>
+        </ModelVisual3D>
+
+        <!-- Light source. -->
+        <ModelVisual3D>
+          <ModelVisual3D.Content>
+            <PointLight Color="White" Position="6 0 10"/>
+          </ModelVisual3D.Content>
+          <ModelVisual3D.Transform>
+            <RotateTransform3D>
+              <RotateTransform3D.Rotation>
+                <AxisAngleRotation3D Axis="0 0 1" Angle="0"/>
+              </RotateTransform3D.Rotation>
+            </RotateTransform3D>
+          </ModelVisual3D.Transform>
+        </ModelVisual3D>
+
+        <!-- Camera. -->
+        <Viewport3D.Camera>
+          <PerspectiveCamera Position="0 0 6" LookDirection="0 0 -1"
+              UpDirection="0 1 0" FieldOfView="120" />
+        </Viewport3D.Camera>
+
+        <Viewport3D.Triggers>
+          <EventTrigger RoutedEvent="Viewport3D.Loaded">
+            <BeginStoryboard>
+              <Storyboard TargetName="xform" TargetProperty="Angle">
+                <DoubleAnimation From="0" To="360" Duration="0:0:5" RepeatBehavior="Forever" />
+              </Storyboard>
+            </BeginStoryboard>
+          </EventTrigger>
+        </Viewport3D.Triggers>
+      </Viewport3D>
+
+    </AppendXml>
+  </XmlTransform>
+  
+  <!-- 3. Binding multiple 2D objects to a 3D ModelUIElement under a common 3D viewport parent. -->
+
+  <XmlTransform Name="BindToAnotherViewport3DModelUIElement3D">
+    <!-- Insert IsEnabled property value is false to binding source. -->
+    <AddAttribute TargetElement="//*[@x:Name='simpleModelUIElement3D']" Property="IsEnabled" Value="false"/>
+
+    <!-- Insert binding to binding targets. -->
+    <AddAttribute TargetElement="//*[@Name='vp2d_first_child']" Property="IsEnabled" Value="{Binding ElementName=simpleModelUIElement3D, Path=IsEnabled}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="IsEnabled" Value="{Binding ElementName=vp2d_first_child, Path=IsEnabled}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="IsEnabled" Value="{Binding ElementName=simpleModelUIElement3D, Path=IsEnabled}"/>
+    <AddAttribute TargetElement="//*[@Name='modelElement_vp2d_FE']" Property="IsEnabled" Value="{Binding ElementName=simpleModelUIElement3D, Path=IsEnabled}"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="IsEnabled" Value="{Binding ElementName=simpleModelUIElement3D, Path=IsEnabled}"/>
+
+    <!-- Append xaml. -->
+    <AppendXml TargetElement="//av:Grid[@Name='testGrid']">
+      <Viewport3D>
+        <Viewport2DVisual3D Geometry="{StaticResource pyramidMesh}">
+          <Viewport2DVisual3D.Material>
+            <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True"/>
+          </Viewport2DVisual3D.Material>
+          <Viewport2DVisual3D.Transform>
+            <Transform3DGroup>
+              <ScaleTransform3D ScaleZ="1.0"/>
+              <RotateTransform3D >
+                <RotateTransform3D.Rotation>
+                  <AxisAngleRotation3D Axis="0 1 0" Angle="40"/>
+                </RotateTransform3D.Rotation>
+              </RotateTransform3D>
+              <TranslateTransform3D OffsetX="-4"/>
+            </Transform3DGroup>
+          </Viewport2DVisual3D.Transform>
+          <StackPanel>
+            <Button Name="vp2d_first_child_2" Content="Button 1" Background="{Binding ElementName=simpleModelUIElement3D, Path=Background}"/>
+          </StackPanel>
+        </Viewport2DVisual3D>
+      </Viewport3D>
+    </AppendXml>
+  </XmlTransform>
+
+  <!-- 4. Binding multiple 2D objects under a common 3D viewport parent to a 2D object is a sibling of the 3D viewport parent. -->
+
+  <XmlTransform Name="BindToA2DObjectIsSiblingOfParent">
+    <!-- Append Button to test Grid. -->
+    <AppendXml TargetElement="//av:Grid[@Name='testGrid']">
+      <Button Name="topLevel_Source" Content="Top Level Source" Background="Red"/>
+    </AppendXml>
+
+    <!-- Insert binding to binding targets. -->
+    <AddAttribute TargetElement="//*[@Name='vp2d_first_child']" Property="Background" Value="{Binding ElementName=topLevel_Source, Path=Background}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Background" Value="{Binding ElementName=vp2d_first_child, Path=Background}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="Background" Value="{Binding ElementName=topLevel_Source, Path=Background}"/>
+    <AddAttribute TargetElement="//*[@Name='modelElement_vp2d_FE']" Property="Background" Value="{Binding ElementName=topLevel_Source, Path=Background}"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="Background" Value="{Binding ElementName=topLevel_Source, Path=Background}"/>
+  </XmlTransform>
+
+
+  <!-- 5. Binding multiple 2D objects are siblings of a 3D viewport parent to multiple 2D objects under the 3D viewport parent. -->
+ 
+  <XmlTransform Name="SiblingsOfParentBindToViewport3D">
+    <!-- Insert background property with red color to binding source. -->
+    <AddAttribute TargetElement="//*[@Name='vp2d_first_child']" Property="Background" Value="Red"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="Background" Value="Red"/>
+    <AddAttribute TargetElement="//*[@Name='modelElement_vp2d_FE']" Property="Background" Value="Red"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="Background" Value="Red"/>
+
+    <!-- Append binding to binding targets. -->
+    <AppendXml TargetElement="//av:Grid[@Name='testGrid']">
+      <Button Name="vp2d_first_child_2"  Content="bind to vp2d_first_child_2" Background="{Binding ElementName=vp2d_first_child, Path=Background}"/>
+      <Button Name="vp2d_nested_child_2" Content="bind to vp2d_nested_child_2" Background="{Binding ElementName=vp2d_nested_child, Path=Background}"/>
+      <Button Name="modelElement_vp2d_FE_2" Content="bind to modelElement_vp2d_FE_2" Background="{Binding ElementName=modelElement_vp2d_FE, Path=Background}"/>
+      <Button Name="modelVisual_vp2d_FE_2" Content="bind to modelVisual_vp2d_FE_2" Background="{Binding ElementName=modelVisual_vp2d_FE, Path=Background}"/>
+    </AppendXml>
+  </XmlTransform>
+</XamlTransformer>

@@ -1,0 +1,37 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    >
+    <DockPanel.Resources>
+        <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type datasources:SlowDataItem}" />
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </DockPanel.Resources>
+
+    <TextBlock DockPanel.Dock="Top" Name="Slow">
+        <TextBlock.Text>
+            <Binding Path="SlowValue" Source="{StaticResource DSO}" IsAsync="true" FallbackValue="fallback" />
+        </TextBlock.Text>
+    </TextBlock>
+
+    <TextBlock DockPanel.Dock="Top" Name="Fast">
+        <TextBlock.Text>
+            <Binding Path="FastValue" Source="{StaticResource DSO}" />
+        </TextBlock.Text>
+    </TextBlock>
+
+    <TextBlock DockPanel.Dock="Top" Name="CodeBind" />
+
+
+    <TextBlock DockPanel.Dock="Top" Name="PriTest">
+        <TextBlock.Text>
+            <PriorityBinding FallbackValue="fallback">
+                <Binding Path="SlowValue" Source="{StaticResource DSO}" IsAsync="true" />
+                <Binding Path="FastValue" Source="{StaticResource DSO}" />
+            </PriorityBinding>
+        </TextBlock.Text>
+    </TextBlock>
+
+</DockPanel>
+

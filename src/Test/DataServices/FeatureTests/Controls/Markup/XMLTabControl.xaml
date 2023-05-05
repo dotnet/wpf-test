@@ -1,0 +1,48 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Name="root"
+    >
+
+    <DockPanel.Resources>
+        <XmlDataProvider XPath="XmlRoot" x:Key="xds">
+          <x:XData>
+            <XmlRoot xmlns="">
+                <Magazine ISBN="1000">
+                    <Title>Hockey Digest</Title>
+                </Magazine>
+                <Magazine ISBN="1001">
+                    <Title>Car n Track</Title>
+                </Magazine>
+                <Magazine ISBN="1002">
+                    <Title>Organic Gardening</Title>
+                </Magazine>
+                <Magazine ISBN="1003">
+                    <Title>Popular Science</Title>
+                </Magazine>
+            </XmlRoot>
+          </x:XData>
+        </XmlDataProvider>
+
+        <Style x:Key="myItemContainerStyle" TargetType="{x:Type TabItem}">
+            <Setter Property="Content" Value="{Binding XPath=@ISBN}" />
+            <Setter Property="Header" Value="{Binding XPath=Title}" /> 
+        </Style>
+
+        <!--This is applied to the header-->
+        <DataTemplate x:Key="myItemTemplate">
+            <TextBlock Text="{Binding Path=InnerText}" Foreground="Green" />
+        </DataTemplate>
+
+        <!--This is applied to the content-->
+        <DataTemplate x:Key="myContentTemplate">
+            <TextBlock Text="{Binding Path=InnerText}" Foreground="Blue" />
+        </DataTemplate>
+    </DockPanel.Resources>
+
+    <TabControl Name="myTabControl"
+        ItemContainerStyle="{StaticResource myItemContainerStyle}"
+        ItemTemplate="{StaticResource myItemTemplate}"
+        ContentTemplate="{StaticResource myContentTemplate}"
+        ItemsSource="{Binding Source={StaticResource xds}, XPath=Magazine}" />
+
+</DockPanel>

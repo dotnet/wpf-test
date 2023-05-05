@@ -1,0 +1,14 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <DockPanel.Resources>
+        <XmlDataProvider XPath="XmlRoot" x:Key="DSO" Source="pack://siteoforigin:,,,/Magazine.xml" />
+    </DockPanel.Resources>
+
+    <TextBlock DockPanel.Dock="Top" Name="SnapMe">
+        <TextBlock.Text>
+            <Binding XPath="Magazine[@ISBN=&apos;1003&apos;]/Title" Source="{StaticResource DSO}" />
+        </TextBlock.Text>
+    </TextBlock>
+
+</DockPanel>

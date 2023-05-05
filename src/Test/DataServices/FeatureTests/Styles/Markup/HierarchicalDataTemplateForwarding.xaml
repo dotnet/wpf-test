@@ -1,0 +1,208 @@
+﻿<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dataSources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:local="clr-namespace:Microsoft.Test.DataServices"
+    xmlns:sysdata="clr-namespace:System.Data;assembly=System.Data" 
+    Name="Root" Background="cornsilk"
+    >
+  <DockPanel.Resources>
+    <dataSources:EarthDataSource x:Key="EarthObject" />
+
+    <DataTemplate DataType="{x:Type dataSources:Country}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=CountryName}" />
+        <TextBlock Text="ImplicitObjectCountry" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate DataType="{x:Type dataSources:Region}"
+                              ItemsSource="{Binding Path=Countries}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=RegionName}" />
+        <TextBlock Text="ImplicitObjectRegion" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate DataType="{x:Type dataSources:Hemisphere}"
+                        ItemsSource="{Binding Path=Regions}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=HemisphereName}" />
+        <TextBlock Text="ImplicitObjectHemisphere" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ExplicitObjectCountry">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=CountryName}" />
+        <TextBlock Text="ExplicitObjectCountry" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitObjectRegion" 
+                              ItemsSource="{Binding Path=Countries}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=RegionName}" />
+        <TextBlock Text="ExplicitObjectRegion" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitObjectHemisphere" 
+                        ItemsSource="{Binding Path=Regions}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=HemisphereName}" />
+        <TextBlock Text="ExplicitObjectHemisphere" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ExplicitObjectCountrySelectorTemplate">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=CountryName}" />
+        <TextBlock Text="ExplicitObjectCountrySelector" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitObjectRegionSelectorTemplate" 
+                              ItemsSource="{Binding Path=Countries}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=RegionName}" />
+        <TextBlock Text="ExplicitObjectRegionSelector" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitObjectHemisphereSelectorTemplate" 
+                        ItemsSource="{Binding Path=Regions}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=HemisphereName}" />
+        <TextBlock Text="ExplicitObjectHemisphereSelector" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+
+
+    <XmlDataProvider x:Key="EarthXML" Source="CountriesHierarchical.xml" IsAsynchronous="false" />
+
+    <DataTemplate DataType="Country">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=CountryName}" />
+        <TextBlock Text="ImplicitXMLCountry" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate DataType="Region" ItemsSource="{Binding XPath=Countries/*}">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=RegionName}" />
+        <TextBlock Text="ImplicitXMLRegion" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate DataType="Hemisphere" ItemsSource="{Binding XPath=Regions/*}">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=HemisphereName}" />
+        <TextBlock Text="ImplicitXMLHemisphere" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ExplicitXMLCountry">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=CountryName}" />
+        <TextBlock Text="ExplicitXMLCountry" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitXMLRegion"  ItemsSource="{Binding XPath=Countries/*}">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=RegionName}" />
+        <TextBlock Text="ExplicitXMLRegion" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitXMLHemisphere"  ItemsSource="{Binding XPath=Regions/*}">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=HemisphereName}" />
+        <TextBlock Text="ExplicitXMLHemisphere" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ExplicitXMLCountrySelectorTemplate">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=CountryName}" />
+        <TextBlock Text="ExplicitXMLCountrySelector" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitXMLRegionSelectorTemplate"  ItemsSource="{Binding XPath=Countries/*}">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=RegionName}" />
+        <TextBlock Text="ExplicitXMLRegionSelector" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitXMLHemisphereSelectorTemplate"  ItemsSource="{Binding XPath=Regions/*}">
+      <StackPanel>
+        <TextBlock Text="{Binding XPath=HemisphereName}" />
+        <TextBlock Text="ExplicitXMLHemisphereSelector" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+
+
+    <dataSources:EarthDataSet x:Key="EarthADO" />
+
+    <HierarchicalDataTemplate DataType="{x:Type sysdata:DataRowView}"
+                        ItemsSource="{Binding Path=RegionsCountries}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=CountryName}" />
+        <TextBlock Text="ImplicitADOCountry" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ExplicitADOCountry">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=CountryName}" />
+        <TextBlock Text="ExplicitADOCountry" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitADORegion"
+                              ItemsSource="{Binding Path=RegionsCountries}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=RegionName}" />
+        <TextBlock Text="ExplicitADORegion" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitADOHemisphere"
+                              ItemsSource="{Binding Path=HemispheresRegions}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=HemisphereName}" />
+        <TextBlock Text="ExplicitADOHemisphere" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ExplicitADOCountrySelectorTemplate">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=CountryName}" />
+        <TextBlock Text="ExplicitADOCountrySelector" />
+      </StackPanel>
+    </DataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitADORegionSelectorTemplate"
+                              ItemsSource="{Binding Path=RegionsCountries}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=RegionName}" />
+        <TextBlock Text="ExplicitADORegionSelector" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="ExplicitADOHemisphereSelectorTemplate"
+                              ItemsSource="{Binding Path=HemispheresRegions}">
+      <StackPanel>
+        <TextBlock Text="{Binding Path=HemisphereName}" />
+        <TextBlock Text="ExplicitADOHemisphereSelector" />
+      </StackPanel>
+    </HierarchicalDataTemplate>
+
+
+
+    <local:HDTSelector x:Key="ExplicitObjectCountrySelector" HDT="{StaticResource ExplicitObjectCountrySelectorTemplate}" />
+    <local:HDTSelector x:Key="ExplicitObjectRegionSelector" HDT="{StaticResource ExplicitObjectRegionSelectorTemplate}"/>
+    <local:HDTSelector x:Key="ExplicitObjectHemisphereSelector" HDT="{StaticResource ExplicitObjectHemisphereSelectorTemplate}"/>
+
+    <local:HDTSelector x:Key="ExplicitXMLCountrySelector" HDT="{StaticResource ExplicitXMLCountrySelectorTemplate}"/>
+    <local:HDTSelector x:Key="ExplicitXMLRegionSelector" HDT="{StaticResource ExplicitXMLRegionSelectorTemplate}"/>
+    <local:HDTSelector x:Key="ExplicitXMLHemisphereSelector" HDT="{StaticResource ExplicitXMLHemisphereSelectorTemplate}"/>
+
+    <local:HDTSelector x:Key="ExplicitADOCountrySelector" HDT="{StaticResource ExplicitADOCountrySelectorTemplate}"/>
+    <local:HDTSelector x:Key="ExplicitADORegionSelector" HDT="{StaticResource ExplicitADORegionSelectorTemplate}"/>
+    <local:HDTSelector x:Key="ExplicitADOHemisphereSelector" HDT="{StaticResource ExplicitADOHemisphereSelectorTemplate}"/>
+  </DockPanel.Resources>
+
+  <TreeView ItemsSource="{Binding Source={StaticResource EarthObject}, Path=Hemispheres}" Name="MyObjectTreeView" />
+  <TreeView ItemsSource="{Binding Source={StaticResource EarthXML}, XPath=Hemispheres/*}" Name="MyXMLTreeView" />
+  <TreeView ItemsSource="{Binding Source={StaticResource EarthADO}, Path=Hemispheres}" Name="MyADOTreeView" />
+</DockPanel>

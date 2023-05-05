@@ -1,0 +1,24 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+    xmlns:sys="clr-namespace:System;assembly=Mscorlib"
+    Background="cornsilk" 
+    >
+
+    <DockPanel.Resources>
+        <src:Places x:Key="places" />
+
+        <CollectionViewSource Source="{StaticResource places}" x:Key="cvs" />
+        
+        <DataTemplate DataType="{x:Type src:Place}">
+            <TextBlock Text="{Binding Path=Name}" Foreground="Blue" Name="tb" />
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Name}" Value="Seattle">
+                    <Setter Property="Foreground" Value="IndianRed" TargetName="tb" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </DockPanel.Resources>
+
+    <ListBox ItemsSource="{Binding Source={StaticResource cvs}}" Name="lb" />
+</DockPanel>

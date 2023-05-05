@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>DataServicesTest</AssemblyName>
+        <OutputType>Library</OutputType>
+        <AssemblyType>Library</AssemblyType>
+        <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Xaml Files below -->
+        <Page Include="..\Collections\Markup\*.xaml" />
+        <Page Include="..\Controls\Markup\*.xaml" />
+        <Page Include="..\DataSources\Markup\*.xaml" />
+        <Page Include="..\Grouping\Markup\*.xaml" />
+        <Page Include="..\Styles\Markup\*.xaml" />
+        <Page Include="..\UIBinding\Markup\*.xaml" />
+        <Page Include="..\Validation\Markup\*.xaml" />
+        <Page Include="..\Views\Markup\*.xaml" />
+        <Page Include="..\XmlWorker\Markup\*.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Embedded Resource files below -->
+        <Resource Include="..\DataSources\Resource\*" />
+        <Resource Include="..\Grouping\Resource\*" />
+        <Resource Include="..\Styles\Resource\*" />
+        <Resource Include="..\UIBinding\Resource\*" />
+        <Resource Include="..\Views\Resource\*" />
+        <Resource Include="..\XmlWorker\Resource\*" />
+
+        <!-- Loose Resource files below -->
+        <Content Include="..\DataSources\Content\*">
+		      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	      </Content>
+        <Content Include="..\UIBinding\Content\*">
+		      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	      </Content>
+    
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="AssemblyAttributes.cs" />
+        <!-- Code Files below -->
+        <Compile Include="..\Collections\Code\*.cs" />
+        <Compile Include="..\Controls\Code\*.cs" />
+        <Compile Include="..\DataSources\Code\*.cs" />
+        <Compile Include="..\Grouping\Code\*.cs" />
+        <Compile Include="..\Styles\Code\*.cs" />
+        <Compile Include="..\UIBinding\Code\*.cs" />
+        <Compile Include="..\UIBinding\Code\EscapePath\*.cs" />
+        <Compile Include="..\Validation\Code\*.cs" />
+        <Compile Include="..\Views\Code\*.cs" />
+        <Compile Include="..\XmlWorker\Code\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(TestRuntimeProject)" />
+        <ProjectReference Include="$(TestContractsProject)" />
+        <ProjectReference Include="$(DataServicesTestCommonProject)" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <NoWarn>$(NoWarn);0067</NoWarn>    
+    </PropertyGroup>
+</Project>

@@ -1,0 +1,22 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:datasources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"  
+  Name="root" DockPanel.Dock="Top" 
+  >
+
+    <DockPanel.Resources>
+        <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type datasources:GreekKing}" />
+
+        <DataTemplate x:Key="contentcontroltemplate">
+            <TextBlock Text="{Binding Path=Name}" FontSize="16" Foreground="Red" FontWeight="Bold" FontStyle="Italic" />
+        </DataTemplate>
+
+    </DockPanel.Resources>
+
+
+    <DockPanel DataContext="{Binding Source={StaticResource DSO}}" Name="dp">
+                <TextBlock DockPanel.Dock="Top"> Button </TextBlock>
+                <Button Height="80" Width="80" ContentTemplate="{StaticResource contentcontroltemplate}" Content="{Binding }" DockPanel.Dock="Top" />
+    </DockPanel>
+
+</DockPanel>

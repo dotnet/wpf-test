@@ -1,0 +1,36 @@
+﻿<StackPanel Background="cornsilk" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices" 
+    >
+    <StackPanel.Resources>
+
+            <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type src:LeagueHierarchicalList}" />
+
+        <DataTemplate x:Key="DataTemplate">
+            <TextBlock Text="{Binding Path=Name}" />
+        </DataTemplate>
+
+    </StackPanel.Resources>
+
+
+    <DockPanel Name="panel" DataContext="{Binding Source={StaticResource DSO}}">
+
+        <DockPanel Dock="Left" Margin="10,0,10,0">
+            <TextBlock DockPanel.Dock="Top">Major League Baseball</TextBlock>
+            <ListBox Name="leagueLB" ItemTemplate="{StaticResource DataTemplate}" SelectedIndex="0" IsSynchronizedWithCurrentItem="true" DockPanel.Dock="Top" ItemsSource="{Binding }" />
+        </DockPanel>
+
+        <DockPanel Dock="Left" Margin="10,0,10,0">
+            <TextBlock Name="divisionCaption" Text="{Binding Path=Name}" DockPanel.Dock="Top" />
+            <ListBox Name="divisionLB" ItemTemplate="{StaticResource DataTemplate}" SelectedIndex="0" IsSynchronizedWithCurrentItem="true" DockPanel.Dock="Top" ItemsSource="{Binding Path=Divisions}" />
+        </DockPanel>
+
+        <DockPanel Dock="Left" Margin="10,0,10,0">
+            <TextBlock Name="teamCaption" Text="{Binding Path=Divisions/Name}" DockPanel.Dock="Top" />
+            <ListBox Name="teamLB" ItemTemplate="{StaticResource DataTemplate}" SelectedIndex="0" IsSynchronizedWithCurrentItem="true" DockPanel.Dock="Top" ItemsSource="{Binding Path=Divisions/Teams}" />
+        </DockPanel>
+
+    </DockPanel>
+
+</StackPanel>

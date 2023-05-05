@@ -1,0 +1,17 @@
+<DockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:src="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon" 
+    xmlns:custom="clr-namespace:Microsoft.Test.DataServices"    
+    >
+  <DockPanel.Resources>
+    <custom:ValueConverter x:Key="ValueConverter" />
+  </DockPanel.Resources>
+
+  <Grid>
+    <StackPanel>
+      <TextBox Text="{Binding RelativeSource={RelativeSource Self}, Path=Text, Converter={StaticResource ValueConverter}}" Name="tb1"/>
+    </StackPanel>
+  </Grid>
+</DockPanel>

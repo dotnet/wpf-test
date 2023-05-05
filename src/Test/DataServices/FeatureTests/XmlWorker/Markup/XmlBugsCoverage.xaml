@@ -1,0 +1,32 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel.Resources>
+      <XmlDataProvider x:Key="xTenants" XPath="/Tenants/*">
+        <x:XData>
+          <Tenants xmlns="">
+            <Tenant>
+              <Notes>Tenant 1</Notes>
+            </Tenant>
+            <Tenant>
+              <Notes>Tenant 2</Notes>
+            </Tenant>
+          </Tenants>
+        </x:XData>
+      </XmlDataProvider>
+      <DataTemplate x:Key="xdetailsTenantTemplate">
+        <TextBox Text="{Binding XPath=Notes, UpdateSourceTrigger=Explicit}"
+            AcceptsReturn="True" Height="60"/>
+      </DataTemplate>
+    </DockPanel.Resources>
+
+  <ListBox Name="xTenantList" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top"
+   IsSynchronizedWithCurrentItem="True"
+  ItemsSource="{Binding Source={StaticResource xTenants}}" />
+
+
+  <ContentControl Name="xTenantDetails" VerticalAlignment="Top" HorizontalAlignment="Left"
+  Grid.Column="1" Grid.Row="7"
+  Content="{Binding Source={StaticResource xTenants}}"
+  ContentTemplate="{StaticResource xdetailsTenantTemplate}"
+  Margin="9,0,0,0"/>
+
+</DockPanel>

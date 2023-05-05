@@ -1,0 +1,434 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:sources="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon">
+  <!--     
+        Scenario 5 - various StringFormat for different controls:   
+            ContentStringFormat: ContentPresenter, ContentControl
+            HeaderStringFormat: HeaderedContentControl, HeaderedItemsControl, GridViewColumn, GroupStyle w/ Header
+            ContentStringFormat: TabControl w/ string content
+            SelectedContentStringFormat: TabControl w/ string selected content
+            SelectionBoxItemStringFormat: ComboBox
+            ItemStringFormat: on ItemsControl itself w/ the DisplayMemberPath set
+            ItemStringFormat: on ItemsControl's items directly w/o the DisplayMemberPath set  
+            ColumnHeaderStringFormat: GridView 
+            ContentStringFormat: HierarchicalDataTemplate
+        Scenario 7 - PriorityBinding (on MB, on subbindings, on both)
+    
+        Tests can be combined with a few controls, but for scenario clarity, each sceario has 
+        its own controls.  
+    -->
+  <Page.Resources>
+    <sources:EarthDataSource x:Key="earth" />
+    <sources:CountriesDataSource x:Key="countries" />
+    <sources:People x:Key="peoplelist" />
+    <sources:FirstValueConverter x:Key="conv" />
+    <sources:CultureConverter x:Key="con" />
+    <sources:PeopleNameConverter x:Key="pconv" />
+
+    <col:ArrayList x:Key="dateList">
+      <sys:DateTime>1993/1/1 12:22:02</sys:DateTime>
+      <sys:DateTime>1993/1/2 13:2:01</sys:DateTime>
+      <sys:DateTime>2006/3/2 13:2:01</sys:DateTime>
+      <sys:DateTime>2004/3/3 2:1:6</sys:DateTime>
+      <sys:DateTime>2004/3/4 13:6:55</sys:DateTime>
+    </col:ArrayList>
+    <col:ArrayList x:Key="doubleList">
+      <sys:Double>345.234</sys:Double>
+      <sys:Double>345.200</sys:Double>
+      <sys:Double>123.256</sys:Double>
+      <sys:Double>678.456</sys:Double>
+    </col:ArrayList>
+    <sys:Double x:Key="dData">18934.1879</sys:Double>
+
+    <XmlDataProvider x:Key="myTasks">
+      <x:XData>
+        <Tasks Name="Root" xmlns="">
+          <Task Name="Groceries" Priority="2" Type="Home">
+            <Description>Pick up Groceries and Detergent</Description>
+          </Task>
+          <Task Name="Laundry" Priority="2" Type="Home">
+            <Description>Do Laundry</Description>
+          </Task>
+          <Task Name="Email" Priority="1" Type="Work">
+            <Description>Email Clients</Description>
+          </Task>
+          <Task Name="Clean" Priority="3" Type="Work">
+            <Description>Clean my office</Description>
+          </Task>
+          <Task Name="Dinner" Priority="1" Type="Home">
+            <Description>Get ready for family reunion</Description>
+          </Task>
+          <Task Name="Proposals" Priority="2" Type="Work">
+            <Description>Review new budget proposals</Description>
+          </Task>
+        </Tasks>
+      </x:XData>
+    </XmlDataProvider>
+    <CollectionViewSource x:Key="src" Source="{Binding Source={StaticResource myTasks}, XPath=Tasks/Task}">
+      <CollectionViewSource.GroupDescriptions>
+        <PropertyGroupDescription PropertyName="@Type" />
+      </CollectionViewSource.GroupDescriptions>
+    </CollectionViewSource>
+
+    <!-- use in the source data type changes: string, int, datetime, object, etc. -->
+    <XmlDataProvider x:Key="dataDS" XPath="People">
+      <x:XData>
+        <People>
+          <Person FirstName="Alice" LastName="Zune" Age="17" DOB="01/01/1990"/>
+          <Person FirstName="Bob" LastName="Ying" Age="27" DOB="01/01/1980"/>
+          <Person FirstName="Carl" LastName="Xue" Age="37" DOB="01/01/1970"/>
+        </People>
+      </x:XData>
+    </XmlDataProvider>
+
+    <DataTemplate x:Key="personTemplate">
+      <Grid Width="Auto" Background="#e1e1e1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="{Binding Mode=OneWay, XPath=@FirstName}" />
+        <Label Grid.Column="1" Content="{Binding Mode=OneWay, XPath=@LastName}" />
+        <Label Grid.Column="2" Content="{Binding Mode=OneWay, XPath=@Age}" />
+        <Label Grid.Column="3" Content="{Binding Mode=OneWay, XPath=@DOB}"/>
+      </Grid>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type HeaderedItemsControl}">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Grid Background="DarkRed" Margin="10">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="20pt"/>
+                <RowDefinition Height="4*"/>
+              </Grid.RowDefinitions>
+              <Label Grid.Column="0" Grid.Row="0" Content="FirstName"/>
+              <Label Grid.Column="1" Grid.Row="0" Content="LastName"/>
+              <Label Grid.Column="2" Grid.Row="0" Content="Age"/>
+              <Label Grid.Column="3" Grid.Row="0" Content="DOB"/>
+              <Grid Grid.Row="1" Grid.ColumnSpan="4" Width="Auto" Height="Auto" Background="White">
+                <ItemsPresenter/>
+              </Grid>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- ContentPresenter in template with Content explicitly data bound-->
+    <DataTemplate x:Key="helloTemplate">
+      <Border BorderBrush="RoyalBlue" BorderThickness="3">
+        <ContentPresenter Content="{Binding}" Name="cp" ContentStringFormat="{}{0}" />
+      </Border>
+    </DataTemplate>
+
+    <!-- TabControl -->
+    <Style x:Key="SimpleTabControl" TargetType="{x:Type TabControl}">
+      <Setter Property = "TabStripPlacement" Value = "Top"/>
+      <Setter Property = "Foreground" Value= "Blue"/>
+    </Style>
+
+    <Style x:Key="Triggers" TargetType="{x:Type TabItem}">
+      <Style.Triggers>
+        <Trigger Property="TabItem.IsMouseOver" Value="true">
+          <Setter Property = "Foreground" Value="Green"/>
+          <Setter Property = "Background" Value="Red"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SimpleTabItem" TargetType="{x:Type TabItem}">
+      <Setter Property = "Background" Value = "Pink"/>
+      <Setter Property = "FontWeight" Value = "Bold"/>
+    </Style>
+
+    <!-- GroupStyle -->
+    <DataTemplate x:Key="gsDT">
+      <TextBlock Name="mytbgroup" FontWeight="Bold" FontSize="15" Text="{Binding Path=Name}"/>
+    </DataTemplate>
+
+    <XmlDataProvider x:Key="data" XPath="/Employees/*">
+      <x:XData>
+        <Employees xmlns="">
+          <Employee Name="Terry Adams" />
+        </Employees>
+      </x:XData>
+    </XmlDataProvider>
+  </Page.Resources>
+
+  <Grid Width="800">
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+      <RowDefinition/>
+      <RowDefinition/>
+      <RowDefinition/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition Width="20"/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+
+    <!-- (A)Binding - control based;-->
+
+    <!-- 1. ContentPresenter, ContentControl: ContentStringFormat -->
+    <StackPanel Grid.Row="0" Grid.Column="0">
+      <TextBlock FontSize="14" HorizontalAlignment="Center" Text="ContentControl AND ContentPresenter Tests"
+                 Background="Gold" Name="mytb1"/>
+      <!-- ContentControl -->
+      <ContentControl Name="mycc" Margin="10" Foreground="Maroon" Height="50"
+                      Content="{Binding ElementName=mytb1, Path=Text}"
+                      ContentStringFormat="{}{0}">
+      </ContentControl>
+
+      <!-- ContentPresenter in template with Content explicitly data bound-->
+      <Button Content="Hello in Button" ContentTemplate="{StaticResource helloTemplate}"
+              Name="btn" ContentStringFormat="{}{0}" />
+    </StackPanel>
+
+    <!-- 2. HeaderedContentControl, HeaderedItemsControl, GridViewColumn, GroupStyle w/ Header: HeaderStringFormat -->
+    <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="5">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- HeaderedContentControl: HeaderStringFormat -->
+        <StackPanel Grid.Row="0">
+          <TextBlock FontSize="14" HorizontalAlignment="Center" Text="HeaderedContentControl - My Header"
+                     Name="tbHeadered" Background="Gold"/>
+          <HeaderedContentControl Name="myhc" Header="{Binding ElementName=tbHeadered, Path=Text}"
+                                  Content="My Content" HeaderStringFormat="{}{0}">
+            <HeaderedContentControl.Template>
+              <ControlTemplate TargetType='{x:Type HeaderedContentControl}'>
+                <HeaderedContentControl
+                  Header='{Binding Path=Header, RelativeSource={RelativeSource TemplatedParent}}'
+                  Content='{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}'/>
+              </ControlTemplate>
+            </HeaderedContentControl.Template>
+          </HeaderedContentControl>
+        </StackPanel>
+
+        <!-- HeaderedItemsControl -->
+        <StackPanel Grid.Row="1">
+          <StackPanel.Resources>
+            <Style x:Key="{x:Type HeaderedItemsControl}" TargetType="{x:Type HeaderedItemsControl}">
+              <Setter Property="Template">
+                <Setter.Value>
+                  <ControlTemplate TargetType="{x:Type HeaderedItemsControl}">
+                    <StackPanel>
+                      <ContentPresenter ContentSource="Header"/>
+                      <ItemsPresenter/>
+                    </StackPanel>
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+            <DataTemplate x:Key="GreenHeaderTemplate">
+              <TextBlock Text="{Binding}" Foreground="Green" FontSize="16" FontStyle="Italic"
+                         FontWeight="Bold" TextWrapping="Wrap" />
+            </DataTemplate>
+          </StackPanel.Resources>
+          <TextBlock FontSize="14" HorizontalAlignment="Center" Text="HeaderedItemsControl" Background="Gold"/>
+          <HeaderedItemsControl Name="myhic" Header="HeaderedItemsControl"
+                                HeaderTemplate="{StaticResource GreenHeaderTemplate}"
+                                HeaderStringFormat="{}{0}">
+            <ItemsControl Name="myic1"
+                          ItemsSource="{Binding Mode=Default, Source={StaticResource dataDS}, XPath=Person}"
+                          ItemTemplate="{DynamicResource personTemplate}" />
+          </HeaderedItemsControl>
+        </StackPanel>
+
+        <!-- GridView: ColumnHeaderStringFormat
+                     GridViewColumn : HeaderStringFormat -->
+        <StackPanel Grid.Row="2">
+          <TextBlock FontSize="14" HorizontalAlignment="Center" Text="GridViewColumn with in ListView" Background="Gold"/>
+          <ListView Name="mygvc" ItemsSource="{Binding Source={StaticResource doubleList}}"
+							  BorderThickness="2" ItemStringFormat="F2">
+            <ListView.View>
+              <GridView ColumnHeaderStringFormat="F2">
+                <GridViewColumn Header="{Binding Source={StaticResource dData}, Path=.}"
+									HeaderStringFormat="F3"
+									DisplayMemberBinding="{Binding Path=., StringFormat=F4}"/>
+              </GridView>
+            </ListView.View>
+          </ListView>
+        </StackPanel>
+
+        <!-- GroupStyle w/ Header: HeaderStringFormat -->
+        <StackPanel Grid.Row="3">
+          <TextBlock Margin="12,5,5,0" FontSize="16" Text="GroupStyle - My Task List" Background="Gold"/>
+          <CheckBox Margin="10,5,5,5">Group by task type</CheckBox>
+          <ListBox Margin="10" Name="myItemsControl"
+                   ItemsSource="{Binding Source={StaticResource src}}">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <DataTemplate.Resources>
+                  <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="10"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                  </Style>
+                </DataTemplate.Resources>
+                <Grid>
+                  <Ellipse Fill="Silver"/>
+                  <StackPanel>
+                    <TextBlock Margin="3,3,3,0" Text="{Binding XPath=@Name}"/>
+                    <TextBlock Margin="3,0,3,7" Text="{Binding XPath=@Priority}"/>
+                  </StackPanel>
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+              <Style>
+                <Setter Property="Control.Width" Value="100"/>
+                <Setter Property="Control.Margin" Value="5"/>
+              </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.GroupStyle>
+              <GroupStyle HeaderTemplate="{StaticResource gsDT}" HeaderStringFormat="{}{0}"/>
+            </ListBox.GroupStyle>
+          </ListBox>
+        </StackPanel>
+      </Grid>
+    </StackPanel>
+
+    <!-- 3. TabControl: 
+            ContentStringFormat: TabControl w/ string content       
+            ItemStringFormat: TabControl w/ string selected content 
+        -->
+    <StackPanel Grid.Row="1" Grid.Column="0">
+      <TextBlock FontSize="14" HorizontalAlignment="Center" Text="TabControl" Background="Gold"/>
+      <TabControl Name="mytc" TabStripPlacement="Top" Margin="0, 0, 0, 10" SelectedIndex="0"
+                  ItemsSource="{StaticResource doubleList}" DisplayMemberPath="."
+                  ContentStringFormat="F" ItemStringFormat="F0" >
+        <TabControl.ItemContainerStyle>
+          <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Content" Value="{Binding Path=.}"/>
+          </Style>
+        </TabControl.ItemContainerStyle>
+      </TabControl>
+    </StackPanel>
+
+    <!-- 4. ComboBox: ItemStringFormat; 
+                ComboBoxItem: ContentStringFormat -->
+    <!-- For ComboBox's SelectionBoxItemStringFormat -->
+    <StackPanel Grid.Row="2" Grid.Column="0">
+      <StackPanel.Resources>
+        <DataTemplate x:Key="itemTemplate">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Name="mytbintemplate" Grid.Row="0" Text="{Binding Path=Government}" />
+            <Grid Grid.Row="1" Background="Gainsboro">
+              <Grid.Style>
+                <Style>
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsSelected, 
+                                    RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="False">
+                      <Setter Property="Grid.Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </Grid.Style>
+            </Grid>
+          </Grid>
+        </DataTemplate>
+        <sys:Double x:Key="DoubleData">18934.1879</sys:Double>
+      </StackPanel.Resources>
+      <TextBlock Text="ComboBox = Choose a color:" FontSize="14" Background="Gold"/>
+      <ComboBox Name="myComboBox" SelectedIndex="0" ItemStringFormat="{}{0}"
+                ItemsSource="{Binding Source={StaticResource countries},Path=Countries}"
+                ItemTemplate="{StaticResource itemTemplate}">
+      </ComboBox>
+      <TextBlock Width="130" Height="30" Name="MyComboBoxTB">
+        <TextBlock.Text>
+          <Binding ElementName="myComboBox" Path="SelectedItem.Content"/>
+        </TextBlock.Text>
+      </TextBlock>
+      <ComboBox Name="myComboBoxTemp" SelectedIndex="0" ItemStringFormat="F2">
+        <ComboBoxItem Content="{StaticResource DoubleData}"/>
+        <ComboBoxItem Content="{StaticResource DoubleData}" ContentStringFormat="F3"/>
+      </ComboBox>
+    </StackPanel>
+
+    <!-- 5. ItemsControl: ItemStringFormat w/ or w/o DisplayMemberPath -->
+    <StackPanel Grid.Row="3" Grid.Column="0">
+      <TextBlock FontSize="14" HorizontalAlignment="Center" Text="ItemsControl Tests" Background="Gold"/>
+      <ListBox Name="lb1" SelectedIndex="1" ItemStringFormat="F1">
+        <sys:Double>3.14159</sys:Double>
+        <sys:Double>2.71828</sys:Double>
+      </ListBox>
+      <ListBox Name="lb2" SelectedIndex="1" DisplayMemberPath="HemisphereName"
+               ItemsSource="{Binding Source={StaticResource earth},Path=Hemispheres}"
+               ItemStringFormat="Hemisphere Name is: {0}" />
+    </StackPanel>
+
+    <!-- 6. HierarchicalDataTemplate: ItemStringFormat -->
+    <StackPanel Grid.Row="4" Grid.Column="2">
+      <TextBlock FontSize="14" HorizontalAlignment="Center" Text="HierarchicalDataTemplatel Tests" Background="Gold"/>
+      <TreeView Name="tv" ItemsSource="{Binding Source={StaticResource myTasks},XPath=Tasks}"
+          ItemStringFormat="{}{0}">
+        <TreeView.ItemTemplate>
+          <HierarchicalDataTemplate ItemsSource="{Binding XPath=Task}"
+											  ItemStringFormat="{}{0}">
+            <ContentPresenter Content="{Binding XPath=@Name}"
+										  ContentStringFormat="{TemplateBinding ContentStringFormat}"/>
+          </HierarchicalDataTemplate>
+        </TreeView.ItemTemplate>
+      </TreeView>
+    </StackPanel>
+
+    <!-- (B)PriorityBinding: on MB; on subbindings; on both -->
+    <StackPanel Grid.Row="4" Grid.Column="0" DataContext="{Binding Source={StaticResource dData}}">
+      <TextBlock FontSize="14" HorizontalAlignment="Center" Text="PriorityBinding Tests" Background="Gold"/>
+      <!-- on PB -->
+      <TextBlock Name="pbTB1" Background="Honeydew" Width="100" HorizontalAlignment="Center">
+        <TextBlock.Text>
+          <PriorityBinding FallbackValue="defaultvalue" StringFormat="C">
+            <Binding ElementName="pbNonExist" Path="Text" />
+            <Binding Path="." />
+          </PriorityBinding>
+        </TextBlock.Text>
+      </TextBlock>
+      <!--<TextBlock Name="pbTB2" Text="1369.261" />-->
+      <!-- On Subbinding -->
+      <TextBlock Name="pbTB3" Background="Honeydew" Width="100" HorizontalAlignment="Center">
+        <TextBlock.Text>
+          <PriorityBinding FallbackValue="defaultvalue">
+            <Binding ElementName="pbNonExist" Path="Text" />
+            <Binding Path="." StringFormat="C3" />
+          </PriorityBinding>
+        </TextBlock.Text>
+      </TextBlock>
+      <!-- both -->
+      <TextBlock Name="pbTB4" Background="Honeydew" Width="100" HorizontalAlignment="Center">
+        <TextBlock.Text>
+          <PriorityBinding FallbackValue="defaultvalue" StringFormat="C">
+            <Binding ElementName="pbNonExist" Path="Text" />
+            <Binding Path="." StringFormat="F0" />
+          </PriorityBinding>
+        </TextBlock.Text>
+      </TextBlock>
+    </StackPanel>
+
+    <Label Name="ContentStringFormatContentLabel" Content="mystring" ContentStringFormat="This is my string {0}"/>
+    <Label Name="ContentStringFormatXmlContentLabel" Content="{Binding Source={StaticResource data}, XPath=@Name}" ContentStringFormat="This is my string {0}"/>
+  </Grid>
+</Page>

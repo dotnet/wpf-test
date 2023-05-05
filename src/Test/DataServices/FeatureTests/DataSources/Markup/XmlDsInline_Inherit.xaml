@@ -1,0 +1,36 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <DockPanel.Resources>
+
+        <XmlNamespaceMappingCollection x:Key="NS">
+            <XmlNamespaceMapping Prefix="a" Uri="test" />
+        </XmlNamespaceMappingCollection>
+
+        <XmlDataProvider XPath="root/a:Magazine[1]" x:Key="DSO" XmlNamespaceManager="{StaticResource NS}">
+          <x:XData>
+            <root xmlns="" xmlns:a="test">
+                <a:Magazine ISBN="1000">
+                    <Title>Hockey Digest</Title>
+                </a:Magazine>
+                <a:Magazine ISBN="1001">
+                    <Title>Car n Track</Title>
+                </a:Magazine>
+                <a:Magazine ISBN="1002">
+                    <Title>Organic Gardening</Title>
+                </a:Magazine>
+                <a:Magazine ISBN="1003">
+                    <Title>Popular Science</Title>
+                </a:Magazine>
+            </root>
+          </x:XData>
+        </XmlDataProvider>
+    </DockPanel.Resources>
+
+    <TextBlock DockPanel.Dock="Top" Name="testText">
+        <TextBlock.Text>
+            <Binding XPath="Title" Source="{StaticResource DSO}" Mode="TwoWay" />
+        </TextBlock.Text>
+    </TextBlock>
+
+</DockPanel>

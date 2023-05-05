@@ -1,0 +1,35 @@
+﻿<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <TextBlock Name="sourceText" Canvas.Top="0" Height="30" Foreground="Blue">
+        <TextBlock.Text>
+            Initial text value
+        </TextBlock.Text>
+    </TextBlock>
+
+    <TextBox Name="targetText" Canvas.Top="35" Height="30" Foreground="Red">
+        <TextBox.Text>
+            <Binding ElementName="sourceText" Path="Text" UpdateSourceTrigger="PropertyChanged" />
+        </TextBox.Text>
+    </TextBox>
+
+    <Canvas Name="sourceCanvas" Height="30" Width="30" Left="200">
+        <Canvas.Top>
+            <Binding ElementName="targetCanvas" Path="Left" />
+        </Canvas.Top>
+        <Canvas.Background>
+            <Binding ElementName="sourceText" Path="Foreground" />
+        </Canvas.Background>
+    </Canvas>
+
+    <Canvas Name="targetCanvas" Height="30" Width="30" Left="100">
+        <Canvas.Top>
+            <Binding ElementName="sourceCanvas" Path="Left" />
+        </Canvas.Top>
+        <Canvas.Background>
+            <Binding ElementName="targetText" Path="Foreground" />
+        </Canvas.Background>
+    </Canvas>
+
+</Canvas>
+

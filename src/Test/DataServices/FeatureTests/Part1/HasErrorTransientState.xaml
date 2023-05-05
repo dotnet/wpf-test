@@ -1,0 +1,97 @@
+<UniformGrid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="clr-namespace:Microsoft.Test.DataServices;assembly=DataServicesTestCommon"
+             xmlns:local="clr-namespace:Microsoft.Test.DataServices">
+  <UniformGrid.Resources>    
+  </UniformGrid.Resources>
+
+  <StackPanel Name="myStackPanel">
+      <StackPanel.Resources>
+            <ControlTemplate
+                x:Key="InputTemplate">
+                <StackPanel>
+
+                    <TextBlock
+                        Margin="0,40"
+                        TextWrapping="Wrap"
+                        Text="Type in a string longer than two characters long. Continue to type and watch as the popup flickers..." />
+
+                    <TextBox
+                        x:Name="InputField"
+                        Text="{Binding Path=DataContext.Value, RelativeSource={RelativeSource AncestorType={x:Type Window}}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                        MinWidth="100"
+                        AutomationProperties.HelpText="{Binding Path=(Validation.Errors).CurrentItem.ErrorContent, RelativeSource={RelativeSource Self}}"
+                         />
+                    
+                    <TextBlock
+                        Text="{Binding Path=(Validation.HasError), ElementName=InputField, StringFormat=Has Error: {0}}" />
+
+                    <Popup
+                        Focusable="False"
+                        MinWidth="100"
+                        x:Name="ErrorPopup"
+                        IsOpen="False"
+                        Width="{Binding Path=ActualWidth, ElementName=InputField}"
+                        PlacementTarget="{Binding ElementName=InputField}"
+                        Placement="Top">
+                        <Border
+                            Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                            Padding="2"
+                            BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
+                            BorderThickness="2">
+                            <TextBlock
+                                x:Name="txtError"
+                                Text="{Binding Path=(AutomationProperties.HelpText), ElementName=InputField}"
+                                Focusable="False"
+                                TextWrapping="Wrap" />
+                        </Border>
+                    </Popup>
+
+                </StackPanel>
+
+                <ControlTemplate.Triggers>
+
+                    <!--Show error popup when input is invalid and when the mouse is over the textbox-->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition
+                                Binding="{Binding Path=(Validation.Errors)[0], ElementName=InputField}"
+                                Value="True" />
+                            <Condition
+                                Binding="{Binding Path=IsMouseOver, ElementName=InputField}"
+                                Value="True" />
+                        </MultiDataTrigger.Conditions>
+
+                        <Setter
+                            TargetName="ErrorPopup"
+                            Property="IsOpen"
+                            Value="True" />
+                    </MultiDataTrigger>
+
+                    <!--Show error popup when input is invalid and when the textbox has focus-->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition
+                                Binding="{Binding Path=(Validation.HasError)[0], ElementName=InputField}"
+                                Value="True" />
+                            <Condition
+                                Binding="{Binding Path=IsFocused, ElementName=InputField}"
+                                Value="True" />
+                        </MultiDataTrigger.Conditions>
+
+                        <Setter
+                            TargetName="ErrorPopup"
+                            Property="IsOpen"
+                            Value="True" />
+                    </MultiDataTrigger>
+
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </StackPanel.Resources>
+            <Control
+                x:Name="Control"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Template="{StaticResource InputTemplate}" />        
+  </StackPanel>
+</UniformGrid>

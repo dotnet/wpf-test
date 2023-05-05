@@ -1,0 +1,50 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:testdata="clr-namespace:Microsoft.Test.DataServices" 
+    >
+
+    <Border Background="cornsilk">
+    <Border.Resources>
+
+        <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type testdata:ManagementChain}" />
+
+                  <Style TargetType="{x:Type ItemsControl}">
+                      <Setter Property="Template">
+                      <Setter.Value>
+                      <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                <DockPanel IsItemsHost="true" />
+                      </ControlTemplate>
+                      </Setter.Value>
+                      </Setter>
+                  </Style>
+
+        <DataTemplate x:Key="TeamTemplate">
+            <DockPanel>
+                <TextBlock Text="{Binding Path=Name}" DockPanel.Dock="Left" />
+                <TextBlock Text="--" DockPanel.Dock="Left" />
+                <TextBlock Name="previous" DockPanel.Dock="Left" Text="{Binding Path=Name,RelativeSource={RelativeSource PreviousData},FallbackValue=Fallback}" />
+                <TextBlock Text="--" DockPanel.Dock="Left" />
+                <TextBlock Name="parent" DockPanel.Dock="Left" Text="{Binding Path=DataContext.Name,RelativeSource={RelativeSource AncestorType={x:Type DockPanel},AncestorLevel=2}}" />
+            </DockPanel>
+        </DataTemplate>
+
+        <Style x:Key="TeamUIStyle" TargetType="{x:Type ContentPresenter}">
+            <Setter Property="DockPanel.Dock" Value="Top" />
+        </Style>
+
+        <DataTemplate x:Key="ManagerTemplate">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top">*********</TextBlock>
+                <TextBlock Name="managerName" Text="{Binding Path=Name}" DockPanel.Dock="Top" />
+                <ItemsControl Name="manager" ItemTemplate="{StaticResource TeamTemplate}" ItemContainerStyle="{StaticResource TeamUIStyle}" DockPanel.Dock="Top" ItemsSource="{Binding Path=Employees}" />
+            </DockPanel>
+        </DataTemplate>
+
+    </Border.Resources>
+
+    <DockPanel Name="panel" DataContext="{Binding Source={StaticResource DSO}}">
+    <ItemsControl Name="itemscontrol" ItemTemplate="{StaticResource ManagerTemplate}" ItemContainerStyle="{StaticResource TeamUIStyle}" ItemsSource="{Binding }" />
+
+  </DockPanel>
+</Border>
+</Page>

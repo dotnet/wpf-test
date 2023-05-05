@@ -1,0 +1,25 @@
+﻿<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:testdata="clr-namespace:Microsoft.Test.DataServices" 
+    >
+    <Canvas.Resources>
+        <ObjectDataProvider x:Key="DSO" ObjectType="{x:Type testdata:TriggerItem}" />
+        <Style x:Key="txtStyle1" TargetType="{x:Type TextBlock}">
+            <Setter Property="Text" Value="{Binding Path=StringValue1, Mode=TwoWay}" />
+            <Setter Property="Foreground" Value="{Binding Path=BrushValue1}" />
+            <Style.Triggers>
+                <Trigger Property="Tag" Value="TempValue">
+                    <Setter Property="Text" Value="{Binding Path=StringValue2}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Canvas.Resources>
+
+    <TextBlock FontSize="40" Name="TestMe" Style="{DynamicResource txtStyle1}">
+        <TextBlock.DataContext>
+            <Binding Source="{StaticResource DSO}" />
+        </TextBlock.DataContext>
+    </TextBlock>
+
+</Canvas>
+
