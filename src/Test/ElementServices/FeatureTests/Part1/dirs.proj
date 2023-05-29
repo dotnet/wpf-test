@@ -1,0 +1,21 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--*****************************************************-->
+  <!--This MSBuild project file was automatically generated-->
+  <!--from the original SOURCES/DIRS file by the KBC tool.-->
+  <!--*****************************************************-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\test\Microsoft.Wpf.Test.Native.Settings.Targets" />
+
+  <!-- Don't compile the .NET 4 features when building pre-4.0 -->
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5'">
+    <ProjectFile Include="Common\Externals\Externals.nativeproj" />      
+    <ProjectFile Include="Common\Setup\VHidPen\VHidPen.nativeproj" Condition="'$(_BuildArch)' != 'arm' and '$(_BuildArch)' != 'eva'"/>
+    <ProjectFile Include="Common\Setup\VHidPenMT\VHidPenMT.nativeproj" Condition="'$(_BuildArch)' != 'arm' and '$(_BuildArch)' != 'eva'"/>
+    <ProjectFile Include="Common\StiConfig\StiConfig.nativeproj" />  
+    <ProjectFile Include="Common\MultiTouchTestCommon.csproj" Condition="'$(_BuildArch)' != 'arm' and '$(_BuildArch)' != 'eva'"/>
+    <ProjectFile Include="MultiTouch\MultiTouchTest.csproj" Condition="'$(_BuildArch)' != 'arm' and '$(_BuildArch)' != 'eva'"/>
+  </ItemGroup>
+
+  <!--Import the targets-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\tools\Microsoft.DevDiv.Traversal.targets" />
+</Project>

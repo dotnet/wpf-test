@@ -1,0 +1,70 @@
+<!--
+ Test autoaliasing in several template configurations. Verifier checks content is, or is not, shown in content presenters.
+-->
+
+
+<cmn:CustomStackPanel Background="Cyan" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:System="clr-namespace:System;assembly=Mscorlib" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.AutoAliasVerifier">
+    <cmn:CustomStackPanel.Resources>
+        <SolidColorBrush x:Key="myBrush" Color="Cyan"/>
+    </cmn:CustomStackPanel.Resources>
+
+    <Button Name="SimpleAutoAlias">aliased_content
+        <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+                <ContentPresenter Name="CP"/>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
+
+
+
+    <!-- Outer CT without CP, Inner CT with CP. Content assigned on templated control should not appear in nested template. -->
+    <Button Name="NestedCP">
+        blah
+        <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+                <Button Name="TemplateTreeControl">
+                    
+     <!-- No ContentPresenter here -->
+    
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Button Background="{StaticResource myBrush}">
+                                <ContentPresenter Name="InnerTemplateCP" />
+                            </Button>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
+    
+    
+    <!-- Outer CT with CP, Inner CT with CP. Content assigned on templated control should appear in nested template. -->
+    <Button Name="ChainedCP">
+        aliased_content
+         <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+                <Button Name="TemplateTreeControl">
+                    <ContentPresenter/>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Button Background="{StaticResource myBrush}">
+                                <ContentPresenter Name="InnerTemplateCP" />
+                            </Button>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
+
+
+
+
+</cmn:CustomStackPanel>

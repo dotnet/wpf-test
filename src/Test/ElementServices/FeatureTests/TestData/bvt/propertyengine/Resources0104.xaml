@@ -1,0 +1,23 @@
+﻿<!--From Use vs. From Definition Lookup.  GpR.Gc.CR&PR: Definition @ GrandParent.Resources, Use @ GrandChild and Overriding Resources @ Child.Resources & Parent.Resources.
+-->
+
+<cmn:CustomStackPanel Background="white" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.ResourcesVerifier" Tag="Resources0104" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+  <cmn:CustomStackPanel.Resources>
+    <SolidColorBrush Color="LightGreen" x:Key="MyBrush" />
+    <Style TargetType="{x:Type Button}" x:Key="MyStyle">
+      <Setter Property="Background" Value="{DynamicResource MyBrush}" />
+    </Style>  
+  </cmn:CustomStackPanel.Resources>
+  <Grid>
+    <Grid.Resources>
+        <SolidColorBrush Color="LightBlue" x:Key="MyBrush" />
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MyStyle}" x:Key="MyStyle">
+        </Style>
+    </Grid.Resources>
+    <Button Style="{DynamicResource MyStyle}" Name="TestButton">
+      <Button.Resources>
+        <SolidColorBrush Color="Indigo" x:Key="MyBrush" />
+      </Button.Resources>
+    </Button>
+  </Grid>
+</cmn:CustomStackPanel>

@@ -1,0 +1,43 @@
+﻿
+
+
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+<cmn:CustomDockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Serialization.ConnectedDataVerifiers.XmlDataSourceVerify"
+ xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+  <cmn:CustomDockPanel.Resources>
+    <XmlDataProvider XPath="XmlRoot" x:Key="DSO">
+      <x:XData>
+          <XmlRoot xmlns="">
+                <Magazine ISBN="1000">
+                        <Title>Popular Science</Title>
+                </Magazine>
+                <Magazine ISBN="1000">
+                        <Title>Car n Track</Title>
+                </Magazine>
+                <Magazine ISBN="1000">
+                        <Title>Organic Gardening</Title>
+                </Magazine>
+                <Magazine ISBN="1000">
+                        <Title>Hockey Digest</Title>
+                </Magazine>
+          </XmlRoot>
+      </x:XData>
+    </XmlDataProvider>
+
+
+    <DataTemplate x:Key="MyTemplate">
+      <TextBlock Name="Text">
+          <TextBlock.Text>
+                      <Binding XPath="Title" />
+          </TextBlock.Text>
+      </TextBlock>
+    </DataTemplate>
+  </cmn:CustomDockPanel.Resources>
+
+  <ListBox Name="ListBox" ItemTemplate="{StaticResource MyTemplate}">
+        <CollectionContainer Collection="{Binding XPath=Magazine,Source={StaticResource DSO}}" />
+  </ListBox>
+</cmn:CustomDockPanel>
+
+</Page>

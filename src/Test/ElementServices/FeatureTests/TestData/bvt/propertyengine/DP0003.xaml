@@ -1,0 +1,25 @@
+﻿<!--
+coretests.exe /ActionForXaml=Serialization /xamlfile=DP0003.xaml
+
+Keyword: Two Triggers
+One is triggered by IsKeyboardFocusWithin and the other IsMouseOver. Sequence counts.
+-->
+
+<cmn:CustomStackPanel Background="white" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.PropertyTriggerVerifier" Tag="DP0003" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+  <cmn:CustomStackPanel.Resources>
+   <Style TargetType="{x:Type Button}">
+      <Setter Property="Background" Value="LightBlue" />
+      <Style.Triggers>
+        <Trigger Property="IsKeyboardFocusWithin" Value="true">
+          <Setter Property="Background" Value="LightGreen" />
+        </Trigger>
+        <Trigger Property="IsMouseOver" Value="true">
+          <Setter Property="Background" Value="Indigo" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>  
+  </cmn:CustomStackPanel.Resources>
+  <Button Name="FirstBtn" Content="Button1" />
+  <Button Name="SecondBtn" Content="Button2" />
+  <Button Name="ThirdBtn" Content="Button3" />
+</cmn:CustomStackPanel>

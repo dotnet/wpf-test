@@ -1,0 +1,37 @@
+﻿<!--
+Keyword: 
+ Resource Type: Non-DO CLR object, Freezable, FE, FCE, Style, Template, ResourceDictionary. x:Shared as default. SetResourceReference and FindResource. Chain of Resource Reference.
+-->
+
+
+<cmn:CustomStackPanel Background="white" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:System="clr-namespace:System;assembly=Mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.ResourcesVerifier" Tag="Resources0001" xmlns:MappingPIGen1="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+  <cmn:CustomStackPanel.Resources>
+    <ResourceDictionary>
+      <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="LightBlue" />
+      </Style>
+      <Style x:Key="TestStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource LightBlueBrush}" />
+      </Style>
+      <System:String x:Key="StringInfo">Test XAML</System:String>
+      <SolidColorBrush x:Key="LightBlueBrush" Color="LightBlue" />
+      <Button x:Key="ConfirmButton" Background="Indigo" />
+      <Paragraph x:Key="TestFCE">Go to MSN at <Hyperlink>Http://www.msn.com</Hyperlink></Paragraph>
+      <ControlTemplate x:Key="TestTemplate" TargetType="{x:Type Button}">
+        <ControlTemplate.Triggers>
+          <MultiTrigger>
+            <MultiTrigger.Conditions>
+              <Condition Property="IsKeyboardFocusWithin" Value="true" />
+              <Condition Property="IsMouseOver" Value="true" />
+            </MultiTrigger.Conditions>
+            <Setter Property="Background" Value="LightGreen" />
+          </MultiTrigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate>
+      <ResourceDictionary x:Key="TestRD">
+      </ResourceDictionary>
+      <UIElement x:Key="TestUIElement" />
+      <ContentElement x:Key="TestContentElement" />
+    </ResourceDictionary>
+  </cmn:CustomStackPanel.Resources>
+</cmn:CustomStackPanel>

@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XamlTransformer  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- ResourceDictionary tests - these tests describe how to modify the skeleton xaml
+    to test databinding. These transforms target CommonUIElement3DScenario.xaml.
+  -->
+
+  <!-- 1.	ResourceDictionary at Page/Test root. Static resource references in vp2d_first_child, vp2d_nested_child, 
+    modelElement_vp2d_FE, and modelVisual_vp2d_FE.-->
+
+  <XmlTransform Name="ResourceDictionaryAtRootStaticReferences">
+    <AppendXml TargetElement="/av:Page/av:Page.Resources">
+      <SolidColorBrush x:Key="BackgroundBrush" Color="Blue"/>
+    </AppendXml>
+    
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='containerElement_vp2d_FE']" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+  </XmlTransform>
+  
+  <!--2.	ResourceDictionary at Page/Test root. Dynamic resource references in modelui3d, vp2d_first_child, vp2d_nested_child, modelElement_vp2d_FE, 
+    and modelVisual_vp2d_FE.-->
+
+  <XmlTransform Name="ResourceDictionaryAtRootDynamicReferences">
+    <AppendXml TargetElement="/av:Page/av:Page.Resources">
+      <SolidColorBrush x:Key="BackgroundBrush" Color="Blue" />
+    </AppendXml>
+
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='containerElement_vp2d_FE']" Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+  </XmlTransform>
+
+  <!--3.	ResourceDictionary in vp2d_with_child with same Keys as ResourceDictionary in Page/Test root. Static resource 
+  references in vp2d_nested_child.-->
+
+  <XmlTransform Name="ResourceDictionaryOverridesStaticReferences">
+    <AppendXml TargetElement="/av:Page/av:Page.Resources">
+      <SolidColorBrush x:Key="BackgroundBrush" Color="Blue"/>
+    </AppendXml>
+
+    <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+      <Viewport3D.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="Red"/>
+      </Viewport3D.Resources>
+    </PrependXml>
+
+    <PrependXml TargetElement="//*[@Name='vp2d_with_child']">
+      <Button.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="Yellow"/>
+      </Button.Resources>
+    </PrependXml >
+   
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='containerElement_vp2d_FE']" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="Background" Value="{StaticResource BackgroundBrush}"/>
+  </XmlTransform>
+
+  <!--4.	ResourceDictionary in vp2d_with_child with same Keys as ResourceDictionary in Page/Test root. Dynamic resource 
+  references in vp2d_nested_child.-->
+
+  <XmlTransform Name="ResourceDictionaryOverridesDynamicReferences">
+    <AppendXml TargetElement="/av:Page/av:Page.Resources">
+      <SolidColorBrush x:Key="BackgroundBrush" Color="Blue"/>
+    </AppendXml>
+
+    <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+      <Viewport3D.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="Red"/>
+      </Viewport3D.Resources>
+    </PrependXml>
+
+    <PrependXml TargetElement="//*[@Name='vp2d_with_child']">
+      <Button.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="Yellow"/>
+      </Button.Resources>
+    </PrependXml >
+
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='vp2d_nested_child']" Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='containerElement_vp2d_FE']" Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+    <AddAttribute TargetElement="//*[@Name='modelVisual_vp2d_FE']" Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+  </XmlTransform>
+
+
+  <!--5. ModelUIElement3D and Viewport2DVisual3D types in page resource dictionary. -->
+  <XmlTransform Name="Element3DInResourceDictionaryStaticReference">
+
+    <AppendXml TargetElement="/av:Page/av:Page.Resources">
+      <SolidColorBrush x:Key="BackgroundBrush" Color="Blue"/>
+    </AppendXml>
+
+    <AppendXml TargetElement="/av:Page/av:Page.Resources">
+      <ModelUIElement3D x:Key="modelUIElement3DinRD" x:Name="modelUIElement3dResource">
+        <ModelUIElement3D.Model>
+          <GeometryModel3D Material="{StaticResource grayMaterial}" Geometry="{StaticResource pyramidMesh}"/>
+        </ModelUIElement3D.Model>
+        <ModelUIElement3D.Transform>
+          <TranslateTransform3D OffsetX="-8" OffsetY="2.25"/>
+        </ModelUIElement3D.Transform>
+      </ModelUIElement3D>
+
+      <Viewport2DVisual3D x:Key="viewport2DVisual3DInResourceDictionary" x:Name="viewport2dVisual3dResource" Geometry="{StaticResource pyramidMesh}">
+        <Viewport2DVisual3D.Material>
+          <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True"/>
+        </Viewport2DVisual3D.Material>
+        <Viewport2DVisual3D.Transform>
+          <Transform3DGroup>
+            <ScaleTransform3D ScaleZ="1.0"/>
+            <RotateTransform3D >
+              <RotateTransform3D.Rotation>
+                <AxisAngleRotation3D Axis="0 1 0" Angle="40"/>
+              </RotateTransform3D.Rotation>
+            </RotateTransform3D>
+            <TranslateTransform3D OffsetX="-4" OffsetY="2.25"/>
+          </Transform3DGroup>
+        </Viewport2DVisual3D.Transform>
+        <StackPanel>
+          <Button  Name="elementFromResourceDictionary" Content="Button 1" Background="{StaticResource BackgroundBrush}"/>
+        </StackPanel>
+      </Viewport2DVisual3D>
+    </AppendXml>
+
+    <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+      <StaticResourceExtension ResourceKey="viewport2DVisual3DInResourceDictionary"/>
+      <StaticResourceExtension ResourceKey="modelUIElement3DinRD"/>
+    </PrependXml>
+  </XmlTransform>
+
+
+  <!--6. ModelUIElement3D and Viewport2DVisual3D types in page resource dictionary. -->
+  <XmlTransform Name="Element3DInResourceDictionaryDynamicReference">
+    <AppendXml TargetElement="/av:Page/av:Page.Resources">
+      <SolidColorBrush x:Key="BackgroundBrush" Color="Blue"/>
+    </AppendXml>
+    
+    <AppendXml TargetElement="/av:Page/av:Page.Resources">
+      <ModelUIElement3D x:Key="modelUIElement3DinRD" x:Name="modelUIElement3dResource">
+        <ModelUIElement3D.Model>
+          <GeometryModel3D Material="{StaticResource grayMaterial}" Geometry="{StaticResource pyramidMesh}"/>
+        </ModelUIElement3D.Model>
+        <ModelUIElement3D.Transform>
+          <TranslateTransform3D OffsetX="-8" OffsetY="2.25"/>
+        </ModelUIElement3D.Transform>
+      </ModelUIElement3D>
+
+      <Viewport2DVisual3D x:Key="viewport2DVisual3DInResourceDictionary" x:Name="viewport2dVisual3dResource" Geometry="{StaticResource pyramidMesh}">
+        <Viewport2DVisual3D.Material>
+          <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True"/>
+        </Viewport2DVisual3D.Material>
+        <Viewport2DVisual3D.Transform>
+          <Transform3DGroup>
+            <ScaleTransform3D ScaleZ="1.0"/>
+            <RotateTransform3D >
+              <RotateTransform3D.Rotation>
+                <AxisAngleRotation3D Axis="0 1 0" Angle="40"/>
+              </RotateTransform3D.Rotation>
+            </RotateTransform3D>
+            <TranslateTransform3D OffsetX="-4" OffsetY="2.25"/>
+          </Transform3DGroup>
+        </Viewport2DVisual3D.Transform>
+        <StackPanel>
+          <Button  Name="elementFromResourceDictionary" Content="Button 1" Background="{DynamicResource BackgroundBrush}"/>
+        </StackPanel>
+      </Viewport2DVisual3D>
+    </AppendXml>
+
+    <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+      <StaticResourceExtension ResourceKey="viewport2DVisual3DInResourceDictionary"/>
+      <StaticResourceExtension ResourceKey="modelUIElement3DinRD"/>
+    </PrependXml>
+  </XmlTransform>
+  
+</XamlTransformer>

@@ -1,0 +1,117 @@
+﻿<FuzzTests>
+    >
+
+    <ContainerFuzzTest MaxIterations="2">
+        <ContainerFuzzer />
+    </ContainerFuzzTest>
+    
+    <BamlFuzzTest MaxIterations="2">
+        <ShuffleFuzzer NumShuffles="5" />
+        <ConnectionIdFuzzer AllowDuplicateIds="true" />
+        <RandomByteFuzzer Frequency="500" Variance="25" />
+    </BamlFuzzTest>
+
+    <XamlFuzzTest MaxIterations="2">
+        <XamlFuzzer />
+    </XamlFuzzTest>
+
+
+    <!--
+    
+    <BamlFuzzTest MaxIterations="-1">
+            <ShuffleFuzzer NumShuffles="5" />
+    </BamlFuzzTest>
+
+    <BamlFuzzTest>
+        <RandomByteFuzzer Frequency="500" Variance="25" />
+    </BamlFuzzTest>
+
+    <BamlFuzzTest MaxIterations="-1">
+        <ConnectionIdFuzzer AllowDuplicateIds="false" />
+    </BamlFuzzTest>
+    
+    <BamlFuzzTest FileType="baml" >
+        <InsertionFuzzer Frequency="20" Variance="5" MaxBytesToInsert="5" />
+    </BamlFuzzTest-->
+
+</FuzzTests>
+
+<!-- 
+
+syntax information:
+    "+" preceeds every node description
+    "(R)" means the attribute is required to be specified.
+
++ FuzzTests\
+        The root node of the script.
+
+        "LogToConsole" -            You can enable console output by setting this value to "true".
+                                    Despite whether this is true or false, logging will always go to "%temp%\Fuzzer*.log".
+                                    There is one log file per thread, but xml driven fuzzing isn't multithreaded.
+                                    Default is "false"
+
+
++ FuzzTests\FuzzTestDescription\
+        A description of fuzzing operations to perform on a set of files.
+        You may create as many of these nodes in the script as you want.
+
+    (R) "FileSearchPath" -          The pattern used to find files you want to fuzz.
+                                    Wildcards are supported so this string can be any value that "dir" accepts.
+                                    
+        "DestinationDirectory" -    The location you want fuzzed files to go.
+                                    All fuzzed files will have the postfix "_Fuzzed" added to the filename so that the
+                                    original files can never be overwritten.
+                                    Default is "Environment.CurrentDirectory"
+                                    
+        "LoadAfterFuzzing" -        Specifies whether or not to send the fuzzed files immediately to Avalon to be loaded.
+                                    If loading the file does not cause an interesting exception, it will be deleted.
+                                    Default is "false"
+                                    
+        "DeleteUselessFiles" -      Specifies whether or not to delete a fuzzed baml file if it is loaded and produces no
+                                    new exceptions.  This attribute has no effect if LoadAfterFuzzing="false" because we
+                                    can't tell if a file is useless until we load it.
+                                    Default is "true"
+                                    
+    (R) "FileType" -                Specifies the type of file to be fuzzed.
+                                    Current supported type is "baml"
+
+
++ FuzzTests\FuzzTestDescription\ShuffleFuzzer\
+        A fuzzer that swaps items in an array.
+
+    (R) "NumShuffles" -             The number of items that should be swapped in the array.
+                                    (For baml fuzzing, this means we swap valid records in the baml stream)
+
+
++ FuzzTests\FuzzTestDescription\RandomByteFuzzer\
+        A fuzzer that corrupts random bytes in a baml stream.
+
+    (R) "Frequency" -               How often you want to corrupt a byte in the baml stream.
+                                    (e.g. "500" means "corrupt every 500 bytes")
+                                    
+    (R) "Variance" -                The amount that Frequency can vary.
+                                    (e.g. Frequency="500" and Variance="20" means "corrupt every 500 bytes give or take 20")
+
+
++ FuzzTests\FuzzTestDescription\ConnectionIdFuzzer\
+        A fuzzer that swaps available ConnectionIds in a baml stream.
+
+        "AllowDuplicateIds" -       ConnectionIds are what tie properties set in Xaml to actual Avalon objects.  They should be unique.
+                                    Setting this to true will tell the fuzzer that Ids do not have to be unique.
+                                    Default is "false"
+
+
++ FuzzTests\FuzzTestDescription\InsertionFuzzer\
+        Insert a random number of random bytes into a BamlRecord whose size is allowed to vary.
+
+    (R) "Frequency" -               How often you want to corrupt a record in the BamlStream.
+                                    If the record is not corruptable (because its size can't be varied), fuzz the next record that is corruptable.
+                                    (e.g. "5" means "corrupt every 5th record")
+                                    
+    (R) "Variance" -                The amount that Frequency can vary.
+                                    (e.g. Frequency="10" and Variance="5" means "corrupt every 10 BamlRecords give or take 5")
+                                    
+        "MaxBytesToInsert" -        The maximum number of bytes to insert into the BamlRecord.
+                                    If the value is "0", you may insert enough bytes to double the record's size.
+                                    Default is "0"
+-->

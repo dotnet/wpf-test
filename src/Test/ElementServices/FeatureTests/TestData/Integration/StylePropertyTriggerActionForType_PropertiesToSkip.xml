@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertiesToSkip>
+  <PropertyToSkip PropertyName="HasContent" />
+  <PropertyToSkip PropertyName="BaseUri" />
+  <PropertyToSkip PropertyName="Resources" Owner="ItemsPanel" />
+  <!-- ResourceDictionary.IsReadOnly may be false if the resources are not app or theme or shared.--> 
+  <PropertyToSkip PropertyName="IsReadOnly" Owner="ResourceDictionary" />
+  <!-- ContentPresenter.DataContext is always set locally by design.-->
+  <PropertyToSkip PropertyName="DataContext" Owner="ContentPresenter" />
+  <!-- TextBoxBase.AllowDrop is set to false locally when in partial trust.-->
+  <PropertyToSkip PropertyName="AllowDrop" Owner="TextBoxBase" />
+  <!-- DocumentViewer.VerticalOffset/HorizontalOffset are set locally according to IDocumentScrollInfo.-->
+  <PropertyToSkip PropertyName="VerticalOffset" Owner="DocumentViewer" />
+  <PropertyToSkip PropertyName="HorizontalOffset" Owner="DocumentViewer" />
+  <!-- DocumentViewer.ContextMenu is set locally to null when the value is already null.-->
+  <PropertyToSkip PropertyName="ContextMenu" Owner="DocumentViewer" />
+  <!-- Track.Visibility and Popup.Visibility are set locally according to content size.-->
+  <PropertyToSkip PropertyName="Visibility" Owner="Track" />
+  <PropertyToSkip PropertyName="Visibility" Owner="Popup" />
+  <!-- Track.Visibility is set locally according to content size.-->
+  <PropertyToSkip PropertyName="FirstColumn" Owner="UniformGrid" />
+  <PropertyToSkip PropertyName="IsItemsHost" />
+</PropertiesToSkip>

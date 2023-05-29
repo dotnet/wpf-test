@@ -1,0 +1,150 @@
+<!--
+/*******************************************************************
+ * Purpose: Snippets of xaml used for tree construction in
+ *          ControlTemplate model.
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/propertyengine/ChainedTriggers/ChainedTriggersModel_elements.xaml $
+********************************************************************/
+-->
+<StackPanel
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+  <!-- ***************************************************
+             Style
+             *************************************************** -->
+  <Style TestId="StyleNode" TargetType="{x:Type Button}">
+    <Style.Triggers>
+    </Style.Triggers>
+  </Style>
+
+  <Button Name="FrameworkElement" Width="40" Height="40" FontSize="24">
+    Resourced FE
+  </Button>
+
+  <!-- *** Styled item parents *** -->
+  <TextBlock TestId="FrameworkContentElementParent" TextAlignment="Center">
+  </TextBlock>
+
+  <!-- ***************************************************
+             Styled Items
+             *************************************************** -->
+  <Bold
+  Name="StyledItem_FrameworkContentElement" Height="50" BorderBrush="Brown"  
+  Style="{FOO testStyle}">
+    Styled FCE
+  </Bold>
+  <Button Name="StyledItem_FrameworkElement" Style="{FOO testStyle}">
+    Styled FE
+  </Button>
+
+  <!-- ***************************************************
+             Parent for a templated table body.
+             *************************************************** -->
+  <FlowDocumentScrollViewer TestId="TableParent" Name="TemplatedControlParent">
+    <FlowDocument>
+      <Table Background="White" Name="TemplatedControlType_Table">
+      </Table>
+    </FlowDocument>
+  </FlowDocumentScrollViewer>
+
+
+  <!-- ***************************************************
+             ControlTemplate
+             *************************************************** -->
+  <ControlTemplate x:Key="FOO" TargetType="{x:Type FOO}">
+    <ControlTemplate.Triggers>
+    </ControlTemplate.Triggers>
+  </ControlTemplate >
+
+
+  <!-- ***************************************************
+             TemplatedControl - Template attribute will be added depending on template type.
+             *************************************************** -->
+  <Button Background="Orange" Name="TemplatedControlType_ContentControl" Style="{DynamicResource styleForSettingTemplate}"
+      Content="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person[2]}">ButtonLogicalChildThingy</Button>
+  <ListBox Background="Orange" Name="TemplatedControlType_ItemsControl" Style="{DynamicResource styleForSettingTemplate}"
+      ItemsSource="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person}">ListBoxLogicalChildThingy</ListBox>
+  <cmn:CustomButton Background="Orange" Name="TemplatedControlType_CustomControl" Style="{DynamicResource styleForSettingTemplate}">CustomButtonLogicalChildThingy</cmn:CustomButton>
+  <TableRowGroup Name="TemplatedControlType_TableRowGroup"
+      Background="Orange"
+      ItemsSource="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person}"
+      Style="{DynamicResource styleForSettingTemplate}"
+            />
+
+
+  <!-- ***************************************************
+             TemplateRootType
+             *************************************************** -->
+  <Button Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_Control" />
+  <StackPanel Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_Panel" />
+  <Border Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_Decorator" />
+  <Bold Panel.Background="Pink" Foreground="Red" x:Name="TemplateRootType_FrameworkContentElement" />
+  <cmn:CustomStackPanel Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_CustomElement" />
+  <Grid x:Name="TemplateRootType_Grid" Background="Pink" TextBlock.Foreground="Red">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+  </Grid>
+
+  <!-- ***************************************************
+             TemplateChildType
+             *************************************************** -->
+  <Button x:Name="TemplateChildType_FrameworkElement" Margin="7" Height="20" Width="150">ButtonText</Button>
+  <Button x:Name="TemplateChildType_FrameworkElement_WithBinding" Margin="7" Height="20" Width="150" />
+  <Bold x:Name="TemplateChildType_FrameworkContentElement" Style="{DynamicResource styleKey1}">BoldText</Bold>
+  <DependencyObject x:Name="TemplateChildType_DependencyObject" />
+  <sys:String x:Name="TemplateChildType_NonDependencyObject">StringText</sys:String>
+  <ListBox x:Name="TemplateChildType_IList" Margin="10" Grid.Column="1">
+    <ListBox.Items>
+      <Button>IList Item</Button>
+      <Button>IList Item</Button>
+    </ListBox.Items>
+  </ListBox>
+  <Rectangle x:Name="TemplateChildType_Shape" Width="100" Height="50" Fill="Blue"></Rectangle>
+
+
+  <!-- ***************************************************
+             TemplateType.Triggers
+             *************************************************** -->
+  <ControlTemplate.Triggers />
+
+  <MultiTrigger TestId="MultiTrigger">
+    <MultiTrigger.Conditions>
+      <Condition Property="FOO" Value="BAR" />
+      <Condition Property="IsMouseOver" Value="true" />
+    </MultiTrigger.Conditions>
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="FOO" Value="BAR" TestId="MultiTrigger_Setter"/>
+  </MultiTrigger>
+
+  <Trigger Property="FOO" Value="BAR" TestId="SingleTrigger">
+    <Setter Property="FOO" Value="BAR" />
+  </Trigger>
+
+  <Trigger Property="FOO" Value="BAR" TestId="StoryBoardTrigger">
+    <Trigger.EnterActions>
+      <BeginStoryboard>
+        <Storyboard> 
+          <DoubleAnimation TestId="SB_Anim_Enter" 
+            Storyboard.TargetProperty="FOO"
+            To="BAR"
+            Duration="0:0:0" />
+        </Storyboard>
+      </BeginStoryboard>
+    </Trigger.EnterActions>
+  </Trigger>
+
+</StackPanel>

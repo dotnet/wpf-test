@@ -1,0 +1,35 @@
+﻿
+
+
+
+<cmn:CustomDockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:y="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" >
+    <cmn:CustomDockPanel.Resources>
+        <Color y:Key="GreenColor" G="219" />
+        <SolidColorBrush y:Key="GreenBrush">
+            <SolidColorBrush.Color>
+                <StaticResource ResourceKey="GreenColor" />
+            </SolidColorBrush.Color>
+        </SolidColorBrush>
+    </cmn:CustomDockPanel.Resources>
+
+    <Button Foreground="{DynamicResource GreenBrush}" cc:MyClass.MyTransparency="1.0">
+        Hey Dude
+    </Button>
+
+    <!-- ListBox.Items is an IList -->
+    <ctrl:ListBox xmlns:ctrl="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <ListBox.Items>
+            <ListBoxItem>Hello 0</ListBoxItem>
+            <ListBoxItem>Hello 1</ListBoxItem>
+        </ListBox.Items>
+    </ctrl:ListBox>
+
+    <!-- Remapping core to a different Assembly-ClrNamespace pair 
+		<?Mapping XmlNamespace="core" ClrNamespace="System.Windows.Controls" Assembly="PresentationFramework" ?>
+		<cc:Button xmlns:cc="core" xmlns:cmn="cmn" />
+		-->
+
+</cmn:CustomDockPanel>

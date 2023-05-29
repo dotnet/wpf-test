@@ -1,0 +1,205 @@
+<!--
+/*******************************************************************
+ * Purpose: InheritanceContext vs freezables with ElementName Binding, DataContext Binding and DynamicResource references
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 3 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/propertyengine/InheritanceContext/InheritanceContext_Freezables.xaml $
+********************************************************************/
+-->
+<cmn:CustomPage
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=ElementServicesTest"
+      xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.InheritanceContext.InheritanceContextFreezables.Verify">
+
+    
+    <StackPanel Name="testRoot">
+
+        <!-- DataContext tests -->
+        
+        <!-- Nested DataContextBinding -->
+        <StackPanel Name="NestedDataContextBinding">
+            <StackPanel.Resources>
+                <XmlDataProvider x:Key="XmlDataProvider1" XPath="/Root/*">
+                    <x:XData>
+                        <Root xmlns="">
+                            <Item Color="red"/>
+                            <Item Color="white"/>
+                        </Root>
+                    </x:XData>
+                </XmlDataProvider>
+                <XmlDataProvider x:Key="XmlDataProvider2" XPath="/Root/*">
+                    <x:XData>
+                        <Root xmlns="">
+                            <Item Color="purple"/>
+                            <Item Color="green"/>
+                        </Root>
+                    </x:XData>
+                </XmlDataProvider>
+            </StackPanel.Resources>
+
+            <Label>Nested DataContext binding</Label>
+            <StackPanel DataContext="{Binding Source={StaticResource XmlDataProvider1}}">
+                <Button>
+                    <Button.Background>
+                        <SolidColorBrush Color="{Binding XPath=@Color}"/>
+                    </Button.Background>
+                </Button>
+
+                <StackPanel DataContext="{Binding Source={StaticResource XmlDataProvider2}}">
+                    <Button >
+                        <Button.Background>
+                            <SolidColorBrush Color="{Binding XPath=@Color}"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Sibling DataContextBinding -->
+        <StackPanel Name="SiblingDataContextBinding">
+            <StackPanel.Resources>
+                <XmlDataProvider x:Key="XmlDataProvider1" XPath="/Root/*">
+                    <x:XData>
+                        <Root xmlns="">
+                            <Item Color="blue"/>
+                            <Item Color="white"/>
+                        </Root>
+                    </x:XData>
+                </XmlDataProvider>
+                <XmlDataProvider x:Key="XmlDataProvider2" XPath="/Root/*">
+                    <x:XData>
+                        <Root xmlns="">
+                            <Item Color="yellow"/>
+                            <Item Color="green"/>
+                        </Root>
+                    </x:XData>
+                </XmlDataProvider>
+            </StackPanel.Resources>
+
+            <Label>Sibling DataContext binding</Label>
+            <StackPanel DataContext="{Binding Source={StaticResource XmlDataProvider1}}">
+                <Button>
+                    <Button.Background>
+                        <SolidColorBrush Color="{Binding XPath=@Color}"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+            <StackPanel DataContext="{Binding Source={StaticResource XmlDataProvider2}}">
+                <Button >
+                    <Button.Background>
+                        <SolidColorBrush Color="{Binding XPath=@Color}"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>            
+        </StackPanel>
+
+        
+        <!-- ElementName binding tests -->
+        
+        
+        <!-- Nested ElementName binding -->
+        <StackPanel Name="NestedElementNameBinding">
+            <Label>Nested ElementName binding</Label>
+            <StackPanel Name="sp1" Background="Blue">
+                <Button>
+                    <Button.Background>
+                        <SolidColorBrush Color="{Binding ElementName=sp1,Path=Background.(SolidColorBrush.Color)}"/>
+                    </Button.Background>
+                </Button>
+
+                <StackPanel Background="Green">
+                    <Button>
+                        <Button.Background>
+                            <SolidColorBrush Color="{Binding ElementName=sp1,Path=Background.(SolidColorBrush.Color)}"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- sibling ElementName binding -->
+        <StackPanel Name="SiblingElementNameBinding">
+            <Label>Sibling ElementName binding</Label>
+            <StackPanel Name="sp2" Background="Cyan">
+                <Button>
+                    <Button.Background>
+                        <SolidColorBrush Color="{Binding ElementName=sp2,Path=Background.(SolidColorBrush.Color)}"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+            <StackPanel Background="Orange">
+                <Button>
+                    <Button.Background>
+                        <SolidColorBrush Color="{Binding ElementName=sp2,Path=Background.(SolidColorBrush.Color)}"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+
+        
+        <!-- DR tests -->
+        
+        
+        <!-- nested dynamic resource reference -->
+        <StackPanel Name="NestedDynamicResourceReference">
+
+            <Label>Nested DynamicResource reference </Label>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Color x:Key="myColor" A="0xff" R="0xff" G="0xff" B="0x00"/>
+                </StackPanel.Resources>
+                <Button>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource myColor}"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Color x:Key="myColor" A="0xff" R="0xff" G="0x00" B="0x00"/>
+                    </StackPanel.Resources>
+                    <Button>
+                        <Button.Background>
+                            <SolidColorBrush Color="{DynamicResource myColor}"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+
+        <!-- sibling dynamic resource reference -->
+        <StackPanel Name="SiblingDynamicResourceReference">
+
+            <Label>Sibling DynamicResource reference </Label>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Color x:Key="myColor" A="0xff" R="0x80" G="0x00" B="0x80"/>
+                </StackPanel.Resources>
+                <Button>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource myColor}"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+            <StackPanel >
+                <StackPanel.Resources>
+                    <Color x:Key="myColor" A="0xff" R="0x00" G="0x80" B="0x00"/>
+                </StackPanel.Resources>
+                <Button>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource myColor}"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+
+    </StackPanel><!-- end testRoot -->
+    
+</cmn:CustomPage>

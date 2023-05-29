@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TestExtenderGraph
+  xmlns="clr-namespace:Microsoft.Test.Integration;assembly=TestRuntime"
+  xmlns:txrw="clr-namespace:Microsoft.Test.Integration.Windows;assembly=TestRuntime"
+  xmlns:ndp="clr-namespace:System;assembly=mscorlib">
+
+    <CallbackVariationGenerator Name="CommandingActionsBrowserOnly" Priority="1">
+
+        <CallbackVariationGenerator.Input>
+            <StorageItem Name="TestContainer">
+                <StorageItem.Type>
+                    <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                </StorageItem.Type>
+            </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\CoreCommanding_*.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+            <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                        TypeName="Avalon.Test.CoreUI.TestApp"
+                        MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <ContentItem>SecureInputBindingPartialTrustApp</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <CallbackVariationGenerator Name="CommandingActionsWindowOnly" Priority="1">
+
+        <CallbackVariationGenerator.Input>
+            <StorageItem Name="TestContainer">
+                <StorageItem.Type>
+                    <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                </StorageItem.Type>
+            </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\CoreCommanding_*.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+            <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                        TypeName="Avalon.Test.CoreUI.TestApp"
+                        MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <ContentItem>CommandLibraryPropertiesNoExecuteHandlerApp</ContentItem>
+        <ContentItem>CommandLibraryPropertiesApp</ContentItem>
+        <ContentItem>CommandLibraryNavigationWindowPropertiesApp</ContentItem>
+        <ContentItem>CommandLibraryNavigationWindowPropertiesNoExecuteHandlerApp</ContentItem>
+        <ContentItem>MouseGestureOverrideChildApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandLibraryCommandValueSerializerConvertFromApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandLibraryCommandValueSerializerConvertToApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandMultipleKeyBindingSpecialKeyApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandMultipleKeyBindingAppsKeyApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandBindingEnabledAfterRemoveApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandBindingKeyBindingAppsKeyApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandBindingSameKeyBindingApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandDefaultsKeyBindingSpecialKeyApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandBindingMouseBindingMiddleButtonApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandManagerRegisterClassInputBindingTypeParentApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">MouseBindingFromDefaultsApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">MouseBindingFromDefaultsContentElementApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">CommandManagerRegisterClassInputBindingsClassCommandBindingApp</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">UIElementRaiseQueryEnabledClassBindingApp</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <CallbackVariationGenerator Name="CommonCommandingActionsPri0">
+
+        <CallbackVariationGenerator.Input>
+            <StorageItem Name="TestContainer">
+                <StorageItem.Type>
+                    <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                </StorageItem.Type>
+            </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\CoreCommanding_*.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+            <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                        TypeName="Avalon.Test.CoreUI.TestApp"
+                        MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <ContentItem>UIElementRaiseCommandApp</ContentItem>
+        <ContentItem>UIElementRaiseCanExecuteApp</ContentItem>
+        <ContentItem>CommandManagerRegisterClassCommandBindingsApp</ContentItem>
+        <ContentItem>CommandManagerRegisterClassInputBindingsApp</ContentItem>
+
+    </CallbackVariationGenerator>
+    
+    <CallbackVariationGenerator Name="CommonCommandingActionsPri1" Priority="1">
+
+        <CallbackVariationGenerator.Input>
+            <StorageItem Name="TestContainer">
+                <StorageItem.Type>
+                    <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                </StorageItem.Type>
+            </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\CoreCommanding_*.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+            <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                        TypeName="Avalon.Test.CoreUI.TestApp"
+                        MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <!-- DISABLED or FAILS: 
+        <ContentItem>ContentElementCommandBindingKeyBindingApp</ContentItem>
+        <ContentItem>CommandBindingInvokeKeyDownApp</ContentItem>
+        <ContentItem>CommandLibraryExecuteApp</ContentItem>
+        <ContentItem>CommandLibraryNavigationCommandsExecuteApp</ContentItem>
+        <ContentItem>ExecutedRoutedEventArgsNullApp</ContentItem>
+        <ContentItem>ExecuteInvalidInputElementApp</ContentItem>
+        <ContentItem>CommandManagerRegisterClassCommandBindingsGlobalApp</ContentItem>
+        <ContentItem>QueryEnabledInvalidInputElementApp</ContentItem>
+        <ContentItem>MouseBindingRaiseEventContentElementApp</ContentItem>
+        <ContentItem>MouseBindingRaiseEventApp</ContentItem>
+        <ContentItem>CanExecuteRoutedEventArgsNullApp</ContentItem>
+        -->
+
+        <!-- ALL VARIATIONS PASS: -->
+        <ContentItem>UIElementPreviewCanExecuteApp</ContentItem>
+        <ContentItem>ContentElementRaiseCommandApp</ContentItem>
+        <ContentItem>CommandConverterConvertFromApp</ContentItem>
+        <ContentItem>CommandConverterConvertToApp</ContentItem>
+        <ContentItem>CommandBindingEnabledApp</ContentItem>
+        <ContentItem>CommandBindingKeyBindingApp</ContentItem>
+        <ContentItem>CommandSerializeApp</ContentItem>
+        <ContentItem>CommandBindingCollectionClearApp</ContentItem>
+        <ContentItem>CommandBindingCollectionContainsApp</ContentItem>
+        <ContentItem>CommandBindingCollectionCopyToApp</ContentItem>
+        <ContentItem>CommandBindingCollectionCountApp</ContentItem>
+        <ContentItem>InputGesturesCollectionCountFromDefaultsApp</ContentItem>
+        <ContentItem>CommandBindingCollectionIListApp</ContentItem>
+        <ContentItem>CommandBindingCollectionRemoveApp</ContentItem>
+        <ContentItem>CommandBindingMouseBindingApp</ContentItem>
+        <ContentItem>CommandBindingSamplePenBindingApp</ContentItem>
+        <ContentItem>CommandBindingSealApp</ContentItem>
+        <ContentItem>CommandBindingSerializeApp</ContentItem>
+        <ContentItem>CommandLibraryCommandConverterConvertToApp</ContentItem>
+        <ContentItem>CommandLibraryCommandConverterConvertFromApp</ContentItem>
+        <ContentItem>CommandManagerRegisterClassCommandBindingsContentElementApp</ContentItem>
+        <ContentItem>CommandManagerRegisterClassInputBindingsContentElementApp</ContentItem>
+        <ContentItem>CommandManagerSuggestRequeryApp</ContentItem>
+        <ContentItem>CommandEmptyStringApp</ContentItem>
+        <ContentItem>CommandNullStringApp</ContentItem>
+        <ContentItem>CommandNullDeclaringTypeApp</ContentItem>
+<!--        <ContentItem>CommandBindingBindingsFromDefaultsApp</ContentItem> -->
+        <ContentItem>CommandSourceKeyBindingApp</ContentItem>
+        <ContentItem>CommandSourceMouseBindingApp</ContentItem>
+        <ContentItem>InputBindingCollectionApp</ContentItem>
+        <ContentItem>InputBindingSerializeApp</ContentItem>
+        <ContentItem>InputGestureCollectionApp</ContentItem>
+        <ContentItem>KeyGestureConverterCanConvertFromApp</ContentItem>
+        <ContentItem>KeyGestureConverterCanConvertToApp</ContentItem>
+        <ContentItem>KeyGestureConverterConvertFromApp</ContentItem>
+        <ContentItem>KeyGestureConverterConvertToApp</ContentItem>
+        <ContentItem>KeyGestureOverrideChildApp</ContentItem>
+        <ContentItem>KeyGestureOverrideChildDefaultGesturesApp</ContentItem>
+        <ContentItem>KeyGesturePropertiesApp</ContentItem>
+        <ContentItem>MouseActionConverterCanConvertFromApp</ContentItem>
+        <ContentItem>MouseActionConverterCanConvertToApp</ContentItem>
+        <ContentItem>MouseGestureConverterCanConvertFromApp</ContentItem>
+        <ContentItem>MouseGestureConverterCanConvertToApp</ContentItem>
+        <ContentItem>MouseGestureOverrideChildDefaultGesturesApp</ContentItem>
+        <ContentItem>MouseGesturePropertiesApp</ContentItem>
+        <ContentItem>UICommandNullCommandTextApp</ContentItem>
+        <ContentItem>InputBindingPartialTrustApp</ContentItem>
+        <ContentItem>SecureCommandExecutePartialTrustApp</ContentItem>
+        <ContentItem>SecureCommandPartialTrustApp</ContentItem>
+        <ContentItem>SecureCommandBindingPartialTrustApp</ContentItem>
+        <ContentItem>SecureCommandBindingExecutePartialTrustApp</ContentItem>
+        <ContentItem>UICommandExecutePartialTrustApp</ContentItem>
+        <ContentItem>UICommandPartialTrustApp</ContentItem>
+        <ContentItem>UICommandBindingPartialTrustApp</ContentItem>
+        <ContentItem>UICommandBindingExecutePartialTrustApp</ContentItem>
+        <ContentItem>CommandConverterConvertFromPrefixApp</ContentItem>
+        <ContentItem>CommandBindingCollectionAddRangeApp</ContentItem>
+        <ContentItem>CommandBindingCollectionAddNonBindingApp</ContentItem>
+        <ContentItem>CommandBindingCollectionFromIListApp</ContentItem>
+        <ContentItem>CommandBindingCollectionRemoveFromArrayApp</ContentItem>
+        <ContentItem>CommandBindingCollectionRemoveNonBindingApp</ContentItem>
+        <ContentItem>CommandBindingCollectionSyncApp</ContentItem>
+        <ContentItem>CommandBindingDynamicCommandSerializeApp</ContentItem>
+        <ContentItem>CommandBindingFromDefaultsApp</ContentItem>
+        <ContentItem>CommandSerializeInstanceCommandApp</ContentItem>
+        <ContentItem>CommandSourceButtonBaseApp</ContentItem>
+        <ContentItem>CommandSourceHyperlinkApp</ContentItem>
+        <ContentItem>CommandSourceMenuItemApp</ContentItem>
+        <ContentItem>FrameworkContentElementCommandBindingOnDocumentViewerApp</ContentItem>
+        <ContentItem>FrameworkElementCommandBindingOnFrameApp</ContentItem>
+        <ContentItem>KeyGestureConverterConvertFromCombination2KeyApp</ContentItem>
+        <ContentItem>KeyGestureConverterConvertFromCombination3KeyApp</ContentItem>
+        <ContentItem>KeyGestureConverterConvertFromInvalidKeyGestureApp</ContentItem>
+        <ContentItem>KeyGestureConverterConvertToInvalidDestinationTypeApp</ContentItem>
+        <ContentItem>KeyGestureAlphanumericKeyApp</ContentItem>
+
+    </CallbackVariationGenerator>
+
+
+    
+    <txrw:ContainerVariationGenerator Name="WpfApplicationWindowNonPri0Variations">
+        <txrw:ContainerVariationGenerator.ApplicationTypes>
+            <ContentItem Priority="1">WpfApplication</ContentItem>
+        </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+        <CallbackVariationGenerator>
+
+            <CallbackVariationGenerator.Output>
+                <StorageItem Name="TestContainer">
+                    <StorageItem.Type>
+                        <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                    </StorageItem.Type>
+                </StorageItem>
+            </CallbackVariationGenerator.Output>
+
+            <CallbackVariationGenerator.Callback>
+                <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                            TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                            MethodName="CreateTestContainer" />
+            </CallbackVariationGenerator.Callback>
+
+            <ContentItem>Window</ContentItem>
+            
+        </CallbackVariationGenerator>
+
+        <SelectorGenerator>
+            <GeneratorReference TargetName="CommonCommandingActionsPri1" />
+            <GeneratorReference TargetName="CommandingActionsWindowOnly" />
+        </SelectorGenerator>
+
+    </txrw:ContainerVariationGenerator>
+    
+    <txrw:ContainerVariationGenerator Name="AllPri0Variations">
+        <txrw:ContainerVariationGenerator.ApplicationTypes>
+            <ContentItem>ClrExe</ContentItem>
+            <ContentItem Priority="1">WpfApplication</ContentItem>
+            <ContentItem Priority="2">WinFormsApplication</ContentItem>
+        </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+        <CallbackVariationGenerator>
+
+            <CallbackVariationGenerator.Output>
+                <StorageItem Name="TestContainer">
+                    <StorageItem.Type>
+                        <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                    </StorageItem.Type>
+                </StorageItem>
+            </CallbackVariationGenerator.Output>
+
+            <CallbackVariationGenerator.Callback>
+                <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                            TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                            MethodName="CreateTestContainer" />
+            </CallbackVariationGenerator.Callback>
+
+            <ContentItem Priority="1">HwndSource</ContentItem>
+            <ContentItem Priority="2">NavigationWindow</ContentItem>
+            <ContentItem SecurityLevel="FullTrust" Priority="3">WindowsFormSource</ContentItem>
+            
+        </CallbackVariationGenerator>
+
+        <SelectorGenerator>
+            <GeneratorReference TargetName="CommonCommandingActionsPri0" />
+        </SelectorGenerator>
+
+    </txrw:ContainerVariationGenerator>
+    
+    <txrw:ContainerVariationGenerator Name="WinFormsVariations">
+        <txrw:ContainerVariationGenerator.ApplicationTypes>
+            <ContentItem Priority="2">WinFormsApplication</ContentItem>
+        </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+        <CallbackVariationGenerator>
+
+            <CallbackVariationGenerator.Output>
+                <StorageItem Name="TestContainer">
+                    <StorageItem.Type>
+                        <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                    </StorageItem.Type>
+                </StorageItem>
+            </CallbackVariationGenerator.Output>
+
+            <CallbackVariationGenerator.Callback>
+                <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                            TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                            MethodName="CreateTestContainer" />
+            </CallbackVariationGenerator.Callback>
+
+            <ContentItem>Window</ContentItem>
+            
+        </CallbackVariationGenerator>
+
+        <SelectorGenerator>
+            <GeneratorReference TargetName="CommonCommandingActionsPri0" />
+        </SelectorGenerator>
+
+    </txrw:ContainerVariationGenerator>
+
+    
+    <txrw:ContainerVariationGenerator Name="CommonVariations">
+        <txrw:ContainerVariationGenerator.ApplicationTypes>
+            <ContentItem>ClrExe</ContentItem>
+            <ContentItem Priority="1">WpfApplication</ContentItem>
+        </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+        <CallbackVariationGenerator>
+
+            <CallbackVariationGenerator.Output>
+                <StorageItem Name="TestContainer">
+                    <StorageItem.Type>
+                        <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                    </StorageItem.Type>
+                </StorageItem>
+            </CallbackVariationGenerator.Output>
+
+            <CallbackVariationGenerator.Callback>
+                <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                            TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                            MethodName="CreateTestContainer" />
+            </CallbackVariationGenerator.Callback>
+
+            <ContentItem Priority="1">HwndSource</ContentItem>
+            <ContentItem Priority="2">NavigationWindow</ContentItem>
+            <ContentItem SecurityLevel="FullTrust" Priority="3">WindowsFormSource</ContentItem>
+
+            
+        </CallbackVariationGenerator>
+
+        <SelectorGenerator>
+            <GeneratorReference TargetName="CommonCommandingActionsPri0" />
+        </SelectorGenerator>
+
+    </txrw:ContainerVariationGenerator>
+
+    <txrw:ContainerVariationGenerator Name="BrowserVariations" Priority="1">
+        <txrw:ContainerVariationGenerator.ApplicationTypes>
+            <ContentItem>Xbap</ContentItem>
+        </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+        <CallbackVariationGenerator>
+
+            <CallbackVariationGenerator.Output>
+                <StorageItem Name="TestContainer">
+                    <StorageItem.Type>
+                        <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                    </StorageItem.Type>
+                </StorageItem>
+            </CallbackVariationGenerator.Output>
+
+            <CallbackVariationGenerator.Callback>
+                <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                            TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                            MethodName="CreateTestContainer" />
+            </CallbackVariationGenerator.Callback>
+
+            <ContentItem>Browser</ContentItem>
+
+        </CallbackVariationGenerator>
+
+        <SelectorGenerator>
+            <GeneratorReference TargetName="CommonCommandingActionsPri0" />
+            <GeneratorReference TargetName="CommandingActionsBrowserOnly" />
+        </SelectorGenerator>
+
+    </txrw:ContainerVariationGenerator>
+
+</TestExtenderGraph>
+

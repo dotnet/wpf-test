@@ -1,0 +1,37 @@
+﻿<cmn:CustomCanvas Name="id"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.TriggersInDataTemplateVerify"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+        <Canvas.Resources>
+            <DataTemplate x:Key="DataTemplate">
+                <Button x:Name="buttonInTemplate">
+                    <Button Name="childButtonInTemplate" Width="50" />
+                </Button>
+                <DataTemplate.Triggers>
+                    <Trigger Property="Width" Value="50" SourceName="childButtonInTemplate">
+                        <Setter Property="Height" TargetName="buttonInTemplate" Value="500" />
+                    </Trigger>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="childButtonInTemplate">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetName="buttonInTemplate">
+                                    <DoubleAnimation From="300" To="300" Duration="0:0:0" Storyboard.TargetProperty="(Button.Width)" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                            <!-- Block on bug 
+                            <BeginStoryboard Storyboard="{DynamicResource storyboardInStyle}" />
+                            -->
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </DataTemplate.Triggers>
+                <DataTemplate.Resources>
+                    <Storyboard TargetName="buttonInTemplate" x:Key="storyboardInStyle">
+                        <ColorAnimation From="Blue" To="Red" Duration="0:0:0" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
+                    </Storyboard>
+                </DataTemplate.Resources>
+            </DataTemplate>
+        </Canvas.Resources>        
+        <Button ContentTemplate="{DynamicResource DataTemplate}" Name="button" />
+</cmn:CustomCanvas>

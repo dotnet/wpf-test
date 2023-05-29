@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<MarkupSnippets 
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" 
+   xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+   xmlns:sys="clr-namespace:System;assembly=mscorlib"
+>
+    
+    <!-- Internal type by itself -->
+    <DockPanel SnippetID="Snippet0">
+        <cc:Custom_InternalButton />
+    </DockPanel>
+
+    <!-- Internal type inside a TypeExtension -->
+    <DockPanel SnippetID="Snippet1">
+        <Button>
+            <x:Array Type="{x:Type cc:Custom_InternalButton}">
+                <cc:Custom_InternalButton />
+                <cc:Custom_InternalButton />
+            </x:Array>
+        </Button>
+    </DockPanel>
+
+    <!-- Internal type inside Type typeconverter -->
+    <DockPanel SnippetID="Snippet2">
+        <Button>
+            <x:Array Type="cc:Custom_InternalButton">
+                <cc:Custom_InternalButton />
+                <cc:Custom_InternalButton />
+            </x:Array>
+        </Button>
+    </DockPanel>
+
+    <!-- Internal type inside a template -->
+    <DockPanel SnippetID="Snippet3">
+        <DockPanel.Resources>
+            <ControlTemplate TargetType="{x:Type x:TypeName=Button}" x:Key="ButtonTemplate">
+                <cc:Custom_InternalButton Width="40" Height="40" />
+            </ControlTemplate>
+        </DockPanel.Resources>
+
+        <Button Template="{StaticResource ButtonTemplate}"/>
+    </DockPanel>
+
+</MarkupSnippets>

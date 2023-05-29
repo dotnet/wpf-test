@@ -1,0 +1,331 @@
+<!-- We are trying to verify that the new MarkupExtensions called
+StaticResourceExtension and DynamicResourceExtension work fine. 
+-->
+
+<cmn:CustomDockPanel  Name="CustomDockPanel0"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ctrl="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
+ Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.ResourceExtensionVerify"
+
+ xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+ xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen3="clr-namespace:System;assembly=mscorlib"
+
+
+>
+	<cmn:CustomDockPanel.Resources>
+		<SolidColorBrush x:Key="Green Brush" Color="Green" />
+		<sys:String x:Key="PinkBrushName">PinkBrush</sys:String> 
+		<sys:String x:Key="Greeting"> Hello World</sys:String> 
+		<SolidColorBrush x:Key="RedBrush" Color="Red" />		
+		<SolidColorBrush x:Key="PinkBrush" Color="Pink" />
+
+
+		<!-- 
+		
+		TODO: Enable the following, it's usage on Button3 and Button4, 
+		and the corresponding verification code, once 1096932 is fixed
+		<cc:MyColor x:Key="BlueColor" Color="Blue" /> 
+		
+		-->
+	</cmn:CustomDockPanel.Resources>
+	
+	<!-- Testing Forward resource reference -->
+	<Button Name="Button4" /> <!--cc:MyClass.MyColor="{DynamicResource BlueColor}"-->
+
+	<Button Name="Button0" Background="{StaticResource &apos;Green Brush&apos;}" />
+	<Button Name="Button1" Background="{DynamicResourceExtension ResourceKey=RedBrush}" />
+	<Button Name="Button2">
+		<Button.Content>
+			<DynamicResource ResourceKey='Greeting' />
+		</Button.Content>
+	</Button>
+	
+	<Button Name="Button3">
+		<!--
+		<cc:MyClass.MyColor>
+			<DynamicResource ResourceKey="BlueColor" />
+		</cc:MyClass.MyColor>		
+		-->
+	</Button>
+	
+	<Button Name="Button5" Background="{DynamicResource ResourceKey=PinkBrush}" />			
+	<Button Name="Button6" Background="{StaticResource ResourceKey=PinkBrush}" />
+	
+	<!-- StaticResourceExt inside StaticResourceExt -->	
+	<Button Name="Button7" Background="{StaticResource ResourceKey={StaticResource PinkBrushName}}" />
+	
+	<!-- StaticResourceExt inside DynamicResourceExt -->	
+	<Button Name="Button8" Background="{DynamicResource ResourceKey={StaticResource PinkBrushName}}" />
+
+
+<DockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ctrl="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:sys="clr-namespace:System;assembly=mscorlib"
+>
+
+
+<!-- testing for use of content tags -->
+
+<DockPanel Name="DockPanel0">
+	<DockPanel.Resources>
+
+		<Button x:Key="imabutton1">
+				button1	
+		</Button>
+		<Button x:Key="imabutton2">
+				button2	
+		</Button>
+		<Button x:Key="imabutton3">
+				button3	
+		</Button>
+		<Button x:Key="imabutton4">
+				button4	
+		</Button>
+		<Button x:Key="imabutton5">
+				button5	
+		</Button>
+		<Button x:Key="imabutton6">
+				button6	
+		</Button>
+		<Button x:Key="imabutton7">
+				button7	
+		</Button>
+		<sys:String x:Key="string1"> string1 </sys:String>
+		<sys:String x:Key="string2"> string2 </sys:String>
+		<sys:String x:Key="string3"> string3 </sys:String>
+		<sys:String x:Key="string4"> string4 </sys:String>
+		<sys:String x:Key="string5"> string5 </sys:String>
+		<sys:String x:Key="string6"> string6 </sys:String>
+	</DockPanel.Resources>
+
+	
+
+	<!-- test static resources used in textblock (cant use dynamic resources here) -->
+	<TextBlock Name="TextBlock1" >
+		<StaticResource ResourceKey="imabutton1" /> 	
+		<StaticResource ResourceKey="imabutton2" /> 
+		<StaticResource ResourceKey="imabutton3" /> 
+		<StaticResource ResourceKey="string1" /> 
+	</TextBlock > 
+
+	<!-- test dynamic and static resources used in textblock -->
+	<ListBox Name="ListBox1" > 
+		<ListBox.Items>
+				<ListBoxItem>
+					<StaticResource ResourceKey="imabutton4" />
+				</ListBoxItem>
+				<ListBoxItem>
+					<DynamicResource ResourceKey="imabutton5" />
+				</ListBoxItem>
+				<ListBoxItem Name="ListBoxItem_imabutton6">
+					<DynamicResource ResourceKey="imabutton6" />
+				</ListBoxItem>
+				<ListBoxItem>
+					<DynamicResource ResourceKey="string1" />
+				</ListBoxItem>
+				<ListBoxItem>
+					<DynamicResource ResourceKey="string2" />
+				</ListBoxItem>
+				<ListBoxItem>
+					<StaticResource ResourceKey="string3" />
+				</ListBoxItem>
+				<ListBoxItem>
+					<StaticResource ResourceKey="string4" />
+				</ListBoxItem>
+				notintags 
+				<StaticResource ResourceKey="string5" />
+				<StaticResource ResourceKey="string1" />
+		</ListBox.Items>	
+	</ListBox> 
+
+</DockPanel>
+
+
+<!-- test for using resources in DockPanel.Children can't use dynamic resources here -->
+
+<DockPanel Name="DockPanel1" >
+	<DockPanel.Resources>
+		<Button x:Key="imabutton1" >
+			imabutton1
+		</Button>
+		<Button x:Key="imabutton2" >
+			imabutton2	
+		</Button>
+		<Button x:Key="imabutton3" >
+			imabutton3	
+		</Button>
+
+	</DockPanel.Resources>
+	
+	<DockPanel.Children>
+		<StaticResource ResourceKey="imabutton1" />
+		<StaticResource ResourceKey="imabutton2" />
+		<StaticResource ResourceKey="imabutton3" />
+
+	</DockPanel.Children>
+</DockPanel>
+
+<!-- WEIRD SELECTION BEHAVIOR IN LISTBOX -->
+<DockPanel Name="DockPanel2" >
+	<DockPanel.Resources>
+		<sys:String x:Key="string1"> string1  </sys:String>
+	</DockPanel.Resources>
+
+	<ComboBox Name="ComboBox3" Height="100" Width="100" > 
+		
+		s
+		d
+		f
+		<ComboBoxItem > g </ComboBoxItem>
+		a	g
+		<StaticResource ResourceKey="string1"/>
+		<StaticResource ResourceKey="string1"/>
+		<StaticResource ResourceKey="string1"/>
+		<ComboBoxItem >
+			<DynamicResource ResourceKey="string1"/>
+		</ComboBoxItem>
+
+	</ComboBox >
+
+	<ListBox Name="ListBox3" Height="100" Width="100" > 
+		
+		s
+		d
+		f
+		<ListBoxItem> g </ListBoxItem>
+		a	g
+		<StaticResource ResourceKey="string1"/>
+		<StaticResource ResourceKey="string1"/>
+		<StaticResource ResourceKey="string1"/>
+
+	</ListBox >
+
+</DockPanel>
+
+
+<DockPanel Name="DockPanel3" >
+	<DockPanel.Resources>
+		<SolidColorBrush Color="Blue" x:Key="foo1" />
+		<SolidColorBrush Color="Red" x:Key="foo2" />
+		<SolidColorBrush Color="Green" x:Key="foo3" />
+		<SolidColorBrush Color="Yellow" x:Key="foo4" />
+		<SolidColorBrush Color="Brown" x:Key="foo5" />
+		<SolidColorBrush Color="Purple" x:Key="foo6" />
+	
+		<sys:String x:Key="string1"> wowww1  </sys:String>
+		<sys:String x:Key="string2"> wowww2  </sys:String>
+
+		<Button x:Key="imabutton" >
+			<Button.Foreground>	
+				<StaticResource ResourceKey="foo5" />
+			</Button.Foreground>
+	
+			<Button.Content>	
+				<StaticResource ResourceKey="string2" />	
+			</Button.Content>		
+		</Button>
+
+		<Button x:Key="imabutton2" >
+			<Button.Foreground>	
+				<StaticResource ResourceKey="foo5" />
+			</Button.Foreground>
+	
+			<Button.Content>	
+				<StaticResource ResourceKey="string2" />	
+			</Button.Content>		
+		</Button>
+		<Button x:Key="imabutton3" >
+			<Button.Foreground>	
+				<StaticResource ResourceKey="foo5" />
+			</Button.Foreground>
+			<StaticResource ResourceKey="string2" />		
+		</Button>
+		<Button x:Key="imabutton4" >
+			<Button.Foreground>	
+				<StaticResource ResourceKey="foo5" />
+			</Button.Foreground>
+			<StaticResource ResourceKey="string2" />		
+		</Button>
+		<Button x:Key="imabutton5" >
+			<Button.Foreground>	
+				<StaticResource ResourceKey="foo5" />
+			</Button.Foreground>
+			<StaticResource ResourceKey="imabutton4" />		
+		</Button>
+	</DockPanel.Resources>
+	
+
+	<Button Name="Button20" >
+		<Button.Foreground>	
+			<StaticResource ResourceKey="foo5" />
+		</Button.Foreground>
+	
+		<Button.Content>	
+			<StaticResource ResourceKey="string1" />	
+		</Button.Content>		
+
+	</Button>	
+	<Button Name="Button21" >
+		<Button.Foreground>	
+			<StaticResource ResourceKey="foo5" />
+		</Button.Foreground>
+	
+		<Button.Content>	
+			<StaticResource ResourceKey="imabutton2" />	
+		</Button.Content>		
+
+	</Button>	
+
+	<Button Name="Button22" >
+		<Button.Foreground>	
+			<StaticResource ResourceKey="foo5" />
+		</Button.Foreground>
+		<DynamicResource ResourceKey="imabutton3" />		
+	</Button>
+
+	<Button Name="Button23" >
+		<Button.Foreground>	
+			<DynamicResource ResourceKey="foo5" />
+		</Button.Foreground>
+		<DynamicResource ResourceKey="string1" />	
+	</Button>
+
+	<StaticResource  ResourceKey="imabutton" />
+
+	<TextBlock Name="TextBlock2" >
+		
+		<StaticResource ResourceKey="string1" /> 	
+		wow
+
+		lala
+		
+	</TextBlock >
+	<TextBox Name="TextBox1" >
+		<StaticResource ResourceKey="string2" /> 	
+	</TextBox >
+	<TextBox Name="TextBox2" >
+		<DynamicResource ResourceKey="string2" /> 	
+	</TextBox >
+
+
+	<ListBox Name="ListBox13" >
+		<ListBox.Items>
+			<ListBoxItem>
+				<StaticResource ResourceKey="string1" />
+			</ListBoxItem>
+			<StaticResource ResourceKey="string1" />
+			<StaticResource ResourceKey="string1" />
+			<StaticResource ResourceKey="string1" />
+		</ListBox.Items>	
+	</ListBox>
+
+</DockPanel>
+
+</DockPanel>
+
+</cmn:CustomDockPanel>
+

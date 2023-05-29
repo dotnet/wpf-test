@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TestExtenderGraph
+  xmlns="clr-namespace:Microsoft.Test.Integration;assembly=TestRuntime"
+  xmlns:txrw="clr-namespace:Microsoft.Test.Integration.Windows;assembly=TestRuntime"
+  xmlns:ndp="clr-namespace:System;assembly=mscorlib">
+
+  <!-- This TXR multiplies input action sequences (1st half of file) by various containers and application types (2nd half). -->
+  
+  <!--
+    ***************************
+    ***** Action Sequences ****
+    ***************************
+    -->
+
+  <!-- Action sequence scenarios that are run in Window, NavigationWindow, WindowsFormSource and HwndSource surfaces. -->
+  <txrw:ActionSequenceVariationGenerator Name="InputTestActionNonBrowser" Priority="2">
+
+    <CallbackVariationGenerator.Input>
+      <StorageItem Name="TestContainer">
+        <StorageItem.Type>
+          <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+        </StorageItem.Type>
+      </StorageItem>
+    </CallbackVariationGenerator.Input>
+
+    <CallbackVariationGenerator.SupportFiles>
+      <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+      <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+      <ndp:String>FeatureTests\ElementServices\CoreInput_*.xaml</ndp:String>
+    </CallbackVariationGenerator.SupportFiles>
+
+    <CallbackVariationGenerator.Callback>
+      <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                  TypeName="Avalon.Test.CoreUI.ActionSequenceTestEngine"
+                  MethodName="RunTestAction" />
+    </CallbackVariationGenerator.Callback>
+
+    <!-- Action sequence scenarios.. .-->
+    <ContentItem SecurityLevel="FullTrust" Priority="2">
+      <ContentItem.SupportFiles>
+        <ndp:String>FeatureTests\ElementServices\DynamicContentScenarios*.xaml</ndp:String>
+      </ContentItem.SupportFiles>
+      FeatureTests\ElementServices\DynamicContentScenarios.xtc
+    </ContentItem>
+    <ContentItem>
+      <ContentItem.SupportFiles>
+        <ndp:String>FeatureTests\ElementServices\CommonMouseScenarios*.xaml</ndp:String>
+      </ContentItem.SupportFiles>
+      FeatureTests\ElementServices\CommonMouseScenarios_NonBrowser.xtc
+    </ContentItem>
+<!-- Removing due to inconsistent pass rates
+    <ContentItem Priority="2">
+      <ContentItem.SupportFiles>
+        <ndp:String>FeatureTests\ElementServices\CommonMouseScenarios*.xaml</ndp:String>
+      </ContentItem.SupportFiles>
+      FeatureTests\ElementServices\CommonMouseScenarios_Drag_PartialTrust.xtc
+    </ContentItem>
+-->
+  </txrw:ActionSequenceVariationGenerator>
+
+  <!-- Action sequence scenarios that are run in Window, NavigationWindow and WindowsFormSource surfaces. -->
+  <txrw:ActionSequenceVariationGenerator Name="InputTestActionNonHwndSource" Priority="1">
+
+    <CallbackVariationGenerator.Input>
+      <StorageItem Name="TestContainer">
+        <StorageItem.Type>
+          <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+        </StorageItem.Type>
+      </StorageItem>
+    </CallbackVariationGenerator.Input>
+
+    <CallbackVariationGenerator.SupportFiles>
+      <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+      <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+      <ndp:String>FeatureTests\ElementServices\CoreInput_*.xaml</ndp:String>
+    </CallbackVariationGenerator.SupportFiles>
+
+    <CallbackVariationGenerator.Callback>
+      <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                  TypeName="Avalon.Test.CoreUI.ActionSequenceTestEngine"
+                  MethodName="RunTestAction" />
+    </CallbackVariationGenerator.Callback>
+
+    <!-- Action sequence scenarios... -->
+<!-- Removing due to inconsistent pass rates
+    <ContentItem SecurityLevel="FullTrust" Priority="2">
+      <ContentItem.SupportFiles>
+        <ndp:String>FeatureTests\ElementServices\DialogOpen*.xaml</ndp:String>
+      </ContentItem.SupportFiles>
+      FeatureTests\ElementServices\DialogOpenMouseInputStateScenarios.xtc
+    </ContentItem>
+-->
+    <ContentItem>
+      <ContentItem.SupportFiles>
+        <ndp:String>FeatureTests\ElementServices\CommonKeyboardScenarios*.xaml</ndp:String>
+      </ContentItem.SupportFiles>
+      FeatureTests\ElementServices\CommonKeyboardScenarios.xtc
+    </ContentItem>
+    <ContentItem>
+      <ContentItem.SupportFiles>
+        <ndp:String>FeatureTests\ElementServices\CommonMouseScenarios*.xaml</ndp:String>
+      </ContentItem.SupportFiles>
+      FeatureTests\ElementServices\CommonMouseScenarios.xtc
+    </ContentItem>
+
+  </txrw:ActionSequenceVariationGenerator>
+
+  <!--
+    ***************************
+    ******** Root Nodes *******
+    ***************************
+    -->
+
+  <!-- NavigationWindows and WindowsFormSource containers. -->
+  <txrw:ContainerVariationGenerator Name="OtherSurfaceVariations">
+    <txrw:ContainerVariationGenerator.ApplicationTypes>
+      <ContentItem>ClrExe</ContentItem>
+    </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+    <CallbackVariationGenerator>
+
+      <CallbackVariationGenerator.Output>
+        <StorageItem Name="TestContainer">
+          <StorageItem.Type>
+            <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+          </StorageItem.Type>
+        </StorageItem>
+      </CallbackVariationGenerator.Output>
+
+      <CallbackVariationGenerator.Callback>
+        <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                    TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                    MethodName="CreateTestContainer" />
+      </CallbackVariationGenerator.Callback>
+
+      <ContentItem Priority="2">NavigationWindow</ContentItem>
+      <ContentItem SecurityLevel="FullTrust" Priority="3">WindowsFormSource</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <SelectorGenerator>
+      <GeneratorReference TargetName="InputTestActionNonBrowser" />
+      <GeneratorReference TargetName="InputTestActionNonHwndSource" />
+    </SelectorGenerator>
+
+  </txrw:ContainerVariationGenerator>
+
+  <!-- Window container. -->
+  <txrw:ContainerVariationGenerator Name="WindowVariations">
+    <txrw:ContainerVariationGenerator.ApplicationTypes>
+      <ContentItem Priority="1">WpfApplication</ContentItem>
+    </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+    <CallbackVariationGenerator>
+
+      <CallbackVariationGenerator.Output>
+        <StorageItem Name="TestContainer">
+          <StorageItem.Type>
+            <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+          </StorageItem.Type>
+        </StorageItem>
+      </CallbackVariationGenerator.Output>
+
+      <CallbackVariationGenerator.Callback>
+        <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                    TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                    MethodName="CreateTestContainer" />
+      </CallbackVariationGenerator.Callback>
+
+      <ContentItem>Window</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <SelectorGenerator>
+      <GeneratorReference TargetName="InputTestActionNonBrowser" />
+      <GeneratorReference TargetName="InputTestActionNonHwndSource" />
+      <txrw:ActionSequenceVariationGenerator Priority="2">
+
+        <CallbackVariationGenerator.Input>
+          <StorageItem Name="TestContainer">
+            <StorageItem.Type>
+              <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+            </StorageItem.Type>
+          </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+          <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\CoreInput_*.xaml</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\DialogOpen*.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+          <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                      TypeName="Avalon.Test.CoreUI.ActionSequenceTestEngine"
+                      MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+<!-- Removing due to inconsistent pass rates
+        <ContentItem SecurityLevel="FullTrust">FeatureTests\ElementServices\DialogOpenBoundKeyboardInputStateScenarios.xtc</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">FeatureTests\ElementServices\DialogOpenBoundMouseInputStateScenarios.xtc</ContentItem>
+        <ContentItem SecurityLevel="FullTrust">FeatureTests\ElementServices\DialogOpenKeyboardInputStateScenarios.xtc</ContentItem>
+-->
+      </txrw:ActionSequenceVariationGenerator>
+    </SelectorGenerator>
+
+  </txrw:ContainerVariationGenerator>
+
+  <!-- HwndSource container. -->
+  <txrw:ContainerVariationGenerator Name="HwndSourceVariations" Priority="1">
+    <txrw:ContainerVariationGenerator.ApplicationTypes>
+      <ContentItem Priority="1">WpfApplication</ContentItem>
+    </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+    <CallbackVariationGenerator>
+
+      <CallbackVariationGenerator.Output>
+        <StorageItem Name="TestContainer">
+          <StorageItem.Type>
+            <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+          </StorageItem.Type>
+        </StorageItem>
+      </CallbackVariationGenerator.Output>
+
+      <CallbackVariationGenerator.Callback>
+        <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                    TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                    MethodName="CreateTestContainer" />
+      </CallbackVariationGenerator.Callback>
+
+      <ContentItem>HwndSource</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <SelectorGenerator>
+      <GeneratorReference TargetName="InputTestActionNonBrowser" />
+      <txrw:ActionSequenceVariationGenerator>
+
+        <CallbackVariationGenerator.Input>
+          <StorageItem Name="TestContainer">
+            <StorageItem.Type>
+              <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+            </StorageItem.Type>
+          </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+          <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\CoreInput_*.xaml</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\CommonMouseScenarios*.xaml</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\CommonKeyboardScenarios*.xaml</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\DynamicContentScenarios*.xaml</ndp:String>
+          <ndp:String>FeatureTests\ElementServices\DialogOpen*.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+          <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                      TypeName="Avalon.Test.CoreUI.ActionSequenceTestEngine"
+                      MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <ContentItem>
+          <ContentItem.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\CommonKeyboardScenarios*.xaml</ndp:String>
+          </ContentItem.SupportFiles>
+          FeatureTests\ElementServices\CommonKeyboardScenarios_HwndSource.xtc
+        </ContentItem>
+        <ContentItem>
+          <ContentItem.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\CommonMouseScenarios*.xaml</ndp:String>
+          </ContentItem.SupportFiles>
+          FeatureTests\ElementServices\CommonMouseScenarios.xtc
+        </ContentItem>
+
+      </txrw:ActionSequenceVariationGenerator>
+    </SelectorGenerator>
+
+  </txrw:ContainerVariationGenerator>
+
+  <!-- Browser container. -->
+  <txrw:ContainerVariationGenerator Name="BrowserVariations" Priority="1">
+    <txrw:ContainerVariationGenerator.ApplicationTypes>
+      <ContentItem>Xbap</ContentItem>
+    </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+    <CallbackVariationGenerator>
+
+      <CallbackVariationGenerator.Output>
+        <StorageItem Name="TestContainer">
+          <StorageItem.Type>
+            <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+          </StorageItem.Type>
+        </StorageItem>
+      </CallbackVariationGenerator.Output>
+
+      <CallbackVariationGenerator.Callback>
+        <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                    TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                    MethodName="CreateTestContainer" />
+      </CallbackVariationGenerator.Callback>
+
+      <ContentItem>Browser</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <txrw:ActionSequenceVariationGenerator Priority="1">
+
+      <CallbackVariationGenerator.Input>
+        <StorageItem Name="TestContainer">
+          <StorageItem.Type>
+            <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+          </StorageItem.Type>
+        </StorageItem>
+      </CallbackVariationGenerator.Input>
+
+      <CallbackVariationGenerator.SupportFiles>
+        <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+        <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+        <ndp:String>FeatureTests\ElementServices\CoreInput_*.xaml</ndp:String>
+      </CallbackVariationGenerator.SupportFiles>
+
+      <CallbackVariationGenerator.Callback>
+        <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                    TypeName="Avalon.Test.CoreUI.ActionSequenceTestEngine"
+                    MethodName="RunTestAction" />
+      </CallbackVariationGenerator.Callback>
+
+      <!-- Action sequence scenarios... -->
+      <ContentItem>
+        <ContentItem.SupportFiles>
+          <ndp:String>FeatureTests\ElementServices\CommonKeyboardScenarios*.xaml</ndp:String>
+        </ContentItem.SupportFiles>
+        FeatureTests\ElementServices\CommonKeyboardScenarios.xtc
+      </ContentItem>
+      <ContentItem>
+        <ContentItem.SupportFiles>
+          <ndp:String>FeatureTests\ElementServices\CommonMouseScenarios*.xaml</ndp:String>
+        </ContentItem.SupportFiles>
+        FeatureTests\ElementServices\CommonMouseScenarios.xtc
+      </ContentItem>
+
+    </txrw:ActionSequenceVariationGenerator>
+
+  </txrw:ContainerVariationGenerator>
+
+
+</TestExtenderGraph>
+

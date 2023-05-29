@@ -1,0 +1,856 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+        <AssemblyName>ElementServicesTest</AssemblyName>
+        <OutputType>Library</OutputType>
+        <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+        <DefineConstants>$(DefineConstants);TARGET_NET3_5</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!--  this section is needed by Commanding\Input-->
+        <Compile Include="..\Untrusted\Common\TestCaseBase.cs" />
+        <Compile Include="..\Untrusted\Common\TestCaseCommon.cs" />
+        <Compile Include="..\Untrusted\Common\IHostedTest.cs" />
+        <Compile Include="..\Untrusted\Common\ITestContainer.cs" />
+        <Compile Include="..\Untrusted\DependencyPropertyChangedEventArgsWrapper.cs" />
+        <Compile Include="..\Untrusted\Common\Win32\Win32GenericMessagePump.cs" />
+        <Compile Include="..\Untrusted\DispatcherTimerHelper.cs" />
+        <Compile Include="..\Untrusted\SecurityBaseUnTrustedHelper.cs" />
+
+        <Compile Include="..\Untrusted\Common\Core\TestCase.cs" />
+        <Compile Include="..\Untrusted\Common\Core\TreeHelper.cs" />
+        <Compile Include="..\Untrusted\CoreModelState.cs" />
+        <Compile Include="..\Untrusted\ModelingCommon.cs" />
+        <Compile Include="..\Untrusted\Common\Threading\ThreadTest.cs" />
+        <Compile Include="..\Untrusted\Common\Parser\ParserUtil.cs" />
+        <Compile Include="..\Untrusted\Common\Parser\CustomObjects.cs" />
+        <Compile Include="..\Untrusted\Common\Parser\SimulatedServer.cs" />
+        <Compile Include="..\Untrusted\Common\Parser\ThrottledReadStream.cs" />
+        <Compile Include="..\Untrusted\Common\Serialization\VerifyElement.cs" />
+        <Compile Include="..\Untrusted\Common\Commanding\TestCommandLibrary.cs" />     <!-- Used for Events too -->
+
+        <Compile Include="..\Untrusted\Common\TestCaseCore.cs" />
+        <Compile Include="..\Untrusted\Common\IHasText.cs" />
+        <Compile Include="..\Untrusted\Common\InstrCoreContentPanel.cs" />
+        <Compile Include="..\Untrusted\Common\InstrPanel.cs" />
+        <Compile Include="..\Untrusted\Common\InstrPanelHost.cs" />
+        <Compile Include="..\Untrusted\Common\LogicalChildCollection.cs" />
+        <Compile Include="..\Untrusted\Common\VisualTreeUtils.cs" />
+        <Compile Include="..\Untrusted\Common\ExeStubContainer.cs" />
+        <Compile Include="..\Untrusted\Common\TestCursorLibrary.cs" />
+
+        <Compile Include="..\Untrusted\Common\WinformsTestContainer.cs" />
+        <Compile Include="..\Untrusted\Common\TestApplicationStub.cs" />
+        <Compile Include="..\Untrusted\Common\Core\ValidationTracking.cs" />
+        <Compile Include="..\Untrusted\Common\Elements\InheritanceBehaviorFrameworkElement.cs" />
+        <Compile Include="..\Untrusted\Common\ExeStubContainerFramework.cs" />
+        <Compile Include="..\Untrusted\Common\input\AutoCloseMessageBox.cs" />
+        <Compile Include="..\Untrusted\Common\input\AutoCloseWin32MessageBox.cs" />
+        <Compile Include="..\Untrusted\Common\input\AutoCloseWinFormsMessageBox.cs" />
+        <Compile Include="..\Untrusted\Common\input\TestDependencyInputObject.cs" />
+        <Compile Include="..\Untrusted\Common\input\InstrContentPanel.cs" />
+        <Compile Include="..\Untrusted\Common\input\InstrContentPanelHost.cs" />
+        <Compile Include="..\Untrusted\Common\input\InstrControlPanel.cs" />
+        <Compile Include="..\Untrusted\Common\input\InstrFrameworkContentPanel.cs" />
+        <Compile Include="..\Untrusted\Common\input\InstrFrameworkPanel.cs" />
+        <Compile Include="..\Untrusted\Common\input\InstrShape.cs" />
+        <Compile Include="..\Untrusted\Common\Security\ExecutionContextWrapper.cs" />
+        <Compile Include="..\Untrusted\Common\UIContextObject\SimpleModalTestWindow.cs" />
+        <Compile Include="..\Untrusted\Common\UIContextObject\SimpleNonModalTestWindow.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Employee.cs" />
+        <Compile Include="..\Untrusted\EventRecord.cs" />
+        <Compile Include="..\Untrusted\EventFilter.cs" />
+        <Compile Include="..\Untrusted\EventRecorder.cs" />
+        <Compile Include="..\Untrusted\IModelTestCase.cs" />
+        <Compile Include="..\Untrusted\PropertyFilter.cs" />
+        <Compile Include="..\Untrusted\PropertyRecord.cs" />
+        <Compile Include="..\Untrusted\TypeMemberFilter.cs" />
+        <Compile Include="..\Untrusted\XamlTestDocument.cs" />
+    </ItemGroup>
+
+    <!-- Various Helper files -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\ModelFailureOverride.cs" />
+        <Compile Include="..\Untrusted\Events\EventHelper.cs" />
+        <Compile Include="..\Untrusted\Events\CustomAvalonContentHost.cs" />
+        <Compile Include="..\Untrusted\Events\CustomAvalonControl.cs" />
+        <Compile Include="..\Untrusted\Events\CustomContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\CustomContentHost.cs" />
+        <Compile Include="..\Untrusted\Events\CustomControl.cs" />
+        <Compile Include="..\Untrusted\Events\CustomUIElement.cs" />
+        <Compile Include="..\Untrusted\Common\ModelAutomationBase.cs" />
+        <Compile Include="..\Untrusted\Common\Serialization\SerializationBaseCase.cs" />
+        <Compile Include="..\Untrusted\Common\Serialization\SerializationRoundTrip.cs" />
+        <Compile Include="..\Untrusted\Common\Resources\ResourcesHelper.cs" />
+        <Compile Include="..\Untrusted\Common\Resources\TestHelper.cs" />
+        <Compile Include="..\Untrusted\Source\SourceCommon.cs" />
+        <Compile Include="..\Untrusted\Xaml\ActionTypeForXaml.cs" />
+        <Compile Include="..\Untrusted\Xaml\ParserUtil.cs" />
+        <Compile Include="..\Untrusted\Xaml\Helper.cs" />
+        <Compile Include="..\Untrusted\Xaml\XamlTestRunner.cs" />      <!-- Used by Models -->
+
+        <Compile Include="..\Untrusted\IdTest\IdTestBaseCase.cs" />
+        <Compile Include="..\Untrusted\IdTest\CustomINameScope.cs" />
+        <Compile Include="..\Untrusted\IdTest\ElementsWithRuntimeNamePropertyAttribute.cs" />
+
+        <Compile Include="..\Untrusted\MultipleDispatcherThreadTestCase.cs" />
+        <Compile Include="..\Untrusted\Common\MultipleThreadTestCase.cs" />
+        <Compile Include="..\Untrusted\DispatcherType.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherHooksWrapper.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherHelper.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherWrapper.cs" />
+
+        <Compile Include="..\Untrusted\PropertyEngine\PropertyChanged\CustomDO.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\DependencyObjectProviderHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\PEHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\ReadOnlyDPs\CustomElements.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\HwndApplication.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\PEApplication.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\RefreshDPBase.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\TestApplication.cs" />
+    </ItemGroup>
+
+    <!-- Verifiers called from .xaml -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Events\EventsVerifier.cs" />
+        <Compile Include="..\Untrusted\IdTest\IdTestVerifiers.cs" />
+        <Compile Include="..\Untrusted\Input\MultipleCursorVerifiers.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Verifiers\AutoAlias.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Misc.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Resources.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Verifiers\ThemeChange.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Title.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Triggers.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Util.cs" />
+    </ItemGroup>
+
+    <!-- Framework for Commanding/Input/InputSequence, previously in TestRuntime -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Common\TestApp\ActionSequenceTestEngine.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\ApplicationController.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\AssemblyDesc.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\CommonStorage.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\ContainerVariationItem.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\Controller.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\ControllerProxy.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\Helper.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\HostType.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\StorageItem.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\StubTestContainer.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\TestApp.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\ThreadController.cs" />
+        <Compile Include="..\Untrusted\Common\TestApp\WinFormsController.cs" />
+
+        <Compile Include="..\Untrusted\Input\InputAction.cs" />
+        <Compile Include="..\Untrusted\Common\Parser\TestTypeDescriptorContext.cs" />
+    </ItemGroup>
+
+    <!-- Commanding/Input (non-TXR) Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionICollectionApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandDefaultConstructorApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandInterfaceDeclaringTypeApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryInputGesturesApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerInvalidateStatusApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerInvalidateStatusMouseInputApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerInvalidateStatusSetFocusApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\InputBindingCollectionICollectionApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\InputBindingCollectionInheritanceContextApp.cs" Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5' "/>
+        <Compile Include="..\Untrusted\Commanding\InputBindingCollectionDynamicResourceApp.cs" Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5' " />
+        <Compile Include="..\Untrusted\Commanding\InputGestureCollectionICollectionApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\InputGestureMultipleGesturesFromCommandApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseActionConverterCultureNullApp.cs" />
+
+        <Compile Include="..\Untrusted\input\UIElementIsHitTestVisibleApp.cs" />
+        <Compile Include="..\Untrusted\input\UIElementInputHitTestVisibleFalseApp.cs" />
+    </ItemGroup>
+
+    <!-- Commanding/Input CommandingApp Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Common\Commanding\CommandingApp.cs" />
+        <Compile Include="..\Untrusted\Common\Commanding\CommandingPartialTrustApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingBindingsFromDefaultsApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionAddNonLinkApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionAddRangeApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionClearApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionContainsApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionCopyToApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionCountApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionCountFromDefaultsApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionFromIListApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionIListApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionRemoveApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionRemoveFromArrayApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionRemoveNonLinkApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingCollectionSyncApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingDynamicCommandSerializeApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingEnabledAfterRemoveApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingEnabledApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingFromDefaultsApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingInvokeKeyDownApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingKeyBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingKeyBindingAppsKeyApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingMouseBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingMouseBindingMiddleButtonApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingPenBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingSameKeyBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingSealApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandBindingSerializeApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandConverterConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandConverterConvertFromPrefixApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandConverterConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandDefaultsKeyBindingSpecialKeyApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandEmptyStringApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryCommandConverterApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryCommandConverterConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryCommandValueSerializerConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryCommandValueSerializerConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryExecuteApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryNavigationCommandsExecuteApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryNavigationWindowPropertiesApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryNavigationWindowPropertiesNoExecuteHandlerApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryPropertiesApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandLibraryPropertiesNoExecuteHandlerApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerRegisterClassCommandBindingsApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerRegisterClassCommandBindingsContentElementApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerRegisterClassCommandBindingsGlobalApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerRegisterClassInputBindingsApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerRegisterClassInputBindingsClassCommandBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerRegisterClassInputBindingsContentElementApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerRegisterClassInputBindingTypeParentApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandManagerSuggestRequeryApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandMultipleKeyBindingAppsKeyApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandMultipleKeyBindingSpecialKeyApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandNullDeclaringTypeApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandNullStringApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandSerializeApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandSerializeInstanceCommandApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandSourceButtonBaseApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandSourceHyperlinkApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandSourceKeyBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandSourceMenuItemApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\CommandSourceMouseBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\ContentElementCommandBindingKeyBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\ContentElementRaiseCommandApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\ExecuteEventArgsNullApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\ExecuteInvalidInputElementApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\FrameworkContentElementCommandBindingOnDocumentViewerApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\FrameworkElementCommandBindingOnFrameApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\InputBindingCollectionApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\InputBindingSerializeApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\InputGestureCollectionApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureAlphanumericKeyApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureConverterCanConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureConverterCanConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureConverterConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureConverterConvertFromCombination2KeyApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureConverterConvertFromCombination3KeyApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureConverterConvertFromInvalidKeyBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureConverterConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureConverterConvertToInvalidDestinationTypeApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureOverrideChildApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGestureOverrideChildDefaultGesturesApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\KeyGesturePropertiesApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseActionConverterCanConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseActionConverterCanConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseBindingFromDefaultsApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseBindingFromDefaultsContentElementApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseBindingRaiseEventApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseBindingRaiseEventContentElementApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseGestureConverterCanConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseGestureConverterCanConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseGestureOverrideChildApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseGestureOverrideChildDefaultGesturesApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MouseGesturePropertiesApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\MultipleCommandBindingVerifiers.cs" />
+        <Compile Include="..\Untrusted\Commanding\MultipleKeyBindingVerifiers.cs" />
+        <Compile Include="..\Untrusted\Commanding\QueryEnabledEventArgsNullApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\QueryEnabledInvalidInputElementApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\InputBindingPartialTrustApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\SecureCommandBindingExecutePartialTrustApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\securecommandbindingpartialtrustapp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\SecureCommandExecutePartialTrustApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\securecommandpartialtrustapp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\secureinputbindingpartialtrustapp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\UICommandBindingExecutePartialTrustApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\UICommandBindingPartialTrustApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\UICommandExecutePartialTrustApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\Security\UICommandPartialTrustApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\UICommandNullCommandTextApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\UIElementPreviewQueryStatusApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\UIElementRaiseCommandApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\UIElementRaiseQueryEnabledClassBindingApp.cs" />
+        <Compile Include="..\Untrusted\Commanding\UIElementRaiseQueryStatusApp.cs" />
+    </ItemGroup>
+
+    <!-- Input tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Common\Input\InputSequenceApp.cs" />
+        <Compile Include="..\Untrusted\Common\Input\InputApp.cs" />
+
+        <Compile Include="..\Untrusted\Input\ContentElementFocusApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureAfterMessageBoxApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureAfterModalWindowApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureAfterNonModalWindowApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureAfterRemoveElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureAfterRemoveElementEnabledFalseApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureAfterRemoveElementRecaptureApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureAfterWinFormsMessageBoxApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureClickApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureLengthAnimationApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureLengthAnimationPositionApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\CaptureMoveNoSourceApp.cs" />
+        <Compile Include="..\Untrusted\Input\CapturePositionApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementCaptureApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementCaptureToSubTreeApp.cs" />
+        <Compile Include="..\Untrusted\Input\contentElementCaptureToSubtreeMouseClickApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementForceCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementIsEnabledApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementIsFocusWithinApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementIsMouseDirectlyOverApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementIsMouseOverApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementIsMouseOverChangedApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementKeyDownApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementLostFocusApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseButtonApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseButtonImmediateMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseCursorAniFileApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseCursorAniHandleApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseCursorAniStreamApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseCursorCurFileApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseCursorCurHandleApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseCursorCurStreamApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseDirectlyOverApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseDownOutsideCapturedElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseDownOutsideCapturedElementCanvasApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseEnterApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseEnterBorderApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseEnterBorderImmediateMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseEnterImmediateMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseLeftButtonDownApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseRightButtonDownApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementMouseWheelApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementPreviewFocusApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementQueryCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\ContentElementReleaseMouseCaptureApp.cs" />
+        <Compile Include="..\Untrusted\Input\CursorConverterConvertFromRelativePathApp.cs" />
+        <Compile Include="..\Untrusted\Input\CursorRelativePathStringApp.cs" />
+        <Compile Include="..\Untrusted\Input\CursorTypeConverterCanConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Input\CursorTypeConverterCanConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Input\CursorTypeConverterCanConvertToNullContextApp.cs" />
+        <Compile Include="..\Untrusted\Input\CursorTypeConverterConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Input\CursorTypeConverterConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Input\CursorTypeConverterTest.cs" />
+        <Compile Include="..\Untrusted\Input\CustomDialogOpenControl.cs" />
+        <Compile Include="..\Untrusted\Input\FocusAfterMessageBoxApp.cs" />
+        <Compile Include="..\Untrusted\Input\FocusAfterModalWindowApp.cs" />
+        <Compile Include="..\Untrusted\Input\FocusAfterNonModalWindowApp.cs" />
+        <Compile Include="..\Untrusted\Input\FocusAfterRemoveElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\FocusAfterRemoveElementRefocusApp.cs" />
+        <Compile Include="..\Untrusted\Input\FocusAfterWinFormsMessageBoxApp.cs" />
+        <Compile Include="..\Untrusted\Input\FocusInvalidInputElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\ForceCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\frameworkContentElementCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\frameworkContentElementFocusableApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkContentElementIsFocusWithinApp.cs" />
+        <Compile Include="..\Untrusted\Input\frameworkcontentelementismouseoverapp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkContentElementIsMouseOverChangedApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkContentElementQueryCursorMouseMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementForceCursorElementMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementInputHitTestDisabledApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementInputHitTestInvisibleApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementIsFocusWithinApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementIsMouseOverChangedApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementIsMouseOverChangedNewTooltipApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementMouseOverVisibilityPropertyTriggerApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementQueryCursorElementMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementQueryCursorMouseMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementQueryCursorNullCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementQueryCursorSendMessageApp.cs" />
+        <Compile Include="..\Untrusted\Input\FrameworkElementQueryCursorUpdateCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\GetIntermediatePointsBaseApp.cs" />
+        <Compile Include="..\Untrusted\Input\GetIntermediatePointsContentElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\GetIntermediatePointsUIElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\InitializeFocus\CoreApplicationFoucusInitialize5.cs" />
+        <Compile Include="..\Untrusted\Input\InitializeFocus\FrameworkApplicationNoChild1.cs" />
+        <Compile Include="..\Untrusted\Input\InitializeFocus\FrameworkApplicationNonFocusableRoot2.cs" />
+        <Compile Include="..\Untrusted\Input\InputManagerEventsApp.cs" />
+        <Compile Include="..\Untrusted\Input\InputManagerMultipleProcessEventsApp.cs" />
+        <Compile Include="..\Untrusted\Input\InputManagerProcessEventPeekInputApp.cs" />
+        <Compile Include="..\Untrusted\Input\InputManagerProcessEventPushInputNullApp.cs" />
+        <Compile Include="..\Untrusted\Input\InputManagerProcessEventPushInputPromoteInvalidApp.cs" />
+        <Compile Include="..\Untrusted\Input\InputManagerProcessEventPushInputPromoteNullApp.cs" />
+        <Compile Include="..\Untrusted\Input\IsFocusWithinApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyAfterMessageBoxApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyAfterWinFormsMessageBoxApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyboardDeviceIsKeyToggledApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyboardFocusedApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyboardFocusedFrameApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyboardFocusedPageNavigateApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyboardFocusedPageNavigateBackApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyboardStateApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyDownApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyStateApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterCanConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConvertercanConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertFromAllKeysApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertFromInvalidKeyApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertFromSpecificCultureApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertToInvalidDestinationTypeApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertToInvalidKeyApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertToKeyDownApp.cs" />
+        <Compile Include="..\Untrusted\Input\KeyTypeConverterConvertToKeyNoneApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterCanConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterCanConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterConvertFromApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterConvertFromCombination2KeyApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterConvertFromCombination3KeyApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterConvertFromSpecificCultureApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterConvertFromWindowsKeyApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterConvertToApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterConvertToInvalidDestinationTypeApp.cs" />
+        <Compile Include="..\Untrusted\Input\ModifierKeysTypeConverterConvertToInvalidKeyApp.cs" />
+        <Compile Include="..\Untrusted\Input\MostRecentInputDeviceApp.cs" />
+        <Compile Include="..\Untrusted\Input\MostRecentInputDeviceMouseMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseButtonAfterMessageBoxApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseButtonAfterWinFormsMessageBoxApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseButtonApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseButtonOnContentElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseButtonOnFrameWithContentElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseButtonOnFrameWithFrameworkElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseButtonOnFrameworkElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseCaptureButtonDownApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseCapturedApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseClassButtonApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseClassButtonUpApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseCursorRightBorderApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseCursorToStringApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseCursorToStringCursorTypeApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseDirectlyOverApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseDirectlyOverDrawingVisualApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseDirectlyOverPointAnimationVisualApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseDirectlyOverRemoveWindowContentApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseDirectlyOverVisualApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseDoubleClickApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseDoubleClickButtonStateApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseDownApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseEnterApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseEnterImmediateMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseGetPositionApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseGetPositionInvalidInputElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseLeaveDoubleAnimationApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseLeaveDoubleAnimationRepeatApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseRightButtonDownApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseSetCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseTripleClickApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseUpdateCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\MouseWheelApp.cs" />
+        <Compile Include="..\Untrusted\Input\MultiCursorMoveToAndClickApp.cs" />
+        <Compile Include="..\Untrusted\Input\MultisourceFocusableApp.cs" />
+        <Compile Include="..\Untrusted\Input\MultiWindowCaptureApp.cs" />
+        <Compile Include="..\Untrusted\Input\MultiWindowCaptureMouseWheelApp.cs" />
+        <Compile Include="..\Untrusted\Input\MultiWindowFocusableApp.cs" />
+        <Compile Include="..\Untrusted\Input\MultiWindowFocusActiveElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\MultiWindowFocusApp.cs" />
+        <Compile Include="..\Untrusted\Input\PreProcessEventPeekInputApp.cs" />
+        <Compile Include="..\Untrusted\Input\PreProcessEventPopInputApp.cs" />
+        <Compile Include="..\Untrusted\Input\PreviewMouseButtonOnContentElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\PreviewMouseButtonOnFrameworkElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\SourceChangedEventTest.cs" />
+        <Compile Include="..\Untrusted\Input\TextInputAltCharApp.cs" />
+        <Compile Include="..\Untrusted\Input\TextInputAltNumKeyApp.cs" />
+        <Compile Include="..\Untrusted\Input\TextInputAltShiftCharApp.cs" />
+        <Compile Include="..\Untrusted\Input\TextInputApp.cs" />
+        <Compile Include="..\Untrusted\Input\TextInputControlCharApp.cs" />
+        <Compile Include="..\Untrusted\Input\TextInputShiftCharApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementCaptureApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementCaptureToSubTreeApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementCaptureToSubtreeContentHostMouseClickApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementCaptureToSubtreeMouseClickApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementFocusApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementInputHitTestApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementInputHitTestContentHostApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementInputHitTestTransparentBrushApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementIsEnabledApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementIsMouseDirectlyOverApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementLostFocusApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseCursorAniFileApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseCursorAniHandleApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseCursorAniStreamApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseCursorCurFileApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseCursorCurHandleApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseCursorCurStreamApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseCursorOverrideApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseDownOutsideCapturedElementApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseDownOutsideCapturedElementCanvasApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseEnterBorderApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementMouseEnterBorderImmediateMoveApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementPreviewFocusApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementQueryCursorApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementReleaseMouseCaptureApp.cs" />
+        <Compile Include="..\Untrusted\Input\UIElementReleaseMouseCaptureLostCaptureApp.cs" />
+    </ItemGroup>
+
+    <!-- Integration Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Integration\TypeActions\ActionHelper.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\ControlTemplateActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\DataTemplateActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\ElementBindingActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\EventTriggerActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\MouseActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\StyleActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\StylePropertyTriggerActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\StylePropertyTriggerStoryboardActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\TemplatePropertyTriggerActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\TemplatePropertyTriggerStoryboardActionRunner.cs" />
+        <Compile Include="..\Untrusted\Integration\TypeActions\TriggerActionHelper.cs" />
+
+        <Compile Include="..\Untrusted\Integration\XamlBasedIntegration.cs" />
+    </ItemGroup>
+
+    <!-- Event Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Events\AddInstanceHandlerContentElementParameterCheck.cs" />
+        <Compile Include="..\Untrusted\Events\AddInstanceHandlerUIElementParameterCheck.cs" />
+        <Compile Include="..\Untrusted\Events\AttachTwoEventsToAControl.cs" />
+        <Compile Include="..\Untrusted\Events\DynamicLoadedModel.cs" />
+        <Compile Include="..\Untrusted\Events\EventMangerGetClassListenersParaValidation.cs" />
+        <Compile Include="..\Untrusted\Events\EventMangerRegisterRoutedIDBoundaryCheck.cs" />
+        <Compile Include="..\Untrusted\Events\EventRouteAddParaCheck.cs" />
+
+        <Compile Include="..\Untrusted\Events\GetRoutedEventIDsForOwnerWhenNon.cs" />
+        <Compile Include="..\Untrusted\Events\RaiseEventParaCheck.cs" />
+        <Compile Include="..\Untrusted\Events\RegisterClasshandlerParameterCheck.cs" />
+        <Compile Include="..\Untrusted\Events\RemoveHandlerOnContentElementParaValidation.cs" />
+        <Compile Include="..\Untrusted\Events\RemoveHandlerOnUIElementParaValidation.cs" />
+        <Compile Include="..\Untrusted\Events\RoutedEventHandlerInfoTest.cs" />
+        <Compile Include="..\Untrusted\Events\RoutedEventArgsParaCheck.cs" />
+        <Compile Include="..\Untrusted\Events\RoutedEventArgsParaCheck1.cs" />
+        <Compile Include="..\Untrusted\Events\StaticLoadedModel.cs" />
+
+        <Compile Include="..\Untrusted\Events\Bubble\AttachBubblingEventHandler.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\AttachBubblingEventHandlersToTwoControls.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\AttachTwoBubblingEventHandlersToAControl.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingBuildRouteInvokeHandlers.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRouteAdd.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRouting52.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig41.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig42.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig43.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig44.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig45.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig46.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig47.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig48.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig49.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkAvalonFig50.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkFig41.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkFig42.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkFig43.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkFig44.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingEventRoutingFrameworkFig45.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\BubblingSubclassClasshandlersSequence.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\DeleteNodeWhileRaisingEvent.cs" />
+        <Compile Include="..\Untrusted\Events\Bubble\RemoveBubblingEventHandler.cs" />
+
+        <Compile Include="..\Untrusted\Events\CLREvent\ClrEventUsingGenericStore.cs" />
+
+        <Compile Include="..\Untrusted\Events\ContentElement\AddInstanceBubbleOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\AddInstanceTunnelOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\BubbleLineStartFromContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\BubbleMultipleHandlerOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\BuildRouteInvokeHandlersOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\CheckContentElement4ClassHandler.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\ClassHandlerWithSubClass.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\ClassHandlerWithSubClass1.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\ClassHandlerWithSubClass2.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\ContentElementClassHandler.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\EventIDOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\GetRoutedEventIDsContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\GetRoutedEventIDsFromContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\RaiseEventCheckArgsOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\RaiseEventOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\RemoveBubblingEventHandlerOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\TunnelMultipleHandlerOnContentElement.cs" />
+        <Compile Include="..\Untrusted\Events\ContentElement\TunnelMultipleHandlerOnPureContentElement.cs" />
+
+        <Compile Include="..\Untrusted\Events\ContentHost\AddInstanceBubbleOnContentHost.cs" />
+        <Compile Include="..\Untrusted\Events\ContentHost\AddInstanceTunnelOnContentHost.cs" />
+        <Compile Include="..\Untrusted\Events\ContentHost\ContentHostClassHandler.cs" />
+        <Compile Include="..\Untrusted\Events\CustomControl\CustomControlClassHandler.cs" />
+        <Compile Include="..\Untrusted\Events\handledness\ClasshandlerHandledToo.cs" />
+        <Compile Include="..\Untrusted\Events\handledness\ClasshandlerNotHandledToo.cs" />
+        <Compile Include="..\Untrusted\Events\handledness\InstancehandlerHandledToo.cs" />
+        <Compile Include="..\Untrusted\Events\handledness\InstancehandlerMultipleNodes.cs" />
+        <Compile Include="..\Untrusted\Events\handledness\InstancehandlerNotHandledToo.cs" />
+        <Compile Include="..\Untrusted\Events\handledness\MixedhandlerMultipleNodes.cs" />
+
+        <Compile Include="..\Untrusted\Events\NonDO\EventIDOnNonDO.cs" />
+        <Compile Include="..\Untrusted\Events\RegressionTests\RegressionLoadedDynamic.cs" />
+
+        <Compile Include="..\Untrusted\Events\Tunnel\AttachTunnelingEventHandler.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\AttachTunnelingEventHandlersToTwoControls.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\AttachTwoTunnelingEventHandlersToAControl.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\RemoveTunnelingEventHandler.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingBuildRouteInvokeHandlers.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRouteAdd.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig41.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig42.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig43.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig44.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig45.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig46.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig47.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig48.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig49.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingEventRoutingFrameworkFig50.cs" />
+        <Compile Include="..\Untrusted\Events\Tunnel\TunnelingSubclassClasshandlersSequence.cs" />
+
+        <Compile Include="..\Untrusted\Events\UIElement\BubbleBuildRouteCoreNoNone.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\BubbleBuildRouteCoreNoNoneTop.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\BubbleMultipleHandlerOnUIElement.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\BuildRouteInvokeHandlersOnUIElement.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\EventIDOnUIElement.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\GetRoutedEventIDsFromUIElement.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\GetRoutedEventIDsUIElement.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\RaiseEventCheckArgsOnUIElement.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\RaiseEventOnUIElement.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\TunnelMultipleHandlerOnUIElement.cs" />
+        <Compile Include="..\Untrusted\Events\UIElement\UIElementAdjustEventSource.cs" />
+        <Compile Include="..\Untrusted\Events\VisualElement\TunnelMultipleHandlerOnVisualElement.cs" />
+        <Compile Include="..\Untrusted\Events\VisualElement\VisualElement.cs" />
+    </ItemGroup>
+
+    <!-- IdTest (NameScope) Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\IdTest\BugRepro2.cs" />
+        <Compile Include="..\Untrusted\IdTest\ElementIdTestCase1.cs" />
+        <Compile Include="..\Untrusted\IdTest\ElementIdTestCase2.cs" />
+        <Compile Include="..\Untrusted\IdTest\NonDoIdTestCase.cs" />
+        <Compile Include="..\Untrusted\IdTest\StyleIdTestCase1.cs" />
+    </ItemGroup>
+
+    <!-- Dispatcher Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Dispatcher\BasicInvoking.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\ClickButtonNestedNestedPump.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\ClickButtonNestedPump.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\DispatchingMultipleDispatchersMultipleContext.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\HostingAvalonWithaDispatcher.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\NestedPumpExitIncorrectOrder.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\PushFrameRobustnessSimple.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\PushFrameTest.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\SimpleHwndDispatcherTest.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\SimpleNestedMessageLoop.cs" />
+        <Compile Include="..\Untrusted\Dispatcher\UnhandledExceptionTest.cs" />
+    </ItemGroup>
+
+    <!-- ComponentDispatcher Tests -->
+    <ItemGroup>
+        <Frameworkcomponentdispatcher Include="ComponentDispatcher\ComponentDispatcherHelper.cs" />
+        <Frameworkcomponentdispatcher Include="ComponentDispatcher\ComponentDispatcherTest.cs" />
+    </ItemGroup>
+
+    <!-- Threading Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Threading\AsyncOperationManagerIntegrationBVT.cs" />
+        <Compile Include="..\Untrusted\Threading\BackgroundWorkerBVT.cs" />
+        <Compile Include="..\Untrusted\Threading\BVTDispatcherHooks.cs" />
+        <Compile Include="..\Untrusted\Threading\CulturePreservingExecutionContextTests.cs" Condition="'$(WPF_TESTBUILD_TARGETVERSION_ATLEAST_46)' != ''"/>
+        <Compile Include="..\Untrusted\Threading\DispatcherBVTs.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherFromThreadTests.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherHooksInstanceModel.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherMessageLoopServiceBVT.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherMiscTest.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherObjectModel.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherOperationBVTs.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherOperationNotificationModel.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherOperationWrapper.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherOperation\DispatcherOperationModeling.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherOperation\DispatcherOperationModelingAutomation.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherOperationPost.cs" />
+        <Compile Include="..\Untrusted\Threading\InvokeWrapper.cs" />
+        <Compile Include="..\Untrusted\Threading\InvokeWrapperHelper.cs" />
+        <Compile Include="..\Untrusted\Threading\ThreadAction.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherOwnershipModel.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherOwnerMultipleModel.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherSecurityTest.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherSyncContextBVT.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherTimerLongTest.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherTimerModel.cs" />
+        <Compile Include="..\Untrusted\Threading\DispatcherTimerWrapper.cs" />
+        <Compile Include="..\Untrusted\Threading\NestingPumpModel.cs" />
+        <Compile Include="..\Untrusted\Threading\NestingTestCases.cs" />
+        <Compile Include="..\Untrusted\Threading\ShutdownEventsModel.cs" />
+        <Compile Include="..\Untrusted\Threading\SingleInvokeModel.cs" />
+        <Compile Include="..\Untrusted\Threading\StopRestartOnTick.cs" />
+        <Compile Include="..\Untrusted\Threading\SynchronizationContextModel.cs" />
+        <Compile Include="..\Untrusted\Threading\TestDispatcherProcessingDisabled.cs" />
+        <Compile Include="..\Untrusted\Threading\TestDispatcherSecurityExceptions.cs" />
+        <Compile Include="..\Untrusted\Threading\TestExecutionContextinAvalon.cs" />
+    </ItemGroup>
+
+    <!-- Container Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Container\FileStream.cs" />
+        <Compile Include="..\Untrusted\Container\NamingSupport.cs" />
+        <Compile Include="..\Untrusted\Container\StorageInfo.cs" />
+        <Compile Include="..\Untrusted\Container\StorageRoot.cs" />
+        <Compile Include="..\Untrusted\Container\StorageRootThemePark.cs" />
+        <Compile Include="..\Untrusted\Container\StreamInfo.cs" />
+        <Compile Include="..\Untrusted\Container\ThemeParkUtils.cs" />
+    </ItemGroup>
+
+    <!-- Resources Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Resources\BVT\BVT1.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT2.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT3.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT4.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT5.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT6.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT7.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT8.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT9.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT10.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT11.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT12.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT13.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT14.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT15.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT16.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\BVT17.cs" />
+        <Compile Include="..\Untrusted\Resources\BVT\ResourceDictionary.cs" />
+        <Compile Include="..\Untrusted\Resources\IDictionary\IDictionaryModel.cs" />
+        <Compile Include="..\Untrusted\Resources\MergedDictionaries\MergedDictionariesModel.cs" />
+        <Compile Include="..\Untrusted\Resources\MergedDictionaries\MergedDictionariesVerifier.cs" />
+        <Compile Include="..\Untrusted\Resources\MergedDictionaries\MergedDictionariesXamlHelper.cs" />
+        <Compile Include="..\Untrusted\Resources\MergedDictionaries\MergedDictionaryTemplates.cs" />
+        <Compile Include="..\Untrusted\Resources\Model\ResourcesModel.cs" />
+        <Compile Include="..\Untrusted\Resources\Model\ResourcesModelState.cs" />
+        <Compile Include="..\Untrusted\Resources\Model\ResourcesModelVerifiers.cs" />
+        <Compile Include="..\Untrusted\Resources\Model\ResourcesModelXamlHelper.cs" />
+        <Compile Include="..\Untrusted\Resources\RegressionTests\ResourcesRegressionTests.cs" />
+        <Compile Include="..\Untrusted\Resources\RegressionTests\ResourcesRegressionXamlTests.cs" />
+    </ItemGroup>
+
+    <!-- PropertyEngine Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\PropertyEngine\RegressionTests\BugRepro29.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\RegressionTests\RegressionReadOnlyAttachedProp.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\RegressionTests\StyleSetterSpecialCaseApp_Bug35.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\RegressionTests\BugVerification30.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\RegressionTests\Bug31.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\RegressionTests\Bug32.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\DependencyObjectProviderTests.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\DependencyObjectProviderFullTrustTests.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\IsTemplatedValueDynamic.cs" Condition="'$(WPF_TESTBUILD_TARGETVERSION_ATLEAST_471)' == 'true'"/>
+        <Compile Include="..\Untrusted\PropertyEngine\Template\TemplateModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\TemplateModelVerifiers.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\TemplateModelXamlHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\TemplateResourceModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\TemplateResourceModelVerifiers.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\TemplateResourceModelXamlHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\ChainedTriggers\ChainedTriggersModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\ChainedTriggers\ChainedTriggersVerifier.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\ChainedTriggers\ChainedTriggersXamlHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\DisjointTrees\DisjointTreeModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\DisjointTrees\DisjointTreeModelVerification.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\DisjointTrees\DisjointTreeModelXamlHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\DisjointTrees\DisjointTreeModelHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\InheritanceBehavior\InheritanceBehaviorModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\InheritanceBehavior\InheritanceCoercion.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Precedence\PrecedenceModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\InheritanceBehavior\OverrideInheritanceBehavior.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\PropertyChanged\CallBackVerificationModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\PropertyTrigger\Model\PropertyTriggerModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\PropertyTrigger\Model\PropertyTriggerModelVerifier.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\PropertyTrigger\Model\PropertyTriggerModelXamlHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\DependencyObject.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\DependencyPropertyRegister.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\DependencyObjectType.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\DependencyPropertyWithIntlName.cs" />
+
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\FrameworkElement.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\FrameworkElementFactory.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\IntraResourceStyleReference.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\InvalidateSmallerOldStyleVisualTree.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\StyleOverride.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\OnDpRegisterWithWithoutAttached.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\OnExternalValueValidation.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\PriorToRefresh.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\UIPropertyMetadata.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithEventHandlerInStyle.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithFceInVisualTree.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithImplicitBasedOnStyleLookup.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithParseBasedOnInStyle.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithParseMultiplePropertyTrigger.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithReadOnlyDependencyProperty.cs" />
+        <!-- <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithStoryboards.cs" /> -->
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithStyleDynamicResourceReference.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Refresh\WithStyleSetBinding.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\StyleResources\StyleResourcesAPI.cs" />
+
+        <Compile Include="..\Untrusted\PropertyEngine\ReadOnlyDPs\ReadOnlyDPModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Style\StyleModel.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Style\StyleModelVerifiers.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Style\StyleModelXamlHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\StyleHelperBugs\StyleHelper_Bugs.cs" />
+    </ItemGroup>
+
+    <!-- Integration DWM tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Integration\DWM\BlurBehindAvalonClientAreaTest.cs" />
+        <Compile Include="..\Untrusted\Integration\DWM\DisableEnableNonClientRendering.cs" />
+        <Compile Include="..\Untrusted\Integration\DWM\DwmApi.cs" />
+        <Compile Include="..\Untrusted\Integration\DWM\DwmApiIntegrationTestBase.cs" />
+        <Compile Include="..\Untrusted\Integration\DWM\DwmExtendFrameIntoClientAreaTest.cs" />
+        <Compile Include="..\Untrusted\Integration\DWM\DwmHelper.cs" />
+        <Compile Include="..\Untrusted\Integration\DWM\EnableDisableDWMTest.cs" />
+        <Compile Include="..\Untrusted\Integration\DWM\InsertThumbnailTest.cs" />
+        <Compile Include="..\Untrusted\Integration\DWM\Win32.cs" />
+        <Compile Include="..\Untrusted\VScanHelper.cs" />
+    </ItemGroup>
+
+    <!-- Orcas Tests -->
+    <ItemGroup>
+        <Compile Include="..\Untrusted\Input\UIElement3DSequenceTests.cs" />
+        <Compile Include="..\Untrusted\Resources\UIElement3DResourcesIntegration.cs" />
+        <Compile Include="..\Untrusted\Common\VisualTreeUtils_Orcas.cs" />
+        <Compile Include="..\Untrusted\Input\UIElement3DPopupServices.cs" />
+        <Compile Include="..\Untrusted\Input\Viewport2DVisual3DScrollViewer.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\Element3D\TemplateElement3D.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\Element3D\TemplateElement3DHelper.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\Element3D\TemplateResourcesElement3D.cs" />
+        <Compile Include="..\Untrusted\PropertyEngine\Template\Element3D\TriggerElement3D.cs" />
+    </ItemGroup>
+
+    <!-- Xaml Files -->
+    <ItemGroup>
+        <Page Include="..\TestData\bvt\Events\RegressionTests\*.xaml" />
+        <Page Include="..\TestData\bvt\PropertyEngine\RegressionTests\*.xaml" />
+        <Page Include="..\TestData\bvt\Resources\RegressionTests\*.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(InternalUtilitiesProject)" />
+        <ProjectReference Include="$(TestContractsProject)" />
+        <ProjectReference Include="$(TestRuntimeProject)" />
+        <ProjectReference Include="$(CoreTestsTrustedProject)" />
+    </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Threading.AccessControl" Version="$(SystemThreadingAccessControlVersion)" />
+  </ItemGroup>
+</Project>

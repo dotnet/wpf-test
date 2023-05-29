@@ -1,0 +1,34 @@
+﻿
+<!-- Named style to default style, disappearing visual tree, storyboard. -->
+
+
+
+<cmn:CustomStackPanel
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.PropertyEngine.RefreshInvalidatePreviousSmallerStyleVisualTreeTest.InvalidatePreviousSmallerStyleVisualTree.RoundtripCV" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+  <cmn:CustomStackPanel.Resources>
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Content" Value="Changed" />
+    </Style>
+
+    <Style x:Key="btnStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+        <StackPanel> 
+          <TextBlock Name="validationContent">Same</TextBlock>
+        </StackPanel>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+    
+  </cmn:CustomStackPanel.Resources> 
+
+  <Button Style="{StaticResource {x:Type Button}}" Name="btn" />
+
+</cmn:CustomStackPanel>

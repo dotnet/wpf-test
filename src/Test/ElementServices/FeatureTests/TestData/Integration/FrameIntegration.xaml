@@ -1,0 +1,78 @@
+﻿<cmn:CustomWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+    xmlns:integration="clr-namespace:Avalon.Test.CoreUI.Integration;assembly=ElementServicesTest" 
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.Integration.FrameIntegration.Verify"
+ >
+    <integration:CustomCanvasForFrameIntegration  Button.Click="ButtonClick" Name="outerButton"
+      xml:lang="de-DE">
+      <integration:CustomCanvasForFrameIntegration.Resources>
+        <Style x:Key="TestStyle" TargetType="{x:Type Control}" >
+          <Setter Property="Background" Value="Red" />
+        </Style>
+        <ControlTemplate x:Key="TestTemplate" TargetType="{x:Type Control}" >
+          <Border>
+             <Control Name="ControlInTemplate" />
+          </Border>              
+          <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="FontSize" Value="20" />
+              </MultiTrigger.Conditions>
+              <Setter Property="Background" Value="LightGreen" />
+            </MultiTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="FrameStyle" TargetType="{x:Type Frame}" >
+          <Setter Property="SandboxExternalContent" Value="true" />
+        </Style>
+        <ControlTemplate x:Key="FrameTemplate" TargetType="{x:Type Frame}" >
+          <ControlTemplate.Triggers>
+              <Trigger Property="SandboxExternalContent" Value="true" >
+                <Setter Property="Height" Value="500" />
+              </Trigger>
+              <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                  <BeginStoryboard>
+                    <Storyboard >
+                      <DoubleAnimation From="300" To="300" Duration="0:0:0" Storyboard.TargetProperty="(Control.Width)" />
+                    </Storyboard>
+                  </BeginStoryboard>
+                </EventTrigger.Actions>
+              </EventTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </integration:CustomCanvasForFrameIntegration.Resources>
+    <Frame Name="frame1" Style="{DynamicResource FrameStyle}"  Canvas.Top="20">
+         <Frame.Content>
+            <Button Style="{DynamicResource TestStyle}" Name="buttonInFrame">
+              <Button.Resources>
+                <Style x:Key="styleInFrame" TargetType="{x:Type Control}" >
+                  <Setter Property="Background" Value="Blue" />
+                </Style>
+              </Button.Resources>
+               <Button Name="childButton" Style="{DynamicResource styleInFrame}" FontSize="20"/>
+            </Button>
+         </Frame.Content>
+    </Frame>
+    <Frame Name="frame2" Source="ButtonForFrameIntegration.xaml"  Canvas.Top="50"  Style="{DynamicResource FrameStyle}" />
+    <Frame Name="frame3" Canvas.Top="100" Style="{DynamicResource FrameStyle}" />
+    <Frame Name="frame4" Canvas.Top="150" Style="{DynamicResource FrameStyle}" />
+    <Frame Name="frame5" Canvas.Top="200" SandboxExternalContent="true" Template="{DynamicResource FrameTemplate}"/>
+  </integration:CustomCanvasForFrameIntegration>
+    
+    <x:Code>
+      <![CDATA[
+        void ButtonClick(object sender, RoutedEventArgs args)
+        {
+           outerButton.EventHandlerInvoked=true;
+           if(args.Source is Frame)
+           {
+               outerButton.EventSourceIsFrame=true;
+           }
+        }
+      ]]>
+    </x:Code>            
+</cmn:CustomWindow>

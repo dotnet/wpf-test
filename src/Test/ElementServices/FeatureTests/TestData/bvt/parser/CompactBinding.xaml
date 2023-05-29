@@ -1,0 +1,13 @@
+﻿
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:parser="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted">
+<Border Background="cornsilk" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border.Resources>
+        <ObjectDataProvider x:Key="DataItem" ObjectType="{x:Type parser:TestDataBind}" />
+    </Border.Resources>
+    <DockPanel Dock="Top" Name="root" DataContext="{Binding Source={StaticResource DataItem}}">
+        <TextBlock Name="e1" Text="{Binding Path=String,Mode=TwoWay,NotifyOnTargetUpdated=True}" />
+        <Button Name="e3" Background="{Binding Path=Color,Mode=OneWay,NotifyOnTargetUpdated=True}" Content="{Binding Path=String,Mode=OneTime,NotifyOnTargetUpdated=True}" />
+    </DockPanel>
+</Border>
+
+</Page>

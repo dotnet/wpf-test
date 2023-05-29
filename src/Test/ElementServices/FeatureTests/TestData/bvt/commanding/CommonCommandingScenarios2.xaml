@@ -1,0 +1,14 @@
+﻿                <Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Green" Name="Parent">
+                <!-- Border->Button->Canvas, button with 2 key bindings -->
+                    <Button Margin="20" Background="Pink" Name="Child">
+                        <Button.InputBindings>
+                            <KeyBinding Command="IncreaseVolume" Gesture="F13" />
+                            <KeyBinding Command="DecreaseVolume" Gesture="F14" />
+                        </Button.InputBindings>
+                        <Button.CommandBindings>
+                            <CommandBinding Command="IncreaseVolume" />
+                            <CommandBinding Command="DecreaseVolume" />
+                        </Button.CommandBindings>
+                        <Canvas Background="Blue" Height="20" Width="20" Margin="0, 100, 0, 0" Name="Grandchild" />
+                    </Button>
+                </Border>

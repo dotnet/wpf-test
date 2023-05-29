@@ -1,0 +1,40 @@
+﻿
+
+
+
+
+<cmn:CustomDockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cc="core" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:S="clr-namespace:System;assembly=Mscorlib"
+    >
+    <DockPanel.Resources>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        <Style x:Key="BoldStyle" TargetType="{x:Type Bold}">
+            <Setter Property="Bold.FontSize" Value="10" />
+        </Style>
+        <Style x:Key="IFrameworkInputElementStyleforButton" TargetType="{x:Type IFrameworkInputElement}">
+            <Setter Property="Button.Background" Value="Red" />
+        </Style>
+        <Style x:Key="IFrameworkInputElementStyleforBold" TargetType="{x:Type IFrameworkInputElement}">
+            <Setter Property="Bold.FontSize" Value="20" />
+        </Style>        
+        <Style x:Key="NoTargetTypeStyleForButton">
+            <Setter Property="Button.Background" Value="Green" />
+        </Style>
+        <Style x:Key="NoTargetTypeStyleForBold">
+            <Setter Property="Bold.FontSize" Value="30" />
+        </Style>
+    </DockPanel.Resources>
+    <Button Name="button1" Style="{DynamicResource ButtonStyle}">
+        <Bold Name="bold1" Style="{DynamicResource BoldStyle}">bold text 1 </Bold>
+    </Button>
+    <Button Name="button2" Style="{DynamicResource IFrameworkInputElementStyleforButton}">
+        <Bold Name="bold2" Style="{DynamicResource IFrameworkInputElementStyleforBold}">bold text 2</Bold>
+    </Button>   
+    <Button Name="button3" Style="{DynamicResource NoTargetTypeStyleForButton}">
+        <Bold Name="bold3" Style="{DynamicResource NoTargetTypeStyleForBold}">bold text 3</Bold>
+    </Button>
+</cmn:CustomDockPanel>
+

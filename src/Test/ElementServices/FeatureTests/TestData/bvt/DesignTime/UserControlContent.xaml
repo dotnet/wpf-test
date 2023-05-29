@@ -1,0 +1,50 @@
+<UserControl 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="clr-namespace:System.ComponentModel;assembly=PresentationFramework" 
+  xmlns:l="clr-namespace:Avalon.Test.CoreUI.DesignerPropertiesTest" 
+  x:Class="Avalon.Test.CoreUI.DesignerPropertiesTest.UserControlContent">
+
+
+
+<x:Code>
+<![CDATA[
+
+        public UserControlContent() {
+            InitializeComponent();
+        }
+]]>
+</x:Code>
+
+  <GroupBox Header="User Control">
+    <StackPanel>
+      <CheckBox 
+        IsChecked="{Binding Path=(d:DesignerProperties.IsInDesignMode), RelativeSource={RelativeSource Self}, Mode=OneWay}">
+        Control inheriting from parent
+      </CheckBox>
+      <ContentControl Style="{DynamicResource TemplateBindingTest}">
+        Template binding inheriting from parent
+      </ContentControl>
+      <ContentControl Style="{DynamicResource CustomControlTest}">
+        Custom control inheriting from parent
+      </ContentControl>
+      <Frame Source="FrameContent.xaml" />
+      <GroupBox Header="Container set to IsInDesignMode=false">
+        <StackPanel d:DesignerProperties.IsInDesignMode="False">
+          <CheckBox 
+            IsChecked="{Binding Path=(d:DesignerProperties.IsInDesignMode), RelativeSource={RelativeSource Self}, Mode=OneWay}">
+            Data Bound control in false container
+          </CheckBox>
+
+          <ContentControl Style="{DynamicResource TemplateBindingTest}">
+            Template binding in false container
+          </ContentControl>
+          <ContentControl Style="{DynamicResource CustomControlTest}">
+            Custom control in false container
+          </ContentControl>
+          <Frame Source="FrameContent.xaml" />
+        </StackPanel>
+      </GroupBox>
+    </StackPanel>
+  </GroupBox>
+</UserControl>

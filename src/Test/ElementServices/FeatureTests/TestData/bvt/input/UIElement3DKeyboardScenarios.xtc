@@ -1,0 +1,360 @@
+﻿<XTC xmlns="ActionSequence">
+  <TEST ID="1" GUID="" Title="2dIn3dSetFocusAndTypeTwice" Owner="Microsoft" Priority="1" Path="" Auto="False" Type="" Status="Under Development" Timeout="60" URL="" Frequency="Daily" DESCRIPTION="">
+    <STEP Index="0" Loader="" Run="" Verify="" LoaderSwitch="" ScriptSwitch="" HarnessFlags="">
+      <TreeConfig Source="CommonUIElement3DScenario.xaml" />
+      <MemberFilters>
+        <EventFilter Name="PreviewTextInput" HandledEventsToo="true" />
+        <EventFilter Name="TextInput" HandledEventsToo="true" />
+        <EventFilter Name="PreviewGotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewLostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="GotFocus" HandledEventsToo="true" />
+        <EventFilter Name="LostFocus" HandledEventsToo="true" />
+        <EventFilter Name="GotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="LostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyDown" HandledEventsToo="true" />
+        <EventFilter Name="KeyUp" HandledEventsToo="true" />
+        <EventFilter Name="KeyDown" HandledEventsToo="true" />
+        <EventFilter Name="IsKeyboardFocusedChanged" />
+        <EventFilter Name="IsKeyboardFocusWithinChanged" />
+        <PropertyFilter ElementName="mainViewport3D" Name="IsFocused" />
+        <PropertyFilter ElementName="mainViewport3D" Name="IsKeyboardFocused" />
+        <PropertyFilter ElementName="mainViewport3D" Name="IsKeyboardFocusWithin" />
+        <PropertyFilter ElementName="vp2d_first_child" Name="IsFocused" />
+        <PropertyFilter ElementName="vp2d_first_child" Name="IsKeyboardFocused" />
+        <PropertyFilter ElementName="vp2d_first_child" Name="IsKeyboardFocusWithin" />
+        <PropertyFilter ElementName="vp2d_second_child" Name="IsFocused" />
+        <PropertyFilter ElementName="vp2d_second_child" Name="IsKeyboardFocused" />
+        <PropertyFilter ElementName="vp2d_second_child" Name="IsKeyboardFocusWithin" />
+        <PropertyFilter ElementName="vp2d_with_child" Name="IsFocused" />
+        <PropertyFilter ElementName="vp2d_with_child" Name="IsKeyboardFocused" />
+        <PropertyFilter ElementName="vp2d_with_child" Name="IsKeyboardFocusWithin" />
+        <PropertyFilter ElementName="vp2d_nested_child" Name="IsFocused" />
+        <PropertyFilter ElementName="vp2d_nested_child" Name="IsKeyboardFocused" />
+        <PropertyFilter ElementName="vp2d_nested_child" Name="IsKeyboardFocusWithin" />
+      </MemberFilters>
+      <ActionSequence>
+        <FocusAction Target="vp2d_second_child" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="PreviewLostKeyboardFocus" SenderName="TestRoot">
+            <PropertyRecord Element="mainViewport3D" Name="IsFocused" Value="False" />
+            <PropertyRecord Element="mainViewport3D" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="mainViewport3D" Name="IsKeyboardFocusWithin" Value="False" />
+            <PropertyRecord Element="vp2d_first_child" Name="IsFocused" Value="False" />
+            <PropertyRecord Element="vp2d_first_child" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="vp2d_first_child" Name="IsKeyboardFocusWithin" Value="False" />
+            <PropertyRecord Element="vp2d_second_child" Name="IsFocused" Value="False" />
+            <PropertyRecord Element="vp2d_second_child" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="vp2d_second_child" Name="IsKeyboardFocusWithin" Value="False" />
+            <PropertyRecord Element="vp2d_with_child" Name="IsFocused" Value="False" />
+            <PropertyRecord Element="vp2d_with_child" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="vp2d_with_child" Name="IsKeyboardFocusWithin" Value="False" />
+            <PropertyRecord Element="vp2d_nested_child" Name="IsFocused" Value="False" />
+            <PropertyRecord Element="vp2d_nested_child" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="vp2d_nested_child" Name="IsKeyboardFocusWithin" Value="False" />
+          </EventRecord>
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="TestRoot" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="testGrid" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="StackPanel" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="vp2d_second_child" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="vp2d_second_child">
+            <PropertyRecord Element="mainViewport3D" Name="IsKeyboardFocusWithin" Value="True" />
+            <PropertyRecord Element="vp2d_second_child" Name="IsKeyboardFocused" Value="True" />
+            <PropertyRecord Element="vp2d_second_child" Name="IsKeyboardFocusWithin" Value="True" />
+          </EventRecord>
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="StackPanel" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="mainViewport3D" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="testGrid" />
+          <EventRecord Name="IsKeyboardFocusedChanged" SenderName="TestRoot" />
+          <EventRecord Name="IsKeyboardFocusedChanged" SenderName="vp2d_second_child" />
+          <EventRecord Name="LostKeyboardFocus" SenderName="TestRoot" />
+          <EventRecord Name="GotFocus" SenderName="vp2d_second_child">
+            <PropertyRecord Element="vp2d_second_child" Name="IsFocused" Value="True" />
+          </EventRecord>
+          <EventRecord Name="GotFocus" SenderName="StackPanel" />
+          <EventRecord Name="GotFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="GotFocus" SenderName="testGrid" />
+          <EventRecord Name="GotFocus" SenderName="TestRoot" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="vp2d_second_child" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="StackPanel" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="testGrid" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="TestRoot" />
+        </FocusAction>
+        <TypeKeyAction Keys="A" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="PreviewKeyDown" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyDown" SenderName="testGrid" />
+          <EventRecord Name="PreviewKeyDown" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewKeyDown" SenderName="StackPanel" />
+          <EventRecord Name="PreviewKeyDown" SenderName="vp2d_second_child" />
+          <EventRecord Name="KeyDown" SenderName="vp2d_second_child" />
+          <EventRecord Name="KeyDown" SenderName="StackPanel" />
+          <EventRecord Name="KeyDown" SenderName="mainViewport3D" />
+          <EventRecord Name="KeyDown" SenderName="testGrid" />
+          <EventRecord Name="KeyDown" SenderName="TestRoot" />
+          <EventRecord Name="PreviewTextInput" SenderName="TestRoot" />
+          <EventRecord Name="PreviewTextInput" SenderName="testGrid" />
+          <EventRecord Name="PreviewTextInput" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewTextInput" SenderName="StackPanel" />
+          <EventRecord Name="PreviewTextInput" SenderName="vp2d_second_child" />
+          <EventRecord Name="TextInput" SenderName="vp2d_second_child" />
+          <EventRecord Name="TextInput" SenderName="StackPanel" />
+          <EventRecord Name="TextInput" SenderName="mainViewport3D" />
+          <EventRecord Name="TextInput" SenderName="testGrid" />
+          <EventRecord Name="TextInput" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyUp" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyUp" SenderName="testGrid" />
+          <EventRecord Name="PreviewKeyUp" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewKeyUp" SenderName="StackPanel" />
+          <EventRecord Name="PreviewKeyUp" SenderName="vp2d_second_child" />
+          <EventRecord Name="KeyUp" SenderName="vp2d_second_child" />
+          <EventRecord Name="KeyUp" SenderName="StackPanel" />
+          <EventRecord Name="KeyUp" SenderName="mainViewport3D" />
+          <EventRecord Name="KeyUp" SenderName="testGrid" />
+          <EventRecord Name="KeyUp" SenderName="TestRoot" />
+        </TypeKeyAction>
+        <FocusAction Target="vp2d_nested_child" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="PreviewLostKeyboardFocus" SenderName="TestRoot" />
+          <EventRecord Name="PreviewLostKeyboardFocus" SenderName="testGrid" />
+          <EventRecord Name="PreviewLostKeyboardFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewLostKeyboardFocus" SenderName="StackPanel" />
+          <EventRecord Name="PreviewLostKeyboardFocus" SenderName="vp2d_second_child" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="TestRoot" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="testGrid" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="StackPanel" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="vp2d_with_child" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="vp2d_nested_child" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="vp2d_second_child">
+            <PropertyRecord Element="vp2d_second_child" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="vp2d_second_child" Name="IsKeyboardFocusWithin" Value="False" />
+            <PropertyRecord Element="vp2d_with_child" Name="IsKeyboardFocusWithin" Value="True" />
+            <PropertyRecord Element="vp2d_nested_child" Name="IsKeyboardFocused" Value="True" />
+            <PropertyRecord Element="vp2d_nested_child" Name="IsKeyboardFocusWithin" Value="True" />
+          </EventRecord>
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="StackPanel" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="vp2d_nested_child" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="vp2d_with_child" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="StackPanel" />
+          <EventRecord Name="IsKeyboardFocusedChanged" SenderName="vp2d_second_child" />
+          <EventRecord Name="IsKeyboardFocusedChanged" SenderName="vp2d_nested_child" />
+          <EventRecord Name="LostKeyboardFocus" SenderName="vp2d_second_child" />
+          <EventRecord Name="LostKeyboardFocus" SenderName="StackPanel" />
+          <EventRecord Name="LostKeyboardFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="LostKeyboardFocus" SenderName="testGrid" />
+          <EventRecord Name="LostKeyboardFocus" SenderName="TestRoot" />
+          <EventRecord Name="LostFocus" SenderName="vp2d_second_child">
+            <PropertyRecord Element="vp2d_second_child" Name="IsFocused" Value="False" />
+          </EventRecord>
+          <EventRecord Name="LostFocus" SenderName="StackPanel" />
+          <EventRecord Name="LostFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="LostFocus" SenderName="testGrid" />
+          <EventRecord Name="LostFocus" SenderName="TestRoot" />
+          <EventRecord Name="GotFocus" SenderName="vp2d_nested_child">
+            <PropertyRecord Element="vp2d_nested_child" Name="IsFocused" Value="True" />
+          </EventRecord>
+          <EventRecord Name="GotFocus" SenderName="vp2d_with_child" />
+          <EventRecord Name="GotFocus" SenderName="StackPanel" />
+          <EventRecord Name="GotFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="GotFocus" SenderName="testGrid" />
+          <EventRecord Name="GotFocus" SenderName="TestRoot" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="vp2d_nested_child" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="vp2d_with_child" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="StackPanel" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="testGrid" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="TestRoot" />
+        </FocusAction>
+        <TypeKeyAction Keys="A" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="PreviewKeyDown" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyDown" SenderName="testGrid" />
+          <EventRecord Name="PreviewKeyDown" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewKeyDown" SenderName="StackPanel" />
+          <EventRecord Name="PreviewKeyDown" SenderName="vp2d_with_child" />
+          <EventRecord Name="PreviewKeyDown" SenderName="vp2d_nested_child" />
+          <EventRecord Name="KeyDown" SenderName="vp2d_nested_child" />
+          <EventRecord Name="KeyDown" SenderName="vp2d_with_child" />
+          <EventRecord Name="KeyDown" SenderName="StackPanel" />
+          <EventRecord Name="KeyDown" SenderName="mainViewport3D" />
+          <EventRecord Name="KeyDown" SenderName="testGrid" />
+          <EventRecord Name="KeyDown" SenderName="TestRoot" />
+          <EventRecord Name="PreviewTextInput" SenderName="TestRoot" />
+          <EventRecord Name="PreviewTextInput" SenderName="testGrid" />
+          <EventRecord Name="PreviewTextInput" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewTextInput" SenderName="StackPanel" />
+          <EventRecord Name="PreviewTextInput" SenderName="vp2d_with_child" />
+          <EventRecord Name="PreviewTextInput" SenderName="vp2d_nested_child" />
+          <EventRecord Name="TextInput" SenderName="vp2d_nested_child" />
+          <EventRecord Name="TextInput" SenderName="vp2d_with_child" />
+          <EventRecord Name="TextInput" SenderName="StackPanel" />
+          <EventRecord Name="TextInput" SenderName="mainViewport3D" />
+          <EventRecord Name="TextInput" SenderName="testGrid" />
+          <EventRecord Name="TextInput" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyUp" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyUp" SenderName="testGrid" />
+          <EventRecord Name="PreviewKeyUp" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewKeyUp" SenderName="StackPanel" />
+          <EventRecord Name="PreviewKeyUp" SenderName="vp2d_with_child" />
+          <EventRecord Name="PreviewKeyUp" SenderName="vp2d_nested_child" />
+          <EventRecord Name="KeyUp" SenderName="vp2d_nested_child" />
+          <EventRecord Name="KeyUp" SenderName="vp2d_with_child" />
+          <EventRecord Name="KeyUp" SenderName="StackPanel" />
+          <EventRecord Name="KeyUp" SenderName="mainViewport3D" />
+          <EventRecord Name="KeyUp" SenderName="testGrid" />
+          <EventRecord Name="KeyUp" SenderName="TestRoot" />
+        </TypeKeyAction>
+      </ActionSequence>
+    </STEP>
+  </TEST>
+
+  <TEST ID="1" GUID="" Title="UIElement3DSetFocusAndTypeTwice" Owner="Microsoft" Priority="1" Path="" Auto="False" Type="" Status="Under Development" Timeout="60" URL="" Frequency="Daily" DESCRIPTION="">
+    <STEP Index="0" Loader="" Run="" Verify="" LoaderSwitch="" ScriptSwitch="" HarnessFlags="">
+      <TreeConfig Source="CommonUIElement3DScenario.xaml" />
+      <MemberFilters>
+        <EventFilter Name="PreviewTextInput" HandledEventsToo="true" />
+        <EventFilter Name="TextInput" HandledEventsToo="true" />
+        <EventFilter Name="PreviewGotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewLostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="GotFocus" HandledEventsToo="true" />
+        <EventFilter Name="LostFocus" HandledEventsToo="true" />
+        <EventFilter Name="GotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="LostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyDown" HandledEventsToo="true" />
+        <EventFilter Name="KeyUp" HandledEventsToo="true" />
+        <EventFilter Name="KeyDown" HandledEventsToo="true" />
+        <EventFilter Name="IsKeyboardFocusedChanged" />
+        <EventFilter Name="IsKeyboardFocusWithinChanged" />
+        <PropertyFilter ElementName="mainViewport3D" Name="IsFocused" />
+        <PropertyFilter ElementName="mainViewport3D" Name="IsKeyboardFocused" />
+        <PropertyFilter ElementName="mainViewport3D" Name="IsKeyboardFocusWithin" />
+        <PropertyFilter ElementName="simpleModelUIElement3D" Name="IsFocused" />
+        <PropertyFilter ElementName="simpleModelUIElement3D" Name="IsKeyboardFocused" />
+        <PropertyFilter ElementName="simpleModelUIElement3D" Name="IsKeyboardFocusWithin" />
+        <PropertyFilter ElementName="vp2d_first_child" Name="IsFocused" />
+        <PropertyFilter ElementName="vp2d_first_child" Name="IsKeyboardFocused" />
+        <PropertyFilter ElementName="vp2d_first_child" Name="IsKeyboardFocusWithin" />
+      </MemberFilters>
+      <ActionSequence>
+        <FocusAction Target="simpleModelUIElement3D" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="PreviewLostKeyboardFocus" SenderName="TestRoot">
+            <PropertyRecord Element="mainViewport3D" Name="IsFocused" Value="False" />
+            <PropertyRecord Element="mainViewport3D" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="mainViewport3D" Name="IsKeyboardFocusWithin" Value="False" />
+            <PropertyRecord Element="simpleModelUIElement3D" Name="IsFocused" Value="False" />
+            <PropertyRecord Element="simpleModelUIElement3D" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="simpleModelUIElement3D" Name="IsKeyboardFocusWithin" Value="False" />
+            <PropertyRecord Element="vp2d_first_child" Name="IsFocused" Value="False" />
+            <PropertyRecord Element="vp2d_first_child" Name="IsKeyboardFocused" Value="False" />
+            <PropertyRecord Element="vp2d_first_child" Name="IsKeyboardFocusWithin" Value="False" />
+          </EventRecord>
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="TestRoot" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="testGrid" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewGotKeyboardFocus" SenderName="ModelUIElement3D" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="ModelUIElement3D">
+            <PropertyRecord Element="mainViewport3D" Name="IsKeyboardFocusWithin" Value="True" />
+            <PropertyRecord Element="simpleModelUIElement3D" Name="IsKeyboardFocused" Value="True" />
+            <PropertyRecord Element="simpleModelUIElement3D" Name="IsKeyboardFocusWithin" Value="True" />
+          </EventRecord>
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="mainViewport3D" />
+          <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="testGrid" />
+          <EventRecord Name="IsKeyboardFocusedChanged" SenderName="TestRoot" />
+          <EventRecord Name="LostKeyboardFocus" SenderName="TestRoot" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="ModelUIElement3D" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="mainViewport3D" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="testGrid" />
+          <EventRecord Name="GotKeyboardFocus" SenderName="TestRoot" />
+        </FocusAction>
+        <TypeKeyAction Keys="A" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="PreviewKeyDown" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyDown" SenderName="testGrid" />
+          <EventRecord Name="PreviewKeyDown" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewKeyDown" SenderName="ModelUIElement3D" />
+          <EventRecord Name="KeyDown" SenderName="ModelUIElement3D" />
+          <EventRecord Name="KeyDown" SenderName="mainViewport3D" />
+          <EventRecord Name="KeyDown" SenderName="testGrid" />
+          <EventRecord Name="KeyDown" SenderName="TestRoot" />
+          <EventRecord Name="PreviewTextInput" SenderName="TestRoot" />
+          <EventRecord Name="PreviewTextInput" SenderName="testGrid" />
+          <EventRecord Name="PreviewTextInput" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewTextInput" SenderName="ModelUIElement3D" />
+          <EventRecord Name="TextInput" SenderName="ModelUIElement3D" />
+          <EventRecord Name="TextInput" SenderName="mainViewport3D" />
+          <EventRecord Name="TextInput" SenderName="testGrid" />
+          <EventRecord Name="TextInput" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyUp" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyUp" SenderName="testGrid" />
+          <EventRecord Name="PreviewKeyUp" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewKeyUp" SenderName="ModelUIElement3D" />
+          <EventRecord Name="KeyUp" SenderName="ModelUIElement3D" />
+          <EventRecord Name="KeyUp" SenderName="mainViewport3D" />
+          <EventRecord Name="KeyUp" SenderName="testGrid" />
+          <EventRecord Name="KeyUp" SenderName="TestRoot" />
+        </TypeKeyAction>
+        <FocusAction Target="model_with_vp2d" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True" />
+        <TypeKeyAction Keys="A" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="PreviewKeyDown" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyDown" SenderName="testGrid" />
+          <EventRecord Name="PreviewKeyDown" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewKeyDown" SenderName="ModelUIElement3D" />
+          <EventRecord Name="KeyDown" SenderName="ModelUIElement3D" />
+          <EventRecord Name="KeyDown" SenderName="mainViewport3D" />
+          <EventRecord Name="KeyDown" SenderName="testGrid" />
+          <EventRecord Name="KeyDown" SenderName="TestRoot" />
+          <EventRecord Name="PreviewTextInput" SenderName="TestRoot" />
+          <EventRecord Name="PreviewTextInput" SenderName="testGrid" />
+          <EventRecord Name="PreviewTextInput" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewTextInput" SenderName="ModelUIElement3D" />
+          <EventRecord Name="TextInput" SenderName="ModelUIElement3D" />
+          <EventRecord Name="TextInput" SenderName="mainViewport3D" />
+          <EventRecord Name="TextInput" SenderName="testGrid" />
+          <EventRecord Name="TextInput" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyUp" SenderName="TestRoot" />
+          <EventRecord Name="PreviewKeyUp" SenderName="testGrid" />
+          <EventRecord Name="PreviewKeyUp" SenderName="mainViewport3D" />
+          <EventRecord Name="PreviewKeyUp" SenderName="ModelUIElement3D" />
+          <EventRecord Name="KeyUp" SenderName="ModelUIElement3D" />
+          <EventRecord Name="KeyUp" SenderName="mainViewport3D" />
+          <EventRecord Name="KeyUp" SenderName="testGrid" />
+          <EventRecord Name="KeyUp" SenderName="TestRoot" />
+        </TypeKeyAction>
+      </ActionSequence>
+    </STEP>
+  </TEST>
+  
+    <!-- HandledEventToo="false" -->
+    <TEST ID="2" GUID="" Title="SetFocusAndTypeNoHandledEvents" Owner="Microsoft" Priority="1" Path="" Auto="False" Type="" Status="Under Development" Timeout="60" URL="" Frequency="Daily" DESCRIPTION="" >
+        <STEP Index="0" Loader="" Run="" Verify="" LoaderSwitch="" ScriptSwitch="" HarnessFlags="">
+            <TreeConfig Source="CommonUIElement3DScenario.xaml" />
+            <MemberFilters>
+                <EventFilter Name="PreviewTextInput" />
+                <EventFilter Name="TextInput" />
+                <EventFilter Name="PreviewGotKeyboardFocus" />
+                <EventFilter Name="PreviewLostKeyboardFocus" />
+                <EventFilter Name="GotFocus" />
+                <EventFilter Name="LostFocus" />
+                <EventFilter Name="GotKeyboardFocus" />
+                <EventFilter Name="LostKeyboardFocus" />
+                <EventFilter Name="PreviewKeyUp" />
+                <EventFilter Name="PreviewKeyDown" />
+                <EventFilter Name="KeyUp" />
+                <EventFilter Name="KeyDown" />
+                <PropertyFilter ElementName="mainViewport3D" Name="IsFocused" />
+                <PropertyFilter ElementName="mainViewport3D" Name="IsKeyboardFocused" />
+                <PropertyFilter ElementName="mainViewport3D" Name="IsKeyboardFocusWithin" />
+                <PropertyFilter ElementName="model_with_vp2d" Name="IsFocused" />
+                <PropertyFilter ElementName="model_with_vp2d" Name="IsKeyboardFocused" />
+                <PropertyFilter ElementName="model_with_vp2d" Name="IsKeyboardFocusWithin" />
+            </MemberFilters>
+            <ActionSequence>
+                <FocusAction Target="simpleModelUIElement3D">
+                  
+                </FocusAction>
+                <TypeKeyAction Keys="A">
+                   
+                </TypeKeyAction>
+            </ActionSequence>
+        </STEP>
+    </TEST>
+</XTC>

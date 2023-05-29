@@ -1,0 +1,63 @@
+﻿
+
+
+
+
+
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:System.Windows.Data;assembly=PresentationFramework" xmlns:MappingPIGen3="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen4="clr-namespace:System.Collections;assembly=mscorlib" xmlns:MappingPIGen5="clr-namespace:System;assembly=mscorlib">
+<cmn:CustomCanvas
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted"
+ xmlns:data="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+ xmlns:sys="clr-namespace:System.Collections;assembly=mscorlib"
+ xmlns:system="clr-namespace:System;assembly=mscorlib"
+ xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+ Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.VerifyIncludeTag2"
+>
+
+    <cmn:CustomCanvas.Resources>
+        <Color x:Key="GreenColor" A="50" G="219" />
+        <SolidColorBrush x:Key="GreenBrush">
+            <SolidColorBrush.Color>
+                <StaticResource ResourceKey="GreenColor" />
+            </SolidColorBrush.Color>
+        </SolidColorBrush>
+
+	    <system:String x:Key="MyString"> Hello world </system:String>
+
+        <Button x:Key="MyButton">
+            <Button.Content>
+                <StaticResource ResourceKey="MyString" />        
+            </Button.Content>
+        </Button>                
+        
+        <cc:Custom_Clr x:Key="MyCustomClr" />        	       
+        
+        <system:Double x:Key="myDouble">8</system:Double>
+    </cmn:CustomCanvas.Resources>
+
+    <StackPanel Name="Panel1" Height="100" Background="{StaticResource ResourceKey=GreenBrush}">
+    </StackPanel>
+    
+    <StackPanel>	
+			<StaticResource ResourceKey="MyButton" />
+    </StackPanel>    
+    
+    <Button>
+        <cmn:CustomCanvas.Left>
+			<StaticResource ResourceKey="myDouble" />
+		</cmn:CustomCanvas.Left>        
+        <Button.Content>
+            <sys:ArrayList>
+                <StaticResource ResourceKey="MyString" />
+			    <StaticResource ResourceKey="MyButton" />
+			    <StaticResource ResourceKey="GreenColor" />
+			    <StaticResource ResourceKey="MyCustomClr" />
+            </sys:ArrayList>
+        </Button.Content>
+    </Button>
+    
+</cmn:CustomCanvas>
+
+</Page>

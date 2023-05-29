@@ -1,0 +1,39 @@
+﻿<!-- Class MemberSelect attribute may have values All, Include, or Exclude. -->
+
+<!-- Each assembly is run as a separate test case. Add a test case attribute 
+  to SecurityExceptionTest.cs to include a new assembly. -->
+<SecurityExceptions>
+    
+  <Assembly Name="WindowsBase">    
+      
+    <Class Name ="System.Windows.Interop.ComponentDispatcher" MemberSelect="Exclude">
+      <Member Name="GetType"/>
+      <Member Name="ToString"/>
+      <Member Name="GetHashCode"/>
+      <Member Name="Equals"/>
+    </Class>
+
+    <Class Name ="System.Windows.Threading.DispatcherHooks" MemberSelect="Exclude">
+      <Member Name="GetType"/>
+      <Member Name="ToString"/>
+      <Member Name="GetHashCode"/>
+      <Member Name="Equals"/>
+    </Class>
+
+    <Class Name ="System.Windows.Threading.DispatcherSynchronizationContext" MemberSelect="Include">
+      <Member Name="Wait"/>
+    </Class>
+
+      
+  </Assembly>
+
+    
+  <Assembly Name="PresentationCore">
+      
+    <Class Name="System.Windows.Interop.HwndSource" MemberSelect="Include">
+        <Member Name="FromHwnd"/>        
+    </Class>
+      
+  </Assembly>
+
+</SecurityExceptions>
