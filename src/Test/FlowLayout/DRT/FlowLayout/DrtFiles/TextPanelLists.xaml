@@ -1,0 +1,220 @@
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="800">
+
+  <Grid.Resources>
+    <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="PagePadding" Value="0" />
+    </Style>
+    <Style x:Key="{x:Type FlowDocumentScrollViewer}" TargetType="{x:Type FlowDocumentScrollViewer}">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+    </Style>
+  </Grid.Resources>
+
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  </Grid.RowDefinitions>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="1">
+        <FlowDocument Background="Beige">
+            <Paragraph>Empty list</Paragraph>
+            <List Background="LightBlue"><ListItem><Paragraph /></ListItem></List>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="1">
+        <FlowDocument Background="LightGreen">
+            <Paragraph>List with hidden elements</Paragraph>
+            <List Background="LightBlue">
+              <!-- comment -->
+              <ListItem><Paragraph /></ListItem>
+            </List>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="3">
+        <FlowDocument Background="LightGreen">
+            <Paragraph>List with nested blocks</Paragraph>
+            <List>
+              <ListItem><Paragraph /></ListItem>
+              <ListItem>
+                 <Paragraph>2nd list item</Paragraph>
+              </ListItem>
+              <ListItem Background="LightBlue">
+                <Paragraph>3rd list item</Paragraph>
+                <Paragraph Background="Yellow">embedded paragraph</Paragraph>
+                <Paragraph>with embedded paragraph</Paragraph>
+              </ListItem>
+              <ListItem>
+                <Paragraph>4th list item</Paragraph>
+              </ListItem>
+              <ListItem Background="LightBlue">
+                <Paragraph Background="Yellow">Empty list item (5th) with embedded paragraph</Paragraph>
+              </ListItem>
+              <ListItem>
+                <Paragraph>6th list item</Paragraph>
+              </ListItem>
+              <ListItem Background="LightBlue">
+                <Paragraph TextIndent="-20">Last list item with negative text indent and default marker offset. Last list item with negative text indent and default marker offset.</Paragraph>
+              </ListItem>
+            </List>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="3">
+        <FlowDocument Background="Beige">
+            <Paragraph>Nested lists</Paragraph>
+            <List>
+              <ListItem>
+                <Paragraph>Following item is a nested list. Following item is a nested list. Following item is a nested list.</Paragraph>
+                <List Background="LightBlue">
+                  <ListItem>
+                    <Paragraph>1st item of nested list</Paragraph>
+                  </ListItem>
+                  <ListItem>
+                    <Paragraph>2nd item of nested list</Paragraph>
+                    <List Background="Yellow" BorderBrush="Red" BorderThickness="1,1,1,1">
+                      <ListItem>
+                        <Paragraph>1st item of double nested list</Paragraph>
+                      </ListItem>
+                      <ListItem BorderBrush="DarkBlue" BorderThickness="1,1,1,1">
+                        <Paragraph>2nd item of double nested list</Paragraph>
+                      </ListItem>
+                      <ListItem>
+                        <Paragraph>3rd item of double nested list</Paragraph>
+                      </ListItem>
+                    </List>
+                  </ListItem>
+                  <ListItem>
+                    <Paragraph>3rd item of nested list</Paragraph>
+                  </ListItem>
+                </List>
+              </ListItem>
+              <ListItem Background="Yellow">
+                <Paragraph TextIndent="20">Last list item with positive text indent and default marker offset. Last list item with positive text indent and default marker offset.</Paragraph>
+              </ListItem>
+            </List>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="5">
+        <FlowDocument Background="Beige">
+            <Paragraph>List with with diffrent props and marker style on list items</Paragraph>
+            <List MarkerStyle="Decimal">
+              <ListItem>
+                <Paragraph>1st - no additional props</Paragraph>
+              </ListItem>
+              <ListItem TextAlignment="Right">
+                <Paragraph>2nd - right alignment</Paragraph>
+              </ListItem>
+              <ListItem>
+                <Paragraph>
+                  <TextBlock>3rd - nested inline object</TextBlock>
+                </Paragraph>
+              </ListItem>
+              <ListItem FontSize="14pt">
+                <Paragraph>4th - font size</Paragraph>
+              </ListItem>
+              <ListItem FontWeight="Bold">
+                <Paragraph>5th - font weight</Paragraph>
+              </ListItem>
+              <ListItem Foreground="Red">
+                <Paragraph>6th - foreground</Paragraph>
+              </ListItem>
+              <ListItem Background="LightBlue">
+                <Paragraph>7th - background</Paragraph>
+              </ListItem>
+              <ListItem FontStyle="Italic">
+                <Paragraph>8th - font style</Paragraph>
+              </ListItem>
+              <ListItem FontFamily="Times New Roman">
+                <Paragraph>9th - font family</Paragraph>
+              </ListItem>
+              <ListItem>
+                <Paragraph>10th - no additional props</Paragraph>
+                <Paragraph>11th - no bullet</Paragraph>
+              </ListItem>
+            </List>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="5">
+        <FlowDocument Background="LightGreen">
+            <Paragraph>Lists with start index</Paragraph>
+            <List StartIndex="1000">
+              <ListItem>
+                <Paragraph>1000 - no additional props</Paragraph>
+              </ListItem>
+              <ListItem>
+                <Paragraph>1001 - disc</Paragraph>
+              </ListItem>
+              <ListItem>
+                <Paragraph>1002 - lower roman</Paragraph>
+                <List Background="LightBlue" MarkerStyle="Square" MarkerOffset="0">
+                    <ListItem>
+                      <Paragraph TextIndent="24">1st item with text indent and negative bullet offset. 1st item with text indent and negative bullet offset.</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                      <Paragraph TextIndent="-24">2nd item with negative text indent and negative bullet offset. 2nd item with negative text indent and negative bullet offset.</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                      <Paragraph>3rd item with negative bullet offset. 3rd item with negative bullet offset.</Paragraph>
+                    </ListItem>
+                </List>
+              </ListItem>
+              <ListItem>
+                <Paragraph>1003 - decimal</Paragraph>
+              </ListItem>
+            </List>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="7">
+        <FlowDocument Background="LightGreen">
+            <Paragraph>Nested lists</Paragraph>
+            <List MarkerStyle="Decimal">
+              <ListItem>
+                <Paragraph>1</Paragraph>
+                <List MarkerStyle="UpperRoman">
+                  <ListItem>
+                    <Paragraph>A</Paragraph>
+                    <List MarkerStyle="LowerRoman">
+                      <ListItem>
+                        <Paragraph>a</Paragraph>
+                      </ListItem>
+                      <ListItem>
+                        <Paragraph>b</Paragraph>
+                      </ListItem>
+                    </List>
+                  </ListItem>
+                  <ListItem>
+                    <Paragraph>B</Paragraph>
+                  </ListItem>
+                  <ListItem>
+                    <Paragraph>C</Paragraph>
+                  </ListItem>
+                </List>
+              </ListItem>
+              <ListItem>
+                <Paragraph>2</Paragraph>
+              </ListItem>
+            </List>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+</Grid>

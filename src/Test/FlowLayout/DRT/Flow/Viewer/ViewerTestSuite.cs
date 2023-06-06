@@ -31,10 +31,10 @@ namespace DRT
         /// </summary>
         static ViewerTestSuite()
         {
-            _piCurrentViewer = typeof(FlowDocumentReader).GetProperty("CurrentViewer", BindingFlags.Instance | BindingFlags.NonPublic);
-            _piRenderScope = typeof(FlowDocumentScrollViewer).GetProperty("RenderScope", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_piCurrentViewer = typeof(FlowDocumentReader).GetProperty("CurrentViewer", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_piRenderScope = typeof(FlowDocumentScrollViewer).GetProperty("RenderScope", BindingFlags.Instance | BindingFlags.NonPublic);
             Type typeFlowDocumentView = DrtFlowBase.FrameworkAssembly.GetType("MS.Internal.Documents.FlowDocumentView");
-            _piDocumentPage = typeFlowDocumentView.GetProperty("DocumentPage", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_piDocumentPage = typeFlowDocumentView.GetProperty("DocumentPage", BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace DRT
             writer.WriteEndElement();
 
             // FlowDocumentView
-            object pageView = _piRenderScope.GetValue(viewer, null);
+            object pageView = s_piRenderScope.GetValue(viewer, null);
             if (pageView != null)
             {
                 DumpFlowDocumentView(writer, pageView);
@@ -279,7 +279,7 @@ namespace DRT
 
             // Embedded view
             writer.WriteStartElement("CurrentViewer");
-            Control currentViewer = _piCurrentViewer.GetValue(viewer, null) as Control;
+            Control currentViewer = s_piCurrentViewer.GetValue(viewer, null) as Control;
             if (currentViewer != null)
             {
                 DumpViewer(writer, currentViewer);
@@ -355,7 +355,7 @@ namespace DRT
             }
 
             // DocumentPage
-            DocumentPage page = _piDocumentPage.GetValue(pageView, null) as DocumentPage;
+            DocumentPage page = s_piDocumentPage.GetValue(pageView, null) as DocumentPage;
             if (page != null)
             {
                 DumpDocumentPage(writer, page);
@@ -411,8 +411,8 @@ namespace DRT
             writer.WriteEndElement();
         }
 
-        private static PropertyInfo _piRenderScope;
-        private static PropertyInfo _piDocumentPage;
-        private static PropertyInfo _piCurrentViewer;
+        private static PropertyInfo s_piRenderScope;
+        private static PropertyInfo s_piDocumentPage;
+        private static PropertyInfo s_piCurrentViewer;
     }
 }

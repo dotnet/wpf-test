@@ -1,0 +1,240 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="LightSteelBlue">
+<Grid Width="800" FlowDirection="RightToLeft">
+
+  <Grid.Resources>
+    <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+        <Setter Property="FontFamily" Value="./DrtFiles/Fonts/#Arial" />
+        <Setter Property="FontSize" Value="10pt" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="PagePadding" Value="0" />
+    </Style>
+    <Style x:Key="{x:Type FlowDocumentScrollViewer}" TargetType="{x:Type FlowDocumentScrollViewer}">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+    </Style>
+  </Grid.Resources>
+
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  </Grid.RowDefinitions>
+
+  <Canvas Grid.Column="1" Grid.Row="1">
+    <Rectangle Canvas.Left="50" Canvas.Top="0" Width="75" Height="350" Fill="Red" />
+    <Border Background="Yellow" Canvas.Top="0" Canvas.Left="0">
+        <FlowDocumentScrollViewer Width="100" Height="100">
+            <FlowDocument>
+                <Paragraph>
+                aaaa
+                <Border Background="RoyalBlue" Width="20" Height="20" />
+                bbbb cccc dddd eeee qqqqqqqqqqqqwwwwwwwwwwww
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+    <Border Background="Yellow" Canvas.Top="100" Canvas.Left="250">
+        <FlowDocumentScrollViewer Width="100" Height="100" HorizontalAlignment="Right">
+            <FlowDocument TextAlignment="Right">
+                <Paragraph>
+                aaaa
+                <Border Background="RoyalBlue" Width="20" Height="20" />
+                bbbb cccc dddd eeee qqqqqqqqqqqqwwwwwwwwwwww
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+    <Border Background="Yellow" Canvas.Top="200" Canvas.Left="100">
+        <FlowDocumentScrollViewer Width="100" Height="100" HorizontalAlignment="Center">
+            <FlowDocument TextAlignment="Center">
+                <Paragraph>
+                aaaa
+                <Border Background="RoyalBlue" Width="20" Height="20" />
+                bbbb cccc dddd eeee qqqqqqqqqqqqwwwwwwwwwwww
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+   </Canvas>
+
+  <DockPanel Grid.Column="3" Grid.Row="1">
+      <FlowDocumentScrollViewer DockPanel.Dock="Top">
+          <FlowDocument Background="Beige">
+              <Paragraph>
+                RTL text: 
+                <TextBlock FontWeight="Bold" Foreground="Red"> Test </TextBlock>
+                <Span>This text should be underlined after clicking Test button</Span>
+                منها بالفنون العربية الأصيلة، قامت صخر ببث برنامج  سينما العرب على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+              </Paragraph>
+              <Paragraph Background="LightGreen" Margin="5,0,20,0" BorderThickness="1" BorderBrush="Red" Padding="10,0,0,0">
+                RTL text paragraph with a figure anchored to character position.
+                RTL text paragraph with a figure anchored to character position.
+                <Figure VerticalAnchor="ParagraphTop" Margin="0,0,5,0" Background="Red">
+                  <Paragraph>
+                  <Border Width="30" Height="30"><TextBlock Foreground="Black" FlowDirection="LeftToRight">LTR</TextBlock></Border>
+                  </Paragraph>
+                </Figure>
+                RTL text paragraph with a figure anchored to character position.
+                <Figure VerticalAnchor="ParagraphTop" HorizontalAnchor="ColumnLeft" Margin="0,0,5,0" Background="Black">
+                  <Paragraph>
+                  <Border Width="30" Height="30"><TextBlock Foreground="White" FlowDirection="RightToLeft">RTL</TextBlock></Border>
+                  </Paragraph>
+                </Figure>
+                RTL text paragraph with a figure anchored to character position.
+                منها بالفنون العربية الأصيلة، قامت صخر ببث برنامج  سينما العرب على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+              </Paragraph>
+              <Paragraph Background="RoyalBlue" FlowDirection="LeftToRight" Margin="5,0,20,0" BorderThickness="1" BorderBrush="Yellow" Padding="10,0,0,0">
+                LTR text paragraph with a figure anchored to character position.
+                LTR text paragraph with a figure anchored to character position.
+                <Figure VerticalAnchor="ParagraphTop" Margin="0,0,5,0" Background="Red">
+                  <Paragraph>
+                  <Border Width="30" Height="30"><TextBlock Foreground="Black" FlowDirection="LeftToRight">LTR</TextBlock></Border>
+                  </Paragraph>
+                </Figure>
+                LTR text paragraph with a figure anchored to character position.
+                <Figure VerticalAnchor="ParagraphTop" HorizontalAnchor="ColumnLeft" Margin="0,0,5,0" Background="Black">
+                  <Paragraph>
+                  <Border Width="30" Height="30"><TextBlock Foreground="White" FlowDirection="RightToLeft">RTL</TextBlock></Border>
+                  </Paragraph>
+                </Figure>
+                LTR text paragraph with a figure anchored to character position.
+                منها بالفنون العربية الأصيلة، قامت صخر ببث برنامج  سينما العرب على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+              </Paragraph>
+          </FlowDocument>
+      </FlowDocumentScrollViewer>
+      <FlowDocumentScrollViewer DockPanel.Dock="Top">
+          <FlowDocument Background="LightGreen">
+              <Paragraph>
+              RTL text paragraph with a figure anchored to character position.
+              RTL text paragraph with a figure anchored to character position.
+              <Figure VerticalAnchor="ParagraphTop" Margin="0,0,5,0" Background="Red">
+                <Paragraph>
+                <Border Width="30" Height="30"><TextBlock Foreground="Black" FlowDirection="LeftToRight">LTR</TextBlock></Border>
+                </Paragraph>
+              </Figure>
+              RTL text paragraph with a figure anchored to character position.
+              <Figure VerticalAnchor="ParagraphTop" HorizontalAnchor="ColumnLeft" Margin="0,0,5,0" Background="Black">
+                <Paragraph>
+                <Border Width="30" Height="30"><TextBlock Foreground="White" FlowDirection="RightToLeft">RTL</TextBlock></Border>
+                </Paragraph>
+              </Figure>
+              RTL text paragraph with a figure anchored to character position.
+              منها بالفنون العربية الأصيلة، قامت صخر ببث برنامج  سينما العرب على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+              </Paragraph>
+          </FlowDocument>
+      </FlowDocumentScrollViewer>
+      <FlowDocumentScrollViewer DockPanel.Dock="Top" FlowDirection="LeftToRight">
+          <FlowDocument Background="RoyalBlue">
+              <Paragraph>
+              LTR text paragraph with a figure anchored to character position.
+              LTR text paragraph with a figure anchored to character position.
+              <Figure VerticalAnchor="ParagraphTop" Margin="0,0,5,0" Background="Red">
+                <Paragraph>
+                <Border Width="30" Height="30"><TextBlock Foreground="Black" FlowDirection="LeftToRight">LTR</TextBlock></Border>
+                </Paragraph>
+              </Figure>
+              LTR text paragraph with a figure anchored to character position.
+              <Figure VerticalAnchor="ParagraphTop" HorizontalAnchor="ColumnLeft" Margin="0,0,5,0" Background="Black">
+                <Paragraph>
+                <Border Width="30" Height="30"><TextBlock Foreground="White" FlowDirection="RightToLeft">RTL</TextBlock></Border>
+                </Paragraph>
+              </Figure>
+              LTR text paragraph with a figure anchored to character position.
+              منها بالفنون العربية الأصيلة، قامت صخر ببث برنامج  سينما العرب على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+              </Paragraph>
+          </FlowDocument>
+      </FlowDocumentScrollViewer>
+  </DockPanel>
+
+  <DockPanel Grid.Column="1" Grid.Row="3">
+    <Border DockPanel.Dock="Top" Background="RoyalBlue" Margin="5,5,15,5">
+        <FlowDocumentScrollViewer>
+            <FlowDocument>
+                <Paragraph>
+                RTL text: 
+                <TextBlock FontWeight="Bold" Foreground="Red"> Test </TextBlock>
+                <Span>This text should be underlined after clicking Test button</Span>
+                منها بالفنون العربية الأصيلة، قامت صخر ببث 
+                <Border Background="Yellow" FlowDirection="LeftToRight"><TextBlock Width="50">LrTb</TextBlock></Border>
+                برنامج  سينما العرب 
+                <Border Background="Yellow" FlowDirection="RightToLeft"><TextBlock Width="50">RlTb</TextBlock></Border>
+                على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+                <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" FlowDirection="LeftToRight">
+                    <FlowDocument Foreground="Yellow">
+                      <Paragraph>
+                      LTR text:
+                      This text should be left aligned and formatted according to LTR Bidi rules.
+                      منها بالفنون العربية الأصيلة، قامت صخر ببث 
+                      <Border Background="DarkGreen" FlowDirection="LeftToRight"><TextBlock Width="50">LrTb</TextBlock></Border>
+                      برنامج  سينما العرب 
+                      <Border Background="DarkGreen" FlowDirection="RightToLeft"><TextBlock Width="50">RlTb</TextBlock></Border>
+                      على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+                      </Paragraph>
+                    </FlowDocument>
+                </FlowDocumentScrollViewer>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+    <Border DockPanel.Dock="Top" FlowDirection="LeftToRight" Background="Beige" Margin="15,5,5,5">
+        <FlowDocumentScrollViewer>
+            <FlowDocument>
+                <Paragraph FlowDirection="RightToLeft">Block: This is RTL content.</Paragraph>
+                <Paragraph>
+                    <TextBlock FlowDirection="RightToLeft">Text: This is RTL content.</TextBlock>
+                    <Span>Span: This is LTR content.</Span>
+                    <TextBlock FlowDirection="RightToLeft">Text: This is RTL content.</TextBlock>
+                </Paragraph>
+                <Paragraph FlowDirection="LeftToRight">Text: This is LTR content.</Paragraph>
+                <Paragraph FlowDirection="RightToLeft">Text: This is RTL content.</Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+  </DockPanel>
+
+  <DockPanel Grid.Column="3" Grid.Row="3">
+      <FlowDocumentScrollViewer DockPanel.Dock="Top">
+          <FlowDocument Background="White">
+              <Paragraph>Container paragraph inherits RTL from a content element.</Paragraph>
+              <Section Foreground="DarkBlue" FlowDirection="RightToLeft">
+                <Paragraph>Container paragraph="" inherits RTL from a content element.</Paragraph>
+                <Paragraph Background="LightGreen" FlowDirection="RightToLeft" Margin="15,0,0,0">
+                  RTL container paragraph. RTL container paragraph. RTL container paragraph.
+                  RTL container paragraph. RTL container paragraph. RTL container paragraph.
+                </Paragraph>
+                <Paragraph>Container paragraph inherits RTL from a content element.</Paragraph>
+              </Section>
+              <Paragraph>Container paragraph inherits RTL from a content element.</Paragraph>
+          </FlowDocument>
+      </FlowDocumentScrollViewer>
+      <FlowDocumentScrollViewer DockPanel.Dock="Top">
+          <FlowDocument Background="White">
+              <Paragraph>Control paragraph inherits RTL from a content element.</Paragraph>
+              <Section Foreground="DarkBlue" FlowDirection="RightToLeft">
+                <Paragraph>Control paragraph inherits RTL from a content element.</Paragraph>
+                <Paragraph>
+                  <Border Background="LightBlue" FlowDirection="RightToLeft" Margin="15,0,0,0">
+                    <TextBlock TextWrapping="WrapWithOverflow">
+                      RTL Control paragraph. RTL Control paragraph. RTL Control paragraph.
+                      RTL Control paragraph. RTL Control paragraph. RTL Control paragraph.
+                    </TextBlock>
+                  </Border>
+                </Paragraph>
+                <Paragraph>Control paragraph inherits RTL from a content element.</Paragraph>
+              </Section>
+              <Paragraph>Control paragraph inherits RTL from a content element.</Paragraph>
+          </FlowDocument>
+      </FlowDocumentScrollViewer>
+  </DockPanel>
+
+</Grid>
+</Border>

@@ -1,0 +1,42 @@
+<Section xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Section.Resources>
+        <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">            
+   	    <Setter Property="FontSize" Value="44" />
+        </Style>    
+    </Section.Resources>
+       
+    <Paragraph Background="LightYellow" Foreground="RoyalBlue" FontWeight="Bold">foreground (solid)</Paragraph>
+       
+  <!-- removing radial gradient test b/c of Won't Fix Regression_Bug44-->  
+  <!--<Paragraph Background="Crimson" FontWeight="Bold">
+    	<Paragraph.Foreground>
+           	<RadialGradientBrush>
+                 	<GradientBrush.GradientStops>
+                        	<GradientStopCollection>
+                            		<GradientStop Color="Green" Offset="0" />
+                            		<GradientStop Color="Pink" Offset="1" />
+                        	</GradientStopCollection>
+                    	</GradientBrush.GradientStops>
+                </RadialGradientBrush>
+        </Paragraph.Foreground>
+      	foreground (radial gradient)</Paragraph>-->
+        
+        <Paragraph Background="LightYellow" FontWeight="Bold">
+            <Paragraph.Foreground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="CadetBlue" Offset="0" />
+                            <GradientStop Color="Crimson" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Paragraph.Foreground>
+	foreground (linear gradient)</Paragraph>
+       
+        <Paragraph FontWeight="Bold">
+                <Paragraph.Foreground>
+                    <ImageBrush ImageSource="pack://siteoforigin:,,,/avalon.png"/>
+                </Paragraph.Foreground>
+		foreground (image)</Paragraph>
+</Section>

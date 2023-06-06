@@ -1,0 +1,39 @@
+<FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <FlowDocument TextAlignment="Left" PagePadding="0">
+    <Table CellSpacing="4" Background="#333333">
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell
+                        Padding="0,0,0,0"
+                        FontSize="18pt"
+                        FontWeight="Bold"
+                        Foreground="#cccccc"><Paragraph>Regression_Bug23 "Extra line added when TextFlow used in Cell."</Paragraph></TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell
+                        BorderThickness="1,1,1,1"
+                        BorderBrush="#cccccc"
+                        Background="Red"
+                        Foreground="#cc6600">
+                            <Paragraph Background="#333333">
+                                <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+                                    <FlowDocument TextAlignment="Left" PagePadding="0">
+                                        <Paragraph>In TextFlow - should not see any Red background!!!</Paragraph>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell
+                        BorderThickness="1,1,1,1"
+                        BorderBrush="#cccccc"
+                        Background="Red"
+                        Foreground="#cc6600"><Paragraph Background="#333333"><DockPanel>
+                            <TextBlock DockPanel.Dock="Right">In DockPanel - should not see any Red background!!!</TextBlock>
+                        </DockPanel></Paragraph></TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+    </FlowDocument>
+</FlowDocumentScrollViewer>

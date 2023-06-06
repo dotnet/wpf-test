@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>FlowLayoutOrcasTest</AssemblyName>
+    <OutputType>Library</OutputType>
+    <OutputSubFolder>FeatureTests\FlowLayout</OutputSubFolder>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Style Resources -->
+    <Resource Include="$(FlowTestDirectory)\Data\MarkUp\GenericButton.xaml" />
+    <Resource Include="$(FlowTestDirectory)\Data\MarkUp\GenericScrollBar.xaml" />
+    <Resource Include="$(FlowTestDirectory)\Data\MarkUp\GenericScrollViewer.xaml" />
+    <Resource Include="$(FlowTestDirectory)\Data\MarkUp\GenericPageViewer.xaml" />
+    <Resource Include="$(FlowTestDirectory)\Data\MarkUp\GenericDocumentReader.xaml" />
+    <Resource Include="$(FlowTestDirectory)\Data\MarkUp\GenericDocumentScrollViewer.xaml" />
+    <Resource Include="$(FlowTestDirectory)\Data\MarkUp\GenericFlowLayoutStyles.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Code Files below -->
+    <Compile Include="$(FlowTestDirectory)\CommonCode\TextEditorW.cs" />
+    <Compile Include="$(FlowTestDirectory)\CommonCode\StylesCommon.cs" />
+    <Compile Include="$(FlowTestDirectory)\CommonLoaderScenario\FlowLayoutLoaderHelper.cs" />
+    <Compile Include="$(FlowTestDirectory)\Hyperlink\Code\Orcas\DeleteHyperlink.cs" />
+    <Compile Include="$(FlowTestDirectory)\ContentElement\AnchoredBlock\Code\Orcas\AnchoredBlock_SelectionTests.cs" />
+    <Compile Include="$(FlowTestDirectory)\CommonLoaderScenario\Orcas\FlowLayoutLoaderTestsOrcas.cs" />
+    <Compile Include="$(FlowTestDirectory)\Viewer\FlowDocumentPageViewer\Code\Orcas\FDPVSelectionTest.cs" />
+    <Compile Include="$(FlowTestDirectory)\Viewer\FlowDocumentPageViewer\Code\Orcas\FDPVCommandTest.cs" />
+    <Compile Include="$(FlowTestDirectory)\Viewer\FlowDocumentReader\Code\Orcas\FDRCommandsTest.cs" />
+    <Compile Include="$(FlowTestDirectory)\Viewer\FlowDocumentScrollViewer\Code\Orcas\FDSVCommandTest.cs" />
+    <Compile Include="$(FlowTestDirectory)\TextBlock\Code\Orcas\TextBlockHitTestingAndFocusRegression.cs" />
+    <Compile Include="$(FlowTestDirectory)\TextBlock\Code\Regression\TextBlockReflowRegression.cs" />
+    <Compile Include="$(FlowTestDirectory)\TextBlock\Code\Regression\TextBlockTrimmingAndWrappingRegression.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+
+</Project>

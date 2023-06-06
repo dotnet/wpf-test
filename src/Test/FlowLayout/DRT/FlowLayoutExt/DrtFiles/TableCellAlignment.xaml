@@ -1,0 +1,32 @@
+﻿<FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <FlowDocument TextAlignment="Left" PagePadding="0">
+        <Table
+            CellSpacing="0"
+            Background="#333333">
+
+            <TableRowGroup>
+                <TableRowGroup.Resources>
+                        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type TableCell}">
+                            <Setter Property="BorderThickness" Value="1,1,1,1" />
+                            <Setter Property="BorderBrush" Value="#ffffff" />
+                            <Setter Property="Background" Value="#666666" />
+                            <Setter Property="Foreground" Value="#ffff7f" />
+                            <Setter Property="Padding" Value="4" />
+                            <Setter Property="TextAlignment" Value="Left" />
+                        </Style>
+                </TableRowGroup.Resources>
+
+                <TableRow>
+                    <TableCell RowSpan="2"><Paragraph>Cells in this row originally are aligned [H:Left|V:Top].<LineBreak />Cells with Red text are the test cells for incremental change of alignment in Body Row Group.</Paragraph></TableCell>
+                    <TableCell Name="BodyOneCellA" ColumnSpan="2" Foreground="Red" FontWeight="Bold"><Paragraph>BodyCellA</Paragraph></TableCell>
+                    <TableCell Name="BodyOneCellB" ColumnSpan="2" RowSpan="2" Foreground="Red" FontWeight="Bold"><Paragraph>BodyCellB</Paragraph></TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell><Paragraph /></TableCell>
+                    <TableCell><Paragraph /></TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+    </FlowDocument>
+</FlowDocumentScrollViewer>
+
