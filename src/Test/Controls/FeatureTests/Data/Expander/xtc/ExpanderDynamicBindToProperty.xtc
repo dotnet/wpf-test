@@ -1,0 +1,268 @@
+<XTC>
+  <TEST Name="Expander: Testing binding one expander's ExpandDirection and IsExpanded to another ones'" SubArea="Expander" Priority="2" ExecutionGroup="Pri2">
+    <DATA>
+      <INIT Class="ExpanderDynamicBindToProperty" SuppressGtoLogger="true"/>
+      <VARIATION ID="1">
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Expander  Header="Header" ExpandDirection="Down" IsExpanded="false" Name="expander">
+              <Expander.Content> ---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+            <Expander  Header="Header1" Name="expander1">
+              <Expander.Content>---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ExpanderBindingAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+          <Action Name="ExpanderChangeDirectionAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="IsExpanded" />
+            <Parameter Value="IsExpanded" />
+          </Validation>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="ExpandDirection" />
+            <Parameter Value="ExpandDirection" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="2">
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Expander  Header="Header" ExpandDirection="Right" IsExpanded="false" Name="expander" >
+              <Expander.Content> ---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+            <Expander  Header="Header" Name="expander1" >
+              <Expander.Content>---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ExpanderBindingAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+          <Action Name="ExpanderChangeDirectionAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="IsExpanded" />
+            <Parameter Value="IsExpanded" />
+          </Validation>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="ExpandDirection" />
+            <Parameter Value="ExpandDirection" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="3">
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Expander  Header="Header" ExpandDirection="Up" IsExpanded="false" Name="expander" >
+              <Expander.Content> ---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+            <Expander  Header="Header"  Name="expander1" >
+              <Expander.Content>---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ExpanderBindingAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+          <Action Name="ExpanderChangeDirectionAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="IsExpanded" />
+            <Parameter Value="IsExpanded" />
+          </Validation>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="ExpandDirection" />
+            <Parameter Value="ExpandDirection" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="4">
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Expander  Header="Header" ExpandDirection="Left" IsExpanded="false" Name="expander" >
+              <Expander.Content> ---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+            <Expander  Header="Header" Name="expander1" >
+              <Expander.Content>---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ExpanderBindingAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+          <Action Name="ExpanderChangeDirectionAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="IsExpanded" />
+            <Parameter Value="IsExpanded" />
+          </Validation>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="ExpandDirection" />
+            <Parameter Value="ExpandDirection" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="5">
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Expander  Header="Header" ExpandDirection="Right" IsExpanded="true" Name="expander" >
+              <Expander.Content> ---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+            <Expander  Header="Header" Name="expander1" >
+              <Expander.Content>---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ExpanderBindingAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+          <Action Name="ExpanderChangeDirectionAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="IsExpanded" />
+            <Parameter Value="IsExpanded" />
+          </Validation>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="ExpandDirection" />
+            <Parameter Value="ExpandDirection" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="6">
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Expander  Header="Header" ExpandDirection="Right" IsExpanded="true" Name="expander" >
+              <Expander.Content> ---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+            <Expander  Header="Header" Name="expander1" >
+              <Expander.Content>---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ExpanderBindingAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+          <Action Name="ExpanderChangeDirectionAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="IsExpanded" />
+            <Parameter Value="IsExpanded" />
+          </Validation>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="ExpandDirection" />
+            <Parameter Value="ExpandDirection" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="7">
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Expander  Header="Header" ExpandDirection="Up"  Name="expander" IsExpanded="true" >
+              <Expander.Content> ---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+            <Expander  Header="Header" Name="expander1" >
+              <Expander.Content>---expand content---\r\n\r\n ...\r\n\r\n---end---</Expander.Content>
+            </Expander>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ExpanderBindingAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+          <Action Name="ExpanderChangeDirectionAction" >
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="IsExpanded" />
+            <Parameter Value="IsExpanded" />
+          </Validation>
+          <Validation Name="CompareValidation">
+            <Parameter Value="expander" />
+            <Parameter Value="expander1" />
+            <Parameter Value="ExpandDirection" />
+            <Parameter Value="ExpandDirection" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>
+
+
+
+
+
+
+
+
+

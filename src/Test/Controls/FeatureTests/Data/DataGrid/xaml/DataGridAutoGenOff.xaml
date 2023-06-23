@@ -1,0 +1,29 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    x:Name="GridPanel"
+    Height="700" Width="700">    
+    <Grid.Resources> 
+        <ctrl:People x:Key="people"/>
+    </Grid.Resources>    
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="WPF DataGrid" Grid.Row="0"/>               
+            
+    <!--ItemsSource set, count = n, AutoGen Flag = false, columns not set-->
+    <DataGrid x:Name="DataGrid_Standard" 
+                Grid.Row="1"                                
+                AlternationCount="2"
+                RowBackground="White" 
+                AlternatingRowBackground="LightBlue"
+                ItemsSource="{Binding Source={StaticResource people}}"
+                AutoGenerateColumns="False">               
+    </DataGrid>    
+</Grid>

@@ -1,0 +1,377 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    xmlns:local="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon" 
+    x:Name="GridPanel"
+    Height="600" Width="600">
+    <Grid.Resources>
+      <Style TargetType="{x:Type local:CustomControlLocalValueControl}">
+        <Setter Property="Title" Value="default test text" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type local:CustomControlLocalValueControl}">
+              <Button Content="{TemplateBinding Title}" Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="StandardButtonCustomControlStyle" TargetType="{x:Type local:CustomControlLocalValueControl}">
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type local:CustomControlLocalValueControl}">
+              <Button Content="{TemplateBinding Title}" Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="StandardContentControlStyle" TargetType="{x:Type local:CustomControlLocalValueControl}">
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type local:CustomControlLocalValueControl}">
+              <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                        ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                        ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="StyleTriggerCustomControlStyle" TargetType="{x:Type local:CustomControlLocalValueControl}" >
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type local:CustomControlLocalValueControl}">
+              <Button Content="{TemplateBinding Title}" Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Setter Property="Title" Value="Style trigger fired" />
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+
+      <Style x:Key="StyleTriggerBindingCustomControlStyle" TargetType="{x:Type local:CustomControlLocalValueControl}" >
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type local:CustomControlLocalValueControl}">
+              <Button Content="{TemplateBinding Title}" Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True">
+            <Setter Property="Title" Value="{Binding  RelativeSource={RelativeSource Self}, Path=WorkingTag, StringFormat='StyleTrigger trigger fired w/ binding: {0}'}" />
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
+
+      <Style x:Key="StyleCustomControlStyle" TargetType="{x:Type local:CustomControlLocalValueControl}" >
+        <Setter Property="Title" Value="set via style" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type local:CustomControlLocalValueControl}">
+              <Button Content="{TemplateBinding Title}" Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="StyleBindingCustomControlStyle" TargetType="{x:Type local:CustomControlLocalValueControl}" >
+        <Setter Property="Title" Value="{Binding RelativeSource={RelativeSource Self}, Path=WorkingTag, StringFormat='Set via Style w/ Binding: {0}'}" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type local:CustomControlLocalValueControl}">
+              <Button Content="{TemplateBinding Title}" Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>    
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+  <StackPanel Grid.Row="0" Orientation="Horizontal">
+    <TextBlock Text="WPF ResourceDictionary Test" />
+    <Button HorizontalAlignment="Center" Content="Debug" Name="btn_Debug" />
+  </StackPanel>
+
+  <ListBox Grid.Row="1" x:Name="ListBox" VirtualizingStackPanel.IsVirtualizing="False">
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Initial Local Value">
+            <local:CustomControlLocalValueControl x:Name="CustomControl_Local" Title="(local) test text" />
+          </GroupBox>
+          <GroupBox Header="TitleProperty info">
+            <StackPanel>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+
+              <StackPanel Orientation="Horizontal">
+                <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Local}"/>
+                <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Local}"/>
+                <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Local}" />
+                <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_Local, Path=UseCustomCoercion}" />
+              </StackPanel>
+            </StackPanel>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Initial Local Value: Binding">
+            <local:CustomControlLocalValueControl x:Name="CustomControl_Local_Binding" Title="{Binding RelativeSource={RelativeSource Self}, Path=WorkingTag, StringFormat='(local) with binding: {0}'}" />
+          </GroupBox>
+          <GroupBox Header="TitleProperty info">
+            <StackPanel>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local_Binding, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local_Binding, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local_Binding, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local_Binding, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local_Binding, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Local_Binding, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+
+              <StackPanel Orientation="Horizontal">
+                <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Local_Binding}"/>
+                <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Local_Binding}"/>
+                <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Local_Binding}" />
+                <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_Local_Binding, Path=UseCustomCoercion}" />
+              </StackPanel>
+            </StackPanel>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Style">
+            <local:CustomControlLocalValueControl x:Name="CustomControl_Style" Style="{StaticResource StyleCustomControlStyle}"/>
+          </GroupBox>
+          <GroupBox  Header="TitleProperty info">
+            <StackPanel>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+
+              <StackPanel Orientation="Horizontal">
+                <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Style}"/>
+                <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Style}"/>
+                <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Style}" />
+                <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_Style, Path=UseCustomCoercion}" />
+              </StackPanel>
+            </StackPanel>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Style Binding">
+            <local:CustomControlLocalValueControl x:Name="CustomControl_Style_Binding" Style="{StaticResource StyleBindingCustomControlStyle}"/>
+          </GroupBox>
+          <GroupBox  Header="TitleProperty info">
+            <StackPanel>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style_Binding, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style_Binding, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style_Binding, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style_Binding, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style_Binding, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_Style_Binding, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+              <StackPanel Orientation="Horizontal">
+                <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Style_Binding}"/>
+                <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Style_Binding}"/>
+                <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Style_Binding}" />
+                <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_Style_Binding, Path=UseCustomCoercion}" />
+              </StackPanel>
+            </StackPanel>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Style Trigger">
+            <local:CustomControlLocalValueControl x:Name="CustomControl_StyleTrigger" Height="50" Width="200"  Style="{StaticResource StyleTriggerCustomControlStyle}"/>
+          </GroupBox>
+          <GroupBox  Header="TitleProperty info">
+            <StackPanel>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+              <StackPanel Orientation="Horizontal">
+                <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_StyleTrigger}"/>
+                <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_StyleTrigger}"/>
+                <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_StyleTrigger}" />
+                <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_StyleTrigger, Path=UseCustomCoercion}" />
+              </StackPanel>
+            </StackPanel>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Style Trigger Binding">
+            <local:CustomControlLocalValueControl x:Name="CustomControl_StyleTrigger_Binding" Height="50" Width="200"  Style="{StaticResource StyleTriggerBindingCustomControlStyle}"/>
+          </GroupBox>
+          <GroupBox  Header="TitleProperty info">
+            <StackPanel>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger_Binding, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger_Binding, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger_Binding, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger_Binding, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger_Binding, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+              <TextBlock Text="{Binding ElementName=CustomControl_StyleTrigger_Binding, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+              <StackPanel Orientation="Horizontal">
+                <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_StyleTrigger_Binding}"/>
+                <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_StyleTrigger_Binding}"/>
+                <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_StyleTrigger_Binding}" />
+                <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_StyleTrigger_Binding, Path=UseCustomCoercion}" />
+              </StackPanel>
+            </StackPanel>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Parent Template Trigger">
+            <Control Name="ParentCustomControl_ParentTemplateTrigger">
+              <Control.Template>
+                <ControlTemplate>
+                  <StackPanel>
+                    <GroupBox>
+                      <local:CustomControlLocalValueControl x:Name="CustomControl_ParentTemplateTrigger" Height="50" Width="200" />
+                    </GroupBox>
+                    <GroupBox Header="TitleProperty info">
+                      <StackPanel>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplateTrigger, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplateTrigger, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplateTrigger, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplateTrigger, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplateTrigger, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplateTrigger, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+                        <StackPanel Orientation="Horizontal">
+                          <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_ParentTemplateTrigger}"/>
+                          <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_ParentTemplateTrigger}"/>
+                          <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_ParentTemplateTrigger}" />
+                          <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_ParentTemplateTrigger, Path=UseCustomCoercion}" />
+                        </StackPanel>
+                      </StackPanel>
+                    </GroupBox>
+                  </StackPanel>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                      <Setter TargetName="CustomControl_ParentTemplateTrigger" Property="Title" Value="Parent Template trigger fired" />
+                    </Trigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Control.Template>
+            </Control>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Parent Template">
+            <Control Name="ParentCustomControl_ParentTemplate">
+              <Control.Template>
+                <ControlTemplate>
+                  <StackPanel>
+                    <GroupBox>
+                      <local:CustomControlLocalValueControl Name="CustomControl_ParentTemplate" Title="(parent template) test text" />
+                    </GroupBox>
+                    <GroupBox Header="TitleProperty info">
+                      <StackPanel>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplate, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplate, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplate, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplate, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplate, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+                        <TextBlock Text="{Binding ElementName=CustomControl_ParentTemplate, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+                        <StackPanel Orientation="Horizontal">
+                          <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_ParentTemplate}"/>
+                          <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_ParentTemplate}"/>
+                          <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_ParentTemplate}" />
+                          <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_ParentTemplate, Path=UseCustomCoercion}" />
+                        </StackPanel>
+                      </StackPanel>
+                    </GroupBox>
+                  </StackPanel>
+                </ControlTemplate>
+              </Control.Template>
+            </Control>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+
+    <ListBoxItem>
+      <Border BorderBrush="Black" BorderThickness="5" Margin="10">
+        <StackPanel>
+          <GroupBox Header="Inherits">
+            <local:CustomControlLocalValueControl Title="(Inherits) test text" Style="{StaticResource StandardContentControlStyle}">
+              <local:CustomControlLocalValueControl.Content>
+                <StackPanel>
+                  <GroupBox>
+                    <local:CustomControlLocalValueControl x:Name="CustomControl_Inherits" Style="{StaticResource StandardButtonCustomControlStyle}" />
+                  </GroupBox>
+                  <GroupBox Header="TitleProperty info">
+                    <StackPanel>
+                      <TextBlock Text="{Binding ElementName=CustomControl_Inherits, Path=TitleLocalValue, StringFormat='LocalValue: {0}' }"/>
+                      <TextBlock Text="{Binding ElementName=CustomControl_Inherits, Path=TitleValueSource.BaseValueSource, StringFormat='BaseValueSource: {0}'}"/>
+                      <TextBlock Text="{Binding ElementName=CustomControl_Inherits, Path=TitleValueSource.IsCoerced, StringFormat='IsCoerced: {0}'}"/>
+                      <TextBlock Text="{Binding ElementName=CustomControl_Inherits, Path=TitleValueSource.IsAnimated, StringFormat='IsAnimated: {0}'}"/>
+                      <TextBlock Text="{Binding ElementName=CustomControl_Inherits, Path=TitleValueSource.IsExpression, StringFormat='IsExpression: {0}'}"/>
+                      <TextBlock Text="{Binding ElementName=CustomControl_Inherits, Path=TitleValueSource.IsCurrent, StringFormat='IsCurrent: {0}'}"/>
+                      <StackPanel Orientation="Horizontal">
+                        <Button Content="Set Local Value" Command="{Binding SetLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Inherits}"/>
+                        <Button Content="Set Current Value" Command="{Binding SetCurrentLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Inherits}"/>
+                        <Button Content="Clear Local Value" Command="{Binding ClearLocalValue}" CommandParameter="{Binding ElementName=CustomControl_Inherits}" />
+                        <CheckBox Content="Use Custom Coerced value" IsChecked="{Binding ElementName=CustomControl_Inherits, Path=UseCustomCoercion}" />
+                      </StackPanel>
+                    </StackPanel>
+                  </GroupBox>
+                </StackPanel>
+              </local:CustomControlLocalValueControl.Content>
+            </local:CustomControlLocalValueControl>
+          </GroupBox>
+        </StackPanel>
+      </Border>
+    </ListBoxItem>
+  </ListBox>
+</Grid>

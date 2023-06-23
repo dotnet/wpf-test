@@ -1,0 +1,81 @@
+<WrapPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"     
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:data="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    xmlns:src="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon"
+    Name="panel">
+    <WrapPanel.Resources>
+        <XmlDataProvider x:Key="Family" XPath="/sb:Family/sb:Person">
+            <XmlDataProvider.XmlNamespaceManager>
+                <XmlNamespaceMappingCollection>
+                    <XmlNamespaceMapping Uri="http://sellsbrothers.com" Prefix="sb"/>
+                </XmlNamespaceMappingCollection>
+            </XmlDataProvider.XmlNamespaceManager>
+            <x:XData>
+                <Family xmlns="http://sellsbrothers.com">
+                    <Person Name="Tom" Age="11"/>
+                    <Person Name="John" Age="12"/>
+                    <Person Name="Melissa" Age="38"/>
+                    <Person Name="George" Age="15"/>
+                    <Person Name="Thomas" Age="32"/>
+                    <Person Name="Andrew" Age="68"/>
+                    <Person Name="William" Age="31"/>
+                    <Person Name="Zachary" Age="12"/>
+                    <Person Name="Millard" Age="38"/>
+                    <Person Name="Franklin" Age="51"/>
+                    <Person Name="Ulysses" Age="62"/>
+                    <Person Name="Rutherford" Age="28"/>
+                    <Person Name="Chester" Age="15"/>
+                    <Person Name="Grover" Age="12"/>
+                    <Person Name="Benjamin" Age="28"/>
+                    <Person Name="Theodore" Age="16"/>
+                    <Person Name="Woodrow" Age="12"/>
+                    <Person Name="Warren" Age="48"/>
+                    <Person Name="Calvin" Age="19"/>
+                    <Person Name="Herbert" Age="12"/>
+                    <Person Name="Harry" Age="48"/>
+                    <Person Name="Dwight" Age="11"/>
+                    <Person Name="Lyndon" Age="22"/>
+                    <Person Name="Richard" Age="38"/>
+                    <Person Name="Gerald" Age="51"/>
+                    <Person Name="Jimmy" Age="17"/>
+                    <Person Name="Ronald" Age="58"/>
+                    <Person Name="Bill" Age="16"/>
+                    <Person Name="David" Age="52"/>
+                    <Person Name="Derek" Age="48"/>
+                    <Person Name="Peter" Age="31"/>
+                    <Person Name="Olivia" Age="22"/>
+                    <Person Name="Ken" Age="28"/>
+                    <Person Name="Paul" Age="51"/>
+                    <Person Name="Vernon" Age="57"/>
+                    <Person Name="Daniel" Age="58"/>
+                    <Person Name="Jerry" Age="36"/>
+                    <Person Name="Jeff" Age="52"/>
+                    <Person Name="Ross" Age="58"/>
+                    <Person Name="Scott" Age="31"/>
+                    <Person Name="Jason" Age="32"/>
+                    <Person Name="Don" Age="28"/>
+                </Family>
+            </x:XData>
+        </XmlDataProvider>
+        <src:AgeToForegroundConverter x:Key="ageConverter" />
+        <CollectionViewSource x:Key="SortedGroupedFamily" Source="{StaticResource Family}">
+            <CollectionViewSource.GroupDescriptions>
+                <data:PropertyGroupDescription PropertyName="@Age"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </WrapPanel.Resources>
+    <StackPanel DataContext="{StaticResource Family}">
+        <ListBox  Name="listbox" Width="100" Height="100" ItemsSource="{Binding Source={StaticResource SortedGroupedFamily}}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding XPath=@Name}" />
+                        <TextBlock Text=" (age:" />
+                        <TextBlock Text="{Binding XPath=@Age}" Foreground="{Binding XPath=@Age, Converter={StaticResource ageConverter}}"/>
+                        <TextBlock Text=")" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</WrapPanel>

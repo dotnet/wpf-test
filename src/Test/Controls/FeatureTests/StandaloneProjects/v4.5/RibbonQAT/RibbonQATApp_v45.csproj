@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>RibbonQATApp</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <PublishDir>$(WpfFeatureTestBasePublishPath)\Controls\RibbonTest\v4.5</PublishDir>
+    <DefineConstants>Net45</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+    <Page Include="Window1.xaml" />
+
+    <Compile Include="*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\*.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TestApiCoreProject)" />
+    <ProjectReference Include="$(TestApiWpfProject)" />
+    <ProjectReference Include="$(ControlsCommonProject)"/>
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,28 @@
+<XTC>
+  <TEST Name="ListViewInputSelectionChangedTest" Priority="0" SubArea="ListView" Timeout="600">
+    <Keywords>
+      <Keyword>Localization_Suite</Keyword>
+    </Keywords>
+    <DATA>
+      <INIT Class="SelectorSelectionChangedTest"/>
+      <PICT Name="ListBoxInputTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="SelectorControlsBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingSmallDataBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingLargeDataBVT.xaml"/>
+      </XAMLS>
+      
+      <!-- Test Up key on listview from 1 to 0 and validate 'SelectionChanged' event is fired -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FocusedIndex="1" ToIndex="0" ShouldEventFire="true" Key="Up" />
+      <!-- Test Up key on listview from 0 to 0 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FocusedIndex="0" ToIndex="0" ShouldEventFire="false" Key="Up" />
+      <!-- Test Down key on listview from 1 to 2 and validate 'SelectionChanged' event is fired -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FocusedIndex="1" ToIndex="2" ShouldEventFire="true" Key="Down" />
+      
+      <!-- Test mouse click on listview from 1 to 3 and validate 'SelectionChanged' event is fired -->
+      <VARIATION ControlName="listview" InputType="Mouse" FocusedIndex="1" ToIndex="3" ShouldEventFire="true" />
+      <!-- Test mouse click on listview from 1 to 1 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Mouse" FocusedIndex="1" ToIndex="1" ShouldEventFire="false" />
+    </DATA>
+  </TEST>
+</XTC>

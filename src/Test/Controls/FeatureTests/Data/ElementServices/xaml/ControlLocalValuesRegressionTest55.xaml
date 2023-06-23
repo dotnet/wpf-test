@@ -1,0 +1,62 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    xmlns:local="clr-namespace:Microsoft.Test.Controls" 
+    x:Name="GridPanel"
+    Height="400" Width="500">
+    <Grid.Resources>
+
+      <local:TestStrings x:Key="Strings"/>
+      
+      <Style x:Key="Style1" TargetType="{x:Type ListBox}">
+        <Setter Property="ItemsSource" Value="{StaticResource Strings}"/>
+        <Setter Property="SelectedIndex" Value="{Binding ElementName=tb, Path=Text, Mode=OneWay}"/>
+        <Setter Property="SelectedItem" Value="Red"/>
+      </Style>
+
+      <Style x:Key="Style2" TargetType="{x:Type ListBox}">
+        <Setter Property="SelectedIndex" Value="{Binding ElementName=tb, Path=Text, Mode=OneWay}"/>
+        <Setter Property="SelectedItem" Value="Green"/>
+      </Style>
+
+      <Style x:Key="Theme1" TargetType="{x:Type Label}">
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Label}">
+              <ListBox Style="{StaticResource Style1}"/>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="Theme2" TargetType="{x:Type Label}">
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Label}">
+              <ListBox Style="{StaticResource Style2}"/>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+  <StackPanel Grid.Row="0" Orientation="Horizontal">
+    <TextBlock Text="WPF ControlLocalValues Regression Test" />
+    <Button HorizontalAlignment="Center" Content="Debug" Name="btn_Debug" />
+  </StackPanel>
+
+  <StackPanel Grid.Row="1">    
+    <Button Name="testButton" Width="Auto" Content="Change Theme"/>    
+    <ListBox Name="lb" Style="{StaticResource Style1}"/>
+    <Label Name="label" Style="{StaticResource Theme1}"/>
+  </StackPanel> 
+  
+</Grid>

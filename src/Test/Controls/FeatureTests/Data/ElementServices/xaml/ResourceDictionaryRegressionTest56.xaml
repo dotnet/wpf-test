@@ -1,0 +1,57 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    xmlns:local="clr-namespace:Microsoft.Test.Controls" 
+    x:Name="GridPanel"
+    Height="400" Width="500">
+    <Grid.Resources>
+      <Button x:Key="dummy" />
+
+      <!-- The templates' content refer to this single dictionary. -->
+      <ResourceDictionary x:Key="rd">
+        <SolidColorBrush x:Key="brush" Color="blue" />
+      </ResourceDictionary>
+
+      <!-- Template 1 - blue -->
+      <ControlTemplate x:Key="template1" TargetType="Button">
+        <DockPanel Background="blue" Height="100" Width="100" Resources="{StaticResource rd}">
+          <DocumentViewer />
+          <ListBox />
+        </DockPanel>
+      </ControlTemplate>
+
+      <!-- Template 2 - red -->
+      <ControlTemplate x:Key="template2" TargetType="Button">
+        <DockPanel Background="red" Height="100" Width="10" Resources="{StaticResource rd}">
+          <DocumentViewer />
+          <ListBox />
+        </DockPanel>
+      </ControlTemplate>      
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+  <StackPanel Grid.Row="0" Orientation="Horizontal">
+    <TextBlock Text="WPF ResourceDictionary Test" />
+    <Button HorizontalAlignment="Center" Content="Debug" Name="btn_Debug" />
+  </StackPanel>
+
+  <Button Name="btn_TestButton" Grid.Row="1">
+    <Button.Style>
+      <!-- Style sets Template property and triggers it when mouse is over. -->
+      <Style TargetType="Button">
+        <Setter Property="Template" Value="{DynamicResource template1}" />
+        <Style.Triggers>
+          <Trigger Property="IsMouseOver" Value="true">
+            <Setter Property="Template" Value="{DynamicResource template2}" />
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+    </Button.Style>
+  </Button>
+</Grid>

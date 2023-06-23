@@ -1,0 +1,215 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="500" Width="800">
+
+    <Grid.Resources>
+
+        <CollectionViewSource x:Key="CVS" Source="{Binding Data}"/>
+
+        <LinearGradientBrush x:Key="HeightBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Offset="0.0" Color="Green"/>
+            <GradientStop Offset="0.4" Color="White"/>
+            <GradientStop Offset="0.6" Color="White"/>
+            <GradientStop Offset="1.0" Color="Red"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="ICS" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <DataTemplate x:Key="ItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding Name}"/>
+                <Grid Grid.Column="1" Height="{Binding DisplayHeight}" Background="{StaticResource HeightBrush}">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding DisplayHeight}"/>
+                </Grid>
+                <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Group1}"/>
+                <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Group2}"/>
+            </Grid>
+        </DataTemplate>
+
+    </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <ScrollViewer Name="_outerSV" Margin="10" Width="250" Height="{Binding CurrentConfig.SVHeight}" VerticalAlignment="Center">
+                <StackPanel>
+                    <Grid Height="400" Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="(before)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Text="(before)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Text="(before)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <ListBox Name="_listbox" Height="200" Margin="30,0"
+                             VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                             VirtualizingPanel.ScrollUnit="{Binding CurrentConfig.ScrollUnit}"
+                             VirtualizingPanel.CacheLength="{Binding CurrentConfig.CacheLength}" VirtualizingPanel.CacheLengthUnit="Pixel"
+                             ItemTemplate="{StaticResource ItemTemplate}"
+                             ItemContainerStyle="{StaticResource ICS}"
+                             ItemsSource="{Binding Source={StaticResource CVS}}"
+                             />
+
+                    <Grid Height="400" Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="(after)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Text="(after)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Text="(after)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <GroupBox Header="Configuration">
+                <Grid Margin="5,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="Current"/>
+                    <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="Proposed"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Text="ScrollViewer Height"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding CurrentConfig.SVHeight}"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" Width="75" HorizontalAlignment="Center" Text="{Binding ProposedConfig.SVHeight}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Text="Scroll Unit"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding CurrentConfig.ScrollUnit}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="2" Width="75" HorizontalAlignment="Center" ItemsSource="{Binding ScrollUnitValues}" SelectedValue="{Binding ProposedConfig.ScrollUnit}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Text="Cache Length"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding CurrentConfig.CacheLength}"/>
+                    <TextBox Grid.Row="3" Grid.Column="2" Width="75" HorizontalAlignment="Center" Text="{Binding ProposedConfig.CacheLength}"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Text="Grouping Levels"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding CurrentConfig.GroupingLevels}"/>
+                    <TextBox Grid.Row="4" Grid.Column="2" Width="75" HorizontalAlignment="Center" Text="{Binding ProposedConfig.GroupingLevels}"/>
+                    <Button Grid.Row="1" Grid.RowSpan="4" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,2" Content="Apply" />
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Setup before scrolling">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,10">
+                        <CheckBox IsChecked="{Binding AlignViewport}" Content="Align viewport "/>
+                        <ComboBox ItemsSource="{Binding VerticalAlignmentValues}" SelectedValue="{Binding ViewportAlignment}" SelectedIndex="0"/>
+                        <TextBlock Text=" to ScrollViewer "/>
+                        <ComboBox ItemsSource="{Binding VerticalAlignmentValues}" SelectedValue="{Binding SVAlignment}" SelectedIndex="0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,10">
+                        <CheckBox IsChecked="{Binding ScrollViewport}" Content="Scroll viewport to "/>
+                        <ComboBox ItemsSource="{Binding ScrollTypeValues}" SelectedValue="{Binding ScrollType}" SelectedIndex="0"/>
+                        <TextBox Margin="5,0" Width="75" Text="{Binding ScrollValue}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <DockPanel Margin="0,5" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Button Padding="5,0" Content="ScrollIntoView"/>
+                <Label Margin="10,0,0,0" Content="Index: "/>
+                <TextBox Name="_tbIndex" Width="50"/>
+            </DockPanel>
+
+            <GroupBox Header="Result">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Text="Before SIV"/>
+                    <TextBlock Grid.Column="2" Text="After SIV"/>
+                    <TextBlock Grid.Row="1" Text="Item in VP"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding BeforeSnapshot.ItemInVp}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding AfterSnapshot.ItemInVp}"/>
+                    <TextBlock Grid.Row="2" Text="Item in VP (visible)"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding BeforeSnapshot.ItemVisInVp}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding AfterSnapshot.ItemVisInVp}"/>
+                    <TextBlock Grid.Row="3" Text="Item in SV"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding BeforeSnapshot.ItemInVp}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding AfterSnapshot.ItemInVp}"/>
+                    <TextBlock Grid.Row="4" Text="Item in SV (visible)"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding BeforeSnapshot.ItemVisInVp}"/>
+                    <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding AfterSnapshot.ItemVisInVp}"/>
+                    <TextBlock Grid.Row="5" Text="Viewport in SV"/>
+                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding BeforeSnapshot.VpInSV}"/>
+                    <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding AfterSnapshot.VpInSV}"/>
+                    <TextBlock Grid.Row="6" Text="Viewport in SV (visible)"/>
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding BeforeSnapshot.VpVisInSV}"/>
+                    <TextBlock Grid.Row="6" Grid.Column="2" Text="{Binding AfterSnapshot.VpVisInSV}"/>
+                <TextBlock Grid.Row="7" Text="Viewport offset/extent"/>
+                <TextBlock Grid.Row="7" Grid.Column="1">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:f2} / {1:f2}">
+                            <Binding Path="BeforeSnapshot.VpOffset"/>
+                            <Binding Path="BeforeSnapshot.VpExtent"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Grid.Row="7" Grid.Column="2">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:f2} / {1:f2}">
+                            <Binding Path="AfterSnapshot.VpOffset"/>
+                            <Binding Path="AfterSnapshot.VpExtent"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Grid.Row="8" Text="ScrollViewer offset/extent"/>
+                <TextBlock Grid.Row="8" Grid.Column="1">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:f2} / {1:f2}">
+                            <Binding Path="BeforeSnapshot.SvOffset"/>
+                            <Binding Path="BeforeSnapshot.SvExtent"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Grid.Row="8" Grid.Column="2">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:f2} / {1:f2}">
+                            <Binding Path="AfterSnapshot.SvOffset"/>
+                            <Binding Path="AfterSnapshot.SvExtent"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Grid>
+        </GroupBox>
+
+    </StackPanel>
+</Grid>
+

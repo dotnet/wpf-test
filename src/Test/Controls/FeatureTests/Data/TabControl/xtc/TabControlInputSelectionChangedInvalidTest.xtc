@@ -1,0 +1,20 @@
+<XTC>
+  <TEST Name="TabControlInputSelectionChangedInvalidTest" Priority="2" SubArea="TabControl" Timeout="600">
+    <DATA>
+      <INIT Class="SelectorSelectionChangedTest"/>
+      <PICT Name="TabControlInputInvalidTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="SelectorControlsBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingSmallDataBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingLargeDataBVT.xaml"/>
+      </XAMLS>
+      <!-- Test key on tabcontrol from 1 to 0 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FocusedIndex="1" ToIndex="0" ShouldEventFire="false" />
+      <!-- Test key on tabcontrol from 1 to 2 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FocusedIndex="1" ToIndex="2" ShouldEventFire="false" />
+      
+      <!-- Test mouse click on tabcontrol from 1 to 3 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Mouse" FocusedIndex="1" ToIndex="3" ShouldEventFire="false" />
+    </DATA>
+  </TEST>
+</XTC>

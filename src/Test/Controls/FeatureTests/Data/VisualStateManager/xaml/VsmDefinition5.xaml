@@ -1,0 +1,59 @@
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    xmlns:utils="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon" 
+    x:Name="HostPanel"
+    Height="700" Width="700">
+    <Grid.Resources>
+        <Storyboard x:Key="sb_stateA">
+            <DoubleAnimation Storyboard.TargetName="target" Storyboard.TargetProperty="Width" 
+                                         Duration="0:0:0.01" From="100" To="150"/>
+            <Storyboard>
+                <DoubleAnimation Storyboard.TargetName="target" Storyboard.TargetProperty="Opacity"
+                                         Duration="0:0:0.01" From="0.5" To="0.8"/>
+            </Storyboard>
+        </Storyboard>
+
+        <Storyboard x:Key="sb_stateB">
+            <Storyboard>
+                <DoubleAnimation Storyboard.TargetName="target" Storyboard.TargetProperty="Width"
+                                             Duration="0:0:0.01" From="30" To="10"/>
+            </Storyboard>
+        </Storyboard>
+
+        <Storyboard x:Key="sb_transition" Duration="0:0:0.2">
+            <Storyboard x:Name="checkpointStoryboard" Duration="0:0:0.1"/>
+            <DoubleAnimation Storyboard.TargetName="target" Storyboard.TargetProperty="Width"
+                                             Duration="0:0:0.2" From="40" To="80"/>
+            <Storyboard>
+                <DoubleAnimation Storyboard.TargetName="target" Storyboard.TargetProperty="Height"
+                                                 Duration="0:0:0.2" To="100"/>
+            </Storyboard>
+        </Storyboard>
+    </Grid.Resources>
+    <!-- XAML for NestedStoryboardsTest test. -->
+    <UserControl>
+        <Canvas Width="100" Height="100" Background="Yellow">
+
+            <Canvas x:Name="target" Width="50" Height="50" Opacity="0.9" Background="Green"/>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="vsGroup">
+                    <VisualStateGroup.States>
+                        <VisualState Name="stateA" Storyboard="{StaticResource sb_stateA}">
+                        </VisualState>
+
+                        <VisualState Name="stateB" Storyboard="{StaticResource sb_stateB}">
+                        </VisualState>
+                    </VisualStateGroup.States>
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition From="stateA" To="stateB" GeneratedDuration="0:0:0.2" Storyboard="{StaticResource sb_transition}">
+                        </VisualTransition>
+                    </VisualStateGroup.Transitions>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Canvas>
+    </UserControl>
+</Grid>

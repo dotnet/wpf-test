@@ -1,0 +1,27 @@
+<!--
+(c) Copyright Microsoft Corporation.
+This source is subject to the Microsoft Limited Permissive License.
+See http://www.microsoft.com/resources/sharedsource/licensingbasics/limitedpermissivelicense.mspx
+All other rights reserved.
+-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WpfControlToolkit"
+    >
+
+  <DataTemplate x:Key="{x:Static local:BarChartControl.DefaultBarTemplateKey}">
+    <Rectangle Fill="Navy"/>
+  </DataTemplate>
+
+  <DataTemplate x:Key="HorizontalLabel">
+    <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+  </DataTemplate>
+
+
+  <Style TargetType="{x:Type local:BarChartControl}">
+    <Setter Property="HorizontalAxisLabelTemplate" Value="{StaticResource HorizontalLabel}"/>
+  </Style>
+  
+
+</ResourceDictionary>

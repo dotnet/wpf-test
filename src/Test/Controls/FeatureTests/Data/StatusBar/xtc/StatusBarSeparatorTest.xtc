@@ -1,0 +1,30 @@
+<XTC>
+  <TEST Name="StatusBar:StatusBar Separator default style test" SubArea="StatusBar" Priority="2" ExecutionGroup="Pri2" Disabled="True">
+    <DATA>
+      <INIT Class="XamlStepsUnitTest" SuppressGtoLogger="true"/>
+      <VARIATION ID="1">
+        <CONTROL>
+          <StatusBar Height="26" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="300">
+            <StatusBarItem Content="item1"/>
+            <Separator/>
+            <StatusBarItem Content="item2"/>
+          </StatusBar>
+        </CONTROL>
+        <XAML>
+          <Steps xmlns:s='clr-namespace:System;assembly=mscorlib'
+                 xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+                 xmlns='http://schemas.microsoft.com/winfx/2006/xaml/test/componentmodel'
+                 xmlns:p='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>
+            <DispatcherValidation Finder='{Finding TypePath=p:Separator}'>
+              <ObjectPropertyValidation TypeName='Separator'>
+                <ObjectPropertyValidation.Properties>
+                  <Checker Value='2' Property='Margin'/>
+                </ObjectPropertyValidation.Properties>
+              </ObjectPropertyValidation>
+            </DispatcherValidation>
+          </Steps>
+        </XAML>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

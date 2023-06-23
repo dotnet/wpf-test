@@ -1,0 +1,21 @@
+<Page x:Class="Microsoft.Test.Controls.DataGridPeersBugsTest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Microsoft.Test.Controls.UIADataSources" 
+    Title="Page1">
+    <Page.Resources>
+        <local:UIAPeople x:Key="Family" />
+    </Page.Resources>
+    <StackPanel>
+        <DataGrid Name="datagrid" 
+                  ItemsSource="{StaticResource Family}" 
+                  Width="200" Height="200"
+                  EnableColumnVirtualization="True">
+            <DataGrid.ColumnHeaderStyle>
+                <Style>
+                    <Setter Property="DataGridColumnHeader.Width" Value="100" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+        </DataGrid>
+    </StackPanel>
+</Page>

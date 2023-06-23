@@ -1,0 +1,120 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    x:Name="GridPanel"
+    Height="700" Width="700">    
+    <Grid.Resources>
+        <XmlDataProvider x:Key="DataProvider" XPath="People/Person">
+            <x:XData>
+                <People xmlns="">
+                    <Person FirstName="George" LastName="Washington" />
+                    <Person FirstName="John" LastName="Adams" />
+                    <Person FirstName="Thomas" LastName="Jefferson" />
+                    <Person FirstName="James" LastName="Madison" />
+                    <Person FirstName="James" LastName="Monroe" />
+                    <Person FirstName="John" LastName="Adams" />
+                    <Person FirstName="Andrew" LastName="Jackson" />
+                    <Person FirstName="Martin" LastName="Van Buren" />
+                    <Person FirstName="William" LastName="Harrison" />
+                    <Person FirstName="John" LastName="Tyler" />
+                    <Person FirstName="James" LastName="Polk" />
+                    <Person FirstName="Zachary" LastName="Taylor" />
+                    <Person FirstName="Millard" LastName="Fillmore" />
+                    <Person FirstName="Franklin" LastName="Pierce" />
+                    <Person FirstName="James" LastName="Buchanan" />
+                    <Person FirstName="Abraham" LastName="Lincoln" />
+                </People>
+            </x:XData>
+        </XmlDataProvider>
+
+        <CollectionViewSource x:Key="ViewSource" Source="{StaticResource DataProvider}">            
+        </CollectionViewSource>
+
+        <Style x:Key="dataGridRowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Header" Value="{Binding}"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Id}"/>
+				        </DataTemplate>
+                </Setter.Value>
+            </Setter>            
+        </Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="WPF DataGrid" Grid.Row="0"/>               
+            
+    <DataGrid x:Name="DataGrid_Standard" 
+                Grid.Row="1"  
+                ItemContainerStyle="{StaticResource dataGridRowStyle}"                 
+                AlternationCount="2"
+                RowBackground="White" 
+                AlternatingRowBackground="LightBlue"
+                AutoGenerateColumns="False">       
+        <DataGrid.Columns>         
+      
+            <DataGridTextColumn
+                x:Name="Column0"
+                Width="130" 
+                Binding="{Binding Path=FirstName}"
+                Header="who knows?">                                
+            </DataGridTextColumn>
+      
+            <DataGridTextColumn
+                x:Name="Column1"
+                Width="Auto" 
+                Binding="{Binding Path=LastName}"
+                Header="Last Name"/>
+      
+            <DataGridCheckBoxColumn
+                x:Name="Column2"
+                Width="SizeToCells" 
+                Binding="{Binding Path=LikesCake}"
+                Header="Likes Cake"/>
+      
+            <DataGridComboBoxColumn 
+                x:Name="Column3"
+                Width="*" 
+                SelectedItemBinding="{Binding Path=Cake}"
+                Header="Cake">
+                <DataGridComboBoxColumn.ItemsSource>
+                    <col:ArrayList>
+                        <sys:String>Chocolate</sys:String>
+                        <sys:String>Vanilla</sys:String>
+                    </col:ArrayList>
+                </DataGridComboBoxColumn.ItemsSource>
+            </DataGridComboBoxColumn>     
+                    
+            <DataGridTextColumn 
+                x:Name="Column4"
+                Width="SizeToHeader" 
+                Binding="{Binding Path=Id}"              
+                Header="Id"/>      
+            
+            <DataGridTemplateColumn 
+                x:Name="Column5"
+                Width="Auto"
+                SortMemberPath="DOB"
+                Header="TemplateColumn">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Path=DOB}" />
+                    </DataTemplate>                      
+                </DataGridTemplateColumn.CellTemplate> 
+                <DataGridTemplateColumn.CellEditingTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding Path=DOB}" />
+                    </DataTemplate>                      
+                </DataGridTemplateColumn.CellEditingTemplate> 
+            </DataGridTemplateColumn>            
+        </DataGrid.Columns>
+    </DataGrid>    
+</Grid>

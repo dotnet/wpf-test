@@ -1,0 +1,156 @@
+<XTC>
+  <TEST Name="Expander: Testing Event count." SubArea="Expander" Priority="2" ExecutionGroup="Pri2" Disabled="True">
+    <DATA>
+      <INIT Class="ControlEventArgsUnitTest"  SuppressGtoLogger = "true"/>
+      <!-- IsExpanded=false Click Expander two times, fire Expanded one time  -->
+      <VARIATION ID="1" >
+        <CONTROL>
+          <Expander Name="ep" Header="Header" Content="Content"  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'>
+          </Expander>
+        </CONTROL>
+        <EventTestable Value='ControlEventCountTest' SourceControlName="ep" ObjectPath="" EventName="ExpandedEvent" EventType="RoutedEvent" EventFromType="&lt;Expander xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'/&gt;">
+          <Actions ></Actions>
+          <Validations>
+            <Count Value="1" />
+          </Validations>
+        </EventTestable>
+        <Actions>
+          <Action Name="ControlVisualIndexPartClickAction"   >
+            <Parameter Value="ep" />
+            <Parameter Value="0" />
+            <Parameter Value="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+            <Parameter Value="ToggleButton" />
+            <Parameter Value="2" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+
+      <!-- IsExpanded=True Click Expander two times, fire Expanded one time  -->
+      <VARIATION ID="2" >
+        <CONTROL>
+          <Expander Name="ep" IsExpanded="True" Header="Header" Content="Content"  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'>
+          </Expander>
+        </CONTROL>
+        <EventTestable Value='ControlEventCountTest' SourceControlName="ep" ObjectPath="" EventName="ExpandedEvent" EventType="RoutedEvent" EventFromType="&lt;Expander xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'/&gt;">
+          <Actions ></Actions>
+          <Validations>
+            <Count Value="1" />
+          </Validations>
+        </EventTestable>
+        <Actions>
+          <Action Name="ControlVisualIndexPartClickAction"   >
+            <Parameter Value="ep" />
+            <Parameter Value="0" />
+            <Parameter Value="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+            <Parameter Value="ToggleButton" />
+            <Parameter Value="2" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+
+      <!-- IsExpanded=false Click Expander three times, fire Collapsed one time  -->
+      <VARIATION ID="3" >
+        <CONTROL>
+          <Expander Name="ep" Header="Header" Content="Content"  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'>
+          </Expander>
+        </CONTROL>
+        <EventTestable Value='ControlEventCountTest' SourceControlName="ep" ObjectPath="" EventName="CollapsedEvent" EventType="RoutedEvent" EventFromType="&lt;Expander xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'/&gt;">
+          <Actions ></Actions>
+          <Validations>
+            <Count Value="1" />
+          </Validations>
+        </EventTestable>
+        <Actions>
+          <Action Name="ControlVisualIndexPartClickAction"   >
+            <Parameter Value="ep" />
+            <Parameter Value="0" />
+            <Parameter Value="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+            <Parameter Value="ToggleButton" />
+            <Parameter Value="3" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+
+      <!-- IsExpanded=True Click Expander two times, fire Collapsed one time  -->
+      <VARIATION ID="4" >
+        <CONTROL>
+          <Expander Name="ep" IsExpanded="True" Header="Header" Content="Content"  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'>
+          </Expander>
+        </CONTROL>
+        <EventTestable Value='ControlEventCountTest' SourceControlName="ep" ObjectPath="" EventName="CollapsedEvent" EventType="RoutedEvent" EventFromType="&lt;Expander xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'/&gt;">
+          <Actions ></Actions>
+          <Validations>
+            <Count Value="2" />
+          </Validations>
+        </EventTestable>
+        <Actions>
+          <Action Name="ControlVisualIndexPartClickAction"   >
+            <Parameter Value="ep" />
+            <Parameter Value="0" />
+            <Parameter Value="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+            <Parameter Value="ToggleButton" />
+            <Parameter Value="3" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+
+      <!-- IsExpanded=false Click Expander 100 times, fire Expanded 50 time  -->
+      <VARIATION ID="5" >
+        <CONTROL>
+          <Expander Name="ep" Header="Header" Content="Content"  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'>
+          </Expander>
+        </CONTROL>
+        <EventTestable Value='ControlEventCountTest' SourceControlName="ep" ObjectPath="" EventName="ExpandedEvent" EventType="RoutedEvent" EventFromType="&lt;Expander xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'/&gt;">
+          <Actions ></Actions>
+          <Validations>
+            <Count Value="50" />
+          </Validations>
+        </EventTestable>
+        <Actions>
+          <Action Name="ControlVisualIndexPartClickAction"   >
+            <Parameter Value="ep" />
+            <Parameter Value="0" />
+            <Parameter Value="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+            <Parameter Value="ToggleButton" />
+            <Parameter Value="100" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+
+      <!-- Click Expander 100 times, fire Collapsed 50 time  -->
+      <VARIATION ID="6" >
+        <CONTROL>
+          <Expander Name="ep"  Header="Header" Content="Content"  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'>
+          </Expander>
+        </CONTROL>
+        <EventTestable Value='ControlEventCountTest' SourceControlName="ep" ObjectPath="" EventName="CollapsedEvent" EventType="RoutedEvent" EventFromType="&lt;Expander xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'/&gt;">
+          <Actions ></Actions>
+          <Validations>
+            <Count Value="50" />
+          </Validations>
+        </EventTestable>
+        <Actions>
+          <Action Name="ControlVisualIndexPartClickAction"   >
+            <Parameter Value="ep" />
+            <Parameter Value="0" />
+            <Parameter Value="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+            <Parameter Value="ToggleButton" />
+            <Parameter Value="100" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

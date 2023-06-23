@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<XTC>
+  <TEST Name="ComboBoxBVT" Priority="0" SubArea="ComboBox" ExecutionGroup="BVT" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestEventUnitTest" SuppressGtoLogger = "true"/>
+      <VARIATION ID="1" NOTE="Press Label access key to invoke a Button.">
+        <Event Name="Click"/>
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Button Name="EventTarget">Button</Button>
+            <Label Name="EventActionTarget" Target="{Binding ElementName=EventTarget}">_Type T to invoke button.</Label>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="KeyboardInputAction">
+            <Parameter Value="KeyDown" />
+            <Parameter Value="LeftAlt" />
+          </Action>
+          <Action Name="KeyboardInputAction">
+            <Parameter Value="KeyPress" />
+            <Parameter Value="T" />
+          </Action>
+          <Action Name="KeyboardInputActionNoFocus">
+            <Parameter Value="KeyUp" />
+            <Parameter Value="LeftAlt" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+
+      <VARIATION ID="2" NOTE="Press Label access key to set Focus on TextBox.">
+        <Event Name="GotKeyboardFocus"/>
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <TextBox Name="EventTarget"></TextBox>
+            <Label Name="EventActionTarget" Target="{Binding ElementName=EventTarget}">_Press P To get to the TextBox.</Label>
+          </StackPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="KeyboardInputAction">
+            <Parameter Value="KeyDown" />
+            <Parameter Value="LeftAlt" />
+          </Action>
+          <Action Name="KeyboardInputAction">
+            <Parameter Value="KeyPress" />
+            <Parameter Value="P" />
+          </Action>
+          <Action Name="KeyboardInputActionNoFocus">
+            <Parameter Value="KeyUp" />
+            <Parameter Value="LeftAlt" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

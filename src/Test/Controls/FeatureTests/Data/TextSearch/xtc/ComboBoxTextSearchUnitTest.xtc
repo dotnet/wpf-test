@@ -1,0 +1,721 @@
+<?xml version="1.0"?>
+<XTC>
+  <TEST Name="ComboBoxTextSearchUnitTest" Priority="2" SubArea="TextSearch" ExecutionGroup="Pri2" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger = "true"/>
+      <VARIATION ID="1" Note="One Char search">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item3" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="2" Note="Two Chars search">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="O" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item5" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="3" Note="Three Chars search">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baac</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="A" />
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item6" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="4" Note="Invalid search, nothing is selected">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="D" />
+            <Parameter Value="O" />
+            <Parameter Value="G" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item1" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="False" />
+          </Validation>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item2" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="False" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="7" Note="Search for next match- Find the third item that begins with B">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="B" />
+            <Parameter Value="B" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item6" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="8" Note="Search with Space key to search for multiple words">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Frank B</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank Smith</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="F" />
+            <Parameter Value="R" />
+            <Parameter Value="A" />
+            <Parameter Value="N" />
+            <Parameter Value="K" />
+            <Parameter Value="Space" />
+            <Parameter Value="S" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item9" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="9" Note="Search up">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Frank B</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank Smith</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="F" />
+            <Parameter Value="R" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:5" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="A" />
+            <Parameter Value="V" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item3" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <!--Note Variation 10-18 is searching with combobox dropdown opened-->
+      <VARIATION ID="10" Note="One Char search">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item3" />
+            <Parameter Value="IsHighlighted" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="11" Note="Two Chars search">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="O" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item5" />
+            <Parameter Value="IsHighlighted" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="12" Note="Three Chars search">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baac</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="A" />
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item6" />
+            <Parameter Value="IsHighlighted" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="13" Note="Invalid search, nothing is selected">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="D" />
+            <Parameter Value="O" />
+            <Parameter Value="G" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item1" />
+            <Parameter Value="IsHighlighted" />
+            <Parameter Value="False" />
+          </Validation>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item2" />
+            <Parameter Value="IsHighlighted" />
+            <Parameter Value="False" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="16" Note="Search for next match- Find the third item that begins with B">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="B" />
+            <Parameter Value="B" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item6" />
+            <Parameter Value="IsHighlighted" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+
+      </VARIATION>
+      <VARIATION ID="17" Note="Search with Space key to search for multiple words">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Frank B</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank Smith</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="F" />
+            <Parameter Value="R" />
+            <Parameter Value="A" />
+            <Parameter Value="N" />
+            <Parameter Value="K" />
+            <Parameter Value="Space" />
+            <Parameter Value="S" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item9" />
+            <Parameter Value="IsHighlighted" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="18" Note="Search up">
+        <CONTROL>
+          <ComboBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Frank B</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank Smith</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="F" />
+            <Parameter Value="R" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:5" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="A" />
+            <Parameter Value="V" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item3" />
+            <Parameter Value="IsHighlighted" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <!--Note Variation 19-23 is searching with Editable combobox-->
+      <VARIATION ID="19" Note="One Char search">
+        <CONTROL>
+          <ComboBox IsEditable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item3" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="20" Note="Two Chars search">
+        <CONTROL>
+          <ComboBox IsEditable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="O" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item5" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="21" Note="Three Chars search">
+        <CONTROL>
+          <ComboBox IsEditable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baac</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="A" />
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item6" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="22" Note="Invalid search, nothing is selected">
+        <CONTROL>
+          <ComboBox IsEditable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="D" />
+            <Parameter Value="O" />
+            <Parameter Value="G" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item1" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="False" />
+          </Validation>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item2" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="False" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="23" Note="Press Backspace: BA will go to Baby, backspace to delete the A and replace with O to go to BO">
+        <CONTROL>
+          <ComboBox  IsEditable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">zoo</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Baby</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Avalon</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Aaron</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Bo</ComboBoxItem>
+            <ComboBoxItem Name="Item6">baa</ComboBoxItem>
+            <ComboBoxItem Name="Item7">Cat</ComboBoxItem>
+            <ComboBoxItem Name="Item8">poo pie</ComboBoxItem>
+            <ComboBoxItem Name="Item9">Frank</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="A" />
+            <Parameter Value="Back" />
+            <Parameter Value="Back" />
+            <Parameter Value="O" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item5" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+
+    </DATA>
+  </TEST>
+</XTC>

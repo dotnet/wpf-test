@@ -1,0 +1,735 @@
+<XTC>
+  <TEST Name="ToolBar" Priority="1" SubArea="ToolBar" ExecutionGroup="Pri1" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest"/>
+      <VARIATION ID="VAR1">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Vertical">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button>4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlPropertyActionById">
+            <Parameter Value="tb1" />
+            <Parameter Value="BandIndex" />
+            <Parameter Value="2" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="BandIndex" />
+            <Parameter Value="1" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR2">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Vertical">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button>4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlPropertyActionById">
+            <Parameter Value="tb1" />
+            <Parameter Value="Band" />
+            <Parameter Value="1" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="Band" />
+            <Parameter Value="1" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR3">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Vertical">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions/>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="HasOverflowItems" />
+            <Parameter Value="true" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR4">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlPropertyActionById">
+            <Parameter Value="tb1" />
+            <Parameter Value="IsOverflowOpen" />
+            <Parameter Value="true" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="IsOverflowOpen" />
+            <Parameter Value="true" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR5">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" Name="tb1" IsOverflowOpen="true">
+              <Button>1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlPropertyActionById">
+            <Parameter Value="tb1" />
+            <Parameter Value="IsOverflowOpen" />
+            <Parameter Value="false" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="IsOverflowOpen" />
+            <Parameter Value="false" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR6">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="OverflowButton" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="IsOverflowOpen" />
+            <Parameter Value="true" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR7">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="OverflowButton" />
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="button4" />
+            <Parameter Value="" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="IsOverflowOpen" />
+            <Parameter Value="false" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR8">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button Name="buttonB">B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="OverflowButton" />
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="button1" />
+            <Parameter Value="" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="IsOverflowOpen" />
+            <Parameter Value="false" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR9">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button Name="buttonB">B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="OverflowButton" />
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="buttonB" />
+            <Parameter Value="" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="IsOverflowOpen" />
+            <Parameter Value="false" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+
+      <VARIATION ID="VAR10">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0">
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="0" />
+            <Parameter Value="50" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="Band" />
+            <Parameter Value="1" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+
+      <VARIATION ID="VAR11">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="250" />
+            <Parameter Value="0" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="BandIndex" />
+            <Parameter Value="1" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR12">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="-250" />
+            <Parameter Value="0" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="BandIndex" />
+            <Parameter Value="0" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR13">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="1" BandIndex="0" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="0" />
+            <Parameter Value="-50" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="Band" />
+            <Parameter Value="0" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR14">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1" ToolBar.OverflowMode="Never">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="-60" />
+            <Parameter Value="0" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+      <VARIATION ID="VAR15">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Vertical">
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1" ToolBar.OverflowMode="Never">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="0" />
+            <Parameter Value="-60" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+      <VARIATION ID="VAR16">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+            <ToolBar Band="1" BandIndex="0">
+              <Button>a</Button>
+              <Button>b</Button>
+              <Button>c</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="0" />
+            <Parameter Value="40" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="tb1" />
+            <Parameter Value="Band" />
+            <Parameter Value="1" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="VAR17">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+
+            <ToolBar Band="0" BandIndex="0">
+              <Button>a</Button>
+              <Button>b</Button>
+              <Button>c</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1" ToolBar.OverflowMode="Never">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="-60" />
+            <Parameter Value="0" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+      <VARIATION ID="VAR18">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Vertical">
+
+            <ToolBar Band="0" BandIndex="0">
+              <Button>a</Button>
+              <Button>b</Button>
+              <Button>c</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1" ToolBar.OverflowMode="Never">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="0" />
+            <Parameter Value="-60" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+      <VARIATION ID="VAR19">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Vertical">
+
+            <ToolBar Band="0" BandIndex="0">
+              <Button>a</Button>
+              <Button>b</Button>
+              <Button>c</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1" ToolBar.OverflowMode="Never">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="0" />
+            <Parameter Value="-60" />
+          </Action>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="0" />
+            <Parameter Value="70" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+      <VARIATION ID="VAR20">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+
+            <ToolBar Band="0" BandIndex="0">
+              <Button>a</Button>
+              <Button>b</Button>
+              <Button>c</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" >
+              <Button Name="button1" ToolBar.OverflowMode="Never">1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always" Name="button4">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="0" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="-60" />
+            <Parameter Value="0" />
+          </Action>
+          <Action Name="MouseDragAction">
+            <Parameter Value="tb1" />
+            <Parameter Value="ToolBarThumb" />
+            <Parameter Value="70" />
+            <Parameter Value="0" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+      <VARIATION ID="VAR21">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" >
+              <Button>1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button ToolBar.OverflowMode="Always">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button Name="button1">D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="ToolBar_SetOverflowMode">
+            <Parameter Value="Always" />
+            <Parameter Value="button1" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+      <VARIATION ID="VAR22">
+        <CONTROL>
+          <ToolBarTray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Gray" Orientation="Horizontal">
+            <ToolBar Band="0" BandIndex="0" >
+              <Button>1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+              <Button Name="button1" ToolBar.OverflowMode="Always">4</Button>
+            </ToolBar>
+            <ToolBar Band="0" BandIndex="1" Name="tb1">
+              <Button>A</Button>
+              <Button>B</Button>
+              <Button>C</Button>
+              <Button>D</Button>
+            </ToolBar>
+          </ToolBarTray>
+        </CONTROL>
+        <Actions>
+          <Action Name="ToolBar_SetOverflowMode">
+            <Parameter Value="Never" />
+            <Parameter Value="button1" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+      <VARIATION ID="VAR23">
+        <CONTROL>
+          <ToolBar Band="0" BandIndex="0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" >
+            <Button>1</Button>
+            <Button>2</Button>
+            <Button>3</Button>
+            <Button Name="button1" ToolBar.OverflowMode="Always">4</Button>
+          </ToolBar>
+        </CONTROL>
+        <Actions>
+          <Action Name="ToolBar_SetOverflowMode">
+            <Parameter Value="Never" />
+            <Parameter Value="button1" />
+          </Action>
+        </Actions>
+        <Validations/>
+      </VARIATION>
+    </DATA>
+  </TEST>
+
+</XTC>

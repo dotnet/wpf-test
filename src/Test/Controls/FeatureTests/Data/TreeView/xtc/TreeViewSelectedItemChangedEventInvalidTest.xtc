@@ -1,0 +1,23 @@
+<XTC>
+  <TEST Name="TreeViewSelectedItemChangedEventTest" Priority="2" SubArea="TreeView" Timeout="600">
+    <DATA>
+      <INIT Class="TreeViewSelectedItemChangedEventTest"/>
+      <PICT Name="TreeViewInputInvalidTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="TreeViewSimple.xaml"/>
+        <XAML Name="TreeViewBindingSmallData.xaml"/>
+        <XAML Name="TreeViewBindingLargeData.xaml"/>
+      </XAMLS>
+      
+      <!-- Test Left key on treeview from 1 to 0 and validate 'SelectedItemChanged' event doesn't fire -->
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="1" ToIndex="0" ShouldEventFire="false" Key="Left" />
+      <!-- Test Right key on treeview from 1 to 2 and validate 'SelectedItemChanged' event doesn't fire -->
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="1" ToIndex="2" ShouldEventFire="false" Key="Right" />
+      
+      <!-- Test mouse click on treeview from 0 to 2 and validate 'SelectedItemChanged' event doesn't fire -->
+      <VARIATION ControlName="treeview" InputType="Mouse" FromIndex="1" ToIndex="3" ShouldEventFire="false" />
+      <!-- Test mouse click on treeview from 1 to 1 and validate 'SelectedItemChanged' event doesn't fire -->
+      <VARIATION ControlName="treeview" InputType="Mouse" FromIndex="1" ToIndex="1" ShouldEventFire="false" />
+    </DATA>
+  </TEST>
+</XTC>

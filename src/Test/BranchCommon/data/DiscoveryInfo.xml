@@ -64,6 +64,47 @@
       </DefaultTestInfo>
     </Target>
 
+    <!-- Area : Controls -->
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\Controls\*.xtc">
+      <DefaultTestInfo Area="Controls" Disabled="False" Priority="0" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="ControlsCommon.dll" Class="Microsoft.Test.Controls.ControlsLoader" Method="RunTest" DefaultResult="Unknown" SecurityLevel="FullTrust" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Controls\ControlsCommon.dll" />
+          <SupportFile Source="FeatureTests\Controls\ControlsTest.dll" />
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="Infra\TestApiCore.dll" />
+          <SupportFile Source="Infra\TestApiWpf.dll" />
+          <supportFile Source="Samples\Controls\CodePlexControls.dll" />
+          <SupportFile Source="FeatureTests\Controls\*.pict" />
+          <SupportFile Source="Common\Effects\pict*.exe" />
+          <SupportFile Source="FeatureTests\Controls\*.xtc" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\Controls\ControlsTest.dll">
+      <DefaultTestInfo Area="Controls" Disabled="False" Type="Functional" UacElevation="Elevated" Timeout="120">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Method="Run" SecurityLevel="FullTrust" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Controls\ControlsCommon.dll" />
+          <SupportFile Source="FeatureTests\Controls\ControlsTest.dll" />
+          <SupportFile Source="Common\TestRuntime.dll" />
+          <SupportFile Source="Infra\TestApiCore.dll" />
+          <SupportFile Source="Infra\TestApiWpf.dll" />
+          <SupportFile Source="FeatureTests\Controls\ControlsAutomationTest.exe" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
     <!-- Area : Diagnostics -->
     <!-- VisualDiagnostics -->
     <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\Diagnostics\VisualDiagnostics\VisualDiagnosticsLibrary.dll">

@@ -1,0 +1,120 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"
+    x:Name="GridPanel"
+    Height="700" Width="700">
+  <Grid.Resources>
+    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+    <Style x:Key="dataGridRowStyle" TargetType="{x:Type DataGridRow}">
+      <Setter Property="Header" Value="{Binding Id}"/>
+    </Style>
+  </Grid.Resources>
+
+  <Grid.RowDefinitions>
+    <RowDefinition Height="Auto"/>
+    <RowDefinition Height="*"/>
+    <RowDefinition Height="Auto"/>
+  </Grid.RowDefinitions>
+
+  <StackPanel Grid.Row="0">
+    <TextBlock Text="WPF DataGrid" />
+    <Button x:Name="btn_Debug" Content="Debug"/>
+  </StackPanel>
+
+  <DataGrid x:Name="DataGrid_Standard"
+              Grid.Row="1"
+              Height="600"
+              ItemContainerStyle="{StaticResource dataGridRowStyle}"
+              RowDetailsVisibilityMode="VisibleWhenSelected"
+              AlternationCount="2"
+              RowBackground="White"
+              AlternatingRowBackground="LightBlue"
+              AutoGenerateColumns="False">
+    <DataGrid.RowDetailsTemplate>
+      <DataTemplate>
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+
+          <Canvas Width="32" Height="32" ClipToBounds="True" Background="#FFDDDDDD" Grid.RowSpan="2" Margin="3">
+            <Ellipse Width="22" Height="28" Fill="#FF555555" Canvas.Top="18" Canvas.Left="5"/>
+            <Ellipse Width="14" Height="14" Fill="#FF555555" Canvas.Left="9" Canvas.Top="4"/>
+          </Canvas>
+          <TextBlock Grid.Column="1" Margin="3">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="{}{0} {1}">
+                <Binding Path="FirstName"/>
+                <Binding Path="LastName"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+
+          <ComboBox Grid.Column="1" Grid.Row="1">
+            <sys:String>Chocolate</sys:String>
+            <sys:String>Vanilla</sys:String>
+            <sys:String>Strawberry</sys:String>
+            <sys:String>Oreo</sys:String>
+            <sys:String>PeanutButter</sys:String>
+            <sys:String>Coffee</sys:String>
+          </ComboBox>          
+        </Grid>
+      </DataTemplate>
+    </DataGrid.RowDetailsTemplate>
+    <DataGrid.Columns>
+      <DataGridTextColumn x:Name="FirstNameColumn"
+                                 Width="130"
+                                 Binding="{Binding Path=FirstName}" />
+
+      <DataGridTextColumn x:Name="LastNameColumn"
+                                 Width="Auto"
+                                 SortMemberPath="LastName"
+                                 Binding="{Binding Path=LastName}"
+                                 Header="LastNameColumn"/>
+
+      <DataGridCheckBoxColumn x:Name="LikesCakeColumn"
+                                     Width="SizeToCells"
+                                     Binding="{Binding Path=LikesCake}"
+                                     Header="LikesCakeColumn"/>
+
+      <DataGridComboBoxColumn x:Name="CakeColumn"
+                                     Width="Auto"
+                                     SelectedItemBinding="{Binding Path=Cake}"
+                                     Header="CakeColumn">
+        <DataGridComboBoxColumn.ItemsSource>
+          <col:ArrayList>
+            <sys:String>Chocolate</sys:String>
+            <sys:String>Vanilla</sys:String>
+          </col:ArrayList>
+        </DataGridComboBoxColumn.ItemsSource>
+      </DataGridComboBoxColumn>
+
+      <DataGridHyperlinkColumn x:Name="HomepageColumn"
+                                      Width="SizeToHeader"
+                                      Binding="{Binding Path=Homepage}"
+                                      Header="HomepageColumn"/>
+
+      <DataGridTemplateColumn x:Name="TemplateColumn"
+                                     Width="Auto"
+                                     Header="TemplateColumn" >
+        <DataGridTemplateColumn.CellTemplate>
+          <DataTemplate>
+            <Button Content="{Binding Path=MiddleName}" />
+          </DataTemplate>
+        </DataGridTemplateColumn.CellTemplate>
+        <DataGridTemplateColumn.CellEditingTemplate>
+          <DataTemplate>
+            <TextBox Text="{Binding Path=MiddleName}" />
+          </DataTemplate>
+        </DataGridTemplateColumn.CellEditingTemplate>
+      </DataGridTemplateColumn>
+    </DataGrid.Columns>
+  </DataGrid>
+</Grid>

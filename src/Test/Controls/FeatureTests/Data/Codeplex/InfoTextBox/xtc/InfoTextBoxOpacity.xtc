@@ -1,0 +1,296 @@
+﻿<XTC>
+  <TEST Name="InfoTextBoxTests" Priority="0" SubArea="InfoTextBox" ExecutionGroup="Pri0" Disabled="True">
+    <DATA>
+      <INIT Class="ActionTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1">
+        <Description>
+        </Description>
+        <CONTROL>
+          <Grid
+            xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:itb="clr-namespace:WpfControlToolkit;assembly=CodePlexControls">
+
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="200"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <itb:InfoTextBox TextBoxInfo="This text is invisible both before and after focus is set to TextInfoBox."
+                             Text="This text is always visible"
+                             Name="CONTROLTOTEST" Grid.Row="0" Grid.Column="1"/>
+
+            <Button Grid.Row="0" Grid.Column="0" Name="ALTERNATE">
+              Click Here
+            </Button>
+            
+          </Grid>
+        </CONTROL>
+        <ACTIONS>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:ALTERNATE}" />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="UT" ExpectedOpacity="0.00"/>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:CONTROLTOTEST}" />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="ST" ExpectedOpacity="0.00"/>
+        </ACTIONS>
+      </VARIATION>
+      <!-- ================================================================================================ -->
+      <VARIATION ID="2">
+        <Description>
+        </Description>
+        <CONTROL>
+          <Grid
+            xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:itb="clr-namespace:WpfControlToolkit;assembly=CodePlexControls">
+
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="200"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <itb:InfoTextBox TextBoxInfo="This text is visible when other text is cleared."
+                             Text="This text will be cleared"
+                             Name="CONTROLTOTEST" Grid.Row="0" Grid.Column="1"/>
+
+            <Button Grid.Row="0" Grid.Column="0" Name="ALTERNATE">
+              Click Here
+            </Button>
+            
+          </Grid>
+        </CONTROL>
+        <ACTIONS>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:ALTERNATE}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="UT" ExpectedOpacity="0.00"/>
+          <InfoTextBoxTestAction.ActionClearText TargetElement="{SceneTreeSearch:CONTROLTOTEST}"/>
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="UF" ExpectedOpacity="0.67"/>
+        </ACTIONS>
+      </VARIATION>
+      <!-- ================================================================================================ -->
+      <VARIATION ID="3">
+        <Description></Description>
+        <CONTROL>
+          <Grid
+            xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:itb="clr-namespace:WpfControlToolkit;assembly=CodePlexControls">
+
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="200"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <itb:InfoTextBox TextBoxInfo="This text is invisible both before and after focus is changed to the Button."
+                             Text="This text is always visible"
+                           Name="CONTROLTOTEST" Grid.Row="0" Grid.Column="1"/>
+            
+            <Button Grid.Row="0" Grid.Column="0" Name="ALTERNATE">
+              Click Here
+            </Button>
+
+          </Grid>
+        </CONTROL>
+        <ACTIONS>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:CONTROLTOTEST}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="ST" ExpectedOpacity="0.00"/>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:ALTERNATE}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="UT" ExpectedOpacity="0.00"/>
+        </ACTIONS>
+      </VARIATION>
+      <!-- ================================================================================================ -->
+      <VARIATION ID="4">
+        <Description></Description>
+        <CONTROL>
+          <Grid
+            xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:itb="clr-namespace:WpfControlToolkit;assembly=CodePlexControls">
+
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="200"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <itb:InfoTextBox TextBoxInfo="This text is visible when other text is cleared."
+                             Text="This text will be cleared"
+                           Name="CONTROLTOTEST" Grid.Row="0" Grid.Column="1"/>
+          </Grid>
+        </CONTROL>
+        <ACTIONS>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:CONTROLTOTEST}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="ST" ExpectedOpacity="0.00"/>
+          <InfoTextBoxTestAction.ActionClearText TargetElement="{SceneTreeSearch:CONTROLTOTEST}"/>
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="SF" ExpectedOpacity="0.33"/>
+        </ACTIONS>
+      </VARIATION>
+      <!-- ================================================================================================ -->
+      <VARIATION ID="5">
+        <Description></Description>
+        <CONTROL>
+          <Grid
+            xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:itb="clr-namespace:WpfControlToolkit;assembly=CodePlexControls">
+
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="200"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Row="1" Grid.Column="0" Name="TEXT">This text is visible when added.</TextBox>
+            
+            <itb:InfoTextBox TextBoxInfo="This text visible at first, invisible when other text added."
+                           Name="CONTROLTOTEST" Grid.Row="0" Grid.Column="1"/>
+            
+            <Button Grid.Row="0" Grid.Column="0" Name="ALTERNATE">
+              Click Here
+            </Button>
+
+          </Grid>
+        </CONTROL>
+        <ACTIONS>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:ALTERNATE}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="UF" ExpectedOpacity="0.67"/>
+          <InfoTextBoxTestAction.ActionAddText TargetElement="{SceneTreeSearch:CONTROLTOTEST}" TextArg="{SceneTreeSearch:TEXT}"/>
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="UT" ExpectedOpacity="0.00"/>
+        </ACTIONS>
+      </VARIATION>
+      <!-- ================================================================================================ -->
+      <VARIATION ID="6">
+        <Description></Description>
+        <CONTROL>
+          <Grid
+            xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:itb="clr-namespace:WpfControlToolkit;assembly=CodePlexControls">
+
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="200"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <itb:InfoTextBox TextBoxInfo="This text is visible before and after focus changed"
+                           Name="CONTROLTOTEST" Grid.Row="0" Grid.Column="1"/>
+
+            <Button Grid.Row="0" Grid.Column="0" Name="ALTERNATE">
+              Click Here
+            </Button>
+
+          </Grid>
+        </CONTROL>
+        <ACTIONS>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:ALTERNATE}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="UF" ExpectedOpacity="0.67"/>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:CONTROLTOTEST}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="SF" ExpectedOpacity="0.33"/>
+        </ACTIONS>
+      </VARIATION>
+      <!-- ================================================================================================ -->
+      <VARIATION ID="7">
+        <Description></Description>
+        <CONTROL>
+          <Grid
+            xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:itb="clr-namespace:WpfControlToolkit;assembly=CodePlexControls">
+
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="200"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Row="1" Grid.Column="0" Name="TEXT">This text is visible when added.</TextBox>
+
+            <itb:InfoTextBox TextBoxInfo="This text visible at first, invisible when other text added."
+                           Name="CONTROLTOTEST" Grid.Row="0" Grid.Column="1"/>
+          </Grid>
+        </CONTROL>
+        <ACTIONS>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:CONTROLTOTEST}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="SF" ExpectedOpacity="0.33"/>
+          <InfoTextBoxTestAction.ActionAddText TargetElement="{SceneTreeSearch:CONTROLTOTEST}" TextArg="{SceneTreeSearch:TEXT}"/>
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="ST" ExpectedOpacity="0.00"/>
+        </ACTIONS>
+      </VARIATION>
+      <!-- ================================================================================================ -->
+      <VARIATION ID="8">
+        <Description></Description>
+        <CONTROL>
+          <Grid
+            xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:itb="clr-namespace:WpfControlToolkit;assembly=CodePlexControls">
+
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="200"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <itb:InfoTextBox TextBoxInfo="This text is visible before and after focus changed"
+                           Name="CONTROLTOTEST" Grid.Row="0" Grid.Column="1"/>
+            
+            <Button Grid.Row="0" Grid.Column="0" Name="ALTERNATE">
+              Click Here
+            </Button>            
+
+          </Grid>
+        </CONTROL>
+        <ACTIONS>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:CONTROLTOTEST}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="SF" ExpectedOpacity="0.33"/>
+          <InfoTextBoxTestAction.ActionSetFocusTo TargetElement="{SceneTreeSearch:ALTERNATE}"  />
+          <CodePlexActions.WaitAction waitInterval="0.00:00:02" />
+          <InfoTextBoxTestValidation.VerifyOpacity TargetElement="{SceneTreeSearch:CONTROLTOTEST}" ExpectedState="UF" ExpectedOpacity="0.67"/>
+        </ACTIONS>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

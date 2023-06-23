@@ -1,0 +1,38 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Height="300">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+
+    <ListBox Name="listbox" Grid.Column="0" Margin="5"
+                ItemsSource="{Binding Data}" VirtualizingPanel.VirtualizationMode="Recycling">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+            <DockPanel>
+              <TextBlock Text="{Binding ID}" Width="40"/>
+              <ComboBox ItemsSource="{Binding StatusValues}" SelectedValue="{Binding Status}"/>
+            </DockPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <DataGrid Name="datagrid" Grid.Column="1" Margin="5"
+                AutoGenerateColumns="False" ItemsSource="{Binding Data}">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+
+        <DataGridTemplateColumn Header="Status">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+                <ComboBox ItemsSource="{Binding StatusValues}" SelectedValue="{Binding Status}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <Button Name="debug" Grid.Column="2" Height="30" Width="70" Margin="5"
+            Content="Debug"/>
+
+</Grid>

@@ -1,0 +1,43 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"    
+      xmlns:local="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"
+      Title="Master Details">
+    <Page.Resources>
+        <local:NewPeople x:Key="people" />
+        <CollectionViewSource x:Key="csv" Source="{StaticResource people}"/>
+        <DataTemplate x:Key="detailTemplate2">
+            <StackPanel Orientation="Horizontal" Margin="3" TextBlock.FontSize="11">
+                <StackPanel Width="250" >
+                    <TextBlock Name="firstNameTextBlock" FontWeight="Bold" Text="{Binding Path=FirstName}" />
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Like Cake: " />
+						<CheckBox IsChecked="{Binding Path=LikesCake}" />
+						<TextBlock Text="     DOB: " />
+                        <TextBlock Text="{Binding Path=DOB}" />
+					</StackPanel>
+				</StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Name="grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="DataGrid_Standard" IsSynchronizedWithCurrentItem="True"
+                     ItemsSource="{Binding Source={StaticResource csv}}"
+                     RowBackground="Beige" AlternatingRowBackground="RoyalBlue"
+                     VerticalScrollBarVisibility="Visible"
+                     AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="120" Header="First Name" Binding="{Binding Path=FirstName}" />
+                <DataGridTextColumn Width="120" Binding="{Binding Path=LastName}" Header="Last Name"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ContentControl Grid.Column="1" Background="RoyalBlue" x:Name="DetailContent"
+                        ContentTemplate="{StaticResource detailTemplate2}" 
+                        Content="{Binding Source={StaticResource csv}}"/>
+    </Grid>
+</Page>

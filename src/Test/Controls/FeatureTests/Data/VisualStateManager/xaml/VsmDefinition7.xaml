@@ -1,0 +1,31 @@
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    xmlns:utils="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon" 
+    x:Name="HostPanel"
+    Height="700" Width="700">
+    <Grid.Resources>
+        <Storyboard x:Key="sb_stateA" Duration="0" />
+        <Storyboard x:Key="sb_transition"/>
+    </Grid.Resources>
+
+    <!-- Used by extensibility tests -->
+    <UserControl>
+
+        <Canvas Width="100" Height="100" Background="Yellow">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="vsGroup">
+                    <VisualStateGroup.States>
+                        <VisualState Name="stateA" Storyboard="{StaticResource sb_stateA}" />
+                        <VisualState Name="stateB"/>
+                    </VisualStateGroup.States>
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0:0:0.01" Storyboard="{StaticResource sb_transition}" />
+                    </VisualStateGroup.Transitions>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Canvas>
+    </UserControl>
+</Grid>

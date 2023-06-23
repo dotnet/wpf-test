@@ -1,0 +1,25 @@
+<XTC>
+  <TEST Name="TabControlInputSelectionChangedTest" Priority="0" SubArea="TabControl" Timeout="600">
+    <DATA>
+      <INIT Class="SelectorSelectionChangedTest"/>
+      <PICT Name="TabControlInputTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="SelectorControlsBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingSmallDataBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingLargeDataBVT.xaml"/>
+      </XAMLS>
+      
+      <!-- Test Left key on tabcontrol from 1 to 0 and validate 'SelectionChanged' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FocusedIndex="1" ToIndex="0" ShouldEventFire="true" FlowDirection="LeftToRight" Key="Left" />
+      <!-- Test Right key on tabcontrol from 1 to 2 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FocusedIndex="1" ToIndex="2" ShouldEventFire="true" FlowDirection="LeftToRight" Key="Right" />
+      <!-- Test Right key on tabcontrol from 1 to 0 and validate 'SelectionChanged' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FocusedIndex="1" ToIndex="0" ShouldEventFire="true" FlowDirection="RightToLeft" Key="Right" />
+      <!-- Test Left key on tabcontrol from 1 to 2 and validate 'SelectionChanged' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FocusedIndex="1" ToIndex="2" ShouldEventFire="true" FlowDirection="RightToLeft" Key="Left" />
+
+      <!-- Test mouse click on tabcontrol from 1 to 3 and validate 'SelectionChanged' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Mouse" FocusedIndex="1" ToIndex="3" ShouldEventFire="true" MouseButton="Left" />
+    </DATA>
+  </TEST>
+</XTC>

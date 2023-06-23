@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<XTC>
+  <TEST Name="Popup:  Hit Testing Popup Transparency" SubArea="Popup" Priority="0" ExecutionGroup="BVT">
+    <DATA>
+      <INIT Class="PopupTransparencyHitTest" SuppressGtoLogger="true"/>
+      <VARIATION ID="1">
+        <CONTROLS>
+          <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Button Canvas.Left="60" Canvas.Top="100"/>
+            <Popup PlacementTarget="{Binding ElementName=cb}" IsOpen="{Binding ElementName=cb, Path=IsChecked}" AllowsTransparency="true" PopupAnimation="scroll">
+              <Canvas Width="200" Height="200">
+                <Ellipse Width="200" Height="200" Stroke="Black" StrokeThickness="50"/>
+              </Canvas>
+            </Popup>
+            <CheckBox Name="cb">toggle me to open the donut popup</CheckBox>
+          </Canvas>
+        </CONTROLS>
+      </VARIATION>
+      <VARIATION ID="2">
+        <CONTROLS>
+          <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Button Canvas.Left="60" Canvas.Top="100"/>
+            <Popup PlacementTarget="{Binding ElementName=cb}" IsOpen="{Binding ElementName=cb, Path=IsChecked}" AllowsTransparency="false" PopupAnimation="scroll">
+              <Canvas Width="200" Height="200">
+                <Ellipse Width="200" Height="200" Stroke="Black" StrokeThickness="50"/>
+              </Canvas>
+            </Popup>
+            <CheckBox Name="cb">toggle me to open the donut popup</CheckBox>
+          </Canvas>
+        </CONTROLS>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

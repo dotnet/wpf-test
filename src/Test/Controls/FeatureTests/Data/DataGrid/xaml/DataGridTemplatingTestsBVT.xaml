@@ -1,0 +1,125 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" 
+      xmlns:local="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"
+      Width="700" Height="300"
+      >
+    <!--
+        DataGrid	Get/Set  ItemTemplateSelector   
+        DataGrid	Get/Set  ItemTemplate          
+        
+        DataGridRow	Get/Set  HeaderTemplate
+        DataGridRow	Get/Set  HeaderTemplateSelector  - ??? what's the user scenario for this?   
+        
+        DataGridColumn	Get/Set  HeaderTemplate
+        DataGridColumn	Get/Set  HeaderTemplateSelector - ??? what's the user scenario for this?
+        
+        DataGridTemplateColumn	Get/Set  CellTemplate
+        DataGridTemplateColumn	Get/Set  CellTemplateSelector - ??? what's the user scenario for this?
+        DataGridTemplateColumn	Get/Set  CellEditingTemplate
+        DataGridTemplateColumn	Get/Set  CellEditingTemplateSelector - ??? what's the user scenario for this?
+    -->
+    <Page.Resources>
+        <local:NewPeople x:Key="people"/>
+
+        <!-- DataGridColumnHeader's Template -->
+        <Style x:Key="newColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Grid Name="RootElement" Background="RoyalBlue" Height="25">
+                            <ContentPresenter Content="{TemplateBinding Content}" Margin="5,0,5,0" 
+                                              VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- DataGridRowHeader style -->
+        <Style x:Key="newRowHeaderStyle" TargetType="{x:Type DataGridRowHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
+                        <Grid Name="RootElement" Background="RoyalBlue" Height="40">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              Margin="5,0,5,0" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>        
+    </Page.Resources>
+   
+    <DataGrid x:Name="DataGrid_Standard" AutoGenerateColumns="False"
+                 ItemsSource="{Binding Source={StaticResource people}}"
+                 ColumnHeaderStyle="{Binding Source={StaticResource newColumnHeaderStyle}}"  
+                 RowBackground="AliceBlue" AlternatingRowBackground="LightSalmon"
+                 >        
+        
+        <DataGrid.RowHeaderStyle>
+            <Style TargetType="{x:Type DataGridRowHeader}">
+                <Setter Property="Background" Value="DarkRed" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Content" Value="{Binding Id}"/>
+            </Style>
+        </DataGrid.RowHeaderStyle>        
+        
+        <DataGrid.Columns>
+            <DataGridTextColumn Width="90" Header="who knows?" Binding="{Binding Path=FirstName}">
+                <DataGridTextColumn.HeaderTemplate>
+                    <DataTemplate DataType="{x:Type sys:String}">
+                        <TextBlock Text="First Name"/>
+                    </DataTemplate>
+                </DataGridTextColumn.HeaderTemplate>
+            </DataGridTextColumn>
+            <DataGridTextColumn Width="SizeToCells" Header="Last Name" Binding="{Binding Path=LastName}" >
+                          </DataGridTextColumn>
+            <DataGridCheckBoxColumn Width="70" Header="Likes Cake" Binding="{Binding Path=LikesCake}">
+                <DataGridCheckBoxColumn.HeaderTemplate>
+                    <DataTemplate DataType="{x:Type sys:String}">
+                        <TextBlock Text="Likes Cake"/>
+                    </DataTemplate>
+                </DataGridCheckBoxColumn.HeaderTemplate>
+            </DataGridCheckBoxColumn>
+            <DataGridComboBoxColumn Width="70" Header="Cake" SelectedItemBinding="{Binding Path=Cake}">
+                <DataGridComboBoxColumn.ItemsSource>
+                    <col:ArrayList>
+                        <sys:String>Vanilla</sys:String>
+                        <sys:String>Chocolate</sys:String>
+                        <sys:String>Strawberry</sys:String>
+                    </col:ArrayList>
+                </DataGridComboBoxColumn.ItemsSource>
+            </DataGridComboBoxColumn>
+            <DataGridHyperlinkColumn Width="200" Header="Homepage" Binding="{Binding Path=Homepage}" />
+            <DataGridTemplateColumn Width="100">
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="Custom  "/>
+                            <Button Content="Ha!" Width="30"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Foreground" Value="Blue" />
+                        <Setter Property="Background" Value="Pink" />
+                    </Style>
+                </DataGridTemplateColumn.HeaderStyle>                
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Name="tb" Text="Ha New!"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>                
+                <DataGridTemplateColumn.CellEditingTemplate>
+                    <DataTemplate>
+                        <TextBox Name="tbEdit" Text="Ha Editing New!"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellEditingTemplate>
+            </DataGridTemplateColumn>            
+        </DataGrid.Columns>        
+        
+    </DataGrid>
+</Page>

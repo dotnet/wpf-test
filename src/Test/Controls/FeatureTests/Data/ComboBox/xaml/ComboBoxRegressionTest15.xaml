@@ -1,0 +1,36 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"
+    xmlns:local="clr-namespace:Microsoft.Test.Controls"
+    x:Name="GridPanel"
+    Height="500" Width="500">
+  <Grid.Resources>
+    <DataTemplate DataType="{x:Type local:TestDataClass}">
+      <ComboBox x:Name="FontSizeCombo"
+				ItemsSource="{Binding Items}"
+				IsEditable="True"
+				IsTextSearchEnabled="False"
+				SelectedItem="{Binding Current, Mode=TwoWay}"
+				Text="{Binding Current, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+      </ComboBox>
+    </DataTemplate>
+  </Grid.Resources>
+
+  <Grid.RowDefinitions>
+    <RowDefinition Height="Auto"/>
+    <RowDefinition Height="*"/>
+  </Grid.RowDefinitions>
+
+  <StackPanel Grid.Row="0" Orientation="Horizontal">
+    <TextBlock Text="WPF ComboBox Binding Test" />
+    <Button HorizontalAlignment="Center" Content="Debug" Name="btn_Debug" />
+  </StackPanel>
+
+  <StackPanel Grid.Row="1" >
+    <ContentPresenter Name="contentPresenter" Content="{Binding}" />
+    <Button Content="dummyButton" />
+    <TextBlock Name="textBlock" Text="{Binding Current}"/>
+  </StackPanel>
+</Grid>
