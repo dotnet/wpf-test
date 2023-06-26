@@ -1,0 +1,45 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <FlowDocumentPageViewer>
+  <FlowDocument IsHyphenationEnabled="True">
+   <FlowDocument.Resources>
+    <Style TargetType='List' x:Key='{x:Type List}'>
+     <Setter Property='Padding' Value='32,0,0,0' />
+    </Style>
+    <Style TargetType='Paragraph' x:Key='H1'>
+      <Setter Property='FontFamily' Value='Arial' />
+      <Setter Property='FontSize' Value='28' />
+      <Setter Property='FontStyle' Value='Italic' />
+    </Style>
+    <Style TargetType='Paragraph' x:Key='H2'>
+      <Setter Property='FontFamily' Value='Arial' />
+      <Setter Property='FontWeight' Value='Bold' />
+    </Style>
+   </FlowDocument.Resources>
+   <Paragraph Style='{StaticResource H1}'>XamlPad Help</Paragraph>
+   <Paragraph>
+    <Hyperlink NavigateUri='#Introduction'>Introduction</Hyperlink><LineBreak
+       /><Hyperlink NavigateUri='#KeyboardShortcuts'>Keyboard Shortcuts</Hyperlink>
+   </Paragraph>
+
+   <Paragraph Style='{StaticResource H2}' Name='Introduction'>Introduction</Paragraph>
+   <Paragraph>XamlPad is a tool built on Windows Presentation Foundation that allows developers to quickly experiment with XAML. The user interface consists of the following areas:</Paragraph>
+   <List MarkerStyle="Decimal">
+    <ListItem><Paragraph>A set of toolbars at the top of the window.</Paragraph></ListItem>
+    <ListItem><Paragraph>A preview pane in the middle of the window.</Paragraph></ListItem>
+    <ListItem><Paragraph>A XAML editing area below the preview pane.</Paragraph></ListItem>
+    <ListItem><Paragraph>A status bar at the bottom of the window.</Paragraph></ListItem>
+   </List>
+   <Paragraph>As text is typed in the XAML editing area, it is parsed and rendered in the preview area. If there are any errors during this process, the status bar will display a message, often with a link to the source of the problem.</Paragraph>
+   <Paragraph>The "parse as you type" behavior can be disabled and re-enabled using the <Run FontWeight="Bold">Auto Parse</Run> button.</Paragraph>
+   
+   <Paragraph Style='{StaticResource H2}' Name='KeyboardShortcuts'>Keyboard Shortcuts</Paragraph>
+   <List MarkerStyle="Decimal">
+    <ListItem><Paragraph><Run FontWeight="Bold">F1</Run>. Displays this Help window.</Paragraph></ListItem>
+    <ListItem><Paragraph><Run FontWeight="Bold">F5</Run>. Re-parses the text in the XAML area. If the root is a window, displays the content in a new window.</Paragraph></ListItem>
+    <ListItem><Paragraph><Run FontWeight="Bold">F6</Run>. Writes the result of serializing the root object from the preview area into a file named <Run FontStyle="Italic">XamlPad_Serialized.xaml</Run>.</Paragraph></ListItem>
+    <ListItem><Paragraph><Run FontWeight="Bold">F7</Run>. Prints the content of the preview area.</Paragraph></ListItem>
+    <ListItem><Paragraph><Run FontWeight="Bold">Ctrl+Shift+R (experimental)</Run>. Toggles support for RTF/XAML copy/paste.</Paragraph></ListItem>
+   </List>
+  </FlowDocument>
+ </FlowDocumentPageViewer>
+</Page>

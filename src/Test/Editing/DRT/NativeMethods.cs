@@ -8,6 +8,9 @@
 // If you need access to a Win32 API that is not exposed, simply uncomment
 // it in one of the following files:
 // 
+// NativeMethods.cs
+// UnsafeNativeMethods.cs
+// SafeNativeMethods.cs
 //
 // Only uncomment what you need to avoid code bloat.
 //
@@ -3470,7 +3473,6 @@ namespace MS.Win32
                     else if (t == typeof(Decimal)) {
                         v.vt = (int)tagVT.VT_CY;
                         Decimal c = (Decimal)var;
-                        // Microsoft, it's bizzare that we need to call this as a static!
                         v.SetLong(Decimal.ToInt64(c));
                     }
                     else if (t == typeof(decimal)) {
@@ -4090,7 +4092,7 @@ namespace MS.Win32
             
             public IntPtr lprgelemdescParam = IntPtr.Zero; // NativeMethods.tagELEMDESC
 
-            // cpb, Microsoft, the EE chokes on Enums in structs
+            // cpb, the EE chokes on Enums in structs
            
             public int funckind = 0; // NativeMethods.tagFUNCKIND
             public int invkind = 0; // NativeMethods.tagINVOKEKIND
@@ -5040,7 +5042,6 @@ namespace MS.Win32
             [MarshalAs(UnmanagedType.U2)]
             public   short wMinorVerNum = 0;
             
-            // Microsoft these are inline too
             //public    NativeMethods.tagTYPEDESC tdescAlias;
             [MarshalAs(UnmanagedType.U4)]
             public   int tdescAlias_unionMember = 0;
@@ -5163,4 +5164,3 @@ namespace MS.Win32
 */
     }
 }
-

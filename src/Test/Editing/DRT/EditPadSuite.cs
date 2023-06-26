@@ -3,6 +3,23 @@
 // See the LICENSE file in the project root for more information.
 
 #if DISABLED_BY_TOM_BREAKING_CHANGE
+using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Controls;
+using System.Reflection;
+using System.Runtime.InteropServices;   // NativeMethods
+
+namespace DRT
+{
+    /// <summary>
+    /// Object representing a session of DRT run (developer's regression test)
+    /// for EditPad application.
+    /// </summary>
+    public class EditPadSuite : DrtTestSuite
+    {
 #region Public Methods
 
         public EditPadSuite() : base("EditPad")

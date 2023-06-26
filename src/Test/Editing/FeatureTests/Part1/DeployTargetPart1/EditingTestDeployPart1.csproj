@@ -1,0 +1,58 @@
+<Project DefaultTargets="build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <PropertyGroup>
+    <HostInBrowser>True</HostInBrowser>
+    <AssemblyName>EditingTestDeployPart1</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+    <OutputSubFolder>FeatureTests/Editing</OutputSubFolder>
+    <AssemblyAttributeCLSCompliant>false</AssemblyAttributeCLSCompliant>
+    <SignAssembly>true</SignAssembly>
+    <SignManifests>True</SignManifests>
+    <ManifestKeyFile>$(EnlistmentRootPath)\ddsuites\src\fx\ClickOnce\CLRTools\clickoncetest.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="DeployEntryApp.xaml" />
+    <Page Include="DeployEntryPage.xaml" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="DeployEntry.xaml.cs">
+      <DependentUpon>DeployEntryApp.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+
+    <ProjectReference Include="$(EditingTestLibProject)">
+      <Name>EditingTestLib</Name>
+      <Project>{66748301-E42F-4c1f-B4D2-D3F8E9BF7E5D}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Private>false</Private>
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(TestContractsProject)" />
+
+    <Reference Include="System" />   
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="Accessibility" />
+    <Reference Include="System.Drawing" />
+        
+    <!-- SOURCES start here. -->
+    <Compile Include="Part1DeployTargetAssemblyTestCaseData.cs" />    
+    <Compile Include="..\CustomSpellerDictionary\CustomSpellerDictionaryTest.cs" />
+    <Compile Include="..\CustomSpellerDictionary\CustomSpellerDictionaryInvalidInPTTest.cs" />
+    <Compile Include="..\ProgrammaticAccessToClipBoardInPTTest.cs" />
+    <Resource Include="..\..\Data\SupportFiles\CustomSpellerDictionaryResourceLocal.lex" />
+  </ItemGroup>
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>
