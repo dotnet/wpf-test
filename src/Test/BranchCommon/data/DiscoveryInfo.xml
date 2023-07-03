@@ -116,6 +116,87 @@
       </DefaultTestInfo>
     </Target>
     
+    <!-- Editing -->
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\Editing\EditingTest.exe">
+      <DefaultTestInfo Area="Editing" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Editing\*" />
+          <SupportFile Source="Common\AssemblyLinker\%PROCESSOR_ARCHITECTURE%\al.exe" />
+          <SupportFile Source="Common\AssemblyLinker\%PROCESSOR_ARCHITECTURE%\alink.dll" />
+          <SupportFile Source="Common\AssemblyLinker\%PROCESSOR_ARCHITECTURE%\alinkui.dll" />
+        </SupportFiles>
+        <Deployments>
+          <Deployment>FeatureTests\Editing\EditingTestLib.deployment</Deployment>
+        </Deployments>
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" />
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!-- Editing -->
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\Editing\EditingOrcasTest.exe">
+      <DefaultTestInfo Area="Editing" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Editing\*" />
+          <SupportFile Source="FeatureTests\Editing\EditingOrcasTest.deployment" />
+        </SupportFiles>
+        <Deployments>
+          <Deployment>FeatureTests\Editing\EditingTestLib.deployment</Deployment>
+          <Deployment>FeatureTests\Editing\EditingOrcasTest.deployment</Deployment>
+        </Deployments>
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" />
+        <Versions>
+          <Version>3.0SP1+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!-- Editing -->
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\Editing\EditingTestPart1.exe">
+      <DefaultTestInfo Area="Editing" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Editing\EditingTestPart1.exe" />
+          <SupportFile Source="FeatureTests\Editing\EditingTestLib.dll" />
+          <SupportFile Source="FeatureTests\Editing\EditingTestLib.deployment" />
+          <SupportFile Source="FeatureTests\Editing\EditingTestPart1.deployment" />
+        </SupportFiles>
+        <Deployments>
+          <Deployment>FeatureTests\Editing\EditingTestLib.deployment</Deployment>
+          <Deployment>FeatureTests\Editing\EditingTestPart1.deployment</Deployment>
+        </Deployments>
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" />
+        <Versions>
+          <Version>4.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
+    <!-- Editing -->
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\Editing\*.xtc">
+      <DefaultTestInfo Area="Editing" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\Editing\*" />
+        </SupportFiles>
+        <Deployments>
+          <Deployment>FeatureTests\Editing\EditingTestLib.deployment</Deployment>
+        </Deployments>
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" />
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+
     <!-- Area : ElementLayout -->
     <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\ElementLayout\ElementLayoutLibrary.dll">
       <DefaultTestInfo Area="ElementLayout" Type="Functional" ExecutionGroupingLevel="SharedAppDomains">
