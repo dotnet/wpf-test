@@ -525,6 +525,9 @@ namespace DRT
         private void OnSizeChanged(object sender, EventArgs args)
         {
             _fSizeChanged = true;
+            // This is to bring back focus to the DRT window as after performing these changes 
+            // the window was losing its focus.
+            _win.Focus();
         }
 
         private void OnLocationChanged(object sender, EventArgs args)
