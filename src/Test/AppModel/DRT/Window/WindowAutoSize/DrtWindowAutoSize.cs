@@ -241,7 +241,10 @@ namespace DRT
         private void ResizeWindow()
         {
             RECT rect = new RECT();
-
+            
+            // This is to bring back focus to the DRT window as after performing these changes 
+            // the window was losing its focus.
+            _win.Focus();
             IntPtr hwnd = GetForegroundWindow();
 
             if (hwnd != _handle)
