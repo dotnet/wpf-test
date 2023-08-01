@@ -1,0 +1,81 @@
+<!--
+/*******************************************************************
+ * Purpose: Xaml shell used for tree construction in EventTrigger integration action.  
+ * Contributors: 
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/testcases/Integration/DataTemplateActionForType_empty.xaml $
+********************************************************************/
+-->
+
+<cmn:CustomStackPanel
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Integration.TypeActions;assembly=ElementServicesTest"
+>
+  <StackPanel.Resources>
+    <DataTemplate x:Key="dataTemplate" />
+    <cc:Places x:Key="places" />
+    <CollectionViewSource Source="{StaticResource places}" x:Key="cvs">
+      <CollectionViewSource.GroupDescriptions>
+        <PropertyGroupDescription PropertyName="State"/>
+      </CollectionViewSource.GroupDescriptions>
+    </CollectionViewSource>
+    
+    <HierarchicalDataTemplate x:Key="hierarchicalDataTemplate"
+    ItemsSource="{Binding Path=Items}" 
+    ItemTemplate="{StaticResource dataTemplate}">
+      <TextBlock Text="{Binding Path=Name}" />
+    </HierarchicalDataTemplate>
+
+    <Style TargetType="{x:Type TreeViewItem}" x:Key="expandedStyle">
+      <Setter Value="True" Property="IsExpanded" />
+    </Style>
+  </StackPanel.Resources>
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+       <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <StackPanel Grid.Column="0" Width="50" Height="50" Background="Yellow" Name="RootForElementWithInitialValues"/>
+
+    <StackPanel Grid.Column="1" Width="50" Height="50" Background="Pink">
+      <ListBox ItemTemplate="{DynamicResource dataTemplate}" Name="listBox" >
+        foo
+      </ListBox>
+    </StackPanel>
+
+    <ContentControl Name="contentControl" Content="Content Control " ContentTemplate="{DynamicResource dataTemplate}"/>
+
+    <StackPanel Grid.Column="2"  Width="50" Height="50" Background="Green">
+      <HeaderedContentControl Header="Header for HeaderedContentControl" Name="headeredContentControl" HeaderTemplate="{DynamicResource dataTemplate}"/>
+    </StackPanel>
+    <StackPanel Grid.Column="3"  Width="50" Height="50" Background="Blue">
+      <TabControl ContentTemplate="{DynamicResource dataTemplate}" Name="tabControl">TabControl</TabControl>
+    </StackPanel>
+    <StackPanel Grid.Column="4"  Width="50" Height="50" Background="Yellow">
+      <ListView Name="listView">
+        <ListView.View>
+          <GridView ColumnHeaderTemplate="{DynamicResource dataTemplate}">
+            <GridViewColumn HeaderTemplate="{DynamicResource dataTemplate}" x:Name="gridViewColumn"> dfakl</GridViewColumn>
+          </GridView>
+        </ListView.View >
+      </ListView>
+    </StackPanel>
+    <StackPanel Grid.Column="5"  Width="50" Height="50" Background="Red">
+      <TreeView ItemsSource="{Binding Source={StaticResource cvs}, Path=Groups}" 
+          ItemTemplate="{StaticResource hierarchicalDataTemplate}" ItemContainerStyle="{StaticResource expandedStyle}" Name="treeView"/>
+    </StackPanel>
+  </Grid>
+</cmn:CustomStackPanel>

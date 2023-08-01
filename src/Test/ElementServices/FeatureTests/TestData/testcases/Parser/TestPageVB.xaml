@@ -1,0 +1,29 @@
+﻿
+
+
+<cmn:CustomCanvas
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:l="clr-namespace:LocallyDefined"
+    x:Class="MyPage"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen1="clr-namespace:LocallyDefined" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+        <Canvas.Resources />
+        <x:Code>
+            <![CDATA[
+
+                Public Sub OnLocallyDefinedPropertyChanged(sender As Object, e As RoutedEventArgs)
+                    Console.WriteLine("OnLocallyDefinedPropertyChanged called")
+                    LocallyDefinedButton button = (LocallyDefinedButton)sender
+                    button.Content = "ContentValue2"
+                    button.Background = Brushes.Red
+                End Sub
+
+                Public Sub OnLocallyDefinedEvent(sender As Object, e As RoutedEventArgs)
+                    Console.WriteLine("OnLocallyDefinedEvent called")
+                    LocallyDefinedButton button = sender  As LocallyDefinedButton
+                    button.EventInvoked = true
+                End Sub
+            ]]>
+        </x:Code>
+</cmn:CustomCanvas>

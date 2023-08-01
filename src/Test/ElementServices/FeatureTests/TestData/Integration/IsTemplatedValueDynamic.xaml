@@ -1,0 +1,81 @@
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="IsTemplatedValueDynamic Test"
+        Height="350" Width="1000">
+    <StackPanel>
+        <StackPanel.Resources>
+            <SolidColorBrush x:Key="Brush1" Color="Pink"/>
+            <SolidColorBrush x:Key="Brush2" Color="Yellow"/>
+
+            <ControlTemplate x:Key='controlTemplate' TargetType='Button'>
+                <ControlTemplate.Resources>
+                    <Style x:Key="s1" TargetType="TextBlock">
+                        <Setter Property="Background" Value="{Binding Background}" />
+                    </Style>
+                    <Style x:Key="s2" TargetType="TextBlock">
+                        <Setter Property="Background" Value="{DynamicResource Brush2}" />
+                    </Style>
+                </ControlTemplate.Resources>
+                <StackPanel x:Name="MyPanel" Background="{StaticResource Brush2}" >
+                    <TextBlock Name="tbLocalValue" Background="Salmon" Text="Template Set Value"/>
+                    <TextBlock Name="tbStaticResource" Background="{StaticResource Brush1}" Text="StaticResource Brush1"/>
+                    <TextBlock Name="tbDynamicResource" Background="{DynamicResource Brush2}" Text="DynamicResource Brush2"/>
+                    <TextBlock Name="tbTemplateBinding" Background="{TemplateBinding Background}" Text="TemplateBinding Background"/>
+                    <TextBlock Name="tbBinding" Background="{Binding Background, ElementName=MyPanel}" Text="Binding Background, ElementName=MyPanel"/>
+                    <TextBlock Name="tbDynamicResourceTriggerSimple" Background="{DynamicResource Brush2}" Text="DynamicResource Brush2 Overridden via Trigger simple"/>
+                    <TextBlock Name="tbSimpleTriggerDynamicResource" Background="Salmon" Text="Simple Overridden via Trigger DynamicResource"/>
+                    <TextBlock Name="tbStyleViaBinding" Style="{StaticResource s1}" >Style applied w/ Binding</TextBlock>
+                    <TextBlock Name="tbStyleViaDynamicResource" Style="{StaticResource s2}" >Style applied w/ DynamicResource</TextBlock>
+                </StackPanel>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsVisible" Value="True">
+                        <Setter Property="Background"
+                            TargetName="tbDynamicResourceTriggerSimple"
+                                Value="LightSkyBlue"/>
+                        <Setter Property="Background"
+                            TargetName="tbSimpleTriggerDynamicResource"
+                                Value="{DynamicResource Brush2}"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <DataTemplate x:Key='dataTemplate' DataType='Button'>
+                <DataTemplate.Resources>
+                    <Style x:Key="s1" TargetType="TextBlock">
+                        <Setter Property="Background" Value="{Binding Background}" />
+                    </Style>
+                    <Style x:Key="s2" TargetType="TextBlock">
+                        <Setter Property="Background" Value="{DynamicResource Brush2}" />
+                    </Style>
+                </DataTemplate.Resources>
+                <StackPanel x:Name="MyPanel" Background="{StaticResource Brush2}" >
+                    <TextBlock Name="tbLocalValue" Background="Salmon" Text="Template Set Value"/>
+                    <TextBlock Name="tbStaticResource" Background="{StaticResource Brush1}" Text="StaticResource Brush1"/>
+                    <TextBlock Name="tbDynamicResource" Background="{DynamicResource Brush2}" Text="DynamicResource Brush2"/>
+                    <TextBlock Name="tbBinding" Background="{Binding Background, ElementName=MyPanel}" Text="Binding Background, ElementName=MyPanel"/>
+                    <TextBlock Name="tbDynamicResourceTriggerSimple" Background="{DynamicResource Brush2}" Text="DynamicResource Brush2 Overridden via Trigger simple"/>
+                    <TextBlock Name="tbSimpleTriggerDynamicResource" Background="Salmon" Text="Simple Overridden via Trigger DynamicResource"/>
+                    <TextBlock Name="tbStyleViaBinding" Style="{StaticResource s1}" >Style applied w/ Binding</TextBlock>
+                    <TextBlock Name="tbStyleViaDynamicResource" Style="{StaticResource s2}" >Style applied w/ DynamicResource</TextBlock>
+                </StackPanel>
+                <DataTemplate.Triggers>
+                    <Trigger Property="IsVisible" Value="True">
+                        <Setter Property="Background"
+                                TargetName="tbDynamicResourceTriggerSimple"
+                                Value="LightSkyBlue"/>
+                        <Setter Property="Background"
+                            TargetName="tbSimpleTriggerDynamicResource"
+                                Value="{DynamicResource Brush2}"/>
+                    </Trigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </StackPanel.Resources>
+
+        <Button Name="ct1" Template='{StaticResource controlTemplate}' Width="300"  Background="{StaticResource Brush1}"
+            VerticalAlignment="Center" HorizontalAlignment="Left"></Button>
+        <ContentPresenter Name="dt1" ContentTemplate="{StaticResource dataTemplate}" Content="hi" />
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap" Name="tbOuter" />
+    </StackPanel>
+</Window>
+

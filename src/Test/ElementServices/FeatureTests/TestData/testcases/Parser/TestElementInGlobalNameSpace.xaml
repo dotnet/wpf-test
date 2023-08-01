@@ -1,0 +1,31 @@
+<cmn:CustomStackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:cc="clr-namespace:;assembly=CoreTestsUntrusted" 
+xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Serialization.TestBamlMapTable.VerifyTypesInGlobalNamespace"
+>
+  <StackPanel.Resources>
+    <cc:ButtonInGlobalNameSpace x:Key="ButtonInResources" />
+    <Style TargetType="{x:Type cc:ButtonInGlobalNameSpace}" x:Key="styleForButtonInResources">
+      <Setter Property="Background" Value="Red" />
+    </Style>
+    <ControlTemplate TargetType="{x:Type Button}" x:Key="templateForButtonInResources">
+      <Border>
+        <cc:ButtonInGlobalNameSpace Name="buttonInTemplate"/>
+      </Border>
+    </ControlTemplate>
+    <cc:BoldInGlobalNameSpace x:Key="BoldInResources" />
+    <Style TargetType="{x:Type cc:BoldInGlobalNameSpace}" x:Key="styleForBoldInResources">
+      <Setter Property="Background" Value="Red" />
+    </Style>
+    
+  </StackPanel.Resources>
+
+  <Button Template="{StaticResource templateForButtonInResources}" Name="Control1"/>
+  <ContentControl Content="{DynamicResource ButtonInResources}" Name="Control2"/>
+  <cc:ButtonInGlobalNameSpace Style="{DynamicResource styleForButtonInResources}" Name="Control3"/>
+  <ContentControl Content="{DynamicResource BoldInResources}" Name="Control4"/>
+  <ContentControl Name="Control5">
+    <cc:BoldInGlobalNameSpace Style="{StaticResource styleForBoldInResources}" Name="bold"/>
+  </ContentControl>
+</cmn:CustomStackPanel>

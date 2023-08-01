@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XamlTransformer    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- 1. ControlTemplate in Viewport3D Resources, with Control.Template.Resources (Static)  -->
+  <XmlTransform Name="InViewport3D_Static_ContainingStyle">
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <ControlTemplate x:Key='TemplateKey' TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                            <Setter Property="Width" Value="450" />
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <Canvas>
+                        <Border x:Name="border1" BorderThickness="10" BorderBrush="MediumPurple">
+                            <TextBlock Margin="10" Foreground="MediumPurple" Width="175" Height="175">Avalon!</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Grid.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 2. ControlTemplate in Root Resources, with Control.Template.Resources (Dynamic)  -->
+  <XmlTransform Name="InViewport3D_Dynamic_ContainingStyle">
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <ControlTemplate x:Key='TemplateKey' TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <Canvas>
+                        <Border x:Name="border1" BorderThickness="10" BorderBrush="LightYellow">
+                            <TextBlock Margin="10" Foreground="MediumPurple" Width="175" Height="175">Avalon!</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Grid.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{DynamicResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 3. ControlTemplate in Button Template, with Control.Template.Resources  -->
+  <XmlTransform Name="InElement_ResourcesInElement">
+        <AppendXml TargetElement="//av:Button[@Name='vp2d_second_child']">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Width" Value="450" />
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <Canvas>
+                        <Border Name="border1" BorderThickness="10" BorderBrush="OrangeRed">
+                            <TextBlock Margin="10" Foreground="MediumPurple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Button.Template>
+        </AppendXml>
+  </XmlTransform>
+
+  <!-- 4. ControlTemplate in Button Template, with Dynamic reference to Parent Style  -->
+  <XmlTransform Name="InElement_StyleDynamicToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+            </Viewport3D.Resources>
+        </PrependXml>
+
+        <AppendXml TargetElement="//av:Button[@Name='vp2d_second_child']">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="Black">
+                        <TextBlock Margin="10" Foreground="MediumPurple" Width="175" Height="175">A</TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </AppendXml>
+  </XmlTransform>
+
+  <!-- 5. ControlTemplate in Button Template, with Static reference to Parent Style  -->
+  <XmlTransform Name="InElement_StyleStaticToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+            </Viewport3D.Resources>
+        </PrependXml>
+
+        <AppendXml TargetElement="//av:Button[@Name='vp2d_second_child']">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="Orange">
+                            <TextBlock Margin="10" Foreground="MediumPurple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Button.Template>
+        </AppendXml>
+  </XmlTransform>
+
+  <!-- 6. ControlTemplate in Button Template, with Dynamic reference to Style in -Button- Resources  -->
+  <XmlTransform Name="InElement_StyleDynamic">
+        <AppendXml TargetElement="//av:Button[@Name='vp2d_second_child']">
+            <Button.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+            </Button.Resources>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="Magenta">
+                            <TextBlock Margin="10" Foreground="MediumPurple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Button.Template>
+        </AppendXml>
+  </XmlTransform>
+
+  <!-- 6.5 ControlTemplate in Button Template, with Static reference to Style in -Button- Resources  -->
+  <XmlTransform Name="InElement_StyleStatic">
+        <AppendXml TargetElement="//av:Button[@Name='vp2d_second_child']">
+            <Button.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+            </Button.Resources>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{StaticResource StyleKey}" BorderThickness="10" BorderBrush="Magenta">
+                            <TextBlock Margin="10" Foreground="MediumPurple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Button.Template>
+        </AppendXml>
+  </XmlTransform>
+
+  <!-- 7. ControlTemplate in Button Template, with Dynamic reference to Sibling Style  -->
+  <XmlTransform Name="InElement_StyleDynamicToSibling">
+        <PrependXml TargetElement="//av:Button[@Name='vp2d_nested_child']">
+            <Button.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+            </Button.Resources>
+        </PrependXml>
+
+        <AppendXml TargetElement="//av:Button[@Name='vp2d_second_child']">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="Magenta">
+                            <TextBlock Margin="10" Foreground="MediumPurple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Button.Template>
+        </AppendXml>
+  </XmlTransform>
+
+  <!-- 8. ControlTemplate (Dynamic) in Parent Resources, with Dynamic reference to Parent Style  -->
+  <XmlTransform Name="InViewport3D_Dynamic_StyleDynamicToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+            </Viewport3D.Resources>
+        </PrependXml>
+
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="Brown">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Grid.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{DynamicResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 9. ControlTemplate (Dynamic) in Parent Resources, with Static reference to Parent Style  -->
+  <XmlTransform Name="InViewport3D_Dynamic_StyleStatic">
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{StaticResource StyleKey}" BorderThickness="10" BorderBrush="Tan">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Grid.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{DynamicResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 10. ControlTemplate (Static) in Parent Resources, with Dynamic reference to Parent Style  -->
+  <XmlTransform Name="InViewport3D_Static_StyleDynamicToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+            </Viewport3D.Resources>
+        </PrependXml>
+
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="RoyalBlue">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Grid.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 11. ControlTemplate (Dynamic) in Parent Resources, with Static reference to Parent Style  -->
+  <XmlTransform Name="InViewport3D_Static_StyleStaticToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+            </Viewport3D.Resources>
+        </PrependXml>
+
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="DodgerBlue">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Grid.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 12. ControlTemplate (Dynamic) in Parent Resources, with Static reference to Parent Style  -->
+  <XmlTransform Name="InParent_Dynamic_StyleStaticToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{StaticResource StyleKey}" BorderThickness="10" BorderBrush="Green">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{DynamicResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 13. ControlTemplate (Dynamic) in Parent Resources, with Dynamic reference to Parent Style  -->
+  <XmlTransform Name="InParent_Dynamic_StyleDynamicToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="LightGreen">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{DynamicResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 14. ControlTemplate (Static) in Parent Resources, with Static reference to Parent Style  -->
+  <XmlTransform Name="InParent_Static_StyleStaticToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{StaticResource StyleKey}" BorderThickness="10" BorderBrush="Blue">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 15. ControlTemplate (Static) in Parent Resources, with Dynamic reference to Parent Style  -->
+  <XmlTransform Name="InParent_Static_StyleDynamicToParent">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="450" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="SlateBlue">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 16. ControlTemplate (Static) in Element, with value set in the Template conflicting with the Style in the Parent  -->
+  <XmlTransform Name="InElement_Static_ValueConflictingWithParentStyle">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="25" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Width="450" BorderThickness="10" BorderBrush="SlateBlue">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 17. ControlTemplate (Dynamic) in Element, with value set in the Template conflicting with the Style in the Parent  -->
+  <XmlTransform Name="InElement_Dynamic_ValueConflictingWithParentStyle">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="25" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Width="450" BorderThickness="10" BorderBrush="SlateBlue">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{DynamicResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 18. ControlTemplate (Static) in Element, with value set in the Template (and Style set) conflicting with the Style in the Parent  -->
+  <XmlTransform Name="InElement_Static_ValueConflictingWithParentStyle2">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="25" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" Width="450" BorderThickness="10" BorderBrush="SlateBlue">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 19. ControlTemplate (Dynamic) in Element, with value set in the Template (and Style set) conflicting with the Style in the Parent  -->
+  <XmlTransform Name="InElement_Dynamic_ValueConflictingWithParentStyle2">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="25" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" Width="450" BorderThickness="10" BorderBrush="SlateBlue">
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{DynamicResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 20. ControlTemplate (Static) in Element, with Static Style on the Element conflicting with the Style in the Parent  -->
+  <XmlTransform Name="InElement_Static_StaticStyle_ConflictingWithParentStyle">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="25" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{StaticResource StyleKey}" BorderThickness="10" BorderBrush="SlateBlue">
+                            <Border.Resources>
+                                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                                    <Setter Property="Width" Value="450" />
+                                </Style>
+                            </Border.Resources>
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 21. ControlTemplate (Static) in Element, with Dynamic Style on the Element conflicting with the Style in the Parent  -->
+  <XmlTransform Name="InElement_Static_DynamicStyle_ConflictingWithParentStyle">
+        <PrependXml TargetElement="//av:Viewport3D[@Name='mainViewport3D']">
+            <Viewport3D.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                    <Setter Property="Width" Value="25" />
+                </Style>
+                <ControlTemplate x:Key="TemplateKey" TargetType="{x:Type Button}">
+                    <Canvas>
+                        <Border Name="border1" Style="{DynamicResource StyleKey}" BorderThickness="10" BorderBrush="SlateBlue">
+                            <Border.Resources>
+                                <Style x:Key="StyleKey" TargetType="{x:Type Border}">
+                                    <Setter Property="Height" Value="1" />
+                                </Style>
+                            </Border.Resources>
+                            <TextBlock Margin="10" Foreground="Purple" Width="175" Height="175">A</TextBlock>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Viewport3D.Resources>
+        </PrependXml>
+        <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+
+</XamlTransformer>

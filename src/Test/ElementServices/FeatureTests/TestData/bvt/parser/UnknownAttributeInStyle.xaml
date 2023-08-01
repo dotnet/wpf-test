@@ -1,0 +1,21 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<DockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">    
+        <DockPanel.Resources>
+            <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+                <!-- Testing that unknown attributes in Styles cause exceptions.
+                     Instead of something like "Background", which is a known attribute, 
+                     we introduce "UnknownAttribute", which is, ofcourse, unknown.
+                -->
+                <Setter Property="UnknownAttribute" Value="Red" />
+                <Setter Property="Width" Value="200" />
+                <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="Blue" />
+                </Trigger>
+                </Style.Triggers>
+            </Style>    
+        </DockPanel.Resources>
+        
+</DockPanel>
+</Page>

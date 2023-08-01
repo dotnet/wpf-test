@@ -1,0 +1,57 @@
+<Errors>
+  <File Name="Error_InvalidTypeAttrInArray.xaml">
+    <Description>Instead of Type from Definition namespace as expected, we try to use non:Type on a x:Array</Description>
+    <Load>
+      <ErrorMessage>'Type' property must be in default namespace or in element namespace 'http://schemas.microsoft.com/winfx/2006/xaml'. Line '5' Position '13'.</ErrorMessage>
+      <Line>5</Line>
+      <Position>13</Position>
+      <ExceptionType>XamlParseException</ExceptionType>
+    </Load>
+    <Compile>
+      <ErrorMessage>The property 'Type' must be in the default namespace or in the element namespace 'http://schemas.microsoft.com/winfx/2006/xaml'. Line 5 Position 13.</ErrorMessage>
+      <Line>5</Line>
+      <Position>13</Position>
+    </Compile>
+  </File>
+  <File Name="Error_UnsupportedAttrOnArray.xaml">
+    <Description>Try to put such an attribute on x:Array that is not supposed to be there</Description>
+    <Load>
+      <ErrorMessage>The attribute 'xmlnsfoo' does not exist in XML namespace 'http://schemas.microsoft.com/winfx/2006/xaml'. Line '5' Position '41'.</ErrorMessage>
+      <Line>5</Line>
+      <Position>41</Position>
+      <ExceptionType>XamlParseException</ExceptionType>
+    </Load>
+    <Compile>
+      <ErrorMessage>The attribute 'xmlnsfoo' does not exist in XML namespace 'http://schemas.microsoft.com/winfx/2006/xaml'. Line 5 Position 41.</ErrorMessage>
+      <Line>5</Line>
+      <Position>41</Position>
+    </Compile>
+  </File>
+  <File Name="Error_InvalidElementInArray.xaml">
+    <Description>Trying to put a SolidColorBrush into a x:Array whose type is Text</Description>
+    <Load>
+      <ErrorMessage>'System.Windows.Markup.ArrayExtension' value cannot be assigned to property 'Content' of object 'System.Windows.Controls.Button'. Items in the array must be type 'TextBlock'. One or more items cannot be cast to this type.  Error at object 'System.Windows.Markup.ArrayExtension', Line 8 Position 6.</ErrorMessage>
+      <Line>8</Line>
+      <Position>6</Position>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <InnerException>Items in the array must be type 'TextBlock'. One or more items cannot be cast to this type.</InnerException>
+    </Load>
+    <Compile>
+      <ErrorMessage>'System.Windows.Markup.ArrayExtension' value cannot be assigned to property 'Content' of object 'System.Windows.Controls.Button'. Items in the array must be type 'TextBlock'. One or more items cannot be cast to this type.  Error at object 'System.Windows.Markup.ArrayExtension' in markup file '__XamlTestRunnerTempFile.xaml' Line 8 Position 6.</ErrorMessage>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <Position>6</Position>
+      <Line>8</Line>
+      <InnerException>Items in the array must be type 'TextBlock'. One or more items cannot be cast to this type.</InnerException>
+    </Compile>
+  </File>
+  <File Name="Error_RepeatTypeOnXArray.xaml">
+    <Description>Specifying the Type attribute on x:Array twice</Description>
+    <Load>
+      <ErrorMessage>'y:Type' is a duplicate attribute name. Line 8, position 47.</ErrorMessage>
+      <InnerException>'y:Type' is a duplicate attribute name. Line 8, position 47.</InnerException>
+      <Line>8</Line>
+      <Position>47</Position>
+      <ExceptionType>XamlParseException</ExceptionType>
+    </Load>
+  </File>
+</Errors>

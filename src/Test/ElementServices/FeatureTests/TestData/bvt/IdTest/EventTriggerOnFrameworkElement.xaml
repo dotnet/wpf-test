@@ -1,0 +1,39 @@
+﻿<cmn:CustomDockPanel
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Serialization;assembly=ElementServicesTest"
+    xmlns:S="clr-namespace:System;assembly=Mscorlib"
+    Name="root"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.EventTriggerOnFrameworkElementVerify" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen2="clr-namespace:Avalon.Test.CoreUI.Serialization;assembly=ElementServicesTest" xmlns:MappingPIGen3="clr-namespace:System;assembly=Mscorlib">
+    <Button Background="LightBlue" Width="200" Height="300" Name="button">
+        <Button.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="childButton">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="80" To="80" Duration="0:0:0" Storyboard.TargetProperty="Width" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <BeginStoryboard>
+                        <Storyboard TargetName="childButton">
+                            <DoubleAnimation From="50" To="50" Duration="0:0:0" Storyboard.TargetProperty="Width" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <BeginStoryboard>
+                        <Storyboard TargetName="sibling">
+                            <DoubleAnimation From="80" To="80" Duration="0:0:0" Storyboard.TargetProperty="Width" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <BeginStoryboard>
+                        <Storyboard TargetName="root">
+                            <DoubleAnimation From="500" To="500" Duration="0:0:0" Storyboard.TargetProperty="Width" />
+                        </Storyboard>                       
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Button.Triggers>
+        <Button x:Name="childButton" />
+    </Button>
+    <Button Name="sibling" />    
+</cmn:CustomDockPanel>

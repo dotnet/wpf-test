@@ -1,0 +1,28 @@
+﻿<cmn:CustomTextPanel
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    x:Name="page"
+    xmlns:cc="clr-namespace:Avalon.Test.CoreUI.IdTest;assembly=ElementServicesTest"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.FrameworkElementWithIDInDataTemplateVerify"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">        
+
+    <FlowDocument>
+  <Paragraph>
+    <Canvas x:Name="sameName">
+        <Canvas.Resources>
+            <DataTemplate x:Key="myDataTemplate">
+                <Button>
+                    <cc:TextBlockWithRuntimeNamePropertyAttribute MyName="parentBlock">
+                        <cc:TextBlockWithRuntimeNamePropertyAttribute MyName="childBlock1" FontSize="8">child block 1</cc:TextBlockWithRuntimeNamePropertyAttribute>
+                        <cc:TextBlockWithRuntimeNamePropertyAttribute MyName="childBlock2" FontSize="8">child block 2</cc:TextBlockWithRuntimeNamePropertyAttribute>
+                        <cc:TextBlockWithRuntimeNamePropertyAttribute MyName="sameName" FontSize="8">same name block</cc:TextBlockWithRuntimeNamePropertyAttribute>
+                    </cc:TextBlockWithRuntimeNamePropertyAttribute>
+                </Button>
+            </DataTemplate>
+        </Canvas.Resources>     
+        <Button ContentTemplate="{DynamicResource myDataTemplate}" x:Name="button" />
+    </Canvas>
+  </Paragraph>
+  </FlowDocument>
+</cmn:CustomTextPanel>

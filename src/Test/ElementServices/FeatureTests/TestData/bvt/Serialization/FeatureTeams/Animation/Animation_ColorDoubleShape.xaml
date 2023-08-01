@@ -1,0 +1,29 @@
+﻿
+
+
+<cmn:CustomDockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="White" Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Serialization.AnimationVerifiers.ColorDoubleShape_Verify" xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+ <Canvas Name="Canvas" Width="500" Height="500">
+  <Ellipse Width="80" Height="80" Canvas.Left="10" Canvas.Top="60" Name="ball1">
+    <Ellipse.Fill>
+        <SolidColorBrush Color="Red" />
+    </Ellipse.Fill>
+    <Ellipse.Triggers>
+      <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+          <EventTrigger.Actions>
+              <BeginStoryboard>
+                  <Storyboard FillBehavior="Stop" BeginTime="0:0:0" Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" Name="storyboard1">
+                    <ColorAnimation AccelerationRatio=".1" DecelerationRatio=".9" From="red" To="blue" BeginTime="0:0:5" Duration="0:0:5" FillBehavior="HoldEnd" />
+                  </Storyboard>
+              </BeginStoryboard>
+              <BeginStoryboard>
+                  <Storyboard FillBehavior="Stop" BeginTime="0:0:0" Storyboard.TargetProperty="Width" Name="storyboard2">
+                    <DoubleAnimation By="50" FillBehavior="HoldEnd" BeginTime="0:0:5" Duration="0:0:2" RepeatBehavior="5x" IsCumulative="true" />
+                  </Storyboard>
+              </BeginStoryboard>			  
+          </EventTrigger.Actions>
+      </EventTrigger>
+    </Ellipse.Triggers>
+  </Ellipse>
+ </Canvas>
+</cmn:CustomDockPanel>

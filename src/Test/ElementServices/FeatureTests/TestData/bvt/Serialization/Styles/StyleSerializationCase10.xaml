@@ -1,0 +1,26 @@
+﻿
+
+
+
+<cmn:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:S="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen3="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+        <cmn:CustomCanvas.Resources>
+        <!-- 3 in style2 matrix-->
+            <S:String x:Key="myString">This is a string</S:String>
+            <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+                <Setter Property="Button.Background">
+                <Setter.Value>
+                            <SolidColorBrush Color="Yellow" />
+                </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <TextBlock x:Name="myText" Text="{DynamicResource myString}" />
+                </ControlTemplate>
+                </Setter.Value>
+                </Setter>
+            </Style> 
+        </cmn:CustomCanvas.Resources>
+    <Button Name="Button1" />
+</cmn:CustomCanvas>
+

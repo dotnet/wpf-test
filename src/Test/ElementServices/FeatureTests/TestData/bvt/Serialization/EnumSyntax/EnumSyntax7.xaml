@@ -1,0 +1,24 @@
+﻿
+
+ 
+
+<cmn:CustomCanvas
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:mscor="clr-namespace:System;assembly=mscorlib" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen3="clr-namespace:System;assembly=mscorlib">
+    <cmn:CustomCanvas.Resources>
+        <Dock x:Key="{x:Static Dock.Right}">Right</Dock>
+        <cc:CustomEnum x:Key="{x:Static cc:CustomEnum.Value1}">Value1</cc:CustomEnum>
+        <cc:CustomEnum x:Key="{x:Static cc:CustomEnum.Value2}">Value2</cc:CustomEnum>
+        <mscor:Boolean x:Key="mybool">true</mscor:Boolean>
+        <mscor:Boolean x:Key="{x:Static cc:CustomEnumControl.PublicStaticBoolClrProperty}">true</mscor:Boolean>
+    </cmn:CustomCanvas.Resources>
+    
+    <Button Name="TargetElement1" DockPanel.Dock="{DynamicResource {x:Static Dock.Right}}" />
+    <Button Name="TargetElement2" cc:CustomEnumControl.Custom="{StaticResource {x:Static cc:CustomEnum.Value2}}" />
+    <Button Name="TargetElement3" cc:CustomEnumControl.CustomAttachedBool="{StaticResource mybool}" />
+    <Button Name="TargetElement4" cc:CustomEnumControl.CustomAttachedBool="{StaticResource {x:Static cc:CustomEnumControl.PublicStaticBoolClrProperty}}" />
+
+</cmn:CustomCanvas>

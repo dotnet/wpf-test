@@ -1,0 +1,21 @@
+﻿<Border Focusable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Green">
+  <Border.Style>
+    <Style TargetType="{x:Type Border}">
+      <Setter Property="BorderBrush" Value="transparent" />
+      <Setter Property="BorderThickness" Value="5" />
+      <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="true">
+          <Setter Property="BorderBrush" Value="red" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+  </Border.Style>
+
+  <TextBlock Focusable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="Parent"
+    HorizontalAlignment="Center" VerticalAlignment="Center" Padding="50" Background="Green">
+    <Bold Background="Pink" Name="Child">
+      <Run Name="Grandchild1">abcdefghijklmnopqrstuvwxyz</Run>
+      <Canvas Background="Blue" Height="15" Width="20" Name="Grandchild2" />
+    </Bold>
+  </TextBlock>
+</Border>

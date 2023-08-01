@@ -1,0 +1,72 @@
+﻿<cmn:CustomStackPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=ElementServicesTest"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:ci="clr-namespace:Avalon.Test.CoreUI.CoreInput.Common.Controls;assembly=ElementServicesTest"
+    xmlns:cmd="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+    Verifier="ElementServicesTest.dll#Avalon.Test.Framework.Commanding.MultipleCommandBindingVerifiers.VerifyCommandBindingValue"
+    xmlns:MappingPIGen1="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+    xmlns:MappingPIGen2="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=ElementServicesTest"
+    xmlns:MappingPIGen3="clr-namespace:System.Windows.Documents;assembly=PresentationFramework"
+    xmlns:MappingPIGen4="clr-namespace:Avalon.Test.CoreUI.CoreInput.Common.Controls;assembly=ElementServicesTest"
+    xmlns:MappingPIGen5="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    >
+    <!--
+    This is a Commanding test file, displaying elements with command and input bindings in a grid. 
+    -->
+    <ci:InstrFrameworkPanel Height="100" Width="100" Name="Open">
+        <ci:InstrFrameworkPanel.CommandBindings>
+            <cmd:CommandBinding Command="ApplicationCommands.Open" />
+        </ci:InstrFrameworkPanel.CommandBindings>
+        <ci:InstrFrameworkPanel.InputBindings>
+            <cmd:KeyBinding Command="ApplicationCommands.Open" Gesture="Ctrl+F9" />
+            <cmd:MouseBinding Command="ApplicationCommands.Open" Gesture="Alt+RightClick" />
+        </ci:InstrFrameworkPanel.InputBindings>
+    </ci:InstrFrameworkPanel>
+    <ci:InstrFrameworkPanel Height="100" Width="100" Name="New">
+        <ci:InstrFrameworkPanel.CommandBindings>
+            <cmd:CommandBinding Command="ApplicationCommands.New" />
+        </ci:InstrFrameworkPanel.CommandBindings>
+        <ci:InstrFrameworkPanel.InputBindings>
+            <cmd:KeyBinding Command="ApplicationCommands.New" Gesture="shift+Next" />
+            <cmd:MouseBinding Command="ApplicationCommands.New" Gesture="LeftClick" />
+        </ci:InstrFrameworkPanel.InputBindings>
+    </ci:InstrFrameworkPanel>
+    <ci:InstrFrameworkPanel Height="100" Width="100" Name="MoveRightByWord">
+        <ci:InstrFrameworkPanel.CommandBindings>
+            <cmd:CommandBinding Command="EditingCommands.MoveRightByWord" />
+        </ci:InstrFrameworkPanel.CommandBindings>
+        <ci:InstrFrameworkPanel.InputBindings>
+            <cmd:KeyBinding Command="EditingCommands.MoveRightByWord" Gesture="ALT+o" />
+            <cmd:MouseBinding Command="EditingCommands.MoveRightByWord" Gesture="SHIFT+LeftDoubleClick" />
+        </ci:InstrFrameworkPanel.InputBindings>
+    </ci:InstrFrameworkPanel>
+    <ci:InstrFrameworkPanel Height="100" Width="100" Name="Print">
+        <ci:InstrFrameworkPanel.CommandBindings>
+            <cmd:CommandBinding Command="ApplicationCommands.Print" />
+        </ci:InstrFrameworkPanel.CommandBindings>
+        <ci:InstrFrameworkPanel.InputBindings>
+            <cmd:KeyBinding Command="ApplicationCommands.Print" Gesture="shift+Alt+F9" />
+            <cmd:MouseBinding Command="ApplicationCommands.Print" Gesture="Win+LeftClick" />
+        </ci:InstrFrameworkPanel.InputBindings>
+    </ci:InstrFrameworkPanel>
+    <ci:InstrFrameworkPanel Height="100" Width="100" Name="SaveAs">
+        <ci:InstrFrameworkPanel.CommandBindings>
+            <cmd:CommandBinding Command="ApplicationCommands.SaveAs" />
+        </ci:InstrFrameworkPanel.CommandBindings>
+        <ci:InstrFrameworkPanel.InputBindings>
+            <cmd:KeyBinding Command="ApplicationCommands.SaveAs" Gesture="Alt+Control+9" />
+            <cmd:MouseBinding Command="ApplicationCommands.SaveAs" Gesture="Ctrl+Alt+LeftClick" />
+        </ci:InstrFrameworkPanel.InputBindings>
+    </ci:InstrFrameworkPanel>
+    <ci:InstrFrameworkPanel Height="100" Width="100" Name="Cut">
+        <ci:InstrFrameworkPanel.CommandBindings>
+            <cmd:CommandBinding Command="ApplicationCommands.Cut" />
+        </ci:InstrFrameworkPanel.CommandBindings>
+        <ci:InstrFrameworkPanel.InputBindings>
+            <cmd:KeyBinding Command="ApplicationCommands.Cut" Gesture="Shift+Ctrl + Space" />
+            <cmd:MouseBinding Command="ApplicationCommands.Cut" Gesture="Ctrl+shift+RightDoubleClick" />
+        </ci:InstrFrameworkPanel.InputBindings>
+    </ci:InstrFrameworkPanel>
+</cmn:CustomStackPanel>

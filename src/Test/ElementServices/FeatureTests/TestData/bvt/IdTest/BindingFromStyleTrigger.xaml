@@ -1,0 +1,41 @@
+﻿<cmn:CustomCanvas Name="id"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.BindingFromStyleTriggerVerify"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+      <Canvas Name="canvas">
+        <Canvas.Resources>
+           <Style x:Key="style" TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="Width" Value="300">
+                          <Setter Property="Background">
+                              <Setter.Value>
+                                   <Binding Path="Background" ElementName="child" Mode="TwoWay" />
+                              </Setter.Value>
+                          </Setter>
+                    </Trigger>
+                    <Trigger Property="Width" Value="300">
+                        <Setter Property="Height">
+                            <Setter.Value>
+                                <Binding Path="Height" ElementName="Rectangle" Mode="TwoWay" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>                  
+                </Style.Triggers>
+               <Setter Property="Template">
+                   <Setter.Value>
+                       <ControlTemplate TargetType="{x:Type Button}">
+                           <Rectangle x:Name="Rectangle" Height="40" />
+                       </ControlTemplate>
+                   </Setter.Value>
+               </Setter>
+                
+            </Style>
+        </Canvas.Resources>        
+        <Button Style="{DynamicResource style}" Name="button" Width="300">
+            <Button Name="child" Background="Blue" />
+        </Button>
+      </Canvas>
+</cmn:CustomCanvas>

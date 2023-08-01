@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TestExtenderGraph
+  xmlns="clr-namespace:Microsoft.Test.Integration;assembly=TestRuntime"
+  xmlns:txrw="clr-namespace:Microsoft.Test.Integration.Windows;assembly=TestRuntime"
+  xmlns:ndp="clr-namespace:System;assembly=mscorlib">
+
+
+  <FileVariationGenerator Name="gen1" 
+	FileExtension="xaml" 
+	DirectoryPath="FeatureTests\ElementServices\ActionForXaml" >
+
+
+    <FileVariationGenerator.Output>
+
+        <StorageItem Name="FileName">
+            <StorageItem.Type>
+
+		<TypeDesc TypeName="System.String" AssemblyName="mscorlib.dll"  />
+
+            </StorageItem.Type>
+        </StorageItem>
+
+        <StorageItem Name="FileStream">
+            <StorageItem.Type>
+
+		<TypeDesc TypeName="System.IO.Stream" AssemblyName="mscorlib.dll"  />
+
+            </StorageItem.Type>
+        </StorageItem>
+
+    </FileVariationGenerator.Output>
+
+
+  </FileVariationGenerator>
+
+  <CallbackVariationGenerator Name="gen2">
+    
+    <CallbackVariationGenerator.Input>
+
+        <StorageItem Name="FileName">
+            <StorageItem.Type>
+
+		<TypeDesc TypeName="System.String" AssemblyName="mscorlib.dll"  />
+
+            </StorageItem.Type>
+        </StorageItem>
+
+    </CallbackVariationGenerator.Input>
+
+
+    <CallbackVariationGenerator.SupportFiles>
+          <ndp:String>FeatureTests\ElementServices\CoreTestsUntrusted.dll</ndp:String>
+    </CallbackVariationGenerator.SupportFiles>
+
+    <CallbackVariationGenerator.Callback>
+      <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                  TypeName="Avalon.Test.Xaml.Markup.XamlTestRunner"
+                  MethodName="EntryMethod" />
+    </CallbackVariationGenerator.Callback>
+
+    <ContentItem Timeout="240">Load</ContentItem>
+    <ContentItem Timeout="240" Disabled="true">AsyncLoad</ContentItem>
+    <ContentItem Timeout="240" Disabled="true">AsyncLoadStream</ContentItem>
+    <ContentItem Timeout="240" Disabled="true">AsyncLoadXmlReader</ContentItem>
+    <ContentItem SecurityLevel="FullTrust" Timeout="240">CompileVisualBasic</ContentItem>
+    <ContentItem SecurityLevel="FullTrust" Timeout="240">CompileCSharp</ContentItem>
+    <ContentItem SecurityLevel="FullTrust" Timeout="240" Disabled="true">TestBamlReaderWriter</ContentItem>
+
+  </CallbackVariationGenerator>
+
+  <CombinationGenerator Area="XAML\ActionForXaml">
+    <GeneratorReference TargetName="gen1" />
+    <GeneratorReference TargetName="gen2" />
+  </CombinationGenerator>
+
+</TestExtenderGraph>
+

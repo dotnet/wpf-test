@@ -1,0 +1,113 @@
+﻿<!--
+Keyword: MultiPropertyTriggers
+When both IsKeyboardFocusWithin and IsMouseOver are true, Button's Background -> LightGreen. (Style in Resources)
+-->
+
+
+<cmn:CustomStackPanel 
+  Background="white" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+  Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.ValueSourceTestVerifier" 
+  xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+  <cmn:CustomStackPanel.Resources>
+    <Storyboard x:Key="myStoryboard"  BeginTime="0" Duration="0:1:0">
+      <ObjectAnimationUsingKeyFrames
+          Storyboard.TargetProperty="Background"
+          BeginTime="00:00:00"
+          Duration="00:00:01"
+          FillBehavior="HoldEnd">
+        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Brushes.Red}" />
+      </ObjectAnimationUsingKeyFrames >
+    </Storyboard>
+    <SolidColorBrush x:Key="myBrush" Color="red"></SolidColorBrush>
+  </cmn:CustomStackPanel.Resources>
+
+  <Button Name="DefaultSet" OverridesDefaultStyle="true" Style="{x:Null}" />
+  <Button Name="DefaultStyleSet" />
+  <Button Name="LocalSet" Background="red" />
+  <Button Name="LocalSet_IsExpression" Background="{DynamicResource myBrush}" />
+  <Button Name="StyleSet">
+    <Button.Style>
+      <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="red" />
+      </Style>
+    </Button.Style>
+  </Button>
+  <Button Name="TemplateTriggerSet">
+    <Button.Template>
+      <ControlTemplate TargetType="{x:Type Button}">
+        <Canvas />
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsEnabled" Value="true">
+            <Setter Property="Background" Value="red" />
+          </Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate>
+    </Button.Template>
+  </Button>
+  <Button Name="StyleTriggerSet">
+    <Button.Style>
+      <Style TargetType="{x:Type Button}">
+        <Style.Triggers>
+          <Trigger Property="IsEnabled" Value="true">
+            <Setter Property="Background" Value="red" />
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+    </Button.Style>
+  </Button>
+  <Button Name="DefaultStyleSet_IsAnimated">
+    <Button.Style>
+      <Style TargetType="{x:Type Button}">
+        <Style.Triggers>
+          <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard Storyboard="{StaticResource myStoryboard}" />
+          </EventTrigger>
+        </Style.Triggers>
+      </Style>
+    </Button.Style>
+  </Button>
+  <Button Name="StyleSet_IsAnimated">
+    <Button.Style>
+      <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="red" />
+        <Style.Triggers>
+          <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard Storyboard="{StaticResource myStoryboard}" />
+          </EventTrigger>
+        </Style.Triggers>
+      </Style>
+    </Button.Style>
+  </Button>
+  <!--   
+    public enum BaseValueSource
+    {
+        /// <summary> The source is not known by the Framework. </summary>
+        Unknown                 = BaseValueSourceInternal.Unknown,
+        /// <summary> Default value, as defined by property metadata. </summary>
+        Default                 = BaseValueSourceInternal.Default,
+        /// <summary> Inherited from an ancestor. </summary>
+        Inherited               = BaseValueSourceInternal.Inherited,
+        /// <summary> Default Style for the current theme. </summary>
+        DefaultStyle            = BaseValueSourceInternal.ThemeStyle,
+        /// <summary> Trigger in the default Style for the current theme. </summary>
+        DefaultStyleTrigger     = BaseValueSourceInternal.ThemeStyleTrigger,
+        /// <summary> Style setter. </summary>
+        Style                   = BaseValueSourceInternal.Style,
+        /// <summary> Trigger in the Template. </summary>
+        TemplateTrigger         = BaseValueSourceInternal.TemplateTrigger,
+        /// <summary> Trigger in the Style. </summary>
+        StyleTrigger            = BaseValueSourceInternal.StyleTrigger,
+        /// <summary> Implicit Style reference. </summary>
+        ImplicitStyleReference  = BaseValueSourceInternal.ImplicitReference,
+        /// <summary> Template that created the element. </summary>
+        ParentTemplate          = BaseValueSourceInternal.ParentTemplate,
+        /// <summary> Trigger in the Template that created the element. </summary>
+        ParentTemplateTrigger   = BaseValueSourceInternal.ParentTemplateTrigger,
+        /// <summary> Local value. </summary>
+        Local                   = BaseValueSourceInternal.Local,
+    }-->
+</cmn:CustomStackPanel>

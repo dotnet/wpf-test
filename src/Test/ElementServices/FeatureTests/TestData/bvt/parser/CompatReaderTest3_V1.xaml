@@ -1,0 +1,63 @@
+﻿<!--
+The following Xaml tests different aspects of <AlternateContent>, a 
+Markup compatibility tag.
+The test spec used is http://avalon/test/coreui/Parser%20Docs/XmlCompatibilityReader.xml
+
+And oh, this test using CompatReaderTest2Verify as the verification routine is not a typo. 
+It's deliberate, because this Xaml differs only slightly from CompatReaderTest2.xaml, 
+and the verification is exactly identical.
+-->
+
+
+<cmn:CustomStackPanel Name="CustomStackPanel0"
+ xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.CompatReaderTest2Verify_V1"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:v1='http://ns.controlstore.com/avalon/2005'
+ xmlns:v2='http://ns.controlstore.com/avalon/2007'
+ xmlns:vtwo='http://ns.controlstore.com/avalon/2007'
+    xmlns:v3='http://ns.controlstore.com/avalon/2009'
+    xmlns:v4='http://ns.controlstore.com/avalon/2011'
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="v1" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+    <!-- The following block tests an attribute on mc:AlternateContent and 
+         an xmlns declaration on mc:Choice. REMOVED xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+         It also tests an empty mc:Fallback
+    -->
+    <mc:AlternateContent Name="AlternateContent">
+        <mc:Choice Requires="v3" mc:Ignorable="v3">
+            <v3:TransButton>This is a v3 button</v3:TransButton>
+        </mc:Choice>
+        <mc:Choice Requires="v2 vtwo" >
+            <v2:TransButton Background="{x:Static Brushes.Red}">This is a v2 button</v2:TransButton>
+        </mc:Choice>
+        <mc:Fallback>
+        </mc:Fallback>
+    </mc:AlternateContent>
+
+    <!-- The following block tests xmlns declarations and mc:attributes on 
+         mc:AlternateContent and mc:Fallback.
+         It also tests an empty mc:Choice.
+    -->
+    <mc:AlternateContent mc:Ignorable="v3">
+        <mc:Choice Requires="v2">
+        </mc:Choice>
+        <mc:Fallback mc:Ignorable="v4">
+            <v1:TransButton Content="Hello">
+                <v3:TransButton />
+                <v4:TransButton />
+            </v1:TransButton>
+        </mc:Fallback>
+    </mc:AlternateContent>
+
+    <!-- This block makes sure that if an mc:Choice cannot be selected 
+    and an mc:Fallback is not provided, then the whole AlternateContent is ignored.-->
+    <mc:AlternateContent>
+        <mc:Choice Requires="v1 v4">
+            <v4:TransButton />
+        </mc:Choice>
+    </mc:AlternateContent>
+
+</cmn:CustomStackPanel>

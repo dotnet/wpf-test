@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XamlTransformer    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- 1. ControlTemplate inside a Style in Root Resources / Static Resource on Button -->
+  <XmlTransform Name="Template_InRootStyle_Static">
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Control}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border x:Name="ControlInTemplate" Background="Red">
+                                    <TextBlock FontSize="36">Avalon!</TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+        </PrependXml>
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Style" Value="{StaticResource StyleKey}"/>
+  </XmlTransform>
+
+  <!-- 2. ControlTemplate inside a Style in Root Resources / Dynamic Resource on Button -->
+  <XmlTransform Name="Template_InRootStyle_Dynamic">
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <Style x:Key="StyleKey" TargetType="{x:Type Control}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border x:Name="ControlInTemplate" Background="Purple">
+                                    <TextBlock FontSize="36">Avalon!</TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+        </PrependXml>
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Style" Value="{DynamicResource StyleKey}"/>
+  </XmlTransform>
+
+  <!-- 3. ControlTemplate directly inside Root Resources / Static Resource on Button -->
+  <XmlTransform Name="Template_InRoot_Static">
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <ControlTemplate x:Key='TemplateKey' TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="AnimateTemplate">
+                            <DoubleAnimation
+                                Storyboard.TargetName       = "ControlInTemplate"
+                                Storyboard.TargetProperty   = "(Shape.Opacity)"
+                                RepeatBehavior              = "Forever"
+                                BeginTime                   = "0:0:0"
+                                Duration                    = "0:0:1"
+                                From                        = "1"
+                                To                          = "0">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <Ellipse x:Name="ControlInTemplate" Height="150" Width="150" Fill="HotPink" />
+
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard Storyboard="{StaticResource AnimateTemplate}"/>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Grid.Resources>
+        </PrependXml>
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{StaticResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 4. ControlTemplate directly inside Root Resources / Dynamic Resource on Button -->
+  <XmlTransform Name="Template_InRoot_Dynamic">
+        <PrependXml TargetElement="//av:Grid[@Name='testGrid']">
+            <Grid.Resources>
+                <ControlTemplate x:Key='TemplateKey' TargetType="{x:Type Button}">
+                    <Canvas x:Name="ControlInTemplate" Height="150" Width="150" Background="Orange" />
+                </ControlTemplate>
+            </Grid.Resources>
+        </PrependXml>
+    <AddAttribute TargetElement="//*[@Name='vp2d_second_child']" Property="Template" Value="{DynamicResource TemplateKey}"/>
+  </XmlTransform>
+
+  <!-- 5. ControlTemplate directly inside the templated Element -->
+  <XmlTransform Name="Template_InElement">
+        <PrependXml TargetElement="//av:Button[@Name='vp2d_second_child']">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <StackPanel>
+                        <TextBox Name="ControlInTemplate" Width="150" Height="150" Background="DarkMagenta" FontSize="24" Text="Avalon!">
+                            <TextBox.LayoutTransform>
+                                <RotateTransform Angle="0.01" CenterX="75" CenterY="75" />
+                            </TextBox.LayoutTransform>
+                        </TextBox>
+                    </StackPanel>
+                </ControlTemplate>
+            </Button.Template>
+        </PrependXml>
+  </XmlTransform>
+
+</XamlTransformer>

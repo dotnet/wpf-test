@@ -1,0 +1,27 @@
+﻿
+
+
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+<cmn:CustomDockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+ Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.DefSharedVerify">
+	<cmn:CustomDockPanel.Resources>
+		<SolidColorBrush x:Key="GreenBrush" x:Shared="False" Color="Green" />
+		<SolidColorBrush x:Key="RedBrush" x:Shared="True" Color="Red" />
+	</cmn:CustomDockPanel.Resources>
+
+	<!-- Button0 and Button1 should get 2 different instances of SolidColorBrush, 
+	     since GreenBrush is not shared 
+	-->	 
+	<Button Name="Button0" Background="{DynamicResource GreenBrush}" />
+	<Button Name="Button1" Background="{DynamicResource GreenBrush}" />
+
+	<!-- Button2 and Button3 should get the same instance of SolidColorBrush,
+	     since RedBrush is shared.
+	-->
+	<Button Name="Button2" Background="{DynamicResource RedBrush}" />
+	<Button Name="Button3" Background="{DynamicResource RedBrush}" />
+</cmn:CustomDockPanel>
+</Page>

@@ -1,0 +1,62 @@
+﻿<!--
+Keyword: MultiPropertyTriggers
+When both IsKeyboardFocusWithin and IsMouseOver are true, Button's Background -> LightGreen. (Style in FE.Style)
+-->
+
+<cmn:CustomStackPanel Background="white" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.PropertyTriggerVerifier" Tag="DP0002" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+  <Button Name="FirstBtn">
+    <Button.Content>
+      <TextBlock>first</TextBlock>
+    </Button.Content>
+    <Button.Style>
+      <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="LightBlue" />
+        <Style.Triggers>
+          <MultiTrigger>
+            <MultiTrigger.Conditions>
+              <Condition Property="IsKeyboardFocusWithin" Value="true" />
+              <Condition Property="IsMouseOver" Value="true" />
+            </MultiTrigger.Conditions>
+            <Setter Property="Background" Value="LightGreen" />
+          </MultiTrigger>
+          </Style.Triggers>
+      </Style>
+    </Button.Style>
+  </Button>
+  <Button Name="SecondBtn" Content="second">
+    <Button.Style>
+      <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="LightBlue" />
+        <Style.Triggers>
+          <MultiTrigger>
+            <MultiTrigger.Conditions>
+              <Condition Property="IsKeyboardFocusWithin" Value="true" />
+              <Condition Property="IsMouseOver" Value="true" />
+            </MultiTrigger.Conditions>
+            <Setter Property="Background" Value="LightGreen" />
+          </MultiTrigger>
+        </Style.Triggers>
+      </Style>
+    </Button.Style>
+  </Button>
+  <Button Name="ThirdBtn">
+    <Button.Content>
+      <TextBlock>third</TextBlock>
+    </Button.Content>
+    <Button.Style>
+      <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="LightBlue" />
+        <Style.Triggers>
+          <MultiTrigger>
+            <MultiTrigger.Conditions>
+              <Condition Property="IsKeyboardFocusWithin" Value="true" />
+              <Condition Property="IsMouseOver" Value="true" />
+            </MultiTrigger.Conditions>
+            <Setter Property="Background" Value="LightGreen" />
+          </MultiTrigger>
+        </Style.Triggers>
+      </Style>
+    </Button.Style>
+  </Button>
+</cmn:CustomStackPanel>
+

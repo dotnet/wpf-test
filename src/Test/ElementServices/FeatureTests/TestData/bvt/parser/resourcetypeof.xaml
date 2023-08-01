@@ -1,0 +1,45 @@
+﻿
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media;assembly=PresentationCore">
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:mil="clr-namespace:System.Windows.Media;assembly=PresentationCore"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <DockPanel.Resources>
+      <!-- Explicit Type declaration -->
+      <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+          <Setter Property="Background" Value="Blue" />
+      </Style>
+      <!-- Implicit Type declaration no prefix -->
+      <Style TargetType="{x:Type RadioButton}">
+          <Setter Property="Background" Value="Yellow" />
+      </Style>
+      <!-- Explicit Type declaration with Prefix -->
+      <Style x:Key="{x:Type mil:SolidColorBrush}" TargetType="{x:Type Border}">
+          <Setter Property="Border.Background">
+          <Setter.Value>
+                <mil:SolidColorBrush>
+                   <mil:SolidColorBrush.Color>
+                      <mil:Color G="255" />
+                   </mil:SolidColorBrush.Color>
+               </mil:SolidColorBrush>
+          </Setter.Value>
+          </Setter>
+      </Style>
+      <Style x:Key="{x:Type Rectangle}" TargetType="{x:Type Rectangle}">
+          <Setter Property="Fill" Value="blue" />
+          <Setter Property="Stroke" Value="Red" />
+          <Setter Property="StrokeThickness" Value="8" />
+          <Setter Property="Width" Value="100" />
+          <Setter Property="Height" Value="75" />
+          <Setter Property="Margin" Value="10" />
+          <Setter Property="RadiusX" Value="10" />
+          <Setter Property="RadiusY" Value="10" />
+      </Style>
+  </DockPanel.Resources>
+    <!-- Resource reference for Type -->
+    <Button Name="b1" Style="{DynamicResource {x:Type Button}}" /> 
+    <RadioButton Name="b2" Style="{DynamicResource {x:Type RadioButton}}" />
+    <Border Name="b3" Style="{DynamicResource {x:Type mil:SolidColorBrush}}" />
+    <Rectangle Name="r1" Style="{DynamicResource {x:Type Rectangle}}" />
+</DockPanel>
+
+</Page>

@@ -1,0 +1,263 @@
+﻿
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:cc="clr-namespace:Tests;assembly=Tests">
+
+	<!-- Style for Next/Previous Page Buttons -->
+	<Style x:Key="DBVButtonStyle" TargetType="{x:Type Button}">
+		<Setter Property="Background" Value="White" />
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+		<Setter Property="FontSize" Value="36pt" />
+		<Setter Property="Width" Value="36pt" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border Background="{TemplateBinding Background}">
+						<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<!-- Disabled -->
+			<Trigger Property="IsEnabled" Value="false">
+				<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+			</Trigger>
+			<!-- Focused -->
+			<Trigger Property="IsMouseOver" Value="true">
+				<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+
+	<!-- Template for DocumentBookViewer -->
+	<ControlTemplate x:Key="DBVTemplate">
+		<Grid ShowGridLines="False">
+			<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />	<!-- Column for Previous Page Button -->
+			<ColumnDefinition Width="*" />	<!-- Column for Left Page -->
+			<ColumnDefinition Width="*" />	<!-- Column for Right Page-->
+			<ColumnDefinition Width="Auto" />	<!-- Column for Next Page Button -->
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+			<RowDefinition Height="*" />		<!-- Row for Page Views -->
+			<RowDefinition Height="Auto" />		<!-- Row for Controls-->
+			</Grid.RowDefinitions>
+
+
+			<!-- Back Button -->
+			<Button Grid.Row="0" Grid.Column="0"
+    Content="&#x003C;lt;"
+    Width="40"
+    Name="BackButton"
+    Command="NavigationCommands.PreviousPage"
+    Focusable="False"
+    Style="{StaticResource DBVButtonStyle}"
+     />
+
+			<!-- Forward Button -->
+			<Button Grid.Row="0" Grid.Column="3"
+    Content="&#x003E;gt;"
+    Width="40"
+    Command="NavigationCommands.NextPage"
+    Focusable="False"
+    Style="{StaticResource DBVButtonStyle}"
+     />
+
+			<AdornerDecorator Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Name="AdornerDecorator">
+				<!-- Grid to contain the page views and the collapsable find toolbar -->
+				<Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,30,0,0">
+					<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />	<!-- Left Page Column-->
+					<ColumnDefinition Width="*" />	<!-- Right Page Column-->
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+					<RowDefinition Height="*" />	<!-- Row for Pages-->
+					<RowDefinition Height="Auto" />	<!-- Row for Find toolbar -->
+					</Grid.RowDefinitions>
+					
+
+
+					
+					<!-- Left Page View-->
+					<Grid
+      Name="LeftPageViewContainer"
+      Grid.Row="0" Grid.Column="0">
+						<Border BorderBrush="Black" BorderThickness="1" Padding="5,5,15,5">
+							<DocumentPageView
+        Name="LeftPageView"
+        PageNumber="0" DocumentViewerBase.IsMasterPage="True">
+							</DocumentPageView>
+						</Border>
+					</Grid>
+					
+
+					<!-- Right Page View -->
+					<Grid
+      Name="RightPageViewContainer"
+      Grid.Row="0" Grid.Column="1">
+						<Border BorderBrush="Black" BorderThickness="1" Padding="15,5,5,5">
+							<DocumentPageView
+        Name="RightPageView"
+        PageNumber="1" DocumentViewerBase.IsMasterPage="False">
+							</DocumentPageView>
+						</Border>
+					</Grid>
+					
+
+
+					<!-- Hidden Page Views for use in Page Turning Animation -->
+					<Grid
+      Visibility="Hidden"
+      Name="HiddenLeftPageViewContainer"
+      Grid.Row="0" Grid.Column="0"
+      Background="White">
+						<Border BorderBrush="Black" BorderThickness="1" Padding="5,5,15,5">
+							<DocumentPageView
+        Name="DocumentPageView3"
+        PageNumber="2" DocumentViewerBase.IsMasterPage="False">
+							</DocumentPageView>
+						</Border>
+					</Grid>
+					<Grid
+      Visibility="Hidden"
+      Name="HiddenRightPageViewContainer"
+      Grid.Row="0" Grid.Column="1"
+      Background="White">
+						<Border BorderBrush="Black" BorderThickness="1" Padding="15,5,5,5">
+							<DocumentPageView
+        Name="DocumentPageView4"
+        PageNumber="3" DocumentViewerBase.IsMasterPage="False">
+							</DocumentPageView>
+						</Border>
+					</Grid>
+
+					
+					<!-- Find Toolbar -->
+					<StackPanel
+      Name="FindPanel"
+      Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+      Height="30"
+      Visibility="{Binding Path=FindToolBarVisibility, RelativeSource={RelativeSource TemplatedParent}}"
+      Orientation="Vertical">
+					</StackPanel>
+				</Grid>
+			</AdornerDecorator>
+			
+
+			
+			
+
+			<!-- Last Page Button -->
+			<Button Grid.Row="1" Grid.Column="3"
+    Content="&#x003E;&#x003E;t;&gt;"
+    Width="40"
+    Command="NavigationCommands.LastPage"
+    Focusable="False"
+    FontSize="18"
+    Style="{StaticResource DBVButtonStyle}"
+     />
+
+
+			<!-- First Page Button -->
+			<Button Grid.Row="1" Grid.Column="0"
+    Content="&#x003C;&#x003C;t;&lt;"
+    Width="40"
+    Command="NavigationCommands.FirstPage"
+    Focusable="False"
+    FontSize="18"
+    Style="{StaticResource DBVButtonStyle}"
+     />
+
+
+
+			<!-- Right Page Number-->
+			<TextBlock
+    Grid.Row="1" Grid.Column="2"
+    Margin="8,0,8,0"
+    HorizontalAlignment="Right" VerticalAlignment="Center"
+    FontSize="16"
+    Text="{Binding Path=RightPageLabel ,RelativeSource={RelativeSource TemplatedParent}}">
+			</TextBlock>
+
+
+
+
+			<!-- Control Panel under Page Views -->
+			<StackPanel
+     Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+     Orientation="Horizontal">
+
+				<!-- Left Page Number-->
+				<TextBlock
+     Margin="8,0,8,0"
+     HorizontalAlignment="Left" VerticalAlignment="Center"
+     FontSize="16"
+     Text="{Binding Path=LeftPageLabel ,RelativeSource={RelativeSource TemplatedParent}}"
+       />
+
+
+
+				<!-- Zoom Out Button-->
+				<Button
+     Width="20"
+     Height="20"
+     Focusable="False"
+     Command="NavigationCommands.DecreaseZoom"
+     IsEnabled="{Binding Path=CanDecreaseZoom,RelativeSource={RelativeSource TemplatedParent}}">
+					<TextBlock VerticalAlignment="Center">-</TextBlock>
+				</Button>
+
+				<!-- Zoom Slider -->
+				<Slider Orientation="Horizontal"
+     Margin="0,4,0,4"
+     HorizontalAlignment="Center" VerticalAlignment="Center"
+     Value="{Binding Path=Zoom,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+     Minimum="{Binding Path=MinZoom,RelativeSource={RelativeSource TemplatedParent}}"
+     Maximum="{Binding Path=MaxZoom,RelativeSource={RelativeSource TemplatedParent}}"
+     Focusable="False"
+     IsEnabled="{Binding Path=CanChangeZoom, RelativeSource={RelativeSource TemplatedParent}}"
+     IsSnapToTickEnabled="True"
+     TickPlacement="BottomRight"
+     TickFrequency="{Binding Path=ZoomIncrement,RelativeSource={RelativeSource TemplatedParent}}"
+           /><!--AutoToolTipPlacement="TopLeft"-->
+
+				<!-- Zoom In Button -->
+				<Button
+     Focusable="False"
+     Width="20"
+     Height="20"
+     Command="NavigationCommands.IncreaseZoom"
+     IsEnabled="{Binding Path=CanIncreaseZoom,RelativeSource={RelativeSource TemplatedParent}}">
+					<TextBlock VerticalAlignment="Center">+</TextBlock>
+				</Button>
+
+				<!-- Toggle FindBar Button -->
+				<Button
+     Margin="4,0,4,0"
+     HorizontalAlignment="Left" VerticalAlignment="Center"
+     Command="{Binding Path=ToggleFindBarCommand,RelativeSource={RelativeSource TemplatedParent}}"
+     Focusable="False"
+     >
+					Find
+				</Button>
+
+
+				<!-- Print Button Focusable="False"-->
+				<Button
+     Name="PrintButton"
+     Margin="4,0,4,0"
+     HorizontalAlignment="Center" VerticalAlignment="Center"
+     Command="ApplicationCommands.Print"
+     >
+					Print
+				</Button>
+			</StackPanel>
+
+		</Grid>
+	</ControlTemplate>
+
+</ResourceDictionary>

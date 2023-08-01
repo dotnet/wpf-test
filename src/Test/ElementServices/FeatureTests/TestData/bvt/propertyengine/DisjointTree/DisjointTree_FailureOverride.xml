@@ -1,0 +1,141 @@
+<!--
+/*******************************************************************
+ * Purpose: Defines combinations of InheritanceContext model parameters that should throw an exception.
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/propertyengine/DisjointTree/DisjointTree_FailureOverride.xml $
+ ********************************************************************/
+-->
+
+<!-- Note: Value tag is optional for a single parameter values but required if there is more than one. -->
+
+<ModelFailureOverride>
+    <!-- Params: Kind, MentorItem, Link, HowLinked, Service, ContextOrientation -->
+
+    <!-- All services in a VisualBrush set by DynamicResource fail except initialized event. -->
+    <Override>
+        <ModelState>
+            <Param Name="Link">VisualBrush</Param>
+            <Param Name="HowLinked">DynamicResource</Param>
+            <Param Name="Service">
+                <!--<Value>Inheritance</Value>-->
+                <!--<Value>BindingElementName</Value>-->
+                <Value>BindingDataContext</Value>
+                <!--<Value>DynamicResource</Value>-->
+                <!--<Value>InitializationEvent</Value>-->
+                <!--<Value>LoadedEvent</Value>-->
+                <!--<Value>ImplicitStyle</Value>-->
+            </Param>
+        </ModelState>
+        <Exception>Microsoft.Test.TestValidationException</Exception>
+        <Reason>InheritanceContext not set if property is assigned via expression.   </Reason>
+    </Override>
+
+  <Override>
+    <ModelState>
+      <Param Name="Link">VisualBrush</Param>
+      <Param Name="HowLinked">StaticResource</Param>
+      <Param Name="Service">
+        <!--<Value>Inheritance</Value>-->
+        <!--<Value>BindingElementName</Value>-->
+        <Value>BindingDataContext</Value>
+        <!--<Value>DynamicResource</Value>-->
+        <!--<Value>InitializationEvent</Value>-->
+        <!--<Value>LoadedEvent</Value>-->
+        <!--<Value>ImplicitStyle</Value>-->
+      </Param>
+    </ModelState>
+    <Exception>Microsoft.Test.TestValidationException</Exception>
+    <Reason>InheritanceContext not set if property is assigned via expression. </Reason>
+  </Override>
+
+    <!-- No services work in a VisualBrush set by a Style. -->
+    <Override>
+        <ModelState>
+            <Param Name="Link">VisualBrush</Param>
+            <Param Name="HowLinked">Style</Param>
+        </ModelState>
+        <Exception>Microsoft.Test.TestValidationException</Exception>
+        <Reason>Inheritance context not set in Style.</Reason>
+    </Override>
+
+    <!-- Bindings and DynamicResources do not work on a VisualBrush in a DataTemplate. -->
+    <!-- fixed -->
+    <!--<Override>
+        <ModelState>
+            <Param Name="Link">VisualBrush</Param>
+            <Param Name="HowLinked">DataTemplate</Param>
+            <Param Name="Service">
+                <Value>BindingDataContext</Value>
+                <Value>DynamicResource</Value>
+            </Param>
+        </ModelState>
+        <Exception>Microsoft.Test.TestValidationException</Exception>
+        <Reason>Resource lookup and DataContext binding do not work in DataTemplate.</Reason>
+
+    </Override>-->
+
+    <!-- DynamicResources do not work on a VisualBrush in a ControlTemplate -->
+    <!-- fixed -->
+    <!--<Override>
+        <ModelState>
+            <Param Name="Link">VisualBrush</Param>
+            <Param Name="HowLinked">ControlTemplate</Param>
+            <Param Name="Service">
+                <Value>DynamicResource</Value>
+            </Param>
+        </ModelState>
+        <Exception>Microsoft.Test.TestValidationException</Exception>
+        <Reason>Resource lookup and DataContext binding do not work in DataTemplate.</Reason>
+    </Override>-->
+
+    <!-- Property inheritance and ElementName data binding do not work in ContextMenus or ToolTips -->
+    <Override>
+        <ModelState>
+            <Param Name="Link">
+                <Value>ContextMenu</Value>
+                <Value>ToolTip</Value>
+            </Param>
+            <Param Name="Service">
+                <Value>Inheritance</Value>
+                <Value>BindingElementName</Value>
+            </Param>
+        </ModelState>
+        <Exception>Microsoft.Test.TestValidationException</Exception>
+        <Reason>PropertyInheritance and ElementName databinding do not work in ContextMenu or ToolTip</Reason>
+    </Override>
+
+    <!-- DataContext binding does not work in ContextMenus -->
+    <!--<Override>
+        <ModelState>
+            <Param Name="Link">ContextMenu</Param>
+            <Param Name="Service">BindingDataContext</Param>
+            <Param Name="HowLinked">DataTemplate</Param>
+        </ModelState>
+        <Exception>Microsoft.Test.TestValidationException</Exception>
+        <Reason>DataContext dependent data bindings do not work in ContextMenu set by DataTemplate</Reason>
+    </Override>-->
+
+    <!-- Resource lookup does not work ContextMenus and ToolTips set in Templates -->
+    <!-- fixed -->
+    <!--<Override>
+        <ModelState>
+            <Param Name="Link">
+                <Value>ContextMenu</Value>
+                <Value>ToolTip</Value>
+            </Param>
+            <Param Name="Service">DynamicResource</Param>
+            <Param Name="HowLinked">
+                <Value>ControlTemplate</Value>
+                <Value>DataTemplate</Value>
+            </Param>
+        </ModelState>
+        <Exception>Microsoft.Test.TestValidationException</Exception>
+        <Reason>Resource lookup does not work in ContextMenus or ToolTips set in Templates.</Reason>
+    </Override>-->
+
+</ModelFailureOverride>

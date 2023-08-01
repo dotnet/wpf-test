@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestExtenderGraph xmlns="clr-namespace:Microsoft.Test.Integration;assembly=TestRuntime" xmlns:txrw="clr-namespace:Microsoft.Test.Integration.Windows;assembly=TestRuntime" xmlns:ndp="clr-namespace:System;assembly=mscorlib">
+  <CombinationGenerator Area="ElementServices\Integration\StylePropertyTrigger">
+    <CombinationGenerator.FilterCallback>
+    <FilterCallback>
+        <FilterCallback.Callback>
+                <MethodDesc 
+                AssemblyName="CoreTestsUntrusted.dll" 
+                TypeName="Avalon.Test.CoreUI.Integration.TypeActions.ActionRunner" 
+                MethodName="GlobalFilterCallback"
+                HintPath="FeatureTests\ElementServices" />
+        </FilterCallback.Callback>
+        <FilterCallback.SupportInfo>
+                    <ndp:String>FeatureTests\ElementServices</ndp:String>
+        </FilterCallback.SupportInfo>
+    </FilterCallback>
+    </CombinationGenerator.FilterCallback>
+    <SelectorGenerator>
+      <txrw:TypeVariationGenerator Name="FCEType" IncludeWPF3InSearch="true">
+        <txrw:TypeVariationGenerator.TypeToSearch>
+          <TypeDesc TypeName="System.Windows.FrameworkContentElement" AssemblyName="PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        </txrw:TypeVariationGenerator.TypeToSearch>
+      </txrw:TypeVariationGenerator>
+      <txrw:TypeVariationGenerator Name="FEType" IncludeWPF3InSearch="true">
+        <txrw:TypeVariationGenerator.TypeToSearch>
+          <TypeDesc TypeName="System.Windows.FrameworkElement" AssemblyName="PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        </txrw:TypeVariationGenerator.TypeToSearch>
+      </txrw:TypeVariationGenerator>
+    </SelectorGenerator>
+    <CallbackVariationGenerator Name="gen2">
+      <CallbackVariationGenerator.Input>
+        <StorageItem Name="Type">
+          <StorageItem.Type>
+            <TypeDesc TypeName="System.Type" AssemblyName="mscorlib.dll" />
+          </StorageItem.Type>
+        </StorageItem>
+      </CallbackVariationGenerator.Input>
+      <CallbackVariationGenerator.SupportFiles>
+        <ndp:String>Common\PropertiesToSkip.xml</ndp:String>
+        <ndp:String>FeatureTests\ElementServices\PropertyTriggerActionForType_empty.xaml</ndp:String>
+        <ndp:String>FeatureTests\ElementServices\IntegrationXamlSnippets.xaml</ndp:String>
+        <ndp:String>FeatureTests\ElementServices\ActionForType_PropertiesToSkip.xml</ndp:String>
+      </CallbackVariationGenerator.SupportFiles>
+      <CallbackVariationGenerator.Callback>
+        <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                   TypeName="Avalon.Test.CoreUI.Integration.TypeActions.ActionRunner" MethodName="CommonEntryCallback" />
+      </CallbackVariationGenerator.Callback>
+      <ContentItem SecurityLevel="FullTrust">StylePropertyTrigger</ContentItem>
+    </CallbackVariationGenerator>
+    <CombinationGenerator.SupportFiles>
+      <ndp:String>FeatureTests\ElementServices\CoreTestsUntrusted.dll</ndp:String>
+    </CombinationGenerator.SupportFiles>
+  </CombinationGenerator>
+</TestExtenderGraph>

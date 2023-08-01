@@ -1,0 +1,30 @@
+<ResourceDictionary
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      >
+
+  <XmlDataProvider x:Key="Library" XPath="/root/*">
+    <x:XData>
+      <root xmlns="">
+        <Book Title="East of Eden" />
+      </root>
+    </x:XData>
+  </XmlDataProvider>
+
+  <!-- DataTemplates for XmlDataProvider -->
+  <DataTemplate DataType="Book">
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Width="100" Text="{Binding XPath=@Title}" />
+    </StackPanel>
+  </DataTemplate>
+  
+  <!-- Custom Style -->
+  <Style x:Key="StyleX">
+    <Setter Property="Control.Background" Value="Blue" />
+  </Style>
+
+  <!-- Custom ControlTemplate -->
+  <ControlTemplate x:Key="TemplateX" TargetType="{x:Type Control}">
+    <Button Name="CP" Background="Green" />
+  </ControlTemplate>
+</ResourceDictionary>

@@ -1,0 +1,22 @@
+﻿<cmn:CustomPage
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Name="page"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.FrameworkElementWithIDInDataTemplateVerify"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">        
+    <Canvas Name="sameName">
+        <Canvas.Resources>
+            <DataTemplate x:Key="myDataTemplate">
+                <Button>
+                    <TextBlock Name="parentBlock">
+                        <TextBlock Name="childBlock1" FontSize="8">child block 1</TextBlock>
+                        <TextBlock Name="childBlock2" FontSize="8">child block 2</TextBlock>
+                        <TextBlock Name="sameName" FontSize="8">same name block</TextBlock>
+                    </TextBlock>
+                </Button>
+            </DataTemplate>
+        </Canvas.Resources>     
+        <Button ContentTemplate="{DynamicResource myDataTemplate}" Name="button" />
+    </Canvas>
+</cmn:CustomPage>

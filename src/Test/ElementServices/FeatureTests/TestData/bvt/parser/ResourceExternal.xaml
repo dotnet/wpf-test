@@ -1,0 +1,61 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:media="media">
+        <DockPanel.Resources>
+<!-- This Draws the Background -->        
+                <Style x:Key="CustomBackground" TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="white" />
+                    <Setter Property="MinWidth" Value="400" />
+                    <Setter Property="MinHeight" Value="300" />
+                </Style>
+<!-- This StackPanel Style is used to stack elements and position them horizontally -->                
+                <Style x:Key="VerticalDockStacker" TargetType="{x:Type Button}">
+                    <Setter Property="DockPanel.Dock" Value="top" />
+                    <Setter Property="HorizontalAlignment" Value="center" />
+                    <Setter Property="Margin" Value="10,10,10,10" />
+                </Style>
+<!-- Styles for toolbar that holds the buttons at the bottom of the screen -->        
+                <Style x:Key="BottomToolBar" TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="10" />
+                    <Setter Property="DockPanel.Dock" Value="Bottom" />
+                </Style>
+                <Style x:Key="UserTile" TargetType="{x:Type Image}">
+                    <Setter Property="Width" Value="120px" />
+                    <Setter Property="Height" Value="120px" />
+                </Style>
+                <Style x:Key="UserTileText" TargetType="{x:Type TextBlock}">
+                    <Setter Property="DockPanel.Dock" Value="Top" />
+                    <Setter Property="HorizontalAlignment" Value="center" />
+                </Style>        
+<!-- Button Styles -->
+                <Style x:Key="ButtonStyler" TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,0,20,20" />
+                </Style>
+                <Style x:Key="ManageUsersButton" BasedOn="{StaticResource ButtonStyler}" TargetType="{x:Type Button}">
+                </Style>
+<!-- Logo Styles -->
+                <Style x:Key="LOGO" TargetType="{x:Type Button}">
+                    <Setter Property="DockPanel.Dock" Value="left" />
+                    <Setter Property="Width" Value="200" />
+                    <Setter Property="Height" Value="200" />
+                    <Setter Property="Template">
+                    <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Canvas>
+                                <Rectangle x:Name="ss1" Height="100" Fill="red" />
+                                <Rectangle x:Name="ss2" Height="50" Fill="gold" />
+                        </Canvas>
+                    <ControlTemplate.Triggers>
+
+                    <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Button.Background" Value="limegreen" TargetName="ss1" />
+                    <Setter Property="Button.Background" Value="red" TargetName="ss2" />
+                    </Trigger>
+                    </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                    </Setter.Value>
+                    </Setter>
+                </Style>
+        </DockPanel.Resources>
+</DockPanel>
+
+</Page>

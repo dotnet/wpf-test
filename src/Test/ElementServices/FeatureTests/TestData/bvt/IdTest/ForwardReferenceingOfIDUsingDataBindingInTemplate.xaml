@@ -1,0 +1,27 @@
+﻿<cmn:CustomStackPanel xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.ForwardReferenceingOfIdUsingDataBindingInTemplateVerify"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    >
+    <StackPanel.Resources>
+        <Style x:Key="test" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <CheckBox IsChecked="{Binding Path=IsChecked,ElementName=cb2}" Name="cb1" />
+                            <CheckBox x:Name="cb2" IsChecked="true" />
+                            <Button Name="buttonInTemplate" Background="{Binding ElementName=bold,Path=Foreground}">
+                                <Bold Name="bold" Foreground="Blue">bold text</Bold>
+                            </Button>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </StackPanel.Resources>
+
+    <Button Style="{StaticResource test}" Name="button" />
+
+</cmn:CustomStackPanel>

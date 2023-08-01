@@ -484,5 +484,151 @@
         </Versions>
       </DefaultTestInfo>
     </Target>
+    <!-- ElementServices -->
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\ElementServices\ElementServicesTest.dll">
+      <Areas>
+        <Area>ElementServices</Area>
+      </Areas>
+      <DefaultTestInfo Area="ElementServices" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementServices\ElementServicesTest.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsTrusted.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsUntrusted.dll" />
+        </SupportFiles>
+        <Deployments>
+          <Deployment>FeatureTests\ElementServices\ElementServicesTest.deployment</Deployment>
+        </Deployments>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target><!--
+    <Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\ElementServices\CoreTestsUntrusted.dll">
+      <Areas>
+        <Area>W8Features</Area>
+      </Areas>
+      <DefaultTestInfo Area="W8Features" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="stiw8.exe" />
+        <DriverParameters DefaultResult="Pass" CreateLog="true" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsUntrusted.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsTrusted.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\ElementServicesTest.dll" />
+          <SupportFile Source="Infra\stiw8.exe" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    --><!-- XAML/AppModel: simple tests --><!--
+--><!-- Daniel's Note : This was cut in an FI, but weren't there important cases in here? --><!--
+    --><!--Target Adaptor="TestAttributeAdaptor" Path="FeatureTests\ElementServices\CoreTestsUntrusted.dll">
+      <Areas>
+        <Area>XAML</Area>
+        <Area>AppModel</Area>
+      </Areas>
+      <DefaultTestInfo Area="XAML" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" CreateLog="true" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsUntrusted.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsTrusted.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\ElementServicesTest.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target--><!--
+    --><!-- ElementServices: Freezables -->
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\ElementServices\FreezablesTest.dll">
+      <DefaultTestInfo Area="ElementServices" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" SecurityLevel="FullTrust" Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementServices\FreezablesTest.dll" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <!-- ElementServices: MDE modeling tests -->
+    <Target Adaptor="ModelAttributeAdaptor" Path="FeatureTests\ElementServices\ElementServicesTest.dll">
+      <Areas>
+        <Area>ElementServices</Area>
+      </Areas>
+      <DefaultTestInfo Area="ElementServices" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" CreateLog="true" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementServices\ElementServicesTest.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsUntrusted.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsTrusted.dll" />
+        </SupportFiles>
+        <Deployments>
+          <Deployment>FeatureTests\ElementServices\ElementServicesTest.deployment</Deployment>
+        </Deployments>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    <!-- ElementServices: MDE modeling tests --><!--
+    <Target Adaptor="ModelAttributeAdaptor" Path="FeatureTests\ElementServices\CoreTestsUntrusted.dll">
+      <Areas>
+        <Area>AppModel</Area>
+      </Areas>
+      <DefaultTestInfo Area="AppModel" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters DefaultResult="Pass" CreateLog="true" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsUntrusted.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\CoreTestsTrusted.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\ElementServicesTest.dll" />
+        </SupportFiles>
+        <Deployments>
+          <Deployment>FeatureTests\ElementServices\ElementServicesTest.deployment</Deployment>
+        </Deployments>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
+    --><!-- ElementServices: MultiTouch -->
+    <Target Adaptor="VariationAttributeAdaptor" Path="FeatureTests\ElementServices\MultiTouchTest.dll">
+      <DefaultTestInfo Area="ElementServices" Type="Functional" UacElevation="Elevated">
+  	<Configurations>
+    		<Configuration>Infra\Configurations\Multitouch_Win7_Forward.xml</Configuration>
+  	</Configurations>
+        <Driver Executable="sti.exe" />
+        <DriverParameters SecurityLevel="FullTrust" DefaultResult="Pass" Method="Run" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\ElementServices\StiConfig\sti.exe.config" />
+          <SupportFile Source="FeatureTests\ElementServices\MultiTouchTestCommon.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\MultiTouchTest.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\MS.MobilePCTest.PenActionsEngine.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\MS.TabletTest.PenInjector.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\MS.TabletTest.PenInjector.Mixed.dll" />
+          <SupportFile Source="FeatureTests\ElementServices\PenActionsEngine.dll" />
+        </SupportFiles>
+        <Deployments>
+          <Deployment>FeatureTests\ElementServices\MultiTouchTest.deployment</Deployment>
+        </Deployments>
+        <Versions>
+          <Version>4.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
   </Targets>
 </DiscoveryInfo>

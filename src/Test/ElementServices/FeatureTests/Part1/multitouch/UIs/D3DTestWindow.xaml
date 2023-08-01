@@ -1,0 +1,48 @@
+﻿<Window x:Class="Microsoft.Test.Input.MultiTouch.Tests.D3DTestWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="WPF 3D Test" Height="500" Width="800">
+    <Grid Background="Black" 
+          MouseWheel="Grid_MouseWheel"
+		  MouseDown="Grid_MouseDown" 
+          MouseUp="Grid_MouseUp"
+		  MouseMove="Grid_MouseMove"    
+          StylusSystemGesture="OnStylusSystemGesture"        
+          >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		
+        <ItemsControl x:Name="WatchList" Grid.Column="0" Grid.RowSpan="2"
+                      IsHitTestVisible="False" Background="Wheat" />
+        
+		<Button x:Name="button" Grid.Row="0"  Grid.Column="1" Content="Reset" Click="Button_Click" />
+		
+		<Viewport3D x:Name="viewport" Grid.Row="1"  Grid.Column="1"
+                    StylusDown="OnStylusDown"
+                    StylusUp="OnStylusUp"
+                    TouchDown="OnTouchDown"
+                    TouchMove="OnTouchMove"
+                    TouchUp="OnTouchUp" >
+			<Viewport3D.Camera>
+				<PerspectiveCamera x:Name="camera" FarPlaneDistance="50" LookDirection="0,0,-10"
+					UpDirection="0,1,0" NearPlaneDistance="0" Position="0,0,5"
+					FieldOfView="45" />
+			</Viewport3D.Camera>
+			
+			<ModelVisual3D x:Name="model">
+				<ModelVisual3D.Content>
+					<Model3DGroup x:Name="group">
+						<AmbientLight Color="DarkGray" />
+						<DirectionalLight Color="White" Direction="-5,-5,-7" />
+					</Model3DGroup>
+				</ModelVisual3D.Content>
+			</ModelVisual3D>
+		</Viewport3D>
+    </Grid>
+</Window>
