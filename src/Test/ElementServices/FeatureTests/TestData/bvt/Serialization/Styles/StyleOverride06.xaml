@@ -1,0 +1,28 @@
+﻿
+<!-- Name: BasedOn, named style, override explicit style property. -->
+
+
+
+
+<cmn:CustomStackPanel
+  Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.PropertyEngine.RefreshStyleOverrideTest.StyleOverride.CV06ValidateAll"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+  xmlns:custom="clr-namespace:Avalon.Test.CoreUI.PropertyEngine.RefreshStyleOverrideTest;assembly=CoreTestsUntrusted" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen2="clr-namespace:Avalon.Test.CoreUI.PropertyEngine.RefreshStyleOverrideTest;assembly=CoreTestsUntrusted">
+
+  <cmn:CustomStackPanel.Resources>
+
+    <Style x:Key="Btn" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Red" />
+    </Style>
+
+    <Style x:Key="FooBtn" BasedOn="{StaticResource Btn}" TargetType="{x:Type custom:FooButton}">
+    </Style>
+
+  </cmn:CustomStackPanel.Resources>
+
+  <Button Focusable="False" Style="{DynamicResource Btn}" />
+  <custom:FooButton Focusable="False" Style="{StaticResource FooBtn}" Background="Yellow" />
+
+</cmn:CustomStackPanel>

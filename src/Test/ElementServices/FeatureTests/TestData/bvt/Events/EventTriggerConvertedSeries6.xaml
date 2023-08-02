@@ -1,0 +1,131 @@
+﻿<!-- Series 6
+     One action starts Timeline in Style.Storyboards. 
+     The other action Pause the same Timeline
+     The third action Resume the same timeline
+     Sequence is: StartAction, PauseAction, ResumeAction
+-->
+
+<cmn:CustomCanvas
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=ElementServicesTest"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:S="clr-namespace:System;assembly=Mscorlib"
+    Background="White"
+    xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=ElementServicesTest"
+    xmlns:MappingPIGen2="clr-namespace:System;assembly=Mscorlib"
+    xmlns:MappingPIGen3="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent='Button.Click'>
+            <EventTrigger.Actions>
+                <BeginStoryboard Name="TestStory">
+                    <Storyboard>
+                        <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                            <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:1" />
+                        </ParallelTimeline>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent='CheckBox.Checked'>
+            <EventTrigger.Actions>
+                <PauseStoryboard BeginStoryboardName="TestStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent='CheckBox.Checked'>
+            <EventTrigger.Actions>
+                <ResumeStoryboard BeginStoryboardName="TestStory" />
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+    <!-- 6_1  EventTrigger(3) in Style.Triggers. 
+    The timeline contains three setters
+    Style in Resources-->
+    <Canvas>
+        <StackPanel>
+            <Button />
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent='Click'>
+                            <EventTrigger.Actions>
+                                <BeginStoryboard Name="TestStory">
+                                    <Storyboard>
+                                        <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                                            <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:1" />
+                                        </ParallelTimeline>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent='CheckBox.Checked'>
+                            <EventTrigger.Actions>
+                                <PauseStoryboard BeginStoryboardName="TestStory" />
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent='CheckBox.Checked'>
+                            <EventTrigger.Actions>
+                                <ResumeStoryboard BeginStoryboardName="TestStory" />
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+        </StackPanel>
+    </Canvas>
+    <!-- 6_11  EventTrigger(3) in FE.Triggers
+Target its child element -->
+    <Canvas>
+        <StackPanel>
+            <Button />
+        </StackPanel>
+    </Canvas>
+    <!-- 6_21  EventTrigger(3) in ControlTemplate.Triggers
+ControlTemplate in Style, Style in Resources -->
+    <Canvas>
+        <Canvas.Resources>
+            <Style TargetType='{x:Type Control}'>
+                <Style.Setters>
+                    <Setter Property='Template'>
+                        <Setter.Value>
+                            <ControlTemplate TargetType='{x:Type Control}'>
+                                <StackPanel>
+                                    <Button x:Name='testBtn' Content='Event Trigger Test 5.21' />
+                                    <Button x:Name='stopBtn' Content='Stop' />
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <EventTrigger RoutedEvent='Button.Click'>
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard Name="TestStory">
+                                                <Storyboard>
+                                                    <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                                                        <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" Storyboard.TargetName="testBtn" FillBehavior="Stop" Duration="0:0:1" />
+                                                    </ParallelTimeline>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent='CheckBox.Checked' SourceName="testBtn">
+                                        <EventTrigger.Actions>
+                                            <PauseStoryboard BeginStoryboardName="TestStory" />
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent='CheckBox.Checked' SourceName="stopBtn">
+                                        <EventTrigger.Actions>
+                                            <ResumeStoryboard BeginStoryboardName="TestStory" />
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style.Setters>
+            </Style>
+        </Canvas.Resources>
+        <StackPanel>
+            <Control />
+        </StackPanel>
+    </Canvas>
+</cmn:CustomCanvas>
+

@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>CoreTestsTrusted</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+    <NoWarn>$(NoWarn);0067</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <OrcasSources Include="MouseHelper_Orcas.cs" />
+    <OrcasSources Include="ElementUtils_Orcas.cs" />
+    <OrcasSources Include="PresentationHelper_Orcas.cs" />
+    <OrcasSources Include="AvalonMouseSimulation_Orcas.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AcceleratorTable.cs" />
+    <Compile Include="AssemblyInfoSecurity.cs" />
+    <Compile Include="AutoData.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="CoreLogger.cs" />
+    <Compile Include="CoreTests.cs" />
+    <Compile Include="ElementUtils.cs" />
+    <Compile Include="Input.cs" />
+    <Compile Include="Interop.cs" />
+    <Compile Include="PointUtil.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="InputHelper.cs" />
+    <Compile Include="InterpolationHelper.cs" />
+    <Compile Include="MouseSimulation.cs" />
+    <Compile Include="AvalonMouseSimulation.cs" />
+    <Compile Include="Win32MouseSimulation.cs" />
+    <Compile Include="MouseHelper.cs" />
+    <Compile Include="PresentationHelper.cs" />
+    <Compile Include="KeyboardHelper.cs" />
+    <Compile Include="SourceHelper.cs" />
+    <Compile Include="SourceHookUtil.cs" />
+    <Compile Include="InputManagerHelper.cs" />
+    <Compile Include="ReflectionServices.cs" />
+    <Compile Include="Surface.cs" />
+    <Compile Include="SurfaceCore.cs" />
+    <Compile Include="SurfaceFramework.cs" />
+    <Compile Include="WindowResizeHelper.cs" />
+    <Compile Include="PEUtility.cs" />
+    <Compile Include="PEWindow.cs" />
+    <Compile Include="TestContainer.cs" />
+    <Compile Include="WinformsApplicationSW.cs" />
+    <Compile Include="TestHwndSource.cs" />
+    <Compile Include="TestCursorSafeHandle.cs" />
+    <Compile Include="TestBeginInvokeSecurity.cs" />
+    <Compile Include="Threading\SecurityTestDispatcherHooks.cs" />
+    <Compile Include="TestCaseMetadata.cs" />
+    <Compile Include="CoreTestsSingleRunServices.cs" />
+    <Compile Include="Controls\Win32ButtonCtrl.cs" />
+    <Compile Include="Controls\Win32ButtonElement.cs" />
+    <Compile Include="Controls\AvalonHostTestTypes.cs" />
+    <Compile Include="Controls\MnemonicsTable.cs" />
+    <Compile Include="Controls\HostControlsKeyInterop.cs" />
+    <Compile Include="Controls\KeyboardInteropModelControls.cs" />
+    <Compile Include="Controls\KeyboardInteropTestControls\KeyboardInteropModelControls.cs" />
+    <Compile Include="Controls\KeyboardInteropTestControls\KeyboardInteropAvalonWindow.cs" />
+    <Compile Include="Controls\KeyboardInteropTestControls\KeyboardInteropHostedHwnd.cs" />
+    <Compile Include="Controls\KeyboardInteropTestControls\KeyboardInteropSourcedAvalon.cs" />
+    <Compile Include="Controls\KeyboardInteropTestControls\KeyboardInteropWin32Window.cs" />
+    <Compile Include="Controls\KeyboardInteropTestControls\KeyboardInteropHostedForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\KeyboardInteropTestControls\KeyboardInteropWinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="@(OrcasSources)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+  </ItemGroup>
+</Project>

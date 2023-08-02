@@ -1,0 +1,70 @@
+﻿<FlowDocumentPageViewer xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<FlowDocument ColumnWidth="800">
+		<Section>
+			<Paragraph>
+				<Figure Background="Green">
+					<Paragraph>This is a Figure</Paragraph>
+				</Figure>
+			</Paragraph>
+			
+			<Paragraph>
+				<Floater Background="Blue">
+					<Paragraph>This is a Floater</Paragraph>
+				</Floater>
+			</Paragraph>
+			
+			<Table BorderBrush="Black" BorderThickness="3">
+        <Table.Columns>
+          <TableColumn />
+          <TableColumn />
+        </Table.Columns>
+				<TableRowGroup>
+					<TableRow>
+						<TableCell>
+							<Paragraph>This is a Table</Paragraph>
+						</TableCell>
+						<TableCell>
+							<Paragraph>This is a Table</Paragraph>
+						</TableCell>
+					</TableRow>
+				</TableRowGroup>
+			</Table>
+			
+			<!--For some reason the Core RoundTripTest utility manipulates the parsed 
+			    copntent of TextBlock in some small way that it "breaks" the serialization 
+			    by inserting <Run>s in the place of TextBlock.Text tags.  A simplified repro 
+			    will not repro this problem. --> 
+			<!-- <Paragraph>
+				<FlowDocumentScrollViewer><FlowDocument>
+					<Paragraph>
+						<TextBlock>These are my UIElements</TextBlock>
+					</Paragraph>
+				</FlowDocument></FlowDocumentScrollViewer>
+			</Paragraph>-->
+			
+			<List Name="myList" MarkerStyle="Decimal">
+				<ListItem>
+					<Paragraph><Run>This is a List</Run></Paragraph>
+				</ListItem>
+			</List>
+			
+			<Paragraph FontFamily="Palatino LinoType">
+				<Span>
+					<Bold>This is </Bold>
+					<Underline>my Paragraph</Underline>
+					<Italic>with all</Italic>
+          <Span Typography.Variants="Superscript">my Inline</Span>
+          <Span Typography.Variants="Subscript">elements</Span>
+					<LineBreak />
+					<Hyperlink>Ta Da!</Hyperlink>
+					<InlineUIContainer><Button /></InlineUIContainer>
+				</Span>
+			</Paragraph>
+			
+			<BlockUIContainer>
+				<Button />
+			</BlockUIContainer>
+			
+		</Section>
+	</FlowDocument>
+</FlowDocumentPageViewer>

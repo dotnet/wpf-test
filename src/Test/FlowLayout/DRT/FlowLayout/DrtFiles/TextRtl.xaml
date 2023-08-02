@@ -1,0 +1,85 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="LightSteelBlue">
+<Grid Width="800" FlowDirection="RightToLeft">
+
+  <Grid.Resources>
+    <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+      <Setter Property="FontFamily" Value="Tahoma" />
+      <Setter Property="FontSize" Value="11" />
+    </Style>
+  </Grid.Resources>
+
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  </Grid.RowDefinitions>
+
+  <Canvas Grid.Column="1" Grid.Row="1">
+    <Rectangle Canvas.Left="50" Canvas.Top="0" Width="75" Height="400" Fill="Red" />
+    <Border Background="Yellow" Canvas.Top="0" Canvas.Left="0">
+      <TextBlock Width="100" Height="100" TextWrapping="WrapWithOverflow">
+        aaaa
+        <Border Background="RoyalBlue" Width="20" Height="20" />
+        bbbb cccc dddd eeee qqqqqqqqqqqqwwwwwwwwwwww
+      </TextBlock>
+    </Border>
+    <Border Background="Yellow" Canvas.Top="100" Canvas.Left="250">
+      <TextBlock Width="100" Height="100" TextWrapping="WrapWithOverflow" TextAlignment="Right" HorizontalAlignment="Right">
+        aaaa
+        <Border Background="RoyalBlue" Width="20" Height="20" />
+        bbbb cccc dddd eeee qqqqqqqqqqqqwwwwwwwwwwww
+      </TextBlock>
+    </Border>
+    <Border Background="Yellow" Canvas.Top="200" Canvas.Left="100">
+      <TextBlock Width="100" Height="100" TextWrapping="WrapWithOverflow" TextAlignment="Center" HorizontalAlignment="Center">
+        aaaa
+        <Border Background="RoyalBlue" Width="20" Height="20" />
+        bbbb cccc dddd eeee qqqqqqqqqqqqwwwwwwwwwwww
+      </TextBlock>
+    </Border>
+   </Canvas>
+
+  <DockPanel Grid.Column="3" Grid.Row="1">
+    <Border DockPanel.Dock="Top" Background="RoyalBlue" Margin="5,5,15,5">
+      <TextBlock TextWrapping="WrapWithOverflow">
+        RTL text: 
+        <TextBlock FontWeight="Bold" Foreground="Red"> Test </TextBlock>
+        <Span>This text should be underlined after clicking Test button</Span>
+        منها بالفنون العربية الأصيلة، قامت صخر ببث 
+        <Border Background="Yellow" FlowDirection="LeftToRight"><TextBlock Width="50">LrTb</TextBlock></Border>
+        برنامج  سينما العرب 
+        <Border Background="Yellow" FlowDirection="RightToLeft"><TextBlock Width="50">RlTb</TextBlock></Border>
+        على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+        <TextBlock TextWrapping="WrapWithOverflow" FlowDirection="LeftToRight" Foreground="Yellow" Width="374">
+          LTR text:
+          This text should be left aligned and formatted according to LTR Bidi rules.
+          منها بالفنون العربية الأصيلة، قامت صخر ببث 
+          <Border Background="DarkGreen" FlowDirection="LeftToRight"><TextBlock Width="50">LrTb</TextBlock></Border>
+          برنامج  سينما العرب 
+          <Border Background="DarkGreen" FlowDirection="LeftToRight"><TextBlock Width="50">RlTb</TextBlock></Border>
+          على شبكة الإنترنت، وبذلك تتيح لهواة هذا الفن 
+        </TextBlock>
+      </TextBlock>
+    </Border>
+
+    <Border DockPanel.Dock="Top" FlowDirection="LeftToRight" Background="Beige" Margin="15,5,5,5">
+      <TextBlock TextWrapping="WrapWithOverflow">
+        <Span>Inline: This is LTR content.</Span>
+        <TextBlock FlowDirection="RightToLeft" Width="374">Text: This is RTL content.</TextBlock>
+        <TextBlock FlowDirection="RightToLeft" Width="374">Text: This is RTL content.</TextBlock>
+        <TextBlock FlowDirection="LeftToRight" Width="374">Text: This is LTR content.</TextBlock>
+        <TextBlock FlowDirection="RightToLeft" Width="374">Text: This is RTL content.</TextBlock>
+      </TextBlock>
+    </Border>
+
+  </DockPanel>
+
+</Grid>
+</Border>

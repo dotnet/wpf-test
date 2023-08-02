@@ -1,0 +1,23 @@
+<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="testBind" Width="300" Height="300">
+  <StackPanel.Resources>
+    <ControlTemplate x:Key="validationTemplate">
+      <Border BorderThickness="20" BorderBrush="Red" Height="200" Width="300">
+        <StackPanel>
+          <TextBlock Text="Should not see this Adorner when the Expander is closed!" FontSize="16" TextWrapping="Wrap"/>
+          <AdornedElementPlaceholder/>
+        </StackPanel>
+      </Border>
+    </ControlTemplate>
+  </StackPanel.Resources>
+  <Expander IsExpanded="True" Name="testExpander" Height="200">
+    <TextBox Name="testTextBox" Margin="30,0,0,0" Width="100" Height="50" Validation.ErrorTemplate="{StaticResource validationTemplate}">
+      <TextBox.Text>
+        <Binding ElementName="testBind" Path="Height">
+          <Binding.ValidationRules>
+            <ExceptionValidationRule />
+          </Binding.ValidationRules>
+        </Binding>
+      </TextBox.Text>
+    </TextBox>
+  </Expander>
+</StackPanel>

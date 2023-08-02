@@ -1,0 +1,62 @@
+﻿<!--
+Style.Triggers Only
+In Style.Triggers, only ExitActions
+In ExitActions, Three BeginStoryboard targeting the same property. (Last one win)
+Style in Resources (key is TargetType)
+
+MultiTrigger
+-->
+
+<cmn:CustomStackPanel
+    Background          = "white"
+    xmlns               = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x             = "http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cmn           = "clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier            = "ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.PropertyTriggerVerifier"
+    Tag                 = "DP0117"
+    xmlns:MappingPIGen1 = "clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+  <cmn:CustomStackPanel.Resources>
+    <Style TargetType="{x:Type Button}">
+      <Setter Property="Margin" Value="5" />
+      <Setter Property="Foreground" Value="Blue" />
+      <Setter Property="Background" Value="LightBlue" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Width" Value="500" />
+      <Setter Property="Height" Value="30" />   
+      <Style.Triggers>
+        <MultiTrigger>
+          <MultiTrigger.Conditions>
+            <Condition Property="IsKeyboardFocusWithin" Value="true" />
+            <Condition Property="IsMouseOver" Value="true" />
+          </MultiTrigger.Conditions>
+          <MultiTrigger.ExitActions>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetProperty="Background.Color">
+                  <ColorAnimation From="Red" To="Red" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetProperty="Background.Color">
+                  <ColorAnimation From="LightGreen" To="LightGreen" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+            <BeginStoryboard>
+              <BeginStoryboard.Storyboard>
+                <Storyboard TargetProperty="Background.Color">
+                  <ColorAnimation From="Green" To="Green" />
+                </Storyboard>
+              </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+          </MultiTrigger.ExitActions>
+        </MultiTrigger>   
+      </Style.Triggers>
+    </Style>
+  </cmn:CustomStackPanel.Resources>
+  <Button Name="FirstBtn"><TextBlock>first</TextBlock></Button>
+  <Button Name="SecondBtn"><TextBlock>second</TextBlock></Button>
+  <Button Name="ThirdBtn"><TextBlock>third</TextBlock></Button>
+</cmn:CustomStackPanel>

@@ -1,0 +1,32 @@
+<!--
+/*******************************************************************
+ * Purpose: Empty Style w/ no TargetType applied skips implicit basedon
+ *          Bug 3 (fixed)
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 3 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/propertyengine/BugRepro3.xaml $
+********************************************************************/
+-->
+
+
+<cmn:CustomCanvas
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.BugRepro3Verifier" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+    <cmn:CustomCanvas.Resources>
+        <Style x:Key="myStyle1">
+            <Setter Property="Control.Background" Value="Blue" />
+        </Style>
+    </cmn:CustomCanvas.Resources>
+
+    <Button Style="{StaticResource myStyle1}" Name="MyButton1">hello</Button>
+    <Button Style="{StaticResource myStyle1}" Name="MyButton2" OverridesDefaultStyle="true">hello</Button>
+    <Button Style="{StaticResource myStyle1}" Name="MyButton3" OverridesDefaultStyle="false">hello</Button>
+
+</cmn:CustomCanvas>

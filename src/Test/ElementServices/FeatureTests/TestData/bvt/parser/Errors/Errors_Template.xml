@@ -1,0 +1,142 @@
+<Errors>
+  <File Name="Error_NestedControlTemplate.xaml">
+    <Description>Putting a ControlTemplate as a child of another ControlTemplate.</Description>
+    <Load>
+      <ErrorMessage>The root of a Template content section cannot contain an element of type 'System.Windows.Controls.ControlTemplate'. Only FrameworkElement and FrameworkContentElement types are valid. Line '23' Position '18'.</ErrorMessage>
+      <Line>23</Line>
+      <Position>18</Position>
+      <ExceptionType>XamlParseException</ExceptionType>
+    </Load>
+    <Compile>
+      <ErrorMessage>The root of a Template content section cannot contain an element of type 'System.Windows.Controls.ControlTemplate'. Only FrameworkElement and FrameworkContentElement types are valid. Line 22 Position 18.</ErrorMessage>
+      <Line>22</Line>
+      <Position>18</Position>
+    </Compile>
+  </File>
+  <File Name="Error_BadTemplateTargetType.xaml">
+    <Description>Using a mismatched TargetType on a ControlTemplate.</Description>
+    <!-- Right now a NullReferenceException is being thrown while executing the load route.
+         Fix that and then enable this. 
+    <Load>
+      <ExceptionType>ArgumentException</ExceptionType>
+      <ErrorMessage>The ControlTemplate TargetType 'ListBox' does not match the templated type 'Button'.</ErrorMessage>
+    </Load>
+    -->
+    <Compile>
+      <ExceptionType>ArgumentException</ExceptionType>
+      <ErrorMessage>'ListBox' ControlTemplate TargetType does not match templated type 'Button'.</ErrorMessage>
+    </Compile>
+  </File>
+  <File Name="Error_ControlTemplateMissingKey.xaml">
+    <Description>A missing key in a ControlTemplate should be a parse exception</Description>
+    <Load>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>Objects added to IDictionary must have Key attribute or some other type of associated Key.  Error at object 'System.Windows.Controls.ControlTemplate', Line 23 Position 11.</ErrorMessage>
+      <Line>23</Line>
+      <Position>11</Position>
+    </Load>
+    <Compile>
+      <ErrorMessage>All objects added to an IDictionary must have a Key attribute or some other type of key associated with them. Line 21 Position 10.</ErrorMessage>
+      <Line>21</Line>
+      <Position>10</Position>
+    </Compile>
+  </File>
+  <File Name="Error_TemplateTriggersOnButtonInTemplate.xaml">
+    <Description>Define compound property ControlTemplate.Triggers inside a Button in a ControlTemplate.</Description>
+    <Load>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>'ControlTemplate.Triggers' attached property is not defined on 'Button' or one of its base classes.  Error at Line 21 Position 14.</ErrorMessage>
+      <Line>21</Line>
+      <Position>14</Position>
+    </Load>
+    <Compile>
+      <ErrorMessage>The attached property 'ControlTemplate.Triggers' is not defined on 'Button' or one of its base classes.</ErrorMessage>
+      <Line>21</Line>
+      <Position>14</Position>
+    </Compile>
+  </File>
+  <File Name="Error_TemplateTriggersInButton.xaml">
+    <Description>Verifies exception when a ControlTemplate.Triggers property is defined inside a Button.</Description>
+    <Load>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>'ControlTemplate.Triggers' attached property is not defined on 'Button' or one of its base classes.  Error at Line 19 Position 10.</ErrorMessage>
+      <Line>19</Line>
+      <Position>10</Position>
+    </Load>
+    <Compile>
+      <ErrorMessage>The attached property 'ControlTemplate.Triggers' is not defined on 'Button' or one of its base classes.</ErrorMessage>
+      <Line>19</Line>
+      <Position>10</Position>
+    </Compile>
+  </File>
+  <!-- 
+  <File Name="Error_InvalidPropertyPathInControlTemplate.xaml">
+    <Description>Verifies parse exception when an invalid property Path is defined in a ControlTemplate.</Description>
+    <Load>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>The value 'Panel.Background)' is not a valid PropertyPath. Line 39 Offset 21</ErrorMessage>
+      <Line>39</Line>
+      <Position>21</Position>
+    </Load>
+    <Compile>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>The value 'Panel.Background)' is not a valid PropertyPath. Line 39 Offset 21</ErrorMessage>
+      <Line>39</Line>
+      <Position>21</Position>
+    </Compile>
+  </File>
+  -->
+  <File Name="Error_NoNestedStyles.xaml">
+    <Description>Attempts to define a nested style. Verifies no nested styles parse exception</Description>
+    <Load>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>Cannot convert the value in attribute 'Style' to object of type 'System.Windows.Style'. Style object is not allowed to affect the Style property of the object to which it applies.  Error at object 'System.Windows.Controls.Button', Line 32 Position 13.</ErrorMessage>
+      <Line>32</Line>
+      <Position>13</Position>
+      <InnerException>Style object is not allowed to affect the Style property of the object to which it applies.</InnerException>
+    </Load>
+    <Compile>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>Cannot convert the value in attribute 'Style' to object of type 'System.Windows.Style'. Style object is not allowed to affect the Style property of the object to which it applies.  Error at object 'System.Windows.Controls.Button' in markup file '__XamlTestRunnerTempFile.xaml' Line 29 Position 13.</ErrorMessage>
+      <Line>29</Line>
+      <Position>13</Position>
+      <InnerException>Style object is not allowed to affect the Style property of the object to which it applies.</InnerException>
+    </Compile>
+  </File>
+  <File Name="Error_SetterInvalidTypeNameForProperty.xaml">
+    <Description>Attempts to use a setter to apply an inappropriate value to a property. In this case a Button to Panel.Background.</Description>
+    <Load>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>Cannot add content of type 'System.Windows.Controls.Button' to an object of type 'System.Object'.  Error at object 'System.Windows.Controls.Button', Line 24 Position 18.</ErrorMessage>
+      <Line>24</Line>
+      <Position>18</Position>
+    </Load>
+    <Compile>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>Cannot add content of type 'System.Windows.Controls.Button' to an object of type 'System.Object'.  Error at object 'System.Windows.Controls.Button' in markup file '__XamlTestRunnerTempFile.xaml' Line 21 Position 18.</ErrorMessage>
+      <Line>21</Line>
+      <Position>18</Position>
+    </Compile>
+  </File>
+  <!-- Duplicate Name in Template -->
+  <File Name="Error_DuplicateNameInControlTemplate.xaml">
+    <Description>Imprecise error message when setting TargetType of style tag.</Description>
+    <Load>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>Cannot register duplicate Name 'name' in this scope. Line '9' Position '36'.</ErrorMessage>
+      <Line>9</Line>
+      <Position>36</Position>
+      <InnerException>Cannot register duplicate Name 'name' in this scope.</InnerException>
+    </Load>
+  </File>
+  <File Name="Error_DuplicateNameInDataTemplate.xaml">
+    <Description>Imprecise error message when setting TargetType of style tag.</Description>
+    <Load>
+      <ExceptionType>XamlParseException</ExceptionType>
+      <ErrorMessage>Cannot register duplicate Name 'name' in this scope. Line '10' Position '31'.</ErrorMessage>
+      <Line>10</Line>
+      <Position>31</Position>
+      <InnerException>Cannot register duplicate Name 'name' in this scope.</InnerException>
+    </Load>
+  </File>
+</Errors>

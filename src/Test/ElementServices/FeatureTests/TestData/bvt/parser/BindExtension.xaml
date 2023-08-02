@@ -1,0 +1,178 @@
+<!-- We are trying to verify that databinding works fine with the Binding class,
+which is now a subclass of MarkupExtension
+TODO: Introduce some positional (constructor) parameters, once
+-->
+
+
+<cmn:CustomDockPanel Name="CustomDockPanel0"
+ 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    	xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" 
+	xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+	xmlns:data="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    	Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.BindExtensionVerify"
+    	Background="White" 
+	xmlns:MappingPIGen1="clr-namespace:System.Windows.Data;assembly=PresentationFramework" 
+	xmlns:MappingPIGen2="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" 
+	xmlns:MappingPIGen3="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+ 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+>
+
+	
+    	<Panel.Resources>
+        	<XmlDataProvider x:Key="DSO1" XPath="/root">
+          		<x:XData>
+            		<root xmlns="">
+                			<brush>Red</brush>
+                			<fontsize>200</fontsize>
+                			<greeting>Hello World</greeting>
+            		</root>
+          		</x:XData>
+        	</XmlDataProvider>
+		<Button Width="39" Height="28" x:Key="imabutton1" Content="Wak-a-doo!" />
+    	</Panel.Resources>
+
+	<StackPanel>
+    	<TextBlock Name="Text0"
+  		Foreground="{Binding Mode=OneWay,Source={StaticResource ResourceKey=DSO1},XPath=brush}"
+  		FontSize="{Binding Mode=OneWay,Source={StaticResource ResourceKey=DSO1},XPath=fontsize}"
+ 	>
+		<TextBlock.Text>
+			<Binding Mode="OneWay" Source="{StaticResource ResourceKey=DSO1}" XPath="greeting" />
+		</TextBlock.Text>
+	</TextBlock>
+
+
+
+
+	<!-- Integration tests: NullExt, StaticExtension inside Binding -->
+	<TextBlock Name="Text1"
+     		Foreground="{Binding Mode=OneWay,Source={StaticResource ResourceKey=DSO1},XPath={x:Null}}"
+     		FontSize="{Binding Mode={x:Static data:BindingMode.OneWay},Source={StaticResource ResourceKey=DSO1},XPath=fontsize}"
+   	/>
+
+	<!-- Set properties explicitly using new Binding xaml elements -->
+    	<TextBlock Name="TextBlock2"
+
+ 	>
+		<TextBlock.Foreground>
+			<Binding>
+ 				<Binding.Mode>
+					OneWay
+				</Binding.Mode>
+				<Binding.XPath>
+					brush
+				</Binding.XPath>
+				<Binding.Source>
+					<StaticResource ResourceKey="DSO1" />
+				</Binding.Source>	
+			</Binding>
+		</TextBlock.Foreground>
+
+		<TextBlock.FontSize>
+			<Binding>
+ 				<Binding.Mode>
+					OneWay
+				</Binding.Mode>
+				<Binding.XPath>
+					fontsize
+				</Binding.XPath>
+				<Binding.Source>
+					<StaticResource ResourceKey="DSO1" />
+				</Binding.Source>	
+			</Binding>	
+		</TextBlock.FontSize>
+
+		<TextBlock.Text>
+			<Binding>
+ 				<Binding.Mode>
+					OneWay
+				</Binding.Mode>
+				<Binding.XPath>
+					greeting
+				</Binding.XPath>
+				<Binding.Source>
+					<StaticResource ResourceKey="DSO1" />
+				</Binding.Source>	
+			</Binding>
+		</TextBlock.Text>
+	</TextBlock>
+
+	<TextBox Name="TextBox1" Height="100" Width="100" > 
+		
+		
+		<Binding>
+ 			<Binding.Mode>
+				OneWay
+			</Binding.Mode>
+			<Binding.Path>
+				Content
+			</Binding.Path>
+			<Binding.Source>
+				<StaticResource ResourceKey="imabutton1" />
+			</Binding.Source>	
+		</Binding>
+
+	</TextBox >
+
+
+
+	<Button Name="Button1" Height="100" Width="100" > 
+		
+		<Binding>
+ 			<Binding.Mode>
+				OneWay
+			</Binding.Mode>
+			<Binding.Path>
+				Content
+			</Binding.Path>
+			<Binding.Source>
+				<StaticResource ResourceKey="imabutton1" />
+			</Binding.Source>	
+		</Binding>
+
+	</Button >
+
+	<ComboBox Name="ComboBox1" Height="100" Width="100" > 
+		
+		<ComboBoxItem>
+		<Binding>
+ 			<Binding.Mode>
+				OneWay
+			</Binding.Mode>
+			<Binding.Path>
+				Content
+			</Binding.Path>
+			<Binding.Source>
+				<StaticResource ResourceKey="imabutton1" />
+			</Binding.Source>	
+		</Binding>
+		</ComboBoxItem>
+
+	</ComboBox >
+
+
+	<ListBox Name="ListBox1" Height="100" Width="100" > 
+		
+		<ListBoxItem>		
+		<Binding>
+ 			<Binding.Mode>
+				OneWay
+			</Binding.Mode>
+			<Binding.Path>
+				Content
+			</Binding.Path>
+			<Binding.Source>
+				<StaticResource ResourceKey="imabutton1" />
+			</Binding.Source>	
+		</Binding>
+		</ListBoxItem>
+
+	</ListBox >
+
+	</StackPanel>
+</cmn:CustomDockPanel>
+
+
+
+

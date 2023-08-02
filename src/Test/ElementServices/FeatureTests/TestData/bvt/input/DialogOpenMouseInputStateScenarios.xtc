@@ -1,0 +1,543 @@
+<XTC xmlns="ActionSequence">
+  <TEST ID="0" GUID="" Title="DockPanel_DialogOpenOnPropertyChange_Canvas_MouseMoveCenterRight_HandledEventsToo" Owner="Microsoft" Priority="1" Path="" Auto="False" Type="" Status="Under Development" Timeout="60" URL="" Frequency="Daily" DESCRIPTION="" xmlns="ActionSequence">
+    <STEP Index="0" Loader="" Run="" Verify="" LoaderSwitch="" ScriptSwitch="" HarnessFlags="">
+      <TreeConfig Source="DialogOpenMouseInputStateScenarios.xaml" />
+      <MemberFilters>
+        <EventFilter Name="GotMouseCapture" HandledEventsToo="true" />
+        <EventFilter Name="LostMouseCapture" HandledEventsToo="true" />
+        <EventFilter Name="MouseEnter" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeave" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeftButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeftButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="MouseMove" HandledEventsToo="true" />
+        <EventFilter Name="MouseRightButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="MouseRightButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="MouseWheel" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseLeftButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseLeftButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseRightButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseRightButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseWheel" HandledEventsToo="true" />
+        <EventFilter Name="GotStylusCapture" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusInAirMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusInRange" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusOutOfRange" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusSystemGesture" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusUp" HandledEventsToo="true" />
+        <EventFilter Name="StylusButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="StylusButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="StylusDown" HandledEventsToo="true" />
+        <EventFilter Name="StylusEnter" HandledEventsToo="true" />
+        <EventFilter Name="StylusInAirMove" HandledEventsToo="true" />
+        <EventFilter Name="StylusInRange" HandledEventsToo="true" />
+        <EventFilter Name="StylusLeave" HandledEventsToo="true" />
+        <EventFilter Name="StylusMove" HandledEventsToo="true" />
+        <EventFilter Name="LostStylusCapture" HandledEventsToo="true" />
+        <EventFilter Name="StylusOutOfRange" HandledEventsToo="true" />
+        <EventFilter Name="StylusSystemGesture" HandledEventsToo="true" />
+        <EventFilter Name="StylusUp" HandledEventsToo="true" />
+        <EventFilter Name="GotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewGotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewLostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="KeyDown" HandledEventsToo="true" />
+        <EventFilter Name="KeyUp" HandledEventsToo="true" />
+        <EventFilter Name="LostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewTextInput" HandledEventsToo="true" />
+        <EventFilter Name="TextInput" HandledEventsToo="true" />
+        <EventFilter Name="IsKeyboardFocusedChanged" />
+        <EventFilter Name="IsKeyboardFocusWithinChanged" />
+        <EventFilter Name="GotFocus" HandledEventsToo="true" />
+        <EventFilter Name="LostFocus" HandledEventsToo="true" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Child" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Child" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseCaptured" />
+        <PropertyFilter ElementName="Child" Name="IsMouseCaptured" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseCaptured" />
+      </MemberFilters>
+      <ActionSequence>
+        <MouseMoveAction IsImmediate="False" MouseLocation="CenterRight" Target="Parent" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="MouseEnter" SenderName="Parent">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseDirectlyOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseCaptured" Value="False" />
+            <PropertyRecord Element="Child" Name="IsMouseCaptured" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseCaptured" Value="False" />
+          </EventRecord>
+          
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+
+          <EventRecordGroup>
+            <EventRecord Name="MouseLeave" SenderName="Child">
+              <PropertyRecord Element="Parent" Name="IsMouseOver" Value="False" />
+              <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="False" />
+            </EventRecord>
+          </EventRecordGroup>
+
+          <EventRecordGroup>
+            <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="Parent">
+              <PropertyRecord Element="Child" Name="IsMouseOver" Value="True" />
+              <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="False" />
+            </EventRecord>
+            <EventRecord Name="IsKeyboardFocusedChanged" SenderName="Parent" />
+            <EventRecord Name="LostKeyboardFocus" SenderName="Parent" />
+
+            <EventRecord Name="MouseLeave" SenderName="Child">
+              <PropertyRecord Element="Parent" Name="IsMouseOver" Value="False" />
+              <PropertyRecord Element="Child" Name="IsMouseOver" Value="False" />
+            </EventRecord>
+
+          </EventRecordGroup>
+
+          <EventRecord Name="MouseLeave" SenderName="Parent" />
+
+          <EventRecordGroup>
+            <EventRecord Name="PreviewGotKeyboardFocus" SenderName="Parent" />
+            <EventRecord Name="IsKeyboardFocusWithinChanged" SenderName="Parent" />
+            <EventRecord Name="IsKeyboardFocusedChanged" SenderName="Parent" />
+            <EventRecord Name="GotKeyboardFocus" SenderName="Parent" />
+          </EventRecordGroup>
+          
+          <EventRecord Name="MouseEnter" SenderName="Child">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="True" />
+          </EventRecord>
+          <EventRecord Name="MouseEnter" SenderName="Parent" />
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+
+          <EventRecord Name="MouseEnter" SenderName="Grandchild">
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="True" />
+          </EventRecord>
+          
+          
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Grandchild" />
+            <EventRecord Name="MouseMove" SenderName="Grandchild" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+
+
+          <EventRecord Name="MouseLeave" SenderName="Grandchild">
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="False" />
+          </EventRecord>
+
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+
+          <EventRecord Name="MouseLeave" SenderName="Child">
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="True" />
+          </EventRecord>
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+
+        </MouseMoveAction>
+      </ActionSequence>
+    </STEP>
+  </TEST>
+  <TEST ID="1" GUID="" Title="DockPanel_DialogOpenOnPropertyChange_Canvas_MouseMoveCenter_HandledEventsToo" Owner="Microsoft" Priority="1" Path="" Auto="False" Type="" Status="Under Development" Timeout="60" URL="" Frequency="Daily" DESCRIPTION="">
+    <STEP Index="0" Loader="" Run="" Verify="" LoaderSwitch="" ScriptSwitch="" HarnessFlags="">
+      <TreeConfig Source="DialogOpenBoundMouseInputStateScenarios.xaml" />
+      <MemberFilters>
+        <EventFilter Name="GotMouseCapture" HandledEventsToo="true" />
+        <EventFilter Name="LostMouseCapture" HandledEventsToo="true" />
+        <EventFilter Name="MouseEnter" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeave" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeftButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeftButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="MouseMove" HandledEventsToo="true" />
+        <EventFilter Name="MouseRightButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="MouseRightButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="MouseWheel" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseLeftButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseLeftButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseRightButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseRightButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseWheel" HandledEventsToo="true" />
+        <EventFilter Name="GotStylusCapture" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusInAirMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusInRange" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusOutOfRange" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusSystemGesture" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusUp" HandledEventsToo="true" />
+        <EventFilter Name="StylusButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="StylusButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="StylusDown" HandledEventsToo="true" />
+        <EventFilter Name="StylusEnter" HandledEventsToo="true" />
+        <EventFilter Name="StylusInAirMove" HandledEventsToo="true" />
+        <EventFilter Name="StylusInRange" HandledEventsToo="true" />
+        <EventFilter Name="StylusLeave" HandledEventsToo="true" />
+        <EventFilter Name="StylusMove" HandledEventsToo="true" />
+        <EventFilter Name="LostStylusCapture" HandledEventsToo="true" />
+        <EventFilter Name="StylusOutOfRange" HandledEventsToo="true" />
+        <EventFilter Name="StylusSystemGesture" HandledEventsToo="true" />
+        <EventFilter Name="StylusUp" HandledEventsToo="true" />
+        <EventFilter Name="GotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewGotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewLostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="KeyDown" HandledEventsToo="true" />
+        <EventFilter Name="KeyUp" HandledEventsToo="true" />
+        <EventFilter Name="LostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewTextInput" HandledEventsToo="true" />
+        <EventFilter Name="TextInput" HandledEventsToo="true" />
+        <EventFilter Name="IsKeyboardFocusedChanged" />
+        <EventFilter Name="IsKeyboardFocusWithinChanged" />
+        <EventFilter Name="GotFocus" HandledEventsToo="true" />
+        <EventFilter Name="LostFocus" HandledEventsToo="true" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Child" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Child" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseCaptured" />
+        <PropertyFilter ElementName="Child" Name="IsMouseCaptured" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseCaptured" />
+      </MemberFilters>
+      <ActionSequence>
+        <MouseMoveAction IsImmediate="False" MouseLocation="Center" Target="Parent" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="MouseEnter" SenderName="Parent">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseDirectlyOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseCaptured" Value="False" />
+            <PropertyRecord Element="Child" Name="IsMouseCaptured" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseCaptured" Value="False" />
+          </EventRecord>
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+          <EventRecord Name="MouseLeave" SenderName="Child">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="False" />
+          </EventRecord>
+          <EventRecord Name="MouseLeave" SenderName="Parent" />
+          <EventRecord Name="MouseEnter" SenderName="Child">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="True" />
+          </EventRecord>
+          <EventRecord Name="MouseEnter" SenderName="Parent" />
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+          <EventRecord Name="MouseEnter" SenderName="Grandchild">
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="True" />
+          </EventRecord>
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Grandchild" />
+            <EventRecord Name="MouseMove" SenderName="Grandchild" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+        </MouseMoveAction>
+      </ActionSequence>
+    </STEP>
+  </TEST>
+
+  <TEST ID="2" GUID="" Title="DockPanel_DialogOpenOnPropertyChange_Canvas_MouseLeftButtonClickOnCenter_HandledEventsToo" Owner="Microsoft" Priority="1" Path="" Auto="False" Type="" Status="Under Development" Timeout="60" URL="" Frequency="Daily" DESCRIPTION="" xmlns="ActionSequence">
+    <STEP Index="0" Loader="" Run="" Verify="" LoaderSwitch="" ScriptSwitch="" HarnessFlags="">
+      <TreeConfig Source="DialogOpenBoundMouseInputStateScenarios.xaml" />
+      <MemberFilters>
+        <EventFilter Name="GotMouseCapture" HandledEventsToo="true" />
+        <EventFilter Name="LostMouseCapture" HandledEventsToo="true" />
+        <EventFilter Name="MouseEnter" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeave" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeftButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeftButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="MouseMove" HandledEventsToo="true" />
+        <EventFilter Name="MouseRightButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="MouseRightButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="MouseWheel" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseLeftButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseLeftButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseRightButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseRightButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseWheel" HandledEventsToo="true" />
+        <EventFilter Name="GotStylusCapture" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusInAirMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusInRange" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusOutOfRange" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusSystemGesture" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusUp" HandledEventsToo="true" />
+        <EventFilter Name="StylusButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="StylusButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="StylusDown" HandledEventsToo="true" />
+        <EventFilter Name="StylusEnter" HandledEventsToo="true" />
+        <EventFilter Name="StylusInAirMove" HandledEventsToo="true" />
+        <EventFilter Name="StylusInRange" HandledEventsToo="true" />
+        <EventFilter Name="StylusLeave" HandledEventsToo="true" />
+        <EventFilter Name="StylusMove" HandledEventsToo="true" />
+        <EventFilter Name="LostStylusCapture" HandledEventsToo="true" />
+        <EventFilter Name="StylusOutOfRange" HandledEventsToo="true" />
+        <EventFilter Name="StylusSystemGesture" HandledEventsToo="true" />
+        <EventFilter Name="StylusUp" HandledEventsToo="true" />
+        <EventFilter Name="GotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewGotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewLostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="KeyDown" HandledEventsToo="true" />
+        <EventFilter Name="KeyUp" HandledEventsToo="true" />
+        <EventFilter Name="LostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewTextInput" HandledEventsToo="true" />
+        <EventFilter Name="TextInput" HandledEventsToo="true" />
+        <EventFilter Name="IsKeyboardFocusedChanged" />
+        <EventFilter Name="IsKeyboardFocusWithinChanged" />
+        <EventFilter Name="GotFocus" HandledEventsToo="true" />
+        <EventFilter Name="LostFocus" HandledEventsToo="true" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Child" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Child" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseCaptured" />
+        <PropertyFilter ElementName="Child" Name="IsMouseCaptured" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseCaptured" />
+      </MemberFilters>
+      <ActionSequence>
+        <MouseClickAction MouseButton="Left" CheckActiveSource="True" MouseLocation="Center" Target="Child" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="MouseEnter" SenderName="Parent">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseDirectlyOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseCaptured" Value="False" />
+            <PropertyRecord Element="Child" Name="IsMouseCaptured" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseCaptured" Value="False" />
+          </EventRecord>
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+          <EventRecord Name="MouseLeave" SenderName="Child">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="False" />
+          </EventRecord>
+          <EventRecord Name="MouseLeave" SenderName="Parent" />
+          <EventRecord Name="MouseEnter" SenderName="Child">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="True" />
+          </EventRecord>
+          <EventRecord Name="MouseEnter" SenderName="Parent" />
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+          <EventRecord Name="MouseEnter" SenderName="Grandchild">
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="True" />
+          </EventRecord>
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Grandchild" />
+            <EventRecord Name="MouseMove" SenderName="Grandchild" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+          <EventRecord Name="PreviewMouseLeftButtonDown" SenderName="Parent" />
+          <EventRecord Name="PreviewMouseLeftButtonDown" SenderName="Child" />
+          <EventRecord Name="PreviewMouseLeftButtonDown" SenderName="Grandchild" />
+          <EventRecord Name="MouseLeftButtonDown" SenderName="Grandchild" />
+          <EventRecord Name="MouseLeftButtonDown" SenderName="Child" />
+          <EventRecord Name="MouseLeftButtonDown" SenderName="Parent" />
+          <EventRecord Name="PreviewMouseLeftButtonUp" SenderName="Parent" />
+          <EventRecord Name="PreviewMouseLeftButtonUp" SenderName="Child" />
+          <EventRecord Name="PreviewMouseLeftButtonUp" SenderName="Grandchild" />
+          <EventRecord Name="MouseLeftButtonUp" SenderName="Grandchild" />
+          <EventRecord Name="MouseLeftButtonUp" SenderName="Child" />
+          <EventRecord Name="MouseLeftButtonUp" SenderName="Parent" />
+        </MouseClickAction>
+      </ActionSequence>
+    </STEP>
+  </TEST>
+
+  <TEST ID="3" GUID="" Title="DockPanel_DialogOpenOnPropertyChange_Canvas_MouseRightButtonClickOnCenter_HandledEventsToo" Owner="Microsoft" Priority="1" Path="" Auto="False" Type="" Status="Under Development" Timeout="60" URL="" Frequency="Daily" DESCRIPTION="">
+    <STEP Index="0" Loader="" Run="" Verify="" LoaderSwitch="" ScriptSwitch="" HarnessFlags="">
+      <TreeConfig Source="DialogOpenBoundMouseInputStateScenarios.xaml" />
+      <MemberFilters>
+        <EventFilter Name="GotMouseCapture" HandledEventsToo="true" />
+        <EventFilter Name="LostMouseCapture" HandledEventsToo="true" />
+        <EventFilter Name="MouseEnter" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeave" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeftButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="MouseLeftButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="MouseMove" HandledEventsToo="true" />
+        <EventFilter Name="MouseRightButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="MouseRightButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="MouseWheel" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseLeftButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseLeftButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseRightButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseRightButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewMouseWheel" HandledEventsToo="true" />
+        <EventFilter Name="GotStylusCapture" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusInAirMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusInRange" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusMove" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusOutOfRange" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusSystemGesture" HandledEventsToo="true" />
+        <EventFilter Name="PreviewStylusUp" HandledEventsToo="true" />
+        <EventFilter Name="StylusButtonDown" HandledEventsToo="true" />
+        <EventFilter Name="StylusButtonUp" HandledEventsToo="true" />
+        <EventFilter Name="StylusDown" HandledEventsToo="true" />
+        <EventFilter Name="StylusEnter" HandledEventsToo="true" />
+        <EventFilter Name="StylusInAirMove" HandledEventsToo="true" />
+        <EventFilter Name="StylusInRange" HandledEventsToo="true" />
+        <EventFilter Name="StylusLeave" HandledEventsToo="true" />
+        <EventFilter Name="StylusMove" HandledEventsToo="true" />
+        <EventFilter Name="LostStylusCapture" HandledEventsToo="true" />
+        <EventFilter Name="StylusOutOfRange" HandledEventsToo="true" />
+        <EventFilter Name="StylusSystemGesture" HandledEventsToo="true" />
+        <EventFilter Name="StylusUp" HandledEventsToo="true" />
+        <EventFilter Name="GotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewGotKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyDown" HandledEventsToo="true" />
+        <EventFilter Name="PreviewKeyUp" HandledEventsToo="true" />
+        <EventFilter Name="PreviewLostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="KeyDown" HandledEventsToo="true" />
+        <EventFilter Name="KeyUp" HandledEventsToo="true" />
+        <EventFilter Name="LostKeyboardFocus" HandledEventsToo="true" />
+        <EventFilter Name="PreviewTextInput" HandledEventsToo="true" />
+        <EventFilter Name="TextInput" HandledEventsToo="true" />
+        <EventFilter Name="IsKeyboardFocusedChanged" />
+        <EventFilter Name="IsKeyboardFocusWithinChanged" />
+        <EventFilter Name="GotFocus" HandledEventsToo="true" />
+        <EventFilter Name="LostFocus" HandledEventsToo="true" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Child" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseOver" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Child" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseDirectlyOver" />
+        <PropertyFilter ElementName="Parent" Name="IsMouseCaptured" />
+        <PropertyFilter ElementName="Child" Name="IsMouseCaptured" />
+        <PropertyFilter ElementName="Grandchild" Name="IsMouseCaptured" />
+      </MemberFilters>
+      <ActionSequence>
+        <MouseClickAction MouseButton="Right" CheckActiveSource="True" MouseLocation="Center" Target="Child" IgnoreEvents="False" IgnoreInputState="True" IgnoreEventArgs="True" IsSynchronous="True">
+          <EventRecord Name="MouseEnter" SenderName="Parent">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseDirectlyOver" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseCaptured" Value="False" />
+            <PropertyRecord Element="Child" Name="IsMouseCaptured" Value="False" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseCaptured" Value="False" />
+          </EventRecord>
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+          <EventRecord Name="MouseLeave" SenderName="Child">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="False" />
+            <PropertyRecord Element="Parent" Name="IsMouseDirectlyOver" Value="False" />
+          </EventRecord>
+          <EventRecord Name="MouseLeave" SenderName="Parent" />
+          <EventRecord Name="MouseEnter" SenderName="Child">
+            <PropertyRecord Element="Parent" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Child" Name="IsMouseOver" Value="True" />
+          </EventRecord>
+          <EventRecord Name="MouseEnter" SenderName="Parent" />
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+          <EventRecord Name="MouseEnter" SenderName="Grandchild">
+            <PropertyRecord Element="Grandchild" Name="IsMouseOver" Value="True" />
+            <PropertyRecord Element="Grandchild" Name="IsMouseDirectlyOver" Value="True" />
+          </EventRecord>
+          <EventRecordGroup>
+            <EventRecord Name="PreviewMouseMove" SenderName="Parent" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Child" />
+            <EventRecord Name="PreviewMouseMove" SenderName="Grandchild" />
+            <EventRecord Name="MouseMove" SenderName="Grandchild" />
+            <EventRecord Name="MouseMove" SenderName="Child" />
+            <EventRecord Name="MouseMove" SenderName="Parent" />
+          </EventRecordGroup>
+          <EventRecord Name="PreviewMouseRightButtonDown" SenderName="Parent" />
+          <EventRecord Name="PreviewMouseRightButtonDown" SenderName="Child" />
+          <EventRecord Name="PreviewMouseRightButtonDown" SenderName="Grandchild" />
+          <EventRecord Name="MouseRightButtonDown" SenderName="Grandchild" />
+          <EventRecord Name="MouseRightButtonDown" SenderName="Child" />
+          <EventRecord Name="MouseRightButtonDown" SenderName="Parent" />
+          <EventRecord Name="PreviewMouseRightButtonUp" SenderName="Parent" />
+          <EventRecord Name="PreviewMouseRightButtonUp" SenderName="Child" />
+          <EventRecord Name="PreviewMouseRightButtonUp" SenderName="Grandchild" />
+          <EventRecord Name="MouseRightButtonUp" SenderName="Grandchild" />
+          <EventRecord Name="MouseRightButtonUp" SenderName="Child" />
+          <EventRecord Name="MouseRightButtonUp" SenderName="Parent" />
+        </MouseClickAction>
+      </ActionSequence>
+    </STEP>
+  </TEST>
+
+</XTC>

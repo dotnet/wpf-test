@@ -1,0 +1,332 @@
+
+<!--
+/*******************************************************************
+ * Purpose: Snippets of xaml used for tree construction in
+ *          ControlTemplate model.
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/propertyengine/Template/TemplateModel_elements.xaml $
+********************************************************************/
+-->
+<StackPanel
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+
+        <!-- ***************************************************
+             Style
+             *************************************************** -->
+        <Style x:Key="styleKey1" TargetType="{x:Type FOO}">
+            <Setter Property="Panel.Background" Value="Purple" />
+        </Style>
+
+        <!-- ***************************************************
+             Style for setting a template.
+             *************************************************** -->
+        <Style x:Key="styleForSettingTemplate" TargetType="{x:Type FOO}">
+            <Setter Property="FOO" TestId="TemplateSetter">
+                <Setter.Value TestId="TemplateSetterValue">
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ***************************************************
+             Parent for a templated table body.
+             *************************************************** -->
+        <FlowDocumentScrollViewer TestId="TableParent" Name="TemplatedControlParent"><FlowDocument>
+            <Table Background="White" Name="TemplatedControlType_Table">
+            </Table>
+        </FlowDocument></FlowDocumentScrollViewer>
+
+
+        <!-- ***************************************************
+             ControlTemplate
+             *************************************************** -->
+        <ControlTemplate x:Key="FOO" TargetType="{x:Type FOO}" />
+
+        <!-- ***************************************************
+             DataTemplate
+             *************************************************** -->
+        <DataTemplate x:Key="FOO" />
+    
+     
+        <!-- ***************************************************
+             TemplatedControl - Template attribute will be added depending on template type.
+             *************************************************** -->
+        <Button Background="Orange" Name="TemplatedControlType_ContentControl" Style="{DynamicResource styleForSettingTemplate}"
+            Content="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person[2]}">ButtonLogicalChildThingy</Button>
+        <ListBox Background="Orange" Name="TemplatedControlType_ItemsControl" Style="{DynamicResource styleForSettingTemplate}"
+            ItemsSource="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person}">ListBoxLogicalChildThingy</ListBox>
+        <cmn:CustomButton Background="Orange" Name="TemplatedControlType_CustomControl" Style="{DynamicResource styleForSettingTemplate}">CustomButtonLogicalChildThingy</cmn:CustomButton>
+        <TableRowGroup Name="TemplatedControlType_TableRowGroup"
+            Background="Orange"
+            ItemsSource="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person}"
+            Style="{DynamicResource styleForSettingTemplate}"
+            />
+
+
+        <!-- ***************************************************
+             TemplateRootType
+             *************************************************** -->
+        <Button Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_Control" />
+        <StackPanel Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_Panel" />
+        <Border Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_Decorator" />
+        <Bold Panel.Background="Pink" Foreground="Red" x:Name="TemplateRootType_FrameworkContentElement" />
+        <cmn:CustomButton Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_CustomControl"/>
+        <cmn:CustomStackPanel Background="Pink" TextBlock.Foreground="Red" x:Name="TemplateRootType_CustomPanel" />
+        <Viewport3D x:Name="TemplateRootType_Viewport3D" Width="100" Height="100">
+            <Viewport3D.Camera>
+                <PerspectiveCamera FarPlaneDistance="10" LookDirection="0,0,-1" UpDirection="0,1,0" NearPlaneDistance="0" Position="0,0,5" FieldOfView="45" />
+            </Viewport3D.Camera>
+
+            <!--Viewport3D.Children-->
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup>
+
+                        <AmbientLight Color="LightGray" />
+                        <DirectionalLight Direction="0,1,1" Color="#FF7F7F00" />
+
+                        <Model3DGroup>
+                            <GeometryModel3D>
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                                        Positions="-1,1,0 1,1,0 1,-1,0 -1,-1,0"
+                                        Normals="0,0,1 0,0,1 0,0,1 0,0,1"
+                                        TextureCoordinates="0,0 1,0 1,1 0,1"
+                                        TriangleIndices="1 0 3 2 1 3" />
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <SolidColorBrush Color="White" />
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+
+                            </GeometryModel3D>
+                            <Model3D.Transform>
+                                <RotateTransform3D>
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0,1,0" Angle="45" />
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                            </Model3D.Transform>
+                        </Model3DGroup>
+
+                    </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+            <!--/Viewport3D.Children-->
+        </Viewport3D>
+        <Grid x:Name="TemplateRootType_Grid" Background="Pink" TextBlock.Foreground="Red">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+
+    <!-- ***************************************************
+             TemplateChildType
+             *************************************************** -->
+        <Button x:Name="TemplateChildType_FrameworkElement" Margin="7" Height="20" Width="150" Style="{DynamicResource styleKey1}" Grid.Column="1">ButtonText</Button>
+        <Button x:Name="TemplateChildType_FrameworkElement_WithBinding" Margin="7" Height="20" Width="150" Style="{DynamicResource styleKey1}" Content="{Binding XPath=@Name}" />
+        <cmn:CustomButton x:Name="TemplateChildType_CustomControl" Margin="7" Height="20" Width="150" Style="{DynamicResource styleKey1}" Grid.Column="1">Custom Button Text</cmn:CustomButton>
+        <Bold x:Name="TemplateChildType_FrameworkContentElement" Style="{DynamicResource styleKey1}">BoldText</Bold>
+        <DependencyObject x:Name="TemplateChildType_DependencyObject" />
+        <sys:String x:Name="TemplateChildType_NonDependencyObject">StringText</sys:String>
+        <Viewport3D x:Name="TemplateChildType_Viewport3D" Width="100" Height="100">
+            <Viewport3D.Camera>
+                <PerspectiveCamera FarPlaneDistance="10" LookDirection="0,0,-1" UpDirection="0,1,0" NearPlaneDistance="0" Position="0,0,5" FieldOfView="45" />
+            </Viewport3D.Camera>
+
+            <!--Viewport3D.Children-->
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup>
+
+                        <AmbientLight Color="LightGray" />
+                        <DirectionalLight Direction="0,1,1" Color="#FF7F7F00" />
+
+                        <Model3DGroup>
+                            <GeometryModel3D>
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                                        Positions="-1,1,0 1,1,0 1,-1,0 -1,-1,0"
+                                        Normals="0,0,1 0,0,1 0,0,1 0,0,1"
+                                        TextureCoordinates="0,0 1,0 1,1 0,1"
+                                        TriangleIndices="1 0 3 2 1 3" />
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <SolidColorBrush Color="White" />
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+
+                            </GeometryModel3D>
+                            <Model3D.Transform>
+                                <RotateTransform3D>
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0,1,0" Angle="45" />
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                            </Model3D.Transform>
+                        </Model3DGroup>
+
+                    </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+            <!--/Viewport3D.Children-->
+        </Viewport3D>
+        <ListBox x:Name="TemplateChildType_IList" Margin="10" Grid.Column="1">
+            <ListBox.Items>
+                <Button>IList Item</Button>
+                <Button>IList Item</Button>
+            </ListBox.Items>
+        </ListBox>
+        <Rectangle x:Name="TemplateChildType_Shape" Width="100" Height="50" Fill="Blue"></Rectangle>
+    
+    
+        <!-- ***************************************************
+             TemplateType.Triggers
+             *************************************************** -->  
+        <ControlTemplate.Triggers />
+        <DataTemplate.Triggers />
+        
+        <!-- ***************************************************
+             Triggers that target template root. (ORDER OF SETTERS IN TRIGGER IS IMPORTANT TO XAML HELPER)
+             *************************************************** -->
+        <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="PropertyTrigger_Control">
+            <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+            <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+        </Trigger>
+        <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="PropertyTrigger_Panel">
+            <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+            <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+        </Trigger>
+        <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="PropertyTrigger_Decorator">
+            <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+            <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+        </Trigger>
+        <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="PropertyTrigger_FrameworkContentElement">
+            <Setter TargetName="FOO" Property="Panel.Background" Value="Yellow" />
+            <Setter TargetName="FOO" Property="Foreground" Value="Green" />
+        </Trigger>
+        <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="PropertyTrigger_CustomPanel">
+            <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+            <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+        </Trigger>
+        <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="PropertyTrigger_CustomControl">
+            <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+            <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+        </Trigger>
+        <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="PropertyTrigger_Grid">
+            <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+            <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+        </Trigger>
+
+        <!-- ***************************************************
+             Triggers that target template child. (ORDER OF SETTERS IN TRIGGER IS IMPORTANT TO XAML HELPER)
+             *************************************************** -->
+    <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="ChildPropertyTrigger_Shape">
+        <Setter TargetName="FOO" Property="Fill" Value="Yellow" />
+        <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+    </Trigger>
+    <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="ChildPropertyTrigger_FrameworkElement">
+        <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+        <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+    </Trigger>
+    <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="ChildPropertyTrigger_FrameworkContentElement">
+        <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+        <Setter TargetName="FOO" Property="Foreground" Value="Green" />
+    </Trigger>
+    <Trigger Property="IsMouseOver" SourceName="BAR" Value="true" TestId="ChildPropertyTrigger_CustomControl">
+        <Setter TargetName="FOO" Property="Background" Value="Yellow" />
+        <Setter TargetName="FOO" Property="TextBlock.Foreground" Value="Green" />
+    </Trigger>
+
+    <!-- ***************************************************
+             ControlTemplate.Triggers [EventTrigger/Storyboard]
+             *************************************************** -->
+
+    <EventTrigger SourceName="FOO" RoutedEvent="Mouse.PreviewMouseDown">
+        <EventTrigger.Actions>
+            <BeginStoryboard TestId="Storyboard_ControlTemplate">
+                <BeginStoryboard.Storyboard>
+                    <Storyboard>
+                        <ParallelTimeline BeginTime="0" Duration="0:1:0">
+                            <ColorAnimation
+                                Storyboard.TargetName="FOO"
+                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                BeginTime="00:00:00"
+                                Duration="00:00:01"
+                                From="LightBlue"
+                                To="DarkBlue"
+                                FillBehavior="HoldEnd" />
+                            <ColorAnimation
+                                Storyboard.TargetName="FOO"
+                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                To="DarkGreen"
+                                BeginTime="0"
+                                Duration="0:0:0" />
+                        </ParallelTimeline>
+                    </Storyboard>
+                </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+        </EventTrigger.Actions>
+    </EventTrigger>
+
+
+        <!-- ***************************************************
+             EventSet code
+             ***************************************************-->
+        <x:Code TestId="EventCode">
+            <![CDATA[
+                void OnMouseLeave(object sender, RoutedEventArgs e)
+                {
+                    DependencyObject depObj = (DependencyObject)sender;
+                    depObj.SetValue(Control.BackgroundProperty, Brushes.Crimson);
+                }
+            ]]>
+        </x:Code>
+
+        <!-- ***************************************************
+             XmlDataProvider
+             ***************************************************-->
+        <XmlDataProvider TestId="XmlDataSource" x:Key="ExpenseDataSource" XPath="Expenses">
+          <x:XData>
+            <Expenses xmlns="">
+                <Person Name="John" Department="Legal">
+                    <Expense ExpenseReason="Lunch" ExpenseAmount="50" />
+                    <Expense ExpenseReason="Transportation" ExpenseAmount="50" />
+                </Person>
+                <Person Name="Paul" Department="Marketing">
+                    <Expense ExpenseReason="Document printing" ExpenseAmount="50" />
+                    <Expense ExpenseReason="Gift" ExpenseAmount="125" />
+                </Person>
+                <Person Name="George" Department="Engineering">
+                    <Expense ExpenseReason="Magazine subscription" ExpenseAmount="50" />
+                    <Expense ExpenseReason="New machine" ExpenseAmount="600" />
+                    <Expense ExpenseReason="Software" ExpenseAmount="500" />
+                </Person>
+                <Person Name="Ringo" Department="Finance">
+                    <Expense ExpenseReason="Dinner" ExpenseAmount="100" />
+                </Person>
+            </Expenses>
+          </x:XData>
+        </XmlDataProvider>
+    
+
+</StackPanel>

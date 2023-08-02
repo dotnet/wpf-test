@@ -1,0 +1,733 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="LightSteelBlue">
+<Grid Width="800">
+
+  <Grid.Resources>
+    <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="PagePadding" Value="0" />
+    </Style>
+    <Style x:Key="{x:Type FlowDocumentScrollViewer}" TargetType="{x:Type FlowDocumentScrollViewer}">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+    </Style>
+    <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+      <Setter Property="FontFamily" Value="Tahoma" />
+      <Setter Property="FontSize" Value="11.0" />
+    </Style>
+    <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+      <Setter Property="FontFamily" Value="Tahoma" />
+      <Setter Property="FontSize" Value="11.0" />
+    </Style>
+  </Grid.Resources>
+
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="2" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="2" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="2" />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="2" />
+  </Grid.RowDefinitions>
+
+
+<Border Grid.Column="1" Grid.Row="1">
+  <Button FlowDirection="LeftToRight">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock>Control is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="1">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock>Control is RTL</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="3">
+  <Button>
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Blue" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="LeftToRight">Control is LTR; Conent is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="3">
+  <Button>
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Blue" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="RightToLeft">Control is LTR; Conent is RTL</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="5">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Blue" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="RightToLeft">Control is RTL; Conent is RTL</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="5">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Blue" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="LeftToRight">Control is RTL; Conent is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="7">
+  <Button>
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock>Control is LTR; Style is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="7">
+  <Button>
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="RightToLeft">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock>Control is LTR; Style is RTL</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="9">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="RightToLeft">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock>Control is RTL; Style is RTL</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="9">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock>Control is RTL; Style is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="11">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="DarkGreen" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="LeftToRight">Control is RTL; Style is LTR; Content is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="11">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="DarkGreen" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="RightToLeft">Control is RTL; Style is LTR; Content is RTL</TextBlock>
+  </Button>
+</Border>
+
+
+<Border Grid.Column="1" Grid.Row="13">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="DarkGreen" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="RightToLeft">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="LeftToRight">Control is RTL; Style is RTL; Content is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="13">
+  <Button FlowDirection="RightToLeft">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="DarkGreen" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="RightToLeft">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="RightToLeft">Control is RTL; Style is RTL; Content is RTL</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="15">
+  <Button FlowDirection="LeftToRight">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Brown" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="LeftToRight">Control is LTR; Style is LTR; Content is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="15">
+  <Button FlowDirection="LeftToRight">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Brown" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="RightToLeft">Control is LTR; Style is LTR; Content is RTL</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="17">
+  <Button FlowDirection="LeftToRight">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Brown" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="RightToLeft">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="LeftToRight">Control is LTR; Style is RTL; Content is LTR</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="17">
+  <Button FlowDirection="LeftToRight">
+  <Button.Resources>
+      <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Brown" />
+        <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="DarkBlue" BorderThickness="1" Margin="2">
+            <Grid Background="LightGray">
+              <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="5" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+              <RowDefinition Height="5" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="5" />
+              </Grid.RowDefinitions>
+              <Border Grid.Column="1" Grid.Row="1" FlowDirection="RightToLeft">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+      </Style>
+  </Button.Resources>
+    <TextBlock FlowDirection="RightToLeft">Control is LTR; Style is RTL; Content is RTL</TextBlock>
+  </Button>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="19" Background="Beige">
+  <TextBlock FlowDirection="LeftToRight">
+    LTR text <Label Width="100" Background="LightGray" FlowDirection="LeftToRight">LTR Control</Label> LTR text
+  </TextBlock>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="19" Background="Beige">
+  <TextBlock FlowDirection="LeftToRight">
+    LTR text <Label Width="100" Background="LightGray" FlowDirection="RightToLeft">RTL Control</Label> LTR text
+  </TextBlock>
+</Border>
+
+<Border Grid.Column="1" Grid.Row="21" Background="Beige">
+  <TextBlock FlowDirection="RightToLeft">
+    RTL text <Label Width="100" Background="LightGray" FlowDirection="LeftToRight">LTR Control</Label> RTL text
+  </TextBlock>
+</Border>
+
+<Border Grid.Column="3" Grid.Row="21" Background="Beige">
+  <TextBlock FlowDirection="RightToLeft">
+    RTL text <Label Width="100" Background="LightGray" FlowDirection="RightToLeft">RTL Control</Label> RTL text
+  </TextBlock>
+</Border>
+
+<FlowDocumentScrollViewer Grid.Column="1" Grid.Row="23" FlowDirection="LeftToRight">
+<FlowDocument Background="Beige">
+  <Paragraph>LTR Flow</Paragraph>
+  <Paragraph FlowDirection="LeftToRight">
+    LTR text <Label Width="100" Background="LightGray" FlowDirection="LeftToRight">LTR Control</Label> LTR text
+  </Paragraph>
+  <Paragraph FlowDirection="LeftToRight">
+    LTR text <Label Width="100" Background="LightGray" FlowDirection="RightToLeft">RTL Control</Label> LTR text
+  </Paragraph>
+  <Paragraph FlowDirection="RightToLeft">
+    RTL text <Label Width="100" Background="LightGray" FlowDirection="LeftToRight">LTR Control</Label> RTL text
+  </Paragraph>
+  <Paragraph FlowDirection="RightToLeft">
+    RTL text <Label Width="100" Background="LightGray" FlowDirection="RightToLeft">RTL Control</Label> RTL text
+  </Paragraph>
+</FlowDocument>
+</FlowDocumentScrollViewer>
+
+<FlowDocumentScrollViewer Grid.Column="3" Grid.Row="23" FlowDirection="RightToLeft">
+<FlowDocument Background="Beige">
+  <Paragraph>RTL Flow</Paragraph>
+  <Paragraph FlowDirection="LeftToRight">
+    LTR text <Label Width="100" Background="LightGray" FlowDirection="LeftToRight">LTR Control</Label> LTR text
+  </Paragraph>
+  <Paragraph FlowDirection="LeftToRight">
+    LTR text <Label Width="100" Background="LightGray" FlowDirection="RightToLeft">RTL Control</Label> LTR text
+  </Paragraph>
+  <Paragraph FlowDirection="RightToLeft">
+    RTL text <Label Width="100" Background="LightGray" FlowDirection="LeftToRight">LTR Control</Label> RTL text
+  </Paragraph>
+  <Paragraph FlowDirection="RightToLeft">
+    RTL text <Label Width="100" Background="LightGray" FlowDirection="RightToLeft">RTL Control</Label> RTL text
+  </Paragraph>
+</FlowDocument>
+</FlowDocumentScrollViewer>
+
+</Grid>
+</Border>

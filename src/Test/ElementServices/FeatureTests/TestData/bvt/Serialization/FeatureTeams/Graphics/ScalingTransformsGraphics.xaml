@@ -1,0 +1,27 @@
+﻿ 
+<!-- Modified by  Microsoft on 11\07\2003 for serialization on Transform : scaling-->
+
+
+<cmn:CustomCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Serialization.GraphicsVerifiers.ScalingTransformVerify" xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+    <Canvas.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="Green" Offset="0" />
+                    <GradientStop Color="White" Offset="1" />
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Canvas.Background>
+    <!--******************** Scaling ****************************** -->
+    <Decorator Name="TransformDecorator">
+        <Decorator.LayoutTransform>
+            <ScaleTransform ScaleX="2" ScaleY="2" />
+        </Decorator.LayoutTransform>
+        <Path StrokeThickness="3" Name="Ellipse" Stroke="#a3F3" Fill="yellow">
+            <Path.Data>
+                <EllipseGeometry Center="150 50" RadiusX="25" RadiusY="25" />
+            </Path.Data>
+        </Path>
+    </Decorator>
+</cmn:CustomCanvas>

@@ -1,0 +1,37 @@
+﻿
+<!-- Name: Simple style, extended in descendent resource dictionary, referenced by control resource in descendent resource dictionary. -->
+
+
+
+<cmn:CustomStackPanel
+  Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.PropertyEngine.RefreshIntraResourceStyleReferenceTest.IntraResourceStyleReference.CV08ValidateAll"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+  <cmn:CustomStackPanel.Resources>
+
+    <Style x:Key="tpStyle" TargetType="{x:Type FlowDocument}">
+        <Setter Property="Foreground" Value="Red" />
+    </Style>
+
+  </cmn:CustomStackPanel.Resources>
+
+  <cmn:CustomStackPanel>
+
+    <cmn:CustomStackPanel.Resources>
+      <Style x:Key="tpStyleExtension" BasedOn="{StaticResource tpStyle}" TargetType="{x:Type FlowDocument}">
+          <Setter Property="Background" Value="Blue" />
+      </Style>
+
+      <FlowDocumentScrollViewer x:Key="tp"><FlowDocument Style="{DynamicResource tpStyleExtension}" Text="Experiment">
+      <Paragraph />
+      </FlowDocument></FlowDocumentScrollViewer>
+    </cmn:CustomStackPanel.Resources>
+
+    <FlowDocumentScrollViewer><FlowDocument Style="{DynamicResource tpStyleExtension}" Text="Control"><Paragraph /></FlowDocument></FlowDocumentScrollViewer>
+    <Button Content="{DynamicResource tp}" />
+ 
+  </cmn:CustomStackPanel>
+
+</cmn:CustomStackPanel>

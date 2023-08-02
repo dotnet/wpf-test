@@ -1,0 +1,56 @@
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="LightSteelBlue">
+<Grid Width="800">
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  </Grid.RowDefinitions>
+
+
+  <!-- Regression_Bug13: Simple case -->
+  <Border Background="White" Grid.Column="1" Grid.Row="1">
+    <Border Background="LightGreen" Width="50">
+        <TextBlock TextAlignment="Center" HorizontalAlignment="Center">BUTTONBUTTON</TextBlock>
+    </Border>
+  </Border>
+
+  <!-- Regression_Bug13: Complex case 1 -->
+  <Border Background="White" Grid.Column="3" Grid.Row="1">
+    <Border Background="LightGreen" Width="50">
+        <TextBlock TextAlignment="Center" HorizontalAlignment="Center">
+          BUTTON
+          <Border Background="Red" Width="15" Height="15" />
+          BUTTON
+        </TextBlock>
+    </Border>
+  </Border>
+
+  <!-- Regression_Bug13: Complex case 2 -->
+  <Border Background="White" Grid.Column="1" Grid.Row="3">
+    <ScrollViewer Height="70" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+    <DockPanel Background="Beige">
+      <TextBlock DockPanel.Dock="Top" TextAlignment="Right" HorizontalAlignment="Right">short text</TextBlock>
+      <TextBlock DockPanel.Dock="Top" TextAlignment="Right" HorizontalAlignment="Right">
+        BUTTON
+        <Border Background="Red" Width="15" Height="15" />
+        BUTTON
+      </TextBlock>
+      <TextBlock DockPanel.Dock="Top" TextAlignment="Right" HorizontalAlignment="Right">
+        longlonglonglonglonglonglonglonglonglonglong
+        longlonglonglonglonglonglonglonglonglonglong
+      </TextBlock>
+    </DockPanel>
+    </ScrollViewer>
+  </Border>
+
+</Grid>
+</Border>

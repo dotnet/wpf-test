@@ -204,6 +204,6 @@ namespace DRT
         }
 
         FlowDocumentReader _viewer;     // Viewer for FlowDocument
-        FlowDocument _document;         // FlowDo----net
+        FlowDocument _document;         // FlowDocument
     }
 }

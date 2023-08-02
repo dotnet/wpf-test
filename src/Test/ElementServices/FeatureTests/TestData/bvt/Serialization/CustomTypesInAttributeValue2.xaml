@@ -1,0 +1,50 @@
+﻿
+
+
+<cmn:CustomCanvas
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:ser="clr-namespace:Avalon.Test.CoreUI.Serialization;assembly=CoretestsUntrusted"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Serialization.Converter.ConverterVerifiers.CustomTypesInAttribute2Verify" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Serialization;assembly=CoretestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+        <Canvas.Resources>
+       <ser:CustomControlWithTypeProperties
+           x:Key="ElementInResources"
+           CustomDP="ser:CustomControlWithTypeProperties"
+           CustomClrProperty="ser:CustomControlWithTypeProperties"
+           CustomAttached="ser:CustomControlWithTypeProperties"> 
+            <ser:CustomControlWithTypeProperties.Style>                                 
+              <Style TargetType="ser:CustomControlWithTypeProperties">
+			   <Style.Triggers>
+				   <Trigger Property="ser:CustomControlWithTypeProperties.CustomAttached" Value="TextBox">
+					   <Setter Property="ser:CustomControlWithTypeProperties.CustomDP" Value="ContentElement" />	           
+				   </Trigger>
+				   <Trigger Property="ser:CustomControlWithTypeProperties.CustomDP" Value="ContentElement">	
+					   <Setter Property="ser:CustomControlWithTypeProperties.CustomAttached" Value="TextBox" />
+				   </Trigger>
+			   </Style.Triggers>	       
+			 </Style>
+			 	    </ser:CustomControlWithTypeProperties.Style>
+       </ser:CustomControlWithTypeProperties>
+
+    </Canvas.Resources>
+    <ser:CustomControlWithTypeProperties
+  CustomDP="ser:CustomControlWithTypeProperties"
+        CustomClrProperty="ser:CustomControlWithTypeProperties"
+        CustomAttached="ser:CustomControlWithTypeProperties"
+        Name="ElementInLogicalTree"> 
+       <ser:CustomControlWithTypeProperties.Style> 
+             <Style TargetType="ser:CustomControlWithTypeProperties">
+			   <Style.Triggers>
+				   <Trigger Property="ser:CustomControlWithTypeProperties.CustomAttached" Value="TextBox">
+					   <Setter Property="ser:CustomControlWithTypeProperties.CustomDP" Value="ContentElement" />	           
+				   </Trigger>
+				   <Trigger Property="ser:CustomControlWithTypeProperties.CustomDP" Value="ContentElement">	
+					   <Setter Property="ser:CustomControlWithTypeProperties.CustomAttached" Value="TextBox" />
+				   </Trigger>
+			   </Style.Triggers>	       
+			 </Style>
+		</ser:CustomControlWithTypeProperties.Style> 
+   </ser:CustomControlWithTypeProperties>                                        
+</cmn:CustomCanvas>

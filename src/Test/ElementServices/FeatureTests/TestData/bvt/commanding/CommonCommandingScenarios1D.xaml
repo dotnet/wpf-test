@@ -1,0 +1,16 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Green">
+    <!-- Border->ContentControl->TextBlock->Bold, bold content with 1 key binding -->
+    <ContentControl Margin="20" Background="Pink" Name="Grandparent">
+        <TextBlock Focusable="True" Name="Parent">
+            <Bold Focusable="True" Name="Child">
+                <Bold.InputBindings>
+                    <KeyBinding Command="IncreaseVolume" Gesture="F13" />
+                </Bold.InputBindings>
+                <Bold.CommandBindings>
+                    <CommandBinding Command="IncreaseVolume" />
+                </Bold.CommandBindings>
+                BOLD TEXT
+            </Bold>
+        </TextBlock>
+    </ContentControl>
+</Border>

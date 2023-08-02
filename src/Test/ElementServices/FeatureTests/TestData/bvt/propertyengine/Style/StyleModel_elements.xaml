@@ -1,0 +1,179 @@
+<!--
+/*******************************************************************
+ * Purpose: Snippets of xaml used for tree construction in
+ *          StyleModel.
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/propertyengine/Style/StyleModel_elements.xaml $
+********************************************************************/
+-->
+
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+    <!-- *** Styled item parents *** -->   
+    <TextBlock TestId="FrameworkContentElementParent" TextAlignment="Center">
+    </TextBlock>
+
+
+    <!-- *** Styled items *** -->    
+    <Bold
+  Name="StyledItem_FrameworkContentElement"
+  Style="{FOO testStyle}">
+		Styled FCE
+	</Bold>
+	
+    <Button
+  Name="StyledItem_FrameworkElement"
+  Style="{FOO testStyle}">
+		Styled FE
+	</Button>
+
+	<cmn:CustomButton
+  Name="StyledItem_CustomFrameworkElement"
+  Style="{FOO testStyle}">
+		Styled custom FE
+	</cmn:CustomButton>
+
+
+	<Style TestId="StyleNode" x:Key="testStyle" TargetType="{x:Type FOO}" BasedOn="{StaticResource FOO}">
+	</Style>
+	<Style TestId="BaseStyleNode" x:Key="testBaseStyle" TargetType="{x:Type FOO}">
+	</Style>
+
+	<!-- Setters -->
+	<Setter TestId="BaseSetter" Property="Background" Value="Red" />
+	<Setter TestId="Setter" Property="Background" Value="Yellow" />
+
+	<!-- Triggers -->
+	<Trigger TestId="BaseTrigger" Property="ContentElement.IsMouseOver" Value="True">
+		<Setter Property="Background" Value="Green" />
+	</Trigger>
+
+	<Trigger TestId="Trigger" Property="ContentElement.IsMouseOver" Value="True">
+		<Setter Property="Background" Value="Orange" />
+	</Trigger>
+
+
+	<!-- EventTriggers -->
+	<EventTrigger TestId="BaseEventTrigger_MouseEnter" RoutedEvent="ContentElement.MouseEnter">
+		<EventTrigger.Actions>
+			<BeginStoryboard>
+				<BeginStoryboard.Storyboard>
+                    <Storyboard>
+					<ParallelTimeline BeginTime="0" Duration="0:1:0">
+						<ColorAnimation
+        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+        BeginTime="00:00:00"
+        Duration="00:00:01"
+        From="Pink"
+        To="Maroon"
+        FillBehavior="HoldEnd" />
+					</ParallelTimeline>
+                    </Storyboard>
+				</BeginStoryboard.Storyboard>
+			</BeginStoryboard>
+		</EventTrigger.Actions>
+	</EventTrigger>
+
+	<EventTrigger TestId="EventTrigger_MouseEnter" RoutedEvent="ContentElement.MouseEnter">
+		<EventTrigger.Actions>
+			<BeginStoryboard>
+				<BeginStoryboard.Storyboard>
+                    <Storyboard>
+					<ParallelTimeline BeginTime="0" Duration="0:1:0">
+						<ColorAnimation
+        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+        BeginTime="00:00:00"
+        Duration="00:00:01"
+        From="LightBlue"
+        To="DarkBlue"
+        FillBehavior="HoldEnd" />
+					</ParallelTimeline>
+                    </Storyboard>
+				</BeginStoryboard.Storyboard>
+			</BeginStoryboard>
+		</EventTrigger.Actions>
+	</EventTrigger>
+
+    <EventTrigger TestId="BaseEventTrigger_Loaded" RoutedEvent="FrameworkElement.Loaded">
+        <EventTrigger.Actions>
+            <BeginStoryboard>
+                <BeginStoryboard.Storyboard>
+                    <Storyboard>
+                        <ParallelTimeline BeginTime="0" Duration="0:1:0">
+                            <ColorAnimation
+            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+            BeginTime="00:00:00"
+            Duration="00:00:01"
+            From="Pink"
+            To="Maroon"
+            FillBehavior="HoldEnd" />
+                        </ParallelTimeline>
+                    </Storyboard>
+                </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+        </EventTrigger.Actions>
+    </EventTrigger>
+
+    <EventTrigger TestId="EventTrigger_Loaded" RoutedEvent="FrameworkElement.Loaded">
+        <EventTrigger.Actions>
+            <BeginStoryboard>
+                <BeginStoryboard.Storyboard>
+                    <Storyboard>
+                        <ParallelTimeline BeginTime="0" Duration="0:1:0">
+                            <ColorAnimation
+            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+            BeginTime="00:00:00"
+            Duration="00:00:01"
+            From="LightBlue"
+            To="DarkBlue"
+            FillBehavior="HoldEnd" />
+                        </ParallelTimeline>
+                    </Storyboard>
+                </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+        </EventTrigger.Actions>
+    </EventTrigger>
+	<!-- Templates -->
+	<ControlTemplate x:Key="ControlTemplateWithStyleBinding" TargetType="{x:Type FOO}">
+		<Button Style="{TemplateBinding Style}" Content="{TemplateBinding Content}" />
+	</ControlTemplate>
+
+	<DataTemplate x:Key="DataTemplateWithStyleBinding">
+		<Button Style="{TemplateBinding Style}" Content="{TemplateBinding Content}" />
+	</DataTemplate>
+
+    <!-- DataTrigger -->
+    <XmlDataProvider x:Key="GameDataSource" XPath="UnhappyChildGames">
+      <x:XData>
+        <UnhappyChildGames xmlns="">
+            <Game Name="Teeter" />
+            <Game Name="Hide&apos;n Be Lonely" />
+            <Game Name="Goose Goose Goose" />
+            <Game Name="Unhappy-Go-Round" />
+            <Game Name="Kick the Can, Over and Over Again, Angrily" />
+            <Game Name="Studio Apartment" />
+        </UnhappyChildGames>
+      </x:XData>
+    </XmlDataProvider>
+
+    <!--Setter TestId="DataSetter" Property="Button.Content" Value="{Binding XPath=Game[1]/@Name}"/-->
+    
+    <DataTrigger TestId="BaseDataTrigger" Value="Teeter" Binding="{Binding XPath=Game[1]/@Name}">
+        <Setter Property="Content" Value="{Binding XPath=Game[3]/@Name}" />
+    </DataTrigger>
+    <DataTrigger TestId="DataTrigger" Value="Teeter" Binding="{Binding XPath=Game[1]/@Name}">
+        <Setter Property="Content" Value="{Binding XPath=Game[3]/@Name}" />
+    </DataTrigger>
+
+
+    <!-- Color used by SolidColor brush in freezable setters -->
+    <Color TestId="myColor"  x:Key="myColor" A="255" R="255" G="0" B="0"/>
+
+  <SolidColorBrush TestId="baseStyleResource" x:Key="baseStyleResource" Color="Red"/>
+  <SolidColorBrush TestId="styleResource" x:Key="styleResource" Color="Yellow"/>
+</Page>

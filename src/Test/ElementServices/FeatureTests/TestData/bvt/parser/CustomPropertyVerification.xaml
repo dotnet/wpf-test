@@ -1,0 +1,32 @@
+﻿
+
+
+<!-- With the RenderedEvent, we are testing events declared by custom objects -->
+<cmn:CustomDockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+ Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.CustomPropertyVerify" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+
+        <!-- MyClass.MyTransparency is of type String -->
+        <!-- MyClass.MyColor is of type MyColor. --> 
+		<Button Name="Button0" cc:MyClass.MyTransparency="1.0">
+		    <cc:MyClass.MyColor>
+		        <cc:MyColor />
+		    </cc:MyClass.MyColor>
+	        Hi there 
+	    </Button>
+	    
+	    <Button Name="Button1">
+		    <cc:MyClass.MyColor>
+		        <cc:MyColor Color="Blue" />
+		    </cc:MyClass.MyColor>
+	    </Button>
+	    
+	    <!-- Testing the type converter for MyColor -->
+	    <Button Name="Button2" cc:MyClass.MyColor="Yellow" />
+
+        <!-- The MyColor property for this button will be set in the event handler -->
+        <Button Name="Button3" />
+</cmn:CustomDockPanel>

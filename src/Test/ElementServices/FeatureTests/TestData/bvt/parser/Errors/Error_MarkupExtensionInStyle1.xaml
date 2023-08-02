@@ -1,0 +1,30 @@
+﻿<!--
+/*******************************************************************
+ * Purpose: MarkupExtension as a Trigger condition.
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/parser/Errors/Error_MarkupExtensionInStyle1.xaml $
+********************************************************************/
+-->
+
+<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:S="clr-namespace:System;assembly=Mscorlib" xmlns:MappingPIGen1="clr-namespace:System;assembly=Mscorlib"
+>
+    <Page.Resources>
+        <S:String x:Key="myString">Foo</S:String>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="Button.Name" Value="{DynamicResource myString}">
+                    <Setter Property="Foreground" Value="Blue" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Button />
+</Page>

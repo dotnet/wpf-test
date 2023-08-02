@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*******************************************************************
+ * Purpose: Properties to ignore/skip when validating in Style integration action.  
+ *
+ * Contributors: 
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/testcases/Integration/ActionForType_PropertiesToSkip.xml $
+********************************************************************/
+-->
+
+<PropertiesToSkip>
+  <PropertyToSkip PropertyName="HasContent" />
+  <PropertyToSkip PropertyName="BaseUri" />
+  <PropertyToSkip PropertyName="Resources" Owner="ItemsPanel" />
+  <!-- ResourceDictionary.IsReadOnly may be false if the resources are not app or theme or shared.--> 
+  <PropertyToSkip PropertyName="IsReadOnly" Owner="ResourceDictionary" />
+  <!-- ContentPresenter.DataContext is always set locally by design.-->
+  <PropertyToSkip PropertyName="DataContext" Owner="ContentPresenter" />
+  <!-- TextBoxBase.AllowDrop is set to false locally when in partial trust.-->
+  <PropertyToSkip PropertyName="AllowDrop" Owner="TextBoxBase" />
+  <!-- DocumentViewer.VerticalOffset/HorizontalOffset are set locally according to IDocumentScrollInfo.-->
+  <PropertyToSkip PropertyName="VerticalOffset" Owner="DocumentViewer" />
+  <PropertyToSkip PropertyName="HorizontalOffset" Owner="DocumentViewer" />
+  <!-- DocumentViewer.ContextMenu is set locally to null when the value is already null.-->
+  <PropertyToSkip PropertyName="ContextMenu" Owner="DocumentViewer" />
+  <!-- Track.Visibility and Popup.Visibility are set locally according to content size.-->
+  <PropertyToSkip PropertyName="Visibility" Owner="Track" />
+  <PropertyToSkip PropertyName="Visibility" Owner="Popup" />
+  <!-- Track.Visibility is set locally according to content size.-->
+  <PropertyToSkip PropertyName="FirstColumn" Owner="UniformGrid" />
+  <!-- GeneralTransform3D.Inverse causes an infinite loop in TreeComparer.-->
+  <PropertyToSkip PropertyName="Inverse" Owner="GeneralTransform3D" />
+  <!-- Foreground verification is generally flakey.-->
+  <PropertyToSkip PropertyName="Foreground" Owner="TextElement" />
+  <PropertyToSkip PropertyName="Foreground" Owner="Control" />
+</PropertiesToSkip>

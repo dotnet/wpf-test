@@ -1,0 +1,29 @@
+﻿
+
+
+
+<cmn:CustomDockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    DockPanel.LastChildFill="true"
+    Background="white" xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.CompactSyntaxVerify1" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+    <DockPanel.Resources>
+        <XmlDataProvider x:Key="DSO1" XPath="/root">
+          <x:XData>
+            <root xmlns="">
+                <brush>#aa00ff</brush>
+                <fontsize>200</fontsize>
+                <fontstyle>Italic</fontstyle>
+            </root>
+          </x:XData>
+        </XmlDataProvider>
+
+    </DockPanel.Resources>
+        <TextBlock
+            Text="Test"
+            Foreground="{Binding XPath=brush,Source={StaticResource DSO1},Mode=OneWay}"
+            FontSize="{Binding XPath=fontsize,Source={StaticResource DSO1}}"
+            FontStyle="{Binding XPath=fontstyle,Source={StaticResource DSO1}}" />
+
+</cmn:CustomDockPanel>

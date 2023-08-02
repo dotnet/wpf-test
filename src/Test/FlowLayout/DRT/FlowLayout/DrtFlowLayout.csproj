@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtFlowLayout</AssemblyName>
+    <TestCode>true</TestCode>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LinkSubsystem>console</LinkSubsystem>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>DRT;FRAMEWORK_NATIVEMETHODS;CORE_NATIVEMETHODS</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\ExternDll.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\HandleCollector.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\NativeMethodsSetLastError.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\UnsafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsCLR.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\SafeNativeMethodsOther.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Internal\FriendAccessAllowedAttribute.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityHelper.cs" />
+    <Compile Include="$(WpfSharedRoot)\ms\Internal\SecurityCriticalDataForSet.cs" />
+    <Compile Include="$(WpfSharedRoot)\MS\Win32\WpfLibraryLoader.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\PointUtil.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseInput.cs" />
+    <Compile Include="DrtLayoutBase.cs" />
+    <Compile Include="LayoutSuite.cs" />
+    <Compile Include="DrtFlowLayout.cs" />
+    <Compile Include="TextStaticSuite.cs" />
+    <Compile Include="TextDynamicChangesSuite.cs" />
+    <Compile Include="TextPanelStaticSuite.cs" />
+    <Compile Include="TextPanelDynamicChangesSuite.cs" />
+    <Compile Include="TextPanelIncrementalSimpleSuite.cs" />
+    <Compile Include="TextPanelIncrementalComplexSuite.cs" />
+    <Compile Include="TableBasicSuite.cs" />
+    <Compile Include="PaginationBasicSuite.cs" />
+    <Compile Include="PaginationApiSuite.cs" />
+    <Compile Include="DrtHyperlinkSuite.cs" />
+    <Compile Include="IContentHostSuite.cs" />
+    <Compile Include="TextIContentHostSuite.cs" />
+    <Compile Include="TextPanelIContentHostSuite.cs" />
+    <Compile Include="FlowDocumentPageIContentHostSuite.cs" />
+    <Compile Include="FlowBugsSuite.cs" />
+    <Compile Include="ContentElementEventsSuite.cs" />
+    <Compile Include="TextBlockRenderTrailingSpacesSuite.cs" />
+    <Compile Include="TextFlowRenderTrailingSpacesSuite.cs" />
+    <Compile Include="TextElementsSuite.cs" />
+    <Compile Include="InlineFlowDirectionSuite.cs" />
+    <None Include="DrtFiles\*">
+      <Link>DrtFiles\FlowLayout\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrtFiles\Fonts\arial.ttf" />
+    <Resource Include="DrtFiles\Fonts\arialbd.ttf" />
+    <Resource Include="DrtFiles\Fonts\arialbi.ttf" />
+    <Resource Include="DrtFiles\Fonts\ariali.ttf" />
+
+    <Resource Include="DrtFiles\Fonts\times.ttf" />
+    <Resource Include="DrtFiles\Fonts\timesbd.ttf" />
+    <Resource Include="DrtFiles\Fonts\timesbi.ttf" />
+    <Resource Include="DrtFiles\Fonts\timesi.ttf" />
+
+    <Resource Include="DrtFiles\Fonts\tahoma.ttf" />
+    <Resource Include="DrtFiles\Fonts\tahomabd.ttf" />
+
+    <Resource Include="DrtFiles\Fonts\cour.ttf" />
+    <Resource Include="DrtFiles\Fonts\courbd.ttf" />
+    <Resource Include="DrtFiles\Fonts\courbi.ttf" />
+    <Resource Include="DrtFiles\Fonts\couri.ttf" />
+
+  </ItemGroup>
+</Project>

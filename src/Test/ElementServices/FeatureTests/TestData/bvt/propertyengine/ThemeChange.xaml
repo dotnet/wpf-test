@@ -1,0 +1,29 @@
+<!--
+ Test autoaliasing in several template configurations. Verifier checks content is, or is not, shown in content presenters.
+-->
+
+<cmn:CustomStackPanel Background="Cyan" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:System="clr-namespace:System;assembly=Mscorlib" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:Ink="clr-namespace:System.Windows.Ink;assembly=PresentationCore"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.ThemeChangeVerifier">
+  <cmn:CustomStackPanel.Resources>
+    <x:Array x:Key="Colors" x:Type="{x:Type Color}">
+      <Color A="255" R="0"   G="0"   B="0"/>
+    </x:Array>
+
+    <DataTemplate DataType="{x:Type Ink:DrawingAttributes}">
+      <ComboBox ItemsSource="{StaticResource Colors}" SelectedIndex="0" />
+    </DataTemplate>
+  </cmn:CustomStackPanel.Resources>
+
+<Grid>
+  <StackPanel>
+    <ContentControl Name="DrawingAttributes">
+      <Ink:DrawingAttributes/>
+    </ContentControl>
+  </StackPanel>
+</Grid>
+</cmn:CustomStackPanel>

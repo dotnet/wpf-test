@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+
+    <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+    <PropertyGroup>
+        <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+        <AssemblyName>ControllerBrowserApp</AssemblyName>
+        <Platform>AnyCPU</Platform>
+        <OutputType>winexe</OutputType>
+        <OutputSubFolder>FeatureTests\ElementServices</OutputSubFolder>
+        <HostInBrowser>true</HostInBrowser>
+        <TargetZone>Internet</TargetZone>
+        <GenerateManifests>true</GenerateManifests>
+        <Install>False</Install>
+        <SignManifests>True</SignManifests>
+        <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    </PropertyGroup>
+    <PropertyGroup>
+        <ManifestKeyFile>$(WpfTest)\Common\clickoncetest.pfx</ManifestKeyFile>
+        <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <WarningLevel>1</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DebugSymbols>false</DebugSymbols>
+        <Optimize>true</Optimize>
+        <DefineConstants>TRACE</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ApplicationDefinition Include="ControllerBrowserApp.xaml" />
+        <Compile Include="ControllerBrowserApp.xaml.cs" />
+        <Compile Include="AssemblyInfo.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(TestRuntimeProject)">
+            <Private>false</Private>
+            <Name>TestRuntime</Name>
+            <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+        </ProjectReference>
+
+        <ProjectReference Include="..\..\Trusted\CoreTestsTrusted.csproj">
+            <Private>false</Private>
+            <Name>CoreTestsTrusted</Name>
+            <Project>{6D1A1BE6-D461-4726-A73E-DA7F0AAD1368}</Project>
+        </ProjectReference>
+
+        <ProjectReference Include="..\..\BuildSources\ElementServicesTest.csproj">
+            <Private>false</Private>
+            <Name>ElementServicesTest</Name>
+            <Project>{CA0FEFED-E08A-4eb6-AB82-E70AB81C931B}</Project>
+        </ProjectReference>
+
+        <Reference Include="System.dll" />
+        <Reference Include="System.Xml.dll" />
+        <Reference Include="System.Windows.Forms.dll" />
+        <Reference Include="System.Drawing.dll" />
+        <Reference Include="System.Runtime.Remoting.dll" />
+        <Reference Include="System.Web.dll" />
+        <Reference Include="System.Web.ApplicationServices.dll" />
+        <Reference Include="System.Data.dll" />
+        <Reference Include="UIAutomationTypes.dll" />
+        <Reference Include="UIAutomationProvider.dll" />
+        <Reference Include="WindowsBase.dll" />
+        <Reference Include="PresentationCore.dll" />
+        <Reference Include="PresentationFramework.dll" />
+    </ItemGroup>
+    
+    <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>

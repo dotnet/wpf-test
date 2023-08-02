@@ -1,0 +1,55 @@
+﻿<!--
+	Testing Hosted a win32 control under a scrollviewer
+-->
+
+<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="HwndHostonScrollViewSimple"
+    WindowTitle="Testing Hosted a win32 control under a scrollviewer" Visibility="Visible"
+ Name="window" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Hosting;assembly=CoreTestsTrusted">
+    <StackPanel>
+      <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+		<Border Background="red" Width="600" Height="600">
+			<ScrollViewer>
+				<Border Background="lightblue">
+					<StackPanel>
+						<Border Background="yellow"><StackPanel><Button>Button1</Button></StackPanel></Border>
+						<Border Background="yellow">
+							<StackPanel xmlns:host="clr-namespace:Avalon.Test.CoreUI.Hosting;assembly=CoreTestsTrusted">
+								<host:Win32ButtonElement Name="hosted" Painted="paint" Width="200" Height="200">	
+								</host:Win32ButtonElement>
+								<x:Code>
+								<![CDATA[
+									
+									void paint(object o, EventArgs args)
+									{
+										Microsoft.Test.Logging.GlobalLog.LogStatus("The button is painted");
+
+										System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(
+                                                                                    System.Windows.Threading.DispatcherPriority.Background,
+                                                                                    new System.Windows.Threading.DispatcherOperationCallback(ClosingWindow),
+                                                                                    null
+                                                                                    );
+									}
+
+									object ClosingWindow(object o)
+									{
+										
+										System.Windows.Application.Current.MainWindow.Close();
+										Microsoft.Test.Logging.TestLog.Current.Result = Microsoft.Test.Logging.TestResult.Pass;
+										return null;
+									}
+									
+								 ]]></x:Code>
+								
+							</StackPanel>
+						</Border>
+						<Border Background="blue"><StackPanel><Button>Button3</Button></StackPanel></Border>
+					</StackPanel>
+				</Border>
+			</ScrollViewer>
+		</Border>
+	   </StackPanel>
+    </StackPanel>
+</Page>

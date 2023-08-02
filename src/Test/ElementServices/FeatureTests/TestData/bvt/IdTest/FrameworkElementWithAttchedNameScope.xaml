@@ -1,0 +1,25 @@
+﻿<cmn:CustomCanvas
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:id="clr-namespace:Avalon.Test.CoreUI.IdTest;assembly=ElementServicesTest"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.FrameworkElementWithAttachedNameScope" 
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+    xmlns:MappingPIGen2="clr-namespace:Avalon.Test.CoreUI.IdTest;assembly=ElementServicesTest"
+>
+  <Canvas.Resources>
+    <NameScope x:Key="CustomINameScopeInResources"/>
+  </Canvas.Resources>
+  
+  <Canvas Name="canvas1" NameScope.NameScope="{DynamicResource CustomINameScopeInResources}">
+    <Button Name="Button2" />
+    <Canvas Name="canvas3">
+      <NameScope.NameScope>
+        <NameScope />
+      </NameScope.NameScope>
+      <Button Name="button4" />
+      <Button Name="button2" />
+      <Button Name="button5" NameScope.NameScope="{DynamicResource CustomINameScopeInResources}" />
+    </Canvas>    
+  </Canvas>
+</cmn:CustomCanvas>

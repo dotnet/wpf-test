@@ -1,0 +1,152 @@
+﻿<FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <FlowDocument TextAlignment="Left" PagePadding="0" FontSize="9pt">
+    <FlowDocument.Resources>
+        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type TableRow}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="#666666" Offset="0" />
+                                <GradientStop Color="#333333" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="{x:Type TableCell}">
+            <Setter Property="Padding" Value="2,2,2,2" />
+            <Setter Property="Foreground" Value="#cc6600" />
+            <Setter Property="BorderThickness" Value="1,1,1,1" />
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="#999999" Offset="0" />
+                                <GradientStop Color="#cccccc" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextAlignment" Value="center" />
+        </Style>
+    </FlowDocument.Resources>
+    <Paragraph>
+        <LineBreak />
+    </Paragraph>
+    <!-- Task 1 "Typographic Table: Allow for empty rows in tables" -->
+    <Table CellSpacing="2">
+        <Table.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="#cccccc" Offset="0" />
+                        <GradientStop Color="#333333" Offset="1" />
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Table.Background>
+        <TableRowGroup>
+            <TableRow>
+                <TableRow.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="#333399" Offset="0" />
+                                <GradientStop Color="#333366" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </TableRow.Background>
+                <TableCell FontSize="16pt" FontWeight="Bold" Foreground="#cccccc">
+                    <Paragraph>Regular table with empty rows</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow />
+            <TableRow />
+            <TableRow>
+                <TableCell>
+                    <Paragraph>Empty rows before and after this row</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow />
+            <TableRow>
+                <TableCell>
+                    <Paragraph>Empty row before this row</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                    <Paragraph>Empty row after this row</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow />
+            <TableRow />
+            <TableRow />
+            <TableRow />
+            <TableRow>
+                <TableCell>
+                    <Paragraph>Three empty rows before and two empty rows after this row</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow />
+            <TableRow />
+        </TableRowGroup>
+    </Table>
+    <Paragraph>
+        <LineBreak />
+    </Paragraph>
+    <!-- Irregular table with empty rows -->
+    <Table CellSpacing="2">
+        <Table.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="#cccccc" Offset="0" />
+                        <GradientStop Color="#333333" Offset="1" />
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Table.Background>
+        <TableRowGroup>
+            <TableRow />
+            <TableRow>
+                <TableCell RowSpan="153">
+                    <Paragraph>In an effort to curtail the growing problem of child safety on the Internet, the International Centre for Missing and Exploited Children, INTERPOL and Microsoft held their second international training program for worldwide law enforcement personnel.</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>Learn how Microsoft is working to build software and services that will help better protect customers and the industry.</Paragraph>
+                </TableCell>
+                <TableCell RowSpan="6">
+                    <Paragraph>You may have gone to TechFest in the past, but this year's event promises to be better than ever. There is no better way to get a broad overview of recent work from the 700-strong research staff in our five labs. Meet the researchers. Get cool gifts and a chance to win prizes.</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>Do you send bulk e-mail over the Internet? IT's SMARTHOST e-mail relay service is being retired and replaced by the new SMTPHOST service.</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow />
+            <TableRow>
+                <TableCell RowSpan="3">
+                    <Paragraph>In his first press interview since assuming his new role as vice president of worldwide services, CIO Rick Devenuti discusses Microsoft Consulting Services' relationship with channel partners and its business strategy.</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>"Microsoft's core revenue-generating business is still software, and the role of Microsoft Services is to help drive adoption, deployment and management of Microsoft's products and technologies for its customers and partners," says Devenuti. "Therefore, customer and partner satisfaction -- not revenue or profitability -- are Microsoft Services' main business objectives."</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                    <Paragraph>The Microsoft Business Plan gives you a way to get quickly up to date on the major broad initiatives and company priorities that we all need to focus on to continue to be successful.</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                    <Paragraph />
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+    </FlowDocument>
+</FlowDocumentScrollViewer>

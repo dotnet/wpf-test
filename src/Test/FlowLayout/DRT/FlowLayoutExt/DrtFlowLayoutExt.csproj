@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtFlowLayoutExt</AssemblyName>
+    <TestCode>true</TestCode>
+    <AssemblyIdentityVersionName>WCP</AssemblyIdentityVersionName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LinkSubsystem>console</LinkSubsystem>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="..\FlowLayout\DrtLayoutBase.cs" />
+    <Compile Include="..\FlowLayout\LayoutSuite.cs" />
+    <Compile Include="DrtFlowLayoutExt.cs" />
+    <Compile Include="FlowLayoutExtSuite.cs" />
+    <Compile Include="MyDocumentPageView.cs" />
+    <Compile Include="SplitPage.cs" />
+    <Compile Include="DrtElements.cs" />
+    <Compile Include="TextOMWrapper.cs" />
+    <Compile Include="TextPanelStaticSuite.cs" />
+    <Compile Include="TextPanelFiguresSuite.cs" />
+    <Compile Include="TableBugsSuite.cs" />
+    <Compile Include="TableBugs2Suite.cs" />
+    <Compile Include="TableCellAlignmentSuite.cs" />
+    <Compile Include="TableColumnsSuite.cs" />
+    <Compile Include="TableDynamicSuite.cs" />
+    <Compile Include="TableNestingSuite.cs" />
+    <Compile Include="TableOMSuite.cs" />
+    <Compile Include="TablePaginationBasicSuite.cs" />
+    <Compile Include="TablePaginationRowSpanSuite.cs" />
+    <Compile Include="TableSpansSuite.cs" />
+    <Compile Include="TableStyleInheritanceSuite.cs" />
+    <Compile Include="TableTasksSuite.cs" />
+    <Compile Include="TableXamlSuite.cs" />
+    <Compile Include="TextViewSuite.cs" />
+    <Compile Include="TextViewMultiPageSuite.cs" />
+    <Compile Include="TextViewTextBlockSuite.cs" />
+    <Compile Include="TextViewTextFlowSuite.cs" />
+    <Compile Include="BringIntoViewSuite.cs" />
+    <None Include="DrtFiles\*">
+        <Link>DrtFiles\FlowLayoutExt\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DrtFiles\Win8\*">
+        <Link>DrtFiles\FlowLayoutExt\Win8\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrtFiles\arial.ttf" />
+  </ItemGroup>
+</Project>

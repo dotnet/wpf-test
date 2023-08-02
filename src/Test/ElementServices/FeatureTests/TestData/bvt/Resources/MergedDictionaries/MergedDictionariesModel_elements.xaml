@@ -1,0 +1,57 @@
+<!--
+/*******************************************************************
+ * Purpose: Snippets of xaml used for tree construction in
+ *          ControlTemplate model.
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/Resources/MergedDictionaries/MergedDictionariesModel_elements.xaml $
+********************************************************************/
+-->
+<StackPanel
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+  <!-- Foreign Keys -->
+  <SolidColorBrush x:Key="InternalForeign" TestId="InternalForeignDup">Red</SolidColorBrush>
+  <SolidColorBrush x:Key="FOO" TestId="Foreign_extend" Color="{DynamicResource Extended}"></SolidColorBrush>
+  
+  <!-- ExternalRD Keys -->
+  <SolidColorBrush x:Key="InternalExternal" TestId="InternalExternalDup1">Red</SolidColorBrush>
+  <SolidColorBrush x:Key="External1" TestId="External1">Blue</SolidColorBrush>
+  <SolidColorBrush x:Key="Ext_Ext" TestId="External1_extend" Color="{DynamicResource Extended}"></SolidColorBrush>
+  
+  <SolidColorBrush x:Key="External2" TestId="External2">Yellow</SolidColorBrush>
+  <Color x:Key="Extended" TestId="External2_extended">Green</Color>
+
+  <!-- Standard Resource Dictionary -->
+  <ResourceDictionary TestId="ResourceDictionary">    
+    <SolidColorBrush x:Key="InternalLocal" TestId="InternalLocalDup">Red</SolidColorBrush>    
+    
+    <ResourceDictionary.MergedDictionaries TestId="MergedDictionary">      
+      <ResourceDictionary TestId="InternalDict1">
+        <SolidColorBrush x:Key="FOO" TestId="DupKey">Green</SolidColorBrush>        
+        <SolidColorBrush x:Key="FOO" TestId="Regular">Green</SolidColorBrush>
+        <SolidColorBrush x:Key="FOO" TestId="Loc_extend" Color="{DynamicResource Extended}"></SolidColorBrush>
+      </ResourceDictionary>
+      <ResourceDictionary TestId="InternalDict2">        
+        <SolidColorBrush x:Key="FOO" TestId="Regular">Orange</SolidColorBrush>
+        <Color x:Key="Extended" TestId="Loc_extension">Green</Color>
+      </ResourceDictionary>
+      
+      <ResourceDictionary Source="ExternalRD1.xaml" TestId="ExternalDict1" />
+      <ResourceDictionary Source="ExternalRD2.xaml" TestId="ExternalDict2" />
+    </ResourceDictionary.MergedDictionaries>
+  </ResourceDictionary>
+ 
+  <Button Name="FrameworkElement" Background="{FOO Key}">
+    Resourced FE
+  </Button>
+
+
+</StackPanel>

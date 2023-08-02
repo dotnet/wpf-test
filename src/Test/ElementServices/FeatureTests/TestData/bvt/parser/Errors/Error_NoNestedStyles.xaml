@@ -1,0 +1,33 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<!--
+/*******************************************************************
+ * Purpose: Attempts to define a nested style. Verifies no nested styles parse exception
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/parser/Errors/Error_NoNestedStyles.xaml $
+ ********************************************************************/
+-->
+<StackPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+    <StackPanel.Resources>
+        <Style x:Key="foo" TargetType="{x:Type Button}">
+          <Style.Setters>
+            <Setter Property="Style">
+                <Setter.Value>
+                    <Style />
+                </Setter.Value>
+            </Setter>
+          </Style.Setters>
+        </Style>
+    </StackPanel.Resources>
+    
+    <Button Style="{DynamicResource foo}" />
+    
+</StackPanel>
+</Page>

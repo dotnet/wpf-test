@@ -1,0 +1,234 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="LightSteelBlue">
+<Grid Width="800">
+
+  <Grid.Resources>
+    <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="PagePadding" Value="0" />
+    </Style>
+    <Style x:Key="{x:Type FlowDocumentScrollViewer}" TargetType="{x:Type FlowDocumentScrollViewer}">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+    </Style>
+  </Grid.Resources>
+
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  </Grid.RowDefinitions>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="1">
+        <FlowDocument Background="White">
+            <Paragraph />
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="1">
+        <FlowDocument Background="White">
+            <Paragraph><LineBreak /></Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="3">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Label Element displays text. It is meant for UI Label scenarios. Most text scenarios should use the TextPanel. Label Element displays text. It is meant for UI Label scenarios. Most text scenarios should use the TextPanel.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="3">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Label Element displays text. It is meant for UI Label scenarios. 
+            <Span Background="LightBlue" FontWeight="Bold">
+              Most text scenarios should use the TextPanel. 
+              <Span Background="Beige" FontStyle="Italic" FontFamily="./DrtFiles/Fonts/#Times New Roman">Label Element displays text. </Span>
+            </Span>
+            <Span Background="LightGreen" FontStyle="Italic" Foreground="Navy" FontSize="12pt">It is meant for UI Label scenarios. </Span>
+            Most text scenarios should use the TextPanel. 
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="5">
+        <FlowDocument Background="White">
+            <Paragraph><TextBlock>[ inline object ]</TextBlock></Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="5">
+        <FlowDocument Background="White">
+            <Paragraph>0-width [<TextBlock></TextBlock>] inline object</Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="7">
+        <FlowDocument Background="White">
+            <Paragraph>
+            <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="None">
+                [very_long_inlie_object_very_long_inlie_object_very_long_inlie_object_very_long_inlie_object]
+            </TextBlock>
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="7">
+        <FlowDocument>
+            <Paragraph />
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="9">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Wrapping of inline objects 
+            <TextBlock>[ 1st inline object 1st inline object ]</TextBlock>
+            <TextBlock>[ 2nd inline object 2nd inline object ]</TextBlock>
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+    <Border />
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="9">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Text with no text wrapping: TextWrap = [ NoWrap ].
+            <TextBlock> + </TextBlock>
+            Text with no text wrapping: TextWrap = [ NoWrap ].
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+    <Border />
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="11">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Very_long_word_very_long_word_very_long_word_very_long_word_very_long_word 
+            Text with default text wrapping: TextWrap = [Wrap].
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+    <Border />
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="11">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Very_long_word_very_long_word_very_long_word_very_long_word_very_long_word 
+            Text with emergency text wrapping: TextWrap = [ Emergency ].
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+  <Border />
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="13">
+        <FlowDocument Background="White" TextAlignment="Left">
+            <Paragraph>
+            Text alignment test: Horizontal alignment = 
+            <TextBlock FontWeight="Bold" Foreground="Navy">[ Left ]</TextBlock>. 
+            Text_alignment test: Horizontal alignment = 
+            <TextBlock FontWeight="Bold" Foreground="Navy">[ Left ]</TextBlock>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="13">
+        <FlowDocument Background="White" TextAlignment="Right">
+            <Paragraph>
+            Text alignment test: Horizontal alignment = 
+            <TextBlock FontWeight="Bold" Foreground="Navy">[ Right ]</TextBlock>. 
+            Text_alignment test: Horizontal alignment = 
+            <TextBlock FontWeight="Bold" Foreground="Navy">[ Right ]</TextBlock>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="15">
+        <FlowDocument Background="White" TextAlignment="Center">
+            <Paragraph>
+            Text alignment test: Horizontal alignment = 
+            <TextBlock FontWeight="Bold" Foreground="Navy">[ Center ]</TextBlock>. 
+            Text_alignment test: Horizontal alignment = 
+            <TextBlock FontWeight="Bold" Foreground="Navy">[ Center ]</TextBlock>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="15">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Text trimming test with no text wrapping. Text Trimming = None None None
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="17">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Text trimming test with no text wrapping. Text Trimming = CharacterEllipsis
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="17">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Text trimming test with no text wrapping. Text Trimming = WordEllipsis
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Height="50" VerticalAlignment="Top" Grid.Column="1" Grid.Row="19">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Vertical alignment of the content. Content is : Top aligned.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Height="50" VerticalAlignment="Bottom" Grid.Column="3" Grid.Row="19">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Vertical alignment of the content. Content is : Bottom aligned.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Height="50" VerticalAlignment="Center" Grid.Column="1" Grid.Row="21">
+        <FlowDocument Background="White">
+            <Paragraph>
+            Vertical alignment of the content. Content is : Center aligned.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+</Grid>
+</Border>

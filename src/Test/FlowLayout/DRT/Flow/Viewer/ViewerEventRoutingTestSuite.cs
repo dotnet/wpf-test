@@ -29,7 +29,7 @@ namespace DRT
         /// </summary>
         static ViewerEventRoutingTestSuite()
         {
-            _piCurrentViewer = typeof(FlowDocumentReader).GetProperty("CurrentViewer", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_piCurrentViewer = typeof(FlowDocumentReader).GetProperty("CurrentViewer", BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace DRT
         {
             AddEventHandlers();
             _readerViewer.AddHandler(CustomEventID, new RoutedEventHandler(OnCustomEventOnViewer));
-            _embeddedViewer = _piCurrentViewer.GetValue(_readerViewer, null) as Control;
+            _embeddedViewer = s_piCurrentViewer.GetValue(_readerViewer, null) as Control;
             DRT.Assert(_embeddedViewer != null, "Cannot find embedded viewer.");
             _embeddedViewer.AddHandler(CustomEventID, new RoutedEventHandler(OnCustomEventOnEmbeddedViewer));
         }
@@ -411,6 +411,6 @@ namespace DRT
         private Control _embeddedViewer;
         private Frame _frame;
         private StringBuilder _eventRoute;
-        private static PropertyInfo _piCurrentViewer;
+        private static PropertyInfo s_piCurrentViewer;
     }
 }

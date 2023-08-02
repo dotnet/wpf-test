@@ -1,0 +1,55 @@
+<cmn:CustomCanvas
+    x:Class="Avalon.Test.CoreUI.Parser.MyName.Page__1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    >
+  
+      <Image Visibility="Collapsed">
+        <Image.Triggers>
+          <EventTrigger RoutedEvent="Image.Loaded">
+            <EventTrigger.Actions>
+              <BeginStoryboard>
+                <BeginStoryboard.Storyboard>
+                  <Storyboard>
+<!--
+BUG1: Very weird interaction here.  With the existence of the 
+<?Mapping XmlNamespace="controls" ClrNamespace="AvalonApplication3" ?>
+mapping line at the top, we get the following error when trying to resolve storyboard stuff:
+"The name 'LowerEllipseTransform' could not be resolved in the name scope of 'System.Windows.Controls.Image'." -->
+
+                    <ColorAnimation To="Yellow" Duration="0:0:2" AutoReverse="true" RepeatBehavior="Forever"
+                      Storyboard.TargetName="TheBrush"
+                      Storyboard.TargetProperty="Color" />
+
+                  </Storyboard>
+                </BeginStoryboard.Storyboard>
+              </BeginStoryboard>
+            </EventTrigger.Actions>
+          </EventTrigger>
+        </Image.Triggers>
+        <Image.Source>
+          <DrawingImage x:Name="PlaceholderDrawingImage">
+            <DrawingImage.Drawing>
+              <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                      <Pen Thickness="15" StartLineCap="Round" EndLineCap="Round">
+                        <Pen.Brush>
+                          <SolidColorBrush x:Name="TheBrush" Color="Black" />
+                        </Pen.Brush>
+                      </Pen>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                      <LineGeometry StartPoint="40,40" EndPoint="460,460" />
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>                </DrawingGroup.Children>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+
+
+</cmn:CustomCanvas>

@@ -1,0 +1,22 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted">
+<DockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted"
+ xmlns:sys="clr-namespace:System.Collections;assembly=mscorlib"
+> 
+	<!-- 
+		We are using x:Shared being in the context of something that doesn't support
+		demand load children (MyClass.MyIDict). Thus x:Shared doesn't make sense there. 
+		An exception should be thrown.
+	-->
+	<Button>
+		<cc:MyClass.MyIDict>
+                 <sys:Hashtable> 
+			<SolidColorBrush x:Key="Foo" x:Shared="true" Color="Red" />
+                 </sys:Hashtable>
+		</cc:MyClass.MyIDict> 
+        </Button>
+
+</DockPanel>
+</Page>

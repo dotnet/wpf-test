@@ -1,0 +1,32 @@
+<cmn:CustomPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.StoryboardsInStyleVerify"
+>
+ <Page.Resources>
+  <Storyboard x:Key="OpacityAnim">
+   <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+     From="1.0" To="0.25" Duration="0:0:1" 
+     AutoReverse="True" RepeatBehavior="Forever"/>
+  </Storyboard>
+  <Style TargetType="{x:Type Rectangle}" x:Key="style">
+   <Setter Property="Fill" Value="Blue"/>
+   <Style.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+     <BeginStoryboard Name="OpacityBegin" Storyboard="{StaticResource OpacityAnim}"/>
+    </EventTrigger>
+    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+     <PauseStoryboard BeginStoryboardName="OpacityBegin" />
+    </EventTrigger>
+    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+     <ResumeStoryboard BeginStoryboardName="OpacityBegin" />
+    </EventTrigger>
+   </Style.Triggers>
+  </Style>
+ </Page.Resources>
+ <Canvas >
+   <Rectangle Width="100" Height="100" Style="{DynamicResource style}" Name="rect" Canvas.Top="10"/>
+   <Button Name="button" Canvas.Top="200"/>
+ </Canvas>
+</cmn:CustomPage>

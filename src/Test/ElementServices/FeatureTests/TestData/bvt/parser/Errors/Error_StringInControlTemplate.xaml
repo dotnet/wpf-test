@@ -1,0 +1,55 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+<!--
+/*******************************************************************
+ * Purpose: Verifies parse exception when a string is defined in a ControlTemplate.
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/parser/Errors/Error_StringInControlTemplate.xaml $
+********************************************************************/
+-->
+<?Mapping XmlNamespace="mscorlib_System" ClrNamespace="System" Assembly="mscorlib" ?>
+
+<Canvas 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+>
+  
+    <Button Style="{x:Null}">
+        <Button.Template>
+        
+            <ControlTemplate TargetType="{x:Type Button}">
+                <Button>
+                    <sys:String>StringText</sys:String>
+                </Button>
+            </ControlTemplate>
+            
+        </Button.Template>
+    </Button>
+    
+    <!--
+    <Button>
+        <Button.Style>
+        
+            <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Button>
+                        <sys:String>StringText</sys:String>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+            </Style>
+            
+        </Button.Style>
+    <Button>
+    -->
+    
+</Canvas>
+</Page>

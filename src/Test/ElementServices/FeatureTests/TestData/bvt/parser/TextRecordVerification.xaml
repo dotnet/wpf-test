@@ -1,0 +1,177 @@
+﻿
+
+
+
+<cmn:CustomDockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:sys="clr-namespace:System.Collections;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xml:space="default"
+ Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.TextRecordVerify" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen3="clr-namespace:System.Collections;assembly=mscorlib"
+>
+
+	<!-- All of these are from Autodata. Index 7 in each of the language-->
+	<!-- Have introduced tabs, spaces and newlines in them, ALWAYS after the first 
+	character in the string  
+	Newlines give rise to spaces, as per the spec -->
+	
+	<!-- Devanagari -->
+	<Button Name="Element0">उ	 नीहरू किन नेपाली मात्र बोल्न सक्दैनन् ?</Button>        
+	
+	<!-- Japanese -->
+    <Button Name="Element1">な
+    ぜ、みんな日本語を話してくれないのか？
+    </Button>        
+    
+    <!-- Kannada -->
+    <Button Name="Element2">ಅ
+    ವರು ಕನ್ನಡ ಮಾತನಾಡಬಹುದಲ್ಲಾ?
+	</Button>
+    
+    <!-- Thai -->
+    <!-- 
+    TODO: PS Item 9673: CRLF in Thai should be replaced with non-width space, and not normal space 
+    Change the verification accordingly.
+    Till the PS item gets done, we have a normal space.
+    -->
+    <Button Name="Element3">ทำ
+    ไมเขาถึงไม่พูดภาษาไทย</Button>
+    
+    <!-- chinesesimplified -->        
+    <Button Name="Element4">他
+    们为什么不说中文（中国）？</Button>
+    
+    <!-- New lines and spaces (internal and surrounding) -->
+    <CheckBox Name="Element5">
+	    Hey    \n\x      Dude
+    </CheckBox>
+    
+    <!-- Tabs, newlines and spaces -->
+    <CheckBox Name="Element6">
+		Hey	dear	Dude
+    </CheckBox>
+    <CheckBox Name="Element7">
+		Hey
+		Dude 
+    </CheckBox>
+
+	<!-- 
+	Text nodes mixed with other nodes 
+	-->
+	<Button Name="Element8">    
+    <ComboBox>
+		Hey Dude     
+		<Button>***</Button>
+	</ComboBox>
+	</Button>
+    
+    <Button Name="Element9">
+    <ComboBox>
+        <Button>***</Button>
+		Hey Dude
+    </ComboBox>
+    </Button>
+    
+    <Button Name="Element10">
+    <ComboBox>
+		Hey dear   
+		<Button>***</Button>   
+		Dude
+    </ComboBox>
+    </Button>
+    
+    
+    <!-- Space inside an attribute value. -->
+    <Button Name="Element11" Background="  Red" />
+
+	<!-- English and other languages text mixed -->
+	<Button Name="Element12">
+	ทำไมเขาถึงไม่พูดภาษาไทย
+ 	Hi
+ 	他们为什么不说中文（中国）？
+	Dude	
+	उनीहरू किन नेपाली मात्र बोल्न सक्दैनन् ?
+	</Button>
+	
+	<!-- The &#x000A; should be treated as a normal space, and should be collapsed. -->
+	<Button Name="Element13">&#x000A;Hey Dude</Button>
+	
+	<!-- Expected result: 
+	No exception, since even if Color doesn't implement IAddChild or IList, 
+	it shouldn't throw an exception, since it doesn't get any text 
+	(all text should be collapsed).
+	-->
+	<Button Name="Element14">
+		<Button.Resources>
+			<Color x:Key="ControlBackground" A="100" G="255">   
+					
+			</Color> 
+		</Button.Resources>
+	</Button>
+
+	<!-- XML:SPACE="PRESERVE" CASES -->
+	
+	<Button xml:space="preserve" Name="Element15">  Hey     Dude  </Button>
+
+	<Button xml:space="preserve" Name="Element16">Hey
+	    Dude
+	</Button>
+	
+	<!-- Expected result:  
+	[space]Hey Dude, since &#x000A; is just like normal space
+	-->
+	<Button xml:space="preserve" Name="Element17">&#x0020;Hey Dude</Button>
+	
+	<!-- XML:SPACE="DEFAULT" CASES AGAIN-->
+	<!-- 
+	cc:MyChildren implements IAddChild 
+	Expected result: The strings we add land up in the private _children array of MyChildren
+	-->
+	<Button Name="Element18">
+		    <cc:MyClass.MyChildren>
+		        <cc:MyChildren>
+		            Hello World
+		            <Button />
+		            Hi There
+		        </cc:MyChildren>
+		    </cc:MyClass.MyChildren>
+	</Button>
+	
+	<!-- 
+	Text directly inside a Complex DP. 
+	Expected result: Same as if Background="Red" was used. 
+	-->
+	<Button Name="Element19">
+	    <Button.Background>
+	        Red
+	    </Button.Background>
+	</Button>
+	
+	<!--
+	Text directly inside a Complex CLR property (SolidColorBrush.Color). 
+	Expected result: Same as if Color="Green" was used. 
+	-->
+	<Button Name="Element20">
+	    <Button.Background>
+	        <SolidColorBrush>
+	            <SolidColorBrush.Color>
+	                Green
+	            </SolidColorBrush.Color>
+	        </SolidColorBrush>
+	    </Button.Background>
+	</Button>
+	    
+	<!--
+	TODO: NOT YET IMPLEMENTED IN PRODUCT CODE. ENABLE LATER
+	ArrayList implements IList
+	Expected result: The string we add lands up in the ArrayList
+	
+	<Button Name="Element21">
+		    <cc:MyClass.MyArrayList>
+		        <sys:ArrayList>
+		            Hey Dude
+		        </sys:ArrayList>
+		    </cc:MyClass.MyArrayList>
+	</Button>
+	-->
+	
+</cmn:CustomDockPanel>

@@ -27,7 +27,7 @@ namespace DRT
         static LayoutDumpTestSuite()
         {
             Type typeLayoutDump = DrtFlowBase.FrameworkAssembly.GetType("MS.Internal.LayoutDump");
-            _miDumpLayout = typeLayoutDump.GetMethod("DumpLayoutTree", BindingFlags.Static | BindingFlags.NonPublic);
+            s_miDumpLayout = typeLayoutDump.GetMethod("DumpLayoutTree", BindingFlags.Static | BindingFlags.NonPublic);
         }
 
         /// <summary>
@@ -44,12 +44,12 @@ namespace DRT
         /// </summary>
         protected override void DumpContent(XmlTextWriter writer)
         {
-            _miDumpLayout.Invoke(null, new object[] { writer, "LayoutDump", this.Root.Child });
+            s_miDumpLayout.Invoke(null, new object[] { writer, "LayoutDump", this.Root.Child });
         }
 
         /// <summary>
         /// Method info for dump layout function.
         /// </summary>
-        private static MethodInfo _miDumpLayout;
+        private static MethodInfo s_miDumpLayout;
     }
 }
