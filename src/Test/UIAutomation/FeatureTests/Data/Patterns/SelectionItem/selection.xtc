@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<XTC
+>
+    <TEST
+            Auto="1"
+            Frequency="Weekly"
+            Owner="Microsoft"
+            Priority="1"
+    >
+        <DIMENSION
+                Type="Class"
+        />
+        <DIMENSION
+                Name="AdditionalTests"
+                Value="*"
+        />
+        <DIMENSION
+                Name="Language"
+                Value="*"
+        />
+        <DIMENSION
+                Name="Platform"
+                Value="*"
+        />
+        <SCENARIO
+                ID="7522451"
+                Language="*:28203"
+                Platform="*:16169"
+        >
+            <INIT
+                    Class="Avalon.Test.ComponentModel.UiaSelectionItemSelectionTest"
+                    Assembly="UiAutoFTUtils"
+                    TestType="UIAutomation"
+            />
+		<VARIATION
+		    ID="1"
+		>
+		    <UIAPatternTest
+			XamlFile="SelectionItemPattern.xaml"
+			ControlName="listboxitem"
+			>
+			<Property Name="InitialIsSelected" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="3"
+		>
+		    <UIAPatternTest
+			XamlFile="SelectionItemPattern.xaml"
+			ControlName="tabitem"
+			>
+			<Property Name="InitialIsSelected" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="5"
+		>
+		    <UIAPatternTest
+			XamlFile="SelectionItemPattern.xaml"
+			ControlName="treeviewitem"
+			>
+			<Property Name="InitialIsSelected" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="7"
+		>
+		    <UIAPatternTest
+			XamlFile="SelectionItemPattern.xaml"
+			ControlName="comboboxitem"
+			>
+			<Property Name="InitialIsSelected" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="9"
+		>
+		    <UIAPatternTest
+			XamlFile="SelectionItemPattern.xaml"
+			ControlName="radiobutton"
+			>
+			<Property Name="InitialIsSelected" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+	</SCENARIO>
+        <STEP
+                Index="1"
+                Loader="FullTrust"
+                LoaderSwitch="UIAutoLoader.exe"
+                Run="000001.xtc"
+        >
+            <FILE
+                    Path="*\FeatureTests\UIAutomation\*"
+                    Type="support"
+            />
+        </STEP>
+    </TEST>
+</XTC>
