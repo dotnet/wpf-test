@@ -1,0 +1,72 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"
+    xmlns:helpers="clr-namespace:Microsoft.Test.Controls.Helpers;assembly=ControlsCommon"      
+    xmlns:local="clr-namespace:Microsoft.Test.Controls"
+    x:Name="GridPanel"
+    Height="500" Width="500">
+  <Grid.Resources>
+    <helpers:VisibilityToBoolConverter x:Key="VisibilityToBoolConverter" />
+  </Grid.Resources>
+
+  <Grid.RowDefinitions>
+    <RowDefinition Height="Auto"/>
+    <RowDefinition Height="*"/>
+    <RowDefinition Height="Auto"/>
+  </Grid.RowDefinitions>
+
+  <StackPanel Grid.Row="0" Orientation="Horizontal">
+    <TextBlock Text="WPF ResourceDictionary Test" />
+    <Button HorizontalAlignment="Center" Content="Debug" Name="btn_Debug" />
+  </StackPanel>
+
+  <DockPanel Grid.Row="1">
+    <Menu Name="tabsMenu" DockPanel.Dock="Top">
+      <MenuItem Header="Tabs" ItemsSource="{Binding ElementName=testTabControl, Path=Items}">
+        <MenuItem.ItemTemplate>
+          <DataTemplate>
+            <MenuItem x:Name="theMenuItem"
+                      Header="{Binding Path=Content}"
+                      IsCheckable="True"
+                      IsChecked="{Binding Path=Visibility, Converter={StaticResource VisibilityToBoolConverter}, Mode=OneWay}"
+                      Command="{Binding ElementName=testTabControl, Path=DataContext.ToggleTab}"
+                      CommandParameter="{Binding ElementName=theMenuItem, Path=IsChecked}"/>
+          </DataTemplate>
+        </MenuItem.ItemTemplate>
+      </MenuItem>
+    </Menu>
+
+    <TabControl Name="testTabControl"
+                ItemsSource="{Binding TabList}"
+                IsSynchronizedWithCurrentItem="False"
+                TabStripPlacement="Top">
+      <TabControl.ItemContainerStyle>
+        <Style TargetType="TabItem">
+          <Setter Property="Visibility" Value="{Binding Visibility}" />
+          <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+          <Setter Property="HeaderTemplate">
+            <Setter.Value>
+              <DataTemplate>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="{Binding Content}" />
+                  <Button Name="ti_CloseButton" Grid.Column="1" Margin="5,1,1,1"
+                          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.CloseTab}"
+                          CommandParameter="{Binding}"
+                          Content="X">
+                  </Button>
+                </Grid>
+              </DataTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </TabControl.ItemContainerStyle>
+    </TabControl>
+
+  </DockPanel>
+</Grid>

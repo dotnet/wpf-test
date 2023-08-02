@@ -1,0 +1,241 @@
+<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+        <Button Name="topButton" Content="Top Button" />
+        <Canvas Name="panel" Height="450" Background="LightBlue">
+
+            <TreeView Name="tv" Canvas.Top="3" Canvas.Left="3" Height="200" Width="140">
+                <TreeViewItem Name="tvi0" IsExpanded="true" IsSelected="true">
+                    <TreeViewItem.Header>
+                        <StackPanel>
+                            <Button Name="e0a">e0a</Button>
+                            <!--<Button Name="e0b">e0b</Button>-->
+                            <TextBlock><Hyperlink Name="e0b">e0b</Hyperlink></TextBlock>
+                        </StackPanel>
+                    </TreeViewItem.Header>
+                    <TreeViewItem Name="tvi00">
+                        <TreeViewItem.Header>
+                            <StackPanel>
+                                <!--<Button Name="e00a">e00a</Button>-->
+                                <TextBlock><Hyperlink Name="e00a">e00a</Hyperlink></TextBlock>
+                                <Button Name="e00b">e00b</Button>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem Name="tvi01">
+                        <TreeViewItem.Header>
+                            <StackPanel>
+                                <!--<Button Name="e01a">e01a</Button>-->
+                                <TextBlock><Hyperlink Name="e01a">e01a</Hyperlink></TextBlock>
+                                <Button Name="e01b">e01b</Button>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Name="tvi1" IsExpanded="true">
+                    <TreeViewItem.Header>
+                        <StackPanel>
+                            <!--<Button Name="e1a">e1a</Button>-->
+                            <TextBlock><Hyperlink Name="e1a">e1a</Hyperlink></TextBlock>
+                            <Button Name="e1b">e1b</Button>
+                        </StackPanel>
+                    </TreeViewItem.Header>
+                    <TreeViewItem Name="tvi10">
+                        <TreeViewItem.Header>
+                            <StackPanel>
+                                <Button Name="e10a">e10a</Button>
+                                <!--<Button Name="e10b">e10b</Button>-->
+                                <TextBlock><Hyperlink Name="e10b">e10b</Hyperlink></TextBlock>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem Name="tvi11">
+                        <TreeViewItem.Header>
+                            <StackPanel>
+                                <!--<Button Name="e11a">e11a</Button>-->
+                                <TextBlock><Hyperlink Name="e11a">e11a</Hyperlink></TextBlock>
+                                <Button Name="e11b">e11b</Button>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeView>
+
+            <ListBox Name="lb" Height="200" Width="90" Canvas.Left="150" Canvas.Top="3">
+                <ListBoxItem Name="lbi0">
+                    <StackPanel Margin="5">
+                        <!--<Button Name="f0a">f0a</Button>-->
+                        <TextBlock><Hyperlink Name="f0a">f0a</Hyperlink></TextBlock>
+                        <Button Name="f0b">f0b</Button>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Name="lbi1" IsSelected="True">
+                    <StackPanel Margin="5">
+                        <Button Name="f1a">f1a</Button>
+                        <!--<Button Name="f1b">f1b</Button>-->
+                        <TextBlock><Hyperlink Name="f1b">f1b</Hyperlink></TextBlock>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Name="lbi2">
+                    <StackPanel Margin="5">
+                        <Button Name="f2a">f2a</Button>
+                        <!--<Button Name="f2b">f2b</Button>-->
+                        <TextBlock><Hyperlink Name="f2b">f2b</Hyperlink></TextBlock>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Name="lbi3">
+                    <StackPanel Margin="5">
+                        <!--<Button Name="f3a">f3a</Button>-->
+                        <TextBlock><Hyperlink Name="f3a">f3a</Hyperlink></TextBlock>
+                        <Button Name="f3b">f3b</Button>
+                    </StackPanel>
+                </ListBoxItem>
+            </ListBox>
+
+            <DataGrid Name="dg" Height="200" Width="450" Canvas.Left="250" Canvas.Top="3"
+                      AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridHyperlinkColumn Binding="{Binding Path=URL, Mode=OneWay}" Width="*">
+                        <DataGridColumn.Header>
+                            <Button Content="Hyperlink"/>
+                        </DataGridColumn.Header>
+                    </DataGridHyperlinkColumn>
+
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridColumn.Header>
+                            <Button Content="TextBox"/>
+                        </DataGridColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="" Width="90"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridColumn.Header>
+                            <Button Content="HL over Button"/>
+                        </DataGridColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="100">
+                                    <TextBlock Width="90"><Hyperlink>http://foo.com</Hyperlink></TextBlock>
+                                    <Button Content="Button"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridColumn.Header>
+                            <Button Content="Button over HL"/>
+                        </DataGridColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="100">
+                                    <Button Content="Button"/>
+                                    <TextBlock Width="90"><Hyperlink>http://bar.com</Hyperlink></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Ribbon Name="rb" Canvas.Top="210" Canvas.Left="3">
+                <Ribbon.ApplicationMenu>
+                    <RibbonApplicationMenu Name="ram">
+                        <RibbonApplicationMenuItem Name="rami0">
+                            <RibbonApplicationMenuItem.Header>
+                                <StackPanel>
+                                    <Button Name="i0a">i0a</Button>
+                                    <!--<Button Name="i0b">i0b</Button>-->
+                                    <TextBlock><Hyperlink Name="i0b">i0b</Hyperlink></TextBlock>
+                                </StackPanel>
+                            </RibbonApplicationMenuItem.Header>
+                        </RibbonApplicationMenuItem>
+                        <RibbonApplicationMenuItem Name="rami1">
+                            <RibbonApplicationMenuItem.Header>
+                                <StackPanel>
+                                    <!--<Button Name="i1a">i1a</Button>-->
+                                    <TextBlock><Hyperlink Name="i1a">i1a</Hyperlink></TextBlock>
+                                    <Button Name="i1b">i1b</Button>
+                                </StackPanel>
+                            </RibbonApplicationMenuItem.Header>
+                        </RibbonApplicationMenuItem>
+                    </RibbonApplicationMenu>
+                </Ribbon.ApplicationMenu>
+                <RibbonTab Name="rt0">
+                    <RibbonTab.Header>
+                        <StackPanel>
+                            <!--<Button Name="g0a">g0a</Button>-->
+                            <TextBlock><Hyperlink Name="g0a">g0a</Hyperlink></TextBlock>
+                            <Button Name="g0b">g0b</Button>
+                            <Button Name="g0c">g0c</Button>
+                        </StackPanel>
+                    </RibbonTab.Header>
+                </RibbonTab>
+                <RibbonTab Name="rt1">
+                    <RibbonTab.Header>
+                        <StackPanel>
+                            <Button Name="g1a">g1a</Button>
+                            <Button Name="g1b">g1b</Button>
+                            <!--<Button Name="g1c">g1c</Button>-->
+                            <TextBlock><Hyperlink Name="g1c">g1c</Hyperlink></TextBlock>
+                        </StackPanel>
+                    </RibbonTab.Header>
+                </RibbonTab>
+                <RibbonGallery Name="rg">
+                    <RibbonGalleryCategory Name="rgc0">
+                        <RibbonGalleryItem Name="rgi00">
+                            <StackPanel>
+                                <!--<Button Name="h00a">h00a</Button>-->
+                                <TextBlock><Hyperlink Name="h00a">h00a</Hyperlink></TextBlock>
+                                <Button Name="h00b">h00b</Button>
+                            </StackPanel>
+                        </RibbonGalleryItem>
+                        <RibbonGalleryItem Name="rgi01">
+                            <StackPanel>
+                                <Button Name="h01a">h01a</Button>
+                                <!--<Button Name="h01b">h01b</Button>-->
+                                <TextBlock><Hyperlink Name="h01b">h01b</Hyperlink></TextBlock>
+                            </StackPanel>
+                        </RibbonGalleryItem>
+                        <RibbonGalleryItem Name="rgi02">
+                            <StackPanel>
+                                <Button Name="h02a">h02a</Button>
+                                <!--<Button Name="h02b">h02b</Button>-->
+                                <TextBlock><Hyperlink Name="h02b">h02b</Hyperlink></TextBlock>
+                            </StackPanel>
+                        </RibbonGalleryItem>
+                    </RibbonGalleryCategory>
+                    <RibbonGalleryCategory Name="rgc1">
+                        <RibbonGalleryItem Name="rgi10">
+                            <StackPanel>
+                                <!--<Button Name="h10a">h10a</Button>-->
+                                <TextBlock><Hyperlink Name="h10a">h10a</Hyperlink></TextBlock>
+                                <Button Name="h10b">h10b</Button>
+                            </StackPanel>
+                        </RibbonGalleryItem>
+                        <RibbonGalleryItem Name="rgi11">
+                            <StackPanel>
+                                <!--<Button Name="h11a">h11a</Button>-->
+                                <TextBlock><Hyperlink Name="h11a">h11a</Hyperlink></TextBlock>
+                                <Button Name="h11b">h11b</Button>
+                            </StackPanel>
+                        </RibbonGalleryItem>
+                        <RibbonGalleryItem Name="rgi12">
+                            <StackPanel>
+                                <Button Name="h12a">h12a</Button>
+                                <!--<Button Name="h12b">h12b</Button>-->
+                                <TextBlock><Hyperlink Name="h12b">h12b</Hyperlink></TextBlock>
+                            </StackPanel>
+                        </RibbonGalleryItem>
+                    </RibbonGalleryCategory>
+                </RibbonGallery>
+            </Ribbon>
+
+        </Canvas>
+        <Button Name="bottomButton" Content="Bottom Button"/>
+</StackPanel>
+

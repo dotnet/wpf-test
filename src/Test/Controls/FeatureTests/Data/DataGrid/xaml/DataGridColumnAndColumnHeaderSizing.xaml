@@ -1,0 +1,105 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"      
+    x:Name="GridPanel"
+    Height="600" Width="1100">
+    <Grid.Resources>
+
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="WPF DataGrid" Grid.Row="0"/>
+
+    <DataGrid x:Name="DataGrid_Standard" 
+                Grid.Row="1"        
+                RowHeaderWidth="200">
+        <DataGrid.Columns>
+            <DataGridTextColumn x:Name="autoHeaderLarger"  Width="Auto" Binding="{Binding Path=LastName}" Header="Header Greater than cells" />
+
+            <DataGridTextColumn x:Name="autoColumnLarger" Width="Auto" Binding="{Binding Path=LastName}" Header="Small"/>
+
+            <DataGridTextColumn x:Name="autoHeaderAbsoluteLarger"  Width="Auto" Binding="{Binding Path=LastName}" Header="Small">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Width" Value="100"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn x:Name="autoHeaderAbsolute_ColumnLarger"  Width="Auto" Binding="{Binding Path=LastName}" Header="Small">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Width" Value="50"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn x:Name="sizeToCellsHeaderLarger"  Width="SizeToCells" Binding="{Binding Path=LastName}" Header="Header Greater than cells" />
+
+            <DataGridTextColumn x:Name="sizeToCellsColumnLarger" Width="SizeToCells" Binding="{Binding Path=LastName}" Header="Small"/>
+
+            <DataGridTextColumn x:Name="sizeToCellsHeaderAbsoluteLarger"  Width="SizeToCells" Binding="{Binding Path=LastName}" Header="Small">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Width" Value="100"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn x:Name="sizeToCellsHeaderAbsolute_ColumnLarger"  Width="SizeToCells" Binding="{Binding Path=LastName}" Header="Small">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Width" Value="50"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn x:Name="sizeToHeaderHeaderLarger"  Width="SizeToHeader" Binding="{Binding Path=LastName}" Header="Header Greater than cells" />
+
+            <DataGridTextColumn x:Name="sizeToHeaderColumnLarger" Width="SizeToHeader" Binding="{Binding Path=LastName}" Header="Small"/>
+
+            <DataGridTextColumn x:Name="sizeToHeaderHeaderAbsoluteLarger"  Width="SizeToHeader" Binding="{Binding Path=LastName}" Header="Small">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Width" Value="100"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn x:Name="sizeToHeaderHeaderAbsolute_ColumnLarger"  Width="SizeToHeader" Binding="{Binding Path=LastName}" Header="Small">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Width" Value="50"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn x:Name="absoluteHeaderLarger"  Width="80" Binding="{Binding Path=LastName}" Header="Header Greater than cells" />
+
+            <DataGridTextColumn x:Name="absoluteColumnLarger" Width="80" Binding="{Binding Path=LastName}" Header="Small"/>
+
+            <DataGridTextColumn x:Name="absoluteAbsoluteLarger"  Width="80" Binding="{Binding Path=LastName}" Header="Small">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Width" Value="100"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn x:Name="absoluteHeaderAbsolute_ColumnLarger"  Width="80" Binding="{Binding Path=LastName}" Header="Small">
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Width" Value="50"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>            
+        </DataGrid.Columns>
+    </DataGrid>
+</Grid>

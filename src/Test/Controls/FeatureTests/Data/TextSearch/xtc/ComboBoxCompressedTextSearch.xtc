@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Both the matched item in the combo list or the input text could contain compression or expansion characters -->
+<!-- Example: "Grosses" in the list would match for input text "Gro�" -->
+<!-- This is to test these scenarios -->
+<!-- Out test execution engine automatically picks this xtc if we provide /Area="Controls" or further we can filter with /SubArea and /Name -->
+<!-- if we want to target only these test cases. Test engine initiates the class ControlTestActionValidationUnitTest and parses the xml elements -->
+<!-- and runs the test accordingly-->
+<XTC>
+  <TEST Name="ComboBoxCompressedTextSearch" Priority="2" SubArea="TextSearch" ExecutionGroup="Pri2" Disabled="True">
+    <Versions>
+      <Version>4.7+</Version>
+    </Versions>
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger = "true"/>
+      <VARIATION ID="1" Note="Chars with compression one">
+        <CONTROL>
+          <ComboBox IsEditable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">Grose</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Gros</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Gro�</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Grosses</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Gro�e</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <!-- 00000409 is to load en-US keyboard -->
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="G" />
+            <Parameter Value="R" />
+            <Parameter Value="O" />
+            <Parameter Value="S" />
+            <Parameter Value="S" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item3" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="2" Note="Chars with compression two">
+        <CONTROL>
+          <ComboBox IsEditable="true" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ComboBoxItem Name="Item1">Grose</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Gros</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Gro�</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Grosses</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Gro�e</ComboBoxItem>
+          </ComboBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <!-- 00000409 is to load en-US keyboard -->
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="MouseClickCenterAction">
+            <Parameter Value="lb1" />
+            <Parameter Value="" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="G" />
+            <Parameter Value="R" />
+            <Parameter Value="O" />
+            <Parameter Value="S" />
+            <Parameter Value="S" />
+            <Parameter Value="E" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item4" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

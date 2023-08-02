@@ -1,0 +1,20 @@
+<XTC>
+  <TEST Name="ListBoxInputSelectionChangedInvalidTest" Priority="2" SubArea="ListBox" Timeout="600">
+    <DATA>
+      <INIT Class="SelectorSelectionChangedTest"/>
+      <PICT Name="ListBoxInputInvalidTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="SelectorControlsBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingSmallDataBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingLargeDataBVT.xaml"/>
+      </XAMLS>
+      <!-- Test key on listbox from 1 to 0 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="listbox" InputType="Keyboard" FocusedIndex="1" ToIndex="0" ShouldEventFire="false" />
+      <!-- Test key on listbox from 1 to 2 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="listbox" InputType="Keyboard" FocusedIndex="1" ToIndex="2" ShouldEventFire="false" />
+      
+      <!-- Test mouse click on listbox from 1 to 3 and validate 'SelectionChanged' event doesn't fire -->
+      <VARIATION ControlName="listbox" InputType="Mouse" FocusedIndex="1" ToIndex="3" ShouldEventFire="false" />
+    </DATA>
+  </TEST>
+</XTC>

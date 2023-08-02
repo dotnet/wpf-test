@@ -1,0 +1,294 @@
+<XTC>
+  <TEST Name="AnimatedStackPanelActions" Priority="0" SubArea="AnimatedStackPanel" ExecutionGroup="Pri0"  Disabled="True">
+    <DATA NOTE="Add and removing items">
+      <INIT Class="ActionTest" SuppressGtoLogger="true" />
+
+      <!-- Add a new item to a ListBox after the 2nd item. -->
+      <VARIATION ID="1">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "Moccasin"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="Orange" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                    <sys:String>Item 1</sys:String>
+                    <sys:String>Item 2</sys:String>
+                    <sys:String>Item 3</sys:String>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Add" StartingIndex="2" AddOrRemoveCount="1" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Add a new item to a ListBox after the last item. -->
+      <VARIATION ID="2">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "LightGreen"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="Green" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Add" StartingIndex="1" AddOrRemoveCount="1" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Add a new item to a ListBox before the 1st item. -->
+      <VARIATION ID="3">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "Black"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="Blue" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                    <sys:String>Item 1</sys:String>
+                    <sys:String>Item 2</sys:String>
+                    <sys:String>Item 3</sys:String>
+                    <sys:String>Item 4</sys:String>
+                    <sys:String>Item 5</sys:String>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Add" StartingIndex="0" AddOrRemoveCount="1" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Add an item to an empty ListBox. -->
+      <VARIATION ID="4">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "Blue"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="Red" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Add" StartingIndex="0" AddOrRemoveCount="1" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Remove the 1st item in a ListBox. -->
+      <VARIATION ID="5">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "Brown"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="GhostWhite" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                    <sys:String>Item 1</sys:String>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Remove" StartingIndex="0" AddOrRemoveCount="1" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Remove the last item in a ListBox. -->
+      <VARIATION ID="6">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "Navy"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="LightYellow" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                    <sys:String>Item 1</sys:String>
+                    <sys:String>Item 2</sys:String>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Remove" StartingIndex="2" AddOrRemoveCount="1" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Remove the only item in a ListBox. -->
+      <VARIATION ID="7">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "Yellow"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="OrangeRed" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Remove" StartingIndex="0" AddOrRemoveCount="1" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Add an item to a ComboBox, at the end. -->
+      <VARIATION ID="8">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "Blue"
+                >
+                <ComboBox Name="CONTROLTOTEST" Margin="10" Background="Red">
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                    <sys:String>Item 1</sys:String>
+                    <sys:String>Item 2</sys:String>
+                    <sys:String>Item 3</sys:String>
+                </ComboBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ComboBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Add" StartingIndex="4" AddOrRemoveCount="1" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Remove multiple items in a ListBox. -->
+      <VARIATION ID="9">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "Purple"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="Lavender" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                    <sys:String>Item 1</sys:String>
+                    <sys:String>Item 2</sys:String>
+                    <sys:String>Item 3</sys:String>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Remove" StartingIndex="0" AddOrRemoveCount="4" />
+        </ACTIONS>
+      </VARIATION>
+
+      <!-- Add multiple items to a ListBox, before the first item. -->
+      <VARIATION ID="10">
+        <CONTROL>
+            <StackPanel
+                xmlns           = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x         = "http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a         = "clr-namespace:WpfControlToolkit;assembly=CodeplexControls"
+                xmlns:sys       = "clr-namespace:System;assembly=mscorlib" 
+                Height          = "300"
+                Width           = "300"
+                Background      = "MediumAquamarine"
+                >
+                <ListBox Name="CONTROLTOTEST" Margin="10" Background="DarkTurquoise" Height="125" Width="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <a:AnimatedStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <sys:String>Item 0</sys:String>
+                </ListBox>
+            </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+            <AnimatedStackPanelActions.ListBoxAddOrRemoveItem TargetElement="{SceneTreeSearch:CONTROLTOTEST}" AddOrRemoveAction="Add" StartingIndex="0" AddOrRemoveCount="4" />
+        </ACTIONS>
+      </VARIATION>
+
+    </DATA>
+  </TEST>
+</XTC>

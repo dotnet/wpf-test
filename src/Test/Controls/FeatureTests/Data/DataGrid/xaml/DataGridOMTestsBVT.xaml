@@ -1,0 +1,107 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"    
+      xmlns:local="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"
+      Title="DataGridOMTestsBVT">
+    <Page.Resources>
+        <local:NewPeople x:Key="people" />
+    </Page.Resources>
+    <StackPanel>
+        <DataGrid x:Name="DataGrid_Standard" Width="588"
+                     ItemsSource="{Binding Source={StaticResource people}}"
+                     CanUserResizeColumns="True"
+                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                     HorizontalGridLinesBrush="Beige" VerticalGridLinesBrush="DarkBlue" 
+                     GridLinesVisibility="All"                          
+                     Margin="20,0,0,20" Padding="30"
+                     HorizontalAlignment="Left"                      
+                     RowBackground="AliceBlue"
+                     AlternatingRowBackground="Bisque"
+                     AutoGenerateColumns="False"
+                     IsReadOnly="True"
+                     >
+            <DataGrid.ToolTip>
+                <ToolTip Name="tt" Placement="Right">
+                    <StackPanel>
+                        <Label FontWeight="Bold" Background="RoyalBlue" Foreground="White" Padding="5">The DataGrid!</Label>
+                    </StackPanel>
+                </ToolTip>    
+            </DataGrid.ToolTip>
+            
+            <DataGrid.ContextMenu>
+                <ContextMenu Background="Beige" Foreground="Black">Something</ContextMenu>
+            </DataGrid.ContextMenu>
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="130" Binding="{Binding Path=FirstName}" Header="who knows?" />
+                <DataGridTextColumn Width="Auto" Binding="{Binding Path=LastName}" Header="Last Name"/>
+                <DataGridCheckBoxColumn Width="SizeToCells" Binding="{Binding Path=LikesCake}" Header="Likes Cake"/>
+                <DataGridComboBoxColumn Width="*" SelectedItemBinding="{Binding Path=Cake}" Header="Cake" />
+                <DataGridHyperlinkColumn Width="SizeToHeader" Binding="{Binding Path=Homepage}" Header="Homepage"/>
+                
+                <DataGridTemplateColumn Width="Auto" Header="TemplateColumn" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding Path=FirstName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>    
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" TextBlock.Foreground="White">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="Can Resize Columns"/>
+                  <CheckBox IsChecked="{Binding ElementName=DataGrid_Standard, Path=CanUserResizeColumns}" Margin="8"/>
+                  <TextBlock Text="VerticalScrollBarVisibility"/>
+                  <ComboBox Name="VerticalScrollBarVisibilityComboBox" SelectedItem="{Binding ElementName=DataGrid_Standard, Path=VerticalScrollBarVisibility}" Margin="8,4,8,4">
+                      <ScrollBarVisibility>Disabled</ScrollBarVisibility>
+                      <ScrollBarVisibility>Auto</ScrollBarVisibility>
+                      <ScrollBarVisibility>Hidden</ScrollBarVisibility>
+                      <ScrollBarVisibility>Visible</ScrollBarVisibility>
+                  </ComboBox>              
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="DataGridHeadersVisibility"/>
+                  <ComboBox Name="DataGridHeadersVisibilityComboBox" SelectedItem="{Binding ElementName=DataGrid_Standard, Path=HeadersVisibility}" Margin="8,4,8,4">
+                      <DataGridHeadersVisibility>All</DataGridHeadersVisibility>
+                      <DataGridHeadersVisibility>Column</DataGridHeadersVisibility>
+                      <DataGridHeadersVisibility>Row</DataGridHeadersVisibility>
+                      <DataGridHeadersVisibility>None</DataGridHeadersVisibility>
+                  </ComboBox>              
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="GridLine visibility"/>
+                  <ComboBox Name="GridLineVisibilityComboBox" SelectedItem="{Binding ElementName=DataGrid_Standard, Path=GridLinesVisibility}" Margin="8,4,8,4">
+                    <DataGridGridLinesVisibility>All</DataGridGridLinesVisibility>
+                    <DataGridGridLinesVisibility>Horizontal</DataGridGridLinesVisibility>
+                    <DataGridGridLinesVisibility>None</DataGridGridLinesVisibility>
+                    <DataGridGridLinesVisibility>Vertical</DataGridGridLinesVisibility>
+                  </ComboBox>
+
+                  <TextBlock Text="Horizontal GridLine color"/>
+                  <ComboBox SelectedItem="{Binding ElementName=DataGrid_Standard, Path=HorizontalGridLinesBrush}" Margin="8,4,8,4">
+                    <SolidColorBrush Color="Black"/>
+                    <SolidColorBrush Color="LightBlue"/>
+                    <SolidColorBrush Color="Tan"/>
+                    <SolidColorBrush Color="DarkSeaGreen"/>
+                  </ComboBox>
+
+                  <TextBlock Text="Vertical GridLine color"/>
+                  <ComboBox SelectedItem="{Binding ElementName=DataGrid_Standard, Path=VerticalGridLinesBrush}" Margin="8,4,8,4">
+                    <SolidColorBrush Color="Black"/>
+                    <SolidColorBrush Color="LightBlue"/>
+                    <SolidColorBrush Color="Tan"/>
+                    <SolidColorBrush Color="DarkSeaGreen"/>
+                  </ComboBox>                
+            </StackPanel>
+        </StackPanel>
+
+    </StackPanel>
+</Page>

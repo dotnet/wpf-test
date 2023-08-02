@@ -1,0 +1,59 @@
+<XTC>
+  <TEST Name="TreeViewItemInputEventTest" Priority="0" SubArea="TreeView" Timeout="600">
+    <Keywords>
+      <Keyword>Localization_Suite</Keyword>
+    </Keywords>
+    <DATA>
+      <INIT Class="TreeViewItemInputEventTest"/>
+      <PICT Name="TreeViewInputTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="TreeViewSimple.xaml"/>
+        <XAML Name="TreeViewBindingSmallData.xaml"/>
+        <XAML Name="TreeViewBindingLargeData.xaml"/>
+      </XAMLS>
+
+       <!--Test Left key on treeview from 0 to 0 and validate 'Collapsed' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Collapsed" ShouldEventFire="true" FlowDirection="LeftToRight" Key="Left" />
+       <!--Test Right key on treeview from 0 to 0 and validate 'Collapsed' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Collapsed" ShouldEventFire="true" FlowDirection="RightToLeft" Key="Right" />
+       <!--Test Left key on treeview from 0 to 0 and validate 'Collapsed' event doesn't fire--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Collapsed" ShouldEventFire="false" FlowDirection="RightToLeft" Key="Left" />
+       <!--Test Right key on treeview from 0 to 0 and validate 'Collapsed' event doesn't fire--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Collapsed" ShouldEventFire="false" FlowDirection="LeftToRight" Key="Right" />
+
+       <!--Test Right key on treeview from 0 to 0 and validate 'Expanded' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Expanded" ShouldEventFire="true" FlowDirection="LeftToRight" Key="Right" />
+       <!--Test Left key on treeview from 0 to 0 and validate 'Expanded' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Expanded" ShouldEventFire="true" FlowDirection="RightToLeft" Key="Left" />
+       <!--Test Right key on treeview from 0 to 0 and validate 'Expanded' event doesn't fire--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Expanded" ShouldEventFire="false" FlowDirection="RightToLeft" Key="Right" />
+       <!--Test Left key on treeview from 0 to 0 and validate 'Expanded' event doesn't fire--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Expanded" ShouldEventFire="false" FlowDirection="LeftToRight" Key="Left" />
+
+       <!--Test Down key on treeview from 0 to 1 and validate 'Selected' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="1" EventName="Selected" ShouldEventFire="true" Key="Down" />
+       <!--Test Down key on treeview from 0 to 0 and validate 'Selected' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Selected" ShouldEventFire="false" Key="Down" />
+       <!--Test Up key on treeview from 1 to 0 and validate 'Selected' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="1" ToIndex="0" EventName="Selected" ShouldEventFire="true" Key="Up" />
+       <!--Test Up key on treeview from 0 to 0 and validate 'Selected' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Selected" ShouldEventFire="false" Key="Up" />
+
+       <!--Test Down key on treeview from 0 to 1 and validate 'Unselected' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="1" EventName="Unselected" ShouldEventFire="false" Key="Down" />
+       <!--Test Down key on treeview from 0 to 0 and validate 'Unselected' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="0" EventName="Unselected" ShouldEventFire="true" Key="Down" />
+       <!--Test Up key on treeview from 1 to 0 and validate 'Unselected' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="0" ToIndex="1" EventName="Unselected" ShouldEventFire="false" Key="Up" />
+       <!--Test Up key on treeview from 1 to 1 and validate 'Unselected' event is fired--> 
+      <VARIATION ControlName="treeview" InputType="Keyboard" FromIndex="1" ToIndex="1" EventName="Unselected" ShouldEventFire="true" Key="Up" />
+
+      <!-- Test mouse click on treeview from 0 to 0 and validate 'Collapsed' event is fired -->
+      <VARIATION ControlName="treeview" InputType="Mouse" FromIndex="0" ToIndex="0" EventName="Collapsed" ShouldEventFire="true" MouseButton="Left" />
+      <!-- Test mouse click on treeview from 0 to 2 and validate 'Expanded' event is fired -->
+      <VARIATION ControlName="treeview" InputType="Mouse" FromIndex="0" ToIndex="2" EventName="Expanded" ShouldEventFire="true" MouseButton="Left" />
+      <!-- Test mouse click on treeview from 0 to 2 and validate 'Selected' event is fired -->
+      <VARIATION ControlName="treeview" InputType="Mouse" FromIndex="0" ToIndex="2" EventName="Selected" ShouldEventFire="true" MouseButton="Left" />
+    </DATA>
+  </TEST>
+</XTC>

@@ -1,0 +1,30 @@
+<WrapPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"     
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon"
+    Name="panel">
+    <WrapPanel.Resources>
+        <XmlDataProvider x:Key="Family" Source="family.xml" XPath="/sb:Family/sb:Person">
+            <XmlDataProvider.XmlNamespaceManager>
+                <XmlNamespaceMappingCollection>
+                    <XmlNamespaceMapping Uri="http://sellsbrothers.com" Prefix="sb" />
+                </XmlNamespaceMappingCollection>
+            </XmlDataProvider.XmlNamespaceManager>
+        </XmlDataProvider>
+        <src:AgeToForegroundConverter x:Key="ageConverter" />
+    </WrapPanel.Resources>
+    <StackPanel DataContext="{StaticResource Family}">
+        <ListBox Name="listbox" Width="100" Height="100" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding XPath=@Name}" />
+                        <TextBlock Text=" (age:" />
+                        <TextBlock Text="{Binding XPath=@Age}" 
+                                   Foreground="{Binding XPath=@Age, Converter={StaticResource ageConverter}}"/>
+                        <TextBlock Text=")"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</WrapPanel>

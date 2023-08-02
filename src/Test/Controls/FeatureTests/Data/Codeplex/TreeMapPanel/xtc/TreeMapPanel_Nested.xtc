@@ -1,0 +1,391 @@
+<XTC>
+  <TEST Name="TreeMapPanel_Nested" Priority="0" SubArea="TreeMapPanel" ExecutionGroup="Pri0" Disabled="True">
+    <DATA NOTE="">
+      <INIT Class="ActionTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1"
+        xmlns:sys = "clr-namespace:System;assembly=mscorlib">
+        <Description>
+           Implement and verify the following arrangement.
+           Basic Nested TreeMapPanels
+                 ROOTPANEL
+                     |____ TextBlock (White)
+                     |____ NESTED_0
+                     |        |______TextBlock (Cyan)
+                     |        |______NESTED_0_0
+                     |                   |_______TextBlock (Magenta)
+                     |                   |_______NESTED_0_0_0
+                     |                               |_________TextBlock (Yellow)
+                     |____ NESTED_1
+                              |______TextBlock (CadetBlue)
+        </Description>
+        <CONTROL>
+          <StackPanel
+              xmlns     = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x   = "http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:tm  = "clr-namespace:WpfControlToolkit;assembly=CodePlexControls"
+	            xmlns:loc = "clr-namespace:Avalon.Test.ComponentModel.Actions;assembly=ControlsTest"
+              Height      = "1000"
+              Width       = "1000"
+              Background  = "AliceBlue">
+            <StackPanel.Resources>
+              <TextBox x:Name="MODEL" x:Key="MODEL" tm:TreeMapPanel.Area="1.0" />
+            </StackPanel.Resources>
+            <tm:TreeMapPanel
+                x:Name          = "ROOTPANEL"
+                Width="500"
+                Height="500">
+              <TextBox Background="White" tm:TreeMapPanel.Area="1.01" Text="Text in ROOTPANEL"/>
+              <tm:TreeMapPanel x:Name="NESTED_0" Tag="NESTED_0" tm:TreeMapPanel.Area="1.0">
+                  <TextBox Background="Cyan" tm:TreeMapPanel.Area="1.01" Text="Text in N_0"/>
+                <tm:TreeMapPanel x:Name="NESTED_0_0" Tag="NESTED_0_0" tm:TreeMapPanel.Area="1.0">
+                  <TextBox Background="Magenta" tm:TreeMapPanel.Area="1.01" Text="Text in N_0_0"/>
+                  <tm:TreeMapPanel x:Name="NESTED_0_0_0" Tag="NESTED_0_0_0" tm:TreeMapPanel.Area="1.0">
+                    <TextBox Background="Yellow" tm:TreeMapPanel.Area="1.0" Text="Text in N_0_0_0"/>
+                  </tm:TreeMapPanel>                  
+                </tm:TreeMapPanel>
+              </tm:TreeMapPanel>
+              <tm:TreeMapPanel x:Name="NESTED_1" Tag="NESTED_1" tm:TreeMapPanel.Area="0.99">
+                <TextBox Background="CadetBlue" tm:TreeMapPanel.Area="1.0" Text="Text in N_1"/>
+              </tm:TreeMapPanel>                
+            </tm:TreeMapPanel>
+          </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+        </ACTIONS>
+      </VARIATION>
+      <VARIATION ID="2"
+        xmlns:sys = "clr-namespace:System;assembly=mscorlib">
+        <Description>
+          Starting with nested Panels add 20 graduated-weight elements to each Panel
+          Although the children weights added to each nested panel are the same, they 
+          are contained within their respective parent panels of different sizes.
+                  ROOTPANEL
+                      |____ TextBlock (White)
+                      |____ NESTED_0
+                      |        |______TextBlock (Cyan)
+                      |        |______NESTED_0_0
+                      |                   |_______TextBlock (Magenta)
+                      |                   |_______NESTED_0_0_0
+                      |                               |_________TextBlock (Yellow)
+                      |____ NESTED_1
+                      |______TextBlock (CadetBlue)
+        </Description>
+        <CONTROL>
+          <StackPanel
+              xmlns     = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x   = "http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:tm  = "clr-namespace:WpfControlToolkit;assembly=CodePlexControls"
+	            xmlns:loc = "clr-namespace:Avalon.Test.ComponentModel.Actions;assembly=ControlsTest"
+              Height      = "1000"
+              Width       = "1000"
+              Background  = "AliceBlue">
+            <StackPanel.Resources>
+              <TextBox x:Name="MODEL" x:Key="MODEL" tm:TreeMapPanel.Area="1.0" />
+            </StackPanel.Resources>
+            <tm:TreeMapPanel
+                x:Name          = "ROOTPANEL"
+                Width="500"
+                Height="500">
+              <TextBox Background="White" tm:TreeMapPanel.Area="1.01" Text="Text in ROOTPANEL"/>
+              <tm:TreeMapPanel x:Name="NESTED_0" Tag="NESTED_0" tm:TreeMapPanel.Area="1.0">
+                <TextBox Background="Cyan" tm:TreeMapPanel.Area="1.01" Text="Text in N_0"/>
+                <tm:TreeMapPanel x:Name="NESTED_0_0" Tag="NESTED_0_0" tm:TreeMapPanel.Area="1.0">
+                  <TextBox Background="Magenta" tm:TreeMapPanel.Area="1.01" Text="Text in N_0_0"/>
+                  <tm:TreeMapPanel x:Name="NESTED_0_0_0" Tag="NESTED_0_0_0" tm:TreeMapPanel.Area="1.0">
+                    <TextBox Background="Yellow" tm:TreeMapPanel.Area="1.0" Text="Text in N_0_0_0"/>
+                  </tm:TreeMapPanel>
+                </tm:TreeMapPanel>
+              </tm:TreeMapPanel>
+              <tm:TreeMapPanel x:Name="NESTED_1" Tag="NESTED_1" tm:TreeMapPanel.Area="0.99">
+                <TextBox Background="CadetBlue" tm:TreeMapPanel.Area="1.0" Text="Text in N_1"/>
+              </tm:TreeMapPanel>
+            </tm:TreeMapPanel>
+          </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_1}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_1" FirstWeight="0.5" WeightIncrement=".001"/>
+          
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0_0_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:ROOTPANEL}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+        </ACTIONS>
+      </VARIATION>
+
+      <VARIATION ID="3"
+        xmlns:sys = "clr-namespace:System;assembly=mscorlib">
+        <Description>
+          Like Variation #2 ..
+          1)  Starting with nested Panels add 20 graduated-weight elements to each Panel
+              Although the children weights added to each nested panel are the same, they
+              are contained within their respective parent panels of different sizes.
+          2)  Change the weighting of nested panel NESTED_0 from 1.0 to 2.0
+          3)  Change the weighting of nested panel NESTED_1 from 1.0 to 2.0
+          
+          ROOTPANEL
+          |____ TextBlock (White)
+          |____ NESTED_0
+          |        |______TextBlock (Cyan)
+          |        |______NESTED_0_0
+          |                   |_______TextBlock (Magenta)
+          |                   |_______NESTED_0_0_0
+          |                               |_________TextBlock (Yellow)
+          |____ NESTED_1
+          |______TextBlock (CadetBlue)
+        </Description>
+        <CONTROL>
+          <StackPanel
+              xmlns     = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x   = "http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:tm  = "clr-namespace:WpfControlToolkit;assembly=CodePlexControls"
+	            xmlns:loc = "clr-namespace:Avalon.Test.ComponentModel.Actions;assembly=ControlsTest"
+              Height      = "1000"
+              Width       = "1000"
+              Background  = "AliceBlue">
+            <StackPanel.Resources>
+              <TextBox x:Name="MODEL" x:Key="MODEL" tm:TreeMapPanel.Area="1.0" />
+            </StackPanel.Resources>
+            <tm:TreeMapPanel
+                x:Name          = "ROOTPANEL"
+                Width="500"
+                Height="500">
+              <TextBox Background="White" tm:TreeMapPanel.Area="1.01" Text="Text in ROOTPANEL"/>
+              <tm:TreeMapPanel x:Name="NESTED_0" Tag="NESTED_0" tm:TreeMapPanel.Area="1.0">
+                <TextBox Background="Cyan" tm:TreeMapPanel.Area="1.01" Text="Text in N_0"/>
+                <tm:TreeMapPanel x:Name="NESTED_0_0" Tag="NESTED_0_0" tm:TreeMapPanel.Area="1.0">
+                  <TextBox Background="Magenta" tm:TreeMapPanel.Area="1.01" Text="Text in N_0_0"/>
+                  <tm:TreeMapPanel x:Name="NESTED_0_0_0" Tag="NESTED_0_0_0" tm:TreeMapPanel.Area="1.0">
+                    <TextBox Background="Yellow" tm:TreeMapPanel.Area="1.0" Text="Text in N_0_0_0"/>
+                  </tm:TreeMapPanel>
+                </tm:TreeMapPanel>
+              </tm:TreeMapPanel>
+              <tm:TreeMapPanel x:Name="NESTED_1" Tag="NESTED_1" tm:TreeMapPanel.Area="0.99">
+                <TextBox Background="CadetBlue" tm:TreeMapPanel.Area="1.0" Text="Text in N_1"/>
+              </tm:TreeMapPanel>
+            </tm:TreeMapPanel>
+          </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_1}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_1" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0_0_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:ROOTPANEL}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.SetTaggedChildrenWeight TreeMap="{SceneTreeSearch:ROOTPANEL}" HavingTag="NESTED_0" Weight="2.0" LimitCount="0"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.SetTaggedChildrenWeight TreeMap="{SceneTreeSearch:ROOTPANEL}" HavingTag="NESTED_1" Weight="2.0" LimitCount="0"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+        </ACTIONS>
+      </VARIATION>
+
+      <VARIATION ID="4"
+        xmlns:sys = "clr-namespace:System;assembly=mscorlib">
+        <Description>
+          Start like Variation #2 ..
+          1)  Starting with nested Panels add 20 graduated-weight elements to each Panel
+          Although the children weights added to each nested panel are the same, they
+          are contained within their respective parent panels of different sizes.
+          2)  Delete nested panel NESTED_1
+          3)  Delete nested panel NESTED_0_0_0
+
+          ROOTPANEL
+          |____ TextBlock (White)
+          |____ NESTED_0
+          |        |______TextBlock (Cyan)
+          |        |______NESTED_0_0
+          |                   |_______TextBlock (Magenta)
+          |                   |_______NESTED_0_0_0
+          |                               |_________TextBlock (Yellow)
+          |____ NESTED_1
+          |______TextBlock (CadetBlue)
+        </Description>
+        <CONTROL>
+          <StackPanel
+              xmlns     = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x   = "http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:tm  = "clr-namespace:WpfControlToolkit;assembly=CodePlexControls"
+	            xmlns:loc = "clr-namespace:Avalon.Test.ComponentModel.Actions;assembly=ControlsTest"
+              Height      = "1000"
+              Width       = "1000"
+              Background  = "AliceBlue">
+            <StackPanel.Resources>
+              <TextBox x:Name="MODEL" x:Key="MODEL" tm:TreeMapPanel.Area="1.0" />
+            </StackPanel.Resources>
+            <tm:TreeMapPanel
+                x:Name          = "ROOTPANEL"
+                Width="500"
+                Height="500">
+              <TextBox Background="White" tm:TreeMapPanel.Area="1.01" Text="Text in ROOTPANEL"/>
+              <tm:TreeMapPanel x:Name="NESTED_0" Tag="NESTED_0" tm:TreeMapPanel.Area="1.0">
+                <TextBox Background="Cyan" tm:TreeMapPanel.Area="1.01" Text="Text in N_0"/>
+                <tm:TreeMapPanel x:Name="NESTED_0_0" Tag="NESTED_0_0" tm:TreeMapPanel.Area="1.0">
+                  <TextBox Background="Magenta" tm:TreeMapPanel.Area="1.01" Text="Text in N_0_0"/>
+                  <tm:TreeMapPanel x:Name="NESTED_0_0_0" Tag="NESTED_0_0_0" tm:TreeMapPanel.Area="1.0">
+                    <TextBox Background="Yellow" tm:TreeMapPanel.Area="1.0" Text="Text in N_0_0_0"/>
+                  </tm:TreeMapPanel>
+                </tm:TreeMapPanel>
+              </tm:TreeMapPanel>
+              <tm:TreeMapPanel x:Name="NESTED_1" Tag="NESTED_1" tm:TreeMapPanel.Area="0.99">
+                <TextBox Background="CadetBlue" tm:TreeMapPanel.Area="1.0" Text="Text in N_1"/>
+              </tm:TreeMapPanel>
+            </tm:TreeMapPanel>
+          </StackPanel>
+        </CONTROL>
+        <ACTIONS>
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_1}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_1" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:NESTED_0_0_0}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.AddModelChildren TreeMap="{SceneTreeSearch:ROOTPANEL}"
+                                                    Model="{SceneTreeSearch:MODEL}" Count="20" SetTag="Test_0_0_0" FirstWeight="0.5" WeightIncrement=".001"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_1}" />
+
+          <TreeMapPanelTestActions.RemoveTaggedChildren TreeMap="{SceneTreeSearch:ROOTPANEL}" ChildTag="NESTED_1" LimitCount="0"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0_0}" />
+
+          <TreeMapPanelTestActions.RemoveTaggedChildren TreeMap="{SceneTreeSearch:NESTED_0_0}" ChildTag="NESTED_0_0_0" LimitCount="0"/>
+
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:ROOTPANEL}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0}" />
+          <TreeMapPanelTestActions.VerifyTreeMapConstraints TreeMap="{SceneTreeSearch:NESTED_0_0}" />
+
+        </ACTIONS>
+      </VARIATION>      
+    </DATA>
+  </TEST>
+</XTC>

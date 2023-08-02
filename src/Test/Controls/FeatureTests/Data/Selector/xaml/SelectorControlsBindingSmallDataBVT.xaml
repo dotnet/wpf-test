@@ -1,0 +1,29 @@
+<WrapPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"     
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:src="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon"
+    Name="panel">
+        <WrapPanel.Resources>
+            <src:USPlaces x:Key="USPlaces" />
+            <CollectionViewSource Source="{StaticResource USPlaces}" x:Key="cvs" />
+            <src:MyPlaces x:Key="myPlaces">
+                <src:USPlace Name="Seattle" State="WA"/>
+                <src:USPlace Name="Redmond" State="WA"/>
+                <src:USPlace Name="Bellevue" State="WA"/>
+                <src:USPlace Name="Kirkland" State="WA"/>
+                <src:USPlace Name="Portland" State="OR"/>
+                <src:USPlace Name="San Francisco" State="CA"/>
+                <src:USPlace Name="Los Angeles" State="CA"/>
+            </src:MyPlaces>
+        </WrapPanel.Resources>
+        <ListBox Name="listbox" ItemsSource="{Binding Source={StaticResource cvs}}" DisplayMemberPath="Name" Width="100" Height="125" />
+        <ListView Name="listview" ItemsSource="{Binding Source={StaticResource cvs}}" Height="110">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" Width="100"/>
+                    <GridViewColumn Header="State" DisplayMemberBinding="{Binding Path=State}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ComboBox Name="comboBox" ItemsSource="{Binding Source={StaticResource cvs}}" DisplayMemberPath="Name" Width="100" Height="25" />
+        <TabControl Name="tabcontrol" ItemsSource="{Binding Source={StaticResource myPlaces}}" DisplayMemberPath="Name" Width="450" Height="100" />
+</WrapPanel>

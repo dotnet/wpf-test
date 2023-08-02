@@ -1,0 +1,77 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"
+    x:Name="HostPanel"
+    Height="700" Width="700">
+  <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup Name="GroupA">
+            <VisualState Name="State1">
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="testTextBlock" Storyboard.TargetProperty="(UIElement.Opacity)" To="0.1" />
+                    <DoubleAnimation Storyboard.TargetName="testButton" Storyboard.TargetProperty="(FrameworkElement.Width)" To="3" />
+                    <ThicknessAnimation To="72,0,0,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="0.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testCheckBox" />
+                </Storyboard>
+            </VisualState>
+            <VisualState Name="State2">
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="testTextBlock" Storyboard.TargetProperty="(UIElement.Opacity)" To="1" Duration="0" />
+                    <DoubleAnimation Storyboard.TargetName="testButton" Storyboard.TargetProperty="(FrameworkElement.Width)" To="50" />
+                    <ThicknessAnimation To="2,0,70,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="0.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testCheckBox" />
+                </Storyboard>
+            </VisualState>
+          <VisualStateGroup.Transitions>
+            <VisualTransition GeneratedDuration="0:0:0.30" From="State1" To="State2" />
+          </VisualStateGroup.Transitions>
+        </VisualStateGroup>
+        <VisualStateGroup Name="GroupB">
+            <VisualState Name="State3">
+                <Storyboard>
+                    <ThicknessAnimation To="72,0,0,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="3.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testLBI1" />
+                    <ThicknessAnimation To="72,0,0,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="2.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testLBI2" />
+                    <ThicknessAnimation To="72,0,0,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="1.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testLBI3" />
+                    <ThicknessAnimation To="72,0,0,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="0.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testLBI4" />
+                </Storyboard>
+            </VisualState>
+            <VisualState Name="State4">
+                <Storyboard>
+                    <ThicknessAnimation To="2,0,70,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="0.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testLBI1" />
+                    <ThicknessAnimation To="2,0,70,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="1.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testLBI2" />
+                    <ThicknessAnimation To="2,0,70,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="2.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testLBI3" />
+                    <ThicknessAnimation To="2,0,70,0" Duration="0:0:0.15" DecelerationRatio="0.5" SpeedRatio="3.5" Storyboard.TargetProperty="Padding" Storyboard.TargetName="testLBI4" />
+                </Storyboard>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <StackPanel Name="stackPanelController" Orientation="Horizontal">
+      <Button Name="btn_Debug" Content="Debug" />
+      <Button Name="btn_State1" Content="GoToState1" />
+      <Button Name="btn_State2" Content="GoToState2" />
+      <Button Name="btn_State3" Content="GoToState3" />
+      <Button Name="btn_State4" Content="GoToState4" />
+    </StackPanel>
+
+    <StackPanel Name="StackPanel1" Grid.Row="1">
+      <TextBlock Name="testTextBlock" Text="GoToElementState Testing" />
+      <Button Name="testButton" Content="Button1" Width="100"/>
+      <CheckBox Name="testCheckBox" Content="CheckBox1" />
+    </StackPanel>
+
+    <Grid Name="testGrid" Grid.Row="2">
+      <ListBox Name="testListBox" >
+        <ListBoxItem Name="testLBI1">item 1</ListBoxItem>
+        <ListBoxItem Name="testLBI2">item 2</ListBoxItem>
+        <ListBoxItem Name="testLBI3">item 3</ListBoxItem>
+        <ListBoxItem Name="testLBI4">item 4</ListBoxItem>
+      </ListBox>
+    </Grid>
+  </Grid>
+</Page>

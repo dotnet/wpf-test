@@ -1,0 +1,162 @@
+<Grid   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="550" Width="800">
+
+        <Grid.Resources>
+            <DataTemplate x:Key="ItemTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Title}"/>
+                </StackPanel>
+            </DataTemplate>
+            <ToolTip x:Key="SharedToolTip">
+                <TextBlock Text="{Binding Title}"/>
+            </ToolTip>
+            <Style x:Key="ItemContainerStyle" TargetType="ListBoxItem">
+                <Setter Property="ToolTip" Value="{StaticResource SharedToolTip}"/>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Ribbon x:Name="_ribbon" Title="Ribbon Title">
+            <Ribbon.HelpPaneContent>
+                <RibbonButton SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="Header" ToolTipImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipFooterDescription="Description" />
+            </Ribbon.HelpPaneContent>
+            <Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar >
+                    <RibbonButton x:Name="QATButton1" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="Header" ToolTipImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipFooterDescription="Description" />
+                    <RibbonButton x:Name="QATButton2" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="Header" ToolTipImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipFooterDescription="Description" />
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png">
+                    <RibbonApplicationMenuItem Header="Hello _Ribbon" ImageSource="pack://siteOfOrigin:,,,/bigIcon.png"
+                                  ToolTipTitle="Header" ToolTipImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipFooterDescription="Description" />
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <RibbonTab Header="Home">
+                <RibbonGroup Header="Group1">
+                    <RibbonButton Label="Button1" LargeImageSource="pack://siteOfOrigin:,,,/bigIcon.png" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="NoFooter" ToolTipImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipDescription="Description"/>
+                    <RibbonButton Label="Button2" LargeImageSource="pack://siteOfOrigin:,,,/bigIcon.png" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipFooterTitle="NoHeader" ToolTipFooterImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipFooterDescription="Description"/>
+                    <RibbonButton Label="Button3" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="NoImage" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="Description" />
+                    <RibbonButton Label="Button4" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="WideHeader" ToolTipDescription="This is a very long description to make it wide - 'cross the wide Missouri."
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="Description" />
+                    <RibbonButton Label="Button5" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="WideFooter" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="This is a very long description to make it wide - 'cross the wide Missouri." />
+                </RibbonGroup>
+                <RibbonGroup Header="Group2">
+                    <RibbonButton Label="Button1" LargeImageSource="pack://siteOfOrigin:,,,/bigIcon.png" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="NoFooter" ToolTipImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipDescription="Description"/>
+                    <RibbonButton Label="Button2" LargeImageSource="pack://siteOfOrigin:,,,/bigIcon.png" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipFooterTitle="NoHeader" ToolTipFooterImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipFooterDescription="Description"/>
+                    <RibbonButton Label="Button3" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="NoImage" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="Description" />
+                    <RibbonButton Label="Button4" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="WideHeader" ToolTipDescription="This is a very long description to make it wide - 'cross the wide Missouri."
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="Description" />
+                    <RibbonButton Label="Button5" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="WideFooter" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="This is a very long description to make it wide - 'cross the wide Missouri." />
+                </RibbonGroup>
+            </RibbonTab>
+            <RibbonTab Header="Away">
+                <RibbonGroup Header="Group1">
+                    <RibbonButton Label="Button1" LargeImageSource="pack://siteOfOrigin:,,,/bigIcon.png" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="NoFooter" ToolTipImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipDescription="Description"/>
+                    <RibbonButton Label="Button2" LargeImageSource="pack://siteOfOrigin:,,,/bigIcon.png" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipFooterTitle="NoHeader" ToolTipFooterImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipFooterDescription="Description"/>
+                    <RibbonButton Label="Button3" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="NoImage" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="Description" />
+                    <RibbonButton Label="Button4" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="WideHeader" ToolTipDescription="This is a very long description to make it wide - 'cross the wide Missouri."
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="Description" />
+                    <RibbonButton Label="Button5" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="WideFooter" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="This is a very long description to make it wide - 'cross the wide Missouri." />
+                </RibbonGroup>
+                <RibbonGroup Header="Group2">
+                    <RibbonButton Label="Button1" LargeImageSource="pack://siteOfOrigin:,,,/bigIcon.png" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="NoFooter" ToolTipImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipDescription="Description"/>
+                    <RibbonButton Label="Button2" LargeImageSource="pack://siteOfOrigin:,,,/bigIcon.png" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipFooterTitle="NoHeader" ToolTipFooterImageSource="pack://siteOfOrigin:,,,/ToolTipsmallIcon.png" ToolTipFooterDescription="Description"/>
+                    <RibbonButton Label="Button3" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="NoImage" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="Description" />
+                    <RibbonButton Label="Button4" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="WideHeader" ToolTipDescription="This is a very long description to make it wide - 'cross the wide Missouri."
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="Description" />
+                    <RibbonButton Label="Button5" SmallImageSource="pack://siteOfOrigin:,,,/smallIcon.png"
+                                  ToolTipTitle="WideFooter" ToolTipDescription="Description"
+                                  ToolTipFooterTitle="Footer" ToolTipFooterDescription="This is a very long description to make it wide - 'cross the wide Missouri." />
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <Grid Grid.Row="1">
+            <!-- Moving the mouse over this rect shows then hides the tooltip immediately, and disables "quick show".
+                 This is used by the test to reset the page to a known initial state w.r.t. tooltips. -->
+            <Rectangle Name="_reset" HorizontalAlignment="Left" Height="30" Margin="420,10,0,0" Fill="Cyan" VerticalAlignment="Top" Width="30" Focusable="True"
+                       ToolTip="RectTT" ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="1" ToolTipService.BetweenShowDelay="0"/>
+            
+            <ListBox Name="_listbox" Margin="10,10,482,300" ItemsSource="{Binding Data}" ItemTemplate="{StaticResource ItemTemplate}" ItemContainerStyle="{StaticResource ItemContainerStyle}"/>
+            <Button Name="_button" Content="Button" Padding="5" HorizontalAlignment="Left" Margin="339,10,0,0" VerticalAlignment="Top" ToolTip="Button Tooltip"/>
+            <TextBox Name="_textbox" HorizontalAlignment="Left" Margin="340,61,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Textbox ToolTip"/>
+            <Image Name="_image" HorizontalAlignment="Left" Height="100" Margin="340,97,0,0" VerticalAlignment="Top" Width="100" Source="pack://siteOfOrigin:,,,/Avalon.png" ToolTip="Image Tooltip"/>
+            <Image Name="_focusableImage" HorizontalAlignment="Left" Height="100" Margin="470,97,0,0" VerticalAlignment="Top" Width="100" Source="pack://siteOfOrigin:,,,/Avalon.png" Focusable="True">
+                <Image.ToolTip>
+                    <ToolTip Content="Image tooltip"/>
+                </Image.ToolTip>
+            </Image>
+            <GroupBox Name="_groupbox" Header="GroupBox" Margin="340,203,251,150" Background="White" ToolTip="GroupBox ToolTip">
+                <StackPanel>
+                    <TextBlock Name="_textblockHL" Height="60">
+                        Some text
+                        <Hyperlink Name="_hyperlinkTB" ToolTip="Hyperlink tooltip">hyperlink</Hyperlink>
+                        more text
+                    </TextBlock>
+                    <TextBox Name="_textBoxNoTT" Width="120" Text="No tool tip"/>
+                    <TextBox Name="_textBoxBSD0" Width="120" Text="Tool tip, BSD=0" ToolTip="BetweenShowDelay = 0" ToolTipService.BetweenShowDelay="0"/>
+                    <TextBox Name="_textBoxTT" Width="120" Text="Tool tip" ToolTip="TextBox tooltip"/>
+                    <TextBox Name="_textBoxISD" Width="120" Text="InitialShowDelay = 2sec" ToolTip="Delayed ToolTip" ToolTipService.InitialShowDelay="2000"/>
+                </StackPanel>
+            </GroupBox>
+            <Rectangle Name="_rectangle" HorizontalAlignment="Left" Height="30" Margin="650,300,0,0" Fill="LightGreen" VerticalAlignment="Top" Width="30" Focusable="True">
+                <Rectangle.ToolTip>
+                    <ToolTip Height="30" Width="50" Content="Rect tooltip"/>
+                </Rectangle.ToolTip>
+            </Rectangle>
+
+            <FlowDocumentScrollViewer Name="_flowdocSV" Margin="340,390,50,50" ToolTip="FlowDocSV tooltip">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run>This is text before the hyperlink.</Run>
+                        <Hyperlink Name="_hyperlinkFD" ToolTip="Hyperlink tooltip">
+                            This is a Hyperlink with a Tooltip.
+                        </Hyperlink>
+                        <Run>This is text after the hyperlink.</Run>
+                        <Hyperlink>
+                            This is a Hyperlink without a Tooltip.
+                        </Hyperlink>
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+
+        </Grid>
+</Grid>

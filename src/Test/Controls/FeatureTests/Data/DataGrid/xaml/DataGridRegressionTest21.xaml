@@ -1,0 +1,145 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"
+    xmlns:ctrlHelpers="clr-namespace:Microsoft.Test.Controls.Helpers;assembly=ControlsCommon" 
+    x:Name="GridPanel"
+    Height="600" Width="700">
+  <Grid.Resources>
+    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+    <Style x:Key="dataGridRowStyleWithDefaultErrorTemplate" TargetType="{x:Type DataGridRow}">
+      <Setter Property="Header" Value="{Binding}"/>
+      <Setter Property="HeaderTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <TextBlock Text="{Binding Id}"/>
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Validation.ErrorTemplate">
+        <Setter.Value>
+          <ControlTemplate>
+            <DockPanel LastChildFill="True">
+              <TextBlock DockPanel.Dock="Right" Foreground="LightGreen" FontSize="14" FontWeight="Bold">*</TextBlock>
+              <Border BorderBrush="LightGreen" BorderThickness="2">
+                <AdornedElementPlaceholder Name="adornerPlaceholder"></AdornedElementPlaceholder>
+              </Border>
+            </DockPanel>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="IsEditing" Value="true">
+          <Setter Property="BorderBrush" Value="Red"/>
+          <Setter Property="BorderThickness" Value="2"/>
+        </Trigger>
+        <Trigger Property="Validation.HasError" Value="true">
+          <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="dataGridRowStyleWithCustomErrorTemplate" TargetType="{x:Type DataGridRow}">
+      <Setter Property="Header" Value="{Binding}"/>
+      <Setter Property="HeaderTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <TextBlock Text="{Binding Id}"/>
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="ValidationErrorTemplate">
+        <Setter.Value>
+          <ControlTemplate>
+            <DockPanel LastChildFill="True">
+              <TextBlock DockPanel.Dock="Right" Foreground="LightGreen" FontSize="14" FontWeight="Bold">*</TextBlock>
+              <Border BorderBrush="LightGreen" BorderThickness="2">
+                <AdornedElementPlaceholder Name="adornerPlaceholder"></AdornedElementPlaceholder>
+              </Border>
+            </DockPanel>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="IsEditing" Value="true">
+          <Setter Property="BorderBrush" Value="Red"/>
+          <Setter Property="BorderThickness" Value="2"/>
+        </Trigger>
+        <Trigger Property="Validation.HasError" Value="true">
+          <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CellStyle" TargetType="{x:Type DataGridCell}">
+      <Style.Triggers>
+        <Trigger Property="IsEditing" Value="true">
+          <Setter Property="BorderBrush" Value="Red"/>
+          <Setter Property="BorderThickness" Value="2"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+  </Grid.Resources>
+
+  <Grid.RowDefinitions>
+    <RowDefinition Height="Auto"/>
+    <RowDefinition Height="*"/>
+    <RowDefinition Height="Auto"/>
+  </Grid.RowDefinitions>
+
+  <StackPanel Grid.Row="0">
+    <TextBlock Text="WPF DataGrid" />
+    <Button x:Name="btn_Debug" Content="Debug"/>
+    <Button x:Name="btn_RawProposedValue" Content="RawProposedValue"/>
+    <Button x:Name="btn_ConvertedValue" Content="ConvertedValue"/>
+    <Button x:Name="btn_UpdatedValue" Content="UpdatedValue"/>
+    <Button x:Name="btn_CommittedValue" Content="CommittedValue"/>
+  </StackPanel>
+
+  <DataGrid x:Name="DataGrid_Standard"
+              Grid.Row="1"
+              MaxHeight="400"
+              ItemContainerStyle="{DynamicResource dataGridRowStyleWithDefaultErrorTemplate}"
+              CellStyle="{StaticResource CellStyle}"
+              RowDetailsVisibilityMode="VisibleWhenSelected"
+              AlternationCount="2"
+              RowBackground="White"
+              AlternatingRowBackground="LightBlue"
+              AutoGenerateColumns="False">   
+    <DataGrid.Columns>
+
+      <DataGridTextColumn Width="130" Binding="{Binding Path=FirstName}" Header="FirstName">
+      </DataGridTextColumn>
+
+      <DataGridTextColumn Width="Auto" Binding="{Binding Path=LastName}" Header="Last Name"/>
+
+      <DataGridCheckBoxColumn Width="SizeToCells" Binding="{Binding Path=LikesCake}" Header="Likes Cake"/>
+
+      <DataGridComboBoxColumn Width="*" SelectedItemBinding="{Binding Path=Cake}" Header="Cake">
+        <DataGridComboBoxColumn.ItemsSource>
+          <col:ArrayList>
+            <sys:String>Chocolate</sys:String>
+            <sys:String>Vanilla</sys:String>
+          </col:ArrayList>
+        </DataGridComboBoxColumn.ItemsSource>
+      </DataGridComboBoxColumn>
+
+      <DataGridTextColumn Width="Auto" Binding="{Binding Path=LastName}" Header="Last Name"/>
+      <DataGridHyperlinkColumn Width="SizeToHeader" Binding="{Binding Path=Homepage}" Header="Homepage"/>
+
+      <DataGridTemplateColumn Width="Auto"  Header="TemplateColumn" >
+        <DataGridTemplateColumn.CellTemplate>
+          <DataTemplate>
+            <Button Content="{Binding Path=MiddleName}" />
+          </DataTemplate>
+        </DataGridTemplateColumn.CellTemplate>
+        <DataGridTemplateColumn.CellEditingTemplate>
+          <DataTemplate>
+            <TextBox Text="{Binding Path=MiddleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </DataTemplate>
+        </DataGridTemplateColumn.CellEditingTemplate>
+      </DataGridTemplateColumn>
+    </DataGrid.Columns>
+  </DataGrid>
+</Grid>

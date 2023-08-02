@@ -1,0 +1,104 @@
+<Page x:Class="Microsoft.Test.Controls.ItemLeak.ItemLeak"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Microsoft.Test.Controls.ItemLeak"
+    Title="ItemLeak Regression Test">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl x:Name="tabControl" Margin="3" SelectedIndex="4">
+            <TabItem Header="DataGrid">
+                <Grid>
+                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="132" Width="259"
+                      ItemsSource="{Binding WideItems}" SelectedCellsChanged="DG_SelectedCellsChanged"/>
+                    <Button Content="Add" Click="DG_Add" HorizontalAlignment="Left" Margin="283,10,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Remove" Click="DG_Remove" HorizontalAlignment="Left" Margin="283,35,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Clear" Click="DG_Clear" HorizontalAlignment="Left" Margin="283,61,0,0" VerticalAlignment="Top" Width="75"/>
+                    <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,156,0,0" >
+                        <TextBlock Text="Selection anchor: "  />
+                        <TextBlock x:Name="tbAnchor"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,176,0,0" >
+                        <TextBlock Text="SelectedItem: "  />
+                        <TextBlock Text="{Binding ElementName=dataGrid, Path=SelectedItem}"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,196,0,0" >
+                        <TextBlock Text="SelectedItems: "  />
+                        <ListBox ItemsSource="{Binding ElementName=dataGrid, Path=SelectedItems}" Margin="5,0,0,0" Width="177" Height="86"/>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ListBox">
+                <Grid>
+                    <Grid.Resources>
+                        <DataTemplate x:Key="SimpleItemTemplate">
+                            <DockPanel>
+                                <TextBlock Text="{Binding Id}" Margin="3,0,3,0"/>
+                                <TextBlock Text="{Binding Name}" Margin="3,0,3,0"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </Grid.Resources>
+                    <ListBox x:Name="listBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="132" Width="259"
+                      ItemsSource="{Binding SimpleItems}" ItemTemplate="{StaticResource SimpleItemTemplate}"/>
+                    <Button Content="Add" Click="LB_Add" HorizontalAlignment="Left" Margin="283,10,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Remove" Click="LB_Remove" HorizontalAlignment="Left" Margin="283,35,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Clear" Click="LB_Clear" HorizontalAlignment="Left" Margin="283,61,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ListView">
+                <Grid>
+                    <ListView Name="listView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="132" Width="259"
+                              ItemsSource="{Binding NarrowItems}" >
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Content="Add" Click="LV_Add" HorizontalAlignment="Left" Margin="283,10,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Remove" Click="LV_Remove" HorizontalAlignment="Left" Margin="283,35,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Clear" Click="LV_Clear" HorizontalAlignment="Left" Margin="283,61,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TreeView">
+                <Grid>
+                    <Grid.Resources>
+                        <HierarchicalDataTemplate x:Key="HItemTemplate" ItemsSource="{Binding SubItems}">
+                            <DockPanel>
+                                <TextBlock Text="{Binding Id}" Margin="3,0,3,0"/>
+                                <TextBlock Text="{Binding Name}" Margin="3,0,3,0"/>
+                            </DockPanel>
+                        </HierarchicalDataTemplate>
+                    </Grid.Resources>
+                    <TreeView x:Name="treeView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="252" Width="259"
+                      ItemsSource="{Binding HierarchicalItems}" ItemTemplate="{StaticResource HItemTemplate}"/>
+                    <Button Content="Add" Click="TV_Add" HorizontalAlignment="Left" Margin="283,10,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Remove" Click="TV_Remove" HorizontalAlignment="Left" Margin="283,35,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Clear" Click="TV_Clear" HorizontalAlignment="Left" Margin="283,61,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Unselect" Click="TV_Unselect" HorizontalAlignment="Left" Margin="283,87,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Full Test">
+                <Grid>
+                    <Button x:Name="btnTest" Content="Run" Click="RunTest" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
+                    <CheckBox x:Name="cbFailures" Content="Failures" IsEnabled="False" HorizontalAlignment="Left" Margin="126,13,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="cbRunning" Content="Running" IsEnabled="False" HorizontalAlignment="Left" Margin="196,13,0,0" VerticalAlignment="Top"/>
+                    <ListBox x:Name="lbTestLog" HorizontalAlignment="Stretch" Margin="5,45,5,5" VerticalAlignment="Stretch" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Grid Grid.Column="1" Margin="3">
+            <CheckBox Content="Workaround DG Leak" HorizontalAlignment="Center" Margin="0,13,0,0" VerticalAlignment="Top"
+                      IsChecked="{Binding WorkaroundDataGridLeak}"/>
+            <Button Content="GC" Click="DoGC" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" Width="75"/>
+            <ListBox HorizontalAlignment="Stretch" Height="223" Margin="10,58,10,0" VerticalAlignment="Top"
+                     ItemsSource="{Binding TrackingList}"/>
+        </Grid>
+    </Grid>
+</Page>
+

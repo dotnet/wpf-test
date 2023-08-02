@@ -1,0 +1,45 @@
+<Page x:Class="Microsoft.Test.Controls.TreeViewRegressionTest9"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Microsoft.Test.Controls"
+    Title="TreeView Bug RegressionTest9">
+    <Page.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type local:RegressionTest9MainItem}" ItemsSource="{Binding SubItems}">
+            <TextBlock Text="{Binding Name}"/>
+        </HierarchicalDataTemplate>
+        <DataTemplate DataType="{x:Type local:RegressionTest9SubItem}" >
+            <TextBlock Text="{Binding Name}"/>
+        </DataTemplate>
+        <Style TargetType="TreeViewItem">
+            <Setter Property="IsExpanded" Value="true"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Button   x:Name="btnLoop" Content="Loop" Margin="5" Width="75" Click="Loop"/>
+            <Button   x:Name="btnReset" Content="Reset" Margin="5" Width="75" Click="Reset"/>
+            <CheckBox x:Name="cbDisable" Content="Disable" Margin="5" Width="75"/>
+            <CheckBox x:Name="cbTopDown" Content="Top down" Margin="5" Width="75"/>
+            <ComboBox x:Name="cb1stRemove" Margin="5" Width="75" ItemsSource="{Binding RemoveActions}"/>
+            <ComboBox x:Name="cb1stAdd" Margin="5" Width="75" ItemsSource="{Binding AddActions}"/>
+            <ComboBox x:Name="cb2ndRemove" Margin="5" Width="75" ItemsSource="{Binding RemoveActions}"/>
+            <ComboBox x:Name="cb2ndAdd" Margin="5" Width="75" ItemsSource="{Binding AddActions}"/>
+            <Button   x:Name="btnGo" Content="Go" Margin="5" Width="75" Click="Go"/>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="tvGrid">
+                <TreeView x:Name="treeView" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Stretch" Width="400" ItemsSource="{Binding MainItems}"/>
+            </Grid>
+            <ListBox x:Name="errorList" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
+    </Grid>
+</Page>

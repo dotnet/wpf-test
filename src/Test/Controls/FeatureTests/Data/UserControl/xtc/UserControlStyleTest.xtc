@@ -1,0 +1,29 @@
+﻿<XTC>
+  <TEST Name="UserControlStyleTest" Priority="1" SubArea="UserControl" ExecutionGroup="Pri1" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1">
+        <CONTROL>
+          <StackPanel
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:UC="clr-namespace:Avalon.Test.ComponentModel;assembly=ControlsTest">
+            <StackPanel.Resources>
+              <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="80" />
+              </Style>
+            </StackPanel.Resources>
+            <UC:TestUserControl Name="CONTROLTOTEST" />
+          </StackPanel>
+        </CONTROL>
+        <Actions />
+        <Validations>
+          <Validation Name="ControlPropertyValidation">
+            <Parameter Value="Margin" />
+            <Parameter Value="80" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

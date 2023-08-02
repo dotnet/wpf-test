@@ -1,0 +1,207 @@
+﻿<XTC>
+  <TEST Name="MouseWheel test" SubArea="UIVirtualization" Priority="2" ExecutionGroup="Pri2" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1">
+        <CONTROL>
+          <DockPanel
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox SelectedIndex="0" ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="180" Name="CONTROLTOTEST">
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlMouseWheelAction">
+            <Parameter Value="10"/>
+            <Parameter Value="10"/>
+            <Parameter Value="-30"/>
+          </Action>
+          <Action Name="ControlMouseLeftClickAction"/>
+          <Action Name="StorePropertyValues">
+            <Parameter Value="SelectedIndex"/>
+          </Action>
+          <Action Name="ControlMouseWheelAction">
+            <Parameter Value="10"/>
+            <Parameter Value="40"/>
+            <Parameter Value="-30"/>
+          </Action>
+          <Action Name="ControlMouseWheelAction">
+            <Parameter Value="10"/>
+            <Parameter Value="70"/>
+            <Parameter Value="-30"/>
+          </Action>
+          <Action Name="ControlMouseWheelAction">
+            <Parameter Value="10"/>
+            <Parameter Value="100"/>
+            <Parameter Value="-30"/>
+          </Action>
+          <Action Name="ControlMouseLeftClickAction"/>
+          <Action Name="ControlMouseLeftClickAction"/>
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateSelectedIndexChange">
+            <Parameter Value="SelectedIndex"/>
+            <Parameter Value="true"/>
+            <Parameter Value="2"/>
+          </Validation>
+        </Validations>
+      </VARIATION>
+
+      <VARIATION ID="2">
+        <CONTROL>
+          <DockPanel
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox SelectedIndex="0" ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="200" Name="CONTROLTOTEST">
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlPressEndAction"/>
+          <Action Name="ControlMouseWheelAction">
+            <Parameter Value="10"/>
+            <Parameter Value="200"/>
+            <Parameter Value="30"/>
+          </Action>
+          <Action Name="ControlMouseLeftClickAction"/>
+          <Action Name="StorePropertyValues">
+            <Parameter Value="SelectedIndex"/>
+          </Action>
+          <Action Name="ControlMouseWheelAction">
+            <Parameter Value="10"/>
+            <Parameter Value="170"/>
+            <Parameter Value="30"/>
+          </Action>
+          <Action Name="ControlMouseWheelAction">
+            <Parameter Value="10"/>
+            <Parameter Value="140"/>
+            <Parameter Value="30"/>
+          </Action>
+          <Action Name="ControlMouseWheelAction">
+            <Parameter Value="10"/>
+            <Parameter Value="110"/>
+            <Parameter Value="30"/>
+          </Action>
+          <Action Name="ControlMouseLeftClickAction"/>
+          <Action Name="ControlMouseLeftClickAction"/>
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateSelectedIndexChange">
+            <Parameter Value="SelectedIndex"/>
+            <Parameter Value="false"/>
+            <Parameter Value="2"/>
+          </Validation>
+        </Validations>
+      </VARIATION>
+
+
+      <VARIATION ID="3">
+        <CONTROL>
+          <DockPanel
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox SelectedIndex="0" ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="180" Name="CONTROLTOTEST">
+              <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+              </ListBox.ItemsPanel>
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseWheelRightAction">
+          </Action>
+          <Action Name="ControlMouseLeftClickAction"/>
+          <Action Name="StorePropertyValues">
+            <Parameter Value="SelectedIndex"/>
+          </Action>
+          <Action Name="MouseWheelRightAction">
+          </Action>
+          <Action Name="MouseWheelRightAction">
+          </Action>
+          <Action Name="MouseWheelRightAction">
+          </Action>
+          <Action Name="ControlMouseLeftClickAction"/>
+          <Action Name="ControlMouseLeftClickAction"/>
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateSelectedIndexChange">
+            <Parameter Value="SelectedIndex"/>
+            <Parameter Value="true"/>
+            <Parameter Value="2"/>
+          </Validation>
+        </Validations>
+      </VARIATION>
+
+
+      <VARIATION ID="4">
+        <CONTROL>
+          <DockPanel
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox SelectedIndex="0" ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="180" Name="CONTROLTOTEST">
+              <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+              </ListBox.ItemsPanel>
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="MouseWheelRightAction">
+          </Action>
+          <Action Name="MouseWheelRightAction">
+          </Action>
+          <Action Name="MouseWheelRightAction">
+          </Action>
+          <Action Name="ControlMouseLeftClickAction"/>
+          <Action Name="StorePropertyValues">
+            <Parameter Value="SelectedIndex"/>
+          </Action>
+          <Action Name="MouseWheelLeftAction">
+          </Action>
+          <Action Name="MouseWheelLeftAction">
+          </Action>
+          <Action Name="ControlMouseLeftClickAction"/>
+          <Action Name="ControlMouseLeftClickAction"/>
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateSelectedIndexChange">
+            <Parameter Value="SelectedIndex"/>
+            <Parameter Value="false"/>
+            <Parameter Value="2"/>
+          </Validation>
+        </Validations>
+      </VARIATION>
+
+    </DATA>
+  </TEST>
+
+</XTC>

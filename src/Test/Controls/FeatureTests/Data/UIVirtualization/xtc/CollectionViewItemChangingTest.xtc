@@ -1,0 +1,48 @@
+﻿<XTC>
+  <TEST Name="Modify items in CollectionView test" SubArea="UIVirtualization" Priority="2" ExecutionGroup="Pri2" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1">
+        <CONTROL>
+          <DockPanel
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+            xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+                <CollectionViewSource.SortDescriptions>
+                  <scm:SortDescription PropertyName="State" />
+                </CollectionViewSource.SortDescriptions>
+              </CollectionViewSource>
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs2">
+                <CollectionViewSource.SortDescriptions>
+                  <scm:SortDescription PropertyName="Name" />
+                </CollectionViewSource.SortDescriptions>
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="100">
+            </ListBox>
+            <ListBox ItemsSource="{Binding Source={StaticResource cvs2}}" DisplayMemberPath="Name" Name="CONTROLTOTEST" Height="100">
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlFocusAction" />
+          <Action Name="ChangeItemsInCollection" />
+          <Action Name="DragScrollBarThumbAction">
+            <Parameter Value="10" />
+            <Parameter Value="120" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateUIVirtualization" />
+          <Validation Name="ValidateMaxDeVirtualizedItems">
+            <Parameter Value="50" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

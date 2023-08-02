@@ -1,0 +1,25 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="300" Width="525">
+
+    <ListBox x:Name="TestListBox" HorizontalAlignment="Left" Height="154" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"
+             ItemsSource="{Binding Items}"
+             VirtualizingPanel.ScrollUnit="Pixel" VirtualizingPanel.CacheLength="0">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Border Height="{Binding Height}" >
+                    <DockPanel>
+                        <TextBlock Text="{Binding SeqNo}"/>
+                        <TextBlock Text="{Binding Height}" Margin="5,0,0,0"/>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.ItemContainerStyle>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="BorderBrush" Value="Blue"/>
+                <Setter Property="BorderThickness" Value="1,1,1,0"/>
+            </Style>
+        </ListBox.ItemContainerStyle>
+    </ListBox>
+</Grid>
+

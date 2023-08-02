@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<XTC>
+  <TEST Name="ListBoxTextSearchUnitTest" Priority="2" SubArea="TextSearch" ExecutionGroup="Pri2" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger = "true"/>
+      <VARIATION ID="1" Note="One Char search">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+            <ListBoxItem Name="Item3">Avalon</ListBoxItem>
+            <ListBoxItem Name="Item4">Aaron</ListBoxItem>
+            <ListBoxItem Name="Item5">Bo</ListBoxItem>
+            <ListBoxItem Name="Item6">baa</ListBoxItem>
+            <ListBoxItem Name="Item7">Cat</ListBoxItem>
+            <ListBoxItem Name="Item8">poo pie</ListBoxItem>
+            <ListBoxItem Name="Item9">Frank</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item3" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="2" Note="Two Chars search">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+            <ListBoxItem Name="Item3">Avalon</ListBoxItem>
+            <ListBoxItem Name="Item4">Aaron</ListBoxItem>
+            <ListBoxItem Name="Item5">Bo</ListBoxItem>
+            <ListBoxItem Name="Item6">baa</ListBoxItem>
+            <ListBoxItem Name="Item7">Cat</ListBoxItem>
+            <ListBoxItem Name="Item8">poo pie</ListBoxItem>
+            <ListBoxItem Name="Item9">Frank</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="O" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item5" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="3" Note="Three Chars search">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+            <ListBoxItem Name="Item3">Avalon</ListBoxItem>
+            <ListBoxItem Name="Item4">Aaron</ListBoxItem>
+            <ListBoxItem Name="Item5">Bo</ListBoxItem>
+            <ListBoxItem Name="Item6">baac</ListBoxItem>
+            <ListBoxItem Name="Item7">Cat</ListBoxItem>
+            <ListBoxItem Name="Item8">poo pie</ListBoxItem>
+            <ListBoxItem Name="Item9">Frank</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="A" />
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item6" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="4" Note="Invalid search, nothing is selected">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="D" />
+            <Parameter Value="O" />
+            <Parameter Value="G" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item1" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="False" />
+          </Validation>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item2" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="False" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="5" Note="Press Backspace: BA will go to Baby, backspace to delete the A and replace with O to go to BO">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+            <ListBoxItem Name="Item3">Avalon</ListBoxItem>
+            <ListBoxItem Name="Item4">Aaron</ListBoxItem>
+            <ListBoxItem Name="Item5">Bo</ListBoxItem>
+            <ListBoxItem Name="Item6">baa</ListBoxItem>
+            <ListBoxItem Name="Item7">Cat</ListBoxItem>
+            <ListBoxItem Name="Item8">poo pie</ListBoxItem>
+            <ListBoxItem Name="Item9">Frank</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="A" />
+            <Parameter Value="Back" />
+            <Parameter Value="O" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item5" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="6" Note="Press Backspace 3 times: Select Frank then backspace to search for Cat">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+            <ListBoxItem Name="Item3">Avalon</ListBoxItem>
+            <ListBoxItem Name="Item4">Aaron</ListBoxItem>
+            <ListBoxItem Name="Item5">Bo</ListBoxItem>
+            <ListBoxItem Name="Item6">baa</ListBoxItem>
+            <ListBoxItem Name="Item7">Cat</ListBoxItem>
+            <ListBoxItem Name="Item8">poo pie</ListBoxItem>
+            <ListBoxItem Name="Item9">Frank</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="F" />
+            <Parameter Value="R" />
+            <Parameter Value="A" />
+            <Parameter Value="Back" />
+            <Parameter Value="Back" />
+            <Parameter Value="Back" />
+            <Parameter Value="C" />
+            <Parameter Value="A" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item7" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="7" Note="Search for next match- Find the third item that begins with B">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+            <ListBoxItem Name="Item3">Avalon</ListBoxItem>
+            <ListBoxItem Name="Item4">Aaron</ListBoxItem>
+            <ListBoxItem Name="Item5">Bo</ListBoxItem>
+            <ListBoxItem Name="Item6">baa</ListBoxItem>
+            <ListBoxItem Name="Item7">Cat</ListBoxItem>
+            <ListBoxItem Name="Item8">poo pie</ListBoxItem>
+            <ListBoxItem Name="Item9">Frank</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="B" />
+            <Parameter Value="B" />
+            <Parameter Value="B" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item6" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="8" Note="Search with Space key to search for multiple words">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+            <ListBoxItem Name="Item3">Avalon</ListBoxItem>
+            <ListBoxItem Name="Item4">Aaron</ListBoxItem>
+            <ListBoxItem Name="Item5">Bo</ListBoxItem>
+            <ListBoxItem Name="Item6">baa</ListBoxItem>
+            <ListBoxItem Name="Item7">Frank B</ListBoxItem>
+            <ListBoxItem Name="Item8">poo pie</ListBoxItem>
+            <ListBoxItem Name="Item9">Frank Smith</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="F" />
+            <Parameter Value="R" />
+            <Parameter Value="A" />
+            <Parameter Value="N" />
+            <Parameter Value="K" />
+            <Parameter Value="Space" />
+            <Parameter Value="S" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item9" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+      <VARIATION ID="8" Note="Search up">
+        <CONTROL>
+          <ListBox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="lb1">
+            <ListBoxItem Name="Item1">zoo</ListBoxItem>
+            <ListBoxItem Name="Item2">Baby</ListBoxItem>
+            <ListBoxItem Name="Item3">Avalon</ListBoxItem>
+            <ListBoxItem Name="Item4">Aaron</ListBoxItem>
+            <ListBoxItem Name="Item5">Bo</ListBoxItem>
+            <ListBoxItem Name="Item6">baa</ListBoxItem>
+            <ListBoxItem Name="Item7">Frank B</ListBoxItem>
+            <ListBoxItem Name="Item8">poo pie</ListBoxItem>
+            <ListBoxItem Name="Item9">Frank Smith</ListBoxItem>
+          </ListBox>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeIMESystemLocal">
+            <Parameter Value="00000409"/>
+          </Action>
+          <Action Name="ControlFocusAction"/>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="F" />
+            <Parameter Value="R" />
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:5" />
+          </Action>
+          <Action Name="MultipleKeyActions">
+            <Parameter Value="A" />
+            <Parameter Value="V" />
+          </Action>
+        </Actions>
+        <Validations>
+          <Validation Name="ControlPropertyValidationById">
+            <Parameter Value="Item3" />
+            <Parameter Value="IsSelected" />
+            <Parameter Value="True" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

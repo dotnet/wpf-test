@@ -1,0 +1,35 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:s="clr-namespace:System.Windows.Media;assembly=PresentationCore">
+    <Grid.Resources>
+        <CollectionViewSource x:Key="MyCollectionViewSource" Source="{x:Static s:Fonts.SystemFontFamilies}" >
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Source[0]" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </Grid.Resources>
+
+    <DataGrid x:Name="DataGrid_Standard" 
+                  ItemsSource="{Binding Source={StaticResource MyCollectionViewSource}}" 
+                  VirtualizingPanel.IsVirtualizing="True" 
+                  VirtualizingPanel.IsVirtualizingWhenGrouping="True" >
+        <DataGrid.Template>
+            <ControlTemplate>
+                <ScrollViewer >
+                    <ItemsPresenter Margin="0,5,0,0" />
+                </ScrollViewer>
+            </ControlTemplate>
+        </DataGrid.Template>
+
+        <DataGrid.GroupStyle>
+            <GroupStyle>
+                <GroupStyle.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name}" />
+                    </DataTemplate>
+                </GroupStyle.HeaderTemplate>
+            </GroupStyle>
+        </DataGrid.GroupStyle>
+    </DataGrid>
+</Grid>
+
