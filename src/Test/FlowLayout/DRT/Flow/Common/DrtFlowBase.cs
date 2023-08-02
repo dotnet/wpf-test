@@ -40,11 +40,11 @@ namespace DRT
         /// </summary>
         static DrtFlowBase()
         {
-            _pfAssembly = Assembly.GetAssembly(typeof(FrameworkElement));
-            _pcAssembly = Assembly.GetAssembly(typeof(UIElement));
+            s_pfAssembly = Assembly.GetAssembly(typeof(FrameworkElement));
+            s_pcAssembly = Assembly.GetAssembly(typeof(UIElement));
 
             // Disable Background Layout.
-            Type typeBackgroundFormatInfo = _pfAssembly.GetType("MS.Internal.PtsHost.BackgroundFormatInfo");
+            Type typeBackgroundFormatInfo = s_pfAssembly.GetType("MS.Internal.PtsHost.BackgroundFormatInfo");
             FieldInfo fieldInfo = typeBackgroundFormatInfo.GetField("_isBackgroundFormatEnabled", BindingFlags.Static | BindingFlags.NonPublic);
             fieldInfo.SetValue(null, false);
         }
@@ -146,12 +146,12 @@ namespace DRT
         /// <summary>
         /// PresentationFramework assembly reference.
         /// </summary>
-        internal static Assembly FrameworkAssembly { get { return _pfAssembly; } }
+        internal static Assembly FrameworkAssembly { get { return s_pfAssembly; } }
 
         /// <summary>
         /// PresentationCore assembly reference.
         /// </summary>
-        internal static Assembly CoreAssembly { get { return _pcAssembly; } }
+        internal static Assembly CoreAssembly { get { return s_pcAssembly; } }
 
         #endregion Internal Methods/Properties
 
@@ -192,12 +192,12 @@ namespace DRT
         /// <summary>
         /// PresentationFramework assembly reference.
         /// </summary>
-        private static Assembly _pfAssembly;
+        private static Assembly s_pfAssembly;
 
         /// <summary>
         /// PresentationCore assembly reference.
         /// </summary>
-        private static Assembly _pcAssembly;
+        private static Assembly s_pcAssembly;
 
         #endregion Private Fields
     }

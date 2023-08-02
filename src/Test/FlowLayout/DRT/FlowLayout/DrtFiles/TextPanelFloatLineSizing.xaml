@@ -1,0 +1,262 @@
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+    <Grid.ColumnDefinitions>
+    <ColumnDefinition />
+    <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+    <RowDefinition />
+    <RowDefinition />
+    <RowDefinition />
+    </Grid.RowDefinitions>
+
+        <Grid.Resources>
+    <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="PagePadding" Value="0" />
+    </Style>
+    <Style x:Key="{x:Type FlowDocumentScrollViewer}" TargetType="{x:Type FlowDocumentScrollViewer}">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+    </Style>
+
+
+          <!--
+        *****************************************
+        * Button Style
+        *****************************************
+    -->
+
+    <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource PFThemeButtonFocusVisual}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="FontSize" Value="11.0" />
+        <Setter Property="FontStyle" Value="Normal" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="12,1,12,2" />
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+            <Grid Background="{TemplateBinding Background}">
+
+                <!--right -->    <Rectangle x:Name="R1" Margin="0,0,0,0" HorizontalAlignment="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                <!--bottom-->    <Rectangle x:Name="B1" Margin="0,0,1,0" VerticalAlignment="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                <!--left  -->    <Rectangle x:Name="L1" Margin="0,0,1,1" HorizontalAlignment="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+                <!--top   -->    <Rectangle x:Name="T1" Margin="1,0,1,1" VerticalAlignment="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+
+                <!--right -->    <Rectangle x:Name="R2" Margin="1,1,1,1" HorizontalAlignment="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                <!--bottom-->    <Rectangle x:Name="B2" Margin="1,1,2,1" VerticalAlignment="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                <!--left  -->    <Rectangle x:Name="L2" Margin="1,1,2,2" HorizontalAlignment="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+                <!--top   -->    <Rectangle x:Name="T2" Margin="2,1,2,2" VerticalAlignment="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+
+                <!--right -->    <Rectangle x:Name="R3" Margin="2,2,2,2" HorizontalAlignment="Right" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <!--bottom-->    <Rectangle x:Name="B3" Margin="2,2,3,2" VerticalAlignment="Bottom" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <!--left  -->    <Rectangle x:Name="L3" Margin="2,2,3,3" HorizontalAlignment="Left" Width="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <!--top   -->    <Rectangle x:Name="T3" Margin="3,2,3,3" VerticalAlignment="Top" Height="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+
+                <Border x:Name="ContentContainer" Margin="3,3,4,4" Padding="{TemplateBinding Padding}">
+
+                    <ContentPresenter x:Name="ContentSite" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </Border>
+            </Grid>
+        <ControlTemplate.Triggers>
+
+        <Trigger Property="IsFocused" Value="true">
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="R1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="B1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="L1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="T1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" TargetName="R2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" TargetName="B2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" TargetName="L2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" TargetName="T2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="R3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="B3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" TargetName="L3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" TargetName="T3" />
+        </Trigger>
+        <Trigger Property="IsDefaulted" Value="true">
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="R1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="B1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="L1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="T1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" TargetName="R2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" TargetName="B2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" TargetName="L2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" TargetName="T2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="R3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="B3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" TargetName="L3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" TargetName="T3" />
+        </Trigger>
+        <Trigger Property="IsPressed" Value="true">
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="R1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="B1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="L1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" TargetName="T1" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="R2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="B2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="L2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" TargetName="T2" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="R3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="B3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="L3" />
+        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="T3" />
+        <Setter Property="Margin" Value="4,4,3,3" TargetName="ContentContainer" />
+        </Trigger>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Opacity" Value="0.5" TargetName="ContentSite" />
+        </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        </Trigger>
+        <!-- Width -->
+        <Trigger Property="Width" Value="Auto">
+        <Setter Property="MinWidth" Value="75" />
+        </Trigger>
+        <!-- Height -->
+        <Trigger Property="Height" Value="Auto">
+        <Setter Property="MinHeight" Value="23" />
+        </Trigger>
+        </Style.Triggers>
+    </Style>
+    </Grid.Resources>
+
+
+
+
+    
+    <!-- Auto-sized element that fits next to floater. -->
+    <Border BorderBrush="Black" BorderThickness="5" Width="400" Grid.Row="0" Grid.Column="0">
+        <FlowDocumentScrollViewer>
+            <FlowDocument Background="LightBlue">
+                <Paragraph> 
+                <Floater Background="Green" Width="100">
+                    <Paragraph>Floater blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</Paragraph>
+                </Floater>
+                <TextBlock Width="Auto" Background="Blue">
+                    Above floater.  Blah blah blah blah blah blah blah blah.
+                </TextBlock>
+                <TextBlock Width="Auto" Background="Red">
+                    Next to floater.  Blah blah blah blah blah.
+                </TextBlock>
+                <TextBlock Width="Auto" Background="Yellow">
+                    Below floater.  Blah blah blah blah blah blah blah blah blah blah.
+                </TextBlock>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+    <Border BorderBrush="Black" BorderThickness="5" Width="400" Grid.Row="1" Grid.Column="0">
+        <FlowDocumentScrollViewer>
+            <FlowDocument Background="LightBlue">
+                <Paragraph>
+                <Floater Background="Green" Width="100" HorizontalAlignment="Left">
+                    <Paragraph>Floater blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</Paragraph>
+                </Floater>
+                <TextBlock Width="Auto" Background="Blue">
+                    Above floater.  Blah blah blah blah blah blah blah blah.
+                </TextBlock>
+                <TextBlock Width="Auto" Background="Red">
+                    Next to floater.  Blah blah blah blah blah.
+                </TextBlock>
+                <TextBlock Width="Auto" Background="Yellow">
+                    Below floater.  Blah blah blah blah blah blah blah blah blah blah.
+                </TextBlock>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+     <Border BorderBrush="Black" BorderThickness="5" Width="400" Grid.Row="2" Grid.Column="0">
+         <FlowDocumentScrollViewer>
+             <FlowDocument Background="LightBlue">
+                <Paragraph>
+                <Floater Background="Green" Width="100" HorizontalAlignment="Right">
+                    <Paragraph>Floater blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</Paragraph>
+                </Floater>
+                <TextBlock Width="Auto" Background="Blue">
+                    Above floater.  Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+                </TextBlock>
+                <TextBlock Width="Auto" Background="Red">
+                    Next to floater.  Blah blah blah blah blah.
+                </TextBlock>
+                <TextBlock Width="Auto" Background="Yellow">
+                    Below floater.  Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+                </TextBlock>
+                </Paragraph>
+             </FlowDocument>
+         </FlowDocumentScrollViewer>
+    </Border>
+   <Border BorderBrush="Black" BorderThickness="5" Width="400" Grid.Row="0" Grid.Column="1">
+       <FlowDocumentScrollViewer>
+           <FlowDocument Background="LightBlue">
+                <Paragraph>
+                <Floater Background="Green" Width="100" HorizontalAlignment="Right">
+                    <Paragraph>Floater blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</Paragraph>
+                </Floater>
+                <Button Width="Auto" Background="Blue">
+                    Above floater.  Blah blah blah blah blah blah blah blah.
+                </Button>
+                <Button Width="Auto" Background="Red">
+                    Next to floater.  Blah blah blah blah blah.
+                </Button>
+                <Button Width="Auto" Background="Yellow">
+                    Below floater.  Blah blah blah blah blah blah blah blah blah blah.
+                </Button>
+                </Paragraph>
+           </FlowDocument>
+       </FlowDocumentScrollViewer>
+    </Border>
+    <Border BorderBrush="Black" BorderThickness="5" Width="400" Grid.Row="1" Grid.Column="1">
+        <FlowDocumentScrollViewer>
+            <FlowDocument Background="LightBlue">
+                <Paragraph>
+                <Floater Background="Green" Width="100" HorizontalAlignment="Left">
+                    <Paragraph>Floater blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</Paragraph>
+                </Floater>
+                <Button Width="Auto" Background="Blue">
+                    Above floater.  Blah blah blah blah blah blah blah blah.
+                </Button>
+                <Button Width="Auto" Background="Red">
+                    Next to floater.  Blah blah blah blah blah.
+                </Button>
+                <Button Width="Auto" Background="Yellow">
+                    Below floater.  Blah blah blah blah blah blah blah blah blah blah.
+                </Button>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+    <Border BorderBrush="Black" BorderThickness="5" Width="400" Grid.Row="2" Grid.Column="1">
+        <FlowDocumentScrollViewer>
+            <FlowDocument Background="LightBlue">
+                <Paragraph>
+                <Floater Background="Green" Width="100" HorizontalAlignment="Left">
+                    <Paragraph>Floater blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</Paragraph>
+                </Floater>
+                <Button Width="Auto" Background="Blue">
+                    Above floater.  Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+                </Button>
+                <Button Width="Auto" Background="Red">
+                    Next to floater.  Blah blah blah blah blah.
+                </Button>
+                <Button Width="Auto" Background="Yellow">
+                    Below floater.  Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+                </Button>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+</Grid>
+
+
