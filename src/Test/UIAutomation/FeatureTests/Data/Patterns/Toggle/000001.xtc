@@ -1,0 +1,143 @@
+<?xml version="1.0" ?>
+<XTC
+>
+    <TEST
+            Auto="1"
+            Frequency="Weekly"
+            Owner="Microsoft"
+            Priority="1"
+    >
+        <DIMENSION
+                Type="Class"
+        />
+        <DIMENSION
+                Name="AdditionalTests"
+                Value="*"
+        />
+        <DIMENSION
+                Name="Language"
+                Value="*"
+        />
+        <DIMENSION
+                Name="Platform"
+                Value="*"
+        />
+        <SCENARIO
+                ID="7522451"
+                Language="*:28203"
+                Platform="*:16169"
+        >
+            <INIT
+                    Class="Avalon.Test.ComponentModel.UiaToggleTest"
+                    Assembly="UiAutoFTUtils"
+                    TestType="UIAutomation"
+            />
+		<VARIATION
+		    ID="1"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="checkbox"
+			>
+			<Property Name="InitialIsThreeState" Value="true"/>
+			<Property Name="InitialCheckBoxIsChecked" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="2"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="checkbox"
+			>
+			<Property Name="InitialIsThreeState" Value="true"/>
+			<Property Name="InitialCheckBoxIsChecked" Value="true"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="3"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="checkbox"
+			>
+			<Property Name="InitialIsThreeState" Value="true"/>
+			<Property Name="InitialCheckBoxIsChecked" Value=""/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="4"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="checkbox"
+			>
+			<Property Name="InitialIsThreeState" Value="false"/>
+			<Property Name="InitialCheckBoxIsChecked" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="5"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="checkbox"
+			>
+			<Property Name="InitialIsThreeState" Value="false"/>
+			<Property Name="InitialCheckBoxIsChecked" Value="true"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="6"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="togglebutton"
+			>
+			<Property Name="InitialCheckBoxIsChecked" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="7"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="togglebutton"
+			>
+			<Property Name="InitialCheckBoxIsChecked" Value="true"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="8"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="menuitem"
+			>
+			<Property Name="InitialMenuItemIsChecked" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="9"
+		>
+		    <UIAPatternTest
+			XamlFile="TogglePattern.xaml"
+			ControlName="menuitem"
+			>
+			<Property Name="InitialMenuItemIsChecked" Value="true"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+	</SCENARIO>
+        <STEP
+                Index="1"
+                Loader="FullTrust"
+                LoaderSwitch="UIAutoLoader.exe"
+                Run="000001.xtc"
+        >
+            <FILE
+                    Path="*\FeatureTests\UIAutomation\*"
+                    Type="support"
+            />
+        </STEP>
+    </TEST>
+</XTC>

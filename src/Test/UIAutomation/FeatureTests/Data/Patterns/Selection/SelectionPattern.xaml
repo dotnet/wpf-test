@@ -1,0 +1,66 @@
+<Canvas
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+>
+<ComboBox Name="combobox">
+        <ComboBoxItem IsSelected="true">Item1</ComboBoxItem>
+        <ComboBoxItem>Item2</ComboBoxItem>
+        <ComboBoxItem>Item3</ComboBoxItem>
+</ComboBox>
+<ListBox Name="listbox" Canvas.Left="180">
+	<ListBoxItem>Item1</ListBoxItem>
+	<ListBoxItem>Item2</ListBoxItem>
+	<ListBoxItem>Item3</ListBoxItem>
+</ListBox>
+<TabControl Canvas.Left="250" Name="tabcontrol">
+	<TabItem Header="Item1">
+		<StackPanel><Button>Button1</Button></StackPanel>
+	</TabItem>
+	<TabItem Header="Item2">
+		<StackPanel><Button>Button 2</Button></StackPanel>
+	</TabItem>
+	<TabItem Header="Item3">
+		<StackPanel><Button>Button 3</Button></StackPanel>
+	</TabItem>
+</TabControl>
+<TreeView Canvas.Left="450" Grid.Row="2" Grid.Column="1" Margin="5" Name="treeview">
+    <TreeViewItem Header="My Computer" IsExpanded="true">
+	<TreeViewItem Header="Floppy Drive" />
+	<TreeViewItem Header="Hard Drive">
+	    <TreeViewItem Header="boot.ini" />
+	    <TreeViewItem Header="config.sys" />
+	    <TreeViewItem Header="WINDOWS">
+		<TreeViewItem Header="win.ini" />
+		<TreeViewItem Header="leaves.bmp" />
+		<TreeViewItem Header="1.bmp" />
+	    </TreeViewItem>
+	</TreeViewItem>
+    </TreeViewItem>
+    <TreeViewItem Header="My Network Places" IsExpanded="true" Name="treeviewitem">
+	<TreeViewItem Header="msn.com" />
+	<TreeViewItem Header="msweb" />
+	<TreeViewItem Header="Other sites">
+	    <TreeViewItem Header="World News" />
+	    <TreeViewItem Header="Local News" />
+	    <TreeViewItem Header="Business News" />
+	</TreeViewItem>
+    </TreeViewItem>
+</TreeView>
+<ListView Canvas.Left="10" Canvas.Top="150" Background="Red" Width="500" Height="200" Name="listview">
+    <ListView.View>
+	<GridView>
+	    <GridViewColumn Header="Month" DisplayMemberBinding="{Binding Path=Month}" Width='150' />
+	    <GridViewColumn Header="Day" DisplayMemberBinding="{Binding Path=Day}" Width='150' />
+	    <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Path=Year}" Width='150' />
+	</GridView>
+    </ListView.View>
+    <ListView.ItemsSource>
+	<s:ArrayList xmlns:s='clr-namespace:System.Collections;assembly=mscorlib' xmlns:p='clr-namespace:System;assembly=mscorlib'>
+	    <p:DateTime>2005/1/2</p:DateTime>
+	    <p:DateTime>2005/1/3</p:DateTime>
+	    <p:DateTime>2005/1/4</p:DateTime>
+	    <p:DateTime>2005/1/1</p:DateTime>
+	</s:ArrayList>
+    </ListView.ItemsSource>
+</ListView>
+
+</Canvas>

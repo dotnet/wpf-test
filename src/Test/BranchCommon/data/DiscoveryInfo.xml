@@ -716,5 +716,23 @@
         </Versions>
       </DefaultTestInfo>
     </Target>
+    <!-- UIAutomation UIAutoVerifier cases-->
+    <Target Adaptor="XtcAdaptor" Path="FeatureTests\UIAutomation\UIAutoVerifier.xtc">
+      <DefaultTestInfo Area="UiAutomation" SubArea="UIAutoVerifier" Disabled="False" Priority="1" Type="Functional" UacElevation="Elevated">
+        <Driver Executable="sti.exe" />
+        <DriverParameters Assembly="UIAutoVerifier.exe" Class="WPF.Test.UIAutomation.UIAutoVerifier" Method="RunVerifierTest" SecurityLevel="FullTrust" DefaultResult="Unknown" />
+        <SupportFiles>
+          <SupportFile Source="FeatureTests\UIAutomation\UIAutoVerifier.exe" />
+          <SupportFile Source="FeatureTests\UIAutomation\WUIALogging.dll" />
+          <SupportFile Source="FeatureTests\UIAutomation\WUIALoggerPiper.dll" />
+          <SupportFile Source="FeatureTests\UIAutomation\WUIATestLibrary.dll" />
+          <SupportFile Source="FeatureTests\UIAutomation\XamlReader.exe" />
+        </SupportFiles>
+        <Versions>
+          <Version>3.0+</Version>
+          <Version>4.0Client+</Version>
+        </Versions>
+      </DefaultTestInfo>
+    </Target>
   </Targets>
 </DiscoveryInfo>

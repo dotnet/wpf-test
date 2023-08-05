@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <OutputName>UIAutoVerifier</OutputName>
+    <OutputType>exe</OutputType>
+    <WuiAccessibleTstPath>$(WpfTestBasePath)\UIAutomation\Common</WuiAccessibleTstPath>	
+    <AtPathCommon>$(WuiAccessibleTstPath)</AtPathCommon>
+    <AtPathUivCommon>$(WuiAccessibleTstPath)\ATGCommon</AtPathUivCommon>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="UIAutoVerifier.cs" />
+    <Compile Include="$(AtPathCommon)\ATGCommon\Attributes.cs" />
+    <Compile Include="$(AtPathCommon)\ATGCommon\framework.cs" />
+    <Compile Include="$(AtPathCommon)\ATGCommon\WrapperControls.cs" />
+    <Compile Include="$(AtPathCommon)\ATGCommon\WrapperApplication.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(WUIALoggingProject)"/>
+    <ProjectReference Include="$(WUIALoggerPiperProject)"/>
+    <ProjectReference Include="$(WUIATestLibraryProject)"/>
+  </ItemGroup>
+</Project>

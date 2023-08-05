@@ -1,0 +1,28 @@
+<Canvas
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+	<Grid ShowGridLines="False" Background="Green">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="300"/>
+		</Grid.ColumnDefinitions>
+		<Button Height="30" Margin="50,50,50,50" Grid.Column="0">
+			Button with Context Menu
+			<Button.ContextMenu>
+				<ContextMenu Name="TestObject" StaysOpen="True">
+					<MenuItem Header="File"/>
+					<MenuItem Header="Save"/>
+					<MenuItem Header="SaveAs"/>
+					<MenuItem Header="Recent Files">
+						<MenuItem Header="ReadMe.txt"/>
+						<MenuItem Header="Schedule.xls">
+							<MenuItem.ToolTip>
+								<ToolTip>Some information.</ToolTip>
+							</MenuItem.ToolTip>
+						</MenuItem>
+					</MenuItem>
+				</ContextMenu>
+			</Button.ContextMenu>
+		</Button>
+	</Grid>
+</Canvas>

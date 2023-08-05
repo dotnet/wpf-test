@@ -1,0 +1,125 @@
+<?xml version="1.0" ?>
+<XTC
+>
+    <TEST
+            Auto="1"
+            Frequency="Weekly"
+            Owner="Microsoft"
+            Priority="1"
+    >
+        <DIMENSION
+                Type="Class"
+        />
+        <DIMENSION
+                Name="AdditionalTests"
+                Value="*"
+        />
+        <DIMENSION
+                Name="Language"
+                Value="*"
+        />
+        <DIMENSION
+                Name="Platform"
+                Value="*"
+        />
+        <SCENARIO
+                ID="7522451"
+                Language="*:28203"
+                Platform="*:16169"
+        >
+            <INIT
+                    Class="Avalon.Test.ComponentModel.UiaScrollTest"
+                    Assembly="UiAutoFTUtils"
+                    TestType="UIAutomation"
+            />
+		<VARIATION
+		    ID="1"
+		>
+		    <UIAPatternTest
+			XamlFile="ScrollPattern.xaml"
+			ControlName="listbox"
+			>
+			<Property Name="InitialHorizontallyScrollable" Value="false"/>
+			<Property Name="InitialVerticallyScrollable" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="2"
+		>
+		    <UIAPatternTest
+			XamlFile="ScrollPattern.xaml"
+			ControlName="listbox"
+			>
+			<Property Name="InitialHorizontallyScrollable" Value="false"/>
+			<Property Name="InitialVerticallyScrollable" Value="true"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="4"
+		>
+		    <UIAPatternTest
+			XamlFile="ScrollPattern.xaml"
+			ControlName="listbox"
+			>
+			<Property Name="InitialHorizontallyScrollable" Value="true"/>
+			<Property Name="InitialVerticallyScrollable" Value="true"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="5"
+		>
+		    <UIAPatternTest
+			XamlFile="ScrollPattern.xaml"
+			ControlName="treeview"
+			>
+			<Property Name="InitialHorizontallyScrollable" Value="false"/>
+			<Property Name="InitialVerticallyScrollable" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="6"
+		>
+		    <UIAPatternTest
+			XamlFile="ScrollPattern.xaml"
+			ControlName="treeview"
+			>
+			<Property Name="InitialHorizontallyScrollable" Value="false"/>
+			<Property Name="InitialVerticallyScrollable" Value="true"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="7"
+		>
+		    <UIAPatternTest
+			XamlFile="ScrollPattern.xaml"
+			ControlName="treeview"
+			>
+			<Property Name="InitialHorizontallyScrollable" Value="true"/>
+			<Property Name="InitialVerticallyScrollable" Value="false"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+		<VARIATION
+		    ID="8"
+		>
+		    <UIAPatternTest
+			XamlFile="ScrollPattern.xaml"
+			ControlName="treeview"
+			>
+			<Property Name="InitialHorizontallyScrollable" Value="true"/>
+			<Property Name="InitialVerticallyScrollable" Value="true"/>
+		    </UIAPatternTest>
+		 </VARIATION>
+	</SCENARIO>
+        <STEP
+                Index="1"
+                Loader="FullTrust"
+                LoaderSwitch="UIAutoLoader.exe"
+                Run="000001.xtc"
+        >
+            <FILE
+                    Path="*\FeatureTests\UIAutomation\*"
+                    Type="support"
+            />
+        </STEP>
+    </TEST>
+</XTC>

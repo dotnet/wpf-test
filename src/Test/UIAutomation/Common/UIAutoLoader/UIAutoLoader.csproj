@@ -1,0 +1,41 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+  <!--Automatically converted using custom WPF settings-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <AssemblyName>UIAutoLoader</AssemblyName>
+    <ProjectGuid>{63ED6A48-3B5E-46F0-A093-1A87E7235EA8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <OutputSubFolder>FeatureTests\UIAutomation</OutputSubFolder>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <AllowPartialTrustedCalls>true</AllowPartialTrustedCalls>
+    <SignAssemblyAttribute>true</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+    <ProjectGuid>{63ED6A48-3B5E-46F0-A093-1A87E7235EA8}</ProjectGuid>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <Compile Include="UiaVariationLoader.cs" />
+    <Compile Include="UIAutoLoader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)">
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>
