@@ -66,7 +66,8 @@ namespace Microsoft.Test.Drt
             {
                 ProcessStartInfo processInfo = new ProcessStartInfo(exeName, args);
                 processInfo.UseShellExecute = false;
-                processInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                // Setting window style to default (normal)
+                //processInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 processInfo.RedirectStandardOutput = true;
                 processInfo.CreateNoWindow = true;
 
