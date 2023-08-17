@@ -106,7 +106,7 @@ namespace Microsoft.Test.Execution
             string instructions3 = "Close this console when you are done.";
             if (settings.DebugTests && !settings.WaitForDebugger)
             {
-            	string programFiles = System.Environment.Is64BitOperatingSystem ? "%ProgramFiles(x86)%" : "%ProgramFiles%";
+            	string programFiles = !System.Environment.Is64BitOperatingSystem ? "%ProgramFiles(x86)%" : "%ProgramFiles%";
 				string vs1 = programFiles + @"\Microsoft Visual Studio\";
 				string vs2a = @"..\IDE\devenv.exe";						// for VS2015-
 				string vs2b = @"\Enterprise\Common7\IDE\devenv.exe";	// for VS2017+
