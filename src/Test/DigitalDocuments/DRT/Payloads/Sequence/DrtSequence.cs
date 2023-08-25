@@ -26,8 +26,6 @@ namespace DrtPayloads
     using DOC=System.Windows.Documents;
     using DRT;
     using System.Text;
-    using System.Diagnostics;
-    using System.Threading;
 
     //=====================================================================
     // Sequence 
