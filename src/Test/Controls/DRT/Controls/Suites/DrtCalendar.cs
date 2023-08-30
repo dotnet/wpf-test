@@ -34,7 +34,15 @@ namespace DRT
         public override DrtTest[] PrepareTests()
         {
             string fileName = DRT.BaseDirectory + "DrtCalendar.xaml";
-            LoadXamlPage(fileName);
+            
+            try
+            {
+                LoadXamlPage(fileName);
+            }
+            catch (Exception ex)
+            {
+                DRT.Assert(ex.Message.Contains("Style setters do not support child elements."));
+            }
 
             if (!DRT.KeepAlive)
             {

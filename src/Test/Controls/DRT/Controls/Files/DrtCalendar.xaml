@@ -4,6 +4,23 @@
     Orientation="Horizontal">
   <Calendar x:Name="TestCalendar"></Calendar>
   <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="FontFamily" Value="Verdana"/>
+                <Setter Property="FontSize" Value="11px"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Background" >
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
+                            <GradientStop Color="#FFFFD190" Offset="0.2"/>
+                            <GradientStop Color="Orange" Offset="0.85"/>
+                            <GradientStop Color="#FFFFD190" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </StackPanel.Resources>
     <Button x:Name="TestButton" Height="50">Click Me</Button>
     <TextBox Text="{Binding ElementName=TestCalendar, Path=SelectedDate}" />
     <TextBox Text="{Binding ElementName=TestCalendar, Path=DisplayDate}" />
