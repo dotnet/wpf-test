@@ -1,0 +1,40 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <PropertyGroup>
+    <CDefines>$(CDefines);UNICODE;_UNICODE</CDefines>
+    <DllDef>effectlib.def</DllDef>
+    <UseStaticAtl>true</UseStaticAtl>
+    <TargetType>DYNLINK</TargetType>
+    <OutputName>effectlib</OutputName>
+    <OutputSubFolder>FeatureTests\Effects\ExplodeBitmapEffect</OutputSubFolder>
+    <UseMsvcrt>false</UseMsvcrt>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RCResourceFile Include="effectlib.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Idl Include="effectlib.idl">
+      <CompileInterface>true</CompileInterface>
+    </Idl>
+  </ItemGroup>
+  <ItemGroup>
+    <CppCompile Include="effectlib.cpp" />
+    <CppCompile Include="Explode.cpp" />
+    <CppCompile Include="noise.cpp" />
+    <CppCompile Include="partition.cpp" />
+    <CppCompile Include="fixed.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <TargetLib Include="$(SdkLibPath)\user32.lib" />
+    <TargetLib Include="$(SdkLibPath)\kernel32.lib" />
+    <TargetLib Include="$(SdkLibPath)\uuid.lib" />
+    <TargetLib Include="$(SdkLibPath)\ole32.lib" />
+    <TargetLib Include="$(SdkLibPath)\oleaut32.lib" />
+    <TargetLib Include="$(SdkLibPath)\WindowsCodecs.lib" />
+  </ItemGroup>
+
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\WPF\Test\Microsoft.Wpf.Test.Native.Targets" />
+</Project>

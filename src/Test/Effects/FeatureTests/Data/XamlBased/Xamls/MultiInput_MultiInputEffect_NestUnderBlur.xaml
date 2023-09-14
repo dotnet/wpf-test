@@ -1,0 +1,33 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas>
+        <Canvas.Resources>
+
+            <VisualBrush x:Key="visualbrush">
+                <VisualBrush.Visual>
+                    <Button Width="100" Height="20" Background="#ff555555" FontFamily="Tahoma" FontWeight="Normal" FontStretch="Normal" FontStyle="Normal" FontSize="12pt" Foreground="Black">
+                        Text in Button
+                    </Button>
+                </VisualBrush.Visual>
+            </VisualBrush>
+
+        </Canvas.Resources>
+
+        <Button Width="250" Height="250" Canvas.Left="0" >
+            <Button.Effect>
+                <BlurEffect />
+            </Button.Effect>
+
+            <Rectangle Fill="AntiqueWhite" Height="150" Width="150">
+                <Rectangle.Effect>
+                    <ShaderEffects:MultiInputEffect 
+                        Input0="{StaticResource visualbrush}"
+                        Input2="{DynamicResource visualbrush}"
+                        />
+                </Rectangle.Effect>
+            </Rectangle>
+        </Button>
+        
+    </Canvas>
+</Grid>

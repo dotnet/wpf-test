@@ -1,0 +1,40 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Automatically converted using custom WPF settings-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <OutputName>
+    </OutputName>
+    <TargetType>COPY</TargetType>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <DataFile Include="*.pict">
+      <SubFolder>FeatureTests\Effects\Model</SubFolder>
+    </DataFile>
+    <DataFile Include="*.xaml">
+      <SubFolder>FeatureTests\Effects\Model</SubFolder>
+    </DataFile>
+    <DataFile Include="*.xml">
+      <SubFolder>FeatureTests\Effects\Model</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+  <!-- 4.0 or later -->
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5' ">
+    <DataFile Include="Masters\Part1\*.png">
+      <SubFolder>FeatureTests\Effects\Model\Masters</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+  <!-- 3.5 -->
+  <ItemGroup Condition="'$(WPF_TESTBUILD_TARGETVERSION)' == 'v3.5'">
+    <DataFile Include="Masters\Arrowhead\*.png">
+      <SubFolder>FeatureTests\Effects\Model\Masters</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.Native.targets" />
+</Project>

@@ -1,0 +1,40 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+            <ResourceDictionary>
+                 <!-- HACK: Add InvariantTheme to workaround Regression_Bug42 -->
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://siteoforigin:,,,/InvariantTheme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+    </Grid.Resources>
+    <Canvas>
+        <Rectangle Width="150" Height="150" Canvas.Left="0" Fill="Yellow">
+            <Rectangle.Effect>
+                <ShaderEffects:DoubleInputEffect>
+                    <ShaderEffects:DoubleInputEffect.Input0>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Button Background="Red" Width="100" Height="100" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </ShaderEffects:DoubleInputEffect.Input0>
+                </ShaderEffects:DoubleInputEffect>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle Width="150" Height="150" Canvas.Left="180" Fill="Yellow">
+            <Rectangle.Effect>
+                <ShaderEffects:DoubleInputEffect>
+                    <ShaderEffects:DoubleInputEffect.Input1>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Button Background="Red" Width="100" Height="100" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </ShaderEffects:DoubleInputEffect.Input1>
+                </ShaderEffects:DoubleInputEffect>
+            </Rectangle.Effect>
+        </Rectangle>
+    </Canvas>
+</Grid>

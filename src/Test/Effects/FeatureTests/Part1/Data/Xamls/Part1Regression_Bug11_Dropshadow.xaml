@@ -1,0 +1,16 @@
+<!-- Part1 Regression_Bug51: ShadeEffect modifies OpacityMask applied on the same control. -->
+
+<Grid xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Canvas Width="640" Height="480" ClipToBounds="True">
+        <Image x:Name="Layer_0" Width="640" Height="480" Source="pack://siteoforigin:,,,/ImageForPart1_Regression_Bug52.png">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="5" Color="#FF000000" 
+                    Direction="-333" Opacity="0.75" ShadowDepth="38"/>
+           </Image.Effect>
+           <Image.OpacityMask>
+               <ImageBrush ImageSource="pack://siteoforigin:,,,/MaskForPart1_Regression_Bug52.png"/>
+           </Image.OpacityMask>
+        </Image>
+    </Canvas>
+</Grid>

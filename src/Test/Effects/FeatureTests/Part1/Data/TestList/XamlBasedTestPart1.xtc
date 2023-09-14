@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="Effects">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="EffectsTests.dll" Class="Microsoft.Test.Effects.EffectsXamlBasedTest" Method="Run" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\EffectsTests.dll" />
+      <SupportFile Source="FeatureTests\Effects\EffectsTestsPart1.dll" />
+      <SupportFile Source="Common\Effects\ShaderEffects.dll" />
+      <SupportFile Source="Common\InvariantTheme.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofile.xml" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+
+
+  <TEST Name="Part1Regression_Bug13" Disabled="true" Priority="0" SubArea="Regression" Timeout="60" Description="TFS Part1 Regression_Bug51 regression test">
+    <DriverParameters Xaml="Part1Regression_Bug13.xaml" Master="Part1Regression_Bug13.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Part1Regression_Bug13.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Part1Regression_Bug13.xaml.png" />
+    </SupportFiles>
+  </TEST>
+ 
+
+  <TEST Name="Part1Regression_Bug12" Disabled="true" Priority="2" SubArea="Regression" Timeout="60" Description="TFS Part1 Regression_Bug52 regression test">
+    <DriverParameters Xaml="Part1Regression_Bug12.xaml" Master="Part1Regression_Bug12.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Part1Regression_Bug12.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Part1Regression_Bug12.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Images\CheckerBoard.bmp"/>
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="Part1Regression_Bug14" Disabled="true" Priority="1" SubArea="Regression" Timeout="60" Description="TFS Part1 Regression_Bug53 regression test">
+    <DriverParameters Xaml="Part1Regression_Bug14.xaml" Master="Part1Regression_Bug14.xaml.png" WindowHeight="400" WindowWidth="400" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Part1Regression_Bug14.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Part1Regression_Bug14.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+
+   <TEST Name="ShaderRenderMode_HardwareOnly_3_0" Disabled="true" Priority="0" SubArea="Arrowhead\ShaderRenderMode" Timeout="60" Description="ShaderRenderMode_HardwareOnly_3_0">
+    <DriverParameters Xaml="ShaderRenderMode_HardwareOnly_3_0.xaml" Master="ShaderRenderMode.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilenovisualvalidation.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\ShaderRenderMode_HardwareOnly_3_0.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\ShaderRenderMode.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilenovisualvalidation.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="MultiInputPS3" Disabled="True" Priority="0" SubArea="PS3Test" Timeout="60" Description="Verify Effect that pass inputs through all 8 registers." >
+    <DriverParameters Assembly="EffectsTestsPart1.dll" Class="Microsoft.Test.Effects.PS3EffectsXamlBasedTest" Method="Run" NoEffectMaster="MultiInputPS3NoEffect.xaml.png"
+      WindowHeight="500" WindowWidth="500" Xaml="MultiInputPS3.xaml" Master="MultiInputPS3.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInputPS3.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInputPS3.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInputPS3NoEffect.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="MultiParameterPS3" Disabled="True" Priority="2" SubArea="PS3Test" Timeout="60" Description="Verify Effect that pass constant through all registers." >
+    <DriverParameters  
+       Assembly="EffectsTestsPart1.dll" Class="Microsoft.Test.Effects.PS3EffectsXamlBasedTest" Method="Run" NoEffectMaster="MultiParameterPS3NoEffect.xaml.png"
+       WindowHeight="300" WindowWidth="300" Xaml="MultiParameterPS3.xaml" Master="MultiParameterPS3.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiParameterPS3.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiParameterPS3.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiParameterPS3NoEffect.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="MultiIntParameterPS3" Disabled="True" Priority="2" SubArea="PS3Test" Timeout="60" Description="Verify Effect that pass int constant through all registers." >
+    <DriverParameters  
+       Assembly="EffectsTestsPart1.dll" Class="Microsoft.Test.Effects.PS3EffectsXamlBasedTest" Method="Run" NoEffectMaster="MultiIntParameterPS3NoEffect.xaml.png"
+       WindowHeight="300" WindowWidth="300" Xaml="MultiIntParameterPS3.xaml" Master="MultiIntParameterPS3.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiIntParameterPS3.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiIntParameterPS3.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiIntParameterPS3NoEffect.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="Part1Regression_Bug11_Blur" Disabled="true" Priority="1" SubArea="Regression" Timeout="60" Description="Verify that BlurEffect won't change the OpacityMask." >
+    <DriverParameters Xaml="Part1Regression_Bug11_Blur.xaml" Master="Part1Regression_Bug11_Blur.xaml.png" WindowHeight="500" WindowWidth="650" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Part1Regression_Bug11_Blur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Part1Regression_Bug11_Blur.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+      <SupportFile Source="FeatureTests\Effects\Images\ImageForPart1_Regression_Bug52.png" />
+      <SupportFile Source="FeatureTests\Effects\Images\MaskForPart1_Regression_Bug52.png" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="Part1Regression_Bug11_Dropshadow" Disabled="true" Priority="1" SubArea="Regression" Timeout="60" Description="Verify that DropshadowEffect won't change the OpacityMask." >
+    <DriverParameters Xaml="Part1Regression_Bug11_Dropshadow.xaml" Master="Part1Regression_Bug11_Dropshadow.xaml.png" WindowHeight="500" WindowWidth="650"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Part1Regression_Bug11_Dropshadow.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Part1Regression_Bug11_Dropshadow.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+      <SupportFile Source="FeatureTests\Effects\Images\ImageForPart1_Regression_Bug52.png" />
+      <SupportFile Source="FeatureTests\Effects\Images\MaskForPart1_Regression_Bug52.png" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="Part1Regression_Bug11_CustomEffect" Disabled="true" Priority="1" SubArea="Regression" Timeout="60" Description="Verify that Custom Effect won't change the OpacityMask." >
+    <DriverParameters Xaml="Part1Regression_Bug11_CustomEffect.xaml" Master="Part1Regression_Bug11_CustomEffect.xaml.png" WindowHeight="500" WindowWidth="650" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Part1Regression_Bug11_CustomEffect.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Part1Regression_Bug11_CustomEffect.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+      <SupportFile Source="FeatureTests\Effects\Images\ImageForPart1_Regression_Bug52.png" />
+      <SupportFile Source="FeatureTests\Effects\Images\MaskForPart1_Regression_Bug52.png" />
+    </SupportFiles>
+  </TEST>
+ </XTC>

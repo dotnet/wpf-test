@@ -1,0 +1,22 @@
+<Canvas 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ 	Background="White" Height="300" Width="300" >
+	<Button Width="200" Height="200">
+		<Button.BitmapEffect>
+			<DropShadowBitmapEffect ShadowDepth="5"/>
+		</Button.BitmapEffect>
+		<Canvas>
+			<Button Canvas.Left="150" Canvas.Top="150"  Width="50" Height="50">What!!!</Button>
+		</Canvas>
+	</Button>
+</Canvas>
+
+
+
+<!-- Regression_Bug20BD_SetDrpShdwOrBlurOnBtnAndChldrnDisappear.xaml -->
+<!-- Bug Behavior: Setting DropShadow On Button caused children to disappear -->
+<!-- 			Notice that we don't see the small button which is a child of the big button
+			However, if you move mouse to where the small button's supposed to render, 
+			the big button changes the border color, so it actually exists but you can't see it -->
+<!-- Correct Behvior: Children shouldn't disappear when adding DropShadow to Button. -->

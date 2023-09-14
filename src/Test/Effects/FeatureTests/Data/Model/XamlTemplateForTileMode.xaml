@@ -1,0 +1,35 @@
+﻿<Grid
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True"
+    RenderOptions.BitmapScalingMode="NearestNeighbor">
+
+    <Grid.Resources>
+        <BlurEffect x:Key="BlurEffect"/>
+        <DropShadowEffect x:Key="DropShadowEffect"/>
+        <ShaderEffects:BasicShaderEffect x:Key="CustomEffect">
+            <ShaderEffects:BasicShaderEffect.PixelShader>
+                <PixelShader UriSource="pack://application:,,,/ShaderEffects;component/Reddish.ps" />
+            </ShaderEffects:BasicShaderEffect.PixelShader>
+        </ShaderEffects:BasicShaderEffect>
+    </Grid.Resources>
+
+    <Rectangle Width="200" Height="200" />
+
+    <HelperXamlSegments>
+
+        <FillPropertyValues>
+             <ImageBrush ImageSource="pack://siteoforigin:,,,/CheckerBoard.bmp" Stretch="None"/>
+
+             <VisualBrush Stretch="None">
+                 <VisualBrush.Visual>
+	            <Image Source="pack://siteoforigin:,,,/CheckerBoard.bmp"  />
+                 </VisualBrush.Visual>
+             </VisualBrush>
+        </FillPropertyValues>
+
+    </HelperXamlSegments>
+
+</Grid>
+    

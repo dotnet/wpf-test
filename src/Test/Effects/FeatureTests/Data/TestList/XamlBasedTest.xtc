@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="Effects" SubArea="Arrowhead">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="EffectsTests.dll" Class="Microsoft.Test.Effects.EffectsXamlBasedTest" Method="Run" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\EffectsTests.dll" />
+      <SupportFile Source="Common\Effects\ShaderEffects.dll" />
+      <SupportFile Source="Common\InvariantTheme.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofile.xml" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilenovisualvalidation.xml" />
+      <SupportFile Source="FeatureTests\Effects\Images\Fish.jpg" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+  <!-- Model based -->
+
+  <!-- Disable serialization testing for all model based test to work around Regression_Bug43-->
+  <TEST Name="EffectsEmulation" Disabled="True" Priority="2" SubArea="Arrowhead\ModelBased" Timeout="600" Description="EffectsEmulation">
+    <DriverParameters Assembly="EffectsTests.dll" Class="Microsoft.Test.Effects.EffectsModel" Method="LoadModel" ModelFileName="EffectsEmulation.pict" DisableSerializationTesting="True" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Model\EffectsEmulation.pict" />
+      <SupportFile Source="FeatureTests\Effects\Model\XamlTemplate.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Model\Masters\EffectsEmulation*.png" />
+      <SupportFile Source="FeatureTests\Effects\GtoData\Images\red.jpg" />
+      <SupportFile Source="Common\Effects\pict*.exe" />
+    </SupportFiles>
+  </TEST>
+
+   <TEST Name="EffectsInProduction" Priority="1" SubArea="Arrowhead\ModelBased" Timeout="600" Description="EffectsInProduction" Disabled="True">
+     <DriverParameters Assembly="EffectsTests.dll" Class="Microsoft.Test.Effects.EffectsModel" Method="LoadModel" ModelFileName="EffectsInProduction.pict" DisableSerializationTesting="True" FirstVariationIndex="0" LastVariationIndex="12" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Model\EffectsInProduction.pict" />
+      <SupportFile Source="FeatureTests\Effects\Model\XamlTemplate.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Model\Masters\EffectsInProduction*.png" />
+      <SupportFile Source="FeatureTests\Effects\GtoData\Images\red.jpg" />
+      <SupportFile Source="Common\Effects\pict*.exe" />
+    </SupportFiles>
+  </TEST>
+   <TEST Name="EffectsInProduction" Priority="1" SubArea="Arrowhead\ModelBased" Timeout="600" Description="EffectsInProduction" Disabled="True">
+    <DriverParameters Assembly="EffectsTests.dll" Class="Microsoft.Test.Effects.EffectsModel" Method="LoadModel" ModelFileName="EffectsInProduction.pict" DisableSerializationTesting="True" FirstVariationIndex="14" LastVariationIndex="14" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Model\EffectsInProduction.pict" />
+      <SupportFile Source="FeatureTests\Effects\Model\XamlTemplate.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Model\Masters\EffectsInProduction*.png" />
+      <SupportFile Source="FeatureTests\Effects\GtoData\Images\red.jpg" />
+      <SupportFile Source="Common\Effects\pict*.exe" />
+    </SupportFiles>
+  </TEST>
+   <TEST Name="EffectsInProduction" Priority="1" SubArea="Arrowhead\ModelBased" Timeout="600" Description="EffectsInProduction" Disabled="True">
+    <DriverParameters Assembly="EffectsTests.dll" Class="Microsoft.Test.Effects.EffectsModel" Method="LoadModel" ModelFileName="EffectsInProduction.pict" DisableSerializationTesting="True" FirstVariationIndex="16" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Model\EffectsInProduction.pict" />
+      <SupportFile Source="FeatureTests\Effects\Model\XamlTemplate.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Model\Masters\EffectsInProduction*.png" />
+      <SupportFile Source="FeatureTests\Effects\GtoData\Images\red.jpg" />
+      <SupportFile Source="Common\Effects\pict*.exe" />
+    </SupportFiles>
+  </TEST>
+
+  <!-- Integration : TileMode -->
+  <TEST Name="TileMode" Priority="0" SubArea="Arrowhead\TileMode" Timeout="600" Description="TileMode" Disabled="True">
+    <DriverParameters Assembly="EffectsTests.dll" Class="Microsoft.Test.Effects.TileBrushModel" Method="LoadModel" 
+        ModelFileName="TileMode.pict" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Model\TileMode.pict" />
+      <SupportFile Source="FeatureTests\Effects\Model\XamlTemplateForTileMode.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Model\Masters\TileMode*.png" />
+      <SupportFile Source="Common\Effects\pict*.exe" />
+      <SupportFile Source="FeatureTests\Effects\Images\CheckerBoard.bmp"/>
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="BlurWithNestedDropShadow" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="BlurWithNestedDropShadow" Disabled="True">
+    <DriverParameters Xaml="BlurWithNestedDropShadow.xaml" Master="BlurWithNestedDropShadow.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BlurWithNestedDropShadow.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BlurWithNestedDropShadow.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius10GaussianBlur" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius10GaussianBlur" Disabled="True">
+    <DriverParameters Xaml="Radius10GaussianBlur.xaml" Master="Radius10GaussianBlur.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius10GaussianBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius10GaussianBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius11GaussianBlurWithTransform" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius11GaussianBlurWithTransform" Disabled="True">
+    <DriverParameters Xaml="Radius11GaussianBlurWithTransform.xaml" Master="Radius11GaussianBlurWithTransform.xaml.png" WindowHeight="500" WindowWidth="500" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius11GaussianBlurWithTransform.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius11GaussianBlurWithTransform.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius1GaussianBlur" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius1GaussianBlur" Disabled="True">
+    <DriverParameters Xaml="Radius1GaussianBlur.xaml" Master="Radius1GaussianBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius1GaussianBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius1GaussianBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius2GaussianBlur" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius2GaussianBlur" Disabled="True">
+    <DriverParameters Xaml="Radius2GaussianBlur.xaml" Master="Radius2GaussianBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius2GaussianBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius2GaussianBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius3GaussianBlurDefinedInControlTemplate" Disabled="true" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius3GaussianBlurDefinedInControlTemplate">
+    <DriverParameters Xaml="Radius3GaussianBlurDefinedInControlTemplate.xaml" Master="Radius3GaussianBlurDefinedInControlTemplate.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius3GaussianBlurDefinedInControlTemplate.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius3GaussianBlurDefinedInControlTemplate.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius4GaussianBlurInStyle" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius4GaussianBlurInStyle" Disabled="True">
+    <DriverParameters Xaml="Radius4GaussianBlurInStyle.xaml" Master="Radius4GaussianBlurInStyle.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius4GaussianBlurInStyle.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius4GaussianBlurInStyle.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius5GaussianBlurDefinedInResourceDictionary" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius5GaussianBlurDefinedInResourceDictionary" Disabled="True">
+    <DriverParameters Xaml="Radius5GaussianBlurDefinedInResourceDictionary.xaml" Master="Radius5GaussianBlurDefinedInResourceDictionary.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius5GaussianBlurDefinedInResourceDictionary.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius5GaussianBlurDefinedInResourceDictionary.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius61GaussianBlur" Disabled="true" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius61GaussianBlur">
+    <DriverParameters Xaml="Radius61GaussianBlur.xaml" Master="Radius61GaussianBlur.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius61GaussianBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius61GaussianBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius6GaussianBlur" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius6GaussianBlur" Disabled="True">
+    <DriverParameters Xaml="Radius6GaussianBlur.xaml" Master="Radius6GaussianBlur.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius6GaussianBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius6GaussianBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <!-- Disable serialization testing to work around Regression_Bug43-->
+  <TEST Name="Radius6GaussianBlurOn3DElement" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius6GaussianBlurOn3DElement" Disabled="True">
+    <DriverParameters Xaml="Radius6GaussianBlurOn3DElement.xaml" Master="Radius6GaussianBlurOn3DElement.xaml.png" WindowHeight="500" WindowWidth="500" DisableSerializationTesting="True"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius6GaussianBlurOn3DElement.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius6GaussianBlurOn3DElement.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius7GaussianBlurWithOpacityMaskOpacityAndTransform" Disabled="true" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius7GaussianBlurWithOpacityMaskOpacityAndTransform">
+    <DriverParameters Xaml="Radius7GaussianBlurWithOpacityMaskOpacityAndTransform.xaml" Master="Radius7GaussianBlurWithOpacityMaskOpacityAndTransform.xaml.png" ToleranceFilePath="testprofilenovisualvalidation.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius7GaussianBlurWithOpacityMaskOpacityAndTransform.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius7GaussianBlurWithOpacityMaskOpacityAndTransform.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius8GaussianBlurWithOpacityMask" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius8GaussianBlurWithOpacityMask" Disabled="True">
+    <DriverParameters Xaml="Radius8GaussianBlurWithOpacityMask.xaml" Master="Radius8GaussianBlurWithOpacityMask.xaml.png" ToleranceFilePath="testprofilebad.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius8GaussianBlurWithOpacityMask.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius8GaussianBlurWithOpacityMask.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius9GaussianBlurWithOpacity" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius9GaussianBlurWithOpacity" Disabled="True">
+    <DriverParameters Xaml="Radius9GaussianBlurWithOpacity.xaml" Master="Radius9GaussianBlurWithOpacity.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius9GaussianBlurWithOpacity.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius9GaussianBlurWithOpacity.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SimpliestBlur" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="SimpliestBlur" Disabled="True">
+    <DriverParameters Xaml="SimpliestBlur.xaml" Master="SimpliestBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\SimpliestBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\SimpliestBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ZeroRadiusBlur" Disabled="true" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="ZeroRadiusBlur">
+    <DriverParameters Xaml="ZeroRadiusBlur.xaml" Master="ZeroRadiusBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\ZeroRadiusBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\ZeroRadiusBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ZeroRadiusGaussianBlur" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="ZeroRadiusGaussianBlur" Disabled="True">
+    <DriverParameters Xaml="ZeroRadiusGaussianBlur.xaml" Master="ZeroRadiusGaussianBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\ZeroRadiusGaussianBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\ZeroRadiusGaussianBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BlurNestedUnderEmboss" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="BlurNestedUnderEmboss" Disabled="True">
+    <DriverParameters Xaml="BlurNestedUnderEmboss.xaml" Master="BlurNestedUnderEmboss.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BlurNestedUnderEmboss.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BlurNestedUnderEmboss.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius0BoxBlur" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius0BoxBlur" Disabled="True">
+    <DriverParameters Xaml="Radius0BoxBlur.xaml" Master="Radius0BoxBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius0BoxBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius0BoxBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius10BoxBlur" Disabled="true" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius10BoxBlur">
+    <DriverParameters Xaml="Radius10BoxBlur.xaml" Master="Radius10BoxBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius10BoxBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius10BoxBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius20BoxBlur" Disabled="true" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius20BoxBlur">
+    <DriverParameters Xaml="Radius20BoxBlur.xaml" Master="Radius20BoxBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius20BoxBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius20BoxBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius50BoxBlur" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius50BoxBlur" Disabled="True">
+    <DriverParameters Xaml="Radius50BoxBlur.xaml" Master="Radius50BoxBlur.xaml.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius50BoxBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius50BoxBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius100BoxBlur" Disabled="true" Priority="0" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius100BoxBlur">
+    <DriverParameters Xaml="Radius100BoxBlur.xaml" Master="Radius100BoxBlur.xaml.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilenovisualvalidation.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius100BoxBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius100BoxBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Radius5BoxBlur" Priority="2" SubArea="Arrowhead\BlurEffect" Timeout="60" Description="Radius5BoxBlur" Disabled="True">
+    <DriverParameters Xaml="Radius5BoxBlur.xaml" Master="Radius5BoxBlur.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\Radius5BoxBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\Radius5BoxBlur.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <!-- BasicShaderEffect-->
+  <TEST Name="BasicShaderEffect_ShaderFromSiteOfOrigin" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_ShaderFromSiteOfOrigin" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_ShaderFromSiteOfOrigin.xaml" Master="BasicShaderEffect.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_ShaderFromSiteOfOrigin.xaml" />
+      <SupportFile Source="Common\Effects\Shaders\Reddish.ps" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_ShaderFromResource" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_ShaderFromResource" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_ShaderFromResource.xaml" Master="BasicShaderEffect.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_ShaderFromResource.xaml" />
+      <SupportFile Source="Common\Effects\Shaders\Reddish.ps" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_ShaderLoadWithContentSyntax" Disabled="true" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_ShaderLoadWithContentSyntax">
+    <DriverParameters Xaml="BasicShaderEffect_ShaderLoadWithContentSyntax.xaml" Master="BasicShaderEffect.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_ShaderLoadWithContentSyntax.xaml" />
+      <SupportFile Source="Common\Effects\Shaders\ContentReddish.ps" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_DataBinding" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_DataBinding" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_DataBinding.xaml" Master="BasicShaderEffect_DataBinding.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_DataBinding.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_DataBinding.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_DynamicResource" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_DynamicResource" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_DynamicResource.xaml" Master="BasicShaderEffect_DynamicResource.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_DynamicResource.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_DynamicResource.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_InControlTemplate" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_InControlTemplate" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_InControlTemplate.xaml" Master="BasicShaderEffect_InControlTemplate.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_InControlTemplate.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_InControlTemplate.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_InDataTemplate" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_InDataTemplate" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_InDataTemplate.xaml" Master="BasicShaderEffect_InDataTemplate.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_InDataTemplate.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_InDataTemplate.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_InStyle" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_InStyle" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_InStyle.xaml" Master="BasicShaderEffect_InStyle.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_InStyle.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_InStyle.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_NestingAEmboss" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_NestingAEmboss" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_NestingAEmboss.xaml" Master="BasicShaderEffect_NestingAEmboss.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_NestingAEmboss.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_NestingAEmboss.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_NestingUnderEmboss" Disabled="true" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_NestingUnderEmboss">
+    <DriverParameters Xaml="BasicShaderEffect_NestingUnderEmboss.xaml" Master="BasicShaderEffect_NestingUnderEmboss.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_NestingUnderEmboss.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_NestingUnderEmboss.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_ShaderFromResource" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_ShaderFromResource" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_ShaderFromResource.xaml" Master="BasicShaderEffect_ShaderFromResource.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_ShaderFromResource.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_ShaderFromResource.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_StaticResource" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_StaticResource" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_StaticResource.xaml" Master="BasicShaderEffect_StaticResource.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_StaticResource.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_StaticResource.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <!-- Disable serialization testing to work around Regression_Bug43-->
+  <TEST Name="BasicShaderEffect_Viewport2DVisual3D" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_Viewport2DVisual3D" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_Viewport2DVisual3D.xaml" Master="BasicShaderEffect_Viewport2DVisual3D.xaml.png" DisableSerializationTesting="True"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_Viewport2DVisual3D.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_Viewport2DVisual3D.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <!-- Disable serialization testing to work around Regression_Bug43-->
+  <TEST Name="BasicShaderEffect_Viewport3D" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_Viewport3D" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_Viewport3D.xaml" Master="BasicShaderEffect_Viewport3D.xaml.png" DisableSerializationTesting="True"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_Viewport3D.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_Viewport3D.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_WithOpacity" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_WithOpacity" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_WithOpacity.xaml" Master="BasicShaderEffect_WithOpacity.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_WithOpacity.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_WithOpacity.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_WithOpacityMask" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_WithOpacityMask" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_WithOpacityMask.xaml" Master="BasicShaderEffect_WithOpacityMask.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_WithOpacityMask.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_WithOpacityMask.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_WithTransform" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_WithTransform" Disabled="True">
+    <!-- Regression_Bug44: Disable alternative rendermode test -->
+    <DriverParameters Xaml="BasicShaderEffect_WithTransform.xaml" Master="BasicShaderEffect_WithTransform.xaml.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_WithTransform.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_WithTransform.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <!-- Disable serialization testing to work around Regression_Bug43-->
+  <TEST Name="BasicShaderEffect_EffectOnElmentInDrwingBrush" Disabled="true" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_EffectOnElmentInDrwingBrush">
+    <DriverParameters Xaml="BasicShaderEffect_EffectOnElmentInDrwingBrush.xaml" Master="BasicShaderEffect_EffectOnElmentInDrwingBrush.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_EffectOnElmentInDrwingBrush.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_EffectOnElmentInDrwingBrush.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofile.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="BasicShaderEffect_BigRectangle" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_BigRectangle" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_BigRectangle.xaml" Master="BasicShaderEffect_BigRectangle.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_BigRectangle.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_BigRectangle.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_EmptyRectangle" Priority="0" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_EmptyRectangle" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_EmptyRectangle.xaml" Master="BasicShaderEffect_EmptyRectangle.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_EmptyRectangle.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_EmptyRectangle.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BasicShaderEffect_SuperBigRectangle" Priority="2" SubArea="Arrowhead\BasicShaderEffect" Timeout="60" Description="BasicShaderEffect_SuperBigRectangle" Disabled="True">
+    <DriverParameters Xaml="BasicShaderEffect_SuperBigRectangle.xaml" Master="BasicShaderEffect_SuperBigRectangle.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BasicShaderEffect_SuperBigRectangle.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BasicShaderEffect_SuperBigRectangle.xaml.png" />
+    </SupportFiles>
+  </TEST>
+
+  <!-- DropShadowEffect -->
+  <TEST Name="DropShadow_ColorBlue" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_ColorBlue" Disabled="True">
+    <DriverParameters Xaml="DropShadow_ColorBlue.xaml" Master="DropShadow_ColorBlue.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_ColorBlue.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_ColorBlue.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_ColorGreen" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_ColorGreen" Disabled="True">
+    <DriverParameters Xaml="DropShadow_ColorGreen.xaml" Master="DropShadow_ColorGreen.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_ColorGreen.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_ColorGreen.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_ColorRed" Disabled="true" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_ColorRed">
+    <DriverParameters Xaml="DropShadow_ColorRed.xaml" Master="DropShadow_ColorRed.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_ColorRed.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_ColorRed.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_Default" Disabled="true" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Default">
+    <DriverParameters Xaml="DropShadow_Default.xaml" Master="DropShadow_Default.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Default.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Default.xaml.png" />
+    </SupportFiles>
+  </TEST>
+   <!--Regression_Bug47: Disable alternative rendermode test -->
+  <TEST Name="DropShadow_Direction135" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Direction135" Disabled="True">
+    <DriverParameters Xaml="DropShadow_Direction135.xaml" Master="DropShadow_Direction135.xaml.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Direction135.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Direction135.xaml.png" />
+    </SupportFiles>
+  </TEST>
+   <!--Regression_Bug47: Disable alternative rendermode test -->
+  <TEST Name="DropShadow_Direction225" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Direction225" Disabled="True">
+    <DriverParameters Xaml="DropShadow_Direction225.xaml" Master="DropShadow_Direction225.xaml.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Direction225.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Direction225.xaml.png" />
+    </SupportFiles>
+  </TEST>
+   <!--Regression_Bug47: Disable alternative rendermode test -->
+  <TEST Name="DropShadow_Direction45" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Direction45" Disabled="True">
+    <DriverParameters Xaml="DropShadow_Direction45.xaml" Master="DropShadow_Direction45.xaml.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Direction45.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Direction45.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_Opacity0" Priority="0" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Opacity0" Disabled="True">
+    <DriverParameters Xaml="DropShadow_Opacity0.xaml" Master="DropShadow_Opacity0.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Opacity0.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Opacity0.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_Opacity05" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Opacity05" Disabled="True">
+    <DriverParameters Xaml="DropShadow_Opacity05.xaml" Master="DropShadow_Opacity05.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Opacity05.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Opacity05.xaml.png" />
+    </SupportFiles>
+  </TEST>
+   <!--Regression_Bug47: Disable alternative rendermode test -->
+  <TEST Name="DropShadow_Opacity1" Disabled="true" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Opacity1">
+    <DriverParameters Xaml="DropShadow_Opacity1.xaml" Master="DropShadow_Opacity1.xaml.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Opacity1.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Opacity1.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_ShadowDepth0" Disabled="true" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_ShadowDepth0">
+    <DriverParameters Xaml="DropShadow_ShadowDepth0.xaml" Master="DropShadow_ShadowDepth0.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_ShadowDepth0.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_ShadowDepth0.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_ShadowDepth100" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_ShadowDepth100" Disabled="True">
+    <DriverParameters Xaml="DropShadow_ShadowDepth100.xaml" Master="DropShadow_ShadowDepth100.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_ShadowDepth100.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_ShadowDepth100.xaml.png" />
+    </SupportFiles>
+  </TEST>
+   <!--Regression_Bug47: Disable alternative RenderingMode test -->
+  <TEST Name="DropShadow_ShadowDepth25" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_ShadowDepth25" Disabled="True">
+    <DriverParameters Xaml="DropShadow_ShadowDepth25.xaml" Master="DropShadow_ShadowDepth25.xaml.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_ShadowDepth25.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_ShadowDepth25.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_ShadowDepth50" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_ShadowDepth50" Disabled="True">
+    <DriverParameters Xaml="DropShadow_ShadowDepth50.xaml" Master="DropShadow_ShadowDepth50.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_ShadowDepth50.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_ShadowDepth50.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <!--Regression_Bug47: Disable alternative RenderingMode test -->
+  <TEST Name="DropShadow_Softness0" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Softness0" Disabled="True">
+    <DriverParameters Xaml="DropShadow_Softness0.xaml" Master="DropShadow_Softness0.xaml.png" DisableAlternativeRenderingModeTesting="True"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Softness0.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Softness0.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_Softness05" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Softness05" Disabled="True">
+    <DriverParameters Xaml="DropShadow_Softness05.xaml" Master="DropShadow_Softness05.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Softness05.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Softness05.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_Softness1" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_Softness1" Disabled="True">
+    <DriverParameters Xaml="DropShadow_Softness1.xaml" Master="DropShadow_Softness1.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_Softness1.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_Softness1.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DropShadow_WithTransform" Priority="2" SubArea="Arrowhead\DropShadowEffect" Timeout="60" Description="DropShadow_WithTransform" Disabled="True">
+    <DriverParameters Xaml="DropShadow_WithTransform.xaml" Master="DropShadow_WithTransform.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\DropShadow_WithTransform.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\DropShadow_WithTransform.xaml.png" />
+    </SupportFiles>
+  </TEST>
+
+  <!-- multiparameter -->
+  <TEST Name="MultiParameterEffect_Basic" Priority="0" SubArea="Arrowhead\MultiParameterEffect" Timeout="60" Description="MultiParameterEffect_Basic" Disabled="True">
+    <DriverParameters Xaml="MultiParameterEffect_Basic.xaml" Master="MultiParameterEffect_Basic.xaml.png" DisableAlternativeRenderingModeTesting="True"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiParameterEffect_Basic.xaml" />
+      <SupportFile Source="Common\Effects\Shaders\MultiParameterShader.ps" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiParameterEffect_Basic.xaml.png" />
+    </SupportFiles>
+  </TEST>
+
+  <!-- ShaderRenderMode -->
+  <TEST Name="ShaderRenderMode_HardwareOnly" Priority="2" SubArea="Arrowhead\ShaderRenderMode" Timeout="60" Description="ShaderRenderMode_HardwareOnly" Disabled="True">
+    <DriverParameters Xaml="ShaderRenderMode_HardwareOnly.xaml" Master="ShaderRenderMode.png" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\ShaderRenderMode_HardwareOnly.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\ShaderRenderMode.png" />
+      <SupportFile Source="Common\Effects\Shaders\Reddish.ps" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="ShaderRenderMode_SoftwareOnly" Priority="2" SubArea="Arrowhead\ShaderRenderMode" Timeout="60" Description="ShaderRenderMode_SoftwareOnly" Disabled="True">
+    <DriverParameters Xaml="ShaderRenderMode_SoftwareOnly.xaml" Master="ShaderRenderMode.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\ShaderRenderMode_SoftwareOnly.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\ShaderRenderMode.png" />
+      <SupportFile Source="Common\Effects\Shaders\Reddish.ps" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+  <!-- Padding -->
+  <TEST Name="AllVisibleShaderBigPaddingBottom" Priority="0" SubArea="Arrowhead\Padding" Timeout="60" Description="AllVisibleShaderBigPaddingBottom" Disabled="True">
+    <DriverParameters Xaml="AllVisibleShaderBigPaddingBottom.xaml" Master="AllVisibleShaderBigPaddingBottom.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\AllVisibleShaderBigPaddingBottom.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\AllVisibleShaderBigPaddingBottom.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="AllVisibleShaderZeroPadding" Priority="0" SubArea="Arrowhead\Padding" Timeout="60" Description="AllVisibleShaderZeroPadding" Disabled="True">
+    <DriverParameters Xaml="AllVisibleShaderZeroPadding.xaml" Master="AllVisibleShaderZeroPadding.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\AllVisibleShaderZeroPadding.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\AllVisibleShaderZeroPadding.xaml.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="AverageColorWithPaddings" Priority="2" SubArea="Arrowhead\Padding" Timeout="60" Description="AverageColorWithPaddings" Disabled="True">
+    <DriverParameters Xaml="AverageColorWithPaddings.xaml" Master="AverageColorWithPaddings.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\AverageColorWithPaddings.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\AverageColorWithPaddings.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\average.ps" />
+    </SupportFiles>
+  </TEST>
+  
+  <!-- Multi input-->
+  <TEST Name="NoInputEffect" Disabled="true" Priority="2" SubArea="Arrowhead\MultiInput" Timeout="60" Description="NoInputEffect">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_NoInputEffect.xaml" Master="MultiInput_NoInputEffect.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_NoInputEffect.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_NoInputEffect.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DoubleInputEffect_NoFill" Disabled="true" Priority="2" SubArea="Arrowhead\MultiInput" Timeout="60" Description="using DoubleInputEffect on Rectangle without Fill property set.">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_DoubleInputEffect_NoFill.xaml" Master="MultiInput_DoubleInputEffect_NoFill.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_DoubleInputEffect_NoFill.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_DoubleInputEffect_NoFill.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  
+  <TEST Name="MultiInput_DataBinding" Disabled="true" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_DataBinding" >
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_DataBinding.xaml" Master="MultiInput_DataBinding.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_DataBinding.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_DataBinding.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="MultiInput_DoubleInputEffect_EffectInVisualBrush" Disabled="true" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_DoubleInputEffect_EffectInVisualBrush">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_DoubleInputEffect_EffectInVisualBrush.xaml" Master="MultiInput_DoubleInputEffect_EffectInVisualBrush.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_DoubleInputEffect_EffectInVisualBrush.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_DoubleInputEffect_EffectInVisualBrush.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_DoubleInputEffect_VisualBrush" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_DoubleInputEffect_VisualBrush" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_DoubleInputEffect_VisualBrush.xaml" Master="MultiInput_DoubleInputEffect_VisualBrush.xaml.png" DisableSerializationTesting="True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_DoubleInputEffect_VisualBrush.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_DoubleInputEffect_VisualBrush.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_VisualBrushFromResource" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_VisualBrushFromResource" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_VisualBrushFromResource.xaml" Master="MultiInput_VisualBrushFromResource.xaml.png" DisableSerializationTesting="True" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_VisualBrushFromResource.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_VisualBrushFromResource.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="MultiInput_MultiInputEffect_ControlTemplate" Disabled="true" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_MultiInputEffect_ControlTemplate">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_MultiInputEffect_ControlTemplate.xaml" Master="MultiInput_MultiInputEffect_ControlTemplate.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_MultiInputEffect_ControlTemplate.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_MultiInputEffect_ControlTemplate.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_MultiInputEffect_NestBlur" Disabled="true" Priority="2" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_MultiInputEffect_NestBlur">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_MultiInputEffect_NestBlur.xaml" Master="MultiInput_MultiInputEffect_NestBlur.xaml.png" DisableSerializationTesting="True" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_MultiInputEffect_NestBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_MultiInputEffect_NestBlur.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+      <SupportFile Source="FeatureTests\Effects\Model\testprofilebad.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_MultiInputEffect_NestEmboss" Disabled="true" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_MultiInputEffect_NestEmboss">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_MultiInputEffect_NestEmboss.xaml" Master="MultiInput_MultiInputEffect_NestEmboss.xaml.png" DisableSerializationTesting="True" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_MultiInputEffect_NestEmboss.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_MultiInputEffect_NestEmboss.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_MultiInputEffect_NestUnderBlur" Disabled="true" Priority="2" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_MultiInputEffect_NestUnderBlur">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_MultiInputEffect_NestUnderBlur.xaml" Master="MultiInput_MultiInputEffect_NestUnderBlur.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_MultiInputEffect_NestUnderBlur.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_MultiInputEffect_NestUnderBlur.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_MultiInputEffect_NestUnderEmboss" Disabled="true" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_MultiInputEffect_NestUnderEmboss" >
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_MultiInputEffect_NestUnderEmboss.xaml" Master="MultiInput_MultiInputEffect_NestUnderEmboss.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_MultiInputEffect_NestUnderEmboss.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_MultiInputEffect_NestUnderEmboss.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+    <Keywords>
+      <Keyword>MicroSuite</Keyword>
+    </Keywords>
+  </TEST>
+  <TEST Name="MultiInput_MultiInputEffect_Opacity" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_MultiInputEffect_Opacity" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_MultiInputEffect_Opacity.xaml" Master="MultiInput_MultiInputEffect_Opacity.xaml.png" DisableSerializationTesting="True" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_MultiInputEffect_Opacity.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_MultiInputEffect_Opacity.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_MultiInputEffect_Transform" Disabled="true" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_MultiInputEffect_Transform">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_MultiInputEffect_Transform.xaml" Master="MultiInput_MultiInputEffect_Transform.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml" DisableAlternativeRenderingModeTesting="True"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_MultiInputEffect_Transform.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_MultiInputEffect_Transform.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_MultiInputEffect_VisualBrushTransform" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_MultiInputEffect_VisualBrushTransform" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_MultiInputEffect_VisualBrushTransform.xaml" Master="MultiInput_MultiInputEffect_VisualBrushTransform.xaml.png" DisableSerializationTesting="True" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_MultiInputEffect_VisualBrushTransform.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_MultiInputEffect_VisualBrushTransform.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_Tiling" Disabled="true" Priority="2" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_Tiling">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_Tiling.xaml" Master="MultiInput_Tiling.xaml.png" DisableSerializationTesting="True" DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_Tiling.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_Tiling.xaml.png" />
+      <SupportFile Source="FeatureTests\Effects\Images\CheckerBoard.bmp"/>
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_Viewport2DVisual3D" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_Viewport2DVisual3D" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_Viewport2DVisual3D.xaml" Master="MultiInput_Viewport2DVisual3D.xaml.png" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_Viewport2DVisual3D.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_Viewport2DVisual3D.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="MultiInput_DoubleInputEffect_EffectWithImageBrushInVisualBrush" Disabled="true" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_DoubleInputEffect_EffectWithImageBrushInVisualBrush">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_DoubleInputEffect_EffectWithImageBrushInVisualBrush.xaml" Master="MultiInput_DoubleInputEffect_EffectWithImageBrushInVisualBrush.xaml.png" DisableSerializationTesting="True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_DoubleInputEffect_EffectWithImageBrushInVisualBrush.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_DoubleInputEffect_EffectWithImageBrushInVisualBrush.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+      <SupportFile Source="FeatureTests\Effects\Images\CheckerBoard.bmp"/>
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_ImageBrushFromResource" Priority="0" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_ImageBrushFromResource" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_ImageBrushFromResource.xaml" Master="MultiInput_ImageBrushFromResource.xaml.png"  DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_ImageBrushFromResource.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_ImageBrushFromResource.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+      <SupportFile Source="FeatureTests\Effects\Images\Red.jpg"/>
+      
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BugRegressionRegression_Bug48" Disabled="true" Priority="2" SubArea="Arrowhead\Regression" Timeout="60" Description="BugRegression DevdivRegression_Bug48">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="BugRegressionRegression_Bug48.xaml" Master="BugRegressionRegression_Bug48.xaml.png"  DisableAlternativeRenderingModeTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BugRegressionRegression_Bug48.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BugRegressionRegression_Bug48.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+      <SupportFile Source="FeatureTests\Effects\Images\Red.jpg"/>
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_Viewport2DVisual3D_ImageBrush" Priority="2" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_Viewport2DVisual3D_ImageBrush" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_Viewport2DVisual3D_ImageBrush.xaml" Master="MultiInput_Viewport2DVisual3D_ImageBrush.xaml.png" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_Viewport2DVisual3D_ImageBrush.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_Viewport2DVisual3D_ImageBrush.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+      <SupportFile Source="FeatureTests\Effects\Images\CheckerBoard.bmp"/>
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_DoubleInputEffect_EffectWithDrawingImageInVisualBrush" Priority="2" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_DoubleInputEffect_EffectWithDrawingImageInVisualBrush" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_DoubleInputEffect_EffectWithDrawingImageInVisualBrush.xaml" Master="MultiInput_DoubleInputEffect_EffectWithDrawingImageInVisualBrush.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_DoubleInputEffect_EffectWithDrawingImageInVisualBrush.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_DoubleInputEffect_EffectWithDrawingImageInVisualBrush.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MultiInput_DrawingImage" Priority="2" SubArea="Arrowhead\MultiInput" Timeout="60" Description="MultiInput_DrawingImage" Disabled="True">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="MultiInput_DrawingImage.xaml" Master="MultiInput_DrawingImage.xaml.png" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\MultiInput_DrawingImage.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\MultiInput_DrawingImage.xaml.png" />
+      <SupportFile Source="Common\Effects\Shaders\DoubleTextureShader.ps" />
+      <SupportFile Source="Common\Effects\Shaders\MultiTextureShader.ps" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BugRegressionRegression_Bug49" Disabled="true" Priority="2" SubArea="Arrowhead\Regression" Timeout="60" Description="BugRegressionRegression_Bug49">
+    <DriverParameters  WindowHeight="500" WindowWidth="500" Xaml="BugRegressionRegression_Bug49.xaml" Master="BugRegressionRegression_Bug49.xaml.png" DisableAlternativeRenderingModeTesting="True" DisableSerializationTesting="True" ToleranceFilePath="testprofilebad.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\Xamls\BugRegressionRegression_Bug49.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Masters\BugRegressionRegression_Bug49.xaml.png" />
+    </SupportFiles>    
+  </TEST>
+
+</XTC>

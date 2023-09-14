@@ -1,0 +1,21 @@
+<StackPanel 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Background="White" Height="300" Width="300">
+	<Decorator Margin="5">
+		<Button FontSize="40" Foreground="Red" >  
+			<Run TextDecorations="Underline" Background="LightBlue" FontWeight="Bold" FontFamily="Tahoma">My button</Run>
+ 			<Button.BitmapEffect>
+    				<BlurBitmapEffect Radius="5" />
+  			</Button.BitmapEffect>
+		</Button>
+		<Decorator.LayoutTransform>
+			<RotateTransform Angle="90" />
+		</Decorator.LayoutTransform>
+	</Decorator>
+</StackPanel>
+
+
+<!-- Regression_Bug21BD_LayoutTransAndBlurCausedBtnInWrongPos.xaml -->
+<!-- Bug Behavior: Text would disappear for rotated Button with bitmap effect.  -->
+<!-- Correct Behavior: Text should show on button.  Only difference is that button should be blurred. -->

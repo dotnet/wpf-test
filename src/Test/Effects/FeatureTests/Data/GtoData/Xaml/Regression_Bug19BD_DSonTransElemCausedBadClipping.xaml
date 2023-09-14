@@ -1,0 +1,19 @@
+<DockPanel 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ 	Background="Gray" Height="300" Width="300" >
+	<Button Height="23" Width="75">
+		<Button.BitmapEffect>
+			<BitmapEffectGroup>
+				<DropShadowBitmapEffect ShadowDepth="51" Color="Blue"/>
+			</BitmapEffectGroup>
+		</Button.BitmapEffect>
+		<Button.LayoutTransform>
+			<RotateTransform Angle="90"/>
+		</Button.LayoutTransform>
+	</Button>
+</DockPanel>
+
+<!-- Regression_Bug19BD_DSonTransElemCausedBadClipping.xaml -->
+<!-- Bug Behavior: Effects and rotation caused bad clipping.  Chopped off bottom half of button. -->
+<!-- Correct Behavior: Full button should be visible when rotated, even if effect is applied. -->
