@@ -1,0 +1,312 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>CoreTestsUntrusted</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <DefineConstants>$(DefineConstants);TARGET_NET3_5</DefineConstants>
+    <NoWarn>$(NoWarn);0067</NoWarn>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Frameworkcommondir Include="Common\Core\TestCaseAppModel.cs" />
+    <Corecommondir Include="Common\VisualTreeUtils.cs" />
+    <Corecommondir Include="Common\TestCursorLibrary.cs" />
+    <Basecommondir Include="Common\Win32\Win32GenericMessagePump.cs" />
+    <Basecommondir Include="Common\IHostedTest.cs" />
+    <Basecommondir Include="Common\ITestContainer.cs" />
+    <Basecommondir Include="Common\HostType.cs" />
+    <Basecommondir Include="DispatcherTimerHelper.cs" />
+    <Basecommondir Include="SecurityBaseUnTrustedHelper.cs" />
+    <Basecommondir Include="Common\ModelAutomationBase.cs" />
+    <Basecommondir Include="CoreModelState.cs" />
+    <Basecommondir Include="IModelTestCase.cs" />
+    <Frameworkpropertyenginesources Include="PropertyEngine\PEHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Basesources Include="@(Basecommondir)" />
+    <Coresources Include="@(Corecommondir)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworkcommondir Include="Common\Core\TreeHelper.cs" />
+    <Compile Include="Common\MultipleThreadTestCase.cs" />
+    <Compile Include="DispatcherType.cs" />
+    <Compile Include="..\Untrusted\Common\InstrCoreContentPanel.cs" />
+    <Compile Include="..\Untrusted\Common\InstrPanel.cs" />
+    <Compile Include="..\Untrusted\Common\InstrPanelHost.cs" />
+    <Compile Include="..\Untrusted\Common\ExeStubContainer.cs" />
+    <Compile Include="..\Untrusted\Common\ExeStubContainerFramework.cs" />
+    <Compile Include="..\Untrusted\Common\IHasText.cs" />
+    <Compile Include="..\Untrusted\Common\LogicalChildCollection.cs" />
+    <Frameworkidtest Include="IdTest\IdTestBaseCase.cs" />
+    <Frameworkcommondir Include="Common\Resources\TestHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworkcommondir Include="ModelingCommon.cs" />
+    <!-- Frameworkcommondir Include="Common\Parser\CoreCompilerParams.cs" / -->
+    <Frameworkcommondir Include="Common\Parser\ParserUtil.cs" />
+    <Frameworkcommondir Include="Common\Parser\ParserVerifier.cs" />
+    <Frameworkcommondir Include="Common\Parser\CustomControl.cs" />
+    <Frameworkcommondir Include="Common\Parser\CustomObjects.cs" />
+    <Frameworkcommondir Include="Common\Parser\MyClass.cs" />
+    <Frameworkcommondir Include="Common\Parser\SimulatedServer.cs" />
+    <Frameworkcommondir Include="Common\Parser\ThrottledReadStream.cs" />
+    <Frameworkcommondir Include="Common\Parser\TestTypeDescriptorContext.cs" />
+    <Frameworkcommondir Include="Common\Parser\TestValueSerializerContext.cs" />
+    <Frameworkcommondir Include="Common\Serialization\CustomContentControl.cs" />
+    <Frameworkcommondir Include="Common\Serialization\CustomControlWithTypeProperties.cs" />
+    <Frameworkcommondir Include="Common\Serialization\FrameworkElementWithIListProp.cs" />
+    <Frameworkcommondir Include="Common\Serialization\MyClrClassWithCustomProperties.cs" />
+    <Frameworkcommondir Include="Common\Serialization\MyUIElementWithCustomProperties.cs" />
+    <Frameworkcommondir Include="Common\Serialization\MyUIElementWithReadOnlyProperties.cs" />
+    <Frameworkcommondir Include="Common\Serialization\UIElementWithShouldSerialize.cs" />
+    <Frameworkcommondir Include="Common\Serialization\SerializationBaseCase.cs" />
+    <Frameworkcommondir Include="Common\input\TestDependencyInputObject.cs" />
+    <Frameworkcommondir Include="Common\Resources\GenericTestCase.cs" />
+    <Frameworkcommondir Include="Common\input\InstrContentPanel.cs" />
+    <Frameworkcommondir Include="Common\input\InstrContentPanelHost.cs" />
+    <Frameworkcommondir Include="Common\input\InstrControlPanel.cs" />
+    <Frameworkcommondir Include="Common\input\InstrFrameworkContentPanel.cs" />
+    <Frameworkcommondir Include="Common\input\InstrFrameworkPanel.cs" />
+    <Frameworkcommondir Include="Common\input\InstrShape.cs" />
+    <Frameworkcommondir Include="Common\Threading\ThreadingHelper.cs" />
+    <Frameworkcommondir Include="Common\Core\ValidationTracking.cs" />
+    <Frameworkcommondir Include="Common\Security\ExecutionContextWrapper.cs" />
+    <Frameworkcommondir Include="Common\Serialization\VerifyElement.cs" />
+    <Frameworkcommondir Include="Common\TestApplicationStub.cs" />
+    <!-- Frameworkcommondir Include="Common\TestApplicationStubCompileTest.cs" / -->
+    <Frameworkcommondir Include="Common\WinformsTestContainer.cs" />
+    <Frameworkcommondir Include="Common\UIContextObject\SimpleModalTestWindow.cs" />
+    <Frameworkcommondir Include="Common\UIContextObject\SimpleNonModalTestWindow.cs" />
+    <Frameworkcommondir Include="Common\input\AutoCloseMessageBox.cs" />
+    <Frameworkcommondir Include="Common\input\AutoCloseWin32MessageBox.cs" />
+    <Frameworkcommondir Include="Common\input\AutoCloseWinFormsMessageBox.cs" />
+    <Frameworkcommondir Include="Common\Commanding\TestCommandLibrary.cs" />
+    <Frameworkcommondir Include="Common\Serialization\SerializationRoundTrip.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworkserialization Include="Serialization\FeatureTeams\AnimationVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\FeatureTeams\ComponentModelVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\FeatureTeams\ConnectedDataVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\FeatureTeams\DocumentXamlVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\FeatureTeams\GraphicsVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\FeatureTeams\LayoutXamlVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\FeatureTeams\StyleVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\FeatureTeams\UISXamlVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\AliasPropertyRepro.cs" />
+    <Frameworkserialization Include="Serialization\AttachedRoutedEventCase1.cs" />
+    <Frameworkserialization Include="Serialization\AttachedRoutedEventVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\BamlizedThemeTest.cs" />
+    <Frameworkserialization Include="Serialization\BugRepro11.cs" />
+    <Frameworkserialization Include="Serialization\CellResources.cs" />
+    <Frameworkserialization Include="Serialization\CultureInfoSerializationVerifier.cs" />
+    <Frameworkserialization Include="Serialization\CustomClrPropertyOnCustomControl.cs" />
+    <Frameworkserialization Include="Serialization\CustomDPOnAvalonComponent.cs" />
+    <Frameworkserialization Include="Serialization\CustomDPOnAvalonComponent2.cs" />
+    <Frameworkserialization Include="Serialization\CustomDPOnCustomControl.cs" />
+    <Frameworkserialization Include="Serialization\DefTagCode.cs" />
+    <Frameworkserialization Include="Serialization\EnumSyntaxVerifier.cs" />
+    <Frameworkserialization Include="Serialization\FrameworkElementWithimmutableProperties.cs" />
+    <Frameworkserialization Include="Serialization\ICollectionSerializationVerifier.cs" />
+    <Frameworkserialization Include="Serialization\LiteralwithResourcesVerifier.cs" />
+    <Frameworkserialization Include="Serialization\LocallyDefinedComponents.cs" />
+    <Frameworkserialization Include="Serialization\MarkupExtensionReturnTypeTest.cs" />
+    <Frameworkserialization Include="Serialization\MyIDictionary.cs" />
+    <Frameworkserialization Include="Serialization\MyIEnumerable.cs" />
+    <Frameworkserialization Include="Serialization\NodeForIDictionary.cs" />
+    <Frameworkserialization Include="Serialization\NodeForIEnumerable.cs" />
+    <Frameworkserialization Include="Serialization\NodeForLiteralwithResources.cs" />
+    <Frameworkserialization Include="Serialization\NodeWithLiteralContent.cs" />
+    <Frameworkserialization Include="Serialization\PerPropertySerializers.cs" />
+    <Frameworkserialization Include="Serialization\ReadonlyCustomPropertySerialization.cs" />
+    <Frameworkserialization Include="Serialization\SerializationICollection.cs" />
+    <Frameworkserialization Include="Serialization\TestShouldSerialzeWithManager.cs" />
+    <Frameworkserialization Include="Serialization\CustomItem2.cs" />
+    <Frameworkserialization Include="Serialization\CustomItem1.cs" />
+    <Frameworkserialization Include="Serialization\ConverterVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\CustomPropertyType.cs" />
+    <Frameworkserialization Include="Serialization\CustomPropertyTypeConverter.cs" />
+    <Frameworkserialization Include="Serialization\CustomElementCustomPropertyType.cs" />
+    <Frameworkserialization Include="Serialization\TemplateVerifiers.cs" />
+    <Frameworkserialization Include="Serialization\CustomContentElementCustomPropertyType.cs" />
+    <Frameworkserialization Include="Serialization\CustomUIElementCustomPropertyType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworkparser Include="Parser\AssemblyUsageTest.cs" />
+    <Frameworkparser Include="Parser\BamlReaderTest.cs" />
+    <Frameworkparser Include="Parser\ContentModelState.cs" />
+    <Frameworkparser Include="Parser\CraftedBamlTest.cs" />
+    <Frameworkparser Include="Parser\DateTimeMarkupTest.cs" />
+    <Frameworkparser Include="Parser\DefUidTest.cs" />
+    <Frameworkparser Include="Parser\EntityTest.cs" />
+    <Frameworkparser Include="Parser\ErrorTest.cs" />
+    <Frameworkparser Include="Parser\parserBVT.cs" />
+    <Frameworkparser Include="Parser\ParserSerialize.cs" />
+    <Frameworkparser Include="Parser\persistence.cs" />
+    <Frameworkparser Include="Parser\SecurityTest.cs" />
+    <Frameworkparser Include="Parser\TextParsingTest.cs" />
+    <Frameworkparser Include="Parser\TypeCvtTest.cs" />
+    <!-- Frameworkparser Include="Parser\XmlnsCacheTest.cs" / -->
+    <Frameworkparser Include="Parser\Errors\DataManager.cs" />
+    <Frameworkparser Include="Parser\Errors\ErrComparer.cs" />
+    <Frameworkparser Include="Parser\Errors\ErrorVerifier.cs" />
+    <Frameworkparser Include="Parser\Errors\guiErrComparer.cs" />
+    <Frameworkparser Include="Parser\Errors\GUIErrComparerDialog.cs">
+      <SubType>Form</SubType>
+    </Frameworkparser>
+    <Frameworkparser Include="Parser\Errors\GUIErrComparerDialog.Designer.cs" />
+    <Frameworkparser Include="Parser\Errors\ReportingErrComparer.cs" />
+    <Frameworkparser Include="Parser\Errors\TestExecutor.cs" />
+    <!-- Frameworkparser Include="Parser\Errors\XamlCompileDataManager.cs" / -->
+    <!-- Frameworkparser Include="Parser\Errors\XamlCompileTestExecutor.cs" / -->
+    <Frameworkparser Include="Parser\Errors\XamlLoadDataManager.cs" />
+    <Frameworkparser Include="Parser\Errors\XamlLoadTestExecutor.cs" />
+    <Frameworkparser Include="Parser\Errors\XmlDataManager.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\BamlFuzzer.cs" />
+    <!-- Frameworkparser Include="Parser\Security\Fuzzer\BamlFuzzTest.cs" / -->
+    <Frameworkparser Include="Parser\Security\Fuzzer\BamlRecord.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\ConnectionIdBamlRecord.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\ConnectionIdFuzzer.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\ContainerFuzzer.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\ContainerFuzzTest.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\FixedSizeBamlRecord.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\FuzzerBase.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\FuzzTest.cs" />
+    <!-- Frameworkparser Include="Parser\Security\Fuzzer\FuzzTestDriver.cs" / -->
+    <Frameworkparser Include="Parser\Security\Fuzzer\IndentLogger.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\InsertionFuzzer.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\ParserFuzzTest.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\RandomByteFuzzer.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\RM_ContainerFuzzTest.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\ShuffleFuzzer.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\VariableSizeBamlRecord.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\XamlFuzzer.cs" />
+    <Frameworkparser Include="Parser\Security\Fuzzer\XamlFuzzTest.cs" />
+    <Frameworkparser Include="Parser\ContentWrapperAttributeTest.cs" />
+    <Frameworkparser Include="Parser\CustomXDataHost.cs" />
+    <Frameworkparser Include="Parser\TestBamlMapTable.cs" />
+    <Frameworkparser Include="Parser\TypesInGlobalNameSpace.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworksourcexaml Include="Xaml\ActionTypeForXaml.cs" />
+    <Frameworksourcexaml Include="Xaml\Helper.cs" />
+    <Frameworksourcexaml Include="Xaml\MarkupActionsPerType.cs" />
+    <Frameworksourcexaml Include="Xaml\MarkupLog.cs" />
+    <Frameworksourcexaml Include="Xaml\ParserUtil.cs" />
+    <Frameworksourcexaml Include="Xaml\XamlTestRunner.cs" />
+    <Frameworksourcexaml Include="Xaml\XamlStyleOverride.cs" />
+    <Frameworksourcexaml Include="Xaml\Test.cs" />
+    <Frameworksourcexaml Include="Xaml\TestApplication.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworksource Include="Source\ChangingRootVisual.cs" />
+    <Frameworksource Include="Source\DestroyingHwndSourceForRunDispatcher.cs" />
+    <Frameworksource Include="Source\HwndSourceTest.cs" />
+    <Frameworksource Include="Source\HwndSourceVisualVerification.cs" />
+    <!-- .NET Core 3.0, multiple AppDomains are no longer supported these tests are irrelevant, removing 
+    <Frameworksource Include="Source\MultipleAppDomainMultipleTopWindows.cs" />
+    <Frameworksource Include="Source\MultipleAppDomainsMultipleAvalonWindowsTop.cs" />
+    <Frameworksource Include="Source\MultipleContextMultipleAppDomainSingleTopWindow.cs" />-->
+    <Frameworksource Include="Source\MultipleContextMultipleDispatcherMultiple.cs" />
+    <Frameworksource Include="Source\MultipleHwndSourceMultipleClickSingleDispatcherSingleContext.cs" />
+    <Frameworksource Include="Source\MultipleHwndSourceonTopLevelWindowonDifferentContext.cs" />
+    <Frameworksource Include="Source\MultpleHwndSourceonTopLevelWindow.cs" />
+    <Frameworksource Include="Source\SimpleHwndSourceMTMC.cs" />
+    <Frameworksource Include="Source\SimpleHwndSourceSTSC.cs" />
+    <Frameworksource Include="Source\SimpleMultipleHwndSourceSTSC.cs" />
+    <Frameworksource Include="Source\SourceCommon.cs" />
+    <Frameworksource Include="Source\SourceHookHelper.cs" />
+    <Frameworksource Include="Source\SourceHookTest.cs" />
+    <Frameworksource Include="Source\SourcesServicesSimple.cs" />
+    <Frameworksource Include="Source\Dispose\HwndSourceDispose.cs" />
+    <Frameworksource Include="Source\HwndSource\Hooks\SimpleTestHooks.cs" />
+    <Frameworksource Include="Source\Layered\LayeredWindowModel.cs" />
+    <Frameworksource Include="Source\Layered\LayeredWindowModelHelper.cs" />
+    <Frameworksource Include="Source\Nesting\Avalon_Hwnd_Avalon_Hwnd.cs" />
+    <Frameworksource Include="Source\PresentationSource\PresentationSourceModel.cs" />
+    <Frameworksource Include="Source\PresentationSource\RemovingElementSourceChangedListener.cs" />
+    <Frameworksource Include="Source\PresentationSource\TestFromVisual.cs" />
+    <Frameworksource Include="Source\PresentationSource\TestMyPresentationSource.cs" />
+    <Frameworksource Include="Source\PresentationSource\TestNotifyRootChange.cs" />
+    <Frameworksource Include="Source\PresentationSource\TestSimpleFromHwnd.cs" />
+    <Frameworksource Include="Source\Dispose\DisposeTest.cs" />
+    <Frameworksource Include="Source\Dispose\DisposeHelper.cs" />
+    <Frameworksource Include="Source\HwndSourceChildTransparency.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworkhost Include="Host\DestroyHwndHostModel.cs" />
+    <Frameworkhost Include="Host\HwndHostBlackHole.cs" />
+    <Frameworkhost Include="Host\HwndHostClickWin32Button.cs" />
+    <Frameworkhost Include="Host\HwndHostDestroyState.cs" />
+    <Frameworkhost Include="Host\HwndHostHostingState.cs" />
+    <Frameworkhost Include="Host\HwndHostInXaml.cs" />
+    <Frameworkhost Include="Host\HwndHostRightToLeft.cs" />
+    <Frameworkhost Include="Host\HwndHostSimple.cs" />
+    <Frameworkhost Include="Host\HwndHostThreaded.cs" />
+    <Frameworkhost Include="Host\HwndHostVisualVerification.cs" />
+    <Frameworkhost Include="Host\MovingHwndHost.cs" />
+    <Frameworkhost Include="Host\SourceChangeModel.cs" />
+    <Frameworkhost Include="Host\KeyboardInterop\KeyboardInteropModel.cs" />
+    <Frameworkhost Include="Host\KeyboardInterop\KeyboardInteropModelSimpleLoader.cs" />
+    <Frameworkhost Include="Host\KeyboardInterop\BVTKeyboardInterop.cs" />
+    <Frameworkhost Include="Host\KeyboardInterop\BVTMnemonics.cs" />
+    <Frameworkhost Include="Host\Security\IKeyboardInputSinkRegister.cs" />
+    <Frameworkhost Include="Host\WinformsKeyboardInterop\WinformsKeyboardInterop.cs" />
+    <Frameworkhost Include="Host\WinformsKeyboardInterop\WinformsKeyboardInteropHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Untrusted\PropertyEngine\Verifiers\AutoAlias.cs" />
+    <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Misc.cs" />
+    <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Resources.cs" />
+    <Compile Include="..\Untrusted\PropertyEngine\Verifiers\ThemeChange.cs" />
+    <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Title.cs" />
+    <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Triggers.cs" />
+    <Compile Include="..\Untrusted\PropertyEngine\Verifiers\Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworkintegrationsources Include="Integration\EmbeddedControlModel.cs" />
+    <Frameworkintegrationsources Include="Integration\FrameIntegration.cs" />
+    <Frameworkintegrationsources Include="Integration\ResizeModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <OrcasSources Include="Common\VisualTreeUtils_Orcas.cs" />
+    <OrcasSources Include="Host\HwndHostInViewport2DVisual3D.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Frameworksources Include="@(Frameworkparser)" />
+    <Frameworksources Include="@(Frameworksourcexaml)" />
+    <Frameworksources Include="@(Frameworkintegrationsources)" />
+    <Frameworksources Include="@(Frameworksource)" />
+    <Frameworksources Include="@(Frameworkhost)" />
+    <Frameworksources Include="@(Frameworkserialization)" />
+    <Frameworksources Include="@(Frameworkidtest)" />
+    <Frameworksources Include="@(Frameworkcommondir)" />
+    <Frameworksources Include="@(Frameworkpropertyenginesources)" />
+    <Frameworksources Include="DependencyPropertyChangedEventArgsWrapper.cs" />
+    <Frameworksources Include="XamlTestDocument.cs" />
+    <Frameworksources Include="Employee.cs" />
+    <Frameworksources Include="PropertyRecord.cs" />
+    <Frameworksources Include="EventRecord.cs" />
+    <Frameworksources Include="TypeMemberFilter.cs" />
+    <Frameworksources Include="EventFilter.cs" />
+    <Frameworksources Include="PropertyFilter.cs" />
+    <Frameworksources Include="EventRecorder.cs" />
+    <Frameworksources Include="MDEIHostedTestBase.cs" />
+    <Frameworksources Include="MDEHostedTestCaseFramework.cs" />
+    <Frameworksources Include="DesignModeTest.cs" />
+    <Frameworksources Include="VScanHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfoSecurity.cs" />
+    <Compile Include="@(Basesources)" />
+    <Compile Include="@(Coresources)" />
+    <Compile Include="@(Frameworksources)" />
+    <Compile Include="@(OrcasSources)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(CoreTestsTrustedProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+</Project>

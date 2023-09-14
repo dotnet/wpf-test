@@ -1,0 +1,189 @@
+<!-- Common UIElement3D and Viewport2DVisual3D tree scenarios -->
+<Page 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="TestSkeleton"
+    Name="TestRoot">
+
+  <Page.Resources>
+    <Point3DCollection x:Key="pyramidButtonPts">-1 1 0, 1 1 0, 1 -1 0, -1 -1 0, 0 0 0.5</Point3DCollection>
+    <PointCollection x:Key="pyramidButtonTs">0 0, 1 0, 1 1, 0 1, 0.5 0.5</PointCollection>
+    <Int32Collection x:Key="pyramidButtonIdx">0 4 1, 1 4 2, 2 4 3, 0 3 4</Int32Collection>
+
+    <MaterialGroup x:Key="grayMaterial">
+      <DiffuseMaterial   Brush="Gray"/>
+      <EmissiveMaterial Brush="Gray"/>
+      <SpecularMaterial  Brush="White"/>
+    </MaterialGroup>
+
+    <MeshGeometry3D x:Key="pyramidMesh"
+     Positions="{StaticResource pyramidButtonPts}"
+     TriangleIndices="{StaticResource pyramidButtonIdx}"
+     TextureCoordinates="{StaticResource pyramidButtonTs}" />
+
+  </Page.Resources>
+
+
+  <!-- Simplified tree -->
+  <!--
+        <Viewport3D Name="mainViewport3D">
+          <ModelUIElement3D x:Name="simpleModelUIElement3D" />
+
+          <Viewport2DVisual3D x:Name="vp2d_multiple_children">
+            <FrameworkElement Name="vp2d_first_child" />
+            <FrameworkElement Name="vp2d_second_child" />
+          </Viewport2DVisual3D>
+
+          <Viewport2DVisual3D x:Name="vp2d_nested_children">
+            <FrameworkElement Name="vp2d_with_child">
+              <FrameworkElement Name="vp2d_nested_child"/>
+            </FrameworkElement>
+          </Viewport2DVisual3D>
+
+          <ContainerUIElement3D x:Name="container_with_vp2d">
+            <Viewport2DVisual3D>
+              <FrameworkElement Name="containerElement_vp2d_FE"/>
+            </Viewport2DVisual3D>
+          </ContainerUIElement3D>
+
+          <ModelVisual3D x:Name="modelVisual_with_vp2d">
+            <Viewport2DVisual3D>
+              <FrameworkElement Name="modelVisual_vp2d_FE" />
+            </Viewport2DVisual3D>
+          </ModelVisual3D>
+        </Viewport3D>
+    -->
+
+  <Grid Name="testGrid">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="8*"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <Viewport3D Name="mainViewport3D">
+
+      <ModelUIElement3D Focusable="True"  x:Name="simpleModelUIElement3D">
+        <ModelUIElement3D.Model>
+          <GeometryModel3D Material="{StaticResource grayMaterial}" Geometry="{StaticResource pyramidMesh}"/>
+        </ModelUIElement3D.Model>
+        <ModelUIElement3D.Transform>
+          <TranslateTransform3D OffsetX="-8"/>
+        </ModelUIElement3D.Transform>
+      </ModelUIElement3D>
+
+      <Viewport2DVisual3D x:Name="vp2d_multiple_children" Geometry="{StaticResource pyramidMesh}">
+        <Viewport2DVisual3D.Material>
+          <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True" Brush="White"/>
+        </Viewport2DVisual3D.Material>
+
+        <Viewport2DVisual3D.Transform>
+          <Transform3DGroup>
+            <ScaleTransform3D x:Name="scaleZ" ScaleZ="1.0"/>
+            <RotateTransform3D >
+              <RotateTransform3D.Rotation>
+                <AxisAngleRotation3D x:Name="xform2" Axis="0 1 0" Angle="40"/>
+              </RotateTransform3D.Rotation>
+            </RotateTransform3D>
+            <TranslateTransform3D OffsetX="-4"/>
+          </Transform3DGroup>
+        </Viewport2DVisual3D.Transform>
+        <StackPanel Name="vp2d_parent1" Height="150" Width="150" Background="LightGreen">
+          <Button Name="vp2d_first_child" Content="Button 1"/>
+          <Button Name="vp2d_second_child" Content="Button 2"/>
+        </StackPanel>
+      </Viewport2DVisual3D>
+
+      <Viewport2DVisual3D x:Name="vp2d_nested_children" Geometry="{StaticResource pyramidMesh}">
+        <Viewport2DVisual3D.Material>
+          <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True" Brush="White"/>
+        </Viewport2DVisual3D.Material>
+
+        <Viewport2DVisual3D.Transform>
+          <Transform3DGroup>
+            <TranslateTransform3D OffsetX="-1"/>
+          </Transform3DGroup>
+        </Viewport2DVisual3D.Transform>
+        <StackPanel Name="vp2d_parent2">
+          <Button Name="vp2d_with_child">
+            <Button Name="vp2d_nested_child">Nested FE</Button>
+          </Button>
+        </StackPanel>
+      </Viewport2DVisual3D>
+
+      <ContainerUIElement3D x:Name="container_with_vp2d">
+        <ContainerUIElement3D.Transform>
+          <TranslateTransform3D OffsetX="2"/>
+        </ContainerUIElement3D.Transform>
+
+        <ContainerUIElement3D.Children>
+          <Viewport2DVisual3D Geometry="{StaticResource pyramidMesh}">
+            <Viewport2DVisual3D.Material>
+              <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True" Brush="White"/>
+            </Viewport2DVisual3D.Material>
+
+            <StackPanel Name="vp2d_parent3">
+              <Button Name="containerElement_vp2d_FE" Content="ContainerUIElement3D Child"/>
+            </StackPanel>
+          </Viewport2DVisual3D>
+        </ContainerUIElement3D.Children>
+      </ContainerUIElement3D>
+      
+      <ModelVisual3D x:Name="modelVisual_with_vp2d">
+        <ModelVisual3D.Transform>
+          <TranslateTransform3D OffsetX="5"/>
+        </ModelVisual3D.Transform>
+
+        <ModelVisual3D.Content>
+          <GeometryModel3D Material="{StaticResource grayMaterial}" Geometry="{StaticResource pyramidMesh}"/>
+        </ModelVisual3D.Content>
+
+        <ModelVisual3D.Children>
+          <Viewport2DVisual3D Geometry="{StaticResource pyramidMesh}">
+            <Viewport2DVisual3D.Material>
+              <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True" Brush="White"/>
+            </Viewport2DVisual3D.Material>
+            <Viewport2DVisual3D.Transform>
+              <Transform3DGroup>
+                <TranslateTransform3D OffsetY="-1" OffsetX="0.5" OffsetZ="0.5"/>
+              </Transform3DGroup>
+            </Viewport2DVisual3D.Transform>
+            <StackPanel Name="vp2d_parent4">
+              <Button Name="modelVisual_vp2d_FE" Content="Visual3DChild Viewport" />
+            </StackPanel>
+          </Viewport2DVisual3D>
+        </ModelVisual3D.Children>
+      </ModelVisual3D>
+
+      <!-- Light source -->
+      <ModelVisual3D>
+        <ModelVisual3D.Content>
+          <PointLight Color="White" Position="6 0 10"/>
+        </ModelVisual3D.Content>
+        <ModelVisual3D.Transform>
+          <RotateTransform3D>
+            <RotateTransform3D.Rotation>
+              <AxisAngleRotation3D x:Name="xform" Axis="0 0 1" Angle="0"/>
+            </RotateTransform3D.Rotation>
+          </RotateTransform3D>
+        </ModelVisual3D.Transform>
+      </ModelVisual3D>
+
+      <!-- Camera -->
+      <Viewport3D.Camera>
+        <PerspectiveCamera Position="0 0 6" LookDirection="0 0 -1"
+            UpDirection="0 1 0" FieldOfView="120" />
+      </Viewport3D.Camera>
+
+      <Viewport3D.Triggers>
+        <EventTrigger RoutedEvent="Viewport3D.Loaded">
+          <BeginStoryboard>
+            <Storyboard TargetName="xform" TargetProperty="Angle">
+              <DoubleAnimation From="0" To="360" Duration="0:0:5" RepeatBehavior="Forever" />
+            </Storyboard>
+          </BeginStoryboard>
+        </EventTrigger>
+      </Viewport3D.Triggers>
+    </Viewport3D>
+
+  </Grid>
+</Page>

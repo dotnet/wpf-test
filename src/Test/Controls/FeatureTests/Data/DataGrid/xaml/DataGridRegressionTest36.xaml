@@ -1,0 +1,19 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataGrid Name="DataGrid_Standard" AutoGenerateColumns="false">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}"/>
+            <DataGridTextColumn Header="LastName" Binding="{Binding LastName}"/>
+        </DataGrid.Columns>
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <DataGrid AutoGenerateColumns="false">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="FirstName" IsReadOnly="True" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="LastName" Binding="{Binding LastName}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
+    </DataGrid>
+</Grid>

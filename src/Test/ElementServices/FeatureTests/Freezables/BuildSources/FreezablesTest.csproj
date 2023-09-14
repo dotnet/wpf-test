@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+        <AssemblyName>FreezablesTest</AssemblyName>
+        <OutputType>Library</OutputType>
+        <AssemblyType>Library</AssemblyType>
+        <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Code Files below -->
+        <Compile Include="..\FreezablesBVT\*.cs" />
+        <Compile Include="..\FreezablesCollections\*.cs" />
+        <Compile Include="..\FreezablesMicroBVT\*.cs" />
+        <Compile Include="..\FreezablesObjects\*.cs" />
+        <Compile Include="..\FreezablesPatterns\*.cs" />
+        <Compile Include="..\InsertDelete\Code\*.cs" />
+        <Compile Include="..\RoundTrip\Code\*.cs" />
+        <Compile Include="..\Common\PredefinedObjects\*.cs" />
+        <Compile Include="..\Common\Utils\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Embedded Resource files below -->
+        <Resource Include="..\Data\*" />
+        <Resource Include="..\InsertDelete\Markup\*" />
+        <Resource Include="..\RoundTrip\Markup\*" />
+
+        <!-- Loose Resource files below -->
+        <Content Include="..\Data\*"><CopyToOutputDirectory>Always</CopyToOutputDirectory></Content>
+        <Content Include="..\InsertDelete\Markup\*"><CopyToOutputDirectory>Always</CopyToOutputDirectory></Content>
+        <Content Include="..\RoundTrip\Markup\*"><CopyToOutputDirectory>Always</CopyToOutputDirectory></Content>
+        <Content Include="..\..\TestData\common\Resources\Images\png.png"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(TestRuntimeProject)" />
+        <ProjectReference Include="$(TestContractsProject)" />
+    </ItemGroup>
+</Project>

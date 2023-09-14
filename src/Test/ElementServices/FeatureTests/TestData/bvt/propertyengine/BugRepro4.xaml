@@ -1,0 +1,36 @@
+<!--
+/*******************************************************************
+ * Purpose: DynamicResource reference to Style not supported in ControlTemplate tree
+ *          Bug 4 (fixed)
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 3 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/propertyengine/BugRepro4.xaml $
+********************************************************************/
+-->
+
+
+<cmn:CustomStackPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.PropertyEngine.Verifiers.BugRepro4Verifier" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+    <cmn:CustomStackPanel.Resources>
+
+        <Style x:Key="styleKey1" TargetType="{x:Type Button}">
+            <Setter Property="Panel.Background" Value="LightBlue" />
+        </Style>
+
+        <ControlTemplate x:Key="resKey1" TargetType="{x:Type Button}">
+            <Button Name="tempButton" Style="{DynamicResource styleKey1}">ButtonText</Button>
+        </ControlTemplate>
+
+    </cmn:CustomStackPanel.Resources>
+
+    <Button Template="{DynamicResource resKey1}" Name="MyButton1" />
+
+</cmn:CustomStackPanel>

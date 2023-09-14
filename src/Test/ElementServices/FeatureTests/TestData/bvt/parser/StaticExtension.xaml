@@ -1,0 +1,66 @@
+<!-- We are trying to verify that the new MarkupExtension called
+StaticExtension works fine. 
+-->
+
+<cmn:CustomDockPanel
+ 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ 	xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" 
+	xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+	xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+ 	Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.StaticExtensionVerify" 
+	xmlns:MappingPIGen1="clr-namespace:System.Windows.Input;assembly=PresentationCore" 
+	xmlns:MappingPIGen2="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" 
+	xmlns:MappingPIGen3="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+
+	
+	<Button Name="Button0" Cursor="{x:Static input:Cursors.Pen}" />	
+	<Button Name="Button1">
+		<Button.Cursor>
+			<x:Static Member="input:Cursors.Pen" />
+		</Button.Cursor>
+	</Button>
+	
+	<Button Name="Button2" Content="{x:Static Member=cc:MyClass.MyGreetingField}" />	
+	<Button Name="Button3" Content="{x:Static cc:MyStruct.MyMottoField}" />
+	<ListBox Name="ListBox0" SelectionMode="{x:Static Member=SelectionMode.Multiple}" />  
+	
+
+
+	
+	<Button Name="Button4">
+		<Button.Cursor>
+			<x:Static>
+				<x:Static.Member>
+					input:Cursors.Pen  <!-- use x:Static? -->
+				</x:Static.Member>
+			</x:Static>
+		</Button.Cursor>
+		<x:Static>
+				<x:Static.Member>
+					cc:MyClass.MyGreetingField
+				</x:Static.Member>
+		</x:Static>
+	</Button>
+
+	<Button Name="Button5">
+		<Button.Content>
+			<x:Static> <!-- Content="{x:Static Member=cc:MyClass.MyGreetingField}"  -->
+				<x:Static.Member>
+					cc:MyStruct.MyMottoField
+				</x:Static.Member>	
+			</x:Static>
+		</Button.Content>
+	</Button> 
+	<ListBox Name="ListBox1" Background="Green">
+		<ListBox.SelectionMode>
+			<x:Static Member="SelectionMode.Multiple"  /> 
+		</ListBox.SelectionMode>
+	</ListBox>  
+
+
+</cmn:CustomDockPanel>
+
+
+	

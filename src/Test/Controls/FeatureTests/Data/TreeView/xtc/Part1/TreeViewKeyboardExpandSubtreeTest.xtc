@@ -1,0 +1,18 @@
+<XTC>
+  <TEST Name="TreeViewExpandSubtreeTest" Priority="0" SubArea="TreeView" Timeout="600">
+    <DATA>
+      <INIT Class="TreeViewExpandSubtreeTest"/>
+      <PICT Name="TreeViewExpandSubtreeTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="ItemsExpandedSmallTreeViewExpandSubtree.xaml"/>
+        <XAML Name="ItemsExpandedTreeViewExpandSubtree.xaml"/>
+        <XAML Name="SmallTreeViewExpandSubtree.xaml"/>
+        <XAML Name="TreeViewExpandSubtree.xaml"/>
+      </XAMLS>
+      <!-- Known Bug : Press * (Multiple) key doesn't expand all subtree when isTreeViewVirtualizing and isTreeViewItemVirtualizing are true -->
+      <!-- 8 variations fail due to the product bug above -->
+      <VARIATION ControlName="treeview" InputType="Keyboard" />
+      <VARIATION ControlName="treeview" InputType="Code" />
+    </DATA>
+  </TEST>
+</XTC>

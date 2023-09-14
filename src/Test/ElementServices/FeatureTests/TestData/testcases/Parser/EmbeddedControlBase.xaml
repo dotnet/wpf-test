@@ -1,0 +1,49 @@
+﻿
+<cmn:CustomTextPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	FontSize="{DynamicResource TestDouble}"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xml:lang="de-DE"
+    xmlns:System="clr-namespace:System;assembly=Mscorlib"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+    <cmn:CustomTextPanel.Resources>
+      <Style x:Key="TestStyle" TargetType="{x:Type Control}" >
+        <Setter Property="Background" Value="Red" />
+      </Style>
+      <ControlTemplate x:Key="TestTemplate" TargetType="{x:Type Control}" >
+        <Border>
+           <Control Name="ControlInTemplate" />
+        </Border>              
+        <ControlTemplate.Triggers>
+          <MultiTrigger>
+            <MultiTrigger.Conditions>
+              <Condition Property="FontSize" Value="20" />
+            </MultiTrigger.Conditions>
+            <Setter Property="Background" Value="LightGreen" />
+          </MultiTrigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate>
+    </cmn:CustomTextPanel.Resources>
+    <FlowDocument
+        LineHeight="25"
+        Typography.Capitals="Unicase"
+        Typography.StandardLigatures="true"
+    >
+           <Table>
+           	    <TableRowGroup>
+					<TableRow>
+						<TableCell />
+					</TableRow>
+				</TableRowGroup>
+           </Table>
+           <List>
+               <ListItem />
+           </List>
+           <Section />
+           <Paragraph>
+               <Figure />
+               <Floater />
+           </Paragraph>
+	</FlowDocument>
+</cmn:CustomTextPanel>

@@ -1,0 +1,160 @@
+using System;
+using System.Collections;
+using System.Threading; using System.Windows.Threading;
+
+namespace Microsoft.Test.Layout {
+    public delegate void WorkItem(object value);
+        
+    public class WorkItemQueue: DispatcherObject, IList {   
+        public WorkItemQueue() {}
+        
+        public WorkItemQueue(Dispatcher ctx) { }
+
+        public void Run() {
+            Pop(null);
+        }
+        
+        public DispatcherOperation BeginRun() { 
+            return BeginRun(DispatcherPriority.Background); 
+        }        
+        
+        public DispatcherOperation BeginRun(DispatcherPriority priority) { 
+            return Dispatcher.CurrentDispatcher.BeginInvoke(priority, new DispatcherOperationCallback(Pop), null);
+        }
+        
+#region Interface Definitions
+        
+#region IEnumerable Interface
+        public IEnumerator GetEnumerator() { return items.GetEnumerator(); }
+#endregion        
+        
+#region ICollection Interface
+        IList items = new ArrayList();
+        IList itemArgs = new ArrayList();
+        
+        ICollection Inner { get { return (ICollection)this; } }
+        
+        public int Count { get { return items.Count; } }
+        
+        public bool IsSynchronized { get { return items.IsSynchronized; } }
+        
+        public object SyncRoot { get { return items.SyncRoot; } }
+        
+        public void CopyTo(Array array, int index) { items.CopyTo(array, index); }
+#endregion        
+        
+#region IList interface
+        public bool IsFixedSize { get { return items.IsFixedSize; } }
+        
+        public bool IsReadOnly { get { return items.IsReadOnly; } }
+        
+        object IList.this [int index] {
+            get { return items[index]; }
+            set { 
+                if(value is WorkItem) {
+                    items[index] = value;
+                    itemArgs[index] = null;
+                }
+                else {
+                    throw new InvalidOperationException("this IList only accepts objects of type WorkItem");
+                }
+            }                
+        }
+        
+        public WorkItem this [int index] {
+            get { return items[index] as WorkItem; }
+            set { 
+                items[index] = value; 
+                itemArgs[index] = null; 
+            }
+        }
+        
+        public int Add(WorkItem value, object arg) { 
+            int index1 = items.Add(value); 
+            if(0 <= index1) { //if value was succesfully added
+                if(0 > itemArgs.Add(arg)) { //if arg failed to be added
+                    items.RemoveAt(index1);
+                    return -1;
+                }
+            }
+            return index1;
+        }
+        
+        public int Add(WorkItem value) { return Add(value, null); }        
+        int IList.Add(object value) { return (value is WorkItem) ? Add(value as WorkItem, null) : -1; }
+        
+        public void Clear() { items.Clear(); itemArgs.Clear(); }
+        
+        public bool Contains(WorkItem value) { return items.Contains(value); }
+        bool IList.Contains(object value) { return items.Contains(value); }
+        
+        public int IndexOf(WorkItem value) { return items.IndexOf(value); }
+        int IList.IndexOf(object value) { return items.IndexOf(value); }
+        
+        public void Insert(int index, WorkItem value, object arg) { 
+            items.Insert(index, value); 
+            itemArgs.Insert(index, arg);
+        }
+        public void Insert(int index, WorkItem value) { Insert(index, value, null); }
+        void IList.Insert(int index, object value) { 
+            if(value is WorkItem) {
+                Insert(index, value as WorkItem, null);
+            }
+        }
+        
+        public void Remove(WorkItem value) { 
+            items.Remove(value); 
+            itemArgs.Remove(value); 
+        }
+        void IList.Remove(object value) { 
+            if(value is WorkItem) {
+                Remove(value as WorkItem);
+            }
+        }
+        
+        public void RemoveAt(int index) { 
+            items.RemoveAt(index); 
+            itemArgs.RemoveAt(index); 
+        }
+#endregion                
+#endregion Interface Definitions
+        public object GetArgument(int i) {
+            return itemArgs[i]; 
+        }
+
+        public void SetArgument(int i, object value) {
+            itemArgs[i] = value; 
+        }
+        
+        object Pop(object o) {            
+            if(Count > 0) {                
+                WorkItem w = this[0];
+                object arg = GetArgument(0);
+                RemoveAt(0);
+                
+                w(arg);                
+                Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(Pop), null);
+                PushFrame();
+            }
+            else {
+                PopFrame();
+            }
+            return null;
+        }
+                
+        DispatcherFrame frame = null;
+        void PushFrame() {
+            if(frame == null) {                
+                frame = new DispatcherFrame();
+                Dispatcher.PushFrame(frame);                
+                frame = null;
+            }
+        }
+        
+        void PopFrame() {
+            if(frame != null) {                
+                frame.Continue = false;
+            }
+        }
+    }
+}

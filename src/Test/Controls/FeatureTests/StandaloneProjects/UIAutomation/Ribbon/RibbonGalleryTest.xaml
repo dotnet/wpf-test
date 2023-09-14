@@ -1,0 +1,62 @@
+<Window x:Class="Microsoft.Test.Controls.RibbonGalleryTest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+      Title="Page1" x:Name="TestWindow">
+  <Window.Resources>
+    <CollectionViewSource x:Key="CVS" Source="{Binding ElementName=TestWindow, Path=TestCategories}" >
+      <CollectionViewSource.GroupDescriptions>
+        <PropertyGroupDescription PropertyName="TestCategoryName" />
+      </CollectionViewSource.GroupDescriptions>
+    </CollectionViewSource>
+    <HierarchicalDataTemplate x:Key="HDT" ItemsSource="{Binding Items}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Category Name: " FontWeight="Bold" FontSize="24" Foreground="Blue"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}" FontWeight="Bold" FontSize="24" Foreground="Blue"/>
+      </Grid>
+      <HierarchicalDataTemplate.ItemTemplate>
+        <DataTemplate>
+          <Border BorderThickness="2" BorderBrush="Black" Padding="5">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <TextBlock Grid.Row="0" Grid.Column="0" Text="Item Name: " FontWeight="Bold" FontSize="18"/>
+              <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TestItemName}" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+          </Border>
+        </DataTemplate>
+      </HierarchicalDataTemplate.ItemTemplate>
+    </HierarchicalDataTemplate>
+       
+  </Window.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="310"/>
+      <RowDefinition />
+    </Grid.RowDefinitions>
+
+        <ribbon:RibbonGallery Name="ribbonGallery" Width="500" SelectionChanged="TestGallery_SelectionChanged" CanUserFilter="True" IsSynchronizedWithCurrentItem="False"
+            ItemsSource="{Binding Source={StaticResource CVS},Path=Groups}"
+            ItemTemplate="{StaticResource HDT}">
+            <ribbon:RibbonGallery.FilterItemContainerStyle>
+                <Style TargetType="ribbon:RibbonMenuItem">
+                    <Setter Property="AutomationProperties.Name" Value="{Binding Name}" />
+                </Style>
+            </ribbon:RibbonGallery.FilterItemContainerStyle>
+        </ribbon:RibbonGallery>
+
+        <CheckBox Name="SelectionChangedCheckBox" Content="Selection has changed." Margin="10" FontSize="20" Grid.Row="1"/>
+    </Grid>
+</Window>

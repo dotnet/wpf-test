@@ -1,0 +1,42 @@
+<Grid
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:system='clr-namespace:System;assembly=mscorlib'
+        Height="600" Width="600">
+<Grid.Resources>
+
+        <DataTemplate x:Key="RowDetailsDataTemplate">
+            <StackPanel>
+                <ComboBox x:Name="comboBox1">
+                    <Button>Button1</Button>
+                    <Button>Button2</Button>
+                    <Button>Button3</Button>
+                </ComboBox>
+            </StackPanel>
+        </DataTemplate>
+
+        <Style x:Key="DefaultRowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="DetailsTemplate" Value="{StaticResource RowDetailsDataTemplate}" />
+            <Setter Property="DetailsVisibility" Value="Visible" />
+        </Style>
+        
+        <Style x:Key="DefaultDataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="RowStyle" Value="{StaticResource DefaultRowStyle}" />            
+            <Setter Property="AutoGenerateColumns" Value="True" />
+            <Setter Property="CanUserAddRows" Value="True" />
+            <Setter Property="CanUserDeleteRows" Value="False" />
+            <Setter Property="CanUserReorderColumns" Value="False" />
+        </Style>
+    </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>        
+
+        <DataGrid Style="{StaticResource DefaultDataGridStyle}" Grid.Row="0" Name="dataGrid" RowDetailsVisibilityMode="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" />
+                <DataGridTextColumn Header="Address"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>

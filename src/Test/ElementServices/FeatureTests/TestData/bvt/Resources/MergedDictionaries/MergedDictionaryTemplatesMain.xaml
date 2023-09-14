@@ -1,0 +1,30 @@
+<!--
+ Test autoaliasing in several template configurations. Verifier checks content is, or is not, shown in content presenters.
+-->
+<cmn:CustomStackPanel Background="Cyan" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:System="clr-namespace:System;assembly=Mscorlib" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.Resources.Verifiers.MergedDictionaryVerifier">
+
+    <cmn:CustomStackPanel.Resources>
+      <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+          <ResourceDictionary Source="MergedDictionaryTemplatesExternal.xaml"/>
+        </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
+    </cmn:CustomStackPanel.Resources>
+
+  <!-- For Testing DataTemplates -->
+  <ListBox Name="lb1" ItemsSource="{Binding Source={StaticResource Library}}" />
+
+  <!-- For Testing ControlTemplates -->
+  <Button Name="b1" Template="{StaticResource TemplateX}" />
+
+  <!-- For Testing Styles -->
+  <Button Name="b2" Style="{StaticResource StyleX}" />
+
+
+
+</cmn:CustomStackPanel>

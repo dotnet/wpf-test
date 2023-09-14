@@ -1,0 +1,43 @@
+<!--
+/*******************************************************************
+ * Purpose: DP-valued properties don't serialize correctly.
+ *          Bug 8 (fixed)
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/Serialization/BugRepro8.xaml $
+********************************************************************/
+-->
+
+
+
+<cmn:CustomDockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:Avalon.Test.CoreUI;assembly=CoreTestsUntrusted"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Name="root" Background="cornsilk" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+    <cmn:CustomDockPanel.Resources>
+        <ObjectDataProvider x:Key="Employees" ObjectType="{x:Type cc:EmployeeCollection}" />
+
+        <cc:EmployeeToBrushConverter x:Key="EmployeeToBrushConverter" />
+
+        <ControlTemplate x:Key="myControlTemplate1" TargetType="{x:Type ListBoxItem}">
+            <Border Background="{TemplateBinding Content, Converter={StaticResource EmployeeToBrushConverter}, ConverterParameter=x}">
+                <ContentPresenter x:Name="ContentSite" />
+            </Border>
+        </ControlTemplate>
+
+    </cmn:CustomDockPanel.Resources>
+
+    <!-- Data sources don't serialize correctly right now.  Future work item.
+    <ListBox ItemsSource="{Binding Source={StaticResource Employees}, XPath=Name}">
+
+    </ListBox>
+    -->
+
+</cmn:CustomDockPanel>

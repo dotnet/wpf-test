@@ -1,0 +1,133 @@
+<!-- 	We are trying to verify that whitespace collapses correctly.
+-->
+
+<cmn:CustomDockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+ Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.WSCollapseToAbcVerify" 
+>
+
+	
+	<!-- Testing implicit and explicit setting of Button with 0, 1, and 2 (many) spaces -->
+	<Button Name="Button01">abc</Button>
+	<Button Name="Button02"> abc</Button>
+	<Button Name="Button03">  abc</Button>
+	<Button Name="Button04">  abc </Button>
+	<Button Name="Button05">  abc  </Button>
+	<Button Name="Button06"> abc  </Button>
+	<Button Name="Button07">abc  </Button>
+
+	<!-- Testing returns (line-feeds) -->
+	<Button Name="Button08">
+abc</Button>
+	<Button Name="Button09">abc
+</Button>
+
+	<!-- Testing double consecutive (line-feeds) -->
+	<Button Name="Button11">
+
+abc</Button>
+	<Button Name="Button12">abc
+
+</Button>
+
+
+	<!-- Testing single tabs -->
+	<Button Name="Button14">	abc</Button>
+	<Button Name="Button16">abc	</Button>
+
+	<!-- Testing double consecutive tabs -->
+	<Button Name="Button17">		abc</Button>
+	<Button Name="Button19">abc		</Button>
+
+	<!-- Testing double nonconsecutive tabs -->
+	<Button Name="Button20">		abc	</Button>
+	<Button Name="Button22">	abc		</Button>
+
+	<!-- Testing tabs with return combos -->
+	<Button Name="Button23">	
+abc</Button>
+	<Button Name="Button24">
+	abc</Button>
+	<Button Name="Button25">abc	
+</Button>
+	<Button Name="Button26">abc
+	</Button>
+	<Button Name="Button28">	
+abc	
+</Button>
+
+	<!-- Testing tabs with spaces combos -->
+	<Button Name="Button29">abc</Button>
+	<Button Name="Button30"> 	abc</Button>
+	<Button Name="Button31">  abc</Button>
+	<Button Name="Button32">  abc	 </Button>
+	<Button Name="Button33">  abc  	</Button>
+	<Button Name="Button34"> 	abc 	 </Button>
+	<Button Name="Button35">	abc  </Button>
+
+
+	<!-- Testing tabs with spaces and linefeeds combos -->
+	<Button Name="Button36"> 	
+abc 
+  	</Button>
+	<Button Name="Button37"> 	
+abc</Button>
+	<Button Name="Button38">  	
+	 abc</Button>
+	<Button Name="Button39">  abc 		
+	  
+</Button>
+	<Button Name="Button40"> 	
+	 abc 	
+	
+  </Button>
+	<Button Name="Button41">	
+	
+	 abc 
+  
+	
+ </Button>
+	<Button Name="Button42">
+abc  </Button>	
+
+
+
+	<!-- Testing tabs with spaces and linefeeds combos in Content property -->
+
+
+	<!-- Testing tabs with spaces and linefeeds combos -->
+	<Button Name="Button43"><Button.Content> 	
+abc 
+  	</Button.Content></Button>
+	<Button Name="Button44"> <Button.Content>  	
+abc</Button.Content> </Button>
+	<Button Name="Button45">   	<Button.Content>  	
+	 abc</Button.Content>	 </Button>
+	<Button Name="Button46"><Button.Content>  abc 		
+	  
+</Button.Content>	 
+</Button>
+	<Button Name="Button47">
+	
+	<Button.Content> 	
+	 abc 	
+	
+  </Button.Content></Button>
+	<Button Name="Button48">
+ <Button.Content>	
+	
+	 abc 
+  
+	
+ </Button.Content>
+
+</Button>
+	<Button Name="Button49">
+	<Button.Content>
+abc  </Button.Content> </Button>
+
+
+	<!-- TEST 01 END -->
+
+</cmn:CustomDockPanel>

@@ -1,0 +1,37 @@
+﻿
+<!-- Name: Simple style, referenced by style visual tree. -->
+
+
+
+<cmn:CustomStackPanel
+    Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.PropertyEngine.RefreshIntraResourceStyleReferenceTest.IntraResourceStyleReference.CV04ValidateAll"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+  <cmn:CustomStackPanel.Resources>
+
+    <Style x:Key="tpStyle" TargetType="{x:Type FlowDocument}">
+        <Setter Property="Foreground" Value="Red" />
+    </Style>
+
+    <Style x:Key="btnStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+        <Button>
+          <FlowDocumentScrollViewer Name="tpExperiment"><FlowDocument Style="{DynamicResource tpStyle}">
+            <Paragraph><TextBlock Name="txtExperiment">Experiment</TextBlock></Paragraph>
+          </FlowDocument></FlowDocumentScrollViewer>
+        </Button>
+        </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+  </cmn:CustomStackPanel.Resources>
+
+  <FlowDocumentScrollViewer><FlowDocument Style="{DynamicResource tpStyle}" Text="Control"><Paragraph /></FlowDocument></FlowDocumentScrollViewer>
+  <Button Style="{DynamicResource btnStyle}" />
+
+</cmn:CustomStackPanel>

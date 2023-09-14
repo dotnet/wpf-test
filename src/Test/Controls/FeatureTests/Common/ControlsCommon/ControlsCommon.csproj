@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ControlsCommon</AssemblyName>
+    <OutputType>Library</OutputType>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <NoWarn Condition="'$(NoWarn)'!=''">$(NoWarn),</NoWarn>
+    <NoWarn>$(NoWarn)1591,1570,1571,1572,1573</NoWarn>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+    <DefineConstants>$(DefineConstants);TESTBUILD_CLR40</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="Actions\*.cs" />
+    <Compile Include="Actions\KeyBoardActions\*.cs" />
+    <Compile Include="Actions\MouseActions\*.cs" />
+    <Compile Include="Actions\ToolBarActions\*.cs" />
+    <Compile Include="Actions\CommandActions\*.cs" />
+    <Compile Include="ATC\*.cs" />
+    <Compile Include="CustomControls\*.cs" />
+    <Compile Include="DataSources\*.cs" />
+    <Compile Include="DataBinding\*.cs" />
+    <Compile Include="DataGrid\*.cs" />
+    <Compile Include="Parameters\*.cs" />
+    <Compile Include="GridSplitterControl\*.cs" />
+    <Compile Include="Helpers\*.cs" />
+    <Compile Include="Selection\*.cs" />
+    <Compile Include="ButtonBaseControls\*.cs" />
+    <Compile Include="SelectorControls\*.cs" />
+    <Compile Include="MenuBaseControls\*.cs" />
+    <Compile Include="RangeBaseControls\*.cs" />
+    <Compile Include="TicTacToe\*.cs" />
+    <Compile Include="Validations\*.cs" />
+    <Compile Include="Resources\*.cs" />
+    <Compile Include="Validations\ToolBarValidations\*.cs" />
+    <Compile Include="VisualStateManager\*.cs" />
+    <Compile Include="VScan\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestApiCoreProject)" />
+    <ProjectReference Include="$(TestApiWpfProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+  
+</Project>

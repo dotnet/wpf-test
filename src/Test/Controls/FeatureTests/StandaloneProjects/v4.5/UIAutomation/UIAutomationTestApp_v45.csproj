@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>UIAutomationTestApp</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <PublishDir>$(WpfFeatureTestBasePublishPath)\Controls\RibbonTest\v4.5</PublishDir>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+    <Page Include="Window1.xaml" />
+    <Page Include="Ribbon\*.xaml" />
+    <Compile Include="App.xaml.cs" />
+    <Compile Include="Window1.xaml.cs" />
+    <Compile Include="Ribbon\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include="Images\*.png" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(TestApiCoreProject)" />
+    <ProjectReference Include="$(TestApiWpfProject)" />
+    <ProjectReference Include="$(ControlsCommonProject)"/>
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+</Project>

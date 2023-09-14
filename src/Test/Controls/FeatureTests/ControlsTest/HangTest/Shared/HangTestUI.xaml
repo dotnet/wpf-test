@@ -1,0 +1,386 @@
+﻿<Page x:Class="HangTest.HangTestUI"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HangTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="Page1">
+
+    <Grid Name="_mainGrid">
+        <Grid.Resources>
+            <local:EnumToIntConverter x:Key="EnumToIntConverter"/>
+            <local:HeightToVisibilityConverter x:Key="HeightToVisibilityConverter"/>
+            <local:MarginConverter x:Key="MarginConverter"/>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="200"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox Name="_errorList" Grid.Column="0" />
+
+        <StackPanel Grid.Column="1" Grid.IsSharedSizeScope="True">
+            <StackPanel.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="0,2,0,2"/>
+                </Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Margin" Value="0,2,0,2"/>
+                </Style>
+                <Style TargetType="GroupBox">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <GroupBox Header="Execution">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Running: "/>
+                        <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding IsRunning}"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Time limit (sec): "/>
+                        <TextBox Grid.Column="1" Text="{Binding TimeLimit}"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Run Random Test: "/>
+                        <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding RunRandomTest}"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Stress: "/>
+                        <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding IsStress}"/>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Progress">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Steps: "/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding LastStepCount}"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Position: "/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding LastPosition}"/>
+                    </Grid>
+                    <TextBox Width="270" IsReadOnly="{Binding IsRunning}" TextWrapping="Wrap" Text="{Binding Parameters}"/>
+                </StackPanel>
+
+            </GroupBox>
+
+            <TabControl>
+                <TabItem Header="TreeView">
+                    <StackPanel>
+
+                        <GroupBox Header="Attributes">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Scroll Unit: "/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding ScrollUnitValues}" SelectedValue="{Binding ScrollUnit}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Virtualization Mode: "/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding VirtualizationModeValues}" SelectedValue="{Binding VirtualizationMode}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Cache Length: "/>
+                                    <TextBox Grid.Column="1" Text="{Binding CacheLength}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Cache Unit: "/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding CacheUnitValues}" SelectedValue="{Binding CacheUnit}"/>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox Header="Layout">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Layout Rounding: "/>
+                                    <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding UseLayoutRounding}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Flow Direction: "/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding FlowDirectionValues}" SelectedValue="{Binding FlowDirection}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="TreeView Height: "/>
+                                    <TextBox Grid.Column="1" Width="150" Text="{Binding TreeViewHeight}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Viewport Margin: "/>
+                                    <TextBox Grid.Column="1" Width="150" Text="{Binding ViewportMargin}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Header Position: "/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding HeaderPositionValues}" SelectedValue="{Binding HeaderPosition}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Bind Item Height: "/>
+                                    <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding BindItemHeight}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Bind Item Margin: "/>
+                                    <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding BindItemMargin}"/>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="Data">
+                    <StackPanel>
+
+                        <GroupBox Header="Data">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Seed: "/>
+                                    <TextBox Grid.Column="1" Width="150" Text="{Binding DataSeed}"/>
+                                </Grid>
+                                <TabControl SelectedIndex="{Binding DataGenerationMethod, Converter={StaticResource EnumToIntConverter}}">
+                                    <TabItem Header="Non-uniform">
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Content="Size: "/>
+                                                <TextBox Grid.Column="1" Width="150" Text="{Binding SizeDistribution}"/>
+                                            </Grid>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Content="Partition: "/>
+                                                <TextBox Grid.Column="1" Width="150" Text="{Binding PartitionDistribution}"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </TabItem>
+                                    <TabItem Header="Fixed Height">
+                                        <DataGrid ItemsSource="{Binding DistributionsByLevel}"/>
+                                    </TabItem>
+                                    <TabItem Header="XML File">
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Content="Filename: "/>
+                                                <DockPanel Grid.Column="1">
+                                                    <Button DockPanel.Dock="Right" Width="Auto" Margin="3,0,0,0" Content="..." Click="Filename_Click"/>
+                                                    <TextBox Name="_tbFilename" MaxWidth="130" Text="{Binding Filename}"/>
+                                                </DockPanel>
+                                            </Grid>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Content="Filter Attribute: "/>
+                                                <TextBox Grid.Column="1" Width="150" Text="{Binding FilterAttribute}"/>
+                                            </Grid>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Content="Children Tag: "/>
+                                                <TextBox Grid.Column="1" Width="150" Text="{Binding ChildrenTag}"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </TabItem>
+                                </TabControl>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Height Distribution: "/>
+                                    <TextBox Grid.Column="1" Width="150" Text="{Binding HeightDistribution}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Margin Distribution: "/>
+                                    <TextBox Grid.Column="1" Width="150" Text="{Binding MarginDistribution}"/>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="Test">
+                    <StackPanel>
+
+                        <GroupBox Header="Verification">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Layout: "/>
+                                    <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding VerifyLayout}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Scroll position: "/>
+                                    <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding VerifyScrolling}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Progress: "/>
+                                    <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding VerifyProgress}"/>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox Header="Action">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Seed: "/>
+                                    <TextBox Grid.Column="1" Width="150" Text="{Binding ActionSeed}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Scrolling: "/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding ScrollActionValues}" SelectedValue="{Binding ScrollAction}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelGroup"/>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="ValueGroup"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Priority: "/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding ScrollPriorityValues}" SelectedValue="{Binding ScrollPriority}"/>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+
+        <FrameworkElement Visibility="Collapsed" Name="_resourceHolder">
+            <FrameworkElement.Resources>
+                <HierarchicalDataTemplate x:Key="DefaultHDT" DataType="{x:Type local:Data}" ItemsSource="{Binding Children}">
+                    <Label Content="{Binding Label}"/>
+                </HierarchicalDataTemplate>
+                <HierarchicalDataTemplate x:Key="HeightHDT" DataType="{x:Type local:Data}" ItemsSource="{Binding Children}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Height="{Binding Height}" Fill="Cyan"/>
+                        <Label Grid.Column="1" Content="{Binding Label}"
+                               VerticalAlignment="Top"
+                               Visibility="{Binding Height, Converter={StaticResource HeightToVisibilityConverter}}"/>
+                    </Grid>
+                </HierarchicalDataTemplate>
+                <Style x:Key="DefaultItemContainerStyle" TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True"/>
+                </Style>
+                <Style x:Key="MarginItemContainerStyle" TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True"/>
+                    <Setter Property="Margin" Value="{Binding Margin, Converter={StaticResource MarginConverter}}"/>
+                </Style>
+            </FrameworkElement.Resources>
+        </FrameworkElement>
+    </Grid>
+</Page>

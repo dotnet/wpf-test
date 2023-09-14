@@ -1,0 +1,20 @@
+<Window x:Class="Microsoft.Test.Controls.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lib="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon"
+    Title="Window1" Height="440" Width="500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="{ThemeDictionary ControlsCommon}" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Name="result" Content="Pass" />
+            <Button Name="runTest" Content="Test" Click="RunTest_Click"/>
+        </StackPanel>
+        <lib:RegressionTest10Control />
+    </StackPanel>
+</Window>

@@ -1,0 +1,54 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <!--Automatically converted using custom WPF settings-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <AssemblyName>UIAutoFTUtils</AssemblyName>
+    <OutputType>Library</OutputType>
+    <OutputSubFolder>FeatureTests\UIAutomation</OutputSubFolder>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <AllowPartialTrustedCalls>true</AllowPartialTrustedCalls>
+    <SignAssemblyAttribute>true</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="..\..\FeatureTests\code\Patterns\*.cs" />
+    <Compile Include="..\..\FeatureTests\code\TreeStructures\UiaTreeStructureTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\ControlTypes\UiaControlTypeTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\IsEnabled\UiaIsEnabledTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\ListBoxItem\UiaListBoxItemTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\Events\UiaFocusChangedEventTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\Events\UiaMenuOpenedCloseddEventTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\CustomAutomationPeer\UiaCustomAutomationPeerTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\ScrollBar\UiaScrollBarTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\BackNForwardBrowseButton\UiaBackNForwardBrowseButtonTest.cs" />
+    <Compile Include="..\..\FeatureTests\code\AutomationIdsAcrossThemes\UiaAutomationIdsAcrossThemes.cs" />
+    <Compile Include="..\..\FeatureTests\code\TextPatternTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(UIAutoLoaderProject)" >
+      <Name>UIAutoLoader</Name>
+      <Project>{1B89D4D8-54CB-43df-8AFC-50121574B271}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>

@@ -1,0 +1,25 @@
+﻿<cmn:CustomCanvas
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:id="clr-namespace:Avalon.Test.CoreUI.IdTest;assembly=ElementServicesTest"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.FrameworkElementWithIDUnderCustomINameScopeWithSameIdsInDifferentScopeVerify"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:MappingPIGen2="clr-namespace:Avalon.Test.CoreUI.IdTest;assembly=ElementServicesTest"
+>
+<Canvas Name="Canvas">
+
+    <id:CustomINameScope Name="CustomINameScope1">
+        <Button Name="button1" />
+        <id:CustomINameScope Name="CustomINameScope2">
+            <Button Name="button4" Content="content" />
+        </id:CustomINameScope>
+        <Button Name="button2" Content="Outside CustomINameScope3" />
+        <id:CustomINameScope Name="CustomINameScope3">
+            <Button Name="button5" Content="content1" />
+            <Button Name="button2" Content="Inside CustomINameScope3" />
+        </id:CustomINameScope>
+        <Button Name="button3" />
+    </id:CustomINameScope>
+</Canvas>
+</cmn:CustomCanvas>

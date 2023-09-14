@@ -1,0 +1,100 @@
+﻿<!--Converted from EventTrigger.cs series 4
+   One action starts Three Timeline in Style.Storyboards. 
+   Each timeline contains one setter
+-->
+
+<cmn:CustomDockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=ElementServicesTest"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:S="clr-namespace:System;assembly=Mscorlib"
+    Background="White"
+    xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=ElementServicesTest"
+    xmlns:MappingPIGen2="clr-namespace:System;assembly=Mscorlib"
+    xmlns:MappingPIGen3="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+
+    <DockPanel.Triggers>
+        <EventTrigger RoutedEvent='CheckBox.Checked'>
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                            <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:1" />
+                            <DoubleAnimation From="150" To="150" Storyboard.TargetProperty="Height" FillBehavior="Stop" Duration="0:0:2" />
+                            <ColorAnimation From="Red" To="Red" Storyboard.TargetProperty="Background" FillBehavior="Stop" Duration="0:0:3" />
+                        </ParallelTimeline>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </DockPanel.Triggers>
+    <!-- 4_1  EventTrigger(1) in Style.Triggers. 
+    The timeline contains three setters
+    Style in Resources-->
+    <Canvas>
+        <StackPanel>
+            <Button />
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent='CheckBox.Checked'>
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                                            <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:1" />
+                                            <DoubleAnimation From="150" To="150" Storyboard.TargetProperty="Height" FillBehavior="Stop" Duration="0:0:2" />
+                                            <ColorAnimation From="Red" To="Red" Storyboard.TargetProperty="Background" FillBehavior="Stop" Duration="0:0:3" />
+                                        </ParallelTimeline>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+        </StackPanel>
+    </Canvas>
+    <!-- 4_11  EventTrigger(1) in FE.Triggers
+Target its child element -->
+    <Canvas>
+        <StackPanel>
+            <Button />
+        </StackPanel>
+    </Canvas>
+    <!-- 4_21  EventTrigger(1) in ControlTemplate.Triggers
+ControlTemplate in Style, Style in Resources -->
+    <Canvas>
+        <Canvas.Resources>
+            <Style TargetType="{x:Type Control}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Control}">
+                            <Button x:Name="testBtn" />
+                            <ControlTemplate.Triggers>
+                                <EventTrigger RoutedEvent='CheckBox.Checked'>
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ParallelTimeline FillBehavior="Stop" Name="ChangeWidthInStoryboards" BeginTime="0:0:0">
+                                                    <DoubleAnimation From="300" To="300" Storyboard.TargetProperty="Width" Storyboard.TargetName="testBtn" FillBehavior="Stop" Duration="0:0:1" />
+                                                    <DoubleAnimation From="150" To="150" Storyboard.TargetProperty="Height" Storyboard.TargetName="testBtn" FillBehavior="Stop" Duration="0:0:2" />
+                                                    <ColorAnimation From="Red" To="Red" Storyboard.TargetProperty="Background" Storyboard.TargetName="testBtn" FillBehavior="Stop" Duration="0:0:3" />
+                                                </ParallelTimeline>
+                                            </Storyboard>
+                                        </BeginStoryboard>                
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Canvas.Resources>
+        <StackPanel>
+            <Control />
+        </StackPanel>
+    </Canvas>
+</cmn:CustomDockPanel>
+

@@ -1,0 +1,168 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"    
+    x:Name="GridPanel"
+    Height="600" Width="900">
+    <Grid.Resources>
+        <!--<ctrl:PersonDataSource x:Key="people"/>-->
+        <Style x:Key="dataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="Content" Value="DefaultHeaderContent"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Background="LightGreen" Foreground="Yellow"  Text="{Binding}"/>
+					</DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="WPF DataGrid" Grid.Row="0"/>               
+            
+    <DataGrid x:Name="DataGrid_Standard" 
+                Grid.Row="1"        
+                ColumnHeaderStyle="{StaticResource dataGridColumnHeaderStyle}">
+                <!--ItemsSource="{Binding Source={StaticResource people}, Path=People}"-->
+                
+        <DataGrid.Columns>                          
+            <!--verify default header style is applied to this column-->
+            <DataGridTextColumn x:Name="testDefaultHeaderStyle"  Width="130" Binding="{Binding Path=FirstName}">                                        
+            </DataGridTextColumn> 
+            
+            <!--verify precedence for column header content set at DataGrid level and by Header-->
+            <DataGridTextColumn x:Name="testHeader"  Width="130" Binding="{Binding Path=FirstName}" Header="right">                                        
+            </DataGridTextColumn> 
+            
+            <!--verify precedence for column header content set at DataGrid level and by HeaderStyle-->                
+            <DataGridTextColumn x:Name="testHeaderStyle"  Width="130" Binding="{Binding Path=FirstName}">                                        
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="LightGreen"/>
+                        <Setter Property="Content" Value="0"/>                        
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>  
+            
+            <!--verify precedence for column header template set at DataGrid level and by HeaderStyle-->                
+            <DataGridTextColumn x:Name="testContentTemplateFromHeaderStyle"  Width="130" Binding="{Binding Path=FirstName}">                                        
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="LightGreen"/>                        
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock Background="LightBlue" Foreground="Red"  Text="right"/>
+					            </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>  
+            
+            <!--verify precedence for column header content set at DataGrid level and by HeaderTemplate-->
+            <DataGridTextColumn x:Name="testHeaderTemplate"  Width="Auto" Binding="{Binding Path=FirstName}">                                        
+                <DataGridTextColumn.HeaderTemplate>
+                     <DataTemplate>
+                        <TextBlock Background="LightBlue" Foreground="Red" Text="right"/>
+				    </DataTemplate>
+                </DataGridTextColumn.HeaderTemplate>
+            </DataGridTextColumn> 
+            
+            <!--verify precedence for Header and HeaderStyle-->
+            <DataGridTextColumn x:Name="testHeaderAndHeaderStyle"  Width="Auto" Binding="{Binding Path=LastName}" Header="right">          
+                 <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="LightGreen"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>     
+            
+            <!--verify precedence for Header and HeaderTemplate-->
+            <DataGridTextColumn x:Name="testHeaderTemplateAndHeader"  Width="Auto" Binding="{Binding Path=FirstName}" Header="wrong">                                        
+                <DataGridTextColumn.HeaderTemplate>
+                     <DataTemplate>
+                        <TextBlock Background="LightBlue" Foreground="Red" Text="right"/>
+				    </DataTemplate>
+                </DataGridTextColumn.HeaderTemplate>
+            </DataGridTextColumn> 
+            
+            <!--verify precedence for HeaderTemplate and HeaderStyle-->
+            <DataGridTextColumn x:Name="testHeaderTemplateAndHeaderStyle"  Width="Auto" Binding="{Binding Path=FirstName}"> 
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="LightGreen"/>
+                        <Setter Property="Content" Value="0"/>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>                        
+                <DataGridTextColumn.HeaderTemplate>
+                     <DataTemplate>
+                        <TextBlock Background="LightBlue" Foreground="Red" Text="right"/>
+				    </DataTemplate>
+                </DataGridTextColumn.HeaderTemplate>
+            </DataGridTextColumn> 
+            
+            <!--verify precedence for HeaderTemplate and HeaderStyle\ContentTemplate-->
+            <DataGridTextColumn x:Name="testHeaderTemplateAndContentTemplate"  Width="Auto" Binding="{Binding Path=FirstName}"> 
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="LightGreen"/>
+                        <Setter Property="Content" Value="0"/>
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock Background="LightGreen" Foreground="Yellow"  Text="wrong"/>
+					            </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>                        
+                <DataGridTextColumn.HeaderTemplate>
+                     <DataTemplate>
+                        <TextBlock Background="LightBlue" Foreground="Red" Text="right"/>
+				    </DataTemplate>
+                </DataGridTextColumn.HeaderTemplate>
+            </DataGridTextColumn> 
+            
+            <!--verify precedence for Header, HeaderTemplate, and HeaderStyle-->
+            <DataGridTextColumn x:Name="testHeaderAndHeaderTemplateAndHeaderStyle"  Width="Auto" Binding="{Binding Path=FirstName}" Header="also wrong"> 
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="LightGreen"/>
+                        <Setter Property="Content" Value="0"/>
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock Background="LightGreen" Foreground="Yellow"  Text="wrong"/>
+					            </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>                        
+                <DataGridTextColumn.HeaderTemplate>
+                     <DataTemplate>
+                        <TextBlock Background="LightBlue" Foreground="Red" Text="right"/>
+				    </DataTemplate>
+                </DataGridTextColumn.HeaderTemplate>
+            </DataGridTextColumn>     
+            
+             <!--verify HeaderStringFormat-->
+            <DataGridTextColumn x:Name="testHeaderStringFormat"  Width="Auto" Binding="{Binding Path=FirstName}" Header="{Binding RelativeSource={RelativeSource Self}, Path=Width}" HeaderStringFormat="Test StringFormat: {0}">                                        
+                <!--override the default so format can be applied-->
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="LightGreen"/>                                                        
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+            </DataGridTextColumn>             
+        </DataGrid.Columns>
+    </DataGrid>       
+</Grid>

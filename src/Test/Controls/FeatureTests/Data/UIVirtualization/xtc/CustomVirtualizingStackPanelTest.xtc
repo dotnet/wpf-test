@@ -1,0 +1,48 @@
+﻿<XTC>
+  <TEST Name="CustomVirtualizingStackPanel Test" SubArea="UIVirtualization" Priority="2" Disabled="true" ExecutionGroup="Pri2">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1">
+        <CONTROL>
+          <DockPanel
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:t="clr-namespace:Avalon.Test.ComponentModel.CustomControls;assembly=ControlsTest"
+              xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="180" Name="CONTROLTOTEST">
+              <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <t:VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+              </ListBox.ItemsPanel>
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageUpAction" />
+          <Action Name="ControlPressPageUpAction" />
+          <Action Name="ControlPressPageUpAction" />
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateUIVirtualization" />
+          <Validation Name="ValidateMaxDeVirtualizedItems">
+            <Parameter Value="50" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

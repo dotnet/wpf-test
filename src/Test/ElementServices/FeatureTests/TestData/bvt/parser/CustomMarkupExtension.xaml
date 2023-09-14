@@ -1,0 +1,106 @@
+<!-- We are trying to verify that a custom MarkupExtension called
+CustomColorBlenderExtension works fine. 
+
+Other MarkupExtensions that can be used inside CustomColorBlender:
+                    As ctor argument        As named argument
+TypeExt                     N                       N
+NullExt                     Y                       Y
+StaticExt                   Y                       Y
+Binding                     N                       N
+StaticResourceExt           Y                       Y                    
+DynamicResourceExt          N                       N                       
+CustomColorBlenderExt       Y                       Y
+-->
+
+<cmn:CustomDockPanel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.CustomMarkupExtensionVerify" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Parser;assembly=CoreTestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>     
+    <cmn:CustomDockPanel.Resources>
+        <SolidColorBrush x:Key="Red Brush" Color="Red" />
+        <Color x:Key="Blue Color">Blue</Color>
+        <Color x:Key="Chocolate Color">Chocolate</Color>
+    </cmn:CustomDockPanel.Resources>
+
+    <Button Name="Button0" Background="{cc:CustomColorBlender Core = Red, Additive = Blue}" />    
+    <Button Name="Button1" Background="{cc:CustomColorBlender &apos;Red&apos;, Additive=&apos;Blue&apos;}" />
+    <Button Name="Button2" Background="{cc:CustomColorBlender &apos;Red&apos;, Blue}" />    
+    
+    <Button Name="Button3">
+        <Button.Background>
+            <cc:CustomColorBlender Core="Maroon" Additive="Navy">
+                <x:Static Member="Colors.Aqua" />
+                <StaticResource ResourceKey="Chocolate Color"/>
+                <Color>Gold</Color>
+            </cc:CustomColorBlender>
+        </Button.Background>
+    </Button> 
+
+    
+    <Button Name="Button4" Background="{cc:CustomColorBlender Core = {x:Static Brushes.Red}, Additive = {x:Static Colors.Blue}}" />    
+    <Button Name="Button5" Background="{cc:CustomColorBlender {x:Static Brushes.Red}, {x:Static Colors.Blue}}" />
+    
+    
+    <Button Name="Button6" Background="{cc:CustomColorBlender Core={StaticResource ResourceKey=&apos;Red Brush&apos;}, Additive={StaticResource ResourceKey=Blue Color}}" />
+    <Button Name="Button7" Background="{cc:CustomColorBlender {StaticResource ResourceKey=&apos;Red Brush&apos;}, {StaticResource ResourceKey=Blue Color}}" />
+
+    
+    
+    <!-- Additive is of type Color that, being a struct, cannot be null -->
+    <Button Name="Button8" Background="{cc:CustomColorBlender Core={x:Null}, Additive=Blue}" />     
+    <Button Name="Button9" Background="{cc:CustomColorBlender {x:Null}, Blue}" /> 
+    
+    
+    <!--
+        Maroon + Navy + Green 
+    -->    
+    <Button Name="Button10" Background="{cc:CustomColorBlender Core={cc:CustomColorBlender Core=Maroon, Additive=Navy}, Additive=Green}" />    
+    <Button Name="Button11" Background="{cc:CustomColorBlender {cc:CustomColorBlender Core=Maroon, Additive=Navy}, Green}" />
+
+
+    <Button Name="Button12">
+    	<cc:CustomColorBlender>		
+            <cc:CustomColorBlender.Core>
+		    	<cc:CustomColorBlender>
+				    <cc:CustomColorBlender.Core>
+					    Maroon
+				    </cc:CustomColorBlender.Core>
+				    <cc:CustomColorBlender.Additive>
+					    Navy
+				    </cc:CustomColorBlender.Additive>
+                    <Color>Aqua</Color>
+			    </cc:CustomColorBlender> 
+		    </cc:CustomColorBlender.Core>
+		    <cc:CustomColorBlender.Additive>
+                Chocolate
+            </cc:CustomColorBlender.Additive>
+            <cc:CustomColorBlender.Mixers>
+                <Color>Gold</Color>
+                <Color>Indigo</Color>
+            </cc:CustomColorBlender.Mixers>
+	</cc:CustomColorBlender> 
+    </Button> 
+
+    <Button Name="Button13">
+        <Button.Content>
+    		<cc:CustomColorBlender >
+		<cc:CustomColorBlender.Core>
+		    	<cc:CustomColorBlender >
+				<cc:CustomColorBlender.Core>
+					Maroon
+				</cc:CustomColorBlender.Core>
+				<cc:CustomColorBlender.Additive>
+					Navy
+				</cc:CustomColorBlender.Additive>
+			</cc:CustomColorBlender>
+		</cc:CustomColorBlender.Core> 
+		<cc:CustomColorBlender.Additive>
+			Green
+		</cc:CustomColorBlender.Additive>
+		</cc:CustomColorBlender> 
+        </Button.Content>
+    </Button>
+    
+</cmn:CustomDockPanel>

@@ -1,0 +1,220 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="LightSteelBlue">
+<Grid>
+
+    <Grid.Resources>
+        <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="PagePadding" Value="0" />
+        </Style>
+        <Style x:Key="{x:Type FlowDocumentScrollViewer}" TargetType="{x:Type FlowDocumentScrollViewer}">
+            <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+            <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+        </Style>
+    </Grid.Resources>
+
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition />
+  <ColumnDefinition />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="Auto" />
+  </Grid.RowDefinitions>
+
+    <FlowDocumentScrollViewer Grid.Column="0" Grid.Row="0">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with a floater on the left side. First paragraph with a floater on the left side.
+    </Paragraph>
+    <Paragraph Foreground="Green">
+      Second paragraph without clear property. Second paragraph without clear property. Second paragraph without clear property. Second paragraph without clear property.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="0">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with a floater on the left side. First paragraph with a floater on the left side.
+    </Paragraph>
+    <Paragraph Foreground="Green" ClearFloaters="Left">
+      Second paragraph with clear left property. Second paragraph with clear left property.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="0" Grid.Row="1">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with 2 floaters on the left and right side. First paragraph 
+    <Floater Background="DarkGreen" HorizontalAlignment="Right"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with 2 floaters on the left and right side.
+    </Paragraph>
+    <Paragraph Foreground="Green" ClearFloaters="Left">
+      Second paragraph with clear left property. Second paragraph with clear left property. Second paragraph with clear...
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="1">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with 2 floaters on the left and right side. First paragraph 
+    <Floater Background="DarkGreen" HorizontalAlignment="Right"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with 2 floaters on the left and right side.
+    </Paragraph>
+    <Paragraph Foreground="Green" ClearFloaters="Both">
+      Second paragraph with clear both property. Second paragraph...
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="0" Grid.Row="2">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with a floater on the left side. First paragraph with a floater on the left side.
+    </Paragraph>
+    <Paragraph ClearFloaters="Left"></Paragraph>
+    <Paragraph>
+    <Span Foreground="Purple">[inline with clear left]</Span>
+    First paragraph...
+    </Paragraph>
+    <Paragraph Foreground="Green">
+      Second paragraph. Second paragraph.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="2">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with 2 floaters on the left and right side. First paragraph 
+    <Floater Background="DarkGreen" HorizontalAlignment="Right"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with 2 floaters 
+    </Paragraph>
+    <Paragraph ClearFloaters="Both"></Paragraph>
+    <Paragraph>
+    <Span Foreground="Purple">[inline with clear both]</Span>
+    on the left and right side.
+    </Paragraph>
+    <Paragraph Foreground="Green">
+      Second paragraph. Second paragraph.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="0" Grid.Row="3">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="70" /></Paragraph></Floater>
+    with floaters on the left side. First paragraph with floaters on the left side.
+    <Floater Background="DarkGreen" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="30" /></Paragraph></Floater>
+    First paragraph with floaters on the left side.
+    </Paragraph>
+    <Paragraph ClearFloaters="Left"></Paragraph>
+    <Paragraph>
+    <Span Foreground="Purple">[inline with clear left]</Span>
+    First paragraph with floaters on the left side.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="3">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="70" /></Paragraph></Floater>
+    with floaters on the left side. First paragraph with floaters on the left side.
+    <Floater Background="DarkGreen" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="30" /></Paragraph></Floater>
+    First paragraph with floaters on the left side.
+    </Paragraph>
+    <Paragraph Foreground="Green">
+      Second paragraph without clear property. Second paragraph without clear property. Second paragraph without clear property. Second paragraph without clear property.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="0" Grid.Row="4">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="70" /></Paragraph></Floater>
+    with floaters on the left side. First paragraph with floaters on the left side.
+    <Floater Background="DarkGreen" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="30" /></Paragraph></Floater>
+    First paragraph with floaters on the left side.
+    </Paragraph>
+    <Paragraph Foreground="Green" ClearFloaters="Left">
+      Second paragraph with clear left.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="4">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="50" /></Paragraph></Floater>
+    with a floater on the left side. First paragraph with a floater on the left side.
+    <Span>[inline without clear]</Span>
+    First paragraph...
+    </Paragraph>
+    <Paragraph Foreground="Green">
+      Second paragraph. Second paragraph.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="0" Grid.Row="5">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Left"><Paragraph><Border Width="50" Height="30" /></Paragraph></Floater>
+    with floaters on the left side. First paragraph with floaters on the left side.
+    </Paragraph>
+    <Paragraph ClearFloaters="Left"></Paragraph>
+    <Paragraph>
+    <Floater Background="DarkGreen" HorizontalAlignment="Left"><Paragraph><Border Width="70" Height="60" /></Paragraph></Floater>
+    First paragraph with floaters on the left side.
+    </Paragraph>
+    <Paragraph Foreground="Green">
+      Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="5">
+        <FlowDocument Background="White">
+    <Paragraph>
+    First paragraph 
+    <Floater Background="DarkBlue" HorizontalAlignment="Right"><Paragraph><Border Width="50" Height="30" /></Paragraph></Floater>
+    with floaters on the right side. First paragraph with floaters on the right side.
+    </Paragraph>
+    <Paragraph ClearFloaters="Right"></Paragraph>
+    <Paragraph>
+    <Floater Background="DarkGreen" HorizontalAlignment="Right"><Paragraph><Border Width="70" Height="60" /></Paragraph></Floater>
+    First paragraph with floaters on the right side.
+    </Paragraph>
+    <Paragraph Foreground="Green">
+      Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph.
+    </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+</Grid>
+</Border>

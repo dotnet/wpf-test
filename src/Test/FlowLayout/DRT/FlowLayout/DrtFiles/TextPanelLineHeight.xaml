@@ -1,0 +1,284 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="LightSteelBlue">
+<Grid Width="1200">
+
+  <Grid.Resources>
+    <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="PagePadding" Value="0" />
+    </Style>
+    <Style x:Key="{x:Type FlowDocumentScrollViewer}" TargetType="{x:Type FlowDocumentScrollViewer}">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+    </Style>
+  </Grid.Resources>
+
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  </Grid.RowDefinitions>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="3">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="Auto">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ default ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ default ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+   <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="3">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="Auto" LineStackingStrategy="MaxHeight">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ default ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ MaxHeight (default) ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="5" Grid.Row="3">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="Auto" LineStackingStrategy="BlockLineHeight">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ default ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ BlockLineHeight ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="7">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="8pt">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ 8pt     ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ default ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="7">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="8pt" LineStackingStrategy="MaxHeight">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ 8pt     ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ MaxHeight (default) ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="5" Grid.Row="7">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="8pt" LineStackingStrategy="BlockLineHeight">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ 8pt     ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ BlockLineHeight ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="11">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="20pt">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ 20pt    ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ default ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="11">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="20pt" LineStackingStrategy="MaxHeight">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ 20pt    ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ MaxHeight (default) ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="5" Grid.Row="11">
+        <FlowDocument Background="White" FontSize="10pt" LineHeight="20pt" LineStackingStrategy="BlockLineHeight">
+            <Paragraph>
+            Line stacking test: Line height = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" FontSize="14pt" Foreground="Navy">[ 20pt    ]</Bold>
+            # Line stacking strategy = 
+            <Bold xml:space="preserve" FontFamily="./DrtFiles/Fonts/#Courier New" Foreground="Navy">[ BlockLineHeight ]</Bold>.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="13">
+        <FlowDocument Background="White" FontSize="16pt">
+            <Paragraph>
+            <Span FontSize="12pt" Background="Beige">
+              <Bold FontSize="10pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Baseline">Baseline   </Bold>
+              baseline
+            </Span>
+            alignment. <Span BaselineAlignment="Center"><Border Background="DarkBlue" Width="15" Height="50" /></Span>
+            <Span FontSize="18pt" Background="Beige">
+              <Bold FontSize="20pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Baseline">Baseline   </Bold>
+              baseline
+            </Span>
+            alignment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="13">
+        <FlowDocument Background="White" FontSize="16pt">
+            <Paragraph>
+            <Span FontSize="12pt" Background="Beige">
+              <Bold FontSize="10pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Center">Center     </Bold>
+              baseline
+            </Span>
+            alignment. <Span BaselineAlignment="Center"><Border Background="DarkBlue" Width="15" Height="50" /></Span>
+            <Span FontSize="18pt" Background="Beige">
+              <Bold FontSize="20pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Center">Center     </Bold>
+              baseline
+            </Span>
+            alignment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="15">
+        <FlowDocument Background="White" FontSize="16pt">
+            <Paragraph>
+            <Span FontSize="12pt" Background="Beige">
+              <Bold FontSize="10pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Top">Top        </Bold>
+              baseline
+            </Span>
+            alignment. <Span BaselineAlignment="Center"><Border Background="DarkBlue" Width="15" Height="50" /></Span>
+            <Span FontSize="18pt" Background="Beige">
+              <Bold FontSize="20pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Top">Top        </Bold>
+              baseline
+            </Span>
+            alignment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="15">
+        <FlowDocument Background="White" FontSize="16pt">
+            <Paragraph>
+            <Span FontSize="12pt" Background="Beige">
+              <Bold FontSize="10pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Bottom">Bottom     </Bold>
+              baseline
+            </Span>
+            alignment. <Span BaselineAlignment="Center"><Border Background="DarkBlue" Width="15" Height="50" /></Span>
+            <Span FontSize="18pt" Background="Beige">
+              <Bold FontSize="20pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Bottom">Bottom     </Bold>
+              baseline
+            </Span>
+            alignment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="17">
+        <FlowDocument Background="White" FontSize="16pt">
+            <Paragraph>
+            <Span FontSize="12pt" Background="Beige">
+              <Bold FontSize="10pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="TextTop">TextTop    </Bold>
+              baseline
+            </Span>
+            alignment. <Span BaselineAlignment="Center"><Border Background="DarkBlue" Width="15" Height="50" /></Span>
+            <Span FontSize="18pt" Background="Beige">
+              <Bold FontSize="20pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="TextTop">TextTop    </Bold>
+              baseline
+            </Span>
+            alignment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="17">
+        <FlowDocument Background="White" FontSize="16pt">
+            <Paragraph>
+            <Span FontSize="12pt" Background="Beige">
+              <Bold FontSize="10pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="TextBottom">TextBottom </Bold>
+              baseline
+            </Span>
+            alignment. <Span BaselineAlignment="Center"><Border Background="DarkBlue" Width="15" Height="50" /></Span>
+            <Span FontSize="18pt" Background="Beige">
+              <Bold FontSize="20pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="TextBottom">TextBottom </Bold>
+              baseline
+            </Span>
+            alignment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="19">
+        <FlowDocument Background="White" FontSize="16pt">
+            <Paragraph>
+            <Span FontSize="12pt" Background="Beige">
+              <Bold FontSize="10pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Subscript">Subscript  </Bold>
+              baseline
+            </Span>
+            alignment. <Span BaselineAlignment="Center"><Border Background="DarkBlue" Width="15" Height="50" /></Span>
+            <Span FontSize="18pt" Background="Beige">
+              <Bold FontSize="20pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Subscript">Subscript  </Bold>
+              baseline
+            </Span>
+            alignment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="19">
+        <FlowDocument Background="White" FontSize="16pt">
+            <Paragraph>
+            <Span FontSize="12pt" Background="Beige">
+              <Bold FontSize="10pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Superscript">Superscript</Bold>
+              baseline
+            </Span>
+            alignment. <Span BaselineAlignment="Center"><Border Background="DarkBlue" Width="15" Height="50" /></Span>
+            <Span FontSize="18pt" Background="Beige">
+              <Bold FontSize="20pt" FontFamily="./DrtFiles/Fonts/#Courier New" Background="LightBlue" BaselineAlignment="Superscript">Superscript</Bold>
+              baseline
+            </Span>
+            alignment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+</Grid>
+</Border>

@@ -1,0 +1,234 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+using System.Windows.Threading;
+using Avalon.Test.ComponentModel;
+using Avalon.Test.ComponentModel.Utilities;
+using Microsoft.Test;
+using Microsoft.Test.Controls.DataSources;
+using Microsoft.Test.Controls.Helpers;
+using Microsoft.Test.Discovery;
+using Microsoft.Test.Input;
+using Microsoft.Test.Logging;
+using Microsoft.Test.TestTypes;
+using Microsoft.Test.Verification;
+using Microsoft.Test.RenderingVerification;
+using Microsoft.Windows.Themes;
+
+namespace Microsoft.Test.Controls
+{
+    /// <summary>
+    /// Mostly ad-hoc testing in M3, the BVT is only for validating the theme based column headers style
+    /// 
+    /// TODO: visual verification of valid inputs in M4 or M5
+    /// </summary>
+    //[Test(0, "DataGrid", "DataGridThemedStylesBVT", SecurityLevel = TestCaseSecurityLevel.FullTrust)]
+    public class DataGridThemedStylesBVT : XamlTest
+    {
+        #region Private Fields
+
+        DataGrid dataGrid;
+
+        #endregion
+
+        #region Constructor
+
+        public DataGridThemedStylesBVT()
+            : base(@"DataGridThemedStylesBVT.xaml")
+        {
+            InitializeSteps += new TestStep(Setup);
+            CleanUpSteps += new TestStep(CleanUp);
+            //RunSteps += new TestStep(TestThemedStyles); // warning: this step will change the theme...
+            RunSteps += TestDataGridHeaderBorder;
+        }
+
+        #endregion
+
+        #region Test Steps
+
+        TestResult Setup()
+        {
+            Status("Setup");
+            WaitForPriority(DispatcherPriority.ApplicationIdle);
+
+            // locate the DataGrid being tested
+            dataGrid = (DataGrid)RootElement.FindName("DataGrid_Standard");
+            Assert.AssertTrue("Can not find the DataGrid in the xaml file!", dataGrid != null);
+
+            LogComment("Setup was successful");
+            return TestResult.Pass;
+        }
+
+        TestResult CleanUp()
+        {
+            dataGrid = null;
+            return TestResult.Pass;
+        }
+
+        TestResult TestThemedStyles()
+        {
+            Status("TestThemedStyle");
+
+            string defaultTheme = DisplayConfiguration.GetTheme();
+            string[] availableThemes = DisplayConfiguration.GetAvailableThemes();
+
+            for (int i = 0; i < availableThemes.Length; i++)
+            {
+                DisplayConfiguration.SetTheme(availableThemes[i]);
+                QueueHelper.WaitTillQueueItemsProcessed();
+
+                for (int j = 0; j < dataGrid.Columns.Count; j++)
+                {
+                    // verify all column headers' style
+                    DataGridColumnHeader columnHeader = DataGridHelper.GetColumnHeader(dataGrid, j);
+                    Assert.AssertTrue("The column header style should be the default",
+                        IsDefaultValue(columnHeader, DataGridColumnHeader.StyleProperty) == true);
+                }
+            }
+
+            LogComment("TestThemedStyle was successful");
+            return TestResult.Pass;
+        }
+
+        TestResult TestDataGridHeaderBorder()
+        {
+            Status("TestDataGridHeaderBorder");
+
+            string defaultTheme = DisplayConfiguration.GetTheme();
+            LogComment("the default theme: " + defaultTheme);
+
+            try
+            {
+                string[] availableThemes = DisplayConfiguration.GetAvailableThemes();
+
+                for (int i = 0; i < availableThemes.Length; i++)
+                {
+                    LogComment("Setting theme to: " + availableThemes[i]);
+                    DisplayConfiguration.SetTheme(availableThemes[i]);
+                    QueueHelper.WaitTillQueueItemsProcessed();
+
+                    TestDataGridHeaderBorderAPIs();                    
+                }
+            }
+            finally
+            {
+                LogComment("Setting theme back to: " + defaultTheme);
+                DisplayConfiguration.SetTheme(defaultTheme);
+                QueueHelper.WaitTillQueueItemsProcessed();
+            }
+
+            LogComment("TestDataGridHeaderBorder was successful");
+            return TestResult.Pass;
+        }
+
+        #endregion
+
+        #region Helper
+
+        private bool IsDefaultValue(DependencyObject d, DependencyProperty dp)
+        {
+            return DependencyPropertyHelper.GetValueSource(d, dp).BaseValueSource == BaseValueSource.Default;
+        }
+
+        private void TestDataGridHeaderBorderAPIs()
+        {
+            var dataGridHeaderBorder = new DataGridHeaderBorder();
+            DPPropertyLocal local;
+
+            Status("DataGridHeaderBorder_IsHovered");
+
+            local.expectGet = true;
+            local.expectSet = true;
+            local.hasCallBack = false;
+
+            DataGridVerificationHelper.TestDP<DataGridHeaderBorder, bool>("IsHovered", local, "OnIsHoveredPropertyChanged");
+            DataGridVerificationHelper.TestSetterGetterDP(dataGridHeaderBorder, "IsHovered", true);
+
+            LogComment("DataGridHeaderBorder_IsHovered was successful");
+
+            Status("DataGridHeaderBorder_IsPressed");
+
+            local.expectGet = true;
+            local.expectSet = true;
+            local.hasCallBack = false;
+
+            DataGridVerificationHelper.TestDP<DataGridHeaderBorder, bool>("IsPressed", local, "OnIsPressedPropertyChanged");
+            DataGridVerificationHelper.TestSetterGetterDP(dataGridHeaderBorder, "IsPressed", true);
+
+            LogComment("DataGridHeaderBorder_IsPressed was successful");
+
+            Status("DataGridHeaderBorder_IsClickable");
+
+            local.expectGet = true;
+            local.expectSet = true;
+            local.hasCallBack = false;
+            // default: false;
+            DataGridVerificationHelper.TestDP<DataGridHeaderBorder, bool>("IsClickable", local, "OnIsClickablePropertyChanged");
+            DataGridVerificationHelper.TestSetterGetterDP(dataGridHeaderBorder, "IsClickable", true);
+
+            LogComment("DataGridHeaderBorder_IsClickable was successful");
+
+            Status("DataGridHeaderBorder_SortDirection");
+
+            local.expectGet = true;
+            local.expectSet = true;
+            local.hasCallBack = false;
+            // default: null;
+            DataGridVerificationHelper.TestDP<DataGridHeaderBorder, Nullable<ListSortDirection>>("SortDirection", local, "OnSortDirectionPropertyChanged");
+            DataGridVerificationHelper.TestSetterGetterDP(dataGridHeaderBorder, "SortDirection", ListSortDirection.Descending);
+
+            LogComment("DataGridHeaderBorder_SortDirection was successful");
+
+            Status("DataGridHeaderBorder_IsSelected");
+
+            local.expectGet = true;
+            local.expectSet = true;
+            local.hasCallBack = false;
+            // default: null;
+            DataGridVerificationHelper.TestDP<DataGridHeaderBorder, bool>("IsSelected", local, "OnIsSelectedPropertyChanged");
+            DataGridVerificationHelper.TestSetterGetterDP(dataGridHeaderBorder, "IsSelected", true);
+
+            LogComment("DataGridHeaderBorder_IsSelected was successful");
+
+            Status("DataGridHeaderBorder_Orientation");
+
+            local.expectGet = true;
+            local.expectSet = true;
+            local.hasCallBack = false;
+            // default: null;
+            DataGridVerificationHelper.TestDP<DataGridHeaderBorder, Orientation>("Orientation", local, "OnOrientationPropertyChanged");
+            DataGridVerificationHelper.TestSetterGetterDP(dataGridHeaderBorder, "Orientation", Orientation.Horizontal);
+
+            LogComment("DataGridHeaderBorder_Orientation was successful");
+
+            Status("DataGridHeaderBorder_SeparatorBrush");
+
+            local.expectGet = true;
+            local.expectSet = true;
+            local.hasCallBack = false;
+            // default: null;
+            DataGridVerificationHelper.TestDP<DataGridHeaderBorder, Brush>("SeparatorBrush", local, "OnSeparatorBrushPropertyChanged");
+            DataGridVerificationHelper.TestSetterGetterDP(dataGridHeaderBorder, "SeparatorBrush", Brushes.Aqua);
+
+            LogComment("DataGridHeaderBorder_SeparatorBrush was successful");
+
+            Status("DataGridHeaderBorder_SeparatorVisibility");
+
+            local.expectGet = true;
+            local.expectSet = true;
+            local.hasCallBack = false;
+            // default: null;
+            DataGridVerificationHelper.TestDP<DataGridHeaderBorder, Visibility>("SeparatorVisibility", local, "OnSeparatorVisibilityPropertyChanged");
+            DataGridVerificationHelper.TestSetterGetterDP(dataGridHeaderBorder, "SeparatorVisibility", Visibility.Hidden);
+
+            LogComment("DataGridHeaderBorder_SeparatorVisibility was successful");
+        }
+
+        #endregion
+    }
+}

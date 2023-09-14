@@ -1,0 +1,113 @@
+<Page x:Class="Microsoft.Test.Controls.UIAEvents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="UIA Events Test">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- AsyncContentLoaded -->
+        <StackPanel Grid.Column="0" Margin="5">
+            <Button x:Name="_asyncContentButton" HorizontalAlignment="Center" 
+                Content="Raise AsyncContentLoaded event" Click="_asyncContentButton_Click"/>
+            <DockPanel HorizontalAlignment="Center" Margin="5">
+                <ComboBox x:Name="_asyncContentCombo" Margin="5" Width="100"/>
+                <Button x:Name="_asyncContentComboCycle" Margin="5" Content="+" Click="_asyncContentComboCycle_Click"/>
+            </DockPanel>
+        </StackPanel>
+        
+         
+        <!-- Notification -->
+        <StackPanel Grid.Column="1" Margin="5">
+            <Button x:Name="_notificationButton" HorizontalAlignment="Center"
+                Content="Raise Notification event" Click="_notificationButton_Click"/>
+            <DockPanel HorizontalAlignment="Center" Margin="5">
+                <ComboBox x:Name="_notificationKindCombo" Margin="5" Width="100"/>
+                <Button x:Name="_notificationKindComboCycle" Margin="5" Content="+" Click="_notificationKindComboCycle_Click"/>
+            </DockPanel>
+            <DockPanel HorizontalAlignment="Center" Margin="5">
+                <ComboBox x:Name="_notificationProcessingCombo" Margin="5" Width="100"/>
+                <Button x:Name="_notificationProcessingComboCycle" Margin="5" Content="+" Click="_notificationProcessingComboCycle_Click"/>
+            </DockPanel>
+            <TextBox x:Name="_notificationString" Margin="5" Width="150" Text="You have been notified"/>
+            <TextBox x:Name="_notificationActivity" Margin="5" Width="150" Text="UniqueActivityID"/>
+        </StackPanel>
+
+
+        <!-- ActiveTextPositionChanged -->
+        <StackPanel Grid.Column="2" Margin="5">
+            <Button x:Name="_atpcButton" HorizontalAlignment="Center"
+                Content="Raise ATPC event" Click="_atpcButton_Click"/>
+            <DockPanel HorizontalAlignment="Center" Margin="5">
+                <ComboBox x:Name="_atpcTargetCombo" Margin="5" Width="100" DisplayMemberPath="Name">
+                    <ComboBox.ItemContainerStyle>
+                        <Style><Setter Property="AutomationProperties.AutomationId" Value="{Binding Name}"/></Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+                <Button x:Name="_atpcTargetComboCycle" Margin="5" Content="+" Click="_atpcTargetComboCycle_Click"/>
+            </DockPanel>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="_startEdge" Grid.Column="0" HorizontalAlignment="Center" IsThreeState="true" Content="Start at edge"/>
+                <CheckBox x:Name="_endEdge" Grid.Column="1" HorizontalAlignment="Center" IsThreeState="true" Content="End at edge"/>
+            </Grid>
+
+            <TextBox x:Name="_textBox" HorizontalAlignment="Stretch" Margin="5" TextWrapping="Wrap" Height="75"
+                 VerticalScrollBarVisibility="Auto">
+                There is a lot of text here.
+                It's not very interesting text, but there's enough of it to make moving the position worthwhile.
+                The text continues on and on, not saying very much but occupying a lot of space on the screen.
+                Pretty boring, right?
+                You probably got tired of reading this a long time ago.
+                Nevertheless, there's more.
+                To continue reading, you'll have to use the scroll bar. 
+                It's not adding anything to your understanding of the world, and yet you're forced to read it.
+                Sorry to waste your time, but this is just a sample app.
+                It was never intended to convey any useful information.
+            </TextBox>
+
+            <RichTextBox x:Name="_richTextBox" HorizontalAlignment="Stretch" Margin="5" Height="75"
+                 VerticalScrollBarVisibility="Auto">
+                <FlowDocument x:Name="_rtbFlowDoc">
+                    <Paragraph>
+                        There is a lot of text here.
+                        It's not very interesting text, but there's enough of it to make moving the position worthwhile.
+                        The text continues on and on, not saying very much but occupying a lot of space on the screen.
+                        Pretty boring, right?
+                        You probably got tired of reading this a long time ago.
+                        Nevertheless, there's more.
+                        To continue reading, you'll have to use the scroll bar. 
+                        It's not adding anything to your understanding of the world, and yet you're forced to read it.
+                        Sorry to waste your time, but this is just a sample app.
+                        It was never intended to convey any useful information.
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+
+            <FlowDocumentScrollViewer x:Name="_fdsv" Margin="5" Height="100">
+                <FlowDocument x:Name="_flowDoc">
+                    <Paragraph>
+                        There is a lot of text here.
+                        It's not very interesting text, but there's enough of it to make moving the position worthwhile.
+                        The text continues on and on, not saying very much but occupying a lot of space on the screen.
+                        Pretty boring, right?
+                        You probably got tired of reading this a long time ago.
+                        Nevertheless, there's more.
+                        To continue reading, you'll have to use the scroll bar. 
+                        It's not adding anything to your understanding of the world, and yet you're forced to read it.
+                        Sorry to waste your time, but this is just a sample app.
+                        It was never intended to convey any useful information.
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+        </StackPanel>
+
+
+    </Grid>
+</Page>

@@ -1,0 +1,47 @@
+﻿<XTC>
+  <TEST Name="SubMenuClosedEventTest" Priority="2" SubArea="Menu" ExecutionGroup="Pri2" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestEventUnitTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1">
+        <Event Name="SubmenuClosed">
+        </Event>
+        <CONTROL>
+          <Menu
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              Width="30" Margin="10, 10, 5, 5" HorizontalAlignment="Left" Background="White">
+            <MenuItem Header="_File" Name="CONTROLTOTEST">
+              <MenuItem Header="_New" />
+              <MenuItem Header="_Open" />
+              <MenuItem Header="_Close" IsCheckable="true"/>
+              <Separator/>
+              <MenuItem Header="Menu with Submenu">
+                <MenuItem Header="_submenuitem1" IsCheckable="true"/>
+                <MenuItem Header="_submenuitem2" IsCheckable="true">
+                  <MenuItem Header="_submenuitem2.1" IsCheckable="true"/>
+                </MenuItem>
+              </MenuItem>
+              <Separator/>
+              <MenuItem Header="_MenuItem">
+              </MenuItem>
+            </MenuItem>
+          </Menu>
+        </CONTROL>
+        <Actions>
+          <Action Name="ControlMouseLeftClickAction">
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+          <Action Name="ControlMouseLeftClickAction">
+          </Action>
+          <Action Name="WaitAction" >
+            <Period Value="0:0:1" />
+          </Action>
+        </Actions>
+        <Validations>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

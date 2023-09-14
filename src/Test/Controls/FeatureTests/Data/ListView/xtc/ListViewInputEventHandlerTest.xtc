@@ -1,0 +1,38 @@
+<XTC>
+  <TEST Name="ListViewInputEventHandlerTest" Priority="0" SubArea="ListView" Timeout="600">
+    <DATA>
+      <INIT Class="SelectorEventHandlerTest"/>
+      <PICT Name="ListBoxInputTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="SelectorControlsBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingSmallDataBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingLargeDataBVT.xaml"/>
+      </XAMLS>
+      <!-- Test down key on listview from 0 to 1 and validate 'SelectedHandler' event is fired -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="0" AttachEventIndex="1" EventName="SelectedHandler" ShouldEventFire="true" Key="Down" />
+      <!-- Test down key on listview from 0 to 0 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="0" AttachEventIndex="0" EventName="SelectedHandler" ShouldEventFire="false" Key="Down" />
+      <!-- Test Up key on listview from 3 to 2 and validate 'SelectedHandler' event is fired -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="3" AttachEventIndex="2" EventName="SelectedHandler" ShouldEventFire="true" Key="Up" />
+      <!-- Test Up key on listview from 3 to 3 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="3" AttachEventIndex="3" EventName="SelectedHandler" ShouldEventFire="false" Key="Up" />
+      <!-- Test down key on listview from 0 to 0 and validate 'UnselectedHandler' event is fired -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="0" AttachEventIndex="0" EventName="UnselectedHandler" ShouldEventFire="true" Key="Down" />
+      <!-- Test down key on listview from 0 to 1 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="0" AttachEventIndex="1" EventName="UnselectedHandler" ShouldEventFire="false" Key="Down" />
+      <!-- Test Up key on listview from 3 to 3 and validate 'UnselectedHandler' event is fired -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="3" AttachEventIndex="3" EventName="UnselectedHandler" ShouldEventFire="true" Key="Up" />
+      <!-- Test Up key on listview from 3 to 2 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="3" AttachEventIndex="2" EventName="UnselectedHandler" ShouldEventFire="false" Key="Up" />
+      
+      <!-- Test mouse click on listview from 0 to 3 with attachEventIndex is 3 and validate 'SelectedHandler' event is fired -->
+      <VARIATION ControlName="listview" InputType="Mouse" FromIndex="0" ToIndex="3" AttachEventIndex="3" EventName="SelectedHandler" ShouldEventFire="true" />
+      <!-- Test mouse click on listview from 0 to 0 with attachEventIndex is 0 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Mouse" FromIndex="0" ToIndex="0" AttachEventIndex="0" EventName="SelectedHandler" ShouldEventFire="false" />
+      <!-- Test mouse click on listview from 0 to 3 with attachEventIndex is 0 and validate 'UnselectedHandler' event is fired -->
+      <VARIATION ControlName="listview" InputType="Mouse" FromIndex="0" ToIndex="3" AttachEventIndex="0" EventName="UnselectedHandler" ShouldEventFire="true" />
+      <!-- Test mouse click on listview from 3 to 0 with attachEventIndex is 0 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Mouse" FromIndex="3" ToIndex="0" AttachEventIndex="0" EventName="UnselectedHandler" ShouldEventFire="false" />
+    </DATA>
+  </TEST>
+</XTC>

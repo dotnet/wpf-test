@@ -1,0 +1,173 @@
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="LightSteelBlue">
+<Grid Width="800">
+
+  <Grid.Resources>
+    <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="PagePadding" Value="0" />
+    </Style>
+    <Style x:Key="{x:Type FlowDocumentScrollViewer}" TargetType="{x:Type FlowDocumentScrollViewer}">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+    </Style>
+  </Grid.Resources>
+
+  <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  <ColumnDefinition />
+  <ColumnDefinition Width="4" />
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  <RowDefinition Height="Auto" />
+  <RowDefinition Height="4" />
+  </Grid.RowDefinitions>
+
+    <FlowDocumentScrollViewer Width="320" Grid.Column="1" Grid.Row="1">
+        <FlowDocument Background="White">
+            <Paragraph TextIndent="50px">
+            Text indent test: Text Indent = 
+            <TextBlock FontWeight="Bold" Foreground="Navy">[ positive 50px ]</TextBlock>
+            . Text indent test. 
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="1">
+        <FlowDocument Background="White">
+            <Paragraph TextIndent="-50px">
+            Text indent test: Text Indent = 
+            <TextBlock FontWeight="Bold" Foreground="Navy">[ negative -50px ]</TextBlock>
+            . Text indent test. Text indent test. Text indent test.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="3">
+        <FlowDocument Background="White">
+            <Paragraph Background="LightGreen"></Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="3" Grid.Row="3">
+        <FlowDocument Background="White">
+            <Paragraph Background="LightGreen">Nested block ContentElement behaves as a paragraph. Nested block ContentElement behaves as a paragraph.</Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+    <FlowDocumentScrollViewer Grid.Column="1" Grid.Row="5">
+        <FlowDocument Background="White">
+            <Paragraph>Paragraph with 
+                <Figure><Paragraph><Border Background="RoyalBlue" Width="50" Height="100" /></Paragraph></Figure>
+                figure. Paragraph with figure.
+            </Paragraph>
+            <Section>
+              <Paragraph TextIndent="30">foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar </Paragraph>
+              <Paragraph Background="LightGreen">Nested block paragraph.</Paragraph>
+              <Paragraph>foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar foo bar </Paragraph>
+            </Section>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+
+  <!-- Regression_Bug13: Simple case -->
+  <Border Background="White" Grid.Column="3" Grid.Row="5">
+    <Border Background="LightGreen" Width="50">
+        <FlowDocumentScrollViewer HorizontalAlignment="Center">
+            <FlowDocument TextAlignment="Center">
+                <Paragraph>BUTTONBUTTON</Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+  </Border>
+
+  <!-- Regression_Bug13: Complex case 1 -->
+  <Border Background="White" Grid.Column="1" Grid.Row="7">
+    <Border Background="LightGreen" Width="50">
+        <FlowDocumentScrollViewer HorizontalAlignment="Center">
+            <FlowDocument TextAlignment="Center">
+              <Paragraph>
+              BUTTONBUTTON
+              <Border Background="Red" Width="15" Height="15" />
+              BUTTONBUTTON
+              </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Border>
+  </Border>
+
+  <!-- Regression_Bug13: Complex case 2 -->
+  <Border Background="White" Grid.Column="3" Grid.Row="7">
+    <ScrollViewer Height="70" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+    <DockPanel Background="Beige">
+        <FlowDocumentScrollViewer DockPanel.Dock="Top" HorizontalAlignment="Right">
+            <FlowDocument TextAlignment="Right">
+                <Paragraph>short text</Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer DockPanel.Dock="Top" HorizontalAlignment="Right">
+            <FlowDocument TextAlignment="Right">
+                <Paragraph>
+                BUTTON
+                <Border Background="Red" Width="15" Height="15" />
+                BUTTON
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer DockPanel.Dock="Top" HorizontalAlignment="Right">
+            <FlowDocument TextAlignment="Right">
+                <Paragraph>
+                longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </DockPanel>
+    </ScrollViewer>
+  </Border>
+
+  <!-- Regression_Bug13: Complex case 3 -->
+  <Border Background="White" Grid.Column="1" Grid.Row="9">
+    <ScrollViewer Height="80" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+    <DockPanel Background="Beige" Width="400">
+        <FlowDocumentScrollViewer DockPanel.Dock="Top">
+            <FlowDocument Background="LightGreen">
+                <Paragraph TextIndent="-30">
+                long long long long long long long long long long long long long long long long long long
+                longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer DockPanel.Dock="Left">
+            <FlowDocument Background="Pink">
+                <Paragraph>short text</Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer DockPanel.Dock="Left" HorizontalAlignment="Center">
+            <FlowDocument Background="Beige" TextAlignment="Center">
+                <Paragraph>short text</Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        <FlowDocumentScrollViewer DockPanel.Dock="Left" HorizontalAlignment="Right">
+            <FlowDocument Background="LightBlue" TextAlignment="Right">
+                <Paragraph>
+                BUTTON
+                <Border Background="Red" Width="15" Height="15" />
+                BUTTON
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </DockPanel>
+    </ScrollViewer>
+  </Border>
+
+</Grid>
+</Border>

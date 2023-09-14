@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <PropertyGroup>
+    <AssemblyName>FloatingWindowTest</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <OutputSubFolder>FeatureTests\Controls</OutputSubFolder>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+    <Page Include="Window1.xaml" />
+
+    <Compile Include="App.xaml.cs" />
+    <Compile Include="Window1.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TestApiCoreProject)" />
+    <ProjectReference Include="$(TestApiWpfProject)" />
+    <ProjectReference Include="$(ControlsCommonProject)">
+      <Name>ControlsCommon</Name>
+      <Project>{72984D5E-E86F-4d35-BCF9-4E81209D6278}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(TestRuntimeProject)">
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Luna" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+  </ItemGroup>
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />  
+</Project>

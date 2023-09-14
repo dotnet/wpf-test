@@ -1,0 +1,33 @@
+﻿<cmn:CustomPage
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.StoryboardDatabindingVerify"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    >
+      <!-- Button for databinding to use a storyboard -->
+      <Button Name="button">
+         <Button.Triggers>
+            <EventTrigger RoutedEvent="Mouse.PreviewMouseDown">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Name="storyboardToBind">
+                        <Storyboard Name="storyboard">
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                From="200"
+                                To="200"
+                                BeginTime="0:0:0"
+                                Duration="0:0:0"
+                                              />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+           <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Storyboard="{Binding ElementName=storyboardToBind,Path=Storyboard}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Button.Triggers>
+      </Button>
+</cmn:CustomPage>

@@ -1,0 +1,250 @@
+﻿<Window x:Class="Microsoft.Test.Input.MultiTouch.Tests.TestManipulations"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Multi-Touch Input" x:Name="TestWindow"
+        WindowStartupLocation="CenterScreen"
+        Width="1000" Height="700" WindowState="Maximized"
+        StylusSystemGesture="OnStylusSystemGesture"
+        StylusDown="OnStylusDownWin"
+        StylusUp="OnStylusUpWin"
+        MouseDown="OnMouseDownWin"
+        MouseMove="OnMouseMoveWin"
+        MouseUp="OnMouseUpWin" 
+        IsManipulationEnabled="True"
+        ManipulationStarting="OnManipulationStartingWin"
+        ManipulationBoundaryFeedback="OnManipulationBoundaryFeedbackWin">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="OnOpenCommand" />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ItemsControl x:Name="WatchList" IsHitTestVisible="False" />
+        
+        <StackPanel Grid.Row="1">
+            <Button Content="Complete" x:Name="CompleteButton" Click="OnCompleteClicked" />
+            <Button Content="Reset" Click="OnReset" Grid.Row="1"/>
+
+            <ContentControl x:Name="CCNoManiButton">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate>
+                        <Button Content="No Manipulations" Margin="15" Command="ApplicationCommands.Open" Click="OnClick"
+                                TouchDown="OnButtonTouchDown" TouchUp="OnButtonTouchUp" />
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
+            </ContentControl>
+
+            <ContentControl x:Name="CCManiButton">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate>
+                        <Button Content="Manipulations" Margin="15" Command="ApplicationCommands.Open"
+                                Click="OnClick" IsManipulationEnabled="True" ManipulationStarting="OnDisableManipulations" 
+                                TouchDown="OnButtonTouchDown" TouchUp="OnButtonTouchUp" />
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
+            </ContentControl>
+        </StackPanel>
+
+        <Canvas Grid.Column="1" Grid.RowSpan="2" 
+                x:Name="RectCanvas" Background="AliceBlue" 
+                IsManipulationEnabled="True"
+                ManipulationStarting="OnManipulationStartingCanvas"
+                ManipulationStarted="OnManipulationStartedCanvas"
+                ManipulationDelta="OnManipulationDeltaCanvas"
+                ManipulationInertiaStarting="OnManipulationInertiaStartingCanvas"
+                ManipulationCompleted="OnManipulationCompletedCanvas">
+
+            <Border x:Name="ManipulationRect"    
+                    IsManipulationEnabled="True"     
+                    ManipulationStarting="OnManipulationStarting"
+                    ManipulationStarted="OnManipulationStarted"                    
+                    ManipulationDelta="OnManipulationDelta"   
+                    ManipulationInertiaStarting="OnManipulationInertiaStarting"
+                    Background="Red" 
+                    BorderBrush="Black" 
+                    BorderThickness="2" 
+                    CornerRadius="3" 
+                    Canvas.Top ="255"
+                    Canvas.Left ="258"
+                    Width="150"
+                    Height="150">
+                <Grid>
+                    <Polygon Fill ="Black"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Width="8"
+                       Height="8">
+                        <Polygon.Points>
+                            <Point X="0" Y="0" />
+                            <Point X="8" Y="3" />
+                            <Point X="3" Y="8" />
+                        </Polygon.Points>
+                    </Polygon>
+                    <Ellipse x:Name="CenterPoint"
+                      Fill="DeepSkyBlue"
+                      Stroke="Black"
+                      StrokeThickness="1"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="-4,-4,0,0"
+                      Width="5"
+                      Height="5" />
+                </Grid>
+            </Border>
+
+            <Border x:Name="TranslateRect" 
+                    IsManipulationEnabled="True"
+                    ManipulationStarting="OnManipulationStarting2"
+                    Background="Green"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Canvas.Top="200"
+                    Width="50"
+                    Height="50"/>
+
+            <Border x:Name="RotateRect" 
+                    IsManipulationEnabled="True"
+                    ManipulationStarting="OnManipulationStarting2"
+                    Background="Aquamarine"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Canvas.Top="50"
+                    Width="50"
+                    Height="50">
+                <Polygon Fill ="Black"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Width="8"
+                   Height="8">
+                    <Polygon.Points>
+                        <Point X="0" Y="0" />
+                        <Point X="8" Y="3" />
+                        <Point X="3" Y="8" />
+                    </Polygon.Points>
+                </Polygon>
+            </Border>
+
+            <Border x:Name="VioletRect" 
+                    IsManipulationEnabled="True"
+                    ManipulationStarting="OnManipulationStarting2"
+                    ManipulationStarted="OnManipulationStarted"
+                    ManipulationDelta="OnManipulationDelta"       
+                    Background="DarkViolet"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Canvas.Top="17"
+                    Canvas.Left ="424"
+                    Width="120"
+                    Height="120">
+                <Polygon Fill ="Black"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Width="8"
+                   Height="8">
+                    <Polygon.Points>
+                        <Point X="0" Y="0" />
+                        <Point X="8" Y="3" />
+                        <Point X="3" Y="8" />
+                    </Polygon.Points>
+                </Polygon>
+            </Border>
+
+            <Border x:Name="OrangeRect" 
+                    IsManipulationEnabled="True"
+                    ManipulationStarting="OnManipulationStarting2"
+                    ManipulationStarted="OnManipulationStarted"
+                    ManipulationDelta="OnManipulationDelta"       
+                    Background="Orange"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Canvas.Top="50"
+                    Canvas.Left ="597"
+                    Width="100"
+                    Height="100">
+                <Polygon Fill ="Black"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Width="8"
+                   Height="8">
+                    <Polygon.Points>
+                        <Point X="0" Y="0" />
+                        <Point X="8" Y="3" />
+                        <Point X="3" Y="8" />
+                    </Polygon.Points>
+                </Polygon>
+            </Border>
+
+            <Border x:Name="BlueRect" 
+                    IsManipulationEnabled="True"
+                    ManipulationStarting="OnManipulationStarting2"
+                    ManipulationStarted="OnManipulationStarted"
+                    ManipulationDelta="OnManipulationDelta"       
+                    Background="RoyalBlue"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Canvas.Top="175"
+                    Canvas.Left ="540"
+                    Width="100"
+                    Height="100">
+                <Polygon Fill ="Black"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Width="8"
+                   Height="8">
+                    <Polygon.Points>
+                        <Point X="0" Y="0" />
+                        <Point X="8" Y="3" />
+                        <Point X="3" Y="8" />
+                    </Polygon.Points>
+                </Polygon>
+            </Border>
+
+            <Border x:Name="SalmonRect" 
+                    IsManipulationEnabled="True"
+                    ManipulationStarting="OnManipulationStarting2"
+                    ManipulationStarted="OnManipulationStarted"
+                    ManipulationDelta="OnManipulationDelta"       
+                    Background="LightSalmon"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Canvas.Top="313"
+                    Canvas.Left ="26"
+                    Width="100"
+                    Height="100">
+                <Polygon Fill ="Black"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Width="8"
+                   Height="8">
+                    <Polygon.Points>
+                        <Point X="0" Y="0" />
+                        <Point X="8" Y="3" />
+                        <Point X="3" Y="8" />
+                    </Polygon.Points>
+                </Polygon>
+            </Border>
+            
+            <Button x:Name="LuckyButton" Content="Lucky Me" IsManipulationEnabled="True"
+                    Click="LuckyButton_Click" BorderThickness="10"
+                    BorderBrush="Olive"
+                    Background="Khaki"
+                    Canvas.Top="35" 
+                    Canvas.Left ="93"
+                    Width="100"
+                    Height="50"/>
+        </Canvas>
+    </Grid>
+</Window>

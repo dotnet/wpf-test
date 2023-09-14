@@ -1,0 +1,34 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    xmlns:local="clr-namespace:Microsoft.Test.Controls" 
+    x:Name="GridPanel"
+    Height="400" Width="500">
+    <Grid.Resources>
+      <ctrl:NewPeople x:Key="NewPeople" />            
+      <CollectionViewSource x:Key="cvs" Source="{StaticResource NewPeople}" />     
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+  <StackPanel Grid.Row="0" Orientation="Horizontal">
+    <TextBlock Text="WPF DatePicker SelectedDate Regression Test" />
+    <Button HorizontalAlignment="Center" Content="Debug" Name="btn_Debug" />
+  </StackPanel>
+
+  <StackPanel DataContext="{StaticResource cvs}" Grid.Row="1">
+    <DatePicker Height="23"
+                Name="datePicker"
+                HorizontalAlignment="Right"                 
+                VerticalAlignment="Top" 
+                SelectedDate="{Binding Path=CurrentItem.DOB}"
+                Width="120" />    
+    <Button Content="Move Next" Height="23"  Name="moveNextButton" VerticalAlignment="Bottom" />
+    <Button Content="Move Prev" Height="23"  Name="movePrevButton" VerticalAlignment="Bottom" />
+  </StackPanel>
+</Grid>

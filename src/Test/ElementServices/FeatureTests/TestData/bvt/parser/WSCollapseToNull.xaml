@@ -1,0 +1,144 @@
+<!-- 	We are trying to verify that whitespace collapses correctly to null content when appropriate.
+-->
+
+<cmn:CustomDockPanel
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" 
+ Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Parser.ParserVerifier.WSCollapseToNullVerify" 
+>
+
+	
+	<!-- TEST 01 BEGIN -->
+	<!-- Test no whitespace case for various items -->
+	<!-- Conditions:
+		xml:space is default
+		TrimSurroundingWhitespace is default: false
+		WhitespaceSignificant is default: false 
+	-->
+	<!-- Testing implicit and explicit setting of Button with 0, 1, and 2 (many) spaces -->
+	<Button Name="Button01"></Button>
+	<Button Name="Button02"> </Button>
+	<Button Name="Button03">  </Button>
+	<Button Name="Button04">   </Button>
+	<Button Name="Button05">    </Button>
+	<Button Name="Button06">   </Button>
+	<Button Name="Button07">  </Button>
+
+	<!-- Testing returns (line-feeds) -->
+	<Button Name="Button08">
+</Button>
+	<Button Name="Button09">
+</Button>
+
+	<!-- Testing double consecutive (line-feeds) -->
+	<Button Name="Button11">
+
+</Button>
+	<Button Name="Button12">
+
+</Button>
+
+
+	<!-- Testing single tabs -->
+	<Button Name="Button14">	</Button>
+	<Button Name="Button16">	</Button>
+
+	<!-- Testing double consecutive tabs -->
+	<Button Name="Button17">		</Button>
+	<Button Name="Button19">		</Button>
+
+	<!-- Testing double nonconsecutive tabs -->
+	<Button Name="Button20">			</Button>
+	<Button Name="Button22">			</Button>
+
+	<!-- Testing tabs with return combos -->
+	<Button Name="Button23">	
+</Button>
+	<Button Name="Button24">
+	</Button>
+	<Button Name="Button25">	
+</Button>
+	<Button Name="Button26">
+	</Button>
+	<Button Name="Button28">	
+	
+</Button>
+
+	<!-- Testing tabs with spaces combos -->
+	<Button Name="Button29"></Button>
+	<Button Name="Button30"> 	</Button>
+	<Button Name="Button31">  </Button>
+	<Button Name="Button32">  	 </Button>
+	<Button Name="Button33">    	</Button>
+	<Button Name="Button34"> 	 	 </Button>
+	<Button Name="Button35">	  </Button>
+
+
+	<!-- Testing tabs with spaces and linefeeds combos -->
+	<Button Name="Button36"> 	
+ 
+  	</Button>
+	<Button Name="Button37"> 	
+</Button>
+	<Button Name="Button38">  	
+	 </Button>
+	<Button Name="Button39">   		
+	  
+</Button>
+	<Button Name="Button40"> 	
+	  	
+	
+  </Button>
+	<Button Name="Button41">	
+	
+	  
+  
+	
+ </Button>
+	<Button Name="Button42">
+  </Button>	
+
+
+
+	<!-- Testing tabs with spaces and linefeeds combos in Content property NOTE: CAN'T ASSIGN EMPTY STRING, so can't do such a test!!! -->
+
+
+	<!-- Testing tabs with spaces and linefeeds combos -->
+  <!--
+  <Button Name="Button43"><Button.Content> 	
+ 
+  	</Button.Content></Button>
+  -->
+  
+  <!--
+	<Button Name="Button44"> <Button.Content>  	
+</Button.Content> </Button>
+	<Button Name="Button45">   	<Button.Content>  	
+	 </Button.Content>	 </Button>
+	<Button Name="Button46"><Button.Content>   		
+	  
+</Button.Content>	 
+</Button>
+	<Button Name="Button47">
+	
+	<Button.Content> 	
+	  	
+	
+  </Button.Content></Button>
+	<Button Name="Button48">
+ <Button.Content>	
+	
+	  
+  
+	
+ </Button.Content>
+
+</Button>
+	<Button Name="Button49">
+	<Button.Content>
+  </Button.Content> </Button>
+-->
+
+	<!-- TEST 01 END -->
+
+</cmn:CustomDockPanel>

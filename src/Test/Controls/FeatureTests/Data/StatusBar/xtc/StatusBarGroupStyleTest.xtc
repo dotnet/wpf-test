@@ -1,0 +1,58 @@
+﻿<XTC>
+  <TEST Name="StatusBar:StatusBarGroupStyleTest" SubArea="StatusBar" Priority="2" ExecutionGroup="Pri2">
+    <DATA>
+      <INIT Class="StatusBarGroupStyleTest" SuppressGtoLogger="true"/>
+      <VARIATION ID="1">
+        <CONTROL>
+          <StackPanel xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+              xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+              xmlns:s='clr-namespace:System.Collections;assembly=mscorlib' xmlns:g='clr-namespace:System.Windows.Data;assembly=PresentationFramework' xmlns:p='clr-namespace:System;assembly=mscorlib'>
+            <StackPanel.Resources>
+              <CollectionViewSource x:Key='src'>
+                <CollectionViewSource.GroupDescriptions>
+                  <g:PropertyGroupDescription PropertyName="Month" />
+                </CollectionViewSource.GroupDescriptions>
+                <CollectionViewSource.Source>
+                  <s:ArrayList>
+                    <p:DateTime>2005/1/1</p:DateTime>
+                    <p:DateTime>2005/2/2</p:DateTime>
+                    <p:DateTime>2005/1/3</p:DateTime>
+                    <p:DateTime>2005/3/4</p:DateTime>
+                  </s:ArrayList>
+                </CollectionViewSource.Source>
+              </CollectionViewSource>
+            </StackPanel.Resources>
+            <StatusBar ItemsSource='{Binding Source={StaticResource src}}'>
+              <StatusBar.GroupStyle>
+                <GroupStyle>
+                  <GroupStyle.ContainerStyle>
+                    <Style TargetType="{x:Type GroupItem}">
+                      <Setter Property="Template">
+                        <Setter.Value>
+                          <ControlTemplate TargetType="{x:Type GroupItem}">
+                            <StackPanel Orientation="Horizontal">
+                              <Border BorderBrush="Gray" BorderThickness="1">
+                                <ContentPresenter />
+                              </Border>
+                              <Separator />
+                              <ItemsPresenter />
+                            </StackPanel>
+                          </ControlTemplate>
+                        </Setter.Value>
+                      </Setter>
+                    </Style>
+                  </GroupStyle.ContainerStyle>
+                  <GroupStyle.Panel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                  </GroupStyle.Panel>
+                </GroupStyle>
+              </StatusBar.GroupStyle>
+            </StatusBar>
+          </StackPanel>
+        </CONTROL>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

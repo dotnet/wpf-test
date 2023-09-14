@@ -1,0 +1,41 @@
+<XTC>
+  <TEST Name="TabControlInputEventHandlerTest" Priority="0" SubArea="TabControl" Timeout="600">
+    <Keywords>
+      <Keyword>Localization_Suite</Keyword>
+    </Keywords>
+    <DATA>
+      <INIT Class="SelectorEventHandlerTest"/>
+      <PICT Name="TabControlInputTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="SelectorControlsBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingSmallDataBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingLargeDataBVT.xaml"/>
+      </XAMLS>
+      <!-- Test Right key on tabcontrol from 0 to 1 and validate 'SelectedHandler' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="1" EventName="SelectedHandler" ShouldEventFire="true" FlowDirection="LeftToRight" Key="Right" />
+      <!-- Test Right key on tabcontrol from 0 to 0 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="0" EventName="SelectedHandler" ShouldEventFire="false" FlowDirection="LeftToRight" Key="Right" />
+      <!-- Test Left key on tabcontrol from 0 to 1 and validate 'SelectedHandler' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="1" EventName="SelectedHandler" ShouldEventFire="true" FlowDirection="RightToLeft" Key="Left" />
+      <!-- Test Left key on tabcontrol from 0 to 0 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="0" EventName="SelectedHandler" ShouldEventFire="false" FlowDirection="RightToLeft" Key="Left" />
+      <!-- Test Right key on tabcontrol from 0 to 0 and validate 'UnselectedHandler' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="0" EventName="UnselectedHandler" ShouldEventFire="true" FlowDirection="LeftToRight" Key="Right" />
+      <!-- Test Right key on tabcontrol from 0 to 1 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="1" EventName="UnselectedHandler" ShouldEventFire="false" FlowDirection="LeftToRight" Key="Right" />
+      <!-- Test Left key on tabcontrol from 0 to 0 and validate 'UnselectedHandler' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="0" EventName="UnselectedHandler" ShouldEventFire="true" FlowDirection="RightToLeft" Key="Left" />
+      <!-- Test Up key on tabcontrol from 0 to 1 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="1" EventName="UnselectedHandler" ShouldEventFire="false" FlowDirection="RightToLeft" Key="Left" />
+      
+      <!-- Test mouse click on tabcontrol from 0 to 3 with attachEventIndex is 3 and validate 'SelectedHandler' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Mouse" FromIndex="1" ToIndex="3" AttachEventIndex="3" EventName="SelectedHandler" ShouldEventFire="true" MouseButton="Left" />
+      <!-- Test mouse click on tabcontrol from 0 to 0 with attachEventIndex is 0 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Mouse" FromIndex="1" ToIndex="1" AttachEventIndex="1" EventName="SelectedHandler" ShouldEventFire="false" MouseButton="Left" />
+      <!-- Test mouse click on tabcontrol from 0 to 3 with attachEventIndex is 0 and validate 'UnselectedHandler' event is fired -->
+      <VARIATION ControlName="tabcontrol" InputType="Mouse" FromIndex="1" ToIndex="3" AttachEventIndex="1" EventName="UnselectedHandler" ShouldEventFire="true" MouseButton="Left" />
+      <!-- Test mouse click on tabcontrol from 3 to 0 with attachEventIndex is 0 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Mouse" FromIndex="3" ToIndex="1" AttachEventIndex="1" EventName="UnselectedHandler" ShouldEventFire="false" MouseButton="Left" />
+    </DATA>
+  </TEST>
+</XTC>

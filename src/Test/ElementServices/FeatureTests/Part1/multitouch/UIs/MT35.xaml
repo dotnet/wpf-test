@@ -1,0 +1,26 @@
+﻿<Window x:Class="Microsoft.Test.Input.MultiTouch.Tests.MT35"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Multi-Touch on 3.5 SP1" x:Name="TestWindow"
+        Height="600" Width="600" 
+ >
+  <Grid Margin="10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Button Content="Clear" Click="Button_Click" Grid.Row="0"/>
+    <ListBox x:Name="Results" Grid.Row="1"/>
+        <Rectangle Fill="Red" Grid.Column="1" Grid.RowSpan="2"
+            StylusDown="Window_StylusDown" 
+            StylusUp="Window_StylusUp" 
+            StylusMove="Window_StylusMove"
+        >            
+        </Rectangle>
+        <Canvas x:Name="dragCanvas" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>

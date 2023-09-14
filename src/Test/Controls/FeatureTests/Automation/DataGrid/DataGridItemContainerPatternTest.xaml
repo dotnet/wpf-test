@@ -1,0 +1,21 @@
+<Page x:Class="Microsoft.Test.Controls.DataGridItemContainerPatternTest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Microsoft.Test.Controls.UIADataSources" 
+    Title="Page1">
+    <Page.Resources>
+        <local:UIAPeople x:Key="Family" />
+        <Style x:Key="dataGridRowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="AutomationProperties.AutomationId" Value="{Binding Path=ID}"/>
+        </Style>
+    </Page.Resources>
+    <StackPanel>
+        <Button Content="Setup AutomationId for each cell" Name="button" Click="Button_Click"/>
+        <Button Content="Ready to test" Name="ready" />
+        <DataGrid Name="datagrid" 
+                  ItemContainerStyle="{StaticResource dataGridRowStyle}"     
+                  ItemsSource="{StaticResource Family}" 
+                  Width="200" Height="200"
+                  EnableColumnVirtualization="True"/>
+    </StackPanel>
+</Page>

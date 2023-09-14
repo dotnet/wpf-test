@@ -1,0 +1,38 @@
+﻿
+
+
+<cmn:CustomCanvas
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:ser="clr-namespace:Avalon.Test.CoreUI.Serialization;assembly=CoretestsUntrusted"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Serialization.Converter.ConverterVerifiers.CustomTypesInAttribute1Verify" xmlns:MappingPIGen1="clr-namespace:Avalon.Test.CoreUI.Serialization;assembly=CoretestsUntrusted" xmlns:MappingPIGen2="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+>
+    <Canvas.Resources>
+       <ser:CustomControlWithTypeProperties
+           x:Key="ElementInResources"
+           CustomDP="ser:CustomControlWithTypeProperties"
+           CustomClrProperty="ser:CustomControlWithTypeProperties"
+           CustomAttached="ser:CustomControlWithTypeProperties"> 
+            <ser:CustomControlWithTypeProperties.Style>                                 
+              <Style TargetType="ser:CustomControlWithTypeProperties">
+	            <Setter Property="ser:CustomControlWithTypeProperties.CustomAttached" Value="{x:Type Button}" />
+	            <Setter Property="ser:CustomControlWithTypeProperties.CustomDP" Value="{x:Type Label}" />
+              </Style>
+	    </ser:CustomControlWithTypeProperties.Style>
+       </ser:CustomControlWithTypeProperties>
+
+    </Canvas.Resources>
+    <ser:CustomControlWithTypeProperties
+  CustomDP="ser:CustomControlWithTypeProperties"
+        CustomClrProperty="ser:CustomControlWithTypeProperties"
+        CustomAttached="ser:CustomControlWithTypeProperties"
+        Name="ElementInLogicalTree"> 
+       <ser:CustomControlWithTypeProperties.Style>                                 
+         <Style TargetType="ser:CustomControlWithTypeProperties">
+	       <Setter Property="ser:CustomControlWithTypeProperties.CustomAttached" Value="{x:Type Button}" />
+	       <Setter Property="ser:CustomControlWithTypeProperties.CustomDP" Value="{x:Type Label}" />
+         </Style>
+      </ser:CustomControlWithTypeProperties.Style>
+    </ser:CustomControlWithTypeProperties>                                        
+</cmn:CustomCanvas>

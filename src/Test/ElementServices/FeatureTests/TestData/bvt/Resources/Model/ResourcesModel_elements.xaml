@@ -1,0 +1,273 @@
+﻿
+<!--
+/*******************************************************************
+ * Purpose: Snippets of xaml used for tree construction in
+ *          Resources resolution model.
+ *
+ * This is a valid XAML File. 
+ *
+ * Important: Add one (1) space before StaticResource if this reference can never be Dynamic
+ * For example: G="{ StaticResource TestKey_gscb_31}" 
+ * Now, ResourcesModel will not attempt to change it to DynamicResource
+ *
+ * For error This Freezable can not be frozen.
+ * This is By design.   .
+********************************************************************/
+-->
+
+<StackPanel Name="TestRoot" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib" >
+    <StackPanel.Resources>
+        <!--  GreenSolidColorBrush (gscb) -->
+        <SolidColorBrush x:Key="TestKey_gscb_1">Green</SolidColorBrush>
+      
+        <Color x:Key="TestKey_gscb_21" A="255" G="128"></Color>
+        <SolidColorBrush x:Key="TestKey_gscb_2" Color="{StaticResource TestKey_gscb_21}" />
+      
+        <sys:Byte x:Key="TestKey_gscb_31">128</sys:Byte>
+        <Color x:Key="TestKey_gscb_32" A="255" G="{ StaticResource TestKey_gscb_31}"></Color>
+        <SolidColorBrush x:Key="TestKey_gscb_3" Color="{StaticResource TestKey_gscb_32}" />
+
+        <!-- Used for FE, FCE Style-->
+        <Style x:Key="TestKey_styleA_1">
+            <Setter Property="TextElement.Background" Value="Green" />
+        </Style>
+        <SolidColorBrush x:Key="TestKey_styleA_21" Color="Green" />
+        <Style x:Key="TestKey_styleA_2">
+            <Setter Property="TextElement.Background" Value="{StaticResource TestKey_styleA_21}" />
+        </Style>
+        <Color x:Key="TestKey_styleA_31" A="255" G="128"></Color>
+        <SolidColorBrush x:Key="TestKey_styleA_32" Color="{StaticResource TestKey_styleA_31}" />
+        <Style x:Key="TestKey_styleA_3">
+            <Setter Property="TextElement.Background" Value="{StaticResource TestKey_styleA_32}" />
+        </Style>
+        
+        <!-- Used for Control.Style -->
+        <Style x:Key="TestKey_styleB_1">
+            <Setter Property="Control.Background" Value="Green" />
+        </Style>
+        <SolidColorBrush x:Key="TestKey_styleB_21" Color="Green" />
+        <Style x:Key="TestKey_styleB_2">
+            <Setter Property="Control.Background" Value="{StaticResource TestKey_styleB_21}" />
+        </Style>
+        <Color x:Key="TestKey_styleB_31" A="255" G="128"></Color>
+        <SolidColorBrush x:Key="TestKey_styleB_32" Color="{StaticResource TestKey_styleB_31}" />
+        <Style x:Key="TestKey_styleB_3">
+            <Setter Property="Control.Background" Value="{StaticResource TestKey_styleB_32}" />
+        </Style>        
+        <setter.value>
+          <FontFamily>Symbol</FontFamily>
+        </setter.value>
+      
+        <!-- gc: Green Color -->
+        <Color x:Key="TestKey_gc_1" A="255" G="128" />
+        <sys:Byte x:Key="TestKey_gc_21">128</sys:Byte>
+        <Color x:Key="TestKey_gc_2" A="255" G="{ StaticResource TestKey_gc_21}" />
+        <sys:Byte x:Key="TestKey_gc_31">128</sys:Byte>
+        <sys:Byte x:Key="TestKey_gc_32">255</sys:Byte>
+        <Color x:Key="TestKey_gc_3" A="{ StaticResource TestKey_gc_32}" G="{ StaticResource TestKey_gc_31}" />
+        
+        <!-- ControlTemplate -->
+        <ControlTemplate x:Key="TestKey_TemplateA_1" TargetType="{x:Type Control}">
+            <CheckBox Name="Up" Background="Green" />
+        </ControlTemplate>
+        <SolidColorBrush x:Key="TestKey_TemplateA_21" Color="Green" />
+        <ControlTemplate x:Key="TestKey_TemplateA_2" TargetType="{x:Type Control}">
+            <CheckBox Name="Up" Background="{StaticResource TestKey_TemplateA_21}" />
+        </ControlTemplate>
+        <Color x:Key="TestKey_TemplateA_31" A="255" G="128"></Color>
+        <SolidColorBrush x:Key="TestKey_TemplateA_32" Color="{StaticResource TestKey_TemplateA_31}" />
+        <ControlTemplate x:Key="TestKey_TemplateA_3" TargetType="{x:Type Control}">
+            <CheckBox Name="Up" Background="{StaticResource TestKey_TemplateA_32}" />
+        </ControlTemplate>
+        
+        <!-- Freezable: GradientStopCollection gsc -->
+        <GradientStopCollection x:Key="TestKey_gsc_1">
+            <GradientStop Color="Green" Offset="0" />
+            <GradientStop Color="Navy" Offset="1" />
+        </GradientStopCollection>
+        <Color x:Key="TestKey_gsc_21" A="255" G="128"></Color>
+        <GradientStopCollection x:Key="TestKey_gsc_2">
+            <GradientStop Color="{StaticResource TestKey_gsc_21}" Offset="0" />
+            <GradientStop Color="Navy" Offset="1" />
+        </GradientStopCollection>
+        <sys:Byte x:Key="TestKey_gsc_31">128</sys:Byte>
+        <Color x:Key="TestKey_gsc_32" A="255" G="{ StaticResource TestKey_gsc_31}"></Color>
+        <GradientStopCollection x:Key="TestKey_gsc_3">
+            <GradientStop Color="{StaticResource TestKey_gsc_32}" Offset="0" />
+            <GradientStop Color="Navy" Offset="1" />
+        </GradientStopCollection>        
+        
+        <!-- FCE: FlowDocument fd -->
+        <FlowDocument x:Key="TestKey_fd_1" Background="Green" />
+        <SolidColorBrush x:Key="TestKey_fd_21" Color="Green" />
+        <FlowDocument x:Key="TestKey_fd_2" Background="{StaticResource TestKey_fd_21}" />
+        <Color x:Key="TestKey_fd_31" A="255" G="128"></Color>
+        <SolidColorBrush x:Key="TestKey_fd_32" Color="{StaticResource TestKey_fd_31}" />
+        <FlowDocument x:Key="TestKey_fd_3" Background="{StaticResource TestKey_fd_32}" />    
+        
+        <!-- Control: Button btn -->
+        <Button x:Key="TestKey_btn_1" Background="Green" />    
+        <SolidColorBrush x:Key="TestKey_btn_21" Color="Green" />
+        <Button x:Key="TestKey_btn_2" Background="{StaticResource TestKey_btn_21}" />
+        <Color x:Key="TestKey_btn_31" A="255" G="128"></Color>
+        <SolidColorBrush x:Key="TestKey_btn_32" Color="{StaticResource TestKey_btn_31}" />
+        <Button x:Key="TestKey_btn_3" Background="{StaticResource TestKey_btn_32}" />
+    </StackPanel.Resources>
+
+    <Button Name="StyleSetterValue" Tag="gscb">
+        <Button.Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{StaticResource TestKey_gscb_1}" />
+            </Style>
+        </Button.Style>
+    </Button>
+    <Button Name="StyleTriggerConditionValue_SingleTrigger" Background="Green" Tag="gscb">
+        <Button.Style>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="Background" Value="{ StaticResource TestKey_gscb_1}">
+                        <Setter Property="Width" Value="200" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Button.Style>
+    </Button>    
+    <Button Name="StyleTriggerConditionValue_MultiTrigger" Background="Green" Tag="gscb">
+        <Button.Style>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="Background" Value="{ StaticResource TestKey_gscb_1}" />
+                            <Condition Property="IsMouseOver" Value="True" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="Width" Value="200" />
+                    </MultiTrigger>
+                </Style.Triggers>
+            </Style>
+        </Button.Style>
+    </Button>
+    <Button Name="StyleTriggerSetterValue_SingleTrigger" Tag="gscb">
+        <Button.Style>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource TestKey_gscb_1}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Button.Style>
+    </Button>     
+    <Button Name="StyleTriggerSetterValue_MultiTrigger" Tag="gscb">
+        <Button.Style>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsMouseOver" Value="True" />
+                            <Condition Property="Content" Value="{x:Null}" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="Background" Value="{StaticResource TestKey_gscb_1}" />
+                    </MultiTrigger>
+                </Style.Triggers>
+            </Style>
+        </Button.Style>
+    </Button>    
+    <Control Name="TemplateElementPropertyValue_ControlTemplate" Tag="gscb">
+        <Control.Template>
+            <ControlTemplate TargetType="{x:Type Control}">
+                <CheckBox Name="Up" Background="{StaticResource TestKey_gscb_1}" />
+            </ControlTemplate>
+        </Control.Template>
+    </Control>     
+    <Control Name="TemplateTriggerConditionValue_ControlTemplate_SingleTrigger" Background="Green" Tag="gscb">
+        <Control.Template>
+            <ControlTemplate TargetType="{x:Type Control}">
+                <Button Name="Up" Background="Green" />
+                <ControlTemplate.Triggers>
+                    <Trigger Property="Background" Value="{ StaticResource TestKey_gscb_1}">
+                        <Setter Property="Width" Value="200" TargetName="Up" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Control.Template>
+    </Control>     
+    <Control Name="TemplateTriggerConditionValue_ControlTemplate_MultiTrigger" Background="Green" Tag="gscb">
+        <Control.Template>
+            <ControlTemplate TargetType="{x:Type Control}">
+                <Button Name="Up" />
+                <ControlTemplate.Triggers>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="Background" Value="{ StaticResource TestKey_gscb_1}" />
+                            <Condition Property="IsMouseOver" Value="True" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="Width" Value="200" TargetName="Up" />
+                    </MultiTrigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Control.Template>
+    </Control>   
+    <Control Name="TemplateTriggerSetterValue_ControlTemplate_SingleTrigger" Tag="gscb">
+        <Control.Template>
+            <ControlTemplate>
+                <Button Name="Up" />
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource TestKey_gscb_1}" TargetName="Up" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Control.Template>
+    </Control>     
+    <Control Name="TemplateTriggerSetterValue_ControlTemplate_MultiTrigger" Tag="gscb">
+        <Control.Template>
+            <ControlTemplate TargetType="{x:Type Control}">
+                <CheckBox Name="Up" />
+                <ControlTemplate.Triggers>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsMouseOver" Value="True" />
+                            <Condition Property="CheckBox.IsChecked" Value="True" SourceName="Up" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="Background" Value="{StaticResource TestKey_gscb_1}" TargetName="Up" />
+                    </MultiTrigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Control.Template>
+    </Control>  
+    
+    <TextBlock Text="Resources Model Test" Background="{StaticResource TestKey_gscb_1}" Name="Inline_FE_Freezable" Tag="gscb" />
+    <TextBlock Text="Resources Model Test" Style="{StaticResource TestKey_styleA_1}" Name="Inline_FE_Style" Tag="styleA" />
+    <UserControl Content="{StaticResource TestKey_btn_1}" Name="Inline_FE_Control" Tag="btn" />    
+    <!-- InvalidCombination: FE_Template -->   
+    
+    <FlowDocumentReader Name="Inline_FCE_Freezable" Tag="gscb">
+        <FlowDocument Background="{StaticResource TestKey_gscb_1}" />
+    </FlowDocumentReader>
+    <FlowDocumentReader Name="Inline_FCE_Style" Tag="styleA">
+        <FlowDocument Style="{StaticResource TestKey_styleA_1}" />
+    </FlowDocumentReader>
+    <!-- InvalidCombination: FCE_Template -->
+    
+    <Button Background="{StaticResource TestKey_gscb_1}" Name="Inline_Control_Freezable" Tag="gscb" />
+    <Button Style="{StaticResource TestKey_styleB_1}" Name="Inline_Control_Style" Tag="styleB" /> 
+    <Control Template="{StaticResource TestKey_TemplateA_1}" Name="Inline_Control_Template" Tag="TemplateA" />   
+    <FlowDocumentReader Name="Inline_Control_FCE" Document="{StaticResource TestKey_fd_1}" Tag="fd" />
+    
+    <Button Name="Inline_Freezable_CLR" Tag="gc">
+        <Button.Background>
+            <SolidColorBrush Color="{StaticResource TestKey_gc_1}" />
+        </Button.Background>
+    </Button>      
+    <Rectangle Name="Inline_Freezable_Freezable" Width="20" Height="20" Tag="gsc">
+        <Rectangle.Fill>
+            <LinearGradientBrush GradientStops="{ StaticResource TestKey_gsc_1}" />
+        </Rectangle.Fill>
+    </Rectangle>
+    <!--InvalidCombination: Freezable_Style, Freezable_Template -->    
+    
+    <StackPanel Name="SP1" />
+    <StackPanel Name="SP2" />
+    <StackPanel Name="SP3" />
+</StackPanel>

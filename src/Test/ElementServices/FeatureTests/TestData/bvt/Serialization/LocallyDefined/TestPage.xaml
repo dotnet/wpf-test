@@ -1,0 +1,90 @@
+﻿<!--
+/*******************************************************************
+* Purpose: Xaml for testing locally-defined components, including 
+*          in Styles and Templates.  This xaml refers a LocallyDefinedButton,
+*          which is a custom Button built in the same project. The Button uses
+*          a locally-defined custom markup extension for some of its properties,
+*          in order to test those.    
+*
+* Owner: Microsoft
+* Contributors: Microsoft
+*
+* $Header: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/Serialization/LocallyDefined/TestPage.xaml#2  $
+********************************************************************/
+-->
+
+<cmn:CustomPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    xmlns:l="clr-namespace:LocallyDefined"
+    x:Class="MyPage"
+    Verifier="CoreTestsUntrusted.dll#Avalon.Test.CoreUI.Serialization.LocallyDefinedComponents.Verify1" xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime" xmlns:MappingPIGen2="clr-namespace:LocallyDefined">
+
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style x:Key="style1" TargetType="{x:Type l:LocallyDefinedButton}">
+                <Setter Property="LocallyDefinedProperty" Value="LocallyDefinedValue" />
+                <Setter Property="Foreground" Value="{l:CustomColorBlenderExtension Red, Additive=Blue}" />
+                <EventSetter Event="LocallyDefinedPropertyChanged" Handler="OnLocallyDefinedPropertyChanged" />
+            </Style>
+            <ControlTemplate x:Key="template1" TargetType="{x:Type Button}">
+                <l:LocallyDefinedButton
+                    LocallyDefinedProperty="LocallyDefinedValue"
+                    LocallyDefinedPropertyChanged="OnLocallyDefinedPropertyChanged"
+                    Background="LightGreen" 
+                    Content="This is a locally-defined Button in a template"
+                 >
+                    <l:LocallyDefinedButton.Foreground>
+                        <l:CustomColorBlender Core="Red" Additive="Blue" />
+                    </l:LocallyDefinedButton.Foreground>                    
+                </l:LocallyDefinedButton>
+            </ControlTemplate>
+        </StackPanel.Resources>
+
+        <l:LocallyDefinedButton
+            x:Name="MyButton1"
+            LocallyDefinedProperty="LocallyDefinedValue"
+            LocallyDefinedPropertyChanged="OnLocallyDefinedPropertyChanged"
+            Background="LightGray" Foreground="{l:CustomColorBlender Red, Additive={x:Static Colors.Blue}}">
+            <l:LocallyDefinedButton.Content>
+                This is locally-defined Button 1
+            </l:LocallyDefinedButton.Content>
+        </l:LocallyDefinedButton>
+
+        <l:LocallyDefinedButton
+            x:Name="MyButton2"
+            Style="{StaticResource style1}"
+            Background="Pink">
+            <l:LocallyDefinedButton.Content>
+                This is locally-defined Button 2
+            </l:LocallyDefinedButton.Content>
+        </l:LocallyDefinedButton>
+
+        <Button Name="TemplatedButton" Template="{StaticResource template1}" />
+
+        <Button Name="DefaultButton" Background="LightBlue"
+                Foreground="{l:CustomColorBlender {l:CustomColorBlender Core=Maroon, Additive=Navy}, Green}"
+        >
+            <l:CustomColorBlenderExtension Core="{x:Null}" Additive="Blue">
+                <x:Static Member="Colors.Yellow" />
+                <Color>Green</Color>
+                <Color>Orange</Color>            
+            </l:CustomColorBlenderExtension> 
+        </Button>
+
+        <x:Code>
+            <![CDATA[
+
+                public void OnLocallyDefinedPropertyChanged(Object sender, RoutedEventArgs e)
+                {
+                    Console.WriteLine("OnLocallyDefinedPropertyChanged called");
+                    LocallyDefinedButton button = (LocallyDefinedButton)sender;
+                    button.Content = "ContentValue2";
+                    button.Background = Brushes.Red;
+                }
+
+            ]]>
+        </x:Code>
+    </StackPanel>
+</cmn:CustomPage>

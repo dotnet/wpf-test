@@ -1,0 +1,102 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon"    
+    x:Name="GridPanel"
+    Height="600" Width="900">
+    <Grid.Resources>
+        <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+
+        <!--Row Style-->
+        <Style x:Key="defaultRowStyle" TargetType="{x:Type DataGridRow}">
+            <Setter Property="MaxHeight" Value="300" />
+            <Setter Property="Header" Value="{Binding Id}"/>               
+            <Setter Property="DetailsTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="{x:Type ctrl:Person}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Canvas Width="32" Height="32" ClipToBounds="True" Background="#FFDDDDDD" Grid.RowSpan="2" Margin="3">
+                                <Ellipse Width="22" Height="28" Fill="#FF555555" Canvas.Top="18" Canvas.Left="5"/>
+                                <Ellipse Width="14" Height="14" Fill="#FF555555" Canvas.Left="9" Canvas.Top="4"/>
+                            </Canvas>
+                            <TextBlock Grid.Column="1" Margin="3">
+                                    <TextBlock.Text>
+                                      <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="FirstName"/>
+                                        <Binding Path="LastName"/>
+                                      </MultiBinding>
+                                    </TextBlock.Text>
+                            </TextBlock>
+
+                            <ListBox Grid.Column="1" Grid.Row="1" Margin="3"
+                                       DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
+                                       ItemsSource="{Binding Path=(Validation.Errors)}"
+                                       Visibility="{Binding Path=(Validation.HasError), Converter={StaticResource bool2VisibilityConverter}}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type ValidationError}">
+                                        <TextBlock Text="{Binding ErrorContent}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>                        
+        </Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*" MaxHeight="400"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="WPF DataGrid" Grid.Row="0"/>               
+            
+    <DataGrid x:Name="DataGrid_Standard" 
+                Grid.Row="1"        
+                RowHeaderWidth="20"
+                RowHeight="75"
+                MaxHeight="400"
+                MinRowHeight="20"     
+                RowStyle="{StaticResource defaultRowStyle}"                           
+                AutoGenerateColumns="False">                                 
+        <DataGrid.Columns>             
+            <DataGridTextColumn Width="130" Binding="{Binding Path=FirstName}" Header="who knows?">                
+            </DataGridTextColumn>
+      
+            <DataGridTextColumn Width="Auto" Binding="{Binding Path=LastName}" Header="Last Name"/>      
+            
+            <DataGridCheckBoxColumn Width="SizeToCells" Binding="{Binding Path=LikesCake}" Header="Likes Cake"/>
+      
+            <DataGridComboBoxColumn Width="200" SelectedItemBinding="{Binding Path=Cake}" Header="Cake">
+                <DataGridComboBoxColumn.ItemsSource>
+                    <col:ArrayList>
+                        <sys:String>Chocolate</sys:String>
+                        <sys:String>Vanilla</sys:String>
+                    </col:ArrayList>
+                </DataGridComboBoxColumn.ItemsSource>
+            </DataGridComboBoxColumn>
+      
+            <DataGridHyperlinkColumn Width="SizeToHeader" Binding="{Binding Path=Homepage}" Header="Homepage"/>
+            
+            <DataGridTemplateColumn x:Name="templateColumnWithMinMax" MinWidth="30" MaxWidth="200" Width="Auto" Header="TemplateColumn" >
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Path=FirstName}" />
+                    </DataTemplate>                      
+                </DataGridTemplateColumn.CellTemplate>                  
+            </DataGridTemplateColumn>     
+        </DataGrid.Columns>
+    </DataGrid>
+</Grid>

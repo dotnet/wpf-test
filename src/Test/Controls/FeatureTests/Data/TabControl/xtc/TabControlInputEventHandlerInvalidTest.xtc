@@ -1,0 +1,26 @@
+<XTC>
+  <TEST Name="TabControlInputEventHandlerInvalidTest" Priority="2" SubArea="TabControl" Timeout="600">
+    <DATA>
+      <INIT Class="SelectorEventHandlerTest"/>
+      <PICT Name="TabControlInputInvalidTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="SelectorControlsBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingSmallDataBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingLargeDataBVT.xaml"/>
+      </XAMLS>
+      <!-- Test key on tabcontrol from 0 to 1 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="1" EventName="SelectedHandler" ShouldEventFire="false" />
+      <!-- Test Right key on tabcontrol from 6 to 5 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="6" AttachEventIndex="5" EventName="SelectedHandler" ShouldEventFire="false" />
+      <!-- Test key on tabcontrol from 0 to 0 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="0" AttachEventIndex="0" EventName="UnselectedHandler" ShouldEventFire="false" />
+      <!-- Test Right key on tabcontrol from 6 to 6 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Keyboard" FromIndex="6" AttachEventIndex="6" EventName="UnselectedHandler" ShouldEventFire="false" />
+      
+      <!-- Test mouse click on tabcontrol from 0 to 3 with attachEventIndex is 3 and validate 'SelectedHandler' doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Mouse" FromIndex="0" ToIndex="3" AttachEventIndex="3" EventName="SelectedHandler" ShouldEventFire="false" />
+      <!-- Test mouse click on tabcontrol from 0 to 3 with attachEventIndex is 3 and validate 'SelectedHandler' doesn't fire -->
+      <VARIATION ControlName="tabcontrol" InputType="Mouse" FromIndex="0" ToIndex="3" AttachEventIndex="3" EventName="UnselectedHandler" ShouldEventFire="false" />
+    </DATA>
+  </TEST>
+</XTC>

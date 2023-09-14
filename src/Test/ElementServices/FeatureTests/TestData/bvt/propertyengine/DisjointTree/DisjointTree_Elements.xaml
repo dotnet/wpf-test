@@ -1,0 +1,113 @@
+
+<!--
+/*******************************************************************
+ * Purpose: Snippets of xaml used for tree construction in
+ *          DisjointTree model.
+ * Contributors: Microsoft
+ *
+ 
+  
+ * Revision:         $Revision: 2 $
+ 
+ * Filename:         $Source: //depot/devdiv/Orcas/SP/feature/WPF/wpf/Test/ElementServices/FeatureTests/TestData/bvt/propertyengine/DisjointTree/DisjointTree_Elements.xaml $
+********************************************************************/
+-->
+<StackPanel
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Mentor parent -->
+    <StackPanel TestId="MentorParent"></StackPanel>
+
+    <!-- Mentor items -->
+    <Button TestId="Button_Mentor"></Button>
+
+    <!-- Link method, also includes Local, Static & Dynamic resources -->
+    <Style TargetType="{x:Type Button}" TestId="HowLinked_Style">
+        <Setter Property="FOO">
+            <Setter.Value>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate TargetType="{x:Type Button}" TestId="HowLinked_ControlTemplate">
+        <Button>Control template
+        </Button>
+    </ControlTemplate>
+
+    <DataTemplate TestId="HowLinked_DataTemplate">
+        <Button>Data template
+        </Button>        
+    </DataTemplate>
+    
+    <!-- Links -->
+    <VisualBrush TestId="VisualBrush_Link" x:Key="FOO">
+        <VisualBrush.Visual/>
+    </VisualBrush>
+    <ContextMenu TestId="ContextMenu_Link" x:Key="FOO"></ContextMenu>
+    <ToolTip TestId="ToolTip_Link" x:Key="FOO"></ToolTip>
+
+    <!-- Mentee items -->
+    <Button TestId="Button_Mentee" TextBlock.Foreground="Orange"></Button>
+    
+    <Rectangle TestId="DynamicResource_Mentee" Width="200" Height="200" Fill="{DynamicResource FOO}"/>
+    <TextBlock TestId="Inheritance_Mentee">Inherit TextBlock.FontStyle</TextBlock>
+    <Button TestId="LoadedEvent_Mentee" Background="Lime" Loaded="DoChangeBackground">Need an IC to receive loaded.</Button>
+    <Button TestId="InitializationEvent_Mentee" Background="Lime" Initialized="DoChangeBackground">Need an IC to receive initialized.</Button>
+    <Rectangle TestId="blahBindingDataContext_Mentee" Width="200" Height="200" Fill="{Binding Path=Item[0]}"/>
+    <Button TestId="BindingDataContext_Mentee">
+        <Button.Background>
+            <SolidColorBrush Color="{Binding XPath=@Color}"/>
+        </Button.Background>
+    </Button>
+    <Button TestId="ImplicitStyle_Mentee">Background should be implicitly styled</Button>
+    <Rectangle TestId="BindingElementName_Mentee" Width="200" Height="200" Fill="{Binding ElementName=FOO,Path=Background}"/>
+
+    <!-- Brushes used in each mentor parent, keys conflict to verify correct resource dictionary is found via IC -->
+    <SolidColorBrush TestId="firstBrush" x:Key="testBrush" Color="Lime"/>
+    <SolidColorBrush TestId="secondBrush" x:Key="testBrush" Color="Yellow"/>
+    
+    
+    <!--***************************************************
+             XmlDataProvider
+        ***************************************************-->
+    <XmlDataProvider x:Key="XmlDataProvider1" TestId="XmlDataProvider1"  XPath="/Root/*">
+        <x:XData>
+            <Root xmlns="">
+                <Item Color="cyan"/>
+                <Item Color="yellow"/>
+            </Root>
+        </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlDataProvider2" TestId="XmlDataProvider2" XPath="/Root/*">
+        <x:XData>
+            <Root xmlns="">
+                <Item Color="blue"/>
+                <Item Color="red"/>
+            </Root>
+        </x:XData>
+    </XmlDataProvider>
+
+    <!-- ***************************************************
+             Implicit style
+         ***************************************************-->
+    <Style TestId="ImplicitStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Magenta"/>
+    </Style>
+
+    <!-- ***************************************************
+             EventSet code
+         ***************************************************-->
+    <x:Code TestId="EventCode">
+        <![CDATA[
+                void DoChangeBackground(object sender, EventArgs e)
+                {
+                    DependencyObject depObj = (DependencyObject)sender;
+                    depObj.SetValue(Control.BackgroundProperty, Brushes.Crimson);
+                }
+            ]]>
+    </x:Code>
+</StackPanel>

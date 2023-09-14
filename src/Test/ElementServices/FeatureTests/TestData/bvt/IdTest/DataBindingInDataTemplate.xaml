@@ -1,0 +1,16 @@
+﻿<cmn:CustomCanvas Name="id"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:cmn="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime"
+    Verifier="ElementServicesTest.dll#Avalon.Test.CoreUI.IdTest.IdTestVerifiers.DataBindingInDataTemplateVerify"
+    xmlns:MappingPIGen1="clr-namespace:Microsoft.Test.Serialization.CustomElements;assembly=TestRuntime">
+        <Canvas.Resources>
+            <DataTemplate x:Key="dataTemplate">
+                <Button x:Name="buttonInTemplate" Background="Blue" Width="{Binding ElementName=button1,Path=Width}">
+                    <Button Name="childButtonInTemplate" Background="{Binding ElementName=buttonInTemplate,Path=Background}" />
+                </Button>
+            </DataTemplate>         
+        </Canvas.Resources>        
+        <Button ContentTemplate="{DynamicResource dataTemplate}" Name="button" />
+        <Button Name="button1" Width="50" />
+</cmn:CustomCanvas>

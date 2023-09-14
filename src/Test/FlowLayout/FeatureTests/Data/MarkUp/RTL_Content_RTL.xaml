@@ -1,0 +1,64 @@
+<FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FlowDirection="RightToLeft">
+	<Paragraph FontWeight="Bold" Foreground="Red">Start</Paragraph>
+	<Paragraph>
+		<Figure Background="LightGreen" VerticalAnchor="PageBottom" HorizontalAnchor="PageLeft"><Paragraph>Figure left.</Paragraph></Figure>
+		<Floater Background="LightBlue" HorizontalAlignment="Right"><Paragraph>Floater right.</Paragraph></Floater>
+	</Paragraph>
+	<Table Background="White" BorderThickness="2" BorderBrush="Navy">
+		<Table.Resources>
+			<Style TargetType="{x:Type TableCell}">
+				<Setter Property="BorderThickness" Value="0,0,0,1" />
+				<Setter Property="BorderBrush" Value="Gray" />
+			</Style>
+		</Table.Resources>
+		<Table.Columns>
+			<TableColumn Width="*" />
+			<TableColumn Width="3*" />
+		</Table.Columns>
+		<TableRowGroup>
+			<TableRow>
+				<TableCell ColumnSpan="2">
+					<Paragraph Style="{DynamicResource tablePara}" FontSize="16" FontWeight="Bold" TextAlignment="Center">Reptile Characteristics</Paragraph>
+				</TableCell>
+			</TableRow>
+			<TableRow>
+				<TableCell  Background="navy">
+					<Paragraph Style="{DynamicResource tablePara}" FontSize="14" TextAlignment="Center" Foreground="white" FontWeight="Bold">Characteristic</Paragraph>
+				</TableCell>
+				<TableCell Background="navy">
+					<Paragraph Style="{DynamicResource tablePara}" FontSize="14" TextAlignment="Center" Foreground="white" FontWeight="Bold">Description</Paragraph>
+				</TableCell>
+			</TableRow>
+			<TableRow>
+				<TableCell>
+					<Paragraph Style="{DynamicResource tablePara}" >Circulatory System</Paragraph>
+				</TableCell>
+				<TableCell>
+					<Paragraph Style="{DynamicResource tablePara}">Nearly all reptiles have three-chambered hearts; the exceptions are crocodilians, which have four-chambered hearts.</Paragraph>
+				</TableCell>
+			</TableRow>
+			<TableRow>
+				<TableCell>
+					<Paragraph Style="{DynamicResource tablePara}">Respiration</Paragraph>
+				</TableCell>
+				<TableCell>
+					<Paragraph Style="{DynamicResource tablePara}">All reptiles breathe with lungs, and unlike amphibians, reptiles never pass through an embryonic stage involving gills.</Paragraph>
+				</TableCell>
+			</TableRow>
+		</TableRowGroup>
+	</Table>	
+	<List MarkerStyle="Decimal">
+		<ListItem><Paragraph>List Item one.</Paragraph></ListItem>
+		<ListItem><Paragraph>List Item two.</Paragraph></ListItem>
+	</List>
+	<BlockUIContainer>
+		<Button Width="150">This is a Button.</Button>
+	</BlockUIContainer>	
+	<Section>
+		<Paragraph>Adam Vinatieri will probably be the league's highest-paid kicker in a couple of weeks. Whether that money comes from the Patriots, the Cowboys, or some other team is the question. Now that a deal between the players and owners has been completed, perhaps the Patriots have reevaluated Vinatieri's value.</Paragraph>
+		<Paragraph>Following an afternoon and early evening of confusion and conflicting Internet reports, it appears Vladimir Guerrero, after toying with the idea of joining the Dominican Republic for the second round of the World Baseball Classic, will remain in Arizona to train with the Angels. -- <Italic>Los Angeles Times</Italic></Paragraph>
+		<Paragraph FlowDirection="LeftToRight">This Paragraph had a LeftToRight FlowDirection.</Paragraph>
+	</Section>
+	<Paragraph>TextBlock --> <TextBlock Background="Orange">This is a TextBlock.</TextBlock></Paragraph>
+	<Paragraph FontWeight="Bold" Foreground="Red">End</Paragraph>
+</FlowDocument>

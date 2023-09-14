@@ -1,0 +1,74 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+      xmlns:custom="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon"
+      xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" >
+  <StackPanel Name="panel">
+    <Menu>
+      <MenuItem Header="_Plain Menus" Name="SimpleMenuTop" >
+        <MenuItem Header="Simple Item 1" Name="SimpleMenu1"> 
+            <MenuItem Header="Simple Item 1 Submenu" Name="SimpleMenu12" />        
+        </MenuItem>
+        <MenuItem Header="Simple Item 2" Name="SimpleMenu2" IsCheckable="True" />
+        <MenuItem Header="Simple Item 3" Name="SimpleMenu3" />
+     </MenuItem>
+
+     <MenuItem Header="Menus with _Focusable elements" Name="FocusableMenuTop" >
+        <MenuItem Header="Button" Name="FocusableMenuOne" >
+            <Button Width="120" Name="FocusableMenuOneButton" />
+        </MenuItem>
+        <MenuItem Header="TextBox" Name="FocusableMenuTwo" >
+            <TextBox Width="120" Name="FocusableMenuTwoTextBox" />
+        </MenuItem>
+      </MenuItem>
+
+
+      <MenuItem Header="_Menus With Context Menus">
+        <MenuItem Header="Simple Context Menu" >
+        <MenuItem.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Item1"/>
+            </ContextMenu>
+        </MenuItem.ContextMenu>
+        </MenuItem>
+
+        <MenuItem Header="Context Menu With TextBox" >
+        <MenuItem.ContextMenu>
+            <ContextMenu>
+                <TextBox Name="ContextMenuTxtBox" Width="120" />
+            </ContextMenu>
+        </MenuItem.ContextMenu>
+        </MenuItem>
+
+        <MenuItem Header="Nested Context Menu" >
+        <MenuItem.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Nested">
+                    <MenuItem.ContextMenu>
+                       <ContextMenu>
+                          <MenuItem Header="Simple Context Menu" >
+        <MenuItem.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Item1"/>
+            </ContextMenu>
+        </MenuItem.ContextMenu>
+        </MenuItem>
+                       </ContextMenu>
+                    </MenuItem.ContextMenu>
+                </MenuItem>
+            </ContextMenu>
+        </MenuItem.ContextMenu>
+        </MenuItem>
+    
+      </MenuItem>
+    </Menu>
+
+    <Button Content="Here are several focusable elements" Name="WPFButton" />
+    <custom:Win32EditBox Height="40" x:Name="Win32TextBox"/>
+    <TextBox Text="textbox" Height="40" Name="WPFTextBox"/>
+    <Border Name="WinFormsControl">
+       <WindowsFormsHost Height="50" x:Name="WinFormsHostInstance">
+          <wf:TextBox x:Name="WinFormsTextBox" Text="Winforms TextBox"></wf:TextBox>
+       </WindowsFormsHost>
+    </Border>
+  </StackPanel>
+</Window>

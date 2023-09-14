@@ -1,0 +1,24 @@
+<Page x:Class="Microsoft.Test.Controls.TabControlRegressionTest8"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Microsoft.Test.Controls"
+    Title="TabControl Bug RegressionTest8">
+    <Page.Resources>
+        <DataTemplate DataType="{x:Type local:WelcomePageViewModel}">
+            <local:WelcomePageView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:LaunchPageViewModel}">
+            <local:LaunchPageView/>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <RadioButton x:Name="rbWelcome" Content="Welcome" Checked="SelectView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbLaunch" Content="Launch" Checked="SelectView" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox" Content="IsEnabled" HorizontalAlignment="Left" Margin="102,10,0,0" VerticalAlignment="Top" IsChecked="{Binding ElementName=MainContentControl, Path=IsEnabled}"/>
+
+        <Border Background="Cornsilk" TextElement.Foreground="Red" HorizontalAlignment="Stretch" Margin="71,51,10,10" VerticalAlignment="Stretch" >
+            <ContentControl x:Name="MainContentControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Border>
+    </Grid>
+</Page>

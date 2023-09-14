@@ -1,0 +1,158 @@
+﻿<Window x:Class="Microsoft.Test.Input.MultiTouch.Tests.TestTouchControls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Test Touch" x:Name="TestWindow" 
+        Height="500" Width="800" ShowInTaskbar="False" 
+        AllowsTransparency="True" Background="Transparent"
+        IsManipulationEnabled="True"
+        StylusSystemGesture="OnStylusSystemGesture"
+        StylusDown="OnStylusDown"
+        StylusUp="OnStylusUp"
+        TouchDown="OnTouchDown"
+        TouchMove="OnTouchMove"
+        TouchUp="OnTouchUp"        
+        Unloaded="OnUnloaded">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="90" />
+        </Style>
+    </Window.Resources>
+
+    <Border CornerRadius="10" Padding="5" Margin="10" BorderBrush="Azure" BorderThickness="1">
+        <Border.Background>
+            <SolidColorBrush Opacity="0.9" Color="Gray"/>
+        </Border.Background>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Border Background="#FFE3DCD2" Grid.Row="0" Height="40" CornerRadius="5" Margin="0,0,0,4" Padding="5"
+                Cursor="{x:Static Cursors.ScrollAll}"
+                Name="controlPanelBorder"
+                MouseLeftButtonDown="OnControlPanelMouseLeftButtonDown"
+                MouseLeftButtonUp="OnControlPanelMouseLeftButtonUp"
+                MouseMove="OnControlPanelMouseMove"
+                TouchDown="OnControlPanelContactDown"
+                TouchMove="OnControlPanelContactChanged"
+                TouchLeave="OnControlPanelContactLeave">
+
+                <TextBlock Text="Touch Test Win - Controls" FontSize="20" VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" FontFamily="Segoe UI" ></TextBlock>
+            </Border>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="#FFF8F7F5" CornerRadius="5" Margin="0,0,4,0" Padding="0,0,5,0">
+                    <Grid>
+                        <Expander ExpandDirection="Right" IsExpanded="true">
+                            <ScrollViewer>
+                                <TreeView Name="treeView"
+                                    SelectedItemChanged="OnTreeViewSelectedItemChanged"
+                                    TouchDown="OnTreeViewTouchDown"
+                                    Background="Transparent" 
+                                    BorderBrush="Transparent"
+                                    FontSize="12">
+                                </TreeView>
+                            </ScrollViewer>
+                        </Expander>
+
+                        <TextBlock Text="Tweakable Objects" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left" 
+                            Margin="0,20,0,0" 
+                            Width="105"
+                            Height="20">
+                            <TextBlock.LayoutTransform>
+                              <RotateTransform Angle="-90"></RotateTransform>
+                            </TextBlock.LayoutTransform>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Column="1" >
+                    <Border Background="#FFF8F7F5" CornerRadius="5" Padding="5,5,5,10">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                            <Border Name="tweakableObjectBorder" />
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Border Grid.Row="2" Background="#FFF8F7F5" CornerRadius="5" Margin="0,4,0,0" Padding="2">
+                <Grid >
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                        <Button Click="OnSaveButtonClick" Content="Export" Grid.Column="0"/>
+                        <Button Click="OnLoadButtonClick" Content="Import" Grid.Column="1"/>
+                        <Button Click="OnCloseButtonClick" Content="Close" Grid.Column="2"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                            <TextBlock Text="Opacity:" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <Slider  Width="80"
+                                   Minimum="0.2"
+                                   Maximum="1"
+                                   SmallChange="0.1"
+                                   LargeChange="0.5"
+                                   Value="1"
+                                   ValueChanged="OnWindowTransparencySliderValueChanged"/>
+
+                            <CheckBox Margin="10,0,0,0"
+                                Height="16"
+                                FontSize="12"
+                                Visibility="Collapsed"
+                                Name="bulkTweakModeCheckBox"
+                                Checked="bulkTweakModeCheckBoxChanged"
+                                Unchecked="bulkTweakModeCheckBoxChanged"
+                                Content="Bulk tweak mode"/>
+                        </StackPanel>
+                    </WrapPanel>
+
+                    <Thumb Margin="0,0,-3,-3"
+                        Width="11" 
+                        Height="11" 
+                        Cursor="{x:Static Cursors.SizeNWSE}" 
+                        DragDelta="onDragDelta" 
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right">
+
+                        <Thumb.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Line X1="1" Y1="11"
+                                        X2="11" Y2="1"
+                                        Stroke="Black"
+                                        StrokeThickness="1" />
+
+                                    <Line
+                                        X1="4" Y1="11"
+                                        X2="11" Y2="4"
+                                        Stroke="Black"
+                                        StrokeThickness="1" />
+
+                                    <Line
+                                        X1="7" Y1="11"
+                                        X2="11" Y2="7"
+                                        Stroke="Black"
+                                        StrokeThickness="1" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Thumb.Template>
+                    </Thumb>
+                </Grid>
+
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

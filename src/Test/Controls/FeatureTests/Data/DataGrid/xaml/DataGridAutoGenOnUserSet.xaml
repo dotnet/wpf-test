@@ -1,0 +1,80 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    x:Name="GridPanel"
+    Height="700" Width="700">    
+    <Grid.Resources>
+        <ctrl:People x:Key="people"/>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="WPF DataGrid" Grid.Row="0"/>               
+            
+    <!--ItemsSource set, count = n, AutoGen Flag = true, columns set-->    
+    <DataGrid x:Name="DataGrid_Standard" 
+                Grid.Row="1"                                   
+                AlternationCount="2"
+                RowBackground="White" 
+                AlternatingRowBackground="LightBlue"
+                ItemsSource="{Binding Source={StaticResource people}}">                                       
+        <DataGrid.Columns>         
+      
+            <DataGridTextColumn
+                x:Name="Column0"
+                Width="130" 
+                Header="who knows?">                                
+            </DataGridTextColumn>
+      
+            <DataGridTextColumn
+                x:Name="Column1"
+                Width="Auto" 
+                Header="Last Name"/>
+      
+            <DataGridCheckBoxColumn
+                x:Name="Column2"
+                Width="SizeToCells" 
+                Header="Likes Cake"/>
+      
+            <DataGridComboBoxColumn 
+                x:Name="Column3"
+                Width="*" 
+                Header="Cake">
+                <DataGridComboBoxColumn.ItemsSource>
+                    <col:ArrayList>
+                        <sys:String>Chocolate</sys:String>
+                        <sys:String>Vanilla</sys:String>
+                    </col:ArrayList>
+                </DataGridComboBoxColumn.ItemsSource>
+            </DataGridComboBoxColumn>     
+                    
+            <DataGridHyperlinkColumn 
+                x:Name="Column4"
+                Width="SizeToHeader" 
+                Header="Homepage"/>      
+            
+            <DataGridTemplateColumn 
+                x:Name="Column5"
+                Width="Auto"  
+                Header="TemplateColumn">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Path=FirstName}" />
+                    </DataTemplate>                      
+                </DataGridTemplateColumn.CellTemplate> 
+                <DataGridTemplateColumn.CellEditingTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding Path=FirstName}" />
+                    </DataTemplate>                      
+                </DataGridTemplateColumn.CellEditingTemplate> 
+            </DataGridTemplateColumn>            
+        </DataGrid.Columns>
+    </DataGrid>    
+</Grid>

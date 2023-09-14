@@ -1,0 +1,27 @@
+<StackPanel xmlns   = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+            Name    = "root">
+
+    <StackPanel.Resources>
+        <Style x:Key="TestStyle" TargetType="{x:Type Button}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="TestBrush" Color="Red" />
+            </Style.Resources>
+        </Style>
+    </StackPanel.Resources>
+
+    <StackPanel x:Name="panel">
+        <StackPanel.Resources>
+            <Style x:Key="WaitingInTheWings" TargetType="{x:Type Button}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="TestBrush" Color="Green" />
+                </Style.Resources>
+            </Style>
+        </StackPanel.Resources>
+
+        <Button Style="{DynamicResource TestStyle}" Background="{DynamicResource TestBrush}" Content="Foo" x:Name="button"/>
+
+    </StackPanel>
+
+</StackPanel>
+

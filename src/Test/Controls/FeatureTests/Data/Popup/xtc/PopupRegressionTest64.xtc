@@ -1,0 +1,47 @@
+<XTC>
+  <TEST Name="PopupRegressionTest64" Priority="0" SubArea="Popup" ExecutionGroup="Pri1">
+    <DATA>
+      <INIT Class="PopupRegressionTest64"/>
+      <VARIATION ID="1">
+        <CONTROL>
+          <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <Popup Placement="Bottom" PlacementTarget="{Binding ElementName=checkbox}" IsOpen="{Binding ElementName=checkbox, Path=IsChecked}" AllowsTransparency="true">
+
+              <StackPanel Name="popupPanel" Grid.IsSharedSizeScope="true">
+
+                <Grid Background="#5f7f7f">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="First"/>
+                    <ColumnDefinition SharedSizeGroup="Second" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+
+                  <Button Grid.Column="0" Grid.Row="0" Content="Button1 with more Content" />
+                  <Button Grid.Column="1" Grid.Row="0" Content="Button2"/>
+                </Grid>
+                <Grid Background="red">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="First"/>
+                    <ColumnDefinition SharedSizeGroup="Second"/>
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+
+                  <Button Grid.Column="0" Grid.Row="0" Content="Button1" />
+                  <Button Grid.Column="1" Grid.Row="0" Content="Button2 with more Content"/>
+                </Grid>
+
+              </StackPanel>
+
+            </Popup>
+
+            <CheckBox Name="checkbox">toggle me to open popup</CheckBox>
+          </StackPanel>
+        </CONTROL>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

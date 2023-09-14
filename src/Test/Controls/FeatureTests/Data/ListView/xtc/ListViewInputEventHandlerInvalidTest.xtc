@@ -1,0 +1,26 @@
+<XTC>
+  <TEST Name="ListViewInputEventHandlerInvalidTest" Priority="2" SubArea="ListView" Timeout="600">
+    <DATA>
+      <INIT Class="SelectorEventHandlerTest"/>
+      <PICT Name="ListBoxInputInvalidTest.pict" Args="/o:2" Excludes=""/>
+      <XAMLS>
+        <XAML Name="SelectorControlsBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingSmallDataBVT.xaml"/>
+        <XAML Name="SelectorControlsBindingLargeDataBVT.xaml"/>
+      </XAMLS>
+      <!-- Test key on listview from 0 to 1 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="0" AttachEventIndex="1" EventName="SelectedHandler" ShouldEventFire="false" />
+      <!-- Test Right key on listview from 3 to 2 and validate 'SelectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="3" AttachEventIndex="2" EventName="SelectedHandler" ShouldEventFire="false" />
+      <!-- Test Left key on listview from 0 to 0 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="0" AttachEventIndex="0" EventName="UnselectedHandler" ShouldEventFire="false" />
+      <!-- Test Right key on listview from 3 to 3 and validate 'UnselectedHandler' event doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Keyboard" FromIndex="3" AttachEventIndex="3" EventName="UnselectedHandler" ShouldEventFire="false" />
+      
+      <!-- Test mouse click on listview from 0 to 3 with attachEventIndex is 3 and validate 'SelectedHandler' doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Mouse" FromIndex="0" ToIndex="3" AttachEventIndex="3" EventName="SelectedHandler" ShouldEventFire="false" />
+      <!-- Test mouse click on listview from 0 to 3 with attachEventIndex is 3 and validate 'SelectedHandler' doesn't fire -->
+      <VARIATION ControlName="listview" InputType="Mouse" FromIndex="0" ToIndex="3" AttachEventIndex="3" EventName="UnselectedHandler" ShouldEventFire="false" />
+    </DATA>
+  </TEST>
+</XTC>

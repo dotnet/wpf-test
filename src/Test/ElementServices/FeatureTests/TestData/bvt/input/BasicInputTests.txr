@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TestExtenderGraph
+  xmlns="clr-namespace:Microsoft.Test.Integration;assembly=TestRuntime"
+  xmlns:txrw="clr-namespace:Microsoft.Test.Integration.Windows;assembly=TestRuntime"
+  xmlns:ndp="clr-namespace:System;assembly=mscorlib">
+
+    <CallbackVariationGenerator Name="NonBrowserInputActions" Priority="1">
+
+        <CallbackVariationGenerator.Input>
+            <StorageItem Name="TestContainer">
+                <StorageItem.Type>
+                    <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                </StorageItem.Type>
+            </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+            <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+            <ndp:String>FeatureTests\ElementServices\CoreInput_GridPanelCursors.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+            <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                        TypeName="Avalon.Test.CoreUI.TestApp"
+                        MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <ContentItem>CaptureAfterNonModalWindowApp</ContentItem>
+        <ContentItem>CaptureAfterModalWindowApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorAniHandleApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorCurHandleApp</ContentItem>
+        <ContentItem>CursorTypeConverterConvertFromApp</ContentItem>
+        <ContentItem>InputManagerEventsApp</ContentItem>
+        <ContentItem>InputManagerProcessEventPeekInputApp</ContentItem>
+        <ContentItem>InputManagerProcessEventPushInputNullApp</ContentItem>
+        <ContentItem>InputManagerProcessEventPushInputPromoteInvalidApp</ContentItem>
+        <ContentItem>InputManagerProcessEventPushInputPromoteNullApp</ContentItem>
+        <ContentItem>MultiSourceFocusableApp</ContentItem>
+        <ContentItem>MultiWindowCaptureApp</ContentItem>
+        <ContentItem>MultiWindowCaptureMouseWheelApp</ContentItem>
+        <ContentItem>MultiWindowFocusableApp</ContentItem>
+        <ContentItem>MultiWindowFocusApp</ContentItem>
+        <ContentItem>SourceChangedEventTest</ContentItem>
+        <ContentItem>TextInputAltNumKeyApp</ContentItem>
+        <ContentItem>UIElementMouseCursorCurHandleApp</ContentItem>
+        <ContentItem>UIElementMouseCursorAniHandleApp</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <CallbackVariationGenerator Name="CommonInputActionsPri0" Priority="0">
+
+        <CallbackVariationGenerator.Input>
+            <StorageItem Name="TestContainer">
+                <StorageItem.Type>
+                    <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                </StorageItem.Type>
+            </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+            <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+            <ndp:String>FeatureTests\ElementServices\CoreInput_GridPanelCursors.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+            <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                        TypeName="Avalon.Test.CoreUI.TestApp"
+                        MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <ContentItem>CaptureClickApp</ContentItem>
+        <ContentItem>CaptureMoveApp</ContentItem>
+        <ContentItem>IsFocusWithinApp</ContentItem>
+        <ContentItem>KeyDownApp</ContentItem>
+        <ContentItem>KeyStateApp</ContentItem>
+        <ContentItem>MouseButtonApp</ContentItem>
+        <ContentItem>MouseCursorApp</ContentItem>
+        <ContentItem>MouseDownApp</ContentItem>
+        <ContentItem>MouseEnterApp</ContentItem>
+        <ContentItem>MouseMoveApp</ContentItem>
+        <ContentItem>MouseSetCursorApp</ContentItem>
+        <ContentItem>MouseWheelApp</ContentItem>
+        <ContentItem>TextInputApp</ContentItem>
+        <ContentItem>UIElementCaptureApp</ContentItem>
+        <ContentItem>UIElementCaptureToSubtreeApp</ContentItem>
+        <ContentItem>UIElementFocusApp</ContentItem>
+        <ContentItem>UIElementIsEnabledApp</ContentItem>
+        <ContentItem>UIElementIsHitTestVisibleApp</ContentItem>
+        <ContentItem>UIElementLostFocusApp</ContentItem>
+        <ContentItem>UIElementReleaseMouseCaptureApp</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <CallbackVariationGenerator Name="CommonInputActionsPri1" Priority="1">
+
+        <CallbackVariationGenerator.Input>
+            <StorageItem Name="TestContainer">
+                <StorageItem.Type>
+                    <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                </StorageItem.Type>
+            </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+            <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+            <ndp:String>FeatureTests\ElementServices\CoreInput_GridPanelCursors.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+            <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                        TypeName="Avalon.Test.CoreUI.TestApp"
+                        MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <!-- DISABLED or FAILS: 
+        <ContentItem>ContentElementLostFocusApp</ContentItem>
+        <ContentItem>ContentElementForceCursorApp</ContentItem>
+        <ContentItem>CursorRelativePathStringApp</ContentItem>
+        <ContentItem>CursorConverterConvertFromRelativePathApp</ContentItem>
+        <ContentItem>FrameworkContentElementCursorApp</ContentItem>
+        <ContentItem>FocusAfterWinFormsMessageBoxApp</ContentItem>
+        <ContentItem>FocusAfterRemoveElementApp</ContentItem>
+        <ContentItem>FocusAfterRemoveElementApp</ContentItem>
+        <ContentItem>KeyConverterConvertFromAllKeysApp</ContentItem>
+        <ContentItem>MultiWindowFocusActiveElementApp</ContentItem>
+        <ContentItem>MultiCursorMoveToAndClickApp</ContentItem>
+        <ContentItem>TextInputAltShiftCharApp</ContentItem>
+        <ContentItem>UIElementPreviewFocusApp</ContentItem>
+        <ContentItem>UIElementMouseEnterBorderImmediateMoveApp</ContentItem>
+        <ContentItem>UIElementMouseDownOutsideCapturedElementCanvasApp</ContentItem>
+        <ContentItem>UIElementMouseDownOutsideCapturedElementApp</ContentItem>
+        -->
+
+        <!-- SOME VARIATIONS FAIL:
+        <ContentItem>GetIntermediatePointsContentElementApp</ContentItem>
+        <ContentItem>GetIntermediatePointsUIElementApp</ContentItem>
+        <ContentItem>KeyboardFocusedPageNavigateApp</ContentItem>
+        <ContentItem>InputManagerMultipleProcessEventsApp</ContentItem>
+        <ContentItem>KeyboardFocusedPageNavigateBackApp</ContentItem>
+        -->
+
+        <!-- NOT A TestAPP: 
+        <ContentItem>CursorTypeConverterTest</ContentItem>
+        <ContentItem>InputAction</ContentItem>
+        <ContentItem>MultipleCursorVerifiers</ContentItem>
+        -->
+
+        <!-- ALL VARIATIONS PASS:  -->
+        <ContentItem>UIElementIsMouseDirectlyOverApp</ContentItem>
+        <ContentItem>CaptureAfterMessageBoxApp</ContentItem>
+        <ContentItem>CaptureAfterRemoveElementApp</ContentItem>
+        <ContentItem>CaptureAfterRemoveElementEnabledFalseApp</ContentItem>
+        <ContentItem>CaptureAfterRemoveElementRecaptureApp</ContentItem>
+        <ContentItem>CaptureAfterWinFormsMessageBoxApp</ContentItem>
+        <ContentItem>CaptureDoubleAnimationApp</ContentItem>
+        <ContentItem>CaptureDoubleAnimationPositionApp</ContentItem>
+        <ContentItem>CaptureMoveNoSourceApp</ContentItem>
+        <ContentItem>CapturePositionApp</ContentItem>
+        <ContentItem>ContentElementCaptureApp</ContentItem>
+        <ContentItem>ContentElementCaptureToSubTreeApp</ContentItem>
+        <ContentItem>ContentElementCaptureToSubtreeMouseClickApp</ContentItem>
+        <ContentItem>ContentElementFocusApp</ContentItem>
+        <ContentItem>ContentElementIsEnabledApp</ContentItem>
+        <ContentItem>ContentElementIsFocusWithinApp</ContentItem>
+        <ContentItem>ContentElementIsMouseDirectlyOverApp</ContentItem>
+        <ContentItem>ContentElementIsMouseOverApp</ContentItem>
+        <ContentItem>ContentElementIsMouseOverChangedApp</ContentItem>
+        <ContentItem>ContentElementKeyDownApp</ContentItem>
+        <ContentItem>ContentElementMouseButtonApp</ContentItem>
+        <ContentItem>ContentElementMouseButtonImmediateMoveApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorAniFileApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorAniStreamApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorCurFileApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorCurStreamApp</ContentItem>
+        <ContentItem>ContentElementMouseDirectlyOverApp</ContentItem>
+        <ContentItem>ContentElementMouseDownOutsideCapturedElementApp</ContentItem>
+        <ContentItem>ContentElementMouseDownOutsideCapturedElementCanvasApp</ContentItem>
+        <ContentItem>ContentElementMouseEnterApp</ContentItem>
+        <ContentItem>ContentElementMouseEnterBorderApp</ContentItem>
+        <ContentItem>ContentElementMouseEnterBorderImmediateMoveApp</ContentItem>
+        <ContentItem>ContentElementMouseEnterImmediateMoveApp</ContentItem>
+        <ContentItem>ContentElementMouseLeftButtonDownApp</ContentItem>
+        <ContentItem>ContentElementMouseMoveApp</ContentItem>
+        <ContentItem>ContentElementMouseRightButtonDownApp</ContentItem>
+        <ContentItem>ContentElementMouseWheelApp</ContentItem>
+        <ContentItem>ContentElementPreviewFocusApp</ContentItem>
+        <ContentItem>ContentElementQueryCursorApp</ContentItem>
+        <ContentItem>ContentElementReleaseMouseCaptureApp</ContentItem>
+        <ContentItem>CursorTypeConverterCanConvertFromApp</ContentItem>
+        <ContentItem>CursorTypeConverterCanConvertToApp</ContentItem>
+        <ContentItem>CursorTypeConverterCanConvertToNullContextApp</ContentItem>
+        <ContentItem>CursorTypeConverterConvertToApp</ContentItem>
+        <ContentItem>FocusAfterMessageBoxApp</ContentItem>
+        <ContentItem>FocusAfterModalWindowApp</ContentItem>
+        <ContentItem>FocusAfterNonModalWindowApp</ContentItem>
+        <ContentItem>FocusAfterRemoveElementRefocusApp</ContentItem>
+        <ContentItem>FocusInvalidInputElementApp</ContentItem>
+        <ContentItem>ForceCursorApp</ContentItem>
+        <ContentItem>FrameworkContentElementFocusableApp</ContentItem>
+        <ContentItem>FrameworkContentElementIsFocusWithinApp</ContentItem>
+        <ContentItem>FrameworkContentElementIsMouseOverApp</ContentItem>
+        <ContentItem>FrameworkContentElementIsMouseOverChangedApp</ContentItem>
+        <ContentItem>FrameworkContentElementQueryCursorMouseMoveApp</ContentItem>
+        <ContentItem>FrameworkElementForceCursorElementMoveApp</ContentItem>
+        <ContentItem>FrameworkElementInputHitTestDisabledApp</ContentItem>
+        <ContentItem>FrameworkElementInputHitTestInvisibleApp</ContentItem>
+        <ContentItem>FrameworkElementIsFocusWithinApp</ContentItem>
+        <ContentItem>FrameworkElementIsMouseOverChangedApp</ContentItem>
+        <ContentItem>FrameworkElementMouseOverVisibilityPropertyTriggerApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorElementMoveApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorMouseMoveApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorNullCursorApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorSendMessageApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorUpdateCursorApp</ContentItem>
+        <ContentItem>KeyAfterMessageBoxApp</ContentItem>
+        <ContentItem>KeyAfterWinFormsMessageBoxApp</ContentItem>
+        <ContentItem>KeyboardDeviceIsKeyToggledApp</ContentItem>
+        <ContentItem>KeyboardFocusedApp</ContentItem>
+        <ContentItem>KeyboardFocusedFrameApp</ContentItem>
+        <ContentItem>KeyboardStateApp</ContentItem>
+        <ContentItem>KeyConverterCanConvertFromApp</ContentItem>
+        <ContentItem>KeyConverterCanConvertToApp</ContentItem>
+        <ContentItem>KeyConverterConvertFromApp</ContentItem>
+        <ContentItem>KeyConverterConvertFromInvalidKeyApp</ContentItem>
+        <ContentItem>KeyConverterConvertFromSpecificCultureApp</ContentItem>
+        <ContentItem>KeyConverterConvertToApp</ContentItem>
+        <ContentItem>KeyConverterConvertToInvalidDestinationTypeApp</ContentItem>
+        <ContentItem>KeyConverterConvertToInvalidKeyApp</ContentItem>
+        <ContentItem>KeyConverterConvertToKeyDownApp</ContentItem>
+        <ContentItem>KeyConverterConvertToKeyNoneApp</ContentItem>
+        <ContentItem>ModifierKeysConverterCanConvertFromApp</ContentItem>
+        <ContentItem>ModifierKeysConverterCanConvertToApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromCombination2KeyApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromCombination3KeyApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromSpecificCultureApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromWindowsKeyApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertToApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertToInvalidDestinationTypeApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertToInvalidKeyApp</ContentItem>
+        <ContentItem>MostRecentInputDeviceApp</ContentItem>
+        <ContentItem>MostRecentInputDeviceMouseMoveApp</ContentItem>
+        <ContentItem>MouseButtonAfterMessageBoxApp</ContentItem>
+        <ContentItem>MouseButtonAfterWinFormsMessageBoxApp</ContentItem>
+        <ContentItem>MouseButtonOnContentElementApp</ContentItem>
+        <ContentItem>MouseButtonOnFrameWithContentElementApp</ContentItem>
+        <ContentItem>MouseButtonOnFrameWithFrameworkElementApp</ContentItem>
+        <ContentItem>MouseButtonOnFrameworkElementApp</ContentItem>
+        <ContentItem>MouseCaptureButtonDownApp</ContentItem>
+        <ContentItem>MouseCapturedApp</ContentItem>
+        <ContentItem>MouseClassButtonApp</ContentItem>
+        <ContentItem>MouseClassButtonUpApp</ContentItem>
+        <ContentItem>MouseCursorRightBorderApp</ContentItem>
+        <ContentItem>MouseCursorToStringApp</ContentItem>
+        <ContentItem>MouseCursorToStringCursorTypeApp</ContentItem>
+        <ContentItem>MouseDirectlyOverApp</ContentItem>
+        <ContentItem>MouseDirectlyOverDrawingVisualApp</ContentItem>
+        <ContentItem>MouseDirectlyOverPointAnimationVisualApp</ContentItem>
+        <ContentItem>MouseDirectlyOverRemoveWindowContentApp</ContentItem>
+        <ContentItem>MouseDirectlyOverVisualApp</ContentItem>
+        <ContentItem>MouseDoubleClickApp</ContentItem>
+        <ContentItem>MouseDoubleClickButtonStateApp</ContentItem>
+        <ContentItem>MouseEnterImmediateMoveApp</ContentItem>
+        <ContentItem>MouseGetPositionApp</ContentItem>
+        <ContentItem>MouseGetPositionInvalidInputElementApp</ContentItem>
+        <ContentItem>MouseLeaveDoubleAnimationApp</ContentItem>
+        <ContentItem>MouseLeaveDoubleAnimationRepeatApp</ContentItem>
+        <ContentItem>MouseRightButtonDownApp</ContentItem>
+        <ContentItem>MouseTripleClickApp</ContentItem>
+        <ContentItem>MouseUpdateCursorApp</ContentItem>
+        <ContentItem>PreProcessEventPeekInputApp</ContentItem>
+        <ContentItem>PreProcessEventPopInputApp</ContentItem>
+        <ContentItem>PreviewMouseButtonOnContentElementApp</ContentItem>
+        <ContentItem>PreviewMouseButtonOnFrameworkElementApp</ContentItem>
+        <ContentItem>TextInputAltCharApp</ContentItem>
+        <ContentItem>TextInputControlCharApp</ContentItem>
+        <ContentItem>TextInputShiftCharApp</ContentItem>
+        <ContentItem>UIElementCaptureToSubtreeContentHostMouseClickApp</ContentItem>
+        <ContentItem>UIElementCaptureToSubtreeMouseClickApp</ContentItem>
+        <ContentItem>UIElementInputHitTestApp</ContentItem>
+        <ContentItem>UIElementInputHitTestContentHostApp</ContentItem>
+        <ContentItem>UIElementInputHitTestTransparentBrushApp</ContentItem>
+        <ContentItem>UIElementInputHitTestVisibleFalseApp</ContentItem>
+        <ContentItem>UIElementMouseCursorAniFileApp</ContentItem>
+        <ContentItem>UIElementMouseCursorAniStreamApp</ContentItem>
+        <ContentItem>UIElementMouseCursorCurFileApp</ContentItem>
+        <ContentItem>UIElementMouseCursorCurStreamApp</ContentItem>
+        <ContentItem>UIElementMouseCursorOverrideApp</ContentItem>
+        <ContentItem>UIElementMouseEnterBorderApp</ContentItem>
+        <ContentItem>UIElementQueryCursorApp</ContentItem>
+        <ContentItem>UIElementReleaseMouseCaptureLostCaptureApp</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <CallbackVariationGenerator Name="BrowserInputActionsPri1" Priority="1">
+
+        <CallbackVariationGenerator.Input>
+            <StorageItem Name="TestContainer">
+                <StorageItem.Type>
+                    <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                </StorageItem.Type>
+            </StorageItem>
+        </CallbackVariationGenerator.Input>
+
+        <CallbackVariationGenerator.SupportFiles>
+            <ndp:String>FeatureTests\ElementServices\*.cur</ndp:String>
+            <ndp:String>FeatureTests\ElementServices\*.ani</ndp:String>
+            <ndp:String>FeatureTests\ElementServices\CoreInput_GridPanelCursors.xaml</ndp:String>
+        </CallbackVariationGenerator.SupportFiles>
+
+        <CallbackVariationGenerator.Callback>
+            <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                        TypeName="Avalon.Test.CoreUI.TestApp"
+                        MethodName="RunTestAction" />
+        </CallbackVariationGenerator.Callback>
+
+        <!-- INCONSISTENT:
+        <ContentItem>FrameworkElementIsFocusWithinApp</ContentItem>
+        <ContentItem>ContentElementIsMouseOverApp</ContentItem>
+        <ContentItem>UIElementInputHitTestContentHostApp</ContentItem>
+        <ContentItem>UIElementIsMouseDirectlyOverApp</ContentItem>
+        <ContentItem>UIElementCaptureToSubtreeContentHostMouseClickApp</ContentItem>
+        <ContentItem>UIElementInputHitTestTransparentBrushApp</ContentItem>
+        -->
+        <ContentItem>CaptureAfterMessageBoxApp</ContentItem>
+        <ContentItem>CaptureAfterRemoveElementApp</ContentItem>
+        <ContentItem>CaptureAfterRemoveElementEnabledFalseApp</ContentItem>
+        <ContentItem>CaptureAfterRemoveElementRecaptureApp</ContentItem>
+        <ContentItem>CaptureAfterWinFormsMessageBoxApp</ContentItem>
+        <ContentItem>CaptureDoubleAnimationApp</ContentItem>
+        <ContentItem>CaptureDoubleAnimationPositionApp</ContentItem>
+        <ContentItem>CaptureMoveNoSourceApp</ContentItem>
+        <ContentItem>CapturePositionApp</ContentItem>
+        <ContentItem>ContentElementCaptureApp</ContentItem>
+        <ContentItem>ContentElementCaptureToSubTreeApp</ContentItem>
+        <ContentItem>ContentElementCaptureToSubtreeMouseClickApp</ContentItem>
+        <ContentItem>ContentElementFocusApp</ContentItem>
+        <ContentItem>ContentElementIsEnabledApp</ContentItem>
+        <ContentItem>ContentElementIsFocusWithinApp</ContentItem>
+        <ContentItem>ContentElementIsMouseDirectlyOverApp</ContentItem>
+        <ContentItem>ContentElementIsMouseOverChangedApp</ContentItem>
+        <ContentItem>ContentElementKeyDownApp</ContentItem>
+        <ContentItem>ContentElementMouseButtonApp</ContentItem>
+        <ContentItem>ContentElementMouseButtonImmediateMoveApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorAniFileApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorAniStreamApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorCurFileApp</ContentItem>
+        <ContentItem>ContentElementMouseCursorCurStreamApp</ContentItem>
+        <ContentItem>ContentElementMouseDirectlyOverApp</ContentItem>
+        <ContentItem>ContentElementMouseDownOutsideCapturedElementApp</ContentItem>
+        <ContentItem>ContentElementMouseDownOutsideCapturedElementCanvasApp</ContentItem>
+        <ContentItem>ContentElementMouseEnterApp</ContentItem>
+        <ContentItem>ContentElementMouseEnterBorderApp</ContentItem>
+        <ContentItem>ContentElementMouseEnterBorderImmediateMoveApp</ContentItem>
+        <ContentItem>ContentElementMouseEnterImmediateMoveApp</ContentItem>
+        <ContentItem>ContentElementMouseLeftButtonDownApp</ContentItem>
+        <ContentItem>ContentElementMouseMoveApp</ContentItem>
+        <ContentItem>ContentElementMouseRightButtonDownApp</ContentItem>
+        <ContentItem>ContentElementMouseWheelApp</ContentItem>
+        <ContentItem>ContentElementPreviewFocusApp</ContentItem>
+        <ContentItem>ContentElementQueryCursorApp</ContentItem>
+        <ContentItem>ContentElementReleaseMouseCaptureApp</ContentItem>
+        <ContentItem>CursorTypeConverterCanConvertFromApp</ContentItem>
+        <ContentItem>CursorTypeConverterCanConvertToApp</ContentItem>
+        <ContentItem>CursorTypeConverterCanConvertToNullContextApp</ContentItem>
+        <ContentItem>CursorTypeConverterConvertToApp</ContentItem>
+        <ContentItem>FocusAfterMessageBoxApp</ContentItem>
+        <ContentItem>FocusAfterModalWindowApp</ContentItem>
+        <ContentItem>FocusAfterNonModalWindowApp</ContentItem>
+        <ContentItem>FocusAfterRemoveElementRefocusApp</ContentItem>
+        <ContentItem>FocusInvalidInputElementApp</ContentItem>
+        <ContentItem>ForceCursorApp</ContentItem>
+        <ContentItem>FrameworkContentElementFocusableApp</ContentItem>
+        <ContentItem>FrameworkContentElementIsFocusWithinApp</ContentItem>
+        <ContentItem>FrameworkContentElementIsMouseOverApp</ContentItem>
+        <ContentItem>FrameworkContentElementIsMouseOverChangedApp</ContentItem>
+        <ContentItem>FrameworkContentElementQueryCursorMouseMoveApp</ContentItem>
+        <ContentItem>FrameworkElementForceCursorElementMoveApp</ContentItem>
+        <ContentItem>FrameworkElementInputHitTestDisabledApp</ContentItem>
+        <ContentItem>FrameworkElementInputHitTestInvisibleApp</ContentItem>
+        <ContentItem>FrameworkElementIsMouseOverChangedApp</ContentItem>
+        <ContentItem>FrameworkElementMouseOverVisibilityPropertyTriggerApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorElementMoveApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorMouseMoveApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorNullCursorApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorSendMessageApp</ContentItem>
+        <ContentItem>FrameworkElementQueryCursorUpdateCursorApp</ContentItem>
+        <ContentItem>KeyAfterMessageBoxApp</ContentItem>
+        <ContentItem>KeyAfterWinFormsMessageBoxApp</ContentItem>
+        <ContentItem>KeyboardDeviceIsKeyToggledApp</ContentItem>
+        <ContentItem>KeyboardFocusedApp</ContentItem>
+        <ContentItem>KeyboardFocusedFrameApp</ContentItem>
+        <ContentItem>KeyboardStateApp</ContentItem>
+        <ContentItem>KeyConverterCanConvertFromApp</ContentItem>
+        <ContentItem>KeyConverterCanConvertToApp</ContentItem>
+        <ContentItem>KeyConverterConvertFromApp</ContentItem>
+        <ContentItem>KeyConverterConvertFromInvalidKeyApp</ContentItem>
+        <ContentItem>KeyConverterConvertFromSpecificCultureApp</ContentItem>
+        <ContentItem>KeyConverterConvertToApp</ContentItem>
+        <ContentItem>KeyConverterConvertToInvalidDestinationTypeApp</ContentItem>
+        <ContentItem>KeyConverterConvertToInvalidKeyApp</ContentItem>
+        <ContentItem>KeyConverterConvertToKeyDownApp</ContentItem>
+        <ContentItem>KeyConverterConvertToKeyNoneApp</ContentItem>
+        <ContentItem>ModifierKeysConverterCanConvertFromApp</ContentItem>
+        <ContentItem>ModifierKeysConverterCanConvertToApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromCombination2KeyApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromCombination3KeyApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromSpecificCultureApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertFromWindowsKeyApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertToApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertToInvalidDestinationTypeApp</ContentItem>
+        <ContentItem>ModifierKeysConverterConvertToInvalidKeyApp</ContentItem>
+        <ContentItem>MostRecentInputDeviceApp</ContentItem>
+        <ContentItem>MostRecentInputDeviceMouseMoveApp</ContentItem>
+        <ContentItem>MouseButtonAfterMessageBoxApp</ContentItem>
+        <ContentItem>MouseButtonAfterWinFormsMessageBoxApp</ContentItem>
+        <ContentItem>MouseButtonOnContentElementApp</ContentItem>
+        <ContentItem>MouseButtonOnFrameWithContentElementApp</ContentItem>
+        <ContentItem>MouseButtonOnFrameWithFrameworkElementApp</ContentItem>
+        <ContentItem>MouseButtonOnFrameworkElementApp</ContentItem>
+        <ContentItem>MouseCaptureButtonDownApp</ContentItem>
+        <ContentItem>MouseCapturedApp</ContentItem>
+        <ContentItem>MouseClassButtonApp</ContentItem>
+        <ContentItem>MouseClassButtonUpApp</ContentItem>
+        <ContentItem>MouseCursorRightBorderApp</ContentItem>
+        <ContentItem>MouseCursorToStringApp</ContentItem>
+        <ContentItem>MouseCursorToStringCursorTypeApp</ContentItem>
+        <ContentItem>MouseDirectlyOverApp</ContentItem>
+        <ContentItem>MouseDirectlyOverDrawingVisualApp</ContentItem>
+        <ContentItem>MouseDirectlyOverPointAnimationVisualApp</ContentItem>
+        <ContentItem>MouseDirectlyOverRemoveWindowContentApp</ContentItem>
+        <ContentItem>MouseDirectlyOverVisualApp</ContentItem>
+        <ContentItem>MouseDoubleClickApp</ContentItem>
+        <ContentItem>MouseDoubleClickButtonStateApp</ContentItem>
+        <ContentItem>MouseEnterImmediateMoveApp</ContentItem>
+        <ContentItem>MouseGetPositionApp</ContentItem>
+        <ContentItem>MouseGetPositionInvalidInputElementApp</ContentItem>
+        <ContentItem>MouseLeaveDoubleAnimationApp</ContentItem>
+        <ContentItem>MouseLeaveDoubleAnimationRepeatApp</ContentItem>
+        <ContentItem>MouseRightButtonDownApp</ContentItem>
+        <ContentItem>MouseTripleClickApp</ContentItem>
+        <ContentItem>MouseUpdateCursorApp</ContentItem>
+        <ContentItem>PreProcessEventPeekInputApp</ContentItem>
+        <ContentItem>PreProcessEventPopInputApp</ContentItem>
+        <ContentItem>PreviewMouseButtonOnContentElementApp</ContentItem>
+        <ContentItem>PreviewMouseButtonOnFrameworkElementApp</ContentItem>
+        <ContentItem>TextInputAltCharApp</ContentItem>
+        <ContentItem>TextInputControlCharApp</ContentItem>
+        <ContentItem>TextInputShiftCharApp</ContentItem>
+        <ContentItem>UIElementCaptureToSubtreeMouseClickApp</ContentItem>
+        <ContentItem>UIElementInputHitTestApp</ContentItem>
+        <ContentItem>UIElementInputHitTestVisibleFalseApp</ContentItem>
+        <ContentItem>UIElementMouseCursorAniFileApp</ContentItem>
+        <ContentItem>UIElementMouseCursorAniStreamApp</ContentItem>
+        <ContentItem>UIElementMouseCursorCurFileApp</ContentItem>
+        <ContentItem>UIElementMouseCursorCurStreamApp</ContentItem>
+        <ContentItem>UIElementMouseCursorOverrideApp</ContentItem>
+        <ContentItem>UIElementMouseEnterBorderApp</ContentItem>
+        <ContentItem>UIElementQueryCursorApp</ContentItem>
+        <ContentItem>UIElementReleaseMouseCaptureLostCaptureApp</ContentItem>
+
+    </CallbackVariationGenerator>
+
+    <txrw:ContainerVariationGenerator Name="WpfApplicationWindowNonPri0Variations">
+        <txrw:ContainerVariationGenerator.ApplicationTypes>
+            <ContentItem Priority="0">WpfApplication</ContentItem>
+        </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+        <CallbackVariationGenerator>
+
+            <CallbackVariationGenerator.Output>
+                <StorageItem Name="TestContainer">
+                    <StorageItem.Type>
+                        <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                    </StorageItem.Type>
+                </StorageItem>
+            </CallbackVariationGenerator.Output>
+
+            <CallbackVariationGenerator.Callback>
+                <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                            TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                            MethodName="CreateTestContainer" />
+            </CallbackVariationGenerator.Callback>
+
+            <ContentItem Priority="0">Window</ContentItem>
+
+        </CallbackVariationGenerator>
+
+        <SelectorGenerator>
+            <GeneratorReference TargetName="CommonInputActionsPri1" />
+            <GeneratorReference TargetName="NonBrowserInputActions" />
+        </SelectorGenerator>
+
+    </txrw:ContainerVariationGenerator>
+
+    <txrw:ContainerVariationGenerator Name="AllPri0Variations">
+        <txrw:ContainerVariationGenerator.ApplicationTypes>
+            <ContentItem Priority="0">ClrExe</ContentItem>
+            <ContentItem Priority="1">WpfApplication</ContentItem>
+            <ContentItem Priority="2">WinFormsApplication</ContentItem>
+        </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+        <CallbackVariationGenerator>
+
+            <CallbackVariationGenerator.Output>
+                <StorageItem Name="TestContainer">
+                    <StorageItem.Type>
+                        <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                    </StorageItem.Type>
+                </StorageItem>
+            </CallbackVariationGenerator.Output>
+
+            <CallbackVariationGenerator.Callback>
+                <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                            TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                            MethodName="CreateTestContainer" />
+            </CallbackVariationGenerator.Callback>
+
+            <ContentItem Priority="0">Window</ContentItem>
+            <ContentItem Priority="2">NavigationWindow</ContentItem>
+            <ContentItem Priority="2">HwndSource</ContentItem>
+            <ContentItem Priority="3">WindowsFormSource</ContentItem>
+
+        </CallbackVariationGenerator>
+
+        <SelectorGenerator>
+            <GeneratorReference TargetName="CommonInputActionsPri0" />
+        </SelectorGenerator>
+
+    </txrw:ContainerVariationGenerator>
+
+    <txrw:ContainerVariationGenerator Name="BrowserVariations" Priority="1">
+        <txrw:ContainerVariationGenerator.ApplicationTypes>
+            <ContentItem>Xbap</ContentItem>
+        </txrw:ContainerVariationGenerator.ApplicationTypes>
+
+        <CallbackVariationGenerator>
+
+            <CallbackVariationGenerator.Output>
+                <StorageItem Name="TestContainer">
+                    <StorageItem.Type>
+                        <TypeDesc TypeName="Avalon.Test.CoreUI.Common.ITestContainer" AssemblyName="CoreTestsUntrusted.dll"  />
+                    </StorageItem.Type>
+                </StorageItem>
+            </CallbackVariationGenerator.Output>
+
+            <CallbackVariationGenerator.Callback>
+                <MethodDesc AssemblyName="CoreTestsUntrusted.dll" 
+                            TypeName="Avalon.Test.CoreUI.Common.StubTestContainer"
+                            MethodName="CreateTestContainer" />
+            </CallbackVariationGenerator.Callback>
+
+            <ContentItem>Browser</ContentItem>
+
+        </CallbackVariationGenerator>
+
+        <SelectorGenerator>
+            <GeneratorReference TargetName="CommonInputActionsPri0" />
+            <GeneratorReference TargetName="BrowserInputActionsPri1" />
+        </SelectorGenerator>
+
+    </txrw:ContainerVariationGenerator>
+
+</TestExtenderGraph>
+

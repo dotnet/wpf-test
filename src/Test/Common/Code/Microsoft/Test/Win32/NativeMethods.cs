@@ -2743,6 +2743,18 @@ namespace Microsoft.Test.Win32
 
         [DllImport(ExternDll.Kernel32, SetLastError = true)]
         public static extern bool FreeLibrary(IntPtr hModule);
+
+
+        /// <summary>Opens the clipboard for examination and prevents other applications from modifying the clipboard content.</summary>
+        /// <param name="hwndNewOwner">Handle to the window to be associated with the open clipboard. If this parameter is NULL, the open clipboard is associated with the current task.</param>
+        /// <returns>true if successfull, false otherwise.</returns>
+        [DllImport(ExternDll.User32, ExactSpelling=true, CharSet=CharSet.Auto, SetLastError = true)]
+        public static extern bool OpenClipboard(IntPtr hwndNewOwner);
+
+        /// <summary>Closes the clipboard.</summary>
+        /// <returns>true if successfull, false otherwise.</returns>
+        [DllImport(ExternDll.User32, ExactSpelling=true, CharSet=CharSet.Auto, SetLastError = true)]
+        public static extern bool CloseClipboard();
     }
 
 

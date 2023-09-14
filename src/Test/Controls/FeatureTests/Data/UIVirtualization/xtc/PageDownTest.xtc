@@ -1,0 +1,95 @@
+﻿<XTC>
+  <TEST Name="PageDown Test" SubArea="UIVirtualization" Priority="2" ExecutionGroup="Pri2" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1">
+        <CONTROL>
+          <DockPanel
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="180" Name="CONTROLTOTEST">
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <!--In Win7 StackPanl items need 11 times PageDown can go to bottom but in Win8 need 15 times,So I add 4 times PageDown-->
+        <Actions>
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateUIVirtualization" />
+          <Validation Name="ValidateMaxDeVirtualizedItems">
+            <Parameter Value="50" />
+          </Validation>
+          <Validation Name="ValidateLastItemDeVirtualized" />
+          <Validation Name="ValidateLastItemSelected" />
+        </Validations>
+      </VARIATION>
+
+
+      <VARIATION ID="2">
+        <CONTROL>
+
+          <DockPanel
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="180" Width="700" Name="CONTROLTOTEST">
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="ChangeOrientation">
+            <Parameter Value="Horizontal" />
+          </Action>
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateUIVirtualization" />
+          <Validation Name="ValidateMaxDeVirtualizedItems">
+            <Parameter Value="50" />
+          </Validation>
+          <Validation Name="ValidateLastItemDeVirtualized" />
+          <Validation Name="ValidateLastItemSelected" />
+        </Validations>
+      </VARIATION>
+
+    </DATA>
+  </TEST>
+
+</XTC>

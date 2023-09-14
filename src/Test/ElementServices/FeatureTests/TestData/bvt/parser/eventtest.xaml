@@ -1,0 +1,34 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<DockPanel Name="root"
+           MouseLeftButtonDown="OnMouseDown"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Button Button.Name="b1" DockPanel.Dock="Left">hello</Button>
+
+    <Button Width="100" Height="50" Click="OnClick">ClickMe</Button>
+    <TextBlock Name="Text1">Waiting for Click!</TextBlock>
+    <TextBlock Name="Text2">Waiting for Click!</TextBlock>
+    <x:Code>
+    <![CDATA[
+        void OnClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Text1.TextRange.Text = "Clicked Text";
+        }
+        ]]>
+    </x:Code>
+
+   	<Canvas Canvas.Top="5"
+         Canvas.Left="10">
+	</Canvas>
+
+    <x:Code>
+    <![CDATA[
+        void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Text2.TextRange.Text = "MouseDown Text";
+        }
+    ]]>
+    </x:Code>
+</DockPanel>
+
+</Page>

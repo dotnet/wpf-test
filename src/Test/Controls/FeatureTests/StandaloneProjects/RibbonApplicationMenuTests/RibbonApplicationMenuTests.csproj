@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AC915CB1-1A0F-40B9-91B5-E8830815F957}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RibbonApplicationMenuTests</RootNamespace>
+    <AssemblyName>RibbonApplicationMenuTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(ControlsCommonProject)">
+      <Name>ControlsCommon</Name>
+      <Project>{72984D5E-E86F-4d35-BCF9-4E81209D6278}</Project>
+    </ProjectReference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ShellLibraryHintPath)</HintPath>
+    </Reference>
+    <Reference Include="RibbonControlsLibrary">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(RibbonLibraryHintPath)</HintPath>
+    </Reference>
+    <ProjectReference Include="$(TestApiCoreProject)" />
+
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="TemplatePage.xaml.cs">
+      <DependentUpon>TemplatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DelegateCommand.cs" />
+    <Compile Include="NoImages.xaml.cs">
+      <DependentUpon>NoImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NoTextPage.xaml.cs">
+      <DependentUpon>NoTextPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RAMPage1.xaml.cs">
+      <DependentUpon>RAMPage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Viewmodal.cs" />
+    <Page Include="TemplatePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="NoImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NoTextPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RAMPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestAPIDefaultProfile.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\AlignObjectsBottomHS.png" />
+    <Resource Include="Images\AlignObjectsCenteredHorizontalHS.png" />
+    <Resource Include="Images\AlignObjectsLeftHS.png" />
+    <Resource Include="Images\AlignObjectsRightHS.png" />
+    <Resource Include="Images\boldhs.png" />
+    <Resource Include="Images\BottomBorderHS.png" />
+    <Resource Include="Images\BulletsHS.png" />
+    <Resource Include="Images\ChangeCaseHS.png" />
+    <Resource Include="Images\CharacterScalingHS.png" />
+    <Resource Include="Images\ClearFormattingHS.png" />
+    <Resource Include="Images\CloseHH.png" />
+    <Resource Include="Images\copy.png" />
+    <Resource Include="Images\CopyHS.png" />
+    <Resource Include="Images\cut16.png" />
+    <Resource Include="Images\DecreaseDecimalsHS.png" />
+    <Resource Include="Images\DistributeParagraphHS.png" />
+    <Resource Include="Images\ExitHS.png" />
+    <Resource Include="Images\FileFinalizeMenuHH.png" />
+    <Resource Include="Images\FilePublishMenuHH.png" />
+    <Resource Include="Images\FileShareMenuHH.png" />
+    <Resource Include="Images\find32.png" />
+    <Resource Include="Images\FontColorNoPreviewHS.png" />
+    <Resource Include="Images\FormatPainterHS.png" />
+    <Resource Include="Images\function32.png" />
+    <Resource Include="Images\GrowFontHS.png" />
+    <Resource Include="Images\HeaderAndFooterHH.png" />
+    <Resource Include="Images\HeaderOrFooterHH.png" />
+    <Resource Include="Images\HighlightHS.png" />
+    <Resource Include="Images\IncreaseDecimalsHS.png" />
+    <Resource Include="Images\ItalicHS.png" />
+    <Resource Include="Images\Large.png" />
+    <Resource Include="Images\LineSpacingHS.png" />
+    <Resource Include="Images\MultiLangDocLibHS.png" />
+    <Resource Include="Images\NewHH.png" />
+    <Resource Include="Images\NormalViewHH.png" />
+    <Resource Include="Images\NormalViewHS.png" />
+    <Resource Include="Images\NumberingHS.png" />
+    <Resource Include="Images\open32.png" />
+    <Resource Include="Images\OpenHH.png" />
+    <Resource Include="Images\Options16.png" />
+    <Resource Include="Images\OutlineViewHH.png" />
+    <Resource Include="Images\OutlineViewHS.png" />
+    <Resource Include="Images\OutlookSearchHelpHS.png" />
+    <Resource Include="Images\PageLayoutViewHH.png" />
+    <Resource Include="Images\ParagraphMarkHS.png" />
+    <Resource Include="Images\ParagraphMarkHT.png" />
+    <Resource Include="Images\paste16.png" />
+    <Resource Include="Images\paste32.png" />
+    <Resource Include="Images\PrintHH.png" />
+    <Resource Include="Images\ReadingModeHH.png" />
+    <Resource Include="Images\saveas32.png" />
+    <Resource Include="Images\SaveAsHH.png" />
+    <Resource Include="Images\SaveHH.png" />
+    <Resource Include="Images\ShadeMergeFieldsHS.png" />
+    <Resource Include="Images\ShowHiddenFormFieldMarkHS.png" />
+    <Resource Include="Images\ShrinkFontHS.png" />
+    <Resource Include="Images\Small.png" />
+    <Resource Include="Images\SortUpHS.png" />
+    <Resource Include="Images\StartWorkflowHH.png" />
+    <Resource Include="Images\Strikethrough2HS.png" />
+    <Resource Include="Images\SubscriptHS.png" />
+    <Resource Include="Images\SuperscriptHS.png" />
+    <Resource Include="Images\UnderlineHS.png" />
+    <Resource Include="Images\WebLayoutViewHH.png" />
+    <Resource Include="Images\WebLayoutViewHS.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="NewNormalReference.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NewPressedReference.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaveAsCheckedHoverReference.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaveAsCheckedReference.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaveAsHoverReference.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaveAsNormalReference.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaveAsPressedReference.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+</Project>

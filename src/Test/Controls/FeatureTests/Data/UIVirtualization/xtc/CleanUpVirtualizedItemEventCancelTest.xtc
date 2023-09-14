@@ -1,0 +1,40 @@
+﻿<XTC>
+  <TEST Name="CleanUpVirtualizedItemEvent Cancel Test" SubArea="UIVirtualization" Priority="3" ExecutionGroup="Pri3" Disabled="True">
+    <DATA>
+      <INIT Class="ControlTestActionValidationUnitTest" SuppressGtoLogger="true" />
+      <VARIATION ID="1">
+        <CONTROL>
+          <DockPanel
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:src="clr-namespace:Avalon.Test.ComponentModel.DataSources;assembly=ControlsTest">
+            <DockPanel.Resources>
+              <src:Places x:Key="places" />
+              <CollectionViewSource Source="{StaticResource places}" x:Key="cvs1">
+              </CollectionViewSource>
+            </DockPanel.Resources>
+            <ListBox ItemsSource="{Binding Source={StaticResource cvs1}}" DisplayMemberPath="Name" Height="180" Name="CONTROLTOTEST">
+            </ListBox>
+          </DockPanel>
+        </CONTROL>
+        <Actions>
+          <Action Name="AddCleanUpVirtualizedItemCancelEventHandler">
+            <Parameter Value="ArgsKey" />
+          </Action>
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+          <Action Name="ControlPressPageDownAction" />
+        </Actions>
+        <Validations>
+          <Validation Name="ValidateCleanupEventCancel">
+            <Parameter Value="ArgsKey" />
+          </Validation>
+        </Validations>
+      </VARIATION>
+    </DATA>
+  </TEST>
+</XTC>

@@ -1,0 +1,745 @@
+<!--
+ (c) Copyright Microsoft Corporation.
+ This source is subject to the Microsoft Limited Permissive License.
+ See http://www.microsoft.com/resources/sharedsource/licensingbasics/limitedpermissivelicense.mspx
+ All other rights reserved.
+-->
+
+<ResourceDictionary
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:DateControls="clr-namespace:WpfControlToolkit"
+        >
+
+  <PathGeometry x:Key="Arrow">
+    <PathGeometry.Figures>
+      <PathFigureCollection>
+        <PathFigure IsFilled="True"
+                    StartPoint="0 0"
+                    IsClosed="True">
+          <PathFigure.Segments>
+            <PathSegmentCollection>
+              <LineSegment Point="0 6"/>
+              <LineSegment Point="6 0"/>
+            </PathSegmentCollection>
+          </PathFigure.Segments>
+        </PathFigure>
+      </PathFigureCollection>
+    </PathGeometry.Figures>
+  </PathGeometry>
+
+  <PathGeometry x:Key="DownArrow">
+    <PathGeometry.Figures>
+      <PathFigureCollection>
+        <PathFigure IsFilled="True"
+                    StartPoint="0 0"
+                    IsClosed="True">
+          <PathFigure.Segments>
+            <PathSegmentCollection>
+              <LineSegment Point="6 0"/>
+              <LineSegment Point="3 3"/>
+            </PathSegmentCollection>
+          </PathFigure.Segments>
+        </PathFigure>
+      </PathFigureCollection>
+    </PathGeometry.Figures>
+  </PathGeometry>
+
+  <!-- Month Calendar -->
+
+  <Style x:Key="ArrowButtonStyle" TargetType="{x:Type ButtonBase}">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Margin" Value="3,1,3,1" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Focusable" Value="false"/>
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Style.Triggers>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="IsMouseOver" Value="True" />
+          <Condition Property="IsPressed" Value="False" />
+        </MultiTrigger.Conditions>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+      </MultiTrigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style x:Key="PreviousButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ArrowButtonStyle}">
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ButtonBase}">
+          <Border Background="Transparent">
+            <Path Data="{StaticResource Arrow}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True">
+              <Path.LayoutTransform>
+                <RotateTransform Angle="315"
+                                 CenterX="3"
+                                 CenterY="3"/>
+              </Path.LayoutTransform>
+            </Path>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="NextButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ArrowButtonStyle}">
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ButtonBase}">
+          <Border Background="Transparent">
+            <Path Data="{StaticResource Arrow}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True">
+              <Path.LayoutTransform>
+                <RotateTransform Angle="135"
+                                 CenterX="3"
+                                 CenterY="3"/>
+              </Path.LayoutTransform>
+            </Path>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!--MonthCalendar Group Style-->
+  <DateControls:WeekNumberConverter x:Key="MonthCalendarWeekNumberConverter" />
+  <DateControls:DayHeaderConverter x:Key="MonthCalendarDayHeaderConverter" />
+  <DateControls:AbbreviatedDayNameConverter x:Key="MonthCalendarAbbreviatedDayNameConverter" />
+  <DateControls:MonthYearHeaderConverter x:Key="MonthCalendarMonthYearHeaderConverter" />
+  <DateControls:DateTimeOffsetConverter x:Key="DateTimeOffsetConverter"/>
+
+
+  <Style x:Key="{x:Type DateControls:MonthCalendar}" TargetType="{x:Type DateControls:MonthCalendar}">
+    <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+    <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" />
+    <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MessageFontStyleKey}}" />
+    <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}" />
+    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+    <Setter Property="Padding" Value="1" />
+    <Setter Property="Grid.IsSharedSizeScope" Value="true" />
+    <Setter Property="FocusManager.IsFocusScope" Value="true"/>
+    <Setter Property="PreviousButtonStyle" Value="{StaticResource PreviousButtonStyle}" />
+    <Setter Property="NextButtonStyle" Value="{StaticResource NextButtonStyle}" />
+    <Setter Property="DayTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <TextBlock Text="{Binding Path=Day}" />
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type DateControls:MonthCalendar}">
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Padding="{TemplateBinding Padding}"
+                  SnapsToDevicePixels="True">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+              </Grid.RowDefinitions>
+
+              <Grid x:Name="Title">
+                <DateControls:MonthCalendarTitle DataContext="{TemplateBinding VisibleMonth}"
+                                                 Style="{TemplateBinding TitleStyle}" />
+                <RepeatButton Command="DateControls:MonthCalendar.PreviousCommand"
+                              Style="{TemplateBinding PreviousButtonStyle}" />
+                <RepeatButton Command="DateControls:MonthCalendar.NextCommand"
+                              Style="{TemplateBinding NextButtonStyle}" />
+              </Grid>
+
+              <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="DayHeaders" Grid.Column="1" IsSharedSizeScope="True">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition SharedSizeGroup="DayGroup" />
+                    <ColumnDefinition SharedSizeGroup="DayGroup" />
+                    <ColumnDefinition SharedSizeGroup="DayGroup" />
+                    <ColumnDefinition SharedSizeGroup="DayGroup" />
+                    <ColumnDefinition SharedSizeGroup="DayGroup" />
+                    <ColumnDefinition SharedSizeGroup="DayGroup" />
+                    <ColumnDefinition SharedSizeGroup="DayGroup" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                  </Grid.RowDefinitions>
+                  <DateControls:MonthCalendarDayHeader Grid.Column="1"
+                                                       x:Name="DayHeader0"
+                                                       Style="{TemplateBinding DayHeaderStyle}"
+                                                       DataContext="{Binding Path=FirstDayOfWeek,Mode=OneWay,Converter={StaticResource MonthCalendarDayHeaderConverter},ConverterParameter=0,RelativeSource={RelativeSource TemplatedParent}}"/>
+                  <DateControls:MonthCalendarDayHeader Grid.Column="2"
+                                                       x:Name="DayHeader1"
+                                                       Style="{TemplateBinding DayHeaderStyle}"
+                                                       DataContext="{Binding Path=FirstDayOfWeek,Mode=OneWay,Converter={StaticResource MonthCalendarDayHeaderConverter},ConverterParameter=1, RelativeSource={RelativeSource TemplatedParent}}"/>
+                  <DateControls:MonthCalendarDayHeader Grid.Column="3"
+                                                       x:Name="DayHeader2"
+                                                       Style="{TemplateBinding DayHeaderStyle}"
+                                                       DataContext="{Binding Path=FirstDayOfWeek,Mode=OneWay,Converter={StaticResource MonthCalendarDayHeaderConverter},ConverterParameter=2, RelativeSource={RelativeSource TemplatedParent}}"/>
+                  <DateControls:MonthCalendarDayHeader Grid.Column="4"
+                                                       x:Name="DayHeader3"
+                                                       Style="{TemplateBinding DayHeaderStyle}"
+                                                       DataContext="{Binding Path=FirstDayOfWeek,Mode=OneWay,Converter={StaticResource MonthCalendarDayHeaderConverter},ConverterParameter=3, RelativeSource={RelativeSource TemplatedParent}}"/>
+                  <DateControls:MonthCalendarDayHeader Grid.Column="5"
+                                                       x:Name="DayHeader4"
+                                                       Style="{TemplateBinding DayHeaderStyle}"
+                                                       DataContext="{Binding Path=FirstDayOfWeek,Mode=OneWay,Converter={StaticResource MonthCalendarDayHeaderConverter},ConverterParameter=4, RelativeSource={RelativeSource TemplatedParent}}"/>
+                  <DateControls:MonthCalendarDayHeader Grid.Column="6"
+                                                       x:Name="DayHeader5"
+                                                       Style="{TemplateBinding DayHeaderStyle}"
+                                                       DataContext="{Binding Path=FirstDayOfWeek,Mode=OneWay,Converter={StaticResource MonthCalendarDayHeaderConverter},ConverterParameter=5, RelativeSource={RelativeSource TemplatedParent}}"/>
+                  <DateControls:MonthCalendarDayHeader Grid.Column="7"
+                                                       x:Name="DayHeader6"
+                                                       Style="{TemplateBinding DayHeaderStyle}"
+                                                       DataContext="{Binding Path=FirstDayOfWeek,Mode=OneWay,Converter={StaticResource MonthCalendarDayHeaderConverter},ConverterParameter=6, RelativeSource={RelativeSource TemplatedParent}}"/>
+                  <Rectangle x:Name="DayHeadersSplitLine" Grid.Column="1" Grid.ColumnSpan="7" Fill="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Height="1" VerticalAlignment="Bottom" SnapsToDevicePixels="True"/>
+
+                  <DateControls:MonthCalendarWeekNumber Grid.Row="1"
+                                                        x:Name="WeekNumber0"
+                                                        Visibility="Collapsed"
+                                                        Style="{TemplateBinding WeekNumberStyle}">
+                    <Control.DataContext>
+                      <MultiBinding Mode="OneWay" Converter="{StaticResource MonthCalendarWeekNumberConverter}" ConverterParameter="0">
+                        <Binding Path="FirstDayOfWeek" RelativeSource="{RelativeSource TemplatedParent}"/>
+                        <Binding Path="VisibleMonth" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </MultiBinding>
+                    </Control.DataContext>
+                  </DateControls:MonthCalendarWeekNumber>
+                  <DateControls:MonthCalendarWeekNumber Grid.Row="2"
+                                                        x:Name="WeekNumber1"
+                                                        Visibility="Collapsed"
+                                                        Style="{TemplateBinding WeekNumberStyle}">
+                    <Control.DataContext>
+                      <MultiBinding Mode="OneWay" Converter="{StaticResource MonthCalendarWeekNumberConverter}" ConverterParameter="1">
+                        <Binding Path="FirstDayOfWeek" RelativeSource="{RelativeSource TemplatedParent}"/>
+                        <Binding Path="VisibleMonth" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </MultiBinding>
+                    </Control.DataContext>
+                  </DateControls:MonthCalendarWeekNumber>
+                  <DateControls:MonthCalendarWeekNumber Grid.Row="3"
+                                                        x:Name="WeekNumber2"
+                                                        Visibility="Collapsed"
+                                                        Style="{TemplateBinding WeekNumberStyle}">
+                    <Control.DataContext>
+                      <MultiBinding Mode="OneWay" Converter="{StaticResource MonthCalendarWeekNumberConverter}" ConverterParameter="2">
+                        <Binding Path="FirstDayOfWeek" RelativeSource="{RelativeSource TemplatedParent}"/>
+                        <Binding Path="VisibleMonth" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </MultiBinding>
+                    </Control.DataContext>
+                  </DateControls:MonthCalendarWeekNumber>
+                  <DateControls:MonthCalendarWeekNumber Grid.Row="4"
+                                                        x:Name="WeekNumber3"
+                                                        Visibility="Collapsed"
+                                                        Style="{TemplateBinding WeekNumberStyle}">
+                    <Control.DataContext>
+                      <MultiBinding Mode="OneWay" Converter="{StaticResource MonthCalendarWeekNumberConverter}" ConverterParameter="3">
+                        <Binding Path="FirstDayOfWeek" RelativeSource="{RelativeSource TemplatedParent}"/>
+                        <Binding Path="VisibleMonth" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </MultiBinding>
+                    </Control.DataContext>
+                  </DateControls:MonthCalendarWeekNumber>
+                  <DateControls:MonthCalendarWeekNumber Grid.Row="5"
+                                                        x:Name="WeekNumber4"
+                                                        Visibility="Collapsed"
+                                                        Style="{TemplateBinding WeekNumberStyle}">
+                    <Control.DataContext>
+                      <MultiBinding Mode="OneWay" Converter="{StaticResource MonthCalendarWeekNumberConverter}" ConverterParameter="4">
+                        <Binding Path="FirstDayOfWeek" RelativeSource="{RelativeSource TemplatedParent}"/>
+                        <Binding Path="VisibleMonth" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </MultiBinding>
+                    </Control.DataContext>
+                  </DateControls:MonthCalendarWeekNumber>
+                  <DateControls:MonthCalendarWeekNumber Grid.Row="6"
+                                                        x:Name="WeekNumber5"
+                                                        Visibility="Collapsed"
+                                                        Style="{TemplateBinding WeekNumberStyle}">
+                    <Control.DataContext>
+                      <MultiBinding Mode="OneWay" Converter="{StaticResource MonthCalendarWeekNumberConverter}" ConverterParameter="5">
+                        <Binding Path="FirstDayOfWeek" RelativeSource="{RelativeSource TemplatedParent}"/>
+                        <Binding Path="VisibleMonth" RelativeSource="{RelativeSource TemplatedParent}"/>
+                      </MultiBinding>
+                    </Control.DataContext>
+                  </DateControls:MonthCalendarWeekNumber>
+                  <Rectangle x:Name="WeekNumbersSplitLine" Grid.Row="1" Grid.RowSpan="6" Fill="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Width="1" HorizontalAlignment="Right" Visibility="Collapsed" SnapsToDevicePixels="True"/>
+
+                  <DateControls:MonthCalendarItem Grid.Row="1" Grid.Column="1" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=0}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="1" Grid.Column="2" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=1}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="1" Grid.Column="3" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=2}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="1" Grid.Column="4" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=3}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="1" Grid.Column="5" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=4}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="1" Grid.Column="6" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=5}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="1" Grid.Column="7" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=6}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+
+                  <DateControls:MonthCalendarItem Grid.Row="2" Grid.Column="1" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=7}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="2" Grid.Column="2" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=8}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="2" Grid.Column="3" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=9}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="2" Grid.Column="4" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=10}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="2" Grid.Column="5" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=11}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="2" Grid.Column="6" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=12}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="2" Grid.Column="7" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=13}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+
+                  <DateControls:MonthCalendarItem Grid.Row="3" Grid.Column="1" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=14}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="3" Grid.Column="2" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=15}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="3" Grid.Column="3" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=16}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="3" Grid.Column="4" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=17}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="3" Grid.Column="5" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=18}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="3" Grid.Column="6" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=19}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="3" Grid.Column="7" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=20}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+
+                  <DateControls:MonthCalendarItem Grid.Row="4" Grid.Column="1" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=21}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="4" Grid.Column="2" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=22}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="4" Grid.Column="3" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=23}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="4" Grid.Column="4" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=24}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="4" Grid.Column="5" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=25}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="4" Grid.Column="6" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=26}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="4" Grid.Column="7" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=27}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+
+                  <DateControls:MonthCalendarItem Grid.Row="5" Grid.Column="1" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=28}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="5" Grid.Column="2" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=29}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="5" Grid.Column="3" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=30}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="5" Grid.Column="4" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=31}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="5" Grid.Column="5" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=32}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="5" Grid.Column="6" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=33}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="5" Grid.Column="7" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=34}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+
+                  <DateControls:MonthCalendarItem Grid.Row="6" Grid.Column="1" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=35}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="6" Grid.Column="2" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=36}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="6" Grid.Column="3" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=37}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="6" Grid.Column="4" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=38}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="6" Grid.Column="5" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=39}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="6" Grid.Column="6" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=40}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                  <DateControls:MonthCalendarItem Grid.Row="6" Grid.Column="7" Content="{Binding Path=FirstVisibleDay,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource DateTimeOffsetConverter},ConverterParameter=41}" ContentTemplate="{TemplateBinding DayTemplate}" ContentTemplateSelector="{TemplateBinding DayTemplateSelector}" Style="{TemplateBinding DayContainerStyle}" />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ShowsTitle" Value="false">
+              <Setter Property="Visibility" Value="Collapsed" TargetName="Title"/>
+            </Trigger>
+            <Trigger Property="ShowsDayHeaders" Value="false">
+              <Setter Property="Visibility" Value="Collapsed" TargetName="DayHeader0"/>
+              <Setter Property="Visibility" Value="Collapsed" TargetName="DayHeader1"/>
+              <Setter Property="Visibility" Value="Collapsed" TargetName="DayHeader2"/>
+              <Setter Property="Visibility" Value="Collapsed" TargetName="DayHeader3"/>
+              <Setter Property="Visibility" Value="Collapsed" TargetName="DayHeader4"/>
+              <Setter Property="Visibility" Value="Collapsed" TargetName="DayHeader5"/>
+              <Setter Property="Visibility" Value="Collapsed" TargetName="DayHeader6"/>
+              <Setter Property="Visibility" Value="Collapsed" TargetName="DayHeadersSplitLine"/>
+            </Trigger>
+            <Trigger Property="ShowsWeekNumbers" Value="true">
+              <Setter Property="Visibility" Value="Visible" TargetName="WeekNumber0"/>
+              <Setter Property="Visibility" Value="Visible" TargetName="WeekNumber1"/>
+              <Setter Property="Visibility" Value="Visible" TargetName="WeekNumber2"/>
+              <Setter Property="Visibility" Value="Visible" TargetName="WeekNumber3"/>
+              <Setter Property="Visibility" Value="Visible" TargetName="WeekNumber4"/>
+              <Setter Property="Visibility" Value="Visible" TargetName="WeekNumber5"/>
+              <Setter Property="Visibility" Value="Visible" TargetName="WeekNumbersSplitLine"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style x:Key="{x:Type DateControls:MonthCalendarItem}" TargetType="{x:Type DateControls:MonthCalendarItem}">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="HorizontalContentAlignment" Value="Right" />
+    <Setter Property="Padding" Value="4,0,4,0" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type DateControls:MonthCalendarItem}">
+          <Border x:Name="Bd"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Padding="{TemplateBinding Padding}"
+                  CornerRadius="2"
+                  SnapsToDevicePixels="true">
+            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <!--
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="IsSelected"
+                           Value="true"/>
+                <Condition Property="Selector.IsSelectionActive"
+                           Value="false"/>
+              </MultiTrigger.Conditions>
+              <Setter TargetName="Bd"
+                      Property="Background"
+                      Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+              <Setter Property="Foreground"
+                      Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            </MultiTrigger>
+          -->
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsWithinVisibleMonth" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+      </Trigger>
+      <Trigger Property="IsMouseOver" Value="true">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+      </Trigger>
+      <Trigger Property="IsSelected" Value="true">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+      </Trigger>
+      <Trigger Property="IsToday" Value="true">
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style x:Key="{x:Type DateControls:MonthCalendarTitle}" TargetType="{x:Type DateControls:MonthCalendarTitle}">
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Focusable" Value="false"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type DateControls:MonthCalendarTitle}">
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Padding="{TemplateBinding Padding}"
+                  SnapsToDevicePixels="True">
+            <TextBlock Text="{Binding Converter={StaticResource MonthCalendarMonthYearHeaderConverter}}"
+                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style x:Key="{x:Type DateControls:MonthCalendarDayHeader}" TargetType="{x:Type DateControls:MonthCalendarDayHeader}">
+    <Setter Property="HorizontalContentAlignment" Value="Right" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="4,1,4,1" />
+    <Setter Property="Focusable" Value="false"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type DateControls:MonthCalendarDayHeader}">
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Padding="{TemplateBinding Padding}"
+                  SnapsToDevicePixels="true">
+            <TextBlock Text="{Binding Converter={StaticResource MonthCalendarAbbreviatedDayNameConverter}}"
+                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsEnabled" Value="false">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style x:Key="{x:Type DateControls:MonthCalendarWeekNumber}" TargetType="{x:Type DateControls:MonthCalendarWeekNumber}">
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Padding" Value="4,1,4,1" />
+    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+    <Setter Property="Focusable" Value="false"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type DateControls:MonthCalendarWeekNumber}">
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Padding="{TemplateBinding Padding}"
+                  SnapsToDevicePixels="true">
+            <TextBlock Text="{Binding}"
+                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- DatePicker -->
+
+  <SolidColorBrush x:Key="ListBorder" Color="#FF7F9DB9"/>
+
+  <Style x:Key="DatePickerFocusVisual">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Border>
+            <Rectangle Margin="4,4,21,4" StrokeThickness="1" Stroke="Black" StrokeDashArray="1 2"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="DatePickerEditableTextBox" TargetType="{x:Type TextBox}">
+    <Setter Property="OverridesDefaultStyle" Value="true"/>
+    <Setter Property="AllowDrop" Value="true"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="MinWidth" Value="0"/>
+    <Setter Property="MinHeight" Value="0"/>
+    <Setter Property="Width" Value="Auto"/>
+    <Setter Property="Height" Value="Auto"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TextBox}">
+          <ScrollViewer x:Name="PART_ContentHost"
+                        Focusable="false"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Hidden"
+                        Background="{TemplateBinding Background}">
+          </ScrollViewer>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+
+  <Style x:Key="DropDownButtonStyleKey" TargetType="{x:Type ToggleButton}">
+    <Setter Property="Focusable" Value="false"/>
+    <Setter Property="ClickMode" Value="Press"/>
+    <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.ScrollWidthKey}}" />
+    <Setter Property="Padding" Value="2.75,4,2.75,1.5" />
+  </Style>
+
+  <Style x:Key="fakeButtonStyle" TargetType="{x:Type ToggleButton}">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ToggleButton}">
+          <Border Background="{TemplateBinding Background}"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="{x:Type DateControls:DatePicker}" TargetType="{x:Type DateControls:DatePicker}">
+    <Setter Property="FocusVisualStyle" Value="{StaticResource DatePickerFocusVisual}"/>
+    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="1"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="DropDownButtonStyle" Value="{StaticResource DropDownButtonStyleKey}" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type DateControls:DatePicker}">
+          <Grid>
+            <Border Background="{TemplateBinding Background}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                    Padding="1">
+              <Grid Grid.IsSharedSizeScope="true">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1"/>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border x:Name="SelectedItemBorder"
+                        Grid.ColumnSpan="2"
+                        Margin="{TemplateBinding Padding}"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                <TextBlock x:Name="UnEditableSite" Grid.Column="1"
+                           VerticalAlignment="Center"
+                           Text="{TemplateBinding Text}" />
+                <TextBox x:Name="PART_EditableTextBox" Grid.Column="1"
+                         Style="{StaticResource DatePickerEditableTextBox}"
+                         Visibility="Collapsed"
+                         IsReadOnly="{TemplateBinding IsReadOnly}"
+                         Margin="{TemplateBinding Padding}" />
+                <ToggleButton x:Name="FakeDropDownButton" Grid.ColumnSpan="2"
+                              Focusable="false" Style="{StaticResource fakeButtonStyle}"
+                              IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"/>
+                <ToggleButton IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                              Style="{TemplateBinding DropDownButtonStyle}"
+                              Grid.Column="2">
+                  <Viewbox SnapsToDevicePixels="True">
+                    <Path Data="{StaticResource DownArrow}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True" />
+                  </Viewbox>
+                </ToggleButton>
+              </Grid>
+            </Border>
+            <Popup Name="PART_Popup" AllowsTransparency="true"
+                   Placement="Bottom" Focusable="false"
+                   IsOpen="{Binding Path=IsDropDownOpen,RelativeSource={RelativeSource TemplatedParent}}">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*"/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="1" x:Name="ShadowA" Height="5">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*"/>
+                  </Grid.ColumnDefinitions>
+                  <Rectangle Grid.Column="1" SnapsToDevicePixels="True">
+                    <Rectangle.Fill>
+                      <RadialGradientBrush Center="1,0" GradientOrigin="1,0" RadiusX="1" RadiusY="1">
+                        <RadialGradientBrush.GradientStops>
+                          <GradientStop Color="#A0000000" Offset="0" />
+                          <GradientStop Color="Transparent" Offset="1" />
+                        </RadialGradientBrush.GradientStops>
+                      </RadialGradientBrush>
+                    </Rectangle.Fill>
+                  </Rectangle>
+                  <Rectangle Grid.Column="2" SnapsToDevicePixels="True">
+                    <Rectangle.Fill>
+                      <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                          <GradientStop Color="#A0000000" Offset="0" />
+                          <GradientStop Color="Transparent" Offset="1" />
+                        </LinearGradientBrush.GradientStops>
+                      </LinearGradientBrush>
+                    </Rectangle.Fill>
+                  </Rectangle>
+                </Grid>
+
+                <Grid Grid.Column="1" x:Name="ShadowB" Width="5">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+                  <Rectangle Grid.Row="1" SnapsToDevicePixels="True">
+                    <Rectangle.Fill>
+                      <RadialGradientBrush Center="0,1" GradientOrigin="0,1" RadiusX="1" RadiusY="1">
+                        <RadialGradientBrush.GradientStops>
+                          <GradientStop Color="#A0000000" Offset="0" />
+                          <GradientStop Color="Transparent" Offset="1" />
+                        </RadialGradientBrush.GradientStops>
+                      </RadialGradientBrush>
+                    </Rectangle.Fill>
+                  </Rectangle>
+                  <Rectangle Grid.Row="2" SnapsToDevicePixels="True">
+                    <Rectangle.Fill>
+                      <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <LinearGradientBrush.GradientStops>
+                          <GradientStop Color="#A0000000" Offset="0" />
+                          <GradientStop Color="Transparent" Offset="1" />
+                        </LinearGradientBrush.GradientStops>
+                      </LinearGradientBrush>
+                    </Rectangle.Fill>
+                  </Rectangle>
+                </Grid>
+
+                <Rectangle x:Name="ShadowC"
+                           Grid.Row="1" Grid.Column="1"
+                           SnapsToDevicePixels="True"
+                           Width="5" Height="5">
+                  <Rectangle.Fill>
+                    <RadialGradientBrush Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                      <RadialGradientBrush.GradientStops>
+                        <GradientStop Color="#A0000000" Offset="0" />
+                        <GradientStop Color="Transparent" Offset="1" />
+                      </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                  </Rectangle.Fill>
+                </Rectangle>
+                <DateControls:MonthCalendar x:Name="PART_DatePickerCalendar"
+                                            MaxSelectionCount="1"
+                                            MaxDate="{TemplateBinding MaxDate}"
+                                            MinDate="{TemplateBinding MinDate}"
+                                            Style="{TemplateBinding MonthCalendarStyle}"
+                                            Background="{TemplateBinding Background}"
+                                            BorderThickness="1"
+                                            BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"/>
+              </Grid>
+            </Popup>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="AllowsTransparency" Value="False" SourceName="PART_Popup">
+              <Setter Property="Visibility" Value="Collapsed" TargetName="ShadowA" />
+              <Setter Property="Visibility" Value="Collapsed" TargetName="ShadowB" />
+              <Setter Property="Visibility" Value="Collapsed" TargetName="ShadowC" />
+            </Trigger>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="IsKeyboardFocusWithin" Value="true" />
+                <Condition Property="IsDropDownOpen" Value="false" />
+                <Condition Property="UsesTextBoxDisplay" Value="false" />
+              </MultiTrigger.Conditions>
+              <Setter TargetName="SelectedItemBorder" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+              <Setter TargetName="UnEditableSite" Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+            </MultiTrigger>
+            <Trigger Property="UsesTextBoxDisplay" Value="true">
+              <Setter TargetName="FakeDropDownButton" Property="Background" Value="{x:Null}"/>
+              <Setter TargetName="SelectedItemBorder" Property="Visibility" Value="Collapsed" />
+              <Setter TargetName="UnEditableSite" Property="Visibility" Value="Collapsed" />
+              <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+              <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+              <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            </Trigger>
+            <Trigger Property="Width" Value="Auto">
+              <Setter Property="MinWidth" Value="150"/>
+            </Trigger>
+            <Trigger Property="Height" Value="Auto">
+              <Setter Property="MinHeight" Value="20"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

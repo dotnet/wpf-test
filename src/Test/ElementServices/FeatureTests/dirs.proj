@@ -1,0 +1,29 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--*****************************************************-->
+  <!--This MSBuild project file was automatically generated-->
+  <!--from the original SOURCES/DIRS file by the KBC tool.-->
+  <!--*****************************************************-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\test\Microsoft.Wpf.Test.Native.Settings.Targets" />
+  <!--Leaf project Properties-->
+  <!--Leaf Project Items-->
+  <!--The following projects will build during the default PHASE-->
+  <ItemGroup Condition="'$(BuildExePhase)' == ''">
+    <ProjectFile Include="Freezables\dirs.proj" />
+    <ProjectFile Include="Part1\dirs.proj" />
+    <ProjectFile Include="Trusted\CoreTestsTrusted.csproj" />
+    <ProjectFile Include="TestData\TestData.nativeproj" />
+    <ProjectFile Include="ParserTestControls\dirs.proj" />
+  </ItemGroup>
+
+  <!-- Don't compile the Orcas+ features if we're building 3.0 -->
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0'  ">
+    <ProjectFile Include="BuildSources\ElementServicesTest.csproj" />
+    <ProjectFile Include="Orcas\Orcas.nativeproj" />
+    <ProjectFile Include="Untrusted\CoreTestsUntrusted.csproj" />
+    <ProjectFile Include="ControllerApplications\dirs.proj" />
+  </ItemGroup>
+
+  <!--Import the targets-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\tools\Microsoft.DevDiv.Traversal.targets" />
+</Project>

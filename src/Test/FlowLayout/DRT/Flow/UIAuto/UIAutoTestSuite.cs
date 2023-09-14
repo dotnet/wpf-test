@@ -44,16 +44,16 @@ namespace DRT
         {
             // Disable Background Layout.
             Type typeTextRangeAdaptor = DrtFlowBase.FrameworkAssembly.GetType("MS.Internal.Automation.TextRangeAdaptor");
-            _fiTRAStart = typeTextRangeAdaptor.GetField("_start", BindingFlags.Instance | BindingFlags.NonPublic);
-            _fiTRAEnd = typeTextRangeAdaptor.GetField("_end", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_fiTRAStart = typeTextRangeAdaptor.GetField("_start", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_fiTRAEnd = typeTextRangeAdaptor.GetField("_end", BindingFlags.Instance | BindingFlags.NonPublic);
             Type typeTextPointer = DrtFlowBase.FrameworkAssembly.GetType("System.Windows.Documents.TextPointer");
-            _piTPOffset = typeTextPointer.GetProperty("Offset", BindingFlags.Instance | BindingFlags.NonPublic);
-            _piTPTextContainer = typeTextPointer.GetProperty("TextContainer", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_piTPOffset = typeTextPointer.GetProperty("Offset", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_piTPTextContainer = typeTextPointer.GetProperty("TextContainer", BindingFlags.Instance | BindingFlags.NonPublic);
             Type typeTextContainer = DrtFlowBase.FrameworkAssembly.GetType("System.Windows.Documents.TextContainer");
-            _piTCTextSelection = typeTextContainer.GetProperty("TextSelection", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_piTCTextSelection = typeTextContainer.GetProperty("TextSelection", BindingFlags.Instance | BindingFlags.NonPublic);
             Type typeElementProxy = DrtFlowBase.CoreAssembly.GetType("MS.Internal.Automation.ElementProxy");
-            _piEPPeer = typeElementProxy.GetProperty("Peer", BindingFlags.Instance | BindingFlags.NonPublic);
-            _miAPGetRootPeer = typeof(UIElementAutomationPeer).GetMethod("GetRootAutomationPeer", BindingFlags.Static | BindingFlags.NonPublic);
+            s_piEPPeer = typeElementProxy.GetProperty("Peer", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_miAPGetRootPeer = typeof(UIElementAutomationPeer).GetMethod("GetRootAutomationPeer", BindingFlags.Static | BindingFlags.NonPublic);
         }
 
         #endregion Constructors
@@ -371,7 +371,7 @@ namespace DRT
                     HwndSource hwndSource = PresentationSource.FromVisual(localRoot) as HwndSource;
                     if (hwndSource != null)
                     {
-                        rootPeer = _miAPGetRootPeer.Invoke(null, new object[] { localRoot, hwndSource.Handle }) as AutomationPeer;
+                        rootPeer = s_miAPGetRootPeer.Invoke(null, new object[] { localRoot, hwndSource.Handle }) as AutomationPeer;
                         if (rootPeer != null)
                         {
                             rootPeer.GetChildren();
@@ -398,8 +398,8 @@ namespace DRT
         /// <param name="end">[out] TextPosition representing the end of the range.</param>
         private static void GetPositionsFromTextRangeProvider(ITextRangeProvider textRangeProvider, out TextPointer start, out TextPointer end)
         {
-            start = _fiTRAStart.GetValue(textRangeProvider) as TextPointer;
-            end = _fiTRAEnd.GetValue(textRangeProvider) as TextPointer;
+            start = s_fiTRAStart.GetValue(textRangeProvider) as TextPointer;
+            end = s_fiTRAEnd.GetValue(textRangeProvider) as TextPointer;
         }
 
         /// <summary>
@@ -411,10 +411,10 @@ namespace DRT
         private static void GetTextSelectionFromTextContainer(TextPointer position, out TextPointer start, out TextPointer end)
         {
             start = end = null;
-            object textContainer = _piTPTextContainer.GetValue(position, null);
+            object textContainer = s_piTPTextContainer.GetValue(position, null);
             if (textContainer != null)
             {
-                TextSelection textSelection = _piTCTextSelection.GetValue(textContainer, null) as TextSelection;
+                TextSelection textSelection = s_piTCTextSelection.GetValue(textContainer, null) as TextSelection;
                 if (textSelection != null)
                 {
                     start = textSelection.Start;
@@ -454,7 +454,7 @@ namespace DRT
         /// <param name="textPointer">TextPosition used to retrieve the offset.</param>
         private static int GetOffsetFromTextPointer(TextPointer textPointer)
         {
-            return (int)_piTPOffset.GetValue(textPointer, null);
+            return (int)s_piTPOffset.GetValue(textPointer, null);
         }
 
         /// <summary>
@@ -462,17 +462,17 @@ namespace DRT
         /// </summary>
         internal static AutomationPeer GetPeerFromRawElement(IRawElementProviderSimple rawElement)
         {
-            return _piEPPeer.GetValue((object)rawElement, null) as AutomationPeer;
+            return s_piEPPeer.GetValue((object)rawElement, null) as AutomationPeer;
         }
 
         #endregion Static Helpers
 
-        private static FieldInfo _fiTRAStart;               // TextRangeAdaptor._start accessor
-        private static FieldInfo _fiTRAEnd;                 // TextRangeAdaptor._end accessor
-        private static PropertyInfo _piTPOffset;            // TextPointer.Offset accessor
-        private static PropertyInfo _piTPTextContainer;     // TextPointer.TextContainer accessor
-        private static PropertyInfo _piTCTextSelection;     // TextContainer.TextSelection accessor
-        private static PropertyInfo _piEPPeer;              // ElementProxy.Peer
-        private static MethodInfo _miAPGetRootPeer;         // AutomationPeer.GetRootAutomationPeer
+        private static FieldInfo s_fiTRAStart;               // TextRangeAdaptor._start accessor
+        private static FieldInfo s_fiTRAEnd;                 // TextRangeAdaptor._end accessor
+        private static PropertyInfo s_piTPOffset;            // TextPointer.Offset accessor
+        private static PropertyInfo s_piTPTextContainer;     // TextPointer.TextContainer accessor
+        private static PropertyInfo s_piTCTextSelection;     // TextContainer.TextSelection accessor
+        private static PropertyInfo s_piEPPeer;              // ElementProxy.Peer
+        private static MethodInfo s_miAPGetRootPeer;         // AutomationPeer.GetRootAutomationPeer
     }
 }

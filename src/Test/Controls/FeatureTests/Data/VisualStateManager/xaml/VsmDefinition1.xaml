@@ -1,0 +1,38 @@
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"   
+    xmlns:ctrl="clr-namespace:Microsoft.Test.Controls.DataSources;assembly=ControlsCommon" 
+    xmlns:utils="clr-namespace:Microsoft.Test.Controls;assembly=ControlsCommon" 
+    x:Name="HostPanel"
+    Height="700" Width="700">
+    <Grid.Resources>
+        <Storyboard x:Key="sb_StateA" Duration="0:0:0.1" >
+            <DoubleAnimation Storyboard.TargetName="animationTarget" Storyboard.TargetProperty="Opacity" From="0" To="0.5"/>
+        </Storyboard>
+
+        <Storyboard x:Key="sb_transition" Duration="0:0:0.1">
+            <DoubleAnimation Storyboard.TargetName="animationTarget" Storyboard.TargetProperty="Opacity" From="1" To="0"/>
+        </Storyboard>
+    </Grid.Resources>
+    <utils:CustomControl>
+        <utils:CustomControl.Template>
+            <ControlTemplate>
+                <Canvas x:Name="animationTarget" Width="100" Height="100" Background="Yellow">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup Name="vsGroup">
+                            <VisualStateGroup.States>
+                                <VisualState Name="stateA" Storyboard="{StaticResource sb_StateA}">                                                                        
+                                </VisualState>
+                                <VisualState Name="stateB"/>
+                            </VisualStateGroup.States>
+                            <VisualStateGroup.Transitions>
+                                <VisualTransition GeneratedDuration="0:0:0.1" Storyboard="{StaticResource sb_transition}">                                    
+                                </VisualTransition>
+                            </VisualStateGroup.Transitions>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Canvas>
+            </ControlTemplate>
+        </utils:CustomControl.Template>
+    </utils:CustomControl>
+</Grid>
+

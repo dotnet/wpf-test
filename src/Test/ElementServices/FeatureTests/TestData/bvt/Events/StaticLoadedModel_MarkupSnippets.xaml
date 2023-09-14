@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<MarkupSnippets xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- FrameworkTemplate will be changed to either DataTemplate or ControlTemplate
+         when it is used. -->
+    <FrameworkTemplate x:Key="Template" SnippetID="FrameworkTemplateEventTrigger">
+        <Placeholder x:Name="FrameworkTemplateRoot" Background="Blue" />
+        <FrameworkTemplate.Triggers >
+            <EventTrigger RoutedEvent="Placeholder.Loaded">
+                <EventTrigger.Actions >    
+                    <BeginStoryboard>
+                        <Storyboard TargetName="FrameworkTemplateRoot" TargetProperty="Background.Color" FillBehavior="HoldEnd">
+                            <ColorAnimation To="Red" Duration="0:0:1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </FrameworkTemplate.Triggers>
+    </FrameworkTemplate>    
+
+    <FrameworkTemplate x:Key="Template" SnippetID="FrameworkTemplateEventHandler">
+            <Placeholder x:Name="FrameworkTemplateRoot" Background="Blue" Loaded="LoadedHandler" />
+    </FrameworkTemplate>    
+
+    <FrameworkTemplate x:Key="Template" SnippetID="StyleInFrameworkTemplateEventTrigger">
+        <Placeholder x:Name="FrameworkTemplateRoot">
+            <Placeholder.Style>
+                <Style TargetType="{x:Type Placeholder}">
+                    <Setter Property="Background" Value="Blue" />
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="Background.Color" FillBehavior="HoldEnd">
+                                        <ColorAnimation To="Red" Duration="0:0:1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Placeholder.Style>
+        </Placeholder>
+    </FrameworkTemplate>
+
+    <FrameworkTemplate x:Key="Template" SnippetID="StyleInFrameworkTemplateEventHandler">
+        <Placeholder x:Name="FrameworkTemplateRoot">
+            <Placeholder.Style>
+                <Style TargetType="{x:Type Placeholder}" >
+                    <Setter Property="Background" Value="Blue" />
+                    <EventSetter Event="Loaded" Handler="LoadedHandler" />
+                </Style>
+            </Placeholder.Style>
+        </Placeholder>
+    </FrameworkTemplate>
+
+    <Style x:Key="Style" TargetType="{x:Type Placeholder}" SnippetID="StyleEventTrigger">
+        <Setter Property="Background" Value="Blue" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty="Background.Color" FillBehavior="HoldEnd">
+                            <ColorAnimation To="Red" Duration="0:0:1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="Style" TargetType="{x:Type Placeholder}" SnippetID="StyleEventHandler">
+        <Setter Property="Background" Value="Blue" />
+        <EventSetter Event="Loaded" Handler="LoadedHandler" />
+    </Style>
+           
+    <Placeholder x:Name="Placeholder0" Background="Blue" SnippetID="ElementTreeEventTrigger">               
+        <Placeholder.Triggers>
+            <EventTrigger RoutedEvent="Placeholder.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty="Background.Color" FillBehavior="HoldEnd">
+                            <ColorAnimation To="Red" Duration="0:0:1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Placeholder.Triggers>
+    </Placeholder>    
+               
+    <Placeholder x:Name="Placeholder0" Background="Blue" Loaded="LoadedHandler" SnippetID="ElementTreeEventHandler"/>
+               
+    <x:Code SnippetID="LoadedHandlerCode">
+        <![CDATA[
+            void LoadedHandler(object sender, System.Windows.RoutedEventArgs args)
+            {
+                if((sender as Placeholder).IsInitialized != true)
+                {
+                    throw new Microsoft.Test.TestValidationException("Loaded fired on " + (sender as Placeholder).Name + " before Initialized is fired on it.");
+                }
+                (sender as Placeholder).Background = Brushes.Red;
+            }
+
+        ]]>
+    </x:Code>
+   
+    <Button x:Name="Button0" ContentTemplate="{StaticResource Template}" SnippetID="DataTemplateTarget">
+        <Placeholder x:Name="Placeholder0" />
+    </Button>   
+
+    <Button x:Name="Button0" ContentTemplate="{StaticResource Template}" SnippetID="StyleInDataTemplateTarget">
+        <Placeholder x:Name="Placeholder0" />
+    </Button>   
+    
+    <!-- ControlTemplates work only with Controls, so we use PasswordBox here directly,
+         instead of Placeholder -->
+    <Button x:Name="Button0" SnippetID="ControlTemplateTarget">
+        <PasswordBox x:Name="PasswordBox0" Template="{StaticResource Template}" />
+    </Button>
+
+    <Button x:Name="Button0" SnippetID="StyleInControlTemplateTarget">
+        <PasswordBox x:Name="PasswordBox0" Template="{StaticResource Template}" />
+    </Button>
+        
+    <Placeholder x:Name="Placeholder0" Style="{StaticResource Style}" SnippetID="StyleTarget" />            
+</MarkupSnippets>
