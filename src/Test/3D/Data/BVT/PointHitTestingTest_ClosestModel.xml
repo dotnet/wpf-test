@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="ClosestModelPointHitTestingTest"
+    LogFilePrefix="PHT_ClosestModel"
+
+    Scene="Explicit"
+    Camera="OrthographicDefault"
+
+    UseViewport3D="false"
+    >
+
+    <VARIATION
+        Description="Point testing (OrthographicCamera) at 99,99"
+        Expectation="Visual 0 has the closer mesh."
+        Point="99,99"
+        Visual0="LayeredMeshes"
+        Visual1="LayeredMeshes"
+        VisualTransform1="Translate 0,0,-1"
+        />
+    <VARIATION
+        Description="Point testing (OrthographicCamera) at 99,99"
+        Expectation="Visual 1 has the closer mesh."
+        Point="99,99"
+        Visual0="LayeredMeshes"
+        Visual1="LayeredMeshes"
+        VisualTransform0="Translate 0,0,-1"
+        />
+    <VARIATION
+        Description="Point testing (OrthographicCamera) at 99,99"
+        Expectation="Contention: not sure which is closest."
+        Visual0="LayeredMeshes"
+        Visual1="LayeredMeshes"
+        Point="99,99"
+        />
+    <VARIATION
+        Description="Point testing (OrthographicCamera) at 100,99"
+        Expectation="Hit front plane of 'Model_0' @ z = 1.0"
+        Visual0="OverlappingPlanes"
+        Visual1="WhiteAmbient"
+        Point="100,99"
+        />
+    <VARIATION
+        Description="Point testing (OrthographicCamera) at 100,99"
+        Expectation="Hit front plane of 'Model' @ z = 0.0"
+        Visual0="MultiParent"
+        Visual1="WhiteAmbient"
+        Point="100,99"
+        />
+
+    <!-- TODO: Add test for models with Scale on them once bug 1412797 is fixed. -->
+
+</INIT>

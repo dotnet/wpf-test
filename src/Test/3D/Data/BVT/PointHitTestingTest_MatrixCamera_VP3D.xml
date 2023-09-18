@@ -1,0 +1,125 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PointHitTestingTest"
+
+    Scene="Explicit"
+    Visual0="Group"
+    Child00="SingleFrontFacingTriangle"
+    Child01="WhiteAmbient"
+
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="11"
+
+    UseViewport3D="true"
+    >
+
+    <!-- Orthographic Type cameras -->
+
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 80,80"
+        Expectation="'Model' is missed."
+        Point="80,80"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 120,50"
+        Expectation="Hit 'Model' once."
+        Point="120,50"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 120,79"
+        Expectation="Hit 'Model' once."
+        Point="120,79"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 0,0"
+        Expectation="'Model' is missed."
+        Point="0,0"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 100,99"
+        Expectation="Hit 'Model' once."
+        Point="100,99"
+        />
+
+    <!-- Perspective Type cameras -->
+
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 100,130"
+        Expectation="'Model' is missed."
+        Point="100,130"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 60,139"
+        Expectation="'Model' is missed."
+        Point="60,139"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 110,70"
+        Expectation="Hit 'Model' once."
+        Point="110,70"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 110,89"
+        Expectation="Hit 'Model' once."
+        Point="110,89"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 147,52"
+        Expectation="'Model' is missed."
+        Point="147,52"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 100,99"
+        Expectation="Hit 'Model' once."
+        Point="100,99"
+        />
+
+</INIT>

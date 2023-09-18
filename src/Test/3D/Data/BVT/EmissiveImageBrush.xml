@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="EmissiveImageBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    DefaultColorTolerance="0,3,3,3"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    Light="WhiteAmbient"
+    MaterialType="Emissive"
+    BackMaterialType="Emissive"
+    >
+
+    <VARIATION
+        Description="front = JPG, back = BMP"
+        Mesh="FrontAndBack"
+        Material="macaw.jpg"
+        BackMaterial="check.bmp"
+        />
+    <VARIATION
+        Description="front = BMP, back = PNG"
+        Light="WhiteDirectionalNegZ" 
+        Mesh="FrontAndBack"
+        Material="check.bmp"
+        BackMaterial="check.png"
+        />
+    <VARIATION
+        Description="front = PNG, back = JPG"
+        Light="WhiteSpot"
+        Mesh="FrontAndBack"
+        Material="check.png"
+        BackMaterial="macaw.jpg"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = BMP, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="check.bmp"
+        BackMaterial="flare.png"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = BMP"
+        Mesh="FrontAndBack"
+        Material="spiral.png"
+        BackMaterial="check.bmp"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="flare.png"
+        BackMaterial="spiral.png"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = JPG * green, back = BMP * indigo"
+        Mesh="FrontAndBack"
+        Material="macaw.jpg"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="check.bmp"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = BMP * green, back = JPG * indigo"
+        Mesh="FrontAndBack"
+        Material="check.bmp"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="macaw.jpg"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = JPG * mix"
+        Mesh="FrontAndBack"
+        Material="spiral.png"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="macaw.jpg"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = JPG * mix, back = semi-transparent * mix"
+        Mesh="FrontAndBack"
+        Material="macaw.jpg"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="spiral.png"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = JPG * transparent, back = BMP * semi-transparent"
+        Mesh="FrontAndBack"
+        Material="macaw.jpg"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="check.bmp"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = JPG * semi-transparent"
+        Mesh="BackAndFront"
+        Material="spiral.png"
+        MaterialColor="192,47,239,143"
+        BackMaterial="macaw.jpg"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

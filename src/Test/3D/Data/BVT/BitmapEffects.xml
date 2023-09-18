@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="BitmapEffectsTest"
+
+    DefaultColorTolerance="0,3,3,3"
+    SilhouetteEdgeTolerance="0.75"
+
+    Scene="Explicit"
+    Visual0="WhiteAmbient"
+
+    Visual1="FullScreenMesh"
+    VisualTransform1="Translate -0.5,-0.5,-0.5"
+    Material1="255,64,100,200"
+
+    Visual2="FullScreenMesh"
+    VisualTransform2="Translate 0.5,0.5,0.5"
+    Material2="100,255,128,64"
+
+    CameraType="Orthographic"
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="20"
+    CameraWidth="4"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <VARIATION
+        BackgroundColor="255,255,255,255"
+        Effect="DropShadow 255,0,0,0 -45 20"
+        />
+    <VARIATION
+        BackgroundColor="255,255,255,255"
+        Effect="DropShadow 255,0,0,0 0 15"
+        />
+    <VARIATION
+        BackgroundColor="255,255,255,255"
+        Effect="DropShadow 255,25,123,56 45 30"
+        />
+    <VARIATION
+        BackgroundColor="255,0,0,0"
+        Effect="DropShadow 255,255,255,255 -45 20"
+        />
+    <VARIATION
+        BackgroundColor="255,0,0,0"
+        Effect="DropShadow 255,255,255,255 0 15"
+        />
+    <VARIATION
+        BackgroundColor="255,0,0,0"
+        Effect="DropShadow 255,25,123,56 45 30"
+        />
+
+    <!-- Effect Inputs (reduce opacity on solid mesh to allow seeing input's effects) -->
+
+    <VARIATION
+        Material1="200,64,100,200"
+        Effect="DropShadow 255,0,0,0 -45 40"
+        />
+
+    <VARIATION
+        Material1="200,64,100,200"
+        Effect="DropShadow 255,0,0,0 -45 1"
+        />
+  
+</INIT>

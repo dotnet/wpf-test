@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    RenderingEffect="Silhouette"
+    WindowWidth="300"
+    WindowHeight="200"
+    LogFilePrefix="PointLight"
+    BackgroundColor="255,255,255,0"
+    PixelToEdgeTolerance="0.05"
+
+    Camera="PerspectiveDefault"
+    Material="255,255,255,255"
+    Mesh="Sphere 50 50 1.1"
+
+    LightType="Point"
+    LightColor="255,255,255,255"
+    LightPosition="0,0,5"
+    LightRange="10"
+    LightConstantAttenuation="1"
+    LightLinearAttenuation="0"
+    LightQuadraticAttenuation="0"
+    >
+
+    <!-- NaN variations on the light fields -->
+
+    <VARIATION
+        Description="Position=0,0,NaN"
+        LightPosition="0,0,NaN"
+        />
+    <VARIATION
+        Description="Position=0,NaN,0"
+        LightPosition="0,NaN,0"
+        />
+    <VARIATION
+        Description="Position=NaN,0,0"
+        LightPosition="NaN,0,0"
+        />
+    <VARIATION
+        Description="Position=NaN,NaN,NaN"
+        LightPosition="NaN,NaN,NaN"
+        />
+
+<!-- Blocked by bug
+
+    <VARIATION
+        Description="Range=NaN"
+        LightRange="NaN"
+        />
+-->
+
+    <VARIATION
+        Description="ConstantAttenuation=NaN"
+        LightConstantAttenuation="NaN"
+        />
+    <VARIATION
+        Description="LinearAttenuation=NaN"
+        LightConstantAttenuation="0"
+        LightLinearAttenuation="NaN"
+        />
+    <VARIATION
+        Description="QuadraticAttenuation=NaN"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="NaN"
+        />
+
+    <!-- Infinity variations on the light fields -->
+
+    <VARIATION
+        Description="Position=0,0,Infinity"
+        LightPosition="0,0,Infinity"
+        />
+    <VARIATION
+        Description="Position=0,Infinity,0"
+        LightPosition="0,Infinity,0"
+        />
+    <VARIATION
+        Description="Position=Infinity,0,0"
+        LightPosition="Infinity,0,0"
+        />
+    <VARIATION
+        Description="Position=Infinity,Infinity,Infinity"
+        LightPosition="Infinity,Infinity,Infinity"
+        />
+    <VARIATION
+        Description="ConstantAttenuation=Infinity"
+        LightConstantAttenuation="Infinity"
+        />
+    <VARIATION
+        Description="LinearAttenuation=Infinity"
+        LightConstantAttenuation="0"
+        LightLinearAttenuation="Infinity"
+        />
+    <VARIATION
+        Description="QuadraticAttenuation=Infinity"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="Infinity"
+        />
+
+    <!-- -Infinity variations on the light fields -->
+
+    <VARIATION
+        Description="Position=0,0,-Infinity"
+        LightPosition="0,0,-Infinity"
+        />
+    <VARIATION
+        Description="Position=0,-Infinity,0"
+        LightPosition="0,-Infinity,0"
+        />
+    <VARIATION
+        Description="Position=-Infinity,0,0"
+        LightPosition="-Infinity,0,0"
+        />
+    <VARIATION
+        Description="Position=-Infinity,-Infinity,-Infinity"
+        LightPosition="-Infinity,-Infinity,-Infinity"
+        />
+    <VARIATION
+        Description="Range=-Infinity"
+        LightRange="-Infinity"
+        />
+    <VARIATION
+        Description="ConstantAttenuation=-Infinity"
+        LightConstantAttenuation="-Infinity"
+        />
+    <VARIATION
+        Description="LinearAttenuation=-Infinity"
+        LightConstantAttenuation="0"
+        LightLinearAttenuation="-Infinity"
+        />
+    <VARIATION
+        Description="QuadraticAttenuation=-Infinity"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="-Infinity"
+        />
+
+    <!-- variations that create illogical lights -->
+
+    <VARIATION
+        Description="Range &lt; 0"
+        LightRange="-1"
+        />
+    <VARIATION
+        Description="Range &lt; 0"
+        LightRange="-10"
+        />
+    <VARIATION
+        Description="ConstantAttenuation &lt; 0"
+        LightConstantAttenuation="-1"
+        />
+    <VARIATION
+        Description="ConstantAttenuation &lt; 0"
+        LightConstantAttenuation="-10"
+        />
+    <VARIATION
+        Description="LinearAttenuation &lt; 0"
+        LightConstantAttenuation="0"
+        LightLinearAttenuation="-.1"
+        />
+    <VARIATION
+        Description="LinearAttenuation &lt; 0"
+        LightConstantAttenuation="0"
+        LightLinearAttenuation="-10"
+        />
+    <VARIATION
+        Description="QuadraticAttenuation &lt; 0"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="-.1"
+        />
+    <VARIATION
+        Description="QuadraticAttenuation &lt; 0"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="-10"
+        />
+
+</INIT>

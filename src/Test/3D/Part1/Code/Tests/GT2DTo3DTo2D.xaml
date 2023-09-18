@@ -1,0 +1,55 @@
+﻿<Window x:Class="Microsoft.Test.Graphics.GT2DTo3DTo2D"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:l="clr-namespace:Microsoft.Test.Graphics"
+        Title="Testing GeneralTransform2DTo3DTo2D with unfreezable cameras"
+        Height="400" Width="400" Top="0" Left="0">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left">
+            <Label Content="Camera Position"/>
+            <TextBox Name="px" Text="1"/>
+            <TextBox Name="py" Text="-1"/>
+            <TextBox Name="pz" Text="4"/>
+        </StackPanel>
+
+        <Viewport3D DockPanel.Dock="Left">
+            <Viewport3D.Resources>
+                <l:PointMultiConverter x:Key="pmc"/>
+
+                <DiffuseMaterial x:Key="HostMat" Viewport2DVisual3D.IsVisualHostMaterial="True" Brush="Blue"/>
+
+                <DiffuseMaterial x:Key="NormalMat" Viewport2DVisual3D.IsVisualHostMaterial="False" Brush="Green"/>
+
+                <Model3DGroup x:Key="Lights">
+                    <Model3DGroup>
+                        <DirectionalLight Color="#FFFFFFFF" Direction="-0.3,0.3,-1"/>
+                        <AmbientLight Color="#FF444444" />
+                    </Model3DGroup>
+                </Model3DGroup>
+
+                <MeshGeometry3D x:Key="Cube" 
+                                Positions="-1,+1,+1  -1,-1,+1  +1,-1,+1  +1,+1,+1    +1,+1,+1  +1,-1,+1  +1,-1,-1  +1,+1,-1 -1,-1,+1  -1,-1,-1  +1,-1,-1  +1,-1,+1"
+                                TriangleIndices="0 1 2  0 2 3    4 5 6  4 6 7    8 9 10  8 10 11"
+                                TextureCoordinates="0,0 0,1 1,1 1,0   0,0 0,1 1,1 1,0  0,0 0,1 1,1 1,0"/>
+            </Viewport3D.Resources>
+
+            <Viewport3D.Camera>
+                <PerspectiveCamera LookDirection="-1,1,-4" UpDirection="0,1,0">
+                    <PerspectiveCamera.Position>
+                        <MultiBinding Converter="{StaticResource pmc}">
+                            <Binding Path="Text" ElementName="px"/>
+                            <Binding Path="Text" ElementName="py"/>
+                            <Binding Path="Text" ElementName="pz"/>
+                        </MultiBinding>
+                    </PerspectiveCamera.Position>
+                </PerspectiveCamera>
+            </Viewport3D.Camera>
+
+            <ModelVisual3D Content="{StaticResource Lights}"/>
+
+            <Viewport2DVisual3D Geometry="{StaticResource Cube}" Material="{StaticResource HostMat}">
+                <Button Background="Yellow" Margin="4" Content="3D"/>
+            </Viewport2DVisual3D>
+        </Viewport3D>
+    </DockPanel>
+</Window>

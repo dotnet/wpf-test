@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="TransformAmbientLight"
+    PixelToEdgeTolerance="0.05"
+
+    Mesh="Sphere 25 50 1.8"
+    Material="255,255,0,0"
+    Camera="PerspectiveDefault"
+    Light="WhiteAmbient"
+
+    TransformTarget="Light"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!--
+        These shouldn't have any effect on the scene.
+        Just make sure that Avalon doesn't blow up with a transform on an ambient light.
+    -->
+
+    <!-- Translation -->
+
+    <VARIATION
+        Description="Translate - should have no effect"
+        TransformType="Translate"
+        TranslateOffset="100,100,100"
+        />
+
+    <!-- Rotation -->
+
+    <VARIATION
+        Description="Rotate - should have no effect"
+        TransformType="RotateAxisAngleCenter"
+        RotateAngle="2345"
+        RotateAxis="1,-1,1"
+        RotateCenter="-200,12,98"
+        />
+
+    <!-- Scale -->
+
+    <VARIATION
+        Description="Scale - should have no effect"
+        TransformType="ScaleCenter"
+        ScaleVector="0.005,12,-34"
+        ScaleCenter="24,56,-90"
+        />
+</INIT>

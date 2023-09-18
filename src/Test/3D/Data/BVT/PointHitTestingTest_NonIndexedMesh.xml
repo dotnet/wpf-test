@@ -1,0 +1,439 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PointHitTestingTest_NonIndexedMesh"
+
+    Scene="Explicit"
+    Visual0="PositionsNormalsUV"
+    Visual1="WhitePoint"
+    WindowWidth="200"
+    WindowHeight="250"
+
+    UseViewport3D="false"
+    >
+
+    <!-- hit testing non indexed mesh with Ortho camera -->
+
+    <!-- hit points -->
+
+    <VARIATION
+        Description="Point testing at 100,125 - OrthographicCamera"
+        Expectation="'Model' hit once"
+        Camera="OrthographicDefault"
+        Point="100,125"
+        />
+    <VARIATION
+        Description="Point testing at 160,30 - OrthographicCamera"
+        Expectation="'Model' hit once"
+        Camera="OrthographicDefault"
+        Point="160,30"
+        />
+    <VARIATION
+        Description="Point testing at 195,200 - OrthographicCamera"
+        Expectation="'Model' hit once"
+        Camera="OrthographicDefault"
+        Point="195,200"
+        />
+    <VARIATION
+        Description="Point testing at 5,70 - OrthographicCamera"
+        Expectation="'Model' hit once"
+        Camera="OrthographicDefault"
+        Point="5,70"
+        />
+    <VARIATION
+        Description="Point testing at 60,220 - OrthographicCamera"
+        Expectation="'Model' hit once"
+        Camera="OrthographicDefault"
+        Point="60,220"
+        />
+
+    <!-- miss points -->
+
+    <VARIATION
+        Description="Point testing at 90,20 - OrthographicCamera"
+        Expectation="'Model' is missed."
+        Camera="OrthographicDefault"
+        Point="90,20"
+        />
+    <VARIATION
+        Description="Point testing at 140,230 - OrthographicCamera"
+        Expectation="'Model' is missed."
+        Camera="OrthographicDefault"
+        Point="140,230"
+        />
+    <VARIATION
+        Description="Point testing at 185,240 - OrthographicCamera"
+        Expectation="'Model' is missed."
+        Camera="OrthographicDefault"
+        Point="185,240"
+        />
+    <VARIATION
+        Description="Point testing at 185,10 - OrthographicCamera"
+        Expectation="'Model' is missed."
+        Camera="OrthographicDefault"
+        Point="185,10"
+        />
+    <VARIATION
+        Description="Point testing at 15,240 - OrthographicCamera"
+        Expectation="'Model' is missed."
+        Camera="OrthographicDefault"
+        Point="15,240"
+        />
+    <VARIATION
+        Description="Point testing at 15,10 - OrthographicCamera"
+        Expectation="'Model' is missed."
+        Camera="OrthographicDefault"
+        Point="15,10"
+        />
+
+    <!-- state testing by adding extra meshes to scene -->
+
+    <VARIATION
+        Description="Two non-indexed meshes - Point testing at 100,125 - OrthographicCamera"
+        Expectation="Two models are hit"
+        Camera="OrthographicDefault"
+        Point="100,125"
+        Visual2="PositionsNormalsUV"
+        Transform2="Translate 0,0,-2"
+        />
+    <VARIATION
+        Description="One non-indexed mesh, one indexed - Point testing at 100,125 - OrthographicCamera"
+        Expectation="Two models are hit"
+        Camera="OrthographicDefault"
+        Point="100,125"
+        Visual2="PositionsNormalsUVIndices"
+        Transform2="Translate 0,0,-2"
+        />
+    <VARIATION
+        Description="One non-indexed mesh, one indexed - Point testing at 100,125 - OrthographicCamera"
+        Expectation="Two models are hit"
+        Camera="OrthographicDefault"
+        Point="100,125"
+        Visual2="Sphere 25 50 1.0"
+        />
+
+    <!-- hit testing non indexed mesh with Perspectivecamera -->
+
+    <!-- hit points -->
+
+    <VARIATION
+        Description="Point testing at 100,125 - PerspectiveCamera"
+        Expectation="'Model' hit once"
+        Camera="PerspectiveDefault"
+        Point="100,125"
+        />
+    <VARIATION
+        Description="Point testing at 80,80 - PerspectiveCamera"
+        Expectation="'Model' hit once"
+        Camera="PerspectiveDefault"
+        Point="80,80"
+        />
+    <VARIATION
+        Description="Point testing at 145,120 - PerspectiveCamera"
+        Expectation="'Model' hit once"
+        Camera="PerspectiveDefault"
+        Point="145,120"
+        />
+    <VARIATION
+        Description="Point testing at 120,170 - PerspectiveCamera"
+        Expectation="'Model' hit once"
+        Camera="PerspectiveDefault"
+        Point="120,170"
+        />
+    <VARIATION
+        Description="Point testing at 55,150 - PerspectiveCamera"
+        Expectation="'Model' hit once"
+        Camera="PerspectiveDefault"
+        Point="55,150"
+        />
+
+    <!-- miss points -->
+
+    <VARIATION
+        Description="Point testing at 90,175 - PerspectiveCamera"
+        Expectation="'Model' is missed."
+        Camera="PerspectiveDefault"
+        Point="90,175"
+        />
+    <VARIATION
+        Description="Point testing at 150,140 - PerspectiveCamera"
+        Expectation="'Model' is missed."
+        Camera="PerspectiveDefault"
+        Point="150,140"
+        />
+    <VARIATION
+        Description="Point testing at 110,75 - PerspectiveCamera"
+        Expectation="'Model' is missed."
+        Camera="PerspectiveDefault"
+        Point="110,75"
+        />
+    <VARIATION
+        Description="Point testing at 50,100 - PerspectiveCamera"
+        Expectation="'Model' is missed."
+        Camera="PerspectiveDefault"
+        Point="50,100"
+        />
+    <VARIATION
+        Description="Point testing at 30,40 - PerspectiveCamera"
+        Expectation="'Model' is missed."
+        Camera="PerspectiveDefault"
+        Point="30,40"
+        />
+    <VARIATION
+        Description="Point testing at 170,40 - PerspectiveCamera"
+        Expectation="'Model' is missed."
+        Camera="PerspectiveDefault"
+        Point="170,40"
+        />
+    <VARIATION
+        Description="Point testing at 170,210 - PerspectiveCamera"
+        Expectation="'Model' is missed."
+        Camera="PerspectiveDefault"
+        Point="170,210"
+        />
+    <VARIATION
+        Description="Point testing at 30,210 - PerspectiveCamera"
+        Expectation="'Model' is missed."
+        Camera="PerspectiveDefault"
+        Point="30,210"
+        />
+
+    <!-- state testing by adding extra meshes to scene -->
+
+    <VARIATION
+        Description="Two non-indexed meshes - Point testing at 100,125 - PerspectiveCamera"
+        Expectation="Two models are hit"
+        Camera="PerspectiveDefault"
+        Point="100,125"
+        Visual2="PositionsNormalsUV"
+        Transform2="Translate 0,0,-2"
+        />
+    <VARIATION
+        Description="One non-indexed mesh, one indexed - Point testing at 100,125 - PerspectiveCamera"
+        Expectation="Two models are hit"
+        Camera="PerspectiveDefault"
+        Point="100,125"
+        Visual2="PositionsNormalsUVIndices"
+        Transform2="Translate 0,0,-2"
+        />
+    <VARIATION
+        Description="One non-indexed mesh, one indexed - Point testing at 100,125 - PerspectiveCamera"
+        Expectation="Two models are hit"
+        Camera="PerspectiveDefault"
+        Point="100,125"
+        Visual2="Sphere 25 50 1.0"
+        />
+
+    <!-- hit testing non indexed mesh with Matrix Ortho camera -->
+
+    <!-- hit points -->
+
+    <VARIATION
+        Description="Point testing at 100,125 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultOrthographic"
+        Point="100,125"
+        />
+    <VARIATION
+        Description="Point testing at 160,30 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultOrthographic"
+        Point="160,30"
+        />
+    <VARIATION
+        Description="Point testing at 195,200 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultOrthographic"
+        Point="195,200"
+        />
+    <VARIATION
+        Description="Point testing at 5,70 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultOrthographic"
+        Point="5,70"
+        />
+    <VARIATION
+        Description="Point testing at 60,220 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultOrthographic"
+        Point="60,220"
+        />
+
+    <!-- miss points -->
+
+    <VARIATION
+        Description="Point testing at 90,20 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultOrthographic"
+        Point="90,20"
+        />
+    <VARIATION
+        Description="Point testing at 140,230 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultOrthographic"
+        Point="140,230"
+        />
+    <VARIATION
+        Description="Point testing at 185,240 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultOrthographic"
+        Point="185,240"
+        />
+    <VARIATION
+        Description="Point testing at 185,10 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultOrthographic"
+        Point="185,10"
+        />
+    <VARIATION
+        Description="Point testing at 15,240 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultOrthographic"
+        Point="15,240"
+        />
+    <VARIATION
+        Description="Point testing at 15,10 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultOrthographic"
+        Point="15,10"
+        />
+
+    <!-- state testing by adding extra meshes to scene -->
+
+    <VARIATION
+        Description="Two non-indexed meshes - Point testing at 100,125 - MatrixCamera"
+        Expectation="Two models are hit"
+        Camera="MatrixDefaultOrthographic"
+        Point="100,125"
+        Visual2="PositionsNormalsUV"
+        Transform2="Translate 0,0,-2"
+        />
+    <VARIATION
+        Description="One non-indexed mesh, one indexed - Point testing at 100,125 - MatrixCamera"
+        Expectation="Two models are hit"
+        Camera="MatrixDefaultOrthographic"
+        Point="100,125"
+        Visual2="PositionsNormalsUVIndices"
+        Transform2="Translate 0,0,-2"
+        />
+    <VARIATION
+        Description="One non-indexed mesh, one indexed - Point testing at 100,125 - MatrixCamera"
+        Expectation="Two models are hit"
+        Camera="MatrixDefaultOrthographic"
+        Point="100,125"
+        Visual2="Sphere 25 50 1.0"
+        />
+
+    <!-- hit testing non indexed mesh with Matrix Perspective camera -->
+
+    <!-- hit points -->
+
+    <VARIATION
+        Description="Point testing at 100,125 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultPerspective"
+        Point="100,125"
+        />
+    <VARIATION
+        Description="Point testing at 80,80 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultPerspective"
+        Point="80,80"
+        />
+    <VARIATION
+        Description="Point testing at 145,120 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultPerspective"
+        Point="145,120"
+        />
+    <VARIATION
+        Description="Point testing at 120,170 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultPerspective"
+        Point="120,170"
+        />
+    <VARIATION
+        Description="Point testing at 55,150 - MatrixCamera"
+        Expectation="'Model' hit once"
+        Camera="MatrixDefaultPerspective"
+        Point="55,150"
+        />
+
+    <!-- miss points -->
+
+    <VARIATION
+        Description="Point testing at 90,175 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultPerspective"
+        Point="90,175"
+        />
+    <VARIATION
+        Description="Point testing at 150,140 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultPerspective"
+        Point="150,140"
+        />
+    <VARIATION
+        Description="Point testing at 110,75 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultPerspective"
+        Point="110,75"
+        />
+    <VARIATION
+        Description="Point testing at 50,100 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultPerspective"
+        Point="50,100"
+        />
+    <VARIATION
+        Description="Point testing at 30,40 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultPerspective"
+        Point="30,40"
+        />
+    <VARIATION
+        Description="Point testing at 170,40 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultPerspective"
+        Point="170,40"
+        />
+    <VARIATION
+        Description="Point testing at 170,210 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultPerspective"
+        Point="170,210"
+        />
+    <VARIATION
+        Description="Point testing at 30,210 - MatrixCamera"
+        Expectation="'Model' is missed."
+        Camera="MatrixDefaultPerspective"
+        Point="30,210"
+        />
+
+    <!-- state testing by adding extra meshes to scene -->
+
+    <VARIATION
+        Description="Two non-indexed meshes - Point testing at 100,125 - MatrixCamera"
+        Expectation="Two models are hit"
+        Camera="MatrixDefaultPerspective"
+        Point="100,125"
+        Visual2="PositionsNormalsUV"
+        Transform2="Translate 0,0,-2"
+        />
+    <VARIATION
+        Description="One non-indexed mesh, one indexed - Point testing at 100,125 - MatrixCamera"
+        Expectation="Two models are hit"
+        Camera="MatrixDefaultPerspective"
+        Point="100,125"
+        Visual2="PositionsNormalsUVIndices"
+        Transform2="Translate 0,0,-2"
+        />
+    <VARIATION
+        Description="One non-indexed mesh, one indexed - Point testing at 100,125 - MatrixCamera"
+        Expectation="Two models are hit"
+        Camera="MatrixDefaultPerspective"
+        Point="100,125"
+        Visual2="Sphere 25 50 1.0"
+        />
+
+</INIT>

@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="Hit Testing" Priority="3">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="CGT3D.dll" Class="Microsoft.Test.Graphics.Cgt3d" Method="Launch" />
+  </DEFAULTTESTINFO>
+  
+  <TEST Name="Client Area Hit Testing - Hit what's lit! - OrthographicCamera" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:OrthographicCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using an OrthographicCamera.  Call VisualOperations.HitTest on every pixel in the window. ">
+    <DriverParameters Args="/script=ClientAreaHitTestingTest_OrthoCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\ClientAreaHitTestingTest_OrthoCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Client Area Hit Testing - Hit what's lit! - PerspectiveCamera" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:OrthographicCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a PerspectiveCamera.  Call VisualOperations.HitTest on every pixel in the window. ">
+    <DriverParameters Args="/script=ClientAreaHitTestingTest_PerspCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\ClientAreaHitTestingTest_PerspCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Hit Test Filter Behavior - Skip Children" Timeout="60" Description="Focus:HitTestFilterBehavior Focus:Unit Testing Uses:RayHitTestParameters Uses:HitTestResults3D Comments: Verify that the filter skips children in the Model3D graph appropriately.  We start this hit test from Model3DGroup.HitTest.  TriviaThe HitTestFilterBehaviorTest is the only place in our test framework where &quot;goto&quot; is used/Trivia ">
+    <DriverParameters Args="/script=HitTestFilter_SkipChildren.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\HitTestFilter_SkipChildren.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Hit Test Filter Behavior - Skip Self" Timeout="60" Description="Focus:HitTestFilterBehavior Focus:Unit Testing Uses:RayHitTestParameters Uses:HitTestResults3D Comments: Verify that the filter skips the currently looked at node in the Model3D graph appropriately.  We start this hit test from Model3DGroup.HitTest.  TriviaThe HitTestFilterBehaviorTest is the only place in our test framework where &quot;goto&quot; is used/Trivia ">
+    <DriverParameters Args="/script=HitTestFilter_SkipSelf.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\HitTestFilter_SkipSelf.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Hit Test Filter Behavior - Skip Self and Children" Timeout="60" Description="Focus:HitTestFilterBehavior Focus:Unit Testing Uses:RayHitTestParameters Uses:HitTestResults3D Comments: Verify that the filter skips the currently looked at node and its children in the Model3D graph appropriately.  We start this hit test from Model3DGroup.HitTest.  TriviaThe HitTestFilterBehaviorTest is the only place in our test framework where &quot;goto&quot; is used/Trivia ">
+    <DriverParameters Args="/script=HitTestFilter_SkipSelfAndChildren.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\HitTestFilter_SkipSelfAndChildren.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Hit Test Filter Behavior - Stop" Timeout="60" Description="Focus:HitTestFilterBehavior Focus:Unit Testing Uses:RayHitTestParameters Uses:HitTestResults3D Comments: Verify that the filter stops traversing the Model3D graph appropriately.  We start this hit test from Model3DGroup.HitTest.  TriviaThe HitTestFilterBehaviorTest is the only place in our test framework where &quot;goto&quot; is used/Trivia ">
+    <DriverParameters Args="/script=HitTestFilter_Stop.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\HitTestFilter_Stop.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Ray Hit Testing - with Mesh,SSL scene" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:RayIntersection Uses:HitTestParameters3D Uses:RayHitTestParameters Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with the same mesh copied into multiple models with different transforms.  Cast a pick ray into the scene and call Model3D.HitTest on the scene.  ScreenSpaceLines3D are ignored by hit tests that originate from this call, but this test does not cover that scenario.  ">
+    <DriverParameters Args="/script=RayHitTestingTest.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL scene - OrthographicCamera" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:OrthographicCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using an OrthographicCamera.  Call VisualOperations.HitTest on the RetainedVisual3D.  ">
+    <DriverParameters Args="/script=PointHitTestingTest_OrthoCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_OrthoCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL scene - PerspectiveCamera" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:PerspectiveCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a PerspectiveCamera.  Call VisualOperations.HitTest on the RetainedVisual3D.  ">
+    <DriverParameters Args="/script=PointHitTestingTest_PerspCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_PerspCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL scene - OrthographicCamera &amp; Viewport3D" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:OrthographicCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using an OrthographicCamera.  Call VisualOperations.HitTest on the Viewport3D.  ">
+    <DriverParameters Args="/script=PointHitTestingTest_OrthoCamera_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_OrthoCamera_VP3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL scene - PerspectiveCamera &amp; Viewport3D" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:PerspectiveCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a PerspectiveCamera.  Call VisualOperations.HitTest on the Viewport3D.   ">
+    <DriverParameters Args="/script=PointHitTestingTest_PerspCamera_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_PerspCamera_VP3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL scene - MatrixCamera" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a MatrixCamera.  Call VisualOperations.HitTest on the RetainedVisual3D.  ">
+    <DriverParameters Args="/script=PointHitTestingTest_MatrixCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_MatrixCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RayHitTesting test - with models that can't be hit" Timeout="60" Description="Focus:RayHitTestParameters Focus:RayHitTestResult Focus:Hit Testing Uses:ScreenSpaceLines3D Uses:Light Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:SpotLight Comments: Create a scene with ScreenSpaceLines and all types of lights.  Try to hit test them.  We shouldn't hit anything. ">
+    <DriverParameters Args="/script=RayHitTestingTest.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing on clipped models - MatrixCamera" Timeout="60" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a partially clipped mesh using a MatrixCamera.  Call VisualOperations.HitTest on the RetainedVisual3D. ">
+    <DriverParameters Args="/script=PointHitTestingTest_ClipMatrix.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_ClipMatrix.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing on clipped models - OrthographicCamera" Timeout="60" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a partially clipped mesh using an OrthographicCamera.  Call VisualOperations.HitTest on the RetainedVisual3D. ">
+    <DriverParameters Args="/script=PointHitTestingTest_ClipOrtho.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_ClipOrtho.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing on clipped models - PerspectiveCamera" Timeout="60" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a partially clipped mesh using a PerspectiveCamera.  Call VisualOperations.HitTest on the RetainedVisual3D. ">
+    <DriverParameters Args="/script=PointHitTestingTest_ClipPersp.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_ClipPersp.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RayHitTesting test - with flattened scene" Timeout="60" Description="Focus:RayHitTestParameters Focus:RayHitTestResult Focus:Hit Testing Uses:MeshGeometry3D Uses:ScaleTransform3D Comments: Try hit testing into a scene containing transformed meshes that have a 0 component in the ScaleVector. ">
+    <DriverParameters Args="/script=RayHitTestingTest_FlattenedScene.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_FlattenedScene.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SLL Multi-Visual scene - MatrixCamera" Timeout="70" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a MatrixCamera.  Call VisualOperations.HitTest on the RetainedVisual3D.  ">
+    <DriverParameters Args="/script=PointHitTestingTest_MatrixCamera_MultiVisual.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_MatrixCamera_MultiVisual.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL Multi-Visual scene - OrthographicCamera" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:OrthographicCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using an OrthographicCamera.  Call VisualOperations.HitTest on the RetainedVisual3D.  ">
+    <DriverParameters Args="/script=PointHitTestingTest_OrthoCamera_MultiVisual.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_OrthoCamera_MultiVisual.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL Multi-Visual scene - OrthographicCamera &amp; Viewport3D" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:OrthographicCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using an OrthographicCamera.  Call VisualOperations.HitTest on the Viewport3D.  ">
+    <DriverParameters Args="/script=PointHitTestingTest_OrthoCamera_VP3D_MultiVisual.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_OrthoCamera_VP3D_MultiVisual.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL Multi-Visual scene - PerspectiveCamera" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:PerspectiveCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a PerspectiveCamera.  Call VisualOperations.HitTest on the RetainedVisual3D.  ">
+    <DriverParameters Args="/script=PointHitTestingTest_PerspCamera_MultiVisual.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_PerspCamera_MultiVisual.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL Multi-Visual scene - PerspectiveCamera &amp; Viewport3D" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:PerspectiveCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a PerspectiveCamera.  Call VisualOperations.HitTest on the Viewport3D.   ">
+    <DriverParameters Args="/script=PointHitTestingTest_PerspCamera_VP3D_MultiVisual.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_PerspCamera_VP3D_MultiVisual.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL scene - MatrixCamera &amp; Viewport3D" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:PerspectiveCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a PerspectiveCamera.  Call VisualOperations.HitTest on the Viewport3D.   ">
+    <DriverParameters Args="/script=PointHitTestingTest_MatrixCamera_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_MatrixCamera_VP3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Mesh,SSL Multi-Visual scene - MatrixCamera &amp; Viewport3D" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:PerspectiveCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using a PerspectiveCamera.  Call VisualOperations.HitTest on the Viewport3D.   ">
+    <DriverParameters Args="/script=PointHitTestingTest_MatrixCamera_VP3D_MultiVisual.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_MatrixCamera_VP3D_MultiVisual.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - with Non-indexed Mesh - All cameras" Timeout="90" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:OrthographicCamera Uses:PerspectiveCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with a non-indexed mesh using all Cameras.  Call VisualOperations.HitTest on the Viewport3D.   ">
+    <DriverParameters Args="/script=PointHitTestingTest_NonIndexedMesh.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_NonIndexedMesh.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Ray Hit Testing - with Mesh,SSL Multi-Visual scene" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:RayIntersection Uses:HitTestParameters3D Uses:RayHitTestParameters Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with the same mesh copied into multiple models with different transforms.  Cast a pick ray into the scene and call Model3D.HitTest on the scene.  ScreenSpaceLines3D are ignored by hit tests that originate from this call, but this test does not cover that scenario.  ">
+    <DriverParameters Args="/script=RayHitTestingTest_MultiVisual.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_MultiVisual.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Ray Hit Testing - with Mesh,SLL scene &amp; Viewport3D" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:RayIntersection Uses:HitTestParameters3D Uses:RayHitTestParameters Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with the same mesh copied into multiple models with different transforms.  Cast a pick ray into the scene and call Model3D.HitTest on the scene.  ScreenSpaceLines3D are ignored by hit tests that originate from this call, but this test does not cover that scenario.  ">
+    <DriverParameters Args="/script=RayHitTestingTest_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_VP3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Ray Hit Testing - with Mesh,SSL Multi-Visual Scene &amp; Viewport3D" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:RayIntersection Uses:HitTestParameters3D Uses:RayHitTestParameters Uses:HitTestResult3D Uses:RayHitTestResult Comments: Render a scene with the same mesh copied into multiple models with different transforms.  Cast a pick ray into the scene and call Model3D.HitTest on the scene.  ScreenSpaceLines3D are ignored by hit tests that originate from this call, but this test does not cover that scenario.  ">
+    <DriverParameters Args="/script=RayHitTestingTest_VP3D_MultiVisual.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_VP3D_MultiVisual.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RayHitTesting test - with models that can't be hit - VisualPerModel" Timeout="60" Description="Focus:RayHitTestParameters Focus:RayHitTestResult Focus:Hit Testing Uses:ScreenSpaceLines3D Uses:Light Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:SpotLight Comments: Create a scene with ScreenSpaceLines and all types of lights.  Try to hit test them.  We shouldn't hit anything. ">
+    <DriverParameters Args="/script=RayHitTestingTest_VisualPerModel.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_VisualPerModel.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - Camera.Transform on all cameras" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:OrthographicCamera Uses:PerspectiveCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Verify that hit testing from a Point still works when a transform is set on the Camera.   ">
+    <DriverParameters Args="/script=PointHitTestingTest_CameraTransform.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_CameraTransform.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Ray Hit Testing - with Transforms on Model3Ds and Visual3Ds" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:RayIntersection Uses:HitTestParameters3D Uses:RayHitTestParameters Uses:HitTestResult3D Uses:RayHitTestResult Comments: Put a transform on a Model3D or a Visual3D or both and attempt a Ray HitTest to verify that the transforms are not being ignored. ">
+    <DriverParameters Args="/script=RayHitTestingTest_Transforms.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_Transforms.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - Mirrored models" Timeout="70" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:OrthographicCamera Uses:PerspectiveCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Verify that hit testing from a Point still works when models are flipped due to mirror transforms (det less than 0).   ">
+    <DriverParameters Args="/script=PointHitTestingTest_MirroredGeometry.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_MirroredGeometry.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Ray Hit Testing - Mirrored models" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:RayIntersection Uses:HitTestParameters3D Uses:RayHitTestParameters Uses:HitTestResult3D Uses:RayHitTestResult Comments: Verify that ray hit testing still works when mirror transforms (det less than 0) exist in a 3D scene. ">
+    <DriverParameters Args="/script=RayHitTestingTest_MirroredGeometry.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_MirroredGeometry.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - BackMaterial" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Focus:BackMaterial Uses:MatrixCamera Uses:OrthographicCamera Uses:PerspectiveCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Verify that hit testing from a Point works on mesh back faces when BackMaterial != null.   ">
+    <DriverParameters Args="/script=PointHitTestingTest_BackMaterial.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_BackMaterial.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Ray Hit Testing - BackMaterial" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Focus:BackMaterial Uses:RayIntersection Uses:HitTestParameters3D Uses:RayHitTestParameters Uses:HitTestResult3D Uses:RayHitTestResult Comments: Verify that ray hit testing works on mesh back faces when BackMaterial != null. ">
+    <DriverParameters Args="/script=RayHitTestingTest_BackMaterial.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_BackMaterial.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - Closest Model returned" Timeout="30" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:HitTestResult3D Uses:RayHitTestResult Comments: Use the VisualTreeHelper.HitTest API that returns the closest model hit as its return value.  Verify that this return value is correct. ">
+    <DriverParameters Args="/script=PointHitTestingTest_ClosestModel.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_ClosestModel.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing outisde viewport area - with Mesh,SSL scene - Viewport3D" Timeout="30" Description="Focus:RayLines3DIntersection Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:OrthographicCamera Uses:Viewport3D Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:RayHitTestResult Comments: Render a scene with a mesh and some screen space lines using an OrthographicCamera.  Hit test outside the viewport area and check for hit test results depending on if we clip to the viewport bounds or not.   ">
+    <DriverParameters Args="/script=PointHitTestingTest_Outside_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_Outside_VP3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - Mesh behind perspective camera clipping regression test" Timeout="60" Description="Focus:Viewport3DVisual Focus:Hit Testing Uses:MatrixCamera Uses:PerspectiveCamera Uses:MeshGeometry3D Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Test the Viewport3DVisual's bounds by hit testing against models that are partially behind the camera.  Verify that the models can be hit since incorrect viewport bounds will fail the hit test. ">
+    <DriverParameters Args="/script=PointHitTestingTest_BoundsRegression.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_BoundsRegression.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing - Bad Meshes" Timeout="60" Description="Focus:Viewport3DVisual Focus:Hit Testing Uses:PerspectiveCamera Uses:MeshGeometry3D Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Do hit testing against meshes with bad vertex data or null values. ">
+    <DriverParameters Args="/script=PointHitTesting_BadMeshes.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTesting_BadMeshes.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - Point Hit Testing - Non-Affine mesh transforms" Timeout="60" Description="Focus:MatrixTransform Focus:Hit Testing Uses:PerspectiveCamera Uses:MeshGeometry3D Uses:AmbientLight Uses:DiffuseMaterial Uses:ImageBrush Comments: Make sure that hit testing meshes with non-affine transforms doesn't cause a crash (the results of the hit tests are ignored). ">
+    <DriverParameters Args="/script=PointHitTestingTest_NonAffine.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_NonAffine.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing on indexed/non-indexed meshes + mirror/non-mirror transforms" Timeout="60" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Try doing Point hit testing on all combos of indexed/non-indexed meshes + mirror/non-mirror transforms ">
+    <DriverParameters Args="/script=PointHitTestingTest_Mirror_Indexing.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_Mirror_Indexing.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point Hit Testing on OrthographicCamera with negative near plane" Timeout="60" Description="Focus:RayMeshGeometry3DIntersection Focus:Hit Testing Uses:MatrixCamera Uses:RayIntersection Uses:PointHitTestParameters Uses:HitTestResult Uses:HitTestResult3D Uses:RayHitTestResult Comments: Try doing Point hit testing on all combos of indexed/non-indexed meshes + mirror/non-mirror transforms where the meshes are behind an OrthographicCamera with a negative near plane. ">
+    <DriverParameters Args="/script=PointHitTestingTest_Mirror_Indexing2.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_Mirror_Indexing2.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+</XTC>

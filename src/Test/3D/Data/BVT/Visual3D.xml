@@ -1,0 +1,248 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="Visual3DRenderingTest"
+    DefaultColorTolerance="4,4,4,4"
+    SilhouetteEdgeTolerance="1"
+    PixelToEdgeTolerance="0.05"
+
+    Camera="PerspectiveDefault"
+    UseViewport3D="false"
+    VerifySerialization="true"
+    >
+
+    <!-- We're mostly making sure that the z-buffer is shared between visuals
+        and that things actually show up when split up in different ways -->
+
+    <VARIATION
+        Scene="Explicit"
+        Visual0="Group"
+        Child00="FullScreenMesh"
+        Material00="255,0,128,0"
+        ModelTransform00="Translate 0,0,-2"
+        Child01="WhiteAmbient"
+        Child02="UnitPlaneTriangle"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="FullScreenMesh"
+        Material0="255,0,128,0"
+        Visual1="WhiteAmbient"
+        Visual2="UnitPlaneTriangle"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="FullScreenMesh"
+        Material0="255,0,128,0"
+        ModelTransform0="Translate 0,0,-2"
+        Visual1="WhiteAmbient"
+        Visual2="UnitPlaneTriangle"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="FullScreenMesh"
+        Material0="255,0,128,0"
+        VisualTransform0="Translate 0,0,-2"
+        Visual1="WhiteAmbient"
+        Visual2="UnitPlaneTriangle"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="UnitPlaneTriangle"
+        Visual1="WhiteAmbient"
+        Visual2="FullScreenMesh"
+        Material2="255,0,128,0"
+        />
+
+    <!-- Multiple lights -->
+
+    <VARIATION
+        Description="2 AmbientLights"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="AmbientLight 255,100,0,100"
+        Visual2="AmbientLight 255,0,100,100"
+        />
+    <VARIATION
+        Description="AmbientLight + DirectionalLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="AmbientLight 255,100,0,100"
+        Visual2="DirectionalLight 255,0,255,255 -1,-1,-1"
+        />
+    <VARIATION
+        Description="AmbientLight + PointLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="AmbientLight 255,100,0,100"
+        Visual2="PointLight 255,0,255,255 -2,-2,2 20 0 0 0.08"
+        />
+    <VARIATION
+        Description="AmbientLight + SpotLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="AmbientLight 255,100,0,100"
+        Visual2="SpotLight 255,0,255,255 0,0,5 0,0,-1 20 15 25"
+        />
+
+    <VARIATION
+        Description="2 DirectionalLights"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="DirectionalLight 255,255,0,255 -1,-1,-1"
+        Visual2="DirectionalLight 255,0,255,255 1,-1,-1"
+        />
+    <VARIATION
+        Description="DirectionalLight + PointLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="DirectionalLight 255,255,0,255 -1,-1,-1"
+        Visual2="PointLight 255,0,255,255 -2,-2,2 20 0 0 0.08"
+        />
+    <VARIATION
+        Description="DirectionalLight + SpotLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="DirectionalLight 255,255,0,255 -1,-1,-1"
+        Visual2="SpotLight 255,0,255,255 0,0,5 0,0,-1 20 15 25"
+        />
+
+    <VARIATION
+        Description="2 PointLights"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="PointLight 255,255,0,255 2,2,2 20 0 0 0.08"
+        Visual2="PointLight 255,0,255,255 -2,-2,2 20 0 0 0.08"
+        />
+    <VARIATION
+        Description="PointLight + SpotLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="PointLight 255,0,255,255 -2,-2,2 20 0 0 0.08"
+        Visual2="SpotLight 255,0,255,255 0,0,5 0,0,-1 20 15 25"
+        />
+
+    <VARIATION
+        Description="2 SpotLights"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="SpotLight 255,255,0,255 -1,0,1 2,0,-1 20 45 60"
+        Visual2="SpotLight 255,0,255,255 1,-1,1 -2,2,-1 20 45 60"
+        DefaultColorTolerance="6,6,6,6"
+        />
+
+    <!-- Ordered spheres with transforms on the models -->
+
+    <!-- [matthohn/03.21.11] Disabling unstable test -->
+	<!--<VARIATION
+        Scene="Explicit"
+        Visual0="Group"
+        Child00="DefaultSphere"
+        Material00="255,255,0,0"
+        ModelTransform00="Translate -1,0,2"
+
+        Child01="DefaultSphere"
+        Material01="255,0,255,0"
+
+        Child02="DefaultSphere"
+        Material02="255,0,0,255"
+        ModelTransform02="Translate 1,0,-2"
+
+        Child03="WhiteDirectionalNegZ"
+        />-->
+    <VARIATION
+        Scene="Explicit"
+        Visual0="Group"
+        Child02="DefaultSphere"
+        Material02="255,255,0,0"
+        ModelTransform02="Translate 1,0,2"
+
+        Child01="DefaultSphere"
+        Material01="255,0,255,0"
+
+        Child00="DefaultSphere"
+        Material00="255,0,0,255"
+        ModelTransform00="Translate -1,0,-2"
+
+        Child03="WhiteDirectionalNegZ"
+        />
+
+    <!-- Ordered spheres with transforms on the visuals -->
+
+	<!-- [matthohn/03.21.11] Disabling unstable test -->
+    <!--<VARIATION
+        Scene="Explicit"
+        Visual0="DefaultSphere"
+        Material0="255,255,0,0"
+        ModelTransform0="Translate -1,0,2"
+
+        Visual1="DefaultSphere"
+        Material1="255,0,255,0"
+
+        Visual2="DefaultSphere"
+        Material2="255,0,0,255"
+        ModelTransform2="Translate 1,0,-2"
+
+        Visual3="WhiteDirectionalNegZ"
+        />-->
+    <VARIATION
+        Scene="Explicit"
+        Visual2="DefaultSphere"
+        Material2="255,255,0,0"
+        ModelTransform2="Translate 1,0,2"
+
+        Visual1="DefaultSphere"
+        Material1="255,0,255,0"
+
+        Visual0="DefaultSphere"
+        Material0="255,0,0,255"
+        ModelTransform0="Translate -1,0,-2"
+
+        Visual3="WhiteDirectionalNegZ"
+        />
+
+    <!-- crazy-huge scene graphs with Transforms galore -->
+
+<!-- 
+The biped walker has reference render lighting problems. This is a minor difference, but time consuming to investigate.
+TODO: (pantal June 07) Assign investigation to a new peer as a well defined training task, or investigate after high priority queue is exhausted.
+
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteDirectionalNegZ"
+        ModelTransform0="Rotate 0,1,0 45"
+        Visual1="BipedWalker"
+        ModelTransform1="Translate 0,0,1.5"
+        ZBufferTolerance=".001"
+        />
+    <VARIATION
+        Scene="VisualPerModel"
+        Visual0="WhiteDirectionalNegZ"
+        ModelTransform0="Rotate 0,1,0 -45"
+        Visual1="BipedWalker"
+        ModelTransform1="Translate 0,0,1.5"
+        ZBufferTolerance=".001"
+        />
+-->
+    <VARIATION
+        Scene="Explicit"
+        Visual0="LowResGroupSphere"
+        Visual1="WhiteDirectionalNegZ"
+        />
+    <VARIATION
+        Scene="VisualPerModel"
+        Visual0="LowResGroupSphere"
+        Visual1="WhiteDirectionalNegZ"
+        />
+
+</INIT>

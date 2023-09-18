@@ -1,0 +1,1027 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="P2-Scenario" Priority="2">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="Scenario3D.dll" Class="Microsoft.Test.Graphics.ScenarioApplication" Method="Launch" />
+  </DEFAULTTESTINFO>
+
+  <!-- Needs Repair. 
+  
+  Video tests here fail on XP
+    <TEST Name="Stability - Video on 3D" Timeout="300" Description="Focus:Stability Focus:Scenario Focus:Video Uses:DiffuseMaterial Uses:TranslateTransform3D Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the stability of Video on 3D. No visual verification, test passes if it doesn't crash. ">
+    <DriverParameters Args="/scenario=MorphMesh.baml /NoMeshAnimation /Video=video.mpg /kill_time=20000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - Video on 3D + Mesh animations" Timeout="300" Description="Focus:Stability Focus:Scenario Focus:Video Focus:Animation Uses:DiffuseMaterial Uses:TranslateTransform3D Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the stability of Video on 3D. No visual verification, test passes if it doesn't crash. ">
+    <DriverParameters Args="/scenario=MorphMesh.baml /Video=video.mpg /kill_time=20000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\*.mpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - Video on 3D + Mesh animations + VisualBrush" Timeout="300" Description="Focus:Stability Focus:Scenario Focus:Video Focus:Animation Focus:VisualBrush Uses:DiffuseMaterial Uses:TranslateTransform3D Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the stability of Video on 3D. No visual verification, test passes if it doesn't crash. ">
+    <DriverParameters Args="/scenario=MorphMesh.baml /Video=video.mpg /UseVisualBrush /kill_time=20000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\*.mpg" />
+    </SupportFiles>
+  </TEST>
+  -->
+  
+    <TEST Name="Video - Basic Video on 3D" Timeout="120" Description="Focus:Rendering Verification Focus:Video Focus:Integration Uses:Canvas Uses:SolidColorBrush Uses:DiffuseMaterial Uses:AmbientLight Uses:OrthographicCamera Uses:MeshGeometry3D Comments: Verify the rendering of a full sreen video that covers the entire Viewport3D.  The test uses an OrhtographicCamera so the image should look like a 2D video.  The video used has 10seconds of red, 10 of blue, t=10 of green, and the verification is done by taking screenshots at the right intervals in time. ">
+    <!-- Disabling for .NET Core 3, Fix and re-enable. Only disabling for Windows 8.1-->
+    <Configurations>
+      <Configuration>Infra\Configurations\NoWin81.xml</Configuration>
+    </Configurations>
+    <DriverParameters Args="/scenario=VideoTest /video=30SecondsOfRed.wmv /expected_color=255,240,15,15  /DefaultColorTolerance=0,16,16,16" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.wmv" />
+    </SupportFiles>
+  </TEST>
+  
+   <TEST Name="Scenario - Brush Sampler" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Scenario Focus:SolidColorBrush Focus:LinearGradientBrush Focus:ImageBrush Focus:DrawingBrush Uses:TranslateTransform3D Uses:DiffuseMaterial Uses:DirectionallLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a different brushes inside DiffueseMaterial by having several cube meshes in a scene rendered using TestRenderer.   ">
+    <DriverParameters Args="/scenario=BrushMaterialSampler /times=0 /PixelToEdgeTolerance=0.2" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - DiffuseMaterial - SolidColorBrush" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:SolidColorBrush Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated SolidColorBrush by applying it to flat quad meshes under AmbientLight and rendering using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_BM_SolidColor /times=500,1000,1500,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - DiffuseMaterial - LinearGradientBrush" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:LinearGradientBrush Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated LinearGradientBrush by applying it to flat quad meshes under AmbientLight and rendering using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_BM_LinearGradient /times=500,1000,1500,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <!-- [matthohn/03.21.11] Disabling unstable test -->
+  <TEST Disabled="True" Name="Serialization - ImageBrush on BrushMaterial - Relative Stretch Modes" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:ImageBrush Focus:Brush Stretch Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an ImageBrush with different 2D TileBrush properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args="/scenario=IB_RelativeStretch /serialize_time=1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\IB_Stretch_Tolerance.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - ImageBrush on BrushMaterial - Absolute Stretch Modes" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:ImageBrush Focus:Brush Stretch Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an ImageBrush with different 2D TileBrush properties by using TestRenderer  on the original and round-trip serialized scenes.   ">
+    <DriverParameters Args="/scenario=IB_AbsoluteStretch /serialize_time=1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\IB_Stretch_Tolerance.xml" />
+    </SupportFiles>
+  </TEST>
+  <!--DISABLEDUNSTABLETEST Serialization - ImageBrush on BrushMaterial - Stretch Modes, Mixed UV-->
+  <TEST Name="Serialization - ImageBrush on BrushMaterial - Stretch Modes, Mixed UV" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:ImageBrush Focus:Brush Stretch Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an ImageBrush with different 2D TileBrush properties by using TestRenderer on the original and round-trip serialized scenes. ">
+    <DriverParameters Args="/scenario=IB_Stretch_MixedUV /serialize_time=1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - ImageBrush on BrushMaterial - Tiling Modes, Mixed UV" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:ImageBrush Focus:Brush TileMode Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an ImageBrush with different 2D TileBrush properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args="/scenario=IB_Tiling_MixedUV /serialize_time=1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - ImageBrush on BrushMaterial - Tiling NONE" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:ImageBrush Focus:Brush TileMode Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an ImageBrush with different 2D TileBrush properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args="/scenario=IB_TileNone /serialize_time=1 /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - DiffuseMaterial - SolidColorBrush (Animated)" Timeout="180" Description="Focus:Rendering Verification Focus:Scenario Focus:Serialization Focus:Storyboards Focus:SolidColorBrush Uses:Animation Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization of a Storyboards-animated SolidColorBrush by applying it to flat quad meshes under AmbientLight and rendering using TestRenderer on the original and round-trip serialized scenes.   ">
+    <DriverParameters Args="/scenario=Anim_BM_SolidColor /serialize_time=500" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - DiffuseMaterial - LinearGradientBrush (Animated)" Timeout="180" Description="Focus:Rendering Verification Focus:Scenario Focus:Serialization Focus:Storyboards Focus:LinearGradientBrush Uses:Animation Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization of a Storyboards-animated LinearGradientBrush by applying it to flat quad meshes under AmbientLight and rendering using TestRenderer on the original and round-trip serialized scenes.   ">
+    <DriverParameters Args="/scenario=Anim_BM_LinearGradient /serialize_time=500" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  
+    <TEST Disabled="True" Name="Animation - Combined Materials - SolidColorBrush - Directional Light" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:SolidColorBrush Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated SolidColorBrush by applying it to flat quad meshes under DirectionalLight and rendering using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_AM_SolidColor_DIR /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Combined Materials - SolidColorBrush - Ambient Light" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:SolidColorBrush Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated SolidColorBrush by applying it to flat quad meshes under AmbientLight and rendering using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_AM_SolidColor_AMB /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Combined Materials - LinearGradientBrush - Directional Light" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:LinearGradientBrush Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated LinearGradientBrush by applying it to flat quad meshes under DirectionalLight and rendering using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_AM_LinearGradient_DIR /times=1,200,500,900,1200 /DefaultColorTolerance=5,5,5,5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Combined Materials - LinearGradientBrush - Ambient Light" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:LinearGradientBrush Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated LinearGradientBrush by applying it to flat quad meshes under AmbientLight and rendering using TestRenderer at several animation frames.     ">
+    <DriverParameters Args="/scenario=Anim_AM_LinearGradient_AMB /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Transparent EmissiveMaterial - Directional Light" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:EmissiveMaterial Focus:Transparency Uses:SolidColorBrushl Uses:DiffuseMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a scene with transparent EmissiveMaterial inside a MaterialGroup by using TestRenderer on the original and round-trip serialized scenes.  Uses: DirectionalLight. ">
+    <DriverParameters Args="/scenario=TransparentAM_DIR /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Transparent EmissiveMaterial - Ambient Light" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:EmissiveMaterial Focus:Transparency Uses:SolidColorBrushl Uses:DiffuseMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a scene with transparent EmissiveMaterial inside a MaterialGroup by using TestRenderer on the original and round-trip serialized scenes.  Uses: AmbientLight. ">
+    <DriverParameters Args="/scenario=TransparentAM_AMB /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - EmissiveMaterial - NO Lights" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:EmissiveMaterial Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an EmissiveMaterial by applying it to flat quad meshes under NO LIGHTS using TestRenderer  on the original and round-trip serialized scenes.    ">
+    <DriverParameters Args="/scenario=EmissiveNoLight /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Terrain Demo" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:End User Scenario Uses:PerspectiveCamera Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a heightfield scene by using TestRenderer on the original and round-trip serialized scenes.    ">
+    <DriverParameters Args="/scenario=TerrainDemo /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - AmbientLight" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:AmbientLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of AmbientLight by rendering a Sphere under it using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_AmbientLight /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - DirectionalLight" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:DirectionalLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of DirectionalLight by rendering a Sphere under it using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_DirectionalLight /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight - Color+Position" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PointLight Focus:Color Focus:Position Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a sphere under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpotLight - Color+Position+Direction" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpotLight Focus:Color Focus:Position Focus:Direction Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated SpotLight properties by rendering a sphere using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_SpotLight /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpotLight - InnerConeAngle" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpotLight Focus:InnerConeAngle Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated SpotLight properties by rendering a highly tesselated grid using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_SpotLight_Cone /TestInnerConeAngle /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpotLight - OuterConeAngle" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpotLight Focus:OuterConeAngle Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated SpotLight properties by rendering a highly tesselated grid using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_SpotLight_Cone /TestOuterConeAngle /times=1,200,500,900,1200  /DefaultColorTolerance=0,4,4,4" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpotLight - OuterConeAngle+InnerConeAngle" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpotLight Focus:InnerConeAngle Focus:OuterConeAngle Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated SpotLight properties by rendering a highly tesselated grid using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_SpotLight_Cone /TestOuterConeAngle /TestInnerConeAngle /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpecularMaterial - SpecularPower" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpecularMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of SpecularMaterial ( SpecularPowerProperty ) by applying it to flat hightly tesselated grid meshe under DirectionalLight and rendering using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_SpecularPower /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpotLight - LinearAttenuation" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpotLight Focus:LinearAttenuation Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated SpotLight properties by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /UseSpotLight /TestLinearAttenuation /times=1,200,500,900,1200 /DefaultColorTolerance=0,6,6,11" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpotLight - QuadraticAttenuation" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpotLight Focus:QuadraticAttenuation Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated SpotLight properties by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /UseSpotLight /TestQuadraticAttenuation /times=1,200,500,900,1200 /DefaultColorTolerance=0,6,6,9" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpotLight - ConstantAttenuation" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpotLight Focus:ConstantAttenuation Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated SpotLight properties by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /UseSpotLight /TestConstantAttenuation /times=1,200,500,900,1200 /DefaultColorTolerance=0,6,6,9" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight - ConstantAttenuation" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PointLight Focus:ConstantAttenuation Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestConstantAttenuation /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight - LinearAttenuation" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PointLight Focus:LinearAttenuation Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestLinearAttenuation /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight - QuadraticAttenuation" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PointLight Focus:QuadraticAttenuation Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestQuadraticAttenuation /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Translate" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:TranslateTransform3D Focus:Offset Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestOffset /times=1,200,500,900,1200 /DefaultColorTolerance=5,5,5,5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Rotate - Center" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:RotateTransform3D Focus:Center Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Transforms/TestCenter /times=1,200,500,900,1200 /DefaultColorTolerance=5,5,5,5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Rotate - AngleRotation" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:RotateTransform3D Focus:QuaternionRotation Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestAngleRotation /times=1,200,500,900,1200 /DefaultColorTolerance=5,5,5,5 " />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Scale - ScaleCenter" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:ScaleTransform3D Focus:ScaleCenter Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestScaleCenter /times=1,200,500,900,1200  /DefaultColorTolerance=5,5,5,5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Scale - ScaleVector" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:ScaleTransform3D Focus:ScaleVector Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestScaleVector /times=1,200,500,900,1200  /DefaultColorTolerance=8,8,8,8" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Scale+Rotate+Translate" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:TranslateTransform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:Transform3DGroup Uses:QuaternionRotation Uses:ScaleVector Uses:Offset Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestScaleVector /TestOffset /TestAngleRotation /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Orthographic - Width" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:OrthographicCamera Focus:Width Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated OrthographicCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /UseOrthographicCamera /TestWidth /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Perspective - FieldOfView" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PerspectiveCamera Focus:FieldOfView Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated PerspectiveCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /TestFieldOfView /times=1,200,500,900,1200 /DefaultColorTolerance=0,9,9,9 /TextureLookUpTolerance=0.001" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Perspective - NearPlaneDistance" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PerspectiveCamera Focus:NearPlaneDistance Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated PerspectiveCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /TestNearPlaneDistance /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Perspective - FarPlaneDistance" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PerspectiveCamera Focus:FarPlaneDistance Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated PerspectiveCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /TestFarPlaneDistance /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Perspective - Position" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PerspectiveCamera Focus:Position Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated PerspectiveCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /TestPosition /times=1,200,500,900,1200 /NumAllowableMismatches=10 /VScanToleranceFile=Anim_PointLight_RangeAttenuation_ToleranceProfile.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+	  <SupportFile Source="FeatureTests\3D\Anim_PointLight_RangeAttenuation_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Perspective - LookDirection" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PerspectiveCamera Focus:LookAtPoint Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated PerspectiveCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /TestLookDirection /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Perspective - Up" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:PerspectiveCamera Focus:Up Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated PerspectiveCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /TestUp /times=1,200,500,900,1200 /NumAllowableMismatches=5 /VScanToleranceFile=Anim_Camera_Up_ToleranceProfile.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+      <SupportFile Source="FeatureTests\3D\Anim_Camera_Up_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Orthographic - NearPlaneDistance" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:OrthographicCamera Focus:NearPlaneDistance Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated OrthographicCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /UseOrthographicCamera /TestNearPlaneDistance /times=1,200,500,900,1200 " />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Orthographic - FarPlaneDistance" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:OrthographicCamera Focus:FarPlaneDistance Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated OrthographicCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /UseOrthographicCamera /TestFarPlaneDistance /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Orthographic - Position" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:OrthographicCamera Focus:Position Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated OrthographicCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /UseOrthographicCamera /TestPosition /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Orthographic - LookDirection" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:OrthographicCamera Focus:LookAtPoint Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated OrthographicCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /UseOrthographicCamera /TestLookDirection /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Camera - Orthographic - Up" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:OrthographicCamera Focus:Up Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the rendering of animated OrthographicCamera properties by rendering a heightfield scene under DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /UseOrthographicCamera /TestUp /times=1,200,500,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - SpotLight cone angles" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:SpotLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a SpotLight by rendering a highly tesselated grid  under a SpotLight using TestRenderer on the original and round-trip serialized scenes.    ">
+    <DriverParameters Args="/scenario=Anim_SpotLight_Cone /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - PointLight Range and Attenuation" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:PointLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a PointLight by rendering a series of highly tesselated grids under a PointLight using TestRenderer on the original and round-trip serialized scenes.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Camera - Perspective" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:PerspectiveCamera Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the serialization of PerspectiveCamera by rendering a heightfield scene under DirectionalLight using TestRenderer on the original and round-trip serialized scenes.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Camera - Orthographic" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:OrthographicCamera Uses:DiffuseMaterial Uses:LinearGradientBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the serialization of OrthographicCamera by rendering a heightfield scene under DirectionalLight using TestRenderer on the original and round-trip serialized scenes.    ">
+    <DriverParameters Args="/scenario=Anim_Camera /UseOrthographicCamera /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\heightfield.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Realization - ImageBrush" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Scenario Focus:ImageBrush Focus:Realization Focus:Intermediate Render Target Uses:ScaleTransform3D Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering realization of ImageBrush in 3D by rendering a plane at different scales using TestRenderer.   ">
+    <DriverParameters Args="/scenario=IB_Scale /times=1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Realization - DrawingBrush" Timeout="180" Description="Focus:Rendering Verification Focus:Scenario Focus:DrawingBrush Focus:Realization Focus:Intermediate Render Target Uses:ScaleTransform3D Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering realization of DrawingBrush in 3D by rendering a plane at different scales using TestRenderer.   ">
+    <DriverParameters Args="/scenario=DB_Scale /times=1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Model3DGroup ( Deep hierarchy )" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:Model3DGroup Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:Transform3DGroup Uses:DiffuseMaterial  Uses:SolidColortBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the serialization of a deeply nested Model3DGroup chain by using TestRenderer on the original and round-trip serialized scenes.    ">
+    <DriverParameters Args="/scenario=Chain /RotateAngle=-5.42 /ModelCount=50 /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Model3DGroup ( Wide hierarchy )" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:Model3DGroup Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:Transform3DGroup Uses:DiffuseMaterial  Uses:SolidColortBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the serialization of a wide Model3DGroup tree of by using TestRenderer on the original and round-trip serialized scenes.   ">
+    <DriverParameters Args="/scenario=SphereGroup /sphereU=10 /sphereV=10 /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Scenario: Go Game" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:End User Scenario Uses:TranslateTransform3D Uses:ScaleTransform3D Uses:Transform3DGroup Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:DrawingBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a 3D board game scenario by using TestRenderer on the original and round-trip serialized scenes.    ">
+    <DriverParameters Args="/scenario=GoBoard /DefaultColorTolerance=0,5,5,5 /UseCube /Moves=B[ji]W[ja]B[jd]W[dd]B[dj]W[dp]B[jp]W[pp]B[pj]W[pd]B[jk]W[js]B[ij]W[aj]B[kj]W[sj] /serialize_time=0 " />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\wood.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - DiffuseMaterial - RadialGradientBrush" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:RadialGradientBrush Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated RadialGradientBrush by applying it to flat quad meshes under AmbientLight and rendering using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_BM_RadialGradient /times=100,400,1000,1350,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - DiffuseMaterial - DrawingBrush" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:DrawingBrush Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated DrawingBrush by applying it to flat quad meshes under AmbientLight and rendering using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_BM_Drawing /times=500,1000,1500,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - SolidColorBrush - DiffuseMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:DiffuseMaterial Focus:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated SolidColorBrush inside a DiffuseMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=SolidColorBrush /Material=DiffuseMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - LinearGradientBrush - DiffuseMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:DiffuseMaterial Focus:LinearGradientBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated LinearGradientBrush inside a DiffuseMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=LinearGradientBrush /Material=DiffuseMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - RadialGradientBrush - DiffuseMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:DiffuseMaterial Focus:RadialGradientBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated RadialGradientBrush inside a DiffuseMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=RadialGradientBrush /Material=DiffuseMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - ImageBrush - DiffuseMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:DiffuseMaterial Focus:ImageBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated ImageBrush inside a EmissiveMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=ImageBrush /Material=DiffuseMaterial /times=435,997,1360,2000  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - DrawingBrush - DiffuseMaterial" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:DiffuseMaterial Focus:DrawingBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated DrawingBrush inside a DiffuseMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=DrawingBrush /Material=DiffuseMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <!--DISABLEDUNSTABLETEST: Animation - Material+Brush - VisualBrush - DiffuseMaterial -->
+  <TEST Name="Animation - Material+Brush - VisualBrush - DiffuseMaterial" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:DiffuseMaterial Focus:VisualBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated VisualBrush inside a DiffuseMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=VisualBrush /Material=DiffuseMaterial /times=435,997,1360,2000 /TextureLookUpTolerance=0.5 /NumAllowableMismatches=80 /VScanToleranceFile=Anim_Material_Brush_Diffuse_ToleranceProfile.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\Anim_Material_Brush_Diffuse_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - SolidColorBrush - SpecularMaterial" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpecularMaterial Focus:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated SolidColorBrush inside a SpecularMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=SolidColorBrush /Material=SpecularMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - LinearGradientBrush - SpecularMaterial" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpecularMaterial Focus:LinearGradientBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated LinearGradientBrush inside a SpecularMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=LinearGradientBrush /Material=SpecularMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - RadialGradientBrush - SpecularMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpecularMaterial Focus:RadialGradientBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated RadialGradientBrush inside a SpecularMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=RadialGradientBrush /Material=SpecularMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - ImageBrush - SpecularMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpecularMaterial Focus:ImageBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated ImageBrush inside a SpecularMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=ImageBrush /Material=SpecularMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - DrawingBrush - SpecularMaterial" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpecularMaterial Focus:DrawingBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated DrawingBrush inside a SpecularMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=DrawingBrush /Material=SpecularMaterial /times=435,997,1360,2000  /DefaultColorTolerance=8,8,8,8" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - VisualBrush - SpecularMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:SpecularMaterial Focus:VisualBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated VisualBrush inside a SpecularMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=VisualBrush /Material=SpecularMaterial /times=435,997,1360,2000 /TextureLookUpTolerance=0.5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - SolidColorBrush - EmissiveMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:EmissiveMaterial Focus:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated SolidColorBrush inside a EmissiveMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=SolidColorBrush /Material=EmissiveMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - LinearGradientBrush - EmissiveMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:EmissiveMaterial Focus:LinearGradientBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated LinearGradientBrush inside a EmissiveMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=LinearGradientBrush /Material=EmissiveMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - RadialGradientBrush - EmissiveMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:EmissiveMaterial Focus:RadialGradientBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated RadialGradientBrush inside a EmissiveMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=RadialGradientBrush /Material=EmissiveMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - ImageBrush - EmissiveMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:EmissiveMaterial Focus:ImageBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated ImageBrush inside a EmissiveMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=ImageBrush /Material=EmissiveMaterial /times=435,997,1360,2000  /DefaultColorTolerance=8,8,8,8" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - DrawingBrush - EmissiveMaterial" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:EmissiveMaterial Focus:DrawingBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated DrawingBrush inside a EmissiveMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=DrawingBrush /Material=EmissiveMaterial /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - VisualBrush - EmissiveMaterial" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:EmissiveMaterial Focus:VisualBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated VisualBrush inside a EmissiveMaterial by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=VisualBrush /Material=EmissiveMaterial /times=435,997,1360,2000 /TextureLookUpTolerance=0.5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - SolidColorBrush - MaterialGroup" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:MaterialGroup Focus:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated SolidColorBrush inside a MaterialGroup by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=SolidColorBrush /Material=MaterialGroup /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - LinearGradientBrush - MaterialGroup" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:MaterialGroup Focus:LinearGradientBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated LinearGradientBrush inside a MaterialGroup by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=LinearGradientBrush /Material=MaterialGroup /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - RadialGradientBrush - MaterialGroup" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:MaterialGroup Focus:RadialGradientBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated RadialGradientBrush inside a MaterialGroup by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=RadialGradientBrush /Material=MaterialGroup /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - ImageBrush - MaterialGroup" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:MaterialGroup Focus:ImageBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated ImageBrush inside a MaterialGroup by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=ImageBrush /Material=MaterialGroup /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - DrawingBrush - MaterialGroup" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:MaterialGroup Focus:DrawingBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated DrawingBrush inside a MaterialGroup by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=DrawingBrush /Material=MaterialGroup /times=435,997,1360,2000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Material+Brush - VisualBrush - MaterialGroup" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:MaterialGroup Focus:VisualBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the animated rendering of an animated VisualBrush inside a MaterialGroup by rendering a Sphere under a DirectionalLight using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Material_Brush /Brush=VisualBrush /Material=MaterialGroup /times=435,997,1360,2000 /TextureLookUpTolerance=0.5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <!-- [matthohn/03.21.11] Disabling unstable test --> 
+  <TEST Disabled="True" Name="Serialization - Model3DGroup ( Deep+Wide hierarchy )" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:Model3DGroup Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:Transform3DGroup Uses:DiffuseMaterial  Uses:SolidColortBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the serialization of a deep and wide nested Model3DGroup tree of by using TestRenderer on the original and round-trip serialized scenes.   ">
+    <DriverParameters Args="/scenario=Chain /ModelCount=20 /TranslateVector=0,.35,2.15 /RotateAngle=-14.42 /Mesh=GroupSphere,3,5,.9 /serialize_time=0 /DefaultColorTolerance=0,8,8,8" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - Model3DGroup ( Deep+Wide hierarchy )" Timeout="300" Description="Focus:Stability Focus:Scenario Focus:Model3DGroup Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:Transform3DGroup Uses:DiffuseMaterial  Uses:SolidColortBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the stability of large Model3DGroup trees. No visual verification, test passes if it doesn't crash. ">
+    <DriverParameters Args="/scenario=Chain /ModelCount=100 /TranslateVector=0,.15,.85 /RotateAngle=-4.42 /Mesh=GroupSphere,10,10,.9 /kill_time=5000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - Model3DGroup ( Deep hierarchy )" Timeout="500" Description="Focus:Stability Focus:Scenario Focus:Model3DGroup Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:Transform3DGroup Uses:DiffuseMaterial  Uses:SolidColortBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the stability of large Model3DGroup trees. No visual verification, test passes if it doesn't crash. ">
+    <DriverParameters Args="/scenario=Chain /ModelCount=1000 /TranslateVector=0,.01,.75 /RotateAngle=-4.42 /Mesh=DoubleSidedTriangle /kill_time=5000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - Model3DGroup ( Wide  hierarchy )" Timeout="300" Description="Focus:Stability Focus:Scenario Focus:Model3DGroup Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:Transform3DGroup Uses:DiffuseMaterial  Uses:SolidColortBrush Uses:DirectionalLight Uses:MeshGeometry3D Comments: Verify the stability of large Model3DGroup trees. No visual verification, test passes if it doesn't crash. ">
+    <DriverParameters Args="/scenario=SphereGroup /sphereU=100 /sphereV=100 /kill_time=5000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - MaterialGroup ( Wide hierarchy )" Disabled="True" Timeout="400" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:MaterialGroup Uses:EmissiveMaterial Uses:SolidColorBrush Uses:TranslateTransform3D Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a wide MaterialGroup tree (multiple sibling Material) on a quad mesh by using TestRenderer on the original and round-trip serialized scenes.   ">
+    <DriverParameters Args="/scenario=MaterialGroup /Deep=1 /Wide=255 /Color=255,01,01,01 /Material=EmissiveMaterial /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - MaterialGroup ( Deep hierarchy )" Timeout="300" Description="Focus:Stability Focus:Scenario Focus:MaterialGroup Uses:EmissiveMaterial Uses:SolidColorBrush Uses:TranslateTransform3D Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the stability of large MaterialGroup trees. No visual verification, test passes if it doesn't crash. ">
+    <DriverParameters Args="/scenario=MaterialGroup /Deep=500 /Color=255,101,31,201 /kill_time=10000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - MaterialGroup ( Deep+Wide hierarchy )" Timeout="300" Description="Focus:Stability Focus:Scenario Focus:MaterialGroup Uses:EmissiveMaterial Uses:SolidColorBrush Uses:TranslateTransform3D Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the stability of large MaterialGroup trees. No visual verification, test passes if it doesn't crash. ">
+    <DriverParameters Args="/scenario=MaterialGroup /Deep=100 /Wide=100 /Color=255,101,31,201 /kill_time=10000" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  
+    <TEST Name="Transparency - DiffuseMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:DiffuseMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Diffuse /Brush=128,255,0,0 /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transparency - SpecularMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:SpecularMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Specular /Brush=128,255,0,0 /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transparency - EmissiveMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:EmissiveMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Emissive /Brush=128,255,0,0 /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Multiple lights - Rotate - PointLight" Timeout="180" Description="Focus:Rendering Verification Focus:Multiple Lights Focus:Animation Focus:Scenario Uses:DiffuseMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of multiple lights by rendering a highly tesselated sphere under a circle of transformed lights using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Lights /LightCount=12 /RotateLights /AnimateTransforms /times=1,300,600,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Multiple lights - Translate - PointLight" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Multiple Lights Focus:Animation Focus:Scenario Uses:DiffuseMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of multiple lights by rendering a highly tesselated sphere under a circle of transformed lights using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Lights /LightCount=12 /TranslateLights /AnimateTransforms /PixelToEdgeTolerance=0.075 /times=1,300,600,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Multiple lights - Translate+Rotate - PointLight" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Multiple Lights Focus:Animation Focus:Scenario Uses:DiffuseMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of multiple lights by rendering a highly tesselated sphere under a circle of transformed lights using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Lights /LightCount=12 /TranslateLights /RotateLights /AnimateTransforms /times=1,300,600,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Multiple lights - Rotate - SpotLight - SpecularMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Multiple Lights Focus:Animation Focus:Scenario Uses:SpecularMaterial Uses:SpottLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of multiple lights by rendering a highly tesselated sphere under a circle of transformed SpotLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Lights /SpecularPower=20 /LightCount=13 /RotateLights /AnimateTransforms /UseSpotLight /times=1,300,600,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Multiple lights - Translate+Rotate - SpotLight - SpecularMaterial+EmissiveMaterial" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Multiple Lights Focus:Animation Focus:Scenario Uses:SpecularMaterial Uses:EmissiveMaterial Uses:SpottLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of multiple lights by rendering a highly tesselated sphere under a circle of transformed SpotLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Lights /SpecularPower=20 /AddEmissive /LightCount=11 /TranslateLights /RotateLights /AnimateTransforms /UseSpotLight /times=1,300,600,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Multiple lights - Rotate - DirectionalLight - DiffuseMaterial + EmissiveMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Multiple Lights Focus:Animation Focus:Scenario Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:DirectionalLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of multiple lights by rendering a highly tesselated sphere under a circle of transformed DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Lights /LightCount=4 /TranslateLights /RotateLights /AnimateTransforms /UseDirectionalLight /AddEmissive /times=1,300,600,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Multiple lights - Rotate - DirectionalLight - SpecularMaterial" Timeout="180" Description="Focus:Rendering Verification Focus:Multiple Lights Focus:Animation Focus:Scenario Uses:SpecularMaterial Uses:DirectionalLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of multiple lights by rendering a highly tesselated sphere under a circle of transformed DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Lights /LightCount=5 /RotateLights /AnimateTransforms /UseDirectionalLight /SpecularPower=15 /times=1,300,600,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serializtion - Multiple lights - Rotate + Translate - DirectionalLight" Timeout="180" Description="Focus:Rendering Verification Focus:Multiple Lights Focus:Serialization Focus:Scenario Uses:DiffuseMaterial Uses:DirectionalLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of multiple lights by rendering a highly tesselated sphere under a circle of transformed DirectionalLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Lights /LightCount=5 /RotateLights /TranslateLights /UseDirectionalLight /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transparency - DiffuseMaterial - Reverse order" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:DiffuseMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Diffuse /Brush=128,0,0,255 /ReverseOrder /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transparency - DiffuseMaterial - Reverse order + interlocked mesh" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:DiffuseMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Diffuse /Brush=128,0,0,255 /ReverseOrder /UseSphereMesh /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transparency - DiffuseMaterial - interlocked mesh" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:DiffuseMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Diffuse /Brush=128,255,0,0 /UseSphereMesh /times=0  /DefaultColorTolerance=5,5,5,5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transparency - EmissiveMaterial - Reverse order" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:EmissiveMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Emissive /Brush=128,0,0,255 /ReverseOrder /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transparency - EmissiveMaterial - Reverse order + interlocked mesh" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:EmissiveMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Emissive /Brush=128,0,0,255 /ReverseOrder /UseSphereMesh /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transparency - EmissiveMaterial - interlocked mesh" Timeout="180" Description="Focus:Rendering Verification Focus:Transparency Focus:Scenario Focus:EmissiveMaterial Uses:PointLight Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated PointLight properties by rendering a series of highly tesselated grids under a PointLight using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /Material=Emissive /Brush=128,255,0,0 /UseSphereMesh /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>  
+  <TEST Name="Serialization - NULL Materials - Render Order - DiffuseMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:DiffuseMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a null Material) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Material is rendered in front and behind meshes with a valid Material to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullMaterial_Diffuse /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - NULL Materials - Render Order - EmissiveMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:EmissiveMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a null Material) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Material is rendered in front and behind meshes with a valid Material to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullMaterial_Emissive /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - NULL Materials - Render Order - SpecularMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:SpecularMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a null Material) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Material is rendered in front and behind meshes with a valid Material to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullMaterial_Specular /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - NULL Brushes - Render Order - SpecularMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:SpecularMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a Material with a null Brush) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Brush is rendered in front and behind meshes with a valid Material to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullBrush_Specular /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - NULL Brushes - Render Order - DiffuseMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:DiffuseMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a Material with a null Brush) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Brush is rendered in front and behind meshes with a valid Material to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullBrush_Diffuse /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - NULL Brushes - Render Order - EmissiveMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:EmissiveMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a Material with a null Brush) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Brush is rendered in front and behind meshes with a valid Material to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullBrush_Emissive /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Scenario - Multiple Lights - Multiple Materials" Timeout="300" Description="Focus:Rendering Verification Focus:Scenario Uses:DiffusseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:SolidColorBrush Uses:VisualBrush Uses:DrawingBrush Uses:ImageBrush Uses:LinearGradientBrush Uses:RadialGradientBrush Uses:DirectionalLight Uses:SpotLight Uses:PointLight Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verifies the rendering of a group of multiple meshes with pseudo-randomly generated Materials under all lighting conditions.  ">
+    <DriverParameters Args="/scenario=LightBox /times=1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Scenario - Multiple Lights - Multiple Materials #2 (seed 45677)" Timeout="300" Description="Focus:Rendering Verification Focus:Scenario Uses:DiffusseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:SolidColorBrush Uses:VisualBrush Uses:DrawingBrush Uses:ImageBrush Uses:LinearGradientBrush Uses:RadialGradientBrush Uses:DirectionalLight Uses:SpotLight Uses:PointLight Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verifies the rendering of a group of multiple meshes with pseudo-randomly generated Materials under all lighting conditions.  ">
+    <DriverParameters Args="/scenario=LightBox /times=1 /Seed=45677 /DefaultColorTolerance=0,7,7,7" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Scenario - Multiple Lights - Multiple Materials #3 (seed 99988 - 15x15)" Timeout="300" Description="Focus:Rendering Verification Focus:Scenario Uses:DiffusseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:SolidColorBrush Uses:VisualBrush Uses:DrawingBrush Uses:ImageBrush Uses:LinearGradientBrush Uses:RadialGradientBrush Uses:DirectionalLight Uses:SpotLight Uses:PointLight Uses:AmbientLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verifies the rendering of a group of multiple meshes with pseudo-randomly generated Materials under all lighting conditions.  ">
+    <DriverParameters Args="/scenario=LightBox  /times=1 /SphereU=15 /SphereV=15 /Seed=99988" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - Empty MaterialGroup - Render Order" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:MaterialGroup Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of multiple meshes (some of which have an empty MaterialGroup) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the empty MaterialGroup is rendered in front and behind meshes with a valid Material to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_EmptyMaterialGroup /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Integration - ClipToBounds FALSE" Timeout="180" Description="Focus:Rendering Verification Focus:Scenario Focus:Integration Focus:Viewport3D Uses:Canvas Uses:SolidColorBrush Uses:DiffuseMaterial Uses:AmbientLight Uses:OrthographicCamera Uses:MeshGeometry3D Comments: Verify the rendering of a mixed 2D/3D scenario where Viewport3D.ClipToBounds=false by rendering a solid color plane in a Viewport3D inside a Canvas and verifying that the screen capture is that color ">
+    <DriverParameters Args="/scenario=NoClip /expected_color=255,0,128,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Integration - Negative 2D scale on Viewport3D" Disabled="True" Timeout="180" Description="Focus:Rendering Verification Focus:Scenario Focus:Integration Focus:Viewport3D Uses:Canvas Uses:SolidColorBrush Uses:DiffuseMaterial Uses:AmbientLight Uses:OrthographicCamera Uses:MeshGeometry3D Comments: Verify the rendering of a mixed 2D/3D scenario where Viewport3D has a 2D scale transform of ( -1 1 ) by rendering a solid color plane in a Viewport3D inside a Canvas and verifying that with TestRenderer ( since the solid color plane is symetric ). ">
+    <DriverParameters Args="/scenario=ReproNegativeScale.baml /expected_color=255,0,128,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - ImageBrush Tiling Modes, Opacity" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:ImageBrush Focus:Brush TileMode Focus:Brush Opacity Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an ImageBrush with different 2D TileBrush tiling and opacity properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args=" /scenario=IB_Tiling /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - DrawingBrush Tiling Modes, Opacity" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:DrawingBrush Focus:Brush TileMode Focus:Brush Opacity Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an DrawingBrush with different 2D TileBrush tiling and opacity properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args=" /scenario=DB_Tiling /serialize_time=0 /TextureLookUpTolerance=0.5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - VisualBrush Tiling Modes, Opacity" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:VisualBrush Focus:Brush TileMode Focus:Brush Opacity Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a VisualBrush with different 2D TileBrush tiling and opacity properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args=" /scenario=VB_Tiling /serialize_time=0 /TextureLookUpTolerance=0.55" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - SolidColorBrush Opacity" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:SolidColorBrush Focus:Brush Opacity Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of a SolidColorBrush with different opacity properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args=" /scenario=SCB_Opacity /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - LinearGradientBrush Opacity" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:LinearGradientgBrush Focus:Brush Opacity Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an LinearGradientgBrush with different opacity properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args=" /scenario=LGB_Opacity /serialize_time=0  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - RadialGradientBrush Opacity" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:RadialGradientBrush Focus:Brush Opacity Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an RadialGradientBrush with different opacity properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args=" /scenario=RGB_Opacity /serialize_time=0  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+   <TEST Name="Serialization - Empty MaterialGroup - Render Order - BackMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:MaterialGroup Focus:BackMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of multiple meshes (some of which have an empty MaterialGroup) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the empty MaterialGroup is rendered in front and behind meshes with a valid BackMaterial to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_EmptyMaterialGroup_Back /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - NULL Brushes - Render Order - DiffuseMaterial - BackMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:DiffuseMaterial Focus:BackMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a BackMaterial with a null Brush) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Brush is rendered in front and behind meshes with a valid BackMaterial to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullBrush_Diffuse_Back /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - NULL Brushes - Render Order - EmissiveMaterial - BackMaterial" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:EmissiveMaterial Focus:BackMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a BackMaterial with a null Brush) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Brush is rendered in front and behind meshes with a valid BackMaterial to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullBrush_Emissive_Back /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - NULL Brushes - Render Order - SpecularMaterial - BackMaterial" Disabled="True" Timeout="300" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:SpecularMaterial Focus:BackMaterial Uses:SolidColorBrush Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of muliple meshes (some of which have a BackMaterial with a null Brush) by using TestRenderer on the original and round-trip serialized scenes.   The mesh with the null Brush is rendered in front and behind meshes with a valid BackMaterial to test rendering order effects.  ">
+    <DriverParameters Args="/scenario=RenderOrder_NullBrush_Specular_Back /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Combined (Back)Materials - LinearGradientBrush - Directional Light" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Storyboards Focus:LinearGradientBrush Focus:BackMaterial Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:MaterialGroup Uses:DirectionalLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a Storyboards-animated LinearGradientBrush by applying it to a flat quad mesh with BackMaterial under DirectionalLight and rendering using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_AM_LinearGradient_DIR_Back /times=1,200,500,900,1200  /DefaultColorTolerance=5,5,5,5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Rotate - Axis" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:RotateTransform3D Focus:QuaternionRotation Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestAxisRotation /times=1,200,500,900,1200  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Rotate - Quaternion" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:RotateTransform3D Focus:QuaternionRotation Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestQuaternionRotation /times=1,200,500,900,1200  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Rotate - Quaternion - UseShortestPath=false" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:RotateTransform3D Focus:QuaternionRotation Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestQuaternionRotation /NoShortcuts /times=1,200,500,900,1200  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Rotation3DAnimation - AxisAngle to AxisAngle" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:RotateTransform3D Focus:QuaternionRotation Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestRotation3D=AxisAngle /times=1,200,500,900,1200  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Rotation3DAnimation - Quaternion to Quaternion" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:RotateTransform3D Focus:QuaternionRotation Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestRotation3D=Quaternion /times=1,200,500,900,1200  /DefaultColorTolerance=5,5,5,5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Transforms - Rotation3DAnimation - Quaternion to AxisAngle" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:RotateTransform3D Focus:QuaternionRotation Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of animated Transform3D properties by rendering a cube using TestRenderer at several animation frames.   ">
+    <DriverParameters Args="/scenario=Anim_Transforms /TestRotation3D=Mixed /times=1,200,500,900,1200  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <!-- [matthohn/03.21.11] Disabling unstable test -->
+  <TEST Disabled="True" Name="Animation - Walker ( Keyframe animation )" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Scenario Focus:Model3DGroup Uses:RotateTransform3D Uses:TranslateTransform3D Uses:DirectionalLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a keyframe animated character using a hierarchy of Model3D and Model3DGroup with keyframed Transform3D properties by rendering it using TestRenderer at several animation frames.  ">
+    <DriverParameters Args="/scenario=Walker /times=100,500,1000,1500,2000 /NumAllowableMismatches=20 /VScanToleranceFile=Walker_ToleranceProfile.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\Walker_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - DrawingBrush on BrushMaterial - Tiling NONE" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:DrawingBrush Focus:Brush TileMode Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an DrawingBrush with different 2D TileBrush properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args="/scenario=DB_TileNone /serialize_time=1" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Serialization - VisualBrush on BrushMaterial - Tiling NONE" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:DrawingBrush Focus:Brush TileMode Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an DrawingBrush with different 2D TileBrush properties by using TestRenderer  on the original and round-trip serialized scenes.  ">
+    <DriverParameters Args="/scenario=VB_TileNone /serialize_time=1 /TextureLookUpTolerance=0.5" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Color Knobs - Saturation test with multiple lights - Diffuse 12 lights" Timeout="180" Description="Focus:Rendering Verification Focus:DiffuseMaterial.Color Uses:DiffuseMaterial Uses:PointlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a DiffuseMaterial with multiple lights and DiffuseMaterial.Color property set so that lights saturate.   ">
+    <DriverParameters Args="/scenario=Lights /LightCount=12 /UseDirectionalLight /AnimateTransforms /RotateLights /DiffuseColor=255,255,128,64 /times=1,300,600,900,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Color Knobs - Saturation test with multiple lights - Diffuse+Ambient 25 lights" Timeout="180" Description="Focus:Rendering Verification Focus:DiffuseMaterial.Color Focus:DiffuseMaterial.AmbientColor Uses:DiffuseMaterial Uses:AmbientlLight Uses:PointlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a DiffuseMaterial with multiple lights and DiffuseMaterial.Color and DiffuseMaterial.AmbientColor properties set so that lights saturate.   ">
+    <DriverParameters Args="/scenario=Lights /LightCount=24 /AddAmbientLight /DiffuseColor=255,24,44,64 /AmbientColor=255,0,0,64 /times=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Color Knobs - Saturation test with multiple lights - Diffuse 128 lights" Timeout="180" Description="Focus:Rendering Verification Focus:DiffuseMaterial.Color Uses:DiffuseMaterial Uses:PointlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a DiffuseMaterial with multiple lights and DiffuseMaterial.Color property set so that lights saturate.   ">
+    <DriverParameters Args="/scenario=Lights /LightCount=128 /DiffuseColor=255,24,44,64 /times=0  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Color Knobs - Saturation test with multiple lights - Specular 128 lights" Timeout="180" Description="Focus:Rendering Verification Focus:SpecularMaterial.Color Uses:SpecularMaterial Uses:DirectionallLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a SpecularMaterial with multiple lights and SpecularMaterial.Color property set so that lights saturate.   ">
+    <DriverParameters Args="/scenario=Lights /LightCount=128 /SpecularColor=255,25,10,15 /SpecularPower=50 /times=0 /UseDirectionalLight  /DefaultColorTolerance=6,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Color Knobs - Saturation test with multiple lights - Specular 12 lights" Timeout="180" Description="Focus:Rendering Verification Focus:SpecularMaterial.Color Uses:SpecularMateriall Uses:SpotLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a SpecularMaterial with multiple lights and SpecularMaterial.Color property set so that lights saturate.   ">
+    <DriverParameters Args="/scenario=Lights /LightCount=12 /SpecularColor=255,255,105,155 /SpecularPower=5 /RotateLights /TranslateLights /AnimateTransforms /UseSpotLight /times=1,500,1000,1500,1796 /DefaultColorTolerance=0,9,9,9" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Color Knobs - Saturation test with multiple lights - Spcular+Emissive 12 lights" Timeout="180" Description="Focus:Rendering Verification Focus:EmissiveMaterial.Color Focus:SpecularMaterial.Color Uses:SpecularMaterial Uses:EmissiveMaterial Uses:PointlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the rendering of a EmissiveMaterial and EmissiveMaterial with multiple lights and EmissiveMaterial.Color and SpecularMaterial.Color properties set so that lights saturate.   ">
+    <DriverParameters Args="ScenarioRepro.exe /scenario=Lights /LightCount=12 /SpecularColor=255,255,100,15 /SpecularPower=5 /AddEmissive /EmissiveColor=255,0,0,255 /RotateLights /TranslateLights /AnimateTransforms /times=1,500,1200   /DefaultColorTolerance=0,6,6,6" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <!-- [matthohn/03.21.11] Disabling unstable test -->
+  <TEST Disabled="True" Name="Animation - PointLight + Transform - Range" Timeout="180" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:PointLight  Focus:QuadraticAttenuation  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated PointLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestQuadraticAttenuation /UseSpotLight /Scale=2,2,2 /times=1,400,800,1200 /NumAllowableMismatches=10 /VScanToleranceFile=Anim_PointLight_RangeAttenuation_ToleranceProfile.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+	  <SupportFile Source="FeatureTests\3D\Anim_PointLight_RangeAttenuation_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight + Transform (scale x2) - LinearAttenuation" Timeout="180" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:PointLight  Focus:LinearAttenuation  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated PointLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestLinearAttenuation /Scale=2,2,2 /times=1,400,800,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight + Transform (scale x2) - ConstantAttenuation" Timeout="180" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:PointLight  Focus:ConstantAttenuation  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated PointLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestConstantAttenuation /Scale=2,2,2 /times=1,400,800,1200" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - SpotLight + Transform (rotate small angle + translate ) - Range" Disabled="True" Timeout="300" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:SpotLight  Focus:Range  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated SpotLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestRange /RotationAngle=-5 /Translate=-1,0,0 /UseSpotLight /times=1,500,1000,1500" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <!-- [matthohn/03.21.11] Disabling unstable test -->
+  <TEST Disabled="True" Name="Animation - SpotLight + Transform (rotate small angle) - Range" Timeout="300" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:SpotLight  Focus:Range  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated SpotLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestRange /RotationAngle=-3.5 /UseSpotLight /times=1,500,1000,1500" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight + Transform (scale uniform x2) - Range" Timeout="180" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:PointLight  Focus:Range  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated PointLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestRange /Scale=2,2,2 /times=1,400,800,1100" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight + Transform (translate) w/ Spheres - Range" Timeout="180" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:PointLight  Focus:Range  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated PointLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestRange /Translate=0,0,4 /UseSphereMesh /times=1,400,800,1400" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - PointLight + Transform (translate) - Range" Timeout="180" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:PointLight  Focus:Range  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated PointLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestRange /Translate=0,0,-10 /times=1,400,800,1400 /NumAllowableMismatches=50 /VScanToleranceFile=Anim_PointLight_RangeAttenuation_ToleranceProfile.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\Anim_PointLight_RangeAttenuation_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <!-- [matthohn/03.21.11] Disabling unstable test -->
+  <TEST Disabled="True" Name="Animation - SpotLight + Transform (translate) - Range" Timeout="180" Description=" Focus:Rendering Verification  Focus:Animation  Focus:Scenario  Focus:SpotLight  Focus:Range  Uses:DiffuseMaterial  Uses:SolidColorBrush  Uses:PerspectiveCamera  Uses:MeshGeometry3D  Comments:  Verify the rendering of animated SpotLight properties with transforms by rendering a series of highly tesselated grids using TestRenderer at several animation frames.    ">
+    <DriverParameters Args="/scenario=Anim_PointLight_RangeAttenuation /TestRange /UseSpotLight /Translate=0,0,2 /times=1,400,800,1500" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+    </SupportFiles>
+  </TEST>
+</XTC>
+

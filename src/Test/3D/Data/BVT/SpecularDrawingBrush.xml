@@ -1,0 +1,134 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="SpecularDrawingBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    TextureLookUpTolerance="0.5"
+    DefaultColorTolerance="0,3,3,3"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    MaterialType="Specular"
+    MaterialSpecularPower="30"
+    BackMaterialType="Specular"
+    BackMaterialSpecularPower="30"
+    >
+
+    <!-- Verify non-ambient lights -->
+
+    <VARIATION
+        Description="front = shapes, back = text, colored directional light"
+        Light="NonWhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        BackMaterial="DrawingBrushText"
+        />
+    <VARIATION
+        Description="front = text, back = image, white point light"
+        Light="WhitePointBelow"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        BackMaterial="DrawingBrushImage maui_turtle.jpg"
+        />
+    <VARIATION
+        Description="front = image, back = shapes, white spot light"
+        Light="WhiteSpot"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushImage maui_turtle.jpg"
+        BackMaterial="DrawingBrushShapes"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = text, back = semi-transparent"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        BackMaterial="DrawingBrushImage flare.png"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = text"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapesOpacity"
+        BackMaterial="DrawingBrushText"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, colored light"
+        Light="NonWhitePoint"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushTextOpacity"
+        BackMaterial="DrawingBrushImage flare.png"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent - specular does not write to z buffer"
+        Light="WhitePoint"
+        Mesh="BackAndFront"
+        Material="DrawingBrushShapesOpacity"
+        BackMaterial="DrawingBrushImage flare.png"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = shapes * green, back = text * indigo"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="DrawingBrushText"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = text * green, back = shapes * indigo"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = shapes * mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushTextOpacity"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = shapes * mix, back = semi-transparent * mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="DrawingBrushImage flare.png"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = shapes * transparent, back = text * semi-transparent"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="DrawingBrushText"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = shapes * semi-transparent"
+        Light="WhitePoint"
+        Mesh="BackAndFront"
+        Material="DrawingBrushTextOpacity"
+        MaterialColor="192,47,239,143"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

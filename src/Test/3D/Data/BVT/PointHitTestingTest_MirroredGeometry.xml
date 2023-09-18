@@ -1,0 +1,298 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PointHitTesting_MirroredGeometry"
+
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+
+    Scene="Explicit"
+    Visual0="UnitPlaneTriangle"
+    Visual1="WhiteAmbient"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- Perspective Camera -->
+
+    <VARIATION
+        Description="Flip across yz-plane - Perspective"
+        Expectation="Hit"
+        CameraTransform="Scale -1,1,1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="75,75"
+        />
+    <VARIATION
+        Description="Flip across yz - Perspective"
+        Expectation="Miss"
+        CameraTransform="Scale -1,1,1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xz - Perspective"
+        Expectation="Hit"
+        CameraTransform="Scale 1,-1,1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="125,125"
+        />
+    <VARIATION
+        Description="Flip across xz - Perspective"
+        Expectation="Miss"
+        CameraTransform="Scale 1,-1,1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xy - Perspective"
+        Expectation="Hit"
+        BackMaterial0="255,0,128,0"
+        CameraTransform="Scale 1,1,-1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="125,75"
+        />
+
+    <!-- Orthographic Camera -->
+
+    <VARIATION
+        Description="Flip across yz - Orthographic"
+        Expectation="Hit"
+        CameraTransform="Scale -1,1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="75,75"
+        />
+    <VARIATION
+        Description="Flip across yz - Orthographic"
+        Expectation="Miss"
+        CameraTransform="Scale -1,1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xz - Orthographic"
+        Expectation="Hit"
+        CameraTransform="Scale 1,-1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="125,125"
+        />
+    <VARIATION
+        Description="Flip across xz - Orthographic"
+        Expectation="Miss"
+        CameraTransform="Scale 1,-1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xy - Orthographic"
+        Expectation="Hit"
+        BackMaterial0="255,0,128,0"
+        CameraTransform="Scale 1,1,-1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="125,75"
+        />
+
+    <!-- Matrix Camera-->
+
+    <VARIATION
+        Description="Flip across yz - Matrix"
+        Expectation="Hit"
+        CameraTransform="Scale -1,1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="75,75"
+        />
+    <VARIATION
+        Description="Flip across yz - Matrix"
+        Expectation="Miss"
+        CameraTransform="Scale -1,1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xz - Matrix"
+        Expectation="Hit"
+        CameraTransform="Scale 1,-1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="125,125"
+        />
+    <VARIATION
+        Description="Flip across xz - Matrix"
+        Expectation="Miss"
+        CameraTransform="Scale 1,-1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xy - Matrix"
+        Expectation="Hit"
+        BackMaterial0="255,0,128,0"
+        CameraTransform="Scale 1,1,-1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="125,75"
+        />
+
+<!-- Model transform -->
+
+    <!-- Perspective Camera -->
+
+    <VARIATION
+        Description="Flip across yz-plane - Perspective"
+        Expectation="Hit"
+        ModelTransform0="Scale -1,1,1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="75,75"
+        />
+    <VARIATION
+        Description="Flip across yz - Perspective"
+        Expectation="Miss"
+        ModelTransform0="Scale -1,1,1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xz - Perspective"
+        Expectation="Hit"
+        ModelTransform0="Scale 1,-1,1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="125,125"
+        />
+    <VARIATION
+        Description="Flip across xz - Perspective"
+        Expectation="Miss"
+        ModelTransform0="Scale 1,-1,1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xy - Perspective"
+        Expectation="Hit"
+        BackMaterial0="255,0,128,0"
+        ModelTransform0="Scale 1,1,-1"
+        CameraType="Perspective"
+        CameraFieldOfView="30"
+        Point="125,75"
+        />
+
+    <!-- Orthographic Camera -->
+
+    <VARIATION
+        Description="Flip across yz - Orthographic"
+        Expectation="Hit"
+        ModelTransform0="Scale -1,1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="75,75"
+        />
+    <VARIATION
+        Description="Flip across yz - Orthographic"
+        Expectation="Miss"
+        ModelTransform0="Scale -1,1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xz - Orthographic"
+        Expectation="Hit"
+        ModelTransform0="Scale 1,-1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="125,125"
+        />
+    <VARIATION
+        Description="Flip across xz - Orthographic"
+        Expectation="Miss"
+        ModelTransform0="Scale 1,-1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xy - Orthographic"
+        Expectation="Hit"
+        BackMaterial0="255,0,128,0"
+        ModelTransform0="Scale 1,1,-1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        Point="125,75"
+        />
+
+    <!-- Matrix Camera-->
+
+    <VARIATION
+        Description="Flip across yz - Matrix"
+        Expectation="Hit"
+        ModelTransform0="Scale -1,1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="75,75"
+        />
+    <VARIATION
+        Description="Flip across yz - Matrix"
+        Expectation="Miss"
+        ModelTransform0="Scale -1,1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xz - Matrix"
+        Expectation="Hit"
+        ModelTransform0="Scale 1,-1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="125,125"
+        />
+    <VARIATION
+        Description="Flip across xz - Matrix"
+        Expectation="Miss"
+        ModelTransform0="Scale 1,-1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="125,75"
+        />
+    <VARIATION
+        Description="Flip across xy - Matrix"
+        Expectation="Hit"
+        BackMaterial0="255,0,128,0"
+        ModelTransform0="Scale 1,1,-1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="30"
+        CameraFieldOfViewY="30"
+        Point="125,75"
+        />
+
+
+</INIT>

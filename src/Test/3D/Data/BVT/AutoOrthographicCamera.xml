@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="AutoOrthographicCameraTest"
+    PixelToEdgeTolerance="0.05"
+
+    Light="WhiteAmbient"
+    Camera="AutoOrthographic"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+    <VARIATION
+        Description="UnitPlaneTriangle - length=1 in each positive axis"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        />
+    <VARIATION
+        Description="UnitPlaneTriangle - transformed ahead of camera 10 units"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        TransformTarget="Model"
+        TransformType="Translate"
+        TranslateOffset="0,0,-10"
+        />
+    <VARIATION
+        Description="UnitPlaneTriangle - transformed behind camera"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        TransformTarget="Model"
+        TransformType="Translate"
+        TranslateOffset="0,0,10"
+        />
+    <VARIATION
+        Description="Skinny plane parallel to clipping planes"
+        Mesh="SingleFrontFacingTriangle"
+        Material="255,0,0,255"
+        />
+    <VARIATION
+        Description="Skinny plane parallel to clipping planes - transformed ahead of camera 20 units"
+        Mesh="SingleFrontFacingTriangle"
+        Material="255,0,0,255"
+        TransformTarget="Model"
+        TransformType="Translate"
+        TranslateOffset="0,0,-20"
+        />
+
+    <!-- Spheres -->
+
+    <VARIATION
+        Description="Sphere radius=1.0"
+        Mesh="Sphere 12 24 1.0"
+        Material="255,0,0,255"
+        />
+    <VARIATION
+        Description="Sphere radius=1.0 - transformed ahead of camera 150 units"
+        Mesh="Sphere 12 24 1.0"
+        Material="255,0,0,255"
+        TransformTarget="Model"
+        TransformType="Translate"
+        TranslateOffset="0,0,-150"
+        />
+</INIT>

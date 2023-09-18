@@ -1,0 +1,33 @@
+﻿<Grid
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <Viewport3D>
+        <Viewport3D.Camera>
+            <PerspectiveCamera
+                FarPlaneDistance="100"
+                LookDirection="0,0,-1"
+                UpDirection="0,1,0"
+                NearPlaneDistance="1"
+                Position="0,0,10"
+                FieldOfView="45"
+                  />
+        </Viewport3D.Camera>
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+                    <Model3DGroup.Transform>
+                        <Transform3DGroup>
+                            <TranslateTransform3D OffsetX="1" OffsetY="1" OffsetZ="1" />
+
+                            <!-- This isn't a Transform3D! -->
+                            <TranslateTransform />
+
+                            <RotateTransform3D />
+                        </Transform3DGroup>
+                    </Model3DGroup.Transform>
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+    </Viewport3D>
+</Grid>

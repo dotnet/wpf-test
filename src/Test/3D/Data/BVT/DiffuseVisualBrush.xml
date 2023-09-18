@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseVisualBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,90,90,90"
+    
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    TextureLookUpTolerance="0.5"
+    Camera="PerspectiveDefault"
+    >
+
+    <VARIATION
+        Description="front = button, back = shapes, AmbientLight"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="VisualBrush"
+        BackMaterial="VisualBrushShapes"
+        />
+    <VARIATION
+        Description="front = shapes, back = viewport3D, AmbientLight = gray"
+        LightType="Ambient"
+        LightColor="255,127,127,127" 
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        BackMaterial="VisualBrush3D"
+        />
+    <VARIATION
+        Description="front = viewport3D, back = button, AmbientLight = mix"
+        DefaultColorTolerance="0,2,2,4"
+        Light="NonWhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="VisualBrush3D"
+        BackMaterial="VisualBrush"
+        />
+
+    <VARIATION
+        Description="front = button, back = shapes, DirectionalLight"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="VisualBrush"
+        BackMaterial="VisualBrushShapes"
+        />
+    <VARIATION
+        Description="front = shapes, back = button, DirectionalLight = -1,-1,-1"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="VisualBrushShapes"
+        BackMaterial="VisualBrush"
+        />
+    <VARIATION
+        Description="front = viewport3D, back = shapes, DirectionalLight = mix, -1,-1,-1"
+        SilhouetteEdgeTolerance="1.1"
+        DefaultColorTolerance="0,3,2,4"
+        Light="NonWhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="VisualBrush3D"
+        BackMaterial="VisualBrushShapes"
+        />
+
+    <VARIATION
+        Description="front = shapes, back = button, PointLight"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="VisualBrushShapes"
+        BackMaterial="VisualBrush"
+        DefaultColorTolerance="0,3,3,3"
+        />
+    <VARIATION
+        Description="front = shapes, back = button, PointLight = mix"
+        SilhouetteEdgeTolerance="1.1"
+        Light="NonWhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="VisualBrushShapes"
+        BackMaterial="VisualBrush"
+        />
+    <VARIATION
+        Description="front = button, back = viewport3D, PointLight = below"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhitePointBelow"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="VisualBrush"
+        BackMaterial="VisualBrush3D"
+        DefaultColorTolerance="0,3,3,3"
+        />
+
+</INIT>
