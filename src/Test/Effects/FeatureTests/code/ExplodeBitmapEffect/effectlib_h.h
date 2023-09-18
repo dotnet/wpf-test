@@ -1,10 +1,12 @@
-
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
 
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
  /* File created by MIDL compiler version 6.00.0366 */
-/* at Wed Oct 05 16:33:20 2005
+/* 
  */
 /* Compiler settings for .\effectlib.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)

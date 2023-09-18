@@ -48,7 +48,7 @@ namespace Microsoft.Test.Effects
             SolidColorBrush implicitInput = Effect.ImplicitInput as SolidColorBrush;
             if (implicitInput != null)
             {             
-                Log.LogStatus("Effect.ImplicitInput is still SolidColorBush.");
+                Log.LogStatus("Effect.ImplicitInput is still SolidColorBrush.");
                 return TestResult.Fail;
             }
             return TestResult.Pass;
