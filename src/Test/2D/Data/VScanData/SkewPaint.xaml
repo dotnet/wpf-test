@@ -1,0 +1,127 @@
+﻿<!-- this test covers the skew transform combined with other transforms and Imagepaint-->
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="#CCCCCC">
+    <Decorator>
+        <Decorator.LayoutTransform>
+            <SkewTransform AngleY="10" />
+        </Decorator.LayoutTransform>
+        <Rectangle Stroke="yellow" StrokeThickness="3">
+            <Canvas.Top>40</Canvas.Top>
+            <Canvas.Left>30</Canvas.Left>
+            <Rectangle.Height>80</Rectangle.Height>
+            <Rectangle.Width>165</Rectangle.Width>
+            <Rectangle.RadiusX>10</Rectangle.RadiusX>
+            <Rectangle.RadiusY>20</Rectangle.RadiusY>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="star.gif" TileMode="Tile">
+                    <ImageBrush.Stretch>
+                         None
+                     </ImageBrush.Stretch>
+                    <ImageBrush.AlignmentX>
+                         Center
+                     </ImageBrush.AlignmentX>
+                    <ImageBrush.AlignmentY>
+                         Center
+                     </ImageBrush.AlignmentY>
+                    <ImageBrush.Viewport>
+                        0,0,0.1,0.1
+                     </ImageBrush.Viewport>
+                    <ImageBrush.ViewportUnits>
+                         Absolute
+                     </ImageBrush.ViewportUnits>
+                </ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Decorator>
+    <Decorator>
+        <Decorator.LayoutTransform>
+            <SkewTransform AngleY="50" />
+        </Decorator.LayoutTransform>
+        <Path StrokeThickness="6">
+            <Path.Data>
+                <EllipseGeometry Center="100 155" RadiusX="75" RadiusY="50" />
+            </Path.Data>
+            <Path.Stroke>red</Path.Stroke>
+            <Path.Fill>
+&gt;
+    <ImageBrush ImageSource="star.gif" TileMode="Tile"><ImageBrush.Stretch>
+                             None
+                         </ImageBrush.Stretch><ImageBrush.AlignmentX>
+                             Center
+                         </ImageBrush.AlignmentX><ImageBrush.AlignmentY>
+                             Center
+                         </ImageBrush.AlignmentY><ImageBrush.Viewport>
+                            0,0,0.1,0.1
+                         </ImageBrush.Viewport><ImageBrush.ViewportUnits>
+                             Absolute
+                         </ImageBrush.ViewportUnits></ImageBrush></Path.Fill>
+        </Path>
+    </Decorator>
+    <Decorator>
+        <Decorator.RenderTransform>
+            <TransformGroup>
+                <TransformGroup.Children>
+                    <TransformCollection>
+                        <ScaleTransform ScaleX="2" ScaleY="2" />
+                        <TranslateTransform X="-40" Y="-50" />
+                        <SkewTransform AngleY="20" />
+                    </TransformCollection>
+                </TransformGroup.Children>
+            </TransformGroup>
+        </Decorator.RenderTransform>
+        <Polygon Stroke="black" StrokeThickness="2" Points="148,116 116,196 196,148 100,148 180,196" FillRule="Nonzero">
+            <Polygon.Fill>
+                <ImageBrush ImageSource="star.gif" TileMode="Tile">
+                    <ImageBrush.Stretch>
+                             None
+                         </ImageBrush.Stretch>
+                    <ImageBrush.AlignmentX>
+                             Center
+                         </ImageBrush.AlignmentX>
+                    <ImageBrush.AlignmentY>
+                             Center
+                         </ImageBrush.AlignmentY>
+                    <ImageBrush.Viewport>
+                            0,0,0.1,0.1
+                         </ImageBrush.Viewport>
+                    <ImageBrush.ViewportUnits>
+                             Absolute
+                         </ImageBrush.ViewportUnits>
+                </ImageBrush>
+            </Polygon.Fill>
+        </Polygon>
+    </Decorator>
+    <Decorator>
+        <Decorator.RenderTransform>
+            <TransformGroup>
+                <TransformGroup.Children>
+                    <TransformCollection>
+                        <TranslateTransform X="-20" Y="-50" />
+                        <SkewTransform AngleX="20" />
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                    </TransformCollection>
+                </TransformGroup.Children>
+            </TransformGroup>
+        </Decorator.RenderTransform>
+        <Path Stroke="blue" StrokeThickness="2" Data="M 240,40 V 200 C 310,225 350,208 385,140 Z">
+            <Path.Fill>
+                <ImageBrush Opacity="0.5" ImageSource="star.gif" TileMode="Tile">
+                    <ImageBrush.Stretch>
+                             None
+                         </ImageBrush.Stretch>
+                    <ImageBrush.AlignmentX>
+                             Left
+                         </ImageBrush.AlignmentX>
+                    <ImageBrush.AlignmentY>
+                             Top
+                         </ImageBrush.AlignmentY>
+                    <ImageBrush.Viewport>
+                            0,0,0.1,0.1
+                         </ImageBrush.Viewport>
+                    <ImageBrush.ViewportUnits>
+                             Absolute
+                         </ImageBrush.ViewportUnits>
+                </ImageBrush>
+            </Path.Fill>
+        </Path>
+    </Decorator>
+</Canvas>

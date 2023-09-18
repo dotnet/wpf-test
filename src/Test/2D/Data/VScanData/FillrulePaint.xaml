@@ -1,0 +1,96 @@
+﻿<!-- 
+This test the FillRule combined with imagepaint to polygons with transforms applied to them
+ -->
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="#CCCCCC">
+    <Canvas>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2" />
+            </Decorator.RenderTransform>
+            <Polygon FillRule="Nonzero" Stroke="black" Points="48,16 16,96 96,48 0,48 80,96">
+                <Polygon.Fill>
+                    <ImageBrush ImageSource="sun.gif" Stretch="Uniform">
+                        <ImageBrush.ViewportUnits>
+        RelativeToBoundingBox
+</ImageBrush.ViewportUnits>
+                        <ImageBrush.Viewport>
+                       0,0,1,1
+</ImageBrush.Viewport>
+                    </ImageBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="200" Y="50" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon FillRule="EvenOdd" Stroke="black" Points="148,16 116,96 196,48 100,48 180,96">
+                <Polygon.Fill>
+                    <ImageBrush ImageSource="sun.gif" Stretch="UniformToFill">
+                        <ImageBrush.ViewportUnits>
+        RelativeToBoundingBox
+</ImageBrush.ViewportUnits>
+                        <ImageBrush.Viewport>
+                       0,0,1,1
+</ImageBrush.Viewport>
+                    </ImageBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="200" Y="150" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon Stroke="red" Points="248,16 216,96 296,48 200,48 280,96">
+                <Polygon.Fill>
+                    <ImageBrush Opacity="0.3" ImageSource="bufly.gif" Stretch="Uniform">
+                        <ImageBrush.ViewportUnits>
+        RelativeToBoundingBox
+</ImageBrush.ViewportUnits>
+                        <ImageBrush.Viewport>
+                       0,0,1,1
+</ImageBrush.Viewport>
+                    </ImageBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="150" Y="100" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon StrokeThickness="3" Stroke="green" Points="148,116 116,196 196,148 100,148 180,196">
+                <Polygon.Fill>
+                    <ImageBrush ImageSource="bufly.gif" Stretch="Fill">
+                        <ImageBrush.ViewportUnits>
+        RelativeToBoundingBox
+</ImageBrush.ViewportUnits>
+                        <ImageBrush.Viewport>
+                       0,0,1,1
+</ImageBrush.Viewport>
+                    </ImageBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+    </Canvas>
+</Border>

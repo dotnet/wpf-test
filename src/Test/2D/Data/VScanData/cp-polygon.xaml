@@ -1,0 +1,47 @@
+﻿<!-- This test sets writeable properties on the Polygon element.
+Includes:
+    All properties declared on the Polygon element
+    All properties inherited from Shape.
+    All properties inheritied from VisualElement
+-->
+
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:media="clr-namespace:System.Windows.Media;assembly=PresentationCore" Background="#CCCCCC" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media;assembly=PresentationCore">
+    <Canvas>
+        <Decorator>
+            <Decorator.LayoutTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="3" ScaleY="3" />
+                            <RotateTransform Angle="20" />
+                            <TranslateTransform X="120" Y="50" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.LayoutTransform>
+            <Polygon>
+                <!--  DECLARED PROPERTIES -->
+                <Polygon.Points>
+        15,10 50,30 50,25 45,20
+        45,15 50,10 55,10 60,15
+        60,20 55,25 55,30 60,30
+        75,45 60,55 72,45 60,35
+        55,60 70,95 53.5,65 
+        35,95 50,60 45,35 
+    </Polygon.Points>
+                <!--  PROPERTIES INHERITED FROM Shape -->
+                <!--<Polygon.Stroke>blue</Polygon.Stroke>-->
+                <Polygon.StrokeThickness>1px</Polygon.StrokeThickness>
+                <!--Polygon.StrokeOpacity>.5</Polygon.StrokeOpacity-->
+                <Polygon.StrokeLineJoin>miter</Polygon.StrokeLineJoin>
+                <Polygon.StrokeMiterLimit>3</Polygon.StrokeMiterLimit>
+                <Polygon.Fill>
+                    <media:SolidColorBrush Color="yellow" Opacity="0.5" />
+                </Polygon.Fill>
+                <Polygon.Stroke>
+                    <media:SolidColorBrush Color="blue" Opacity="0.5" />
+                </Polygon.Stroke>
+            </Polygon>
+        </Decorator>
+    </Canvas>
+</Border>

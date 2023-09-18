@@ -1,0 +1,30 @@
+﻿<!-- This test covers the Polygon element the complex way with a rotate applied to it and filled with a HorizontalGradient
+-->
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="Microsoft.Test.Graphics.TwoDGlobal1Test" ContentRendered="RunTest">
+    <Canvas>
+        <Decorator>
+            <Decorator.LayoutTransform>
+                <RotateTransform Angle="10" />
+            </Decorator.LayoutTransform>
+            <Polygon>
+                <Polygon.Points>
+		100,100 53,-103 290,79 123,67 50,50
+    </Polygon.Points>
+                <Polygon.Stroke>blue</Polygon.Stroke>
+                <Polygon.StrokeThickness>3</Polygon.StrokeThickness>
+                <Polygon.StrokeLineJoin>miter</Polygon.StrokeLineJoin>
+                <Polygon.StrokeMiterLimit>1</Polygon.StrokeMiterLimit>
+                <Polygon.Fill>
+                    <LinearGradientBrush Opacity="0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="yellow" Offset="0" />
+                                <GradientStop Color="green" Offset="1" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+    </Canvas>
+</Window>

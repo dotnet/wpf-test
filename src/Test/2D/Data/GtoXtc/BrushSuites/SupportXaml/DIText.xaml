@@ -1,0 +1,235 @@
+<StackPanel Width="200" Height="200"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    Background="white" 
+ >
+  <StackPanel.Resources>
+
+    <!-- ****************** Composite Font ******************** -->
+    <FontFamily x:Key="CompositeFontResource1"
+            Baseline="1.3" 
+            LineSpacing="2.0">
+
+      <!-- Name mapping -->
+      <FontFamily.FamilyNames>
+        <System:String x:Key="en-US">My Simple Font</System:String>
+      </FontFamily.FamilyNames>
+
+      <!-- Typefaces for the device font -->
+      <FontFamily.FamilyTypefaces>
+        <FamilyTypeface
+                Weight="Normal" Stretch="Normal" Style="Normal"
+                UnderlinePosition="-0.1" UnderlineThickness="0.05"
+                StrikethroughPosition="0.3" StrikethroughThickness="0.05"
+                CapsHeight="0.5" XHeight="0.3"
+                DeviceFontName="My Device Font">
+        </FamilyTypeface>
+      </FontFamily.FamilyTypefaces>
+      <FontFamily.FamilyMaps>
+        <!-- Basic Latin        0000-007F -->
+        <FontFamilyMap  
+            Unicode          = "0??" 
+            Target           = "Palatino Linotype"        
+            Scale            = "0.6"/>
+        <!-- Thai -->
+        <FontFamilyMap  
+            Unicode          = "E00-EFF" 
+            Target           = "Adobe Thai"
+            Language	     = "th-TH"
+            Scale            = "2.2"/>
+        <!-- Arabic -->
+        <FontFamilyMap  
+            Unicode          = "6??" 
+            Target           = "Arial"
+            Scale            = "1.8"/>
+        <!-- CHS -->
+        <FontFamilyMap  
+            Unicode          = "4e9a-9662" 
+            Target           = "SimSun"
+            Scale            = "1.5"/>
+
+      </FontFamily.FamilyMaps>
+    </FontFamily>
+
+    <FontFamily x:Key="CompositeFontResource2"
+        LineSpacing="1.2" 
+        Baseline="0.9">
+
+      <!-- Name mapping -->
+      <FontFamily.FamilyNames>
+        <System:String x:Key="en-US">My Resource Font</System:String>
+      </FontFamily.FamilyNames>
+
+      <!-- Faces to report in font chooser UI -->
+      <FontFamily.FamilyTypefaces>
+        <FamilyTypeface 
+            Weight = "Normal"  Style = "Normal"  Stretch = "Normal"
+            UnderlinePosition     = "-0.1"  UnderlineThickness     = "0.05"
+            StrikethroughPosition = "0.3"   StrikethroughThickness = "0.05"
+            CapsHeight            = "0.5"   XHeight                = "0.3"
+    />
+
+        <FamilyTypeface 
+            Weight = "Bold"  Style = "Normal"  Stretch = "Normal"
+            UnderlinePosition     = "-0.1"  UnderlineThickness     = "0.15"
+            StrikethroughPosition = "0.3"   StrikethroughThickness = "0.15"
+            CapsHeight            = "0.5"   XHeight                = "0.3"
+    />
+
+        <FamilyTypeface 
+            Weight = "Light"  Style = "Normal"  Stretch = "Normal"
+            UnderlinePosition     = "-0.1"  UnderlineThickness     = "0.05"
+            StrikethroughPosition = "0.3"   StrikethroughThickness = "0.05"
+            CapsHeight            = "0.5"   XHeight                = "0.3"
+    />
+      </FontFamily.FamilyTypefaces>
+
+      <!-- Character to family lookups (in lookup order) -->
+      <FontFamily.FamilyMaps>
+        <FontFamilyMap 
+            Unicode = "3000-30FF, 32??, 010000-10FFFF" 
+            Language = "ja-JP" 
+            Target  = "MS Gothic, MS UI Gothic"
+            Scale   = "1.1"/>
+
+        <FontFamilyMap 
+            Unicode = "3000-30FF, 32??, 010000-10FFFF" 
+            Language = "zh-CN" 
+            Target  = "Simsun"
+            Scale   = "1.1"/>
+
+        <FontFamilyMap 
+            Language = "en-US" 
+            Target  = "Arial"/>
+        <FontFamilyMap 
+            Target  = "Global User Interface"/>
+      </FontFamily.FamilyMaps>
+    </FontFamily>
+    <!-- ****************** Composite Font ******************** -->
+
+    <!-- ****************** Text Decorations ******************** -->
+    <TextDecorationCollection x:Key="TextDecorations1">
+      <TextDecoration Location="Underline" PenOffset="1">
+        <TextDecoration.Pen>
+          <Pen Brush="Green" Thickness="1.2"
+               StartLineCap="Triangle" EndLineCap="Triangle" DashCap="Round"
+               MiterLimit="2">
+            <Pen.DashStyle>
+              <DashStyle Offset="0" Dashes="1 2 1">
+              </DashStyle>
+            </Pen.DashStyle>
+          </Pen>
+        </TextDecoration.Pen>
+      </TextDecoration>
+      <TextDecoration Location="Strikethrough">
+        <TextDecoration.Pen>
+          <Pen Brush="Red" Thickness="1.5"
+               StartLineCap="Triangle" EndLineCap="Triangle" DashCap="Round"
+               MiterLimit="2">
+            <Pen.DashStyle>
+              <DashStyle Offset="0" Dashes="1 2 1">
+              </DashStyle>
+            </Pen.DashStyle>
+          </Pen>
+        </TextDecoration.Pen>
+      </TextDecoration>
+    </TextDecorationCollection>
+
+    <TextDecorationCollection x:Key="TextDecorations2">
+      <TextDecoration Location="Underline">
+        <TextDecoration.Pen>
+          <Pen Thickness="2"
+               StartLineCap="Triangle" EndLineCap="Triangle" DashCap="Round"
+               MiterLimit="2">
+            <Pen.DashStyle>
+              <DashStyle Offset="0" Dashes="10 2">
+              </DashStyle>
+            </Pen.DashStyle>
+            <Pen.Brush>
+              <LinearGradientBrush Opacity="0.5"
+                StartPoint="0,0.5"  EndPoint="1,0.5">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Color="Yellow" Offset="0" />
+                  <GradientStop Color="Red" Offset="1" />
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Pen.Brush>
+          </Pen>
+        </TextDecoration.Pen>
+      </TextDecoration>
+      <TextDecoration Location="Overline" PenThicknessUnit="Pixel">
+        <TextDecoration.Pen>
+          <Pen Brush="Red" Thickness="5"
+               StartLineCap="Triangle" EndLineCap="Triangle" DashCap="Round"
+               MiterLimit="2">
+            <Pen.DashStyle>
+              <DashStyle Offset="10" Dashes="1 2 1">
+              </DashStyle>
+            </Pen.DashStyle>
+          </Pen>
+        </TextDecoration.Pen>
+      </TextDecoration>
+    </TextDecorationCollection>
+    <!-- ****************** Text Decorations ******************** -->
+
+    <!-- ****************** Styles ******************** -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="Style1">
+      <Setter Property="NumberSubstitution.CultureSource" Value="Override" />
+      <Setter Property="NumberSubstitution.CultureOverride" Value="ar-SA" />
+      <Setter Property="NumberSubstitution.Substitution" Value="NativeNational" />
+
+      <Setter Property="FontFamily" Value="Palatino Linotype" />
+      <Setter Property="Typography.Capitals" Value="SmallCaps" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="Style2">
+      <Setter Property="NumberSubstitution.CultureSource" Value="Override" />
+      <Setter Property="NumberSubstitution.CultureOverride" Value="th-TH" />
+      <Setter Property="NumberSubstitution.Substitution" Value="Traditional" />
+
+      <Setter Property="FontFamily" Value="Palatino Linotype" />
+      <Setter Property="Typography.Variants" Value="Subscript" />
+    </Style>
+    <!-- ****************** Styles ******************** -->
+
+  </StackPanel.Resources>
+  <TextBlock 
+       Name="textBlock"
+       FontFamily="{StaticResource CompositeFontResource1}" 
+       TextWrapping="Wrap" 
+       FontSize="15"
+	     Style="{StaticResource Style1}"
+       TextDecorations="{StaticResource TextDecorations1}">
+       <TextBlock.TextEffects>
+            <TextEffectCollection>
+                <TextEffect PositionStart="0" PositionCount="20"> 
+                    <TextEffect.Foreground>
+                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                           <LinearGradientBrush.GradientStops>
+                                <GradientStop Offset="0" Color="#ff0000"/>
+                                <GradientStop Offset="1" Color="#00ff00"/>
+                           </LinearGradientBrush.GradientStops>
+                           <LinearGradientBrush.Transform>
+                                <RotateTransform/>
+                           </LinearGradientBrush.Transform>
+                         </LinearGradientBrush>                      
+                    </TextEffect.Foreground>
+                </TextEffect>
+            </TextEffectCollection>
+        </TextBlock.TextEffects> 
+
+    Normal :
+    Th<Run Typography.Variants="SuperScript">deep</Run>
+    I haleep!
+    12<Bold NumberSubstitution.Substitution="{x:Static NumberSubstitutionMethod.European}">34</Bold>56<Italic Typography.Variants="SuperScript">78</Italic>90
+    x:
+    هوٽڛ ڏ anat. Pثaؤ
+    <Span TextDecorations="Underline" Foreground="RED">Thai:</Span>
+    กญฎฏฯ
+    ๑๒๕๖๗๘   ใหญ่ใข่ใฝ่ไ  Text with Ligatures:
+    Shepherd said " Ah! first I need to efficiently  flock the  sheep in  a perfect Queue"
+    Cied: 研究院 <Bold Language="">7:01 PM</Bold> <Underline NumberSubstitution.Substitution="{x:Static NumberSubstitutionMethod.Context}">4/6/2006</Underline>
+
+  </TextBlock>
+</StackPanel>

@@ -1,0 +1,68 @@
+<!-- This tests gradientbrushes with 1 and 0 gradient stops with different spread methods.-->
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="#CCCCCC">
+
+<!-- *************** LinearGradientBrush Tests ***************** -->
+<Rectangle Width="150" Height="150" Canvas.Left="10" Canvas.Top="10" StrokeThickness="2" Stroke="black">
+  <Rectangle.Fill>
+    <RadialGradientBrush Center="0.5,0.5" RadiusX="1" RadiusY="1" MappingMode="RelativeToBoundingBox" SpreadMethod="pad">
+    <RadialGradientBrush.GradientStops>
+      <GradientStop Color="#FF0000" Offset="0" />
+    </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+  </Rectangle.Fill>
+</Rectangle>
+
+
+<Rectangle Width="150" Height="150" Canvas.Left="170" Canvas.Top="10" StrokeThickness="2" Stroke="black">
+  <Rectangle.Fill>
+    <RadialGradientBrush Center="1,1" RadiusX="1" RadiusY="1" SpreadMethod="reflect" MappingMode="RelativeToBoundingBox">
+    <RadialGradientBrush.GradientStops>
+	<GradientStop Color="yellow" Offset="1" />
+    </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+  </Rectangle.Fill>
+</Rectangle>
+
+<Rectangle Width="150" Height="150" Canvas.Left="330" Canvas.Top="10" StrokeThickness="2" Stroke="black">
+  <Rectangle.Fill>
+    <RadialGradientBrush Center=".5,.5" RadiusX=".4" RadiusY=".4" MappingMode="RelativeToBoundingBox" SpreadMethod="repeat">
+    <RadialGradientBrush.GradientStops>
+      <GradientStop Color="Green" Offset=".7" />
+    </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+  </Rectangle.Fill>
+</Rectangle>
+
+<!-- *************** LinearGradientBrush Tests ***************** -->
+<Rectangle Width="150" Height="150" Canvas.Left="10" Canvas.Top="170" StrokeThickness="2" Stroke="black">
+  <Rectangle.Fill>
+    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="pad">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Color="Orange" Offset="0" />
+    </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+  </Rectangle.Fill>
+</Rectangle>
+
+
+<Rectangle Width="150" Height="150" Canvas.Left="170" Canvas.Top="170" StrokeThickness="2" Stroke="black">
+  <Rectangle.Fill>
+    <LinearGradientBrush StartPoint="1,0" EndPoint="0,0"  SpreadMethod="reflect" MappingMode="RelativeToBoundingBox">
+    <LinearGradientBrush.GradientStops>
+	<GradientStop Color="Turquoise" Offset="1" />
+    </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+  </Rectangle.Fill>
+</Rectangle>
+
+<Rectangle Width="150" Height="150" Canvas.Left="330" Canvas.Top="170" StrokeThickness="2" Stroke="black">
+  <Rectangle.Fill>
+    <LinearGradientBrush  StartPoint="0.5,0.5" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="repeat">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Color="SeaGreen" Offset=".7" />
+    </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+  </Rectangle.Fill>
+</Rectangle>
+</Canvas>
+

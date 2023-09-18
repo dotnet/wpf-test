@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ApiTest</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="ApiTestBase\*.cs" />
+    <Compile Include="Brush\*.cs" />
+    <Compile Include="Color\*.cs" />
+    <Compile Include="Geometry\*.cs" />
+    <Compile Include="Pen\*.cs" />
+    <Compile Include="Shapes\*.cs" />
+    <Compile Include="Transform\*.cs" />
+    <Compile Include="Regression\*.cs" />
+    <Compile Include="RenderMode\*.cs" />
+    <Page    Include="Regression\*.xaml" />
+    <Page    Include="RenderMode\*.xaml" />
+    <Content Include="*Tolerance.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+  </ItemGroup>
+</Project>

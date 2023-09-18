@@ -1,0 +1,42 @@
+﻿<!-- This test covers the different shapes with Imagepaint applied to the background and well as a scale. -->
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="820px" Height="850px" Shape.Stroke="#444488" Shape.StrokeThickness="1px">
+    <Canvas.Background>
+        <ImageBrush ImageSource="usflag.bmp">
+            <ImageBrush.Transform>
+                <ScaleTransform ScaleX="3" ScaleY="3" />
+            </ImageBrush.Transform>
+            <ImageBrush.ViewportUnits>
+        RelativeToBoundingBox
+</ImageBrush.ViewportUnits>
+            <ImageBrush.Viewport>
+                       0,0,1,1
+</ImageBrush.Viewport>
+        </ImageBrush>
+    </Canvas.Background>
+    <Decorator>
+        <Decorator.RenderTransform>
+            <ScaleTransform ScaleX="3" ScaleY="3" />
+        </Decorator.RenderTransform>
+        <Canvas>
+            <Rectangle Canvas.Top="10" Canvas.Left="0" Width="60" Height="40" Fill="Red" />
+            <Decorator>
+                <Decorator.LayoutTransform>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+                </Decorator.LayoutTransform>
+                <Polygon Points="37,27 42.88,45.09 27.49,33.91 46.51,33.91 31.12,45.09" StrokeThickness="1.3" Stroke="#00CC11">
+                </Polygon>
+            </Decorator>
+            <Rectangle Canvas.Top="10" Canvas.Left="80" Width="20" Height="40" Fill="Blue" />
+            <Rectangle Canvas.Top="10" Canvas.Left="100" Width="20" Height="40" Fill="White" />
+            <Rectangle Canvas.Top="10" Canvas.Left="120" Width="20" Height="40" Fill="Red" />
+            <Rectangle Canvas.Top="70" Canvas.Left="0" Width="60" Height="13" Fill="deepskyBlue" />
+            <Rectangle Canvas.Top="83" Canvas.Left="0" Width="60" Height="13" Fill="White" />
+            <Image Canvas.Top="83" Canvas.Left="21" Width="14" Height="13" Source="argentine.bmp" />
+            <Rectangle Canvas.Top="96" Canvas.Left="0" Width="60" Height="14" Fill="deepskyBlue" />
+            <Polygon Points="80,70 118,100 87,100 125,130 80,130" StrokeLineJoin="miter" Stroke="#777777" StrokeThickness="2.5" />
+            <Polygon Points="80,70 118,100 87,100 125,130 80,130" StrokeLineJoin="miter" Stroke="#0000AA" StrokeThickness="2" Fill="#CF0000" />
+            <Image Canvas.Top="84" Canvas.Left="83" Width="14" Height="13" Source="firststar.bmp" />
+            <Image Canvas.Top="112" Canvas.Left="82" Width="14" Height="13" Source="secondstar.bmp" />
+        </Canvas>
+    </Decorator>
+</Canvas>

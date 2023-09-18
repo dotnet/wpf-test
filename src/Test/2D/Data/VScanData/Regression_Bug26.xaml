@@ -1,0 +1,42 @@
+<!--
+	Purpose:  regression case for Regression_Bug26
+	Author:   Microsoft
+-->
+<Canvas  Background="white" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"> 
+   <Rectangle Width="300" Height="300" Stroke="Black">
+             <Rectangle.Fill>
+                          <DrawingBrush AlignmentX="Left" AlignmentY="Top" Viewbox="-200,-200,400,400" ViewboxUnits="Absolute">
+                                      <DrawingBrush.Drawing>
+                                                   <DrawingGroup>
+                                                               <GeometryDrawing Brush="Green">
+                                                                             <GeometryDrawing.Geometry>
+                                                                                         <RectangleGeometry Rect="0,0,200,200" >
+                                                                                         </RectangleGeometry>
+                                                                             </GeometryDrawing.Geometry>
+                                                                </GeometryDrawing>
+<DrawingGroup>
+  
+                                                               <GeometryDrawing Brush="Red">
+                                                                             <GeometryDrawing.Geometry>
+                                                                                         <RectangleGeometry Rect="0,0,200,200" >
+                                                                                         </RectangleGeometry>
+                                                                             </GeometryDrawing.Geometry>
+                                                                </GeometryDrawing>
+                                                                <DrawingGroup.Transform>
+                                                                 <RotateTransform Angle="50" />
+                                                                </DrawingGroup.Transform>
+                                                                <DrawingGroup.OpacityMask>
+<!--                                                                             <VisualBrush Viewport="0,0,200,200" ViewportUnits="Absolute"> -->
+                                                                             <VisualBrush>
+                                                                                         <VisualBrush.Visual>
+                                                                                                      <Ellipse Width="100" Height="100" Fill="Green" />
+                                                                                         </VisualBrush.Visual>
+                                                                             </VisualBrush>
+                                                                </DrawingGroup.OpacityMask>
+                                                   </DrawingGroup>
+                                                   </DrawingGroup>
+                                      </DrawingBrush.Drawing>
+                          </DrawingBrush>
+             </Rectangle.Fill>
+   </Rectangle>
+</Canvas>         

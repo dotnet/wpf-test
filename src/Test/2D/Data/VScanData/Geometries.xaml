@@ -1,0 +1,64 @@
+﻿<!-- This test covers all the geometries - created by Saloua on 10/22/03-->
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="#CCCCCC">
+    <!-- ********************* Geometry Collection *********************-->
+    <Path Fill="Red" Stroke="white" StrokeThickness="3">
+        <Path.Data>
+            <CombinedGeometry GeometryCombineMode="Xor">
+                <CombinedGeometry.Geometry1>
+                    <RectangleGeometry Rect="0 0 100 100" />
+                </CombinedGeometry.Geometry1>
+                <CombinedGeometry.Geometry2>
+                    <RectangleGeometry Rect="50 50 100 100" />
+                </CombinedGeometry.Geometry2>
+            </CombinedGeometry>
+        </Path.Data>
+    </Path>
+    <!-- ********************* Path geometry *********************-->
+    <Path Fill="#4000FF00" Stroke="Yellow">
+        <Path.Data>
+            <PathGeometry FillRule="EvenOdd">
+                <PathGeometry.Transform>
+                    <TranslateTransform X="225" Y="25" />
+                </PathGeometry.Transform>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsFilled="True" StartPoint="0 0" IsClosed="True">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="100 0" />
+                                    <BezierSegment Point1="125 25" Point2="125 75" Point3="100 100" />
+                                    <QuadraticBezierSegment Point1="50 50" Point2="0 100" />
+                                    <ArcSegment Point="100 150" Size="100 100" RotationAngle="45" IsLargeArc="False" SweepDirection="Clockwise" />
+                                    <PolyLineSegment Points="100 175 0 175" />
+                                    <PolyBezierSegment Points="50 225 50 275 0 300 50 325 50 375 0 400" />
+                                    <PolyQuadraticBezierSegment Points="50 450 0 500 50 550 0 600" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+    <!-- *********************** Rectangle geometry *********************-->
+    <Path Fill="blue" Stroke="black" StrokeThickness="2">
+        <Path.Data>
+            <RectangleGeometry Rect="325 225 175 75" RadiusX="10" RadiusY="5">
+            </RectangleGeometry>
+        </Path.Data>
+    </Path>
+    <!-- ******************* Ellipse geometry ********************-->
+    <Path Fill="purple" Stroke="yellow" StrokeThickness="5">
+        <Path.Data>
+            <EllipseGeometry Center="60 300" RadiusX="50" RadiusY="75">
+            </EllipseGeometry>
+        </Path.Data>
+    </Path>
+    <!-- ******************Line geometry ************************-->
+    <Path Stroke="orange" StrokeThickness="20" StrokeStartLineCap="Flat" StrokeEndLineCap="Triangle">
+        <Path.Data>
+            <LineGeometry StartPoint="350 25" EndPoint="500 75">
+            </LineGeometry>
+        </Path.Data>
+    </Path>
+</Canvas>

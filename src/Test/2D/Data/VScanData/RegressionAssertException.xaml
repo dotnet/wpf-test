@@ -1,0 +1,50 @@
+<!--
+  This xaml contains all those cases that assert or throw exception.
+  As long as this xaml loaded without all those assertions and exceptions, it passes
+  Author:  Microsoft
+  Tracking cases: Regression_Bug_266, Regression_Bug_267, Regression_Bug_268, Regression_Bug_269
+-->
+<Canvas
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:s="system"
+>   
+  <TextBlock>yeah
+    <TextBlock.Foreground>
+      <VisualBrush>
+        <VisualBrush.Visual>    
+          <Line
+              X1="250"
+              Y1="300"
+              X2="30"
+              Y2="300"
+              Fill="pink"
+             StrokeThickness="0.0005"
+             Stroke="black" />
+        </VisualBrush.Visual>
+      </VisualBrush>
+    </TextBlock.Foreground>   
+  </TextBlock>
+
+  <Rectangle Width="200" Stroke="Blue" Height="200" Fill="Red" StrokeThickness="20" StrokeDashCap="Flat"             
+		StrokeDashArray="0 2 1.79e307 2" 
+		StrokeStartLineCap="Triangle" 
+		StrokeEndLineCap="Round">
+  </Rectangle>
+
+  <Grid>
+    <Path 
+      Margin="100" 
+      Stroke="red" 
+      Data="m 1.79,100 L -1.79e307 100" 
+      StrokeThickness="17" 
+      StrokeDashArray="4E-46"  
+      StrokeStartLineCap="Triangle" 
+      StrokeEndLineCap="Triangle" 
+      />
+  </Grid>  
+
+  <Button Width="1000000000" Height="100000000" Background="Green">
+  </Button>
+     
+</Canvas>

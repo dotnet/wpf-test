@@ -1,0 +1,96 @@
+﻿
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:media="clr-namespace:System.Windows.Media;assembly=PresentationCore" Background="#CCCCCC" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media;assembly=PresentationCore">
+    <Canvas>
+        <Ellipse Width="151" Height="101" Canvas.Left="144.5" Canvas.Top="24.5">
+            <Ellipse.Stroke>red</Ellipse.Stroke>
+            <Ellipse.Fill>
+                <media:SolidColorBrush Color="blue" Opacity="0.5" />
+            </Ellipse.Fill>
+        </Ellipse>
+        <!-- Line needs to be fixed does not render at the right position, I will update master after fix of 867144-->
+        <Line>
+            <Line.X1>350</Line.X1>
+            <Line.Y1>15</Line.Y1>
+            <Line.X2>400</Line.X2>
+            <Line.Y2>100</Line.Y2>
+            <Line.StrokeThickness>10</Line.StrokeThickness>
+            <Line.Stroke>
+                <media:SolidColorBrush Color="red" Opacity="0.5" />
+            </Line.Stroke>
+        </Line>
+        <Rectangle Canvas.Top="275">
+            <Canvas.Top>75</Canvas.Top>
+            <Canvas.Left>475</Canvas.Left>
+            <Rectangle.Height>100</Rectangle.Height>
+            <Rectangle.Width>75</Rectangle.Width>
+            <Rectangle.Stroke>yellow</Rectangle.Stroke>
+            <Rectangle.Fill>
+                <media:SolidColorBrush Color="red" Opacity="0.3" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <Path Canvas.Top="300" Data="M 100 100 L300 300 L 200 300 z">
+            <Path.Stroke>red</Path.Stroke>
+            <Path.StrokeThickness>2</Path.StrokeThickness>
+            <Path.Fill>
+                <media:SolidColorBrush Color="green" Opacity="0.4" />
+            </Path.Fill>
+        </Path>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="100" Y="0" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon Canvas.Top="200">
+                <!--  DECLARED PROPERTIES -->
+                <Polygon.Points>
+        15,10 50,30 50,25 45,20
+        45,15 50,10 55,10 60,15
+        60,20 55,25 55,30 60,30
+        75,45 60,55 72,45 60,35
+        55,60 70,95 53.5,65 
+        35,95 50,60 45,35 15,10
+    </Polygon.Points>
+                <Polygon.Stroke>blue</Polygon.Stroke>
+                <Polygon.StrokeThickness>1px</Polygon.StrokeThickness>
+                <Polygon.Fill>
+                    <media:SolidColorBrush Color="yellow" Opacity="0.6" />
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.LayoutTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="300" Y="350" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.LayoutTransform>
+            <Polyline>
+                <Polyline.Points>
+        10,10 60,30 10,50 60,70
+        10,90 30,25
+    </Polyline.Points>
+                <Polyline.Stroke>blue</Polyline.Stroke>
+                <Polyline.StrokeThickness>3</Polyline.StrokeThickness>
+                <Polyline.Fill>
+                    <media:SolidColorBrush Color="yellow" Opacity="0.5" />
+                </Polyline.Fill>
+            </Polyline>
+        </Decorator>
+        <Image Canvas.Top="300" Canvas.Left="300">
+            <Image.Opacity>0.5</Image.Opacity>
+            <Image.Source>bmp.bmp</Image.Source>
+            <Image.Height>100</Image.Height>
+            <Image.Width>200</Image.Width>
+        </Image>
+    </Canvas>
+</Border>
