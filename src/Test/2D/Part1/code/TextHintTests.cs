@@ -34,7 +34,7 @@ namespace Microsoft.Test.Graphics
     /// Animation function tests for the TextHintingMode DWrite text feature
     /// </summary>
     [Test(1, "TextHinting",
-     SupportFiles = @"FeatureTests\2D\Dev10\Masters\TextHinting-animated.png,FeatureTests\2D\Dev10\Masters\TextHinting-fixed.png,FeatureTests\2D\Dev10\Masters\TextHinting-auto.png")]
+     SupportFiles = @"FeatureTests\2D\Part1\Masters\TextHinting-animated.png,FeatureTests\2D\Part1\Masters\TextHinting-fixed.png,FeatureTests\2D\Part1\Masters\TextHinting-auto.png")]
     public class TextHintingTests : WindowTest
     {
         private TestSettings _settings; // test vector values
@@ -50,21 +50,21 @@ namespace Microsoft.Test.Graphics
         // 2: is the rendered image expected to be the same as the reference?
         // 3: the name of the reference image
 
-        ////////////////////////////////////////////////////////////////////////////////////////////        
+        ////////////////////////////////////////////////////////////////////////////////////////////ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
         // DISABLEDUNSTABLETEST:
         // TestName: Microsoft.Test.Graphics.TextHintingTests(Animated\\\,true\\\,TextHinting-animated.png)
-        // Area: 2D   SubArea: TextHinting
+        // Area: 2Dï¿½ï¿½ SubArea: TextHinting
         // Disable this case due to high fail rate, will enable after fix it.
-        // to find all disabled tests in test tree, use: “findstr /snip DISABLEDUNSTABLETEST” 
+        // to find all disabled tests in test tree, use: ï¿½findstr /snip DISABLEDUNSTABLETESTï¿½ 
         ////////////////////////////////////////////////////////////////////////////////////////////
         //[Variation("Animated,true,TextHinting-animated.png")]
 
-        ////////////////////////////////////////////////////////////////////////////////////////////        
+        ////////////////////////////////////////////////////////////////////////////////////////////ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
         // DISABLEDUNSTABLETEST:
         // TestName: Microsoft.Test.Graphics.TextHintingTests(Auto\\\,true\\\,TextHinting-auto.png)
-        // Area: 2D   SubArea: TextHinting
+        // Area: 2Dï¿½ï¿½ SubArea: TextHinting
         // Disable this case due to high fail rate, will enable after fix it.
-        // to find all disabled tests in test tree, use: “findstr /snip DISABLEDUNSTABLETEST” 
+        // to find all disabled tests in test tree, use: ï¿½findstr /snip DISABLEDUNSTABLETESTï¿½ 
         ////////////////////////////////////////////////////////////////////////////////////////////
         //[Variation("Auto,true,TextHinting-auto.png")]
 

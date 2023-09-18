@@ -14,7 +14,7 @@ namespace Microsoft.Test.Graphics.CachedComposition
     [Test(0, "CachedCompositionBasic", "Functional",
      Area = "2D",
      Description = "CachedComposition functional tests",
-     SupportFiles = @"FeatureTests\2D\Dev10\Masters\red2SecondsGreen30.wmv",
+     SupportFiles = @"FeatureTests\2D\Part1\Masters\red2SecondsGreen30.wmv",
      SecurityLevel=TestCaseSecurityLevel.FullTrust
     ) ]
     public class CachedCompositionFunctional : WindowTest

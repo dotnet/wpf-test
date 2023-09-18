@@ -24,7 +24,7 @@ namespace Microsoft.Test.Graphics
     [Test(1, "TileBrushCacheHint",
         Area = "2D",
         Description = @"Tests for tilebrush's cache hint. ",
-        SupportFiles = @"Infra\TestApiCore.dll,FeatureTests\2D\Dev10\Masters\smallJelly.png,FeatureTests\2D\Dev10\Masters\CacheHintMaster*.png"
+        SupportFiles = @"Infra\TestApiCore.dll,FeatureTests\2D\Part1\Masters\smallJelly.png,FeatureTests\2D\Part1\Masters\CacheHintMaster*.png"
         )
     ]
     public class TileBrushCacheHint : WindowTest

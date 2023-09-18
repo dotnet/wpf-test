@@ -35,7 +35,7 @@ namespace Microsoft.Test.Graphics
     // [Test(1, "Regression", "Regression_Bug45",
     //     Area = "2D",
     //     Description = @"Regression test for Regression_Bug45 :  Cached composition leaves dirty bits on the screen when the content of the cache shrinks",
-    //     SupportFiles = @"TestApiCore.dll,FeatureTests\2D\Dev10\Masters\Regression_Bug45_KnownGood.png"
+    //     SupportFiles = @"TestApiCore.dll,FeatureTests\2D\Part1\Masters\Regression_Bug45_KnownGood.png"
     //     )
     // ]
     public class Regression_Bug45 : WindowTest

@@ -10,7 +10,7 @@ namespace Microsoft.Test.Graphics.CachedComposition
      Area = "2D",
      Disabled = true, // these are for personal use, not lab use (and currently produce a bluescreen) D:
      Description = "CachedComposition exhaustive tests",
-     SupportFiles = @"FeatureTests\2D\Dev10\Masters\red2SecondsGreen30.wmv",
+     SupportFiles = @"FeatureTests\2D\Part1\Masters\red2SecondsGreen30.wmv",
      SecurityLevel = TestCaseSecurityLevel.FullTrust)
     ]
     public class CachedCompositionExhaustive : CachedCompositionFunctional

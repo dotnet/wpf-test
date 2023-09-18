@@ -9,7 +9,7 @@ namespace Microsoft.Test.Graphics.CachedComposition
     [Test(1, "CachedCompositionFunctional", "Full Vector Coverage",
      Area = "2D",
      Description = "CachedComposition extended functional tests - non exhaustive",
-     SupportFiles = @"FeatureTests\2D\Dev10\Masters\red2SecondsGreen30.wmv",
+     SupportFiles = @"FeatureTests\2D\Part1\Masters\red2SecondsGreen30.wmv",
      SecurityLevel = TestCaseSecurityLevel.FullTrust)
     ]
     public class CachedCompositionFunctionalExtended : CachedCompositionFunctional

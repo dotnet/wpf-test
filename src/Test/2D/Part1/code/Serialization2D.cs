@@ -21,11 +21,11 @@ namespace Microsoft.Test.Graphics
     {
 
         /// <summary/>
-        [Variation("ImageSource.xaml", SupportFiles = @"FeatureTests\2D\Dev10\Xamls\ImageSource.xaml,FeatureTests\2D\Dev10\Masters\winscii.png")]
-        [Variation("RequestCachePolicy.xaml", SupportFiles = @"FeatureTests\2D\Dev10\Xamls\RequestCachePolicy.xaml,FeatureTests\2D\Dev10\Masters\winscii.png")]
-        [Variation("Int32Rect.xaml", SupportFiles = @"FeatureTests\2D\Dev10\Xamls\Int32Rect.xaml")]
-        [Variation("Brush.xaml", SupportFiles = @"FeatureTests\2D\Dev10\Xamls\Brush.xaml")]
-        [Variation("InputBindings.xaml", SupportFiles = @"FeatureTests\2D\Dev10\Xamls\InputBindings.xaml")]
+        [Variation("ImageSource.xaml", SupportFiles = @"FeatureTests\2D\Part1\Xamls\ImageSource.xaml,FeatureTests\2D\Part1\Masters\winscii.png")]
+        [Variation("RequestCachePolicy.xaml", SupportFiles = @"FeatureTests\2D\Part1\Xamls\RequestCachePolicy.xaml,FeatureTests\2D\Part1\Masters\winscii.png")]
+        [Variation("Int32Rect.xaml", SupportFiles = @"FeatureTests\2D\Part1\Xamls\Int32Rect.xaml")]
+        [Variation("Brush.xaml", SupportFiles = @"FeatureTests\2D\Part1\Xamls\Brush.xaml")]
+        [Variation("InputBindings.xaml", SupportFiles = @"FeatureTests\2D\Part1\Xamls\InputBindings.xaml")]
         public Serialization2D(string xamlFileIn)
         {
             _xamlFile = xamlFileIn;

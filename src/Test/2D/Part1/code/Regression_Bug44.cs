@@ -28,7 +28,7 @@ namespace Microsoft.Test.Graphics
     [Test(1, "Regression", "Regression_Bug44",
         Area = "2D",
         Description = @"Regression test for Regression_Bug44 :  Hardware text not blending correctly in intermediate render targets and layered windows",
-        SupportFiles = @"infra\TestApiCore.dll,FeatureTests\2D\Dev10\Masters\Regression_Bug44_KnownGood.png",
+        SupportFiles = @"infra\TestApiCore.dll,FeatureTests\2D\Part1\Masters\Regression_Bug44_KnownGood.png",
         Disabled=true
         )
     ]

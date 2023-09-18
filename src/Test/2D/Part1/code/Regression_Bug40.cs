@@ -182,7 +182,7 @@ namespace Microsoft.Test.Graphics
             double fontSize = 8;
             string unicodeString = "We-will, we will Rock U!@~!";
 
-            Uri fontUri = new Uri("pack://application:,,,/2D_Dev10;;component/Resources/times.ttf");
+            Uri fontUri = new Uri("pack://application:,,,/2D_Part1;;component/Resources/times.ttf");
             GlyphTypeface glyphTypeface = new GlyphTypeface(fontUri);
 
             IList<ushort> glyphIndices = new List<ushort>();

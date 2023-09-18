@@ -33,7 +33,7 @@ namespace Microsoft.Test.Graphics
     /// Verification for ClearTypeHint, which allows us to force Cleartype rendering when the 
     ///  framework would normally disallow it.
     /// </summary>
-    [Test(0, "ClearType", "ClearTypeHintDev10", // Positional variables for the subarea and name.
+    [Test(0, "ClearType", "ClearTypeHintPart1", // Positional variables for the subarea and name.
         Area = "2D", // Named variable for the area.
         SupportFiles = @"FeatureTests\Text\Data\times.ttf",
         Description = "Verification for ClearTypeHint")] // Named variable for the desc. 

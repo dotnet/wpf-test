@@ -1,16 +1,19 @@
-﻿<!-- This test covers all the transforms - created by Saloua on 10/23/03-->
+﻿<!-- This test covers all the transforms -->
 <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <Canvas.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="0,1">
             <GradientBrush.GradientStops>
                 <GradientStopCollection>
-                    <GradientStop Color="Green" Offset="0" />
-                    <GradientStop Color="White" Offset="1" />
+                    <GradientStop Color="Green"
+                                  Offset="0" />
+                    <GradientStop Color="White"
+                                  Offset="1" />
                 </GradientStopCollection>
             </GradientBrush.GradientStops>
         </LinearGradientBrush>
     </Canvas.Background>
-    <!--************************* Skew ************************** -->
+    <!-- ************************* Skew ************************** -->
     <Decorator>
         <Decorator.LayoutTransform>
             <TransformGroup>
@@ -22,46 +25,75 @@
                 </TransformGroup.Children>
             </TransformGroup>
         </Decorator.LayoutTransform>
-        <Rectangle Stroke="red" StrokeThickness="3" Canvas.Top="10" Canvas.Left="5" Width="150" Height="50" Fill="pink" />
+        <Rectangle Stroke="red"
+                   StrokeThickness="3"
+                   Canvas.Top="10"
+                   Canvas.Left="5"
+                   Width="150"
+                   Height="50"
+                   Fill="pink" />
     </Decorator>
-    <!--******************** Scaling ****************************** -->
+    <!-- ******************** Scaling ****************************** -->
     <Decorator>
         <Decorator.LayoutTransform>
-            <ScaleTransform ScaleX="2" ScaleY="2" />
+            <ScaleTransform ScaleX="2"
+                            ScaleY="2" />
         </Decorator.LayoutTransform>
-        <Path StrokeThickness="3" Stroke="#a3F3" Fill="yellow">
+        <Path StrokeThickness="3"
+              Stroke="#a3F3"
+              Fill="yellow">
             <Path.Data>
-                <EllipseGeometry Center="150 50" RadiusX="25" RadiusY="25" />
+                <EllipseGeometry Center="150 50"
+                                 RadiusX="25"
+                                 RadiusY="25" />
             </Path.Data>
         </Path>
     </Decorator>
-    <!--************************ Rotate**************************** -->
+    <!-- ************************ Rotate**************************** -->
     <Decorator>
         <Decorator.RenderTransform>
             <RotateTransform Angle="25" />
         </Decorator.RenderTransform>
-        <Line X1="450" Y1="50" X2="55" Y2="340" Stroke="yellow" StrokeThickness="20" />
+        <Line X1="450"
+              Y1="50"
+              X2="55"
+              Y2="340"
+              Stroke="yellow"
+              StrokeThickness="20" />
     </Decorator>
-    <!--******************** Translating ****************************** -->
+    <!-- ******************** Translating ****************************** -->
     <Decorator>
         <Decorator.RenderTransform>
-            <TranslateTransform X="250" Y="50" />
+            <TranslateTransform X="250"
+                                Y="50" />
         </Decorator.RenderTransform>
-        <Path StrokeThickness="3" Stroke="yellow" Fill="purple">
+        <Path StrokeThickness="3"
+              Stroke="yellow"
+              Fill="purple">
             <Path.Data>
-                <EllipseGeometry Center="150 50" RadiusX="25" RadiusY="25" />
+                <EllipseGeometry Center="150 50"
+                                 RadiusX="25"
+                                 RadiusY="25" />
             </Path.Data>
         </Path>
     </Decorator>
     <!-- **************** TransformGroup ************************* -->
     <Decorator>
-        <Rectangle Canvas.Top="100" Canvas.Left="125" Width="100" Height="100" StrokeThickness="2" Stroke="Blue">
+        <Rectangle Canvas.Top="100"
+                   Canvas.Left="125"
+                   Width="100"
+                   Height="100"
+                   StrokeThickness="2"
+                   Stroke="Blue">
             <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="1,1">
                     <GradientBrush.GradientStops>
                         <GradientStopCollection>
-                            <GradientStop Color="red" Offset="0" />
-                            <GradientStop Color="blue" Offset="1" />
+                            <GradientStop Color="red"
+                                          Offset="0" />
+                            <GradientStop Color="blue"
+                                          Offset="1" />
                         </GradientStopCollection>
                     </GradientBrush.GradientStops>
                 </LinearGradientBrush>
@@ -69,17 +101,31 @@
         </Rectangle>
         <Decorator.RenderTransform>
             <TransformGroup>
-                <TranslateTransform X="10" Y="10" />
-                <ScaleTransform ScaleX="1.5" ScaleY="0.75" />
-                <SkewTransform AngleX="1.5" AngleY="0.9" />
+                <TranslateTransform X="10"
+                                    Y="10" />
+                <ScaleTransform ScaleX="1.5"
+                                ScaleY="0.75" />
+                <SkewTransform AngleX="1.5"
+                               AngleY="0.9" />
                 <RotateTransform Angle="25" />
-                <ScaleTransform ScaleX="1.2" ScaleY="1.3" CenterX="30" CenterY="30" />
-                <RotateTransform Angle="2" CenterX="45" CenterY="45" />
+                <ScaleTransform ScaleX="1.2"
+                                ScaleY="1.3"
+                                CenterX="30"
+                                CenterY="30" />
+                <RotateTransform Angle="2"
+                                 CenterX="45"
+                                 CenterY="45" />
             </TransformGroup>
         </Decorator.RenderTransform>
     </Decorator>
-    <!-- ********************* MatrixTransform **************************-->
+    <!-- ********************* MatrixTransform ************************** -->
     <Decorator RenderTransform="1,0,1,1,50,90">
-        <Rectangle Stroke="red" StrokeThickness="3" Canvas.Top="50" Canvas.Left="450" Width="100" Height="50" Fill="orange" />
+        <Rectangle Stroke="red"
+                   StrokeThickness="3"
+                   Canvas.Top="50"
+                   Canvas.Left="450"
+                   Width="100"
+                   Height="50"
+                   Fill="orange" />
     </Decorator>
 </Canvas>

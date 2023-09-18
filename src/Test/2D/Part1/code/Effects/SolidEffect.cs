@@ -18,6 +18,6 @@ namespace Microsoft.Test.Graphics
         }
 
         private static PixelShader s_pixelShader =
-             new PixelShader() { UriSource = new Uri("pack://application:,,,/2D_Dev10;component/Effects/solid.ps") };
+             new PixelShader() { UriSource = new Uri("pack://application:,,,/2D_Part1;component/Effects/solid.ps") };
     }
 }
