@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="BVT-HWSW" Priority="0">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="CGT3D.exe" Class="Microsoft.Test.Graphics.Cgt3d" Method="Launch" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.exe" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+  <TEST Name="AntiAliasing - Basic Color check" Disabled="True" Timeout="90" Description="Focus:Rendering Verification Focus:AntiAliasing Uses:SolidColorBrush Uses:DiffuseMaterial Uses:AmbientLight Uses:OrthographicCamera Uses:PerspectiveCamera Uses:ScreenSpaceLines Comments: Verify the rendering of Anti-Aliased content by rendering solid color 3D content onto a solid color background and looking for a spread of color values.  Test asserts correct tier.   ">
+    <DriverParameters Args="/script=AntiAlias.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AntiAlias.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="AntiAliasing (EdgeMode=Aliased) - Basic Color check" Disabled="True" Timeout="90" Description="Focus:Rendering Verification Focus:AntiAliasing Uses:SolidColorBrush Uses:DiffuseMaterial Uses:AmbientLight Uses:OrthographicCamera Uses:PerspectiveCamera Uses:ScreenSpaceLines Comments: Verify the rendering of Anti-Aliased content by rendering solid color 3D content onto a solid color background and looking for a spread of color values.  Test asserts correct tier.   ">
+    <DriverParameters Args="/script=AntiAliasWEdgeMode.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AntiAliasWEdgeMode.xml" />
+    </SupportFiles>
+  </TEST>
+  <!--DISABLEDUNSTABLETEST: Tier API - Hardware ( Tier 2 )-->
+  <TEST Name="Tier API - Hardware ( Tier 2 )"  Priority="2" Disabled="True" Timeout="30" Description="Focus:Unit Testing Focus:Tiering Comments: Verify the correct usage of tiering API by running the test under correct hardware.  This variant expect to be run under Tier2 Hardware.   ">
+    <DriverParameters Args="/Class=TierAPITest /ExpectedHardwareTier=131072" />
+  </TEST>
+  <TEST Name="Tier API - Software ( Tier 0 )" Disabled="True" Timeout="30" Description="Focus:Unit Testing Focus:Tiering Comments: Verify the correct usage of tiering API by running the test under correct hardware.  This variant expect to be run under Tier0 Software only.   ">
+    <DriverParameters Args="/Class=TierAPITest /ExpectedHardwareTier=0" />
+  </TEST>
+  
+</XTC>

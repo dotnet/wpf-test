@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="Orcas3D-BVT" Priority="0">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="Orcas3D.dll" Class="Microsoft.Test.Graphics.Cgt3d" Method="Launch" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Orcas\Orcas3D.*" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+  
+  <TEST Name="ModelUIElement3D BVT Rendering Test" Priority="2" Timeout="120" Description="Visual Verification test on basic rendering behavior. This should smoke out any general regressions in rendering behavior for this type.">
+    <DriverParameters Args="/script=ModelUIElement3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Orcas\ModelUIElement3D.xml" />
+      <SupportFile Source="FeatureTests\3D\Orcas\ModelUIElement3D_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="Viewport2DVisual3D BVT Rendering test" Timeout="120" Description="Visual Verification test on basic rendering behavior. This should smoke out any general regressions in rendering behavior for this type.">
+    <DriverParameters Args="/script=Viewport2DVisual3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Orcas\Viewport2DVisual3D.xml" />
+    </SupportFiles>
+  </TEST>
+  
+  <TEST Name="UIElement3DInvalidateModel" Timeout="120" Description="Tests behaviour of  UIElement3D.InvalidateModel() and UIElement3D.OnModelUpdated">
+    <DriverParameters Args="/Class=UIElement3DInvalidateModelTest" />
+  </TEST>
+
+</XTC>

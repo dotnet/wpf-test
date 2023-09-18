@@ -1,0 +1,160 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="BadMeshes"
+    SilhouetteEdgeTolerance=".5"
+    PixelToEdgeTolerance="0.05"
+    DefaultColorTolerance="0,3,3,3"
+
+    Camera="PerspectiveDefault"
+    UseViewport3D="false"
+    >
+
+    <!-- Meshes -->
+
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="BadPositions1"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="BadPositions2"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="BadPositions4"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="BadPositions5"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="NullPositions1"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="NullPositions2"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="NullPositions3"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="Null"
+        Material1="DrawingBrush"
+        />
+	<!--Broken - Var 9 needs to be reviewed. 
+	This involves a combination of video card variant invalid param scenario behaviors
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="PositionsElseNull"
+        Material1="DrawingBrush"
+        />
+	-->
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhitePoint"
+        Visual1="BadIndex1"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhitePoint"
+        Visual1="BadIndex2"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhitePoint"
+        Visual1="BadIndexNoNormals"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhitePoint"
+        Visual1="BadIndexNullNormals"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhitePoint"
+        Visual1="BadIndexMissingSomeNormals"
+        PixelToEdgeTolerance="0.5"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="GroupNullChildren"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="Positions"
+        Material1="GroupNullChildren"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="Positions"
+        Material1="GroupNullChildren"
+        Visual2="Positions"
+        VisualTransform2="Translate 0,0,-1"
+        Material2="255,255,0,255"
+        />
+
+    <!-- Combinations of good and bad -->
+
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="BadPositions1"
+        Visual2="Positions"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="BadPositions4"
+        Visual2="CreateFlatDisc 3"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="Positions"
+        Visual2="BadPositions1"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="CreateFlatDisc 3"
+        Visual2="BadPositions4"
+        />
+
+    <!-- fire away! :) -->
+
+    <VARIATION
+        Description="Lots of bad meshes mixed with good meshes in a single scene"
+        Scene="Explicit"
+        Visual0="WhiteAmbient"
+        Visual1="BadPositions1"
+        VisualTransform1="Translate 0,0,-0.25"
+        Visual2="BadPositions2"
+        VisualTransform2="Translate 0,0,-0.5"
+        Visual3="BadPositions4"
+        VisualTransform3="Translate 0,0,-0.75"
+        Visual4="BadPositions5"
+        VisualTransform4="Translate 0,0,-1"
+        Visual5="Positions"
+        VisualTransform5="Translate 0,0,-1.75"
+        Visual6="FullScreenMesh"
+        VisualTransform6="Translate 0,0,-2.0"
+        Visual60="GroupNullChildren"
+        />
+
+</INIT>

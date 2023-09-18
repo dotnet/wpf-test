@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="P1" Priority="1">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="CGT3D.dll" Class="Microsoft.Test.Graphics.Cgt3d" Method="Launch" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+
+  <TEST Name="AmbientLight" Timeout="30" Description="Focus:AmbientLight Focus:Light Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of different colored ambient lights on different colored meshes.  ">
+    <DriverParameters Args="/script=AmbientLight.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AmbientLight.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MatrixTransform3D" Timeout="30" Description="Focus:MatrixTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of a MatrixTransform3D applied to a single triangle mesh.  ">
+    <DriverParameters Args="/script=MatrixTransform3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MatrixTransform3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="TranslateTransform3D" Timeout="30" Description="Focus:TranslateTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of a TranslateTransform3D applied to a single triangle mesh.   ">
+    <DriverParameters Args="/script=TranslateTransform3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\TranslateTransform3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RotateTransform3D - Angle, Axis" Timeout="30" Description="Focus:RotateTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of a RotateTransform3D (with only Axis/Angle specified) applied to a single triangle mesh.  ">
+    <DriverParameters Args="/script=RotateTransform3DAngleAxis.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\RotateTransform3DAngleAxis.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RotateTransform3D - Angle, Axis, Center" Timeout="30" Description="Focus:RotateTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of a RotateTransform3D (with Axis/Angle and Center specified) applied to a single triangle mesh.   ">
+    <DriverParameters Args="/script=RotateTransform3DAngleAxisCenter.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\RotateTransform3DAngleAxisCenter.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ScaleTransform3D" Timeout="30" Description="Focus:ScaleTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of a ScaleTransform3D (with only ScaleVector specified) applied to a single triangle mesh.  ">
+    <DriverParameters Args="/script=ScaleTransform3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\ScaleTransform3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="OrthographicCamera" Timeout="30" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Comments: Orient an orthographic camera to look at a single triangle in many different ways.  Verify that the camera is correct.  ">
+    <DriverParameters Args="/script=OrthographicCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OrthographicCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PerspectiveCamera" Timeout="30" Description="Focus:PerspectiveCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Comments: Orient a perspective camera to look at a single triangle in many different ways.  Verify that the camera is correct.  ">
+    <DriverParameters Args="/script=PerspectiveCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\PerspectiveCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MeshGeometry3D" Timeout="90" Description="Focus:MeshGeometry3D Focus:Rendering Verification Uses:PerspectiveCamera Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Create simple meshes and verify that they are rendered correctly. ">
+    <DriverParameters Args="/script=MeshPrimitive3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MeshPrimitive3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PerspectiveCamera using Viewport3D" Timeout="30" Description="Focus:Viewport3D Focus:Rendering Verification Uses:PerspectiveCamera Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Comments: Run the exact same test as the PerspectiveCamera BVT except draw the 3D scene inside a Viewport3D instead of RetainedVisual3D. ">
+    <DriverParameters Args="/script=PerspectiveCameraWithViewport3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\PerspectiveCameraWithViewport3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MatrixCamera" Timeout="30" Description="Focus:MatrixCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Comments: Orient a matrix camera to look at a single triangle in many different ways (perspective and orthographic projections).  Verify that the camera is correct.   ">
+    <DriverParameters Args="/script=MatrixCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MatrixCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DirectionalLight - HW" Timeout="120" Description="Focus:Rendering Verification Focus:DirectionalLight Uses:MeshGeometry3D Uses:PerspectiveCamera Uses:SolidColorBrush Uses:DiffuseMaterial Comments: Verify the rendering of DirectionalLight applying it to different meshes and rendering using TestRenderer.  Variations include different Light parameters ( Direction, Color ).  ">
+    <DriverParameters Args="/script=Directional_Light_BVT.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Directional_Light_BVT.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PointLight - HW" Timeout="120" Description="Focus:Rendering Verification Focus:PointLight Uses:MeshGeometry3D Uses:OrthographicCamera Uses:SolidColorBrush Uses:DiffuseMaterial Comments: Verify the rendering of PointLight applying it to different meshes and rendering using TestRenderer.  Variations include different Light parameters ( Range, Attenuation, Color ).   ">
+    <DriverParameters Args="/script=Point_Light_BVT.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Point_Light_BVT.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SpotLight - HW" Timeout="120" Description="Focus:Rendering Verification Focus:SpotLight Uses:MeshGeometry3D Uses:OrthographicCamera Uses:SolidColorBrush Uses:DiffuseMaterial Comments: Verify the rendering of SpotLight applying it to different meshes and rendering using TestRenderer.  Variations include different Light parameters ( Range, Attenuation, Color, Cone angles ).   ">
+    <DriverParameters Args="/script=Spot_Light_BVT.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Spot_Light_BVT.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ScaleTransform3D - with ScaleCenter" Timeout="30" Description="Focus:ScaleTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of a ScaleTransform3D (with ScaleVector and ScaleCenter specified) applied to a single triangle mesh.  ">
+    <DriverParameters Args="/script=ScaleTransform3DCenter.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\ScaleTransform3DCenter.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DirectionalLight - SW" Timeout="120" Description="Focus:Rendering Verification Focus:DirectionalLight Focus:Software Rendering Uses:MeshGeometry3D Uses:PerspectiveCamera Uses:SolidColorBrush Uses:DiffuseMaterial Comments: Verify the rendering of DirectionalLight applying it to different meshes and rendering using TestRenderer.  Variations include different Light parameters ( Direction, Color ). Software only.  ">
+    <DriverParameters Args="/script=Directional_Light_BVT_SW.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Directional_Light_BVT_SW.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RotateTransform3D - Rotation3D" Timeout="30" Description="Focus:RotateTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Uses:Rotation3D Comments: Verify the effects of a RotateTransform3D (with only Rotation specified) applied to a single triangle mesh.  ">
+    <DriverParameters Args="/script=RotateTransform3DRotation.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\RotateTransform3DRotation.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RotateTransform3D - Rotation3D, Center" Timeout="30" Description="Focus:RotateTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Uses:Rotation3D Comments: Verify the effects of a RotateTransform3D (with Rotation and Center specified) applied to a single triangle mesh.  ">
+    <DriverParameters Args="/script=RotateTransform3DRotationCenter.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\RotateTransform3DRotationCenter.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MeshGeometry3D - optional fields unspecified" Timeout="90" Description="Focus:MeshGeometry3D Focus:Rendering Verification Comments: Verify that we can create MeshGeometry3Ds that render by explicitly populating or ignoring the Normals, TextureCoordinates, and TriangleIndices collections.  Positions are required and always specified by the meshes in this test.  ">
+    <DriverParameters Args="/script=MeshGeometryFields.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MeshGeometryFields.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PointLight - SW" Timeout="120" Description="Focus:Rendering Verification Focus:PointLight Focus:Software Rendering Uses:MeshGeometry3D Uses:OrthographicCamera Uses:SolidColorBrush Uses:DiffuseMaterial Comments: Verify the rendering of PointLight applying it to different meshes and rendering using TestRenderer.  Variations include different Light parameters ( Range, Attenuation, Color ). Software only.  ">
+    <DriverParameters Args="/script=Point_Light_BVT.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Point_Light_BVT.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SpotLight - SW" Timeout="120" Description="Focus:Rendering Verification Focus:Software Rendering Focus:SpotLight Uses:MeshGeometry3D Uses:OrthographicCamera Uses:SolidColorBrush Uses:DiffuseMaterial Comments: Verify the rendering of SpotLight applying it to different meshes and rendering using TestRenderer.  Variations include different Light parameters ( Range, Attenuation, Color, Cone angles ).  Software only.  ">
+    <DriverParameters Args="/script=Spot_Light_BVT.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Spot_Light_BVT.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="IA64 Stability test - Render Xaml - no visual verification" Timeout="30" Description="Focus:Serialization Focus:Rendering Verification Comments: Verify that XAML can parse and be rendered. ">
+    <DriverParameters Args="/Class=XamlTest /UseViewport3D /Filename=OffscreenSphere.xaml /DefaultColorTolerance=255,255,255,255" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OffscreenSphere.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="State Test - Materials" Timeout="150" Description="Focus:Rendering Verification Focus:DiffuseMaterial Focus:EmissiveMaterial Focus:SpecularMaterial Uses:Serialization Comments: Test for state change problems in the rendering pipeline.  We've seen issues where rendering a model with a certain material will corrupt the state of the rendering pipeline and cause subsequent models to render with incorrect materials. This test renders scenes with: Diffuse - Emissive Diffuse - Specular Emissive - Diffuse Emissive - Specular Specular - Diffuse Specular - Emissive Diffuse - Emissive - Specular Diffuse - Specular - Emissive Emissive - Diffuse - Specular Emissive - Specular - Diffuse Specular - Diffuse - Emissive Specular - Emissive - Diffuse ">
+    <DriverParameters Args="/script=MaterialStateTest.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MaterialStateTest*.xaml" />
+      <SupportFile Source="FeatureTests\3D\MaterialStateTest.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transform AmbientLight" Timeout="30" Description="Focus:AmbientLight Focus:Rendering Verification Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:ScaleTransform3D Comments: Verify the effects of a transform applied to an AmbientLight. ">
+    <DriverParameters Args="/script=TransformAmbientLight.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\TransformAmbientLight.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transform DirectionalLight" Timeout="30" Description="Focus:DirectionalLight Focus:Rendering Verification Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:ScaleTransform3D Comments: Verify the effects of a transform applied to a DirectionalLight.  ">
+    <DriverParameters Args="/script=TransformDirectionalLight.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\TransformDirectionalLight.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transform PointLight" Timeout="30" Description="Focus:PointLight Focus:Rendering Verification Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:ScaleTransform3D Comments: Verify the effects of a transform applied to a PointLight.  ">
+    <DriverParameters Args="/script=TransformPointLight.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\TransformPointLight.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Transform SpotLight" Timeout="30" Description="Focus:SpotLight Focus:Rendering Verification Uses:PerspectiveCamera Uses:TranslateTransform3D Uses:RotateTransform3D Uses:ScaleTransform3D Comments: Verify the effects of a transform applied to a SpotLight.  ">
+    <DriverParameters Args="/script=TransformSpotLight.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\TransformSpotLight.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Auto clipping - OrthographicCamera" Timeout="30" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Create a camera without setting the clipping planes.  The camera should automatically adjust to fit the contents of the entire scene. ">
+    <DriverParameters Args="/script=AutoOrthographicCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AutoOrthographicCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Auto clipping - PerspectiveCamera" Timeout="30" Description="Focus:PerspectiveCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Create a camera without setting the clipping planes.  The camera should automatically adjust to fit the contents of the entire scene. ">
+    <DriverParameters Args="/script=AutoPerspectiveCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AutoPerspectiveCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Visual3D Test" Timeout="300" Description="Focus:ScaleTransform3D Focus:Rendering Verification Uses:AmbientLight Uses:PerspectiveCamera Uses:ScreenSpaceLines3D Comments: Verify the effects of a ScaleTransform3D (with ScaleVector and ScaleCenter specified) applied to screen space lines.  ">
+    <DriverParameters Args="/script=Visual3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Visual3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Auto clipping - MultiVisual scenarios" Timeout="120" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Create a camera without setting the clipping planes.  The camera should automatically adjust to fit the contents of the entire scene. ">
+    <DriverParameters Args="/script=AnotherAutoCameraTest.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AnotherAutoCameraTest.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Mesh vertices behind camera position scenarios - AutoCamera" Timeout="90" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Create a camera without setting the clipping planes.  The camera should automatically adjust to fit the contents of the entire scene. ">
+    <DriverParameters Args="/script=MeshBehindAutoCameraPosition.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MeshBehindAutoCameraPosition.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="OrthographicCamera - SceneSpan computation test" Timeout="90" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Create a camera without setting the clipping planes.  The camera should automatically adjust to fit the contents of the entire scene. ">
+    <DriverParameters Args="/script=OrthographicCameraSceneSpan.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OrthographicCameraSceneSpan.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Mesh vertices behind camera position scenarios" Timeout="90" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Create a camera without setting the clipping planes.  The camera should automatically adjust to fit the contents of the entire scene. ">
+    <DriverParameters Args="/script=MeshBehindCameraPosition.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MeshBehindCameraPosition.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PerspectiveCamera - SceneSpan computation test" Timeout="90" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Create a camera without setting the clipping planes.  The camera should automatically adjust to fit the contents of the entire scene. ">
+    <DriverParameters Args="/script=PerspectiveCameraSceneSpan.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PerspectiveCameraSceneSpan.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="OrthographicCamera.Transform" Timeout="45" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Verify the Camera.Transform property on an OrthographicCamera. ">
+    <DriverParameters Args="/script=OrthographicCameraTransform.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OrthographicCameraTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PerspectiveCamera.Transform" Timeout="45" Description="Focus:PerspectiveCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Verify the Camera.Transform property on a PerspectiveCamera. ">
+    <DriverParameters Args="/script=PerspectiveCameraTransform.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\PerspectiveCameraTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MatrixCamera.Transform" Timeout="45" Description="Focus:MatrixCamera Focus:Rendering Verification Uses:AmbientLight Uses:DiffuseMaterial Uses:MeshGeometry3D Uses:ScreenSpaceLines3D Comments: Verify the Camera.Transform property on an OrthographicCamera. ">
+    <DriverParameters Args="/script=MatrixCameraTransform.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MatrixCameraTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Model3D/Visual3D Transform rendering test" Timeout="90" Description="Focus:ModelVisual3D Focus:Model3D Focus:Rendering Verification Uses:AmbientLight Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Uses:RotateTransform3D Uses:ScaleTransform3D Uses:TranslateTransform3D Comments: Verify that setting transforms on both Model3Ds and ModelVisual3Ds at the same time produces the expected result.  ">
+    <DriverParameters Args="/script=Model3DVisual3DTransform.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Model3DVisual3DTransform.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MeshGeometry3D rendering test - Mirrored models" Timeout="90" Description="Focus:MeshGeometry3D Focus:Rendering Verification Focus:GeometryModel3D Uses:DirectionalLight Uses:OrthographicCamera Uses:PerspectiveCamera Uses:MatrixCamera Uses:ScaleTransform3D Uses:DiffuseMaterial Uses:ImageBrush Comments: Verify that Meshes render correctly when mirror transforms (det less than 0) exist in the scene. ">
+    <DriverParameters Args="/script=MeshGeometry3D_Mirrored.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MeshGeometry3D_Mirrored.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Viewport3DVisual offsets and clipping" Timeout="30" Description="Focus:Viewport3DVisual Focus:Rendering Verification Uses:OrthographicCamera Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Comments: Test rendering of Viewport3DVisual with viewport rects not equal to the window size.   ">
+    <DriverParameters Args="/script=ViewportOffset.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\ViewportOffset.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Viewport3D offset/width/height and ClipToBounds" Timeout="30" Description="Focus:Viewport3D Focus:Rendering Verification Uses:OrthographicCamera Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Uses:MeshGeometry3D Comments: Test rendering of Viewport3D that is offset and has Width/Height not equal to the containing window's size.  Also test the ClipToBounds property.  ">
+    <DriverParameters Args="/script=ViewportOffset_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\ViewportOffset_VP3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Properties on Viewport3DVisual (Clip,Opacity,OpacityMask,Transform)" Disabled="True" Timeout="90" Description="Focus:Viewport3DVisual Uses:MeshGeometry3D Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of geometry clips, opacity, opacity masks, and Transforms on the Viewport3DVisual.  ">
+    <DriverParameters Args="/script=VisualProperties.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\VisualProperties.xml" />
+      <SupportFile Source="FeatureTests\3D\VisualProperties_VP3D_Tolerance.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Properties on Viewport3D (Clip,Opacity,OpacityMask,Transform)" Disabled="True" Timeout="90" Description="Focus:Viewport3D Uses:MeshGeometry3D Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of geometry clips, opacity, opacity masks, and Transforms on the Viewport3D. ">
+    <DriverParameters Args="/script=VisualProperties_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\VisualProperties_VP3D.xml" />
+	  <SupportFile Source="FeatureTests\3D\VisualProperties_VP3D_Tolerance.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BitmapEffects on Viewport3D (DropShadow)" Disabled="True" Timeout="90" Description="Focus:Viewport3D Focus:DropShadowBitmapEffect Uses:MeshGeometry3D Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify drop shadow effects on Viewport3D.  ">
+    <DriverParameters Args="/script=BitmapEffects_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BitmapEffects_VP3D.xml" />
+      <SupportFile Source="FeatureTests\3D\BitmapEffects_VP3D_Tolerance.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="XAML Parse/Render tests" Timeout="120" Description="Focus:Serialization Focus:Rendering Verification Comments: Verify that XAML can parse and be rendered. ">
+    <DriverParameters Args="/script=XamlParseRenderTest.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\*.xaml" />
+      <SupportFile Source="FeatureTests\3D\XamlParseRenderTest.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BitmapEffects on Viewport3DVisual (DropShadow)" Disabled="True" Timeout="90" Description="Focus:Viewport3DVisual Focus:DropShadowBitmapEffect Uses:MeshGeometry3D Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify drop shadow effects on Viewport3DVisual. ">
+    <DriverParameters Args="/script=BitmapEffects.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BitmapEffects.xml" />
+      <SupportFile Source="FeatureTests\3D\BitmapEffects_VP3D_Tolerance.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - SolidColorBrush" Timeout="200" Description="Focus:Rendering Verification Focus:SolidColorBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:OrthographicCamera Comments: Verify the rendering of SolidColorBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseSolidBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseSolidBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - LinearGradientBrush" Timeout="200" Description="Focus:Rendering Verification Focus:LinearGradientBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of LinearGradientBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseLinearGradientBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseLinearGradientBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - RadialGradientBrush" Timeout="200" Description="Focus:Rendering Verification Focus:RadialGradientBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of RadialGradientBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseRadialGradientBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseRadialGradientBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - ImageBrush" Priority="2" Timeout="200" Description="Focus:Rendering Verification Focus:ImageBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of ImageBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseImageBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseImageBrush.xml" />
+      <SupportFile Source="FeatureTests\3D\DiffuseImageBrush_Tolerance.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - DrawingBrush" Timeout="200" Description="Focus:Rendering Verification Focus:DrawingBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of DrawingBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseDrawingBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseDrawingBrush.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - VisualBrush" Timeout="200" Description="Focus:Rendering Verification Focus:VisualBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of VisualBrush (Button,Viewport3D,Shapes) in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseVisualBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseVisualBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="EmissiveMaterial - VisualBrush" Timeout="200" Description="Focus:Rendering Verification Focus:VisualBrush Focus:EmissiveMaterial Uses:AmbientLight Uses:PerspectiveCamera Comments: Verify the rendering of VisualBrush (Button,Viewport3D,Shapes) in EmissiveMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Emissive color knobs are also tested.   ">
+    <DriverParameters Args="/script=EmissiveVisualBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\EmissiveVisualBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="EmissiveMaterial - DrawingBrush" Timeout="200" Description="Focus:Rendering Verification Focus:DrawingBrush Focus:EmissiveMaterial Uses:AmbientLight Uses:PerspectiveCamera Comments: Verify the rendering of DrawingBrush in EmissiveMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Emissive color knobs are also tested.   ">
+    <DriverParameters Args="/script=EmissiveDrawingBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\EmissiveDrawingBrush.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="EmissiveMaterial - ImageBrush" Timeout="200" Description="Focus:Rendering Verification Focus:ImageBrush Focus:EmissiveMaterial Uses:AmbientLight Uses:PerspectiveCamera Comments: Verify the rendering of ImageBrush in EmissiveMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Emissive color knobs are also tested.   ">
+    <DriverParameters Args="/script=EmissiveImageBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\EmissiveImageBrush.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="EmissiveMaterial - RadialGradientBrush" Timeout="200" Description="Focus:Rendering Verification Focus:RadialGradientBrush Focus:EmissiveMaterial Uses:AmbientLight Uses:OrthographicCamera Comments: Verify the rendering of RadialGradientBrush in EmissiveMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Emissive color knobs are also tested.   ">
+    <DriverParameters Args="/script=EmissiveRadialGradientBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\EmissiveRadialGradientBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="EmissiveMaterial - LinearGradientBrush" Timeout="200" Description="Focus:Rendering Verification Focus:LinearGradientBrush Focus:EmissiveMaterial Uses:AmbientLight Uses:OrthographicCamera Comments: Verify the rendering of LinearGradientBrush in EmissiveMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Emissive color knobs are also tested.   ">
+    <DriverParameters Args="/script=EmissiveLinearGradientBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\EmissiveLinearGradientBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="EmissiveMaterial - SolidColorBrush" Timeout="200" Description="Focus:Rendering Verification Focus:SolidColorBrush Focus:EmissiveMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:OrthographicCamera Comments: Verify the rendering of SolidColorBrush in EmissiveMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Emissive color knobs are also tested.   ">
+    <DriverParameters Args="/script=EmissiveSolidBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\EmissiveSolidBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - VisualBrush - Transparency" Timeout="200" Description="Focus:Rendering Verification Focus:VisualBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of VisualBrush (Button,Viewport3D,Shapes) in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseVisualBrushTransparency.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseVisualBrushTransparency.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - DrawingBrush - Transparency" Timeout="200" Description="Focus:Rendering Verification Focus:DrawingBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of DrawingBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseDrawingBrushTransparency.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseDrawingBrushTransparency.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - ImageBrush - Transparency" Timeout="200" Description="Focus:Rendering Verification Focus:ImageBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of ImageBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseImageBrushTransparency.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseImageBrushTransparency.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - RadialGradientBrush - Transparency" Timeout="200" Description="Focus:Rendering Verification Focus:RadialGradientBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of RadialGradientBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseRadialGradientBrushTransparency.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseRadialGradientBrushTransparency.xml" />
+      <SupportFile Source="FeatureTests\3D\DiffuseRadialGradientBrushTransparency_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - LinearGradientBrush - Transparency" Timeout="200" Description="Focus:Rendering Verification Focus:LinearGradientBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:OrthographicCamera Comments: Verify the rendering of LinearGradientBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseLinearGradientBrushTransparency.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseLinearGradientBrushTransparency.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - SolidColorBrush - Transparency" Timeout="200" Description="Focus:Rendering Verification Focus:SolidColorBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of SolidColorBrush in DiffuseMaterial by applying it to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseSolidBrushTransparency.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseSolidBrushTransparency.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - SolidColorBrush - Color Knobs" Timeout="200" Description="Focus:Rendering Verification Focus:SolidColorBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of Color Knobs with SolidColorBrush by applying them to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseSolidBrushKnobs.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseSolidBrushKnobs.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - LinearGradientBrush - Color Knobs" Timeout="200" Description="Focus:Rendering Verification Focus:LinearGradientBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of Color Knobs with LinearGradientBrush by applying them to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseLinearGradientBrushKnobs.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseLinearGradientBrushKnobs.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - RadialGradientBrush - Color Knobs" Timeout="200" Description="Focus:Rendering Verification Focus:RadialGradientBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of Color Knobs with RadialGradientBrush by applying them to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseRadialGradientBrushKnobs.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseRadialGradientBrushKnobs.xml" />
+      <SupportFile Source="FeatureTests\3D\General_Low_Tolerance.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - ImageBrush - Color Knobs" Priority="2" Timeout="200" Description="Focus:Rendering Verification Focus:ImageBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of Color Knobs with ImageBrush by applying them to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseImageBrushKnobs.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseImageBrushKnobs.xml" />
+      <SupportFile Source="FeatureTests\3D\DiffuseImageBrush_Tolerance.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - DrawingBrush - Color Knobs" Timeout="200" Description="Focus:Rendering Verification Focus:DrawingBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of Color Knobs with DrawingBrush by applying them to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseDrawingBrushKnobs.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseDrawingBrushKnobs.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DiffuseMaterial - VisualBrush - Color Knobs" Timeout="200" Description="Focus:Rendering Verification Focus:VisualBrush Focus:DiffuseMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:PerspectiveCamera Comments: Verify the rendering of Color Knobs with VisualBrush (Button,Viewport3D,Shapes) by applying them to front and back materials on a simple mesh, and on the spiral.   ">
+    <DriverParameters Args="/script=DiffuseVisualBrushKnobs.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\DiffuseVisualBrushKnobs.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SpecularMaterial - SolidColorBrush" Timeout="200" Description="Focus:Rendering Verification Focus:SolidColorBrush Focus:SpecularMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:OrthographicCamera Comments: Verify the rendering of SolidColorBrush in SpecularMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Specular color knobs and SpecularPower are also tested.   ">
+    <DriverParameters Args="/script=SpecularSolidBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\SpecularSolidBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SpecularMaterial - LinearGradientBrush" Timeout="200" Description="Focus:Rendering Verification Focus:LinearGradientBrush Focus:SpecularMaterial Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:PerspectiveCamera Comments: Verify the rendering of LinearGradientBrush in SpecularMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Specular color knobs are also tested.   ">
+    <DriverParameters Args="/script=SpecularLinearGradientBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\SpecularLinearGradientBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SpecularMaterial - RadialGradientBrush" Timeout="200" Description="Focus:Rendering Verification Focus:RadialGradientBrush Focus:SpecularMaterial Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:PerspectiveCamera Comments: Verify the rendering of RadialGradientBrush in SpecularMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Specular color knobs are also tested.   ">
+    <DriverParameters Args="/script=SpecularRadialGradientBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\SpecularRadialGradientBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SpecularMaterial - ImageBrush" Timeout="200" Description="Focus:Rendering Verification Focus:ImageBrush Focus:SpecularMaterial Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:PerspectiveCamera Comments: Verify the rendering of ImageBrush in SpecularMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Specular color knobs are also tested.   ">
+    <DriverParameters Args="/script=SpecularImageBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\SpecularImageBrush.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SpecularMaterial - DrawingBrush" Timeout="200" Description="Focus:Rendering Verification Focus:DrawingBrush Focus:SpecularMaterial Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:PerspectiveCamera Comments: Verify the rendering of DrawingBrush in SpecularMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Specular color knobs are also tested.   ">
+    <DriverParameters Args="/script=SpecularDrawingBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\SpecularDrawingBrush.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SpecularMaterial - VisualBrush" Timeout="200" Description="Focus:Rendering Verification Focus:VisualBrush Focus:SpecularMaterial Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:PerspectiveCamera Comments: Verify the rendering of VisualBrush (Button,Viewport3D,Shapes) in SpecularMaterial by applying it to front and back materials on a simple mesh.  Some brushes are semi-transparent.  Specular color knobs are also tested.   ">
+    <DriverParameters Args="/script=SpecularVisualBrush.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\SpecularVisualBrush.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Material Combinations" Timeout="200" Description="Focus:Rendering Verification Focus:DiffuseMaterial Focus:EmissiveMaterial Focus:SpecularMaterial Uses:PointLight Uses:OrthographicCamera Comments: Verify that DiffuseMaterial is source-over and Emissive and SpecularMaterials are additive.  We test this behavior on a set of three meshes whose z-order does not match the order of creation.  We also test Front/Back Material rendering order for source-over vs. additive blending.   ">
+    <DriverParameters Args="/script=MaterialCombos.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MaterialCombos.xml" />
+      <SupportFile Source="FeatureTests\3D\window.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Material Group" Timeout="300" Description="Focus:Rendering Verification Focus:MaterialGroup Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:PerspectiveCamera Comments: Test combinations of source-over and additive materials in a MaterialGroup.  Nested MaterialGroups and the effects of transparency and different light types are also tested.   ">
+    <DriverParameters Args="/script=MaterialGroup.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MaterialGroup.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+      <SupportFile Source="FeatureTests\3D\MaterialGroup_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Material Group Knobs" Timeout="300" Description="Focus:Rendering Verification Focus:MaterialGroup Uses:DiffuseMaterial Uses:EmissiveMaterial Uses:SpecularMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:SpotLight Uses:PerspectiveCamera Comments: Test combinations of source-over and additive materials in a MaterialGroup with color knobs set on the materials.   ">
+    <DriverParameters Args="/script=MaterialGroupKnobs.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\MaterialGroupKnobs.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Color Knobs w/ Multiple lights" Timeout="200" Description="Focus:Rendering Verification Focus:DiffuseMaterial Focus:EmissiveMaterial Focus:SpecularMaterial Uses:AmbientLight Uses:DirectionalLight Uses:PointLight Uses:OrthographicCamera Comments: Verify that color knobs behave properly when multiple lights exist (i.e. don't modulate opacity multiple times per light since some knobs scale by opacity and other change the opacity of the material)   ">
+    <DriverParameters Args="/script=ColorKnobs_MultipleLights.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\ColorKnobs_MultipleLights.xml" />
+      <SupportFile Source="FeatureTests\3D\General_Low_Tolerance.xml" />
+      <SupportFile Source="FeatureTests\3D\*" />
+    </SupportFiles>
+  </TEST>
+</XTC>

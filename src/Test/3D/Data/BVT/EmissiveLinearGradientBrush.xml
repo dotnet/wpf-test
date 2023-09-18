@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="EmissiveLinearGradientBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    DefaultColorTolerance="0,3,3,3"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="OrthographicDefaultWidth4"
+    Light="WhiteAmbient"
+    MaterialType="Emissive"
+    BackMaterialType="Emissive"
+    >
+
+    <VARIATION
+        Description="front = white/gray/0, back = yellow/purple/45"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = red/blue/90"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterial="LinearGradientBrush 255,255,0,0 255,0,0,255 90"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = yellow/purple/45"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        />
+    <VARIATION
+        Description="front = red/blue/90, back = white/gray/0"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 90"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = yellow/purple/45, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterial="LinearGradientBrush 45,0,255,0 200,255,0,255 60"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = yellow/purple/45"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 220,34,193,139 60,139,34,193 30"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 220,34,193,139 60,139,34,193 30"
+        BackMaterial="LinearGradientBrush 45,0,255,0 200,255,0,255 60"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = white/gray/0 * green, back = yellow/purple/45 * indigo"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45 * green, back = white/gray/0 * indigo"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = white/gray/0 * mix"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 45,0,255,0 200,255,0,255 60"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = white/gray/0 * mix, back = semi-transparent * mix"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="LinearGradientBrush 45,0,255,0 200,255,0,255 60"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = white/gray/0 * transparent, back = yellow/purple/45 * semi-transparent"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = white/gray/0 * semi-transparent"
+        Mesh="BackAndFront"
+        Material="LinearGradientBrush 45,0,255,0 200,255,0,255 60"
+        MaterialColor="192,47,239,143"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

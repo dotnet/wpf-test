@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PointHitTestingTest_ClipOrtho"
+
+    Scene="UnitPlane"
+
+    CameraType="Orthographic"
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+    CameraWidth="2"
+
+    UseViewport3D="false"
+    >
+    <VARIATION
+        Description="Point testing at 110,90 - No Clip"
+        Expectation="'Model' Hit."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraFarPlaneDistance="4.5"
+
+        Description="Point testing at 110,90 - Clip Back"
+        Expectation="'Model' Hit."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraNearPlaneDistance="4.5"
+
+        Description="Point testing at 110,90 - Clip Front"
+        Expectation="'Model' Missed."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraFarPlaneDistance="4.5"
+
+        Description="Point testing at 140,60 - Clip Back"
+        Expectation="'Model' Missed."
+        Point="140,60"
+        />
+    <VARIATION
+        CameraNearPlaneDistance="4.5"
+
+        Description="Point testing at 140,60 - Clip Front"
+        Expectation="'Model' Hit."
+        Point="140,60"
+        />
+</INIT>

@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RayHitTestingTest"
+    LogFilePrefix="RayHitTestingTest"
+
+    Scene="Explicit"
+    Visual0="Group"
+    Child00="SingleFrontFacingTriangle"
+    Child01="WhiteAmbient"
+
+    Camera="OrthographicDefault"
+    UseViewport3D="false"
+    >
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,5 down -z axis"
+        Expectation="Hit"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,0.01 down -z axis"
+        Expectation="Hit"
+        Origin="0.25,0.25,0.01"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,-0.01 down -z axis"
+        Expectation="Miss"
+        Origin="0.25,0.25,0.01"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,-5 down -z axis"
+        Expectation="Miss"
+        Origin="0.25,0.25,-5"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Can we hit the back side of a triangle? Ray origin=0,0,-5 direction=+z axis"
+        Expectation="Miss"
+        Origin="0,0,-5"
+        Direction="0,0,1"
+        />
+    <VARIATION
+        Description="Off by .5 * sqrt(2). Ray origin=1,1,1 direction=-z axis" 
+        Expectation="Miss"
+        Origin="1,1,1"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Off by .1. Ray origin=-0.1,0.1,5 direction=-z axis" 
+        Expectation="Miss"
+        Origin="-0.1,0.1,5"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Aim for just inside the middle of the hypotenuse. Ray origin=0.45,0.45,5 direction=-z axis"
+        Expectation="Hit"
+        Origin="0.45,0.45,5"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Aim inside the triangle. Ray origin=.6,.2,3 direction=-z axis"
+        Expectation="Hit"
+        Origin="0.6,0.2,3"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Let's not follow the axes anymore. Ray origin=.6,.2,3 direction=-.1,.1,-.8"
+        Expectation="Hit"
+        Origin="0.6,0.2,3"
+        Direction="-.1,.1,-.8"
+        />
+    <VARIATION
+        Description="Let's not follow the axes anymore. Ray origin=0,.5,1 direction=-.1,0,-1"
+        Expectation="Miss"
+        Origin="0,0.5,1.0"
+        Direction="-.1,0,-1"
+        />
+    <VARIATION
+        Description="Let's not follow the axes anymore. Ray origin=0.5,0,1 direction=0,-.1,-1"
+        Expectation="Miss"
+        Origin="0.5,0,1.0"
+        Direction="0,-.1,-1"
+        />
+</INIT>

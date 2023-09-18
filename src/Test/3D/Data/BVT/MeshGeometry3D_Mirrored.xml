@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="GeometryModel3DTest_Mirrored"
+    PixelToEdgeTolerance="0.05"
+    SilhouetteEdgeTolerance="0.5"
+    DefaultColorTolerance="0,4,4,4"
+
+    CameraType="Perspective"
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+    CameraFieldOfView="35"
+
+    Scene="Explicit"
+    Visual0="UnitPlaneTriangle"
+    Material0="check.bmp"
+    Visual1="WhiteDirectionalNegZ"
+    VisualTransform1="Rotate 0,1,0 -30"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <VARIATION
+        Description="Flip across yz-plane"
+        CameraTransform="Scale -1,1,1"
+        />
+    <VARIATION
+        Description="Flip across xz-plane"
+        CameraTransform="Scale 1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xz- and yz-planes"
+        CameraTransform="Scale -1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - nothing renders"
+        CameraTransform="Scale 1,1,-1"
+        />
+
+    <VARIATION
+        Description="Flip across yz-plane"
+        VisualTransform0="Scale -1,1,1"
+        />
+    <VARIATION
+        Description="Flip across xz-plane"
+        VisualTransform0="Scale 1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xz- and yz-planes"
+        VisualTransform0="Scale -1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - nothing renders"
+        VisualTransform0="Scale 1,1,-1"
+        />
+
+    <VARIATION
+        Description="Flip across yz-plane"
+        ModelTransform0="Scale -1,1,1"
+        />
+    <VARIATION
+        Description="Flip across xz-plane"
+        ModelTransform0="Scale 1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xz- and yz-planes"
+        ModelTransform0="Scale -1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - nothing renders"
+        ModelTransform0="Scale 1,1,-1"
+        />
+
+    <VARIATION
+        Description="Flip across yz-plane"
+        CameraTransform="Scale -1,1,1"
+        ModelTransform0="Scale -1,1,1"
+        VisualTransform0="Scale -1,1,1"
+        />
+    <VARIATION
+        Description="Flip across xz-plane"
+        CameraTransform="Scale 1,-1,1"
+        ModelTransform0="Scale 1,-1,1"
+        VisualTransform0="Scale 1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xz- and yz-planes"
+        CameraTransform="Scale -1,-1,1"
+        ModelTransform0="Scale -1,-1,1"
+        VisualTransform0="Scale -1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - nothing renders"
+        CameraTransform="Scale 1,1,-1"
+        ModelTransform0="Scale 1,1,-1"
+        VisualTransform0="Scale 1,1,-1"
+        />
+
+    <VARIATION
+        Description="Flip across yz-plane"
+        CameraTransform="Scale -1,1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        />
+    <VARIATION
+        Description="Flip across xz-plane"
+        CameraTransform="Scale 1,-1,1"
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="3"
+        />
+</INIT>

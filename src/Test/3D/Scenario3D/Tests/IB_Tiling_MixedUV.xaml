@@ -1,0 +1,111 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Viewport3D Name="VIEWPORT" ClipToBounds="true" >
+        <Viewport3D.Camera>
+            <PerspectiveCamera
+                Position="0,0,3.5"
+                LookDirection="0,0,-1"
+                UpDirection="0,1,0"
+                NearPlaneDistance="1"
+                FarPlaneDistance="200"
+                FieldOfView="45" />
+        </Viewport3D.Camera>
+
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+
+                    <!-- Texture Coordinates are upside-down -->
+
+                    <!-- Light -->
+                    <AmbientLight Color="White" />
+
+                    <!-- Top Left -->
+                    <GeometryModel3D>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <ImageBrush ImageSource="pack://siteoforigin:,,,/check.bmp" ViewportUnits="Absolute" TileMode="FlipXY" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D
+                                Positions="         -1,0,0  0,0,0   -1,1,0  0,1,0"
+                                Normals="           0,0,1   0,0,1   0,0,1   0,0,1"
+                                TextureCoordinates=".5,.5    5,.5    .5,3     5,3"
+                                TriangleIndices="   0 1 2 3 2 1" />
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Transform>
+                            <TranslateTransform3D OffsetX="-0.1" OffsetY="0.1" OffsetZ="0" />
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+
+                    <!-- Top Right -->
+                    <GeometryModel3D>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <ImageBrush ImageSource="pack://siteoforigin:,,,/check.bmp" ViewportUnits="Absolute" TileMode="FlipX" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D
+                                Positions="         0,0,0   1,0,0   0,1,0   1,1,0"
+                                Normals="           0,0,1   0,0,1   0,0,1   0,0,1"
+                                TextureCoordinates=".5,.5    5,.5    .5,3     5,3"
+                                TriangleIndices="   0 1 2 3 2 1" />
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Transform>
+                            <TranslateTransform3D OffsetX="0.1" OffsetY="0.1" OffsetZ="0" />
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+
+                    <!-- Bottom Left -->
+                    <GeometryModel3D>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <ImageBrush ImageSource="pack://siteoforigin:,,,/check.bmp" ViewportUnits="Absolute" TileMode="Tile" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D
+                                Positions="         -1,-1,0 0,-1,0  -1,0,0  0,0,0"
+                                Normals="           0,0,1   0,0,1   0,0,1   0,0,1"
+                                TextureCoordinates=".5,.5    5,.5    .5,3     5,3"
+                                TriangleIndices="   0 1 2 3 2 1" />
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Transform>
+                            <TranslateTransform3D OffsetX="-0.1" OffsetY="-0.1" OffsetZ="0" />
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+
+                    <!-- Bottom Right -->
+                    <GeometryModel3D>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <ImageBrush ImageSource="pack://siteoforigin:,,,/check.bmp" ViewportUnits="Absolute" TileMode="FlipY" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D
+                                Positions="         0,-1,0  1,-1,0  0,0,0   1,0,0"
+                                Normals="           0,0,1   0,0,1   0,0,1   0,0,1"
+                                TextureCoordinates=".5,.5    5,.5    .5,3     5,3"
+                                TriangleIndices="   0 1 2 3 2 1" />
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Transform>
+                            <TranslateTransform3D OffsetX="0.1" OffsetY="-0.1" OffsetZ="0" />
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+    </Viewport3D>
+</Page>

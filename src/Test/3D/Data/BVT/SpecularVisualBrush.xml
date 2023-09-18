@@ -1,0 +1,134 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="SpecularVisualBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    TextureLookUpTolerance="0.5"
+    DefaultColorTolerance="0,4,4,4"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    MaterialType="Specular"
+    MaterialSpecularPower="30"
+    BackMaterialType="Specular"
+    BackMaterialSpecularPower="30"
+    >
+
+    <!-- Verify non-ambient lights -->
+
+    <VARIATION
+        Description="front = shapes, back = button, colored directional light"
+        Light="NonWhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        BackMaterial="VisualBrushButton"
+        />
+    <VARIATION
+        Description="front = button, back = viewport3D, white point light"
+        Light="WhitePointBelow"
+        Mesh="FrontAndBack"
+        Material="VisualBrushButton"
+        BackMaterial="VisualBrush3D"
+        />
+    <VARIATION
+        Description="front = viewport3D, back = shapes, white spot light"
+        Light="WhiteSpot"
+        Mesh="FrontAndBack"
+        Material="VisualBrush3D"
+        BackMaterial="VisualBrushShapes"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = button, back = semi-transparent"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="VisualBrushButton"
+        BackMaterial="VisualBrushShapesOpacity"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = button"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapesOpacity"
+        BackMaterial="VisualBrushButton"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, colored light"
+        Light="NonWhitePoint"
+        Mesh="FrontAndBack"
+        Material="VisualBrushButtonOpacity"
+        BackMaterial="VisualBrush3DOpacity"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent - specular does not write to z buffer"
+        Light="WhitePoint"
+        Mesh="BackAndFront"
+        Material="VisualBrushShapesOpacity"
+        BackMaterial="VisualBrush3DOpacity"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = shapes * green, back = button * indigo"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="VisualBrushButton"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = button * green, back = shapes * indigo"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="VisualBrushButton"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="VisualBrushShapes"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = shapes * mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="VisualBrushButtonOpacity"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="VisualBrushShapes"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = shapes * mix, back = semi-transparent * mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        MaterialColor="255,47,239,143"
+        BackMaterial="VisualBrush3DOpacity"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = shapes * transparent, back = button * semi-transparent"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="VisualBrushButton"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = shapes * semi-transparent"
+        Light="WhitePoint"
+        Mesh="BackAndFront"
+        Material="VisualBrushButtonOpacity"
+        MaterialColor="192,47,239,143"
+        BackMaterial="VisualBrushShapes"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

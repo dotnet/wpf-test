@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RayHitTestingTest"
+    LogFilePrefix="RayHitTesting_MirroredGeometry"
+
+    CameraType="Perspective"
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+    CameraFieldOfView="35"
+
+    Scene="Explicit"
+    Visual0="UnitPlaneTriangle"
+    Visual1="WhiteAmbient"
+
+    Origin="0.25,0.25,5.0"
+    Direction="0,0,-1"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <VARIATION
+        Description="Flip across yz-plane - Perspective camera transform should have no effect"
+        Expectation="Hit"
+        CameraTransform="Scale -1,1,1"
+        />
+    <VARIATION
+        Description="Flip across xz-plane - Orthographic camera transform should have no effect"
+        Expectation="Hit"
+        CameraTransform="Scale 1,-1,1"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - Matrix camera transform should have no effect"
+        Expectation="Hit"
+        CameraTransform="Scale -1,1,1"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="35"
+        CameraFieldOfViewY="35"
+        />
+
+    <VARIATION
+        Description="Flip across yz-plane - put transform on Visual3D"
+        Expectation="Hit"
+        VisualTransform0="Scale -1,1,1"
+        />
+    <VARIATION
+        Description="Flip across yz-plane - put transform on Visual3D"
+        Expectation="Miss"
+        VisualTransform0="Scale -1,1,1"
+        Origin="-0.25,0.25,5.0"
+        />
+    <VARIATION
+        Description="Flip across xz-plane - put transform on Visual3D"
+        Expectation="Hit"
+        VisualTransform0="Scale 1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xz-plane - put transform on Visual3D"
+        Expectation="Miss"
+        VisualTransform0="Scale 1,-1,1"
+        Origin="0.25,-0.25,5.0"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - put transform on Visual3D"
+        Expectation="Hit"
+        VisualTransform0="Scale 1,1,-1"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - put transform on Visual3D"
+        Expectation="Miss"
+        VisualTransform0="Scale 1,1,-1"
+        Origin="0.25,0.25,-5.0"
+        Direction="0,0,1"
+        />
+
+    <VARIATION
+        Description="Flip across yz-plane - put transform on Model3D"
+        Expectation="Miss"
+        ModelTransform0="Scale -1,1,1"
+        />
+    <VARIATION
+        Description="Flip across yz-plane - put transform on Model3D"
+        Expectation="Hit"
+        ModelTransform0="Scale -1,1,1"
+        Origin="-0.25,0.25,5.0"
+        />
+    <VARIATION
+        Description="Flip across xz-plane - put transform on Model3D"
+        Expectation="Miss"
+        ModelTransform0="Scale 1,-1,1"
+        />
+    <VARIATION
+        Description="Flip across xz-plane - put transform on Model3D"
+        Expectation="Hit"
+        ModelTransform0="Scale 1,-1,1"
+        Origin="0.25,-0.25,5.0"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - put transform on Model3D"
+        Expectation="Miss"
+        ModelTransform0="Scale 1,1,-1"
+        />
+    <VARIATION
+        Description="Flip across xy-plane - put transform on Model3D"
+        Expectation="Hit"
+        ModelTransform0="Scale 1,1,-1"
+        Origin="0.25,0.25,-5.0"
+        Direction="0,0,1"
+        />
+
+</INIT>

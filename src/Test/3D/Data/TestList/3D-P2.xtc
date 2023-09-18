@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="P2" Priority="2">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="CGT3D.dll" Class="Microsoft.Test.Graphics.Cgt3d" Method="Launch" />
+  </DEFAULTTESTINFO>
+
+ 
+  <TEST Name="OrthographicCamera - Clipping plane tests" Timeout="60" Description="Focus:OrthographicCamera Focus:Rendering Verification Uses:MeshGeometry3D Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Test the camera clipping planes on OrthographicCamera.  I clip 1 and 2 vertices of a triangle on each edge of the viewing frustum.  I also render some triangles with 3 clipped vertices (but the middle of it should render). ">
+    <DriverParameters Args="/script=OrthographicCamera_Clip.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\OrthographicCamera_Clip.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PerspectiveCamera - Clipping plane tests" Timeout="60" Description="Focus:PerspectiveCamera Focus:Rendering Verification Uses:MeshGeometry3D Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Test the camera clipping planes on PerspectiveCamera.  I clip 1 and 2 vertices of a triangle on each edge of the viewing frustum.  I also render some triangles with 3 clipped vertices (but the middle of it should render). ">
+    <DriverParameters Args="/script=PerspectiveCamera_Clip.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PerspectiveCamera_Clip.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PerspectiveCamera w/ Viewport3D - Clipping plane tests" Timeout="60" Description="Focus:PerspectiveCamera Focus:Viewport3D Focus:Rendering Verification Uses:MeshGeometry3D Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Test the camera clipping planes on PerspectiveCamera inside a Viewport3D.  I clip 1 and 2 vertices of a triangle on each edge of the viewing frustum.  I also render some triangles with 3 clipped vertices (but the middle of it should render). ">
+    <DriverParameters Args="/script=PerspectiveCameraWithViewport3D_Clip.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\PerspectiveCameraWithViewport3D_Clip.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="MatrixCamera Parallel Projection - Clipping plane tests" Timeout="60" Description="Focus:MatrixCamera Focus:Rendering Verification Uses:MeshGeometry3D Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Test the camera clipping planes on a MatrixCamera describing a parallel projection.  I clip 1 and 2 vertices of a triangle on each edge of the viewing frustum.  I also render some triangles with 3 clipped vertices (but the middle of it should render). ">
+    <DriverParameters Args="/script=MatrixCameraOrtho_Clip.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\MatrixCameraOrtho_Clip.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Large Mesh support" Timeout="600" Description="Focus:Rendering Verification Focus:MeshGeometry3D Focus:Stability Uses:LinearGradientBrush Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera ToleranceTextureLookUpTolerance/Tolerance ToleranceSilhouetteDetectionTolerance/Tolerance Comments: Verify the rendering of MeshGeometry3D objects with large number of Vertices, TextureCoordinates and Normals a by using TestRenderer.   It utilizes highly tesselated sphere and disc meshes of varying tesselations.  ">
+    <DriverParameters Args="/script=LargeMesh.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\LargeMesh.xml" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="MatrixCamera Perspective Projection - Clipping plane tests" Timeout="60" Description="Focus:MatrixCamera Focus:Rendering Verification Uses:MeshGeometry3D Uses:AmbientLight Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Test the camera clipping planes on a MatrixCamera describing a perspective projection.  I clip 1 and 2 vertices of a triangle on each edge of the viewing frustum.  I also render some triangles with 3 clipped vertices (but the middle of it should render). ">
+    <DriverParameters Args="/script=MatrixCameraPersp_Clip.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\MatrixCameraPersp_Clip.xml" />
+    </SupportFiles>
+  </TEST>
+  <!-- [matthohn/03.21.11] Disabling unstable test -->
+  <TEST Disabled="True" Name="XAML Parse/Render test - Rings" Timeout="60" Description="Focus:Rendering Verification Uses:Serialization Uses:Transform3DGroup Comments: Complex scenes.  Everything is declared in the Resources tag of the Xaml file.  The same mesh resource is used 5 times.  Each mesh is transformed by a Transform3DGroup. ">
+    <DriverParameters Args="/Class=XamlTest /Filename=rings.xaml /SilhouetteDetectionTolerance=1 /PixelToEdgeTolerance=0.05 /BackgroundColor=255,255,255,255 /WindowWidth=599 /WindowHeight=350 /NumAllowableMismatches=10 /VScanToleranceFile=rings_ToleranceProfile.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\rings.xaml" />
+      <SupportFile Source="FeatureTests\3D\rings_ToleranceProfile.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="3D Template tests (FrameworkElementFactory)" Timeout="90" Description="Focus:FrameworkElementFactory Focus:IAddChild Comments: Create a template programmatically with FrameworkElementFactory.  Set the template on a Control (or Page) and verify the rendering. ">
+    <DriverParameters Args="/script=Template.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\Template.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Partial Trust - Smoke Test" Disabled="True" Timeout="300" Description="Focus:Scenario Focus:Partial Trust Comments: Verify that a simple XBAP application containing a sample of 3D content loads in partial trust and navigates to all the pages which include a sample of 3D content.  Content includes different materials, lights, external file support as in ImageBrush, Video and Text. ">
+    <DriverParameters Args="" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.wmv" />
+      <SupportFile Source="FeatureTests\3D\*.ttf" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stability - Non-Affine matrix rendering test" Timeout="60" Description="Focus:MatrixTransform Focus:Rendering Verification Uses:MeshGeometry3D Uses:AmbientLight Uses:DiffuseMaterial Uses:ImageBrush Comments: Make sure that WPF doesn't crash or assert when setting non-affine transforms on meshes (results of rendering are ignored). ">
+    <DriverParameters Args="/script=NonAffineMatrix.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\NonAffineMatrix.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Random UV" Timeout="90" Description="Focus:MeshGeometry3D Focus:Rendering Verification Uses:PerspectiveCamera Uses:AmbientLight Uses:DiffuseMaterial Uses:ImageBrush Comments: Draw a mesh with random texture coordinates in different ranges (positive, negative, and non-uniform aspect ratio).  Verify the texturing is correct. ">
+    <DriverParameters Args="/script=RandomUV.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RandomUV.xml" />
+      <SupportFile Source="FeatureTests\3D\check.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Remove Child Test" Disabled="True" Timeout="300" Description="Focus:Rendering Verification Focus:Model3DGroup Focus:MaterialGroup Focus:Transform3DGroup Uses:Serialization Comments: Test handling of Remove events from Groups in a live 3D scene. ">
+    <DriverParameters Args="/script=ClearChildrenTest.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+      <SupportFile Source="FeatureTests\3D\RemoveChild.xaml" />
+      <SupportFile Source="FeatureTests\3D\ClearChildrenTest.xml" />
+    </SupportFiles>
+  </TEST>
+</XTC>

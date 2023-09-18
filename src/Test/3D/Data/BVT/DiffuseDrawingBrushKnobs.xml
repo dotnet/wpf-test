@@ -1,0 +1,200 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseDrawingBrushKnobsTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,40,40,40"
+    
+    TextureLookUpTolerance="0.5"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    >
+
+    <!-- AmbientColor (transparency in knob does not affect material transparency. It only scales the knob RGB values) -->
+
+    <VARIATION
+        Description="front = shapes, back = text, white light, AmbientColor knob"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="DrawingBrushText"
+        BackMaterialAmbientColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = text, back = shapes, colored light, AmbientColor knob"
+        Light="NonWhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialAmbientColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = shapes, back = text, white light, AmbientColor knob w/ transparency"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialAmbientColor="0,255,255,255"
+        BackMaterial="DrawingBrushText"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = text, back = shapes, white light, AmbientColor knob w/ transparency"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="DrawingBrushText"
+        MaterialAmbientColor="64,0,255,0"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialAmbientColor="192,127,0,192"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, white light, AmbientColor knob w/ transparency"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushImage flare.png"
+        MaterialAmbientColor="192,0,255,0"
+        BackMaterial="DrawingBrushShapesOpacity"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = text, back = shapes, directional light, AmbientColor knob (ignored)"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+
+    <!-- DiffuseColor (transparency in knob affects transparency of material) -->
+
+    <VARIATION
+        Description="front = shapes, back = text, white light, DiffuseColor knob"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialColor="255,0,255,0"
+        BackMaterial="DrawingBrushText"
+        BackMaterialColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = text, back = shapes, colored light, DiffuseColor knob"
+        Light="NonWhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        MaterialColor="255,0,255,0"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = shapes, back = text, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialColor="0,0,255,0"
+        BackMaterial="DrawingBrushText"
+        BackMaterialColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = text, back = shapes, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="BackAndFront"
+        Material="DrawingBrushText"
+        MaterialColor="64,0,255,0"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="192,127,0,192"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushImage flare.png"
+        MaterialColor="127,0,255,0"
+        BackMaterial="DrawingBrushShapesOpacity"
+        BackMaterialColor="64,127,0,192"
+        />
+    <VARIATION
+        Description="front = text, back = shapes, ambient light, DiffuseColor knob (ignored)"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        MaterialColor="255,0,255,0"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="255,127,0,192"
+        />
+
+    <!-- Both knobs -->
+
+    <VARIATION
+        Description="front = shapes, back = shapes, point light, both knobs set (ambient ignored)"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushShapes"
+        MaterialAmbientColor="255,0,0,0"
+        MaterialColor="255,255,255,255" 
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = shapes, back = shapes, point light, both knobs set (transparent ambient ignored)"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushShapes"
+        MaterialAmbientColor="0,0,0,0"
+        MaterialColor="255,255,255,255" 
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialAmbientColor="0,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = shapes, back = shapes, ambient light, both knobs set (diffuse ignored)"
+        Light="WhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushShapes"
+        MaterialAmbientColor="255,0,0,0"
+        MaterialColor="255,255,255,255"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = shapes, back = shapes, ambient light, both knobs set (diffuse alpha respected)"
+        Light="WhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushShapes"
+        MaterialAmbientColor="180,0,255,0"
+        MaterialColor="180,255,255,255"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="0,0,0,0"
+        />
+    <VARIATION
+        Description="front = text, back = text, point light, both knobs set (ambient ignored)"
+        Light="NonWhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushText"
+        MaterialAmbientColor="255,200,200,200"
+        MaterialColor="255,200,200,200"
+        BackMaterial="DrawingBrushText"
+        BackMaterialAmbientColor="255,200,200,200"
+        BackMaterialColor="255,200,200,200"
+        />
+    <VARIATION
+        Description="front = text, back = text, ambient light, both knobs set (diffuse ignored)"
+        Light="NonWhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushText"
+        MaterialAmbientColor="255,200,200,200"
+        MaterialColor="255,200,200,200"
+        BackMaterial="DrawingBrushText"
+        BackMaterialAmbientColor="255,200,200,200"
+        BackMaterialColor="255,200,200,200"
+        />
+
+</INIT>

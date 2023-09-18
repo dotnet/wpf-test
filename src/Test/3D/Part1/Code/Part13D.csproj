@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Part13D</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <PublishDir>$(WpfFeatureTestBasePublishPath)\3D\Part1</PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Application markup -->
+    <ApplicationDefinition Include="Part1Application.xaml" />
+
+    <!-- Compiled Xaml Files list -->
+    <Page Include="Tests\*.xaml" />
+
+    <!-- CodeBehind file list -->
+    <Compile Include="*.cs" />
+    <Compile Include="Tests\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+</Project>

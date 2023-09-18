@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseRadialGradientBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,90,90,90"
+    
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    >
+
+    <VARIATION
+        Description="front = gray/white, back = purple/yellow, AmbientLight"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        BackMaterial="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        />
+    <VARIATION
+        Description="front = purple/yellow, back = blue/red, AmbientLight = gray"
+        LightType="Ambient"
+        LightColor="255,127,127,127" 
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        BackMaterial="RadialGradientBrush 255,0,0,255 255,255,0,0"
+        />
+    <VARIATION
+        Description="front = blue/red, back = gray/white, AmbientLight = mix"
+        Light="NonWhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,0,0,255 255,255,0,0"
+        BackMaterial="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        />
+
+    <VARIATION
+        Description="front = gray/white, back = purple/yellow, DirectionalLight"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        BackMaterial="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        />
+    <VARIATION
+        Description="front = purple/yellow, back = gray/white, DirectionalLight = -1,-1,-1"
+        SilhouetteEdgeTolerance="1.1"
+        DefaultColorTolerance="0,3,3,3"
+        Light="WhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        BackMaterial="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        />
+    <VARIATION
+        Description="front = blue/red, back = purple/yellow, DirectionalLight = mix, -1,-1,-1"
+        SilhouetteEdgeTolerance="1.1"
+        Light="NonWhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,0,0,255 255,255,0,0"
+        BackMaterial="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        />
+
+    <VARIATION
+        Description="front = purple/yellow, back = gray/white, PointLight"
+        SilhouetteEdgeTolerance="1.1"
+        DefaultColorTolerance="0,3,3,3"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        BackMaterial="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        />
+    <VARIATION
+        Description="front = purple/yellow, back = gray/white, PointLight = mix"
+        SilhouetteEdgeTolerance="1.1"
+        Light="NonWhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        BackMaterial="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        />
+    <VARIATION
+        Description="front = gray/white, back = blue/red, PointLight = below"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhitePointBelow"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        BackMaterial="RadialGradientBrush 255,0,0,255 255,255,0,0"
+        DefaultColorTolerance="0,3,3,3"
+        />
+
+</INIT>

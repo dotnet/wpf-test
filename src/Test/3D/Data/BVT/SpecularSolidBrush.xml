@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="SpecularSolidBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    DefaultColorTolerance="0,3,3,3"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="OrthographicDefaultWidth4"
+    MaterialType="Specular"
+    MaterialSpecularPower="40"
+    BackMaterialType="Specular"
+    BackMaterialSpecularPower="40" 
+    >
+
+    <!-- Verify Specular doesn't work with AmbientLight -->
+    
+    <VARIATION
+        Description="front = white, back = mix, AmbientLight (specular ignored)"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        BackMaterial="255,239,143,47"
+        />
+
+    <!-- Verify other lights work -->
+
+    <VARIATION
+        Description="front = white, back = mix, colored directional light"
+        Light="NonWhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        BackMaterial="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = mix, back = mix, white point light"
+        Light="WhitePointBelow"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        BackMaterial="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = mix, back = white, white spot light"
+        Light="WhiteSpot"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        BackMaterial="255,255,255,255"
+        />
+
+    <!-- Test Specular Power -->
+
+    <VARIATION
+        Description="Power test - front = white/1, back = mix/5"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialSpecularPower="1" 
+        BackMaterial="255,239,143,47"
+        BackMaterialSpecularPower="5"
+        />
+    <VARIATION
+        Description="Power test - front = mix/10, back = white/20"
+        Light="WhitePoint" 
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        MaterialSpecularPower="10" 
+        BackMaterial="255,255,255,255"
+        BackMaterialSpecularPower="20"
+        />
+    <VARIATION
+        Description="Power test - front = mix/100, back = white/200"
+        Light="WhitePoint" 
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        MaterialSpecularPower="100" 
+        BackMaterial="255,255,255,255"
+        BackMaterialSpecularPower="200"
+        />
+    <VARIATION
+        Description="Power test - front = white/1000, back = mix/.5"
+        Light="WhitePoint" 
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialSpecularPower="1000" 
+        BackMaterial="255,239,143,47"
+        BackMaterialSpecularPower="0.5"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = mix, back = semi-transparent"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        BackMaterial="110,255,255,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="160,180,50,124"
+        BackMaterial="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, colored light"
+        Light="NonWhitePoint"
+        Mesh="FrontAndBack"
+        Material="160,180,50,124"
+        BackMaterial="110,255,255,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent - specular does not write to z buffer"
+        Light="WhitePoint"
+        Mesh="BackAndFront"
+        Material="160,180,50,124"
+        BackMaterial="110,255,255,255"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = white * green, back = mix * indigo"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="255,239,143,47"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = mix * green, back = white * indigo"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = white * mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="187,255,255,255"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = white * mix, back = semi-transparent * mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="187,255,255,255"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = white * transparent, back = mix * semi-transparent"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="255,239,143,47"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = white * semi-transparent"
+        Light="WhitePoint"
+        Mesh="BackAndFront"
+        Material="187,255,255,255"
+        MaterialColor="192,47,239,143"
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

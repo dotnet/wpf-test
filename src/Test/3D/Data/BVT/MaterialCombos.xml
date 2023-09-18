@@ -1,0 +1,135 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="MaterialCombosTest"
+    SilhouetteEdgeTolerance="0.7"
+    DefaultColorTolerance="0,4,4,4"
+    BackgroundColor="255,0,0,0"
+    WindowWidth="250"
+    WindowHeight="200"
+
+    Camera="OrthographicDefaultWidth4"
+    SaveExpectedZBuffer="false"
+    SaveDiffZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    UseViewport3D="true"
+    
+    Scene="Explicit"
+    Visual0="WhitePointBelow"
+    >
+
+    <!--
+        Render order matters when transparency is involved because we still z-write if the pixel is transparent.
+        Visual2 is behind Visual1 and in front of Visual0.
+        This script should really be called OpticalIllusion.xml...
+        
+        EmissiveMaterial and SpecularMaterial are treated interchangeably because they are both Additive Materials.
+    -->
+
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - Diffuse (middle)"
+        Visual1="PlaneXY -0.25,1.3 1.75,-0.7 -1 10 10"
+        Visual2="PlaneXY -1.75,0.7 0.25,-1.3 1 10 10"
+        Visual3="PlaneXY -1.01,0.99 0.99,-1.01 0 10 10"
+        Material1="window.png"
+        Material2="window.png"
+        Material3="window.png"
+        />
+    <VARIATION
+        Description="Specular (back) - Diffuse (front) - Diffuse (middle)"
+        Visual1="PlaneXY -0.25,1.3 1.75,-0.7 -1 10 10"
+        Visual2="PlaneXY -1.75,0.7 0.25,-1.3 1 10 10"
+        Visual3="PlaneXY -1.01,0.99 0.99,-1.01 0 10 10"
+        Material1="DefaultSpecular"
+        Material2="window.png"
+        Material3="window.png"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Specular (front) - Diffuse (middle)"
+        Visual1="PlaneXY -0.25,1.3 1.75,-0.7 -1 10 10"
+        Visual2="PlaneXY -1.75,0.7 0.25,-1.3 1 10 10"
+        Visual3="PlaneXY -1.01,0.99 0.99,-1.01 0 10 10"
+        Material1="window.png"
+        Material2="DefaultSpecular"
+        Material3="window.png"
+        />
+    <VARIATION
+        Description="Specular (back) - Specular (front) - Diffuse (middle)"
+        Visual1="PlaneXY -0.25,1.3 1.75,-0.7 -1 10 10"
+        Visual2="PlaneXY -1.75,0.7 0.25,-1.3 1 10 10"
+        Visual3="PlaneXY -1.01,0.99 0.99,-1.01 0 10 10"
+        Material1="DefaultSpecular"
+        Material2="DefaultSpecular"
+        Material3="window.png"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - Specular (middle)"
+        Visual1="PlaneXY -0.25,1.3 1.75,-0.7 -1 10 10"
+        Visual2="PlaneXY -1.75,0.7 0.25,-1.3 1 10 10"
+        Visual3="PlaneXY -1.01,0.99 0.99,-1.01 0 10 10"
+        Material1="window.png"
+        Material2="window.png"
+        Material3="DefaultSpecular"
+        />
+    <VARIATION
+        Description="Specular (back) - Diffuse (front) - Emissive (middle)"
+        Visual1="PlaneXY -0.25,1.3 1.75,-0.7 -1 10 10"
+        Visual2="PlaneXY -1.75,0.7 0.25,-1.3 1 10 10"
+        Visual3="PlaneXY -1.01,0.99 0.99,-1.01 0 10 10"
+        Material1="DefaultSpecular"
+        Material2="window.png"
+        Material3="DefaultEmissive"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Emissive (front) - Specular (middle)"
+        Visual1="PlaneXY -0.25,1.3 1.75,-0.7 -1 10 10"
+        Visual2="PlaneXY -1.75,0.7 0.25,-1.3 1 10 10"
+        Visual3="PlaneXY -1.01,0.99 0.99,-1.01 0 10 10"
+        Material1="window.png"
+        Material2="DefaultEmissive"
+        Material3="DefaultSpecular"
+        />
+    <VARIATION
+        Description="Emissive (back) - Specular (front) - Specular (middle)"
+        Visual1="PlaneXY -0.25,1.3 1.75,-0.7 -1 10 10"
+        Visual2="PlaneXY -1.75,0.7 0.25,-1.3 1 10 10"
+        Visual3="PlaneXY -1.01,0.99 0.99,-1.01 0 10 10"
+        Material1="DefaultEmissive"
+        Material2="DefaultSpecular"
+        Material3="DefaultSpecular"
+        />
+
+    <!--
+        FrontMaterial/BackMaterial combos.
+        Only do heterogenous combos because homogenous ones are covered in Diffuse/Emissive/Specular tests.
+    -->
+
+    <VARIATION
+        Description="Specular (front) - Diffuse (back)"
+        Camera="PerspectiveDefault"
+        Visual1="FrontAndBack"
+        Material1="DefaultSpecular"
+        BackMaterial1="window.png"
+        />
+    <VARIATION
+        Description="Diffuse (front) - Emissive (back)"
+        Camera="PerspectiveDefault"
+        Visual1="FrontAndBack"
+        Material1="window.png"
+        BackMaterial1="DefaultEmissive"
+        />
+    <VARIATION
+        Description="Specular (front) - Diffuse (back)"
+        Camera="PerspectiveDefault"
+        Visual1="BackAndFront"
+        Material1="DefaultSpecular"
+        BackMaterial1="window.png"
+        />
+    <VARIATION
+        Description="Diffuse (front) - Emissive (back)"
+        Camera="PerspectiveDefault"
+        Visual1="BackAndFront"
+        Material1="window.png"
+        BackMaterial1="DefaultEmissive"
+        />
+</INIT>

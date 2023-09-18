@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+
+  <DEFAULTTESTINFO Area="3D" SubArea="Part1" Priority="0">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="Part13D.dll" Class="Microsoft.Test.Graphics.Part1Application" Method="Launch" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Part1\Part13D.*" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+  
+  <!--  Disabling this test for now since Part1 bug #453513 cannot be fixed in the current release. -->
+  <!--<TEST Name="VP2DV3D_NULL_VHM" Timeout="30" 
+        Description="Part1 Bug #453513 : Testing Viewport2DVisual3D.GetIsVisualHostMaterial(NULL) and Viewport2DVisual3D.SetIsVisualHostMaterial(NULL, true).">
+    <DriverParameters Args="/TestCaseFileName=VP2DV3D_NULL_VHM.xaml" />
+  </TEST> -->
+
+  <TEST Name="GT2DTo3DTo2D" Timeout="30"
+        Description="Part1 Bug #453522 : Testing GeneratTransfort2DTo3DTo2D on unfreezable cameras (no exceptions should be thrown).">
+    <DriverParameters Args="/TestCaseFileName=GT2DTo3DTo2D.xaml" />
+  </TEST>
+  
+</XTC>

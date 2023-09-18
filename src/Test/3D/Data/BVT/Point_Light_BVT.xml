@@ -1,0 +1,163 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    WindowWidth="300"
+    WindowHeight="200"
+    LogFilePrefix="PointLightTest"
+    BackgroundColor="255,30,30,30"
+    PixelToEdgeTolerance="0.05"
+
+    Material="255,255,255,255"
+    Mesh="Sphere 24 48 1.2"
+    CameraType="Perspective"
+    CameraPosition="0,0,6"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraFieldOfView="45"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+
+    LightType="Point"
+    >
+    <!-- Test Range Too close -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="1"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="1"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- Test Range over part of object (don't care about the boundary, just that beyond it is black) -->
+    <VARIATION
+        LightingRangeTolerance="0.1"
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="2"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="1"
+        LightQuadraticAttenuation="0"
+        DefaultColorTolerance="3,3,3,3"
+        />
+    <!-- Test Unattenuated Point Light-->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="1"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- Test Constant Attenuation < 1 -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="0.5"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- Test Constant Attenuation > 1 -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="2"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- Test Linear Attenuation = 1 -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="1"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- Test Linear Attenuation < 1 -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0.6"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- Test Linear Attenuation > 1 -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="1.5"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- Test Quadratic Attenuation = 1 -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="1"
+        />
+    <!-- Test Quadratic Attenuation < 1 -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="0.7"
+        />
+    <!-- Test Quadratic Attenuation > 1 -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="2"
+        />
+    <!-- Test Combined Attenuation -->
+    <VARIATION
+        LightColor="255,255,255,255"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="3"
+        LightConstantAttenuation="0.5"
+        LightQuadraticAttenuation="1.5"
+        />
+    <!-- Test Light Color -->
+    <VARIATION
+        LightColor="255,120,130,140"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="1"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- Test Black Point Light-->
+    <VARIATION
+        LightColor="255,0,0,0"
+        LightPosition="0, 0, 3"
+        LightRange="10"
+        LightLinearAttenuation="0"
+        LightConstantAttenuation="1"
+        LightQuadraticAttenuation="0"
+        />
+    <!-- One more, with different Mesh -->
+    <VARIATION
+        LightColor="255,230,220,240"
+        CameraPosition="15, 10, 15"
+        CameraLookDirection="-1,-1,-1"
+        CameraFarPlaneDistance="100"
+        LightPosition="5, 5, 5"
+        LightRange="50"
+        LightLinearAttenuation=".3"
+        LightConstantAttenuation="0"
+        LightQuadraticAttenuation="0"
+        Mesh="CreateFlatGrid 20 20 0.0"
+        />
+</INIT>

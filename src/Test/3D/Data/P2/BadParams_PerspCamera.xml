@@ -1,0 +1,287 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="PerspectiveCameraTest"
+    RenderingEffect="NoRendering"
+    
+    Mesh="UnitPlaneTriangle"
+    Material="255,0,0,255"
+    Light="WhiteAmbient"
+
+    BackgroundColor="255,255,255,0"
+    
+    CameraType="Perspective"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraFieldOfView="45"
+
+    SaveExpectedFrameBuffer="true"
+    SaveExpectedToleranceBuffer="false"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffToleranceBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- NaN variations on the camera fields -->
+
+    <VARIATION
+        Description="FieldOfView=NaN"
+        CameraFieldOfView="NaN"
+        />
+    <VARIATION
+        Description="NearPlaneDistance=NaN"
+        CameraNearPlaneDistance="NaN"
+        />
+    <VARIATION
+        Description="FarPlaneDistance=NaN"
+        CameraFarPlaneDistance="NaN"
+        />
+    <VARIATION
+        Description="Up=0,0,NaN"
+        CameraUp="0,0,NaN"
+        />
+    <VARIATION
+        Description="Up=0,NaN,0"
+        CameraUp="0,NaN,0"
+        />
+    <VARIATION
+        Description="Up=NaN,0,0"
+        CameraUp="NaN,0,0"
+        />
+    <VARIATION
+        Description="Up=NaN,NaN,NaN"
+        CameraUp="NaN,NaN,NaN"
+        />
+    <VARIATION
+        Description="Position=0,0,NaN"
+        CameraPosition="0,0,NaN"
+        CameraLookDirection="0,0,-1"
+        />
+    <VARIATION
+        Description="Position=0,NaN,0"
+        CameraPosition="0,NaN,0"
+        CameraLookDirection="0,-1,0"
+        />
+    <VARIATION
+        Description="Position=NaN,0,0"
+        CameraPosition="NaN,0,0"
+        CameraLookDirection="-1,0,0"
+        />
+    <VARIATION
+        Description="Position=NaN,NaN,NaN"
+        CameraPosition="NaN,NaN,NaN"
+        CameraLookDirection="-1,-1,-1"
+        />
+    <VARIATION
+        Description="LookDirection=0,0,NaN"
+        CameraLookDirection="0,0,NaN"
+        />
+    <VARIATION
+        Description="LookDirection=0,NaN,0"
+        CameraLookDirection="0,NaN,0"
+        />
+    <VARIATION
+        Description="LookDirection=NaN,0,0"
+        CameraLookDirection="NaN,0,0"
+        />
+    <VARIATION
+        Description="LookDirection=NaN,NaN,NaN"
+        CameraLookDirection="NaN,NaN,NaN"
+        />
+
+
+    <!-- Infinity variations on the camera fields -->
+
+    <VARIATION
+        Description="FieldOfView=Infinity"
+        CameraFieldOfView="Infinity"
+        />
+    <VARIATION
+        Description="NearPlaneDistance=Infinity"
+        CameraNearPlaneDistance="Infinity"
+        />
+    <!--
+        FarPlaneDistance is allowed to be Infinity
+    -->
+    <VARIATION
+        Description="Up=0,0,Infinity"
+        CameraUp="0,0,Infinity"
+        />
+    <VARIATION
+        Description="Up=0,Infinity,0"
+        CameraUp="0,Infinity,0"
+        />
+    <VARIATION
+        Description="Up=Infinity,0,0"
+        CameraUp="Infinity,0,0"
+        />
+    <VARIATION
+        Description="Up=Infinity,Infinity,Infinity"
+        CameraUp="Infinity,Infinity,Infinity"
+        />
+    <VARIATION
+        Description="Position=0,0,Infinity"
+        CameraPosition="0,0,Infinity"
+        CameraLookDirection="0,0,-1"
+        />
+    <VARIATION
+        Description="Position=0,Infinity,0"
+        CameraPosition="0,Infinity,0"
+        CameraLookDirection="0,-1,0"
+        />
+    <VARIATION
+        Description="Position=Infinity,0,0"
+        CameraPosition="Infinity,0,0"
+        CameraLookDirection="-1,0,0"
+        />
+    <VARIATION
+        Description="Position=Infinity,Infinity,Infinity"
+        CameraPosition="Infinity,Infinity,Infinity"
+        CameraLookDirection="-1,-1,-1"
+        />
+    <VARIATION
+        Description="LookDirection=0,0,Infinity"
+        CameraLookDirection="0,0,Infinity"
+        />
+    <VARIATION
+        Description="LookDirection=0,Infinity,0"
+        CameraLookDirection="0,Infinity,0"
+        />
+    <VARIATION
+        Description="LookDirection=Infinity,0,0"
+        CameraLookDirection="Infinity,0,0"
+        />
+    <VARIATION
+        Description="LookDirection=Infinity,Infinity,Infinity"
+        CameraLookDirection="Infinity,Infinity,Infinity"
+        />
+
+    <!-- Negative Infinity variations on the camera fields -->
+
+    <VARIATION
+        Description="FieldOfView=-Infinity"
+        CameraFieldOfView="-Infinity"
+        />
+    <VARIATION
+        Description="FarPlaneDistance=-Infinity"
+        CameraFarPlaneDistance="-Infinity"
+        />
+    <VARIATION
+        Description="Up=0,0,-Infinity"
+        CameraUp="0,0,-Infinity"
+        />
+    <VARIATION
+        Description="Up=0,-Infinity,0"
+        CameraUp="0,-Infinity,0"
+        />
+    <VARIATION
+        Description="Up=-Infinity,0,0"
+        CameraUp="-Infinity,0,0"
+        />
+    <VARIATION
+        Description="Up=-Infinity,-Infinity,-Infinity"
+        CameraUp="-Infinity,-Infinity,-Infinity"
+        />
+    <VARIATION
+        Description="Position=0,0,-Infinity"
+        CameraPosition="0,0,-Infinity"
+        CameraLookDirection="0,0,1"
+        />
+    <VARIATION
+        Description="Position=0,-Infinity,0"
+        CameraPosition="0,-Infinity,0"
+        CameraLookDirection="0,1,0"
+        />
+    <VARIATION
+        Description="Position=-Infinity,0,0"
+        CameraPosition="-Infinity,0,0"
+        CameraLookDirection="1,0,0"
+        />
+    <VARIATION
+        Description="Position=-Infinity,-Infinity,-Infinity"
+        CameraPosition="-Infinity,-Infinity,-Infinity"
+        CameraLookDirection="1,1,1"
+        />
+    <VARIATION
+        Description="LookDirection=0,0,-Infinity"
+        CameraLookDirection="0,0,-Infinity"
+        />
+    <VARIATION
+        Description="LookDirection=0,-Infinity,0"
+        CameraLookDirection="0,-Infinity,0"
+        />
+    <VARIATION
+        Description="LookDirection=-Infinity,0,0"
+        CameraLookDirection="-Infinity,0,0"
+        />
+    <VARIATION
+        Description="LookDirection=-Infinity,-Infinity,-Infinity"
+        CameraLookDirection="-Infinity,-Infinity,-Infinity"
+        />
+
+    <!-- combinations that will produce an illogical camera (shouldn't render anything) -->
+
+    <VARIATION
+        Description="NearPlane > FarPlane"
+        CameraNearPlaneDistance="10"
+        CameraFarPlaneDistance="1"
+        />
+    <VARIATION
+        Description="NearPlane (-1) &lt; 0"
+        CameraNearPlaneDistance="-1"
+        />
+    <VARIATION
+        Description="NearPlane (-10) &lt; 0"
+        CameraNearPlaneDistance="-10"
+        />
+    <VARIATION
+        Description="NearPlane == FarPlane (behind mesh)"
+        CameraNearPlaneDistance="10"
+        CameraFarPlaneDistance="10"
+        />
+    <VARIATION
+        Description="NearPlane == FarPlane (on vertices)"
+        CameraNearPlaneDistance="5"
+        CameraFarPlaneDistance="5"
+        />
+    <VARIATION
+        Description="NearPlane == FarPlane (intersecting mesh)"
+        CameraNearPlaneDistance="4.5"
+        CameraFarPlaneDistance="4.5"
+        />
+    <VARIATION
+        Description="NearPlane == FarPlane (on vertices)"
+        CameraNearPlaneDistance="4"
+        CameraFarPlaneDistance="4"
+        />
+    <VARIATION
+        Description="NearPlane == FarPlane (in front of mesh)"
+        CameraNearPlaneDistance="1"
+        CameraFarPlaneDistance="1"
+        />
+    <VARIATION
+        Description="LookDirection == zero vector"
+        CameraLookDirection="0,0,0"
+        />
+    <VARIATION
+        Description="LookDirection == zero vector"
+        CameraPosition="0,0,0"
+        CameraLookDirection="0,0,0"
+        />
+    <VARIATION
+        Description="Up == 0,0,0 (practically same as NaN case)"
+        CameraUp="0,0,0"
+        />
+    <VARIATION
+        Description="Up == 0,0,-1 (parallel to look direction)"
+        CameraUp="0,0,-1"
+        />
+    <VARIATION
+        Description="Up == 0,0,1 (parallel to look direction)"
+        CameraUp="0,0,1"
+        />
+</INIT>

@@ -1,0 +1,55 @@
+﻿<Canvas
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="#FF00008B">
+    <Panel.Children>
+
+        <Button>Hello</Button>
+
+        <Ellipse Fill="Red" Stroke="Yellow" StrokeThickness="3.5" Width="200" Height="200" Canvas.Top="200" Canvas.Left="100" />
+
+        <Viewport3D Width="320" Height="320" Canvas.Top="100" Canvas.Left="100" ClipToBounds="true">
+            <Viewport3D.Camera>
+                <PerspectiveCamera
+                    FarPlaneDistance="20"
+                    FieldOfView="25"
+                    LookDirection="0,0,-1"
+                    NearPlaneDistance="1"
+                    Position="0,0,5"
+                    UpDirection="0,1,0" />
+            </Viewport3D.Camera>
+            <Viewport3D.Children>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <Model3DGroup>
+                            <Model3DGroup.Children>
+                                <Model3DCollection>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D
+                                                Normals="-1,1,1 1,-1,1 1,1,1 -1,1,1 -1,-1,1 1,-1,1 -1,1,-1 -1,-1,1 -1,1,1 -1,1,-1 -1,-1,-1 -1,-1,1"
+                                                Positions="-1,1,1 1,-1,1 1,1,1 -1,1,1 -1,-1,1 1,-1,1 -1,1,-1 -1,-1,1 -1,1,1 -1,1,-1 -1,-1,-1 -1,-1,1"
+                                                TextureCoordinates="0,0 1,1 1,0 0,0 0,1 1,1 1,0 0,1 0,0 1,0 0,1 0,1"
+                                                TriangleIndices="0 1 2 3 4 5 6 7 8 9 10 11" />
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial Brush="#FF3F7FAF" />
+                                        </GeometryModel3D.Material>
+                                        <Model3D.Transform>
+                                            <MatrixTransform3D Matrix="0.866025403784439,0,-0.5,0,0,1,0,0,0.5,0,0.866025403784439,0,0,0,0,1" />
+                                        </Model3D.Transform>
+                                    </GeometryModel3D>
+                                    <DirectionalLight Direction="0,-1,0">
+                                        <Model3D.Transform>
+                                            <MatrixTransform3D Matrix="Identity" />
+                                        </Model3D.Transform>
+                                    </DirectionalLight>
+                                </Model3DCollection>
+                            </Model3DGroup.Children>
+                        </Model3DGroup>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+            </Viewport3D.Children>
+        </Viewport3D>
+
+    </Panel.Children>
+</Canvas>
