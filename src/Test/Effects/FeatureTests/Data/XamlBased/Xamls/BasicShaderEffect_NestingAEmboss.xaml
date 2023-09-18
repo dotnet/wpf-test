@@ -1,0 +1,20 @@
+<!-- Loading Element with Custom Effect has an element with EmbossBitmapEffect as child -->
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+        <ShaderEffects:BasicShaderEffect x:Key="effect">
+            <ShaderEffects:BasicShaderEffect.PixelShader>
+                <PixelShader UriSource="pack://application:,,,/ShaderEffects;component/Reddish.ps" />
+            </ShaderEffects:BasicShaderEffect.PixelShader>
+        </ShaderEffects:BasicShaderEffect>
+    </Grid.Resources>
+
+    <Grid Effect="{StaticResource effect}" >
+        <Image Height="200" Width="200" Source="pack://siteoforigin:,,,/Fish.jpg" >
+            <Image.BitmapEffect>
+                <EmbossBitmapEffect />
+            </Image.BitmapEffect>
+        </Image>
+    </Grid>
+</Grid>

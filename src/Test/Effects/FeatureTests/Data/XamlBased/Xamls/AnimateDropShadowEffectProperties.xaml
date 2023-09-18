@@ -1,0 +1,21 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+        <Storyboard x:Key="storyboard" Storyboard.TargetName="effect">
+            <DoubleAnimation From="0" To="10" Duration="0:0:3" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="BlurRadius" />
+            <DoubleAnimation From="0" To="20" Duration="0:0:3" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ShadowDepth" />
+            <DoubleAnimation From="0" To="426" Duration="0:0:3" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Direction" />
+            <DoubleAnimation From="0.3" To="0.9" Duration="0:0:3" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" />
+            <ColorAnimation From="Red" To="Yellow" Duration="0:0:2" AutoReverse="false" RepeatBehavior="1x" Storyboard.TargetProperty="Color"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="RenderingBias">
+                <DiscreteObjectKeyFrame KeyTime="0:0:3.5" Value="{x:Static RenderingBias.Performance}" />
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Grid.Resources>
+    <Rectangle Width="200" Height="200" Fill="Blue">
+        <Rectangle.Effect>
+            <DropShadowEffect x:Name="effect" BlurRadius="0" RenderingBias="Quality"/>
+        </Rectangle.Effect>
+    </Rectangle>
+</Grid>

@@ -1,0 +1,39 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <OutputName>
+    </OutputName>
+    <TargetType>COPY</TargetType>
+  </PropertyGroup>
+
+  <!-- Gto tests need different master images for different version -->
+
+  <!-- 4.0 or later -->
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5' ">
+    <DataFile Include="Part1\*.png">
+      <SubFolder>FeatureTests\Effects\GtoMasters</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+  <!-- 3.5 -->
+  <ItemGroup Condition="'$(WPF_TESTBUILD_TARGETVERSION)' == 'v3.5'">
+    <DataFile Include="Arrowhead\*.png">
+      <SubFolder>FeatureTests\Effects\GtoMasters</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+
+  <!--  3.0 -->
+  <ItemGroup Condition="'$(WPF_TESTBUILD_TARGETVERSION)' == 'v3.0'">
+    <DataFile Include="Orcas\*.png">
+      <SubFolder>FeatureTests\Effects\GtoMasters</SubFolder>
+    </DataFile>
+  </ItemGroup>
+
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.Native.targets" />
+</Project>

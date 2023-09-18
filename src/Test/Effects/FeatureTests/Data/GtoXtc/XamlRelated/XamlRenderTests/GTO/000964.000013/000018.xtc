@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<XTC Query="Important=1 Restricted=5 Root=WCPEffects branch='WCPEffects   ManagedEffectsTests   XamlTests EffectsXamlTemplateTests'" SyncDate="2006-04-06T15:22:50.285" Template="GTO">
+  <TEST Auto="1" Frequency="Weekly" Owner="Microsoft" Path="\\WCP\MIL-Effects\TestCases\GTO" Priority="1" Status="Lab-Pending" Timeout="5" Title="#13 of BitmapEffectsXamlRegressions P1">
+    <DIMENSION Name="Language" Value="*" />
+    <DIMENSION Name="Platform" Value="*" />
+    <RESOLVER Assembly="Gto.dll" Class="SuperMasterPlatformResolver" />
+    <SCENARIO>
+      <INIT Assembly="Gto.dll" Class="SuperMasterVerifyTest" Language="*:28325" Platform="*:26701">
+        <COMPARATOR Assembly="Gto.dll" Class="FuzzyComparator" Index="0">
+          <PROFILESET Assembly="Gto.dll" Class="DefaultDpiToHighDpiProfileSet" />
+        </COMPARATOR>
+        <RENDERER Assembly="Gto.dll" Class="XamlTemplateETC" LocalResourceDictionaryPath="InvariantTheme.xaml" />
+        <SURFACE Assembly="Gto.dll" Class="HwndSourceSurface" Height="300" Index="0" Width="300" X="200" Y="0" />
+      </INIT>
+      <VARIATION MatchLevel="Good">
+        <SUPERMASTER Key="*:47545">
+          <ELEMENTTREE Source="Regression_Bug38PngOpacity.Xaml" />
+        </SUPERMASTER>
+      </VARIATION>
+    </SCENARIO>
+    <STEP Index="1" Loader="GTOLoader" LoaderSwitch="/NOSEE" Run="000018.xtc">
+      <FILE Path="*\Client\WcpTests\MIL\Effects\Data\XAMLRelated\Data\Regression_Bug38PngOpacity.Xaml" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Graphics\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Effects\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\MILHookGTO.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\MILWin32GTO.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Effects\BVT\XAMLRelated\XamlRenderTests\GTO\000964.000013\000018.xtc" Type="support" />
+    </STEP>
+  </TEST>
+</XTC>

@@ -1,0 +1,31 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+        <Storyboard x:Key="storyboard" Storyboard.TargetName="effect" Storyboard.TargetProperty="ColorValue">
+            <DoubleAnimation From="-100000" To="8000000" Duration="0:0:3" AutoReverse="false" RepeatBehavior="1x" Storyboard.TargetProperty="DoubleValue"/>
+            <PointAnimation From="80,20" To="-20,120" Duration="0:0:3" AutoReverse="false" RepeatBehavior="1x" Storyboard.TargetProperty="PointValue"/>
+            <Point3DAnimation From="60,40, 100" To="20,120,0" Duration="0:0:3" AutoReverse="false" RepeatBehavior="1x" Storyboard.TargetProperty="Point3DValue"/>
+            <Vector3DAnimation From="0,40, 100" To="100,80,0" Duration="0:0:3" AutoReverse="false" RepeatBehavior="1x" Storyboard.TargetProperty="Vector3DValue"/>
+            <SizeAnimation From="20, 0" To="80,80" Duration="0:0:3" AutoReverse="false" RepeatBehavior="1x" Storyboard.TargetProperty="SizeValue"/>
+            <VectorAnimation From="100, -20" To="0,80" Duration="0:0:3" AutoReverse="false" RepeatBehavior="1x" Storyboard.TargetProperty="VectorValue"/>
+            <ColorAnimation From="Red" To="Yellow" Duration="0:0:2" AutoReverse="false" RepeatBehavior="1x" Storyboard.TargetProperty="ColorValue"/>
+        </Storyboard>
+    </Grid.Resources>
+    <Rectangle Width="200" Height="200" Fill="Blue">
+        <Rectangle.Effect>
+            <ShaderEffects:MultiParameterShaderEffect 
+                    FloatValue="200" 
+                    DoubleValue="-100000" 
+                    PointValue="80,20"
+                    Point3DValue="60,40, 100"
+                    Point4DValue="20,30,5,80"
+                    Vector3DValue="0,40, 100" 
+                    SizeValue="20, 0"
+                    VectorValue="100, -20" 
+                    ColorValue="Red" 
+                    x:Name="effect"
+            />
+        </Rectangle.Effect>
+    </Rectangle>
+</Grid>

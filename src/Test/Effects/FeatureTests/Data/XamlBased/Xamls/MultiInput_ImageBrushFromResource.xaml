@@ -1,0 +1,24 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas>
+        <Canvas.Resources>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/Red.jpg" x:Key="brush" />
+        </Canvas.Resources>
+        <Rectangle Width="150" Height="150" Canvas.Left="0" Fill="Red">
+            <Rectangle.Effect>
+                <ShaderEffects:MultiInputEffect 
+                    Input0="{StaticResource brush}"
+                    Input2="{DynamicResource brush}"
+                    />
+            </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle Width="150" Height="150" Canvas.Left="180" Fill="Red">
+            <Rectangle.Effect>
+                <ShaderEffects:MultiInputEffect
+                    Input1="{StaticResource brush}"
+                    Input3="{DynamicResource brush}" />                   
+            </Rectangle.Effect>
+        </Rectangle>
+    </Canvas>
+</Grid>

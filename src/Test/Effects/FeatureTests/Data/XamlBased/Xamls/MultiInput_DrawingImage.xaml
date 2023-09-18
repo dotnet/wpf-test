@@ -1,0 +1,44 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas>
+        <Canvas.Resources>
+            <ImageBrush x:Key="brush">
+              <ImageBrush.ImageSource>
+                <DrawingImage>
+                  <DrawingImage.Drawing>
+                    <GeometryDrawing>
+                      <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                          <EllipseGeometry RadiusX="10" RadiusY="10" Center="10,10" />
+                        </GeometryGroup>
+                      </GeometryDrawing.Geometry>
+                      <GeometryDrawing.Brush>
+                            <LinearGradientBrush>
+                              <GradientStop Offset="0.0" Color="Black" />
+                              <GradientStop Offset="1.0" Color="Red" />
+                            </LinearGradientBrush>
+                      </GeometryDrawing.Brush>
+                    </GeometryDrawing>
+                  </DrawingImage.Drawing>
+                </DrawingImage>
+              </ImageBrush.ImageSource>
+            </ImageBrush>
+        </Canvas.Resources>
+        <Rectangle Width="150" Height="150" Canvas.Left="0" Fill="Red">
+            <Rectangle.Effect>
+                <ShaderEffects:MultiInputEffect 
+                    Input0="{StaticResource brush}"
+                    Input2="{DynamicResource brush}"
+                    />
+            </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle Width="150" Height="150" Canvas.Left="180" Fill="Red">
+            <Rectangle.Effect>
+                <ShaderEffects:MultiInputEffect
+                    Input1="{StaticResource brush}"
+                    Input3="{DynamicResource brush}" />                   
+            </Rectangle.Effect>
+        </Rectangle>
+    </Canvas>
+</Grid>
