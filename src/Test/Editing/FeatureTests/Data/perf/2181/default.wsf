@@ -1,0 +1,28 @@
+<JOB ID="main">
+<SCRIPT LANGUAGE="JScript" SRC="..\..\include.js" />
+
+<SCRIPT LANGUAGE="JScript">
+
+var oTestProcess = new Process();
+
+var sCommandLine = "\"" + TESTBIN_PATH + "\\perfutil.exe\" /time /timeout:60 /count:10 \"" + TESTBIN_PATH + "\\WCP.EditingPerfTiming.exe\"  /Scenario=Typing /TargetControl=RichTextBox /InstanceCount=1000 /PerfMeasurement=Time /Position=Middle";
+
+g_oShell.CurrentDirectory = TESTBIN_PATH ;
+ 
+ensureCScript();
+
+printBanner("Editing - Typing for RichTextBox x 1000 paragraphs at Middle (Ti");
+
+if (oTestProcess.run(sCommandLine, DEFAULT_OUTPUT_FILENAME))
+{
+    parse(OUTPUT_COMPLOGS, DEFAULT_OUTPUT_FILENAME);
+
+    if (g_oFSO.FileExists(DEFAULT_OUTPUT_FILENAME))
+    {
+        g_oFSO.DeleteFile(DEFAULT_OUTPUT_FILENAME, true);
+    }
+}
+
+</SCRIPT>
+
+</JOB>

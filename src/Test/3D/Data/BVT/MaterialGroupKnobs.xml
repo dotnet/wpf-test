@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="MaterialGroupKnobsTest"
+
+    BackgroundColor="255,40,40,40"
+    WindowWidth="300"
+    WindowHeight="200"
+
+    TextureLookUpTolerance="0.5"
+    SilhouetteEdgeTolerance="0.7"
+    DefaultColorTolerance="0,4,4,4"
+
+    Camera="PerspectiveDefault"
+    Mesh="FrontAndBack"
+    Material="Group"
+    BackMaterial="Group"
+    Light="WhiteDirectionalNegZ"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    LogRendererPerformance="true"
+    >
+
+    <!--
+        Test combinations of Source-Over and Additive Materials with color knobs set.
+        Emissive and Specular can be treated as identical (they are both additive).
+    -->
+
+    <VARIATION
+        Light="WhiteAmbient" 
+        Material0Type="Diffuse"
+        Material0="check.bmp"
+        Material0AmbientColor="255,255,255,0"
+        Material1Type="Specular"
+        Material1="255,255,255,255"
+        Material1SpecularPower="75"
+        
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="255,255,255,255"
+        BackMaterial0AmbientColor="127,255,127,0"
+        BackMaterial1Type="Emissive"
+        BackMaterial1="255,100,100,100"
+        Description="D + S (front) - D + E (back) - AmbientColor knobs on Diffuse"
+        />
+    <VARIATION
+        Light="WhiteAmbient" 
+        Material0Type="Diffuse"
+        Material0="DrawingBrushShapes"
+        Material0AmbientColor="127,255,255,0"
+        Material0Color="195,255,255,255" 
+        Material1Type="Specular"
+        Material1="255,255,255,255"
+        Material1SpecularPower="75"
+        
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="check.bmp"
+        BackMaterial0AmbientColor="255,255,127,0"
+        BackMaterial0Color="195,255,255,255" 
+        BackMaterial1Type="Emissive"
+        BackMaterial1="255,100,100,100"
+        Description="D + S (front) - D + E (back) - AmbientColor knobs on Diffuse (semi-transparent DiffuseKnobs)"
+        />
+    <VARIATION
+        Material0Type="Diffuse"
+        Material0="DrawingBrushShapes"
+        Material0AmbientColor="127,255,255,0"
+        Material0Color="195,100,123,140" 
+        Material1Type="Specular"
+        Material1="255,200,200,200"
+        Material1SpecularPower="75"
+        
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="check.bmp"
+        BackMaterial0AmbientColor="255,255,127,0"
+        BackMaterial0Color="195,100,123,140" 
+        BackMaterial1Type="Emissive"
+        BackMaterial1="255,100,100,100"
+        Description="D + S (front) - D + E (back) - both knobs on Diffuse (ambient ignored)"
+        />
+    <VARIATION
+        Material0Type="Diffuse"
+        Material0="LinearGradientBrush 255,255,0,255 255,0,255,0 45"
+        Material0Color="125,255,255,255" 
+        Material1Type="Specular"
+        Material1="255,200,200,200"
+        Material1SpecularPower="75"
+        
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="check.bmp"
+        BackMaterial0Color="255,255,0,255"
+        BackMaterial1Type="Emissive"
+        BackMaterial1="255,100,100,100"
+        Description="D + S (front) - D + E (back) - DiffuseColor knobs on Diffuse"
+        />
+    <VARIATION
+        Material0Type="Diffuse"
+        Material0="check.bmp"
+        Material1Type="Specular"
+        Material1="255,255,255,255"
+        Material1Color="255,0,0,255"
+        Material1SpecularPower="75"
+        
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="255,0,0,100"
+        BackMaterial1Type="Emissive"
+        BackMaterial1="255,255,255,255"
+        BackMaterial1Color="200,200,100,150" 
+        Description="D + S (front) - D + E (back) - Color knobs on Additive"
+        />
+
+    <!-- Diffuse on Diffuse -->
+
+    <VARIATION
+        Light="WhiteAmbient"
+        Material0Type="Diffuse"
+        Material0="VisualBrush3D"
+        Material0AmbientColor="160,255,255,255"
+        Material1Type="Diffuse"
+        Material1="window.png"
+
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="255,255,255,255"
+        BackMaterial0AmbientColor="255,255,0,255"
+        BackMaterial1Type="Diffuse"
+        BackMaterial1="window.png"
+        Description="D + D (front) - D + D (back) - AmbientColor knobs on first Diffuse layer"
+        />
+    <VARIATION
+        Material0Type="Diffuse"
+        Material0="VisualBrush3D"
+        Material0Color="60,255,255,255"
+        Material1Type="Diffuse"
+        Material1="window.png"
+
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="255,255,255,255"
+        BackMaterial0Color="255,255,0,255"
+        BackMaterial1Type="Diffuse"
+        BackMaterial1="window.png"
+        Description="D + D (front) - D + D (back) - DiffuseColor knobs on first Diffuse layer"
+        />
+    <VARIATION
+        Light="WhiteAmbient"
+        Material0Type="Diffuse"
+        Material0="VisualBrush3D"
+        Material1Type="Diffuse"
+        Material1="check.bmp"
+        Material1AmbientColor="160,255,255,255"
+
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="255,255,255,255"
+        BackMaterial1Type="Diffuse"
+        BackMaterial1="window.png"
+        BackMaterial1AmbientColor="255,255,0,255"
+        Description="D + D (front) - D + D (back) - AmbientColor knobs on second Diffuse layer"
+        />
+    <VARIATION
+        Material0Type="Diffuse"
+        Material0="VisualBrush3D"
+        Material1Type="Diffuse"
+        Material1="check.bmp"
+        Material1Color="60,255,255,255"
+
+        BackMaterial0Type="Diffuse"
+        BackMaterial0="255,255,255,255"
+        BackMaterial1Type="Diffuse"
+        BackMaterial1="window.png"
+        BackMaterial1Color="255,255,0,255"
+        Description="D + D (front) - D + D (back) - DiffuseColor knobs on second Diffuse layer"
+        />
+
+</INIT>

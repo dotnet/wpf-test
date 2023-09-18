@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="BVT - Scenario" Priority="0">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="Scenario3D.dll" Class="Microsoft.Test.Graphics.ScenarioApplication" Method="Launch" />
+  </DEFAULTTESTINFO>
+  
+ 
+  <TEST Name="Animation - Custom Visual3D - Dot down to ValueType from Viewport3D" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Tooling Uses:ModelVisual3D Uses:ObjectAnimationBase Comments: Create custom Visual3D's by deriving from ModelVisual3D.  The custom Visual3D's have DP's that can be animated.  Verify that the animation works. ">
+    <DriverParameters Args="/scenario=CustomVisual3D /DotDownViewport /times=0,900,1500,2200,3000 /WindowBackgroundColor=255,255,255,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Custom Visual3D - Dot down to ValueType from Visual3D" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Tooling Uses:ModelVisual3D Uses:ObjectAnimationBase Comments: Create custom Visual3D's by deriving from ModelVisual3D.  The custom Visual3D's have DP's that can be animated.  Verify that the animation works. ">
+    <DriverParameters Args="/scenario=CustomVisual3D /DotDownVisual3D /times=0,900,1500,2200,3000 /WindowBackgroundColor=255,255,255,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Custom Visual3D - ValueType DependencyProperty on Visual3D" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Tooling Uses:ModelVisual3D Uses:ObjectAnimationBase Comments: Create custom Visual3D's by deriving from ModelVisual3D.  The custom Visual3D's have DP's that can be animated.  Verify that the animation works. ">
+    <DriverParameters Args="/scenario=CustomVisual3D /ValueType /times=0,900,1500,2200,3000 /WindowBackgroundColor=255,255,255,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Custom Visual3D - ReferenceType DependencyProperty on Visual3D" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Tooling Uses:ModelVisual3D Uses:ObjectAnimationBase Comments: Create custom Visual3D's by deriving from ModelVisual3D.  The custom Visual3D's have DP's that can be animated.  Verify that the animation works. ">
+    <DriverParameters Args="/scenario=CustomVisual3D /ReferenceType /times=0,900,1500,2200,3000 /WindowBackgroundColor=255,255,255,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Custom Visual3D - BeginAnimation on Visual3D" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Tooling Uses:ModelVisual3D Uses:ObjectAnimationBase Comments: Create custom Visual3D's by deriving from ModelVisual3D.  The custom Visual3D's have DP's that can be animated.  Verify that the animation works. ">
+    <DriverParameters Args="/scenario=CustomVisual3D /BeginAnimation /times=0,900,1500,2200,3000 /WindowBackgroundColor=255,255,255,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D*.*" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Custom Visual3D - ApplyAnimationClock on Visual3D" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Tooling Uses:ModelVisual3D Uses:ObjectAnimationBase Comments: Create custom Visual3D's by deriving from ModelVisual3D.  The custom Visual3D's have DP's that can be animated.  Verify that the animation works. ">
+    <DriverParameters Args="/scenario=CustomVisual3D /ApplyAnimationClock /times=0,900,1500,2200,3000 /WindowBackgroundColor=255,255,255,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>  
+  <TEST Name="Serialization - ImageBrush TileMode=None + Opacity Regression" Timeout="180" Description="Focus:Rendering Verification Focus:Serialization Focus:Scenario Focus:ImageBrush Focus:Brush Opacity Uses:DiffuseMaterial Uses:AmbientlLight Uses:PerspectiveCamera Uses:MeshGeometry3D Comments: Verify the serialization and rendering of an ImageBrush with different 2D and opacity properties by using TestRenderer on the original and round-trip serialized scenes. This is a regression for bug 1531829. ">
+    <DriverParameters Args=" /scenario=IB_TileOpacityRepro /serialize_time=0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+      <SupportFile Source="FeatureTests\3D\3D.security" />
+      <SupportFile Source="FeatureTests\3D\*.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Video - Basic Video on 3D - blue, green, red, 10 secs" Priority="2" Timeout="120" Description="Focus:Rendering Verification Focus:Video Focus:Integration Uses:Canvas Uses:SolidColorBrush Uses:DiffuseMaterial Uses:AmbientLight Uses:OrthographicCamera Uses:MeshGeometry3D Comments: Verify the rendering of a full sreen video that covers the entire Viewport3D.  The test uses an OrhtographicCamera so the image should look like a 2D video.  The video used has 10seconds of red, 10 of blue, t=10 of green, and the verification is done by taking screenshots at the right intervals in time. ">
+    <DriverParameters Args="/scenario=VideoTest /video=b10g10r10.wmv /video_times=5000,10000,10000 /video_colors=255,0,0,255;255,0,255,0;255,255,0,0  /DefaultColorTolerance=4,15,15,15" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*" />
+      <SupportFile Source="FeatureTests\3D\*.wmv" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation - Custom Visual3D - Multiple concurrent animations" Timeout="180" Description="Focus:Rendering Verification Focus:Animation Focus:Tooling Uses:ModelVisual3D Uses:ObjectAnimationBase Comments: Create custom Visual3D's by deriving from ModelVisual3D.  The custom Visual3D's have DP's that can be animated.  Verify that the animation works. ">
+    <DriverParameters Args="/scenario=CustomVisual3D /DotDownViewport /DotDownVisual3D /ValueType /ReferenceType /times=0,900,1500,2200,3000 /WindowBackgroundColor=255,255,255,0" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Scenario3D.*.*" />
+    </SupportFiles>
+  </TEST>
+</XTC>

@@ -1,0 +1,196 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="ColorKnobs_MultipleLightsTest"
+    SilhouetteEdgeTolerance="0.7"
+    DefaultColorTolerance="0,4,4,4"
+    BackgroundColor="255,40,40,40"
+    WindowWidth="250"
+    WindowHeight="200"
+
+    Camera="PerspectiveDefault"
+    SaveExpectedZBuffer="false"
+    SaveDiffZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    UseViewport3D="true"
+    
+    Scene="Explicit"
+    Visual0="FrontAndBack"
+    >
+
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - 2 AmbientLights - AmbientColor knobs"
+        Visual1="WhiteAmbient"
+        Visual2="NonWhiteAmbient"
+        Material0="255,255,255,255"
+        Material0AmbientColor="127,255,255,0"
+        BackMaterial0="check.bmp"
+        BackMaterial0AmbientColor="192,0,255,255"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - 2 AmbientLights - both knobs (diffuse alpha respected)"
+        Visual1="WhiteAmbient"
+        Visual2="NonWhiteAmbient"
+        Material0="check.bmp"
+        Material0AmbientColor="127,0,255,255"
+        Material0Color="100,255,255,255" 
+        BackMaterial0="LinearGradientBrush 255,255,255,255 255,0,0,0 90"
+        BackMaterial0AmbientColor="192,255,255,0"
+        BackMaterial0Color="200,255,255,255"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - 2 non-AmbientLights - DiffuseColor knobs"
+        DefaultColorTolerance="0,5,5,5"
+        Visual1="WhiteDirectionalNegZ"
+        Visual2="WhitePointBelow"
+        Material0="255,255,255,255"
+        Material0Color="127,0,255,255"
+        BackMaterial0="255,255,255,255"
+        BackMaterial0Color="192,255,255,0"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - 2 non-AmbientLights - both knobs (ambient ignored)"
+        Visual1="WhiteDirectionalNegZ"
+        Visual2="WhitePointBelow"
+        Material0="255,255,255,255"
+        Material0AmbientColor="0,0,255,127"
+        Material0Color="100,255,255,255" 
+        BackMaterial0="255,255,255,255"
+        BackMaterial0AmbientColor="192,255,255,0"
+        BackMaterial0Color="200,255,255,255"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - Ambient+DirectionalLight - both knobs"
+        Visual1="WhiteAmbient"
+        Visual2="WhiteDirectionalNegZ"
+        Material0="check.bmp"
+        Material0AmbientColor="127,0,255,255"
+        Material0Color="200,255,255,255" 
+        BackMaterial0="LinearGradientBrush 255,255,255,255 255,0,0,0 90"
+        BackMaterial0AmbientColor="192,255,255,0"
+        BackMaterial0Color="200,255,255,255"
+        />
+
+    <!-- Additive Materials -->
+
+    <VARIATION
+        Description="Emissive (back) - Specular (front) - 2 non-AmbientLights - opaque knobs"
+        Visual1="WhiteDirectionalNegZ"
+        Visual2="WhitePointBelow"
+        Material0="255,255,255,255"
+        Material0Type="Specular" 
+        Material0SpecularPower="40" 
+        Material0Color="255,192,239,80"
+        BackMaterial0="255,255,255,255"
+        BackMaterial0Type="Emissive"
+        BackMaterial0Color="255,80,239,192"
+        />
+    <VARIATION
+        Description="Emissive (back) - Specular (front) - 2 non-AmbientLights - semi-transparent knobs"
+        Visual1="WhiteDirectionalNegZ"
+        Visual2="WhitePointBelow"
+        Material0="255,255,255,255"
+        Material0Type="Specular" 
+        Material0SpecularPower="40" 
+        Material0Color="134,192,239,80"
+        BackMaterial0="255,255,255,255"
+        BackMaterial0Type="Emissive"
+        BackMaterial0Color="182,80,239,192"
+        />
+    <VARIATION
+        Description="Emissive (back) - Specular (front) - Ambient+SpotLight - semi-transparent knobs"
+        Visual1="WhiteAmbient"
+        Visual2="WhiteSpot"
+        Material0="255,255,255,255"
+        Material0Type="Specular" 
+        Material0SpecularPower="40" 
+        Material0Color="134,192,239,80"
+        BackMaterial0="255,255,255,255"
+        BackMaterial0Type="Emissive"
+        BackMaterial0Color="182,80,239,192"
+        />
+
+    <!-- Lots o' lights -->
+
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - 5 AmbientLights - AmbientColor knob"
+        Visual1="AmbientLight 255,51,51,51"
+        Visual2="AmbientLight 255,51,51,51"
+        Visual3="AmbientLight 255,51,51,51"
+        Visual4="AmbientLight 255,51,51,51"
+        Visual5="AmbientLight 255,51,51,51"
+        Material0="check.bmp"
+        Material0AmbientColor="153,255,255,255"
+        BackMaterial0="LinearGradientBrush 200,255,0,255 30,0,255,255 90"
+        BackMaterial0AmbientColor="204,255,255,255"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - 5 AmbientLights - both knobs (transparency on DiffuseColor)"
+        Visual1="AmbientLight 255,51,51,51"
+        Visual2="AmbientLight 255,51,51,51"
+        Visual3="AmbientLight 255,51,51,51"
+        Visual4="AmbientLight 255,51,51,51"
+        Visual5="AmbientLight 255,51,51,51"
+        Material0="check.bmp"
+        Material0AmbientColor="153,255,255,255"
+        Material0Color="150,255,129,0" 
+        BackMaterial0="LinearGradientBrush 200,255,0,255 30,0,255,255 90"
+        BackMaterial0AmbientColor="204,255,255,255"
+        BackMaterial0Color="150,0,255,129"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - 5 DirectionalLights - DiffuseColor knob"
+        Visual1="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual2="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual3="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual4="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual5="DirectionalLight 255,51,51,51 0,0,-1"
+        Material0="check.bmp"
+        Material0Color="255,153,153,153"
+        BackMaterial0="LinearGradientBrush 30,0,255,255 200,255,0,255 90"
+        BackMaterial0Color="255,204,204,204"
+        />
+    <VARIATION
+        Description="Diffuse (back) - Diffuse (front) - 5 DirectionalLights - DiffuseColor knob (transparency)"
+        Visual1="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual2="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual3="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual4="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual5="DirectionalLight 255,51,51,51 0,0,-1"
+        Material0="check.bmp"
+        Material0Color="153,255,127,0"
+        BackMaterial0="LinearGradientBrush 30,0,255,255 200,255,0,255 90"
+        BackMaterial0Color="204,255,255,255"
+        />
+    <VARIATION
+        Description="Specular (back) - Emissive (front) - 5 DirectionalLights"
+        Visual1="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual2="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual3="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual4="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual5="DirectionalLight 255,51,51,51 0,0,-1"
+        Material0="check.bmp"
+        Material0Type="Emissive"
+        Material0Color="255,153,153,153"
+        BackMaterial0="LinearGradientBrush 30,0,255,255 200,255,0,255 90"
+        BackMaterial0Type="Specular"
+        BackMaterial0SpecularPower="100"
+        BackMaterial0Color="255,204,204,204"
+        />
+    <VARIATION
+        Description="Emissive (back) - Specular (front) - 5 DirectionalLights - (transparency on Color knob)"
+        Visual1="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual2="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual3="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual4="DirectionalLight 255,51,51,51 0,0,-1"
+        Visual5="DirectionalLight 255,51,51,51 0,0,-1"
+        Material0="check.bmp"
+        Material0Type="Specular"
+        Material0SpecularPower="100"
+        Material0Color="153,255,127,0"
+        BackMaterial0="LinearGradientBrush 30,0,255,255 200,255,0,255 90"
+        BackMaterial0Type="Emissive"
+        BackMaterial0Color="204,255,255,255"
+        />
+
+</INIT>

@@ -1,0 +1,62 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Viewport3D Name="VIEWPORT" ClipToBounds="true" >
+        <Viewport3D.Camera>
+            <PerspectiveCamera
+                Position="0,0,40"
+                LookDirection="0,0,-1"
+                UpDirection="0,1,0"
+                NearPlaneDistance="1"
+                FarPlaneDistance="200"
+                FieldOfView="45" />
+        </Viewport3D.Camera>
+
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+
+                    <!-- Light -->
+                    <AmbientLight Color="White" />
+
+                    <GeometryModel3D>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <ImageBrush ImageSource="pack://siteoforigin:,,,/cars_original.bmp" Stretch="Fill" TileMode="None" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D
+                                Positions="         -1,-1,0 1,-1,0  -1,1,0  1,1,0"
+                                Normals="           0,0,1   0,0,1   0,0,1   0,0,1"
+                                TextureCoordinates="0,1     1,1     0,0     1,0"
+                                TriangleIndices="   0 1 2 3 2 1" />
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Transform>
+                            <ScaleTransform3D ScaleX="10" ScaleY="10" ScaleZ="1" />
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+
+                    <GeometryModel3D>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <ImageBrush ImageSource="pack://siteoforigin:,,,/cars_original.bmp" Stretch="Fill" TileMode="None" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D
+                                Positions="         -1,-1,1 1,-1,1  -1,1,1  1,1,1"
+                                Normals="           0,0,1   0,0,1   0,0,1   0,0,1"
+                                TextureCoordinates="0,1     1,1     0,0     1,0"
+                                TriangleIndices="   0 1 2 3 2 1" />
+                        </GeometryModel3D.Geometry>
+                    </GeometryModel3D>
+
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+    </Viewport3D>
+</Page>

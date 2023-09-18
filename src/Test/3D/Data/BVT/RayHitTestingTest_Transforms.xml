@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RayHitTestingTest"
+    LogFilePrefix="RayHitTestingTest"
+
+    Scene="Explicit"
+    Visual0="UnitPlaneTriangle"
+    Visual1="WhiteAmbient"
+
+    Camera="OrthographicDefault"
+    UseViewport3D="false"
+    >
+
+    <!-- Translations -->
+    <VARIATION
+        Description="Translation on Model only - Hitting where it used to be"
+        Expectation="Miss"
+        ModelTransform0="Translate 0,-1,0"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Translation on Model only - Hitting where it should be"
+        Expectation="Hit"
+        ModelTransform0="Translate 0,-1,0"
+        Origin=".25,-.75,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Translation on Visual only - Hitting where it should be (pre-Visual transform)"
+        Expectation="Hit"
+        VisualTransform0="Translate -1,0,0"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Translation on Visual only - Hitting where it renders"
+        Expectation="Miss"
+        VisualTransform0="Translate -1,0,0"
+        Origin="-.75,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Translation on Model + Visual - Hitting where it used to be"
+        Expectation="Miss"
+        ModelTransform0="Translate 0,-1,0"
+        VisualTransform0="Translate -1,0,0"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Translation on Model + Visual - Hitting where it renders"
+        Expectation="Miss"
+        ModelTransform0="Translate 0,-1,0"
+        VisualTransform0="Translate -1,0,0"
+        Origin="-.75,-.75,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Translation on Model + Visual - Hitting somewhere inbetween"
+        Expectation="Hit"
+        ModelTransform0="Translate 0,-1,0"
+        VisualTransform0="Translate -1,0,0"
+        Origin=".25,-.75,5.0"
+        Direction="0,0,-1"
+        />
+
+    <!-- Rotations -->
+    <VARIATION
+        Description="Rotation on Model only - Hitting where it used to be"
+        Expectation="Miss"
+        ModelTransform0="Rotate -1,0,0 90"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Rotation on Model only - Hitting where it should be"
+        Expectation="Hit"
+        ModelTransform0="Rotate -1,0,0 90"
+        Origin=".25,5.0,-.25"
+        Direction="0,-1,0"
+        />
+    <VARIATION
+        Description="Rotation on Visual only - Hitting where it should be (pre-visual transform)"
+        Expectation="Hit"
+        VisualTransform0="Rotate 0,0,1 90"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Rotation on Visual only - Hitting where it renders"
+        Expectation="Miss"
+        VisualTransform0="Rotate 0,0,1 90"
+        Origin="-.25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Rotation on Model + Visual - Hitting where it used to be"
+        Expectation="Miss"
+        ModelTransform0="Rotate -1,0,0 90"
+        VisualTransform0="Rotate 0,0,1 90"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Rotation on Model + Visual - Hitting where it renders"
+        Expectation="Miss"
+        ModelTransform0="Rotate -1,0,0 90"
+        VisualTransform0="Rotate 0,0,1 90"
+        Origin="-.25,5.0,-.25"
+        Direction="0,-1,0"
+        />
+    <VARIATION
+        Description="Rotation on Model + Visual - Hitting somewhere inbetween"
+        Expectation="Hit"
+        ModelTransform0="Rotate -1,0,0 90"
+        VisualTransform0="Rotate 0,0,1 90"
+        Origin=".25,5.0,-.25"
+        Direction="0,-1,0"
+        />
+
+    <!-- Scales -->
+    <VARIATION
+        Description="Scale on Model only - Hitting where it used to be"
+        Expectation="Miss"
+        ModelTransform0="ScaleCenter 2,2,2 2,0,0"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Scale on Model only - Hitting where it should be"
+        Expectation="Hit"
+        ModelTransform0="ScaleCenter 2,2,2 2,0,0"
+        Origin="-.75,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Scale on Visual only - Hitting where it should be (pre-visual transform)"
+        Expectation="Hit"
+        VisualTransform0="ScaleCenter 2,2,2 0,2,0"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Scale on Visual only - Hitting where it renders"
+        Expectation="Miss"
+        VisualTransform0="ScaleCenter 2,2,2 0,2,0"
+        Origin=".25,-.75,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Scale on Model + Visual - Hitting where it used to be"
+        Expectation="Miss"
+        ModelTransform0="ScaleCenter 2,2,2 1,0,0"
+        VisualTransform0="ScaleCenter 2,2,2 0,2,0"
+        Origin=".25,.25,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Scale on Model + Visual - Hitting where it renders"
+        Expectation="Miss"
+        ModelTransform0="ScaleCenter 2,2,2 1,0,0"
+        VisualTransform0="ScaleCenter 2,2,2 0,2,0"
+        Origin="-.75,-.75,5.0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Scale on Model + Visual - Hitting somewhere inbetween"
+        Expectation="Hit"
+        ModelTransform0="ScaleCenter 2,2,2 1,0,0"
+        VisualTransform0="ScaleCenter 2,2,2 0,2,0"
+        Origin="-.75,.25,5.0"
+        Direction="0,0,-1"
+        />
+</INIT>

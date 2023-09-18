@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="P3" Priority="3">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="CGT3D.dll" Class="Microsoft.Test.Graphics.Cgt3d" Method="Launch" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+    </SupportFiles>    
+  </DEFAULTTESTINFO>
+  <TEST Name="Invalid OrthographicCamera - Bad Params" Timeout="90" Description="Focus:OrthographicCamera Focus:Bad Parameters Comments: Create a camera whose properties are bad parameters.  None of the variations should render anything. ">
+    <DriverParameters Args="/script=BadParams_OrthoCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BadParams_OrthoCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Invalid PerspectiveCamera - Bad Params" Timeout="90" Description="Focus:PerspectiveCamera Focus:Bad Parameters Comments: Create a camera whose properties are bad parameters.  None of the variations should render anything. ">
+    <DriverParameters Args="/script=BadParams_PerspCamera.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BadParams_PerspCamera.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Invalid DirectionalLight - Bad Params" Timeout="90" Description="Focus:DirectionalLight Focus:Bad Parameters Comments: Create a DirectionalLight whose properties are bad parameters.  All scenes should render black objects (because lighting is bad). ">
+    <DriverParameters Args="/script=BadParams_DirectionalLight.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BadParams_DirectionalLight.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Invalid PointLight - Bad Params" Timeout="120" Description="Focus:PointLight Focus:Bad Parameters Comments: Create a PointLight whose properties are bad parameters.  All scenes should render black objects (because lighting is bad). ">
+    <DriverParameters Args="/script=BadParams_PointLight.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BadParams_PointLight.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Invalid SpotLight - Bad Params" Timeout="180" Description="Focus:SpotLight Focus:Bad Parameters Comments: Create a SpotLight whose properties are bad parameters.  All scenes should render black objects (because lighting is bad). ">
+    <DriverParameters Args="/script=BadParams_SpotLight.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BadParams_SpotLight.xml" />
+    </SupportFiles>
+  </TEST>
+<!--Pantal - Needs repair 
+  <TEST Name="All BVTs (Material) - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases.   ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true /DefaultColorTolerance=4,4,4,4" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\*Material*.xml" />
+      <SupportFile Source="FeatureTests\3D\*Material*.xaml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+-->
+<!--Pantal - Needs repair 
+  <TEST Name="All BVTs (Light) - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\*Material*.xaml" />
+      <SupportFile Source="FeatureTests\3D\*Light*.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+-->
+  <TEST Name="All BVTs (Transforms - Part 1) - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\*Material*.xaml" />
+      <SupportFile Source="FeatureTests\3D\CameraTransform_NonInvertable.xml" />
+      <SupportFile Source="FeatureTests\3D\MatrixCameraTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\MatrixTransform3D.xml" />
+      <SupportFile Source="FeatureTests\3D\Model3DVisual3DTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\NullTransform3D.xml" />
+      <SupportFile Source="FeatureTests\3D\OrthographicCameraTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\PerspectiveCameraTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\PointHitTestingTest_CameraTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\RayHitTestingTest_Transforms.xml" />
+      <SupportFile Source="FeatureTests\3D\RotateTransform3DAngleAxis.xml" />
+      <SupportFile Source="FeatureTests\3D\RotateTransform3DAngleAxisCenter.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="All BVTs (Transforms - Part 2) - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\*Material*.xaml" />
+      <SupportFile Source="FeatureTests\3D\RotateTransform3DRotation.xml" />
+      <SupportFile Source="FeatureTests\3D\RotateTransform3DRotationCenter.xml" />
+      <SupportFile Source="FeatureTests\3D\ScaleTransform3D.xml" />
+      <SupportFile Source="FeatureTests\3D\ScaleTransform3DCenter.xml" />
+      <SupportFile Source="FeatureTests\3D\TransformAmbientLight.xml" />
+      <SupportFile Source="FeatureTests\3D\TransformDirectionalLight.xml" />
+      <SupportFile Source="FeatureTests\3D\TransformPointLight.xml" />
+      <SupportFile Source="FeatureTests\3D\TransformSpotLight.xml" />
+      <SupportFile Source="FeatureTests\3D\TranslateTransform3D.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="OrthographicCamera.xml - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OrthographicCamera.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="OrthographicCameraSceneSpan.xml - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OrthographicCameraSceneSpan.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="OrthographicCameraTransform.xml - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OrthographicCameraTransform.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="OrthographicCamera_Clip.xml - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OrthographicCamera_Clip.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="All BVTs (PerspectiveCamera) - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\PerspectiveCamera*.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+
+  <TEST Name="All BVTs (Geometry) - Render to ImageVisualManager" Timeout="900" Description="Focus:Rendering Verification Focus:ImageVisualManager Comments: Verify the rendering of a subset of the BVT cases by rendering them onto an ImageVisualManager.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /RenderToImage=true" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Mesh*.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Null Model3D.Transform" Timeout="90" Description="Focus:Model3D Focus:Model3DGroup Focus:GeometryModel3D Focus:ScreenSpaceLines3D Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Bad Parameters Comments: Verify that setting Model3D.Transform to null behaves the same as setting it to Matrix3D.Identity. ">
+    <DriverParameters Args="/script=NullTransform3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\NullTransform3D.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Bad Meshes" Timeout="90" Description="Focus:MeshGeometry3D Focus:ScreenSpaceLines3D Focus:Bad Parameters Comments: Verify that setting not enough positions on a mesh (or points on a SSL) does not crash.  In some cases, it should actually render something. ">
+    <DriverParameters Args="/script=BadMeshes.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BadMeshes.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="All Properties on Viewport3D (Clip,Opacity,OpacityMask,Transform,Effects)" Timeout="60" Description="Focus:Viewport3D Focus:Integration Uses:MeshGeometry3D Uses:OrthographicCamera Uses:DiffuseMaterial Uses:SolidColorBrush Comments: Verify the effects of all of the following set on a Viewport3D at once: geometry clips, opacity, opacity masks, Transforms, and effects. ">
+    <DriverParameters Args="/script=VisualProperties_VP3D.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\VisualProperties_VP3D.xml" />
+	  <SupportFile Source="FeatureTests\3D\VisualProperties_VP3D_Tolerance.xml" />
+    </SupportFiles>
+  </TEST>
+<!--Pantal - Needs Repair
+  <TEST Name="All BVTs (Light) - FlowDirection=RightToLeft" Timeout="900" Description="Focus:Rendering Verification Focus:FlowDirection=RightToLeft Comments: Verify the rendering of a subset of the BVT cases by rendering them with FlowDirection=RightToLeft.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /UseViewport3D /FlowDirection=RightToLeft" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\*Light*.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+-->
+  <TEST Name="All BVTs (OrthographicCamera) - FlowDirection=RightToLeft" Timeout="900" Description="Focus:Rendering Verification Focus:FlowDirection=RightToLeft Comments: Verify the rendering of a subset of the BVT cases by rendering them with FlowDirection=RightToLeft.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /UseViewport3D /FlowDirection=RightToLeft" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\OrthographicCamera*.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="All BVTs (PerspectiveCamera) - FlowDirection=RightToLeft" Timeout="900" Description="Focus:Rendering Verification Focus:FlowDirection=RightToLeft Comments: Verify the rendering of a subset of the BVT cases by rendering them with FlowDirection=RightToLeft.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <!-- Disabling for .NET Core 3, Fix and re-enable. Only disabling for Windows Server 2012-->
+    <Configurations>
+      <Configuration>Infra\Configurations\NoWin2012.xml</Configuration>
+    </Configurations>
+    <DriverParameters Args="/RunAllScripts /UseViewport3D /FlowDirection=RightToLeft" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\PerspectiveCamera*.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="All BVTs (Geometry) - FlowDirection=RightToLeft" Timeout="900" Description="Focus:Rendering Verification Focus:FlowDirection=RightToLeft Comments: Verify the rendering of a subset of the BVT cases by rendering them with FlowDirection=RightToLeft.  This re-uses the scripts used for Pri0 BVT cases. ">
+    <DriverParameters Args="/RunAllScripts /UseViewport3D /FlowDirection=RightToLeft" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Mesh*.xml" />
+      <SupportFile Source="FeatureTests\3D\*.bmp" />
+      <SupportFile Source="FeatureTests\3D\*.jpg" />
+    </SupportFiles>
+  </TEST>
+</XTC>

@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PointHitTestingTest_ClipMatrix"
+
+    Scene="UnitPlane"
+
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+
+    UseViewport3D="false"
+    >
+
+    <!-- Orthographic Type cameras -->
+
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 110,90 - No Clip"
+        Expectation="'Model' Hit."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraFarPlaneDistance="4.5"
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 110,90 - Clip Back"
+        Expectation="'Model' Hit."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraNearPlaneDistance="4.5"
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 110,90 - Clip Front"
+        Expectation="'Model' Missed."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraFarPlaneDistance="4.5"
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 140,60 - Clip Back"
+        Expectation="'Model' Missed."
+        Point="140,60"
+        />
+    <VARIATION
+        CameraNearPlaneDistance="4.5"
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 140,60 - Clip Front"
+        Expectation="'Model' Hit."
+        Point="140,60"
+        />
+
+    <!-- Perspective Type cameras -->
+
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="35"
+        CameraFieldOfViewY="35"
+
+        Description="Point testing at 110,90 - No Clip"
+        Expectation="'Model' Hit."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraFarPlaneDistance="4.5"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="35"
+        CameraFieldOfViewY="35"
+
+        Description="Point testing at 110,90 - Clip Back"
+        Expectation="'Model' Hit."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraNearPlaneDistance="4.5"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="35"
+        CameraFieldOfViewY="35"
+
+        Description="Point testing at 110,90 - Clip Front"
+        Expectation="'Model' Missed."
+        Point="110,90"
+        />
+    <VARIATION
+        CameraFarPlaneDistance="4.5"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="35"
+        CameraFieldOfViewY="35"
+
+        Description="Point testing at 125,75 - Clip Back"
+        Expectation="'Model' Missed."
+        Point="125,75"
+        />
+    <VARIATION
+        CameraNearPlaneDistance="4.5"
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="35"
+        CameraFieldOfViewY="35"
+
+        Description="Point testing at 125,75 - Clip Front"
+        Expectation="'Model' Hit."
+        Point="125,75"
+        />
+</INIT>

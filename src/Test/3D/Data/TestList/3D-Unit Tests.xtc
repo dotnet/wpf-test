@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="3D" SubArea="Unit Tests" Priority="1">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="CGT3D.dll" Class="Microsoft.Test.Graphics.Cgt3d" Method="Launch" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\CGT3D.*" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+
+  <TEST Name="Serialization Test - English/Turkish - Full Tree verification" Timeout="300" Description="Focus:Serialization Focus:Unit Testing Uses:Bad Parameters Comments: Verify that all 3D objects and their DependencyProperty's can be parsed from XAML and re-serialized.  Also verify that the Parsing/Serialization is correct.  We also cover the IAddChild methods by structuring the XAML in different ways. ">
+    <DriverParameters Args="/script=Serialization.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Serialization.xml" />
+      <SupportFile Source="FeatureTests\3D\Serialization*.xaml" />
+      <SupportFile Source="FeatureTests\3D\AddChildTest.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Point3D API test - Bad Params" Timeout="30" Description="Focus:Point3D Focus:Unit Testing Focus:Bad Parameters Comments: Test the public APIs for Point3D using invalid input.  ">
+    <DriverParameters Args="/Class=Point3DTest /Priority=2" />
+  </TEST>
+  <TEST Name="Vector3D API test - Bad Params" Timeout="30" Description="Focus:Vector3D Focus:Unit Testing Focus:Bad Parameters Comments: Test the public APIs for Vector3D using invalid input. ">
+    <DriverParameters Args="/Class=Vector3DTest /Priority=2" />
+  </TEST>
+  <TEST Name="Quaternion API test - Bad Params" Timeout="30" Description="Focus:Quaternion Focus:Unit Testing Focus:Bad Parameters Comments: Test the public APIs for Quaternion using invalid input. ">
+    <DriverParameters Args="/Class=QuaternionTest /Priority=2" />
+  </TEST>
+  <TEST Name="Rect3D API test - Bad Params" Timeout="30" Description="Focus:Rect3D Focus:Unit Testing Focus:Bad Parameters Comments: Test the public APIs for Rect3D using invalid input. ">
+    <DriverParameters Args="/Class=Rect3DTest /Priority=2" />
+  </TEST>
+  <TEST Name="Point4D API test - Bad Params" Timeout="30" Description="Focus:Point4D Focus:Unit Testing Focus:Bad Parameters Comments: Test the public APIs for Point4D using invalid input. ">
+    <DriverParameters Args="/Class=Point4DTest /Priority=2" />
+  </TEST>
+  <TEST Name="Size3D API test - Bad Params" Timeout="30" Description="Focus:Size3D Focus:Unit Testing Focus:Bad Parameters Comments: Test the public APIs for Size3D using invalid input. ">
+    <DriverParameters Args="/Class=Size3DTest /Priority=2" />
+  </TEST>
+  <TEST Name="Serialization Test - Only catch exceptions" Timeout="40" Description="Focus:Serialization Focus:Unit Testing Comments: Verify that all 3D objects and their DependencyProperty's can be parsed from XAML and re-serialized.  Do not verify that the Parsing/Serialization is correct.  Just look for exceptions.  We also cover the IAddChild methods by structuring the XAML in different ways.   ">
+    <DriverParameters Args="/script=Serialization.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Serialization.xml" />
+      <SupportFile Source="FeatureTests\3D\Serialization*.xaml" />
+      <SupportFile Source="FeatureTests\3D\AddChildTest.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Matrix3D.Inverse tests" Timeout="30" Description="Focus:Matrix3D Focus:Unit Testing Comments: Test the public APIs for Matrix3D.Inverse using both valid and invalid input.   ">
+    <DriverParameters Args="/Class=InverseTest" />
+  </TEST>
+  <TEST Name="Point3D API test" Timeout="30" Description="Focus:Point3D Focus:Unit Testing Comments: Test the public APIs for Point3D using valid input.  Some corner cases are covered.  Others are reserved for the P2 case.  ">
+    <DriverParameters Args="/Class=Point3DTest" />
+  </TEST>
+  <TEST Name="Vector3D API test" Timeout="30" Description="Focus:Vector3D Focus:Unit Testing Comments: Test the public APIs for Vector3D using valid input.  Some corner cases are covered.  Others are reserved for the P2 case.  ">
+    <DriverParameters Args="/Class=Vector3DTest" />
+  </TEST>
+  <TEST Name="Quaternion API test" Timeout="30" Description="Focus:Quaternion Focus:Unit Testing Comments: Test the public APIs for Quaternion using valid input.  Some corner cases are covered.  Others are reserved for the P2 case.  ">
+    <DriverParameters Args="/Class=QuaternionTest" />
+  </TEST>
+  <TEST Name="Transform3DGroup API test" Timeout="30" Description="Focus:Transform3DGroup Focus:Unit Testing Comments: Test the public APIs for Transform3DGroup using valid input.  Tests cover: Constructor, set_Children, Copy, get_Value, get_IsAffine.  ">
+    <DriverParameters Args="/Class=Transform3DGroupTest" />
+  </TEST>
+  <TEST Name="Rect3D API test" Timeout="30" Description="Focus:Rect3D Focus:Unit Testing Comments: Test the public APIs for Rect3D using valid input.  Some corner cases are covered.  Others are reserved for the P2 case.  ">
+    <DriverParameters Args="/Class=Rect3DTest" />
+  </TEST>
+  <TEST Name="Transform3D API test" Timeout="30" Description="Focus:Transform3D Focus:Unit Testing Comments: Test the public APIs for Transform3D using valid input.  This test covers: static Create[TransformType] functions, get_Identity, get_IsAffine (on all Transform3D types except Transform3DGroup), Transform +5 overloads, MatrixTransform3D.get_Matrix   ">
+    <DriverParameters Args="/Class=Transform3DAPITest" />
+  </TEST>
+  <TEST Name="Point4D API test" Timeout="30" Description="Focus:Point4D Focus:Unit Testing Comments: Test the public APIs for Point4D using valid input.  Some corner cases are covered.  Others are reserved for the P2 case.  ">
+    <DriverParameters Args="/Class=Point4DTest" />
+  </TEST>
+  <TEST Name="Size3D API test" Timeout="30" Description="Focus:Size3D Focus:Unit Testing Comments: Test the public APIs for Size3D using valid input.  Some corner cases are covered.  Others are reserved for the P2 case.  ">
+    <DriverParameters Args="/Class=Size3DTest" />
+  </TEST>
+  <TEST Name="Matrix3D API test" Timeout="30" Description="Focus:Matrix3D Focus:Unit Testing Comments: Test the public APIs for Matrix3D using valid input.  Some corner cases are covered.  Others are reserved for the P2 case.  ">
+    <DriverParameters Args="/Class=Matrix3DTest" />
+  </TEST>
+  <TEST Name="Model3D API test" Timeout="30" Description="Focus:Model3D Focus:Unit Testing Comments: Create some Model3Ds and verify that the Bounds calculated by Avalon are correct. ">
+    <DriverParameters Args="/Class=Model3DTest" />
+  </TEST>
+  <TEST Name="Animation Property Test - Set Animation First (API - no rendering verification)" Timeout="400" Description="Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Light Focus:Camera Focus:ProjectionCamera Focus:OrthographicCamera Focus:PerspectiveCamera Focus:MatrixCamera Focus:Transform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:TranslateTransform3D Focus:Rotation3D Focus:ScreenSpaceLines3D Focus:Animation Focus:GetCurrentValue Comments: Add an animation to a property that has no BaseValue (property is unset), then set the BaseValue to some value specified in the test script.  When the animation stops, we should see the BaseValue. ">
+    <DriverParameters Args="/script=Animation.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\Animation.xml" />
+      <SupportFile Source="FeatureTests\3D\cars.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Rotation3D API test" Timeout="30" Description="Focus:Rotation3D Focus:Unit Testing Comments: Test the public APIs for Rotation3D using valid input.  Some corner cases are covered.  This test covers: Constructors, get/set_Axis/Angle, get_Quaternion, ToString.  ">
+    <DriverParameters Args="/Class=Rotation3DTest" />
+  </TEST>
+  <TEST Name="RotateTransform3D API test" Timeout="30" Description="Focus:RotateTransform3D Focus:Unit Testing Comments: Test the public APIs for Rotat3Transform3D using valid input.  Some corner cases are covered.  This test was useful before Rotation3D was invented and we had problems getting and setting the Axis and Angle properties because the underlying implementation for the Transform used Quaternions.  Now the test is redundant.  More coverage can't hurt can it?  ">
+    <DriverParameters Args="/Class=RotateTransform3DAPITest" />
+  </TEST>
+  <TEST Name="Animation Property Test - Set BaseValue First (API - no rendering verification)" Timeout="400" Description="Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Light Focus:Camera Focus:ProjectionCamera Focus:OrthographicCamera Focus:PerspectiveCamera Focus:MatrixCamera Focus:Transform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:TranslateTransform3D Focus:Rotation3D Focus:ScreenSpaceLines3D Focus:Animation Uses:GetCurrentValue Comments: Just like the animation BVT except we set the BaseValue before adding the animation.  When the animation stops, we should see the BaseValue again.  ">
+    <DriverParameters Args="/script=AnimationBaseValue.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AnimationBaseValue.xml" />
+      <SupportFile Source="FeatureTests\3D\cars.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation Property Test - Set BaseValue First and Clear Animation first (API - no rendering verification)" Timeout="400" Description="Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Light Focus:Camera Focus:ProjectionCamera Focus:OrthographicCamera Focus:PerspectiveCamera Focus:MatrixCamera Focus:Transform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:TranslateTransform3D Focus:Rotation3D Focus:ScreenSpaceLines3D Focus:Animation Uses:GetCurrentValue Comments: Just like the animation BVT except we set the BaseValue before adding the animation.  We then end the animation, followed by clearing the BaseValue. ">
+    <DriverParameters Args="/script=AnimationBaseValueClearLifo.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AnimationBaseValueClearLifo.xml" />
+      <SupportFile Source="FeatureTests\3D\cars.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation Property Test - Set Animation First and Clear Animation first (API - no rendering verification)" Timeout="400" Description="Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Light Focus:Camera Focus:ProjectionCamera Focus:OrthographicCamera Focus:PerspectiveCamera Focus:MatrixCamera Focus:Transform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:TranslateTransform3D Focus:Rotation3D Focus:ScreenSpaceLines3D Focus:Animation Uses:GetCurrentValue Comments: Just like the animation BVT (add the animation while BaseValue is unset, then set BaseValue).  We then end the animation, followed by clearing the BaseValue.  ">
+    <DriverParameters Args="/script=AnimationClearFifo.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AnimationClearFifo.xml" />
+      <SupportFile Source="FeatureTests\3D\cars.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation Property Test - No BaseValue (API - no rendering verification)" Timeout="400" Description="Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Light Focus:Camera Focus:ProjectionCamera Focus:OrthographicCamera Focus:PerspectiveCamera Focus:MatrixCamera Focus:Transform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:TranslateTransform3D Focus:Rotation3D Focus:ScreenSpaceLines3D Focus:Animation Uses:GetCurrentValue Comments: Just like the animation BVT except we never set the BaseValue.  When the animation stops, we should see the Avalon default.  ">
+    <DriverParameters Args="/script=AnimationNoBaseValue.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AnimationNoBaseValue.xml" />
+      <SupportFile Source="FeatureTests\3D\cars.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation Property Test - No BaseValue and ClearValue (API - no rendering verification)" Timeout="400" Description="Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Light Focus:Camera Focus:ProjectionCamera Focus:OrthographicCamera Focus:PerspectiveCamera Focus:MatrixCamera Focus:Transform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:TranslateTransform3D Focus:Rotation3D Focus:ScreenSpaceLines3D Focus:Animation Uses:GetCurrentValue Comments: Just like the animation BVT except we never set the BaseValue.  When the animation stops, we Clear the BaseValue again.  ">
+    <DriverParameters Args="/script=AnimationNoBaseValueClear.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AnimationNoBaseValueClear.xml" />
+      <SupportFile Source="FeatureTests\3D\cars.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Invalid IAddChild/Text in markup" Timeout="60" Description="Focus:MaterialGroup Focus:Model3DGroup Focus:Transform3DGroup Focus:Viewport3D Focus:Bad Parameters Uses:Serialization Comments: Add child nodes of the wrong type and text inside a MaterialGroup, Model3DGroup, Transform3DGroup, and Viewport3D.  Catch the exception and fail if it isn't thrown. ">
+    <DriverParameters Args="/script=BadParams_IAddChild.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\BadParams_IAddChild.xml" />
+      <SupportFile Source="FeatureTests\3D\Bad*.xaml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ValueTypeCollection API test" Timeout="30" Description="Focus:Point3DCollection Focus:Vector3DCollection Focus:Unit Testing Comments: Test the single parameter &quot;Parse&quot; methods on ValueType Collections.  ">
+    <DriverParameters Args="/Class=ValueTypeCollectionTest" />
+  </TEST>
+  <TEST Name="ValueTypeCollections API test - Bad Params" Timeout="30" Description="Focus:Point3DCollection Focus:Vector3DCollection Focus:Unit Testing Comments: Test the single parameter &quot;Parse&quot; methods on ValueType Collections with &quot;Infinity&quot; and &quot;NaN&quot;.  These only run on English because we don't have translation support in the framework yet. ">
+    <DriverParameters Args="/Class=ValueTypeCollectionTest /Priority=2" />
+  </TEST>
+  <TEST Name="Not Impl Test" Timeout="30" Description="Focus:Camera Focus:Model3D Focus:Material Focus:Unit Testing Comments: Currently this only covers not implemented ToString methods on certain Animatables.  I was sick of looking at coverage holes for stupid stuff like this.  If it fails then we know that we need to start testing the API for real :) ">
+    <DriverParameters Args="/Class=NotImplTest" />
+  </TEST>
+  <TEST Name="Animation Property Test - Set Animation First and Clear BaseValue first(API - no rendering verification)" Timeout="400" Description="Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Light Focus:Camera Focus:ProjectionCamera Focus:OrthographicCamera Focus:PerspectiveCamera Focus:MatrixCamera Focus:Transform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:TranslateTransform3D Focus:Rotation3D Focus:ScreenSpaceLines3D Focus:Animation Uses:GetCurrentValue Comments: Just like the animation BVT (add the animation while BaseValue is unset, then set BaseValue).  We then clear the BaseValue, followed by ending the animation.  ">
+    <DriverParameters Args="/script=AnimationClearLifo.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AnimationClearLifo.xml" />
+      <SupportFile Source="FeatureTests\3D\cars.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Animation Property Test - Set BaseValue First and Clear BaseValue first (API - no rendering verification)" Timeout="400" Description="Focus:AmbientLight Focus:DirectionalLight Focus:PointLight Focus:SpotLight Focus:Light Focus:Camera Focus:ProjectionCamera Focus:OrthographicCamera Focus:PerspectiveCamera Focus:MatrixCamera Focus:Transform3D Focus:ScaleTransform3D Focus:RotateTransform3D Focus:TranslateTransform3D Focus:Rotation3D Focus:ScreenSpaceLines3D Focus:Animation Uses:GetCurrentValue Comments: Just like the animation BVT except we set the BaseValue before adding the animation.  We then clear the BaseValue, followed by ending the animation. ">
+    <DriverParameters Args="/script=AnimationBaseValueClearFifo.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\AnimationBaseValueClearFifo.xml" />
+      <SupportFile Source="FeatureTests\3D\cars.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RenderBounds test" Timeout="90" Description="Focus:Viewport3DVisual Focus:Viewport3D Comments: Verify the 2D bounds of Viewport3D and Viewport3DVisual. ">
+    <DriverParameters Args="/script=RenderBoundsTest.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\3D\RenderBoundsTest.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Visual3D API test" Timeout="20" Description="Focus:Visual3D Focus:Unit Testing Comments: Test the public APIs for Visual3D using valid input. ">
+    <DriverParameters Args="/Class=Visual3DTest" />
+  </TEST>
+  <TEST Name="Visual3DCollection API test" Timeout="30" Description="Focus:Visual3DCollection Focus:Unit Testing Comments: psuedo-CodeGen'ed Collection test.  Covers all the APIs for Visual3DCollection. ">
+    <DriverParameters Args="/Class=Visual3DCollectionTest" />
+  </TEST>
+  <TEST Name="Visual3DCollection API test - Bad Params" Timeout="30" Description="Focus:Visual3DCollection Focus:Unit Testing Focus:Bad Parameters Comments: psuedo-CodeGen'ed Collection test.  Test the public APIs for Visual3DCollection using invalid input. ">
+    <DriverParameters Args="/Class:Visual3DCollectionTest /Priority:2" />
+  </TEST>
+  <TEST Name="QuaternionRotation3D API test" Timeout="20" Description="Focus:QuaternionRotation3D Focus:Unit Testing Comments: Test the public APIs for QuaternionRotation3D using valid input. ">
+    <DriverParameters Args="/Class=QuaternionRotation3DTest" />
+  </TEST>
+  <TEST Name="Matrix3D API test - Bad Params" Timeout="30" Description="Focus:Matrix3D Focus:Unit Testing Focus:Bad Parameters Comments: Test the public APIs for Matrix3D using invalid input.  ">
+    <DriverParameters Args="/Class=Matrix3DTest /Priority=2" />
+  </TEST>
+  <TEST Name="Transform3D API test - Bad Params" Timeout="30" Description="Focus:Transform3D Focus:Unit Testing Uses:Bad Parameters Comments: Test the public APIs for Transform3D using invalid input.  This test covers: Transform +5 overloads using a non-affine matrix. ">
+    <DriverParameters Args="/Class=Transform3DAPITest /Priority=2" />
+  </TEST>
+  <TEST Name="Visual3D API test - Bad Params" Timeout="20" Description="Focus:Visual3D Focus:Unit Testing Comments: Test the public APIs for Visual3D using bad parameters. ">
+    <DriverParameters Args="/Class=Visual3DTest /Priority=2" />
+  </TEST>
+  <TEST Name="GeneralTransform2DTo3D API test" Timeout="30" Description="Verify correct functional behavior of GeneralTransform2DTo3D for TryTransform">
+    <DriverParameters Args="/Class=GeneralTransform2DTo3DTest" />
+  </TEST>
+  <TEST Name="GeneralTransform3DGroup API test" Timeout="30" Description="Verify correct functional behavior of GeneralTransform3DGroup for TryTransform, TestTransformBounds">
+    <DriverParameters Args="/Class=GeneralTransform3DGroupTest" />
+  </TEST>
+</XTC>

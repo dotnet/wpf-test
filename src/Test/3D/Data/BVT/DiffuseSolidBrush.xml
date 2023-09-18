@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseSolidBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,90,90,90"
+    
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="OrthographicDefaultWidth4"
+    >
+
+    <VARIATION
+        Description="front = white, back = mix, AmbientLight"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        BackMaterial="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = mix, back = black, AmbientLight = gray"
+        LightType="Ambient"
+        LightColor="255,127,127,127" 
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        BackMaterial="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = black, back = white, AmbientLight = mix"
+        Light="NonWhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="255,0,0,0"
+        BackMaterial="255,255,255,255"
+        />
+
+    <VARIATION
+        Description="front = white, back = mix, DirectionalLight"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        BackMaterial="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = mix, back = white, DirectionalLight = -1,-1,-1"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,239,143,47"
+        BackMaterial="255,255,255,255"
+        />
+    <VARIATION
+        Description="front = black, back = mix, DirectionalLight = mix, -1,-1,-1"
+        SilhouetteEdgeTolerance="1.1"
+        Light="NonWhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,0,0,0"
+        BackMaterial="255,239,143,47"
+        />
+
+    <VARIATION
+        Description="front = mix, back = white, PointLight"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,239,143,47"
+        BackMaterial="255,255,255,255"
+        />
+    <VARIATION
+        Description="front = mix, back = white, PointLight = mix"
+        SilhouetteEdgeTolerance="1.1"
+        Light="NonWhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,239,143,47"
+        BackMaterial="255,255,255,255"
+        />
+    <VARIATION
+        Description="front = white, back = black, PointLight = below"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhitePointBelow"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,255,255,255"
+        BackMaterial="255,0,0,0"
+	DefaultColorTolerance="0,3,3,3"
+        />
+
+</INIT>

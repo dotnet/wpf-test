@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="AutoOrthographicCameraTest"
+    PixelToEdgeTolerance="0.05"
+
+    Light="WhiteAmbient"
+    CameraType="Orthographic"
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraWidth="2"
+    CameraNearPlaneDistance="0.125"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- FarPlaneDistance = Infinity -->
+
+    <VARIATION
+        Description="UnitPlaneTriangle - length=1 in each positive axis - FarPlane=Infinity"
+        CameraFarPlaneDistance="Infinity"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        />
+    <VARIATION
+        Description="UnitPlaneTriangle - transformed ahead of camera 10 units - FarPlane=Infinity"
+        CameraFarPlaneDistance="Infinity"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        TransformTarget="Model"
+        TransformType="Translate"
+        TranslateOffset="0,0,-10"
+        />
+    <VARIATION
+        Description="UnitPlaneTriangle - camera moves away - FarPlane=Infinity"
+        CameraFarPlaneDistance="Infinity"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        CameraPosition="0,0,150"
+        />
+    <VARIATION
+        Description="UnitPlaneTriangle - transformed behind camera - FarPlane=Infinity"
+        CameraFarPlaneDistance="Infinity"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        TransformTarget="Model"
+        TransformType="Translate"
+        TranslateOffset="0,0,10"
+        />
+    <VARIATION
+        Description="Skinny plane parallel to clipping planes - FarPlane=Infinity"
+        CameraFarPlaneDistance="Infinity"
+        Mesh="SingleFrontFacingTriangle"
+        Material="255,0,0,255"
+        />
+    <VARIATION
+        Description="Skinny plane parallel to clipping planes - transformed ahead of camera 20 units - FarPlane=Infinity"
+        CameraFarPlaneDistance="Infinity"
+        Mesh="SingleFrontFacingTriangle"
+        Material="255,0,0,255"
+        TransformTarget="Model"
+        TransformType="Translate"
+        TranslateOffset="0,0,-20"
+        />
+    <VARIATION
+        Description="Sphere radius=1.0 - FarPlane=Infinity"
+        CameraFarPlaneDistance="Infinity"
+        Mesh="Sphere 12 24 1.0"
+        Material="255,0,0,255"
+        />
+    <VARIATION
+        Description="Sphere radius=1.0 - transformed ahead of camera 150 units - FarPlane=Infinity"
+        CameraFarPlaneDistance="Infinity"
+        Mesh="Sphere 12 24 1.0"
+        Material="255,0,0,255"
+        TransformTarget="Model"
+        TransformType="Translate"
+        TranslateOffset="0,0,-150"
+        />
+
+    <!-- FarPlaneDistance = -Infinity -->
+
+    <VARIATION
+        Description="UnitPlaneTriangle - length=1 in each positive axis - FarPlane=-Infinity - should not render"
+        CameraFarPlaneDistance="-Infinity"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        />
+
+
+    <!-- FarPlaneDistance = NaN -->
+
+    <VARIATION
+        Description="UnitPlaneTriangle - length=1 in each positive axis - FarPlane=NaN - should not render"
+        CameraFarPlaneDistance="NaN"
+        Mesh="UnitPlaneTriangle"
+        Material="255,0,0,255"
+        />
+</INIT>

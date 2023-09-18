@@ -19,7 +19,7 @@ REM --------- Run test suites
 
 	DrtEditing.exe
 
-REM --------- ----ize and clean ----------
+REM --------- Analize and clean ----------
 	REM ---------- Save coverage data (PresentationFramework.dll\*.covdata)
 	covercmd /save
 	REM ---------- Stop covermon service

@@ -1,0 +1,553 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="HitTestFilterBehaviorTest"
+    LogFilePrefix="HitTest_SkipSelfAndChildren"
+    Priority="1"
+    HitTestFilter="SkipSelfAndChildren"
+
+    Scene="Explicit"
+    Camera="PerspectiveDefault"
+    >
+    
+    <!-- make sure that the filter doesn't go down into the Model3DGroup level -->
+    
+    <VARIATION
+        Description="Skip Self and Children on visual with ModelGroup content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+        
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Child00="SingleFrontFacingTriangle"
+        Child01="WhiteAmbient"
+        />
+    
+    <!-- try filter scenarios with only one visual in visual collection -->
+    
+    <VARIATION
+        Description="Skip Self and Children on visual with no content, no children"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with content (hit) and no children"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with content (missed) and no children"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with children (1:missed) and no content"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with children (1:hit) and no content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with children (5:hit) and no content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual01="CreateFlatDisc 4"
+        Visual02="Sphere 10 20 0.5"
+        Visual03="SingleFrontFacingTriangle"
+        Visual04="DoubleTriangleMesh"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with children (5:missed) and no content"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual01="CreateFlatDisc 4"
+        Visual02="Sphere 10 20 0.5"
+        Visual03="SingleFrontFacingTriangle"
+        Visual04="DoubleTriangleMesh"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with content and children (1:missed)"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with content and children (1:hit)"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with content and children (5:hit)"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual01="CreateFlatDisc 4"
+        Visual02="Sphere 10 20 0.5"
+        Visual03="SingleFrontFacingTriangle"
+        Visual04="DoubleTriangleMesh"
+        />
+    <VARIATION
+        Description="Skip Self and Children on visual with content and children (5:missed)"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual01="CreateFlatDisc 4"
+        Visual02="Sphere 10 20 0.5"
+        Visual03="SingleFrontFacingTriangle"
+        Visual04="DoubleTriangleMesh"
+        />
+
+    <!-- 1 sibling scenarios (does state get messed up based on children?) -->
+
+    <!-- right sibling -->
+    
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with no content, no children"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with content (hit) and no children"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with content (missed) and no children"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with children (1:missed) and no content"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with children (1:hit) and no content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with children (5:hit) and no content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual01="CreateFlatDisc 4"
+        Visual02="Sphere 10 20 0.5"
+        Visual03="SingleFrontFacingTriangle"
+        Visual04="DoubleTriangleMesh"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with children (5:missed) and no content"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="Group"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual01="CreateFlatDisc 4"
+        Visual02="Sphere 10 20 0.5"
+        Visual03="SingleFrontFacingTriangle"
+        Visual04="DoubleTriangleMesh"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with content and children (1:missed)"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with content and children (1:hit)"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with content and children (5:hit)"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual01="CreateFlatDisc 4"
+        Visual02="Sphere 10 20 0.5"
+        Visual03="SingleFrontFacingTriangle"
+        Visual04="DoubleTriangleMesh"
+        Visual1="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the right - Skip Self and Children on visual with content and children (5:missed)"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Skip0="SkipSelfAndChildren"
+        Visual00="SingleFrontFacingTriangle"
+        Visual01="CreateFlatDisc 4"
+        Visual02="Sphere 10 20 0.5"
+        Visual03="SingleFrontFacingTriangle"
+        Visual04="DoubleTriangleMesh"
+        Visual1="SingleFrontFacingTriangle"
+        />
+
+    <!-- left sibling -->
+    
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with no content, no children"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="Group"
+        Skip1="SkipSelfAndChildren"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with content (hit) and no children"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Skip1="SkipSelfAndChildren"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with content (missed) and no children"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Skip1="SkipSelfAndChildren"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with children (1:missed) and no content"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="Group"
+        Skip1="SkipSelfAndChildren"
+        Visual10="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with children (1:hit) and no content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="Group"
+        Skip1="SkipSelfAndChildren"
+        Visual10="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with children (5:hit) and no content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="Group"
+        Skip1="SkipSelfAndChildren"
+        Visual10="SingleFrontFacingTriangle"
+        Visual11="CreateFlatDisc 4"
+        Visual12="Sphere 10 20 0.5"
+        Visual13="SingleFrontFacingTriangle"
+        Visual14="DoubleTriangleMesh"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with children (5:missed) and no content"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="Group"
+        Skip1="SkipSelfAndChildren"
+        Visual10="SingleFrontFacingTriangle"
+        Visual11="CreateFlatDisc 4"
+        Visual12="Sphere 10 20 0.5"
+        Visual13="SingleFrontFacingTriangle"
+        Visual14="DoubleTriangleMesh"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with content and children (1:missed)"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Skip1="SkipSelfAndChildren"
+        Visual10="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with content and children (1:hit)"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Skip1="SkipSelfAndChildren"
+        Visual10="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with content and children (5:hit)"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Skip1="SkipSelfAndChildren"
+        Visual10="SingleFrontFacingTriangle"
+        Visual11="CreateFlatDisc 4"
+        Visual12="Sphere 10 20 0.5"
+        Visual13="SingleFrontFacingTriangle"
+        Visual14="DoubleTriangleMesh"
+        />
+    <VARIATION
+        Description="1 sibling to the left - Skip Self and Children on visual with content and children (5:missed)"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Skip1="SkipSelfAndChildren"
+        Visual10="SingleFrontFacingTriangle"
+        Visual11="CreateFlatDisc 4"
+        Visual12="Sphere 10 20 0.5"
+        Visual13="SingleFrontFacingTriangle"
+        Visual14="DoubleTriangleMesh"
+        />
+
+    <!-- n sibling scenarios -->
+
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with no content, no children"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="Group"
+        Skip2="SkipSelfAndChildren"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with content (hit) and no children"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="SingleFrontFacingTriangle"
+        Skip2="SkipSelfAndChildren"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with content (missed) and no children"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="SingleFrontFacingTriangle"
+        Skip2="SkipSelfAndChildren"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with children (1:missed) and no content"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="Group"
+        Skip2="SkipSelfAndChildren"
+        Visual20="SingleFrontFacingTriangle"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with children (1:hit) and no content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="Group"
+        Skip2="SkipSelfAndChildren"
+        Visual20="SingleFrontFacingTriangle"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with children (5:hit) and no content"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="Group"
+        Skip2="SkipSelfAndChildren"
+        Visual20="SingleFrontFacingTriangle"
+        Visual21="CreateFlatDisc 4"
+        Visual22="Sphere 10 20 0.5"
+        Visual23="SingleFrontFacingTriangle"
+        Visual24="DoubleTriangleMesh"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with children (5:missed) and no content"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="Group"
+        Skip2="SkipSelfAndChildren"
+        Visual20="SingleFrontFacingTriangle"
+        Visual21="CreateFlatDisc 4"
+        Visual22="Sphere 10 20 0.5"
+        Visual23="SingleFrontFacingTriangle"
+        Visual24="DoubleTriangleMesh"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with content and children (1:missed)"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="SingleFrontFacingTriangle"
+        Skip2="SkipSelfAndChildren"
+        Visual20="SingleFrontFacingTriangle"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with content and children (1:hit)"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="SingleFrontFacingTriangle"
+        Skip2="SkipSelfAndChildren"
+        Visual20="SingleFrontFacingTriangle"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with content and children (5:hit)"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="SingleFrontFacingTriangle"
+        Skip2="SkipSelfAndChildren"
+        Visual20="SingleFrontFacingTriangle"
+        Visual21="CreateFlatDisc 4"
+        Visual22="Sphere 10 20 0.5"
+        Visual23="SingleFrontFacingTriangle"
+        Visual24="DoubleTriangleMesh"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+    <VARIATION
+        Description="middle of 5 siblings - Skip Self and Children on visual with content and children (5:missed)"
+        Origin="0,0,5"
+        Direction="1,0,0"
+
+        Visual0="SingleFrontFacingTriangle"
+        Visual1="SingleFrontFacingTriangle"
+        Visual2="SingleFrontFacingTriangle"
+        Skip2="SkipSelfAndChildren"
+        Visual20="SingleFrontFacingTriangle"
+        Visual21="CreateFlatDisc 4"
+        Visual22="Sphere 10 20 0.5"
+        Visual23="SingleFrontFacingTriangle"
+        Visual24="DoubleTriangleMesh"
+        Visual3="SingleFrontFacingTriangle"
+        Visual4="SingleFrontFacingTriangle"
+        />
+
+</INIT>

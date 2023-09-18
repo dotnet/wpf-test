@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="MatrixTransform3DTest"
+    PixelToEdgeTolerance="0.05"
+
+    Mesh="SingleFrontFacingTriangle"
+    Material="255,255,0,0"
+    Camera="PerspectiveDefault"
+    Light="WhiteAmbient"
+    TransformType="Matrix"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- transform the scene -->
+
+    <VARIATION
+        MatrixValue="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1"
+        TransformTarget="Group"
+        />
+    <VARIATION
+        MatrixValue="2,0,0,0,0,2,0,0,0,0,2,0,-1,-1,-1,1"
+        TransformTarget="Group"
+        />
+    <VARIATION
+        MatrixValue="0,-1,0,0,1,0,0,0,0,0,1,0,0,0,0,1"
+        TransformTarget="Group"
+        />
+    <VARIATION
+        MatrixValue="1,0,0.5,0,0,1,0,0,0,0.5,1,0,0,0,0,1"
+        TransformTarget="Group"
+        />
+
+    <!-- transform the model -->
+
+    <VARIATION
+        MatrixValue="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1"
+        TransformTarget="Model"
+        />
+    <VARIATION
+        MatrixValue="2,0,0,0,0,2,0,0,0,0,2,0,-1,-1,-1,1"
+        TransformTarget="Model"
+        />
+    <VARIATION
+        MatrixValue="0,-1,0,0,1,0,0,0,0,0,1,0,0,0,0,1"
+        TransformTarget="Model"
+        />
+    <VARIATION
+        MatrixValue="1,0,0.5,0,0,1,0,0,0,0.5,1,0,0,0,0,1"
+        TransformTarget="Model"
+        />
+</INIT>

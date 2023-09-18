@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PHT_CameraTransform"
+
+    Scene="Explicit"
+    Visual0="Group"
+    Child00="SingleFrontFacingTriangle"
+    Child01="WhiteAmbient"
+
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="11"
+
+    UseViewport3D="false"
+    >
+
+    <!-- MatrixCameras -->
+
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+        CameraTransform="Translate 1,0,0"
+
+        Description="Point testing (MatrixCamera-Ortho) at 20,79"
+        Expectation="Hit 'Model' once."
+        Point="20,79"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+        CameraTransform="Translate 1,0,0"
+
+        Description="Point testing (MatrixCamera-Ortho) at 120,79"
+        Expectation="'Model' is missed."
+        Point="120,79"
+        />
+
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+        CameraTransform="Translate 1,0,0"
+
+        Description="Point testing (MatrixCamera-Perspective) at 62,89"
+        Expectation="Hit 'Model' once."
+        Point="62,89"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+        CameraTransform="Translate 1,0,0"
+
+        Description="Point testing (MatrixCamera-Perspective) at 110,89"
+        Expectation="'Model' is missed."
+        Point="110,89"
+        />
+
+    <!-- OrthographicCameras -->
+
+    <VARIATION
+        CameraType="Orthographic"
+        CameraWidth="2"
+        CameraTransform="Translate 1,0,0"
+
+        Description="Point testing (OrthographicCamera) at 20,79"
+        Expectation="Hit 'Model' once."
+        Point="20,79"
+        />
+    <VARIATION
+        CameraType="Orthographic"
+        CameraWidth="2"
+        CameraTransform="Translate 1,0,0"
+
+        Description="Point testing (OrthographicCamera) at 120,79"
+        Expectation="'Model' is missed."
+        Point="120,79"
+        />
+
+    <!-- PerspectiveCameras -->
+
+    <VARIATION
+        CameraType="Perspective"
+        CameraFieldOfView="45"
+        CameraTransform="Translate 1,0,0"
+
+        Description="Point testing (PerspectiveCamera) at 62,89"
+        Expectation="Hit 'Model' once."
+        Point="62,89"
+        />
+    <VARIATION
+        CameraType="Perspective"
+        CameraFieldOfView="45"
+        CameraTransform="Translate 1,0,0"
+
+        Description="Point testing (PerspectiveCamera) at 110,89"
+        Expectation="'Model' is missed."
+        Point="110,89"
+        />
+
+</INIT>

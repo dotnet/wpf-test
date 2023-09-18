@@ -1,0 +1,96 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{654E2B34-79BC-4724-BB64-FB0CB3B150EC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RtfXamlView</RootNamespace>
+    <AssemblyName>RtfXamlView</AssemblyName>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore, Version=6.0.4030.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\windows\DevTest\WCP\objchk\i386\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework, Version=6.0.4030.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\windows\DevTest\WCP\objchk\i386\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider, Version=6.0.4030.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\windows\DevTest\WCP\objchk\i386\UIAutomationProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase, Version=6.0.4030.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\windows\DevTest\WCP\objchk\i386\WindowsBase.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="common.cs" />
+    <Compile Include="ConvertButtonsPanel.cs" />
+    <Compile Include="gotocp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gotocp.Designer.cs">
+      <DependentUpon>gotocp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogPanel.cs" />
+    <Compile Include="Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RichEditWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SyncButtonPanel.cs" />
+    <Compile Include="RunViewer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RtfXamlView.cs" />
+    <Compile Include="RtfPanel.cs" />
+    <Compile Include="TextViewPanel.cs" />
+    <Compile Include="tom.cs" />
+    <Compile Include="XamlPanel.cs" />
+    <Compile Include="XamlWindow.cs" />
+    <Compile Include="xcvtaut.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gotocp.resx">
+      <DependentUpon>gotocp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Options.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

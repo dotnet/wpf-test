@@ -1,0 +1,462 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PHT_Mirror_Indexing"
+
+    WindowWidth="300" 
+    WindowHeight="300"
+    BackgroundColor="255,80,80,80"
+    Scene="Explicit"
+    Visual0="WhiteAmbient"
+    
+    Visual1="PositionsNormalsUV"
+    Material1="check.bmp"
+    BackMaterial1="LinearGradientBrush 255,255,0,0 255,0,0,255 0,0 1,1"
+    ModelTransform1="Scale -1,1,1"
+    VisualTransform1="Translate -1.1,1.1,0" 
+    
+    Visual2="PositionsNormalsUV" 
+    Material2="check.bmp" 
+    BackMaterial2="LinearGradientBrush 255,255,0,0 255,0,0,255 0,0 1,1"
+    VisualTransform2="Translate 1.1,1.1,0" 
+    
+    Visual3="PlaneXY -1,-1 1,1 -1 10 10"
+    Material3="check.bmp"
+    BackMaterial3="LinearGradientBrush 255,255,0,0 255,0,0,255 0,0 1,1"
+    ModelTransform3="Scale 1,-1,1"
+    VisualTransform3="Translate -1.1,-1.1,0"
+
+    Visual4="PlaneXY -1,-1 1,1 -1 10 10"
+    Material4="check.bmp"
+    BackMaterial4="LinearGradientBrush 255,255,0,0 255,0,0,255 0,0 1,1"
+    ModelTransform4="Translate -1.1,-1.1,0"
+    VisualTransform4="Rotate 0,0,1 90"
+    
+    CameraType="Orthographic"
+    CameraPosition="0,0,-5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="-10"
+    CameraFarPlaneDistance="10"
+    CameraWidth="4.4"
+
+    UseViewport3D="false"
+    >
+
+    <!-- ############################ -->
+    <!-- Hit Testing on FrontMaterial -->
+    <!-- ############################ -->
+    
+    <!-- tests for non-indexed mesh with a mirror transform -->
+
+    <VARIATION
+        Description="Test upper boundary (non-indexed + mirrored)"
+        Expectation="'Model' Missed."
+        Point="10,5"
+        />
+    <VARIATION
+        Description="Test upper boundary (non-indexed + mirrored)"
+        Expectation="'Model' Hit."
+        Point="10,8"
+        />
+    <VARIATION
+        Description="Test right boundary (non-indexed + mirrored)"
+        Expectation="'Model' Missed."
+        Point="144,10"
+        />
+    <VARIATION
+        Description="Test right boundary (non-indexed + mirrored)"
+        Expectation="'Model' Hit."
+        Point="141,10"
+        />
+    <VARIATION
+        Description="Test lower boundary (non-indexed + mirrored)"
+        Expectation="'Model' Missed."
+        Point="139,144"
+        />
+    <VARIATION
+        Description="Test lower boundary (non-indexed + mirrored)"
+        Expectation="'Model' Hit."
+        Point="139,141"
+        />
+    <VARIATION
+        Description="Test left boundary (non-indexed + mirrored)"
+        Expectation="'Model' Missed."
+        Point="5,140"
+        />
+    <VARIATION
+        Description="Test left boundary (non-indexed + mirrored)"
+        Expectation="'Model' Hit."
+        Point="8,140"
+        />
+
+    <!-- tests for non-indexed mesh -->
+
+    <VARIATION
+        Description="Test upper boundary (non-indexed)"
+        Expectation="'Model' Missed."
+        Point="160,5"
+        />
+    <VARIATION
+        Description="Test upper boundary (non-indexed)"
+        Expectation="'Model' Hit."
+        Point="160,8"
+        />
+    <VARIATION
+        Description="Test right boundary (non-indexed)"
+        Expectation="'Model' Missed."
+        Point="294,10"
+        />
+    <VARIATION
+        Description="Test right boundary (non-indexed)"
+        Expectation="'Model' Hit."
+        Point="291,10"
+        />
+    <VARIATION
+        Description="Test lower boundary (non-indexed)"
+        Expectation="'Model' Missed."
+        Point="289,144"
+        />
+    <VARIATION
+        Description="Test lower boundary (non-indexed)"
+        Expectation="'Model' Hit."
+        Point="289,141"
+        />
+    <VARIATION
+        Description="Test left boundary (non-indexed)"
+        Expectation="'Model' Missed."
+        Point="155,140"
+        />
+    <VARIATION
+        Description="Test left boundary (non-indexed)"
+        Expectation="'Model' Hit."
+        Point="158,140"
+        />
+
+    <!-- tests for indexed mesh with a mirror transform -->
+
+    <VARIATION
+        Description="Test upper boundary (indexed + mirrored)"
+        Expectation="'Model' Missed."
+        Point="10,155"
+        />
+    <VARIATION
+        Description="Test upper boundary (indexed + mirrored)"
+        Expectation="'Model' Hit."
+        Point="10,158"
+        />
+    <VARIATION
+        Description="Test right boundary (indexed + mirrored)"
+        Expectation="'Model' Missed."
+        Point="144,160"
+        />
+    <VARIATION
+        Description="Test right boundary (indexed + mirrored)"
+        Expectation="'Model' Hit."
+        Point="141,160"
+        />
+    <VARIATION
+        Description="Test lower boundary (indexed + mirrored)"
+        Expectation="'Model' Missed."
+        Point="139,294"
+        />
+    <VARIATION
+        Description="Test lower boundary (indexed + mirrored)"
+        Expectation="'Model' Hit."
+        Point="139,291"
+        />
+    <VARIATION
+        Description="Test left boundary (indexed + mirrored)"
+        Expectation="'Model' Missed."
+        Point="5,290"
+        />
+    <VARIATION
+        Description="Test left boundary (indexed + mirrored)"
+        Expectation="'Model' Hit."
+        Point="8,290"
+        />
+
+    <!-- tests for indexed mesh -->
+
+    <VARIATION
+        Description="Test upper boundary (indexed)"
+        Expectation="'Model' Missed."
+        Point="160,155"
+        />
+    <VARIATION
+        Description="Test upper boundary (indexed)"
+        Expectation="'Model' Hit."
+        Point="160,158"
+        />
+    <VARIATION
+        Description="Test right boundary (indexed)"
+        Expectation="'Model' Missed."
+        Point="294,160"
+        />
+    <VARIATION
+        Description="Test right boundary (indexed)"
+        Expectation="'Model' Hit."
+        Point="291,160"
+        />
+    <VARIATION
+        Description="Test lower boundary (indexed)"
+        Expectation="'Model' Missed."
+        Point="289,294"
+        />
+    <VARIATION
+        Description="Test lower boundary (indexed)"
+        Expectation="'Model' Hit."
+        Point="289,291"
+        />
+    <VARIATION
+        Description="Test left boundary (indexed)"
+        Expectation="'Model' Missed."
+        Point="155,290"
+        />
+    <VARIATION
+        Description="Test left boundary (indexed)"
+        Expectation="'Model' Hit."
+        Point="158,290"
+        />
+
+    <!-- ########################### -->
+    <!-- Hit Testing on BackMaterial -->
+    <!-- ########################### -->
+    
+    <!-- tests for non-indexed mesh with a mirror transform -->
+
+    <VARIATION
+        Description="Test upper boundary (non-indexed + mirrored)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="10,5"
+        />
+    <VARIATION
+        Description="Test upper boundary (non-indexed + mirrored)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="10,8"
+        />
+    <VARIATION
+        Description="Test right boundary (non-indexed + mirrored)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="144,10"
+        />
+    <VARIATION
+        Description="Test right boundary (non-indexed + mirrored)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="141,10"
+        />
+    <VARIATION
+        Description="Test lower boundary (non-indexed + mirrored)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="139,144"
+        />
+    <VARIATION
+        Description="Test lower boundary (non-indexed + mirrored)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="139,141"
+        />
+    <VARIATION
+        Description="Test left boundary (non-indexed + mirrored)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="5,140"
+        />
+    <VARIATION
+        Description="Test left boundary (non-indexed + mirrored)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="8,140"
+        />
+
+    <!-- tests for non-indexed mesh -->
+
+    <VARIATION
+        Description="Test upper boundary (non-indexed)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="160,5"
+        />
+    <VARIATION
+        Description="Test upper boundary (non-indexed)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="160,8"
+        />
+    <VARIATION
+        Description="Test right boundary (non-indexed)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="294,10"
+        />
+    <VARIATION
+        Description="Test right boundary (non-indexed)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="291,10"
+        />
+    <VARIATION
+        Description="Test lower boundary (non-indexed)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="289,144"
+        />
+    <VARIATION
+        Description="Test lower boundary (non-indexed)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="289,141"
+        />
+    <VARIATION
+        Description="Test left boundary (non-indexed)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="155,140"
+        />
+    <VARIATION
+        Description="Test left boundary (non-indexed)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="158,140"
+        />
+
+    <!-- tests for indexed mesh with a mirror transform -->
+
+    <VARIATION
+        Description="Test upper boundary (indexed + mirrored)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="10,155"
+        />
+    <VARIATION
+        Description="Test upper boundary (indexed + mirrored)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="10,158"
+        />
+    <VARIATION
+        Description="Test right boundary (indexed + mirrored)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="144,160"
+        />
+    <VARIATION
+        Description="Test right boundary (indexed + mirrored)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="141,160"
+        />
+    <VARIATION
+        Description="Test lower boundary (indexed + mirrored)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="139,294"
+        />
+    <VARIATION
+        Description="Test lower boundary (indexed + mirrored)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="139,291"
+        />
+    <VARIATION
+        Description="Test left boundary (indexed + mirrored)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="5,290"
+        />
+    <VARIATION
+        Description="Test left boundary (indexed + mirrored)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="8,290"
+        />
+
+    <!-- tests for indexed mesh -->
+
+    <VARIATION
+        Description="Test upper boundary (indexed)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="160,155"
+        />
+    <VARIATION
+        Description="Test upper boundary (indexed)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="160,158"
+        />
+    <VARIATION
+        Description="Test right boundary (indexed)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="294,160"
+        />
+    <VARIATION
+        Description="Test right boundary (indexed)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="291,160"
+        />
+    <VARIATION
+        Description="Test lower boundary (indexed)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="289,294"
+        />
+    <VARIATION
+        Description="Test lower boundary (indexed)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="289,291"
+        />
+    <VARIATION
+        Description="Test left boundary (indexed)"
+        Expectation="'Model' Missed."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="155,290"
+        />
+    <VARIATION
+        Description="Test left boundary (indexed)"
+        Expectation="'Model' Hit."
+        CameraPosition="0,0,5" 
+        CameraLookDirection="0,0,1" 
+        Point="158,290"
+        />
+
+</INIT>

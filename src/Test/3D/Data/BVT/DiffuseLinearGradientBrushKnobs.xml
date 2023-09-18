@@ -1,0 +1,201 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseLinearGradientBrushKnobsTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,40,40,40"
+    
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    >
+
+    <!-- AmbientColor (transparency in knob does not affect material transparency. It only scales the knob RGB values) -->
+
+    <VARIATION
+        Description="front = white/gray/0, back = yellow/purple/45, white light, AmbientColor knob"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterialAmbientColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = white/gray/0, colored light, AmbientColor knob"
+        Light="NonWhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialAmbientColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = white/gray/0, back = yellow/purple/45, white light, AmbientColor knob w/ transparency"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialAmbientColor="0,255,255,255"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = white/gray/0, white light, AmbientColor knob w/ transparency"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialAmbientColor="64,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialAmbientColor="192,127,0,192"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, white light, AmbientColor knob w/ transparency"
+        DefaultColorTolerance="0,3,3,3"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 200,255,0,255 45,0,255,0 90"
+        MaterialAmbientColor="192,0,255,0"
+        BackMaterial="LinearGradientBrush 100,255,255,255 230,150,150,150 0"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = white/gray/0, directional light, AmbientColor knob (ignored)"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+
+    <!-- DiffuseColor (transparency in knob affects transparency of material) -->
+
+    <VARIATION
+        Description="front = white/gray/0, back = yellow/purple/45, white light, DiffuseColor knob"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialColor="255,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterialColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = white/gray/0, colored light, DiffuseColor knob"
+        Light="NonWhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialColor="255,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = white/gray/0, back = yellow/purple/45, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialColor="0,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterialColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = white/gray/0, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="BackAndFront"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialColor="64,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialColor="192,127,0,192"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 200,255,0,255 45,0,255,0 90"
+        MaterialColor="127,0,255,0"
+        BackMaterial="LinearGradientBrush 100,255,255,255 230,150,150,150 0"
+        BackMaterialColor="64,127,0,192"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = white/gray/0, ambient light, DiffuseColor knob (ignored)"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialColor="255,0,255,0"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialColor="255,127,0,192"
+        />
+
+    <!-- Both knobs -->
+
+    <VARIATION
+        Description="front = white/gray/0, back = white/gray/0, point light, both knobs set (ambient ignored)"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialAmbientColor="255,0,0,0"
+        MaterialColor="255,255,255,255" 
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = white/gray/0, back = white/gray/0, point light, both knobs set (transparent ambient ignored)"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialAmbientColor="0,0,0,0"
+        MaterialColor="255,255,255,255" 
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialAmbientColor="0,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = white/gray/0, back = white/gray/0, ambient light, both knobs set (diffuse ignored)"
+        Light="WhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialAmbientColor="255,0,0,0"
+        MaterialColor="255,255,255,255"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = white/gray/0, back = white/gray/0, ambient light, both knobs set (diffuse alpha respected)"
+        Light="WhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        MaterialAmbientColor="180,0,255,0"
+        MaterialColor="180,255,255,255"
+        BackMaterial="LinearGradientBrush 255,255,255,255 255,150,150,150 0"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="0,0,0,0"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = yellow/purple/45, point light, both knobs set (ambient ignored)"
+        DefaultColorTolerance="0,3,3,3"
+        Light="NonWhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialAmbientColor="255,200,200,200"
+        MaterialColor="255,200,200,200"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterialAmbientColor="255,200,200,200"
+        BackMaterialColor="255,200,200,200"
+        />
+    <VARIATION
+        Description="front = yellow/purple/45, back = yellow/purple/45, ambient light, both knobs set (diffuse ignored)"
+        Light="NonWhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        MaterialAmbientColor="255,200,200,200"
+        MaterialColor="255,200,200,200"
+        BackMaterial="LinearGradientBrush 255,255,255,0 255,255,0,255 45"
+        BackMaterialAmbientColor="255,200,200,200"
+        BackMaterialColor="255,200,200,200"
+        />
+
+</INIT>

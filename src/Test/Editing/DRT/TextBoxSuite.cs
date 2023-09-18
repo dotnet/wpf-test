@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -348,9 +348,9 @@ namespace DRT
 
         /// <summary>
         /// Tests inserting surrogate char with the TextBox.MaxLength property.
-        /// WPF textbox exception when input emotion icon if "MaxLength" is set
-        /// Incorrect truncated text when input string contains emotion icon and exceeds the "MaxLength" of WPF textbox
-        /// A rectangle is shown when input emotion icon to a WPF textbox with 1 remainig space to reach its MaxLength
+        /// Regression_Bug268-WPF textbox exception when input emotion icon if "MaxLength" is set
+        /// Regression_Bug269-Incorrect truncated text when input string contains emotion icon and exceeds the "MaxLength" of WPF textbox
+        /// Regression_Bug270-A rectangle is shown when input emotion icon to a WPF textbox with 1 remainig space to reach its MaxLength
         /// </summary>
         private void TestMaxLengthSurrogate()
         {
@@ -899,7 +899,6 @@ namespace DRT
         private void TestCaretMovementOnKeyDown()
         {
             // Verify that selection start moves to beginning of last line, after the \r\n sequences
-            // 
             AssertEqual(_textbox.SelectionStart, 8, "Selection start expected value is 8");
 
             // Clear _textbox for next set of tests

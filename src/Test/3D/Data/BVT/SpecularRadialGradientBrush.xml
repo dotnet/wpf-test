@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="SpecularRadialGradientBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    DefaultColorTolerance="0,5,5,5"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    MaterialType="Specular"
+    MaterialSpecularPower="30"
+    BackMaterialType="Specular"
+    BackMaterialSpecularPower="30"
+    >
+
+    <!-- Verify non-ambient lights -->
+
+    <VARIATION
+        Description="front = white/gray, back = yellow/purple, colored directional light"
+        Light="NonWhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,255,255 255,150,150,150"
+        BackMaterial="RadialGradientBrush 255,255,255,0 255,255,0,255"
+        />
+    <VARIATION
+        Description="front = yellow/purple, back = yellow/purple, white point light"
+        Light="WhitePointBelow"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,255,0 255,255,0,255"
+        BackMaterial="RadialGradientBrush 255,255,255,0 255,255,0,255"
+        />
+    <VARIATION
+        Description="front = yellow/purple, back = white/gray, white spot light"
+        Light="WhiteSpot"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,255,0 255,255,0,255"
+        BackMaterial="RadialGradientBrush 255,255,255,255 255,150,150,150"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = yellow/purple, back = semi-transparent"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,255,0 255,255,0,255"
+        BackMaterial="RadialGradientBrush 45,0,255,0 200,255,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = yellow/purple"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 220,34,193,139 60,139,34,193"
+        BackMaterial="RadialGradientBrush 255,255,255,0 255,255,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, colored light"
+        Light="NonWhitePoint"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 220,34,193,139 60,139,34,193"
+        BackMaterial="RadialGradientBrush 45,0,255,0 200,255,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent - specular does not write to z buffer"
+        Light="WhitePoint"
+        Mesh="BackAndFront"
+        Material="RadialGradientBrush 220,34,193,139 60,139,34,193"
+        BackMaterial="RadialGradientBrush 45,0,255,0 200,255,0,255"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = white/gray * green, back = yellow/purple * indigo"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,255,255 255,150,150,150"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="RadialGradientBrush 255,255,255,0 255,255,0,255"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = yellow/purple * green, back = white/gray * indigo"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,255,0 255,255,0,255"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="RadialGradientBrush 255,255,255,255 255,150,150,150"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = white/gray * mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 220,34,193,139 60,139,34,193"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="RadialGradientBrush 255,255,255,255 255,150,150,150"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = white/gray * mix, back = semi-transparent * mix"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,255,255 255,150,150,150"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="RadialGradientBrush 0,255,255,255 255,255,255,255"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = gray/white * transparent, back = purple/yellow * semi-transparent"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = gray/white * semi-transparent"
+        Light="WhitePoint"
+        Mesh="BackAndFront"
+        Material="RadialGradientBrush 200,255,0,255 45,0,255,0"
+        MaterialColor="192,47,239,143"
+        BackMaterial="RadialGradientBrush 255,150,150,150 255,255,255,255"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

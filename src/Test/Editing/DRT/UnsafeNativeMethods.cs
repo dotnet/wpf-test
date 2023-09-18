@@ -9,6 +9,7 @@
 // it in one of the following files:
 // 
 // NativeMethods.cs
+// UnsafeNativeMethods.cs
 // SafeNativeMethods.cs
 //
 // Only uncomment what you need to avoid code bloat.
@@ -3690,18 +3691,12 @@ namespace MS.Win32
         public IntPtr pszFile = IntPtr.Zero;
     }
     
-    // SECUNDONE : For some reason "PtrToStructure" requires super high permission.. put this 
-    //           : assert here until we can get a resolution on this.
-    //
     [ReflectionPermission(SecurityAction.Assert, Unrestricted=true),
         SecurityPermission(SecurityAction.Assert, Flags=SecurityPermissionFlag.UnmanagedCode)]
     public static object PtrToStructure(IntPtr lparam, Type cls) {
         return Marshal.PtrToStructure(lparam, cls);
     }
     
-    // SECUNDONE : For some reason "PtrToStructure" requires super high permission.. put this 
-    //           : assert here until we can get a resolution on this.
-    //
     [ReflectionPermission(SecurityAction.Assert, Unrestricted=true),
         SecurityPermission(SecurityAction.Assert, Flags=SecurityPermissionFlag.UnmanagedCode)]
     public static void PtrToStructure(IntPtr lparam, object data) {

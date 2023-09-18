@@ -1,0 +1,199 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseSolidBrushKnobsTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,40,40,40"
+    
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="OrthographicDefaultWidth4"
+    >
+
+    <!-- AmbientColor (transparency in knob does not affect material transparency. It only scales the knob RGB values) -->
+
+    <VARIATION
+        Description="front = white, back = mix, white light, AmbientColor knob"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="255,239,143,47"
+        BackMaterialAmbientColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = mix, back = white, colored light, AmbientColor knob"
+        Light="NonWhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="255,255,255,255"
+        BackMaterialAmbientColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = white, back = mix, white light, AmbientColor knob w/ transparency"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialAmbientColor="0,255,255,255"
+        BackMaterial="255,239,143,47"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = mix, back = white, white light, AmbientColor knob w/ transparency"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="255,239,143,47"
+        MaterialAmbientColor="64,0,255,0"
+        BackMaterial="255,255,255,255"
+        BackMaterialAmbientColor="192,127,0,192"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, white light, AmbientColor knob w/ transparency"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="127,239,143,47"
+        MaterialAmbientColor="192,0,255,0"
+        BackMaterial="255,255,255,255"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = mix, back = white, directional light, AmbientColor knob (ignored)"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        MaterialAmbientColor="255,0,255,0"
+        BackMaterial="255,255,255,255"
+        BackMaterialAmbientColor="127,127,0,192"
+        />
+
+    <!-- DiffuseColor (transparency in knob affects transparency of material) -->
+
+    <VARIATION
+        Description="front = white, back = mix, white light, DiffuseColor knob"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialColor="255,0,255,0"
+        BackMaterial="255,239,143,47"
+        BackMaterialColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = mix, back = white, colored light, DiffuseColor knob"
+        Light="NonWhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        MaterialColor="255,0,255,0"
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="255,127,0,192"
+        />
+    <VARIATION
+        Description="front = white, back = mix, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialColor="0,0,255,0"
+        BackMaterial="255,239,143,47"
+        BackMaterialColor="127,127,0,192"
+        />
+    <VARIATION
+        Description="front = mix, back = white, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="BackAndFront"
+        Material="255,239,143,47"
+        MaterialColor="64,0,255,0"
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="192,127,0,192"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent, white light, DiffuseColor knob w/ transparency"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="127,239,143,47"
+        MaterialColor="127,0,255,0"
+        BackMaterial="192,255,255,255"
+        BackMaterialColor="64,127,0,192"
+        />
+    <VARIATION
+        Description="front = mix, back = white, ambient light, DiffuseColor knob (ignored)"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        MaterialColor="255,0,255,0"
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="255,127,0,192"
+        />
+
+    <!-- Both knobs -->
+
+    <VARIATION
+        Description="front = white, back = white, point light, both knobs set (ambient ignored)"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,255,255,255"
+        MaterialAmbientColor="255,0,0,0"
+        MaterialColor="255,255,255,255" 
+        BackMaterial="255,255,255,255"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = white, back = white, point light, both knobs set (transparent ambient ignored)"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,255,255,255"
+        MaterialAmbientColor="0,0,0,0"
+        MaterialColor="255,255,255,255" 
+        BackMaterial="255,255,255,255"
+        BackMaterialAmbientColor="0,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = white, back = white, ambient light, both knobs set (diffuse ignored)"
+        Light="WhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,255,255,255"
+        MaterialAmbientColor="255,0,0,0"
+        MaterialColor="255,255,255,255"
+        BackMaterial="255,255,255,255"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = white, back = white, ambient light, both knobs set (diffuse alpha respected)"
+        Light="WhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,255,255,255"
+        MaterialAmbientColor="180,0,255,0"
+        MaterialColor="180,255,255,255"
+        BackMaterial="255,255,255,255"
+        BackMaterialAmbientColor="255,127,127,127"
+        BackMaterialColor="0,0,0,0"
+        />
+    <VARIATION
+        Description="front = mix, back = mix, point light, both knobs set (ambient ignored)"
+        Light="NonWhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,239,143,47"
+        MaterialAmbientColor="255,200,200,200"
+        MaterialColor="255,200,200,200"
+        BackMaterial="255,143,47,239"
+        BackMaterialAmbientColor="255,200,200,200"
+        BackMaterialColor="255,200,200,200"
+        />
+    <VARIATION
+        Description="front = mix, back = mix, ambient light, both knobs set (diffuse ignored)"
+        Light="NonWhiteAmbient"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="255,239,143,47"
+        MaterialAmbientColor="255,200,200,200"
+        MaterialColor="255,200,200,200"
+        BackMaterial="255,143,47,239"
+        BackMaterialAmbientColor="255,200,200,200"
+        BackMaterialColor="255,200,200,200"
+        />
+
+</INIT>

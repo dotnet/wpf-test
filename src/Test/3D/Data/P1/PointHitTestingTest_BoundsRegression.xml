@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PHT_BoundsRegression"
+
+    Scene="Explicit"
+    Visual0="Spiral 1 24 20.0 5"
+    Material0="255,0,0,255"
+    BackMaterial0="255,255,0,0"
+
+    Visual1="WhiteDirectionalNegZ"
+
+    Visual2="FullScreenMesh"
+    Material2="128,0,255,0"
+
+    CameraType="Perspective"
+    CameraPosition="0,2.1,12"
+    CameraLookDirection="0,-1.7,-10"
+    CameraUp="0,.98,-.17"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="40"
+
+    UseViewport3D="false"
+    >
+
+    <!--
+         When meshes are behind a Perspective Camera, their bounds can be projected to strange places.
+         This test places a camera in the center of a single-coiled spiral and aims it slightly downward.
+         This causes the bug to repro on older bits where the projected bounds clipped half of the visible area.
+         The scene would still render properly even though the hit test bounds were incorrect.
+         The last three variations on each camera failed on the old bits.
+    -->
+
+    <VARIATION
+        CameraFieldOfView="45"
+
+        Description="Point testing at 99,72 - two materials"
+        Expectation="Hit 'Model_2' once."
+        Point="99,72"
+        />
+    <VARIATION
+        CameraFieldOfView="45"
+
+        Description="Point testing at 99,112 - two materials"
+        Expectation="Hit 'Model_0' once."
+        Point="99,112"
+        />
+    <VARIATION
+        CameraFieldOfView="45"
+
+        Description="Point testing at 99,112 - Front Material = null"
+        Expectation="Hit 'Model_0' once."
+        Material0="Null"
+        Point="99,112"
+        />
+    <VARIATION
+        CameraFieldOfView="45"
+
+        Description="Point testing at 99,112 - Back Material = null"
+        Expectation="Hit 'Model_0' once."
+        BackMaterial0="Null"
+        Point="99,112"
+        />
+
+    <!-- Matrix Camera -->
+
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 99,72 - two materials"
+        Expectation="Hit 'Model_2' once."
+        Point="99,72"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 99,112 - two materials"
+        Expectation="Hit 'Model_0' once."
+        Point="99,112"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 99,112 - Front Material = null"
+        Expectation="Hit 'Model_0' once."
+        Material0="Null"
+        Point="99,112"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 99,112 - Back Material = null"
+        Expectation="Hit 'Model_0' once."
+        BackMaterial0="Null"
+        Point="99,112"
+        />
+
+</INIT>

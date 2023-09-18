@@ -1,0 +1,78 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>EditingTestLib</AssemblyName>
+    <Configuration>Release</Configuration>
+    <OutputType>Library</OutputType>
+    <HostInBrowser>false</HostInBrowser>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <GenerateManifests>true</GenerateManifests>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <Import Project="$(WINDOWS_TST_CLIENT_ROOT)\WinFxTest.targets" />
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>$(TRUSTED_TEST_KEY)</AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(ASSEMBLYINFO)" />
+    <Compile Include="/unsafe" />
+    <Compile Include="data\documentpositiondata.cs" />
+    <Compile Include="Imaging\BitmapCapture.cs" />
+    <Compile Include="Imaging\BitmapUtils.cs" />
+    <Compile Include="Imaging\ColorUtils.cs" />
+    <Compile Include="Imaging\ComparisonAlgorithm.cs" />
+    <Compile Include="Imaging\ComparisonCriteria.cs" />
+    <Compile Include="Imaging\ComparisonOperation.cs" />
+    <Compile Include="Imaging\ComparisonOperationUtils.cs" />
+    <Compile Include="Imaging\ComparisonResult.cs" />
+    <Compile Include="Imaging\PixelData.cs" />
+    <Compile Include="IO\LogStreamWorkItem.cs" />
+    <Compile Include="IO\StringStream.cs" />
+    <Compile Include="IO\TextFileUtils.cs" />
+    <Compile Include="Loggers\ClrProfilerLogger.cs" />
+    <Compile Include="Loggers\CommandLogger.cs" />
+    <Compile Include="Loggers\InputLogger.cs" />
+    <Compile Include="Loggers\Loggers.cs" />
+    <Compile Include="Loggers\TextTreeLogger.cs" />
+    <Compile Include="Loggers\VisualLogger.cs" />
+    <Compile Include="Management\Attributes.cs" />
+    <Compile Include="Management\Coordinator.cs" />
+    <Compile Include="Management\TestFinder.cs" />
+    <Compile Include="Management\TestRunner.cs" />
+    <Compile Include="Models\KeyboardEditingState.cs" />
+    <Compile Include="TestTypes\TestTypes.cs" />
+    <Compile Include="Utils\ActionManager.cs" />
+    <Compile Include="Utils\CaretVerifier.cs" />
+    <Compile Include="Utils\Combinatorial.cs" />
+    <Compile Include="Utils\Configuration.cs" />
+    <Compile Include="Utils\CustomXPathNavigators.cs" />
+    <Compile Include="Utils\ElementUtils.cs" />
+    <Compile Include="Utils\GlobalCachedObjects.cs" />
+    <Compile Include="Utils\Input.cs" />
+    <Compile Include="Utils\InputGenerator.cs" />
+    <Compile Include="Utils\InputMonitor.cs" />
+    <Compile Include="Utils\InputMonitorManager.cs" />
+    <Compile Include="Utils\MathUtils.cs" />
+    <Compile Include="Utils\ProcessUtils.cs" />
+    <Compile Include="Utils\Queue.cs" />
+    <Compile Include="Utils\Reflection.cs" />
+    <Compile Include="Utils\Text.cs" />
+    <Compile Include="Utils\Verifier.cs" />
+    <Compile Include="Utils\XamlUtils.cs" />
+    <Compile Include="Utils\XmlTestConfiguration.cs" />
+    <Compile Include="Wrappers\ActionItemWrapper.cs" />
+    <Compile Include="Wrappers\ElementWrappers.cs" />
+    <Compile Include="Wrappers\WinFormsWrappers.cs" />
+    <Compile Include="Wrappers\Wrappers.cs" />
+    <Compile Include="Stress\UisStress.cs" />
+    <Compile Include="TestCaseTemplates\ActionDrivenTest.cs" />
+    <Compile Include="TestCaseTemplates\Text\TestTextContainerChangedEventHandler.cs" />
+    <ResolvedReferencePaths Include="$(WCP_REFERENCES)" />
+    <ResolvedReferencePaths Include="$(AUTOMATIONFRAMEWORK_METADATA)" />
+    <ResolvedReferencePaths Include="$(CLIENTTESTRUNTIME_METADATA)" />
+    <ResolvedReferencePaths Include="$(AUTODATA_METADATA)" />
+  </ItemGroup>
+</Project>

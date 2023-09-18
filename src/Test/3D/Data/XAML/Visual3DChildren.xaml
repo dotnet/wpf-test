@@ -1,0 +1,80 @@
+﻿<Grid
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="black"
+    >
+    <Grid.Resources>
+        <!-- Meshes -->
+        <MeshGeometry3D x:Key="flatmesh" Positions="-0.5,-0.5,0 0.5,-0.5,0 0,0.5,0" />
+        <MeshGeometry3D x:Key="unitmesh" Positions="-0.5,-0.5,0.7 0.5,-0.5,0.3 0,0.5,0" />
+
+        <!-- Materials -->
+        <DiffuseMaterial x:Key="red" Brush="red" />
+        <DiffuseMaterial x:Key="yellow" Brush="yellow" />
+        <DiffuseMaterial x:Key="green" Brush="green" />
+        <DiffuseMaterial x:Key="blue" Brush="blue" />
+
+        <!-- GeometryModels -->
+        <GeometryModel3D x:Key="flatred" Geometry="{StaticResource flatmesh}" Material="{StaticResource red}" />
+        <GeometryModel3D x:Key="flatblue" Geometry="{StaticResource flatmesh}" Material="{StaticResource blue}" />
+        <GeometryModel3D x:Key="unityellow" Geometry="{StaticResource unitmesh}" Material="{StaticResource yellow}" />
+        <GeometryModel3D x:Key="unitgreen" Geometry="{StaticResource unitmesh}" Material="{StaticResource green}" />
+
+        <!-- Transforms -->
+        <TranslateTransform3D x:Key="upleft"    OffsetX="-1.2" OffsetY=" 1.2" OffsetZ="   0" />
+        <TranslateTransform3D x:Key="up"        OffsetX="   0" OffsetY=" 1.2" OffsetZ="   0" />
+        <TranslateTransform3D x:Key="upright"   OffsetX=" 1.2" OffsetY=" 1.2" OffsetZ="   0" />
+        <TranslateTransform3D x:Key="left"      OffsetX="-1.2" OffsetY="   0" OffsetZ="   0" />
+        <TranslateTransform3D x:Key="right"     OffsetX=" 1.2" OffsetY="   0" OffsetZ="   0" />
+        <TranslateTransform3D x:Key="downleft"  OffsetX="-1.2" OffsetY="-1.2" OffsetZ="   0" />
+        <TranslateTransform3D x:Key="down"      OffsetX="   0" OffsetY="-1.2" OffsetZ="   0" />
+        <TranslateTransform3D x:Key="downright" OffsetX=" 1.2" OffsetY="-1.2" OffsetZ="   0" />
+        <TranslateTransform3D x:Key="forward"   OffsetX="   0" OffsetY="   0" OffsetZ=" 1.2" />
+        <TranslateTransform3D x:Key="backward"  OffsetX="   0" OffsetY="   0" OffsetZ="-1.2" />
+
+        <!-- Lights -->
+        <AmbientLight x:Key="dimamb" Color="#ff252525" />
+        <AmbientLight x:Key="brightamb" Color="#ffc0c0c0" />
+        <DirectionalLight x:Key="dimdir" Color="#ff252525" Direction="0,0,-1" />
+        <DirectionalLight x:Key="brightdir" Color="#ffc0c0c0" Direction="0,0,-1" />
+        <PointLight x:Key="dimpoint" Color="#ff252525" Position="0,0,0" Range="20" ConstantAttenuation="2" />
+        <PointLight x:Key="brightpoint" Color="#ffc0c0c0" Position="0,0,0" Range="20" ConstantAttenuation="2" />
+
+    </Grid.Resources>
+
+    <Viewport3D>
+        <Viewport3D.Camera>
+            <PerspectiveCamera
+                FarPlaneDistance="20"
+                FieldOfView="60"
+                LookDirection="0,0,-1"
+                NearPlaneDistance="1"
+                Position="0,0,6"
+                UpDirection="0,1,0"
+                  />
+        </Viewport3D.Camera>
+
+        <ModelVisual3D Content="{StaticResource dimamb}">
+            <ModelVisual3D Content="{StaticResource dimdir}" />
+        </ModelVisual3D>
+        
+        <ModelVisual3D Content="{StaticResource flatred}"   Transform="{StaticResource backward}">
+            <ModelVisual3D Content="{StaticResource unitgreen}"  Transform="{StaticResource upleft}" />
+            <ModelVisual3D Content="{StaticResource flatblue}"   Transform="{StaticResource up}" />
+            <ModelVisual3D Content="{StaticResource unityellow}" Transform="{StaticResource upright}" />
+        </ModelVisual3D>
+        
+        <ModelVisual3D Transform="{StaticResource forward}">
+            <ModelVisual3D Content="{StaticResource flatred}"  Transform="{StaticResource downleft}" />
+            <ModelVisual3D Content="{StaticResource unitgreen}"  Transform="{StaticResource down}">
+                <ModelVisual3D Transform="{StaticResource forward}">
+                    <ModelVisual3D Content="{StaticResource flatblue}" Transform="{StaticResource right}" />
+                    <ModelVisual3D Content="{StaticResource unityellow}"  Transform="{StaticResource upright}" />
+                </ModelVisual3D>
+            </ModelVisual3D>
+        </ModelVisual3D>
+
+    </Viewport3D>
+
+
+</Grid>
