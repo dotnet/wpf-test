@@ -1,0 +1,816 @@
+﻿<Window
+  x:Uid="Window_1" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:cmd="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+  xmlns:cmdCustom="clr-namespace:EditingExaminer"
+  Title="EditingExaminer"
+  x:Class="EditingExaminer.MainWindow"
+  Loaded="WindowLoaded"
+  Closed="WindowClosed" 
+  ResizeMode="CanResizeWithGrip" 
+  Width="850" Height="500" 
+  Padding ="20, 0, 20, 20" 
+  Background="Transparent" 
+  SizeChanged="window_SizeChanged"  
+  Name="EditorWindow">
+
+  <Window.Resources>
+    <Style TargetType="{x:Type Paragraph}">
+      <Setter Property="Margin">
+        <Setter.Value>0</Setter.Value>
+      </Setter>
+    </Style>
+
+    <!--=================================================================
+        ScrollViewer inside a MenuItem or ContextMenu
+    ==================================================================-->
+    <ControlTemplate x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type FrameworkElement}, ResourceId=SubmenuContent}"
+                     TargetType="{x:Type ContentControl}">
+      <Grid>
+        <Rectangle Fill="white"
+                   Stroke="white"
+                   StrokeThickness="0"/>
+        <Rectangle Margin="2"
+                   Fill="white"
+                   RadiusX="2"
+                   RadiusY="2"/>
+        <Grid Margin="2">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Rectangle Grid.ColumnSpan="3"
+                     Fill="white"
+                     RadiusX="6"
+                     RadiusY="6"/>
+          <Rectangle Grid.Column="1"
+                     Fill="white"/>
+          <Rectangle Grid.Column="2"
+                     Fill="White"/>
+        </Grid>
+        <ContentPresenter/>
+      </Grid>
+    </ControlTemplate>
+    <Style x:Key="MenuScrollButton"
+           TargetType="{x:Type RepeatButton}"
+           BasedOn="{x:Null}">
+      <Setter Property="ClickMode"
+              Value="Hover"/>
+      <Setter Property="MinWidth"
+              Value="0"/>
+      <Setter Property="MinHeight"
+              Value="0"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type RepeatButton}">
+            <DockPanel Background="Transparent">
+              <!--right -->
+              <Rectangle DockPanel.Dock="Right"
+                         x:Name="R1"
+                         Width="1"
+                         Fill="Transparent"/>
+              <!--bottom-->
+              <Rectangle DockPanel.Dock="Bottom"
+                         x:Name="B1"
+                         Height="1"
+                         Fill="Transparent"/>
+              <!--left  -->
+              <Rectangle DockPanel.Dock="Left"
+                         x:Name="L1"
+                         Width="1"
+                         Fill="Transparent"/>
+              <!--top   -->
+              <Rectangle DockPanel.Dock="Top"
+                         x:Name="T1"
+                         Height="1"
+                         Fill="Transparent"/>
+              <ContentPresenter x:Name="ContentContainer"
+                                Margin="2,2,2,2"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+            </DockPanel>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsPressed"
+                       Value="true">
+                <Setter TargetName="R1"
+                        Property="Fill"
+                        Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+                <Setter TargetName="B1"
+                        Property="Fill"
+                        Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+                <Setter TargetName="L1"
+                        Property="Fill"
+                        Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
+                <Setter TargetName="T1"
+                        Property="Fill"
+                        Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
+                <Setter TargetName="ContentContainer"
+                        Property="Margin"
+                        Value="3,3,1,1"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter"/>
+    <PathGeometry x:Key="DownArrow">
+      <PathGeometry.Figures>
+        <PathFigureCollection>
+          <PathFigure StartPoint="0 0"
+                      IsClosed="True"
+                      IsFilled="True">
+            <PathFigure.Segments>
+              <PathSegmentCollection>
+                <LineSegment Point="3.5 4"/>
+                <LineSegment Point="7 0"/>
+              </PathSegmentCollection>
+            </PathFigure.Segments>
+          </PathFigure>
+        </PathFigureCollection>
+      </PathGeometry.Figures>
+    </PathGeometry>
+    <PathGeometry x:Key="UpArrow">
+      <PathGeometry.Figures>
+        <PathFigureCollection>
+          <PathFigure IsFilled="True"
+                      StartPoint="0 4"
+                      IsClosed="True">
+            <PathFigure.Segments>
+              <PathSegmentCollection>
+                <LineSegment Point="3.5 0"/>
+                <LineSegment Point="7 4"/>
+              </PathSegmentCollection>
+            </PathFigure.Segments>
+          </PathFigure>
+        </PathFigureCollection>
+      </PathGeometry.Figures>
+    </PathGeometry>
+    <PathGeometry x:Key="RightArrow">
+      <PathGeometry.Figures>
+        <PathFigureCollection>
+          <PathFigure IsFilled="True"
+                      StartPoint="0 0"
+                      IsClosed="True">
+            <PathFigure.Segments>
+              <PathSegmentCollection>
+                <LineSegment Point="0 8"/>
+                <LineSegment Point="4 4"/>
+              </PathSegmentCollection>
+            </PathFigure.Segments>
+          </PathFigure>
+        </PathFigureCollection>
+      </PathGeometry.Figures>
+    </PathGeometry>
+    <PathGeometry x:Key="Checkmark">
+      <PathGeometry.Figures>
+        <PathFigureCollection>
+          <PathFigure IsFilled="True"
+                      StartPoint="1.5 6"
+                      IsClosed="True">
+            <PathFigure.Segments>
+              <PathSegmentCollection>
+                <LineSegment Point="0 6"/>
+                <LineSegment Point="3.5 11"/>
+                <LineSegment Point="9 0"/>
+                <LineSegment Point="7.5 0"/>
+                <LineSegment Point="3.5 8"/>
+              </PathSegmentCollection>
+            </PathFigure.Segments>
+          </PathFigure>
+        </PathFigureCollection>
+      </PathGeometry.Figures>
+    </PathGeometry>
+    <Style x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type FrameworkElement}, ResourceId=MenuScrollViewer}"
+           TargetType="{x:Type ScrollViewer}"
+           BasedOn="{x:Null}">
+      <Setter Property="HorizontalScrollBarVisibility"
+              Value="Hidden"/>
+      <Setter Property="VerticalScrollBarVisibility"
+              Value="Auto"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type ScrollViewer}">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <Border Grid.Row="1"
+                      Grid.Column="0">
+                <ScrollContentPresenter Margin="{TemplateBinding Padding}"/>
+              </Border>
+              <RepeatButton
+                            Style="{StaticResource MenuScrollButton}"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Command="{x:Static ScrollBar.LineUpCommand}"
+                            CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                            Focusable="false">
+                <RepeatButton.Visibility>
+                  <MultiBinding FallbackValue="Visibility.Collapsed"
+                                Converter="{StaticResource MenuScrollingVisibilityConverter}"
+                                ConverterParameter="0">
+                    <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                             Path="ComputedVerticalScrollBarVisibility"/>
+                    <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                             Path="VerticalOffset"/>
+                    <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                             Path="ExtentHeight"/>
+                    <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                             Path="ViewportHeight"/>
+                  </MultiBinding>
+                </RepeatButton.Visibility>
+                <Path Fill="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
+                      Data="{StaticResource UpArrow}"/>
+              </RepeatButton>
+              <RepeatButton
+                            Style="{StaticResource MenuScrollButton}"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Command="{x:Static ScrollBar.LineDownCommand}"
+                            CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                            Focusable="false">
+                <RepeatButton.Visibility>
+                  <MultiBinding FallbackValue="Visibility.Collapsed"
+                                Converter="{StaticResource MenuScrollingVisibilityConverter}"
+                                ConverterParameter="100">
+                    <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                             Path="ComputedVerticalScrollBarVisibility"/>
+                    <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                             Path="VerticalOffset"/>
+                    <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                             Path="ExtentHeight"/>
+                    <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                             Path="ViewportHeight"/>
+                  </MultiBinding>
+                </RepeatButton.Visibility>
+                <Path Fill="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
+                      Data="{StaticResource DownArrow}"/>
+              </RepeatButton>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style  TargetType="{x:Type ContextMenu}">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type ContextMenu}">
+            <Border Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" 
+                            BorderBrush="Silver" 
+                            BorderThickness="2" CornerRadius="10" Padding="4">
+              <Grid Name="Root">
+                <ContentControl Name="Border"
+                                Template="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type FrameworkElement}, ResourceId=SubmenuContent}}"
+                                IsTabStop="false"/>
+                <ScrollViewer CanContentScroll="true"
+                              Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type FrameworkElement}, ResourceId=MenuScrollViewer}}">
+                  <ItemsPresenter Margin="{TemplateBinding Padding}"
+                                  KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                </ScrollViewer>
+              </Grid>
+
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="HasDropShadow"
+                       Value="true">
+                <Setter TargetName="Root"
+                        Property="Margin"
+                        Value="0,0,3,3"/>
+                <Setter TargetName="Root"
+                        Property="SnapsToDevicePixels"
+                        Value="true"/>
+
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <!--=================================================================
+        TabControl
+    ==================================================================-->
+    <SolidColorBrush x:Key="TabControlNormalBorderBrush"
+                     Color="#8C8E94"/>
+    <Style x:Key="{x:Type TabControl}"
+           TargetType="{x:Type TabControl}">
+      <Setter Property="Foreground"
+              Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+      <Setter Property="Padding"
+              Value="4,4,4,4"/>
+      <Setter Property="BorderThickness"
+              Value="1"/>
+      <Setter Property="BorderBrush"
+              Value="{StaticResource TabControlNormalBorderBrush}"/>
+      <Setter Property="Background"
+              Value="White"/>
+      <Setter Property="HorizontalContentAlignment"
+              Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+      <Setter Property="VerticalContentAlignment"
+              Value="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type TabControl}">
+            <Grid KeyboardNavigation.TabNavigation="Local">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="ColumnDefinition0"/>
+                <ColumnDefinition x:Name="ColumnDefinition1"
+                                  Width="0"/>
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition x:Name="RowDefinition0"
+                               Height="Auto"/>
+                <RowDefinition x:Name="RowDefinition1"
+                               Height="*"/>
+              </Grid.RowDefinitions>
+              <Border x:Name="ContentPanel"
+                      Background="{TemplateBinding Background}"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      KeyboardNavigation.TabNavigation="Local"
+                      KeyboardNavigation.DirectionalNavigation="Contained"
+                      KeyboardNavigation.TabIndex="2"
+                      Grid.Column="0"
+                      Grid.Row="1">
+                <ContentPresenter x:Name="PART_SelectedContentHost"
+                                  Margin="{TemplateBinding Padding}"
+                                  ContentSource="SelectedContent"/>
+              </Border>
+              <TabPanel x:Name="HeaderPanel"
+                        KeyboardNavigation.TabIndex="1"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        IsItemsHost="true"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="TabStripPlacement"
+                       Value="Bottom">
+                <Setter Property="Grid.Row"
+                        Value="1"
+                        TargetName="HeaderPanel"/>
+                <Setter Property="Grid.Row"
+                        Value="0"
+                        TargetName="ContentPanel"/>
+                <Setter Property="Height"
+                        Value="*"
+                        TargetName="RowDefinition0"/>
+                <Setter Property="Height"
+                        Value="Auto"
+                        TargetName="RowDefinition1"/>
+              </Trigger>
+              <Trigger Property="TabStripPlacement"
+                       Value="Left">
+                <Setter Property="Grid.Row"
+                        Value="0"
+                        TargetName="HeaderPanel"/>
+                <Setter Property="Grid.Row"
+                        Value="0"
+                        TargetName="ContentPanel"/>
+                <Setter Property="Grid.Column"
+                        Value="0"
+                        TargetName="HeaderPanel"/>
+                <Setter Property="Grid.Column"
+                        Value="1"
+                        TargetName="ContentPanel"/>
+                <Setter Property="Width"
+                        Value="Auto"
+                        TargetName="ColumnDefinition0"/>
+                <Setter Property="Width"
+                        Value="*"
+                        TargetName="ColumnDefinition1"/>
+                <Setter Property="Height"
+                        Value="*"
+                        TargetName="RowDefinition0"/>
+                <Setter Property="Height"
+                        Value="0"
+                        TargetName="RowDefinition1"/>
+              </Trigger>
+              <Trigger Property="TabStripPlacement"
+                       Value="Right">
+                <Setter Property="Grid.Row"
+                        Value="0"
+                        TargetName="HeaderPanel"/>
+                <Setter Property="Grid.Row"
+                        Value="0"
+                        TargetName="ContentPanel"/>
+                <Setter Property="Grid.Column"
+                        Value="1"
+                        TargetName="HeaderPanel"/>
+                <Setter Property="Grid.Column"
+                        Value="0"
+                        TargetName="ContentPanel"/>
+                <Setter Property="Width"
+                        Value="*"
+                        TargetName="ColumnDefinition0"/>
+                <Setter Property="Width"
+                        Value="Auto"
+                        TargetName="ColumnDefinition1"/>
+                <Setter Property="Height"
+                        Value="*"
+                        TargetName="RowDefinition0"/>
+                <Setter Property="Height"
+                        Value="0"
+                        TargetName="RowDefinition1"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+
+    <Style x:Key="TabItemFocusVisual">
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Rectangle Margin="3,3,3,1"
+                       StrokeThickness="1"
+                       Stroke="Black"
+                       StrokeDashArray="1 2"/>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    
+    <!--=================================================================
+        TabItem
+    ==================================================================-->
+    <LinearGradientBrush x:Key="TabItemNormalBackground"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+      <LinearGradientBrush.GradientStops>
+        <GradientStop Color="#FFFFFF"
+                      Offset="0.15"/>
+        <GradientStop Color="#D6E7EF"
+                      Offset=".4"/>
+        <GradientStop Color="#BDD7EF"
+                      Offset=".65"/>
+        <GradientStop Color="#A5CBE7"
+                      Offset=".65"/>
+        <GradientStop Color="#A5CBE7"
+                      Offset=".75"/>
+        <GradientStop Color="#ADD3EF"
+                      Offset=".75"/>
+        <GradientStop Color="#ADD7EF"
+                      Offset="1"/>
+
+
+
+        
+      </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TabItemHotBackground"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+      <LinearGradientBrush.GradientStops>
+
+        <GradientStop Color="#D6E7EF"
+                      Offset=".4"/>
+        <GradientStop Color="#BDD7EF"
+                      Offset=".3"/>
+        <GradientStop Color="#A5CBE7"
+                      Offset=".25"/>
+        <GradientStop Color="#A5CBE7"
+                      Offset=".2"/>
+        <GradientStop Color="#ADD3EF"
+                      Offset=".1"/>
+        <GradientStop Color="#ADD7EF"
+                      Offset="0.5"/>
+        <GradientStop Color="orange"
+              Offset="0"/>
+        
+        <GradientStop Color="#FFFFFF"
+              Offset="0.5"/>
+        <GradientStop Color="#D6E7EF"
+                      Offset=".6"/>
+        <GradientStop Color="#BDD7EF"
+                      Offset=".7"/>
+        <GradientStop Color="#A5CBE7"
+                      Offset=".75"/>
+        <GradientStop Color="#A5CBE7"
+                      Offset=".8"/>
+        <GradientStop Color="#ADD3EF"
+                      Offset=".9"/>
+        <GradientStop Color="#ADD7EF"
+                      Offset=".95"/>
+        <GradientStop Color="orange"
+      Offset="1"/>
+        
+
+      </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="TabItemSelectedBackground"
+                     Color="#FFFCFCFE"/>
+    <SolidColorBrush x:Key="TabItemDisabledBackground"
+                     Color="#FFF5F4EA"/>
+    <SolidColorBrush x:Key="TabItemSelectedBorderBackround"
+                     Color="#FFFFC73C"/>
+    <SolidColorBrush x:Key="TabItemSelectedBorderBrush"
+                     Color="#FFE68B2C"/>
+    <SolidColorBrush x:Key="TabItemHotBorderBackround"
+                     Color="#FFFFC73C"/>
+    <SolidColorBrush x:Key="TabItemHotBorderBrush"
+                     Color="#FFE68B2C"/>
+    <SolidColorBrush x:Key="TabItemDisabledBorderBrush"
+                     Color="#FFC9C7BA"/>
+    <Style x:Key="{x:Type TabItem}"
+           TargetType="{x:Type TabItem}">
+      <Setter Property="FocusVisualStyle"
+              Value="{StaticResource TabItemFocusVisual}"/>
+      <Setter Property="Foreground"
+              Value="Black"/>
+      <Setter Property="Padding"
+              Value="6,1,6,1"/>
+      <Setter Property="BorderBrush"
+              Value="{StaticResource TabControlNormalBorderBrush}"/>
+      <Setter Property="Background"
+              Value="{StaticResource TabItemNormalBackground}"/>
+      <Setter Property="VerticalContentAlignment"
+              Value="Center"/>
+      <Setter Property="HorizontalContentAlignment"
+              Value="Center"/>
+      <!--Setter Property="TabStripPlacement" Value="{Binding Path=TabStripPlacement,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" /-->
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type TabItem}">
+            <Border SnapsToDevicePixels="true">
+              <Grid Margin="0,0,1,0">
+                <Grid x:Name="Transform">
+                  <!-- Header Border -->
+                  <Border Name="Bd"
+                          CornerRadius="3,3,0,0"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"/>
+                  <!-- Top part used for orange highlight -->
+                  <Border x:Name="HighlightBorder"
+                          Height="3"
+                          BorderThickness="1,1,1,0"
+                          CornerRadius="3,3,0,0"
+                          VerticalAlignment="Top"/>
+                </Grid>
+                <!-- Header Content -->
+                <Border BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}">
+                  <ContentPresenter ContentSource="Header"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    RecognizesAccessKey="True"/>
+                </Border>
+              </Grid>
+            </Border>
+
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver"
+                       Value="true">
+                <Setter TargetName="HighlightBorder"
+                        Property="BorderBrush"
+                        Value="{StaticResource TabItemHotBorderBrush}"/>
+                <Setter TargetName="HighlightBorder"
+                        Property="Background"
+                        Value="{StaticResource TabItemHotBorderBackround}"/>
+                <Setter TargetName="Bd"
+                        Property="Background"
+                        Value="{StaticResource TabItemHotBackground}"/>
+              </Trigger>
+              <Trigger Property="IsSelected"
+                       Value="true">
+                <Setter TargetName="HighlightBorder"
+                        Property="BorderBrush"
+                        Value="{StaticResource TabItemSelectedBorderBrush}"/>
+                <Setter TargetName="HighlightBorder"
+                        Property="Background"
+                        Value="{StaticResource TabItemSelectedBorderBackround}"/>
+                <Setter TargetName="Bd"
+                        Property="Background"
+                        Value="wheat"/>
+              </Trigger>
+              <Trigger Property="TabStripPlacement"
+                       Value="Bottom">
+                <Setter Property="LayoutTransform"
+                        TargetName="Transform">
+                  <Setter.Value>
+                    <ScaleTransform ScaleX="1"
+                                    ScaleY="-1"/>
+                  </Setter.Value>
+                </Setter>
+              </Trigger>
+              <Trigger Property="TabStripPlacement"
+                       Value="Left">
+                <Setter Property="LayoutTransform"
+                        TargetName="Transform">
+                  <Setter.Value>
+                    <RotateTransform Angle="-90"/>
+                  </Setter.Value>
+                </Setter>
+              </Trigger>
+              <Trigger Property="TabStripPlacement"
+                       Value="Right">
+                <Setter Property="LayoutTransform"
+                        TargetName="Transform">
+                  <Setter.Value>
+                    <RotateTransform Angle="90"/>
+                  </Setter.Value>
+                </Setter>
+              </Trigger>
+              <Trigger Property="IsEnabled"
+                       Value="false">
+                <Setter Property="Foreground"
+                        Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter TargetName="Bd"
+                        Property="Background"
+                        Value="{StaticResource TabItemDisabledBackground}"/>
+                <Setter TargetName="Bd"
+                        Property="BorderBrush"
+                        Value="{StaticResource TabItemDisabledBorderBrush}"/>
+              </Trigger>
+              <MultiTrigger>
+                <!-- Selected and Top -->
+                <MultiTrigger.Conditions>
+                  <Condition Property="IsSelected"
+                             Value="true"/>
+                  <Condition Property="TabStripPlacement"
+                             Value="Top"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Margin"
+                        Value="0,0,0,-1"/>
+              </MultiTrigger>
+              <MultiTrigger>
+                <!-- Selected and Bottom -->
+                <MultiTrigger.Conditions>
+                  <Condition Property="IsSelected"
+                             Value="true"/>
+                  <Condition Property="TabStripPlacement"
+                             Value="Bottom"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Margin"
+                        Value="0,-1,0,0"/>
+              </MultiTrigger>
+              <MultiTrigger>
+                <!-- Selected and Left -->
+                <MultiTrigger.Conditions>
+                  <Condition Property="IsSelected"
+                             Value="true"/>
+                  <Condition Property="TabStripPlacement"
+                             Value="Left"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Margin"
+                        Value="0,0,-1,0"/>
+              </MultiTrigger>
+              <MultiTrigger>
+                <!-- Selected and Right -->
+                <MultiTrigger.Conditions>
+                  <Condition Property="IsSelected"
+                             Value="true"/>
+                  <Condition Property="TabStripPlacement"
+                             Value="Right"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Margin"
+                        Value="-1,0,0,0"/>
+              </MultiTrigger>
+              <Trigger Property="Width"
+                       Value="Auto">
+                <Setter Property="MinWidth"
+                        Value="20"/>
+              </Trigger>
+              <Trigger Property="Height"
+                       Value="Auto">
+                <Setter Property="MinHeight"
+                        Value="20"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Window.Resources>
+  <Window.CommandBindings>
+    <cmd:CommandBinding Command="New" Executed="DoNewCommand" />
+    <cmd:CommandBinding Command="Save" Executed="DoFileSaveCommand" />
+    <cmd:CommandBinding Command="Open" Executed="DoFileOpenCommand" />
+    <cmd:CommandBinding Command="SaveAs" Executed="DoFileSaveCommand" />
+    <cmd:CommandBinding  Command="cmdCustom:MainWindow.FontCommand" Executed="DoFontCommand"/>
+    <cmd:CommandBinding Command="cmdCustom:MainWindow.HelpTopicsCommand" Executed="DoHelpTopicsCommand" />
+    <cmd:CommandBinding Command="cmdCustom:MainWindow.LaunchWin32RTBCommand" Executed="DoLaunchWin32RTBCommand" />
+    <cmd:CommandBinding Command="cmdCustom:MainWindow.SpellCheckCommand" Executed="DoSpellCheckCommand" />
+    <cmd:CommandBinding Command="cmdCustom:MainWindow.RichTextModeCommand" Executed="DoRichTextModeCommand" />
+    <cmd:CommandBinding Command="cmdCustom:MainWindow.ExitCommand" Executed="DoExitCommand" />
+    <cmd:CommandBinding Command="cmdCustom:MainWindow.ImmediateCommand" Executed="DoImmediateCommand" />
+  </Window.CommandBindings>
+  <Window.InputBindings>
+  </Window.InputBindings>
+
+  <StackPanel   Name="TopPanel" VerticalAlignment="Stretch">
+    <StackPanel.Background>
+      <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+        <LinearGradientBrush.GradientStops>
+          <GradientStopCollection>
+            <GradientStop Offset="0" Color="brown" />
+            <GradientStop Offset="1" Color="white" />
+          </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+      </LinearGradientBrush>
+    </StackPanel.Background>
+    <StackPanel>
+      <Menu Name="MainMenu" DockPanel.Dock="Top">
+        <Menu.Background>
+          <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+            <LinearGradientBrush.GradientStops>
+              <GradientStopCollection>
+                <GradientStop Offset="0" Color="brown" />
+                <GradientStop Offset="1" Color="white" />
+              </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+          </LinearGradientBrush>
+        </Menu.Background>
+        <MenuItem  Name="_fileMenu">
+          <MenuItem.Header>_File</MenuItem.Header>
+          <MenuItem  Name="NewMenuItem" Command="New" CommandTarget="{Binding ElementName=EditorWindow}">
+            <MenuItem.Header>_New </MenuItem.Header>
+          </MenuItem>
+          <MenuItem  Name="OpenMenuItem" Command="Open" CommandTarget="{Binding ElementName=EditorWindow}">
+            <MenuItem.Header>_Open...</MenuItem.Header>
+          </MenuItem>
+          <MenuItem Name="SaveMenuItem" Command="Save" CommandTarget="{Binding ElementName=EditorWindow}">
+            <MenuItem.Header>_Save</MenuItem.Header>
+          </MenuItem>
+          <MenuItem Name="SaveAsMenuItem" Command="SaveAs" CommandTarget="{Binding ElementName=EditorWindow}">
+            <MenuItem.Header>Save _As...</MenuItem.Header>
+          </MenuItem>
+          <MenuItem Name="ExitMenuItem" Command="cmdCustom:MainWindow.ExitCommand" CommandTarget="{Binding ElementName=EditorWindow}">
+            <MenuItem.Header>E_xit</MenuItem.Header>
+          </MenuItem>
+        </MenuItem>
+        
+        <MenuItem Name="_editMenu">
+          <MenuItem.Header>_Edit</MenuItem.Header>
+          <MenuItem Name="UndoMenuItem" IsEnabled="True"  Command="Undo" >
+            <MenuItem.Header>_Undo</MenuItem.Header>
+          </MenuItem>
+          <MenuItem Name="RedoMenuItem" IsEnabled="False" Command="Redo" >
+            <MenuItem.Header>_Redo</MenuItem.Header>
+          </MenuItem>
+          <Separator />
+          <MenuItem Name="CutMenuItem"  Command="Cut" >
+            <MenuItem.Header>Cu_t</MenuItem.Header>
+          </MenuItem>
+          <MenuItem Name="CopyMenuItem" Command="Copy" >
+            <MenuItem.Header>_Copy</MenuItem.Header>
+          </MenuItem>
+          <MenuItem Name="PasteMenuItem" Command="Paste" >
+            <MenuItem.Header>_Paste</MenuItem.Header>
+          </MenuItem>
+          <MenuItem  Name="DeleteMenuItem" Command="Delete" >
+            <MenuItem.Header>De_lete</MenuItem.Header>
+          </MenuItem>
+          <Separator />
+          <MenuItem Name="SelectAllMenuItem" Command="SelectAll">
+            <MenuItem.Header>Select _All</MenuItem.Header>
+          </MenuItem>
+        </MenuItem>
+
+        <MenuItem Name="_formatMenu">
+          <MenuItem.Header>F_ormat</MenuItem.Header>
+          <MenuItem Name="FontMenuItem" Command="cmdCustom:MainWindow.FontCommand" CommandTarget="{Binding ElementName=EditorWindow}">
+            <MenuItem.Header>_Font...</MenuItem.Header>
+          </MenuItem>
+          <Separator  />
+          <MenuItem  Name="SpellCheckMenuItem" Command="cmdCustom:MainWindow.SpellCheckCommand" IsEnabled="True" IsCheckable="True" IsChecked="False">
+            <MenuItem.Header>_Spell Check</MenuItem.Header>
+          </MenuItem>
+          <MenuItem  Name="RichEditMenuItem" Command="cmdCustom:MainWindow.RichTextModeCommand" CommandTarget="{Binding ElementName=EditorWindow}" IsCheckable="True" IsChecked="True">
+            <MenuItem.Header>_RichText Mode</MenuItem.Header>
+          </MenuItem>
+        </MenuItem>
+        
+        <MenuItem  Name="_helpMenu">
+          <MenuItem.Header>_Help</MenuItem.Header>
+          <MenuItem Name="ImmediateMenuItem" Command="cmdCustom:MainWindow.ImmediateCommand" CommandTarget="{Binding ElementName=EditorWindow}" IsChecked="false" IsCheckable="True">
+            <MenuItem.Header>_Immediate Window</MenuItem.Header>
+          </MenuItem>
+          <MenuItem Name="FormBoxMenuItem" Command="cmdCustom:MainWindow.LaunchWin32RTBCommand" CommandTarget="{Binding ElementName=EditorWindow}">
+            <MenuItem.Header>_Win32 RTB</MenuItem.Header>
+          </MenuItem>
+          <MenuItem Name="HelpMenuItem" Command="cmdCustom:MainWindow.HelpTopicsCommand" CommandTarget="{Binding ElementName=EditorWindow}">
+            <MenuItem.Header>_Help Topics</MenuItem.Header>
+          </MenuItem>
+        </MenuItem>
+      </Menu>
+    </StackPanel>
+    <StackPanel Name="Panel1" Orientation ="Vertical" Grid.Row="0"  VerticalAlignment="Stretch">
+      <RichTextBox Name="MainEditor" AcceptsTab="true" VerticalScrollBarVisibility="Visible" >
+      </RichTextBox>
+    </StackPanel>
+  </StackPanel>
+
+</Window>

@@ -4,6 +4,42 @@
 
 //TextContainer tests.
 #if DISABLED_BY_TOM_BREAKING_CHANGE
+
+using System;
+using System.Threading;
+
+using System.Collections;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Globalization;
+using System.Windows.Markup;
+using System.Windows.Media;
+
+namespace DRT
+{    
+    internal class TextTreeSuite : DrtTestSuite
+    {
+        internal TextTreeSuite() : base("TextContainer")
+        {
+        }
+
+    // Initialize tests.
+    public override DrtTest[] PrepareTests()
+    {            
+        // Return the lists of tests to run against the tree
+        return new DrtTest[]{
+            new DrtTest(Bugs),
+            new DrtTest(BasicPointerTests),
+            new DrtTest(InsertTests),
+            new DrtTest(MoveExtractTests),
+            new DrtTest(SetTextTests),
+            new DrtTest(AdvancedPointerTests),
+            new DrtTest(RangeTests),
+            new DrtTest(TextOMRangeTests),
+            new DrtTest(BinaryPointerTests),
+            new DrtTest(ControlsTests),
 #if NOT_YET
                 CopyTests();
 #endif // NOT_YET
@@ -95,54 +131,59 @@
             // Target: TextContainer.Delete
             tr.Text = String.Empty;
 
+            // Regression_Bug265
             tb.Text = "Some Text";
             TextPosition ptr3 = tb.EndPosition;
             int characterOffsetFromTextPosition = ptr3.GetOffsetToPosition(ptr3);
             int characterOffsetFromTextNavigator = ptr3.GetOffsetToPosition(ptr3.CreateNavigator());
             if (characterOffsetFromTextPosition != 0 ||
                 characterOffsetFromTextNavigator != 0)
-                throw new Exception("Bug regressed.");
+                    throw new Exception("Regression_Bug265 regressed.");
 
-                TextNavigator ptra = newTree.Start.CreateNavigator();
-                newTree.MoveToElementEdge(ptra, root, ElementEdge.BeforeStart);
-                TextNavigator ptrb = newTree.Start.CreateNavigator();
-                newTree.MoveToElementEdge(ptrb, nodeB, ElementEdge.AfterEnd);
+            // Regression_Bug895
+            TextNavigator ptra = newTree.Start.CreateNavigator();
+            newTree.MoveToElementEdge(ptra, root, ElementEdge.BeforeStart);
+            TextNavigator ptrb = newTree.Start.CreateNavigator();
+            newTree.MoveToElementEdge(ptrb, nodeB, ElementEdge.AfterEnd);
 
-                TextRange tr1 = new TextRange(ptra, ptrb);
+            TextRange tr1 = new TextRange(ptra, ptrb);
 
-                tr1.Text = String.Empty;
+            tr1.Text = String.Empty;
                 
-                TextBox box = new TextBox();
+            // Regression_Bug638
+            TextBox box = new TextBox();
 
-                box.Text = "Hello, world!";
-                TextNavigator n = box.StartPosition.CreateNavigator();
-                n.MoveByDistance(3);
-                new Bold(box.StartPosition, n);
-                
-                // Write it out.
-                ConsoleWriteLine("TextBox XAML contents:");
-                ConsoleWriteLine(
-                  System.Windows.Markup.XamlWriter.Save(box));
+            box.Text = "Hello, world!";
+            TextNavigator n = box.StartPosition.CreateNavigator();
+            n.MoveByDistance(3);
+            new Bold(box.StartPosition, n);
+            
+            // Write it out.
+            ConsoleWriteLine("TextBox XAML contents:");
+            ConsoleWriteLine(
+                System.Windows.Markup.XamlWriter.Save(box));
 
-                TextFlow newPanel0 = new TextFlow();
-                Inline il = new Inline();
-                ((IAddChild)newPanel0).AddChild(il);
-                il.Append("text");
+            // Regression_Bug266
+            TextFlow newPanel0 = new TextFlow();
+            Inline il = new Inline();
+            ((IAddChild)newPanel0).AddChild(il);
+            il.Append("text");
 
-                TextNavigator tttn = newPanel0.TextRange.Start.CreateNavigator();
-                ((TextContainer)newPanel0.TextRange.TextContainer).MoveToElementEdge(tttn, il, ElementEdge.AfterStart);
-                if (tttn.GetSymbolType(LogicalDirection.Forward) != TextSymbolType.Character)
-                    throw new Exception("Bug 848301 regressed 1.");
-                if (((TextContainer)newPanel0.TextRange.TextContainer).GetElement(tttn, LogicalDirection.Backward) != il)
-                    throw new Exception("Bug 848301 regressed 2.");
+            TextNavigator tttn = newPanel0.TextRange.Start.CreateNavigator();
+            ((TextContainer)newPanel0.TextRange.TextContainer).MoveToElementEdge(tttn, il, ElementEdge.AfterStart);
+            if (tttn.GetSymbolType(LogicalDirection.Forward) != TextSymbolType.Character)
+                throw new Exception("Regression_Bug266 regressed 1.");
+            if (((TextContainer)newPanel0.TextRange.TextContainer).GetElement(tttn, LogicalDirection.Backward) != il)
+                throw new Exception("Regression_Bug266 regressed 2.");
 
-                // Verify TextElement.Text works
-                if (il.Text != "text")
-                    throw new Exception("Bad TextElement.Text");
-                il.Text = "new text";
-                if (il.Text != "new text")
-                    throw new Exception("Bad TextElement.Text (2)");
+            // Verify TextElement.Text works
+            if (il.Text != "text")
+                throw new Exception("Bad TextElement.Text");
+            il.Text = "new text";
+            if (il.Text != "new text")
+                throw new Exception("Bad TextElement.Text (2)");
        
+           // Regression_Bug896           
            {
                TextFlow newPanel1 = new TextFlow();
                TextContainer newTree1 = (TextContainer)newPanel1.TextRange.TextContainer;
@@ -163,13 +204,11 @@
                TextNavigator ptr11 = newTree1.Start.CreateNavigator();
                newTree1.MoveToElementEdge(ptr11, root1, ElementEdge.AfterStart);
            
-           
                // **** UNCOMMENT THIS LINE AND IT ALL WORKS ****
                //Console.WriteLine(ptr1.GetSymbolType(LogicalDirection.Forward));
            
                // Target: TextNavigator.GetEmbeddedObject(...)
-               Object retrievedObject = ptr11.GetEmbeddedObject(LogicalDirection.Forward);
-           
+               Object retrievedObject = ptr11.GetEmbeddedObject(LogicalDirection.Forward);          
            }
         }
 

@@ -1,0 +1,450 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
+//  Walking the virtual text buffer in a random fashion
+
+namespace Test.Uis.TextEditing
+{
+    #region Namespaces.
+
+    using System;
+    using System.Collections;
+    using System.Globalization;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Automation;
+    using System.Windows.Controls;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+
+    using Test.Uis.Loggers;
+    using Test.Uis.Management;
+    using Test.Uis.TestTypes;
+    using Test.Uis.Utils;
+    using Test.Uis.Wrappers;
+    using Microsoft.Test.Imaging;
+    using Microsoft.Test;
+    using Microsoft.Test.Discovery;
+
+    #endregion Namespaces.
+
+    /// <summary>
+    /// KeyboardOperationGenerator
+    /// </summary>
+    public static class KeyboardOperationGenerator
+    {
+        /// <summary>The list of all alphanumeric and symbol characters.</summary>
+        private static string s_alphaNumericCharacters = "abcdef ghijklmnopq rstuvwxyz12 34567890\\,. /;' @#$&*()-=_ ";
+
+        /// <summary>
+        /// Since we might want to raise the chance of getting
+        /// more characters
+        /// </summary>
+        private static string[] s_keyOperations =
+        {
+            "Up",
+            "Down",
+            "Left",
+            "Right",
+            "AlphaNumeric",
+            "Home",
+            "End",
+            "Delete",
+            "AlphaNumeric",
+            "Backspace",
+            "Enter",
+            "Insert",
+            "AlphaNumeric"
+        };
+
+        /// <summary>
+        /// return the keystroke string of the next key
+        /// The rand can be created with specific seed so that the sequence can be rebuilt. (for repro)
+        /// </summary>
+        /// <param name="rand"></param>
+        /// <param name="isAlphanumeric"></param>
+        /// <param name="isShift"></param>
+        /// <returns></returns>
+        public static string GetNextKeyOperation(Random rand,
+            out bool isAlphanumeric, out bool isShift)
+        {
+            isAlphanumeric = false;
+            isShift = false;
+
+            // determine Key operation first
+            string operation = s_keyOperations[rand.Next() % s_keyOperations.Length];
+            string keystroke = String.Empty;
+
+            // is that a shift key?
+            if (rand.Next() % 2 == 0)
+            {
+                isShift = true;
+            }
+
+            // if it alphanumeric we need another random number to get the character
+            if (operation == "AlphaNumeric")
+            {
+                isAlphanumeric = true;
+                keystroke = new string(s_alphaNumericCharacters[rand.Next() % s_alphaNumericCharacters.Length], 1);
+            }
+            else
+            {
+                keystroke = operation;
+            }
+            return keystroke;
+        }
+
+        /// <summary>
+        /// Print the sequence
+        /// </summary>
+        /// <param name="seed"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static string DumpSequence(int seed, int start, int end)
+        {
+            Random dumperRand = new Random(seed);
+            StringBuilder sb = new StringBuilder();
+            string nextKeystroke = String.Empty;
+
+            bool isAlphaNumeric = false;
+            bool isShift = false;
+
+            // walk the Random object to the start of the desired number
+            for (int i = 1; i < start; i++)
+            {
+                dumperRand.Next();
+            }
+
+            for (int i = start; i <= end; i++)
+            {
+                nextKeystroke = GetNextKeyOperation(dumperRand, out isAlphaNumeric, out isShift);
+
+                if (!isAlphaNumeric)
+                {
+                    nextKeystroke = "{" + nextKeystroke + "}";
+                }
+
+                if (isShift)
+                {
+                    sb.Append("S-");
+                }
+                sb.Append(nextKeystroke);
+                sb.Append(" | ");
+            }
+            return sb.ToString();
+        }
+    }
+
+    /// <summary>
+    /// The logic for test case code
+    /// </summary>
+    [TestOwner("Microsoft"), TestTactics("430,431,432,433,434,435,436,437,438,439")]
+    [Test(3, "Selection", "RandomCaretWalker", MethodParameters = "/TestCaseType:RandomCaretWalker /TestName:RandomCaretWalker", Disabled=true)]
+    public class RandomCaretWalker : CustomTestCase
+    {
+        /// <summary>Initializes a new RandomCaretWalker instance.</summary>
+        public RandomCaretWalker() : base()
+        {
+            // if seed is specified in xml file, we use that
+            // other the seed is generated by DataTime.Ticks
+            if (ConfigurationSettings.Current.HasArgument("Seed"))
+            {
+                _seed = ConfigurationSettings.Current.GetArgumentAsInt("Seed");
+            }
+            else
+            {
+                _seed = unchecked((int)DateTime.Now.Ticks);
+            }
+            _rand = new Random(_seed);
+            _currentKeystrokesInjected = 0;
+
+            // Change Teststring in xml to have different content
+            _testString = ConfigurationSettings.Current.GetArgument("TestString");
+
+            if (_testString == null)
+            {
+                string output = "Test cannot proceed. Cannot find test string or test sequence string";
+
+                throw new InvalidOperationException(output);
+            }
+
+            // TestIterations - total number of Keystrokes to be injected
+            if (!ConfigurationSettings.Current.HasArgument("TestIterations"))
+            {
+                _totalIterations = s_defaultIterations;
+            }
+            else
+            {
+                _totalIterations = ConfigurationSettings.Current.GetArgumentAsInt("TestIterations");
+
+                if (_totalIterations == 0)
+                {
+                    _totalIterations = s_defaultIterations;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Test entry
+        /// </summary>
+        public override void RunTestCase()
+        {
+            // Set main Xaml
+            string xamlString = ConfigurationSettings.Current.GetArgument("MainXaml");
+
+            ActionItemWrapper.SetMainXaml(xamlString);
+
+            QueueHelper.Current.QueueDelegate(new SimpleHandler(PositionCaret));
+        }
+
+        private void PositionCaret()
+        {
+            UIElement element;
+
+            // find the element called TextBox1
+            // remember if we need to test RichTextBox we can change
+            // the xaml fragment in xml, but the element to be tested
+            // has to have the id TextBox1
+
+            element = ElementUtils.FindElement(MainWindow, "TextBox1") as UIElement;
+
+            // if _element is null, try TextPanel
+            if (element == null)
+            {
+                element = ElementUtils.FindElement(MainWindow, "RichTextBox1") as UIElement;
+
+                if (element == null)
+                {
+                    throw new InvalidOperationException("UIElement named [TextBox1] or [RichTextBox1] cannot be found");
+                }
+            }
+
+            _wrapper = new UIElementWrapper(element);
+
+            // position caret in the TextBox
+            MouseInput.MouseClick(_wrapper.Element);
+            QueueHelper.Current.QueueDelegate(new SimpleHandler(PrepareTest));
+        }
+
+        private void FillControl(string testString)
+        {
+            _wrapper.Text = testString;
+        }
+
+        private void PrepareTest()
+        {
+            // Fill the TextBox with _testString
+            // AppendText may leave the text selected, so MoveToPositions
+            // restore the caret back to the starting point.
+            FillControl(_testString);
+            MoveSelectionToStart();
+
+            // initialize virutal text buffer
+            VirtualTextEditor.Current.FillBuffer(_testString);
+
+            // if Repro is specified either in xml or command line,
+            // the code won't proceed as automated test
+            if (!ConfigurationSettings.Current.GetArgumentAsBool("Repro"))
+            {
+                QueueHelper.Current.QueueDelegate(new SimpleHandler(InvokeKeyOperation));
+            }
+        }
+
+        private void InvokeKeyOperation()
+        {
+            string keystroke = String.Empty;
+            bool isAlphanumeric = false;
+            bool isShift = false;
+
+            // Get next keystroke
+            keystroke = KeyboardOperationGenerator.GetNextKeyOperation(_rand,
+                out isAlphanumeric,
+                out isShift);
+
+            DoKeyboard(keystroke,
+                isAlphanumeric,
+                isShift);
+
+            QueueHelper.Current.QueueDelegate(new SimpleHandler(ValidateTest));
+        }
+
+        /// <summary>
+        /// Inject real keystroke and update internal buffer through VirtualTextEditor
+        /// Note: we have exclude key defined here.. there are some key combinations
+        /// which are not supported yet. (e.g. Shift-Insert) the reason is that
+        /// this pastes the text content from clipboard and we haven't got to that yet
+        /// </summary>
+        /// <param name="keystroke"></param>
+        /// <param name="isAlphaNumeric"></param>
+        /// <param name="isShift"></param>
+        private void DoKeyboard(string keystroke,
+            bool isAlphaNumeric,
+            bool isShift)
+        {
+            bool excludedKey = false;
+            if (isAlphaNumeric)
+            {
+                if (isShift)
+                {
+                    keystroke = keystroke.ToUpper(new CultureInfo(0x0409));
+                }
+                else
+                {
+                    keystroke = keystroke.ToLower(new CultureInfo(0x0409));
+                }
+
+                VirtualTextEditor.Current.DoTypeString(keystroke);
+                _currentKeystrokesInjected++;
+
+                KeyboardInput.TypeString(keystroke);
+            }
+            else
+            {
+                switch(keystroke.ToLower(new CultureInfo(0x409)))
+                {
+                    case "left":
+                        VirtualTextEditor.Current.DoLeftRightKey(false, isShift);
+                        break;
+                    case "right":
+                        VirtualTextEditor.Current.DoLeftRightKey(true, isShift);
+                        break;
+                    case "up":
+                        VirtualTextEditor.Current.DoUpDownKey(-1, isShift);
+                        break;
+                    case "down":
+                        VirtualTextEditor.Current.DoUpDownKey(1, isShift);
+                        break;
+                    case "home":
+                        VirtualTextEditor.Current.DoHomeEndKey(true, isShift);
+                        break;
+                    case "end":
+                        VirtualTextEditor.Current.DoHomeEndKey(false, isShift);
+                        break;
+                    case "delete":
+                        VirtualTextEditor.Current.DoDeleteBackspaceKey(false, isShift);
+                        break;
+                    case "backspace":
+                        VirtualTextEditor.Current.DoDeleteBackspaceKey(true, isShift);
+                        break;
+                    case "enter":
+                        VirtualTextEditor.Current.DoTypeEnter(isShift);
+                        break;
+                    case "insert":
+                        if (isShift)
+                        {
+                            excludedKey = true;
+                        }
+                        else
+                        {
+                            VirtualTextEditor.Current.DoTypeInsert();
+                        }
+                        break;
+                    default:
+                        throw new InvalidOperationException();
+                }
+
+                if (!excludedKey)
+                {
+                    if (isShift)
+                    {
+                        keystroke = "+{" + keystroke + "}";
+                    }
+                    else
+                    {
+                        keystroke = "{" + keystroke + "}";
+                    }
+
+                    _currentKeystrokesInjected++;
+
+                    KeyboardInput.TypeString(keystroke);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Abstract TextSelection retrieval so that the type of
+        /// element tested is transparent
+        /// </summary>
+        /// <returns></returns>
+        private void MoveSelectionToStart()
+        {
+            _wrapper.Select(0, 0);
+        }
+
+        /// <summary>
+        /// Call ValidateVirtualTextBuffer and ValidateVirtualTextBufferSelection to
+        /// validate test result
+        /// </summary>
+        private void ValidateTest()
+        {
+
+            try
+            {
+                ValidateVirtualTextBuffer();
+                ValidateVirtualTextBufferSelection();
+            }
+            catch(Exception e)
+            {
+                // yes, all exception are caught here, but we need the current status
+                // so that we can repro. Also we do rethrow the exception so
+                // the inner exception information is not lost.
+                Logger.Current.Log("Seed = {0}", _seed.ToString());
+                Logger.Current.Log("Keystroke injected = {0}", _currentKeystrokesInjected);
+                Logger.Current.Log("Sequence = {0}", KeyboardOperationGenerator.DumpSequence(_seed, 1, _currentKeystrokesInjected));
+                if (e.InnerException != null)
+                {
+                    throw e.InnerException;
+                }
+                else
+                {
+                    throw e;
+                }
+            }
+
+            if (_currentKeystrokesInjected < _totalIterations)
+            {
+                QueueHelper.Current.QueueDelegate(new SimpleHandler(InvokeKeyOperation));
+            }
+            else
+            {
+                Logger.Current.Log("Test Completed");
+                Logger.Current.Log("Total keystroke injected: {0}", _currentKeystrokesInjected.ToString());
+                Logger.Current.Log("Seed: {0}", _seed.ToString());
+                Logger.Current.ReportSuccess();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ValidateVirtualTextBuffer()
+        {
+            Verifier.Verify(_wrapper.Text == VirtualTextEditor.Current.GetRawText());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ValidateVirtualTextBufferSelection()
+        {
+            Verifier.Verify(_wrapper.GetSelectedText(false, false) == VirtualTextEditor.Current.SelectedText);
+
+            Verifier.Verify(_wrapper.GetTextOutsideSelection(LogicalDirection.Backward)
+                == VirtualTextEditor.Current.GetRawTextBeforeSelectionLogicalStart());
+
+            Verifier.Verify(_wrapper.GetTextOutsideSelection(LogicalDirection.Forward)
+                == VirtualTextEditor.Current.GetRawTextAfterSelectionLogicalEnd());
+        }
+
+        private string _testString;
+        private int _totalIterations;
+        private int _currentKeystrokesInjected;
+        private UIElementWrapper _wrapper;
+        private Random _rand;
+        private int _seed;
+
+        private static int s_defaultIterations = 100;
+    }
+}

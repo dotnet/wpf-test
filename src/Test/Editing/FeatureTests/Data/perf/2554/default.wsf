@@ -1,0 +1,28 @@
+<JOB ID="main">
+<SCRIPT LANGUAGE="JScript" SRC="..\..\include.js" />
+
+<SCRIPT LANGUAGE="JScript">
+
+var oTestProcess = new Process();
+
+var sCommandLine = "\"" + TESTBIN_PATH + "\\perfutil.exe\" /startup /count:10 \"" + TESTBIN_PATH + "\\WCP.EditingPerfTiming.exe\" /Scenario=Paste /TargetControl=RichTextBox /InstanceCount=100 /PerfMeasurement=Time";
+
+g_oShell.CurrentDirectory = TESTBIN_PATH ;
+ 
+ensureCScript();
+
+printBanner("Editing - Paste x 100 paragraphs into a RichTextBox (Time)");
+
+if (oTestProcess.run(sCommandLine, DEFAULT_OUTPUT_FILENAME))
+{
+    parse(OUTPUT_COMPLOGS, DEFAULT_OUTPUT_FILENAME);
+
+    if (g_oFSO.FileExists(DEFAULT_OUTPUT_FILENAME))
+    {
+        g_oFSO.DeleteFile(DEFAULT_OUTPUT_FILENAME, true);
+    }
+}
+
+</SCRIPT>
+
+</JOB>

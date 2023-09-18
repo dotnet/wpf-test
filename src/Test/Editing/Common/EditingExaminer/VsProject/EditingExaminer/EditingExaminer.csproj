@@ -1,0 +1,131 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC82A9AF-E029-4B82-A022-DABFCA8DD924}</ProjectGuid>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <RootNamespace>RichExplorer</RootNamespace>
+    <AssemblyName>EditingExaminer</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <OutputType>winexe</OutputType>
+    <ApplicationVersion>1.0.0.*</ApplicationVersion>
+    <!-- Most people will use Publish dialog in Visual Studio to increment this -->
+    <BootstrapperEnabled>false</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>E:\Avalon.obj.x86fre\windows\DevTest\WCP\objfre\i386\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OfficeLateBoundWrapper, Version=1.0.2084.28350, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Avalon.obj.x86fre\windows\DevTest\WCP\objfre\i386\OfficeLateBoundWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\MyApp.xaml">
+      <SubType>
+      </SubType>
+    </ApplicationDefinition>
+    <Page Include="..\..\DebugWindow.xaml">
+      <Link>DebugWindow.xaml</Link>
+      <SubType>
+      </SubType>
+    </Page>
+    <Page Include="..\..\FontChooser.xaml">
+      <Link>FontChooser.xaml</Link>
+    </Page>
+    <Page Include="..\..\MainWindow.xaml">
+      <SubType>
+      </SubType>
+    </Page>
+    <Compile Include="..\..\MyApp.xaml.cs">
+      <DependentUpon>..\..\MyApp.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="..\..\MainWindow.xaml.cs">
+      <DependentUpon>..\..\MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\ColorSelectionItem.cs">
+      <Link>ColorSelectionItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CommandLineParser.cs" />
+    <Compile Include="..\..\DebugWindow.xaml.cs">
+      <Link>DebugWindow.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DialogEvent.cs">
+      <Link>DialogEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DocumentConversion.cs">
+      <Link>DocumentConversion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\FontChoice.cs">
+      <Link>FontChoice.cs</Link>
+    </Compile>
+    <Compile Include="..\..\FontChooser.xaml.cs">
+      <Link>FontChooser.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\FontItems.cs">
+      <Link>FontItems.cs</Link>
+    </Compile>
+    <Compile Include="..\..\FontRendering.cs">
+      <Link>FontRendering.cs</Link>
+    </Compile>
+    <Compile Include="..\..\helper.cs" />
+    <Compile Include="..\..\KnownColor.cs">
+      <Link>KnownColor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ToolTipMessage.cs">
+      <Link>ToolTipMessage.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Reflection.cs" />
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+</Project>

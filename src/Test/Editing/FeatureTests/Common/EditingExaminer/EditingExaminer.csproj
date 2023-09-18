@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <PropertyGroup>
+    <AssemblyName>EditingExaminer</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+    <OutputSubFolder>FeatureTests/Editing</OutputSubFolder>
+    <AssemblyAttributeCLSCompliant>false</AssemblyAttributeCLSCompliant>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="MyApp.xaml">
+      <SubType>
+      </SubType>
+    </ApplicationDefinition>
+    <Page Include="DebugWindow.xaml">
+      <Link>DebugWindow.xaml</Link>
+      <SubType>
+      </SubType>
+    </Page>
+    <Page Include="FontChooser.xaml">
+      <Link>FontChooser.xaml</Link>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>
+      </SubType>
+    </Page>
+    <Compile Include="MyApp.xaml.cs">
+      <DependentUpon>MyApp.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ColorSelectionItem.cs">
+      <Link>ColorSelectionItem.cs</Link>
+    </Compile>
+    <Compile Include="CommandLineParser.cs" />
+    <Compile Include="DebugWindow.xaml.cs">
+      <Link>DebugWindow.xaml.cs</Link>
+    </Compile>
+    <Compile Include="DialogEvent.cs">
+      <Link>DialogEvent.cs</Link>
+    </Compile>
+    <Compile Include="DocumentConversion.cs">
+      <Link>DocumentConversion.cs</Link>
+    </Compile>
+    <Compile Include="FontChoice.cs">
+      <Link>FontChoice.cs</Link>
+    </Compile>
+    <Compile Include="FontChooser.xaml.cs">
+      <Link>FontChooser.xaml.cs</Link>
+    </Compile>
+    <Compile Include="FontItems.cs">
+      <Link>FontItems.cs</Link>
+    </Compile>
+    <Compile Include="FontRendering.cs">
+      <Link>FontRendering.cs</Link>
+    </Compile>
+    <Compile Include="helper.cs" />
+    <Compile Include="KnownColor.cs">
+      <Link>KnownColor.cs</Link>
+    </Compile>
+    <Compile Include="ToolTipMessage.cs">
+      <Link>ToolTipMessage.cs</Link>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs" />
+
+    <Compile Include="Reflection.cs" />
+    <AppDesigner Include="Properties\" />
+    <CopyFile Include="OfficeLateBoundWrapper.dll">
+        <DestFolder>$(OutputPath)</DestFolder>
+    </CopyFile>
+
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    </ItemGroup>
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>

@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+    <AssemblyName>EditingTestPart1</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <LinkSubsystem>console</LinkSubsystem>
+    <TestCode>true</TestCode>
+    <ManagedCode>true</ManagedCode>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(TestTrustedKey)</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(ASSEMBLYINFO)" />
+    <Compile Include="..\ExeTarget\EntryPoint.cs" />   
+    <Compile Include="BringIntoViewTest.cs" />
+    <Compile Include="Part1AssemblyTestCaseData.cs" />
+    <Compile Include="BindingSelectionAndCaretBrushTest.cs" />
+    <Compile Include="CaretBrushRenderingTest.cs" />
+    <Compile Include="CaretBrushRenderingStyleAndTriggerTest.cs" /> 
+    <Compile Include="ClipboardFlush.cs" />
+    <Compile Include="NonAdornerSelectionRenderingTest.cs" />
+    <Compile Include="SelectionRenderingTest.cs" />
+    <Compile Include="SelectionRenderingStyleAndTriggerTest.cs" />
+    <Compile Include="IsReadOnlyCaretVisibleTest.cs" />
+    <Compile Include="TextOMRegressions.cs" /> 
+    <Compile Include="TextElementExtractUndoWithExpressions.cs" />
+    <Compile Include="ProgrammaticAccessToClipBoardInPTTest.cs" />
+    <Compile Include="SerializationVersionToleranceTest.cs" />
+    <Compile Include="..\TextBoxOM\TextBoxTestCase.cs" />
+    <Compile Include=".\TextFormattingMode\*.cs" />
+    <Compile Include=".\DataBoundRun\*.cs" />  
+    <Compile Include=".\IME\*.cs" />  
+    <Compile Include=".\CustomSpellerDictionary\*.cs" />
+    <Resource Include="..\Data\SupportFiles\CustomSpellerDictionaryResourceLocal.lex" />
+    <Resource Include="..\Data\SupportFiles\CustomDictionaryEnglish.lex" />
+    <Resource Include="..\Data\SupportFiles\CustomDictionaryFrench.lex" />
+    <Resource Include="..\Data\SupportFiles\CustomDictionarySpanish.lex" />
+    <Resource Include="..\Data\SupportFiles\CustomDictionaryGerman.lex" />
+    <Resource Include="..\Data\SupportFiles\CustomDictionaryJapanese.lex" />
+    <None Include="$(AssemblyName).deployment">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>	
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(EditingTestLibProject)"/>
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+  </ItemGroup>
+</Project>

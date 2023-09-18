@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>EditingOrcasTest</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <LinkSubsystem>console</LinkSubsystem>
+    <!--Auto-converted: TEST_CODE-->
+    <TestCode>true</TestCode>
+    <!--Auto-converted: MANAGED_CODE-->
+    <ManagedCode>true</ManagedCode>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <OutputSubFolder>FeatureTests\Editing</OutputSubFolder>
+    <SignAssemblyAttribute>false</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+  </PropertyGroup>  
+  
+  <ItemGroup>
+    <Compile Include="$(ASSEMBLYINFO)" />
+    <Compile Include="..\ExeTarget\EntryPoint.cs" />
+    <Compile Include="CustomTextBox.cs" />
+    <Compile Include="FilteredTextBox.cs" />
+    <Compile Include="FilteredRichTextBox.cs" />
+    <Compile Include="ImeFilterTest.cs" />
+    <Compile Include="OrcasAssemblyTestCaseData.cs" />
+    <Compile Include="RichTextBoxProperties.cs" />
+    <Compile Include="TextBoxBaseProperties.cs" />
+    <Compile Include="TextBoxViewArrangeVisualsTest.cs" />
+    <Compile Include="TextCompositionEventsTest.cs" />
+    <Compile Include="VerboseTextChangeEvent.cs" />
+    <Compile Include="ImeTests\Regression_Bug100.cs" />
+    <Compile Include="ImeTests\Regression_Bug99.cs" />
+    <Compile Include="ImeTests\ImeInputInDataBoundTB.cs" />
+    <Compile Include="Serialization\Regression_Bug101.cs" />
+    <Compile Include="RichTextBox\TextChangedEvent.cs" />
+    <Compile Include="TextBoxOM\CutCopyPaste.cs" />
+    <Compile Include="TextBoxOM\InsertDeletePasteEvents.cs" />
+    <Compile Include="TextBoxOM\InsertDeletePasteRichTextBoxEvents.cs" />
+    <None Include="$(AssemblyName).deployment">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(EditingTestLibProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+  
+</Project>
