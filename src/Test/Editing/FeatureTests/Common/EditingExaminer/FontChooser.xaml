@@ -1,0 +1,1333 @@
+﻿<Window x:Uid="Window_1" x:Class="EditingExaminer.FontChooser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Font Chooser"
+    Height="350" Width="480pt" MinHeight="550" MinWidth="750"
+    Background="#ECE9D8"
+    ResizeMode="CanResizeWithGrip"
+    Initialized="WindowInitialized">
+
+    <!-- Use a grid to separate the window into3 sections:
+        1. All the comboboxes
+        2. Family and typeface samples, descriptive text, other sample views
+        3. Preview
+        4. Ok/Cancel buttons
+    -->
+
+    <Grid x:Uid="Grid_1">
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition x:Uid="ColumnDefinition_1" Width="10" />  <!-- Left border  -->
+        <ColumnDefinition x:Uid="ColumnDefinition_2" />             <!-- Active area  -->
+        <ColumnDefinition x:Uid="ColumnDefinition_3" Width="13" />  <!-- Right border -->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        <RowDefinition x:Uid="RowDefinition_1" Height="12" />       <!-- Top border   -->
+        <RowDefinition x:Uid="RowDefinition_2" Height="2*" />       <!-- Comboboxes   -->
+        <RowDefinition x:Uid="RowDefinition_3" Height="13" />       <!-- Separation border -->
+        <RowDefinition x:Uid="RowDefinition_4" Height="3*" />       <!-- Family and typeface samples, or font details -->
+        <RowDefinition x:Uid="RowDefinition_5" Height="8" />        <!-- Separation border (Title row already provides some separation) -->
+        <RowDefinition x:Uid="RowDefinition_6" Height="1*" />       <!-- Preview -->
+        <RowDefinition x:Uid="RowDefinition_30" Height="13" />                               <!-- Separation border -->
+        <RowDefinition x:Uid="RowDefinition_31" Height="Auto" />                             <!-- OK/Cancel -->
+        <RowDefinition x:Uid="RowDefinition_7" Height="13" />       <!-- Bottom border -->
+        </Grid.RowDefinitions>
+
+
+        <Grid x:Uid="Grid_2" Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Uid="ColumnDefinition_4" />               <!-- Family text and list boxes -->
+            <ColumnDefinition x:Uid="ColumnDefinition_5" Width="8" />      <!-- Separation border -->
+            <ColumnDefinition x:Uid="ColumnDefinition_6" />               <!-- Typeface text and list boxes -->
+            <ColumnDefinition x:Uid="ColumnDefinition_7" Width="8" />      <!-- Separation border -->
+            <ColumnDefinition x:Uid="ColumnDefinition_8" Width="60" />     <!-- Size text and list boxes -->
+            <ColumnDefinition x:Uid="ColumnDefinition_9" Width="8" />      <!-- Separation border -->
+            <ColumnDefinition x:Uid="ColumnDefinition_10" />              <!-- Color text and list boxes -->
+            <ColumnDefinition x:Uid="ColumnDefinition_11" Width="8" />     <!-- Separation border -->
+            <ColumnDefinition x:Uid="ColumnDefinition_12" Width="Auto" />  <!-- Checkboxes -->
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition x:Uid="RowDefinition_8" Height="Auto" />        <!-- Titles  -->
+            <RowDefinition x:Uid="RowDefinition_9" Height="Auto" />        <!-- Text boxes -->
+            <RowDefinition x:Uid="RowDefinition_10" />                     <!-- List boxes -->
+            </Grid.RowDefinitions>
+
+            <!-- Family, face, size and color comboboxes -->
+
+
+            <!-- Note: the 3 pixel margin on the left of the text and listboxes allows room for the first characeter of the label above to overhang the left margin. -->
+            <Label x:Uid="Label_1" Grid.Column="0" Grid.Row="0" Padding="3">Font family:</Label>
+            <TextBox x:Uid="TextBox_1" Grid.Column="0" Grid.Row="1" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="FontFamilyTextBox" IsTabStop="true" TabIndex="1" TextChanged="FontFamilyChanged" PreviewMouseRightButtonDown="CreateContextMenu"></TextBox>
+            <ListBox x:Uid="ListBox_1" Grid.Column="0" Grid.Row="2" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="FontFamilyListBox" IsTabStop="false" TabIndex="-1" Height="Auto" SelectionChanged="FontFamilySelected" PreviewMouseRightButtonDown="CreateContextMenu"></ListBox>
+
+            <Label x:Uid="Label_2" Grid.Column="2" Grid.Row="0" Padding="3">Typeface:</Label>
+            <TextBox x:Uid="TextBox_2" Grid.Column="2" Grid.Row="1" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="TypefaceTextBox" IsTabStop="true" TabIndex="2" TextChanged="TypefaceChanged" PreviewMouseRightButtonDown="CreateContextMenu"></TextBox>
+            <ListBox x:Uid="ListBox_2" Grid.Column="2" Grid.Row="2" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="TypefaceListBox" IsTabStop="false" TabIndex="-1" Height="Auto" SelectionChanged="TypefaceSelected" PreviewMouseRightButtonDown="CreateContextMenu"></ListBox>
+
+            <Label x:Uid="Label_3" Grid.Column="4" Grid.Row="0" Padding="3">Size:</Label>
+            <TextBox x:Uid="TextBox_3" Grid.Column="4" Grid.Row="1" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="FontSizeTextBox" IsTabStop="True" TabIndex="5" TextChanged="FontSizeChanged" PreviewMouseRightButtonDown="CreateContextMenu" MinWidth="10"></TextBox>
+            <ListBox x:Uid="ListBox_3" Grid.Column="4" Grid.Row="2" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="FontSizeListBox" IsTabStop="false" TabIndex="-1" Height="Auto" SelectionChanged="FontSizeSelected" PreviewMouseRightButtonDown="CreateContextMenu"></ListBox>
+
+            <Label x:Uid="Label_4" Grid.Column="6" Grid.Row="0" Padding="3">Color:</Label>
+            <TextBox x:Uid="TextBox_4" Grid.Column="6" Grid.Row="1" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="TextColorTextBox" IsTabStop="true" TabIndex="6" TextChanged="TextColorChanged" PreviewMouseRightButtonDown="CreateContextMenu"></TextBox>
+            <ListBox x:Uid="ListBox_4" Grid.Column="6" Grid.Row="2" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="TextColorListBox" IsTabStop="false" TabIndex="-1" Height="Auto" SelectionChanged="TextColorSelected" PreviewMouseRightButtonDown="CreateContextMenu"></ListBox>
+
+
+            <Grid x:Uid="Grid_3" Grid.Column="8" Grid.Row="1" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Uid="ColumnDefinition_13" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                <RowDefinition x:Uid="RowDefinition_15" Height="Auto" />  <!-- Underline -->
+                <RowDefinition x:Uid="RowDefinition_16" Height="3" />
+                <RowDefinition x:Uid="RowDefinition_17" Height="Auto" />  <!-- Strikethrough -->
+                <RowDefinition x:Uid="RowDefinition_18" Height="3" />
+                <RowDefinition x:Uid="RowDefinition_19" Height="Auto" />  <!-- Overline -->
+                <RowDefinition x:Uid="RowDefinition_32" Height="*" />
+                </Grid.RowDefinitions>
+
+                <CheckBox x:Uid="CheckBox_1" Grid.Column="0" Grid.Row="0" Name="UnderLineCheckBox" IsTabStop="true" TabIndex="7" Click="DecorationsChanged" PreviewMouseRightButtonDown="CreateContextMenu">Underline</CheckBox>
+                <CheckBox x:Uid="CheckBox_2" Grid.Column="0" Grid.Row="2" Name="StrikethroughCheckBox" IsTabStop="true" TabIndex="8" Click="DecorationsChanged" PreviewMouseRightButtonDown="CreateContextMenu">Strikethrough</CheckBox>
+                <CheckBox x:Uid="CheckBox_3" Grid.Column="0" Grid.Row="4" Name="OverLineCheckBox" IsTabStop="true" TabIndex="9" Click="DecorationsChanged" PreviewMouseRightButtonDown="CreateContextMenu">Overline</CheckBox>
+            </Grid>
+        </Grid>
+
+        <TabControl x:Uid="FontViewer" Grid.Column="1" Grid.Row="3" Margin="3 0 0 0" Name="FontViewer" BorderThickness="0.75" Background="#ECE9D8">
+
+            <TabItem x:Uid="TabItem_1" Header="Family and typeface samples" Background="#ECE9D8">
+
+                <Grid x:Uid="Grid_4" Margin="3 0 3 3">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Uid="ColumnDefinition_14" />               <!-- Family typefaces -->
+                    <ColumnDefinition x:Uid="ColumnDefinition_15" Width="6pt" />   <!-- Separator -->
+                    <ColumnDefinition x:Uid="ColumnDefinition_16" />               <!-- Typeface sizes -->
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                    <RowDefinition x:Uid="RowDefinition_26" Height="Auto" />    <!-- Title -->
+                    <RowDefinition x:Uid="RowDefinition_27" />                  <!-- Sample -->
+                    </Grid.RowDefinitions>
+                    <!-- Family and Typeface samples, or font details -->
+
+
+
+                    <TextBlock x:Uid="Label_5" Grid.Column="0" Grid.Row="0" Margin="3">
+                        Font family: <TextBlock x:Uid="FamilyTypefaceSamplesLabel" Name="FamilyTypefaceSamplesLabel" />
+                    </TextBlock>
+                    <RichTextBox
+                        x:Uid="RichTextBox_1"
+                        Grid.Column="0" Grid.Row="1"
+                        Margin="3 0 0 0" Padding="3"
+                        BorderThickness="0.75"
+                        Background="White"
+                        Name="FamilyTypefaceSamples"
+                        IsTabStop="false" TabIndex="-1"
+                        IsReadOnly="true" AcceptsReturn="false" 
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Auto"
+                        PreviewMouseRightButtonDown="CreateContextMenu"
+                      />
+
+                    <TextBlock x:Uid="Label_6" Grid.Column="2" Grid.Row="0" Margin="3">
+                        Typeface: <TextBlock x:Uid="TypefaceSizeSamplesLabel" Name="TypefaceSizeSamplesLabel" />
+                    </TextBlock>
+                    <RichTextBox
+                        x:Uid="RichTextBox_2"
+                        Grid.Column="3" Grid.Row="1"
+                        Margin="3 0 0 0" Padding="3"
+                        BorderThickness="0.75"
+                        Background="White"
+                        Name="TypefaceSizeSamples"
+                        IsTabStop="false" TabIndex="-1"
+                        IsReadOnly="true" AcceptsReturn="false"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Auto"
+                        PreviewMouseRightButtonDown="CreateContextMenu"
+                        FontFamily="Palatino Linotype"
+                        FontSize="7.5pt"
+                        Localization.Comments="
+                            FontFamily (This family will be used for small text annotations in all the font chooser samples)
+                            FontSize   (This size will be used for small text annotations in all the font chooser samples)
+                            $Content   (This string defines the format for font size annotations, and includes the name for typographic measurements of 1/72nd of an inch)
+                        "
+
+
+
+
+                        >
+                        <FlowDocument x:Uid="FlowDocument_1">
+                            <Paragraph x:Uid="Paragraph_1">
+                                {0} Points
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </Grid>
+
+            </TabItem>
+
+
+            <TabItem x:Uid="TypographicFeatures" Header="Typographic features" Name="TypographicFeatures" Background="#ECE9D8">
+
+                <Grid x:Uid="Grid_5" Margin="3 0 3 3">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Uid="ColumnDefinition_18" />                <!-- Family typefaces -->
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                    <RowDefinition x:Uid="RowDefinition_33" Height="Auto" />    <!-- Title -->
+                    <RowDefinition x:Uid="RowDefinition_34" />                  <!-- List of selectable features with samples -->
+                    </Grid.RowDefinitions>
+                    <!-- Family and Typeface samples, or font details -->
+
+
+
+                    <TextBlock x:Uid="TextBlock_1" Grid.Column="0" Grid.Row="0" Margin="3">
+                        Typographic features for: <TextBlock x:Uid="FontForTypographicFeatures" Name="FontForTypographicFeatures" />
+                    </TextBlock>
+                    <ScrollViewer
+                        x:Uid="ScrollViewer_1" Grid.Column="0" Grid.Row="1"
+                        Margin="0" Padding="3"
+                        BorderThickness="0.75"
+                        Background="White"
+                        VerticalScrollBarVisibility="Auto"
+                        PreviewMouseRightButtonDown="CreateContextMenu"
+                        >
+                        <StackPanel x:Uid="StackPanel_1" Grid.IsSharedSizeScope="true">
+                            <StackPanel.Resources>
+                                <Style x:Uid="Style_1" x:Key="{x:Type ColumnDefinition}" TargetType="{x:Type ColumnDefinition}">
+                                    <Setter x:Uid="Setter_1" Property="Width" Value="Auto" />
+                                </Style>
+
+                                <Style x:Uid="Style_2" x:Key="{x:Type RowDefinition}" TargetType="{x:Type RowDefinition}">
+                                    <Setter x:Uid="Setter_2" Property="Height" Value="Auto" />
+                                </Style>
+
+                                <Style x:Uid="Style_3" x:Key="Label" TargetType="{x:Type TextBlock}">
+                                    <Setter x:Uid="Setter_3" Property="Margin" Value="2 6 2 2" />
+                                </Style>
+
+                                <Style x:Uid="Style_4" x:Key="Button" TargetType="{x:Type RadioButton}">
+                                    <Setter x:Uid="Setter_4" Property="Grid.Column" Value="0" />
+                                    <Setter x:Uid="Setter_5" Property="Margin" Value="16 2 2 2" />
+                                </Style>
+
+                                <Style x:Uid="Style_5" x:Key="Sample" TargetType="{x:Type TextBlock}">
+                                    <Setter x:Uid="Setter_6" Property="Grid.Column" Value="1" />
+                                    <Setter x:Uid="Setter_7" Property="Margin" Value="4 1 0 0" />
+                                </Style>
+
+                                <!--
+                                <Style x:Key="{x:Type Grid}" TargetType="{x:Type Grid}">
+                                    <Setter Property="ShowGridLines"     Value="true"/>
+                                </Style>
+                                -->
+                            </StackPanel.Resources>
+
+                            <Grid x:Uid="Grid_6">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_19" SharedSizeGroup="C0" /> <ColumnDefinition x:Uid="ColumnDefinition_20" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_35" />
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Uid="TextBlock_2" Grid.Row="0" Grid.Column="0" FontWeight="Bold">Typographic feature</TextBlock>
+                                <TextBlock x:Uid="TextBlock_3" Grid.Row="0" Grid.Column="1" FontWeight="Bold">Sample</TextBlock>
+                            </Grid>
+
+                            <Grid x:Uid="Grid_7">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_21" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_22" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_36" />
+                                <RowDefinition x:Uid="RowDefinition_37" />
+                                <RowDefinition x:Uid="RowDefinition_38" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_4" Grid.Row="0" Style="{DynamicResource Label}">Kerning</TextBlock>
+                                    <RadioButton x:Uid="KerningDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="KerningDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="KerningDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="KerningDisabledSample" />
+                                    <RadioButton x:Uid="KerningEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="KerningEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="KerningEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="KerningEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_8">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_23" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_24" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_39" />
+                                <RowDefinition x:Uid="RowDefinition_40" />
+                                <RowDefinition x:Uid="RowDefinition_41" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_5" Grid.Row="0" Style="{DynamicResource Label}">Standard ligatures</TextBlock>
+                                    <RadioButton x:Uid="StandardLigaturesDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StandardLigaturesDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StandardLigaturesDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StandardLigaturesDisabledSample" />
+                                    <RadioButton x:Uid="StandardLigaturesEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StandardLigaturesEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StandardLigaturesEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StandardLigaturesEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_9">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_25" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_26" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_42" />
+                                <RowDefinition x:Uid="RowDefinition_43" />
+                                <RowDefinition x:Uid="RowDefinition_44" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_6" Grid.Row="0" Style="{DynamicResource Label}">Contextual ligatures</TextBlock>
+                                    <RadioButton x:Uid="ContextualLigaturesDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="ContextualLigaturesDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="ContextualLigaturesDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="ContextualLigaturesDisabledSample" />
+                                    <RadioButton x:Uid="ContextualLigaturesEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="ContextualLigaturesEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="ContextualLigaturesEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="ContextualLigaturesEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_10">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_27" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_28" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_45" />
+                                <RowDefinition x:Uid="RowDefinition_46" />
+                                <RowDefinition x:Uid="RowDefinition_47" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_7" Grid.Row="0" Style="{DynamicResource Label}">Discretionary ligatures</TextBlock>
+                                    <RadioButton x:Uid="DiscretionaryLigaturesDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="DiscretionaryLigaturesDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="DiscretionaryLigaturesDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="DiscretionaryLigaturesDisabledSample" />
+                                    <RadioButton x:Uid="DiscretionaryLigaturesEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="DiscretionaryLigaturesEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="DiscretionaryLigaturesEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="DiscretionaryLigaturesEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_11">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_29" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_30" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_48" />
+                                <RowDefinition x:Uid="RowDefinition_49" />
+                                <RowDefinition x:Uid="RowDefinition_50" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_8" Grid.Row="0" Style="{DynamicResource Label}">Historical ligatures</TextBlock>
+                                    <RadioButton x:Uid="HistoricalLigaturesDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="HistoricalLigaturesDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="HistoricalLigaturesDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="HistoricalLigaturesDisabledSample" />
+                                    <RadioButton x:Uid="HistoricalLigaturesEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="HistoricalLigaturesEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="HistoricalLigaturesEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="HistoricalLigaturesEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_12">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_31" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_32" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_51" />
+                                <RowDefinition x:Uid="RowDefinition_52" />
+                                <RowDefinition x:Uid="RowDefinition_53" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_9" Grid.Row="0" Style="{DynamicResource Label}">Contextual alternates</TextBlock>
+                                    <RadioButton x:Uid="ContextualAlternatesDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="ContextualAlternatesDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="ContextualAlternatesDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="ContextualAlternatesDisabledSample" />
+                                    <RadioButton x:Uid="ContextualAlternatesEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="ContextualAlternatesEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="ContextualAlternatesEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="ContextualAlternatesEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_13">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_33" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_34" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_54" />
+                                <RowDefinition x:Uid="RowDefinition_55" />
+                                <RowDefinition x:Uid="RowDefinition_56" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_10" Grid.Row="0" Style="{DynamicResource Label}">Historical forms</TextBlock>
+                                    <RadioButton x:Uid="HistoricalFormsDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="HistoricalFormsDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="HistoricalFormsDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="HistoricalFormsDisabledSample" />
+                                    <RadioButton x:Uid="HistoricalFormsEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="HistoricalFormsEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="HistoricalFormsEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="HistoricalFormsEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_14">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_35" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_36" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_57" />
+                                <RowDefinition x:Uid="RowDefinition_58" />
+                                <RowDefinition x:Uid="RowDefinition_59" />
+                                <RowDefinition x:Uid="RowDefinition_60" />
+                                <RowDefinition x:Uid="RowDefinition_61" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_11" Grid.Row="0" Style="{DynamicResource Label}">Annotation alternates</TextBlock>
+                                    <RadioButton x:Uid="AnnotationAlternatesNoneButton" Grid.Row="1" Style="{DynamicResource Button}" Name="AnnotationAlternatesNoneButton">None</RadioButton>
+                                    <TextBlock x:Uid="AnnotationAlternatesNoneSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="AnnotationAlternatesNoneSample" />
+                                    <RadioButton x:Uid="AnnotationAlternatesSet1Button" Grid.Row="2" Style="{DynamicResource Button}" Name="AnnotationAlternatesSet1Button">Set 1</RadioButton>
+                                    <TextBlock x:Uid="AnnotationAlternatesSet1Sample" Grid.Row="2" Style="{DynamicResource Sample}" Name="AnnotationAlternatesSet1Sample" />
+                                    <RadioButton x:Uid="AnnotationAlternatesSet2Button" Grid.Row="3" Style="{DynamicResource Button}" Name="AnnotationAlternatesSet2Button">Set 2</RadioButton>
+                                    <TextBlock x:Uid="AnnotationAlternatesSet2Sample" Grid.Row="3" Style="{DynamicResource Sample}" Name="AnnotationAlternatesSet2Sample" />
+                                    <RadioButton x:Uid="AnnotationAlternatesSet3Button" Grid.Row="4" Style="{DynamicResource Button}" Name="AnnotationAlternatesSet3Button">Set 3</RadioButton>
+                                    <TextBlock x:Uid="AnnotationAlternatesSet3Sample" Grid.Row="4" Style="{DynamicResource Sample}" Name="AnnotationAlternatesSet3Sample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_15">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_37" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_38" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_62" />
+                                <RowDefinition x:Uid="RowDefinition_63" />
+                                <RowDefinition x:Uid="RowDefinition_64" />
+                                <RowDefinition x:Uid="RowDefinition_65" />
+                                <RowDefinition x:Uid="RowDefinition_66" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_12" Grid.Row="0" Style="{DynamicResource Label}">Contextual swashes</TextBlock>
+                                    <RadioButton x:Uid="ContextualSwashesNoneButton" Grid.Row="1" Style="{DynamicResource Button}" Name="ContextualSwashesNoneButton">None</RadioButton>
+                                    <TextBlock x:Uid="ContextualSwashesNoneSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="ContextualSwashesNoneSample" />
+                                    <RadioButton x:Uid="ContextualSwashesSet1Button" Grid.Row="2" Style="{DynamicResource Button}" Name="ContextualSwashesSet1Button">Set 1</RadioButton>
+                                    <TextBlock x:Uid="ContextualSwashesSet1Sample" Grid.Row="2" Style="{DynamicResource Sample}" Name="ContextualSwashesSet1Sample" />
+                                    <RadioButton x:Uid="ContextualSwashesSet2Button" Grid.Row="3" Style="{DynamicResource Button}" Name="ContextualSwashesSet2Button">Set 2</RadioButton>
+                                    <TextBlock x:Uid="ContextualSwashesSet2Sample" Grid.Row="3" Style="{DynamicResource Sample}" Name="ContextualSwashesSet2Sample" />
+                                    <RadioButton x:Uid="ContextualSwashesSet3Button" Grid.Row="4" Style="{DynamicResource Button}" Name="ContextualSwashesSet3Button">Set 3</RadioButton>
+                                    <TextBlock x:Uid="ContextualSwashesSet3Sample" Grid.Row="4" Style="{DynamicResource Sample}" Name="ContextualSwashesSet3Sample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_16">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_39" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_40" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_67" />
+                                <RowDefinition x:Uid="RowDefinition_68" />
+                                <RowDefinition x:Uid="RowDefinition_69" />
+                                <RowDefinition x:Uid="RowDefinition_70" />
+                                <RowDefinition x:Uid="RowDefinition_71" />
+                                <RowDefinition x:Uid="RowDefinition_72" />
+                                <RowDefinition x:Uid="RowDefinition_73" />
+                                <RowDefinition x:Uid="RowDefinition_74" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_13" Grid.Row="0" Style="{DynamicResource Label}">Capitals</TextBlock>
+                                    <RadioButton x:Uid="CapitalsNormalButton" Grid.Row="1" Style="{DynamicResource Button}" Name="CapitalsNormalButton">Normal</RadioButton>
+                                    <TextBlock x:Uid="CapitalsNormalSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="CapitalsNormalSample" />
+                                    <RadioButton x:Uid="CapitalsAllSmallButton" Grid.Row="2" Style="{DynamicResource Button}" Name="CapitalsAllSmallButton">All small</RadioButton>
+                                    <TextBlock x:Uid="CapitalsAllSmallSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="CapitalsAllSmallSample" />
+                                    <RadioButton x:Uid="CapitalsSmallButton" Grid.Row="3" Style="{DynamicResource Button}" Name="CapitalsSmallButton">Small</RadioButton>
+                                    <TextBlock x:Uid="CapitalsSmallSample" Grid.Row="3" Style="{DynamicResource Sample}" Name="CapitalsSmallSample" />
+                                    <RadioButton x:Uid="CapitalsAllPetiteButton" Grid.Row="4" Style="{DynamicResource Button}" Name="CapitalsAllPetiteButton">All petite</RadioButton>
+                                    <TextBlock x:Uid="CapitalsAllPetiteSample" Grid.Row="4" Style="{DynamicResource Sample}" Name="CapitalsAllPetiteSample" />
+                                    <RadioButton x:Uid="CapitalsPetiteButton" Grid.Row="5" Style="{DynamicResource Button}" Name="CapitalsPetiteButton">Petite</RadioButton>
+                                    <TextBlock x:Uid="CapitalsPetiteSample" Grid.Row="5" Style="{DynamicResource Sample}" Name="CapitalsPetiteSample" />
+                                    <RadioButton x:Uid="CapitalsUnicaseButton" Grid.Row="6" Style="{DynamicResource Button}" Name="CapitalsUnicaseButton">Unicase</RadioButton>
+                                    <TextBlock x:Uid="CapitalsUnicaseSample" Grid.Row="6" Style="{DynamicResource Sample}" Name="CapitalsUnicaseSample" />
+                                    <RadioButton x:Uid="CapitalsTitlingButton" Grid.Row="7" Style="{DynamicResource Button}" Name="CapitalsTitlingButton">Titling</RadioButton>
+                                    <TextBlock x:Uid="CapitalsTitlingSample" Grid.Row="7" Style="{DynamicResource Sample}" Name="CapitalsTitlingSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_17">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_41" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_42" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_75" />
+                                <RowDefinition x:Uid="RowDefinition_76" />
+                                <RowDefinition x:Uid="RowDefinition_77" />
+                                <RowDefinition x:Uid="RowDefinition_78" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_14" Grid.Row="0" Style="{DynamicResource Label}">Fractions</TextBlock>
+                                    <RadioButton x:Uid="FractionsNormalButton" Grid.Row="1" Style="{DynamicResource Button}" Name="FractionsNormalButton">Normal</RadioButton>
+                                    <TextBlock x:Uid="FractionsNormalSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="FractionsNormalSample" />
+                                    <RadioButton x:Uid="FractionsSlashedButton" Grid.Row="2" Style="{DynamicResource Button}" Name="FractionsSlashedButton">Slashed</RadioButton>
+                                    <TextBlock x:Uid="FractionsSlashedSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="FractionsSlashedSample" />
+                                    <RadioButton x:Uid="FractionsStackedButton" Grid.Row="3" Style="{DynamicResource Button}" Name="FractionsStackedButton">Stacked</RadioButton>
+                                    <TextBlock x:Uid="FractionsStackedSample" Grid.Row="3" Style="{DynamicResource Sample}" Name="FractionsStackedSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_18">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_43" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_44" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_79" />
+                                <RowDefinition x:Uid="RowDefinition_80" />
+                                <RowDefinition x:Uid="RowDefinition_81" />
+                                <RowDefinition x:Uid="RowDefinition_82" />
+                                <RowDefinition x:Uid="RowDefinition_83" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_15" Grid.Row="0" Style="{DynamicResource Label}">Standard swashes</TextBlock>
+                                    <RadioButton x:Uid="StandardSwashesNoneButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StandardSwashesNoneButton">None</RadioButton>
+                                    <TextBlock x:Uid="StandardSwashesNoneSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StandardSwashesNoneSample" />
+                                    <RadioButton x:Uid="StandardSwashesSet1Button" Grid.Row="2" Style="{DynamicResource Button}" Name="StandardSwashesSet1Button">Set 1</RadioButton>
+                                    <TextBlock x:Uid="StandardSwashesSet1Sample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StandardSwashesSet1Sample" />
+                                    <RadioButton x:Uid="StandardSwashesSet2Button" Grid.Row="3" Style="{DynamicResource Button}" Name="StandardSwashesSet2Button">Set 2</RadioButton>
+                                    <TextBlock x:Uid="StandardSwashesSet2Sample" Grid.Row="3" Style="{DynamicResource Sample}" Name="StandardSwashesSet2Sample" />
+                                    <RadioButton x:Uid="StandardSwashesSet3Button" Grid.Row="4" Style="{DynamicResource Button}" Name="StandardSwashesSet3Button">Set 3</RadioButton>
+                                    <TextBlock x:Uid="StandardSwashesSet3Sample" Grid.Row="4" Style="{DynamicResource Sample}" Name="StandardSwashesSet3Sample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_19">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_45" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_46" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_84" />
+                                <RowDefinition x:Uid="RowDefinition_85" />
+                                <RowDefinition x:Uid="RowDefinition_86" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_16" Grid.Row="0" Style="{DynamicResource Label}">Capital spacing</TextBlock>
+                                    <RadioButton x:Uid="CapitalSpacingDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="CapitalSpacingDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="CapitalSpacingDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="CapitalSpacingDisabledSample" />
+                                    <RadioButton x:Uid="CapitalSpacingEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="CapitalSpacingEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="CapitalSpacingEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="CapitalSpacingEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_20">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_47" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_48" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_87" />
+                                <RowDefinition x:Uid="RowDefinition_88" />
+                                <RowDefinition x:Uid="RowDefinition_89" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_17" Grid.Row="0" Style="{DynamicResource Label}">Case sensitive forms</TextBlock>
+                                    <RadioButton x:Uid="CaseSensitiveFormsDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="CaseSensitiveFormsDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="CaseSensitiveFormsDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="CaseSensitiveFormsDisabledSample" />
+                                    <RadioButton x:Uid="CaseSensitiveFormsEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="CaseSensitiveFormsEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="CaseSensitiveFormsEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="CaseSensitiveFormsEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_21">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_49" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_50" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_90" />
+                                <RowDefinition x:Uid="RowDefinition_91" />
+                                <RowDefinition x:Uid="RowDefinition_92" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_18" Grid.Row="0" Style="{DynamicResource Label}">East Asian expert forms</TextBlock>
+                                    <RadioButton x:Uid="EastAsianExpertFormsDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="EastAsianExpertFormsDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="EastAsianExpertFormsDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="EastAsianExpertFormsDisabledSample" />
+                                    <RadioButton x:Uid="EastAsianExpertFormsEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="EastAsianExpertFormsEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="EastAsianExpertFormsEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="EastAsianExpertFormsEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_22">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_51" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_52" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_93" />
+                                <RowDefinition x:Uid="RowDefinition_94" />
+                                <RowDefinition x:Uid="RowDefinition_95" />
+                                <RowDefinition x:Uid="RowDefinition_96" />
+                                <RowDefinition x:Uid="RowDefinition_97" />
+                                <RowDefinition x:Uid="RowDefinition_98" />
+                                <RowDefinition x:Uid="RowDefinition_99" />
+                                <RowDefinition x:Uid="RowDefinition_100" />
+                                <RowDefinition x:Uid="RowDefinition_101" />
+                                <RowDefinition x:Uid="RowDefinition_102" />
+                                <RowDefinition x:Uid="RowDefinition_103" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_19" Grid.Row="0" Style="{DynamicResource Label}">East Asian language</TextBlock>
+                                    <RadioButton x:Uid="EastAsianLanguageNormalButton" Grid.Row="1" Style="{DynamicResource Button}" Name="EastAsianLanguageNormalButton">Normal</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageNormalSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="EastAsianLanguageNormalSample" />
+                                    <RadioButton x:Uid="EastAsianLanguageJis78Button" Grid.Row="2" Style="{DynamicResource Button}" Name="EastAsianLanguageJis78Button">JIS 78</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageJis78Sample" Grid.Row="2" Style="{DynamicResource Sample}" Name="EastAsianLanguageJis78Sample" />
+                                    <RadioButton x:Uid="EastAsianLanguageJis83Button" Grid.Row="3" Style="{DynamicResource Button}" Name="EastAsianLanguageJis83Button">JIS 83</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageJis83Sample" Grid.Row="3" Style="{DynamicResource Sample}" Name="EastAsianLanguageJis83Sample" />
+                                    <RadioButton x:Uid="EastAsianLanguageJis90Button" Grid.Row="4" Style="{DynamicResource Button}" Name="EastAsianLanguageJis90Button">JIS 90</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageJis90Sample" Grid.Row="4" Style="{DynamicResource Sample}" Name="EastAsianLanguageJis90Sample" />
+                                    <RadioButton x:Uid="EastAsianLanguageJis04Button" Grid.Row="5" Style="{DynamicResource Button}" Name="EastAsianLanguageJis04Button">JIS 04</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageJis04Sample" Grid.Row="5" Style="{DynamicResource Sample}" Name="EastAsianLanguageJis04Sample" />
+                                    <RadioButton x:Uid="EastAsianLanguageHojoKanjiButton" Grid.Row="6" Style="{DynamicResource Button}" Name="EastAsianLanguageHojoKanjiButton">Hoji Kanji</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageHojoKanjiSample" Grid.Row="6" Style="{DynamicResource Sample}" Name="EastAsianLanguageHojoKanjiSample" />
+                                    <RadioButton x:Uid="EastAsianLanguageNlcKanjiButton" Grid.Row="7" Style="{DynamicResource Button}" Name="EastAsianLanguageNlcKanjiButton">NLC Kanji</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageNlcKanjiSample" Grid.Row="7" Style="{DynamicResource Sample}" Name="EastAsianLanguageNlcKanjiSample" />
+                                    <RadioButton x:Uid="EastAsianLanguageSimplifiedButton" Grid.Row="8" Style="{DynamicResource Button}" Name="EastAsianLanguageSimplifiedButton">Simplified</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageSimplifiedSample" Grid.Row="8" Style="{DynamicResource Sample}" Name="EastAsianLanguageSimplifiedSample" />
+                                    <RadioButton x:Uid="EastAsianLanguageTraditionalButton" Grid.Row="9" Style="{DynamicResource Button}" Name="EastAsianLanguageTraditionalButton">Traditional</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageTraditionalSample" Grid.Row="9" Style="{DynamicResource Sample}" Name="EastAsianLanguageTraditionalSample" />
+                                    <RadioButton x:Uid="EastAsianLanguageTraditionalNamesButton" Grid.Row="10" Style="{DynamicResource Button}" Name="EastAsianLanguageTraditionalNamesButton">Traditional names</RadioButton>
+                                    <TextBlock x:Uid="EastAsianLanguageTraditionalNamesSample" Grid.Row="10" Style="{DynamicResource Sample}" Name="EastAsianLanguageTraditionalNamesSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_23">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_53" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_54" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_104" />
+                                <RowDefinition x:Uid="RowDefinition_105" />
+                                <RowDefinition x:Uid="RowDefinition_106" />
+                                <RowDefinition x:Uid="RowDefinition_107" />
+                                <RowDefinition x:Uid="RowDefinition_108" />
+                                <RowDefinition x:Uid="RowDefinition_109" />
+                                <RowDefinition x:Uid="RowDefinition_110" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_20" Grid.Row="0" Style="{DynamicResource Label}">East Asian widths</TextBlock>
+                                    <RadioButton x:Uid="EastAsianWidthsNormalButton" Grid.Row="1" Style="{DynamicResource Button}" Name="EastAsianWidthsNormalButton">Normal</RadioButton>
+                                    <TextBlock x:Uid="EastAsianWidthsNormalSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="EastAsianWidthsNormalSample" />
+                                    <RadioButton x:Uid="EastAsianWidthsProportionalButton" Grid.Row="2" Style="{DynamicResource Button}" Name="EastAsianWidthsProportionalButton">Proportional</RadioButton>
+                                    <TextBlock x:Uid="EastAsianWidthsProportionalSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="EastAsianWidthsProportionalSample" />
+                                    <RadioButton x:Uid="EastAsianWidthsFullButton" Grid.Row="3" Style="{DynamicResource Button}" Name="EastAsianWidthsFullButton">Full</RadioButton>
+                                    <TextBlock x:Uid="EastAsianWidthsFullSample" Grid.Row="3" Style="{DynamicResource Sample}" Name="EastAsianWidthsFullSample" />
+                                    <RadioButton x:Uid="EastAsianWidthsHalfButton" Grid.Row="4" Style="{DynamicResource Button}" Name="EastAsianWidthsHalfButton">Half</RadioButton>
+                                    <TextBlock x:Uid="EastAsianWidthsHalfSample" Grid.Row="4" Style="{DynamicResource Sample}" Name="EastAsianWidthsHalfSample" />
+                                    <RadioButton x:Uid="EastAsianWidthsThirdButton" Grid.Row="5" Style="{DynamicResource Button}" Name="EastAsianWidthsThirdButton">Third</RadioButton>
+                                    <TextBlock x:Uid="EastAsianWidthsThirdSample" Grid.Row="5" Style="{DynamicResource Sample}" Name="EastAsianWidthsThirdSample" />
+                                    <RadioButton x:Uid="EastAsianWidthsQuarterButton" Grid.Row="6" Style="{DynamicResource Button}" Name="EastAsianWidthsQuarterButton">Quarter</RadioButton>
+                                    <TextBlock x:Uid="EastAsianWidthsQuarterSample" Grid.Row="6" Style="{DynamicResource Sample}" Name="EastAsianWidthsQuarterSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_24">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_55" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_56" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_111" />
+                                <RowDefinition x:Uid="RowDefinition_112" />
+                                <RowDefinition x:Uid="RowDefinition_113" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_21" Grid.Row="0" Style="{DynamicResource Label}">Mathematical Greek</TextBlock>
+                                    <RadioButton x:Uid="MathematicalGreekDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="MathematicalGreekDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="MathematicalGreekDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="MathematicalGreekDisabledSample" />
+                                    <RadioButton x:Uid="MathematicalGreekEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="MathematicalGreekEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="MathematicalGreekEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="MathematicalGreekEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_25">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_57" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_58" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_114" />
+                                <RowDefinition x:Uid="RowDefinition_115" />
+                                <RowDefinition x:Uid="RowDefinition_116" />
+                                <RowDefinition x:Uid="RowDefinition_117" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_22" Grid.Row="0" Style="{DynamicResource Label}">Numeral alignment</TextBlock>
+                                    <RadioButton x:Uid="NumeralAlignmentNormalButton" Grid.Row="1" Style="{DynamicResource Button}" Name="NumeralAlignmentNormalButton">Normal</RadioButton>
+                                    <TextBlock x:Uid="NumeralAlignmentNormalSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="NumeralAlignmentNormalSample" />
+                                    <RadioButton x:Uid="NumeralAlignmentProportionalButton" Grid.Row="2" Style="{DynamicResource Button}" Name="NumeralAlignmentProportionalButton">Proportional</RadioButton>
+                                    <TextBlock x:Uid="NumeralAlignmentProportionalSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="NumeralAlignmentProportionalSample" />
+                                    <RadioButton x:Uid="NumeralAlignmentTabularButton" Grid.Row="3" Style="{DynamicResource Button}" Name="NumeralAlignmentTabularButton">Tabular</RadioButton>
+                                    <TextBlock x:Uid="NumeralAlignmentTabularSample" Grid.Row="3" Style="{DynamicResource Sample}" Name="NumeralAlignmentTabularSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_26">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_59" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_60" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_118" />
+                                <RowDefinition x:Uid="RowDefinition_119" />
+                                <RowDefinition x:Uid="RowDefinition_120" />
+                                <RowDefinition x:Uid="RowDefinition_121" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_23" Grid.Row="0" Style="{DynamicResource Label}">Numeral style</TextBlock>
+                                    <RadioButton x:Uid="NumeralStyleNormalButton" Grid.Row="1" Style="{DynamicResource Button}" Name="NumeralStyleNormalButton">Normal</RadioButton>
+                                    <TextBlock x:Uid="NumeralStyleNormalSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="NumeralStyleNormalSample" />
+                                    <RadioButton x:Uid="NumeralStyleLiningButton" Grid.Row="2" Style="{DynamicResource Button}" Name="NumeralStyleLiningButton">Lining</RadioButton>
+                                    <TextBlock x:Uid="NumeralStyleLiningSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="NumeralStyleLiningSample" />
+                                    <RadioButton x:Uid="NumeralStyleOldStyleButton" Grid.Row="3" Style="{DynamicResource Button}" Name="NumeralStyleOldStyleButton">Old style</RadioButton>
+                                    <TextBlock x:Uid="NumeralStyleOldStyleSample" Grid.Row="3" Style="{DynamicResource Sample}" Name="NumeralStyleOldStyleSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_27">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_61" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_62" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_122" />
+                                <RowDefinition x:Uid="RowDefinition_123" />
+                                <RowDefinition x:Uid="RowDefinition_124" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_24" Grid.Row="0" Style="{DynamicResource Label}">Slashed zero</TextBlock>
+                                    <RadioButton x:Uid="SlashedZeroDisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="SlashedZeroDisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="SlashedZeroDisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="SlashedZeroDisabledSample" />
+                                    <RadioButton x:Uid="SlashedZeroEnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="SlashedZeroEnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="SlashedZeroEnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="SlashedZeroEnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_28">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_63" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_64" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_125" />
+                                <RowDefinition x:Uid="RowDefinition_126" />
+                                <RowDefinition x:Uid="RowDefinition_127" />
+                                <RowDefinition x:Uid="RowDefinition_128" />
+                                <RowDefinition x:Uid="RowDefinition_129" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_25" Grid.Row="0" Style="{DynamicResource Label}">Stylistic alternates</TextBlock>
+                                    <RadioButton x:Uid="StylisticAlternatesNoneButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticAlternatesNoneButton">None</RadioButton>
+                                    <TextBlock x:Uid="StylisticAlternatesNoneSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticAlternatesNoneSample" />
+                                    <RadioButton x:Uid="StylisticAlternatesSet1Button" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticAlternatesSet1Button">Set 1</RadioButton>
+                                    <TextBlock x:Uid="StylisticAlternatesSet1Sample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticAlternatesSet1Sample" />
+                                    <RadioButton x:Uid="StylisticAlternatesSet2Button" Grid.Row="3" Style="{DynamicResource Button}" Name="StylisticAlternatesSet2Button">Set 2</RadioButton>
+                                    <TextBlock x:Uid="StylisticAlternatesSet2Sample" Grid.Row="3" Style="{DynamicResource Sample}" Name="StylisticAlternatesSet2Sample" />
+                                    <RadioButton x:Uid="StylisticAlternatesSet3Button" Grid.Row="4" Style="{DynamicResource Button}" Name="StylisticAlternatesSet3Button">Set 3</RadioButton>
+                                    <TextBlock x:Uid="StylisticAlternatesSet3Sample" Grid.Row="4" Style="{DynamicResource Sample}" Name="StylisticAlternatesSet3Sample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_29">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_65" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_66" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_130" />
+                                <RowDefinition x:Uid="RowDefinition_131" />
+                                <RowDefinition x:Uid="RowDefinition_132" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_26" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 1</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet1DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet1DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet1DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet1DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet1EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet1EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet1EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet1EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_30">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_67" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_68" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_133" />
+                                <RowDefinition x:Uid="RowDefinition_134" />
+                                <RowDefinition x:Uid="RowDefinition_135" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_27" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 2</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet2DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet2DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet2DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet2DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet2EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet2EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet2EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet2EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_31">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_69" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_70" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_136" />
+                                <RowDefinition x:Uid="RowDefinition_137" />
+                                <RowDefinition x:Uid="RowDefinition_138" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_28" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 3</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet3DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet3DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet3DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet3DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet3EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet3EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet3EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet3EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_32">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_71" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_72" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_139" />
+                                <RowDefinition x:Uid="RowDefinition_140" />
+                                <RowDefinition x:Uid="RowDefinition_141" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_29" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 4</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet4DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet4DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet4DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet4DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet4EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet4EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet4EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet4EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_33">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_73" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_74" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_142" />
+                                <RowDefinition x:Uid="RowDefinition_143" />
+                                <RowDefinition x:Uid="RowDefinition_144" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_30" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 5</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet5DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet5DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet5DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet5DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet5EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet5EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet5EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet5EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_34">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_75" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_76" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_145" />
+                                <RowDefinition x:Uid="RowDefinition_146" />
+                                <RowDefinition x:Uid="RowDefinition_147" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_31" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 6</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet6DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet6DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet6DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet6DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet6EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet6EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet6EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet6EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_35">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_77" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_78" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_148" />
+                                <RowDefinition x:Uid="RowDefinition_149" />
+                                <RowDefinition x:Uid="RowDefinition_150" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_32" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 7</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet7DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet7DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet7DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet7DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet7EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet7EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet7EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet7EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_36">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_79" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_80" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_151" />
+                                <RowDefinition x:Uid="RowDefinition_152" />
+                                <RowDefinition x:Uid="RowDefinition_153" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_33" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 8</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet8DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet8DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet8DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet8DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet8EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet8EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet8EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet8EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_37">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_81" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_82" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_154" />
+                                <RowDefinition x:Uid="RowDefinition_155" />
+                                <RowDefinition x:Uid="RowDefinition_156" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_34" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 9</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet9DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet9DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet9DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet9DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet9EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet9EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet9EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet9EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_38">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_83" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_84" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_157" />
+                                <RowDefinition x:Uid="RowDefinition_158" />
+                                <RowDefinition x:Uid="RowDefinition_159" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_35" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 10</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet10DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet10DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet10DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet10DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet10EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet10EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet10EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet10EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_39">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_85" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_86" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_160" />
+                                <RowDefinition x:Uid="RowDefinition_161" />
+                                <RowDefinition x:Uid="RowDefinition_162" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_36" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 11</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet11DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet11DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet11DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet11DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet11EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet11EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet11EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet11EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_40">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_87" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_88" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_163" />
+                                <RowDefinition x:Uid="RowDefinition_164" />
+                                <RowDefinition x:Uid="RowDefinition_165" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_37" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 12</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet12DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet12DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet12DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet12DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet12EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet12EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet12EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet12EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_41">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_89" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_90" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_166" />
+                                <RowDefinition x:Uid="RowDefinition_167" />
+                                <RowDefinition x:Uid="RowDefinition_168" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_38" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 13</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet13DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet13DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet13DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet13DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet13EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet13EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet13EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet13EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_42">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_91" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_92" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_169" />
+                                <RowDefinition x:Uid="RowDefinition_170" />
+                                <RowDefinition x:Uid="RowDefinition_171" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_39" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 14</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet14DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet14DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet14DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet14DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet14EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet14EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet14EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet14EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_43">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_93" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_94" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_172" />
+                                <RowDefinition x:Uid="RowDefinition_173" />
+                                <RowDefinition x:Uid="RowDefinition_174" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_40" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 15</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet15DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet15DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet15DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet15DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet15EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet15EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet15EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet15EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_44">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_95" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_96" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_175" />
+                                <RowDefinition x:Uid="RowDefinition_176" />
+                                <RowDefinition x:Uid="RowDefinition_177" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_41" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 16</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet16DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet16DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet16DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet16DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet16EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet16EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet16EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet16EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_45">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_97" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_98" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_178" />
+                                <RowDefinition x:Uid="RowDefinition_179" />
+                                <RowDefinition x:Uid="RowDefinition_180" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_42" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 17</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet17DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet17DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet17DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet17DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet17EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet17EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet17EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet17EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_46">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_99" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_100" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_181" />
+                                <RowDefinition x:Uid="RowDefinition_182" />
+                                <RowDefinition x:Uid="RowDefinition_183" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_43" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 18</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet18DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet18DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet18DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet18DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet18EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet18EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet18EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet18EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_47">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_101" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_102" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_184" />
+                                <RowDefinition x:Uid="RowDefinition_185" />
+                                <RowDefinition x:Uid="RowDefinition_186" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_44" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 19</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet19DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet19DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet19DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet19DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet19EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet19EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet19EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet19EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_48">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_103" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_104" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_187" />
+                                <RowDefinition x:Uid="RowDefinition_188" />
+                                <RowDefinition x:Uid="RowDefinition_189" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_45" Grid.Row="0" Style="{DynamicResource Label}">Stylistic set 20</TextBlock>
+                                    <RadioButton x:Uid="StylisticSet20DisabledButton" Grid.Row="1" Style="{DynamicResource Button}" Name="StylisticSet20DisabledButton">Disabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet20DisabledSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="StylisticSet20DisabledSample" />
+                                    <RadioButton x:Uid="StylisticSet20EnabledButton" Grid.Row="2" Style="{DynamicResource Button}" Name="StylisticSet20EnabledButton">Enabled</RadioButton>
+                                    <TextBlock x:Uid="StylisticSet20EnabledSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="StylisticSet20EnabledSample" />
+                            </Grid>
+
+                            <Grid x:Uid="Grid_49">
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_105" SharedSizeGroup="C0" />
+                                <ColumnDefinition x:Uid="ColumnDefinition_106" SharedSizeGroup="C1" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition x:Uid="RowDefinition_190" />
+                                <RowDefinition x:Uid="RowDefinition_191" />
+                                <RowDefinition x:Uid="RowDefinition_192" />
+                                <RowDefinition x:Uid="RowDefinition_193" />
+                                <RowDefinition x:Uid="RowDefinition_194" />
+                                <RowDefinition x:Uid="RowDefinition_195" />
+                                <RowDefinition x:Uid="RowDefinition_196" />
+                                </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="TextBlock_46" Grid.Row="0" Style="{DynamicResource Label}">Variants</TextBlock>
+                                    <RadioButton x:Uid="VariantsNormalButton" Grid.Row="1" Style="{DynamicResource Button}" Name="VariantsNormalButton">Normal</RadioButton>
+                                    <TextBlock x:Uid="VariantsNormalSample" Grid.Row="1" Style="{DynamicResource Sample}" Name="VariantsNormalSample" />
+                                    <RadioButton x:Uid="VariantsSuperscriptButton" Grid.Row="2" Style="{DynamicResource Button}" Name="VariantsSuperscriptButton">Superscript</RadioButton>
+                                    <TextBlock x:Uid="VariantsSuperscriptSample" Grid.Row="2" Style="{DynamicResource Sample}" Name="VariantsSuperscriptSample" />
+                                    <RadioButton x:Uid="VariantsSubscriptButton" Grid.Row="3" Style="{DynamicResource Button}" Name="VariantsSubscriptButton">Subscript</RadioButton>
+                                    <TextBlock x:Uid="VariantsSubscriptSample" Grid.Row="3" Style="{DynamicResource Sample}" Name="VariantsSubscriptSample" />
+                                    <RadioButton x:Uid="VariantsOrdinalButton" Grid.Row="4" Style="{DynamicResource Button}" Name="VariantsOrdinalButton">Ordinal</RadioButton>
+                                    <TextBlock x:Uid="VariantsOrdinalSample" Grid.Row="4" Style="{DynamicResource Sample}" Name="VariantsOrdinalSample" />
+                                    <RadioButton x:Uid="VariantsInferiorButton" Grid.Row="5" Style="{DynamicResource Button}" Name="VariantsInferiorButton">Inferior</RadioButton>
+                                    <TextBlock x:Uid="VariantsInferiorSample" Grid.Row="5" Style="{DynamicResource Sample}" Name="VariantsInferiorSample" />
+                                    <RadioButton x:Uid="VariantsRubyButton" Grid.Row="6" Style="{DynamicResource Button}" Name="VariantsRubyButton">Ruby</RadioButton>
+                                    <TextBlock x:Uid="VariantsRubySample" Grid.Row="6" Style="{DynamicResource Sample}" Name="VariantsRubySample" />
+                            </Grid>
+
+<!--- Templates
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="C0"/>
+                                <ColumnDefinition SharedSizeGroup="C1"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                    <TextBlock   Grid.Row="0" Style="{DynamicResource Label}"></TextBlock>
+                                    <RadioButton Grid.Row="1" Style="{DynamicResource Button}" Name="DisabledButton">Disabled</RadioButton>
+                                    <FlowDocumentScrollViewer Grid.Row="1" Style="{DynamicResource Sample}" Name="DisabledSample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="2" Style="{DynamicResource Button}" Name="EnabledButton">Enabled</RadioButton>
+                                    <FlowDocumentScrollViewer Grid.Row="2" Style="{DynamicResource Sample}" Name="EnabledSample"><FlowDocument/></FlowDocumentScrollViewer>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="C0"/>
+                                <ColumnDefinition SharedSizeGroup="C1"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                    <TextBlock   Grid.Row="0" Style="{DynamicResource Label}"></TextBlock>
+                                    <RadioButton Grid.Row="1" Style="{DynamicResource Button}" Name="NoneButton">None</RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="1" Style="{DynamicResource Sample}" Name="NoneSample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="2" Style="{DynamicResource Button}" Name="Set1Button">Set 1</RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="2" Style="{DynamicResource Sample}" Name="Set1Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="3" Style="{DynamicResource Button}" Name="Set2Button">Set 2</RadioButton>RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="3" Style="{DynamicResource Sample}" Name="Set2Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="4" Style="{DynamicResource Button}" Name="Set3Button">Set 3</RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="4" Style="{DynamicResource Sample}" Name="Set3Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="C0"/>
+                                <ColumnDefinition SharedSizeGroup="C1"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                    <TextBlock   Grid.Row="0" Style="{DynamicResource Label}"></TextBlock>
+                                    <RadioButton Grid.Row="1" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="1" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="2" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="2" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="3" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="3" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="4" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="4" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="5" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="5" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="6" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="6" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="7" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="7" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="8" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="8" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="9" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="9" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                                    <RadioButton Grid.Row="10" Style="{DynamicResource Button}" Name="Button"></RadioButton>
+                                    <FlowDocumentScrollViewer    Grid.Row="10" Style="{DynamicResource Sample}" Name="Sample"><FlowDocument/></FlowDocumentScrollViewer>
+                            </Grid>
+-->
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Uid="DescriptiveText" Header="Descriptive text" Name="DescriptiveText" Background="#ECE9D8">
+
+                <Grid x:Uid="Grid_50" Margin="3 0 3 3">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Uid="ColumnDefinition_107" Width="5*" />    <!-- Family typefaces -->
+                    <ColumnDefinition x:Uid="ColumnDefinition_108" Width="6pt" />   <!-- Separator -->
+                    <ColumnDefinition x:Uid="ColumnDefinition_109" Width="5*" />    <!-- Typeface sizes -->
+                    <ColumnDefinition x:Uid="ColumnDefinition_110" Width="6pt" />   <!-- Separator -->
+                    <ColumnDefinition x:Uid="ColumnDefinition_111" Width="2*" />    <!-- Languages -->
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                    <RowDefinition x:Uid="RowDefinition_197" Height="Auto" />    <!-- Title -->
+                    <RowDefinition x:Uid="RowDefinition_198" />                  <!-- Sample -->
+                    </Grid.RowDefinitions>
+                    <!-- Family and Typeface samples, or font details -->
+
+
+
+                    <Label x:Uid="Label_8" Grid.Column="0" Grid.Row="0" Padding="3">Font description:</Label>
+                    <ScrollViewer
+                        x:Uid="ScrollViewer_2" Grid.Column="0" Grid.Row="1"
+                        Margin="0" Padding="3"
+                        BorderThickness="0.75"
+                        Background="White"
+                        VerticalScrollBarVisibility="Auto"
+                        PreviewMouseRightButtonDown="CreateContextMenu"
+                        >
+                        <Grid x:Uid="Grid_51">
+                            <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Uid="ColumnDefinition_112" Width="Auto" />
+                            <ColumnDefinition x:Uid="ColumnDefinition_113" Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                            <RowDefinition x:Uid="RowDefinition_199" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_200" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_201" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_202" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_203" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_204" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_205" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_206" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_207" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_208" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_209" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_210" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_211" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_212" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_213" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_214" Height="Auto" />
+                            </Grid.RowDefinitions>
+
+
+
+                            <TextBlock x:Uid="FamilyNameLabel" Grid.Row="1" Grid.Column="0" Margin="8 2 0 2" Name="FamilyNameLabel">Family:</TextBlock>
+                            <TextBlock x:Uid="FamilyNameText" Grid.Row="1" Grid.Column="1" Margin="8 2 8 2" Name="FamilyNameText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="FaceNameLabel" Grid.Row="2" Grid.Column="0" Margin="8 2 0 2" Name="FaceNameLabel">Face:</TextBlock>
+                            <TextBlock x:Uid="FaceNameText" Grid.Row="2" Grid.Column="1" Margin="8 2 8 2" Name="FaceNameText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="DescriptionLabel" Grid.Row="3" Grid.Column="0" Margin="8 2 0 2" Name="DescriptionLabel">Description:</TextBlock>
+                            <TextBlock x:Uid="DescriptionText" Grid.Row="3" Grid.Column="1" Margin="8 2 8 2" Name="DescriptionText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="VersionStringLabel" Grid.Row="4" Grid.Column="0" Margin="8 2 0 2" Name="VersionStringLabel">Version:</TextBlock>
+                            <TextBlock x:Uid="VersionStringText" Grid.Row="4" Grid.Column="1" Margin="8 2 8 2" Name="VersionStringText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="CopyrightLabel" Grid.Row="5" Grid.Column="0" Margin="8 2 0 2" Name="CopyrightLabel">Copyright:</TextBlock>
+                            <TextBlock x:Uid="CopyrightText" Grid.Row="5" Grid.Column="1" Margin="8 2 8 2" Name="CopyrightText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="TrademarkLabel" Grid.Row="6" Grid.Column="0" Margin="8 2 0 2" Name="TrademarkLabel">Trademark:</TextBlock>
+                            <TextBlock x:Uid="TrademarkText" Grid.Row="6" Grid.Column="1" Margin="8 2 8 2" Name="TrademarkText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="ManufacturerNameLabel" Grid.Row="7" Grid.Column="0" Margin="8 2 0 2" Name="ManufacturerNameLabel">Manufacturer:</TextBlock>
+                            <TextBlock x:Uid="ManufacturerNameText" Grid.Row="7" Grid.Column="1" Margin="8 2 8 2" Name="ManufacturerNameText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="DesignerNameLabel" Grid.Row="8" Grid.Column="0" Margin="8 2 0 2" Name="DesignerNameLabel">Designer:</TextBlock>
+                            <TextBlock x:Uid="DesignerNameText" Grid.Row="8" Grid.Column="1" Margin="8 2 8 2" Name="DesignerNameText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="DesignerUrlLabel" Grid.Row="9" Grid.Column="0" Margin="8 2 0 2" Name="DesignerUrlLabel">Designer Url:</TextBlock>
+                            <TextBlock x:Uid="DesignerUrlText" Grid.Row="9" Grid.Column="1" Margin="8 2 8 2" Name="DesignerUrlText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="VendorUrlLabel" Grid.Row="10" Grid.Column="0" Margin="8 2 0 2" Name="VendorUrlLabel">Vendor Url:</TextBlock>
+                            <TextBlock x:Uid="VendorUrlText" Grid.Row="10" Grid.Column="1" Margin="8 2 8 2" Name="VendorUrlText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="SampleTextLabel" Grid.Row="11" Grid.Column="0" Margin="8 2 0 2" Name="SampleTextLabel">Sample text:</TextBlock>
+                            <TextBlock x:Uid="SampleTextText" Grid.Row="11" Grid.Column="1" Margin="8 2 8 2" Name="SampleTextText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="Win32FamilyNameLabel" Grid.Row="12" Grid.Column="0" Margin="8 2 0 2" Name="Win32FamilyNameLabel">Win32 family:</TextBlock>
+                            <TextBlock x:Uid="Win32FamilyNameText" Grid.Row="12" Grid.Column="1" Margin="8 2 8 2" Name="Win32FamilyNameText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="Win32FaceNameLabel" Grid.Row="13" Grid.Column="0" Margin="8 2 0 2" Name="Win32FaceNameLabel">Win32 face:</TextBlock>
+                            <TextBlock x:Uid="Win32FaceNameText" Grid.Row="13" Grid.Column="1" Margin="8 2 8 2" Name="Win32FaceNameText" TextWrapping="Wrap" />
+
+                            <TextBlock x:Uid="FontFileUriLabel" Grid.Row="14" Grid.Column="0" Margin="8 2 0 2" Name="FontFileUriLabel">Font file Uri:</TextBlock>
+                            <TextBlock x:Uid="FontFileUriText" Grid.Row="14" Grid.Column="1" Margin="8 2 8 2" Name="FontFileUriText" TextWrapping="Wrap" />
+
+                        </Grid>
+                    </ScrollViewer>
+
+                    <Label x:Uid="Label_9" Grid.Column="2" Grid.Row="0" Padding="3">License:</Label>
+                    <TextBox
+                        x:Uid="LicenseDescription" Grid.Column="2" Grid.Row="1"
+                        Margin="3 0 0 0" Padding="3"
+                        BorderThickness="0.75"
+                        Background="White"
+                        Name="LicenseDescription"
+                        IsTabStop="false" TabIndex="-1"
+                        IsReadOnly="true" AcceptsReturn="false" TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        PreviewMouseRightButtonDown="CreateContextMenu"
+                        >
+                    </TextBox>
+
+                    <Label x:Uid="Label_10" Grid.Column="4" Grid.Row="0" Padding="3">Language:</Label>
+                    <Grid x:Uid="Grid_52" Grid.Column="4" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Uid="ColumnDefinition_114" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                        <RowDefinition x:Uid="RowDefinition_215" Height="Auto" />   <!-- textbox -->
+                        <RowDefinition x:Uid="RowDefinition_216" />                 <!-- listbox -->
+                        </Grid.RowDefinitions>
+
+                        <TextBox x:Uid="DescriptionLanguageTextBox" Grid.Column="0" Grid.Row="0" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="DescriptionLanguageTextBox" IsTabStop="true" TabIndex="1" TextChanged="DescriptionLanguageChanged" PreviewMouseRightButtonDown="CreateContextMenu"></TextBox>
+                        <ListBox x:Uid="DescriptionLanguageListBox" Grid.Column="0" Grid.Row="1" Margin="3 0 0 0" Padding="3" BorderThickness="0.75" Name="DescriptionLanguageListBox" IsTabStop="false" TabIndex="-1" SelectionChanged="DescriptionLanguageSelected" PreviewMouseRightButtonDown="CreateContextMenu"></ListBox>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Uid="Repertoire" Header="Character repertoire" Name="Repertoire" Background="#ECE9D8">
+
+            </TabItem>
+
+            <TabItem x:Uid="Metrics" Header="Metrics" Name="Metrics" Background="#ECE9D8">
+
+            </TabItem>
+
+        </TabControl>
+
+        <Grid x:Uid="Grid_53" Grid.Column="1" Grid.Row="5">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Uid="ColumnDefinition_17" />               <!-- Preview -->
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition x:Uid="RowDefinition_28" Height="Auto" />  <!-- Title -->
+            <RowDefinition x:Uid="RowDefinition_29" />                  <!-- Preview -->
+            </Grid.RowDefinitions>
+            <!-- Preview and action buttons -->
+
+
+
+            <Label x:Uid="Label_7" Grid.Column="0" Grid.Row="0" Padding="3">Preview:</Label>
+            <TextBox
+                x:Uid="RichTextBox_3"
+                Grid.Column="0" Grid.Row="1"
+                Margin="3 0 0 0" Padding="3"
+                BorderThickness="0.75"
+                Background="White"
+                MaxHeight="120"
+                Name="Preview"
+                IsTabStop="false" TabIndex="-1"
+                IsReadOnly="false" AcceptsReturn="false" TextWrapping="NoWrap"
+                VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Auto"
+                PreviewMouseRightButtonDown="CreateContextMenu">
+                The quick brown fox jumps over the lazy dog
+            </TextBox>
+        </Grid>
+
+        <Grid x:Uid="Grid_54" Grid.Column="1" Grid.Row="7">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Uid="ColumnDefinition_115" Width="*" />
+            <ColumnDefinition x:Uid="ColumnDefinition_116" Width="Auto" />   <!-- Cancel -->
+            <ColumnDefinition x:Uid="ColumnDefinition_117" Width="3" />
+            <ColumnDefinition x:Uid="ColumnDefinition_118" Width="Auto" />   <!-- Ok -->
+            <ColumnDefinition x:Uid="ColumnDefinition_119" Width="3" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition x:Uid="RowDefinition_217" Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button x:Uid="Button_1" MinWidth="75" Grid.Column="1" Grid.Row="0" Name="CancelButton" IsTabStop="true" TabIndex="6" IsCancel="true" Click="OnCancelButtonClicked" PreviewMouseRightButtonDown="CreateContextMenu">Cancel</Button>
+            <Button x:Uid="Button_2" MinWidth="75" Grid.Column="3" Grid.Row="0" Name="OKButton" IsTabStop="true" TabIndex="5" IsDefault="true" Click="OnOkButtonClicked" PreviewMouseRightButtonDown="CreateContextMenu">OK</Button>
+        </Grid>
+
+    </Grid>
+</Window>

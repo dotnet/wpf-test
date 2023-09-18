@@ -1,0 +1,161 @@
+﻿<Project DefaultTargets="build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <PropertyGroup>
+    <HostInBrowser>True</HostInBrowser>
+    <AssemblyName>EditingTestDeploy</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <Configuration>Release</Configuration>
+    <OutputSubFolder>FeatureTests/Editing</OutputSubFolder>
+    <AssemblyAttributeCLSCompliant>false</AssemblyAttributeCLSCompliant>
+    <SignAssembly>true</SignAssembly>
+    <SignManifests>True</SignManifests>
+    <ManifestKeyFile>$(WpfTest)\Common\clickoncetest.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>cd582af19e477ae94a53102e0453e71b3c592a80</ManifestCertificateThumbprint>
+    <PlatformTarget Condition="'$(TARGET_WOW)' != '' And '$(HostInBrowser)' != 'true' And '$(OutputType)' != 'Library'">x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="DeployEntryApp.xaml" />
+    <Page Include="DeployEntryPage.xaml" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="DeployEntry.xaml.cs">
+      <DependentUpon>DeployEntryApp.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <!-- TestRuntime references TestAPICore References System.core, but we need to reference System.Core first for name resolution -->
+    <Reference Include="System.Core" Condition="'$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0'" />
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Private>false</Private>
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(EditingTestLibProject)">
+      <Name>EditingTestLib</Name>
+      <Project>{66748301-E42F-4c1f-B4D2-D3F8E9BF7E5D}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(TestContractsProject)" />
+
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="Accessibility" />
+    
+    
+    <!-- SOURCES start here. -->
+    <Compile Include="..\ActionDriven\ActionDrivenTest.cs" />
+    <Compile Include="..\AssemblyData\AssemblyTestCaseData.cs" />
+    <Compile Include="..\AssemblyData\GroupedCustomTestcaseData.cs" />
+    <Compile Include="..\Commands\CommandService.cs" />
+    <Compile Include="..\Commands\StandardCommandsTest.cs" />
+    <Compile Include="..\ContextMenu\ContextMenuTest.cs" />
+    <Compile Include="..\Editing\FrameworkViewLocation.cs" />
+    <Compile Include="..\Editing\Tablet.cs" />
+    <Compile Include="..\Editing\TestHelpers.cs" />
+    <Compile Include="..\Editing\TextEditorTests.cs" />
+    <Compile Include="..\Editing\UndoRedoTests.cs" />
+    <Compile Include="..\DataObject\DataObjectAPI.cs" />
+    <Compile Include="..\Clipboard\ClipboardTest.cs" />
+    <Compile Include="..\Clipboard\ClipboardLeak.cs" />
+    <Compile Include="..\Clipboard\XamlPackageTest.cs" />
+    <Compile Include="..\Clipboard\SetGetClipboardData.cs" />
+    <Compile Include="..\Clipboard\ClipboardTestInSameContainer.cs" />
+    <Compile Include="..\DragDrop\DragDropAPITest.cs" />
+    <Compile Include="..\DragDrop\DragDropUITest.cs" />
+    <Compile Include="..\EditCommand\EditCommand.cs" />
+    <Compile Include="..\Input\KeyEvents.cs" />
+    <Compile Include="..\Input\MouseEvents.cs" />
+    <Compile Include="..\Interactive\CombinatorialExplorer.cs" />
+    <Compile Include="..\Interactive\DragDropExplorer.cs" />
+    <Compile Include="..\Interactive\GlobalizationExplorer.cs" />
+    <Compile Include="..\Interactive\TBLineAPITestHelper.cs" />
+    <Compile Include="..\Interactive\TextExplorer.cs" />
+    <Compile Include="..\KeyNavigation\KeyNavigationTest.cs" />
+    <Compile Include="..\KeyNavigation\PageUpDownNavigation.cs" />
+    <Compile Include="..\KeyNavigation\KeyboardNavigationRegression.cs" />
+    <Compile Include="..\KeyNavigation\TypographyNavigation.cs" />
+    <Compile Include="..\MouseEditing\MouseEditingTest.cs" />
+    <Compile Include="..\ListEditing\ListCreatingTest.cs" />
+    <Compile Include="..\RichText\AdvancedTypographyFeatures.cs" />
+    <Compile Include="..\RichText\CharacterFormattingHelper.cs" />
+    <Compile Include="..\RichText\FigureAndFloaterTest.cs" />
+    <Compile Include="..\RichText\HyperlinkTest.cs" />
+    <Compile Include="..\RichText\KeyboardRegressionTest.cs" />
+    <Compile Include="..\RichText\WordEditingBVTTest.cs" />
+    <Compile Include="..\RichText\RichEditingBase.cs" />
+    <Compile Include="..\RichText\CharacterFormattingTest.cs" />
+    <Compile Include="..\RichText\ListEditingTest.cs" />
+    <Compile Include="..\RichText\ParagraphEditingTestWithKeyboard.cs" />
+    <Compile Include="..\RichText\ParagraphCreateAndSplitingBVT.cs" />
+    <Compile Include="..\RichText\ParagraphDeletingAndMergingBVT.cs" />
+    <Compile Include="..\RichText\ParagraphEditingWithMouse.cs" />
+    <Compile Include="..\RichTextBoxOM\RichTextBoxEventsTest.cs" />
+    <Compile Include="..\RichTextBoxOM\RichTextBoxProperties.cs" />
+    <Compile Include="..\RichTextBoxOM\CreateTextPointerFromPoint.cs" />
+    <Compile Include="..\RichTextBoxOM\RTBFlowDirection.cs" />
+    <Compile Include="..\TableEditing\TableEditingRegression.cs" />
+    <Compile Include="..\Scrolling\PhysicalScrollingTest.cs" />
+    <Compile Include="..\Selection\CaretElement.cs" />
+    <Compile Include="..\Selection\SelectionTest.cs" />
+    <Compile Include="..\Speller\SpellerTest.cs" />
+    <Compile Include="..\Speller\MsSpellCheckLibRCW.cs" />
+    <Compile Include="..\PasswordBox\PasswordBoxbase.cs" />
+    <Compile Include="..\PasswordBox\PasswordRenderingTest.cs" />
+    <Compile Include="..\PasswordBox\PasswordBoxAPIInputTest.cs" />
+    <Compile Include="..\PasswordBox\PasswordBoxUserInputTest.cs" />
+    <Compile Include="..\adorners\adornermanagementtest.cs" />
+    <Compile Include="..\adorners\GrabHandleAdornerBVTTest.cs" />
+    <Compile Include="..\adorners\LollipopAdornerBVTTest.cs" />
+    <Compile Include="..\adorners\GrabHandleAdorner.cs" />
+    <Compile Include="..\adorners\LollipopAdorner.cs" />
+    <Compile Include="..\adorners\AdornerUtils.cs" />
+    <Compile Include="..\TextBoxOM\AtomicsTest.cs" />
+    <Compile Include="..\BackgroundLayout\BackgroundLayoutKeyboardInput.cs" />
+    <Compile Include="..\TextBoxOM\Commands.cs" />
+    <Compile Include="..\TextBoxOM\ContentControl.cs" />
+    <Compile Include="..\TextBoxOM\Contexts.cs" />
+    <Compile Include="..\TextBoxOM\Data.cs" />
+    <Compile Include="..\TextBoxOM\DataBinding.cs" />
+    <Compile Include="..\TextBoxOM\Editing.cs" />
+    <Compile Include="..\TextBoxOM\Events.cs" />
+    <Compile Include="..\TextBoxOM\IAddChild.cs" />
+    <Compile Include="..\TextBoxOM\Integration.cs" />
+    <Compile Include="..\TextBoxOM\Navigation.cs" />
+    <Compile Include="..\TextBoxOM\Rendering.cs" />
+    <Compile Include="..\TextBoxOM\Scrolling.cs" />
+    <Compile Include="..\TextBoxOM\Selection.cs" />
+    <Compile Include="..\TextBoxOM\Sequences.cs" />
+    <Compile Include="..\TextBoxOM\Serialization.cs" />
+    <!--Compile Include="..\TextBoxOM\SpellCheckingTest.cs" /-->
+    <Compile Include="..\TextBoxOM\ReadOnlyTextBoxTest.cs" />
+    <Compile Include="..\TextBoxOM\Styling.cs" />
+    <Compile Include="..\TextBoxOM\Text.cs" />
+    <Compile Include="..\TextBoxOM\TextBoxTestCase.cs" />
+    <Compile Include="..\TextBoxOM\TextUIElementTest.cs" />
+    <!--
+        <Compile Include="..\TextOM\TextNavigatorTest.cs" />
+        <Compile Include="..\TextOM\TOMTests.cs" />
+        -->
+    <Compile Include="..\TableEditing\TableEditingNegativeTest.cs" />
+    <Compile Include="..\TextOM\TextRangeTest.cs" />
+    <Compile Include="..\ListEditing\CaretNavigationInsideList.cs" />
+    <Compile Include="..\TextOM\TextPositionTest.cs" />
+    <Compile Include="..\TextRangeSerialization\TextRangeSerializationTest.cs" />
+    <Compile Include="..\Undoredo\CommonCase.cs" />
+    <Compile Include="..\Undoredo\UndoEmbededObjectTest.cs" />
+    <Compile Include="..\Undoredo\UndoTypingInTextBox.cs" />
+    <Compile Include="..\Undoredo\UndoMultipleLanguagesTest.cs" />
+    <Compile Include="..\Undoredo\UndoFormating.cs" />
+    <Compile Include="..\Undoredo\MSNScenarios.cs" />
+    <Compile Include="..\Undoredo\UndoDelimiterTest.cs" />
+    <Compile Include="..\Undoredo\TextBoxBaseUndoApiTest.cs" />
+    <Compile Include="..\PartialTrust\ClipboardAcessInPartialTrust.cs" />
+    <Compile Include="..\PartialTrust\RichTextCutCopyPasteInPartialTrust.cs" />
+  </ItemGroup>
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>

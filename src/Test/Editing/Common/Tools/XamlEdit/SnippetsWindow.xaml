@@ -1,0 +1,77 @@
+﻿<Window x:Class="XamlPadEdit.SnippetsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="XamlPad Snippets" Height="340" Width="480" 
+	
+	Loaded="WindowLoaded" >
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="SkyBlue" Offset="1" />
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Name="mainGrid">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        <ListBox Name="snippetList" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }">
+            <ListBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="LightYellow" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </ListBox.Background>
+        </ListBox>
+        <Button Name="addButton" Click="AddButtonClicked" Grid.Column="1" Grid.Row="0">_Add</Button>
+        <Button Name="removeButton" Click="RemoveButtonClicked" Grid.Column="1" Grid.Row="1">_Remove</Button>
+        <Button Name="swapUpButton" Click="SwapUpButtonClicked" Grid.Column="1" Grid.Row="2">Swap _Up</Button>
+        <Button Name="swapDownButton" Click="SwapDownButtonClicked" Grid.Column="1" Grid.Row="3">Swap _Down</Button>
+        <Button Name="restoreDefaultsButton" Click="RestoreDefaultsButtonClicked" Grid.Column="1" Grid.Row="4">R_estore Defaults</Button>
+        <Label Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">_Name:</Label>
+        <TextBox Name="nameText" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Text="{Binding Path=Title}">
+            <TextBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="LightYellow" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </TextBox.Background>
+        </TextBox>
+        <Label Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2">Snippet _Body:</Label>
+        <TextBox Name="bodyText" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" AcceptsReturn="True" AcceptsTab="False" FontFamily="Lucida Console" FontSize="12" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Text="{Binding Path=Body}">
+            <TextBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="LightYellow" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </TextBox.Background>
+        </TextBox>
+        <Button Grid.Column="1" Grid.Row="9" Click="CloseButtonClicked">_Close</Button>
+    </Grid>
+</Window>

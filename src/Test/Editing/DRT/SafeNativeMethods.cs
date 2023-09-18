@@ -9,6 +9,8 @@
 // it in one of the following files:
 // 
 // NativeMethods.cs
+// UnsafeNativeMethods.cs
+// SafeNativeMethods.cs
 //
 // Only uncomment what you need to avoid code bloat.
 //

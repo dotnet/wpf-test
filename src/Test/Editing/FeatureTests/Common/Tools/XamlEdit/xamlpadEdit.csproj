@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <PropertyGroup Condition=" '$(O)' != '' ">
+    <OutputType>WinExe</OutputType>
+    <Install>True</Install>
+    <Configuration>Release</Configuration>
+    <UpdateEnabled>False</UpdateEnabled>
+    <ProductName>XamlPad</ProductName>
+    <ApplicationVersion>$(WpfVersion)</ApplicationVersion>
+    <TEST_CODE>1</TEST_CODE>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>objchk\i386\</OutputPath>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectGuid>{F682BB06-8D56-4DD8-B36F-3A4C43F10763}</ProjectGuid>
+    <RootNamespace>XamlPadEdit</RootNamespace>
+    <ApplicationIcon>XamlEdit.ico</ApplicationIcon>
+    <AssemblyName>XamlEdit</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>XamlEditKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
+  <ItemGroup>
+    <Compile Include="XamlPadApp.xaml.cs" />
+    <Compile Include="DrawingIcon.cs" />
+    <Page Include="XamlPadPage.xaml" />
+    <Page Include="SnippetsWindow.xaml" />
+    <Page Include="XamlPadHelp.xaml" />
+    <Compile Include="XamlPadPage.xaml.cs">
+      <DependentUpon>XamlPadPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SnippetsWindow.xaml.cs">
+      <DependentUpon>SnippetsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ParseResult.cs" />
+    <Compile Include="SnippetManager.cs" />
+    <Compile Include="XamlHelper.cs" />
+    <None Include="Resources\XamlSnippets.txt" />
+    <None Include="XamlEditKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="XamlEdit.ico" />
+    <Resource Include="zipResource.zip" />
+    <Resource Include="unzip.exe" />
+    <Resource Include="xamlEditScreen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ColorPallette.xaml" />
+    <Page Include="FindAndReplace.xaml" />
+    <Page Include="GoToLineDialog.xaml" />
+    <Page Include="Interpreter.xaml" />
+    <Page Include="InterpreterHelpPage.xaml" />
+    <Page Include="NoSelectionDialog.xaml" />
+    <Page Include="Resources.xaml" />
+    <Compile Include="ColorPallette.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>ColorPallette.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommandLineParser.cs" />
+    <Compile Include="FindAndReplace.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>FindAndReplace.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalHook.cs" />
+    <Compile Include="GoToLineDialog.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>GoToLineDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interpreter.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>Interpreter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InterpreterHelpPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>InterpreterHelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListTreeView.cs" />
+    <Compile Include="NoSelectionDialog.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>NoSelectionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyTreeView.cs" />
+    <Compile Include="Reflection.cs" />
+    <Compile Include="SplashScreen.cs" />
+    <Compile Include="Trackball.cs" />
+    <Compile Include="TreeViewHelper.cs" />
+    <Compile Include="VisualTreeView.cs" />
+    <Compile Include="XamlPadMain.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="OfficeUtils, Version=1.0.2552.19258, Culture=neutral, PublicKeyToken=69577fba6a579e63, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\OfficeUtils.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

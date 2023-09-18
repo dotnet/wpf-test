@@ -1,0 +1,74 @@
+<JOB ID="main">
+<SCRIPT LANGUAGE="JScript" SRC="..\..\include.js" />
+<SCRIPT LANGUAGE="JScript">
+
+// --- BEGIN CUSTOM PORTION ---------------------------------------------------
+
+var sProcessName = "WCP.EditingPerfTiming.exe";
+var sParameters= "\" /Scenario=Typing /TargetControl=RichTextBox /InstanceCount=100 /PerfMeasurement=Time /Position=Start"; 
+var sLogFile = TESTBIN_PATH + "\\Typing_R_100_s.etl";
+var sConfigTemplate = PARSERCONFIGTEMPLATE_PROCTIMEONLYEXECUTIONNOSUMMARY;
+var sTestCommandLine = "\"" + TESTBIN_PATH + "\\" + sProcessName + sParameters;
+var nCount = 5;
+var nTimeout = null;    // in seconds, null defaults to five minutes
+
+// --- END CUSTOM PORTION -----------------------------------------------------
+
+var sScenarioName = "Editing - Typing for RichTextBox x 100 paragraphs at Start";
+var oTest = null;
+var oScriptFile = null;
+var sConfigFile = g_oFSO.GetParentFolderName(WScript.ScriptFullName) + "\\config.xml";
+var sResultFile = g_oFSO.GetParentFolderName(WScript.ScriptFullName) + "\\result.xml";
+var sExtendedResultFile = g_oFSO.GetParentFolderName(WScript.ScriptFullName) + "\\extendedResult.xml";
+var fVerbose = ((WScript.Arguments.Named.Exists("v")) || (WScript.Arguments.Named.Exists("verbose")))
+
+ensureCScript();
+loadManifest();
+g_oShell.CurrentDirectory = TESTBIN_PATH;
+
+if (g_oJob != null)
+{
+    oScriptFile = g_oFSO.GetFile(WScript.ScriptFullName);
+
+    if (oScriptFile != null)
+    {
+        oTest = g_oJob.selectSingleNode("TESTS/TEST[@TESTID=" + oScriptFile.ParentFolder.Name + "]");
+
+        if (oTest != null)
+        {
+            sScenarioName = oTest.getAttribute("NAME");
+        }
+    }
+}
+
+if (sScenarioName == "")
+{
+    sScenarioName = sProcessName;
+}
+
+printBanner(sScenarioName);
+
+if (gatherLogsManual(sTestCommandLine, sLogFile, nCount, nTimeout, fVerbose))
+{
+    if (inWindowsXP())
+    {
+        sProcessName = sProcessName.substr(0, 15);
+    }
+
+    write("Customizing config template file...");
+    if (customizeParserConfigFile(sConfigTemplate, sConfigFile, sProcessName, sScenarioName))
+    {
+        writeLine("done.");
+
+        if (parseExtended(sLogFile, sConfigFile, sResultFile, sExtendedResultFile, fVerbose))
+        {
+            copyLogToServer(sExtendedResultFile, "Detailed Result", "xtperf");
+            copyLogToServer(sLogFile, "ETW Log");
+        }
+    }
+}
+
+deleteFile(sLogFile, true);
+
+</SCRIPT>
+</JOB>

@@ -1,0 +1,858 @@
+﻿<Page
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+  xmlns:XamlPadEdit="clr-namespace:XamlPadEdit"
+  x:Class="XamlPadEdit.XamlPadPage"
+  Loaded="PageLoaded"
+  Name="MainPage"
+    >
+	<Page.CommandBindings>
+		<CommandBinding  Command="Open" Executed="DoOpenCommand" />
+		<CommandBinding  Command="Save" Executed="DoSaveCommand" />
+		<CommandBinding  Command="XamlPadEdit:XamlPadPage.SpellerReform" Executed="DoSpellingReformCommand" />
+		<CommandBinding  Command="XamlPadEdit:XamlPadPage.CharacterFormatting" Executed="DoCharacterFormattingCommand" />
+	</Page.CommandBindings>
+
+
+	<Grid Name="MainGrid">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="5" Name="dividerRow" />
+			<RowDefinition Name="textBoxRow" Height="100" MaxHeight="{Binding ElementName=ContentRect,Path=ActualHeight}" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="0" Name="dividerColumn" />
+			<ColumnDefinition Width="0" Name="visualColumn" MaxWidth="{Binding ElementName=ContentRect,Path=ActualWidth}" />
+		</Grid.ColumnDefinitions>
+
+		<!-- Tool bar tray -->
+		<ToolBarTray Name="toolbarMenu" 
+                     Grid.Row="0" 
+                     Grid.ColumnSpan="3" 
+                     KeyboardNavigation.TabNavigation="Cycle" 
+                     PresentationOptions:Freeze="true">
+			<ToolBarTray.Resources>
+				<Pen x:Key="BlackPen" Brush="Black" Thickness="1" />
+				<Pen x:Key="GrayPen" Brush="Gray" Thickness="1" />
+			</ToolBarTray.Resources>
+
+			<!-- Refresh tool bar -->
+			<ToolBar KeyboardNavigation.TabNavigation="Local">
+
+				<!-- Auto Parse button -->
+				<ToggleButton IsChecked="True" Margin="1" Name="autoParseButton" ToolTip="Toggle whether or not the XAML is automatically parsed and rendered as you type">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Auto Parse" Margin="1" />
+					</StackPanel>
+				</ToggleButton>
+
+				<!-- Refresh button -->
+				<Button Margin="1" Click="RefreshButtonClicked" ToolTip="Parse and render the XAML content (F5)">
+					<StackPanel Orientation="Horizontal">
+						<Path StrokeThickness="1" Stroke="Green" Width="8" Height="12" VerticalAlignment="Center" Margin="2" Fill="Green">
+							<Path.Data>
+								<PathGeometry>
+									<PathFigure IsClosed="True">
+										<LineSegment Point="0, 12" />
+										<LineSegment Point="6, 6" />
+									</PathFigure>
+								</PathGeometry>
+							</Path.Data>
+						</Path>
+						<TextBlock Margin="1" Text="Refresh" />
+					</StackPanel>
+				</Button>
+
+				<!-- Minimize to systray button -->
+				<ToggleButton IsChecked="False" Margin="1" Name="systrayButton" ToolTip="Minimize to System Tray">
+					<StackPanel Orientation="Horizontal">
+						<XamlPadEdit:DrawingIcon>
+							<XamlPadEdit:DrawingIcon.Drawing>
+								<DrawingGroup>
+									<DrawingGroup.Children>
+										<GeometryDrawing Brush="#93C7FF">
+											<GeometryDrawing.Geometry>
+												<RectangleGeometry Rect="0 0 11 14" />
+											</GeometryDrawing.Geometry>
+											<GeometryDrawing.Pen>
+												<Pen Thickness="1" Brush="#5A5D8C" />
+											</GeometryDrawing.Pen>
+										</GeometryDrawing>
+										<GeometryDrawing Brush="Green">
+											<GeometryDrawing.Geometry>
+												<StreamGeometry>M 1,1 1,7 4,4 z</StreamGeometry>
+											</GeometryDrawing.Geometry>
+										</GeometryDrawing>
+									</DrawingGroup.Children>
+								</DrawingGroup>
+							</XamlPadEdit:DrawingIcon.Drawing>
+						</XamlPadEdit:DrawingIcon>
+						<TextBlock Text="SysTray" Margin="1" />
+					</StackPanel>
+				</ToggleButton>
+
+
+			</ToolBar>
+
+			<!-- Print tool bar-->
+			<ToolBar KeyboardNavigation.TabNavigation="Local">
+				<Button Margin="1" Name="printButton" Click="PrintButtonClicked" ToolTip="Print content rendered in frame">
+					<XamlPadEdit:DrawingIcon>
+						<XamlPadEdit:DrawingIcon.Drawing>
+							<DrawingGroup>
+								<DrawingGroup.Children>
+									<GeometryDrawing>
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 2,6 5,6 6,2 10,2 9,6 12,6 12,9 10,11 7.5,11 6.5,12 1.5,12 1.5,11.5 2,11 0,11 0,8 z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Brush="Black" Thickness="1"/>
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="White">
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 6,2 L 10,2 9,6 5,6 z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing>
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 10,2 L 9,6</StreamGeometry>
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Brush="Black" Thickness="0.5"/>
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="#fccc">
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 0,8 L 10,8 10,11 0,11 z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing>
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 8,10.5 L 6.5,12 1.5,12 1.5,11.5 3,10 8,10 z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Brush>
+											<LinearGradientBrush StartPoint='0,0' EndPoint='0,1' SpreadMethod='Pad'>
+												<LinearGradientBrush.GradientStops>
+													<GradientStop Offset='0' Color='#f333' />
+													<GradientStop Offset='0.3' Color='#fccc' />
+													<GradientStop Offset='0.7' Color='White' />
+												</LinearGradientBrush.GradientStops>
+											</LinearGradientBrush>
+										</GeometryDrawing.Brush>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="#fddd">
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 0,8 L 2,6 12,6 10,8z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="#fbbb">
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 12,6 L 12,9 10,11 10,8z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="#f444">
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 4,6 L 10,6 7.5,8 2.5,8z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="#f333">
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 2.5,8 L 7.5,8 7,9 3,9z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="LightGreen">
+										<GeometryDrawing.Geometry>
+											<EllipseGeometry Center="9,8" RadiusX="0.5" RadiusY="0.5"/>
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+								</DrawingGroup.Children>
+							</DrawingGroup>
+						</XamlPadEdit:DrawingIcon.Drawing>
+					</XamlPadEdit:DrawingIcon>
+				</Button>
+			</ToolBar>
+
+			<!-- Font tool bar -->
+			<ToolBar KeyboardNavigation.TabNavigation="Local">
+				<!-- Font name dropdown -->
+				<ComboBox
+                  Initialized="FontNameInitialized"
+                  Name="fontNameCombo"
+                  MinHeight="20"
+                  Width="120"
+                  Margin="1"
+                  IsEditable="True"
+                  Focusable="True"
+                  ToolTip="Font" 
+                  SelectionChanged="FontNameSelectionChanged"
+                  LostKeyboardFocus="FontNameLostFocus"
+                  GotKeyboardFocus="ControlGotKeyboardFocus">
+				</ComboBox>
+
+				<!-- Font size dropdown -->
+				<ComboBox
+                  Name="fontSizeCombo"
+                  MinHeight="20"
+                  Width="50"
+                  Margin="1"
+                  IsEditable="True"
+                  Focusable="True"
+                  ToolTip="Font Size" 
+                  LostKeyboardFocus="FontSizeLostFocus"
+                  SelectionChanged="FontSizeSelectionChanged"
+                  GotKeyboardFocus="ControlGotKeyboardFocus">
+
+					<ComboBoxItem>8</ComboBoxItem>
+					<ComboBoxItem>10</ComboBoxItem>
+					<ComboBoxItem>11</ComboBoxItem>
+					<ComboBoxItem>12</ComboBoxItem>
+					<ComboBoxItem>14</ComboBoxItem>
+					<ComboBoxItem>16</ComboBoxItem>
+					<ComboBoxItem>18</ComboBoxItem>
+					<ComboBoxItem>20</ComboBoxItem>
+					<ComboBoxItem>22</ComboBoxItem>
+					<ComboBoxItem>24</ComboBoxItem>
+					<ComboBoxItem>26</ComboBoxItem>
+					<ComboBoxItem>28</ComboBoxItem>
+					<ComboBoxItem>36</ComboBoxItem>
+					<ComboBoxItem>48</ComboBoxItem>
+
+				</ComboBox>
+
+				<ToggleButton Name="HideEditorButton" Margin="1" IsChecked="true" Checked="ShowEditor" Unchecked="HideEditor"  ToolTip="Show/Hide the text editor">
+					<XamlPadEdit:DrawingIcon>
+						<XamlPadEdit:DrawingIcon.Drawing>
+							<DrawingGroup>
+								<DrawingGroup.Children>
+									<GeometryDrawing Brush="White">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 17 16" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="Gray">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 6 17 10" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="Black">
+										<GeometryDrawing.Geometry>
+											<StreamGeometry>M 6,9 L 8.5,12 11,9 z</StreamGeometry>
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing>
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 17 16" />
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Thickness="1" Brush="#5a5d8c" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+								</DrawingGroup.Children>
+							</DrawingGroup>
+						</XamlPadEdit:DrawingIcon.Drawing>
+					</XamlPadEdit:DrawingIcon>
+				</ToggleButton>
+
+				<!--Show/Hide Visual Tree Button-->
+				<ToggleButton Margin="1" Name="showVisualTreeButton" Checked="ShowVisualTree" Unchecked="HideVisualTree"
+                        ToolTip="Show/Hide the visual tree">
+					<XamlPadEdit:DrawingIcon>
+						<XamlPadEdit:DrawingIcon.Drawing>
+							<DrawingGroup>
+								<DrawingGroup.Children>
+									<GeometryDrawing Brush="White">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 17 16" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="White" Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="2 2 2 2" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="White" Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="6 6 2 2" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="White" Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="6 10 2 2" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="3,5" EndPoint="3,11" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="3,7" EndPoint="5,7" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="3,11" EndPoint="5,11" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource BlackPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="5,3" EndPoint="12,3" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource BlackPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="10,7" EndPoint="14,7" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource BlackPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="10,11" EndPoint="14,11" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing>
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 17 16" />
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Thickness="1" Brush="#5a5d8c" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+								</DrawingGroup.Children>
+							</DrawingGroup>
+						</XamlPadEdit:DrawingIcon.Drawing>
+					</XamlPadEdit:DrawingIcon>
+				</ToggleButton>
+
+			</ToolBar>
+
+			<!-- Zoom tool bar -->
+			<ToolBar KeyboardNavigation.TabNavigation="Local">
+				<ComboBox
+                  Name="zoomCombo"
+                  MinHeight="20"
+                  Width="80"
+                  Margin="1"
+                  IsEditable="True"
+                  Focusable="True"
+                  ToolTip="Zoom" 
+                  SelectionChanged="ZoomSelectionChanged"
+                  LostKeyboardFocus="ZoomLostFocus"
+                  GotKeyboardFocus="ControlGotKeyboardFocus">
+
+					<ComboBoxItem>500%</ComboBoxItem>
+					<ComboBoxItem>200%</ComboBoxItem>
+					<ComboBoxItem>150%</ComboBoxItem>
+					<ComboBoxItem>100%</ComboBoxItem>
+					<ComboBoxItem>75%</ComboBoxItem>
+					<ComboBoxItem>50%</ComboBoxItem>
+					<ComboBoxItem>25%</ComboBoxItem>
+					<ComboBoxItem>10%</ComboBoxItem>
+				</ComboBox>
+			</ToolBar>
+
+			<!-- Command Interpreter tool bar -->
+			<ToolBar KeyboardNavigation.TabNavigation="Local" >
+				<ToggleButton Name="ShowInterpreterButton" Margin="1" IsChecked="false" Checked="ShowCommandInterpreter"  Unchecked="HideCommandInterpreter" ToolTip="Show/Hide the command interpreter">
+					<XamlPadEdit:DrawingIcon>
+						<XamlPadEdit:DrawingIcon.Drawing>
+							<DrawingGroup>
+								<DrawingGroup.Children>
+									<GeometryDrawing Brush="White">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 17 16" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="White" Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="2 2 2 2" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="White" Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="6 6 2 2" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="White" Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="6 10 2 2" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="3,5" EndPoint="3,11" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="3,7" EndPoint="5,7" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Pen="{StaticResource GrayPen}">
+										<GeometryDrawing.Geometry>
+											<LineGeometry StartPoint="3,11" EndPoint="5,11" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="Gray" >
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 10 17 7" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+
+									<GeometryDrawing>
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 17 16" />
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Thickness="1" Brush="#5a5d8c" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+								</DrawingGroup.Children>
+							</DrawingGroup>
+						</XamlPadEdit:DrawingIcon.Drawing>
+					</XamlPadEdit:DrawingIcon>
+				</ToggleButton>
+				<ToggleButton Name="ShowControlStyles" Margin="1"  IsChecked="False" Checked="ShowStyleWindow"  Unchecked="HideStyleWindow" ToolTip="Open/Close Control Styles window">
+					<XamlPadEdit:DrawingIcon>
+						<XamlPadEdit:DrawingIcon.Drawing>
+							<DrawingGroup>
+								<DrawingGroup.Children>
+
+									<GeometryDrawing>
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 17 16" />
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Thickness="1" Brush="#5a5d8c" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="#66B5F314">
+										<GeometryDrawing.Geometry>
+											<EllipseGeometry Center="4,4" RadiusX="4"  RadiusY="4"/>
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Brush="Black" Thickness="1" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="LightBlue">
+										<GeometryDrawing.Geometry>
+											<EllipseGeometry Center="12,4" RadiusX="4"  RadiusY="4"/>
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Brush="Black" Thickness="1" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="LightBlue">
+										<GeometryDrawing.Geometry>
+											<EllipseGeometry Center="4,12" RadiusX="4"  RadiusY="4"/>
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Brush="Black" Thickness="1" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="#66B5F314">
+										<GeometryDrawing.Geometry>
+											<EllipseGeometry Center="12,12" RadiusX="4"  RadiusY="4"/>
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Brush="Black" Thickness="1" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+
+
+
+								</DrawingGroup.Children>
+							</DrawingGroup>
+						</XamlPadEdit:DrawingIcon.Drawing>
+					</XamlPadEdit:DrawingIcon>
+				</ToggleButton>
+				<ToggleButton Name="ShowPallette" Margin="1"  IsChecked="False" Checked="ShowPalletteWindow"  Unchecked="HidePalletteWindow" ToolTip="Open/Close Color Pallette">
+					<XamlPadEdit:DrawingIcon>
+						<XamlPadEdit:DrawingIcon.Drawing>
+							<DrawingGroup>
+								<DrawingGroup.Children>
+
+									<GeometryDrawing Brush="Red" >
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 8 8" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="Yellow" >
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="8 0 8 8" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="Blue" >
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 8 8 8" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+									<GeometryDrawing Brush="Lime" >
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="8 8 8 8" />
+										</GeometryDrawing.Geometry>
+									</GeometryDrawing>
+
+									<GeometryDrawing>
+										<GeometryDrawing.Geometry>
+											<RectangleGeometry Rect="0 0 17 16" />
+										</GeometryDrawing.Geometry>
+										<GeometryDrawing.Pen>
+											<Pen Thickness="1" Brush="#5a5d8c" />
+										</GeometryDrawing.Pen>
+									</GeometryDrawing>
+
+
+
+								</DrawingGroup.Children>
+							</DrawingGroup>
+						</XamlPadEdit:DrawingIcon.Drawing>
+					</XamlPadEdit:DrawingIcon>
+				</ToggleButton>
+			</ToolBar>
+
+			<!-- editing tabs tool bar -->
+			<ToolBar KeyboardNavigation.TabNavigation="Local" Name="EditingExtras" Visibility="Collapsed" >
+
+				<Menu Background="Transparent" Name="FileMenu" Margin="0" Padding="0" >
+					<MenuItem Header="_File"  BorderBrush="Black" BorderThickness="1"  Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center"  >
+						<MenuItem.Background>
+							<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+								<LinearGradientBrush.GradientStops>
+									<GradientStop Color="#FFFFFF"
+												  Offset="0.15"/>
+									<GradientStop Color="#D6E7EF"
+												  Offset=".4"/>
+									<GradientStop Color="#BDD7EF"
+												  Offset=".65"/>
+									<GradientStop Color="#A5CBE7"
+												  Offset=".65"/>
+									<GradientStop Color="#A5CBE7"
+												  Offset=".75"/>
+									<GradientStop Color="#ADD3EF"
+												  Offset=".75"/>
+									<GradientStop Color="#ADD7EF"
+												  Offset="1"/>
+								</LinearGradientBrush.GradientStops>
+							</LinearGradientBrush>
+						</MenuItem.Background>
+						<!--PreviewMouseLeftButtonUp="OpenDocFile" -->
+						<MenuItem Header="_Open"  Command="Open"></MenuItem>
+						<MenuItem Header="_Save"   Command="Save"></MenuItem>
+					</MenuItem>
+				</Menu>
+				<TextBlock Width="5"/>
+				<Menu Background="Transparent" Name="SimpleTests" >
+					<MenuItem  Header="_SimpleTests"    BorderBrush="Black" BorderThickness="1" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center">
+						<MenuItem.Background>
+							<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+								<LinearGradientBrush.GradientStops>
+									<GradientStop Color="#FFFFFF"
+												  Offset="0.15"/>
+									<GradientStop Color="#D6E7EF"
+												  Offset=".4"/>
+									<GradientStop Color="#BDD7EF"
+												  Offset=".65"/>
+									<GradientStop Color="#A5CBE7"
+												  Offset=".65"/>
+									<GradientStop Color="#A5CBE7"
+												  Offset=".75"/>
+									<GradientStop Color="#ADD3EF"
+												  Offset=".75"/>
+									<GradientStop Color="#ADD7EF"
+												  Offset="1"/>
+								</LinearGradientBrush.GradientStops>
+							</LinearGradientBrush>
+						</MenuItem.Background>
+						<MenuItem Header="_SpellingReform"   Command="XamlPadEdit:XamlPadPage.SpellerReform"  ></MenuItem>
+						<MenuItem Header="_Apply Formatting"   Command="XamlPadEdit:XamlPadPage.CharacterFormatting"  ></MenuItem>
+					</MenuItem>
+				</Menu>
+
+
+			</ToolBar>
+
+
+
+		</ToolBarTray>
+
+		<!-- Rectangle filling content Row used to determine max height of textbox -->
+		<Rectangle x:Name="ContentRect" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" Margin="5,5,0,0"/>
+
+		<!--Content render area-->
+		<Border Name="contentRenderAreaDecorator" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Grid.Row="1">
+			<Frame Name="contentRenderArea" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" ContentRendered="FrameContentRendered" Initialized="ContentFrameInitialized" JournalOwnership="UsesParentJournal">
+				<Frame.LayoutTransform>
+					<ScaleTransform x:Name="frameScaleTransform" ScaleX="1.0" ScaleY="1.0" />
+				</Frame.LayoutTransform>
+			</Frame>
+		</Border>
+
+		<!--Divider-->
+		<GridSplitter
+          Grid.Row="1" 
+          Grid.Column="1"
+          ResizeDirection="Columns"
+          HorizontalAlignment="Stretch" />
+
+		<!--Visual tree explorer-->
+		<Grid Grid.Row="1" Grid.Column="2" Margin="0,0,5,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="2"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<!--Visual tree view-->
+			<GroupBox Grid.Row="0" Padding="2" Header="Visual Tree Explorer" Margin="1" Name="visualTreeViewContainer"/>
+
+			<!--Divider-->
+			<GridSplitter
+              Grid.Row="1"
+              ResizeDirection="Rows"
+              HorizontalAlignment="Stretch" />
+
+			<!--Property tree view-->
+			<GroupBox Margin="1" Padding="2" Grid.Row="2" Header="Property Tree Explorer" Name="propertyTreeViewContainer"/>
+		</Grid>
+
+		<!-- Divider -->
+		<GridSplitter
+          Name="splitter"
+          Grid.Row="2"
+          Grid.ColumnSpan="3"
+          ResizeDirection="Rows"
+          ResizeBehavior="PreviousAndNext"
+          HorizontalAlignment="Stretch" />
+
+		<Border CornerRadius="5" 
+                BorderThickness="1" 
+                BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" 
+                Grid.Row="3" 
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="3" />
+
+
+		<!-- Text box -->
+		<TabControl  Grid.Row="3" Name="TabControl" MinHeight="80" 
+						 Grid.ColumnSpan="3"  Height="{Binding ElementName=TextBoxRow,Path=Height}"   MaxHeight="{Binding ElementName=ContentRect,Path=ActualHeight}" >
+			<TabItem Header="Static Xaml" Name="staticXamlTab">
+				<TabItem.CommandBindings>
+					<CommandBinding  Command="XamlPadEdit:XamlPadPage.OpenFind" Executed="DoOpenFindCommand" />
+					<CommandBinding  Command="XamlPadEdit:XamlPadPage.ExecuteIndent" Executed="indentItem_Click" />
+					<CommandBinding  Command="XamlPadEdit:XamlPadPage.OpenGoTo" Executed="DoOpenGoToCommand" />
+					<CommandBinding  Command="XamlPadEdit:XamlPadPage.FindNext" Executed="DoFindNextCommand" />
+				</TabItem.CommandBindings>
+				<TabItem.InputBindings>
+					<KeyBinding  Command="XamlPadEdit:XamlPadPage.OpenFind" Gesture="Ctrl+F" />
+					<KeyBinding  Command="XamlPadEdit:XamlPadPage.ExecuteIndent" Gesture="Ctrl+I" />
+					<KeyBinding  Command="XamlPadEdit:XamlPadPage.OpenFind" Gesture="Ctrl+H" />
+					<KeyBinding  Command="XamlPadEdit:XamlPadPage.OpenGoTo" Gesture="Ctrl+G" />
+					<KeyBinding  Command="XamlPadEdit:XamlPadPage.FindNext" Gesture="F3" />
+				</TabItem.InputBindings>
+				<ScrollViewer VerticalScrollBarVisibility="Visible"
+							 HorizontalScrollBarVisibility="Auto"
+							 Margin="3"
+							 BorderThickness="2"
+							 BorderBrush="Gray"
+							 Name="scroll"
+							 >
+					<Grid>
+						
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<TextBox
+							Foreground="DarkBlue" 
+							Background="AliceBlue"
+							Margin="0,5,0,5" FontFamily="{Binding ElementName=editableTextBox, Path=FontFamily}"
+							FontSize="{Binding ElementName=editableTextBox, Path=FontSize}"
+							AcceptsReturn="True" Name="LineNumberBox" IsReadOnly="True" Grid.Column="0" Text="1"/>
+						<TextBox Name="editableTextBox"
+								 AcceptsReturn="True"
+								 AcceptsTab="True"
+								 Margin="0,5,0,5"
+								 VerticalScrollBarVisibility="Auto"
+								 HorizontalScrollBarVisibility="Auto"
+								 Background="White"
+								 TextChanged="TextBoxTextChanged"
+								 Initialized="TextBoxInitialized" 
+								 PreviewMouseLeftButtonUp="editableTextBox_PreviewMouseLeftButtonUp"
+								 PreviewMouseDoubleClick="editableTextBox_PreviewMouseDoubleClick"
+								 LayoutUpdated="editableTextBox_LayoutUpdated"
+								 Grid.Column="1"/>
+					</Grid>
+				</ScrollViewer>
+
+
+			</TabItem>
+			
+			<TabItem Header="Core Xaml" Name="CoreXamlTab">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition MaxHeight="30"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Button Grid.Column="0" Grid.Row="0" Content="Click to Obtain Core Xaml" HorizontalAlignment="Stretch" Click="CoreXamlClick"/>
+					<Button  Grid.Column="1" Grid.Row="0" Content="Click to Parse Core Xaml / Update static Xaml" HorizontalAlignment="Stretch"  Click="ParseCoreXamlClick"/>
+					<TextBox Name="dynamicTextBox" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+						
+							 AcceptsReturn="True"
+							 AcceptsTab="True"
+							 Margin="5"
+							 VerticalScrollBarVisibility="Visible"
+							 HorizontalScrollBarVisibility="Auto"
+								 Background="White"
+							 
+						 />
+				</Grid>
+
+			</TabItem>
+			
+			<TabItem Header="Clipboard Viewer" Name="ClipboardViewerTab">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition MaxHeight="30"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<WrapPanel Grid.Column="0" Grid.Row="0">
+						<Menu Width="auto"  HorizontalAlignment="Left" Name="ClipboardFormats" >
+							<Menu.Background>
+								<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+									<LinearGradientBrush.GradientStops>
+										<GradientStop Color="#FFFFFF"
+													  Offset="0.15"/>
+										<GradientStop Color="#D6E7EF"
+													  Offset=".4"/>
+										<GradientStop Color="#BDD7EF"
+													  Offset=".65"/>
+										<GradientStop Color="#A5CBE7"
+													  Offset=".65"/>
+										<GradientStop Color="#A5CBE7"
+													  Offset=".75"/>
+										<GradientStop Color="#ADD3EF"
+													  Offset=".75"/>
+										<GradientStop Color="#ADD7EF"
+													  Offset="1"/>
+
+
+
+
+									</LinearGradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Menu.Background>
+							<MenuItem  Cursor="Hand"  BorderBrush="Black" BorderThickness="1" Name="AvailableFormats" Header="Available Formats on Clipboard" PreviewMouseLeftButtonUp="GetClipboardFormats" >
+								<MenuItem/>
+							</MenuItem>
+						</Menu>
+						<Menu Width="auto"  HorizontalAlignment="Left" Name="ClearClipboardFormats" >
+							<Menu.Background>
+								<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+									<LinearGradientBrush.GradientStops>
+										<GradientStop Color="#FFFFFF"
+													  Offset="0.15"/>
+										<GradientStop Color="#D6E7EF"
+													  Offset=".4"/>
+										<GradientStop Color="#BDD7EF"
+													  Offset=".65"/>
+										<GradientStop Color="#A5CBE7"
+													  Offset=".65"/>
+										<GradientStop Color="#A5CBE7"
+													  Offset=".75"/>
+										<GradientStop Color="#ADD3EF"
+													  Offset=".75"/>
+										<GradientStop Color="#ADD7EF"
+													  Offset="1"/>
+
+
+
+
+									</LinearGradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Menu.Background>
+							<MenuItem Cursor="Hand" BorderBrush="Black" BorderThickness="1" Header="Clear All Formats Except" PreviewMouseLeftButtonUp="GetClipboardFormats" >
+								<MenuItem/>
+							</MenuItem>
+						</Menu>
+						<Button Content="Clear ClipBoard" Click="ClearClipboard"/>
+						<Button Content="Open Content in Separate Window" Click="NewWindowForContent"/>
+					</WrapPanel>
+					<FlowDocumentPageViewer Name="ClipBoardContent" Grid.Column="0" Grid.Row="1" Background="Wheat">
+					</FlowDocumentPageViewer>
+				</Grid>
+
+			</TabItem>
+			
+			<TabItem Header="Document Tree" Visibility="Collapsed" Name="DocumentTreeTab" MinWidth="1">
+				<TreeView Name="TextTreeView" >
+					<TreeView.ContextMenu>
+						<ContextMenu PreviewMouseLeftButtonDown="TreeViewItemSelectEvent">
+							<TextBlock Text="Send selected TreeView item to Interpreter" Background="Transparent" />
+						</ContextMenu>
+					</TreeView.ContextMenu>
+				</TreeView>
+			</TabItem>
+
+			<TabItem Header="Selection Xaml" Name="SelectionXamlTab" VerticalContentAlignment="Stretch" Visibility="Collapsed" MinWidth="1">
+				<TextBox Name="SelectionXaml"  Grid.Column="0" Grid.Row="1"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"   AcceptsReturn="True" IsReadOnly="True">
+				</TextBox>
+			</TabItem>
+			
+		    <TabItem Header="TextSerialized Xaml" Name ="DocSerializedXamlTab" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="Collapsed" MinWidth="1">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition MaxHeight="30"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Button  Grid.Column="0" Grid.Row="0" Content="Click to Parse Xaml" HorizontalAlignment="left"  Click="ParseDocXaml"/>
+				<TextBox Name="DocSerializedXaml"  Grid.Column="0" Grid.Row="1"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  AcceptsReturn="True">
+				</TextBox>
+			</Grid>
+			</TabItem>
+		</TabControl>
+
+        <!-- Status area -->
+        <Grid Grid.Row="4" Grid.ColumnSpan="3" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBox Name="statusText" 
+                     MinHeight="20" 
+                     IsReadOnly="True" 
+                     TextWrapping="Wrap" 
+                     BorderBrush="Transparent"
+                     Background="Transparent" />
+
+            <TextBlock Name="errorTextBlock" Grid.Column="1">
+                <Hyperlink Click="JumpToErrorLinkClicked" Name="goToErrorHyperlink">Jump To</Hyperlink>
+            </TextBlock>
+
+            <Button Name="enableCameraButton" 
+                Click="EnableCameraButtonClicked" 
+                Visibility="Collapsed" 
+                Grid.Column="2"
+                Content="Enable 3D Camera Control" />
+        </Grid>
+		
+    </Grid>
+</Page>

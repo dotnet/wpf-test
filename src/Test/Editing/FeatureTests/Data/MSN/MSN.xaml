@@ -1,0 +1,1039 @@
+﻿<!-- *** BEGIN Performance Instrumentation Code -->
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="#440077">
+    <ScrollViewer Name="scrollviewer">
+        <Border>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="FontSize" Value="10" />
+                        <Setter Property="FontWeight" Value="medium" />
+                        <Setter Property="FontFamily" Value="arial" />
+                        <Setter Property="Foreground" Value="white" />
+                    </Style>
+                    <Style x:Key="TEXT_LINK_HEADER" TargetType="{x:Type TextBlock}">
+                        <Setter Property="FontSize" Value="10" />
+                        <Setter Property="FontWeight" Value="bold" />
+                        <Setter Property="FontFamily" Value="arial" />
+                        <Setter Property="Foreground" Value="black" />
+                    </Style>
+                    <Style TargetType="{x:Type HyperLink}">
+                        <Setter Property="FontSize" Value="10" />
+                        <Setter Property="FontWeight" Value="medium" />
+                        <Setter Property="FontFamily" Value="arial" />
+                        <Setter Property="Foreground" Value="white" />
+                        <Setter Property="TextDecorations" Value="none" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="TextDecorations" Value="Underline" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style x:Key="HYPERLINK_GRAY_INDENT" TargetType="{x:Type HyperLink}">
+                        <Setter Property="FontSize" Value="10" />
+                        <Setter Property="FontWeight" Value="medium" />
+                        <Setter Property="FontFamily" Value="arial" />
+                        <Setter Property="Foreground" Value="gray" />
+                        <Setter Property="TextDecorations" Value="none" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="TextDecorations" Value="Underline" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style x:Key="HYPERLINK_GRAY_NOINDENT" TargetType="{x:Type HyperLink}">
+                        <Setter Property="FontSize" Value="10" />
+                        <Setter Property="FontWeight" Value="medium" />
+                        <Setter Property="FontFamily" Value="arial" />
+                        <Setter Property="Foreground" Value="gray" />
+                        <Setter Property="TextDecorations" Value="none" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="TextDecorations" Value="Underline" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <!-- *** BEGIN Scrollable panel *** -->
+                <DockPanel LastChildFill="true">
+                    <!-- *** BEGIN blue content *** -->
+                    <Border BorderThickness="2,2,2,2" DockPanel.Dock="top">
+                        <DockPanel Margin="2,0,40,0" Width="760">
+                            <!-- ****************************************************** -->
+                            <!-- *** BEGIN: TOP Title Bar ***************************** -->
+                            <DockPanel Background="#440077" DockPanel.Dock="top" Width="760">
+                                <!-- ****************************************************** -->
+                                <!-- *** BEGIN: TOP Title Bar edge gradient *************** -->
+                                <DockPanel DockPanel.Dock="top" Width="760" Height="3">
+                                    <DockPanel.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientBrush.GradientStops>
+                                                <GradientStopCollection>
+                                                    <GradientStop Color="#EEAAAAAA" Offset="0" />
+                                                    <GradientStop Color="#666699" Offset="1" />
+                                                </GradientStopCollection>
+                                            </GradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </DockPanel.Background>
+                                </DockPanel>
+                                <!-- *** END: TOP Title Bar edge gradient ***************** -->
+                                <!-- ****************************************************** -->
+                                <!-- ****************************************************** -->
+                                <!-- *** BEGIN: TOP Title Bar TABs ************************ -->
+                                <DockPanel DockPanel.Dock="top" Width="760">
+                                    <StackPanel Orientation="Horizontal" DockPanel.Dock="left">
+                                        <DockPanel Dock="left">
+                                            <Image DockPanel.Dock="left" Height="60" Width="140" Source="logo.gif" />
+                                            <Image DockPanel.Dock="bottom" Height="36" Width="52" Source="tab-front_on.gif" />
+                                        </DockPanel>
+                                        <!-- ************* MSN HOME tab ************* -->
+                                        <DockPanel Background="#666699" DockPanel.Dock="bottom" Height="36" Margin="0,1,0,0">
+                                            <DockPanel DockPanel.Dock="top" Width="100" Height="4">
+                                                <DockPanel.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                        <GradientBrush.GradientStops>
+                                                            <GradientStopCollection>
+                                                                <GradientStop Color="#EEAAAAAA" Offset="0" />
+                                                                <GradientStop Color="#666699" Offset="1" />
+                                                            </GradientStopCollection>
+                                                        </GradientBrush.GradientStops>
+                                                    </LinearGradientBrush>
+                                                </DockPanel.Background>
+                                            </DockPanel>
+                                            <TextBlock DockPanel.Dock="top" Width="100" Height="32">
+                                                <Hyperlink Background="#666699" NavigateUri="MSN.xaml">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="center">
+                                                        <TextBlock Margin="4,8,0,0" FontSize="11" FontWeight="bold">MSN HOME</TextBlock>
+                                                    </StackPanel>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                        </DockPanel>
+                                        <!-- ************* My MSN tab ************* -->
+                                        <Image HorizontalAlignment="left" VerticalAlignment="bottom" Height="36" Width="28" Source="tab-mid_on2.gif" />
+                                        <DockPanel Background="#9999CC" DockPanel.Dock="bottom" Height="36" Margin="0,1,0,0">
+                                            <DockPanel DockPanel.Dock="top" Width="100" Height="4">
+                                                <DockPanel.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                        <GradientBrush.GradientStops>
+                                                            <GradientStopCollection>
+                                                                <GradientStop Color="#EEAAAAAA" Offset="0" />
+                                                                <GradientStop Color="#9999CC" Offset="1" />
+                                                            </GradientStopCollection>
+                                                        </GradientBrush.GradientStops>
+                                                    </LinearGradientBrush>
+                                                </DockPanel.Background>
+                                            </DockPanel>
+                                            <TextBlock DockPanel.Dock="top" Width="100" Height="32">
+                                                <Hyperlink Background="#9999CC" NavigateUri="MyMSN.xaml">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="center">
+                                                        <TextBlock Margin="4,8,0,0" FontSize="11" FontWeight="bold">My MSN</TextBlock>
+                                                    </StackPanel>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                            <DockPanel DockPanel.Dock="bottom" Width="100" Height="3">
+                                                <DockPanel.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                        <GradientBrush.GradientStops>
+                                                            <GradientStopCollection>
+                                                                <GradientStop Color="#EEAAAAAA" Offset="0" />
+                                                                <GradientStop Color="#666699" Offset="1" />
+                                                            </GradientStopCollection>
+                                                        </GradientBrush.GradientStops>
+                                                    </LinearGradientBrush>
+                                                </DockPanel.Background>
+                                            </DockPanel>
+                                            <DockPanel DockPanel.Dock="bottom" Background="#666699" Width="100" Height="1" />
+                                        </DockPanel>
+                                        <Image HorizontalAlignment="left" VerticalAlignment="bottom" Width="8" Height="36" Source="tab-end_off.gif" />
+                                        <Image Margin="8,8,8,8" HorizontalAlignment="left" VerticalAlignment="bottom" Width="66" Height="19" Source="pp-signin.gif" />
+                                    </StackPanel>
+                                    <DockPanel Height="50" Dock="right">
+                                        <TextBlock DockPanel.Dock="bottom">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Friday, Jun 14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="bottom">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Help</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                </DockPanel>
+                                <!-- *** END: TOP Title Bar TABs ************************** -->
+                                <!-- ****************************************************** -->
+                            </DockPanel>
+                            <!-- *** END: Top Title Bar ******************************* -->
+                            <!-- ****************************************************** -->
+                            <!-- ****************************************************** -->
+                            <!-- *** BEGIN: Right Area ******************************** -->
+                            <Border BorderThickness="0,0,0,0" Background="#666699" DockPanel.Dock="right">
+                                <DockPanel Height="800" Width="150">
+                                    <Border Margin="10,2,8,2" DockPanel.Dock="top">
+                                        <TextBlock Margin="0,0,0,10">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">
+                                                <TextBlock FontWeight="bold" TextWrapping="WrapWithOverflow">Father's Day is June 16th...Show him your appreciation with the classic gift of Godiva</TextBlock>
+                                            </Hyperlink>
+                                        </TextBlock>
+                                    </Border>
+                                    <Border Margin="0,0,0,4" Background="#9999CC" DockPanel.Dock="top">
+                                        <TextBlock FontWeight="bold" Margin="8,2,2,0">MSN Channels</TextBlock>
+                                    </Border>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Autos</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Business</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Careers</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">City Guides</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml" Foreground="yellow">Entertainment</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml" Foreground="yellow">Father's Day</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="12,0,0,0" DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml" Foreground="yellow">Shop by Price,</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top" Margin="12,0,0,0">
+                                        <Hyperlink NavigateUri="BlankPage.xaml" Foreground="yellow">Last-minute Gifts</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml" Foreground="yellow">Games</Hyperlink>
+                                    </TextBlock>
+                                    <DockPanel Dock="top" Width="150">
+                                        <TextBlock DockPanel.Dock="left" Margin="12,0,0,0" Width="50">
+                                            <Hyperlink NavigateUri="BlankPage.xaml" Foreground="yellow">21 Blitz,</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="left" Margin="2,0,0,0">
+                                            <Hyperlink NavigateUri="BlankPage.xaml" Foreground="yellow">Slots</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Health</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">House/Home</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Kids</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Learning/Research</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Love/Relationships</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Music/Radio</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">News</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Sports by</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">
+                                            <Image DockPanel.Dock="top" Source="espn_logo.bmp" />
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    <DockPanel Dock="top">
+                                        <TextBlock Margin="12,0,0,0">
+                                            <Hyperlink NavigateUri="BlankPage.xaml" Foreground="yellow">2002 World cup</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Tech/Gadgets</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Travel</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Women</Hyperlink>
+                                    </TextBlock>
+                                    <Border Margin="0,0,0,4" Background="#9999CC" DockPanel.Dock="top">
+                                        <TextBlock FontWeight="bold" Margin="8,2,2,0">My MSN</TextBlock>
+                                    </Border>
+                                    <TextBlock DockPanel.Dock="top" TextWrapping="WrapWithOverflow" Margin="8,0,0,0">Visit My MSN to get you Hotmail, stock quotes, local weather and more!</TextBlock>
+                                    <Button Margin="10,8,0,8" Height="20" Width="120" DockPanel.Dock="top">
+                                        <TextBlock Foreground="DarkBlue">Go to My MSN</TextBlock>
+                                    </Button>
+                                    <Border DockPanel.Dock="top" Margin="0,0,0,4" Background="#9999CC">
+                                        <TextBlock FontWeight="bold" Margin="8,2,2,0">Spotlight</TextBlock>
+                                    </Border>
+                                    <TextBlock DockPanel.Dock="top" Margin="12,0,0,4">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">
+                                            <DockPanel Width="135">
+                                                <Image DockPanel.Dock="left" Margin="0,0,4,0" Source="SPL_doc0612.bmp" />
+                                                <TextBlock TextWrapping="WrapWithOverflow" DockPanel.Dock="left">Is it OK to haggle with your doctor?</TextBlock>
+                                            </DockPanel>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    <Border DockPanel.Dock="top" Margin="0,0,0,4" Background="#9999CC">
+                                        <TextBlock FontWeight="bold" Margin="8,2,2,0">Featured Today</TextBlock>
+                                    </Border>
+                                    <TextBlock DockPanel.Dock="top" FontWeight="bold" Foreground="yellow" Margin="8,0,0,10">eDiets</TextBlock>
+                                    <TextBlock DockPanel.Dock="top" TextWrapping="WrapWithOverflow" Margin="8,0,0,10">A wealth of info from America's premier online weight loss web site</TextBlock>
+                                    <TextBlock DockPanel.Dock="top" Width="105">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">
+                                            <DockPanel>
+                                                <Image DockPanel.Dock="left" Source="checkbullet.gif" />
+                                                <TextBlock TextWrapping="WrapWithOverflow" DockPanel.Dock="left" Foreground="yellow">Add eDiets to My MSN Page</TextBlock>
+                                            </DockPanel>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    <Border Margin="0,10,0,4" Background="#9999CC" DockPanel.Dock="top">
+                                        <TextBlock FontWeight="bold" Margin="8,2,2,0">MSN Worldwide</TextBlock>
+                                    </Border>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">US - Spanish</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Canada</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">Mexico</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">UK</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">India</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock DockPanel.Dock="top">
+                                        <Hyperlink NavigateUri="BlankPage.xaml">More...</Hyperlink>
+                                    </TextBlock>
+                                </DockPanel>
+                            </Border>
+                            <!-- *** END: Right Area ********************************** -->
+                            <!-- ****************************************************** -->
+                            <!-- ****************************************************** -->
+                            <!-- *** BEGIN: Top Area ********************************** -->
+                            <Border Background="#666699" DockPanel.Dock="top">
+                                <DockPanel Margin="10,10,0,0" Width="600">
+                                    <DockPanel Width="600" Dock="top">
+                                        <TextBlock DockPanel.Dock="Left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">MSN Home</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="Left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">My MSN</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="Left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Hotmail</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="Left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Search</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="Left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Money</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="Left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">People and Chat</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                    <DockPanel DockPanel.Dock="bottom" Width="600" Margin="10,10,10,10">
+                                        <TextBlock DockPanel.Dock="left" Margin="0,0,8,0" HorizontalAlignment="left" VerticalAlignment="Center">Search the Web:</TextBlock>
+                                        <TextBox DockPanel.Dock="left" Name="TextBoxSearch" Width="366" Height="20">
+                                        </TextBox>
+                                        <Button Margin="8,0,0,0" DockPanel.Dock="left" Width="80" Height="20">
+                                            <TextBlock Foreground="DarkBlue">Search</TextBlock>
+                                        </Button>
+                                    </DockPanel>
+                                </DockPanel>
+                            </Border>
+                            <!-- *** END: Top Area ************************************ -->
+                            <!-- ****************************************************** -->
+                            <!-- ****************************************************** -->
+                            <!-- *** BEGIN: Bottom Area ******************************* -->
+                            <Border BorderThickness="0,0,0,0" Background="#666699" DockPanel.Dock="bottom">
+                                <DockPanel Margin="10,0,0,0" Width="600">
+                                    <DockPanel Width="600" Dock="top">
+                                        <TextBlock Width="600" DockPanel.Dock="bottom">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">More Useful Everyday</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                    <DockPanel Width="600" Dock="bottom">
+                                        <TextBlock DockPanel.Dock="left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">MSN Home</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">My MSN</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Hotmail</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Search</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Money</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,8,0" DockPanel.Dock="left">|</TextBlock>
+                                        <TextBlock DockPanel.Dock="left">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">People and Chat</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                </DockPanel>
+                            </Border>
+                            <!-- *** END: Bottom Area ********************************* -->
+                            <!-- ****************************************************** -->
+                            <!-- ****************************************************** -->
+                            <!-- *** BEGIN: Middle Content Area *********************** -->
+                            <DockPanel Background="white" Width="610">
+                                <DockPanel Background="#666699" DockPanel.Dock="top" Height="30" Width="610">
+                                    <Border DockPanel.Dock="left" Margin="10,2,8,2">
+                                        <TextBlock Margin="0,0,0,10">
+                                            <Hyperlink NavigateUri="BlankPage.xaml" FontWeight="bold">US Open gold coverage: live updates, analysis, and more</Hyperlink>
+                                        </TextBlock>
+                                    </Border>
+                                    <Image Source="MSN_AD1.gif" DockPanel.Dock="right" />
+                                </DockPanel>
+                                <!-- ****************************************************** -->
+                                <!-- *** BEGIN: Left Navigation Area ********************** -->
+                                <DockPanel Background="#666699" DockPanel.Dock="left" Width="150" Height="700">
+                                    <DockPanel.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="FontSize" Value="10" />
+                                            <Setter Property="FontFamily" Value="arial" />
+                                            <Setter Property="Foreground" Value="white" />
+                                            <Setter Property="TextDecorations" Value="none" />
+                                            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                                            <Setter Property="FontWeight" Value="bold" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter Property="TextDecorations" Value="Underline" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                        <Style TargetType="{x:Type HyperLink}">
+                                            <Setter Property="FontSize" Value="10" />
+                                            <Setter Property="FontWeight" Value="medium" />
+                                            <Setter Property="FontFamily" Value="arial" />
+                                            <Setter Property="TextDecorations" Value="none" />
+                                            <Setter Property="Foreground" Value="#666655" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter Property="TextDecorations" Value="Underline" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                        <Style x:Key="TEXT_LINK_HEADER" TargetType="{x:Type TextBlock}">
+                                            <Setter Property="FontSize" Value="10" />
+                                            <Setter Property="FontFamily" Value="arial" />
+                                            <Setter Property="Foreground" Value="white" />
+                                            <Setter Property="TextDecorations" Value="none" />
+                                            <Setter Property="FontWeight" Value="bold" />
+                                            <Setter Property="Width" Value="130" />
+                                            <Setter Property="Margin" Value="8,4,4,0" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter Property="TextDecorations" Value="Underline" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DockPanel.Resources>
+                                    <Border Margin="0,8,4,8" DockPanel.Dock="top">
+                                        <TextBlock Margin="10,0,0,0" Width="130">
+                                            <Hyperlink NavigateUri="BlankPage.xaml" Foreground="white" FontWeight="bold">Meet Tiger Woods' guru, caddie and girlfriend</Hyperlink>
+                                        </TextBlock>
+                                    </Border>
+                                    <Border Margin="0,8,4,8" DockPanel.Dock="top">
+                                        <TextBlock Margin="10,0,0,0" Width="130">
+                                            <Hyperlink NavigateUri="BlankPage.xaml" Foreground="white" FontWeight="bold">Players to beat: 20 who can win the US Open</Hyperlink>
+                                        </TextBlock>
+                                    </Border>
+                                    <Border Margin="0,8,4,8" DockPanel.Dock="top">
+                                        <TextBlock Margin="10,0,0,0" Width="130">
+                                            <Hyperlink NavigateUri="BlankPage.xaml" Foreground="white" FontWeight="bold">Save strokes and money: Golf equipment deals</Hyperlink>
+                                        </TextBlock>
+                                    </Border>
+                                    <DockPanel DockPanel.Dock="top" Background="#DDDDCC" Width="150">
+                                        <Border Margin="0,0,0,4" DockPanel.Dock="top" Background="#AAAA77">
+                                            <TextBlock Style="{DynamicResource TEXT_LINK_HEADER}">Find</TextBlock>
+                                        </Border>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Air Tickets</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Auctions</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Auto Price Quotes</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Buy Books</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Buy CDs and DVDs</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Find a Job</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Hotel Deals from $39</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Internet Access Specials</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Old Friends</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Personals</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">White Pages</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Yellow Pages</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">More...</Hyperlink>
+                                        </TextBlock>
+                                        <Border DockPanel.Dock="top" Margin="0,10,0,4" Background="#AAAA77">
+                                            <TextBlock Style="{DynamicResource TEXT_LINK_HEADER}">Explore</TextBlock>
+                                        </Border>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Bedding Blowout</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">But Flowers</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Downloads</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Find Contractors</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Get an Apartment</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Greeting Cards</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Health Insurance Quotes</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Horoscopes</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Maps and Directions</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Mobile Services</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Send Money</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Used Car Deals</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Weather</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">More...</Hyperlink>
+                                        </TextBlock>
+                                        <Border DockPanel.Dock="top" Margin="0,10,0,4" Background="#AAAA77">
+                                            <TextBlock Style="{DynamicResource TEXT_LINK_HEADER}">Play</TextBlock>
+                                        </Border>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Be a Movie Critic</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Broadband Access</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Cartoons</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Concert Tickets</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Free Games</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Hear Music</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Internet Messaging</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Lottery Results</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">People on MSN</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Play Bejeweled Offline</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Share Photos</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Sports Scores</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">TV Listings</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">More...</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                </DockPanel>
+                                <!-- *** END: Left Navigation Area ************************ -->
+                                <!-- ****************************************************** -->
+                                <!-- ****************************************************** -->
+                                <!-- *** BEGIN: Middle Content Level 1 ******************** -->
+                                <DockPanel Margin="0,0,10,10" Dock="top" Width="460">
+                                    <DockPanel Margin="0,0,0,0" Width="460" Dock="bottom">
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">56k? No Way! 50 reasons to dump you dial-up</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Heartbroken? How to survive a nasty breakup</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                    <DockPanel Margin="0,0,0,0" Width="140" Dock="Left">
+                                        <Image Source="NT_stanleycup0613.jpg" DockPanel.Dock="top" />
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml" Foreground="black">Stanley Cup countdown</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">
+                                                <TextBlock TextWrapping="WrapWithOverflow" Foreground="gray">Can Carolina find a way to shock detroit?</TextBlock>
+                                            </Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                    <DockPanel Margin="0,0,0,0" Width="140" Dock="left">
+                                        <TextBlock DockPanel.Dock="top" FontWeight="bold" Foreground="black">Today on MSN</TextBlock>
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">New planet discovered</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Can Team USA win?</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Last-minute gifts for Dad</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Bam! Chat with Emeril</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}">Get outta here</TextBlock>
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Could you drive a 4X4?</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Vegas Hotels, 35% off</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                            <Hyperlink NavigateUri="BlankPage.xaml">Today's daily horoscpoe</Hyperlink>
+                                        </TextBlock>
+                                    </DockPanel>
+                                    <DockPanel Width="140" Dock="left">
+                                        <DockPanel Background="#FFFFDD" DockPanel.Dock="top" Width="140">
+                                            <TextBlock DockPanel.Dock="top" FontWeight="bold" Foreground="black">Tech Trends + Toys</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Funny e-cards for Dad</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">
+                                                    <TextBlock Foreground="gray" TextWrapping="WrapWithOverflow">Is NSync's Lace Bass headed for Space?</TextBlock>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Gotta-have-it gadgets</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Play 42 free games</Hyperlink>
+                                            </TextBlock>
+                                        </DockPanel>
+                                        <TextBlock DockPanel.Dock="top" FontWeight="bold" Foreground="black">Universal Presents</TextBlock>
+                                        <DockPanel Margin="0,0,0,10" DockPanel.Dock="top">
+                                            <Image Source="NS_bourne0613.bmp" DockPanel.Dock="left" />
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">
+                                                    <TextBlock Foreground="gray" TextWrapping="WrapWithOverflow">Are you game? 'Bourne Identity' trivia quiz</TextBlock>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                        </DockPanel>
+                                    </DockPanel>
+                                </DockPanel>
+                                <!-- *** END: Middle Content Level 1 ********************** -->
+                                <!-- ****************************************************** -->
+                                <!-- ****************************************************** -->
+                                <!-- *** BEGIN: Middle Content Level 2 ******************** -->
+                                <DockPanel Margin="2,2,2,2" Dock="top" Width="460">
+                                    <Border Margin="2,2,2,0" BorderThickness="0,1,0,0" BorderBrush="silver">
+                                        <DockPanel Width="200" Height="230">
+                                            <DockPanel DockPanel.Dock="top" Background="#ddddFF" Margin="4,2,0,2">
+                                                <TextBlock FontWeight="bold" DockPanel.Dock="left" Foreground="#3366CC">MSN Top Headlines</TextBlock>
+                                                <TextBlock DockPanel.Dock="right">
+                                                    <Hyperlink Foreground="#3366CC" NavigateUri="BlankPage.xaml">more...</Hyperlink>
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#3366CC">MSNBC News</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Bishops meet to set abuse policy</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">U.S. issues gloomy drought outlook</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Distant cousin of Jupiter is found</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#3366CC">Slate: Opinion and Commentary</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Rupert Murdoch's doomed dynasty</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#3366CC">ESPN Sports</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">U.S. Open live scores and webcases</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Are Lakers just getting started?</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Check out first motorcycle backflip</Hyperlink>
+                                            </TextBlock>
+                                        </DockPanel>
+                                    </Border>
+                                    <Border Margin="2,2,2,0" BorderThickness="0,1,0,0" BorderBrush="silver">
+                                        <DockPanel Width="230" Height="230">
+                                            <DockPanel DockPanel.Dock="top" Background="#CCFFCC" Margin="4,2,0,2">
+                                                <TextBlock FontWeight="bold" DockPanel.Dock="left" Foreground="#339966">CNBC on MSN Money</TextBlock>
+                                                <TextBlock DockPanel.Dock="right">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml" Foreground="#339966">more...</Hyperlink>
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#339966">Stock Quotes</TextBlock>
+                                            <StackPanel Orientation="Horizontal" Width="230" DockPanel.Dock="top">
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Datek</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Ameritrade</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">ShareBuilder</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">TD Waterhouse</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Trade Now</Hyperlink>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <Grid DockPanel.Dock="top" Margin="8,0,8,0" Width="230" Height="60">
+                                                <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60" />
+                                                <ColumnDefinition Width="60" />
+                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="50" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="bold" Margin="2,0,0,0" Foreground="black">Name</TextBlock>
+                                                <TextBlock Grid.Column="1" Grid.Row="0" FontWeight="bold" Margin="2,0,0,0" Foreground="black">Last</TextBlock>
+                                                <TextBlock Grid.Column="2" Grid.Row="0" FontWeight="bold" Margin="2,0,0,0" Foreground="black">Change</TextBlock>
+                                                <TextBlock Grid.Column="3" Grid.Row="0" FontWeight="bold" Margin="2,0,0,0" Foreground="black">% Chg</TextBlock>
+                                                <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,0,0,0">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml" FontWeight="light" Foreground="gray">Dow</Hyperlink>
+                                                </TextBlock>
+                                                <DockPanel Grid.Column="1" Grid.Row="1">
+                                                    <TextBlock FontWeight="light" Foreground="gray">9,448.45</TextBlock>
+                                                    <Image Source="stock-dn.gif" />
+                                                </DockPanel>
+                                                <TextBlock Grid.Column="2" Grid.Row="1" FontWeight="light" Foreground="red">-54.35</TextBlock>
+                                                <TextBlock Grid.Column="3" Grid.Row="1" FontWeight="light" Foreground="red">-0.57%</TextBlock>
+                                                <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,0,0,0">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml" FontWeight="light" Foreground="gray">Nasdaq</Hyperlink>
+                                                </TextBlock>
+                                                <DockPanel Grid.Column="1" Grid.Row="2">
+                                                    <TextBlock FontWeight="light" Foreground="gray">1,502.70</TextBlock>
+                                                    <Image Source="stock-up.gif" />
+                                                </DockPanel>
+                                                <TextBlock Grid.Column="2" Grid.Row="2" FontWeight="light" Foreground="red">+5.84</TextBlock>
+                                                <TextBlock Grid.Column="3" Grid.Row="2" FontWeight="light" Foreground="red">+0.39%</TextBlock>
+                                                <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,0,0,0">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml" FontWeight="light" Foreground="gray">S/P</Hyperlink>
+                                                </TextBlock>
+                                                <DockPanel Grid.Column="1" Grid.Row="3">
+                                                    <TextBlock FontWeight="light" Foreground="gray">1,006.57</TextBlock>
+                                                    <Image Source="stock-dn.gif" />
+                                                </DockPanel>
+                                                <TextBlock Grid.Column="2" Grid.Row="3" FontWeight="light" Foreground="red">-2.996</TextBlock>
+                                                <TextBlock Grid.Column="3" Grid.Row="3" FontWeight="light" Foreground="red">-0.30%</TextBlock>
+                                            </Grid>
+                                            <DockPanel Width="210" Margin="10,4,10,4" Background="#CCFFCC" DockPanel.Dock="top">
+                                                <TextBlock DockPanel.Dock="left" Foreground="black" Margin="2,0,0,0">Quotes by S/P, 20 min. delay</TextBlock>
+                                                <TextBlock DockPanel.Dock="right" Margin="2,0,0,0">
+                                                    <Hyperlink FontWeight="bold" Foreground="black" NavigateUri="BlankPage.xaml">Update</Hyperlink>
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <Border BorderThickness="1,1,1,1" Margin="8,4,0,4" Background="#CCFFCC" BorderBrush="silver" DockPanel.Dock="top">
+                                                <DockPanel Width="210" Margin="4,4,4,4">
+                                                    <TextBlock DockPanel.Dock="left" VerticalAlignment="Center" FontWeight="light" Foreground="gray">Get Quote</TextBlock>
+                                                    <TextBox DockPanel.Dock="left" Margin="8,0,0,0" Width="80" Name="QuteTextBox" Height="20">
+                                                    </TextBox>
+                                                    <Button DockPanel.Dock="left" Margin="8,0,0,0" Height="20" VerticalAlignment="Center">
+                                                        <TextBlock FontSize="8" FontWeight="bold" Foreground="DarkBlue">Go</TextBlock>
+                                                    </Button>
+                                                </DockPanel>
+                                            </Border>
+                                            <StackPanel Width="230" DockPanel.Dock="top">
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Market Report</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">News</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Top 10 Lists</Hyperlink>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Border>
+                                </DockPanel>
+                                <!-- *** END: Middle Content Level 2 ********************** -->
+                                <!-- ****************************************************** -->
+                                <!-- ****************************************************** -->
+                                <!-- *** BEGIN: Middle Content Level 3 ******************** -->
+                                <DockPanel Margin="2,2,2,2" Dock="top" Width="460">
+                                    <Border Margin="2,2,2,0" BorderThickness="0,1,0,0" BorderBrush="silver">
+                                        <DockPanel Width="200" Height="230">
+                                            <DockPanel DockPanel.Dock="top" Background="#FFCC99" Width="196" Margin="4,2,0,2">
+                                                <TextBlock FontWeight="bold" DockPanel.Dock="left" Foreground="#CC3333">MSN Shopping</TextBlock>
+                                                <TextBlock DockPanel.Dock="right">
+                                                    <Hyperlink Foreground="#CC3333" NavigateUri="BlankPage.xaml">more...</Hyperlink>
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#CC3333">Today's Sales and Deals</TextBlock>
+                                            <DockPanel Dock="top" Margin="4,2,0,2">
+                                                <DockPanel Margin="8,0,0,0" Width="70" DockPanel.Dock="left">
+                                                    <Image Source="chefs.gif" Width="50" Height="50" DockPanel.Dock="top" HorizontalAlignment="left" />
+                                                    <TextBlock DockPanel.Dock="bottom" Width="60">
+                                                        <Hyperlink FontWeight="light" Foreground="gray" NavigateUri="BlankPage.xaml">
+                                                            <TextBlock TextWrapping="WrapWithOverflow" FontWeight="light" Foreground="gray">Free Set of Emerilware cooking tools</TextBlock>
+                                                        </Hyperlink>
+                                                    </TextBlock>
+                                                </DockPanel>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Save $200 on a digicam</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">
+                                                        <TextBlock TextWrapping="WrapWithOverflow" FontWeight="light" Foreground="gray">Baby sale: stock up, save</TextBlock>
+                                                    </Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Wedding gifts</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">
+                                                        <TextBlock TextWrapping="WrapWithOverflow" FontWeight="light" Foreground="gray">Share minutes with ATT Wireless</TextBlock>
+                                                    </Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">
+                                                        <TextBlock TextWrapping="WrapWithOverflow" FontWeight="light" Foreground="gray">Hot New Feature: Try on Virtual Clothing</TextBlock>
+                                                    </Hyperlink>
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#CC3333">What's Hot Right Now</TextBlock>
+                                            <StackPanel Orientation="Horizontal" DockPanel.Dock="top">
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Dad Gifts</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Mountain Trips</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Denim</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Kids' Furniture</Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="light" Margin="8,0,0,0" Foreground="gray">|</TextBlock>
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">Hot Compaq Deals</Hyperlink>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Border>
+                                    <Border Margin="2,2,2,0" BorderThickness="0,1,0,0" BorderBrush="silver">
+                                        <DockPanel Width="230" Height="230">
+                                            <DockPanel DockPanel.Dock="top" Background="#FFFFCC" Margin="4,2,0,2">
+                                                <TextBlock FontWeight="bold" DockPanel.Dock="left" Foreground="#CC9933">MSN Specials</TextBlock>
+                                                <TextBlock DockPanel.Dock="right">
+                                                    <Hyperlink Foreground="#CC9933" NavigateUri="BlankPage.xaml">more...</Hyperlink>
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#CC9933">Love it or leave it</TextBlock>
+                                            <DockPanel Margin="0,0,0,10" DockPanel.Dock="top">
+                                                <Image Source="SPC_leaveit0613.jpg" Width="50" Height="50" DockPanel.Dock="left" />
+                                                <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" Width="180">
+                                                    <Hyperlink NavigateUri="BlankPage.xaml">
+                                                        <TextBlock TextWrapping="WrapWithOverflow" FontWeight="light" Foreground="gray">Hate your job? How to tell if it's time to quit</TextBlock>
+                                                    </Hyperlink>
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#CC9933">Just for him</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top" Width="180">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">It's not too late: Last-minute dad gifts</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource HYPERLINK_GRAY_INDENT}" Width="180">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Find the best sports bars in 47 cities</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock DockPanel.Dock="top" Style="{DynamicResource TEXT_LINK_HEADER}" Foreground="#CC9933">This week on MSN</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top" Width="180">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Dating? Create a free online profile</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top" Width="180">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Enjoy off-road thrills without the spills</Hyperlink>
+                                            </TextBlock>
+                                        </DockPanel>
+                                    </Border>
+                                </DockPanel>
+                                <!-- *** END: Middle Content Level 3 ********************** -->
+                                <!-- ****************************************************** -->
+                                <!-- ****************************************************** -->
+                                <!-- *** BEGIN: Middle Content Level 4 ******************** -->
+                                <Border DockPanel.Dock="top" Margin="4,2,4,0" BorderThickness="0,1,0,0" BorderBrush="silver">
+                                    <DockPanel Width="440">
+                                        <DockPanel DockPanel.Dock="top" Background="#EEEEEE" Margin="4,2,0,2">
+                                            <TextBlock FontWeight="bold" DockPanel.Dock="left" Foreground="#336666">MSN links and Resources</TextBlock>
+                                            <TextBlock DockPanel.Dock="right">
+                                                <Hyperlink Foreground="#336666" NavigateUri="BlankPage.xaml">more...</Hyperlink>
+                                            </TextBlock>
+                                        </DockPanel>
+                                        <DockPanel Dock="left" Margin="8,2,0,2" Width="120">
+                                            <TextBlock FontWeight="bold" DockPanel.Dock="top" Margin="0,0,0,8" Foreground="#336666">From MSN</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Resource Center</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Try MSN TV</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Calendar and Reminders</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Internet access deals</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">MSN on your cell phone</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">MSN Messenger</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Free MSN Explorer</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Set MSN as you Homepage</Hyperlink>
+                                            </TextBlock>
+                                        </DockPanel>
+                                        <DockPanel DockPanel.Dock="left" Margin="8,2,0,2" Width="120">
+                                            <TextBlock FontWeight="bold" DockPanel.Dock="top" Margin="0,0,0,8" Foreground="#336666">From Microsoft</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Microsoft Products</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Small Business Services</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Windows Update</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Office Tools</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Pocket PC</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Xbox.com</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock FontWeight="bold" DockPanel.Dock="top" Margin="0,10,0,8" Foreground="#336666">Other Resources</TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Contact MSN</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Get Help with MSN</Hyperlink>
+                                            </TextBlock>
+                                            <TextBlock Style="{DynamicResource HYPERLINK_GRAY_INDENT}" DockPanel.Dock="top">
+                                                <Hyperlink NavigateUri="BlankPage.xaml">Advertise on MSN</Hyperlink>
+                                            </TextBlock>
+                                        </DockPanel>
+                                        <DockPanel DockPanel.Dock="left" Margin="8,2,0,2" Width="180">
+                                            <TextBlock FontWeight="bold" DockPanel.Dock="top" Margin="0,0,0,8" Foreground="#336666">Local Resources</TextBlock>
+                                            <Border BorderThickness="1,1,1,1" Margin="8,4,0,4" Background="silver" BorderBrush="silver" DockPanel.Dock="top">
+                                                <DockPanel Width="160" Margin="4,4,4,4">
+                                                    <TextBlock DockPanel.Dock="left" VerticalAlignment="Center" Foreground="black">ZIP</TextBlock>
+                                                    <TextBox Width="50" Height="20" DockPanel.Dock="left" Margin="8,0,0,0">
+                                                    </TextBox>
+                                                    <Button Height="20" DockPanel.Dock="left" Margin="8,0,0,0" VerticalAlignment="Center">
+                                                        <TextBlock FontWeight="bold" FontSize="8" Foreground="DarkBlue">Go</TextBlock>
+                                                    </Button>
+                                                </DockPanel>
+                                            </Border>
+                                            <TextBlock Width="180" DockPanel.Dock="top" FontWeight="light" Foreground="gray" TextWrapping="WrapWithOverflow">Get local news, weather, and regional information for any city</TextBlock>
+                                        </DockPanel>
+                                    </DockPanel>
+                                </Border>
+                                <!-- *** END: Middle Content Level 4 ********************** -->
+                                <!-- ****************************************************** -->
+                            </DockPanel>
+                            <!-- *** END: Middle Content Area ************************* -->
+                            <!-- ****************************************************** -->
+                        </DockPanel>
+                    </Border>
+                    <!-- *** END blue content *** -->
+                    <!-- *** BEGIN footer *** -->
+                    <DockPanel DockPanel.Dock="bottom" Margin="10,20,40,40">
+                        <TextBlock DockPanel.Dock="left">(C)2002 Microsoft Corporation. All rights reserved.</TextBlock>
+                        <TextBlock DockPanel.Dock="left" Margin="4,0,0,0">
+                            <Hyperlink NavigateUri="BlankPage.xaml">Terms of Use</Hyperlink>
+                        </TextBlock>
+                        <TextBlock DockPanel.Dock="left" Margin="4,0,0,0">
+                            <Hyperlink NavigateUri="BlankPage.xaml">Advertise</Hyperlink>
+                        </TextBlock>
+                        <TextBlock DockPanel.Dock="left" Margin="4,0,0,0">
+                            <Hyperlink NavigateUri="BlankPage.xaml">TRUSTe Approved Privacy Statement</Hyperlink>
+                        </TextBlock>
+                        <TextBlock DockPanel.Dock="left" Margin="4,0,0,0">
+                            <Hyperlink NavigateUri="BlankPage.xaml">GetNetWise</Hyperlink>
+                        </TextBlock>
+                    </DockPanel>
+                    <!-- *** END footer *** -->
+                </DockPanel>
+                <!-- *** END Scrollable panel *** -->
+            </Grid>
+        </Border>
+    </ScrollViewer>
+</Border>
+<!-- *** END Performance Instrumentation Code -->
