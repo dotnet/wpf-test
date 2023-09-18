@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<XTC Query="Important=0 Restricted=4 Root=WCPEffects branch='WCPEffects   ManagedEffectsTests   XamlTests EffectsXamlTemplateTests'" SyncDate="2006-05-02T14:58:03.616" Template="GTO">
+  <TEST Auto="1" Frequency="Per Build" Owner="Microsoft" Path="\\WCP\MIL-Effects\BVT\GTO" Priority="0" Status="Lab-Pending" Timeout="5" Title="#32 of BitmapEffectsXamlRegressions">
+    <DIMENSION Name="Language" Value="*" />
+    <DIMENSION Name="Platform" Value="*" />
+    <RESOLVER Assembly="Gto.dll" Class="SuperMasterPlatformResolver" />
+    <SCENARIO ID="12678595">
+      <INIT Assembly="Gto.dll" Class="SuperMasterVerifyTest" Language="*:28325" Platform="*:26701">
+        <COMPARATOR Assembly="Gto.dll" Class="FuzzyComparator" Index="0">
+          <PROFILESET Assembly="Gto.dll" Class="DefaultDpiToHighDpiProfileSet" />
+        </COMPARATOR>
+        <RENDERER Assembly="Gto.dll" Class="XamlTemplateETC" LocalResourceDictionaryPath="InvariantTheme.xaml" />
+        <SURFACE Assembly="Gto.dll" Class="HwndSourceSurface" Height="300" Index="0" Width="300" X="200" Y="0" />
+      </INIT>
+      <VARIATION ID="12678646" MatchLevel="Good">
+        <SUPERMASTER Key="*:47545" ID="8707921">
+          <ELEMENTTREE ID="8707920" Source="Regression_Bug32PathDropShadow.Xaml" />
+        </SUPERMASTER>
+      </VARIATION>
+    </SCENARIO>
+    <STEP Index="1" Loader="GTOLoader" LoaderSwitch="/NOSEE" Run="000016.xtc">
+      <FILE Path="*\Client\WcpTests\MIL\Effects\Data\XAMLRelated\Data\Regression_Bug32PathDropShadow.Xaml" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Graphics\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Effects\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\MILHookGTO.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\MILWin32GTO.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Effects\BVT\XAMLRelated\XamlRenderTests\GTO\000765.000032\000016.xtc" Type="support" />
+    </STEP>
+  </TEST>
+</XTC>

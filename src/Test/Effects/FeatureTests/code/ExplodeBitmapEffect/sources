@@ -1,0 +1,60 @@
+!include $(WPF_TEST_ROOT)\common.inc
+C_DEFINES=$(C_DEFINES) -DUNICODE -D_UNICODE
+
+USE_NATIVE_EH=ASYNC                     # C++ exceptions
+USE_STL=1                               # C++ standard library containers & algorithms
+STL_VER=60
+USE_IOSTREAM=1                          # C++ standard library streams
+USE_RTTI=1                              # C++ run-time type identification
+USE_MSVCRT=1                            # C++ runtime DLL
+USE_VCCOM=1
+TARGET_BOTH=1
+
+COVERAGE_ENABLED=1
+
+DLLDEF=effectlib.def
+
+_NT_TARGET_VERSION=$(_NT_TARGET_VERSION_WINXP)
+
+ATL_VER=70
+USE_STATIC_ATL=1
+
+TARGETTYPE=DYNLINK
+MAJORCOMP=windows
+MINORCOMP=effectlib
+TARGETNAME=effectlib
+DLLENTRY=_DllMainCRTStartup
+TARGETPATH=$(_OBJ_DIR)
+PASS2_BINPLACE=1
+BINPLACE_DESTINATIONS=FeatureTests\Effects\ExplodeBitmapEffect
+BINPLACE_FLAGS=$(BINPLACE_FLAGS) \
+	$(TARGET) $(TARGETNAME).tlb 
+DLLBASE=0x04000000
+
+INCLUDES=$(SDK_INC_PATH);                       \
+         $(WPF_TEST_ROOT)\Common\Legacy\Gto\MilLib;   \
+
+SOURCES=                     \
+    effectlib.cpp            \
+    effectlib_i.c            \
+    Explode.cpp              \
+    noise.cpp                \
+    partition.cpp            \
+    fixed.cpp                \
+    effectlib.idl            \
+    effectlib.rc             \
+
+
+TARGETLIBS=                           \
+    $(SDK_LIB_PATH)\user32.lib        \
+    $(SDK_LIB_PATH)\kernel32.lib      \
+    $(SDK_LIB_PATH)\uuid.lib          \
+    $(SDK_LIB_PATH)\advapi32.lib      \
+    $(SDK_LIB_PATH)\ole32.lib         \
+    $(SDK_LIB_PATH)\oleaut32.lib      \
+    $(WPF_TEST_ROOT)\Common\Legacy\Gto\MilWin32GTO\WindowsCodecs.lib \
+
+#PASS2_BINPLACE=                                                                                          \
+#    -:DEST FeatureTests\Effects\ExplodeBitmapEffect  $(OBJ_PATH)\$(O)\$(TARGETNAME).dll    \
+#    -:DEST FeatureTests\Effects\ExplodeBitmapEffect  $(OBJ_PATH)\$(O)\$(TARGETNAME).pdb    \
+#    -:DEST FeatureTests\Effects\ExplodeBitmapEffect  $(TARGETNAME).tlb    

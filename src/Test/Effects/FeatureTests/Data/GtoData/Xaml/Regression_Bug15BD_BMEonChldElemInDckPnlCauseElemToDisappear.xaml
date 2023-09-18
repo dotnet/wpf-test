@@ -1,0 +1,15 @@
+<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  Height="100" Width="100" >
+	<Button 	Background="Red" Width="100" Height="100" 
+			Content="Good Morning"  Opacity = "1">
+                	<Button.BitmapEffect>
+				<BitmapEffectGroup>
+					<BlurBitmapEffect Radius="1" />                        
+ 				</BitmapEffectGroup>
+                </Button.BitmapEffect>
+	</Button>                 
+</DockPanel>
+
+<!-- Regression_Bug15BD_BMEonChldElemInDckPnlCauseElemToDisappear.xaml -->
+<!-- Bug Behavior: Button in dockpanel used to disappear if bitmapeffect was applied to button. -->
+<!--               This behavior was not evident when child button with effect was in a canvas. -->
+<!-- Correct Behavior: Button should not disappear when bitmapeffect is applied. -->

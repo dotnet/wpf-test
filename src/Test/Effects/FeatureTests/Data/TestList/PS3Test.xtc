@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="Effects" Timeout="600" SubArea="PS3.0">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="EffectsTests.dll" Class="Microsoft.Test.Effects.HlslModel" Method="LoadModel" ForceSaveFiles="True" PixelShaderModel="3.0" ShaderSrcInAssembly="True"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\Effects\EffectsTests.dll" />
+      <SupportFile Source="Common\Effects\ShaderEffects.dll" />
+      <SupportFile Source="Common\InvariantTheme.xaml" />
+      <SupportFile Source="FeatureTests\Effects\Model\HLSLTestProfile.xml" />
+    <SupportFile Source="FeatureTests\Effects\Model\Hlsl_InstructionTemplates.xml" />
+      <SupportFile Source="Common\Effects\pict*.exe" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+
+  <!-- Model based -->
+  <TEST Name="abs" Disabled="true" Priority="0" Description="Testing PS_2_0 abs instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="abs" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="abs - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 abs instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="abs" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="abs - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 abs instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="abs" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="abs - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 abs instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="abs" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="abs - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 abs instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="abs" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+  <TEST Name="nrm - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 nrm instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="nrm" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="nrm - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 nrm instruction withsaturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="nrm" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="cmp" Disabled="true" Priority="0" Description="Testing PS_2_0 cmp instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="cmp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="cmp - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 cmp instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="cmp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="cmp - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 cmp instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="cmp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="cmp - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 cmp instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="cmp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="cmp - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 cmp instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="cmp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="frc" Disabled="true" Priority="0" Description="Testing PS_2_0 frc instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="frc" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="frc - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 frc instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="frc" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="frc - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 frc instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="frc" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="frc - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 frc instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="frc" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="exp" Disabled="true" Priority="0" Description="Testing PS_2_0 exp instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="exp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="exp - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 exp instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="exp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="exp - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 exp instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_ReplicateSwizzle.pict" PictArgs="/o:2" Instruction="exp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_ReplicateSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="exp - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 exp instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="exp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="exp - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 exp instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="exp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="log" Disabled="true" Priority="0" Description="Testing PS_2_0 log instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="log" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="log - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 log instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="log" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="log - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 log instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_ReplicateSwizzle.pict" PictArgs="/o:2" Instruction="log" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_ReplicateSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="log - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 log instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="log" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="log - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 log instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="log" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="rcp" Disabled="true" Priority="0" Description="Testing PS_2_0 rcp instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="rcp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="rcp - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 rcp instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_ReplicateSwizzle.pict" PictArgs="/o:2" Instruction="rcp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_ReplicateSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="rcp - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 rcp instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="rcp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="rsq" Disabled="true" Priority="0" Description="Testing PS_2_0 rsq instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="rsq" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="rsq - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 rsq instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_ReplicateSwizzle.pict" PictArgs="/o:2" Instruction="rsq" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_ReplicateSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="rsq - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 rsq instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="rsq" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="rsq - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 rsq instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="rsq" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="sincos" Disabled="true" Priority="0" Description="Testing PS_2_0 sincos instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="sincos" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="sincos - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 sincos instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="sincos" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="sincos - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 sincos instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_ReplicateSwizzle.pict" PictArgs="/o:2" Instruction="sincos" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_ReplicateSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="add" Disabled="true" Priority="0" Description="Testing PS_2_0 add instruction">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg.pict" PictArgs="/o:2" Instruction="add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="add - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 add instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate.pict" PictArgs="/o:3" Instruction="add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="add - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 add instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_FullSwizzle.pict" PictArgs="/o:3" Instruction="add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="add - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 add instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="add - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 add instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="dp3" Disabled="true" Priority="0" Description="Testing PS_2_0 dp3 instruction">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg.pict" PictArgs="/o:2" Instruction="dp3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp3 - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 dp3 instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate.pict" PictArgs="/o:3" Instruction="dp3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp3 - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 dp3 instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_FullSwizzle.pict" PictArgs="/o:3" Instruction="dp3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp3 - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 dp3 instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="dp3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp3 - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 dp3 instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="dp3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="dp4" Disabled="true" Priority="0" Description="Testing PS_2_0 dp4 instruction">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg.pict" PictArgs="/o:2" Instruction="dp4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp4 - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 dp4 instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate.pict" PictArgs="/o:3" Instruction="dp4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp4 - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 dp4 instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_FullSwizzle.pict" PictArgs="/o:3" Instruction="dp4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp4 - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 dp4 instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="dp4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp4 - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 dp4 instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="dp4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="max" Disabled="true" Priority="0" Description="Testing PS_2_0 max instruction">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg.pict" PictArgs="/o:2" Instruction="max" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="max - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 max instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate.pict" PictArgs="/o:3" Instruction="max" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="max - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 max instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_FullSwizzle.pict" PictArgs="/o:3" Instruction="max" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="max - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 max instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="max" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="max - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 max instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="max" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="min" Disabled="true" Priority="0" Description="Testing PS_2_0 min instruction">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg.pict" PictArgs="/o:2" Instruction="min" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="min - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 min instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate.pict" PictArgs="/o:3" Instruction="min" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="min - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 min instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_FullSwizzle.pict" PictArgs="/o:3" Instruction="min" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="min - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 min instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="min" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="min - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 min instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="min" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="mul" Disabled="true" Priority="0" Description="Testing PS_2_0 mul instruction">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg.pict" PictArgs="/o:2" Instruction="mul" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="mul - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 mul instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate.pict" PictArgs="/o:3" Instruction="mul" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="mul - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 mul instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_FullSwizzle.pict" PictArgs="/o:3" Instruction="mul" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="mul - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 mul instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="mul" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="mul - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 mul instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="mul" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="crs" Disabled="true" Priority="0" Description="Testing PS_2_0 crs instruction">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg.pict" PictArgs="/o:2" Instruction="crs" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="crs - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 crs instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate.pict" PictArgs="/o:3" Instruction="crs" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="crs - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 crs instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="crs" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="dp2add" Disabled="true" Priority="0" Description="Testing PS_2_0 dp2add instruction">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_dp2add.pict" PictArgs="/o:4" Instruction="dp2add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_dp2add.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp2add - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 dp2add instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_Negate_dp2add.pict" PictArgs="/o:5" Instruction="dp2add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_Negate_dp2add.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp2add - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 dp2add instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_ReplicateSwizzle.pict" PictArgs="/o:4" Instruction="dp2add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_ReplicateSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp2add - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 dp2add instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_WriteMask_dp2add.pict" PictArgs="/o:5" Instruction="dp2add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_WriteMask_dp2add.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="dp2add - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 dp2add instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_Saturate_dp2add.pict" PictArgs="/o:5" Instruction="dp2add" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_Saturate_dp2add.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="lrp" Disabled="true" Priority="0" Description="Testing PS_2_0 lrp instruction">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg.pict" PictArgs="/o:3" Instruction="lrp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="lrp - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 lrp instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_Negate.pict" PictArgs="/o:4" Instruction="lrp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="lrp - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 lrp instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_FullSwizzle.pict" PictArgs="/o:4" Instruction="lrp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="lrp - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 lrp instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_WriteMask.pict" PictArgs="/o:4" Instruction="lrp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="lrp - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 lrp instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_Saturate.pict" PictArgs="/o:4" Instruction="lrp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="mad" Disabled="true" Priority="0" Description="Testing PS_2_0 mad instruction">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg.pict" PictArgs="/o:3" Instruction="mad" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="mad - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 mad instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_Negate.pict" PictArgs="/o:4" Instruction="mad" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="mad - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 mad instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_FullSwizzle.pict" PictArgs="/o:4" Instruction="mad" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="mad - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 mad instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_WriteMask.pict" PictArgs="/o:4" Instruction="mad" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="mad - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 mad instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_ThreeSrcReg_Saturate.pict" PictArgs="/o:4" Instruction="mad" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_ThreeSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="sub" Disabled="true" Priority="0" Description="Testing PS_2_0 sub instruction">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg.pict" PictArgs="/o:2" Instruction="sub" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="sub - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 sub instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate.pict" PictArgs="/o:3" Instruction="sub" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="sub - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 sub instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_FullSwizzle.pict" PictArgs="/o:3" Instruction="sub" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="sub - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 sub instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_WriteMask.pict" PictArgs="/o:3" Instruction="sub" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_WriteMask.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="sub - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 sub instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="sub" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="pow" Disabled="true" Priority="0" Description="Testing PS_2_0 pow instruction - non-zero base">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_pow.pict" PictArgs="/o:2" Instruction="pow" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_pow.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="pow - zero base" Disabled="true" Priority="0" Description="Testing PS_2_0 pow instruction - zero base">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_pow_zero.pict" PictArgs="/o:2" Instruction="pow" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_pow_zero.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="pow - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 pow instruction with negate register modifier - non-zero base">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate_pow.pict" PictArgs="/o:3" Instruction="pow" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate_pow.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="pow - negate - zero base" Disabled="true" Priority="2" Description="Testing PS_2_0 pow instruction with negate register modifier - zero base">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Negate_pow_zero.pict" PictArgs="/o:3" Instruction="pow" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Negate_pow_zero.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="pow - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 pow instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_ReplicateSwizzle.pict" PictArgs="/o:3" Instruction="pow" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_ReplicateSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="pow - writemask" Disabled="true" Priority="0" Description="Testing PS_2_0 pow instruction with destination register write mask">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_WriteMask_pow.pict" PictArgs="/o:3" Instruction="pow" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_WriteMask_pow.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="pow - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 pow instruction with saturate modifier - non-zero base">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate_pow.pict" PictArgs="/o:4" Instruction="pow" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate_pow.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="pow - saturate - zero base" Disabled="true" Priority="0" Description="Testing PS_2_0 pow instruction with saturate modifier - zero base">
+    <DriverParameters ModelFileName="Hlsl_TwoSrcReg_Saturate_pow_zero.pict" PictArgs="/o:4" Instruction="pow" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_TwoSrcReg_Saturate_pow_zero.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="texldb" Disabled="true" Priority="0" Description="Testing PS_2_0 texldb instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="texldb" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="texldp" Disabled="true" Priority="0" Description="Testing PS_2_0 texldp instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="texldp" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="m3x2" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x2 instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="m3x2" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x2 - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x2 instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="m3x2" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x2 - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x2 instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="m3x2" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x2 - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x2 instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="m3x2" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="m3x3" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x3 instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="m3x3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x3 - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x3 instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="m3x3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x3 - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x3 instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="m3x3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x3 - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x3 instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="m3x3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="m3x4" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x4 instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="m3x4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x4 - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x4 instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="m3x4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x4 - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x4 instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="m3x4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m3x4 - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 m3x4 instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="m3x4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="m4x3" Disabled="true" Priority="0" Description="Testing PS_2_0 m4x3 instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="m4x3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m4x3 - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 m4x3 instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="m4x3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m4x3 - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 m4x3 instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="m4x3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m4x3 - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 m4x3 instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="m4x3" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="m4x4" Disabled="true" Priority="0" Description="Testing PS_2_0 m4x4 instruction">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg.pict" PictArgs="/o:2" Instruction="m4x4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m4x4 - negate" Disabled="true" Priority="0" Description="Testing PS_2_0 m4x4 instruction with negate register modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Negate.pict" PictArgs="/o:3" Instruction="m4x4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Negate.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m4x4 - swizzling" Disabled="true" Priority="0" Description="Testing PS_2_0 m4x4 instruction with source register swizzling">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_FullSwizzle.pict" PictArgs="/o:2" Instruction="m4x4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_FullSwizzle.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="m4x4 - saturate" Disabled="true" Priority="0" Description="Testing PS_2_0 m4x4 instruction with saturate modifier">
+    <DriverParameters ModelFileName="Hlsl_OneSrcReg_Saturate.pict" PictArgs="/o:3" Instruction="m4x4" MaxNumberOfVariationsInOnePass="100" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_OneSrcReg_Saturate.pict" /></SupportFiles>
+  </TEST>
+
+
+
+  <TEST Name="max_reg_const_float" Disabled="true" Priority="0" Description="Testing for maximum number of PS_2_0 constant float registers allowed">
+    <DriverParameters ModelFileName="Hlsl_Simple.pict" PictArgs="/o:1" Instruction="max_reg_const_float" MaxNumberOfVariationsInOnePass="1" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_Simple.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="max_reg_texture" Disabled="true" Priority="0" Description="Testing for maximum number of PS_2_0 texture registers allowed">
+    <DriverParameters ModelFileName="Hlsl_Simple.pict" PictArgs="/o:1" Instruction="max_reg_texture" MaxNumberOfVariationsInOnePass="1" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_Simple.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="max_reg_sampler" Disabled="true" Priority="0" Description="Testing for maximum number of PS_2_0 sampler registers allowed">
+    <DriverParameters ModelFileName="Hlsl_Simple.pict" PictArgs="/o:1" Instruction="max_reg_sampler" MaxNumberOfVariationsInOnePass="1" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_Simple.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="max_reg_temp_regs" Disabled="true" Priority="0" Description="Testing for maximum number of PS_2_0 temporary registers allowed">
+    <DriverParameters ModelFileName="Hlsl_Simple.pict" PictArgs="/o:1" Instruction="max_reg_temp_regs" MaxNumberOfVariationsInOnePass="1" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_Simple.pict" /></SupportFiles>
+  </TEST>
+
+  <TEST Name="max_reg_output_regs" Disabled="true" Priority="0" Description="Testing for maximum number of PS_2_0 output color registers allowed">
+    <DriverParameters ModelFileName="Hlsl_Simple.pict" PictArgs="/o:1" Instruction="max_reg_output_regs" MaxNumberOfVariationsInOnePass="1" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_Simple.pict" /></SupportFiles>
+  </TEST>
+
+  <!-- Disabling the following test due to Windows-Partners-Regression_Bug46 -->
+  <TEST Name="max_slots_arithmetic" Priority="0" Disabled="True" Description="Testing for maximum number of PS_2_0 arithmetic instruction slots allowed">
+    <DriverParameters ModelFileName="Hlsl_Simple.pict" PictArgs="/o:2" Instruction="max_slots_arithmetic" MaxNumberOfVariationsInOnePass="1" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_Simple.pict" /></SupportFiles>
+  </TEST>
+  
+  <TEST Name="max_slots_texture" Disabled="true" Priority="0" Description="Testing for maximum number of PS_2_0 texture instruction slots allowed">
+    <DriverParameters ModelFileName="Hlsl_Simple.pict" PictArgs="/o:2" Instruction="max_slots_texture" MaxNumberOfVariationsInOnePass="1" ToleranceProfileFile="HLSLTestProfile.xml" />
+	<SupportFiles><SupportFile Source="FeatureTests\Effects\Model\Hlsl_Simple.pict" /></SupportFiles>
+  </TEST>
+
+  <!-- Disabling the following tests for now since these shaders may not be valid (they use vertex shader whereas we only support pixel shader) -->
+  <TEST Name="FromFXFile" Priority="0" Description="Testing PixelJIT using HLSL shaders provided by DX team." Disabled="True">
+    <DriverParameters ModelFileName="Hlsl_D2DShaders.pict" PictArgs="/o:1" Instruction="FromFXFile" MaxNumberOfVariationsInOnePass="50" ToleranceProfileFile="HLSLTestProfile.xml" 
+	              ShaderSrcFromExternalFile="True" ShaderSrcInAssembly="False"/>
+
+	<SupportFiles>
+	    <SupportFile Source="FeatureTests\Effects\Model\Hlsl_D2DShaders.pict" />
+	    <SupportFile Source="Common\Effects\D2DShaders\*.fx" />
+    </SupportFiles>
+  </TEST>
+</XTC>

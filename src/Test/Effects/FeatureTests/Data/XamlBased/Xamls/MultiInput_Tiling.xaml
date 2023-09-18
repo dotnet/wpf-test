@@ -1,0 +1,79 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas>
+        <Canvas.Resources>
+            <VisualBrush x:Key="flipx" TileMode="FlipX" Viewport="0,0,0.2,0.2">
+                <VisualBrush.Visual>
+                    <Image Source="pack://siteoforigin:,,,/CheckerBoard.bmp"  Width="20" Height="20"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+            <VisualBrush x:Key="flipy" TileMode="FlipY" Viewport="0,0,0.2,0.3">
+                <VisualBrush.Visual>
+                    <Image Source="pack://siteoforigin:,,,/CheckerBoard.bmp"  Width="20" Height="20"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+            <VisualBrush x:Key="flipxy" TileMode="FlipXY" Viewport="0,0,0.3,0.3">
+                <VisualBrush.Visual>
+                    <Image Source="pack://siteoforigin:,,,/CheckerBoard.bmp" Width="20" Height="20"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+            <VisualBrush x:Key="tile" TileMode="Tile" Viewport="0,0,0.2,0.2">
+                <VisualBrush.Visual>
+                    <Image Source="pack://siteoforigin:,,,/CheckerBoard.bmp" Width="20" Height="20" />
+                </VisualBrush.Visual>
+            </VisualBrush>
+            <VisualBrush x:Key="none" TileMode="None"  Viewport="0,0,0.3,0.4">
+                <VisualBrush.Visual>
+                    <Image Source="pack://siteoforigin:,,,/CheckerBoard.bmp" Width="20" Height="20" />
+                </VisualBrush.Visual>
+            </VisualBrush>
+            <VisualBrush x:Key="poweroftwotile" TileMode="Tile" Viewport="0,0,0.2,0.2">
+                <VisualBrush.Visual>
+                    <Image Source="pack://siteoforigin:,,,/CheckerBoard.bmp"  Width="64" Height="64"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Canvas.Resources>
+
+        <!-- Tile -->
+        <Rectangle Fill="LightGreen" Width="100" Height="100" Canvas.Left="0" Canvas.Top="0">
+            <Rectangle.Effect>
+                <ShaderEffects:DoubleInputEffect Input1="{StaticResource tile}"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <!-- FlipX -->
+        <Rectangle Fill="LightGreen" Width="100" Height="100" Canvas.Left="120" Canvas.Top="0">
+            <Rectangle.Effect>
+                <ShaderEffects:DoubleInputEffect Input1="{StaticResource flipx}"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <!-- FlipY -->
+        <Rectangle Fill="LightGreen" Width="100" Height="100" Canvas.Left="240" Canvas.Top="0">
+            <Rectangle.Effect>
+                <ShaderEffects:DoubleInputEffect Input0="{StaticResource flipy}"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <!-- FlipXY -->
+        <Rectangle Fill="LightGreen" Width="100" Height="100" Canvas.Left="0" Canvas.Top="120">
+            <Rectangle.Effect>
+                <ShaderEffects:DoubleInputEffect Input0="{StaticResource flipxy}"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <!-- None -->
+        <Rectangle Fill="LightGreen" Width="100" Height="100" Canvas.Left="120" Canvas.Top="120">
+            <Rectangle.Effect>
+                <ShaderEffects:DoubleInputEffect Input0="{StaticResource none}"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <!-- Tile a sampler with size of power of 2 -->
+        <Rectangle Fill="LightGreen" Width="100" Height="100" Canvas.Left="240" Canvas.Top="120">
+            <Rectangle.Effect>
+                <ShaderEffects:DoubleInputEffect Input0="{StaticResource poweroftwotile}"/>
+            </Rectangle.Effect>
+        </Rectangle>
+    </Canvas>
+</Grid>

@@ -1,0 +1,49 @@
+HKCR
+{
+        effectlib.Explode.1 = s 'Explode Class'
+        {
+                CLSID = s '{C9308B90-2011-47E6-BC3E-872B1AEF7258}'
+        }
+        effectlib.Explode = s 'Explode Class'
+        {
+                CLSID = s '{C9308B90-2011-47E6-BC3E-872B1AEF7258}'
+                CurVer = s 'effectlib.Explode.1'
+        }
+        NoRemove CLSID
+        {
+                ForceRemove '{C9308B90-2011-47E6-BC3E-872B1AEF7258}' = s 'Explode Class'
+                {
+                        ProgID = s 'effectlib.Explode.1'
+                        VersionIndependentProgID = s 'effectlib.Explode'
+                        ForceRemove 'Programmable'
+                        InprocServer32 = s '%MODULE%'
+                        {
+                                val ThreadingModel = s 'Apartment'
+                        }
+                        val AppID = s '%APPID%'
+                        'TypeLib' = s ''
+                }
+        }
+}
+HKLM
+{
+        NoRemove Software
+        {
+            NoRemove Microsoft
+            {
+                NoRemove Avalon
+                {
+                    NoRemove Effects
+                    {
+                        ForceRemove Explode
+                        {
+                            Name = s 'Explode'
+                            GUID = s '{C9308B90-2011-47E6-BC3E-872B1AEF7258}'
+                            NumInputs = s '1'
+                            NumOutputs = s '1'
+                        }
+                    }
+                }
+            }
+        }
+}

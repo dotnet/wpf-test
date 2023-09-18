@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <NoTargets>true</NoTargets>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Shaders\ShaderBytecode\*.ps">
+      <Link>\Shaders\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="d3dref9\x86\*.dll" Condition= "'$(Platform)' != 'x64'">
+      <Link>d3dref9\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="d3dref9\x64\*.dll" Condition= "'$(Platform)' == 'x64'">
+      <Link>d3dref9\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,53 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+            <ResourceDictionary>
+                 <!-- HACK: Add InvariantTheme to workaround Regression_Bug42 -->
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://siteoforigin:,,,/InvariantTheme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+    </Grid.Resources>  
+    <Canvas>
+        <Canvas.Resources>
+
+            <VisualBrush x:Key="visualbrush">
+                <VisualBrush.Visual>
+                    <Button Width="100" Height="20" Background="#ff555555" FontFamily="Tahoma" FontWeight="Normal" FontStretch="Normal" FontStyle="Normal" FontSize="12pt" Foreground="Black">
+                        Text in Button
+                    </Button>
+                </VisualBrush.Visual>
+            </VisualBrush>
+
+
+        </Canvas.Resources>
+
+        <!-- Opacity-->
+        <Rectangle Fill="AntiqueWhite" Width="150" Height="150" Canvas.Left="0" Opacity="0.6">
+            <Rectangle.Effect>
+                <ShaderEffects:MultiInputEffect 
+                        Input0="{StaticResource visualbrush}"
+                        Input2="{DynamicResource visualbrush}"
+                        />
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <!-- OpacityMask -->
+        <Rectangle  Fill="AntiqueWhite" Width="150" Height="150" Canvas.Left="180">
+            <Rectangle.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#10000000" Offset="1" />
+                    <GradientStop Color="#90000000" Offset="0.6" />
+                    <GradientStop Color="#FF000000" Offset="0" />
+                </LinearGradientBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Effect>
+                <ShaderEffects:MultiInputEffect
+                    Input1="{StaticResource visualbrush}"
+                    Input3="{DynamicResource visualbrush}"
+                />
+            </Rectangle.Effect>
+        </Rectangle>
+    </Canvas>
+</Grid>

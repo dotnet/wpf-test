@@ -1,0 +1,25 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+        <ResourceDictionary>
+                <!-- HACK: Add InvariantTheme to workaround Regression_Bug42 -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://siteoforigin:,,,/InvariantTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Grid.Resources>  
+    <Canvas>
+  
+    <Rectangle Fill="AntiqueWhite" Width="280" Height="280" Canvas.Left="0" >
+        <Rectangle.Effect>
+            <ShaderEffects:MultiIntParameterPS3Effect 
+                Int0="0" Int1="16" Int2="32" Int3="48" Int4="64" 
+                Int5="80" Int6="96" Int7="112" Int8="128" Int9="144" 
+                Int10="160" Int11="176" Int12="192" Int13="208" Int14="224" 
+                Int15="240"
+            />
+        </Rectangle.Effect>
+        </Rectangle>
+    </Canvas>
+</Grid>

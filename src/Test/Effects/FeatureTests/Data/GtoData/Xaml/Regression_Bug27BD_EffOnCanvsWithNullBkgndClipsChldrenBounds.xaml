@@ -1,0 +1,17 @@
+<Canvas Width="200" Height="200" 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" > 
+	<Canvas.BitmapEffect>
+ 		<BlurBitmapEffect />
+	</Canvas.BitmapEffect>
+
+	<Button Canvas.Top="10" Width="100" Height="25">DropShadowBug	
+		<Button.BitmapEffect>
+			<DropShadowBitmapEffect ShadowDepth="10"/>
+		</Button.BitmapEffect>
+	</Button>
+</Canvas>
+
+<!-- Regression_Bug27BD_EffOnCanvsWithNullBkgndClipsChldrenBounds.xaml  -->
+<!-- Bug Behavior:  Applying effects on canvas with null background clipped the children bounds and prevented child effects -->
+<!-- Correct Behavior: The children's effects should show up too -->

@@ -1,0 +1,70 @@
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  Background="#aa6">
+    <Canvas.Resources>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="GlassPanelBorder">
+            <GradientStop Color="#80888888" Offset="1"/>
+            <GradientStop Color="#B3E8E8E8" Offset="0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="GlassPanelBrush" EndPoint="0,0" StartPoint="1,0">
+            <LinearGradientBrush.Transform>
+                <RotateTransform CenterX="0.5" CenterY="0.5" Angle="22" />
+            </LinearGradientBrush.Transform>
+            <GradientStop Color="#96EEEEEE" Offset="0.558"/>
+            <GradientStop Color="#84FFFFFF" Offset="1"/>
+            <GradientStop Color="#B0F8F8F8" Offset="0"/>
+            <GradientStop Color="#93EEEEEE" Offset="0.154"/>
+            <GradientStop Color="#A6FFFFFF" Offset="0.351"/>
+        </LinearGradientBrush>
+
+        <Style TargetType="Border" x:Key="Panel">
+            <Setter Property="Background" Value="{StaticResource GlassPanelBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource GlassPanelBorder}" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="PanelText">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#FFEAEAEA" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" Direction="330"
+                          Color="#000000" Opacity="0.6" BlurRadius="0" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Canvas.Resources>
+
+    <Border Style="{StaticResource Panel}" Grid.Row="2" Margin="8">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource PanelText}" Margin="16,8,16,8" Grid.ColumnSpan="2">
+          Other players need your IP address to join the game. If you are connected to the internet, your IP address will appear below.
+        </TextBlock>
+            <TextBlock Style="{StaticResource PanelText}" Grid.Row="1" Margin="16,8,8,8">
+          Your local (LAN) IP address is:
+          <LineBreak />
+          Your internet IP address is:          
+        </TextBlock>
+            <TextBlock Style="{StaticResource PanelText}" Grid.Row="1" Grid.Column="1" Margin="8,8,16,8">
+          <Run x:Name="localIP" /> (<Hyperlink >copy</Hyperlink>)
+          <LineBreak />
+          <Run x:Name="externalIP" FontStyle="Italic">Processing...</Run> (<Hyperlink >copy</Hyperlink>)
+        </TextBlock>
+            <TextBlock Style="{StaticResource PanelText}" Grid.Row="2" Grid.ColumnSpan="2" Margin="16,8,16,8" FontStyle="Italic">
+            If you are behind a firewall, a router, or any kind of NAT other players may experience difficulties connecting to your computer.
+        </TextBlock>
+        </Grid>
+    </Border>
+</Canvas>

@@ -1,0 +1,19 @@
+<DockPanel Height="300" Width="300"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    >
+
+<Path Data="M125,100 h-150 a150,150 0 1,0 150,-150 z"
+         Fill="blue"
+         Stroke="orange" 
+        StrokeThickness="5">
+	    <Path.BitmapEffect>
+		<BitmapEffectGroup>
+			<DropShadowBitmapEffect ShadowDepth="10"/>
+			<BlurBitmapEffect Radius="2"/>
+		</BitmapEffectGroup>
+	    </Path.BitmapEffect>
+</Path>
+</DockPanel >
+
+<!-- Regression_Bug16BD_CurvOfDrpShdwNotSmoothIfCombWithBlur.xaml -->
+<!-- Bug Behavior: Curve of DropShadowEffect was No Longer Smooth When Blur Applied -->
+<!-- Correct Behavior: DropShadowEffect curve should be smooth. -->
