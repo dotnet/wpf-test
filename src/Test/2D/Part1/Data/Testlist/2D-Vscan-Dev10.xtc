@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+    <DEFAULTTESTINFO Disabled="True" Area="2D" SubArea="Xaml Master Verification Tests">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="TestRuntime.dll" Class="Microsoft.Test.TestTypes.XamlVisualVerificationTest" Method="Launch"/>
+    <SupportFiles>
+      <SupportFile Source="Common\TestRuntime.dll" />
+      <SupportFile Source="Common\XamlBrowserHost.xbap" />
+      <SupportFile Source="Common\XamlBrowserHost.exe" />
+      <SupportFile Source="Common\XamlBrowserHost.exe.manifest" />
+      <SupportFile Source="FeatureTests\2D\VscanData\tyjonesdefaultprofile.xml" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+  <TEST Name="Regression_Bug47" Priority="1" Timeout="160" Description="Regression test for Regression_Bug244: Dashed line does not render correctly.">
+    <DriverParameters Args="/tolerance=tyjonesdefaultprofile.xml /ShowsNavigationUI=false /DpiX=96.0 /DpiY=96.0 /type=image /master=Regression_Bug47.xaml.bmp /capture=Regression_Bug47.xaml /path=FeatureTests\2D\Part1\Masters" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\Part1\Xamls\Regression_Bug47.xaml" />
+      <SupportFile Source="FeatureTests\2D\Part1\Masters\Regression_Bug47.xaml.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Regression_Bug48" Priority="1" Timeout="160" Description="Regression test for Regression_Bug48: Shapes: hasThinDimension should not ignore logic in Uniform case.">
+    <DriverParameters Args="/tolerance=tyjonesdefaultprofile.xml  /ShowsNavigationUI=false /DpiX=96.0 /DpiY=96.0 /master=Regression_Bug48.xaml.bmp /capture=Regression_Bug48.xaml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\Part1\Xamls\Regression_Bug48.xaml" />
+      <SupportFile Source="FeatureTests\2D\Part1\Masters\Regression_Bug48.xaml.bmp" />
+      <SupportFile Source="Common\InvariantTheme.xaml" />
+    </SupportFiles>
+  </TEST>
+</XTC>

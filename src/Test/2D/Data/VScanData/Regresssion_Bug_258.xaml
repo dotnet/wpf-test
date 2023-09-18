@@ -1,0 +1,52 @@
+﻿<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="400" Height="200" Background="LightGray">
+    <Canvas.Resources>
+        <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" Viewbox="0,0,1,1" ViewboxUnits="Absolute" Stretch="Uniform" TileMode="Tile" x:Key="strokeBrush">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="White">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="-1, -1, 3, 3" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="Black">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0.25, -1, 0.5, 3" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+        <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" Viewbox="0,0,1,1" ViewboxUnits="Absolute" Stretch="Uniform" TileMode="Tile" x:Key="strokeBrushRotate">
+            <DrawingBrush.Transform>
+                <RotateTransform Angle="90" />
+            </DrawingBrush.Transform>
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="White">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="-1, -1, 3, 3" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="Black">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0.25, -1, 0.5, 3" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </Canvas.Resources>
+    <Rectangle Canvas.Left="100" Canvas.Top="51" Width="128" Height="30" Fill="Yellow" />
+    <Line X1="100" Y1="51" X2="228" Y2="51" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="Red" />
+    <Line X1="100" Y1="81" X2="228" Y2="81" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="Red" />
+    <Line X1="100" Y1="51" X2="100" Y2="81" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="Red" />
+    <Line X1="228" Y1="51" X2="228" Y2="81" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="Red" />
+    <Line X1="100" Y1="51" X2="228" Y2="51" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="{StaticResource strokeBrush}" />
+    <Line X1="100" Y1="81" X2="228" Y2="81" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="{StaticResource strokeBrush}" />
+    <Line X1="100" Y1="51" X2="100" Y2="81" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="{StaticResource strokeBrushRotate}" />
+    <Line X1="228" Y1="51" X2="228" Y2="81" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="{StaticResource strokeBrushRotate}" />
+</Canvas>

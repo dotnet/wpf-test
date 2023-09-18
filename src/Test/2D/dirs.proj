@@ -1,0 +1,24 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\test\Microsoft.Wpf.Test.Native.Settings.Targets" />
+
+  <!--The following projects will build during the default PHASE-->
+  <ItemGroup Condition="'$(BuildExePhase)' == ''">
+    <ProjectFile Include="CGT2D\CGT2D.csproj" />
+    <ProjectFile Include="Scenario2D\BuildScenario2D.csproj" />
+    <ProjectFile Include="GraphicsXamlTest\buildGraphicsXamlTest.csproj" />
+    <ProjectFile Include="ApiTest\ApiTestRazzle.csproj" />
+    <ProjectFile Include="Data\dirs.proj" />
+    <ProjectFile Include="PartialTrustXaml\PartialTrustXaml.csproj" />
+    <ProjectFile Include="Binaries\Binaries.nativeproj" />
+  </ItemGroup>
+
+  <!-- These projects will only build for 4.0 or later -->
+  <ItemGroup Condition="'$(BuildExePhase)' == '' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.0' AND '$(WPF_TESTBUILD_TARGETVERSION)' != 'v3.5' ">
+    <ProjectFile Include="Part1\dirs.proj" />
+  </ItemGroup>
+
+  <!--Import the targets-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\tools\Microsoft.DevDiv.Traversal.targets" />
+</Project>

@@ -1,0 +1,13 @@
+<!--
+This test checks whether the cycle checking mechanism in a VisualBrush works or not
+-->
+<Page xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'> 
+  <Canvas Background='LightBlue'>
+    <Rectangle Width='200' Height='100' Fill='Yellow' Margin='10,50,0,0'/>
+    <Ellipse x:Name='ellipse' Width='200' Height='100' Stroke='Black'>
+      <Ellipse.Fill>
+        <VisualBrush Visual='{Binding ElementName=ellipse}'/>
+      </Ellipse.Fill>
+    </Ellipse>
+  </Canvas>
+</Page>
