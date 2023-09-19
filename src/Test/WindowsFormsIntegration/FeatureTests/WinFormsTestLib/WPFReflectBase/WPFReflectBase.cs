@@ -2418,7 +2418,7 @@ namespace WPFReflectTools
         public void ExpectException(
             ScenarioResult sr,
             Type expectedExceptionType,
-            MethodInvoker testCode)
+            System.Windows.Forms.MethodInvoker testCode)
         {
             try
             {
@@ -2438,7 +2438,7 @@ namespace WPFReflectTools
 
         public bool SecurityCheck(
             ScenarioResult sr,
-            MethodInvoker testCode,
+            System.Windows.Forms.MethodInvoker testCode,
             MethodBase expectedStackMethod,
             params CodeAccessPermission[] expectedPermissions)
         {

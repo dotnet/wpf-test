@@ -511,7 +511,7 @@ namespace ReflectTools
             // We need to use InvokeAsync here in order to allow the form
             // to display before BeginTest starts (or TestIsDone is called)
             if ( PerformInitialization() )
-                BeginInvoke(new MethodInvoker(this.BeginTest));
+                BeginInvoke(new System.Windows.Forms.MethodInvoker(this.BeginTest));
             else
                 BeginInvoke(new TestIsDoneInvoker(TestIsDone),
                     new object[] { scenarioParams });
@@ -2013,7 +2013,7 @@ namespace ReflectTools
                     // and fails with an ObjectDisposed exception if we've already closed it.
                     //
                     this.Visible = true;
-                    BeginInvoke(new MethodInvoker(this.Close));
+                    BeginInvoke(new System.Windows.Forms.MethodInvoker(this.Close));
                 }
             }
 			_TestComplete = true;
@@ -2290,7 +2290,7 @@ namespace ReflectTools
         public void ExpectException(
             ScenarioResult sr,
             Type expectedExceptionType,
-            MethodInvoker testCode)
+            System.Windows.Forms.MethodInvoker testCode)
         {
             try
             {
@@ -2309,8 +2309,8 @@ namespace ReflectTools
         }
 
 		public bool SecurityCheck(
-			ScenarioResult sr, 
-			MethodInvoker testCode, 
+			ScenarioResult sr,
+            System.Windows.Forms.MethodInvoker testCode, 
 			MethodBase expectedStackMethod, 
 			params CodeAccessPermission[] expectedPermissions)
 		{
