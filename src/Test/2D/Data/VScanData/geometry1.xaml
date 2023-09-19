@@ -1,0 +1,59 @@
+﻿<!-- This test creates a Path out of Geometries : rectangle polyline and line with imagepaint to the fill and radialgradient applied to the stroke of line
+    -->
+
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"Background="VerticalGradient yellow royalblue" >
+
+<Path>
+<Path.Data>
+<RectangleGeometry Rect="140 80 160 175" RadiusX="10" RadiusY="5"></RectangleGeometry></Path.Data> 
+        
+
+<Path.Data>
+<PathGeometry>
+    <PathFigure StartPoint="100 200">
+        <PolyLineSegment>
+            <PolyLineSegment.Points>30,200,140,50,290,200,30,200</PolyLineSegment.Points>
+        </PolyLineSegment>
+    </PathFigure>
+</PathGeometry>
+</Path.Data>
+
+        
+    
+    <Path.Fill>
+    <ImageBrush Stretch="None"  
+     AlignmentX="Center" ImageSource="peacock.jpg">
+     <ImageBrush.Viewport>
+        0,0,1,1
+    </ImageBrush.Viewport>
+</ImageBrush>
+</Path.Fill>
+    
+</Path>
+
+
+<Canvas Canvas.Top="0" Canvas.Left="350" Width="500" Height="500" Background="HorizontalGradient pink purple" >
+
+<Path>
+<Path.Data>
+    
+    <LineGeometry StartPoint="15 10" EndPoint="400 400"></LineGeometry></Path.Data> 
+<Path.Data> 
+    <LineGeometry StartPoint="400 15" EndPoint="25 400"></LineGeometry>
+</Path.Data>
+<Path.Fill>orange</Path.Fill>
+<Path.Stroke>
+<RadialGradientBrush Center="0.5,0.5" Focus="0.5,0.5" SpreadMethod="pad">
+<RadialGradientBrush.GradientStops>
+          <GradientStop Color="#FF0000" Offset="0" />
+          <GradientStop Color="blue" Offset="0.5" />
+          <GradientStop Color="white" Offset="1" />
+</RadialGradientBrush.GradientStops>
+    </RadialGradientBrush></Path.Stroke>
+    <Path.StrokeThickness>40</Path.StrokeThickness>
+        
+</Path>
+
+
+</Canvas>
+</Canvas>

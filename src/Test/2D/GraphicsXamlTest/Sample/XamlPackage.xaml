@@ -1,0 +1,279 @@
+﻿<!-- To show this window, do this: Window w=new Window1; w.Show(); -->
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="Microsoft.Test.Graphics.Window1" Title="ShapeLeakDetect">
+    <TabControl>
+        <TabItem Header="General">
+            <Canvas>
+                <Canvas.Background>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="skyblue" Offset="0" />
+                                <GradientStop Color="#000033" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Canvas.Background>
+                <TextBlock Canvas.Top="130" Canvas.Left="330" FontWeight="Bold" Foreground="white" FontFamily="Arial">Space:The final frontier</TextBlock>
+                <!--space ship-->
+                <Line>
+                    <Line.X1>600</Line.X1>
+                    <Line.Y1>263</Line.Y1>
+                    <Line.X2>650</Line.X2>
+                    <Line.Y2>313</Line.Y2>
+                    <Line.Stroke>
+			skyblue
+			</Line.Stroke>
+                    <Line.StrokeThickness>5</Line.StrokeThickness>
+                </Line>
+                <Line>
+                    <Line.X1>700</Line.X1>
+                    <Line.Y1>263</Line.Y1>
+                    <Line.X2>650</Line.X2>
+                    <Line.Y2>313</Line.Y2>
+                    <Line.Stroke>
+			skyblue
+			</Line.Stroke>
+                    <Line.StrokeThickness>5</Line.StrokeThickness>
+                </Line>
+                <Rectangle Fill="lightblue" Canvas.Top="315" Canvas.Left="680" Width="6" Height="4" StrokeThickness="1" Stroke="lightcyan" />
+                <Rectangle Fill="lightblue" Canvas.Top="315" Canvas.Left="660" Width="6" Height="4" StrokeThickness="1" Stroke="skyblue" />
+                <Rectangle Fill="lightblue" Canvas.Top="315" Canvas.Left="640" Width="6" Height="4" StrokeThickness="1" Stroke="skyblue" />
+                <Rectangle Fill="lightblue" Canvas.Top="315" Canvas.Left="620" Width="6" Height="4" StrokeThickness="1" Stroke="skyblue" />
+                <Polygon Points="35,37.5 37.9,46.1 46.9,46.1 39.7,51.5
+					42.3,60.1 35,55 27.7,60.1 30.3,51.5
+					23.1,46.1 32.1,46.1" Fill="yellow" />
+                <Polygon Points="35,37.5 37.9,46.1 46.9,46.1 39.7,51.5
+					42.3,60.1 35,55 27.7,60.1 30.3,51.5
+					23.1,46.1 32.1,46.1" Fill="lightblue" Stroke="White" StrokeThickness="1">
+                    <Polygon.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <TransformCollection>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                    <TranslateTransform X="670" Y="100" />
+                                </TransformCollection>
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Polygon.RenderTransform>
+                </Polygon>
+                <Polygon Points="35,37.5 37.9,46.1 46.9,46.1 39.7,51.5
+					42.3,60.1 35,55 27.7,60.1 30.3,51.5
+					23.1,46.1 32.1,46.1" Fill="white">
+                    <Polygon.RenderTransform>
+                        <TranslateTransform X="710" Y="30" />
+                    </Polygon.RenderTransform>
+                </Polygon>
+                <Polygon Points="35,37.5 37.9,46.1 46.9,46.1 39.7,51.5
+					42.3,60.1 35,55 27.7,60.1 30.3,51.5
+					23.1,46.1 32.1,46.1">
+                    <Polygon.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <TransformCollection>
+                                    <ScaleTransform ScaleX="4" ScaleY="4" />
+                                    <TranslateTransform X="210" Y="230" />
+                                </TransformCollection>
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Polygon.RenderTransform>
+                    <Polygon.Fill>
+                        <LinearGradientBrush StartPoint="0,.5" EndPoint=".5,0">
+                            <GradientBrush.GradientStops>
+                                <GradientStopCollection>
+                                    <GradientStop Color="yellow" Offset="0" />
+                                    <GradientStop Color="white" Offset="1" />
+                                </GradientStopCollection>
+                            </GradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Polygon.Fill>
+                </Polygon>
+                <Polygon Points="35,37.5 37.9,46.1 46.9,46.1 39.7,51.5
+					42.3,60.1 35,55 27.7,60.1 30.3,51.5
+					23.1,46.1 32.1,46.1">
+                    <Polygon.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <TransformCollection>
+                                    <ScaleTransform ScaleX="3" ScaleY="3" />
+                                    <TranslateTransform X="50" Y="100" />
+                                    <RotateTransform Angle="20" />
+                                </TransformCollection>
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Polygon.RenderTransform>
+                    <Polygon.Fill>
+                        <RadialGradientBrush>
+                            <GradientBrush.GradientStops>
+                                <GradientStopCollection>
+                                    <GradientStop Color="orange" Offset="0" />
+                                    <GradientStop Color="yellow" Offset="1" />
+                                </GradientStopCollection>
+                            </GradientBrush.GradientStops>
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+                </Polygon>
+            </Canvas>
+        </TabItem>
+        <TabItem Header="Shape">
+            <Canvas Background="#CCCCCC">
+                <Path Data="M100,200 C100,100 250,100 250,200 S400,300 400,200" Stroke="yellow" StrokeThickness="6" />
+                <Line>
+                    <Line.X1>455</Line.X1>
+                    <Line.Y1>255</Line.Y1>
+                    <Line.X2>200</Line.X2>
+                    <Line.Y2>100</Line.Y2>
+                    <Line.Fill>blue</Line.Fill>
+                    <Line.Stroke>red</Line.Stroke>
+                    <Line.StrokeThickness>10</Line.StrokeThickness>
+                    <Line.StrokeStartLineCap>Round</Line.StrokeStartLineCap>
+                    <Line.StrokeEndLineCap>Round</Line.StrokeEndLineCap>
+                </Line>
+                <Polygon Fill="purple" Stroke="black" StrokeThickness="2" Points="100,10 150,35 150,65 100,90 50,65 50,35">
+                </Polygon>
+                <Polyline Stroke="blue" StrokeThickness="6" Points="10,10 50,30 5,100 100,100 100,300 300,300 300,500" />
+                <Rectangle Width="200px" Height="200px" StrokeThickness="15px" Stroke="red" Canvas.Top="200" Canvas.Left="500" Fill="gold" RadiusX="20" RadiusY="20" />
+            </Canvas>
+        </TabItem>
+        <TabItem Header="Geometry">
+            <Canvas Background="#CCCCCC">
+                <!-- ********************* Geometry Collection *********************-->
+                <Path Fill="Red" Stroke="white" StrokeThickness="3">
+                    <Path.Data>
+                        <CombinedGeometry GeometryCombineMode="Xor">
+                            <CombinedGeometry.Geometry1>
+                                <RectangleGeometry Rect="0 0 100 100" />
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <RectangleGeometry Rect="50 50 100 100" />
+                            </CombinedGeometry.Geometry2>
+                        </CombinedGeometry>
+                    </Path.Data>
+                </Path>
+                <!-- ********************* Path geometry *********************-->
+                <Path Fill="#4000FF00" Stroke="Yellow">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathGeometry.Transform>
+                                <TranslateTransform X="225" Y="25" />
+                            </PathGeometry.Transform>
+                            <PathGeometry.Figures>
+                                <PathFigureCollection>
+                                    <PathFigure IsFilled="True" StartPoint="0 0" IsClosed="True">
+                                        <PathFigure.Segments>
+                                            <PathSegmentCollection>
+                                                <LineSegment Point="100 0" />
+                                                <BezierSegment Point1="125 25" Point2="125 75" Point3="100 100" />
+                                                <QuadraticBezierSegment Point1="50 50" Point2="0 100" />
+                                                <ArcSegment Point="100 150" Size="100 100" RotationAngle="45" IsLargeArc="False" SweepDirection="True" />
+                                                <PolyLineSegment Points="100 175 0 175" />
+                                                <PolyBezierSegment Points="50 225 50 275 0 300 50 325 50 375 0 400" />
+                                                <PolyQuadraticBezierSegment Points="50 450 0 500 50 550 0 600" />
+                                            </PathSegmentCollection>
+                                        </PathFigure.Segments>
+                                    </PathFigure>
+                                </PathFigureCollection>
+                            </PathGeometry.Figures>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <!-- *********************** Rectangle geometry *********************-->
+                <Path Fill="blue" Stroke="black" StrokeThickness="2">
+                    <Path.Data>
+                        <RectangleGeometry Rect="325 225 175 75" RadiusX="10" RadiusY="5">
+                        </RectangleGeometry>
+                    </Path.Data>
+                </Path>
+                <!-- ******************* Ellipse geometry ********************-->
+                <Path Fill="purple" Stroke="yellow" StrokeThickness="5">
+                    <Path.Data>
+                        <EllipseGeometry Center="60 300" RadiusX="50" RadiusY="75">
+                        </EllipseGeometry>
+                    </Path.Data>
+                </Path>
+                <!-- ******************Line geometry ************************-->
+                <Path Stroke="orange" StrokeThickness="20" StrokeStartLineCap="Flat" StrokeEndLineCap="Triangle">
+                    <Path.Data>
+                        <LineGeometry StartPoint="350 25" EndPoint="500 75">
+                        </LineGeometry>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </TabItem>
+        <TabItem Header="Brush-Pen">
+            <Canvas Background="#CCCCCC">
+                <!-- ********************* SolidColor Brush *********************-->
+                <Rectangle Width="200" Height="200" Canvas.Top="10" Canvas.Left="10" StrokeThickness="1" Stroke="Black">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#88FA02EE" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!-- ********************* LinearGradient Brush *********************-->
+                <Rectangle Width="200" Height="200" Canvas.Top="10" Canvas.Left="230" StrokeThickness="1" Stroke="Black">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="Red" Offset="0" />
+                                <GradientStop Color="White" Offset="0.5" />
+                                <GradientStop Color="Blue" Offset="1.0" />
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!-- ********************* RadialGradient Brush *********************-->
+                <Rectangle Width="200" Height="200" Canvas.Top="10" Canvas.Left="450" StrokeThickness="1" Stroke="Black">
+                    <Rectangle.Fill>
+                        <RadialGradientBrush MappingMode="RelativeToBoundingBox" Center="0.5,0.5" GradientOrigin="0.75,0.75" RadiusX="50" RadiusY="20" SpreadMethod="Reflect">
+                            <RadialGradientBrush.GradientStops>
+                                <GradientStop Color="Red" Offset="0" />
+                                <GradientStop Color="White" Offset="0.5" />
+                                <GradientStop Color="Blue" Offset="1.0" />
+                            </RadialGradientBrush.GradientStops>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!-- ********************* Image Brush *********************-->
+                <Rectangle Width="200" Height="200" Canvas.Top="230" Canvas.Left="10" StrokeThickness="1" Stroke="Black">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/XamlGraphicsTest;Component/Images/v5sRGB16table.bmp" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center" TileMode="FlipXY" Viewport="0,0,1,1" ViewportUnits="RelativeToBoundingBox">
+                        </ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!-- ********************* Drawing Brush *********************-->
+                <Rectangle Width="200" Height="200" Canvas.Top="230" Canvas.Left="450" StrokeThickness="1" Stroke="Black">
+                    <Rectangle.Fill>
+                        <DrawingBrush ViewboxUnits="Absolute" Viewbox="0,.2,1,.6" Viewport="0,0,.2,.15" TileMode="FlipXY">
+                            <DrawingBrush.Drawing>
+                                <DrawingGroup>
+                                    <DrawingGroup.Children>
+                                        <GeometryDrawing Brush="Blue">
+                                            <GeometryDrawing.Geometry>
+                                                <EllipseGeometry RadiusX=".5" RadiusY=".5" Center=".5, .5" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Brush="White">
+                                            <GeometryDrawing.Geometry>
+                                                <EllipseGeometry RadiusX=".3" RadiusY=".3" Center=".5, .5" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Brush="Red">
+                                            <GeometryDrawing.Geometry>
+                                                <EllipseGeometry RadiusX=".1" RadiusY=".1" Center=".5, .5" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup.Children>
+                                </DrawingGroup>
+                            </DrawingBrush.Drawing>
+                        </DrawingBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!-- ********************* Pen *********************-->
+                <Line X1="10" Y1="450" X2="650" Y2="450" StrokeThickness="10">
+                    <Line.StrokeStartLineCap>Round</Line.StrokeStartLineCap>
+                    <Line.StrokeEndLineCap>Triangle</Line.StrokeEndLineCap>
+                    <Line.Stroke>Red</Line.Stroke>
+                </Line>
+            </Canvas>
+        </TabItem>
+        <TabItem Header="Transform" />
+    </TabControl>
+</Window>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+
+  <DEFAULTTESTINFO Area="2D" SubArea="GxTests-CGT">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="CGT2D.dll" Class="Microsoft.Test.Graphics.Cgt2d" Method="Launch" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\Fonts\arial.ttf" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+
+  <TEST Name="Shape animation API test  -AnimationFirst (No visual verification)" Priority="1" Timeout="360" Description="Tested shape properties:   Rectangle.Width   Rectangle.Height   Rectangle.Stroke.Color   Rectangle.Fill   Rectangle.StrokeThickness   Rectangle.RadiusX   Rectangle.RadiusY   Ellipse.Wdith   Ellipse.Height   Ellipse.Stroke.Color   Ellipse.Fill   Ellipse.StrokeThickness      Line.X1   Line.Y1   Line.X2   Line.Y2   Line.Stroke.Color   Line.StrokeThicknessComment:  Set Animation first, then clear the animation">
+    <DriverParameters Args="/script=ShapeAnim_AnimationFirst.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\CGT2D.*" />
+      <SupportFile Source="FeatureTests\2D\CgtXml\ShapeAnim_AnimationFirst.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Shape animation API test - AnimationFirstClearFifo (No visual verification)" Priority="1" Timeout="360" Description="Tested shape properties:   Rectangle.Width   Rectangle.Height   Rectangle.Stroke.Color   Rectangle.Fill   Rectangle.StrokeThickness   Rectangle.RadiusX   Rectangle.RadiusY   Ellipse.Wdith   Ellipse.Height   Ellipse.Stroke.Color   Ellipse.Fill   Ellipse.StrokeThickness      Line.X1   Line.Y1   Line.X2   Line.Y2   Line.Stroke.Color   Line.StrokeThicknessComment:  Set Animation first, then end the animation, followed by clearing the basevalue.">
+    <DriverParameters Args="/script=ShapeAnim_AnimationFirstAndClearFifo.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\CGT2D.*" />
+      <SupportFile Source="FeatureTests\2D\CgtXml\ShapeAnim_AnimationFirstAndClearFifo.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Shape animation API Test - AnimationFirstClearLifo (No Visual Verification)" Priority="1" Timeout="360" Description="Tested shape properties:   Rectangle.Width   Rectangle.Height   Rectangle.Stroke.Color   Rectangle.Fill   Rectangle.StrokeThickness   Rectangle.RadiusX   Rectangle.RadiusY   Ellipse.Wdith   Ellipse.Height   Ellipse.Stroke.Color   Ellipse.Fill   Ellipse.StrokeThickness      Line.X1   Line.Y1   Line.X2   Line.Y2   Line.Stroke.Color   Line.StrokeThicknessComment:  Set Animation first before setting the basevalue, then clear the basevalue followed by ending the animation.">
+    <DriverParameters Args="/script=ShapeAnim_AnimationFirstAndClearLifo.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\CGT2D.*" />
+      <SupportFile Source="FeatureTests\2D\CgtXml\ShapeAnim_AnimationFirstAndClearLifo.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Shape animation API Test - BaseValueFirst (No Visual Verification )" Priority="1" Timeout="360" Description="Shape animation API test  -AnimationFirst (No visual verification)Tested shape properties:   Rectangle.Width   Rectangle.Height   Rectangle.Stroke.Color   Rectangle.Fill   Rectangle.StrokeThickness   Rectangle.RadiusX   Rectangle.RadiusY   Ellipse.Wdith   Ellipse.Height   Ellipse.Stroke.Color   Ellipse.Fill   Ellipse.StrokeThickness      Line.X1   Line.Y1   Line.X2   Line.Y2   Line.Stroke.Color   Line.StrokeThicknessComment:  Set the BaseValue first, then set animation.  When the animation stops, we should see the BaseValue again.">
+    <DriverParameters Args="/script=ShapeAnim_BaseValueFirst.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\CGT2D.*" />
+      <SupportFile Source="FeatureTests\2D\CgtXml\ShapeAnim_BaseValueFirst.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Shape animation API Test - BaseValueFirstAndClearFifo (NO Visual Verification)" Priority="1" Timeout="360" Description="Tested shape properties:   Rectangle.Width   Rectangle.Height   Rectangle.Stroke.Color   Rectangle.Fill   Rectangle.StrokeThickness   Rectangle.RadiusX   Rectangle.RadiusY   Ellipse.Wdith   Ellipse.Height   Ellipse.Stroke.Color   Ellipse.Fill   Ellipse.StrokeThickness      Line.X1   Line.Y1   Line.X2   Line.Y2   Line.Stroke.Color   Line.StrokeThicknessComment:  Set BaseValue first before setting animation, when animation is ended, we should see the BaseValue again.">
+    <DriverParameters Args="/script=ShapeAnim_BaseValueFirstAndClearFifo.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\CGT2D.*" />
+      <SupportFile Source="FeatureTests\2D\CgtXml\ShapeAnim_BaseValueFirstAndClearFifo.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Shape animation API Test - BaseValueFirstAndClearLifo (No Visual Verification)" Priority="1" Timeout="360" Description="Tested shape properties:   Rectangle.Width   Rectangle.Height   Rectangle.Stroke.Color   Rectangle.Fill   Rectangle.StrokeThickness   Rectangle.RadiusX   Rectangle.RadiusY   Ellipse.Wdith   Ellipse.Height   Ellipse.Stroke.Color   Ellipse.Fill   Ellipse.StrokeThickness      Line.X1   Line.Y1   Line.X2   Line.Y2   Line.Stroke.Color   Line.StrokeThicknessComment:  Set BaseValue first before adding the animation, then end the animatio, followed by clearing the BaseValue.">
+    <DriverParameters Args="/script=ShapeAnim_BaseValueFirstAndClearLifo.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\CGT2D.*" />
+      <SupportFile Source="FeatureTests\2D\CgtXml\ShapeAnim_BaseValueFirstAndClearLifo.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Shape animation API test - NoBaseValue (No Visual Verification)" Priority="1" Timeout="360" Description="Tested shape properties:   Rectangle.Width   Rectangle.Height   Rectangle.Stroke.Color   Rectangle.Fill   Rectangle.StrokeThickness   Rectangle.RadiusX   Rectangle.RadiusY   Ellipse.Wdith   Ellipse.Height   Ellipse.Stroke.Color   Ellipse.Fill   Ellipse.StrokeThickness      Line.X1   Line.Y1   Line.X2   Line.Y2   Line.Stroke.Color   Line.StrokeThicknessComment:  Never set the BaseValue.  When the animation stops, we should see the Avalon Default Value.">
+    <DriverParameters Args="/script=ShapeAnim_NoBaseValue.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\CGT2D.*" />
+      <SupportFile Source="FeatureTests\2D\CgtXml\ShapeAnim_NoBaseValue.xml" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Shape animation API Test - NoBaseValueAndClearValue (No Visual Verification)" Priority="2" Timeout="360" Description="Tested shape properties:   Rectangle.Width   Rectangle.Height   Rectangle.Stroke.Color   Rectangle.Fill   Rectangle.StrokeThickness   Rectangle.RadiusX   Rectangle.RadiusY   Ellipse.Wdith   Ellipse.Height   Ellipse.Stroke.Color   Ellipse.Fill   Ellipse.StrokeThickness      Line.X1   Line.Y1   Line.X2   Line.Y2   Line.Stroke.Color   Line.StrokeThicknessComment:   Never set BaseValue.  When the animation stops, we should see the default Avalon value.">
+    <DriverParameters Args="/script=ShapeAnim_NoBaseValueAndClearValue.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\CGT2D.*" />
+      <SupportFile Source="FeatureTests\2D\CgtXml\ShapeAnim_NoBaseValueAndClearValue.xml" />
+    </SupportFiles>
+  </TEST>
+</XTC>

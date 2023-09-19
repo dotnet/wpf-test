@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PHT_BadMeshes"
+
+    Camera="PerspectiveDefault"
+    UseViewport3D="false"
+
+    Scene="Explicit"
+    Visual0="WhiteAmbient"
+
+    Point="110,90"
+    >
+
+    <!-- Meshes -->
+
+    <VARIATION
+        Description="Only one position in the mesh"
+        Expectation="Miss"
+        Visual1="BadPositions1"
+        />
+    <VARIATION
+        Description="Only two positions in the mesh"
+        Expectation="Miss"
+        Visual1="BadPositions2"
+        />
+    <VARIATION
+        Description="Four positions in the mesh - one valid triangle"
+        Expectation="Hit"
+        Visual1="BadPositions4"
+        />
+    <VARIATION
+        Description="Five positions in the mesh - one valid triangle"
+        Expectation="Hit"
+        Visual1="BadPositions5"
+        />
+    <VARIATION
+        Description="Null Positions, empty Indices"
+        Expectation="Miss"
+        Visual1="NullPositions1"
+        />
+    <VARIATION
+        Description="Null Positions, null Indices"
+        Expectation="Miss"
+        Visual1="NullPositions2"
+        />
+    <VARIATION
+        Description="Null Positions, non-empty Indices"
+        Expectation="Miss"
+        Visual1="NullPositions3"
+        />
+    <VARIATION
+        Description="Valid Positions, null Indices"
+        Expectation="Hit"
+        Visual1="PositionsElseNull"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Hit"
+        Visual1="BadIndex1"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Hit"
+        Visual1="BadIndex2"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Hit"
+        Visual1="BadIndex3"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Hit"
+        Visual1="BadIndex4"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Hit"
+        Visual1="BadIndex5"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Hit"
+        Visual1="BadIndex6"
+        />
+    <VARIATION
+        Description="Seriously crippled sphere missing a third of its triangles"
+        Expectation="Hit"
+        Visual0="WhitePoint"
+        Visual1="BadIndexMissingSomeNormals"
+        />
+
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Miss"
+        Visual1="BadIndex1"
+        Point="100,110"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Miss"
+        Visual1="BadIndex2"
+        Point="100,110"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Miss"
+        Visual1="BadIndex3"
+        Point="100,110"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Miss"
+        Visual1="BadIndex4"
+        Point="100,110"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Miss"
+        Visual1="BadIndex5"
+        Point="100,110"
+        />
+    <VARIATION
+        Description="Only half a plane renders because of a bad index in the middle"
+        Expectation="Miss"
+        Visual1="BadIndex6"
+        Point="100,110"
+        />
+    <VARIATION
+        Description="Seriously crippled sphere missing a third of its triangles"
+        Expectation="Miss"
+        Visual0="WhitePoint"
+        Visual1="BadIndexMissingSomeNormals"
+        Point="100,160"
+        />
+
+    <VARIATION
+        Description="Group with null Children"
+        Expectation="Miss"
+        Visual1="GroupNullChildren"
+        />
+
+    <!-- Combinations of good and bad -->
+
+    <VARIATION
+        Description="Null positions and CreateFlatDisc 3"
+        Expectation="Miss"
+        Point="120,80"
+        Visual1="NullPositions1"
+        Visual2="CreateFlatDisc 3"
+        />
+    <VARIATION
+        Description="Null positions and CreateFlatDisc 3 in same Model3DGroup"
+        Expectation="Miss"
+        Point="120,80"
+        Visual1="Group"
+        Child10="NullPositions1"
+        Child11="CreateFlatDisc 3"
+        />
+
+</INIT>

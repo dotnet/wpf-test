@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PointHitTestingTest"
+
+    Scene="Explicit"
+    Visual0="SingleFrontFacingTriangle"
+    Visual1="WhiteAmbient"
+
+    Camera="OrthographicDefault"
+    UseViewport3D="true"
+    >
+    <VARIATION
+        Description="Point testing at 80,80"
+        Expectation="'Model' is missed."
+        Point="80,80"
+        />
+    <VARIATION
+        Description="Point testing at 120,50"
+        Expectation="Hit 'Model' once."
+        Point="120,50"
+        />
+    <VARIATION
+        Description="Point testing at 120,79"
+        Expectation="Hit 'Model' once."
+        Point="120,79"
+        />
+    <VARIATION
+        Description="Point testing at 0,0"
+        Expectation="'Model' is missed."
+        Point="0,0"
+        />
+    <VARIATION
+        Description="Point testing at 100,99"
+        Expectation="Hit 'Model' once."
+        Point="100,99"
+        />
+
+    <VARIATION
+        Description="Point testing at 100,99"
+        Expectation="Hit six meshes."
+        Point="100,99"
+        Visual0="LayeredMeshes"
+        Visual2="LayeredMeshes"
+        VisualTransform1="Translate 0,0,-1"
+        />
+    <VARIATION
+        Description="Point testing at 100,99"
+        Expectation="Hit six meshes."
+        Point="100,99"
+        Visual0="LayeredMeshes"
+        Visual2="LayeredMeshes"
+        VisualTransform0="Translate 0,0,-1"
+        />
+    <VARIATION
+        Description="Point testing at 6,4"
+        Expectation="Hit 'Model' three times."
+        Visual0="OverlappingPlanes"
+        Point="6,4"
+        />
+    <VARIATION
+        Description="Point testing at 194,196"
+        Expectation="Hit 'Model' three times."
+        Visual0="OverlappingPlanes"
+        Point="194,196"
+        />
+</INIT>

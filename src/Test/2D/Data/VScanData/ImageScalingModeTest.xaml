@@ -1,0 +1,322 @@
+ <Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition />
+      <ColumnDefinition />
+      <ColumnDefinition />
+      <ColumnDefinition />
+      <ColumnDefinition />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+      <RowDefinition/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <!-- Test on Visual-->
+    <!-- Applying property on Image element directly-->
+    <DockPanel Grid.Column="0">
+      <!-- FantScale -->
+      <Image RenderOptions.BitmapScalingMode="HighQuality" Source="cars.jpg" />
+    </DockPanel>
+    <DockPanel Grid.Column="1">
+      <!-- BilinearScale -->
+      <Image RenderOptions.BitmapScalingMode="LowQuality" Source="cars.jpg"/>
+    </DockPanel>
+
+    <!-- Applying property on Parent element directly-->
+    <DockPanel RenderOptions.BitmapScalingMode="HighQuality" Grid.Column="2">
+      <!-- FantScale -->
+      <Image Source="cars.jpg"/>
+    </DockPanel>
+    <DockPanel RenderOptions.BitmapScalingMode="LowQuality" Grid.Column="3">
+      <!-- BilinearScale -->
+      <Image Source="cars.jpg"/>
+    </DockPanel>
+
+    <!-- Applying property HighQuality on Parent and LowQuality on Image element -->
+    <DockPanel RenderOptions.BitmapScalingMode="HighQuality" Grid.Column="4">
+      <!-- BilinearScale -->
+      <Image RenderOptions.BitmapScalingMode="LowQuality" Source="cars.jpg"/>
+    </DockPanel>
+    <DockPanel RenderOptions.BitmapScalingMode="LowQuality" Grid.Column="5">
+      <!-- FantScale -->
+      <Image RenderOptions.BitmapScalingMode="HighQuality" Source="cars.jpg"/>
+    </DockPanel>
+    <!-- Test on Visual END-->
+
+    <!-- Test on DrawingGroup-->
+    <!-- Applying property on DrawingGroup element directly-->
+    <DockPanel Grid.Row="1" Grid.Column="0">
+      <!-- FantScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup RenderOptions.BitmapScalingMode="HighQuality">
+                <GeometryDrawing>
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry Rect="1024,1024,1024,1024"/>
+                  </GeometryDrawing.Geometry>
+                  <GeometryDrawing.Brush>
+                    <ImageBrush>
+                      <ImageBrush.ImageSource>
+                        <BitmapImage UriSource="cars.jpg"/>
+                      </ImageBrush.ImageSource>
+                    </ImageBrush>
+                  </GeometryDrawing.Brush>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+    <DockPanel Grid.Row="1" Grid.Column="1">
+      <!-- BilinearScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup RenderOptions.BitmapScalingMode="LowQuality">
+                <GeometryDrawing>
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry Rect="1024,1024,1024,1024"/>
+                  </GeometryDrawing.Geometry>
+                  <GeometryDrawing.Brush>
+                    <ImageBrush>
+                      <ImageBrush.ImageSource>
+                        <BitmapImage UriSource="cars.jpg"/>
+                      </ImageBrush.ImageSource>
+                    </ImageBrush>
+                  </GeometryDrawing.Brush>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+
+    <!-- Applying property on Parent element directly-->
+    <DockPanel RenderOptions.BitmapScalingMode="HighQuality" Grid.Row="1" Grid.Column="2">
+      <!-- FantScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup>
+                <GeometryDrawing>
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry Rect="1024,1024,1024,1024"/>
+                  </GeometryDrawing.Geometry>
+                  <GeometryDrawing.Brush>
+                    <ImageBrush>
+                      <ImageBrush.ImageSource>
+                        <BitmapImage UriSource="cars.jpg"/>
+                      </ImageBrush.ImageSource>
+                    </ImageBrush>
+                  </GeometryDrawing.Brush>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+    <DockPanel RenderOptions.BitmapScalingMode="LowQuality" Grid.Row="1" Grid.Column="3">
+      <!-- BilinearScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup>
+                <GeometryDrawing>
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry Rect="1024,1024,1024,1024"/>
+                  </GeometryDrawing.Geometry>
+                  <GeometryDrawing.Brush>
+                    <ImageBrush>
+                      <ImageBrush.ImageSource>
+                        <BitmapImage UriSource="cars.jpg"/>
+                      </ImageBrush.ImageSource>
+                    </ImageBrush>
+                  </GeometryDrawing.Brush>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+
+    <!-- Applying property HighQuality on Parent and LowQuality on DrawingGroup element -->
+    <DockPanel RenderOptions.BitmapScalingMode="HighQuality" Grid.Row="1"  Grid.Column="4">
+      <!-- BilinearScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup RenderOptions.BitmapScalingMode="LowQuality">
+                <GeometryDrawing>
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry Rect="1024,1024,1024,1024"/>
+                  </GeometryDrawing.Geometry>
+                  <GeometryDrawing.Brush>
+                    <ImageBrush>
+                      <ImageBrush.ImageSource>
+                        <BitmapImage UriSource="cars.jpg"/>
+                      </ImageBrush.ImageSource>
+                    </ImageBrush>
+                  </GeometryDrawing.Brush>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+    <DockPanel RenderOptions.BitmapScalingMode="LowQuality" Grid.Row="1" Grid.Column="5">
+      <!-- FantScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup RenderOptions.BitmapScalingMode="HighQuality">
+                <GeometryDrawing>
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry Rect="1024,1024,1024,1024"/>
+                  </GeometryDrawing.Geometry>
+                  <GeometryDrawing.Brush>
+                    <ImageBrush>
+                      <ImageBrush.ImageSource>
+                        <BitmapImage UriSource="cars.jpg"/>
+                      </ImageBrush.ImageSource>
+                    </ImageBrush>
+                  </GeometryDrawing.Brush>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+    <!-- Test on DrawingGroup END-->
+
+    <!-- Test on DrawingGroup-->
+    <!-- Applying property on Image element directly-->
+    <DockPanel Grid.Row="2" Grid.Column="0">
+      <!-- FantScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup RenderOptions.BitmapScalingMode="HighQuality">
+                <ImageDrawing Rect="1024,1024,1024,1024">
+                  <ImageDrawing.ImageSource>
+                    <BitmapImage UriSource="cars.jpg"/>
+                  </ImageDrawing.ImageSource>
+                </ImageDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+    <DockPanel Grid.Row="2" Grid.Column="1">
+      <!-- BilinearScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup RenderOptions.BitmapScalingMode="LowQuality">
+                <ImageDrawing Rect="1024,1024,1024,1024">
+                  <ImageDrawing.ImageSource>
+                    <BitmapImage UriSource="cars.jpg"/>
+                  </ImageDrawing.ImageSource>
+                </ImageDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+
+    <!-- Applying property on Parent element directly-->
+    <DockPanel RenderOptions.BitmapScalingMode="HighQuality" Grid.Row="2" Grid.Column="2">
+      <!-- FantScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup>
+                <ImageDrawing Rect="1024,1024,1024,1024">
+                  <ImageDrawing.ImageSource>
+                    <BitmapImage UriSource="cars.jpg"/>
+                  </ImageDrawing.ImageSource>
+                </ImageDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+    <DockPanel RenderOptions.BitmapScalingMode="LowQuality" Grid.Row="2" Grid.Column="3">
+      <!-- BilinearScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup>
+                <ImageDrawing Rect="1024,1024,1024,1024">
+                  <ImageDrawing.ImageSource>
+                    <BitmapImage UriSource="cars.jpg"/>
+                  </ImageDrawing.ImageSource>
+                </ImageDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+
+    <!-- Applying property HighQuality on Parent and LowQuality on Image element -->
+    <DockPanel RenderOptions.BitmapScalingMode="HighQuality" Grid.Row="2" Grid.Column="4">
+      <!-- BilinearScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup RenderOptions.BitmapScalingMode="LowQuality">
+                <ImageDrawing Rect="1024,1024,1024,1024">
+                  <ImageDrawing.ImageSource>
+                    <BitmapImage UriSource="cars.jpg"/>
+                  </ImageDrawing.ImageSource>
+                </ImageDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+    <DockPanel RenderOptions.BitmapScalingMode="LowQuality" Grid.Row="2" Grid.Column="5">
+      <!-- FantScale -->
+      <Image Margin="5,5,5,5">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup RenderOptions.BitmapScalingMode="HighQuality">
+                <ImageDrawing Rect="1024,1024,1024,1024">
+                  <ImageDrawing.ImageSource>
+                    <BitmapImage UriSource="cars.jpg"/>
+                  </ImageDrawing.ImageSource>
+                </ImageDrawing>
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </DockPanel>
+    <!-- Test on DrawingGroup END-->
+  </Grid>
+</Page>

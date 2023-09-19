@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseLinearGradientBrushTransparencyTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,40,40,40"
+    
+    DefaultColorTolerance="0,3,3,3"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="OrthographicDefaultWidth4"
+    >
+
+    <!-- Test rendering order (make sure that semi-transparent materials rendered first with closer z position are not see-through) -->
+
+    <VARIATION
+        Description="see the back of the mesh through the semi-transparent front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 200,255,0,255 45,0,255,0 0"
+        BackMaterial="LinearGradientBrush 255,255,0,255 255,255,255,0 90"
+        />
+    <VARIATION
+        Description="cannot see front of the mesh through opaque back material"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="LinearGradientBrush 200,255,0,255 45,0,255,0 0"
+        BackMaterial="LinearGradientBrush 255,255,0,255 255,255,255,0 90"
+        />
+    <VARIATION
+        Description="cannot see back of the mesh through the opaque front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,0,255 255,255,255,0 60"
+        BackMaterial="LinearGradientBrush 60,139,34,193 220,34,193,139 30"
+        />
+    <VARIATION
+        Description="cannot see the front of the mesh through semi-transparent back material (rendering order matters)"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="LinearGradientBrush 255,255,0,255 255,255,255,0 60"
+        BackMaterial="LinearGradientBrush 60,139,34,193 220,34,193,139 30"
+        />
+    <VARIATION
+        Description="see the semi-transparent back of the mesh through the semi-transparent front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="LinearGradientBrush 255,255,0,0 100,0,180,180 10"
+        BackMaterial="LinearGradientBrush 255,0,60,235 160,239,0,0 40"
+        />
+    <VARIATION
+        Description="cannot see the semi-transparent front of the mesh through semi-transparent back material (rendering order matters)"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="LinearGradientBrush 255,255,0,0 100,0,180,180 10"
+        BackMaterial="LinearGradientBrush 255,0,60,235 160,239,0,0 40"
+        />
+
+    <!-- Different light types/colors -->
+
+    <VARIATION
+        Description="semi-transparent materials on spiral with white directional light"
+        Light="WhiteDirectionalNegZ"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,0,0 100,0,180,180 10"
+        BackMaterial="LinearGradientBrush 255,0,60,235 160,239,0,0 40"
+        />
+    <VARIATION
+        Description="semi-transparent materials on spiral with white point light"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,0,0 100,0,180,180 10"
+        BackMaterial="LinearGradientBrush 255,0,60,235 160,239,0,0 40"
+        />
+    <VARIATION
+        Description="semi-transparent materials on spiral with non-white point light"
+        Light="NonWhitePointBelow"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="LinearGradientBrush 255,255,0,0 100,0,180,180 10"
+        BackMaterial="LinearGradientBrush 255,0,60,235 160,239,0,0 40"
+        />
+
+</INIT>

@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RayHitTestingTest"
+    LogFilePrefix="RayHitTestingTest_BackMaterial"
+
+    Scene="Explicit"
+    Visual0="UnitPlaneTriangle"
+    Material0="255,0,0,255"
+    BackMaterial0="255,255,0,0"
+    Visual1="WhiteAmbient"
+
+    Camera="PerspectiveDefault"
+    UseViewport3D="false"
+    >
+    <VARIATION
+        Description="Can we hit the back side of a triangle?"
+        Expectation="Hit"
+        Origin="0,0,-5"
+        Direction="0,0,1"
+        />
+    <VARIATION
+        Description="Can we hit the front side of a triangle when its material is null?"
+        Expectation="Miss"
+        Material0="Null"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Can we hit both front and back faces in a cube?"
+        Expectation="Hit mesh twice"
+        Visual0="SimpleCubeMesh"
+        Origin="0.25,0,5"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Can we hit both front and back faces in a cube from a different angle?"
+        Expectation="Hit mesh twice"
+        Visual0="SimpleCubeMesh"
+        Origin="4,1,0"
+        Direction="-4,-1,0"
+        />
+    <VARIATION
+        Description="Can we hit both front and back faces in a cube when both materials are null?"
+        Expectation="Miss"
+        Visual0="SimpleCubeMesh"
+        Material0="Null"
+        BackMaterial0="Null"
+        Origin="0,0,5"
+        Direction="0,0,-1"
+        />
+
+</INIT>

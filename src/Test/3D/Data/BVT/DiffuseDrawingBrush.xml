@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseDrawingBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,90,90,90"
+    
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    TextureLookUpTolerance="0.5"
+    Camera="PerspectiveDefault"
+    >
+
+    <VARIATION
+        Description="front = shapes, back = text, AmbientLight"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        BackMaterial="DrawingBrushText"
+        />
+    <VARIATION
+        Description="front = text, back = image, AmbientLight = gray"
+        LightType="Ambient"
+        LightColor="255,127,127,127" 
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        BackMaterial="DrawingBrushImage cars.bmp"
+        />
+    <VARIATION
+        Description="front = image, back = shapes, AmbientLight = mix"
+        Light="NonWhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushImage checklong.bmp"
+        BackMaterial="DrawingBrushShapes"
+        />
+
+    <VARIATION
+        Description="front = shapes, back = text, DirectionalLight"
+        Light="WhiteDirectionalNegZ"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        BackMaterial="DrawingBrushText"
+        />
+    <VARIATION
+        Description="front = text, back = text, DirectionalLight = -1,-1,-1"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushText"
+        BackMaterial="DrawingBrushText"
+        />
+    <VARIATION
+        Description="front = image, back = shapes, DirectionalLight = mix, -1,-1,-1"
+        SilhouetteEdgeTolerance="1.1"
+        Light="NonWhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushImage check.png"
+        BackMaterial="DrawingBrushShapes"
+        />
+
+    <VARIATION
+        Description="front = text, back = shapes, PointLight"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushText"
+        BackMaterial="DrawingBrushShapes"
+        />
+    <VARIATION
+        Description="front = text, back = shapes, PointLight = mix"
+        SilhouetteEdgeTolerance="1.1"
+        Light="NonWhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushText"
+        BackMaterial="DrawingBrushShapes"
+        />
+    <VARIATION
+        Description="front = shapes, back = image, PointLight = below"
+        SilhouetteEdgeTolerance="1.1"
+        Light="WhitePointBelow"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="DrawingBrushShapes"
+        BackMaterial="DrawingBrushImage macaw.jpg"
+        />
+
+</INIT>

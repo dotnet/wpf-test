@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>CGT3D</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <PublishDir>$(WpfFeatureTestBasePublishPath)\3D</PublishDir>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <DefineConstants>$(DefineConstants);STANDALONE_BUILD</DefineConstants>
+    <SignAssemblyAttribute>true</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <StartupObject>Microsoft.Test.Graphics.Cgt3d</StartupObject>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <Compile Include="Cgt3D.cs" />
+    <Compile Include="Tests\AntiAliasColorScanTest.cs" />
+    <Compile Include="Tests\AntiAliasTest.cs" />
+    <Compile Include="Tests\ClientAreaHitTestingTest.cs" />
+    <Compile Include="Tests\ClosestModelPointHitTestingTest.cs" />
+    <Compile Include="Tests\DiffuseMaterialTest.cs" />
+    <Compile Include="Tests\HitTestFilterBehaviorTest.cs" />
+    <Compile Include="Tests\HitTestingTest.cs" />
+    <Compile Include="Tests\ImagePartnerTest.cs" />
+    <Compile Include="Tests\ModelHitInfo.cs" />
+    <Compile Include="Tests\PointHitTestingTest.cs" />
+    <Compile Include="Tests\PointHitTestingTestBase.cs" />
+    <Compile Include="Tests\Ray.cs" />
+    <Compile Include="Tests\RayHitTestingTest.cs" />
+    <Compile Include="Tests\RenderBoundsTest.cs" />
+    <Compile Include="Tests\RenderingTest3D.cs" />
+    <Compile Include="Tests\TemplateTest.cs" />
+    <Compile Include="Tests\Visual3DActionTest.cs" />
+    <Compile Include="Tests\Visual3DRenderingTest.cs" />
+    <Compile Include="Tests\XamlRemoveChildTest.cs" />
+    <Compile Include="TypeConverter3D\TypeConverter3d.cs" />
+    <Compile Include="UnitTests\GeneralTransform2DTo3DTest.cs" />
+    <Compile Include="UnitTests\GeneralTransform3DGroupTest.cs" />
+    <Compile Include="UnitTests\InverseBreaker.cs" />
+    <Compile Include="UnitTests\InverseTest.cs" />
+    <Compile Include="UnitTests\Matrix3DTest.cs" />
+    <Compile Include="UnitTests\Model3DTest.cs" />
+    <Compile Include="UnitTests\NotImplTest.cs" />
+    <Compile Include="UnitTests\Point3DTest.cs" />
+    <Compile Include="UnitTests\Point4DTest.cs" />
+    <Compile Include="UnitTests\QuaternionRotation3DTest.cs" />
+    <Compile Include="UnitTests\QuaternionTest.cs" />
+    <Compile Include="UnitTests\Rect3DTest.cs" />
+    <Compile Include="UnitTests\RotateTransform3DAPITest.cs" />
+    <Compile Include="UnitTests\Rotation3DTest.cs" />
+    <Compile Include="UnitTests\Size3DTest.cs" />
+    <Compile Include="UnitTests\TierAPITest.cs" />
+    <Compile Include="UnitTests\Transform3DAPITest.cs" />
+    <Compile Include="UnitTests\Transform3DGroupTest.cs" />
+    <Compile Include="UnitTests\ValueTypeCollectionTest.cs" />
+    <Compile Include="UnitTests\Vector3DTest.cs" />
+    <Compile Include="UnitTests\Visual3DCollectionTest.cs" />
+    <Compile Include="UnitTests\Visual3DTest.cs" />
+    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestRuntimeProject)" />
+  </ItemGroup>
+</Project>

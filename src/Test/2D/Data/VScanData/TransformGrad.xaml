@@ -1,0 +1,111 @@
+﻿<!-- A transform is applied to a linear and radial gradient-->
+
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  Background="#CCCCCC">
+  
+  <Canvas Height="40">
+
+<!-- Rectangle #1 is filled with a LinearGradientBrush. The gradient colors 
+     flow from left to right by default. -->
+
+    <Rectangle Canvas.Left="10" Canvas.Top="10"
+      Width="300" Height="200">
+      
+      <Rectangle.Fill>
+        <LinearGradientBrush>
+        
+          <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="red" Offset="0" />
+              <GradientStop Color="yellow" Offset="1" />
+              <GradientStop Color="blue" Offset="0.5" />
+              <GradientStop Color="white" Offset="0.2" />
+            </GradientStopCollection>
+          </LinearGradientBrush.GradientStops>
+          
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+      
+    </Rectangle>
+
+
+<!-- Rectangle #2 is identical to the first rectangle except that the Transform 
+     property rotates the LinearGradientBrush so that the gradient colors are 
+     rotated by 45 degrees. -->
+
+    <Rectangle Canvas.Left="320" Canvas.Top="10"
+      Width="300" Height="200">
+    
+      <Rectangle.Fill>
+        <LinearGradientBrush>
+        
+          <LinearGradientBrush.Transform>
+            <RotateTransform Angle="45" CenterX="470" CenterY="110" /> <!-- Rotation angle. -->
+          </LinearGradientBrush.Transform>
+          
+          <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="red" Offset="0" />
+              <GradientStop Color="yellow" Offset="1" />
+              <GradientStop Color="blue" Offset="0.5" />
+              <GradientStop Color="white" Offset="0.2" />
+            </GradientStopCollection>
+          </LinearGradientBrush.GradientStops>
+          
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+      
+    </Rectangle>
+
+    
+<!-- Rectangle #3 is filled with a RadialGradientBrush. -->
+
+    <Rectangle Canvas.Left="10" Canvas.Top="250"
+      Width="300" Height="200">
+      
+      <Rectangle.Fill>
+        <RadialGradientBrush Focus="0.5,0.5">
+        
+          <RadialGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="red" Offset="0" />
+              <GradientStop Color="yellow" Offset="1" />
+              <GradientStop Color="blue" Offset="0.5" />
+            </GradientStopCollection>
+          </RadialGradientBrush.GradientStops>
+          
+        </RadialGradientBrush>
+      </Rectangle.Fill>
+      
+    </Rectangle>
+
+
+<!-- Rectangle #4 is identical to the third rectangle except that the Transform 
+     property applies a ScaleTransform to the RadialGradientBrush so that the 
+     gradient is half its previous height. -->
+
+    <Rectangle Canvas.Left="320" Canvas.Top="250"
+      Width="300" Height="200">
+      
+      <Rectangle.Fill>
+      
+        <RadialGradientBrush Focus="0.5,0.5">
+          <RadialGradientBrush.Transform>
+            <ScaleTransform ScaleX="1" ScaleY="0.5" CenterX="160" CenterY="350" /> <!-- Scale transform. -->
+          </RadialGradientBrush.Transform>
+        
+          <RadialGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="red" Offset="0" />
+              <GradientStop Color="yellow" Offset="1" />
+              <GradientStop Color="blue" Offset="0.5" />
+            </GradientStopCollection>
+          </RadialGradientBrush.GradientStops>
+          
+        </RadialGradientBrush>
+      </Rectangle.Fill>
+      
+    </Rectangle>
+  
+  </Canvas>
+</Border>

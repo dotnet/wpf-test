@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseImageBrushTransparencyTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,40,40,40"
+    
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    >
+
+    <!-- Test rendering order (make sure that semi-transparent materials rendered first with closer z position are not see-through) -->
+
+    <VARIATION
+        Description="see the back of the mesh through the semi-transparent front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="spiral.png"
+        BackMaterial="check.bmp"
+        />
+    <VARIATION
+        Description="cannot see front of the mesh through opaque back material"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="spiral.png"
+        BackMaterial="check.bmp"
+        />
+    <VARIATION
+        Description="cannot see back of the mesh through the opaque front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="macaw.jpg"
+        BackMaterial="flare.png"
+        />
+    <VARIATION
+        Description="cannot see the front of the mesh through semi-transparent back material (rendering order matters)"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="macaw.jpg"
+        BackMaterial="flare.png"
+        />
+    <VARIATION
+        Description="see the semi-transparent back of the mesh through the semi-transparent front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="flare.png"
+        BackMaterial="spiral.png"
+        />
+    <VARIATION
+        Description="cannot see the semi-transparent front of the mesh through semi-transparent back material (rendering order matters)"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="flare.png"
+        BackMaterial="spiral.png"
+        />
+
+    <!-- Different light types/colors -->
+
+    <VARIATION
+        Description="semi-transparent materials on spiral with white directional light"
+        Light="WhiteDirectionalNegZ"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="flare.png"
+        BackMaterial="spiral.png"
+        />
+    <VARIATION
+        Description="semi-transparent materials on spiral with non-white directional light"
+        Light="WhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="flare.png"
+        BackMaterial="spiral.png"
+        />
+    <VARIATION
+        Description="semi-transparent materials on spiral with white point light"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="flare.png"
+        BackMaterial="spiral.png"
+        />
+    <VARIATION
+        Description="semi-transparent materials on spiral with non-white point light"
+        Light="NonWhitePointBelow"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="flare.png"
+        BackMaterial="spiral.png"
+        />
+
+</INIT>

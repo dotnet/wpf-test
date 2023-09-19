@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="EmissiveVisualBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    TextureLookUpTolerance="0.5"
+    DefaultColorTolerance="0,4,4,4"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    Light="WhiteAmbient"
+    MaterialType="Emissive"
+    BackMaterialType="Emissive"
+    >
+
+    <VARIATION
+        Description="front = shapes, back = button"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        BackMaterial="VisualBrushButton"
+        />
+    <VARIATION
+        Description="front = button, back = viewport3D"
+        Light="WhiteDirectionalNegZ" 
+        Mesh="FrontAndBack"
+        Material="VisualBrushButton"
+        BackMaterial="VisualBrush3D"
+        />
+    <VARIATION
+        Description="front = viewport3D, back = shapes"
+        Light="WhiteSpot"
+        Mesh="FrontAndBack"
+        Material="VisualBrush3D"
+        BackMaterial="VisualBrushShapes"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = button, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="VisualBrushButton"
+        BackMaterial="VisualBrushShapesOpacity"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = viewport3D"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapesOpacity"
+        BackMaterial="VisualBrush3D"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="VisualBrush3DOpacity"
+        BackMaterial="VisualBrushButtonOpacity"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = shapes * green, back = button * indigo"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="VisualBrushButton"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = button * green, back = viewport3D * indigo"
+        Mesh="FrontAndBack"
+        Material="VisualBrushButton"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="VisualBrush3D"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = shapes * mix"
+        Mesh="FrontAndBack"
+        Material="VisualBrushButtonOpacity"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="VisualBrushShapes"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = shapes * mix, back = semi-transparent * mix"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="VisualBrush3DOpacity"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = shapes * transparent, back = button * semi-transparent"
+        Mesh="FrontAndBack"
+        Material="VisualBrushShapes"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="VisualBrushButton"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = shapes * semi-transparent"
+        Mesh="BackAndFront"
+        Material="VisualBrushButtonOpacity"
+        MaterialColor="192,47,239,143"
+        BackMaterial="VisualBrushShapes"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

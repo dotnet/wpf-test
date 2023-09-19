@@ -1,0 +1,254 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PointHitTestingTest"
+
+    Scene="Explicit"
+    Visual0="SingleFrontFacingTriangle"
+    Visual1="WhiteAmbient"
+
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="11"
+
+    UseViewport3D="true"
+    >
+
+    <!-- Orthographic Type cameras -->
+
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 80,80"
+        Expectation="'Model' is missed."
+        Point="80,80"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 120,50"
+        Expectation="Hit 'Model' once."
+        Point="120,50"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 120,79"
+        Expectation="Hit 'Model' once."
+        Point="120,79"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 0,0"
+        Expectation="'Model' is missed."
+        Point="0,0"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 100,99"
+        Expectation="Hit 'Model' once."
+        Point="100,99"
+        />
+
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 100,99"
+        Expectation="Hit six models."
+        Point="100,99"
+        Visual0="LayeredMeshes"
+        Visual2="LayeredMeshes"
+        VisualTransform1="Translate 0,0,-1"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 100,99"
+        Expectation="Hit six models."
+        Point="100,99"
+        Visual0="LayeredMeshes"
+        Visual2="LayeredMeshes"
+        VisualTransform0="Translate 0,0,-1"
+        />
+
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 6,4"
+        Expectation="Hit 'Model' three times."
+        Visual0="OverlappingPlanes"
+        Point="6,4"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+
+        Description="Point testing at 194,196"
+        Expectation="Hit 'Model' three times."
+        Visual0="OverlappingPlanes"
+        Point="194,196"
+        />
+
+    <!-- Perspective Type cameras -->
+
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 100,130"
+        Expectation="'Model' is missed."
+        Point="100,130"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 60,139"
+        Expectation="'Model' is missed."
+        Point="60,139"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 110,70"
+        Expectation="Hit 'Model' once."
+        Point="110,70"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 110,89"
+        Expectation="Hit 'Model' once."
+        Point="110,89"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 147,52"
+        Expectation="'Model' is missed."
+        Point="147,52"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 100,99"
+        Expectation="Hit 'Model' once."
+        Point="100,99"
+        />
+
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 100,99"
+        Expectation="Hit six models."
+        Point="100,99"
+        Visual0="LayeredMeshes"
+        Visual2="LayeredMeshes"
+        VisualTransform1="Translate 0,0,-1"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 100,99"
+        Expectation="Hit six models."
+        Point="100,99"
+        Visual0="LayeredMeshes"
+        Visual2="LayeredMeshes"
+        VisualTransform0="Translate 0,0,-1"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 46,42"
+        Expectation="Hit 'Model' once."
+        Visual0="OverlappingPlanes"
+        Point="46,42"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 58,54"
+        Expectation="Hit 'Model' twice."
+        Visual0="OverlappingPlanes"
+        Point="58,54"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 66,62"
+        Expectation="Hit 'Model' three times."
+        Visual0="OverlappingPlanes"
+        Point="66,62"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 133,137"
+        Expectation="Hit 'Model' three times."
+        Visual0="OverlappingPlanes"
+        Point="133,137"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 141,145"
+        Expectation="Hit 'Model' twice."
+        Visual0="OverlappingPlanes"
+        Point="141,145"
+        />
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing at 153,157"
+        Expectation="Hit 'Model' once."
+        Visual0="OverlappingPlanes"
+        Point="153,157"
+        />
+</INIT>

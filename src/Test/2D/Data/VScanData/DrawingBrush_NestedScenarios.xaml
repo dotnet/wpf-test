@@ -1,0 +1,34 @@
+﻿<Canvas Width="200" Height="200" Background="White" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    
+    <!-- DrawingBrush nested inside a DrawingBrush and Drawing inside of Drawing-->
+    <Rectangle Canvas.Top="0" Canvas.Left="0" Width="200" Height="200">
+        <Rectangle.Fill>
+            <DrawingBrush Viewport="0,0,0.25,0.25" Stretch="Uniform" TileMode="Tile" AlignmentX="Left" AlignmentY="Top">
+                <DrawingBrush.Drawing>
+                    <GeometryDrawing>
+                          <GeometryDrawing.Pen>
+                              <Pen Thickness="0.1" Brush="Black" />
+                          </GeometryDrawing.Pen>
+
+                          <GeometryDrawing.Brush>
+                              <DrawingBrush Stretch="None">
+                                  <DrawingBrush.Drawing>
+                                      <GeometryDrawing Brush="Red">
+                                          <GeometryDrawing.Geometry>
+                                              <EllipseGeometry RadiusX="10" RadiusY="10" Center="100,100" />
+                                           </GeometryDrawing.Geometry>
+                                     </GeometryDrawing>
+                                  </DrawingBrush.Drawing>
+                               </DrawingBrush>
+                          </GeometryDrawing.Brush>
+
+                          <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0,0,25,25" />
+                          </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingBrush.Drawing>
+            </DrawingBrush>
+        </Rectangle.Fill>
+    </Rectangle>   
+
+</Canvas>

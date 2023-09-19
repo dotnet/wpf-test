@@ -1,0 +1,77 @@
+﻿<!-- This test creates a Path out of Geometries : ellipse and polygon with imagepaint and radialgradient applied to the fill
+    -->
+
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="820px" Height="850px" Background="royalblue">
+
+<Path>
+<Path.Data>
+    <EllipseGeometry>
+    
+        <EllipseGeometry.Center>200 200</EllipseGeometry.Center>
+        <EllipseGeometry.RadiusX>50</EllipseGeometry.RadiusX>
+        <EllipseGeometry.RadiusY>50</EllipseGeometry.RadiusY>
+    </EllipseGeometry></Path.Data> </Path>
+    
+    
+
+<Path StrokeThickness="3" Stroke="yellow">
+<Path.Data>
+<PathGeometry>
+ 
+ <PathFigure StartPoint="100 200" IsClosed="True">
+  <LineSegment Point="100,200" />
+  <LineSegment Point="200,130" />
+  <LineSegment Point="300,200" />
+  <LineSegment Point="100,200" />
+ </PathFigure> </PathGeometry>
+
+    
+</Path.Data>
+
+    
+    <Path.Fill>
+    
+    <ImageBrush ImageSource="disc.gif" Stretch="fill">
+    <ImageBrush.ViewportUnits>
+            RelativeToBoundingBox
+    </ImageBrush.ViewportUnits>
+    <ImageBrush.Viewport>
+                           0,0,1,1
+    </ImageBrush.Viewport>
+</ImageBrush>
+</Path.Fill>
+    
+</Path>
+
+
+<Canvas Canvas.Top="0" Canvas.Left="350" Width="500" Height="500" Background="purple">
+
+<Path StrokeThickness="3" Stroke="yellow">
+<Path.Data>
+    <EllipseGeometry>
+    
+        <EllipseGeometry.Center>200 200</EllipseGeometry.Center>
+        <EllipseGeometry.RadiusX>50</EllipseGeometry.RadiusX>
+        <EllipseGeometry.RadiusY>50</EllipseGeometry.RadiusY>
+    </EllipseGeometry>
+    
+
+    
+</Path.Data>
+    
+    <Path.Fill>
+
+    <RadialGradientBrush>
+    <RadialGradientBrush.GradientStops>
+          <GradientStop Color="#FF0000" Offset="0" />
+          <GradientStop Color="blue" Offset="0.5" />
+          <GradientStop Color="white" Offset="1" />
+    </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+</Path.Fill>
+    
+</Path>
+
+
+</Canvas>
+</Canvas>

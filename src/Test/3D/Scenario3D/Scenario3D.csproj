@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Scenario3D</AssemblyName>
+    <OutputType>winexe</OutputType>
+    <PublishDir>$(WpfFeatureTestBasePublishPath)\3D</PublishDir>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="ScenarioApplication.xaml" />
+
+    <Page Include="Tests\*.xaml" />
+
+    <Compile Include="*.xaml.cs" />
+    <Compile Include="Library\*.cs" />
+    <Compile Include="Tests\*.cs" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,23 @@
+<!--
+	Regression case for Regression_Bug35
+	Verify:  No assertion on Chk build
+	Author: Microsoft
+-->
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/xaml/2005" >
+  <Path Width="200" Height="200" Stretch="None"  Stroke="Blue">
+	<Path.Fill>
+		<DrawingBrush>
+			<DrawingBrush.Drawing>
+				<ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,0.1,0.01"/>
+			</DrawingBrush.Drawing>
+		</DrawingBrush>
+	</Path.Fill>
+	<Path.Data>
+		<PathGeometry>
+			<PathFigure IsClosed="true" IsFilled="true">
+                            <ArcSegment IsLargeArc="false" Size="4,1.7e39" SweepDirection="Clockwise" Point="1000,100"/>
+			</PathFigure>
+		</PathGeometry>
+	</Path.Data>
+  </Path>
+</Canvas>

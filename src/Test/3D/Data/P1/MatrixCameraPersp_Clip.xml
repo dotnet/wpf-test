@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="MatrixCameraTest"
+    PixelToEdgeTolerance="0.05"
+
+    Mesh="UnitPlaneTriangle"
+    Material="255,255,0,0"
+    Light="WhiteAmbient"
+
+    CameraType="MatrixPersp"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+    CameraUp="0,1,0"
+    CameraFieldOfViewX="25"
+    CameraFieldOfViewY="25"
+
+    SaveExpectedFrameBuffer="true"
+    SaveExpectedToleranceBuffer="true"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffToleranceBuffer="true"
+    SaveDiffZBuffer="false"
+    >
+    <VARIATION
+        Description="Clip right side (1 Vertex)"
+        CameraPosition="-0.5,0,5"
+        CameraLookDirection="0,0,-1"
+        />
+    <VARIATION
+        Description="Clip right side (2 Vertices)"
+        CameraPosition="5,0,1.5"
+        CameraLookDirection="-1,0,0"
+        />
+    <VARIATION
+        Description="Clip left side (1 vertex)"
+        CameraPosition="5,0,-0.5"
+        CameraLookDirection="-1,0,0"
+        />
+    <VARIATION
+        Description="Clip left side (2 vertices)"
+        CameraPosition="1.5,0,5"
+        CameraLookDirection="0,0,-1"
+        />
+    <VARIATION
+        Description="Clip top (1 vertex)"
+        CameraPosition="0,-0.5,5"
+        CameraLookDirection="0,0,-1"
+        />
+    <VARIATION
+        Description="Clip top (2 vertices - inverted camera)"
+        CameraPosition="0,1.5,5"
+        CameraLookDirection="0,0,-1"
+        CameraUp="0,-1,0"
+        />
+    <VARIATION
+        Description="Clip bottom (1 vertex - inverted camera)"
+        CameraPosition="0,-0.5,5"
+        CameraLookDirection="0,0,-1"
+        CameraUp="0,-1,0"
+        />
+    <VARIATION
+        Description="Clip bottom (2 vertices)"
+        CameraPosition="0,1.5,5"
+        CameraLookDirection="0,0,-1"
+        />
+    <VARIATION
+        Description="Clip back (1 vertex - camera at 5,0,5)"
+        CameraPosition="5,0,5"
+        CameraLookDirection="-1,0,-1"
+        CameraFarPlaneDistance="6.7"
+        />
+    <VARIATION
+        Description="Clip back (2 vertices)"
+        CameraPosition="0,0,5"
+        CameraLookDirection="0,0,-1"
+        CameraFarPlaneDistance="4.5"
+        />
+    <VARIATION
+        Description="Clip front (1 vertex)"
+        CameraPosition="0,0,5"
+        CameraLookDirection="0,0,-1"
+        CameraNearPlaneDistance="4.5"
+        />
+    <VARIATION
+        Description="Clip front (2 vertices - camera at 5,0,5)"
+        CameraPosition="5,0,5"
+        CameraLookDirection="-1,0,-1"
+        CameraNearPlaneDistance="6.7"
+        />
+    <VARIATION
+        Description="Clip 3 vertices"
+        CameraPosition="0.5,0.5,5"
+        CameraLookDirection="0,0,-1"
+        CameraFieldOfViewX="7.5"
+        />
+    <VARIATION
+        Description="Clip 3 vertices"
+        CameraPosition="0.33,0.33,5"
+        CameraLookDirection="0,0,-1"
+        CameraUp="0,-1,0"
+        CameraFieldOfViewX="7.5"
+        />
+</INIT>

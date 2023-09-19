@@ -1,0 +1,126 @@
+﻿<Canvas Background="white" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+
+  <Rectangle Width="400" Height="300">
+    <Rectangle.Stroke>
+      <SolidColorBrush Color="Blue" />
+    </Rectangle.Stroke>
+    <Rectangle.Fill>
+      <DrawingBrush>
+        <DrawingBrush.RelativeTransform>
+          <TransformGroup>
+            <TransformGroup.Children>
+              <TranslateTransform X="10" Y="-10" />
+              <RotateTransform Angle="5" CenterX="10" CenterY="10" />
+              <ScaleTransform ScaleX="0.9" ScaleY="1.1" CenterX="10" CenterY="10" />
+              <SkewTransform AngleX="5" AngleY="5" CenterX="10" CenterY="10" />
+              <MatrixTransform Matrix="1.1,0,0,0.9,-10,10" />
+            </TransformGroup.Children>
+          </TransformGroup>
+        </DrawingBrush.RelativeTransform>
+        <DrawingBrush.Drawing>
+          <DrawingGroup Opacity="0.9">
+
+            <DrawingGroup.Transform>
+              <TransformGroup>
+                <TransformGroup.Children>
+                  <TranslateTransform X="10" Y="-10" />
+                  <RotateTransform Angle="5" CenterX="10" CenterY="10" />
+                  <ScaleTransform ScaleX="0.9" ScaleY="1.1" CenterX="10" CenterY="10" />
+                  <SkewTransform AngleX="5" AngleY="5" CenterX="10" CenterY="10" />
+                  <MatrixTransform Matrix="1.1,0,0,0.9,-10,10" />
+                </TransformGroup.Children>
+              </TransformGroup>
+            </DrawingGroup.Transform>
+
+            <DrawingGroup.ClipGeometry>
+              <GeometryGroup FillRule="NonZero">
+
+                <GeometryGroup.Transform>
+                  <TransformGroup>
+                    <TransformGroup.Children>
+                      <TranslateTransform X="10" Y="-10" />
+                      <RotateTransform Angle="5" CenterX="10" CenterY="10" />
+                      <ScaleTransform ScaleX="0.9" ScaleY="1.1" CenterX="10" CenterY="10" />
+                      <SkewTransform AngleX="5" AngleY="5" CenterX="10" CenterY="10" />
+                      <MatrixTransform Matrix="1.1,0,0,0.9,-10,10" />
+                    </TransformGroup.Children>
+                  </TransformGroup>
+                </GeometryGroup.Transform>
+
+                <LineGeometry StartPoint="-10,-10" EndPoint="200,200" />
+                <RectangleGeometry RadiusX="100" RadiusY="150" Rect="-10,-10,200,200" />
+                <EllipseGeometry RadiusX="150" RadiusY="100" Center="10,10" />
+                <!--
+                <PathGeometry FillRule="NonZero">
+                  <PathFigure StartPoint="15 15" IsClosed="true" IsFilled="true">
+                    <LineSegment Point="15,15"/>
+                    <ArcSegment Point="50,50" IsLargeArc="true" SweepDirection="Clockwise" Size="10,10" RotationAngle="10"/>
+                    <BezierSegment Point1="60,65" Point2="70,75" Point3="80,10"/>
+                    <PolyBezierSegment Points="10,20,30,40,50,60"/>
+                    <PolyLineSegment Points="30,20,20,50"/>
+                    <PolyQuadraticBezierSegment Points="90,95,100,105"/>
+                    <QuadraticBezierSegment Point1="50,50" Point2="80,10"/>
+                  </PathFigure>
+                </PathGeometry>
+                -->
+                <CombinedGeometry GeometryCombineMode="Xor">
+                  <CombinedGeometry.Geometry1>
+                    <RectangleGeometry Rect="0 0 100 100" />
+                  </CombinedGeometry.Geometry1>
+                  <CombinedGeometry.Geometry2>
+                    <RectangleGeometry Rect="50 50 100 100" />
+                  </CombinedGeometry.Geometry2>
+                </CombinedGeometry>
+              </GeometryGroup>
+            </DrawingGroup.ClipGeometry>
+
+            <DrawingGroup.Children>
+              <GeometryDrawing>
+                <GeometryDrawing.Brush>
+                  <SolidColorBrush Color="Red" />
+                </GeometryDrawing.Brush>
+                <GeometryDrawing.Pen>
+                  <Pen Thickness="5" StartLineCap="Square" EndLineCap="Round" DashCap="Triangle" LineJoin="Bevel" MiterLimit="5">
+                    <Pen.DashStyle>
+                      <DashStyle Offset="5" Dashes="0.0,3.0" />
+                    </Pen.DashStyle>
+                    <Pen.Brush>
+                      <LinearGradientBrush StartPoint="0,1" EndPoint="1,1" SpreadMethod="Repeat" MappingMode="RelativeToBoundingBox">
+                        <LinearGradientBrush.GradientStops>
+                          <GradientStop Color="purple" Offset="0" />
+                          <GradientStop Color="yellow" Offset="1" />
+                          <GradientStop Color="orange" Offset="0.5" />
+                        </LinearGradientBrush.GradientStops>
+                      </LinearGradientBrush>
+                    </Pen.Brush>
+                  </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry Rect="0,0,10,10" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+              
+              <!--
+              <ImageDrawing Rect="10,10,10,10" ImageSource="\\av-image\Legacy\gordonia\images\Good\Normal\Medium\png\32-bit\019.png"/>
+              -->
+              
+              <GlyphRunDrawing>
+                <GlyphRunDrawing.ForegroundBrush>
+                  <RadialGradientBrush Center="0.5,0.5" GradientOrigin="10,10" RadiusX="1" RadiusY="1" MappingMode="RelativeToBoundingBox" SpreadMethod="pad">
+                    <RadialGradientBrush.GradientStops>
+                      <GradientStop Color="#FF0000" Offset="0" />
+                      <GradientStop Color="blue" Offset="0.5" />
+                      <GradientStop Color="white" Offset="1" />
+                    </RadialGradientBrush.GradientStops>
+                  </RadialGradientBrush>
+                </GlyphRunDrawing.ForegroundBrush>
+              </GlyphRunDrawing>
+
+            </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>			
+    </Rectangle.Fill>
+  </Rectangle>
+</Canvas>	

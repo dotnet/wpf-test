@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+ <!--   TODO : investigate why this test requires signing with an empty originator file -->
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+    
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>PartialTrustXaml</AssemblyName>
+    <AssemblyType>Library</AssemblyType>
+    <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)"/>
+    <ProjectReference Include="$(TestApiWpfProject)"/>
+    <ProjectReference Include="$(TestApiCoreProject)"/>
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Compile Include="VisualXaml.cs" />
+  </ItemGroup>
+    
+</Project>

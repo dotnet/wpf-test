@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="DiffuseRadialGradientBrushTransparencyTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,40,40,40"
+    
+    DefaultColorTolerance="0,3,3,3"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    >
+
+    <!-- Test rendering order (make sure that semi-transparent materials rendered first with closer z position are not see-through) -->
+
+    <VARIATION
+        Description="see the back of the mesh through the semi-transparent front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 200,255,0,255 45,0,255,0"
+        BackMaterial="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        />
+    <VARIATION
+        Description="cannot see front of the mesh through opaque back material"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="RadialGradientBrush 200,255,0,255 45,0,255,0"
+        BackMaterial="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        />
+    <VARIATION
+        Description="cannot see back of the mesh through the opaque front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        BackMaterial="RadialGradientBrush 60,139,34,193 220,34,193,139"
+        />
+    <VARIATION
+        Description="cannot see the front of the mesh through semi-transparent back material (rendering order matters)"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="RadialGradientBrush 255,255,0,255 255,255,255,0"
+        BackMaterial="RadialGradientBrush 60,139,34,193 220,34,193,139"
+        />
+    <VARIATION
+        Description="see the semi-transparent back of the mesh through the semi-transparent front material"
+        Light="WhiteAmbient"
+        Mesh="FrontAndBack"
+        Material="RadialGradientBrush 255,255,0,0 100,0,180,180"
+        BackMaterial="RadialGradientBrush 255,0,60,235 160,239,0,0"
+        />
+    <VARIATION
+        Description="cannot see the semi-transparent front of the mesh through semi-transparent back material (rendering order matters)"
+        Light="WhiteAmbient"
+        Mesh="BackAndFront"
+        Material="RadialGradientBrush 255,255,0,0 100,0,180,180"
+        BackMaterial="RadialGradientBrush 255,0,60,235 160,239,0,0"
+        />
+
+    <!-- Different light types/colors -->
+    <!-- TODO: there are interpolation bugs hiding somewhere... Change Alpha on the last variation to 160 to see
+        It appears that an entire stripe of pixels randomly goes to 0,0,0.
+        I think it has to do with lighting angle x surface normal at those points.  I will look into it if I get time. -->
+
+    <VARIATION
+        Description="semi-transparent materials on spiral with white directional light"
+        Light="WhiteDirectionalNegZ"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,255,0,0 100,0,180,180"
+        BackMaterial="RadialGradientBrush 255,0,60,235 160,239,0,0"
+        NumAllowableMismatches="10"
+        VScanToleranceFile="DiffuseRadialGradientBrushTransparency_ToleranceProfile.xml"
+        />
+    <VARIATION
+        Description="semi-transparent materials on spiral with non-white directional light"
+        Light="WhiteDirectionalNegAll"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,255,0,0 100,0,180,180"
+        BackMaterial="RadialGradientBrush 255,10,60,235 160,239,10,10"
+        NumAllowableMismatches="10"
+        VScanToleranceFile="DiffuseRadialGradientBrushTransparency_ToleranceProfile.xml"
+        />
+    <VARIATION
+        Description="semi-transparent materials on spiral with white point light"
+        Light="WhitePoint"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,255,0,0 100,0,180,180"
+        BackMaterial="RadialGradientBrush 255,0,60,235 160,239,0,0"
+        />
+    <VARIATION
+        Description="semi-transparent materials on spiral with non-white point light"
+        Light="NonWhitePointBelow"
+        Mesh="Spiral 2 24 1.2 2.0"
+        Material="RadialGradientBrush 255,255,0,0 100,0,180,180"
+        BackMaterial="RadialGradientBrush 255,10,60,235 190,239,10,10"
+        />
+
+</INIT>

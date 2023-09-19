@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="TransformSpotLight"
+    PixelToEdgeTolerance="0.05"
+    DefaultColorTolerance="4,4,4,4"
+
+    Mesh="PlaneXY -5,5 5,-5 0 30 30"
+    Material="255,255,0,0"
+    CameraType="Perspective"
+    CameraPosition="0,0,10"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="20"
+    CameraFieldOfView="55"
+
+    LightType="Spot"
+    LightColor="255,255,255,255"
+    LightPosition="0,0,5"
+    LightDirection="0,0,-1"
+    LightConstantAttenuation="1"
+    LightLinearAttenuation="0"
+    LightQuadraticAttenuation="0"
+    LightRange="10"
+    LightInnerConeAngle="15"
+    LightOuterConeAngle="50"
+
+    TransformTarget="Light"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- Translation -->
+
+    <VARIATION
+        Description="Translate - light in bottom right quadrant"
+        TransformType="Translate"
+        TranslateOffset="2,-3,-1"
+        />
+
+    <!-- Rotation -->
+
+    <VARIATION
+        Description="Rotate - light fading toward top left corner"
+        TransformType="RotateAxisAngle"
+        RotateAngle="45"
+        RotateAxis="1,1,0"
+        />
+    <VARIATION
+        Description="Rotate - light fading toward bottom center"
+        TransformType="RotateAxisAngleCenter"
+        LightDirection="0,1,1"
+        RotateAngle="180"
+        RotateAxis="-1,0,0"
+        RotateCenter="0,1,4"
+        />
+    <VARIATION
+        Description="Rotate - light parallel to plane fading toward top center"
+        LightConstantAttenuation=".2"
+        TransformType="RotateAxisAngleCenter"
+        RotateAngle="90"
+        RotateAxis="1,0,0"
+        RotateCenter="0,0,1"
+        />
+    <VARIATION
+        Description="Rotate - light parallel to plane fading toward top center, shorter range"
+        LightingRangeTolerance="0.1"
+        LightConstantAttenuation=".2"
+        LightRange="6"
+        TransformType="RotateAxisAngleCenter"
+        RotateAngle="90"
+        RotateAxis="1,0,0"
+        RotateCenter="0,0,1"
+        />
+
+    <!-- Scale -->
+
+<!--
+    Spec bugs prevent this...
+-->
+</INIT>

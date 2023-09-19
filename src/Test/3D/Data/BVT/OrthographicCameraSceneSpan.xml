@@ -1,0 +1,164 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="OrthographicCameraSceneSpan"
+    
+    SilhouetteEdgeTolerance="0.5"
+    TextureLookUpTolerance="0.2"
+    DefaultColorTolerance="0,3,3,3"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    ForceSave="false"
+
+    Scene="Explicit"
+
+    Visual0="UnitPlaneTriangle"  Material0="check.bmp"
+    Visual1="FullScreenMesh"     Material1="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+    Visual2="WhiteAmbient"
+
+    CameraType="Orthographic"
+    CameraUp="0,1,0"
+    CameraWidth="2"
+    CameraLookDirection="0,0,-1"
+    CameraNearPlaneDistance="0.125"
+    CameraFarPlaneDistance="Infinity"
+    >
+    <!--
+        We're using two meshes in this test:
+            One is parallel to camera clipping planes (par), and one is not (npar).
+
+        Vertex position choices:
+            (dnp, +inf)        == ahead
+            default near plane == dnp (0.125)
+            (cam, dnp)         == between
+            camera plane       == cam
+            (-inf, cam)        == behind
+
+        Vertex position combinations:
+
+        npar:                   par:
+            ahead, ahead            ahead
+            ahead, dnp              dnp
+            ahead, between          between
+            ahead, cam              cam
+            ahead, behind           behind
+            dnp, between
+            dnp, cam
+            dnp, behind
+            between, between
+            between, cam
+            between, behind
+            cam, behind
+            behind, behind
+
+        In total, there are 65 combinations (npar x par), but we will only be testing:
+            par #1 x all npar == 13
+            npar #1 x all par == 5  (1 dupe, but we'll make it more interesting)
+            npar #13 x par #5 == 1
+
+    -->
+    <VARIATION
+        CameraPosition="0,0,5"
+        Description="par = ahead - npar = ahead,ahead"
+        />
+    <VARIATION
+        Description="par = ahead - npar = ahead,dnp"
+        CameraPosition="0,0,1.125"
+        />
+    <VARIATION
+        Description="par = ahead - npar = ahead,between"
+        CameraPosition="0,0,1.0625"
+        />
+    <VARIATION
+        Description="par = ahead - npar = ahead,cam"
+        CameraPosition="0,0,1"
+        />
+    <VARIATION
+        Description="par = ahead - npar = ahead,behind"
+        CameraPosition="0,0,0.5"
+        />
+    <VARIATION
+        Description="par = ahead - npar = dnp,between"
+        VisualTransform0="Translate 0,0,1"
+        ModelTransform0="Scale 1,1,0.0625"
+        CameraPosition="0,0,1.125"
+        />
+    <VARIATION
+        Description="par = ahead - npar = dnp,cam"
+        VisualTransform0="Translate 0,0,1"
+        ModelTransform0="Scale 1,1,0.125"
+        CameraPosition="0,0,1.125"
+        />
+    <VARIATION
+        Description="par = ahead - npar = dnp,behind"
+        VisualTransform0="Translate 0,0,1"
+        CameraPosition="0,0,1.125"
+        />
+    <VARIATION
+        Description="par = ahead - npar = between,between"
+        VisualTransform0="Translate 0,0,1"
+        ModelTransform0="Scale 1,1,0.0625"
+        CameraPosition="0,0,1.09375"
+        />
+    <VARIATION
+        Description="par = ahead - npar = between,cam"
+        VisualTransform0="Translate 0,0,1"
+        ModelTransform0="Scale 1,1,0.0625"
+        CameraPosition="0,0,1.0625"
+        />
+    <VARIATION
+        Description="par = ahead - npar = between,behind"
+        VisualTransform0="Translate 0,0,1"
+        CameraPosition="0,0,1.0625"
+        />
+    <VARIATION
+        Description="par = ahead - npar = cam,behind"
+        VisualTransform0="Translate 0,0,1"
+        CameraPosition="0,0,1"
+        />
+    <VARIATION
+        Description="par = ahead - npar = behind,behind"
+        VisualTransform0="Translate 0,0,2"
+        CameraPosition="0,0,1"
+        />
+    <VARIATION
+        Description="npar = ahead,ahead - par = ahead"
+        CameraPosition="0,0,500"
+        />
+
+<!--
+
+    Need to get this test working...
+
+    <VARIATION
+        Description="npar = ahead,ahead - par = dnp"
+        VisualTransform1="Translate 0,0,4.875"
+        CameraPosition="0,0,5"
+        />
+-->
+
+    <VARIATION
+        Description="npar = ahead,ahead - par = between"
+        VisualTransform1="Translate 0,0,4.9375"
+        CameraPosition="0,0,5"
+        />
+    <VARIATION
+        Description="npar = ahead,ahead - par = cam"
+        VisualTransform1="Translate 0,0,5"
+        CameraPosition="0,0,5"
+        />
+    <VARIATION
+        Description="npar = ahead,ahead - par = behind"
+        VisualTransform1="Translate 0,0,10"
+        CameraPosition="0,0,5"
+        />
+    <VARIATION
+        Description="npar = behind,behind - par = behind"
+        VisualTransform0="Translate 0,0,10"
+        VisualTransform1="Translate 0,0,10"
+        CameraPosition="0,0,5"
+        />
+
+</INIT>

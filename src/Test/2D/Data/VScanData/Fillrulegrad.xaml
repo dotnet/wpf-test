@@ -1,0 +1,230 @@
+﻿<!-- 
+This test the FillRule combined with gradients
+ -->
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="#CCCCCC">
+    <Canvas>
+        <!-- First row of stars********************************************-->
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="2" ScaleY="2" />
+                            <TranslateTransform X="0" Y="-20" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon FillRule="Nonzero" Stroke="black" Points="48,16 16,96 96,48 0,48 80,96">
+                <Polygon.Fill>
+                    <RadialGradientBrush>
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="red" Offset="0" />
+                                <GradientStop Color="blue" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="20" Y="130" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon FillRule="Nonzero" Stroke="black" Points="48,16 16,96 96,48 0,48 80,96">
+                <Polygon.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="red" Offset="0" />
+                                <GradientStop Color="blue" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="20" Y="240" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon FillRule="Nonzero" Stroke="black" Points="48,16 16,96 96,48 0,48 80,96">
+                <Polygon.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="red" Offset="0" />
+                                <GradientStop Color="blue" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <!-- Second row of stars with EvenOdd *********************************-->
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="2" ScaleY="2" />
+                            <TranslateTransform X="40" Y="-20" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon FillRule="EvenOdd" Stroke="yellow" Points="148,16 116,96 196,48 100,48 180,96">
+                <Polygon.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Yellow" Offset="0" />
+                                <GradientStop Color="blue" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="100" Y="130" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon FillRule="EvenOdd" Stroke="yellow" Points="148,16 116,96 196,48 100,48 180,96">
+                <Polygon.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Yellow" Offset="0" />
+                                <GradientStop Color="blue" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="100" Y="240" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon FillRule="EvenOdd" Stroke="yellow" Points="148,16 116,96 196,48 100,48 180,96">
+                <Polygon.Fill>
+                    <RadialGradientBrush>
+                        <GradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="Yellow" Offset="0" />
+                                <GradientStop Color="blue" Offset="1" />
+                            </GradientStopCollection>
+                        </GradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <!-- Third row of stars with Linear and radial gradients combined with EvenOdd-->
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="2" ScaleY="2" />
+                            <TranslateTransform X="70" Y="-20" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon Stroke="red" FillRule="EvenOdd" Points="248,16 216,96 296,48 200,48 280,96">
+                <Polygon.Fill>
+                    <RadialGradientBrush Opacity="0.8">
+                        <RadialGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="red" Offset="0" />
+                                <GradientStop Color="yellow" Offset="1" />
+                                <GradientStop Color="purple" Offset="0.5" />
+                                <GradientStop Color="pink" Offset="0.2" />
+                            </GradientStopCollection>
+                        </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="200" Y="130" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon Stroke="red" FillRule="EvenOdd" Points="248,16 216,96 296,48 200,48 280,96">
+                <Polygon.Fill>
+                    <RadialGradientBrush Opacity="0.8">
+                        <RadialGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="#FF0000" Offset="0" />
+                                <GradientStop Color="blue" Offset="0.5" />
+                                <GradientStop Color="white" Offset="1" />
+                            </GradientStopCollection>
+                        </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+        <Decorator>
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <ScaleTransform ScaleX="2" ScaleY="2" />
+                            <TranslateTransform X="70" Y="240" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Polygon Stroke="red" FillRule="EvenOdd" Points="248,16 216,96 296,48 200,48 280,96">
+                <Polygon.Fill>
+                    <RadialGradientBrush Opacity="0.8">
+                        <RadialGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="yellow" Offset="0" />
+                                <GradientStop Color="red" Offset="0.5" />
+                                <GradientStop Color="purple" Offset="1" />
+                            </GradientStopCollection>
+                        </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+        </Decorator>
+    </Canvas>
+</Border>
