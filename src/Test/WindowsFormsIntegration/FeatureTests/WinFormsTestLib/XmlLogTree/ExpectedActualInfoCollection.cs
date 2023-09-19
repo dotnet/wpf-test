@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace WFCTestLib.XmlLogTree
 {
 	using System;
@@ -7,26 +11,17 @@ namespace WFCTestLib.XmlLogTree
 	//  Project   : WFCTestLib.XmlLogTree
 	//  Class     : ExpectedActualInfoCollection
 	// 
-	//  Copyright (C) 2002, Microsoft Corporation
-	// ------------------------------------------------------------------------------
 	//  <summary>
 	//  Strongly-typed collection of ExpectedActualInfo objects
 	//  </summary>
 	//  <remarks></remarks>
-	//  <history>
-	//      [dineshc] 12/17/2004  Created
-	//  </history>
 	[Serializable()]
 	public class ExpectedActualInfoCollection : CollectionBase
 	{
-
 		///  <summary>
 		///       Initializes a new instance of <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection"/>.
 		///  </summary>
 		///  <remarks></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public ExpectedActualInfoCollection()
 		{
 		}
@@ -38,9 +33,6 @@ namespace WFCTestLib.XmlLogTree
 		///       A <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection"/> from which the contents are copied
 		///  </param>
 		///  <remarks></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public ExpectedActualInfoCollection(ExpectedActualInfoCollection value)
 		{
 			this.AddRange(value);
@@ -53,9 +45,6 @@ namespace WFCTestLib.XmlLogTree
 		///       A array of <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfo"/> objects with which to intialize the collection
 		///  </param>
 		///  <remarks></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public ExpectedActualInfoCollection(ExpectedActualInfo[] value)
 		{
 			this.AddRange(value);
@@ -69,9 +58,6 @@ namespace WFCTestLib.XmlLogTree
 		///  The entry at the specified index of the collection.
 		///  </value>
 		///  <remarks><exception cref="System.ArgumentOutOfRangeException"><paramref name="index"/> is outside the valid range of indexes for the collection.</exception></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public ExpectedActualInfo this[int index]
 		{
 			get
@@ -93,9 +79,6 @@ namespace WFCTestLib.XmlLogTree
 		///    The index at which the new element was inserted.
 		///  </returns>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection.AddRange"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public int Add(ExpectedActualInfo value)
 		{
 			return List.Add(value);
@@ -108,9 +91,6 @@ namespace WFCTestLib.XmlLogTree
 		///    An array of type <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfo"/> containing the objects to add to the collection.
 		///  </param>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection.Add"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void AddRange(ExpectedActualInfo[] value)
 		{
 			for (int i = 0; (i < value.Length); i = (i + 1))
@@ -120,17 +100,12 @@ namespace WFCTestLib.XmlLogTree
 		}
 
 		///  <summary>
-		///     
 		///       Adds the contents of another <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection"/> to the end of the collection.
-		///    
 		///  </summary>
 		///  <param name="value">
 		///    A <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection"/> containing the objects to add to the collection.
 		///  </param>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection.Add"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void AddRange(ExpectedActualInfoCollection value)
 		{
 			for (int i = 0; (i < value.Count); i = (i + 1))
@@ -149,9 +124,6 @@ namespace WFCTestLib.XmlLogTree
 		///   otherwise, <see langword="false"/>.
 		///  </returns>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection.IndexOf"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public bool Contains(ExpectedActualInfo value)
 		{
 			return List.Contains(value);
@@ -168,9 +140,6 @@ namespace WFCTestLib.XmlLogTree
 		///  <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than <paramref name="array"/>"s lowbound. </exception>
 		///  <seealso cref="System.Array"/>
 		///  </remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void CopyTo(ExpectedActualInfo[] array, int index)
 		{
 			List.CopyTo(array, index);
@@ -186,9 +155,6 @@ namespace WFCTestLib.XmlLogTree
 		///  <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection"/>, if found; otherwise, -1.
 		///  </returns>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection.Contains"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public int IndexOf(ExpectedActualInfo value)
 		{
 			return List.IndexOf(value);
@@ -200,9 +166,6 @@ namespace WFCTestLib.XmlLogTree
 		///  <param name="index">The zero-based index where <paramref name="value"/> should be inserted.</param>
 		///  <param name=" value">The <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfo"/> to insert.</param>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection.Add"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void Insert(int index, ExpectedActualInfo value)
 		{
 			List.Insert(index, value);
@@ -214,9 +177,6 @@ namespace WFCTestLib.XmlLogTree
 		///  </summary>
 		///  <returns>An enumerator for the collection</returns>
 		///  <remarks><seealso cref="System.Collections.IEnumerator"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public new ExpectedActualInfoEnumerator GetEnumerator()
 		{
 			return new ExpectedActualInfoEnumerator(this);
@@ -228,9 +188,6 @@ namespace WFCTestLib.XmlLogTree
 		///  </summary>
 		///  <param name="value">The <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfo"/> to remove from the <see cref="WFCTestLib.XmlLogTree.ExpectedActualInfoCollection"/> .</param>
 		///  <remarks><exception cref="System.ArgumentException"><paramref name="value"/> is not found in the Collection. </exception></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void Remove(ExpectedActualInfo value)
 		{
 			List.Remove(value);
@@ -238,22 +195,21 @@ namespace WFCTestLib.XmlLogTree
 
 		public class ExpectedActualInfoEnumerator : object, IEnumerator
 		{
+			private IEnumerator _baseEnumerator;
 
-			private IEnumerator baseEnumerator;
-
-			private IEnumerable temp;
+			private IEnumerable _temp;
 
 			public ExpectedActualInfoEnumerator(ExpectedActualInfoCollection mappings)
 			{
-				this.temp = ((IEnumerable)(mappings));
-				this.baseEnumerator = temp.GetEnumerator();
+				this._temp = ((IEnumerable)(mappings));
+				this._baseEnumerator = _temp.GetEnumerator();
 			}
 
 			public ExpectedActualInfo Current
 			{
 				get
 				{
-					return ((ExpectedActualInfo)(baseEnumerator.Current));
+					return ((ExpectedActualInfo)(_baseEnumerator.Current));
 				}
 			}
 
@@ -261,28 +217,28 @@ namespace WFCTestLib.XmlLogTree
 			{
 				get
 				{
-					return baseEnumerator.Current;
+					return _baseEnumerator.Current;
 				}
 			}
 
 			public bool MoveNext()
 			{
-				return baseEnumerator.MoveNext();
+				return _baseEnumerator.MoveNext();
 			}
 
 			bool IEnumerator.MoveNext()
 			{
-				return baseEnumerator.MoveNext();
+				return _baseEnumerator.MoveNext();
 			}
 
 			public void Reset()
 			{
-				baseEnumerator.Reset();
+				_baseEnumerator.Reset();
 			}
 
 			void IEnumerator.Reset()
 			{
-				baseEnumerator.Reset();
+				_baseEnumerator.Reset();
 			}
 		}
 	}

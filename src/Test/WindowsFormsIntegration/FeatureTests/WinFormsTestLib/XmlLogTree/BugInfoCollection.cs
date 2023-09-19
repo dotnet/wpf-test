@@ -1,9 +1,8 @@
-// ------------------------------------------------------------------------------
-// <copyright from='1997' to='2001' company='Microsoft Corporation'>
-//    Copyright (c) Microsoft Corporation. All Rights Reserved.   
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 //    Information Contained Herein is Proprietary and Confidential.       
-// </copyright> 
-// ------------------------------------------------------------------------------
 // 
 namespace WFCTestLib.XmlLogTree {
     using System;
@@ -194,41 +193,41 @@ namespace WFCTestLib.XmlLogTree {
         
         public class BugInfoEnumerator : object, IEnumerator {
             
-            private IEnumerator baseEnumerator;
+            private IEnumerator _baseEnumerator;
             
-            private IEnumerable temp;
+            private IEnumerable _temp;
             
             public BugInfoEnumerator(BugInfoCollection mappings) {
-                this.temp = ((IEnumerable)(mappings));
-                this.baseEnumerator = temp.GetEnumerator();
+                this._temp = ((IEnumerable)(mappings));
+                this._baseEnumerator = _temp.GetEnumerator();
             }
             
             public BugInfo Current {
                 get {
-                    return ((BugInfo)(baseEnumerator.Current));
+                    return ((BugInfo)(_baseEnumerator.Current));
                 }
             }
             
             object IEnumerator.Current {
                 get {
-                    return baseEnumerator.Current;
+                    return _baseEnumerator.Current;
                 }
             }
             
             public bool MoveNext() {
-                return baseEnumerator.MoveNext();
+                return _baseEnumerator.MoveNext();
             }
             
             bool IEnumerator.MoveNext() {
-                return baseEnumerator.MoveNext();
+                return _baseEnumerator.MoveNext();
             }
             
             public void Reset() {
-                baseEnumerator.Reset();
+                _baseEnumerator.Reset();
             }
             
             void IEnumerator.Reset() {
-                baseEnumerator.Reset();
+                _baseEnumerator.Reset();
             }
         }
     }

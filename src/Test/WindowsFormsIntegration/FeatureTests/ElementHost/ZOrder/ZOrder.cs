@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -19,24 +23,20 @@ using MS.Internal.Mita.Foundation.Collections;
 using MS.Internal.Mita.Foundation.Controls;
 using MS.Internal.Mita.Foundation.Waiters;
 
-//
+
 // Testcase:    ZOrder
 // Description: Verify the z-order of an ElementHost and its Avalon control.
-// Author:      a-rickyt
-//
-//
 public class ZOrder : ReflectBase
 {
     #region Testcase setup
 
-    ElementHost elementHost1;
-    SWC.Button avButton;
-    SWF.Button wfButton;
-    SWC.ContextMenu avContextMenu;
-    SWF.Label label;
-    Bitmap bmp;
+    ElementHost _elementHost1;
+    SWC.Button _avButton;
+    SWF.Button _wfButton;
+    SWC.ContextMenu _avContextMenu;
+    SWF.Label _label;
+    Bitmap _bmp;
     Edit _edit1;
-
 
     public ZOrder(String[] args) : base(args) { }
 
@@ -56,36 +56,36 @@ public class ZOrder : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        avButton = new SWC.Button();
-        avButton.Background = System.Windows.Media.Brushes.White;
-        avButton.Content = "Avalon Button";
+        _avButton = new SWC.Button();
+        _avButton.Background = System.Windows.Media.Brushes.White;
+        _avButton.Content = "Avalon Button";
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = avButton;
-        elementHost1.Location = new System.Drawing.Point(0, 0);
-        elementHost1.BackColor = Color.White;
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _avButton;
+        _elementHost1.Location = new System.Drawing.Point(0, 0);
+        _elementHost1.BackColor = Color.White;
+        Controls.Add(_elementHost1);
 
-        wfButton = new SWF.Button();
-        wfButton.Name = "wfButton";
-        wfButton.Size = new System.Drawing.Size(200, 100);
-        wfButton.Text = "WinForm Button";
-        wfButton.BackColor = Color.Red;
-        Controls.Add(wfButton);
+        _wfButton = new SWF.Button();
+        _wfButton.Name = "wfButton";
+        _wfButton.Size = new System.Drawing.Size(200, 100);
+        _wfButton.Text = "WinForm Button";
+        _wfButton.BackColor = Color.Red;
+        Controls.Add(_wfButton);
         Utilities.SleepDoEvents(10);
 
-        label = new SWF.Label();
-        label.Height = 50;
-        label.Dock = SWF.DockStyle.Bottom;
-        Controls.Add(label);
+        _label = new SWF.Label();
+        _label.Height = 50;
+        _label.Dock = SWF.DockStyle.Bottom;
+        Controls.Add(_label);
 
         if (scenario.Name == "Scenario2")
         {
 
-            avContextMenu = new SWC.ContextMenu();
-            avContextMenu.Background = System.Windows.Media.Brushes.Blue;
+            _avContextMenu = new SWC.ContextMenu();
+            _avContextMenu.Background = System.Windows.Media.Brushes.Blue;
             SWC.MenuItem menuItem1 = new SWC.MenuItem();
             SWC.MenuItem menuItem2 = new SWC.MenuItem();
             SWC.MenuItem menuItem3 = new SWC.MenuItem();
@@ -94,12 +94,12 @@ public class ZOrder : ReflectBase
             menuItem2.Header = "Avalon Menu Item 2";
             menuItem3.Header = "Avalon Menu Item 3";
             menuItem4.Header = "Avalon Menu Item 4";
-            avContextMenu.Items.Add(menuItem1);
-            avContextMenu.Items.Add(menuItem2);
-            avContextMenu.Items.Add(menuItem3);
-            avContextMenu.Items.Add(menuItem4);
-            avContextMenu.Opened += new RoutedEventHandler(avContextMenu_Opened);
-            avButton.ContextMenu = avContextMenu;
+            _avContextMenu.Items.Add(menuItem1);
+            _avContextMenu.Items.Add(menuItem2);
+            _avContextMenu.Items.Add(menuItem3);
+            _avContextMenu.Items.Add(menuItem4);
+            _avContextMenu.Opened += new RoutedEventHandler(avContextMenu_Opened);
+            _avButton.ContextMenu = _avContextMenu;
         }
 
         if (scenario.Name == "Scenario3")
@@ -109,13 +109,13 @@ public class ZOrder : ReflectBase
             avToolTip.Content = "This is an Avalon ToolTip.";
             avToolTip.StaysOpen = true;
             avToolTip.Opened += new RoutedEventHandler(avToolTip_Opened);
-            avButton.ToolTip = avToolTip;
+            _avButton.ToolTip = avToolTip;
 
             SWF.ToolTip wfToolTip = new SWF.ToolTip();
             wfToolTip.ToolTipTitle = "WinForm ToolTip";
             wfToolTip.ShowAlways = true;
             wfToolTip.Popup += new System.Windows.Forms.PopupEventHandler(wfToolTip_Popup);
-            wfToolTip.SetToolTip(wfButton, "This is a WinForm ToolTip.");
+            wfToolTip.SetToolTip(_wfButton, "This is a WinForm ToolTip.");
         }
   
         return base.BeforeScenario(p, scenario);
@@ -123,17 +123,17 @@ public class ZOrder : ReflectBase
 
     void wfToolTip_Popup(object sender, System.Windows.Forms.PopupEventArgs e)
     {
-        label.Text = "WinForm ToolTip opened.";
+        _label.Text = "WinForm ToolTip opened.";
     }
 
     void avToolTip_Opened(object sender, RoutedEventArgs e)
     {
-        label.Text = "Avalon ToolTip opened.";
+        _label.Text = "Avalon ToolTip opened.";
     }
 
     void avContextMenu_Opened(object sender, RoutedEventArgs e)
     {
-        label.Text = "Avalon Context Menu opened.";
+        _label.Text = "Avalon Context Menu opened.";
     }
 
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result)
@@ -148,99 +148,99 @@ public class ZOrder : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         //Check initial properties
-        sr.IncCounters(this.Controls.GetChildIndex(elementHost1) == 0,
+        sr.IncCounters(this.Controls.GetChildIndex(_elementHost1) == 0,
             "Failed at GetChildIndex(elementHost1). Expected: 0, Actual: " +
-            this.Controls.GetChildIndex(elementHost1), p.log);
-        sr.IncCounters(this.Controls.GetChildIndex(wfButton) == 1,
+            this.Controls.GetChildIndex(_elementHost1), p.log);
+        sr.IncCounters(this.Controls.GetChildIndex(_wfButton) == 1,
             "Failed at GetChildIndex(wfButton). Expected: 1, Actual: " +
-            this.Controls.GetChildIndex(wfButton), p.log);
+            this.Controls.GetChildIndex(_wfButton), p.log);
 	Utilities.SleepDoEvents(50);
-        bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.White) >= 80,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.White) >= 80,
             "Bitmap Failed at initial properties. Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.White) + "%", p.log);
 
-        elementHost1.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+        _elementHost1.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
         {
-            elementHost1.SendToBack();
+            _elementHost1.SendToBack();
         });
         Utilities.SleepDoEvents(10);
 
         //Check SendToBack of the z-order properties
-        sr.IncCounters(this.Controls.GetChildIndex(elementHost1) == 2,
+        sr.IncCounters(this.Controls.GetChildIndex(_elementHost1) == 2,
             "Failed at GetChildIndex(elementHost1) after elementHost1.SendToBack. Expected: 2, Actual: " +
-            this.Controls.GetChildIndex(elementHost1), p.log);
-        sr.IncCounters(this.Controls.GetChildIndex(wfButton) == 0,
+            this.Controls.GetChildIndex(_elementHost1), p.log);
+        sr.IncCounters(this.Controls.GetChildIndex(_wfButton) == 0,
             "Failed at GetChildIndex(wfButton) after elementHost1.SendToBack. Expected: 0, Actual: " +
-            this.Controls.GetChildIndex(wfButton), p.log);
+            this.Controls.GetChildIndex(_wfButton), p.log);
 
 	Utilities.SleepDoEvents(10);
-        bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) >= 80,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) >= 80,
             "Bitmap Failed at SendToBack. Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
-        elementHost1.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+        _elementHost1.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
         {
-            elementHost1.BringToFront();
+            _elementHost1.BringToFront();
         });
         Utilities.SleepDoEvents(10);
 
         //Check BringToFront of the z-order properties
-        sr.IncCounters(this.Controls.GetChildIndex(elementHost1) == 0,
+        sr.IncCounters(this.Controls.GetChildIndex(_elementHost1) == 0,
             "Failed at GetChildIndex(elementHost1) after elementHost1.BringToFront. Expected: 0, Actual: " +
-            this.Controls.GetChildIndex(elementHost1), p.log);
-        sr.IncCounters(this.Controls.GetChildIndex(wfButton) == 1,
+            this.Controls.GetChildIndex(_elementHost1), p.log);
+        sr.IncCounters(this.Controls.GetChildIndex(_wfButton) == 1,
             "Failed at GetChildIndex(wfButton) after elementHost1.BringToFront. Expected: 1, Actual: " +
-            this.Controls.GetChildIndex(wfButton), p.log);
+            this.Controls.GetChildIndex(_wfButton), p.log);
 
-        bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.White) >= 80,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.White) >= 80,
             "Bitmap Failed at SendToBack. Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.White) + "%", p.log);
 
-        wfButton.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+        _wfButton.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
         {
-            wfButton.BringToFront();
+            _wfButton.BringToFront();
         });
         Utilities.SleepDoEvents(10);
 
         //Check BringToFront of the z-order properties
-        sr.IncCounters(this.Controls.GetChildIndex(elementHost1) == 1,
+        sr.IncCounters(this.Controls.GetChildIndex(_elementHost1) == 1,
             "Failed at GetChildIndex(elementHost1) after wfButton.BringToFront. Expected: 1, Actual: " +
-            this.Controls.GetChildIndex(elementHost1), p.log);
-        sr.IncCounters(this.Controls.GetChildIndex(wfButton) == 0,
+            this.Controls.GetChildIndex(_elementHost1), p.log);
+        sr.IncCounters(this.Controls.GetChildIndex(_wfButton) == 0,
             "Failed at GetChildIndex(wfButton) after wfButton.BringToFront. Expected: 0, Actual: " +
-            this.Controls.GetChildIndex(wfButton), p.log);
+            this.Controls.GetChildIndex(_wfButton), p.log);
 
-        bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) >= 80,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) >= 80,
             "Bitmap Failed at wfButton.BringToFront(). Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
-        wfButton.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+        _wfButton.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
         {
-            wfButton.SendToBack();
+            _wfButton.SendToBack();
         });
         Utilities.SleepDoEvents(10);
 
         //Check SendToBack of the z-order properties
-        sr.IncCounters(this.Controls.GetChildIndex(elementHost1) == 0,
+        sr.IncCounters(this.Controls.GetChildIndex(_elementHost1) == 0,
             "Failed at GetChildIndex(elementHost1) after wfButton.SendToBack. Expected: 0, Actual: " +
-            this.Controls.GetChildIndex(elementHost1), p.log);
-        sr.IncCounters(this.Controls.GetChildIndex(wfButton) == 2,
+            this.Controls.GetChildIndex(_elementHost1), p.log);
+        sr.IncCounters(this.Controls.GetChildIndex(_wfButton) == 2,
             "Failed at GetChildIndex(wfButton) after wfButton.SendToBack. Expected: 2, Actual: " +
-            this.Controls.GetChildIndex(wfButton), p.log);
+            this.Controls.GetChildIndex(_wfButton), p.log);
 
-        bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(8, 34, 200, 100));
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.White) >= 80,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.White) >= 80,
             "Bitmap Failed at wfButton.SendToBack(). Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.White) + "%", p.log);
 
         return sr;
     }
@@ -258,12 +258,12 @@ public class ZOrder : ReflectBase
         //Check initial properties
         _edit1.Click(PointerButtons.Secondary);
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(label.Text == "Avalon Context Menu opened.",
+        sr.IncCounters(_label.Text == "Avalon Context Menu opened.",
             "Failed at Avalon Context Menu.", p.log);
 
-        elementHost1.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+        _elementHost1.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
         {
-            elementHost1.SendToBack();
+            _elementHost1.SendToBack();
         });
         Utilities.SleepDoEvents(10);
 
@@ -275,7 +275,7 @@ public class ZOrder : ReflectBase
         _edit1.Click(PointerButtons.Secondary);
         Utilities.SleepDoEvents(20);
 
-        sr.IncCounters(label.Text == "WinForm Context Menu opened.",
+        sr.IncCounters(_label.Text == "WinForm Context Menu opened.",
             "Failed at WinForm Context Menu.", p.log);
         _edit1.Click(PointerButtons.Primary);
         return sr;
@@ -294,12 +294,12 @@ public class ZOrder : ReflectBase
         //Check initial properties
         _edit1.MovePointer();
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(label.Text == "Avalon ToolTip opened.",
+        sr.IncCounters(_label.Text == "Avalon ToolTip opened.",
             "Failed at Avalon ToolTip.", p.log);
 
-        elementHost1.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+        _elementHost1.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
         {
-            elementHost1.SendToBack();
+            _elementHost1.SendToBack();
         });
         Utilities.SleepDoEvents(10);
 
@@ -311,7 +311,7 @@ public class ZOrder : ReflectBase
         _edit1.MovePointer();
         Utilities.SleepDoEvents(20);
 
-        sr.IncCounters(label.Text == "WinForm ToolTip opened.",
+        sr.IncCounters(_label.Text == "WinForm ToolTip opened.",
             "Failed at WinForm ToolTip.", p.log);
 
         return sr;

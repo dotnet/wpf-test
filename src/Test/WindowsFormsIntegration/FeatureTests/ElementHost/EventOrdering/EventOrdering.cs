@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Reflection;
 using System.Windows.Forms;
@@ -11,14 +15,12 @@ using System.Windows.Forms.Integration;
 using System.ComponentModel;
 using System.Text;
 
-//
+
 // Testcase:    EventOrdering
 // Description: Verify that a Avalon control recieves all the expected during it's lifecycle
-// Author:      bogdanbr
-//
 public class EventOrdering : ReflectBase
 {
-    private StringBuilder m_eventsTrace = null;
+    private StringBuilder _eventsTrace = null;
 
     #region Testcase setup
     public EventOrdering(string[] args) : base(args) { }
@@ -36,7 +38,7 @@ public class EventOrdering : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        m_eventsTrace = new StringBuilder();
+        _eventsTrace = new StringBuilder();
 
         return base.BeforeScenario(p, scenario);
     }
@@ -72,8 +74,8 @@ public class EventOrdering : ReflectBase
         Application.DoEvents();
         
         //validate the order of events (for both ElemnentHost and WPF Button)
-        sr.IncCounters( m_eventsTrace.ToString() == "ParentChanged:Initialized:HandleCreated:Loaded:HandleDestroyed:Disposed:Unloaded:", 
-                        "Unexpected events were raised. Raised events were: " + m_eventsTrace.ToString(), 
+        sr.IncCounters( _eventsTrace.ToString() == "ParentChanged:Initialized:HandleCreated:Loaded:HandleDestroyed:Disposed:Unloaded:", 
+                        "Unexpected events were raised. Raised events were: " + _eventsTrace.ToString(), 
                         p.log );
 
         elementHostListener.Clear();
@@ -114,8 +116,8 @@ public class EventOrdering : ReflectBase
         Application.DoEvents();
 
         //validate the order of events (for both ElemnentHost and WPF Button)
-        sr.IncCounters( m_eventsTrace.ToString() == "Initialized:IsVisible:ChildChanged:SizeChanged:Loaded:IsVisible:ChildChanged:Unloaded:",
-                        "Unexpected events were raised. Raised events were: " + m_eventsTrace.ToString(), 
+        sr.IncCounters( _eventsTrace.ToString() == "Initialized:IsVisible:ChildChanged:SizeChanged:Loaded:IsVisible:ChildChanged:Unloaded:",
+                        "Unexpected events were raised. Raised events were: " + _eventsTrace.ToString(), 
                         p.log);
 
         secondForm.Close();
@@ -127,7 +129,7 @@ public class EventOrdering : ReflectBase
         elementHostEventListener.Dispose();
         avBtnEventListener.Dispose();
 
-        //Failing this scenario due to a suggestion bug. If the bug it's approved, just return the sr - else, change the expected string. 
+        //Failing this scenario due to a suggestion 
         return sr;
     }
 
@@ -159,18 +161,18 @@ public class EventOrdering : ReflectBase
         Application.DoEvents();
 
         //validate the order of events(helps debugging and review if we do this after each action and then reset the m_eventsTrace)
-        sr.IncCounters(m_eventsTrace.ToString() == "ParentChanged:IsVisible:SizeChanged:HandleCreated:BindingContextChanged:BindingContextChanged:BindingContextChanged:Layout:ControlAdded:Loaded:",
-                       "Unexpected events were raised. Raised events were: " + m_eventsTrace.ToString(), 
+        sr.IncCounters(_eventsTrace.ToString() == "ParentChanged:IsVisible:SizeChanged:HandleCreated:BindingContextChanged:BindingContextChanged:BindingContextChanged:Layout:ControlAdded:Loaded:",
+                       "Unexpected events were raised. Raised events were: " + _eventsTrace.ToString(), 
                        p.log );
-        m_eventsTrace.Remove(0, m_eventsTrace.Length);
+        _eventsTrace.Remove(0, _eventsTrace.Length);
 
         //remove the elementHost from the form 
         secondForm.Controls.Remove(elementHost);
         Application.DoEvents();
 
         //validate the order of events
-        sr.IncCounters( m_eventsTrace.ToString() == "IsVisible:VisibleChanged:IsVisible:VisibleChanged:ParentChanged:BindingContextChanged:Layout:ControlRemoved:",
-                        "Unexpected events were raised. Raised events were: " + m_eventsTrace.ToString(),
+        sr.IncCounters( _eventsTrace.ToString() == "IsVisible:VisibleChanged:IsVisible:VisibleChanged:ParentChanged:BindingContextChanged:Layout:ControlRemoved:",
+                        "Unexpected events were raised. Raised events were: " + _eventsTrace.ToString(),
                         p.log);
 
         secondForm.Close();
@@ -216,8 +218,8 @@ public class EventOrdering : ReflectBase
         Application.DoEvents();
 
         //validate the order of events (no events expected)
-        sr.IncCounters( m_eventsTrace.ToString() == "",
-                        "Unexpected events were raised. Raised events were: " + m_eventsTrace.ToString(),
+        sr.IncCounters( _eventsTrace.ToString() == "",
+                        "Unexpected events were raised. Raised events were: " + _eventsTrace.ToString(),
                         p.log);
 
         secondForm.Close();
@@ -262,8 +264,8 @@ public class EventOrdering : ReflectBase
         Application.DoEvents();
 
         //validate the order of events
-        sr.IncCounters(m_eventsTrace.ToString() == "",
-                        "Unexpected events were raised. Raised events were: " + m_eventsTrace.ToString(),
+        sr.IncCounters(_eventsTrace.ToString() == "",
+                        "Unexpected events were raised. Raised events were: " + _eventsTrace.ToString(),
                         p.log);
 
         secondForm.Close();
@@ -310,12 +312,12 @@ public class EventOrdering : ReflectBase
 
         //validate the order of events
         string expectedEventTrace = "PreviewGotKeyboardFocus:Enter:GotFocus:IsKeyboardFocusWithin:IsKeyboardFocused:RequestBringIntoView:GotFocus:GotKeyboardFocus:LostFocus:IsKeyboardFocusWithin:IsKeyboardFocused:LostKeyboardFocus:GotFocus:PreviewGotKeyboardFocus:PreviewGotKeyboardFocus:IsKeyboardFocusWithin:IsKeyboardFocused:GotKeyboardFocus:Paint:";
-        sr.IncCounters(m_eventsTrace.ToString() == expectedEventTrace,
+        sr.IncCounters(_eventsTrace.ToString() == expectedEventTrace,
             
                         "Unexpected events were raised. Expected: "+expectedEventTrace+
-			"Raised events were: " + m_eventsTrace.ToString(),
+			"Raised events were: " + _eventsTrace.ToString(),
                         p.log);
-        m_eventsTrace.Remove(0, m_eventsTrace.Length);
+        _eventsTrace.Remove(0, _eventsTrace.Length);
         
         secondForm.Close();
         secondForm.Dispose();
@@ -359,10 +361,10 @@ public class EventOrdering : ReflectBase
         Application.DoEvents();
 
         //validate the order of events
-        sr.IncCounters(m_eventsTrace.ToString() == "",
-                        "Unexpected events were raised. Raised events were: " + m_eventsTrace.ToString(),
+        sr.IncCounters(_eventsTrace.ToString() == "",
+                        "Unexpected events were raised. Raised events were: " + _eventsTrace.ToString(),
                         p.log);
-        m_eventsTrace.Remove(0, m_eventsTrace.Length);
+        _eventsTrace.Remove(0, _eventsTrace.Length);
 
         //bring to front the second form
         secondForm.BringToFront();
@@ -370,9 +372,9 @@ public class EventOrdering : ReflectBase
 
         //validate the order of events
         string expectedEventTrace = "PreviewGotKeyboardFocus:Enter:GotFocus:IsKeyboardFocusWithin:IsKeyboardFocused:RequestBringIntoView:GotFocus:GotKeyboardFocus:";
-        sr.IncCounters(m_eventsTrace.ToString() == expectedEventTrace,
+        sr.IncCounters(_eventsTrace.ToString() == expectedEventTrace,
                         "Unexpected events were raised. Expected: "+expectedEventTrace+ 
-			"Raised events were: " + m_eventsTrace.ToString(),
+			"Raised events were: " + _eventsTrace.ToString(),
                         p.log);
 
         secondForm.Close();
@@ -444,12 +446,12 @@ public class EventOrdering : ReflectBase
     void eventListener_EventFired(object sender, EventFiredEventArgs e)
     {
         //we handle this because we want to merge the events for elementHost and for the hosted control. 
-        m_eventsTrace.Append( e.EventInfo.EventName + ":");
+        _eventsTrace.Append( e.EventInfo.EventName + ":");
     }
     void dependencyPropertyChangedEventHandler(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
     {
         //for this type of events we need a handler cause we cannot use the EventListener
-        m_eventsTrace.Append(e.Property.Name + ":");
+        _eventsTrace.Append(e.Property.Name + ":");
     }
     
     #endregion

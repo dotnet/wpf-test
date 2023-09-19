@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -17,17 +21,15 @@ using System.Threading;
 using System.Reflection;
 using ReflectTools.AutoPME;
 
-//
+
 // Testcase:    XElementHost
 // Description: AutoPME Verification for Element Host.
-// Author:      a-rickyt
-//
 public class XElementHost : XControl
 {
     #region Test case setup
 
-    ElementHost elementHost;
-    String testPropertyValue;
+    ElementHost _elementHost;
+    String _testPropertyValue;
 
     [STAThread]
     public static void Main(String[] args)
@@ -137,11 +139,11 @@ public class XElementHost : XControl
     
     protected ScenarioResult get_HostContainer(TParams p)
     {
-        elementHost = GetElementHost(p);
+        _elementHost = GetElementHost(p);
         return new ScenarioResult("System.Windows.Forms.Integration.AvalonAdapter", 
-            elementHost.HostContainer.ToString(), "HostContainer should be " +
+            _elementHost.HostContainer.ToString(), "HostContainer should be " +
             "System.Windows.Forms.Integration.AvalonAdapter" + ", but is " + 
-            elementHost.HostContainer.ToString() + " instead.", p.log);
+            _elementHost.HostContainer.ToString() + " instead.", p.log);
     }
 
     protected ScenarioResult get_Child(TParams p)
@@ -152,10 +154,10 @@ public class XElementHost : XControl
 
     protected ScenarioResult set_Child(TParams p, UIElement value)
     {
-        elementHost = GetElementHost(p);
-        elementHost.Child = value;
-        return new ScenarioResult(value, elementHost.Child, "Child " +
-            "should be " + value + ", but is " + elementHost.Child + " instead.", p.log);
+        _elementHost = GetElementHost(p);
+        _elementHost.Child = value;
+        return new ScenarioResult(value, _elementHost.Child, "Child " +
+            "should be " + value + ", but is " + _elementHost.Child + " instead.", p.log);
     }
 
     protected ScenarioResult get_BackColorTransparent(TParams p)
@@ -165,40 +167,40 @@ public class XElementHost : XControl
 
     protected ScenarioResult set_BackColorTransparent(TParams p, Boolean value)
     {
-        elementHost = GetElementHost(p);
-        elementHost.BackColorTransparent = value;
-        return new ScenarioResult(value, elementHost.BackColorTransparent, "BackColorTransparent " +
-            "should be " + value + ", but is " + elementHost.BackColorTransparent + " instead.", p.log);
+        _elementHost = GetElementHost(p);
+        _elementHost.BackColorTransparent = value;
+        return new ScenarioResult(value, _elementHost.BackColorTransparent, "BackColorTransparent " +
+            "should be " + value + ", but is " + _elementHost.BackColorTransparent + " instead.", p.log);
     }
 
     protected ScenarioResult OnPropertyChanged(TParams p, String propertyName, Object value)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost = GetElementHost(p);
+        _elementHost = GetElementHost(p);
         String val = "Element Host 1";
-        elementHost.PropertyMap.Add("Name", new PropertyTranslator(MyPropertyTranslator));
-        elementHost.Name = val;
-        sr.IncCounters("", testPropertyValue, "OnPropertyChanged: Name " +
-            "should be " + "" + ", but is " + testPropertyValue + " instead.", p.log);
+        _elementHost.PropertyMap.Add("Name", new PropertyTranslator(MyPropertyTranslator));
+        _elementHost.Name = val;
+        sr.IncCounters("", _testPropertyValue, "OnPropertyChanged: Name " +
+            "should be " + "" + ", but is " + _testPropertyValue + " instead.", p.log);
 
-        elementHost.OnPropertyChanged("Name", val);
-        sr.IncCounters(val, testPropertyValue, "OnPropertyChanged: Name " +
-            "should be " + val + ", but is " + testPropertyValue + " instead.", p.log);
+        _elementHost.OnPropertyChanged("Name", val);
+        sr.IncCounters(val, _testPropertyValue, "OnPropertyChanged: Name " +
+            "should be " + val + ", but is " + _testPropertyValue + " instead.", p.log);
 
         return sr;
     }
     private void MyPropertyTranslator(object host, String propertyName, object value)
     {
-        testPropertyValue = value.ToString();
+        _testPropertyValue = value.ToString();
     }
 
     protected ScenarioResult get_PropertyMap(TParams p)
     {
-        elementHost = GetElementHost(p);
+        _elementHost = GetElementHost(p);
         return new ScenarioResult("System.Windows.Forms.Integration.ElementHostPropertyMap",
-            elementHost.PropertyMap.ToString(), "PropertyMap should be " +
+            _elementHost.PropertyMap.ToString(), "PropertyMap should be " +
             "System.Windows.Forms.Integration.ElementHostPropertyMap" + ", but is " +
-            elementHost.PropertyMap.ToString() + " instead.", p.log);
+            _elementHost.PropertyMap.ToString() + " instead.", p.log);
     }
 
     #endregion

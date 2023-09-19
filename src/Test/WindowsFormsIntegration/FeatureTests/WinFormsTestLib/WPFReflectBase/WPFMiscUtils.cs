@@ -1,10 +1,11 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using WFCTestLib.Log;
 
-//
 // Filename:    WPFMiscUtils.cs
 // Description: Utility functions to bypass problems in WPFBase (until those problems are resolved)
-// Author:      a-wboyde
-//
 namespace WPFReflectTools
 {
     public class WPFMiscUtils
@@ -14,7 +15,7 @@ namespace WPFReflectTools
         // an Exception, knocking the entire Test Case down.
         // These versions bypass that behavior by testing the values first and then calling a "safe"
         // form of IncCounters if the test will fail.  Inefficient, but gets us past the exception.
-        // Please remove these when someone fixes WPFReflectBase  :-)  a-wboyde 1/16/06
+        // Please remove these when someone fixes WPFReflectBase 
 
         /// <summary>
         /// Safe replacement for ScenarioResult.IncCounters(expected, actual, comments, log)
@@ -60,10 +61,8 @@ namespace WPFReflectTools
             }
         }
 
-        //
         // Returns true if expected.Equals(actual).  Checks for null values.
         // Code lifted from WFCTestlib.Log Scenario.cs to mimic dealing with null values
-        //
         private static bool TestValues(object expected, object actual)
         {
             if (expected == null || actual == null)

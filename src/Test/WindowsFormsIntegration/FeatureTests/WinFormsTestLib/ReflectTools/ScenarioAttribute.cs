@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace ReflectTools {
     using System;
 
@@ -12,45 +16,45 @@ namespace ReflectTools {
     //
     [AttributeUsage(AttributeTargets.Method)]
     public class ScenarioAttribute : Attribute {
-        private bool isScenario;
-        private string description;
-		private int order = Int32.MaxValue;		// Default value is Int32.MaxValue--this means the scenario is NOT ordered.
+        private bool _isScenario;
+        private string _description;
+		private int _order = Int32.MaxValue;		// Default value is Int32.MaxValue--this means the scenario is NOT ordered.
 
 		public ScenarioAttribute(bool isScenario) {
-            this.isScenario = isScenario;
+            this._isScenario = isScenario;
         }
 
 		public ScenarioAttribute(int order)
 		{
-			this.isScenario = true;
-			this.order = order;
+			this._isScenario = true;
+			this._order = order;
 		}
 
 		public ScenarioAttribute(string description)
 		{
-			this.isScenario = true;
-            this.description = description;
+			this._isScenario = true;
+            this._description = description;
         }
 
 		public ScenarioAttribute(string description, int order)
 		{
-			this.isScenario = true;
-			this.description = description;
-			this.order = order;
+			this._isScenario = true;
+			this._description = description;
+			this._order = order;
 		}
 
 		public bool IsScenario
 		{
-			get { return isScenario; }
+			get { return _isScenario; }
         }
 
         public string Description {
-            get { return description; }
+            get { return _description; }
         }
 
 		// Default value is Int32.MaxValue--this means the scenario is NOT ordered.
 		public int Order {
-			get { return order; }
+			get { return _order; }
 		}
     }
 }

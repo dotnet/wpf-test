@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.ComponentModel;
 using System.Collections;
@@ -45,11 +49,6 @@ namespace ReflectTools
     // </desc>
     // <seealso class="ReflectTools.ReflectBase"/>
     // </doc>
-    //
-    // TODO: We should make every AutoPME test class use an attribute to specify which
-    //       actual class it is meant to test.  e.g. XControl tests Control, XObject tests
-    //       Object, etc.
-    //
     public abstract class WPFAutoPME : WPFReflectBase
     {
         // Prefixes found on event handler add/remove methods.  AutoPME does not count
@@ -73,52 +72,40 @@ namespace ReflectTools
         //   The group of scenarios we expected to see but didn't.
         // </desc>
         // </doc>
-        private static Hashtable missingScenariosInGroup = new Hashtable();
+        private static Hashtable s_missingScenariosInGroup = new Hashtable();
 
         // <doc>
         // <desc>
         //   The group of scenarios we didn't expect to see but did.
         // </desc>
         // </doc>
-        private static Hashtable extraScenariosInGroup = new Hashtable();
+        private static Hashtable s_extraScenariosInGroup = new Hashtable();
 
-        //
         // We set this to true if the NoBase run flag is present.  We only use
         // this variable in InitTest to output some debug info.
-        //
-        private bool noBaseRunFlagDetected = false;
+        private bool _noBaseRunFlagDetected = false;
 
-        //
         // If true, base-class tests will be excluded.  Only the tests on the target class
         // will be run.
-        //
-        private bool noBase = false;
+        private bool _noBase = false;
 
-        //
         // If true, only the autotest scenarios will be run.
-        //
-        private bool autoTestOnly = false;
+        private bool _autoTestOnly = false;
 
-        //
         // If true, do not consider missing scenarios as failures.
-        //
-        private bool ignoreMissing = false;
+        private bool _ignoreMissing = false;
 
-        //
         // If true, ignore NoBase run flag--i.e. even if it's present we still want
         // to run all scenarios.
-        //
-        private bool ignoreNoBaseRunFlag = false;
+        private bool _ignoreNoBaseRunFlag = false;
 
-        //
         // The number of scenarios from the current group that we've excluded.  Used
         // to keep total counts consistent between pre-handle mode and normal mode runs.
-        //
-        private int numExcludedScenarios = 0;
+        private int _numExcludedScenarios = 0;
 
         // If set to true, we don't make sure the tested method is on the stack of SecurityExceptions
         // This is reset to false in BeforeScenario().
-        private bool ignoreStackForCurrentScenario = false;
+        private bool _ignoreStackForCurrentScenario = false;
 
         // <doc>
         // <desc>
@@ -127,12 +114,10 @@ namespace ReflectTools
         // </doc>
         protected WPFAutoPME(String[] args) : base(args) { }
 
-        //
         // We initialize the size and location of the form to random values.  This is a bit tricky
         // since the screen resolution can cause potential failures when part of a form is off-screen.
         // We do a little hackery to try to allieviate this problem.
-        //
-        System.Drawing.Size size;
+        System.Drawing.Size _size;
 
         protected override void InitTest(TParams p)
         {
@@ -146,7 +131,7 @@ namespace ReflectTools
             // exactly reproduce the conditions under which their test ran.
             Rectangle screen = SystemInformation.WorkingArea;
 
-            if (noBaseRunFlagDetected)
+            if (_noBaseRunFlagDetected)
             {
                 p.log.WriteLine();
                 p.log.WriteLine("*****NOTE: \"" + NoBaseRunFlagName + "\" run flag detected; will run with NoBase option on*****");
@@ -158,82 +143,73 @@ namespace ReflectTools
 
             // Constant max size so at least the form size will remain the same when run with the
             // same random seed, regardless of resolution.
-            size = p.ru.GetSize(100, maxSize.Width, 100, maxSize.Height);
-            this.Width = size.Width;
-            this.Height = size.Height;
+            _size = p.ru.GetSize(100, maxSize.Width, 100, maxSize.Height);
+            this.Width = _size.Width;
+            this.Height = _size.Height;
 
             // Pick a starting location such that most of the form is visible.  Starting location
             // is dependent on resolution, but the algorithm we use here is to maintain the same
             // distance from the lower-right corner of the screen.  Thus, theoretically, in most
             // resolutions, you'll get the same part of the form on-screen or off-screen.
-            int dx = p.ru.GetRange((int)(minOnScreen * size.Width), maxSize.Width);    // dist from right edge
-            int dy = p.ru.GetRange((int)(minOnScreen * size.Height), maxSize.Height);  // dist from bottom of screen
+            int dx = p.ru.GetRange((int)(minOnScreen * _size.Width), maxSize.Width);    // dist from right edge
+            int dy = p.ru.GetRange((int)(minOnScreen * _size.Height), maxSize.Height);  // dist from bottom of screen
 
             // Make sure it's not too far offscreen too the left or up.
-            int x = Math.Max(screen.Width - dx, (int)(-maxOffScreen * size.Width));
+            int x = Math.Max(screen.Width - dx, (int)(-maxOffScreen * _size.Width));
             int y = Math.Max(screen.Height - dy, 0);   // Min is 0 since we don't want the titlebar offscreen.
 
             this.Title = "[ Started at " + DateTime.Now.ToString(null, null) + " ] - " + Class.FullName;
         }
 
-        //
         // If NoBase is true, scenario groups on the target class's base classes will be excluded
         // from execution.  Default is false.
-        //
         protected bool NoBase
         {
             get
             {
-                return noBase && !IgnoreNoBaseRunFlag;
+                return _noBase && !IgnoreNoBaseRunFlag;
             }
             set
             {
                 if (!value)
-                    noBaseRunFlagDetected = false;
+                    _noBaseRunFlagDetected = false;
 
-                noBase = value;
+                _noBase = value;
             }
         }
 
-        //
         // If AutoTestOnly is true, only AutoTest scenarios will be executed.
-        //
         protected bool AutoTestOnly
         {
             get
             {
-                return autoTestOnly;
+                return _autoTestOnly;
             }
             set
             {
-                autoTestOnly = value;
+                _autoTestOnly = value;
             }
         }
 
-        //
         // If true, do not consider missing scenarios as failures.
-        //
         protected bool IgnoreMissing
         {
             get
             {
-                return ignoreMissing;
+                return _ignoreMissing;
             }
             set
             {
-                ignoreMissing = value;
+                _ignoreMissing = value;
             }
         }
 
         protected bool IgnoreNoBaseRunFlag
         {
-            get { return ignoreNoBaseRunFlag; }
-            set { ignoreNoBaseRunFlag = value; }
+            get { return _ignoreNoBaseRunFlag; }
+            set { _ignoreNoBaseRunFlag = value; }
         }
 
-
-        // TODO: see if there's a better way to do this so the parsing code can be shared, and
-        //       we can guarantee the base gets called.
         protected override void CheckEnvironmentOptions()
         {
             base.CheckEnvironmentOptions();
@@ -411,14 +387,12 @@ namespace ReflectTools
         //  The scenario that is to override the base implementation.
         // </param>
         // </doc>
-        // TODO: doesn't hurt to have it, but we might as well rip it when we're sure we don't need it anymore
-        //		[Obsolete("OverrideScenario is no longer necessary in any situation.")]
         protected void OverrideScenario(MethodBase scenario)
         {
             for (int i = 0; i < tests.Count; i++)
             {
                 ScenarioGroup sg = (ScenarioGroup)tests[i];
-                ArrayList missing = (ArrayList)missingScenariosInGroup[sg];
+                ArrayList missing = (ArrayList)s_missingScenariosInGroup[sg];
                 for (int j = 0; j < missing.Count; j++)
                 {
                     if (MatchScenarioToMethod(scenario, (MethodInfo)missing[j]))
@@ -463,7 +437,7 @@ namespace ReflectTools
                 //pLocation = p.ru.GetPoint(new System.Drawing.Point(size));
 
                 // If we're running without AllWindows permission, there will be a security
-                // bubble that can screw up painting scenarios if the control is under it.
+                // bubble that can ---- up painting scenarios if the control is under it.
                 //if (!Utilities.HavePermission(LibSecurity.AllWindows) && pLocation.Y < 200)
                 //{
                 //    pLocation.Y = 200;
@@ -476,10 +450,10 @@ namespace ReflectTools
 
                 //set random size also
                 //size = c.Size;
-                size = p.ru.GetSize(this.size);
-                p.log.WriteLine("RANDOM=setting size to: " + size.ToString());
-                c.Width = size.Width;
-                c.Height = size.Height;
+                _size = p.ru.GetSize(this._size);
+                p.log.WriteLine("RANDOM=setting size to: " + _size.ToString());
+                c.Width = _size.Width;
+                c.Height = _size.Height;
 
                 this.Content = c;
             }
@@ -519,7 +493,7 @@ namespace ReflectTools
         protected override bool AfterScenarioGroup(TParams p, ScenarioGroup g, int total, int fail)
         {
             bool fullyImplemented = true;           // All scenarios are implemented
-            ArrayList missing = (ArrayList)missingScenariosInGroup[g];
+            ArrayList missing = (ArrayList)s_missingScenariosInGroup[g];
 
             if (!IgnoreMissing)
             {
@@ -535,9 +509,6 @@ namespace ReflectTools
             });
 
             // In AutoTest mode we don't want to gripe about missing scenarios
-            // BUGBUG: we technically shouldn't have to do this--but there are
-            //         bugs in AutoPME when your test class inheritance chain
-            //         doesn't match the target class's.
             if (AutoTestOnly)
                 return true;
 
@@ -564,7 +535,7 @@ namespace ReflectTools
             }
 
             // Output extra methods--these don't count as failures but is useful to know anyway
-            ArrayList extra = (ArrayList)extraScenariosInGroup[g];
+            ArrayList extra = (ArrayList)s_extraScenariosInGroup[g];
             p.log.WriteLine();
 
             if (extra == null || extra.Count == 0)
@@ -584,8 +555,8 @@ namespace ReflectTools
 
             if (true)
             {
-                p.log.TestResults.PassCount += numExcludedScenarios;
-                numExcludedScenarios = 0;
+                p.log.TestResults.PassCount += _numExcludedScenarios;
+                _numExcludedScenarios = 0;
             }
 
             if (StopOnFailureInGroup)
@@ -596,7 +567,7 @@ namespace ReflectTools
 
         protected override bool BeforeScenario(TParams p, MethodInfo scenario)
         {
-            ignoreStackForCurrentScenario = false;
+            _ignoreStackForCurrentScenario = false;
             return base.BeforeScenario(p, scenario);
         }
 
@@ -605,7 +576,6 @@ namespace ReflectTools
             base.AfterScenario(p, scenario, result);
         }
 
-        //
         // We override VerifySecurityException so we can make sure the current scenario name
         // (i.e. the method we're testing) is on the stack of the exception being thrown.
         // This is so we are sure there are no false positives, where someone does something
@@ -623,13 +593,12 @@ namespace ReflectTools
         {
             bool origStackCheck = StackCheck;
 
-            // TODO: this needs to check for the correct method, not the AutoPME scenario method
-            if (ignoreStackForCurrentScenario) { StackCheck = false; }
+            if (_ignoreStackForCurrentScenario) { StackCheck = false; }
             else if (securityCheckExpectedMethod != null) { securityCheckExpectedMethod = currentScenario; }
 
             ScenarioResult result = base.VerifySecurityException(p, se);
 
-            if (ignoreStackForCurrentScenario) { StackCheck = origStackCheck; }
+            if (_ignoreStackForCurrentScenario) { StackCheck = origStackCheck; }
 
             return result;
         }
@@ -679,7 +648,7 @@ namespace ReflectTools
             }
 
             BeginSecurityCheck(p);
-            ignoreStackForCurrentScenario = ignoreStack;
+            _ignoreStackForCurrentScenario = ignoreStack;
         }
 
         protected void BeginSecurityCheck(CodeAccessPermission[] p, bool ignoreStack, string reason)
@@ -693,17 +662,12 @@ namespace ReflectTools
             }
 
             BeginSecurityCheck(p);
-            ignoreStackForCurrentScenario = ignoreStack;
+            _ignoreStackForCurrentScenario = ignoreStack;
         }
 
-        //
-        // (12/10/03) We're currently grandfathering tests which use AddRequiredPermissions()
-        // and letting them skip the stack check. We'll probably revisit this at a later date.
-        //
-        [
-        Obsolete("AddRequiredPermission() is obsolete.  Please use BeginSecurityCheck() instead"),
-        EditorBrowsable(EditorBrowsableState.Never)
-        ]
+
+        [Obsolete("AddRequiredPermission() is obsolete.  Please use BeginSecurityCheck() instead"),
+        EditorBrowsable(EditorBrowsableState.Never)]
         protected override void AddRequiredPermission(CodeAccessPermission p)
         {
             BeginSecurityCheck(p, true, "AddRequiredPermission()");
@@ -753,14 +717,6 @@ namespace ReflectTools
 
             // Loop up the inheritance chain of the target class and the test class.  It's possible
             // for there to be more test classes than there are target classes.
-            //
-            // TODO: handle the case where there is a target class but no corresponding test class.
-            // HACK: This code assumes the test inheritance chain matches the target inheritance chain.
-            //       What should we do if it doesn't?  Fail and quit?
-            //       (8/10/01 KevinTao): The answer is in the TODO at the top--use an attribute for each
-            //                           test class to tell AutoPME what it tests.  If the inheritance
-            //                           chain doesn't match, fail.
-            //
             while (currentTestType != null)
             {
 
@@ -866,7 +822,7 @@ namespace ReflectTools
                 // NoBase mode, and this is a base class scenario group.  We need to exclude all these scenarios.
                 foreach (MethodInfo mi in g.Scenarios)
                 {
-                    numExcludedScenarios++;
+                    _numExcludedScenarios++;
                     LogExcludedMethod(p, mi);
                 }
 
@@ -886,7 +842,7 @@ namespace ReflectTools
                         methods.Add(mi);
                     else
                     {
-                        numExcludedScenarios++;
+                        _numExcludedScenarios++;
                         LogExcludedMethod(p, mi);
                     }
                 }
@@ -956,7 +912,7 @@ namespace ReflectTools
                 }
             }
 
-            missingScenariosInGroup[key] = missing;
+            s_missingScenariosInGroup[key] = missing;
         }
 
         // <doc>
@@ -995,7 +951,7 @@ namespace ReflectTools
                 }
             }
 
-            extraScenariosInGroup[key] = extra;
+            s_extraScenariosInGroup[key] = extra;
         }
 
         // <doc>
@@ -1033,12 +989,6 @@ namespace ReflectTools
         // <desc>
         //  Determines if the specified Object is a Control and if if is also
         //  a child of the testcase form.
-        //
-        //  TODO: This code doesn't look like it handles nested controls (e.g.
-        //  a control in a groupbox in a form). This code should probably
-        //  be re-written to walk up the control's parent chain until the parent
-        //  object found is either 'this' (and return true) or 'null' (and return
-        //  false).
         //
         // </desc>
         // <param term="o">
@@ -1169,9 +1119,7 @@ namespace ReflectTools
             }
         }
 
-        //
         // Overridden to check for the OverrideScenario attribute before running a test.
-        //
         [Scenario(false)]
         protected override ScenarioResult InvokeMethod(MethodInfo mi, TParams p)
         {
@@ -1198,14 +1146,8 @@ namespace ReflectTools
         }
     }
 
-    //
     // This is an alternate way of overriding a scenario.  You can use this instead of the
     // OverrideScenario(MethodBase m) method.
-    //
-    [
-        // TODO: doesn't hurt to have it, but we might as well rip it when we're sure we don't need it anymore
-        //	Obsolete("OverrideScenario is no longer necessary in any situation"),
-    AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)
-    ]
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
     public class OverrideScenarioAttribute : Attribute { }
 }

@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -46,9 +50,6 @@ namespace WFCTestLib.Util
         // <doc>
         // <desc>
         //  Add a string to the list of items
-        //  TODO: Deal with the listbox getting full. If numItems
-        //        is greater than some MAX, then delete the first
-        //        third of the items in the list.
         // </desc>
         // <param term="s">
         //  The string to add to the listbox.

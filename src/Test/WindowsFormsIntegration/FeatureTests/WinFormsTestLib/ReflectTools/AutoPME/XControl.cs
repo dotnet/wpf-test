@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Drawing;
 using System.ComponentModel;
@@ -15,9 +19,9 @@ namespace ReflectTools.AutoPME
 {
     public abstract class XControl : XComponent
     {
-        private Control c;
+        private Control _c;
 
-        private Control newC;   // a newly-created object for use with testing Reset properties
+        private Control _newC;   // a newly-created object for use with testing Reset properties
 
         public XControl(String[] args) : base(args) { }
 
@@ -40,9 +44,9 @@ namespace ReflectTools.AutoPME
                 ExcludedProperties.Add("Capture");  // This fails if we don't have AllWindows
 
             // Initialize the new object
-            newC = (Control)CreateObject(p);
+            _newC = (Control)CreateObject(p);
 
-            // Exclude Text on Win9x (bug #44781).  There are chars on Win9x that cannot be
+            // Exclude Text on Win9x (Regression_Bug51).  There are chars on Win9x that cannot be
             // round-tripped, even if they are valid Unicode characters.
             //
             if (Utilities.IsWin9x)
@@ -217,58 +221,58 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Bottom(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("Botom is " + c.Bottom.ToString());
+            p.log.WriteLine("Botom is " + _c.Bottom.ToString());
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult get_CanFocus(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("CanFocus is " + c.CanFocus.ToString());
+            p.log.WriteLine("CanFocus is " + _c.CanFocus.ToString());
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult get_CanSelect(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("CanSelect is " + c.CanSelect.ToString());
+            p.log.WriteLine("CanSelect is " + _c.CanSelect.ToString());
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult set_Capture(TParams p, bool value)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             ScenarioResult sr = new ScenarioResult();
-            bool expected = !c.Capture;
+            bool expected = !_c.Capture;
             bool bSet = SecurityCheck(sr, delegate
             {
-                c.Capture = expected;
+                _c.Capture = expected;
             }, typeof(Control).GetMethod("set_Capture"), LibSecurity.AllWindows);
             expected = bSet ? expected : !expected;
-            sr.IncCounters(expected, c.Capture, "FAIL: Didn't get expected capture value", p.log);
+            sr.IncCounters(expected, _c.Capture, "FAIL: Didn't get expected capture value", p.log);
             return get_Capture(p);
         }
 
         protected virtual ScenarioResult get_Capture(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             bool b = p.ru.GetBoolean();
-            SafeMethods.SetCapture(c, b);
-            return new ScenarioResult(b, c.Capture, "FAIL: couldn't get capture", p.log);
+            SafeMethods.SetCapture(_c, b);
+            return new ScenarioResult(b, _c.Capture, "FAIL: couldn't get capture", p.log);
         }
 
         protected virtual ScenarioResult get_ClientRectangle(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Rectangle r = c.ClientRectangle;
+            Rectangle r = _c.ClientRectangle;
 
             p.log.WriteLine("ClientRectangle is " + r.ToString());
-            return new ScenarioResult(r.X == 0 && r.Y == 0 && r.Width == c.ClientSize.Width && r.Height == c.ClientSize.Height);
+            return new ScenarioResult(r.X == 0 && r.Y == 0 && r.Width == _c.ClientSize.Width && r.Height == _c.ClientSize.Height);
         }
 
         protected virtual ScenarioResult set_ClientSize(TParams p, Size value)
@@ -278,20 +282,20 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_ClientSize(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             Size pt = p.ru.GetSize(this.Size);
 
-            p.log.WriteLine("ClientSize was " + c.ClientSize.ToString());
+            p.log.WriteLine("ClientSize was " + _c.ClientSize.ToString());
             p.log.WriteLine("ClientSize to be " + pt.ToString());
-            c.ClientSize = pt;
+            _c.ClientSize = pt;
 
-            Size ppt = c.ClientSize;
+            Size ppt = _c.ClientSize;
 
             p.log.WriteLine("ClientSize is " + ppt.ToString());
 
             // Form can't get narrower than 88 pixels.
-            if ((c is Form) && (pt.Width < 88))
+            if ((_c is Form) && (pt.Width < 88))
                 pt.Width = 88;
 
             return new ScenarioResult(pt.Equals(ppt));
@@ -299,9 +303,9 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Controls(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            System.Windows.Forms.Control.ControlCollection cc = c.Controls;
+            System.Windows.Forms.Control.ControlCollection cc = _c.Controls;
 
             return new ScenarioResult(cc != null);
         }
@@ -310,12 +314,12 @@ namespace ReflectTools.AutoPME
         {
             ScenarioResult result = new ScenarioResult();
 
-            c = (Control)CreateObject(p);
-            result.IncCounters(!c.Created, "FAIL: returned true, expected false", p.log);
+            _c = (Control)CreateObject(p);
+            result.IncCounters(!_c.Created, "FAIL: returned true, expected false", p.log);
 
             bool expected = true;
 
-            Controls.Add(c);
+            Controls.Add(_c);
             Application.DoEvents();
             if (PreHandleMode)
             {
@@ -323,16 +327,16 @@ namespace ReflectTools.AutoPME
                 expected = false;
             }
 
-            result.IncCounters(c.Created == expected, "FAIL: after adding control to the Form returned " + c.Created + ", expected " + expected, p.log);
+            result.IncCounters(_c.Created == expected, "FAIL: after adding control to the Form returned " + _c.Created + ", expected " + expected, p.log);
             return result;
         }
 
         protected virtual ScenarioResult get_DisplayRectangle(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Rectangle r = c.DisplayRectangle;
-            Size s = c.ClientSize;
+            Rectangle r = _c.DisplayRectangle;
+            Size s = _c.ClientSize;
 
             p.log.WriteLine("DisplayRect is " + r.ToString());
             p.log.WriteLine("ClientSize is " + s.ToString());
@@ -350,14 +354,14 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Enabled(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            bool b = c.Enabled;
+            bool b = _c.Enabled;
 
             p.log.WriteLine("Enabled was " + b.ToString());
-            c.Enabled = !b;
+            _c.Enabled = !b;
 
-            bool bb = c.Enabled;
+            bool bb = _c.Enabled;
 
             p.log.WriteLine("Enabled is " + bb.ToString());
             return new ScenarioResult(b != bb);
@@ -365,7 +369,7 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Focused(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult result = new ScenarioResult();
             Button b = new Button();
@@ -374,15 +378,15 @@ namespace ReflectTools.AutoPME
             Controls.Add(b);
             SafeMethods.Focus(b);
             Application.DoEvents();
-            result.IncCounters(!c.Focused, "FAIL: returned true expected false", p.log);
-            SafeMethods.Focus(c);
+            result.IncCounters(!_c.Focused, "FAIL: returned true expected false", p.log);
+            SafeMethods.Focus(_c);
             if (PreHandleMode)
             {
                 p.log.WriteLine("cannot focus in PreHandleMode");
                 expected = false;
             }
 
-            result.IncCounters(c.Focused == expected, "FAIL: returned " + c.Focused + " expected " + expected, p.log);
+            result.IncCounters(_c.Focused == expected, "FAIL: returned " + _c.Focused + " expected " + expected, p.log);
             return result;
         }
 
@@ -391,12 +395,12 @@ namespace ReflectTools.AutoPME
             ScenarioResult result = new ScenarioResult();
 
             // HasChildren will be false for almost every newly created control
-            c = (Control)CreateObject(p);
-            result.IncCounters(c.HasChildren == (c.Controls.Count != 0), "FAILED initial state", p.log);
+            _c = (Control)CreateObject(p);
+            result.IncCounters(_c.HasChildren == (_c.Controls.Count != 0), "FAILED initial state", p.log);
 
             // Add child and verify HasChildren is now true
-            c.Controls.Add(new Button());
-            result.IncCounters(c.HasChildren, "FAILED: returned false after child control added", p.log);
+            _c.Controls.Add(new Button());
+            result.IncCounters(_c.HasChildren, "FAILED: returned false after child control added", p.log);
             return result;
         }
 
@@ -407,9 +411,9 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_ImeMode(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            System.Windows.Forms.ImeMode imemd = c.ImeMode;
+            System.Windows.Forms.ImeMode imemd = _c.ImeMode;
 
             p.log.WriteLine("initially Got: " + EnumTools.GetEnumStringFromValue(typeof(System.Windows.Forms.ImeMode), (int)imemd));
             if (System.Text.Encoding.Default.CodePage == 932)   // Japanese
@@ -420,33 +424,32 @@ namespace ReflectTools.AutoPME
                 imemd = (ImeMode)p.ru.GetDifferentEnumValue(typeof(System.Windows.Forms.ImeMode), (int)imemd);
 
             p.log.WriteLine("Setting to: " + EnumTools.GetEnumStringFromValue(typeof(System.Windows.Forms.ImeMode), (int)imemd));
-            c.ImeMode = imemd;
+            _c.ImeMode = imemd;
 
-            ImeMode imemd2 = c.ImeMode;
+            ImeMode imemd2 = _c.ImeMode;
 
             p.log.WriteLine("retrieved: " + EnumTools.GetEnumStringFromValue(typeof(System.Windows.Forms.ImeMode), (int)imemd2));
             Application.DoEvents();
 
-	    //Added to reflect changes in QFE 4448, in which ImeMode.OnHalf got added but returns ImeMode.On
-	    //First check if ImeMode.OnHalf exists
+            //Added to reflect changes in QFE 4448, in which ImeMode.OnHalf got added but returns ImeMode.On
+            //First check if ImeMode.OnHalf exists
             if (Enum.IsDefined(typeof(System.Windows.Forms.ImeMode), "OnHalf"))
             {
                 if(imemd == ImeMode.OnHalf)
 		            return new ScenarioResult(imemd2 == ImeMode.On);
             }
 
-
-            return new ScenarioResult(imemd2 == GetExpectedImeMode(c, imemd));
+            return new ScenarioResult(imemd2 == GetExpectedImeMode(_c, imemd));
         }
 
         protected virtual ScenarioResult get_IsHandleCreated(TParams p)
         {
             ScenarioResult result = new ScenarioResult();
 
-            c = (Control)CreateObject(p);
-            result.IncCounters(!c.IsHandleCreated, "FAIL: returned true, expected false", p.log);
+            _c = (Control)CreateObject(p);
+            result.IncCounters(!_c.IsHandleCreated, "FAIL: returned true, expected false", p.log);
 
-            Controls.Add(c);
+            Controls.Add(_c);
             Application.DoEvents();
 
             bool expected = true;
@@ -457,7 +460,7 @@ namespace ReflectTools.AutoPME
                 expected = false;
             }
 
-            result.IncCounters(c.IsHandleCreated == expected, "FAIL: returned " + c.IsHandleCreated + ", expected " + expected, p.log);
+            result.IncCounters(_c.IsHandleCreated == expected, "FAIL: returned " + _c.IsHandleCreated + ", expected " + expected, p.log);
             return result;
         }
 
@@ -468,29 +471,26 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Left(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            // TODO: get real validation for docked controls.
-            //       for now, we'll just remove the Dock property
-            //  AND override in xRichControl
-            ((Control)c).Dock = DockStyle.None;
+            ((Control)_c).Dock = DockStyle.None;
 
-            int l = c.Left;
+            int l = _c.Left;
 
             p.log.WriteLine("Left was " + l.ToString());
 
             int x;
 
-            if (c is Form && ((Form)c).TopLevel)
+            if (_c is Form && ((Form)_c).TopLevel)
                 x = p.ru.GetScreenPoint().X;
             else
-                x = p.ru.GetRange(0, c.Width);
+                x = p.ru.GetRange(0, _c.Width);
 
-            int ll = p.ru.GetRange(-c.Width / 2, x - (c.Width / 2));
+            int ll = p.ru.GetRange(-_c.Width / 2, x - (_c.Width / 2));
 
             p.log.WriteLine("Setting Left to " + ll.ToString());
-            c.Left = ll;
-            l = c.Left;
+            _c.Left = ll;
+            l = _c.Left;
             p.log.WriteLine("Left is " + l.ToString());
             return new ScenarioResult(l == ll);
         }
@@ -503,60 +503,60 @@ namespace ReflectTools.AutoPME
         // when Visible = falase, Dock has no effect on location
         protected virtual ScenarioResult get_Location(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            if (c is Form)
+            if (_c is Form)
             {
-                c = new Form();
+                _c = new Form();
             }
             else
             {
                 // if Control is parented to GroupBox - from previous scenarios
                 // it's location will not be (0, 0)
                 // So we'll parent out control to the Form
-                if ((SafeMethods.GetParent(c) != null) && (!SafeMethods.GetParent(c).Equals(this)))
+                if ((SafeMethods.GetParent(_c) != null) && (!SafeMethods.GetParent(_c).Equals(this)))
                 {
-                    SafeMethods.GetParent(c).Controls.Remove(c);
+                    SafeMethods.GetParent(_c).Controls.Remove(_c);
                     this.Controls.Clear();
-                    this.Controls.Add(c);
+                    this.Controls.Add(_c);
                     Application.DoEvents();
                 }
             }
 
-            p.log.WriteLine("current Visible: " + c.Visible);
-            p.log.WriteLine("current Dock: " + c.Dock.ToString());
+            p.log.WriteLine("current Visible: " + _c.Visible);
+            p.log.WriteLine("current Dock: " + _c.Dock.ToString());
 
-            Point pt = c.Location;
+            Point pt = _c.Location;
 
             p.log.WriteLine("Location was " + pt.ToString());
 
             Point ppt = p.ru.GetScreenPoint();
 
             p.log.WriteLine("Setting to Location " + ppt.ToString());
-            c.Location = ppt;
-            p.log.WriteLine("Location is " + c.Location.ToString());
+            _c.Location = ppt;
+            p.log.WriteLine("Location is " + _c.Location.ToString());
 
             // If control is docked and Visible, its location will not change
             // Splitter respects docking even when it's not visible
-            if (c.Dock != DockStyle.None && (c.Visible || c is Splitter))
+            if (_c.Dock != DockStyle.None && (_c.Visible || _c is Splitter))
             {
-                return new ScenarioResult(c.Location.Equals(pt));
+                return new ScenarioResult(_c.Location.Equals(pt));
             }
 
-            return new ScenarioResult(c.Location.Equals(ppt));
+            return new ScenarioResult(_c.Location.Equals(ppt));
         }
 
         protected virtual ScenarioResult set_Parent(TParams p, Control value)
         {
             //don't call get_Parent, will cause a SecurityException with the wrong stack
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Control pc = SafeMethods.GetParent(c);
+            Control pc = SafeMethods.GetParent(_c);
             if (pc != null) p.log.WriteLine("Parent was " + pc.ToString());
 
             Control expected = null;
 
-            if (c is Form) ((Form)c).TopLevel = false;
+            if (_c is Form) ((Form)_c).TopLevel = false;
 
             // pick a new parent
             int i = p.ru.GetRange(0, 5);
@@ -567,15 +567,15 @@ namespace ReflectTools.AutoPME
                 case 0: // null
                     p.log.WriteLine("Setting Parent to null");
                     expected = null;
-                    c.Parent = expected;
+                    _c.Parent = expected;
                     break;
 
                 case 1: // itself
                     p.log.WriteLine("Setting Parent to self");
                     try
                     {
-                        expected = c;
-                        c.Parent = expected;
+                        expected = _c;
+                        _c.Parent = expected;
                         return new ScenarioResult(false, "Control can't be parented to itself");
                     }
                     catch (Exception)
@@ -586,8 +586,8 @@ namespace ReflectTools.AutoPME
 
                 case 2: // it's current parent
                     p.log.WriteLine("Setting Parent to Parent");
-                    expected = SafeMethods.GetParent(c);
-                    c.Parent = expected;
+                    expected = SafeMethods.GetParent(_c);
+                    _c.Parent = expected;
                     break;
 
                 case 3: // another control already on the form
@@ -597,7 +597,7 @@ namespace ReflectTools.AutoPME
 
                     this.Controls.Add(gb);
                     expected = gb;
-                    c.Parent = expected;
+                    _c.Parent = expected;
                     break;
 
                 case 4: // another control not yet on the form
@@ -606,12 +606,12 @@ namespace ReflectTools.AutoPME
 
                     GroupBox gb2 = new GroupBox();
                     expected = gb2;
-                    c.Parent = expected;
+                    _c.Parent = expected;
                     this.Controls.Add(gb2);
                     break;
             }
 
-            Control pc2 = SafeMethods.GetParent(c);
+            Control pc2 = SafeMethods.GetParent(_c);
 
             AddObjectToForm(p);
             return new ScenarioResult(pc2 == expected, "EXPECTED: " + (expected == null ? "null" : expected.ToString()) + "; GOT: " + (pc2 == null ? "null" : pc2.ToString()));
@@ -619,13 +619,13 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Parent(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             ScenarioResult sr = new ScenarioResult();
             Control pc = null;
 
             bool gotParent = SecurityCheck(sr, delegate
             {
-                pc = c.Parent;
+                pc = _c.Parent;
             }, typeof(Control).GetMethod("get_Parent"), LibSecurity.AllWindows);
             if (!gotParent)
             { sr.IncCounters(null == pc, "FAIL: get_Parent returned a value in partial trust", p.log); }
@@ -635,22 +635,22 @@ namespace ReflectTools.AutoPME
 
             Control expected = null;
 
-            if (c is Form) ((Form)c).TopLevel = false;
+            if (_c is Form) ((Form)_c).TopLevel = false;
 
             switch (p.ru.GetRange(0, 5))
             {
                 case 0: // null
                     p.log.WriteLine("Setting Parent to null");
                     expected = null;
-                    c.Parent = null;
+                    _c.Parent = null;
                     break;
 
                 case 1: // itself
                     p.log.WriteLine("Setting Parent to self");
-                    expected = SafeMethods.GetParent(c);
+                    expected = SafeMethods.GetParent(_c);
 					try
 					{
-						c.Parent = c;
+						_c.Parent = _c;
 						sr.IncCounters(new ScenarioResult(false, "Control can't be parented to itself (expected exception)", p.log));
 					}
 					catch (NotSupportedException) { }//For a control with a readonly controls collection, it will throw NSE instead of ArgE
@@ -659,8 +659,8 @@ namespace ReflectTools.AutoPME
 
                 case 2: // it's current parent
                     p.log.WriteLine("Setting Parent to Parent");
-                    expected = SafeMethods.GetParent(c);
-                    c.Parent = expected;
+                    expected = SafeMethods.GetParent(_c);
+                    _c.Parent = expected;
                     break;
 
                 case 3: // another control already on the form
@@ -670,7 +670,7 @@ namespace ReflectTools.AutoPME
 
                     this.Controls.Add(gb);
                     expected = gb;
-                    c.Parent = expected;
+                    _c.Parent = expected;
                     break;
 
                 case 4: // another control not yet on the form
@@ -678,7 +678,7 @@ namespace ReflectTools.AutoPME
                     p.log.WriteLine("Setting Parent to control not yet on form");
 
                     GroupBox gb2 = new GroupBox();
-                    c.Parent = gb2;
+                    _c.Parent = gb2;
 
                     expected = gb2;
                     this.Controls.Add(gb2);
@@ -688,10 +688,10 @@ namespace ReflectTools.AutoPME
             Control finalParent = null;
             gotParent = SecurityCheck(sr, delegate
             {
-                finalParent = c.Parent;
+                finalParent = _c.Parent;
             }, typeof(Control).GetMethod("get_Parent"), LibSecurity.AllWindows);
             if (!gotParent)
-            { finalParent = SafeMethods.GetParent(c); }
+            { finalParent = SafeMethods.GetParent(_c); }
 
             AddObjectToForm(p);
             sr.IncCounters(expected, finalParent, "FAIL: Final parent was incorrect", p.log);
@@ -701,9 +701,9 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_RecreatingHandle(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            bool b = c.RecreatingHandle;
+            bool b = _c.RecreatingHandle;
 
             p.log.WriteLine("RecreatingHandle is " + b.ToString());
             return ScenarioResult.Pass;
@@ -712,27 +712,27 @@ namespace ReflectTools.AutoPME
         // when Visible = false, Docking has no effect on returned Right value
         protected virtual ScenarioResult get_Right(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("current IsHandleCreated: " + c.IsHandleCreated);
-            p.log.WriteLine("current Visible: " + c.Visible);
-            p.log.WriteLine("current Dock: " + c.Dock.ToString());
+            p.log.WriteLine("current IsHandleCreated: " + _c.IsHandleCreated);
+            p.log.WriteLine("current Visible: " + _c.Visible);
+            p.log.WriteLine("current Dock: " + _c.Dock.ToString());
 
-            int r = c.Right;
+            int r = _c.Right;
 
             p.log.WriteLine("Right was " + r.ToString());
-            p.log.WriteLine("Bounds were " + c.Bounds.ToString());
-            c.Width++;
+            p.log.WriteLine("Bounds were " + _c.Bounds.ToString());
+            _c.Width++;
 
-            int rr = c.Right;
+            int rr = _c.Right;
 
             p.log.WriteLine("Right is " + rr.ToString());
-            p.log.WriteLine("Bounds are " + c.Bounds.ToString());
+            p.log.WriteLine("Bounds are " + _c.Bounds.ToString());
 
             // Right changes when Dock = None, Left or Visible = false 
-            if (c.Dock != DockStyle.None && c.Dock != DockStyle.Left && c.Visible && c.IsHandleCreated)
+            if (_c.Dock != DockStyle.None && _c.Dock != DockStyle.Left && _c.Visible && _c.IsHandleCreated)
             {
-                return new ScenarioResult(c.Right == r);
+                return new ScenarioResult(_c.Right == r);
             }
 
             return new ScenarioResult(rr == r + 1);
@@ -745,9 +745,9 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_TabIndex(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            int initTabIndex = c.TabIndex;
+            int initTabIndex = _c.TabIndex;
 
             p.log.WriteLine("initial TabIndex: " + initTabIndex.ToString());
 
@@ -756,7 +756,7 @@ namespace ReflectTools.AutoPME
             try
             {
                 p.log.WriteLine("setting TabIndex to: " + newTabIndex.ToString());
-                c.TabIndex = newTabIndex;
+                _c.TabIndex = newTabIndex;
                 if (newTabIndex < 0)
                     return new ScenarioResult(false, "FAILED: didn't throw exception for negative TabIndex", p.log);
             }
@@ -765,15 +765,15 @@ namespace ReflectTools.AutoPME
                 ScenarioResult sr = new ScenarioResult();
 
                 sr.IncCounters(newTabIndex < 0, "FAILED: exception was thrown for non-negative value", p.log);
-                sr.IncCounters(c.TabIndex == initTabIndex, "FAILED: didn't preserve initial TabIndex", p.log);
+                sr.IncCounters(_c.TabIndex == initTabIndex, "FAILED: didn't preserve initial TabIndex", p.log);
                 return sr;
             }
             catch (Exception e)
             {
                 return new ScenarioResult(false, "FAILED: unexpected exception was thrown: " + e.Message, p.log);
             }
-            p.log.WriteLine("new TabIndex: " + c.TabIndex.ToString());
-            return new ScenarioResult(c.TabIndex == newTabIndex, "FAILED: set/get TabIndex", p.log);
+            p.log.WriteLine("new TabIndex: " + _c.TabIndex.ToString());
+            return new ScenarioResult(_c.TabIndex == newTabIndex, "FAILED: set/get TabIndex", p.log);
         }
 
         protected virtual ScenarioResult set_TabStop(TParams p, bool value)
@@ -783,14 +783,14 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_TabStop(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            bool b = c.TabStop;
+            bool b = _c.TabStop;
 
             p.log.WriteLine("TabStop was " + b.ToString());
-            c.TabStop = !b;
+            _c.TabStop = !b;
 
-            bool bb = c.TabStop;
+            bool bb = _c.TabStop;
 
             p.log.WriteLine("TabStop is " + bb.ToString());
             return new ScenarioResult(b != bb);
@@ -803,17 +803,17 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Text(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            String sold = c.Text;
+            String sold = _c.Text;
             String ss = p.ru.GetString(32, true);
 
             p.log.WriteLine("Text was " + sold);
             p.log.WriteLine("Setting Text to " + ss);
             textInASCII(ss);
-            c.Text = ss;
+            _c.Text = ss;
 
-            String s = c.Text;
+            String s = _c.Text;
 
             p.log.WriteLine("Text is " + s);
             textInASCII(s);
@@ -846,50 +846,50 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Top(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            int l = c.Top;
+            int l = _c.Top;
 
-            p.log.WriteLine("current IsHandleCreated: " + c.IsHandleCreated);
-            p.log.WriteLine("current Visible: " + c.Visible);
-            p.log.WriteLine("Current dock: " + c.Dock.ToString());
+            p.log.WriteLine("current IsHandleCreated: " + _c.IsHandleCreated);
+            p.log.WriteLine("current Visible: " + _c.Visible);
+            p.log.WriteLine("Current dock: " + _c.Dock.ToString());
             p.log.WriteLine("Top was " + l.ToString());
 
-            int ll = p.ru.GetRange(-c.Width / 2, p.ru.GetScreenPoint().Y - (c.Width / 2));
+            int ll = p.ru.GetRange(-_c.Width / 2, p.ru.GetScreenPoint().Y - (_c.Width / 2));
 
             p.log.WriteLine("Setting top to " + ll.ToString());
-            c.Top = ll;
-            p.log.WriteLine("Top is " + c.Top.ToString());
-            if (PreHandleMode && c is Splitter && (c.Parent != null))
+            _c.Top = ll;
+            p.log.WriteLine("Top is " + _c.Top.ToString());
+            if (PreHandleMode && _c is Splitter && (_c.Parent != null))
             {
                 p.log.WriteLine("testing Splitter in PreHandle mode");
-                p.log.WriteLine("curent IsHandleCreated: " + c.IsHandleCreated);
-                return new ScenarioResult(c.Top == l, "FAIL: Expected " + l, p.log);
+                p.log.WriteLine("curent IsHandleCreated: " + _c.IsHandleCreated);
+                return new ScenarioResult(_c.Top == l, "FAIL: Expected " + l, p.log);
             }
             else
                 // Top will change only when Dock is None and control is visible and the handle is created
-                if (c.Dock != DockStyle.None && c.Visible && c.IsHandleCreated)
-                    return new ScenarioResult(c.Top == l, "FAIL: Expected " + l, p.log);
+                if (_c.Dock != DockStyle.None && _c.Visible && _c.IsHandleCreated)
+                    return new ScenarioResult(_c.Top == l, "FAIL: Expected " + l, p.log);
                 else
-                    return new ScenarioResult(c.Top == ll, "FAIL: Expected " + l, p.log);
+                    return new ScenarioResult(_c.Top == ll, "FAIL: Expected " + l, p.log);
         }
 
         protected virtual ScenarioResult get_TopLevelControl(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
 
             Control actual = null;
             ScenarioResult sr = new ScenarioResult();
             bool bSet = SecurityCheck(sr, delegate
             {
-                actual = c.TopLevelControl;
+                actual = _c.TopLevelControl;
             }, typeof(Control).GetMethod("get_TopLevelControl"), LibSecurity.AllWindows);
 
             Control expected = null;
             if (bSet)
             {
-                expected = c;
+                expected = _c;
                 while (expected != null && !(expected is Form && ((Form)expected).TopLevel))
                 { expected = SafeMethods.GetParent(expected); }
             }
@@ -904,16 +904,16 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult get_Visible(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            bool b = c.Visible;
+            bool b = _c.Visible;
             bool bb;
 
             p.log.WriteLine("Visible was " + b.ToString());
-            c.Visible = !b;
-            bb = c.Visible;
+            _c.Visible = !b;
+            bb = _c.Visible;
             p.log.WriteLine("Visible is " + bb.ToString());
-            c.Visible = b;
+            _c.Visible = b;
 
             bool expected = !b;
 
@@ -938,18 +938,10 @@ namespace ReflectTools.AutoPME
 
         protected virtual ScenarioResult BringToFront(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            /*      //TODO: add case for Control without parent
-            bool bParent = (c.Parent != null);
-            bool b1 = (this == c);
-            p.log.WriteLine("current control has parent: " + bParent.ToString() + ", c & this same: " + b1.ToString());
-
-            // saving current state of the control
-            int initInd = this.Controls.GetChildIndex(c);
-    */
-                        // send control to Front, its ChildIndex should become 0
-            c.BringToFront();
+            // send control to Front, its ChildIndex should become 0
+            _c.BringToFront();
 
             /*       int ind = this.Controls.GetChildIndex(c);
             p.log.WriteLine("after bringing control to Front its ChildIndex: " + ind.ToString());
@@ -1024,17 +1016,17 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult Contains(TParams p, Control ctl)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            ctl = c;
+            ctl = _c;
 
-            System.Windows.Forms.Control.ControlCollection cc = c.Controls;
+            System.Windows.Forms.Control.ControlCollection cc = _c.Controls;
 
             if (cc.Count != 0) ctl = (Control)(cc[0]);
 
-            bool b = c.Contains(ctl);
+            bool b = _c.Contains(ctl);
 
-            if (ctl == c)
+            if (ctl == _c)
                 return new ScenarioResult(!b, "Contains should return false for self");
             else
                 return new ScenarioResult(b, "Contains failed for contained control");
@@ -1042,32 +1034,32 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_ContainsFocus(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult sr = new ScenarioResult();
 
             // We'll use ContainsFocus instead of Focused since a control's child can have focus
             // and Focused will return false
-            bool b = c.ContainsFocus;
+            bool b = _c.ContainsFocus;
 
             p.log.WriteLine(" initial ContainsFocus: " + b.ToString());
             p.log.WriteLine("1. setting Focus to control...");
-            SafeMethods.Focus(c);
+            SafeMethods.Focus(_c);
 
-            p.log.WriteLine(" new Focused: " + c.Focused.ToString());
-            p.log.WriteLine(" ContainsFocus returns: " + c.ContainsFocus.ToString());
-            if (PreHandleMode && c is Form)
+            p.log.WriteLine(" new Focused: " + _c.Focused.ToString());
+            p.log.WriteLine(" ContainsFocus returns: " + _c.ContainsFocus.ToString());
+            if (PreHandleMode && _c is Form)
             {
-                c = (Control)CreateObject(p);
+                _c = (Control)CreateObject(p);
             }
 
             // Forms with child controls or forms return false for Focused and true for ContainsFocus.
-            if (!PreHandleMode && (c.Focused || c is UpDownBase || (c is Form && !c.Focused && (((Form)c).IsMdiContainer) || c.Controls.Count > 0)))
-                sr.IncCounters(c.ContainsFocus, "FAILED: returned False for focused control", p.log);
+            if (!PreHandleMode && (_c.Focused || _c is UpDownBase || (_c is Form && !_c.Focused && (((Form)_c).IsMdiContainer) || _c.Controls.Count > 0)))
+                sr.IncCounters(_c.ContainsFocus, "FAILED: returned False for focused control", p.log);
             else
-                sr.IncCounters(!c.ContainsFocus, "FAILED: returned True for non-focused control", p.log);
+                sr.IncCounters(!_c.ContainsFocus, "FAILED: returned True for non-focused control", p.log);
 
-            System.Windows.Forms.Control.ControlCollection cc = c.Controls;
+            System.Windows.Forms.Control.ControlCollection cc = _c.Controls;
 
             // It doesn't quite work this way on the grid so we'll skip this test.
             if (cc.Count != 0)
@@ -1075,16 +1067,16 @@ return ScenarioResult.Pass;
                 p.log.WriteLine("2. setting Focus to contained control...");
                 SafeMethods.Focus((cc[0]));
                 p.log.WriteLine(" contained control Focused: " + cc[0].Focused.ToString());
-                b = c.ContainsFocus;
+                b = _c.ContainsFocus;
                 if (cc[0].Focused)
                     sr.IncCounters(b, "FAILED: returned False when contained control is focused", p.log);
                 else
                 {
-                    p.log.WriteLine(" control itself is Focused: " + c.Focused.ToString());
-                    if (c.Focused)
-                        sr.IncCounters(c.ContainsFocus, "FAILED: returned False for focused control", p.log);
+                    p.log.WriteLine(" control itself is Focused: " + _c.Focused.ToString());
+                    if (_c.Focused)
+                        sr.IncCounters(_c.ContainsFocus, "FAILED: returned False for focused control", p.log);
                     else
-                        sr.IncCounters(!c.ContainsFocus, "FAILED: returned True for non-focused control", p.log);
+                        sr.IncCounters(!_c.ContainsFocus, "FAILED: returned True for non-focused control", p.log);
                 }
 
                 p.log.WriteLine(" ContainsFocus returns: " + b.ToString());
@@ -1095,7 +1087,7 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult CreateControl(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult sr = new ScenarioResult();
 
@@ -1106,19 +1098,19 @@ return ScenarioResult.Pass;
             //
             bool b;
 
-            p.log.WriteLine("   Initial Created: " + c.Created.ToString());
+            p.log.WriteLine("   Initial Created: " + _c.Created.ToString());
             p.log.WriteLine("1. calling CreateControl() on already created control with Visible=true");
-            b = c.Visible;               // saving initial Visible
-            c.Visible = true;
-            c.CreateControl();
-            p.log.WriteLine("   new Created: " + c.Created.ToString());
-            sr.IncCounters(c.Created, "FAILED: to maintain control created when it's visible", p.log);
+            b = _c.Visible;               // saving initial Visible
+            _c.Visible = true;
+            _c.CreateControl();
+            p.log.WriteLine("   new Created: " + _c.Created.ToString());
+            sr.IncCounters(_c.Created, "FAILED: to maintain control created when it's visible", p.log);
             p.log.WriteLine("2. calling CreateControl() on already created control with Visible=false");
-            c.Visible = false;
-            c.CreateControl();
-            p.log.WriteLine("   new Created: " + c.Created.ToString());
-            sr.IncCounters(c.Created, "FAILED: to maintain control created when it's not visible", p.log);
-            c.Visible = b;                  // restoring initial Visible
+            _c.Visible = false;
+            _c.CreateControl();
+            p.log.WriteLine("   new Created: " + _c.Created.ToString());
+            sr.IncCounters(_c.Created, "FAILED: to maintain control created when it's not visible", p.log);
+            _c.Visible = b;                  // restoring initial Visible
 
             //
             // declaring new control, that is not initially created
@@ -1174,65 +1166,61 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult Focus(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // We'll use ContainsFocus instead of Focused since a control's child can have focus
             // and Focused will return false
-            bool initialFocus = c.ContainsFocus;
-            bool can = c.CanFocus;
+            bool initialFocus = _c.ContainsFocus;
+            bool can = _c.CanFocus;
             ScenarioResult sr = new ScenarioResult();
 
             p.log.WriteLine("ContainsFocus was: " + initialFocus.ToString());
             p.log.WriteLine("CanFocus: " + can.ToString());
 
             bool bSetFocus = SecurityCheck(sr, delegate
-            { c.Focus(); }, typeof(Control).GetMethod("Focus"), LibSecurity.AllWindows);
+            { _c.Focus(); }, typeof(Control).GetMethod("Focus"), LibSecurity.AllWindows);
 
             if (can && bSetFocus)
             {
-                sr.IncCounters(c.CanFocus, "FAIL: did not Focus when CanFocus", p.log);
+                sr.IncCounters(_c.CanFocus, "FAIL: did not Focus when CanFocus", p.log);
             }
             else
             {
-                sr.IncCounters(initialFocus, c.ContainsFocus, "FAIL: performed focusing when Cannot focus(!?)", p.log);
+                sr.IncCounters(initialFocus, _c.ContainsFocus, "FAIL: performed focusing when Cannot focus(!?)", p.log);
             }
 
-            p.log.WriteLine("new ContainsFocus is: " + (c.ContainsFocus).ToString());
+            p.log.WriteLine("new ContainsFocus is: " + (_c.ContainsFocus).ToString());
             return sr;
         }
 
-        //
         // when child-control has Width or Height = 0, GetChildAtPoint cannot retrieve this child
-        //
-        // CONSIDER: Does the control and its children have to be visible for this to work?
-        //
         protected virtual ScenarioResult GetChildAtPoint(TParams p, Point value)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Point pt = p.ru.GetPoint(new Point(c.ClientSize));
+            Point pt = p.ru.GetPoint(new Point(_c.ClientSize));
 
-            p.log.WriteLine("ClientSize of the control: " + c.ClientSize.ToString());
+            p.log.WriteLine("ClientSize of the control: " + _c.ClientSize.ToString());
             p.log.WriteLine("initial point to get a child at: " + pt.ToString());
-            p.log.WriteLine("number of child-controls on the control: " + c.Controls.Count.ToString());
+            p.log.WriteLine("number of child-controls on the control: " + _c.Controls.Count.ToString());
 
             // SECURITY: GetChildAtPoint only demands AllWindows if the control returned from
             //           UnsafeNativeMethods.ChildWindowFromPoint is not a descendant.  This
             //			 should never happen, so we can basically assume this method does not
             //			 require any permissions.  Not much we can do otherwise.
             //AddRequiredPermission(LibSecurity.AllWindows);
-            Control ctl = c.GetChildAtPoint(pt);
+            Control ctl = _c.GetChildAtPoint(pt);
 
-            if ((c.Controls.Count == 0) && (ctl != null))
+            if ((_c.Controls.Count == 0) && (ctl != null))
                 return new ScenarioResult(false, "FAILED: returned non-null for control with no children", p.log);
-            else if ((c.Controls.Count != 0) && (ctl == null))
+            else if ((_c.Controls.Count != 0) && (ctl == null))
             {
                 // point is outside of child-controls - need to adjust it
-                Size clsz = c.Controls[0].ClientSize;
-                Point loc = c.Controls[0].Location;
-                Size parentSz = c.ClientSize;
+                Size clsz = _c.Controls[0].ClientSize;
+                Point loc = _c.Controls[0].Location;
+                Size parentSz = _c.ClientSize;
 
-                p.log.WriteLine("Bounds of 1st child: " + (c.Controls[0].Bounds).ToString());
+                p.log.WriteLine("Bounds of 1st child: " + (_c.Controls[0].Bounds).ToString());
 
                 // picking point within child's ClientArea--constrain it with a 1 pixel border
                 pt = p.ru.GetPoint(1, clsz.Width - 1, 1, clsz.Height - 1);
@@ -1240,15 +1228,15 @@ return ScenarioResult.Pass;
                 // adjust point according to location of child
                 pt = new Point(loc.X + pt.X, loc.Y + pt.Y);
                 p.log.WriteLine("new point to get a child: " + pt.ToString());
-                ctl = c.GetChildAtPoint(pt);
+                ctl = _c.GetChildAtPoint(pt);
 
                 //Utilities.MarkPoint(c, pt);     // For debugging--paint a marker to show the point.
                 // in cases when Width or Height of child = 0, this child cannot be retrieved
 		// ToolStripDropDowns may have scrollbuttons that may or may not be visible
                 // Likewise with controls outside of the client area (and maybe invisible controls?)
-                if ((clsz.Width != 0 && clsz.Height != 0) && (pt.X >= 0 && pt.X < parentSz.Width) && (pt.Y >= 0 && pt.Y < parentSz.Height) && c.Controls[0].Visible)
-                    return new ScenarioResult(ctl == c.Controls[0], "FAILED: Expected " + c.Controls[0] + ", but got " + ctl, p.log);
-	        else if ((c is ToolStripDropDownMenu) && (!c.Controls[0].Visible))
+                if ((clsz.Width != 0 && clsz.Height != 0) && (pt.X >= 0 && pt.X < parentSz.Width) && (pt.Y >= 0 && pt.Y < parentSz.Height) && _c.Controls[0].Visible)
+                    return new ScenarioResult(ctl == _c.Controls[0], "FAILED: Expected " + _c.Controls[0] + ", but got " + ctl, p.log);
+	        else if ((_c is ToolStripDropDownMenu) && (!_c.Controls[0].Visible))
  		    return new ScenarioResult(true);
                 else
                     return new ScenarioResult(ctl == null, "FAILED: Expected null but got " + ctl, p.log);
@@ -1257,40 +1245,36 @@ return ScenarioResult.Pass;
             return ScenarioResult.Pass;
         }
 
-        //
         // when child-control has Width or Height = 0, GetChildAtPoint cannot retrieve this child
-        //
-        // CONSIDER: Does the control and its children have to be visible for this to work?
-        //
         protected virtual ScenarioResult GetChildAtPoint(TParams p, Point value, GetChildAtPointSkip skip)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             skip = p.ru.GetEnumValue<GetChildAtPointSkip>();
-            Point pt = p.ru.GetPoint(new Point(c.ClientSize));
+            Point pt = p.ru.GetPoint(new Point(_c.ClientSize));
 
-            p.log.WriteLine("ClientSize of the control: " + c.ClientSize.ToString());
+            p.log.WriteLine("ClientSize of the control: " + _c.ClientSize.ToString());
             p.log.WriteLine("initial point to get a child at: " + pt.ToString());
-            p.log.WriteLine("number of child-controls on the control: " + c.Controls.Count.ToString());
+            p.log.WriteLine("number of child-controls on the control: " + _c.Controls.Count.ToString());
 
             // SECURITY: GetChildAtPoint only demands AllWindows if the control returned from
             //           UnsafeNativeMethods.ChildWindowFromPoint is not a descendant.  This
             //			 should never happen, so we can basically assume this method does not
             //			 require any permissions.  Not much we can do otherwise.
             //AddRequiredPermission(LibSecurity.AllWindows);
-            Control ctl = c.GetChildAtPoint(pt, skip);
+            Control ctl = _c.GetChildAtPoint(pt, skip);
 
-            if ((c.Controls.Count == 0) && (ctl != null))
+            if ((_c.Controls.Count == 0) && (ctl != null))
                 return new ScenarioResult(false, "FAILED: returned non-null for control with no children", p.log);
-            else if ((c.Controls.Count != 0) && (ctl == null))
+            else if ((_c.Controls.Count != 0) && (ctl == null))
             {
                 // point is outside of child-controls - need to adjust it
-                Control targetControl = c.Controls[0];
+                Control targetControl = _c.Controls[0];
                 Size clsz = targetControl.ClientSize;
                 Point loc = targetControl.Location;
-                Size parentSz = c.ClientSize;
+                Size parentSz = _c.ClientSize;
 
-                p.log.WriteLine("Bounds of 1st child: " + (c.Controls[0].Bounds).ToString());
+                p.log.WriteLine("Bounds of 1st child: " + (_c.Controls[0].Bounds).ToString());
 
                 // picking point within child's ClientArea--constrain it with a 1 pixel border
                 pt = p.ru.GetPoint(1, clsz.Width - 1, 1, clsz.Height - 1);
@@ -1305,7 +1289,7 @@ return ScenarioResult.Pass;
                         try
                         {
                             targetControl.Enabled = false;
-                            ctl = c.GetChildAtPoint(pt, GetChildAtPointSkip.Disabled);
+                            ctl = _c.GetChildAtPoint(pt, GetChildAtPointSkip.Disabled);
                             return new ScenarioResult(null, ctl, "FAIL: should have skipped disabled child", p.log);
                         }
                         finally { targetControl.Enabled = prevEnabled; }
@@ -1314,7 +1298,7 @@ return ScenarioResult.Pass;
                         try
                         {
                             targetControl.Visible = false;
-                            ctl = c.GetChildAtPoint(pt, GetChildAtPointSkip.Invisible);
+                            ctl = _c.GetChildAtPoint(pt, GetChildAtPointSkip.Invisible);
                             return new ScenarioResult(null, ctl, "FAIL: should have skipped disabled child", p.log);
                         }
                         finally { targetControl.Visible = prevVisible; }
@@ -1325,16 +1309,16 @@ return ScenarioResult.Pass;
                         //normal testing follows
                         break;
                 }
-                ctl = c.GetChildAtPoint(pt, GetChildAtPointSkip.None);
+                ctl = _c.GetChildAtPoint(pt, GetChildAtPointSkip.None);
 
 
                 //Utilities.MarkPoint(c, pt);     // For debugging--paint a marker to show the point.
                 // in cases when Width or Height of child = 0, this child cannot be retrieved
 		// ToolStripDropDowns may have scrollbuttons that may or may not be visible
                 // Likewise with controls outside of the client area (and maybe invisible controls?)
-                if ((clsz.Width != 0 && clsz.Height != 0) && (pt.X >= 0 && pt.X < parentSz.Width) && (pt.Y >= 0 && pt.Y < parentSz.Height) && c.Controls[0].Visible)
-                    return new ScenarioResult(ctl == c.Controls[0], "FAILED: Expected " + c.Controls[0] + ", but got " + ctl, p.log);
-		else if ((c is ToolStripDropDownMenu) && (!c.Controls[0].Visible))
+                if ((clsz.Width != 0 && clsz.Height != 0) && (pt.X >= 0 && pt.X < parentSz.Width) && (pt.Y >= 0 && pt.Y < parentSz.Height) && _c.Controls[0].Visible)
+                    return new ScenarioResult(ctl == _c.Controls[0], "FAILED: Expected " + _c.Controls[0] + ", but got " + ctl, p.log);
+		else if ((_c is ToolStripDropDownMenu) && (!_c.Controls[0].Visible))
 		    return new ScenarioResult(true);
                 else
                     return new ScenarioResult(ctl == null, "FAILED: Expected null but got " + ctl, p.log);
@@ -1346,16 +1330,16 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult GetContainerControl(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult sr = new ScenarioResult();
             IContainerControl container = null;
             bool bSuccess = SecurityCheck(sr, delegate
-            { container = c.GetContainerControl(); }, typeof(Control).GetMethod("GetContainerControl"), LibSecurity.AllWindows);
+            { container = _c.GetContainerControl(); }, typeof(Control).GetMethod("GetContainerControl"), LibSecurity.AllWindows);
 
             if (bSuccess && container != null)
             {
-                Control current = c;
+                Control current = _c;
                 bool bFoundContainer = false;
                 while (null != current)
                 {
@@ -1370,17 +1354,17 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult GetNextControl(TParams p, Control ctl, Boolean forward)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult sr = ScenarioResult.Pass;
 
-            if (c.Controls.Count != 0)
+            if (_c.Controls.Count != 0)
             {
-                ctl = (Control)(c.Controls[0]);
+                ctl = (Control)(_c.Controls[0]);
 
-                Control cc = c.GetNextControl(ctl, true);
+                Control cc = _c.GetNextControl(ctl, true);
 
-                cc = c.GetNextControl(cc, false);
+                cc = _c.GetNextControl(cc, false);
                 sr = new ScenarioResult(cc == ctl, "Forward and back didn't return same control");
             }
 
@@ -1389,32 +1373,24 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult Hide(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             bool b;
 
-            c.Hide();
-            b = c.Visible;
-            c.Show();
+            _c.Hide();
+            b = _c.Visible;
+            _c.Show();
             return new ScenarioResult(!b, "Hide didn't set Visible to false");
         }
 
-        private bool painted = false;
+        private bool _painted = false;
 
         private void Painted(Object source, PaintEventArgs e)
         {
-            painted = true;
+            _painted = true;
             scenarioParams.log.WriteLine("*******************PAINT EVENT FIRED***********************");
         }
 
-        // TODO: Several controls (e.g. MonthCalendar, GroupBox, Label, TabControl, TextBox
-        //                              RichTextBox, ProgressBar)
-        //       do not get paint events. You can add a PaintEvent handler to those controls,
-        //       but you don't end up getting any PaintEvents. We need to find a way to deal
-        //       with all controls in a generic manner, or we need to special case these
-        //       scenarios in each of those XTests and just return ScenarioResult.Pass after
-        //       calling the appropriate Update method.
-        //
         // You can tell if a control should receive Paint events by seeing if it or its
         // base class calls SetStyle(ControlStyles.UserPaint, true).  UserPaint is false by
         // default so it must explicitly be set to true for the control to receive paint
@@ -1488,9 +1464,9 @@ return ScenarioResult.Pass;
 		protected virtual void PrepareForInvalidate(TParams p)
 		{
 			this.Size = new Size(800, 800);
-			c = GetControl(p);
-			c.Size = new Size(200, 200);
-			c.Location = new Point(200, 200);
+			_c = GetControl(p);
+			_c.Size = new Size(200, 200);
+			_c.Location = new Point(200, 200);
 
 			SafeMethods.Activate(this);
 			SafeMethods.Focus(this);
@@ -1501,20 +1477,20 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult Invalidate(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // make sure the control is visible and created
-            if (c is Form) ((Form)c).TopLevel = false;
+            if (_c is Form) ((Form)_c).TopLevel = false;
 
             AddObjectToForm(p);
             Application.DoEvents();
-            c.Visible = true;
+            _c.Visible = true;
             Application.DoEvents();
-            p.log.WriteLine("Bounds are " + c.Bounds.ToString());
-            p.log.WriteLine("ClientRectangle is " + c.ClientRectangle.ToString());
+            p.log.WriteLine("Bounds are " + _c.Bounds.ToString());
+            p.log.WriteLine("ClientRectangle is " + _c.ClientRectangle.ToString());
             p.log.WriteLine("Form.ClentSize: " + this.ClientSize.ToString());
-            MoveControlOutOfSecurityBubble(p, c);
-            if (controlWillNotInvalidate(c, p))
+            MoveControlOutOfSecurityBubble(p, _c);
+            if (controlWillNotInvalidate(_c, p))
             {
                 return ScenarioResult.Pass;
             }
@@ -1522,108 +1498,108 @@ return ScenarioResult.Pass;
             ScenarioResult sr = new ScenarioResult();
 	    PrepareForInvalidate(p);
 
-            painted = false;
+            _painted = false;
 
 
 
             PaintEventHandler peh = new PaintEventHandler(this.Painted);
 
-            ((Control)c).Paint += peh;
+            ((Control)_c).Paint += peh;
 
             // need to make sure that there is visible rectangle to  Invalidate
-            if (GetVisibleRectangle(p, c) == Rectangle.Empty)
+            if (GetVisibleRectangle(p, _c) == Rectangle.Empty)
             {
                 return ScenarioResult.Pass;
             }
 
-            c.Invalidate();
-            p.log.WriteLine("before DoEvents onPaint was called: " + painted.ToString());
-            if (painted) sr.Comments = "Invalidate not asynchronous";
+            _c.Invalidate();
+            p.log.WriteLine("before DoEvents onPaint was called: " + _painted.ToString());
+            if (_painted) sr.Comments = "Invalidate not asynchronous";
 
-            sr.IncCounters(!painted);
+            sr.IncCounters(!_painted);
             Application.DoEvents();
-            p.log.WriteLine("after DoEvents onPaint was called: " + painted.ToString());
-            if (!IsSpecialCasePaintControl(c))
+            p.log.WriteLine("after DoEvents onPaint was called: " + _painted.ToString());
+            if (!IsSpecialCasePaintControl(_c))
             {
-                if (!painted) sr.Comments = "DoEvents did not process Paint message";
+                if (!_painted) sr.Comments = "DoEvents did not process Paint message";
 
-                sr.IncCounters(painted);
+                sr.IncCounters(_painted);
             }
 
-            p.log.WriteLine("current Visible: " + c.Visible);
-            painted = false;
-            c.Invalidate();
-            c.Update();
-            p.log.WriteLine("after Invalidate&Update onPaint was called: " + painted.ToString());
-            if (!IsSpecialCasePaintControl(c))
+            p.log.WriteLine("current Visible: " + _c.Visible);
+            _painted = false;
+            _c.Invalidate();
+            _c.Update();
+            p.log.WriteLine("after Invalidate&Update onPaint was called: " + _painted.ToString());
+            if (!IsSpecialCasePaintControl(_c))
             {
-                if (!painted) sr.Comments = "Update didn't process Paint message";
+                if (!_painted) sr.Comments = "Update didn't process Paint message";
 
-                sr.IncCounters(painted);
+                sr.IncCounters(_painted);
             }
 
-            ((Control)c).Paint -= peh;
+            ((Control)_c).Paint -= peh;
             return sr;
         }
 
         protected virtual ScenarioResult Invalidate(TParams p, Boolean invalidateChildren)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // make sure the control is visible and created
-            if (c is Form) ((Form)c).TopLevel = false;
+            if (_c is Form) ((Form)_c).TopLevel = false;
 
             AddObjectToForm(p);
-            c.Visible = true;
-            MoveControlOutOfSecurityBubble(p, c);
-            if (controlWillNotInvalidate(c, p))
+            _c.Visible = true;
+            MoveControlOutOfSecurityBubble(p, _c);
+            if (controlWillNotInvalidate(_c, p))
             {
                 return ScenarioResult.Pass;
             }
 
             ScenarioResult sr = new ScenarioResult();
 
-            painted = false;
+            _painted = false;
 
 			PrepareForInvalidate(p);
 
             PaintEventHandler peh = new PaintEventHandler(this.Painted);
 
-            ((Control)c).Paint += peh;
+            ((Control)_c).Paint += peh;
 
             // need to make sure that there is visible rectangle to  Invalidate
-            if (GetVisibleRectangle(p, c) == Rectangle.Empty)
+            if (GetVisibleRectangle(p, _c) == Rectangle.Empty)
             {
                 return ScenarioResult.Pass;
             }
 
-            c.Invalidate(true);
-            p.log.WriteLine("before DoEvents onPaint was called: " + painted.ToString());
-            if (painted) sr.Comments = "Invalidate not asynchronous";
+            _c.Invalidate(true);
+            p.log.WriteLine("before DoEvents onPaint was called: " + _painted.ToString());
+            if (_painted) sr.Comments = "Invalidate not asynchronous";
 
-            sr.IncCounters(!painted);
+            sr.IncCounters(!_painted);
             Application.DoEvents();
-            p.log.WriteLine("after DoEvents onPaint was called: " + painted.ToString());
-            if (!IsSpecialCasePaintControl(c))
+            p.log.WriteLine("after DoEvents onPaint was called: " + _painted.ToString());
+            if (!IsSpecialCasePaintControl(_c))
             {
-                if (!painted) sr.Comments = "DoEvents did not process Paint message";
+                if (!_painted) sr.Comments = "DoEvents did not process Paint message";
 
-                sr.IncCounters(painted);
+                sr.IncCounters(_painted);
             }
 
-            p.log.WriteLine("current Visible: " + c.Visible);
-            painted = false;
-            c.Invalidate(false);
-            c.Update();
-            p.log.WriteLine("after Invalidate&Update onPaint was called: " + painted.ToString());
-            if (!IsSpecialCasePaintControl(c))
+            p.log.WriteLine("current Visible: " + _c.Visible);
+            _painted = false;
+            _c.Invalidate(false);
+            _c.Update();
+            p.log.WriteLine("after Invalidate&Update onPaint was called: " + _painted.ToString());
+            if (!IsSpecialCasePaintControl(_c))
             {
-                if (!painted) sr.Comments = "Update didn't process Paint message";
+                if (!_painted) sr.Comments = "Update didn't process Paint message";
 
-                sr.IncCounters(painted);
+                sr.IncCounters(_painted);
             }
 
-            ((Control)c).Paint -= peh;
+            ((Control)_c).Paint -= peh;
             return sr;
         }
 
@@ -1697,36 +1673,36 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult Invalidate(TParams p, Rectangle rc)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("control ClientRectangle is " + c.ClientRectangle.ToString());
+            p.log.WriteLine("control ClientRectangle is " + _c.ClientRectangle.ToString());
             p.log.WriteLine("Form ClientRectangle is " + this.ClientRectangle.ToString());
 
             // make sure the control is visible and created
-            if (c is Form) ((Form)c).TopLevel = false;
-            if (c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
+            if (_c is Form) ((Form)_c).TopLevel = false;
+            if (_c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
             {
-                ((ToolStripDropDown)c).TopLevel = false;
-                ((ToolStripDropDown)c).Parent = this;
+                ((ToolStripDropDown)_c).TopLevel = false;
+                ((ToolStripDropDown)_c).Parent = this;
             }
 
             AddObjectToForm(p);
-            c.Visible = true;
+            _c.Visible = true;
             Application.DoEvents();
 
             // on WinXP and Win98 have to give some time to receive previous events
             System.Threading.Thread.Sleep(500);
 
             // more debug info for Panel
-            if (c is Panel)
+            if (_c is Panel)
             {
-                p.log.WriteLine("location of Panel: " + ((Panel)c).Location.ToString());
-                p.log.WriteLine("Form contains Panel: " + this.Controls.Contains(c));
-                ((Panel)c).AutoScroll = false;   // if scrollbar is only visible then no invalidation
+                p.log.WriteLine("location of Panel: " + ((Panel)_c).Location.ToString());
+                p.log.WriteLine("Form contains Panel: " + this.Controls.Contains(_c));
+                ((Panel)_c).AutoScroll = false;   // if scrollbar is only visible then no invalidation
             }
 
-            MoveControlOutOfSecurityBubble(p, c);
-            if (controlWillNotInvalidate(c, p))
+            MoveControlOutOfSecurityBubble(p, _c);
+            if (controlWillNotInvalidate(_c, p))
             {
                 return ScenarioResult.Pass;
             }
@@ -1735,12 +1711,12 @@ return ScenarioResult.Pass;
 
 			PrepareForInvalidate(p); 
 			
-			painted = false;
+			_painted = false;
 
             PaintEventHandler peh = new PaintEventHandler(this.Painted);
 
-            ((Control)c).Paint += peh;
-            rc = GetVisibleRectangle(p, c);
+            ((Control)_c).Paint += peh;
+            rc = GetVisibleRectangle(p, _c);
 
             // doesn't make sense to invalidate empty rectangle
             if (rc == Rectangle.Empty)
@@ -1748,11 +1724,11 @@ return ScenarioResult.Pass;
                 return ScenarioResult.Pass;
             }
 
-            p.log.WriteLine("intersection to be Invalidated: " + Rectangle.Intersect(c.ClientRectangle, rc).ToString());
+            p.log.WriteLine("intersection to be Invalidated: " + Rectangle.Intersect(_c.ClientRectangle, rc).ToString());
 
             // for controls with border when rectangle to Invalidate contains only border
             // onPaint will not be triggered
-            if ((Rectangle.Intersect(c.ClientRectangle, rc).Width < 3 || Rectangle.Intersect(c.ClientRectangle, rc).Height < 3))
+            if ((Rectangle.Intersect(_c.ClientRectangle, rc).Width < 3 || Rectangle.Intersect(_c.ClientRectangle, rc).Height < 3))
             {
                 p.log.WriteLine("  Invalidate will not be triggered");
                 return ScenarioResult.Pass;
@@ -1763,77 +1739,77 @@ return ScenarioResult.Pass;
 
             // in case of 'bizarre' region rectangle-to-invalidate may not be within visible
             // part of the control - to ensure visibility change region to standard 'rectangle'-region
-            ((Control)c).Region = null;
-            c.Invalidate(rc);
-            p.log.WriteLine("before DoEvents onPaint was called: " + painted.ToString());
-            if (painted) sr.Comments = "Invalidate not asynchronous";
+            ((Control)_c).Region = null;
+            _c.Invalidate(rc);
+            p.log.WriteLine("before DoEvents onPaint was called: " + _painted.ToString());
+            if (_painted) sr.Comments = "Invalidate not asynchronous";
 
-            sr.IncCounters(!painted);
+            sr.IncCounters(!_painted);
             Application.DoEvents();
-            p.log.WriteLine("after DoEvents onPaint was called: " + painted.ToString());
-            if (!IsSpecialCasePaintControl(c))
-                sr.IncCounters(painted, "DoEvents did not process Paint message: " + rc.ToString(), p.log);
+            p.log.WriteLine("after DoEvents onPaint was called: " + _painted.ToString());
+            if (!IsSpecialCasePaintControl(_c))
+                sr.IncCounters(_painted, "DoEvents did not process Paint message: " + rc.ToString(), p.log);
 
-            painted = false;
-            rc = GetVisibleRectangle(p, c);
+            _painted = false;
+            rc = GetVisibleRectangle(p, _c);
 
             // rectangle to update is in Form coordinates already
             p.log.WriteLine("rectangle to update is " + rc.ToString());
-            p.log.WriteLine("intersection to be Invalidated: " + Rectangle.Intersect(c.ClientRectangle, rc).ToString());
+            p.log.WriteLine("intersection to be Invalidated: " + Rectangle.Intersect(_c.ClientRectangle, rc).ToString());
 
             // for controls with border when rectangle to Invalidate contains only border
             // onPaint will not be triggered
-            if ((Rectangle.Intersect(c.ClientRectangle, rc).Width < 3 || Rectangle.Intersect(c.ClientRectangle, rc).Height < 3))
+            if ((Rectangle.Intersect(_c.ClientRectangle, rc).Width < 3 || Rectangle.Intersect(_c.ClientRectangle, rc).Height < 3))
             {
                 p.log.WriteLine(" Invalidate will not be triggered");
                 return ScenarioResult.Pass;
             }
 
-            p.log.WriteLine("current Visible: " + c.Visible);
-            c.Invalidate(rc);
-            c.Update();
-            p.log.WriteLine("after Invalidate&Update onPaint was called: " + painted.ToString());
-            if (!IsSpecialCasePaintControl(c))
-                sr.IncCounters(painted, "Update didn't process Paint message: " + rc.ToString(), p.log);
+            p.log.WriteLine("current Visible: " + _c.Visible);
+            _c.Invalidate(rc);
+            _c.Update();
+            p.log.WriteLine("after Invalidate&Update onPaint was called: " + _painted.ToString());
+            if (!IsSpecialCasePaintControl(_c))
+                sr.IncCounters(_painted, "Update didn't process Paint message: " + rc.ToString(), p.log);
 
-            c.Paint -= peh;
-            if (c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
+            _c.Paint -= peh;
+            if (_c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
             {
-                ((ToolStripDropDown)c).Parent = null;
-                ((ToolStripDropDown)c).TopLevel = true;
+                ((ToolStripDropDown)_c).Parent = null;
+                ((ToolStripDropDown)_c).TopLevel = true;
             }
             return sr;
         }
 
         protected virtual ScenarioResult Invalidate(TParams p, Rectangle rc, Boolean invalidateChildren)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("ClientRectangle is " + c.ClientRectangle.ToString());
+            p.log.WriteLine("ClientRectangle is " + _c.ClientRectangle.ToString());
 
             // make sure the control is visible and created
-            if (c is Form) ((Form)c).TopLevel = false;
-            if (c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
+            if (_c is Form) ((Form)_c).TopLevel = false;
+            if (_c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
             {
-                ((ToolStripDropDown)c).TopLevel = false;
-                ((ToolStripDropDown)c).Parent = this;
+                ((ToolStripDropDown)_c).TopLevel = false;
+                ((ToolStripDropDown)_c).Parent = this;
             }
 
             AddObjectToForm(p);
-            c.Visible = true;
+            _c.Visible = true;
             Application.DoEvents();
 
             // on WinXP     and Win98 have to give some time for previous events to be received
             System.Threading.Thread.Sleep(500);
-            if (c is Panel)
+            if (_c is Panel)
             {
-                p.log.WriteLine("location of Panel: " + ((Panel)c).Location.ToString());
-                p.log.WriteLine("Form contains Panel: " + this.Controls.Contains(c));
-                ((Panel)c).AutoScroll = false;  // if scrollbar only visible - no invalidating
+                p.log.WriteLine("location of Panel: " + ((Panel)_c).Location.ToString());
+                p.log.WriteLine("Form contains Panel: " + this.Controls.Contains(_c));
+                ((Panel)_c).AutoScroll = false;  // if scrollbar only visible - no invalidating
             }
 
-            MoveControlOutOfSecurityBubble(p, c);
-            if (controlWillNotInvalidate(c, p))
+            MoveControlOutOfSecurityBubble(p, _c);
+            if (controlWillNotInvalidate(_c, p))
             {
                 return ScenarioResult.Pass;
             }
@@ -1842,12 +1818,12 @@ return ScenarioResult.Pass;
 
 			PrepareForInvalidate(p);
 
-            painted = false;
+            _painted = false;
 
             PaintEventHandler peh = new PaintEventHandler(this.Painted);
 
-            ((Control)c).Paint += peh;
-            rc = GetVisibleRectangle(p, c);
+            ((Control)_c).Paint += peh;
+            rc = GetVisibleRectangle(p, _c);
 
             // doesn't make sense to invalidate empty rectangle
             if (rc == Rectangle.Empty)
@@ -1858,7 +1834,7 @@ return ScenarioResult.Pass;
             //    p.log.WriteLine("intersection to be Invalidated: " + Rectangle.Intersect(c.ClientRectangle, rc).ToString());
             // for controls with border when rectangle to Invalidate contains only border
             // onPaint will not be triggered
-            if ((Rectangle.Intersect(c.ClientRectangle, rc).Width < 3 || Rectangle.Intersect(c.ClientRectangle, rc).Height < 3))
+            if ((Rectangle.Intersect(_c.ClientRectangle, rc).Width < 3 || Rectangle.Intersect(_c.ClientRectangle, rc).Height < 3))
             {
                 p.log.WriteLine("  Invalidate will not be triggered");
                 return ScenarioResult.Pass;
@@ -1869,22 +1845,22 @@ return ScenarioResult.Pass;
 
             // in case of 'bizarre' region rectangle-to-invalidate may not be within visible
             // part of the control - to ensure visibility change region to standard 'rectangle'-region
-            ((Control)c).Region = null;
-            c.Invalidate(rc, true);
-            p.log.WriteLine("before DoEvents onPaint was called: " + painted.ToString());
-            if (painted) sr.Comments = "Invalidate not asynchronous";
+            ((Control)_c).Region = null;
+            _c.Invalidate(rc, true);
+            p.log.WriteLine("before DoEvents onPaint was called: " + _painted.ToString());
+            if (_painted) sr.Comments = "Invalidate not asynchronous";
 
-            sr.IncCounters(!painted);
+            sr.IncCounters(!_painted);
             Application.DoEvents();
-            p.log.WriteLine("after DoEvents onPaint was called: " + painted.ToString());
-            if (!IsSpecialCasePaintControl(c))
+            p.log.WriteLine("after DoEvents onPaint was called: " + _painted.ToString());
+            if (!IsSpecialCasePaintControl(_c))
             {
-                if (!painted) sr.Comments = "DoEvents did not process Paint message: " + rc.ToString(); ;
-                sr.IncCounters(painted);
+                if (!_painted) sr.Comments = "DoEvents did not process Paint message: " + rc.ToString(); ;
+                sr.IncCounters(_painted);
             }
 
-            painted = false;
-            rc = GetVisibleRectangle(p, c);
+            _painted = false;
+            rc = GetVisibleRectangle(p, _c);
 
             // rectangle to update in in Form's coordinates already
             p.log.WriteLine("rectangle to update is " + rc.ToString());
@@ -1892,28 +1868,28 @@ return ScenarioResult.Pass;
             //    p.log.WriteLine("intersection to be Invalidated: " + Rectangle.Intersect(c.ClientRectangle, rc).ToString());
             // for controls with border when rectangle to Invalidate contains only border
             // onPaint will not be triggered
-            if ((Rectangle.Intersect(c.ClientRectangle, rc).Width < 3 || Rectangle.Intersect(c.ClientRectangle, rc).Height < 3))
+            if ((Rectangle.Intersect(_c.ClientRectangle, rc).Width < 3 || Rectangle.Intersect(_c.ClientRectangle, rc).Height < 3))
             {
                 p.log.WriteLine(" Invalidate will not be triggered");
                 return ScenarioResult.Pass;
             }
 
-            p.log.WriteLine("current Visible: " + c.Visible);
-            c.Invalidate(rc, false);
-            c.Update();
-            p.log.WriteLine("after Invalidate&Update onPaint was called: " + painted.ToString());
-            if (!IsSpecialCasePaintControl(c))
+            p.log.WriteLine("current Visible: " + _c.Visible);
+            _c.Invalidate(rc, false);
+            _c.Update();
+            p.log.WriteLine("after Invalidate&Update onPaint was called: " + _painted.ToString());
+            if (!IsSpecialCasePaintControl(_c))
             {
-                if (!painted) sr.Comments = "Update didn't process Paint message: " + rc.ToString();
+                if (!_painted) sr.Comments = "Update didn't process Paint message: " + rc.ToString();
 
-                sr.IncCounters(painted);
+                sr.IncCounters(_painted);
             }
 
-            ((Control)c).Paint -= peh;
-            if (c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
+            ((Control)_c).Paint -= peh;
+            if (_c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
             {
-                ((ToolStripDropDown)c).Parent = null;
-                ((ToolStripDropDown)c).TopLevel = true;
+                ((ToolStripDropDown)_c).Parent = null;
+                ((ToolStripDropDown)_c).TopLevel = true;
             }
             return sr;
         }
@@ -1959,67 +1935,61 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult PerformLayout(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            c.PerformLayout();
+            _c.PerformLayout();
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult PerformLayout(TParams p, Control affectedControl, String affectedProperty)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             affectedControl = null;
-            if (c.Controls.Count != 0)
-                affectedControl = (Control)(c.Controls[0]);
+            if (_c.Controls.Count != 0)
+                affectedControl = (Control)(_c.Controls[0]);
 
-            //TODO: We have to change the following line.
             affectedProperty = "Visible";
-            c.PerformLayout(affectedControl, affectedProperty);
+            _c.PerformLayout(affectedControl, affectedProperty);
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult PointToClient(TParams p, Point pt)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             pt = p.ru.GetPoint();
-            return new ScenarioResult(c.PointToClient(c.PointToScreen(pt)).Equals(pt));
+            return new ScenarioResult(_c.PointToClient(_c.PointToScreen(pt)).Equals(pt));
         }
 
         protected virtual ScenarioResult PointToScreen(TParams p, Point pt)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             pt = p.ru.GetPoint();
-            return new ScenarioResult(c.PointToScreen(c.PointToClient(pt)).Equals(pt));
+            return new ScenarioResult(_c.PointToScreen(_c.PointToClient(pt)).Equals(pt));
         }
 
         protected virtual ScenarioResult PreProcessMessage(TParams p, ref Message msg)
         {
-            // UNDONE: can't test this the standard way because it only does a LinkDemand, and this
-            //         assembly has full trust, so it passes.
-            //AddRequiredPermission(LibSecurity.UnmanagedCode);
-            // TODO: implement.
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             Message m = new Message();
 
-            c.PreProcessMessage(ref m);
+            _c.PreProcessMessage(ref m);
             return InternalOnlyMethod(p);
         }
 
-
 		protected virtual ScenarioResult PreProcessControlMessage(TParams p, ref Message msg)
 		{
-			if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+			if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
 			Message m = new Message();
 			ScenarioResult sr = new ScenarioResult();
 			new NamedPermissionSet("FullTrust").Assert();
 //			new SecurityPermission(PermissionState.Unrestricted).Assert();
-			PreProcessControlState pcs = c.PreProcessControlMessage(ref m);
-			Boolean b = c.PreProcessMessage(ref m);
+			PreProcessControlState pcs = _c.PreProcessControlMessage(ref m);
+			Boolean b = _c.PreProcessMessage(ref m);
 
 			switch (pcs)
 			{
@@ -2041,49 +2011,49 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult RectangleToClient(TParams p, Rectangle r)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             r = p.ru.GetRectangle();
-            return new ScenarioResult(c.RectangleToClient(c.RectangleToScreen(r)).Equals(r));
+            return new ScenarioResult(_c.RectangleToClient(_c.RectangleToScreen(r)).Equals(r));
         }
 
         protected virtual ScenarioResult RectangleToScreen(TParams p, Rectangle r)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             r = p.ru.GetRectangle();
-            return new ScenarioResult(c.RectangleToScreen(c.RectangleToClient(r)).Equals(r));
+            return new ScenarioResult(_c.RectangleToScreen(_c.RectangleToClient(r)).Equals(r));
         }
 
         protected virtual ScenarioResult Refresh(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // make sure the control is visible and created
-            if (c is Form) ((Form)c).TopLevel = false;
-            if (c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
+            if (_c is Form) ((Form)_c).TopLevel = false;
+            if (_c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
             {
-                ((ToolStripDropDown)c).TopLevel = false;
-                ((ToolStripDropDown)c).Parent = this;
+                ((ToolStripDropDown)_c).TopLevel = false;
+                ((ToolStripDropDown)_c).Parent = this;
             }
 
             AddObjectToForm(p);
-            c.Visible = true;
-            p.log.WriteLine("current Visible: " + c.Visible);
-            MoveControlOutOfSecurityBubble(p, c);
-            if (controlWillNotInvalidate(c, p))
+            _c.Visible = true;
+            p.log.WriteLine("current Visible: " + _c.Visible);
+            MoveControlOutOfSecurityBubble(p, _c);
+            if (controlWillNotInvalidate(_c, p))
             {
                 return ScenarioResult.Pass;
             }
 
-            painted = false;
+            _painted = false;
 
             PaintEventHandler peh = new PaintEventHandler(this.Painted);
 
-            c.Paint += peh;
+            _c.Paint += peh;
 
             //************************************************
-            Rectangle rc = GetVisibleRectangle(p, c);
+            Rectangle rc = GetVisibleRectangle(p, _c);
 
             // doesn't make sense to invalidate empty rectangle
             if (rc == Rectangle.Empty)
@@ -2093,66 +2063,66 @@ return ScenarioResult.Pass;
 
             // in case of 'bizarre' region rectangle-to-invalidate may not be within visible
             // part of the control - to ensure visibility change region to standard 'rectangle'-region
-            ((Control)c).Region = null;
-            c.Invalidate(rc, true);
+            ((Control)_c).Region = null;
+            _c.Invalidate(rc, true);
 
             //**********************************************************************************
-            c.Refresh();
+            _c.Refresh();
 
             // force success if special-cased paint control
             // !!! for new controls IsSpecialCase.. may return False as they are
             // not named among special controls --> add line for new control in IsSpecial..
-            if (IsSpecialCasePaintControl(c)) painted = true;
+            if (IsSpecialCasePaintControl(_c)) _painted = true;
 
-            c.Paint -= peh;
-            if (c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
+            _c.Paint -= peh;
+            if (_c is ToolStripDropDown && !Utilities.HavePermission(LibSecurity.AllWindows))
             {
-                ((ToolStripDropDown)c).Parent = null;
-                ((ToolStripDropDown)c).TopLevel = true;
+                ((ToolStripDropDown)_c).Parent = null;
+                ((ToolStripDropDown)_c).TopLevel = true;
             }
-            return new ScenarioResult(painted);
+            return new ScenarioResult(_painted);
         }
 
         protected virtual ScenarioResult ResetText(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("initial Text: " + c.Text);
-            c.ResetText();
-            p.log.WriteLine("Text after reset: " + c.Text);
+            p.log.WriteLine("initial Text: " + _c.Text);
+            _c.ResetText();
+            p.log.WriteLine("Text after reset: " + _c.Text);
 
-            bool bResult = c.Text == "";
+            bool bResult = _c.Text == "";
 
             return new ScenarioResult(bResult, "FAILED: didn't reset Text to empty string", p.log);
         }
 
         protected virtual ScenarioResult ResumeLayout(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            c.SuspendLayout();
-            c.PerformLayout();
-            c.ResumeLayout();
-            c.PerformLayout();
+            _c.SuspendLayout();
+            _c.PerformLayout();
+            _c.ResumeLayout();
+            _c.PerformLayout();
             return ScenarioResult.Pass;
         }
 
         protected ScenarioResult ResumeLayout(TParams p, bool b)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            c.ResumeLayout(false);
-            c.ResumeLayout(true);
+            _c.ResumeLayout(false);
+            _c.ResumeLayout(true);
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult Select(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            if (c is Form) return ScenarioResult.Pass;
+            if (_c is Form) return ScenarioResult.Pass;
 
-            bool canFocus = c.CanFocus;
+            bool canFocus = _c.CanFocus;
 
             p.log.WriteLine("current CanFocus: " + canFocus);
 
@@ -2161,36 +2131,35 @@ return ScenarioResult.Pass;
             SafeMethods.Focus(this);
             Application.DoEvents();
             BeginSecurityCheck(LibSecurity.AllWindows);
-            c.Select();
+            _c.Select();
             EndSecurityCheck();
 
             // We'll use ContainsFocus instead of Focused since a control's child can have focus
             // and Focused will return false
-            bool result = (canFocus && c.ContainsFocus) || (!canFocus && !c.ContainsFocus);
+            bool result = (canFocus && _c.ContainsFocus) || (!canFocus && !_c.ContainsFocus);
 
-            p.log.WriteLine("after Select Focused = " + c.Focused.ToString());
+            p.log.WriteLine("after Select Focused = " + _c.Focused.ToString());
             return new ScenarioResult(result);
         }
 
-        //todo: may want to make this test against form or a container control and verify that the next control is selected(activated)
         protected virtual ScenarioResult SelectNextControl(TParams p, Control ctl, Boolean forward, Boolean tabStopOnly, Boolean nested, Boolean wrap)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            ctl = c;
+            ctl = _c;
 
             int rng = -1;
 
             p.log.WriteLine("start ctrl: " + ctl.ToString());
 
             //check to see if composite control
-            if (c.Controls.Count != 0)
+            if (_c.Controls.Count != 0)
             {
-                rng = p.ru.GetRange(0, c.Controls.Count - 1);
-                ctl = (Control)(c.Controls[rng]);
+                rng = p.ru.GetRange(0, _c.Controls.Count - 1);
+                ctl = (Control)(_c.Controls[rng]);
             }
 
-            foreach (Control ct in c.Controls)
+            foreach (Control ct in _c.Controls)
             {
                 p.log.WriteLine(ct.ToString());
             }
@@ -2206,7 +2175,7 @@ return ScenarioResult.Pass;
             try
             {
                 Application.DoEvents();
-                bool b = c.SelectNextControl(ctl, forward, tabStopOnly, nested, wrap);
+                bool b = _c.SelectNextControl(ctl, forward, tabStopOnly, nested, wrap);
 
                 p.log.WriteLine("SelectNextControl returned " + b.ToString());
 
@@ -2221,9 +2190,6 @@ return ScenarioResult.Pass;
             }
             catch (SecurityException)
             {
-                // UNDONE: This is lame, but the logic that determines if a SecurityException is
-                //         thrown is too complex, and would be more work than the test would be
-                //         worth.
                 BeginSecurityCheck(LibSecurity.AllWindows);
                 throw;
             }
@@ -2232,18 +2198,18 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult SendToBack(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            c.SendToBack();
+            _c.SendToBack();
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult Show(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            c.Show();
-            return new ScenarioResult(c.Visible, "Show did not set Visible to true");
+            _c.Show();
+            return new ScenarioResult(_c.Visible, "Show did not set Visible to true");
         }
 
         protected virtual ScenarioResult SuspendLayout(TParams p)
@@ -2273,14 +2239,14 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_CausesValidation(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            bool b = c.CausesValidation;
+            bool b = _c.CausesValidation;
 
             p.log.WriteLine("CausesValidation was " + b.ToString());
-            c.CausesValidation = !b;
+            _c.CausesValidation = !b;
 
-            bool bb = c.CausesValidation;
+            bool bb = _c.CausesValidation;
 
             p.log.WriteLine("CausesValidation is " + bb.ToString());
             return new ScenarioResult(b != bb);
@@ -2288,9 +2254,9 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Handle(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            int h = (int)c.Handle;
+            int h = (int)_c.Handle;
 
             p.log.WriteLine("Handle is " + h.ToString());
             if (PreHandleMode)
@@ -2303,10 +2269,10 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult ResetRightToLeft(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // Get the default value from an unaltered instance of this control
-            RightToLeft defaultValue = newC.RightToLeft;
+            RightToLeft defaultValue = _newC.RightToLeft;
 
             p.log.WriteLine("default RightToLeft = " + defaultValue.ToString());
 
@@ -2314,19 +2280,19 @@ return ScenarioResult.Pass;
 
             newValue = (RightToLeft)p.ru.GetEnumValue(typeof(RightToLeft));
             p.log.WriteLine("setting RightToLeft to " + newValue.ToString());
-            c.RightToLeft = newValue;
+            _c.RightToLeft = newValue;
 
             // ResetRightToLeft resets RightToLeft to Inherit
             // so we will need to compare it to Parent.RightToLeft
             p.log.WriteLine("calling ResetRightToLeft()");
-            c.ResetRightToLeft();
-            newValue = c.RightToLeft;
-            if (SafeMethods.GetParent(c) != null)
+            _c.ResetRightToLeft();
+            newValue = _c.RightToLeft;
+            if (SafeMethods.GetParent(_c) != null)
             {
-                RightToLeft expected = SafeMethods.GetParent(c).RightToLeft;
+                RightToLeft expected = SafeMethods.GetParent(_c).RightToLeft;
 
                 // cannot set RightToLeft on ListBox - on Win9X, NT4 OSes
-                if (c is ListBox && (SafeMethods.GetOSVersion().Platform != System.PlatformID.Win32NT || SafeMethods.GetOSVersion().Version.Major < 5))
+                if (_c is ListBox && (SafeMethods.GetOSVersion().Platform != System.PlatformID.Win32NT || SafeMethods.GetOSVersion().Version.Major < 5))
                     expected = RightToLeft.No;
 
                 p.log.WriteLine("Default value = {0}, Expected_value = {1}, New_value_after_Reset = {2}", defaultValue.ToString(), expected.ToString(), newValue.ToString());
@@ -2340,54 +2306,54 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult ResetForeColor(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // Get the default value from an unaltered instance of this control
-            Color defaultValue = newC.ForeColor;
+            Color defaultValue = _newC.ForeColor;
             Color newValue;
 
-            c.ForeColor = p.ru.GetColor();
-            c.ResetForeColor();
-            newValue = c.ForeColor;
+            _c.ForeColor = p.ru.GetColor();
+            _c.ResetForeColor();
+            newValue = _c.ForeColor;
             p.log.WriteLine("Default = {0}, New = {1}", defaultValue, newValue);
             return new ScenarioResult(defaultValue.Equals(newValue));
         }
 
         protected virtual ScenarioResult ResetBackColor(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // Get the default value from an unaltered instance of this control
-            Color defaultValue = newC.BackColor;
+            Color defaultValue = _newC.BackColor;
             Color newValue;
 
-            c.BackColor = p.ru.GetColor();
-            c.ResetBackColor();
-            newValue = c.BackColor;
+            _c.BackColor = p.ru.GetColor();
+            _c.ResetBackColor();
+            newValue = _c.BackColor;
             p.log.WriteLine("Default = {0}, New = {1}", defaultValue, newValue);
             return new ScenarioResult(defaultValue.Equals(newValue));
         }
 
         protected virtual ScenarioResult ResetFont(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // Get the default value from an unaltered instance of this control
-            Font defaultValue = newC.Font;
+            Font defaultValue = _newC.Font;
             Font newValue;
 
             Font newFont = p.ru.GetFont();
             // work around VSWhidbey #107035 for Label controls
-            if (c is Label && (newFont.Unit == GraphicsUnit.Inch || newFont.SizeInPoints > 150))
+            if (_c is Label && (newFont.Unit == GraphicsUnit.Inch || newFont.SizeInPoints > 150))
                 newFont = new Font(newFont.FontFamily, Math.Min(newFont.Size, 150f), newFont.Style, GraphicsUnit.Pixel);
-            c.Font = newFont;
-            c.ResetFont();
-            newValue = c.Font;
+            _c.Font = newFont;
+            _c.ResetFont();
+            newValue = _c.Font;
             p.log.WriteLine("Default = {0}, New = {1}", defaultValue, newValue);
             return new ScenarioResult(defaultValue.Equals(newValue));
         }
 
-        private bool invokeSuccess;
+        private bool _invokeSuccess;
 
         private delegate void delVoidParamsVoid();
 
@@ -2395,88 +2361,86 @@ return ScenarioResult.Pass;
 
         private void VoidMethodVoid()
         {
-            invokeSuccess = true;
+            _invokeSuccess = true;
         }
 
         private void VoidMethodIntStringObject(int n, String s, Object o)
         {
-            invokeSuccess = true;
+            _invokeSuccess = true;
         }
 
         //Looks like these two methods are removed from Control.
         protected virtual ScenarioResult BeginInvoke(TParams p, Delegate method, Object[] args)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            invokeSuccess = false;
+            _invokeSuccess = false;
             args = new Object[] { 42, "Howdy!", this };
-            c.BeginInvoke(new delVoidParamsIntStringObject(this.VoidMethodIntStringObject), args);
-            if (invokeSuccess)
+            _c.BeginInvoke(new delVoidParamsIntStringObject(this.VoidMethodIntStringObject), args);
+            if (_invokeSuccess)
                 return new ScenarioResult(false, "InvokeAsync not asynchronous");
 
             Application.DoEvents();
-            return new ScenarioResult(invokeSuccess, "InvokeAsync failed");
+            return new ScenarioResult(_invokeSuccess, "InvokeAsync failed");
         }
 
         protected virtual ScenarioResult BeginInvoke(TParams p, Delegate method)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            invokeSuccess = false;
-            c.BeginInvoke(new delVoidParamsVoid(this.VoidMethodVoid));
-            if (invokeSuccess)
+            _invokeSuccess = false;
+            _c.BeginInvoke(new delVoidParamsVoid(this.VoidMethodVoid));
+            if (_invokeSuccess)
                 return new ScenarioResult(false, "InvokeAsync not asynchronous");
 
             Application.DoEvents();
-            return new ScenarioResult(invokeSuccess, "InvokeAsync failed");
+            return new ScenarioResult(_invokeSuccess, "InvokeAsync failed");
         }
 
-        // TODO: Test that EndInvoke returns a value properly
-        //
         protected virtual ScenarioResult EndInvoke(TParams p, IAsyncResult asyncResult)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            invokeSuccess = false;
-            c.EndInvoke(c.BeginInvoke(new delVoidParamsVoid(this.VoidMethodVoid)));
-            return new ScenarioResult(invokeSuccess, "InvokeAsync not asynchronous");
+            _invokeSuccess = false;
+            _c.EndInvoke(_c.BeginInvoke(new delVoidParamsVoid(this.VoidMethodVoid)));
+            return new ScenarioResult(_invokeSuccess, "InvokeAsync not asynchronous");
         }
 
         protected virtual ScenarioResult Invoke(TParams p, Delegate method, Object[] args)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            invokeSuccess = false;
+            _invokeSuccess = false;
             args = new Object[] { 42, "Howdy!", this };
-            c.Invoke(new delVoidParamsIntStringObject(this.VoidMethodIntStringObject), args);
-            return new ScenarioResult(invokeSuccess, "Invoke failed");
+            _c.Invoke(new delVoidParamsIntStringObject(this.VoidMethodIntStringObject), args);
+            return new ScenarioResult(_invokeSuccess, "Invoke failed");
         }
 
         protected virtual ScenarioResult Invoke(TParams p, Delegate method)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            invokeSuccess = false;
-            c.Invoke(new delVoidParamsVoid(this.VoidMethodVoid));
-            return new ScenarioResult(invokeSuccess, "Invoke failed");
+            _invokeSuccess = false;
+            _c.Invoke(new delVoidParamsVoid(this.VoidMethodVoid));
+            return new ScenarioResult(_invokeSuccess, "Invoke failed");
         }
 
         protected virtual ScenarioResult FindForm(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult sr = new ScenarioResult();
             Form found = null;
             bool bFound = SecurityCheck(sr, delegate
             {
-                found = c.FindForm();
+                found = _c.FindForm();
             }, typeof(Control).GetMethod("FindForm"), LibSecurity.AllWindows);
 
 
             Control expected = null;
             if (bFound)
             {
-                expected = c;
+                expected = _c;
 
                 while (SafeMethods.GetParent(expected) != null)
                 { expected = SafeMethods.GetParent(expected); }
@@ -2487,79 +2451,79 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult DoDragDrop(TParams p, Object data, DragDropEffects allowedEffects)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             data = "Howdy!";
             allowedEffects = (DragDropEffects)p.ru.GetEnumValue(typeof(DragDropEffects));
-            SafeMethods.FindForm(c).BringToFront();
+            SafeMethods.FindForm(_c).BringToFront();
             Application.DoEvents();
 
             // This test would hang if the control was outside of the bounds of the form,
             // so we'll resize the form and relocate the control for this test.
             Rectangle origFormBounds = this.DesktopBounds;
-            Point origLoc = c.Location;
+            Point origLoc = _c.Location;
 
-            c.Location = new Point(10, 10);
+            _c.Location = new Point(10, 10);
             this.DesktopBounds = new Rectangle(10, 10, 300, 300);
-            SafeMethods.SetCursorPosition(c.PointToScreen(new Point(Math.Max(0, -c.Left), Math.Max(0, -c.Top))));
+            SafeMethods.SetCursorPosition(_c.PointToScreen(new Point(Math.Max(0, -_c.Left), Math.Max(0, -_c.Top))));
             p.log.WriteLine("Effect tested: " + allowedEffects.ToString());
-            p.log.WriteLine("Control bounds: " + c.Bounds.ToString());
+            p.log.WriteLine("Control bounds: " + _c.Bounds.ToString());
             p.log.WriteLine("Form.ClientSize : " + this.ClientSize.ToString());
 
-            DragDropEffects ddeDone = c.DoDragDrop(data, allowedEffects);
+            DragDropEffects ddeDone = _c.DoDragDrop(data, allowedEffects);
 
             Application.DoEvents();
             p.log.WriteLine("DoDragDrop return value: " + ddeDone.ToString());
-            c.Location = origLoc;
+            _c.Location = origLoc;
             this.DesktopBounds = origFormBounds;
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult CreateGraphics(TParams p, IntPtr dc)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult sr = ScenarioResult.Pass;
-            Graphics gr = c.CreateGraphics();
+            Graphics gr = _c.CreateGraphics();
 
-            gr.DrawLine(SystemPens.WindowText, 0, 0, c.Width, c.Height);
-            gr.DrawLine(SystemPens.WindowText, c.Width, 0, 0, c.Height);
+            gr.DrawLine(SystemPens.WindowText, 0, 0, _c.Width, _c.Height);
+            gr.DrawLine(SystemPens.WindowText, _c.Width, 0, 0, _c.Height);
             Application.DoEvents();
             try
             {
-                gr.DrawLine(SystemPens.WindowText, 0, 0, c.Width, c.Height);
-                gr.DrawLine(SystemPens.WindowText, c.Width, 0, 0, c.Height);
+                gr.DrawLine(SystemPens.WindowText, 0, 0, _c.Width, _c.Height);
+                gr.DrawLine(SystemPens.WindowText, _c.Width, 0, 0, _c.Height);
                 gr.Dispose();
             }
             catch (Exception)
             {
                 sr = new ScenarioResult(false, "Graphics disposed by forcing message loop");
             }
-            c.Invalidate();
+            _c.Invalidate();
             return sr;
         }
 
         protected virtual ScenarioResult CreateGraphics(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult sr = ScenarioResult.Pass;
-            Graphics gr = c.CreateGraphics();
+            Graphics gr = _c.CreateGraphics();
 
-            gr.DrawLine(SystemPens.WindowText, 0, 0, c.Width, c.Height);
-            gr.DrawLine(SystemPens.WindowText, c.Width, 0, 0, c.Height);
+            gr.DrawLine(SystemPens.WindowText, 0, 0, _c.Width, _c.Height);
+            gr.DrawLine(SystemPens.WindowText, _c.Width, 0, 0, _c.Height);
             Application.DoEvents();
             try
             {
-                gr.DrawLine(SystemPens.WindowText, 0, 0, c.Width, c.Height);
-                gr.DrawLine(SystemPens.WindowText, c.Width, 0, 0, c.Height);
+                gr.DrawLine(SystemPens.WindowText, 0, 0, _c.Width, _c.Height);
+                gr.DrawLine(SystemPens.WindowText, _c.Width, 0, 0, _c.Height);
                 gr.Dispose();
             }
             catch (Exception)
             {
                 sr = new ScenarioResult(false, "FAILED: Graphics disposed by forcing message loop");
             }
-            c.Invalidate();
+            _c.Invalidate();
             return sr;
         }
 
@@ -2570,20 +2534,20 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_RightToLeft(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            RightToLeft rtle = c.RightToLeft;
+            RightToLeft rtle = _c.RightToLeft;
 
             p.log.WriteLine("initially Got: " + EnumTools.GetEnumStringFromValue(typeof(System.Windows.Forms.RightToLeft), (int)rtle));
             rtle = (RightToLeft)p.ru.GetDifferentEnumValue(typeof(System.Windows.Forms.RightToLeft), (int)rtle);
             p.log.WriteLine("Setting to: " + EnumTools.GetEnumStringFromValue(typeof(System.Windows.Forms.RightToLeft), (int)rtle));
-            c.RightToLeft = rtle;
+            _c.RightToLeft = rtle;
 
-            RightToLeft rtle2 = c.RightToLeft;
+            RightToLeft rtle2 = _c.RightToLeft;
 
             p.log.WriteLine("retrieved: " + EnumTools.GetEnumStringFromValue(typeof(System.Windows.Forms.RightToLeft), (int)rtle2));
             Application.DoEvents();
-            return new ScenarioResult(rtle2 == GetExpectedRightToLeft(c, rtle), "Expected " + GetExpectedRightToLeft(c, rtle));
+            return new ScenarioResult(rtle2 == GetExpectedRightToLeft(_c, rtle), "Expected " + GetExpectedRightToLeft(_c, rtle));
         }
 
         //
@@ -2619,44 +2583,44 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Region(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Region orig = c.Region;
-            Region region = p.ru.GetRegion(c.Size);
+            Region orig = _c.Region;
+            Region region = p.ru.GetRegion(_c.Size);
 
             //willsad 3/2/00
             // Region Type enum cannot be null when setting the random region
             // need to get different region to avoid null ref exception
             while (region == null)
             {
-                region = p.ru.GetRegion(c.Size);
+                region = p.ru.GetRegion(_c.Size);
             }
 
-            if (c is Form)
+            if (_c is Form)
             {                      // This is only protected for top-level Forms
-                ((Form)c).MdiParent = null;
-                ((Form)c).TopLevel = true;
+                ((Form)_c).MdiParent = null;
+                ((Form)_c).TopLevel = true;
                 //				BeginSecurityCheck(LibSecurity.AllWindows);
             }
             
             ScenarioResult sr = new ScenarioResult();
             bool bSet = SecurityCheck(sr, delegate
             {
-                c.Region = region;
-            }, typeof(Control).GetMethod("set_Region"), (c is Form) ? LibSecurity.AllWindows : LibSecurity.SafeTopLevelWindows);
+                _c.Region = region;
+            }, typeof(Control).GetMethod("set_Region"), (_c is Form) ? LibSecurity.AllWindows : LibSecurity.SafeTopLevelWindows);
 
-            bool passed = (c.Region == region);
+            bool passed = (_c.Region == region);
 
-            // Return region to original value so painting tests aren't screwed up
-            SafeMethods.SetRegion(c, orig);
+            // Return region to original value so painting tests aren't ----ed up
+            SafeMethods.SetRegion(_c, orig);
             return new ScenarioResult(bSet, passed, "FAIL: incorrect region", p.log);
         }
 
         protected virtual ScenarioResult get_InvokeRequired(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            bool b = c.InvokeRequired;
+            bool b = _c.InvokeRequired;
 
             return ScenarioResult.Pass;
         }
@@ -2668,13 +2632,13 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_ForeColor(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Color co = c.ForeColor;
+            Color co = _c.ForeColor;
             Color cc = p.ru.GetColor();
 
-            c.ForeColor = cc;
-            return new ScenarioResult(cc.Equals(c.ForeColor));
+            _c.ForeColor = cc;
+            return new ScenarioResult(cc.Equals(_c.ForeColor));
         }
 
         protected virtual ScenarioResult set_BackColor(TParams p, Color value)
@@ -2684,16 +2648,16 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_BackColor(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Color co = c.BackColor;
+            Color co = _c.BackColor;
             Color cc = p.ru.GetColor();
 
-            c.BackColor = cc;
+            _c.BackColor = cc;
             if (PreHandleMode)
                 p.target = CreateObject(p);
 
-            return new ScenarioResult(cc.Equals(c.BackColor));
+            return new ScenarioResult(cc.Equals(_c.BackColor));
         }
 
         protected virtual ScenarioResult set_Font(TParams p, Font value)
@@ -2703,20 +2667,20 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Font(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Font f = c.Font;
+            Font f = _c.Font;
 
             p.log.WriteLine("initial Font: " + f.ToString());
 
             Font ff = p.ru.GetFont();
             // work around VSWhidbey #107035 - Win32Exception for large Fonts on Label
-            if (c is Label && (ff.Unit == GraphicsUnit.Inch || ff.SizeInPoints > 150))
+            if (_c is Label && (ff.Unit == GraphicsUnit.Inch || ff.SizeInPoints > 150))
                 ff = new Font(ff.FontFamily, Math.Min(ff.Size, 150f), ff.Style, GraphicsUnit.Pixel);
 
             p.log.WriteLine("setting Font to: " + ff.ToString());
-            c.Font = ff;
-            return new ScenarioResult(ff.Equals(c.Font));
+            _c.Font = ff;
+            return new ScenarioResult(ff.Equals(_c.Font));
         }
 
         protected virtual ScenarioResult get_DefaultFont(TParams p)
@@ -2752,9 +2716,9 @@ return ScenarioResult.Pass;
         {
             ScenarioResult sr = new ScenarioResult();
 
-            c = GetControl(p);
+            _c = GetControl(p);
 
-            ContextMenuStrip cm = c.ContextMenuStrip;
+            ContextMenuStrip cm = _c.ContextMenuStrip;
             ContextMenuStrip cm2 = null;
 
             if (p.ru.GetBoolean())
@@ -2766,9 +2730,9 @@ return ScenarioResult.Pass;
                 cm2.Items.Add(new ToolStripSeparator());
             }
 
-            c.ContextMenuStrip = cm2;
+            _c.ContextMenuStrip = cm2;
 
-            sr.IncCounters(cm2 == c.ContextMenuStrip, "Wasn't the right ContextMenuStrip.", p.log);
+            sr.IncCounters(cm2 == _c.ContextMenuStrip, "Wasn't the right ContextMenuStrip.", p.log);
 
             if (cm2 != null)
                 sr.IncCounters(cm2.Items.Count == 4, "Item count was: " + cm2.Items.Count, p.log);
@@ -2783,16 +2747,16 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Dock(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            DockStyle cde = c.Dock;
+            DockStyle cde = _c.Dock;
 
             p.log.WriteLine("Dock was " + cde.ToString());
             cde = (DockStyle)p.ru.GetDifferentEnumValue(typeof(DockStyle), (int)cde);
             p.log.WriteLine("Setting Dock to " + cde.ToString());
-            c.Dock = cde;
-            p.log.WriteLine("Dock is " + c.Dock.ToString());
-            return new ScenarioResult(cde == c.Dock);
+            _c.Dock = cde;
+            p.log.WriteLine("Dock is " + _c.Dock.ToString());
+            return new ScenarioResult(cde == _c.Dock);
         }
 
         protected virtual ScenarioResult set_Cursor(TParams p, Cursor value)
@@ -2802,16 +2766,16 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Cursor(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Cursor cu = c.Cursor;
+            Cursor cu = _c.Cursor;
 
             cu = p.ru.GetCursor();
             BeginSecurityCheck(LibSecurity.SafeSubWindows);
-            c.Cursor = cu;
+            _c.Cursor = cu;
             EndSecurityCheck();
-            p.log.Write("UseWaitCursor: " + c.UseWaitCursor);
-            return new ScenarioResult(c.UseWaitCursor ? c.Cursor == Cursors.WaitCursor : c.Cursor == cu);
+            p.log.Write("UseWaitCursor: " + _c.UseWaitCursor);
+            return new ScenarioResult(_c.UseWaitCursor ? _c.Cursor == Cursors.WaitCursor : _c.Cursor == cu);
         }
 
         protected virtual ScenarioResult set_BackgroundImageLayout(TParams p, ImageLayout value)
@@ -2821,14 +2785,14 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_BackgroundImageLayout(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            ImageLayout il = c.BackgroundImageLayout;
+            ImageLayout il = _c.BackgroundImageLayout;
 
             il = (ImageLayout)p.ru.GetEnumValue(typeof(ImageLayout));
             p.log.WriteLine("Setting to " + il.ToString());
-            c.BackgroundImageLayout = il;
-            return new ScenarioResult(il == c.BackgroundImageLayout, "Set " + il.ToString() + " but Got " + c.BackgroundImageLayout.ToString());
+            _c.BackgroundImageLayout = il;
+            return new ScenarioResult(il == _c.BackgroundImageLayout, "Set " + il.ToString() + " but Got " + _c.BackgroundImageLayout.ToString());
         }
 
         protected virtual ScenarioResult set_BackgroundImage(TParams p, Image value)
@@ -2837,16 +2801,15 @@ return ScenarioResult.Pass;
         }
 
         // Used to fail because of ASURT #19067--now closed.
-        //
         protected virtual ScenarioResult get_BackgroundImage(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            Image i = c.BackgroundImage;
+            Image i = _c.BackgroundImage;
 
             i = p.ru.GetImage(ImageStyle.Random);
-            c.BackgroundImage = i;
-            return new ScenarioResult(i == c.BackgroundImage);
+            _c.BackgroundImage = i;
+            return new ScenarioResult(i == _c.BackgroundImage);
         }
 
         protected virtual ScenarioResult set_Anchor(TParams p, AnchorStyles value)
@@ -2858,29 +2821,27 @@ return ScenarioResult.Pass;
         {
             p.log.WriteLine("Tested by exclusive test using control consumption");
             return ScenarioResult.Pass;
-
         }
-
 
         protected virtual ScenarioResult get_Anchor(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            AnchorStyles cae = c.Anchor;
+            AnchorStyles cae = _c.Anchor;
 
             cae = (AnchorStyles)p.ru.GetDifferentEnumValue(typeof(AnchorStyles), (int)cae);
-            c.Anchor = cae;
-            return new ScenarioResult(cae == c.Anchor);
+            _c.Anchor = cae;
+            return new ScenarioResult(cae == _c.Anchor);
         }
 
         protected virtual ScenarioResult set_AllowDrop(TParams p, bool value)
         {
             p.log.WriteLine("In Control.AllowDrop");
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             // SECURITY: Simple security verification.  We only demand when setting it to true.
-            // Updated, AllowDrop throws an InvalidOperationException when Clipboard access is denied, not a SecurityException (AndrewD)
+            // Updated, AllowDrop throws an InvalidOperationException when Clipboard access is denied, not a SecurityException
 
-			p.log.WriteLine(c.AllowDrop.ToString());
+			p.log.WriteLine(_c.AllowDrop.ToString());
             //Check whether we have read access to the clipboard (the same as AllClipboard)
             bool hasClip = Utilities.HavePermission(LibSecurity.AllClipboard);
 
@@ -2888,7 +2849,7 @@ return ScenarioResult.Pass;
             try
             {
                 //Attempt to set AllowDrop if we don't have ClipboardRead, this should throw IOE
-                c.AllowDrop = true;
+                _c.AllowDrop = true;
                 //Should have thrown by now if we had perms
                 if (!hasClip)
                 {
@@ -2903,7 +2864,7 @@ return ScenarioResult.Pass;
                 { throw; }
                 else
                 {
-					p.log.WriteLine(c.AllowDrop.ToString());
+					p.log.WriteLine(_c.AllowDrop.ToString());
 					p.log.WriteLine(e.InnerException.ToString());
 					p.log.WriteLine("Control.AllowDrop threw InvalidOperationException (as expected) because ClipboardPermission was denied");
                 }
@@ -2913,29 +2874,29 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_AllowDrop(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 			try
 			{
 				ScenarioResult result = new ScenarioResult();
 
 				try
 				{
-					c.AllowDrop = false;
-					result.IncCounters(!c.AllowDrop, "FAIL: set to false, returned true", p.log);
+					_c.AllowDrop = false;
+					result.IncCounters(!_c.AllowDrop, "FAIL: set to false, returned true", p.log);
 
 					// We only demand when setting it to true
-					SafeMethods.SetAllowDrop(c, true);
-					result.IncCounters(c.AllowDrop, "FAIL: set to true, returned false", p.log);
+					SafeMethods.SetAllowDrop(_c, true);
+					result.IncCounters(_c.AllowDrop, "FAIL: set to true, returned false", p.log);
 				}
 				catch (Exception e)
 				{
-					// Make sure SecurityExceptions propagate up (bug #78939 by design)
+					// Make sure SecurityExceptions propagate up (Regression_Bug52 by design)
 					if (e.InnerException is SecurityException)
 						throw e.InnerException;
 					else if (e.InnerException is System.Threading.ThreadStateException)
 					{
 						p.log.LogException(e);
-						return new ScenarioResult(false, p.log, BugDb.ASURT, 139401, "ThreadStateException when run as HREF exe.  Postponed for Whidbey.");
+						return new ScenarioResult(false, p.log, BugDb.ASURT, 53, "ThreadStateException when run as HREF exe.  Postponed for Whidbey.");
 					}
 					else
 						throw;
@@ -2944,7 +2905,7 @@ return ScenarioResult.Pass;
 			}
 			finally
 			{
-				SafeMethods.SetAllowDrop(c, false);
+				SafeMethods.SetAllowDrop(_c, false);
 			}
         }
 
@@ -2955,12 +2916,12 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_IsAccessible(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            bool b = c.IsAccessible;
+            bool b = _c.IsAccessible;
 
-            c.IsAccessible = !b;
-            return new ScenarioResult(c.IsAccessible == !b);
+            _c.IsAccessible = !b;
+            return new ScenarioResult(_c.IsAccessible == !b);
         }
 
         protected virtual ScenarioResult set_AccessibleRole(TParams p, AccessibleRole value)
@@ -2971,22 +2932,22 @@ return ScenarioResult.Pass;
         protected virtual ScenarioResult get_AccessibleRole(TParams p)
         {
             ScenarioResult sr = new ScenarioResult();
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            AccessibleRole are = c.AccessibleRole;
+            AccessibleRole are = _c.AccessibleRole;
 
             p.log.WriteLine("AccessibleRole was " + are.ToString());
             are = (AccessibleRole)p.ru.GetDifferentEnumValue(typeof(AccessibleRole), (int)are);
             p.log.WriteLine("Setting AccessibleRole to " + are.ToString());
-            c.AccessibleRole = are;
-            p.log.WriteLine("AccessibleRole is " + c.AccessibleRole.ToString());
-            sr.IncCounters(are, c.AccessibleRole, "Control.AccessibleRole not the value set.", p.log);
-            sr.IncCounters(are, c.AccessibilityObject.Role, "Control.AccessibilityObject.Role not the value set for AccessibleRole.", p.log);
+            _c.AccessibleRole = are;
+            p.log.WriteLine("AccessibleRole is " + _c.AccessibleRole.ToString());
+            sr.IncCounters(are, _c.AccessibleRole, "Control.AccessibleRole not the value set.", p.log);
+            sr.IncCounters(are, _c.AccessibilityObject.Role, "Control.AccessibilityObject.Role not the value set for AccessibleRole.", p.log);
             p.log.WriteLine("Setting AccessibleRole to the Default.");
-            c.AccessibleRole = AccessibleRole.Default;
-            AccessibleRole expectedDefaultRole = GetDefaultAccessibleRoleForType(c.GetType());
-            sr.IncCounters(AccessibleRole.Default, c.AccessibleRole, "Control.AccessibleRole not AccessibleRole.Default.", p.log);
-            sr.IncCounters(expectedDefaultRole, SafeMethods.GetAccessibleRole(c.AccessibilityObject), "Control.AccessibilityObject.Role not the value expected when setting AccessibleRole to the default.", p.log);
+            _c.AccessibleRole = AccessibleRole.Default;
+            AccessibleRole expectedDefaultRole = GetDefaultAccessibleRoleForType(_c.GetType());
+            sr.IncCounters(AccessibleRole.Default, _c.AccessibleRole, "Control.AccessibleRole not AccessibleRole.Default.", p.log);
+            sr.IncCounters(expectedDefaultRole, SafeMethods.GetAccessibleRole(_c.AccessibilityObject), "Control.AccessibilityObject.Role not the value expected when setting AccessibleRole to the default.", p.log);
             return sr;
         }
 
@@ -2998,16 +2959,16 @@ return ScenarioResult.Pass;
         protected virtual ScenarioResult get_AccessibleName(TParams p)
         {
             ScenarioResult sr = new ScenarioResult();
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            String s = c.AccessibleName;
+            String s = _c.AccessibleName;
             p.log.WriteLine("AccessibleName was " + s);
             s = p.ru.GetString(255, true);
-            c.AccessibleName = s;
-            p.log.WriteLine("AccessibleName is " + c.AccessibleName);
-            p.log.WriteLine("Control.AccessibleObject.Name is " + c.AccessibilityObject.Name);
-            sr.IncCounters(s, c.AccessibleName, "Control.AccessibleName not the value it was set to.", p.log);
-            sr.IncCounters(s, c.AccessibilityObject.Name, "Control.AccessiblityObject.Name not the value Control.AccessibleName was set to.", p.log);
+            _c.AccessibleName = s;
+            p.log.WriteLine("AccessibleName is " + _c.AccessibleName);
+            p.log.WriteLine("Control.AccessibleObject.Name is " + _c.AccessibilityObject.Name);
+            sr.IncCounters(s, _c.AccessibleName, "Control.AccessibleName not the value it was set to.", p.log);
+            sr.IncCounters(s, _c.AccessibilityObject.Name, "Control.AccessiblityObject.Name not the value Control.AccessibleName was set to.", p.log);
             return sr;
         }
 
@@ -3019,16 +2980,16 @@ return ScenarioResult.Pass;
         protected virtual ScenarioResult get_AccessibleDescription(TParams p)
         {
             ScenarioResult sr = new ScenarioResult();
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            String s = c.AccessibleDescription;
+            String s = _c.AccessibleDescription;
             p.log.WriteLine("AccessibleDescription was " + s);
             s = p.ru.GetString(255, true);
-            c.AccessibleDescription = s;
-            p.log.WriteLine("AccessibleDescription is " + c.AccessibleDescription);
-            p.log.WriteLine("Control.AccessibleObject.Description is " + c.AccessibilityObject.Description);
-            sr.IncCounters(s, c.AccessibleDescription, "Control.AccessibleDescription not the value it was set to.", p.log);
-            sr.IncCounters(s, c.AccessibilityObject.Description, "Control.AccessiblityObject.Description not the value Control.AccessibleDescription was set to.", p.log);
+            _c.AccessibleDescription = s;
+            p.log.WriteLine("AccessibleDescription is " + _c.AccessibleDescription);
+            p.log.WriteLine("Control.AccessibleObject.Description is " + _c.AccessibilityObject.Description);
+            sr.IncCounters(s, _c.AccessibleDescription, "Control.AccessibleDescription not the value it was set to.", p.log);
+            sr.IncCounters(s, _c.AccessibilityObject.Description, "Control.AccessiblityObject.Description not the value Control.AccessibleDescription was set to.", p.log);
             return sr;
 
         }
@@ -3041,16 +3002,16 @@ return ScenarioResult.Pass;
         protected virtual ScenarioResult get_AccessibleDefaultActionDescription(TParams p)
         {
             ScenarioResult sr = new ScenarioResult();
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            String s = c.AccessibleDefaultActionDescription;
+            String s = _c.AccessibleDefaultActionDescription;
             p.log.WriteLine("AccessibleDefaultActionDescription was " + s);
             s = p.ru.GetString(255, true);
-            c.AccessibleDefaultActionDescription = s;
-            p.log.WriteLine("AccessibleDefaultActionDescription is " + c.AccessibleDefaultActionDescription);
-            p.log.WriteLine("Control.AccessibleObject.DefaultAction is " + c.AccessibilityObject.DefaultAction);
-            sr.IncCounters(s, c.AccessibleDefaultActionDescription, "Control.AccessibleDefaultActionDescription not the value it was set to.", p.log);
-            sr.IncCounters(s, c.AccessibilityObject.DefaultAction, "Control.AccessiblityObject.DefaultAction not the value Control.AccessibleDefaultActionDescription was set to.", p.log);
+            _c.AccessibleDefaultActionDescription = s;
+            p.log.WriteLine("AccessibleDefaultActionDescription is " + _c.AccessibleDefaultActionDescription);
+            p.log.WriteLine("Control.AccessibleObject.DefaultAction is " + _c.AccessibilityObject.DefaultAction);
+            sr.IncCounters(s, _c.AccessibleDefaultActionDescription, "Control.AccessibleDefaultActionDescription not the value it was set to.", p.log);
+            sr.IncCounters(s, _c.AccessibilityObject.DefaultAction, "Control.AccessiblityObject.DefaultAction not the value Control.AccessibleDefaultActionDescription was set to.", p.log);
             return sr;
         }
 
@@ -3074,18 +3035,18 @@ return ScenarioResult.Pass;
             // Role
 
             ScenarioResult sr = new ScenarioResult();
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
-            AccessibleObject cao = c.AccessibilityObject;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
+            AccessibleObject cao = _c.AccessibilityObject;
             p.log.WriteLine("Test Accessible Object Bounds");
-            sr.IncCounters(c.RectangleToScreen(c.ClientRectangle), SafeMethods.GetAccessibleBounds(cao), "Bounds for control and the accessible object don't match.", p.log);
+            sr.IncCounters(_c.RectangleToScreen(_c.ClientRectangle), SafeMethods.GetAccessibleBounds(cao), "Bounds for control and the accessible object don't match.", p.log);
             return sr;
         }
 
         protected virtual ScenarioResult get_CompanyName(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            String cn = c.CompanyName;
+            String cn = _c.CompanyName;
             String en = "Microsoft Corporation";
 
             return new ScenarioResult(cn.Equals(en));
@@ -3094,11 +3055,11 @@ return ScenarioResult.Pass;
         protected virtual ScenarioResult get_ProductName(TParams p)
         {
 
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
 			//The unicode value of the registered trademark symbol
 			int characterCode = 0x00AE;
-            String actualValue = c.ProductName;
+            String actualValue = _c.ProductName;
             String oldExpectedValue = "Microsoft(R) .NET Framework";
 			String newExpectedValue = "Microsoft" + Convert.ToChar(characterCode) + " .NET Framework"; 
 
@@ -3107,27 +3068,27 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_ProductVersion(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            String pv = c.ProductVersion;
+            String pv = _c.ProductVersion;
 
             return new ScenarioResult(!pv.Equals(null));
         }
 
         protected virtual ScenarioResult ResetCursor(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // Get the default value from an unaltered instance of this control
-            Cursor defaultValue = newC.Cursor;
+            Cursor defaultValue = _newC.Cursor;
             Cursor newValue;
 
-            c.Cursor = p.ru.GetCursor();
-            c.ResetCursor();
-            newValue = c.Cursor;
+            _c.Cursor = p.ru.GetCursor();
+            _c.ResetCursor();
+            newValue = _c.Cursor;
             p.log.WriteLine("Default = {0}, New = {1}", defaultValue, newValue);
-            p.log.WriteLine("UseWaitCursor = " + c.UseWaitCursor);
-            return new ScenarioResult(c.UseWaitCursor ? newValue == Cursors.WaitCursor : defaultValue.Equals(newValue));
+            p.log.WriteLine("UseWaitCursor = " + _c.UseWaitCursor);
+            return new ScenarioResult(_c.UseWaitCursor ? newValue == Cursors.WaitCursor : defaultValue.Equals(newValue));
         }
 
         // get_Control.Site calls base.get_Site
@@ -3173,27 +3134,27 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult Invalidate(TParams p, Region region, bool invalidateChildren)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            if (c is Form)
-                ((Form)c).TopLevel = false;
+            if (_c is Form)
+                ((Form)_c).TopLevel = false;
 
-            region = p.ru.GetRegion(c.Size);
+            region = p.ru.GetRegion(_c.Size);
             invalidateChildren = p.ru.GetBoolean();
-            c.Invalidate(region, invalidateChildren);
+            _c.Invalidate(region, invalidateChildren);
             Application.DoEvents();
             return ScenarioResult.Pass;
         }
 
         protected virtual ScenarioResult Invalidate(TParams p, Region region)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            if (c is Form)
-                ((Form)c).TopLevel = false;
+            if (_c is Form)
+                ((Form)_c).TopLevel = false;
 
-            region = p.ru.GetRegion(c.Size);
-            c.Invalidate(region);
+            region = p.ru.GetRegion(_c.Size);
+            _c.Invalidate(region);
             Application.DoEvents();
             return ScenarioResult.Pass;
         }
@@ -3201,19 +3162,19 @@ return ScenarioResult.Pass;
         [OverrideScenario]
         protected override ScenarioResult Dispose(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("Control.IsDisposed before calling Control.Dispose is " + c.IsDisposed.ToString());
-            p.log.WriteLine("Control.Disposing before calling Control.Dispose is " + c.Disposing.ToString());
+            p.log.WriteLine("Control.IsDisposed before calling Control.Dispose is " + _c.IsDisposed.ToString());
+            p.log.WriteLine("Control.Disposing before calling Control.Dispose is " + _c.Disposing.ToString());
 
             bool result;
 
             try
             {
-                c.Dispose();
-                p.log.WriteLine("Control.Disposing after calling Control.Dispose is " + c.Disposing.ToString());
-                p.log.WriteLine("Control.IsDisposed after calling Control.Dispose is " + c.IsDisposed.ToString());
-                result = c.IsDisposed;
+                _c.Dispose();
+                p.log.WriteLine("Control.Disposing after calling Control.Dispose is " + _c.Disposing.ToString());
+                p.log.WriteLine("Control.IsDisposed after calling Control.Dispose is " + _c.IsDisposed.ToString());
+                result = _c.IsDisposed;
             }
             catch (Exception e)
             {
@@ -3227,19 +3188,17 @@ return ScenarioResult.Pass;
 
         protected virtual void RecreateControl(TParams p)
         {
-            // since we nuked the Control by calling Dispose, we should recreate it.
+            // since we ----d the Control by calling Dispose, we should recreate it.
             // we can't guarantee that this method is the last one called.
             p.target = (Control)this.CreateObject(p);
-            if (c is Form)
-                ((Form)c).TopLevel = false;
+            if (_c is Form)
+                ((Form)_c).TopLevel = false;
 
             this.AddObjectToForm(p);
             Application.DoEvents();
         }
 
-        //
         // Special case methods to handle Docked, Anchored, and AutoSize controls
-        //
         protected bool PreservesHeight(Control c, TParams p)
         {
             DockStyle dock = c.Dock;
@@ -3365,27 +3324,20 @@ return ScenarioResult.Pass;
         // NOTE:  SetSizeHelper() IS NOW OBSOLETE!!  Need to move this code to get_Size() and fix
         //        any tests that break.
         // Use this enum to determine which method/property SetSizeHelper tests.
-        //
         protected enum SizeMethod { SetSizeMethod, SizeProperty }
 
-        //
         // SetSizeHelper contains code to test both the SetSize methods.  Specify which
         // method to test using the SizeMethod enum.  The ScenarioResult is returned in the
         // "result" out parameter.
-        //
-        // TODO: (KevinTao 9/14/2000) Create virtual CalculateExpectedHeight() and one for width.
-        //       Control classes can override these methods rather than polluting XRichControl
-        //       with special case code.
-        //
         protected virtual void SetSizeHelper(TParams p, SizeMethod which, out ScenarioResult result)
         {
-            if ((c = GetControl(p)) == null)
+            if ((_c = GetControl(p)) == null)
             {
                 result = ScenarioResult.Fail;
                 return;
             }
 
-            Control parent = SafeMethods.GetParent(c);
+            Control parent = SafeMethods.GetParent(_c);
 
             if (parent == null)
                 p.log.WriteLine("Parent is null.");
@@ -3394,29 +3346,29 @@ return ScenarioResult.Pass;
 
             DockStyle initDS = DockStyle.None;
 
-            if (c is CheckedListBox)
+            if (_c is CheckedListBox)
             {
                 p.log.WriteLine("-- testing CheckedListBox --");
-                initDS = ((CheckedListBox)c).Dock;
-                ((CheckedListBox)c).Dock = DockStyle.None;
-                p.log.WriteLine("number of Items: " + ((CheckedListBox)c).Items.Count);
-                p.log.WriteLine("IntegralHeight: " + ((CheckedListBox)c).IntegralHeight);
-                p.log.WriteLine("ItemHeight: " + ((CheckedListBox)c).ItemHeight);
+                initDS = ((CheckedListBox)_c).Dock;
+                ((CheckedListBox)_c).Dock = DockStyle.None;
+                p.log.WriteLine("number of Items: " + ((CheckedListBox)_c).Items.Count);
+                p.log.WriteLine("IntegralHeight: " + ((CheckedListBox)_c).IntegralHeight);
+                p.log.WriteLine("ItemHeight: " + ((CheckedListBox)_c).ItemHeight);
             }
 
-            p.log.WriteLine("current DockStyle: " + ((Enum)c.Dock).ToString());
+            p.log.WriteLine("current DockStyle: " + ((Enum)_c.Dock).ToString());
 
-            Size origSize = c.Size;
+            Size origSize = _c.Size;
 
             Size maxSize = this.Size;
-            if (c is ToolStripDropDown | c is Form)
+            if (_c is ToolStripDropDown | _c is Form)
                 maxSize = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size;
 
             Size newSize = p.ru.GetSize(maxSize);
 
-            if (c is ComboBox && newSize.Width == 0)
+            if (_c is ComboBox && newSize.Width == 0)
                 newSize.Width = 1;
-            if (c is Splitter)
+            if (_c is Splitter)
             {
                 if (newSize.Width < 3)
                     newSize.Width = 3;
@@ -3427,29 +3379,29 @@ return ScenarioResult.Pass;
             p.log.WriteLine("Size was " + origSize.ToString());
             p.log.WriteLine("Setting Size to " + newSize.ToString());
             if (which == SizeMethod.SetSizeMethod)
-                c.Size = new Size(newSize.Width, newSize.Height);
+                _c.Size = new Size(newSize.Width, newSize.Height);
             else
-                c.Size = newSize;
+                _c.Size = newSize;
 
             Size expectedSize = newSize;
 
-            if (PreservesWidth(c, p))
+            if (PreservesWidth(_c, p))
             {
                 expectedSize.Width = origSize.Width;
                 p.log.WriteLine("Preserves width at " + expectedSize.Width);
             }
 
-            if (PreservesHeight(c, p))
+            if (PreservesHeight(_c, p))
             {
                 expectedSize.Height = origSize.Height;
                 p.log.WriteLine("Preserves height at " + expectedSize.Height);
             }
-            else if (c is ListBox)
-                expectedSize.Height = listBoxExpectedHeight((ListBox)c, origSize.Height, newSize.Height, p);
+            else if (_c is ListBox)
+                expectedSize.Height = listBoxExpectedHeight((ListBox)_c, origSize.Height, newSize.Height, p);
 
-            if (c is SplitContainer)
+            if (_c is SplitContainer)
             {
-                SplitContainer sc = (SplitContainer)c;
+                SplitContainer sc = (SplitContainer)_c;
                 int wd = 0;
                 if (sc.BorderStyle == BorderStyle.FixedSingle)
                     wd = SystemInformation.BorderSize.Width;
@@ -3463,13 +3415,13 @@ return ScenarioResult.Pass;
                     expectedSize.Height = wd;
             }
 
-            Size sz = c.Size;
+            Size sz = _c.Size;
 
             p.log.WriteLine("Size is " + sz.ToString());
             p.log.WriteLine("expected Size is " + expectedSize.ToString());
-            if (c is CheckedListBox)
+            if (_c is CheckedListBox)
             {
-                ((CheckedListBox)c).Dock = initDS;
+                ((CheckedListBox)_c).Dock = initDS;
             }
 
             result = new ScenarioResult(sz.Equals(expectedSize));
@@ -3545,13 +3497,13 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Width(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            p.log.WriteLine("current DockStyle: " + ((Enum)c.Dock).ToString());
+            p.log.WriteLine("current DockStyle: " + ((Enum)_c.Dock).ToString());
 
-            int oldWidth = c.Width;
-            int newWidth = p.ru.GetRange(0, c.Size.Width * 3); // set upper bound of 3 x current width
-            if (c is Splitter)
+            int oldWidth = _c.Width;
+            int newWidth = p.ru.GetRange(0, _c.Size.Width * 3); // set upper bound of 3 x current width
+            if (_c is Splitter)
             {
                 if (newWidth < 3)
                     newWidth = 3;
@@ -3559,19 +3511,19 @@ return ScenarioResult.Pass;
 
             p.log.WriteLine("initial Width is " + oldWidth.ToString());
             p.log.WriteLine("setting width to " + newWidth.ToString());
-            c.Width = newWidth;
+            _c.Width = newWidth;
 
-            int w = c.Width;
+            int w = _c.Width;
             int wExpected = newWidth;
 
             p.log.WriteLine("new Width is " + w.ToString());
-            if (PreservesWidth(c, p))
+            if (PreservesWidth(_c, p))
                 wExpected = oldWidth;
 
             // Width of the Vertical SplitContainer is limited by the value below
-            if (c is SplitContainer && ((SplitContainer)c).Orientation == Orientation.Vertical)
+            if (_c is SplitContainer && ((SplitContainer)_c).Orientation == Orientation.Vertical)
             {
-                SplitContainer sc = (SplitContainer)c;
+                SplitContainer sc = (SplitContainer)_c;
                 int wd = 0;
                 if (sc.BorderStyle == BorderStyle.FixedSingle)
                     wd = SystemInformation.BorderSize.Width;
@@ -3603,15 +3555,15 @@ return ScenarioResult.Pass;
         //
         protected virtual void BoundsHelper(TParams p, BoundsMethod which, out ScenarioResult result)
         {
-            if ((c = GetControl(p)) == null)
+            if ((_c = GetControl(p)) == null)
             {
                 result = ScenarioResult.Fail;
                 return;
             }
 
-            p.log.WriteLine("current DockStyle: " + ((Enum)c.Dock).ToString());
+            p.log.WriteLine("current DockStyle: " + ((Enum)_c.Dock).ToString());
 
-            Rectangle origRect = c.Bounds;
+            Rectangle origRect = _c.Bounds;
             Rectangle newRect = p.ru.GetIntersectingRectangle(this.ClientRectangle);
 
             //BoundsSpecified bs = 0;
@@ -3622,17 +3574,17 @@ return ScenarioResult.Pass;
             switch (which)
             {
                 case BoundsMethod.Property:
-                    c.Bounds = newRect;
+                    _c.Bounds = newRect;
                     break;
 
                 case BoundsMethod.MethodNoSpecified:
-                    c.SetBounds(newRect.X, newRect.Y, newRect.Width, newRect.Height);
+                    _c.SetBounds(newRect.X, newRect.Y, newRect.Width, newRect.Height);
                     break;
 
                 case BoundsMethod.MethodSpecified:
                     bs = (BoundsSpecified)p.ru.GetEnumValue(typeof(BoundsSpecified));
                     p.log.WriteLine("SetBounds parameters : " + newRect.ToString() + ", " + bs.ToString());
-                    c.SetBounds(newRect.X, newRect.Y, newRect.Width, newRect.Height, bs);
+                    _c.SetBounds(newRect.X, newRect.Y, newRect.Width, newRect.Height, bs);
                     break;
 
                 default:
@@ -3640,7 +3592,7 @@ return ScenarioResult.Pass;
             }
 
             // Adjust expected Rect to account for dock, autosize, bounds specified, etc.
-            Rectangle bounds = c.Bounds;
+            Rectangle bounds = _c.Bounds;
             Rectangle rExpected;
 
             p.log.WriteLine("new Bounds: " + bounds.ToString());
@@ -3662,16 +3614,16 @@ return ScenarioResult.Pass;
                     rExpected.Height = newRect.Height;
             }
 
-            if (c is Splitter)
+            if (_c is Splitter)
             {
                 if (rExpected.Width == 0) rExpected.Width = 3;
 
                 if (rExpected.Height == 0) rExpected.Height = 3;
             }
 
-            if (c is SplitContainer)
+            if (_c is SplitContainer)
             {
-                SplitContainer sc = ((SplitContainer)c);
+                SplitContainer sc = ((SplitContainer)_c);
                 int borderSize = 0;
                 switch (sc.BorderStyle)
                 {
@@ -3690,42 +3642,32 @@ return ScenarioResult.Pass;
                     rExpected.Height = minAllowed;
             }
 
-            if (PreservesHeight(c, p))
+            if (PreservesHeight(_c, p))
                 rExpected.Height = origRect.Height;
-            else if (c is ListBox && (bs & BoundsSpecified.Height) == BoundsSpecified.Height)
-                rExpected.Height = listBoxExpectedHeight((ListBox)c, origRect.Height, newRect.Height, p);
+            else if (_c is ListBox && (bs & BoundsSpecified.Height) == BoundsSpecified.Height)
+                rExpected.Height = listBoxExpectedHeight((ListBox)_c, origRect.Height, newRect.Height, p);
 
-            if (PreservesWidth(c, p))
+            if (PreservesWidth(_c, p))
                 rExpected.Width = origRect.Width;
 
-            //
             // Height of a ComboBox with DropDownStyle != ComboBoxStyle.Simple
             // will be set depending of Font.Height before handle is created 
-            // TODO: (?) in some cases we have handle already created for the ComboBox when running in PreHandleMode (?)
-            // attempt to re-create control results in multiple failures afterwards.
-            // At current stage we'll leave the situation as it is.	 But will need to look into this later on.
-            //
-            if (PreHandleMode && c is ComboBox && (((ComboBox)c).DropDownStyle != ComboBoxStyle.Simple))
+            if (PreHandleMode && _c is ComboBox && (((ComboBox)_c).DropDownStyle != ComboBoxStyle.Simple))
             {
                 //  rExpected.Height = (int)c.Font.Height + SystemInformation.BorderSize.Height * 4 + 3;
                 p.log.WriteLine("... testing ComboBox in prehandle mode...");
-                p.log.WriteLine(" ComboBox.PreferredHeight = " + ((ComboBox)c).PreferredHeight);
-                if (c.IsHandleCreated)		 // preserves orig Height for DropDownStyle other than Simple
+                p.log.WriteLine(" ComboBox.PreferredHeight = " + ((ComboBox)_c).PreferredHeight);
+                if (_c.IsHandleCreated)		 // preserves orig Height for DropDownStyle other than Simple
                     rExpected.Height = origRect.Height;
                 else
+                    rExpected.Height = ((ComboBox)_c).PreferredHeight;
 
-                    //  (KevinTao)
-                    //  TODO: ComboBox height is always PreferredHeight if the ComboBox is parented so this code didn't work for me
-                    //        in Whidbey or RTM.  Need to figure out if this code was correct in the first place.
-                    //					rExpected.Height = newRect.Height;
-                    rExpected.Height = ((ComboBox)c).PreferredHeight;
-
-                p.log.WriteLine("ComboBox.IsHandleCreated: " + c.IsHandleCreated);
+                p.log.WriteLine("ComboBox.IsHandleCreated: " + _c.IsHandleCreated);
             }
 
             // correct Location
-            rExpected.X = GetExpectedX(c, origRect, rExpected);
-            rExpected.Y = GetExpectedY(c, origRect, rExpected);
+            rExpected.X = GetExpectedX(_c, origRect, rExpected);
+            rExpected.Y = GetExpectedY(_c, origRect, rExpected);
             p.log.WriteLine("expected Bounds: " + rExpected.ToString());
             result = new ScenarioResult(bounds.Equals(rExpected));
         }
@@ -3766,29 +3708,29 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Height(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            int origHeight = c.Height;
+            int origHeight = _c.Height;
             //int newHeight = p.ru.GetRange(1, 1024);
             int newHeight = p.ru.GetRange(1, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
 
             p.log.WriteLine("initial Height is " + origHeight.ToString());
             p.log.WriteLine("Setting Height to " + newHeight.ToString());
-            c.Height = newHeight;
+            _c.Height = newHeight;
 
-            int height = c.Height;
+            int height = _c.Height;
             int hExpected = newHeight;
 
             p.log.WriteLine(" new Height is " + height.ToString());
-            if (PreservesHeight(c, p))
+            if (PreservesHeight(_c, p))
                 hExpected = origHeight;
-            else if (c is ListBox)
-                hExpected = listBoxExpectedHeight((ListBox)c, origHeight, newHeight, p);
+            else if (_c is ListBox)
+                hExpected = listBoxExpectedHeight((ListBox)_c, origHeight, newHeight, p);
 
             // Height of the Horizontal SplitContainer is limited by the value below
-            if (c is SplitContainer && ((SplitContainer)c).Orientation == Orientation.Horizontal)
+            if (_c is SplitContainer && ((SplitContainer)_c).Orientation == Orientation.Horizontal)
             {
-                SplitContainer sc = (SplitContainer)c;
+                SplitContainer sc = (SplitContainer)_c;
                 int ht = 0;
                 if (sc.BorderStyle == BorderStyle.FixedSingle)
                     ht = SystemInformation.BorderSize.Height;
@@ -3804,33 +3746,28 @@ return ScenarioResult.Pass;
         }
 
         // Use this enum to determine which method/property ScaleHelper tests.
-        //
         protected enum ScaleMethod { OneParam, TwoParam, Struct }
 
-        //
         // ScaleHelper contains code to test both the Scale methods.  Specify which
         // method to test using the ScaleMethod enum.  The ScenarioResult is returned in the
         // "result" out parameter.
-        // TODO: Remove logic for the one param.  We only have SizeF now.
 
 #pragma warning disable 618 // 618 = Obsolete
         protected virtual void ScaleHelper(TParams p, ScaleMethod which, out ScenarioResult result)
         {
-            if ((c = GetControl(p)) == null)
+            if ((_c = GetControl(p)) == null)
             {
                 result = ScenarioResult.Fail;
                 return;
             }
 
             result = new ScenarioResult();
-            p.log.WriteLine("current DockStyle: " + ((Enum)c.Dock).ToString());
+            p.log.WriteLine("current DockStyle: " + ((Enum)_c.Dock).ToString());
 
-            // REVIEW: What is this for?
-            c.Scale(0.5f);
-            c.Scale(2.0f);
+            _c.Scale(0.5f);
+            _c.Scale(2.0f);
 
             // Set up scale values based on which method we're testing
-            //
             float xScale;
             float yScale;
 
@@ -3845,48 +3782,45 @@ return ScenarioResult.Pass;
                 yScale = 4.0f;
 
                 // Max height appears to be 29632, so we only allow a height of 1/4 this so that we can test it
-                if (c.Height > 7408) c.Height = 7408;
+                if (_c.Height > 7408) _c.Height = 7408;
             }
 
             // Set up variables and call the appropriate Scale() method
-            //
-            Size origSize = c.Size;
+            Size origSize = _c.Size;
             Size expectedSize = new Size((int)(origSize.Width * xScale), (int)(origSize.Height * yScale));
             Size newSize;
-            Point origLocation = c.Location;
+            Point origLocation = _c.Location;
             Point expectedLocation = new Point((int)(origLocation.X * xScale), (int)(origLocation.Y * yScale));
             Point newLocation;
 
             p.log.WriteLine("initial Size was " + origSize.ToString());
             p.log.WriteLine("initial Location was " + origLocation.ToString());
             if (which == ScaleMethod.OneParam)
-                c.Scale(xScale);
+                _c.Scale(xScale);
             else if (which == ScaleMethod.TwoParam)
-                c.Scale(xScale, yScale);
+                _c.Scale(xScale, yScale);
             else
             {
                 SizeF newScale = new SizeF(xScale, yScale);
-                c.Scale(newScale);
+                _c.Scale(newScale);
             }
 
-            newSize = c.Size;
-            newLocation = c.Location;
+            newSize = _c.Size;
+            newLocation = _c.Location;
 
             // Calculate expected size and location
-            //
-            if (PreservesHeight(c, p))
+            if (PreservesHeight(_c, p))
                 expectedSize.Height = origSize.Height;
-            else if (c is ListBox)
-                expectedSize.Height = listBoxExpectedHeight((ListBox)c, origSize.Height, newSize.Height, p);
+            else if (_c is ListBox)
+                expectedSize.Height = listBoxExpectedHeight((ListBox)_c, origSize.Height, newSize.Height, p);
 
-            if (PreservesWidth(c, p))
+            if (PreservesWidth(_c, p))
                 expectedSize.Width = origSize.Width;
 
-            expectedLocation.X = GetExpectedX(c, new Rectangle(origLocation, origSize), new Rectangle(newLocation, newSize));
-            expectedLocation.Y = GetExpectedY(c, new Rectangle(origLocation, origSize), new Rectangle(newLocation, newSize));
+            expectedLocation.X = GetExpectedX(_c, new Rectangle(origLocation, origSize), new Rectangle(newLocation, newSize));
+            expectedLocation.Y = GetExpectedY(_c, new Rectangle(origLocation, origSize), new Rectangle(newLocation, newSize));
 
             // Check results
-            //
             if (which == ScaleMethod.OneParam)
             {
                 p.log.WriteLine("after Scale({0}) Size is {1}", xScale, newSize.ToString());
@@ -3902,28 +3836,25 @@ return ScenarioResult.Pass;
             result.IncCounters(newLocation.Equals(expectedLocation), "2. Loc: " + newLocation + " != " + expectedLocation, p.log);
 
             // Rescale to original size and check results
-            //
             if (which == ScaleMethod.OneParam)
-                c.Scale(1.0f / xScale);
+                _c.Scale(1.0f / xScale);
             else if (which == ScaleMethod.TwoParam)
-                c.Scale(1.0f / xScale, 1.0f / yScale);
+                _c.Scale(1.0f / xScale, 1.0f / yScale);
             else
             {
                 SizeF oldScale = new SizeF(1 / xScale, 1 / yScale);
-                c.Scale(oldScale);
+                _c.Scale(oldScale);
             }
 
-            newSize = c.Size;
-            newLocation = c.Location;
+            newSize = _c.Size;
+            newLocation = _c.Location;
             p.log.WriteLine("recreated Size is " + newSize.ToString());
             p.log.WriteLine("recreated Location is " + newLocation.ToString());
 
-            // due to bug #34060 resolution - "round-off impercision is by Design"
-            // we'll allow small flactuation in results
             bool res = origSize.Equals(newSize) || (Math.Abs(origSize.Width - newSize.Width) <= 1 && Math.Abs(origSize.Height - newSize.Height) <= 1);
 
             if (!res && (origSize.Height + origLocation.Y < 0 || origSize.Width + origLocation.X < 0))
-                result.IncCounters(false, p.log, BugDb.ASURT, 115223, "3. Size: " + newSize + " != " + origSize);
+                result.IncCounters(false, p.log, BugDb.ASURT, 55, "3. Size: " + newSize + " != " + origSize);
             else
                 result.IncCounters(res, "3. Size: " + newSize + " != " + origSize, p.log);
 
@@ -3934,10 +3865,10 @@ return ScenarioResult.Pass;
             // when IntegralHeight = true
             if (origSize != newSize)
             {
-                if (c is ListBox && ((ListBox)c).IntegralHeight == true)
+                if (_c is ListBox && ((ListBox)_c).IntegralHeight == true)
                 {
                     int temp = Math.Abs(origSize.Height - newSize.Height);
-                    int temp1 = ((ListBox)c).GetItemHeight(0);
+                    int temp1 = ((ListBox)_c).GetItemHeight(0);
 
                     if (Math.IEEERemainder(temp, temp1) == 0)
                     {
@@ -3951,10 +3882,10 @@ return ScenarioResult.Pass;
             // when IntegralHeight = true
             if (origSize != newSize)
             {
-                if (c is ComboBox && ((ComboBox)c).IntegralHeight == true)
+                if (_c is ComboBox && ((ComboBox)_c).IntegralHeight == true)
                 {
                     int temp = Math.Abs(origSize.Height - newSize.Height);
-                    int temp1 = ((ComboBox)c).GetItemHeight(0);
+                    int temp1 = ((ComboBox)_c).GetItemHeight(0);
 
                     if (Math.IEEERemainder(temp, temp1) == 0)
                     {
@@ -3988,27 +3919,27 @@ return ScenarioResult.Pass;
 
             ScaleHelper(p, ScaleMethod.TwoParam, out result);
             return result;
-        }		//
+        }
+
         //This method will show up as an extra scenario.  It used to be a test for Control.SetNewControls(),
         //which was replaced with the AddRange() method on the Controls collection.  No harm in keeping this
         //test though, since we could use additional collection coverage.
-
         protected virtual ScenarioResult ControlsAddRange(TParams p, Control[] value)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult sr = new ScenarioResult();
-            // Temporarily removing RadioButton - it throws an exception in internet zone: bug 480421
+            // Temporarily removing RadioButton - it throws an exception in internet zone: Regression_Bug66
             //Control[] ca = new Control[] { new Button(), new CheckBox(), new RadioButton() };
             Control[] ca = new Control[] { new Button(), new Button(), new Button() };
-            int initNumber = c.Controls.Count;
+            int initNumber = _c.Controls.Count;
 
             p.log.WriteLine("initial number of controls on tested control: " + initNumber);
             p.log.WriteLine("adding " + ca.Length.ToString() + " controls by Controls.AddRange...");
-            c.Controls.AddRange(ca);
-            if (c.Controls.Count != ca.Length + initNumber)
+            _c.Controls.AddRange(ca);
+            if (_c.Controls.Count != ca.Length + initNumber)
             {
-                sr.IncCounters(false, "FAILED: added " + (c.Controls.Count - initNumber).ToString() + " controls instead of " + initNumber, p.log);
+                sr.IncCounters(false, "FAILED: added " + (_c.Controls.Count - initNumber).ToString() + " controls instead of " + initNumber, p.log);
                 return sr;
             }
 
@@ -4017,10 +3948,10 @@ return ScenarioResult.Pass;
                 Application.DoEvents();
                 try
                 {
-                    int index = c.Controls.GetChildIndex(ca[i]);
+                    int index = _c.Controls.GetChildIndex(ca[i]);
 
                     Application.DoEvents();
-                    c.Controls.Remove(ca[i]);
+                    _c.Controls.Remove(ca[i]);
                     Application.DoEvents();
                     p.log.WriteLine(i + "-control was found among newly added controls");
                     sr.IncCounters(true);
@@ -4035,20 +3966,20 @@ return ScenarioResult.Pass;
                 }
             }
 
-            sr.IncCounters(c.Controls.Count == initNumber, "FAILED: to Remove just added controls", p.log);
+            sr.IncCounters(_c.Controls.Count == initNumber, "FAILED: to Remove just added controls", p.log);
             return sr;
         }
 
         protected virtual ScenarioResult ResetImeMode(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            c.ImeMode = (ImeMode)p.ru.GetDifferentEnumValue(typeof(ImeMode), (int)ImeMode.Inherit);
-            c.ResetImeMode();
+            _c.ImeMode = (ImeMode)p.ru.GetDifferentEnumValue(typeof(ImeMode), (int)ImeMode.Inherit);
+            _c.ResetImeMode();
 
-            ImeMode expectedResult = ExpectedReturnedImeDefault(c);
+            ImeMode expectedResult = ExpectedReturnedImeDefault(_c);
 
-            return new ScenarioResult(c.ImeMode == expectedResult, "ImeMode: " + c.ImeMode + "  Expected result: " + expectedResult, p.log);
+            return new ScenarioResult(_c.ImeMode == expectedResult, "ImeMode: " + _c.ImeMode + "  Expected result: " + expectedResult, p.log);
         }
 
         protected virtual ScenarioResult set_Name(TParams p, string s)
@@ -4058,12 +3989,12 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Name(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             string newName = p.ru.GetString(p.ru.GetRange(0, 1000));
 
-            c.Name = newName;
-            return new ScenarioResult(c.Name.Equals(newName), "Name set to:\n" + newName + "\n\nName is:\n" + c.Name);
+            _c.Name = newName;
+            return new ScenarioResult(_c.Name.Equals(newName), "Name set to:\n" + newName + "\n\nName is:\n" + _c.Name);
         }
 
         protected virtual ScenarioResult set_Tag(TParams p, object o)
@@ -4073,12 +4004,12 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Tag(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             object newTag = new Object();
 
-            c.Tag = newTag;
-            return new ScenarioResult(c.Tag == newTag);
+            _c.Tag = newTag;
+            return new ScenarioResult(_c.Tag == newTag);
         }
 
         // Returns the actual default ImeMode of the given control.  Contrast with
@@ -4119,30 +4050,27 @@ return ScenarioResult.Pass;
             }
         }
 
-        //
         // Whidbey features
-        //
         protected virtual ScenarioResult set_AutoSize(TParams p, bool value)
         {
             return get_AutoSize(p);
         }
 
-        //	TODO: add more specific coverage
         protected virtual ScenarioResult get_AutoSize(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // we may need to remember initial AutoSize and then restore it after the test
             // in order to avoid impact on other scenarios
-            bool orig = c.AutoSize;
+            bool orig = _c.AutoSize;
             bool newAutoSize = p.ru.GetBoolean();
 
-            p.log.WriteLine("change AutoSize from {0} to {1}", c.AutoSize, newAutoSize);
-            c.AutoSize = newAutoSize;
-            p.log.WriteLine("new AutoSize = " + c.AutoSize);
-            bool result = c.AutoSize == newAutoSize;
+            p.log.WriteLine("change AutoSize from {0} to {1}", _c.AutoSize, newAutoSize);
+            _c.AutoSize = newAutoSize;
+            p.log.WriteLine("new AutoSize = " + _c.AutoSize);
+            bool result = _c.AutoSize == newAutoSize;
 
-            c.AutoSize = orig;
+            _c.AutoSize = orig;
             return new ScenarioResult(result, "Failed: to set/get AutoSize", p.log);
         }
         protected virtual ScenarioResult set_AutoRelocate(TParams p, bool value)
@@ -4161,17 +4089,17 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Margin(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // Win32 Exception thrown from ReflectTools.ReflectBase.TestEngine
             // for very big values - will restrict with max
             int max = 512;
             Padding newValue = p.ru.GetPadding(max, max, max, max);
 
-            p.log.WriteLine("change Margin from {0} to {1}", c.Margin, newValue);
-            c.Margin = newValue;
-            p.log.WriteLine("new Margin = " + c.Margin);
-            return new ScenarioResult(c.Margin == newValue, "Failed: to set/get Margin", p.log);
+            p.log.WriteLine("change Margin from {0} to {1}", _c.Margin, newValue);
+            _c.Margin = newValue;
+            p.log.WriteLine("new Margin = " + _c.Margin);
+            return new ScenarioResult(_c.Margin == newValue, "Failed: to set/get Margin", p.log);
         }
 
         protected virtual ScenarioResult set_Padding(TParams p, Padding value)
@@ -4181,7 +4109,7 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_Padding(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult result = new ScenarioResult();
 
@@ -4190,30 +4118,30 @@ return ScenarioResult.Pass;
             int max = 512;
             Padding newValue = p.ru.GetPadding(max, max, max, max);
 
-            p.log.WriteLine("change Padding from {0} to {1}", c.Padding, newValue);
+            p.log.WriteLine("change Padding from {0} to {1}", _c.Padding, newValue);
             try
             {
-                c.Padding = newValue;
-                p.log.WriteLine("new Padding = " + c.Padding);
-                result.IncCounters(c.Padding == newValue, "Failed: to set/get Padding", p.log);
+                _c.Padding = newValue;
+                p.log.WriteLine("new Padding = " + _c.Padding);
+                result.IncCounters(_c.Padding == newValue, "Failed: to set/get Padding", p.log);
             }
             catch (OverflowException e)
             {
                 p.log.WriteLine("Exception: " + e.ToString());
-                result.IncCounters(false, p.log, BugDb.VSWhidbey, 148029, "OverflowException for large Padding");
+                result.IncCounters(false, p.log, BugDb.VSWhidbey, 56, "OverflowException for large Padding");
             }
             return result;
         }
 
         protected virtual ScenarioResult get_PreferredSize(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult result = new ScenarioResult();
-            Size initPrefSize = c.PreferredSize;
-            string initText = c.Text;
-            Font initFont = c.Font;
-            Size initSize = c.Size;
+            Size initPrefSize = _c.PreferredSize;
+            string initText = _c.Text;
+            Font initFont = _c.Font;
+            Size initSize = _c.Size;
 
             // increase Font to change PreferredSize
             //int increase = p.ru.GetRange(5, 1024);
@@ -4221,85 +4149,85 @@ return ScenarioResult.Pass;
 
             // If Size of the control changes as a result of the Font.Increase
             // PreferredSize should be also updated
-            if (!(c is DateTimePicker))
-                c.Text = p.ru.GetString(Int32.MaxValue, true);
+            if (!(_c is DateTimePicker))
+                _c.Text = p.ru.GetString(Int32.MaxValue, true);
             // have to limit length of text for Button with UseCompatibleTextRendering = false
             // due to Postponed VSWhidbey #535880
-            if ((c is Button) && (!((Button)c).UseCompatibleTextRendering) && (c.Text.Length > 500))
-                c.Text = c.Text.Substring(0, 500);
+            if ((_c is Button) && (!((Button)_c).UseCompatibleTextRendering) && (_c.Text.Length > 500))
+                _c.Text = _c.Text.Substring(0, 500);
 
-            p.log.WriteLine("Get PreferredSize on control with Text.Length = " + c.Text.Length);
-            result.IncCounters(IncreaseControlPreferredSize(c, increase, p), "Failed: to change Font", p.log);
-            p.log.WriteLine("PreferredSize: init/new: {0}/{1} ", initPrefSize, c.PreferredSize);
-            p.log.WriteLine("Size: init/new: {0}/{1} ", initSize, c.Size);
+            p.log.WriteLine("Get PreferredSize on control with Text.Length = " + _c.Text.Length);
+            result.IncCounters(IncreaseControlPreferredSize(_c, increase, p), "Failed: to change Font", p.log);
+            p.log.WriteLine("PreferredSize: init/new: {0}/{1} ", initPrefSize, _c.PreferredSize);
+            p.log.WriteLine("Size: init/new: {0}/{1} ", initSize, _c.Size);
 
             // verify PreferredSize increase
-            bool pass = (c.PreferredSize.Width >= initPrefSize.Width) && (c.PreferredSize.Height > initPrefSize.Height);
+            bool pass = (_c.PreferredSize.Width >= initPrefSize.Width) && (_c.PreferredSize.Height > initPrefSize.Height);
 
             //If you have a ComboBox, it may be bound by PreferredHeight if in one of the DropDown styles.
-            ComboBox cb = c as ComboBox;
+            ComboBox cb = _c as ComboBox;
             if (cb != null)
             {
                 if (cb.DropDownStyle == ComboBoxStyle.DropDown || cb.DropDownStyle == ComboBoxStyle.DropDownList)
-                    pass = (c.PreferredSize.Width >= initPrefSize.Width) && (c.PreferredSize.Height >= initPrefSize.Height);
+                    pass = (_c.PreferredSize.Width >= initPrefSize.Width) && (_c.PreferredSize.Height >= initPrefSize.Height);
             }
             // In some cases Height may remain unchanged if Text is "" (ButtonBase)
             // For controls like Form, GroupBox, Panel, ListBox, PictureBox, etc.
             // Font.Size doesn't affect PreferredSize
-            if (((c is ButtonBase) && (c.Text == "")) || (c is Form) || (c is GroupBox) || (c is Panel) || (c is ListView) || (c is PictureBox) || (c is ProgressBar) || (c is PropertyGrid) || (c is Splitter) || (c is TabControl) || (c is TrackBar) || (c is TreeView) || (c is PrintPreviewControl) || (c is ScrollBar) || (c is PropertyGrid))
-                    pass = (c.PreferredSize.Width >= initPrefSize.Width) && (c.PreferredSize.Height == initPrefSize.Height);
+            if (((_c is ButtonBase) && (_c.Text == "")) || (_c is Form) || (_c is GroupBox) || (_c is Panel) || (_c is ListView) || (_c is PictureBox) || (_c is ProgressBar) || (_c is PropertyGrid) || (_c is Splitter) || (_c is TabControl) || (_c is TrackBar) || (_c is TreeView) || (_c is PrintPreviewControl) || (_c is ScrollBar) || (_c is PropertyGrid))
+                    pass = (_c.PreferredSize.Width >= initPrefSize.Width) && (_c.PreferredSize.Height == initPrefSize.Height);
             
             // For Button control with AutoSizeMode = GrowOnly Height may remain unchanged even for non-empty text
             // - In case if initial Height already exceeded Height required to accomodate Text string.
-            if ((c is Button) && (c.Text.Length > 0) && (((Button)c).AutoSizeMode == AutoSizeMode.GrowOnly)) 
-                pass = (c.PreferredSize.Width >= initPrefSize.Width) && (c.PreferredSize.Height >= initPrefSize.Height);
+            if ((_c is Button) && (_c.Text.Length > 0) && (((Button)_c).AutoSizeMode == AutoSizeMode.GrowOnly)) 
+                pass = (_c.PreferredSize.Width >= initPrefSize.Width) && (_c.PreferredSize.Height >= initPrefSize.Height);
 
             // For ContainerControls like Form, PropertyBrowser.
             // Font.Size affects PreferredSize if AutoScaleMode = Font
-            if ((c is ContainerControl) && (((ContainerControl)c).AutoScaleMode == AutoScaleMode.Font))
-                pass = (c.PreferredSize.Width >= initPrefSize.Width) && (c.PreferredSize.Height >= initPrefSize.Height);
+            if ((_c is ContainerControl) && (((ContainerControl)_c).AutoScaleMode == AutoScaleMode.Font))
+                pass = (_c.PreferredSize.Width >= initPrefSize.Width) && (_c.PreferredSize.Height >= initPrefSize.Height);
 
             // For TextBoxBase-derived controls only onde dimension of the PreferredSize can increase with Font increase
             // - especially for large fonts
-            if (c is TextBoxBase && (Marshal.SizeOf(typeof(IntPtr)) * 8 == 64))
-                pass = (c.PreferredSize.Width >= initPrefSize.Width) || (c.PreferredSize.Height >= initPrefSize.Height);
+            if (_c is TextBoxBase && (Marshal.SizeOf(typeof(IntPtr)) * 8 == 64))
+                pass = (_c.PreferredSize.Width >= initPrefSize.Width) || (_c.PreferredSize.Height >= initPrefSize.Height);
 
             //Note much you can guarantee for DataGridView -- it would even be possible to have Width and Height
             //both _decrease_ if you have funky autosizing going on
-            if (c is DataGridView)
+            if (_c is DataGridView)
                 pass = true;
 
             // For ListBox PreferredSize remains unchanged for OwnerDraw* modes and PreHandleMode
-            if ((c is ListBox) && ((((ListBox)c).DrawMode != DrawMode.Normal) || PreHandleMode))
-                pass = (c.PreferredSize.Width == initPrefSize.Width) && (c.PreferredSize.Height == initPrefSize.Height);
+            if ((_c is ListBox) && ((((ListBox)_c).DrawMode != DrawMode.Normal) || PreHandleMode))
+                pass = (_c.PreferredSize.Width == initPrefSize.Width) && (_c.PreferredSize.Height == initPrefSize.Height);
 
             // log several known bugs
-            if (c is ListBox && PreHandleMode)
-                result.IncCounters(pass, p.log, BugDb.VSWhidbey, 151141, "Unexpected PreferredSize prior handle creation");
-            else if (c is RichTextBox && PreHandleMode)
-                result.IncCounters(pass, p.log, BugDb.VSWhidbey, 151735, "RTB returns default PreferredSize prior handle creation");
-            else if (c is CheckedListBox && !pass && c.PreferredSize.Height == initPrefSize.Height)
-                result.IncCounters(true, p.log, BugDb.VSWhidbey, 151155, "CLB: Won't Fix bug: PreferredSize always returns default Height");
-            else if (c is SplitContainer && !pass && ((SplitContainer)c).AutoSize)
-                result.IncCounters(pass, p.log, BugDb.VSWhidbey, 163396, "SC: PreferredSize changes with Font increase when AutoSize = true");
+            if (_c is ListBox && PreHandleMode)
+                result.IncCounters(pass, p.log, BugDb.VSWhidbey, 57, "Unexpected PreferredSize prior handle creation");
+            else if (_c is RichTextBox && PreHandleMode)
+                result.IncCounters(pass, p.log, BugDb.VSWhidbey, 58, "RTB returns default PreferredSize prior handle creation");
+            else if (_c is CheckedListBox && !pass && _c.PreferredSize.Height == initPrefSize.Height)
+                result.IncCounters(true, p.log, BugDb.VSWhidbey, 59, "CLB: Won't Fix bug: PreferredSize always returns default Height");
+            else if (_c is SplitContainer && !pass && ((SplitContainer)_c).AutoSize)
+                result.IncCounters(pass, p.log, BugDb.VSWhidbey, 60, "SC: PreferredSize changes with Font increase when AutoSize = true");
             else
-                result.IncCounters(pass, "Failed: to adjust PreferredSize for control with Text.Length = " + c.Text.Length, p.log);
+                result.IncCounters(pass, "Failed: to adjust PreferredSize for control with Text.Length = " + _c.Text.Length, p.log);
 
-            if ((c is ListBox) && (c.Text == "") && (initSize.Width != c.Size.Width || initSize.Height != c.Size.Height) && (initPrefSize.Height == c.PreferredSize.Height))
+            if ((_c is ListBox) && (_c.Text == "") && (initSize.Width != _c.Size.Width || initSize.Height != _c.Size.Height) && (initPrefSize.Height == _c.PreferredSize.Height))
                 result.IncCounters(false, p.log, BugDb.VSWhidbey, 148270, "PreferredSize didn't change when actual Size has changed");
 
-            if ((c is ListBox) && !pass)
+            if ((_c is ListBox) && !pass)
             {
-                p.log.WriteLine("Items.Count = " + ((ListBox)c).Items.Count);
-                p.log.WriteLine("SelectedIndex: " + ((ListBox)c).SelectedIndex);
-                p.log.WriteLine("DrawMode: " + ((ListBox)c).DrawMode);
+                p.log.WriteLine("Items.Count = " + ((ListBox)_c).Items.Count);
+                p.log.WriteLine("SelectedIndex: " + ((ListBox)_c).SelectedIndex);
+                p.log.WriteLine("DrawMode: " + ((ListBox)_c).DrawMode);
             }
 
             // restore initial conditions
-            if (!(c is DateTimePicker))
-                c.Text = initText;
-            c.Font = initFont;
-            c.Size = initSize;
+            if (!(_c is DateTimePicker))
+                _c.Text = initText;
+            _c.Font = initFont;
+            _c.Size = initSize;
 
             //p.log.WriteLine("PrefSize after restore: " + c.PreferredSize);
             return result;
@@ -4342,68 +4270,68 @@ return ScenarioResult.Pass;
         //
         protected virtual ScenarioResult GetPreferredSize(TParams p, Size proposedSize)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult result = new ScenarioResult();
-            Size initSize = c.PreferredSize;
-            Size initControlSize = c.Size;
+            Size initSize = _c.PreferredSize;
+            Size initControlSize = _c.Size;
 
             p.log.WriteLine("default PreferredSize = " + initSize);
             p.log.WriteLine("1. call when (0, 0) is proposed");
 
-            Size retSize = c.GetPreferredSize(Size.Empty);
+            Size retSize = _c.GetPreferredSize(Size.Empty);
 
             result.IncCounters(retSize.Equals(initSize), "Failed: returned " + retSize + " when proposed (0, 0)", p.log);
             p.log.WriteLine("2. call when (Int32.Max, Int32.Max) is proposed");
-            retSize = c.GetPreferredSize(new Size(Int32.MaxValue, Int32.MaxValue));
+            retSize = _c.GetPreferredSize(new Size(Int32.MaxValue, Int32.MaxValue));
             result.IncCounters(retSize.Equals(initSize), "Failed: returned " + retSize + " when proposed (Int32.Max, Int32.Max)", p.log);
             p.log.WriteLine("3. call when exact default PreferredSize is proposed");
-            retSize = c.GetPreferredSize(initSize);
+            retSize = _c.GetPreferredSize(initSize);
             result.IncCounters(retSize.Equals(initSize), "Failed: returned " + retSize + " when proposed default PreferredSize", p.log);
 
             // remember MinimumSize and MaximumSize to restore at the end of the scenario
-            Size saveMaxSize = c.MaximumSize;
-            Size saveMinSize = c.MinimumSize;
+            Size saveMaxSize = _c.MaximumSize;
+            Size saveMinSize = _c.MinimumSize;
 
             p.log.WriteLine("4. call when MaximimSize is smaller than default PreferredSize and (0, 0) is proposed");
 
             // make sure new MaxSize doesn't contain 0 - 0 means unlimited
             Size newSize = p.ru.GetSize(1, initSize.Width - 1, 1, initSize.Height - 1);
 
-            c.MaximumSize = newSize;
-            if (c is ComboBox)
+            _c.MaximumSize = newSize;
+            if (_c is ComboBox)
                 newSize.Height = 0;
-            result.IncCounters(c.MaximumSize.Equals(newSize), "Failed to set MaximumSize", p.log);
-            retSize = c.GetPreferredSize(Size.Empty);
+            result.IncCounters(_c.MaximumSize.Equals(newSize), "Failed to set MaximumSize", p.log);
+            retSize = _c.GetPreferredSize(Size.Empty);
 
             // if MinimumSize.Width or Height is greater than MaximumSize.Width/Height
             // the MinimumSize will take precedence
             Size expSize = newSize;
 
-            if (c.MinimumSize.Width > expSize.Width)
-                expSize.Width = c.MinimumSize.Width;
+            if (_c.MinimumSize.Width > expSize.Width)
+                expSize.Width = _c.MinimumSize.Width;
 
-            if (c.MinimumSize.Height > expSize.Height)
-                expSize.Height = c.MinimumSize.Height;
+            if (_c.MinimumSize.Height > expSize.Height)
+                expSize.Height = _c.MinimumSize.Height;
 
-            if (c is ComboBox)
+            if (_c is ComboBox)
                 result.IncCounters(retSize.Width <= expSize.Width, "Failed: returned " + retSize + " when MaxSize = " + newSize, p.log);
             else
                 result.IncCounters(retSize.Width <= expSize.Width && retSize.Height <= expSize.Height, "Failed: returned " + retSize + " when MaxSize = " + newSize, p.log);
             p.log.WriteLine("5. call when MinimumSize is greater than default PreferredSize and (0, 0) is proposed");
             newSize = p.ru.GetSize(initSize.Width + 1, initSize.Height + 1);
-            c.MaximumSize = Size.Empty; // clear Maximum restriction 
-            c.MinimumSize = newSize;
-            if (c is ComboBox)
+            _c.MaximumSize = Size.Empty; // clear Maximum restriction 
+            _c.MinimumSize = newSize;
+            if (_c is ComboBox)
                 newSize.Height = 0;
-            result.IncCounters(c.MinimumSize.Equals(newSize), "Failed to set MinimumSize", p.log);
-            retSize = c.GetPreferredSize(Size.Empty);
+            result.IncCounters(_c.MinimumSize.Equals(newSize), "Failed to set MinimumSize", p.log);
+            retSize = _c.GetPreferredSize(Size.Empty);
             result.IncCounters(retSize.Width >= newSize.Width && retSize.Height >= newSize.Height, "Failed: returned " + retSize + " when MinSize = " + newSize, p.log);
 
             // restore MaximumSize and MinimumSize
-            c.MinimumSize = saveMinSize;
-            c.MaximumSize = saveMaxSize;
-            c.Size = initControlSize;
+            _c.MinimumSize = saveMinSize;
+            _c.MaximumSize = saveMaxSize;
+            _c.Size = initControlSize;
             return result;
         }
 
@@ -4414,9 +4342,9 @@ return ScenarioResult.Pass;
         //
         protected virtual ScenarioResult get_LayoutEngine(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
-            object retValue = c.LayoutEngine;
+            object retValue = _c.LayoutEngine;
 
             // verify that it's not null
             return new ScenarioResult(retValue != null, "Failed: returned value is null", p.log);
@@ -4513,64 +4441,64 @@ return ScenarioResult.Pass;
         // actual meaning of the property and is misleading
         protected virtual ScenarioResult get_MaximumSize(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult result = new ScenarioResult();
-            Size origMaxSize = c.MaximumSize;
-            Size origControlSize = c.Size;
+            Size origMaxSize = _c.MaximumSize;
+            Size origControlSize = _c.Size;
             //Size newSize = p.ru.GetSize(Int16.MaxValue / 10, Int16.MaxValue / 10);
             int newWidth = p.ru.GetRange(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width);
             int newHeight = p.ru.GetRange(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 2, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
             Size newSize = new Size(newWidth, newHeight);
 
             // 1. change MaximumSize
-            p.log.WriteLine("1. change MaximumSize from {0} to {1}", c.MaximumSize, newSize);
-            c.MaximumSize = newSize;
-            p.log.WriteLine("new MaximumSize = " + c.MaximumSize);
-            result.IncCounters(c.MaximumSize == newSize, "FAIL: set/get MaximumSize", p.log);
+            p.log.WriteLine("1. change MaximumSize from {0} to {1}", _c.MaximumSize, newSize);
+            _c.MaximumSize = newSize;
+            p.log.WriteLine("new MaximumSize = " + _c.MaximumSize);
+            result.IncCounters(_c.MaximumSize == newSize, "FAIL: set/get MaximumSize", p.log);
 
             // 2. Try modifying size to value larger than max.
             p.log.WriteLine("2. Try modifying size to value larger than max.  Size should return max.");
             Size randSize = p.ru.GetSize(newSize.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, newSize.Height, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
-            Size origSize = c.Size;
+            Size origSize = _c.Size;
 
             // in partial trust, window can not be set off the screen
             Size expected = newSize;
-            if (c is Form)
+            if (_c is Form)
             {
-                if (((Form)c).IsRestrictedWindow)
+                if (((Form)_c).IsRestrictedWindow)
                 {
                     p.log.WriteLine("IsRestrictedWindow, adjusting expected size...");
-                    Rectangle working = Screen.GetWorkingArea(c);
-                    expected.Width = working.Width - c.Location.X;
-                    expected.Height = working.Height - c.Location.Y;
+                    Rectangle working = Screen.GetWorkingArea(_c);
+                    expected.Width = working.Width - _c.Location.X;
+                    expected.Height = working.Height - _c.Location.Y;
                     p.log.WriteLine("	new expected (" + expected.Width + ", " + expected.Height + ")");
                 }
             }
 
             p.log.WriteLine("setting Size to " + randSize);
-            c.Size = randSize;
+            _c.Size = randSize;
 
-            if (PreservesHeight(c, p))
+            if (PreservesHeight(_c, p))
                 expected.Height = origSize.Height;
 
-            if (PreservesWidth(c, p))
+            if (PreservesWidth(_c, p))
                 expected.Width = origSize.Width;
 
-            //[achin] - MonthCalendar size depends on how many calendars are completely visible
-			if (c is MonthCalendar)
+            //MonthCalendar size depends on how many calendars are completely visible
+			if (_c is MonthCalendar)
 			{
-				p.log.WriteLine(c.Size.ToString());
-				result.IncCounters(((c.Size.Width <= expected.Width) && (c.Size.Height <= expected.Height)), "FAIL: Size is greater than MaximumSize", expected.ToString(), c.Size.ToString(), p.log);
+				p.log.WriteLine(_c.Size.ToString());
+				result.IncCounters(((_c.Size.Width <= expected.Width) && (_c.Size.Height <= expected.Height)), "FAIL: Size is greater than MaximumSize", expected.ToString(), _c.Size.ToString(), p.log);
 			}
-			else if (c is ListBox)
-				expected.Height = listBoxExpectedHeight((ListBox)c, origSize.Height, newSize.Height, p);
+			else if (_c is ListBox)
+				expected.Height = listBoxExpectedHeight((ListBox)_c, origSize.Height, newSize.Height, p);
 			else
-                result.IncCounters(expected, c.Size, "FAIL: set Size", p.log);
+                result.IncCounters(expected, _c.Size, "FAIL: set Size", p.log);
 
             // restore minsize so as not to break subsequent sizing scenarios.
-            c.MaximumSize = origMaxSize;
-            c.Size = origControlSize;
+            _c.MaximumSize = origMaxSize;
+            _c.Size = origControlSize;
             return result;
         }
 
@@ -4584,65 +4512,62 @@ return ScenarioResult.Pass;
         // VSWhidbey 135632: Min and MaximumSize do affect control size now.
         protected virtual ScenarioResult get_MinimumSize(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             // should accept any Size
-            // TODO: investigate Win32 exception from ReflectBase and
-            // then remove restrictions on Size
-            //Size newSize = p.ru.GetSize ();
             ScenarioResult result = new ScenarioResult();
             Application.DoEvents();
-            Size origMinSize = c.MinimumSize;
-            Size origControlSize = c.Size;
+            Size origMinSize = _c.MinimumSize;
+            Size origControlSize = _c.Size;
             //Size newSize = p.ru.GetSize(Int16.MaxValue / 10, Int16.MaxValue / 10);
             int newWidth = p.ru.GetRange(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width);
             int newHeight = p.ru.GetRange(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 2, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
             Size newSize = new Size(newWidth, newHeight);
 
             // 1. change MinimumSize
-            p.log.WriteLine("1. change MinimumSize from {0} to {1}", c.MinimumSize, newSize);
-            c.MinimumSize = newSize;
-            p.log.WriteLine("new MinimumSize = " + c.MinimumSize);
-            if (c is ComboBox)
+            p.log.WriteLine("1. change MinimumSize from {0} to {1}", _c.MinimumSize, newSize);
+            _c.MinimumSize = newSize;
+            p.log.WriteLine("new MinimumSize = " + _c.MinimumSize);
+            if (_c is ComboBox)
                 newSize.Height = 0;
-            result.IncCounters(c.MinimumSize == newSize, "FAIL: set/get MinimumSize", p.log);
+            result.IncCounters(_c.MinimumSize == newSize, "FAIL: set/get MinimumSize", p.log);
 
             // 2. Try modifying size to value smaller than min.
             p.log.WriteLine("2. Try modifying size to value smaller than min.  Size should return min.");
             Size randSize = p.ru.GetSize(0, newSize.Width, 0, newSize.Height);
-            Size origSize = c.Size;
+            Size origSize = _c.Size;
             Size expected = newSize;
             p.log.WriteLine("setting Size to " + randSize);
-            c.Size = randSize;
+            _c.Size = randSize;
             Application.DoEvents();
-            if (PreservesHeight(c, p))
+            if (PreservesHeight(_c, p))
                 expected.Height = origSize.Height;
 
-            if (PreservesWidth(c, p))
+            if (PreservesWidth(_c, p))
                 expected.Width = origSize.Width;
 
-            //[achin] - MonthCalendar size depends on how many calendars are completely visible
-            if (c is MonthCalendar)
+            //MonthCalendar size depends on how many calendars are completely visible
+            if (_c is MonthCalendar)
             {
-                p.log.WriteLine(c.Size.ToString());
-                result.IncCounters(((c.Size.Width >= expected.Width) && (c.Size.Height >= expected.Height)), "FAIL: Size is less than MinimumSize", expected.ToString(), c.Size.ToString(), p.log);
+                p.log.WriteLine(_c.Size.ToString());
+                result.IncCounters(((_c.Size.Width >= expected.Width) && (_c.Size.Height >= expected.Height)), "FAIL: Size is less than MinimumSize", expected.ToString(), _c.Size.ToString(), p.log);
             }
-            else if (c is ListBox)
-                expected.Height = listBoxExpectedHeight((ListBox)c, origSize.Height, newSize.Height, p);
-			else if (c is TextBox)
+            else if (_c is ListBox)
+                expected.Height = listBoxExpectedHeight((ListBox)_c, origSize.Height, newSize.Height, p);
+			else if (_c is TextBox)
 				//TextBox nolonger preserves height when AutoSize = true
-				expected.Height = c.PreferredSize.Height;
-            else if (c is TrackBar) {
+				expected.Height = _c.PreferredSize.Height;
+            else if (_c is TrackBar) {
                 //trackbar no longer preserves height when Autosize = true
                 expected.Height = newSize.Height;
-                result.IncCounters(expected, c.Size, "FAIL: set Size", p.log);
+                result.IncCounters(expected, _c.Size, "FAIL: set Size", p.log);
             }
             else
-                result.IncCounters(expected, c.Size, "FAIL: set Size", p.log);
+                result.IncCounters(expected, _c.Size, "FAIL: set Size", p.log);
 
             // restore minsize so as not to break subsequent sizing scenarios.
-            c.MinimumSize = origMinSize;
-            c.Size = origControlSize;
+            _c.MinimumSize = origMinSize;
+            _c.Size = origControlSize;
             return result;
         }
 
@@ -4653,33 +4578,33 @@ return ScenarioResult.Pass;
 
         protected virtual ScenarioResult get_UseWaitCursor(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
 
             ScenarioResult result = new ScenarioResult();
-            bool initUseWait = c.UseWaitCursor;
+            bool initUseWait = _c.UseWaitCursor;
 
-            c.UseWaitCursor = false;
+            _c.UseWaitCursor = false;
 
-            Cursor origCursor = c.Cursor;
+            Cursor origCursor = _c.Cursor;
 
-            c.UseWaitCursor = initUseWait;
+            _c.UseWaitCursor = initUseWait;
 
             // set to true, verify that Cursor is Wait 
             p.log.WriteLine("original Cursor: " + origCursor);
-            p.log.WriteLine("1. change UseWaitCursor from {0} to true", c.UseWaitCursor);
-            c.UseWaitCursor = true;
-            result.IncCounters(c.UseWaitCursor, "Failed: to set UseWaitCursor = true", p.log);
-            result.IncCounters(c.Cursor.Equals(Cursors.WaitCursor), "Failed: to update Cursor to Wait, Cursor is " + c.Cursor, p.log);
+            p.log.WriteLine("1. change UseWaitCursor from {0} to true", _c.UseWaitCursor);
+            _c.UseWaitCursor = true;
+            result.IncCounters(_c.UseWaitCursor, "Failed: to set UseWaitCursor = true", p.log);
+            result.IncCounters(_c.Cursor.Equals(Cursors.WaitCursor), "Failed: to update Cursor to Wait, Cursor is " + _c.Cursor, p.log);
 
             // set to false, verify Cursor went back to original
-            p.log.WriteLine("2. change UseWaitCursor from {0} to false", c.UseWaitCursor);
-            c.UseWaitCursor = false;
-            result.IncCounters(!c.UseWaitCursor, "Failed: to set UseWaitCursor = false", p.log);
-            result.IncCounters(c.Cursor.Equals(origCursor), p.log, BugDb.VSWhidbey, 142284, "Didn't preserve Cursor in process of changing UseWaitCursor ");
+            p.log.WriteLine("2. change UseWaitCursor from {0} to false", _c.UseWaitCursor);
+            _c.UseWaitCursor = false;
+            result.IncCounters(!_c.UseWaitCursor, "Failed: to set UseWaitCursor = false", p.log);
+            result.IncCounters(_c.Cursor.Equals(origCursor), p.log, BugDb.VSWhidbey, 61, "Didn't preserve Cursor in process of changing UseWaitCursor ");
             p.log.WriteLine("3. change UseWaitCursor to true, change Cursor property");
-            c.UseWaitCursor = true;
-            result.IncCounters(c.UseWaitCursor, "Failed: to set UseWaitCursor = true", p.log);
-            result.IncCounters(c.Cursor.Equals(Cursors.WaitCursor), "Failed: to update Cursor to Wait, Cursor is " + c.Cursor, p.log);
+            _c.UseWaitCursor = true;
+            result.IncCounters(_c.UseWaitCursor, "Failed: to set UseWaitCursor = true", p.log);
+            result.IncCounters(_c.Cursor.Equals(Cursors.WaitCursor), "Failed: to update Cursor to Wait, Cursor is " + _c.Cursor, p.log);
 
             Cursor newCursor = p.ru.GetCursor();
 
@@ -4690,27 +4615,27 @@ return ScenarioResult.Pass;
                 newCursor = p.ru.GetCursor();
 
             // Cursor should return WaitCursor while UseWaitCursor = true
-            c.Cursor = newCursor;
-            p.log.WriteLine("Cursor returns " + c.Cursor + " after setting to " + newCursor + ", UseWaitCursor = " + c.UseWaitCursor);
-            result.IncCounters(c.Cursor.Equals(Cursors.WaitCursor), p.log, BugDb.VSWhidbey, 142284, "Cursor didn't return WaitCursor after setting to random cursor when UseWaitCursor = true");
+            _c.Cursor = newCursor;
+            p.log.WriteLine("Cursor returns " + _c.Cursor + " after setting to " + newCursor + ", UseWaitCursor = " + _c.UseWaitCursor);
+            result.IncCounters(_c.Cursor.Equals(Cursors.WaitCursor), p.log, BugDb.VSWhidbey, 61, "Cursor didn't return WaitCursor after setting to random cursor when UseWaitCursor = true");
 
             // Cursor should be restored to the new cursor after UseWait = false
             p.log.WriteLine("... set UseWaitCursor = false, verify new cursor is restored");
-            c.UseWaitCursor = false;
-            p.log.WriteLine("Cursor returns " + c.Cursor + " after setting UseWaitCursor = false ");
-            result.IncCounters(c.Cursor.Equals(newCursor), "Failed to restore new Cursor: " + newCursor + " after setting UseWait = false", p.log);
-            c.UseWaitCursor = p.ru.GetBoolean();	// for future scenarios
+            _c.UseWaitCursor = false;
+            p.log.WriteLine("Cursor returns " + _c.Cursor + " after setting UseWaitCursor = false ");
+            result.IncCounters(_c.Cursor.Equals(newCursor), "Failed to restore new Cursor: " + newCursor + " after setting UseWait = false", p.log);
+            _c.UseWaitCursor = p.ru.GetBoolean();	// for future scenarios
             return result;
         }
 
         protected virtual ScenarioResult get_AutoScrollOffset(TParams p)
         {
-            c = GetControl(p);
+            _c = GetControl(p);
 
             Point pt = p.ru.GetPoint(Int32.MinValue, Int32.MaxValue, Int32.MinValue, Int32.MaxValue);
-            c.AutoScrollOffset = pt;
+            _c.AutoScrollOffset = pt;
 
-            return new ScenarioResult(pt.Equals(c.AutoScrollOffset), "Point mismatch: " + pt.ToString() + " vs. " + c.AutoScrollOffset.ToString());
+            return new ScenarioResult(pt.Equals(_c.AutoScrollOffset), "Point mismatch: " + pt.ToString() + " vs. " + _c.AutoScrollOffset.ToString());
         }
 
         protected virtual ScenarioResult set_AutoScrollOffset(TParams p, Point value)
@@ -4750,12 +4675,12 @@ return ScenarioResult.Pass;
 
             Bitmap mapA = new Bitmap(50, 50);
             Bitmap mapB = (Bitmap)mapA.Clone();
-            c = GetControl(p);
+            _c = GetControl(p);
 
             bool bSet = SecurityCheck(result,
                 delegate
                 {
-                    c.DrawToBitmap(mapA, c.ClientRectangle);
+                    _c.DrawToBitmap(mapA, _c.ClientRectangle);
                 }, typeof(Control).GetMethod("DrawToBitmap"),
                 LibSecurity.AllWindows);
 
@@ -4914,16 +4839,6 @@ return ScenarioResult.Pass;
                     return ScenarioResult.Pass; 
                 }
         */
-                        //*********************************************************************
-        // TODO (KevinTao 1/9/2001):
-        // The code below is from Beta 1 XControl and XRichControl tests.  They are still valid
-        // tests for methods and properties that are no longer publicly exposed or have been moved.
-        // I'm keeing these here so we can make use of them in other tests if we choose to.
-        //*********************************************************************
-        // ??? Do we need special case for LinkLabel  ???
-        // ======= DoubleCLick raises no event in Button --> need special ========
-        // ====== using Clicked caused failures for Label ================
-        // -------// --> using OnMouseUp  // ----------------------------
         /* BETA2: SendMessage is now Protected
         protected virtual ScenarioResult SendMessage(TParams p, Int32 msg, Int32 wParam, Int32 lParam)
         {
@@ -5104,14 +5019,14 @@ return ScenarioResult.Pass;
             sr.IncCounters(OBJECT_LOCATIONCHANGE(p));
             //sr.IncCounters(OBJECT_NAMECHANGE(p));
             //sr.IncCounters(OBJECT_DEFACTIONCHANGE(p));
-            p.log.WriteLine("VSWhidbey# 371681 postponed.  OBJECT_NAMECHANGE and OBJECT_DEFACTIONCHANGE tests disabled");
+            p.log.WriteLine("VSWhidbey# Regression_Bug62 postponed.  OBJECT_NAMECHANGE and OBJECT_DEFACTIONCHANGE tests disabled");
             sr.IncCounters(OBJECT_PARENTCHANGE(p));
             return sr;
         }
         [Scenario(false)]
         protected virtual ScenarioResult OBJECT_CREATE(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             ScenarioResult sr = new ScenarioResult();
             bool prevVisible = this.Visible;
             this.Visible = true;
@@ -5119,11 +5034,11 @@ return ScenarioResult.Pass;
             {
                 using (AccessibleEventListener listener = new AccessibleEventListener(AccessibleEventListener.EVENT.OBJECT_CREATE))
                 {
-                    c = new Control();
-                    this.Controls.Add(c);
+                    _c = new Control();
+                    this.Controls.Add(_c);
                     Application.DoEvents();
                     sr.IncCounters(1 <= listener.FiredEvents.Count, "FAIL: expected OBJECT_CREATE accessible event to be fired once", p.log);
-                    this.Controls.Remove(c);
+                    this.Controls.Remove(_c);
                 }
                 return sr;
             }
@@ -5144,7 +5059,7 @@ return ScenarioResult.Pass;
         //        c.AccessibleDefaultActionDescription = p.ru.GetString(20);
         //        p.log.WriteLine("DefaultActionDescription is: " + c.AccessibleDefaultActionDescription);
         //        Application.DoEvents();
-        //        sr.IncCounters(1 <=listener.FiredEvents.Count, p.log, BugDb.VSWhidbey, 371681 );//"FAIL: expected OBJECT_DEFACTIONCHANGE accessible event to be fired once", p.log);
+        //        sr.IncCounters(1 <=listener.FiredEvents.Count, p.log, BugDb.VSWhidbey, Regression_Bug62 );//"FAIL: expected OBJECT_DEFACTIONCHANGE accessible event to be fired once", p.log);
         //    }
         //    return sr;
         //}
@@ -5152,22 +5067,22 @@ return ScenarioResult.Pass;
         [Scenario(false)]
         protected virtual ScenarioResult OBJECT_DESTROY(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             ScenarioResult sr = new ScenarioResult();
-            if (c is Form) ((Form)c).TopLevel = false;
+            if (_c is Form) ((Form)_c).TopLevel = false;
             AddObjectToForm(p);
-            c.Visible = true;
+            _c.Visible = true;
             using (AccessibleEventListener listener = new AccessibleEventListener(AccessibleEventListener.EVENT.OBJECT_DESTROY))
             {
                 try
                 {
-                    c.Dispose();
+                    _c.Dispose();
                     Application.DoEvents();
                     sr.IncCounters(1 <= listener.FiredEvents.Count, "FAIL: expected OBJECT_DESTROY accessible event to be fired once", p.log);
                 }
                 finally
                 {
-                    this.Controls.Remove(c);
+                    this.Controls.Remove(_c);
                     RecreateControl(p);
                 }
             }
@@ -5177,16 +5092,16 @@ return ScenarioResult.Pass;
         [Scenario(false)]
         protected virtual ScenarioResult OBJECT_FOCUS(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             ScenarioResult sr = new ScenarioResult();
-            if (!c.CanFocus)
+            if (!_c.CanFocus)
             { return ScenarioResult.Pass; }
 
             AddObjectToForm(p);
             //if (c is Form) ((Form)c).TopLevel = false;
             //if (AddControlToForm)
             //    this.Controls.Add(c);
-            c.Visible = true;
+            _c.Visible = true;
             bool prevVisible = this.Visible;
             this.Visible = true;
             try
@@ -5197,8 +5112,8 @@ return ScenarioResult.Pass;
                 using (AccessibleEventListener listener = new AccessibleEventListener(AccessibleEventListener.EVENT.OBJECT_FOCUS))
                 {
                     if (!AddControlToForm)
-                        c.Show();
-                    SafeMethods.Focus(c);
+                        _c.Show();
+                    SafeMethods.Focus(_c);
 
                     Application.DoEvents();
                     sr.IncCounters(1 <= listener.FiredEvents.Count, "FAIL: expected OBJECT_FOCUS accessible event to be fired once", p.log);
@@ -5211,47 +5126,47 @@ return ScenarioResult.Pass;
         [Scenario(false)]
         protected virtual ScenarioResult OBJECT_HIDE(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             ScenarioResult sr = new ScenarioResult();
-            c = CreateObject(p) as Control;
-            if (c is Form) ((Form)c).TopLevel = false;
+            _c = CreateObject(p) as Control;
+            if (_c is Form) ((Form)_c).TopLevel = false;
             if (!AddControlToForm)
-                c.Show();
+                _c.Show();
             else
-                this.Controls.Add(c);
+                this.Controls.Add(_c);
             using (AccessibleEventListener listener = new AccessibleEventListener(AccessibleEventListener.EVENT.OBJECT_HIDE))
             {
-                c.Hide();
+                _c.Hide();
                 Application.DoEvents();
                 sr.IncCounters(1 <= listener.FiredEvents.Count, "FAIL: expected OBJECT_HIDE accessible event to be fired once", p.log);
             }
-            c.Show();
+            _c.Show();
             return sr;
         }
         //EVENT_OBJECT_LOCATIONCHANGE: Fired on both a resize and a move.
         [Scenario(false)]
         protected virtual ScenarioResult OBJECT_LOCATIONCHANGE(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             ScenarioResult sr = new ScenarioResult();
-            p.target = c = CreateObject(p) as Control;
+            p.target = _c = CreateObject(p) as Control;
 
-            if (c is Form) ((Form)c).TopLevel = false;
+            if (_c is Form) ((Form)_c).TopLevel = false;
             AddObjectToForm(p);
 
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
-            c.Visible = true;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
+            _c.Visible = true;
             using (AccessibleEventListener listener = new AccessibleEventListener(AccessibleEventListener.EVENT.OBJECT_LOCATIONCHANGE))
             {
-                c.Location = new Point(c.Location.X + 1, c.Location.Y + 1);
+                _c.Location = new Point(_c.Location.X + 1, _c.Location.Y + 1);
                 Application.DoEvents();
                 sr.IncCounters(1 <= listener.FiredEvents.Count, "FAIL: expected OBJECT_LOCATIONCHANGE accessible event to be fired once when control moves", p.log);
 
-                Size oldSize = c.Size;
-                c.Size = new Size(c.Size.Width + 1, c.Size.Height + 1);
+                Size oldSize = _c.Size;
+                _c.Size = new Size(_c.Size.Width + 1, _c.Size.Height + 1);
                 Application.DoEvents();
 
-                if (oldSize == c.Size)
+                if (oldSize == _c.Size)
                     sr.IncCounters(1 <= listener.FiredEvents.Count, "FAIL: size did not change and expected no OBJECT_LOCATIONCHANGE accessible event to be fired", p.log);
                 else
                     sr.IncCounters(2 <= listener.FiredEvents.Count, "FAIL: expected OBJECT_LOCATIONCHANGE accessible event to be fired again when control is resized", p.log);
@@ -5273,7 +5188,7 @@ return ScenarioResult.Pass;
         //    {
         //        c.AccessibleName = p.ru.GetString(20);
         //        Application.DoEvents();
-        //        sr.IncCounters(1<= listener.FiredEvents.Count, p.log, BugDb.VSWhidbey, 371681 );//"FAIL: expected OBJECT_NAMECHANGE accessible event to be fired once", p.log);
+        //        sr.IncCounters(1<= listener.FiredEvents.Count, p.log, BugDb.VSWhidbey, Regression_Bug62 );//"FAIL: expected OBJECT_NAMECHANGE accessible event to be fired once", p.log);
         //    }
         //    return sr;
         //}
@@ -5281,18 +5196,18 @@ return ScenarioResult.Pass;
         [Scenario(false)]
         protected virtual ScenarioResult OBJECT_PARENTCHANGE(TParams p)
         {
-            if ((c = GetControl(p)) == null) return ScenarioResult.Fail;
+            if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;
             ScenarioResult sr = new ScenarioResult();
 
-            if (c is Form) ((Form)c).TopLevel = false;
+            if (_c is Form) ((Form)_c).TopLevel = false;
             //top level control can't have parent
             if (!AddControlToForm)
                 return new ScenarioResult(true);
 
             //			this.Controls.Add(c = CreateObject(p) as Control);
-            c = CreateObject(p) as Control;
-            if (c is Form) ((Form)c).TopLevel = false;
-            this.Controls.Add(c);
+            _c = CreateObject(p) as Control;
+            if (_c is Form) ((Form)_c).TopLevel = false;
+            this.Controls.Add(_c);
 
 
             Panel pa = new Panel();
@@ -5300,7 +5215,7 @@ return ScenarioResult.Pass;
             Application.DoEvents();
             using (AccessibleEventListener listener = new AccessibleEventListener(AccessibleEventListener.EVENT.OBJECT_PARENTCHANGE))
             {
-                pa.Controls.Add(c);
+                pa.Controls.Add(_c);
                 Application.DoEvents();
                 //This event could fire multiple times because of the parking window, that's not a problem
                 sr.IncCounters(0 < listener.FiredEvents.Count, "FAIL: expected OBJECT_PARENTCHANGE accessible event to be fired once", p.log);

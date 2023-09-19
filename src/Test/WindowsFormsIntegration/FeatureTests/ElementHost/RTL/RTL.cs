@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -16,24 +20,21 @@ using System.Diagnostics;
 using System.Threading;
 using System.Reflection;
 
-//
+
 // Testcase:    RTL
 // Description: Verify Right-To-Left works for Element Host controls hosted on Winform.  
 //              Also verify it works properly with FlowDirection.
-// Author:      a-rickyt
-//
 public class RTL : ReflectBase
 {
     #region Testcase setup
 
-    ElementHost elementHost1;
-    ElementHost elementHost2;
-    SWC.TextBox avTextBox1;
-    SWC.Button avButton;
-    SWC.ListView listView;
-    SWC.GridView gridView;
-    List<Type> panelTypes;
-
+    ElementHost _elementHost1;
+    ElementHost _elementHost2;
+    SWC.TextBox _avTextBox1;
+    SWC.Button _avButton;
+    SWC.ListView _listView;
+    SWC.GridView _gridView;
+    List<Type> _panelTypes;
 
     public RTL(String[] args) : base(args) { }
 
@@ -42,7 +43,7 @@ public class RTL : ReflectBase
         this.Text = "RTL";
         this.Size = new System.Drawing.Size(400, 400);
 
-        panelTypes = GetDerivedType("System.Windows.Forms.dll", typeof(SWF.Panel));
+        _panelTypes = GetDerivedType("System.Windows.Forms.dll", typeof(SWF.Panel));
 
         base.InitTest(p);
     }
@@ -62,92 +63,92 @@ public class RTL : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
         
-        avTextBox1 = new SWC.TextBox();
-        avButton = new SWC.Button();
+        _avTextBox1 = new SWC.TextBox();
+        _avButton = new SWC.Button();
 
-        avTextBox1.Text = "Avalon TextBox!";
-        avButton.Content = "Avalon Button!";
+        _avTextBox1.Text = "Avalon TextBox!";
+        _avButton.Content = "Avalon Button!";
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Child = avTextBox1;
-        elementHost1.Location = new System.Drawing.Point(100, 20);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _avTextBox1;
+        _elementHost1.Location = new System.Drawing.Point(100, 20);
+        Controls.Add(_elementHost1);
 
         //Create Element Host 2
-        elementHost2 = new ElementHost();
-        elementHost2.Child = avButton;
-        elementHost2.Location = new System.Drawing.Point(100, 200);
-        Controls.Add(elementHost2);
+        _elementHost2 = new ElementHost();
+        _elementHost2.Child = _avButton;
+        _elementHost2.Location = new System.Drawing.Point(100, 200);
+        Controls.Add(_elementHost2);
 
         Utilities.SleepDoEvents(10);
 
         // verify initial RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Right To Left"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost2.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avButton.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost2.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avButton.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
-        elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+        _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right" except elementHost1 and avTextBox1
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
-        elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
-        elementHost2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+        _elementHost2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right" except elementHost2 and avButton
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost2.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avButton.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost2.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avButton.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
 
-        elementHost2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        _elementHost2.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost2.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avButton.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
         return sr;
     }
@@ -157,7 +158,7 @@ public class RTL : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        gridView = new SWC.GridView();
+        _gridView = new SWC.GridView();
 
         SWC.GridViewColumn column1 = new SWC.GridViewColumn();
         column1.Header = "First Name";
@@ -169,74 +170,74 @@ public class RTL : ReflectBase
         column3.Header = "Address";
         column3.Width = 150;
 
-        gridView.Columns.Add(column1);
-        gridView.Columns.Add(column2);
-        gridView.Columns.Add(column3);
+        _gridView.Columns.Add(column1);
+        _gridView.Columns.Add(column2);
+        _gridView.Columns.Add(column3);
 
-        listView = new SWC.ListView();
-        listView.View = gridView;
+        _listView = new SWC.ListView();
+        _listView.View = _gridView;
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Child = listView;
-        elementHost1.Width = 350;
-        elementHost1.Location = new System.Drawing.Point(25, 20);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _listView;
+        _elementHost1.Width = 350;
+        _elementHost1.Location = new System.Drawing.Point(25, 20);
+        Controls.Add(_elementHost1);
 
         Utilities.SleepDoEvents(10);
 
         // verify initial RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Right To Left"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(listView.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_listView.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with complex control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
 
-        elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+        _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - elementHost1 and  listView should be "Right to Left"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(listView.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_listView.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with complex control.", p.log);
 
-        elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - only this should be "Right To Left"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
-        sr.IncCounters(listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with complex control.", p.log);
+        sr.IncCounters(_listView.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with complex control.", p.log);
 
         return sr;
     }
@@ -246,7 +247,7 @@ public class RTL : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        foreach (Type t in panelTypes)
+        foreach (Type t in _panelTypes)
         {
             int i = t.GetConstructors().Length;
             if (t == typeof(SWF.TabPage) || t.GetConstructors().Length == 0 || t.IsAbstract)
@@ -263,9 +264,9 @@ public class RTL : ReflectBase
             }
 
             string containerType = "Container type: " + t.ToString();
-            avTextBox1 = new SWC.TextBox();
-            avTextBox1.Text = "Avalon TextBox!";
-            avTextBox1.TextWrapping = TextWrapping.Wrap;
+            _avTextBox1 = new SWC.TextBox();
+            _avTextBox1.Text = "Avalon TextBox!";
+            _avTextBox1.TextWrapping = TextWrapping.Wrap;
 
             p.log.WriteLine(containerType);
 
@@ -273,10 +274,10 @@ public class RTL : ReflectBase
             panel.BackColor = Color.Aqua;
 
             //Create Element Host 1
-            elementHost1 = new ElementHost();
-            elementHost1.Child = avTextBox1;
-            elementHost1.Location = new System.Drawing.Point(25, 20);
-            panel.Controls.Add(elementHost1);
+            _elementHost1 = new ElementHost();
+            _elementHost1.Child = _avTextBox1;
+            _elementHost1.Location = new System.Drawing.Point(25, 20);
+            panel.Controls.Add(_elementHost1);
 
             Controls.Add(panel);
 
@@ -284,81 +285,81 @@ public class RTL : ReflectBase
 
             // verify initial RTL states - all should be "Left To Right"
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
 
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             Utilities.SleepDoEvents(10);
 
             // verify RTL states - all should be "Right To Left"
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with container control.", p.log);
 
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             Utilities.SleepDoEvents(10);
 
             // verify RTL states - all should be "Left To Right"
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
 
-            elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             Utilities.SleepDoEvents(10);
 
             // verify RTL states - all should be "Left To Right" except elementHost1 and avTextBox1
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with container control.", p.log);
 
-            elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Inherit;
+            _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Inherit;
             Utilities.SleepDoEvents(10);
 
             // verify RTL states - all should be "Left To Right"
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
 
             panel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             Utilities.SleepDoEvents(10);
 
             // verify RTL states - all should be "Right to Left" except this
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with container control.", p.log);
 
             panel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             Utilities.SleepDoEvents(10);
 
             // verify RTL states - all should be "Left To Right"
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
 
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             Utilities.SleepDoEvents(10);
 
             // verify RTL states - only this should be "Right To Left"
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
 
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             Utilities.SleepDoEvents(10);
 
             // verify RTL states - all should be "Left To Right"
             sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
             sr.IncCounters(panel.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with container control.", p.log);
-            sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
+            sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with container control.", p.log);
         }
         return sr;
     }
@@ -368,111 +369,111 @@ public class RTL : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avTextBox1 = new SWC.TextBox();
-        avTextBox1.Text = "Avalon TextBox!";
+        _avTextBox1 = new SWC.TextBox();
+        _avTextBox1.Text = "Avalon TextBox!";
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Child = avTextBox1;
-        elementHost1.Location = new System.Drawing.Point(100, 20);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _avTextBox1;
+        _elementHost1.Location = new System.Drawing.Point(100, 20);
+        Controls.Add(_elementHost1);
 
         Utilities.SleepDoEvents(10);
 
         // verify initial RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
         
         this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Right To Left"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
         
         this.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
         
-        elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+        _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right" except elementHost1 and avTextBox1
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
 
-        avTextBox1.FlowDirection = FlowDirection.LeftToRight;
+        _avTextBox1.FlowDirection = FlowDirection.LeftToRight;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right" except elementHost1
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
-        elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
-        avTextBox1.FlowDirection = FlowDirection.RightToLeft;
+        _avTextBox1.FlowDirection = FlowDirection.RightToLeft;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right" except avTextBox1
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.RightToLeft, "Failed at Element Host with single control.", p.log);
 
-        avTextBox1.FlowDirection = FlowDirection.LeftToRight;
+        _avTextBox1.FlowDirection = FlowDirection.LeftToRight;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - only this should be "Right To Left"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
-        elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Inherit;
+        _elementHost1.RightToLeft = System.Windows.Forms.RightToLeft.Inherit;
         Utilities.SleepDoEvents(10);
         this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Right To Left" except avTextBox1
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.Yes, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
 
         this.RightToLeft = System.Windows.Forms.RightToLeft.No;
         Utilities.SleepDoEvents(10);
 
         // verify RTL states - all should be "Left To Right"
         sr.IncCounters(this.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
-        sr.IncCounters(avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_elementHost1.RightToLeft == SWF.RightToLeft.No, "Failed at Element Host with single control.", p.log);
+        sr.IncCounters(_avTextBox1.FlowDirection == FlowDirection.LeftToRight, "Failed at Element Host with single control.", p.log);
         
         return sr;
     }

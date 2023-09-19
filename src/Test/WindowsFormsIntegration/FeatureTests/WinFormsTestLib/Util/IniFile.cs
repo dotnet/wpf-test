@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Collections;
 using System.Text ; 
@@ -23,7 +27,7 @@ namespace WFCTestLib.Util
         //  The name of the .INI formatted file we are wrapping
         // </desc>
         // </doc>
-        private String fileName;
+        private String _fileName;
 
         // <doc>
         // <desc>
@@ -36,21 +40,21 @@ namespace WFCTestLib.Util
         // <seealso member="SetInt"/>
         // <seealso member="SetString"/>
         // </doc>
-        private String currentSection;
+        private String _currentSection;
 
         // <doc>
         // <desc>
         //  A private buffer used for working space.
         // </desc>
         // </doc>
-        private static char[] ca = new char[32767];
+        private static char[] s_ca = new char[32767];
 
         // <doc>
         // <desc>
         //  A private StringBuilder object used for working space.
         // </desc>
         // </doc>
-        private static StringBuilder sb = new StringBuilder(32767);
+        private static StringBuilder s_sb = new StringBuilder(32767);
 
         // <doc>
         // <desc>
@@ -62,7 +66,7 @@ namespace WFCTestLib.Util
         // </doc>
         public IniFile(String fileName)
         {
-            this.fileName = fileName;
+            this._fileName = fileName;
         }
 
         // <doc>
@@ -74,7 +78,7 @@ namespace WFCTestLib.Util
         {
             get
             {
-                return fileName;
+                return _fileName;
             }
         }
 
@@ -92,9 +96,9 @@ namespace WFCTestLib.Util
         // </doc>
         public int GetInt(String keyName)
         {
-            if (currentSection == null)
+            if (_currentSection == null)
                 throw new Exception("currentSection has not been set");
-            return GetInt(currentSection, keyName);
+            return GetInt(_currentSection, keyName);
         }
         
         // <doc>
@@ -150,9 +154,9 @@ namespace WFCTestLib.Util
         // </doc>
         public String[] GetSectionStrings()
         {
-            if (currentSection == null)
+            if (_currentSection == null)
                 throw new Exception("currentSection has not been set");
-            return (GetSectionStrings(currentSection));
+            return (GetSectionStrings(_currentSection));
         }
         
         // <doc>
@@ -170,8 +174,8 @@ namespace WFCTestLib.Util
         // </doc>
         public String[] GetSectionStrings(String sectionName)
         {
-            GetPrivateProfileSection(sectionName, ca, ca.Length, FileName);
-            return ParseStringList(ca);
+            GetPrivateProfileSection(sectionName, s_ca, s_ca.Length, FileName);
+            return ParseStringList(s_ca);
         }
 
         // <doc>
@@ -184,8 +188,8 @@ namespace WFCTestLib.Util
         // </doc>
         public String[] GetSectionNames()
         {
-            GetPrivateProfileSectionNames(ca, ca.Length, FileName);
-            return ParseStringList(ca);
+            GetPrivateProfileSectionNames(s_ca, s_ca.Length, FileName);
+            return ParseStringList(s_ca);
         }
 
         // <doc>
@@ -202,9 +206,9 @@ namespace WFCTestLib.Util
         // </doc>
         public String GetString(String keyName)
         {
-            if (currentSection == null)
+            if (_currentSection == null)
                 throw new Exception("currentSection has not been set");
-            return GetString(currentSection, keyName);
+            return GetString(_currentSection, keyName);
         }
         
         // <doc>
@@ -247,8 +251,8 @@ namespace WFCTestLib.Util
         // </doc>
         public String GetString(String sectionName, String keyName, String defaultValue)
         {
-            GetPrivateProfileString(sectionName, keyName, defaultValue, sb, sb.Capacity, FileName);
-            return sb.ToString();
+            GetPrivateProfileString(sectionName, keyName, defaultValue, s_sb, s_sb.Capacity, FileName);
+            return s_sb.ToString();
         }
 
         // <doc>
@@ -296,7 +300,7 @@ namespace WFCTestLib.Util
         // </doc>
         public void SetCurrentSection(String currentSection)
         {
-            this.currentSection = currentSection;
+            this._currentSection = currentSection;
         }
 
         // <doc>
@@ -344,9 +348,9 @@ namespace WFCTestLib.Util
         // </doc>
         public void SetSectionStrings(String[] strings)
         {
-            if (currentSection == null)
+            if (_currentSection == null)
                 throw new Exception("currentSection has not been set");
-            SetSectionStrings(currentSection, strings);
+            SetSectionStrings(_currentSection, strings);
         }
         
         // <doc>
@@ -394,9 +398,9 @@ namespace WFCTestLib.Util
         // </doc>
         public void SetString(String keyName, String value)
         {
-            if (currentSection == null)
+            if (_currentSection == null)
                 throw new Exception("currentSection has not been set");
-            SetString(currentSection, keyName, value);
+            SetString(_currentSection, keyName, value);
         }
         
         // <doc>

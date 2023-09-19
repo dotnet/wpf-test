@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 
@@ -8,21 +12,17 @@ using System.Windows.Forms.Integration;
 using System.Drawing;
 using Microsoft.Test.Display;
 
-//
+
 // Testcase:    FontPropagation
 // Description: Verify that Fonts set on the EH parent get propogated to the EH and it's control
-// Author:      bogdanbr
-//
-
 public class FontPropagation : ReflectBase
 {
-    private Panel ehParent = null;
-    private ElementHost elementHost = null;
-    private System.Windows.Controls.Label ehChild = null;
+    private Panel _ehParent = null;
+    private ElementHost _elementHost = null;
+    private System.Windows.Controls.Label _ehChild = null;
 
     #region Testcase setup
     public FontPropagation(string[] args) : base(args) { }
-
 
     protected override void InitTest(TParams p)
     {
@@ -37,19 +37,19 @@ public class FontPropagation : ReflectBase
             this.Controls.Clear();
         }
 
-        ehChild = new System.Windows.Controls.Label();
-        ehChild.Content = "Test String";
+        _ehChild = new System.Windows.Controls.Label();
+        _ehChild.Content = "Test String";
 
-        elementHost = new ElementHost();
-        elementHost.AutoSize = true;
-        elementHost.Child = ehChild;
+        _elementHost = new ElementHost();
+        _elementHost.AutoSize = true;
+        _elementHost.Child = _ehChild;
 
-        ehParent = new Panel();
-        ehParent.Location = new Point(0, 0);
-        ehParent.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        ehParent.AutoSize = true;
-        ehParent.Controls.Add(elementHost);
-        this.Controls.Add(ehParent);
+        _ehParent = new Panel();
+        _ehParent.Location = new Point(0, 0);
+        _ehParent.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        _ehParent.AutoSize = true;
+        _ehParent.Controls.Add(_elementHost);
+        this.Controls.Add(_ehParent);
 
         return base.BeforeScenario(p, scenario);
     }
@@ -65,13 +65,13 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //set the font on the parent
-        ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
+        _ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), "FontFamily failed", p.log);
-        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), ehChild.FontSize, "FontSize failed", p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, "FontStyle failed", p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), "FontFamily failed", p.log);
+        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), _ehChild.FontSize, "FontSize failed", p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, "FontStyle failed", p.log);
 
         return sr;
     }
@@ -82,22 +82,22 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //set the font on the parent
-        ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
+        _ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
         //Set it again 
-        ehParent.Font = new Font("Times New Roman", 18, FontStyle.Regular, GraphicsUnit.Pixel);
+        _ehParent.Font = new Font("Times New Roman", 18, FontStyle.Regular, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Times New Roman", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters((int)Monitor.ConvertScreenToLogical(Dimension.Width, 18), (int)ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Normal, ehChild.FontStyle, p.log);
+        sr.IncCounters("Times New Roman", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters((int)Monitor.ConvertScreenToLogical(Dimension.Width, 18), (int)_ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Normal, _ehChild.FontStyle, p.log);
 
         return sr;
     }
@@ -108,16 +108,16 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //get the font on the ehParent
-        Font originalFont = ehParent.Font;
+        Font originalFont = _ehParent.Font;
 
         //change the font on the ehChild
-        ehChild.FontSize += 3;
-        ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
-        ehChild.FontStyle = System.Windows.FontStyles.Italic;
+        _ehChild.FontSize += 3;
+        _ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
+        _ehChild.FontStyle = System.Windows.FontStyles.Italic;
         Application.DoEvents();
 
         //verify that the font on the ehParent wasn't changed. 
-        sr.IncCounters(originalFont, ehParent.Font, p.log);
+        sr.IncCounters(originalFont, _ehParent.Font, p.log);
 
         return sr;
     }
@@ -128,19 +128,19 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //set the font on the child. 
-        ehChild.FontStyle = System.Windows.FontStyles.Normal;
-        ehChild.FontSize = 20;
-        ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
+        _ehChild.FontStyle = System.Windows.FontStyles.Normal;
+        _ehChild.FontSize = 20;
+        _ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
         Application.DoEvents();
 
         //set the font on the ehParent. 
-        ehParent.Font = new Font("Times New Roman", 12, FontStyle.Italic, GraphicsUnit.Pixel);
+        _ehParent.Font = new Font("Times New Roman", 12, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font on the ehChild didn't change. (changes on the parent shoud not overwrite what was specifically set) 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(20.0, ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Normal, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(20.0, _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Normal, _ehChild.FontStyle, p.log);
 
         return sr;
     }
@@ -151,19 +151,19 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //set the font on the ehParent. 
-        ehParent.Font = new Font("Times New Roman", 12, FontStyle.Italic, GraphicsUnit.Pixel);
+        _ehParent.Font = new Font("Times New Roman", 12, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //set the font on the child. 
-        ehChild.FontStyle = System.Windows.FontStyles.Normal;
-        ehChild.FontSize = 20;
-        ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
+        _ehChild.FontStyle = System.Windows.FontStyles.Normal;
+        _ehChild.FontSize = 20;
+        _ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
         Application.DoEvents();
 
         //verify that the font on the ehChild changed 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(20.0, ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Normal, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(20.0, _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Normal, _ehChild.FontStyle, p.log);
 
         return sr;
     }
@@ -174,13 +174,13 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //set the font on the elementHost
-        elementHost.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
+        _elementHost.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
         return sr;
     }
@@ -191,22 +191,22 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //set the font on the element host
-        elementHost.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
+        _elementHost.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
         //Set it again 
-        elementHost.Font = new Font("Times New Roman", 18, FontStyle.Regular, GraphicsUnit.Pixel);
+        _elementHost.Font = new Font("Times New Roman", 18, FontStyle.Regular, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Times New Roman", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters((int)Monitor.ConvertScreenToLogical(Dimension.Width, 18), (int)ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Normal, ehChild.FontStyle, p.log);
+        sr.IncCounters("Times New Roman", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters((int)Monitor.ConvertScreenToLogical(Dimension.Width, 18), (int)_ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Normal, _ehChild.FontStyle, p.log);
 
         return sr;
     }
@@ -217,16 +217,16 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //get the font on the elementHost
-        Font originalFont = elementHost.Font;
+        Font originalFont = _elementHost.Font;
 
         //change the font on the ehChild
-        ehChild.FontSize += 3;
-        ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
-        ehChild.FontStyle = System.Windows.FontStyles.Italic;
+        _ehChild.FontSize += 3;
+        _ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
+        _ehChild.FontStyle = System.Windows.FontStyles.Italic;
         Application.DoEvents();
 
         //verify that the font on the ehParent wasn't changed. 
-        sr.IncCounters(originalFont, elementHost.Font, p.log);
+        sr.IncCounters(originalFont, _elementHost.Font, p.log);
 
         return sr;
     }
@@ -237,19 +237,19 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //set the font on the child. 
-        ehChild.FontStyle = System.Windows.FontStyles.Normal;
-        ehChild.FontSize = 20;
-        ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
+        _ehChild.FontStyle = System.Windows.FontStyles.Normal;
+        _ehChild.FontSize = 20;
+        _ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
         Application.DoEvents();
 
         //set the font on the element host 
-        elementHost.Font = new Font("Times New Roman", 12, FontStyle.Italic, GraphicsUnit.Pixel);
+        _elementHost.Font = new Font("Times New Roman", 12, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font on the ehChild didn't change. (changes on the element host shoud not overwrite what was specifically set) 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(20.0, ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Normal, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(20.0, _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Normal, _ehChild.FontStyle, p.log);
 
         return sr;
     }
@@ -260,19 +260,19 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //set the font on the element-host. 
-        elementHost.Font = new Font("Times New Roman", 12, FontStyle.Italic, GraphicsUnit.Pixel);
+        _elementHost.Font = new Font("Times New Roman", 12, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //set the font on the child. 
-        ehChild.FontStyle = System.Windows.FontStyles.Normal;
-        ehChild.FontSize = 20;
-        ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
+        _ehChild.FontStyle = System.Windows.FontStyles.Normal;
+        _ehChild.FontSize = 20;
+        _ehChild.FontFamily = new System.Windows.Media.FontFamily("Impact");
         Application.DoEvents();
 
         //verify that the font on the ehChild changed 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(20.0, ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Normal, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(20.0, _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Normal, _ehChild.FontStyle, p.log);
 
         return sr;
     }
@@ -283,53 +283,53 @@ public class FontPropagation : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         //set the font on the parent
-        ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Millimeter);
+        _ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Millimeter);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(56, (int)ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(56, (int)_ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
-        ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Document);
+        _ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Document);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(4, (int)ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(4, (int)_ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
-        ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Inch);
+        _ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Inch);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(1440, (int)ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(1440, (int)_ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
-        ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Point);
+        _ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Point);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(20, (int)ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(20, (int)_ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
-        ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.World);
+        _ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.World);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
-        ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
+        _ehParent.Font = new Font("Impact", 15, FontStyle.Italic, GraphicsUnit.Pixel);
         Application.DoEvents();
 
         //verify that the font was applied on the Avalon Label. 
-        sr.IncCounters("Impact", ehChild.FontFamily.ToString(), p.log);
-        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), ehChild.FontSize, p.log);
-        sr.IncCounters(System.Windows.FontStyles.Italic, ehChild.FontStyle, p.log);
+        sr.IncCounters("Impact", _ehChild.FontFamily.ToString(), p.log);
+        sr.IncCounters(Monitor.ConvertScreenToLogical(Dimension.Width, 15), _ehChild.FontSize, p.log);
+        sr.IncCounters(System.Windows.FontStyles.Italic, _ehChild.FontStyle, p.log);
 
         return sr;
     }

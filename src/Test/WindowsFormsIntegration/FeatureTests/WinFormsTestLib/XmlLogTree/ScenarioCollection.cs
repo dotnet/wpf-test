@@ -1,9 +1,8 @@
-// ------------------------------------------------------------------------------
-// <copyright from='1997' to='2001' company='Microsoft Corporation'>
-//    Copyright (c) Microsoft Corporation. All Rights Reserved.   
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 //    Information Contained Herein is Proprietary and Confidential.       
-// </copyright> 
-// ------------------------------------------------------------------------------
 // 
 namespace WFCTestLib.XmlLogTree {
     using System;
@@ -18,7 +17,7 @@ namespace WFCTestLib.XmlLogTree {
     /// <seealso cref='LogTree.ScenarioCollection'/>
     [Serializable()]
     public class ScenarioCollection : CollectionBase {
-        ScenarioGroup parent;
+        ScenarioGroup _parent;
         
         /// <summary>
         ///     <para>
@@ -26,7 +25,7 @@ namespace WFCTestLib.XmlLogTree {
         ///    </para>
         /// </summary>
         public ScenarioCollection(ScenarioGroup parent) {
-            this.parent = parent;
+            this._parent = parent;
         }
         
         /// <summary>
@@ -39,7 +38,7 @@ namespace WFCTestLib.XmlLogTree {
         /// </param>
         public ScenarioCollection(ScenarioGroup parent, ScenarioCollection value) {
             this.AddRange(value);
-            this.parent = parent;
+            this._parent = parent;
         }
         
         /// <summary>
@@ -81,7 +80,7 @@ namespace WFCTestLib.XmlLogTree {
         /// </returns>
         /// <seealso cref='LogTree.ScenarioCollection.AddRange'/>
         public int Add(Scenario value) {
-            value.SetParent(parent);
+            value.SetParent(_parent);
             return List.Add(value);
         }
         
@@ -97,7 +96,7 @@ namespace WFCTestLib.XmlLogTree {
         /// <seealso cref='LogTree.ScenarioCollection.Add'/>
         public void AddRange(Scenario[] value) {
             for (int i = 0; (i < value.Length); i = (i + 1)) {
-                value[i].SetParent(parent);
+                value[i].SetParent(_parent);
                 this.Add(value[i]);
             }
         }
@@ -116,7 +115,7 @@ namespace WFCTestLib.XmlLogTree {
         /// <seealso cref='LogTree.ScenarioCollection.Add'/>
         public void AddRange(ScenarioCollection value) {
             for (int i = 0; (i < value.Count); i = (i + 1)) {
-                value[i].SetParent(parent);
+                value[i].SetParent(_parent);
                 this.Add(value[i]);
             }
         }
@@ -174,7 +173,7 @@ namespace WFCTestLib.XmlLogTree {
         /// <returns><para>None.</para></returns>
         /// <seealso cref='LogTree.ScenarioCollection.Add'/>
         public void Insert(int index, Scenario value) {
-            value.SetParent(parent);
+            value.SetParent(_parent);
             List.Insert(index, value);
         }
         
@@ -202,41 +201,41 @@ namespace WFCTestLib.XmlLogTree {
         
         public class ScenarioEnumerator : object, IEnumerator {
             
-            private IEnumerator baseEnumerator;
+            private IEnumerator _baseEnumerator;
             
-            private IEnumerable temp;
+            private IEnumerable _temp;
             
             public ScenarioEnumerator(ScenarioCollection mappings) {
-                this.temp = ((IEnumerable)(mappings));
-                this.baseEnumerator = temp.GetEnumerator();
+                this._temp = ((IEnumerable)(mappings));
+                this._baseEnumerator = _temp.GetEnumerator();
             }
             
             public Scenario Current {
                 get {
-                    return ((Scenario)(baseEnumerator.Current));
+                    return ((Scenario)(_baseEnumerator.Current));
                 }
             }
             
             object IEnumerator.Current {
                 get {
-                    return baseEnumerator.Current;
+                    return _baseEnumerator.Current;
                 }
             }
             
             public bool MoveNext() {
-                return baseEnumerator.MoveNext();
+                return _baseEnumerator.MoveNext();
             }
             
             bool IEnumerator.MoveNext() {
-                return baseEnumerator.MoveNext();
+                return _baseEnumerator.MoveNext();
             }
             
             public void Reset() {
-                baseEnumerator.Reset();
+                _baseEnumerator.Reset();
             }
             
             void IEnumerator.Reset() {
-                baseEnumerator.Reset();
+                _baseEnumerator.Reset();
             }
         }
     }

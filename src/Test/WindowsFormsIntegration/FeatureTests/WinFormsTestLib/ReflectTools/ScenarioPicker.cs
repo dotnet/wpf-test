@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.ComponentModel;
 using System.Collections;
@@ -17,33 +21,31 @@ using WFCTestLib.Util;
 using System.IO.IsolatedStorage;
 using System.Xml;
 
-//Author: nathane
-//Date:   03/02/05
+
 //DESCRIPTION:  The ScenarioPicker Dialog displays all the scenarios for a given test and
 //allows a user to select the ones that they want to run.  The /SCENARIOPICKER
 //command line argument must be used for the dialog to be displayed.
-
 namespace ReflectTools
 {
 	public partial class ScenarioPicker : Form
 	{
 		#region Constructor and Init
 
-		private ArrayList m_tests;			//This is the original list of ScenarioGroups
-		private int m_countdown;			//Int to decrement the countdown
-		private string m_testName;			//This is the name of the current test to use as the filename
-		private Hashtable m_allNodes;		//This HT stores all the nodes for easy lookup
-		private ArrayList m_SelectedNodes;	//This ArrayList contains the HT Key for the selected nodes in m_allNodes
+		private ArrayList _tests;			//This is the original list of ScenarioGroups
+		private int _countdown;			//Int to decrement the countdown
+		private string _testName;			//This is the name of the current test to use as the filename
+		private Hashtable _allNodes;		//This HT stores all the nodes for easy lookup
+		private ArrayList _selectedNodes;	//This ArrayList contains the HT Key for the selected nodes in m_allNodes
 
 		//The constructor takes in all the scenarios and the test name.
 		public ScenarioPicker(ArrayList tests, string testName)
 		{
 			InitializeComponent();
 
-			m_countdown = 3;				//set the countdown to 3 seconds
-			m_tests = tests;				//store off the original ScenarioGroups
-			m_testName = testName;			//store off the name of the test
-			m_allNodes = new Hashtable(100);//init the list of all nodes
+			_countdown = 3;				//set the countdown to 3 seconds
+			_tests = tests;				//store off the original ScenarioGroups
+			_testName = testName;			//store off the name of the test
+			_allNodes = new Hashtable(100);//init the list of all nodes
 
 			LoadScenarios(tests);			//add all the scenarios to the tree view
 			GetSavedSelections();			//check any saved scenarios
@@ -66,7 +68,7 @@ namespace ReflectTools
 				//if we decide to save the selections we can easily go back 
 				//and get the nodes that were selected.
 				int count = 0;
-				m_SelectedNodes = new ArrayList();
+				_selectedNodes = new ArrayList();
 
 				//ar is our new ArrayList with the selected ScenarioGroups and Scenarios
 				ArrayList ar = new ArrayList();
@@ -85,7 +87,7 @@ namespace ReflectTools
 						ScenarioGroup sg = new ScenarioGroup();
 						sg.Name = tvScenarios.Nodes[i].Text;
 						
-						m_SelectedNodes.Add(count); //store off the index of node
+						_selectedNodes.Add(count); //store off the index of node
 
 						//We use an arraylist because we don't know how big the actual
 						//MethodInfo array shoudl be.  
@@ -101,7 +103,7 @@ namespace ReflectTools
 							if (tvScenarios.Nodes[i].Nodes[j].Checked)
 							{
 								tmp.Add(tvScenarios.Nodes[i].Nodes[j].Tag);
-								m_SelectedNodes.Add(count);
+								_selectedNodes.Add(count);
 							}
 						}
 
@@ -123,7 +125,7 @@ namespace ReflectTools
 		#region Control Events
 
 		//if the Save Selections checkbox was checked, save the selections
-		//otherwise clear the store, set the dialog reslut to OK and close
+		//otherwise clear the store, set the dialog re---- to OK and close
 		private void btnOK_Click(object sender, EventArgs e)
 		{
 			if (chkPersist.Checked)
@@ -151,15 +153,15 @@ namespace ReflectTools
 		//passes 0 the dialog result is set to cancel and this dialog is closed
 		private void timer1_Tick(object sender, EventArgs e)
 		{
-			m_countdown--;
-			if (m_countdown < 0)
+			_countdown--;
+			if (_countdown < 0)
 			{
 				this.DialogResult = DialogResult.Cancel;
 				this.Close();
 			}
 			else
 			{
-				tssLabel.Text = String.Format("Continuing in {0} seconds...", m_countdown.ToString());
+				tssLabel.Text = String.Format("Continuing in {0} seconds...", _countdown.ToString());
 			}
 		}
 
@@ -233,7 +235,7 @@ namespace ReflectTools
 			CheckAll(tvScenarios.Nodes, false); 
 
 			IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
-			StreamReader reader = new StreamReader(new IsolatedStorageFileStream(m_testName, FileMode.OpenOrCreate, isoStore));
+			StreamReader reader = new StreamReader(new IsolatedStorageFileStream(_testName, FileMode.OpenOrCreate, isoStore));
 			try
 			{
 				//if the reader is empty just check all the nodes
@@ -272,7 +274,7 @@ namespace ReflectTools
 		{
 			if (savedIndex != "")
 			{
-				((TreeNode)m_allNodes[Convert.ToInt32(savedIndex)]).Checked = true;
+				((TreeNode)_allNodes[Convert.ToInt32(savedIndex)]).Checked = true;
 			}
 		}
 
@@ -287,15 +289,15 @@ namespace ReflectTools
 			IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
 			
 			// Assign the writer to the store and the file TestStore.
-			StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(m_testName, FileMode.OpenOrCreate, isoStore));
+			StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(_testName, FileMode.OpenOrCreate, isoStore));
 
 			try
 			{
 				//calling selected Scenarios populates the m_SelectedNode hash table, we don't care about the returned ArrayList
 				ArrayList ar = SelectedScenarios;
-				for (int i = 0; i < m_SelectedNodes.Count; i++)
+				for (int i = 0; i < _selectedNodes.Count; i++)
 				{
-					writer.WriteLine(m_SelectedNodes[i].ToString());
+					writer.WriteLine(_selectedNodes[i].ToString());
 				}
 
 				writer.Close();
@@ -313,13 +315,13 @@ namespace ReflectTools
 		{
 			IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
 
-			string[] fileNames = isoStore.GetFileNames(m_testName);
+			string[] fileNames = isoStore.GetFileNames(_testName);
 
 			foreach (string file in fileNames)
 			{
-				if (file == m_testName)
+				if (file == _testName)
 				{
-					isoStore.DeleteFile(m_testName);
+					isoStore.DeleteFile(_testName);
 				}
 			}
 
@@ -347,7 +349,7 @@ namespace ReflectTools
 				items[i].Checked = true;
 
 				//Add the new node to the m_allNodes HT				
-				m_allNodes.Add(nodeCount, sgNode);
+				_allNodes.Add(nodeCount, sgNode);
 
 				//Next loop through all the scenarios for this Scenariogroup and add them
 				//to the tree.
@@ -378,7 +380,7 @@ namespace ReflectTools
 					sNode.Tag = scenarios[j];
 
 					//Add the new node to the m_allNodes HT				
-					m_allNodes.Add(nodeCount, sNode);
+					_allNodes.Add(nodeCount, sNode);
 
 					//Add the Scenario Node to the ScenarioGroup Node
 					items[i].Nodes.Add(sNode);					

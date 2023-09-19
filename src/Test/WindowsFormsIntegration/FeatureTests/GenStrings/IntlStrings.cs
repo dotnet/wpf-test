@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
+using System;
 using System.Resources;
 using System.IO;
 using System.Globalization;
@@ -17,28 +21,28 @@ namespace GenStrings
         private const int TEMP_LCID = 0 ;
 
         //Current LCID, this LCID is used to retrieve the information from the resource files.
-        private int iCurrentLCID = TEMP_LCID; 
+        private int _iCurrentLCID = TEMP_LCID; 
 
         //Random generator used to generate the random numbers.
-        private static Random rand ;
+        private static Random s_rand ;
 
         // All the information about the current LocaleID stored in this variable. This helps to improve the 
         // perfomance because we don't wnat to retrieve the resource information every time when user calls
         // a method in IntlStrings.
-        private static String strCodePageInfo ;
+        private static String s_strCodePageInfo ;
 
         //Keeps an instance of NumberFormatInfo specific to the current LocaleID.
-        private static NumberFormatInfo nfiCurrent = null ;
+        private static NumberFormatInfo s_nfiCurrent = null ;
 
         //Postfix string used to load the Resoure file.
-        private static String RESOURCE_STRING_POSTFIX = "_Text" ;
+        private static String s_RESOURCE_STRING_POSTFIX = "_Text" ;
 
         //Invlaid characters that you can't use in file names.
-        private static Char[] cInvalidFileChars = new Char[] { '|', '\\', '/', ':', '*', '?', '\"', '<', '>' };
+        private static Char[] s_cInvalidFileChars = new Char[] { '|', '\\', '/', ':', '*', '?', '\"', '<', '>' };
 
         // This stores information about the valid character range for different languages. Information in this struct 
         // helps to generate the ANSI characters for any given code page. 
-        private LeadByteType[] LeadByteRange = new LeadByteType[4];
+        private LeadByteType[] _leadByteRange = new LeadByteType[4];
 
         // To represent single byte character type.
         private const int SINGLES = 1;
@@ -47,12 +51,12 @@ namespace GenStrings
         private const int DOUBLES = 2 ;
 
         //to represent current code page location to retrieve the bytes. 
-        private int intCPPoint = 0 , intCPPoint2  = 0;
+        private int _intCPPoint = 0 ,_intCPPoint2  = 0;
 
         // Off set number that we have to use while generating the ANSI characters.
-        private int intCharOffset = 0;
+        private int _intCharOffset = 0;
 
-        private int iDefaultStrLength = 30 ;
+        private int _iDefaultStrLength = 30 ;
 
         private const int LOCALE_IDEFAULTANSICODEPAGE = 0x1004 ;
 
@@ -79,7 +83,7 @@ namespace GenStrings
             Trace.Listeners.Add( new TextWriterTraceListener( sw ));
             
             //Create a random object.
-            rand = new Random( (int)lSeed );
+            s_rand = new Random( (int)lSeed );
             
             //Output the random seed, user may need this to repro a testcase with the same seed.
             Debug.WriteLine("Random seed :: " + lSeed );                
@@ -97,32 +101,32 @@ namespace GenStrings
         //*-------------------------------------------------------------------------------------------------
         private void VerifyLCIDAndLoadResource(int iLCID){
     		try{
-                if ( iCurrentLCID > TEMP_LCID &&  iCurrentLCID == iLCID)  //Check to see if we have already loaded the requested resources.
+                if ( _iCurrentLCID > TEMP_LCID &&  _iCurrentLCID == iLCID)  //Check to see if we have already loaded the requested resources.
                     return;
     			
                 if ( iLCID == TEMP_LCID ) //Load default system locale specific resources.
-    		        iCurrentLCID = CultureInfo.CurrentCulture.LCID ;
+    		        _iCurrentLCID = CultureInfo.CurrentCulture.LCID ;
     			else
-    				iCurrentLCID = iLCID ;
+    				_iCurrentLCID = iLCID ;
 
-            	Debug.WriteLine( "Locale ID... " + iCurrentLCID ); // We may need this to debug test cases.                
+            	Debug.WriteLine( "Locale ID... " + _iCurrentLCID ); // We may need this to debug test cases.                
                 
                 //verify whether genstrings supports this culture.
-                bool bResult = VerifyLCID( iCurrentLCID );
+                bool bResult = VerifyLCID( _iCurrentLCID );
                 if (! bResult )
-                    throw new NotSupportedException("Requested LCID is not suppported...  LCID number:" + iCurrentLCID );
+                    throw new NotSupportedException("Requested LCID is not suppported...  LCID number:" + _iCurrentLCID );
 
                 //Set the NumberFormatInfo to the current culture number format info
-                nfiCurrent = new CultureInfo( iCurrentLCID ).NumberFormat ;
+                s_nfiCurrent = new CultureInfo( _iCurrentLCID ).NumberFormat ;
                     
                 //Load resource file.            
-                if(! LoadResourceFile(iCurrentLCID) )
-                    throw new NotSupportedException("Not able to load the resource file...  LCID number:" + iCurrentLCID );
+                if(! LoadResourceFile(_iCurrentLCID) )
+                    throw new NotSupportedException("Not able to load the resource file...  LCID number:" + _iCurrentLCID );
             } catch ( Exception e){
     			Debug.WriteLine("Resource loading failed... \r\nFollowing exception occured.... \r\n" + e.ToString()  );
                 // We have written the debug statements to the file. Now throw the exception, testcase should know, that
                 // some exception occured here. 
-                throw new Exception("Current LCID number... " + iCurrentLCID.ToString() , e );
+                throw new Exception("Current LCID number... " + _iCurrentLCID.ToString() , e );
     		}		
     	}
 
@@ -155,12 +159,12 @@ namespace GenStrings
                 
                 String strLangName = Enum.GetName( typeof( enuLCIDList ) , (object)iLCID);  // Get the current locale name.
                 ResourceManager manager = new ResourceManager("IntlStrings", this.GetType().Module.Assembly);  //Load the resource file.
-                strCodePageInfo = manager.GetString( strLangName + RESOURCE_STRING_POSTFIX); //Get the Resource information for the current locale.
+                s_strCodePageInfo = manager.GetString( strLangName + s_RESOURCE_STRING_POSTFIX); //Get the Resource information for the current locale.
                 
-                if ( strCodePageInfo  == null )
+                if ( s_strCodePageInfo  == null )
                     Debug.WriteLine("Resource file is empty");
 
-                Debug.WriteLine("Resource loaded for .. " +  strLangName + RESOURCE_STRING_POSTFIX ); //Debug statement, we can remove later.
+                Debug.WriteLine("Resource loaded for .. " +  strLangName + s_RESOURCE_STRING_POSTFIX ); //Debug statement, we can remove later.
             }catch (FileNotFoundException e ){
                 Debug.WriteLine("Specified Resource file doesn't exist... " + e.ToString());
                 return false ;
@@ -192,7 +196,7 @@ namespace GenStrings
                 return String.Empty;
             
             if (! bAbsolute )
-                iMaxChar = rand.Next( 1  , iMaxChar );  
+                iMaxChar = s_rand.Next( 1  , iMaxChar );  
 
             String strTemp = MakeTheString(iMaxChar);
             
@@ -212,8 +216,8 @@ namespace GenStrings
 
             // Remove strLine.Length number of characters from the string to include the strLine.
             if ( strText.Length > strLine.Length) {
-                strText = strText.Remove( rand.Next(0, strText.Length - strLine.Length) , strLine.Length );
-                strText = strText.Insert( rand.Next(0, strText.Length), strLine );
+                strText = strText.Remove( s_rand.Next(0, strText.Length - strLine.Length) , strLine.Length );
+                strText = strText.Insert( s_rand.Next(0, strText.Length), strLine );
             }
 
             return strText; 
@@ -236,7 +240,7 @@ namespace GenStrings
                 return String.Empty;
             
             if (! bAbsolute )
-                iMaxChar = (Int16)rand.Next( 1  , iMaxChar );  
+                iMaxChar = (Int16)s_rand.Next( 1  , iMaxChar );  
 
             String strInteresting = RetrieveSectionInfo( enuDataSectionTypes.INTERESTING_CHARS, false );
 	    //Console.WriteLine(strInteresting);
@@ -267,7 +271,7 @@ namespace GenStrings
 		}
             }
             else{  //In case the requested string length less than the intesting chars.
-                iRandNum = rand.Next( 0 , strTemp.Length );
+                iRandNum = s_rand.Next( 0 , strTemp.Length );
                 strText = (strTemp+strTemp).Substring( iRandNum , iMaxChar );
             }               
 
@@ -278,7 +282,7 @@ namespace GenStrings
             int[] iArrLocations = new int[al.Count] ;
             int iPosOffSet = 0 ;
             for(int iLoop = 0 ; iLoop < al.Count ; iLoop++)
-                iArrLocations[iLoop] = rand.Next( (iLength * iLoop)/al.Count, (iLength * (iLoop+1))/al.Count);
+                iArrLocations[iLoop] = s_rand.Next( (iLength * iLoop)/al.Count, (iLength * (iLoop+1))/al.Count);
             
             for(int iLoop = 1 ; iLoop < al.Count ; iLoop++){
                 iPosOffSet += ((String) al[iLoop]).Length  ;
@@ -305,8 +309,8 @@ namespace GenStrings
 
             //Get a random string and insert a problematic charcter at a random location.
             for(int iLoop = 0 ; iLoop < al.Count ; iLoop++){
-                strTemp = GetString( iDefaultStrLength, true, true, false );
-                strTemp =strTemp.Insert( rand.Next( 0, strTemp.Length ) , Convert.ToString( al[iLoop] ) ) ;
+                strTemp = GetString( _iDefaultStrLength, true, true, false );
+                strTemp =strTemp.Insert( s_rand.Next( 0, strTemp.Length ) , Convert.ToString( al[iLoop] ) ) ;
                 strProbStrs[iProbCharNum++] = strTemp ;
             } 
 
@@ -330,7 +334,7 @@ namespace GenStrings
                 return String.Empty;
             
             if (! bAbsolute )
-                iMaxChar = (Int16)rand.Next ( 0 , iMaxChar );
+                iMaxChar = (Int16)s_rand.Next ( 0 , iMaxChar );
 
             String strProblematic = RetrieveSectionInfo( enuDataSectionTypes.PROBLEMATIC_CHARS, false  );
             
@@ -356,13 +360,13 @@ namespace GenStrings
                 return String.Empty;
 
             if (! bAbsolute )
-                iMaxChar = (Int16)rand.Next ( 0 , iMaxChar );
+                iMaxChar = (Int16)s_rand.Next ( 0 , iMaxChar );
 
             strProbURT = RetrieveSectionInfo( enuDataSectionTypes.NOT_ROUNDTRIPPABLE, true  );
             
             if ( strProbURT.Length < iMaxChar ) {
                  String strTemp = GetString( iMaxChar - strProbURT.Length , true , true );
-                 strProbURT = strTemp.Insert( rand.Next(0, strTemp.Length - strProbURT.Length ) , strProbURT ) ;
+                 strProbURT = strTemp.Insert( s_rand.Next(0, strTemp.Length - strProbURT.Length ) , strProbURT ) ;
             }
             else
                 strProbURT = strProbURT.Substring( 0 , iMaxChar ) ;
@@ -391,7 +395,7 @@ namespace GenStrings
 
         public String GetRandStrLCID(Int16 iMaxChar, bool bAbsolute, bool bValidate,enuLCIDList enulcidType, bool bNoLeadNum){
             String strText = null ;
-            int iOldLCID = iCurrentLCID ;
+            int iOldLCID = _iCurrentLCID ;
             if ( iMaxChar <= 0 )  // If the string length is <= zero, return an empty string
                 return String.Empty;
 
@@ -407,7 +411,7 @@ namespace GenStrings
         //-------------------------------------------------------------------------------
         //    Name           : GetStrLCID
         //    Purpose        : To generate a string composed of consecutive ascending ansi characters values
-        //                        thus assurring every character is hit.
+        //                        thus ----urring every character is hit.
         //    Inputs         : iMaxChar -- maximum number of character to be generated
         //                   : bAbsolute -- if set true, exact number (iMaxChar) will be generated,
         //                        if set falise, number of generated chars will be random.
@@ -426,7 +430,7 @@ namespace GenStrings
 
         public String GetStrLcid(Int16 iMaxChar, bool bAbsolute, bool bValidate, enuLCIDList enulcidType , bool bNoLeadNum){                                     
             String strText = null ;
-            int iOldLCID = iCurrentLCID ;
+            int iOldLCID = _iCurrentLCID ;
 
             if ( iMaxChar <= 0 )  // If the string length is <= zero, return an empty string
                 return String.Empty;
@@ -456,7 +460,7 @@ namespace GenStrings
         
         public String GetProbCharStrLCID(Int16 iMaxChar, bool bAbsolute, bool bValidate, enuLCIDList enulcidType ){
             String strText = null;
-            int iOldLCID = iCurrentLCID ;
+            int iOldLCID = _iCurrentLCID ;
             VerifyLCIDAndLoadResource( (int)enulcidType );  //Load the specified resource.                                        
             
             strText = GetProbCharString(iMaxChar, bAbsolute, bValidate);
@@ -482,7 +486,7 @@ namespace GenStrings
 
         public String GetProbURTCStrLCID(Int16 iMaxChar, bool bAbsolute, bool bValidate, enuLCIDList enulcidType ){
             String strText = null ;
-            int iOldLCID = iCurrentLCID ;
+            int iOldLCID = _iCurrentLCID ;
             VerifyLCIDAndLoadResource( (int)enulcidType );                                          
             strText = GetProbURTCString(iMaxChar, bAbsolute, bValidate);
             VerifyLCIDAndLoadResource( iOldLCID  );
@@ -526,7 +530,7 @@ namespace GenStrings
         public String GetUniStrRandAnsi(int iMaxChar, bool bAbsolute, bool bValidate, enuCodeType intCodeType, enuLCIDList enulcidType, bool bNoLeadNum ){
             String strText; 
             
-            int iOldLCID = iCurrentLCID ;
+            int iOldLCID = _iCurrentLCID ;
             VerifyLCIDAndLoadResource( (int)enulcidType );                                                  
             
             if ((int)intCodeType < 0 || (int)intCodeType > 3)  // invalid conversion type
@@ -556,7 +560,7 @@ namespace GenStrings
             String strText; 
             Byte[] bArrEncoded = null;
             
-            int iOldLCID = iCurrentLCID ;
+            int iOldLCID = _iCurrentLCID ;
             VerifyLCIDAndLoadResource( (int)enulcidType );                                                  
             
             if ( iMaxChar <= 0 )  // If the string length is <= zero, return an empty string
@@ -607,7 +611,7 @@ namespace GenStrings
         public String GetUniStrInvalidAnsi(int iMaxChar, bool bAbsolute, enuCodeType intCodeType, enuLCIDList enulcidType ){
             String strText; 
 
-            int iOldLCID = iCurrentLCID ;
+            int iOldLCID = _iCurrentLCID ;
             VerifyLCIDAndLoadResource( (int)enulcidType );                                                  
             
             if ( iMaxChar <= 0 )  // If the string length is <= zero, return an empty string
@@ -662,7 +666,7 @@ namespace GenStrings
 
             // always ansi characters are mapped to unicode. Runtime supports unicode characters, We don't need this method
             // any more.
-            int iOldLCID = iCurrentLCID ;
+            int iOldLCID = _iCurrentLCID ;
             VerifyLCIDAndLoadResource( (int)enuLCIDType );                                                  
             
             if ((int)intCodeType < 0 || (int)intCodeType > 3)  // invalid conversion type
@@ -693,12 +697,12 @@ namespace GenStrings
                 //Build the string to the requested length in a loop.
                 while(strGenerate.ToString().Length < iMaxChar ){
                     iReqStrLength = iReqStrLength - iRandLength ;    //New Length.
-                    iRandLength = rand.Next( 0 , strText.Length) ;
+                    iRandLength = s_rand.Next( 0 , strText.Length) ;
                     
                     if ( iRandLength > iReqStrLength ) 
                         iRandLength = iReqStrLength ;   //Random length 
                     
-                    iStart = rand.Next( 0 , strText.Length );    // Random starting point
+                    iStart = s_rand.Next( 0 , strText.Length );    // Random starting point
                     if ( iRandLength + iStart >= strText.Length) // We need this check to make sure Start + Length is always less than the string length.
                         iRandLength = strText.Length - iStart ;
                     strGenerate.Append( strText.Substring( iStart , iRandLength )); 
@@ -714,8 +718,8 @@ namespace GenStrings
         
         //Returns true if it's a valid file name char, otherwise false.
         private bool IsValidFileNameChar(Char cFileChar){
-            for(int iLoop = 0 ; iLoop < cInvalidFileChars.Length ; iLoop++ ){
-                if ( cFileChar == cInvalidFileChars[iLoop] ) 
+            for(int iLoop = 0 ; iLoop < s_cInvalidFileChars.Length ; iLoop++ ){
+                if ( cFileChar == s_cInvalidFileChars[iLoop] ) 
                     return false ;
             }
 
@@ -740,7 +744,7 @@ namespace GenStrings
                 return String.Empty;
 
             if (! bAbsolute) 
-                iMaxChar = rand.Next(1 , iMaxChar ) ;
+                iMaxChar = s_rand.Next(1 , iMaxChar ) ;
 
             String strText = GetString( iMaxChar * 2, bAbsolute, true ); //Get a large string.
 
@@ -765,16 +769,16 @@ namespace GenStrings
                 return String.Empty;
             
             if (! bAbsolute) 
-                iMaxChar = rand.Next(0 , iMaxChar ) ;
+                iMaxChar = s_rand.Next(0 , iMaxChar ) ;
             
-            if ( iMaxChar <= cInvalidFileChars.Length ) 
-                return new String( cInvalidFileChars ).Substring( 0 , iMaxChar );
+            if ( iMaxChar <= s_cInvalidFileChars.Length ) 
+                return new String( s_cInvalidFileChars ).Substring( 0 , iMaxChar );
 
-            String strFileName = GetString( iMaxChar - cInvalidFileChars.Length, bAbsolute, true );
+            String strFileName = GetString( iMaxChar - s_cInvalidFileChars.Length, bAbsolute, true );
 
-            for( int iLoop = 0 ; iLoop < cInvalidFileChars.Length ; iLoop++ ){
-                int iNumRand = rand.Next( 1, strFileName.Length );
-                strFileName = strFileName.Insert( iNumRand, Char.ToString(cInvalidFileChars[iLoop]) ); 
+            for( int iLoop = 0 ; iLoop < s_cInvalidFileChars.Length ; iLoop++ ){
+                int iNumRand = s_rand.Next( 1, strFileName.Length );
+                strFileName = strFileName.Insert( iNumRand, Char.ToString(s_cInvalidFileChars[iLoop]) ); 
             }
             return strFileName ;
         }
@@ -798,7 +802,7 @@ namespace GenStrings
                 return String.Empty;
 
             if (! bAbsolute) 
-                iMaxChar = (Int16)rand.Next(1 , iMaxChar ) ;
+                iMaxChar = (Int16)s_rand.Next(1 , iMaxChar ) ;
 
             //Verify whether the first character is valid character, if not remove it.
             for (int iLoop = 0; iLoop < iMaxChar ; iLoop++ ){
@@ -851,39 +855,39 @@ namespace GenStrings
         // All methods below are helper functions to get inforamtion from the NumbberformatInfo for the 
         // current culture. 
         public int CurrenyDecimalDigits(){
-            return nfiCurrent.CurrencyDecimalDigits ;
+            return s_nfiCurrent.CurrencyDecimalDigits ;
         }
         
         public String CurrenyDecimalSeparator(){
-            return nfiCurrent.CurrencyDecimalSeparator ;
+            return s_nfiCurrent.CurrencyDecimalSeparator ;
         }
 
         public string CurrenyGroupSeparator(){
-            return nfiCurrent.CurrencyGroupSeparator ;
+            return s_nfiCurrent.CurrencyGroupSeparator ;
         }
 
         public int[] CurrenyGroupSizes(){
-            return nfiCurrent.CurrencyGroupSizes ;
+            return s_nfiCurrent.CurrencyGroupSizes ;
         }
 
         public string CurrenySymbol(){
-            return nfiCurrent.CurrencySymbol ;
+            return s_nfiCurrent.CurrencySymbol ;
         }
 
         public int NumberDecimalDigits(){
-            return nfiCurrent.NumberDecimalDigits ;
+            return s_nfiCurrent.NumberDecimalDigits ;
         }
 
         public string NumberDecimalSeparator(){
-            return nfiCurrent.NumberDecimalSeparator ;
+            return s_nfiCurrent.NumberDecimalSeparator ;
         }
 
         public string NumberGroupSeparator(){
-            return nfiCurrent.NumberGroupSeparator ;
+            return s_nfiCurrent.NumberGroupSeparator ;
         }
 
         public int[] NumberGroupSizes(){
-            return nfiCurrent.NumberGroupSizes ;
+            return s_nfiCurrent.NumberGroupSizes ;
         }
 
         //-------------------------------------------------------------------------------
@@ -916,7 +920,7 @@ namespace GenStrings
            if ( strLines.Count == 0 ) 
                 return String.Empty ;
             
-            String strLine = (String)strLines[rand.Next(0 , strLines.Count )] ;
+            String strLine = (String)strLines[s_rand.Next(0 , strLines.Count )] ;
             return strLine ;
         }
 
@@ -978,7 +982,7 @@ namespace GenStrings
                 String strSectionName = Enum.GetName( typeof(enuDataSectionTypes),  DataSectionType) ; 
                 int iSectionValue = (int) DataSectionType ;
                 
-                strText = strCodePageInfo.Substring( strCodePageInfo.IndexOf(strSectionName) + strSectionName.Length + 2 );
+                strText = s_strCodePageInfo.Substring( s_strCodePageInfo.IndexOf(strSectionName) + strSectionName.Length + 2 );
                 if ( iSectionValue != 10 ) {
                     strNextSectionName = Enum.GetName( typeof(enuDataSectionTypes), iSectionValue + 1  ) ;
                     strText = strText.Substring( 0, strText.IndexOf( strNextSectionName)   - 2 ) ; 
@@ -1011,7 +1015,7 @@ namespace GenStrings
         
             // current platform does not support DBCS
             // generate a single byte char instead.
-            int iLCIDType = GetLeadByteRangeIndex(iCurrentLCID);
+            int iLCIDType = GetLeadByteRangeIndex(_iCurrentLCID);
             if( iLCIDType < 0)
                 intNumberOfByte = SINGLES ;
 
@@ -1019,14 +1023,14 @@ namespace GenStrings
                 switch ( intNumberOfByte){
                 case DOUBLES:
                     do{  // validate the char
-                        lngLeadRange = rand.Next(1, 1000);
-                        if( (lngLeadRange % 2 != 0) && LeadByteRange[iLCIDType].intStart2 != 0 && LeadByteRange[iLCIDType].intEnd2 !=  0)                                     
-                            lngLead = rand.Next(LeadByteRange[iLCIDType].intStart2, LeadByteRange[iLCIDType].intEnd2);
+                        lngLeadRange = s_rand.Next(1, 1000);
+                        if( (lngLeadRange % 2 != 0) && _leadByteRange[iLCIDType].intStart2 != 0 && _leadByteRange[iLCIDType].intEnd2 !=  0)                                     
+                            lngLead = s_rand.Next(_leadByteRange[iLCIDType].intStart2, _leadByteRange[iLCIDType].intEnd2);
                         else
-                            lngLead = rand.Next(LeadByteRange[iLCIDType].intStart, LeadByteRange[iLCIDType].intEnd);
+                            lngLead = s_rand.Next(_leadByteRange[iLCIDType].intStart, _leadByteRange[iLCIDType].intEnd);
                         
                         // trail byte
-                        lngTrail = rand.Next(48, 254) ;
+                        lngTrail = s_rand.Next(48, 254) ;
                         try{
                             strRet = Encoding.Default.GetString(new Byte[]{Convert.ToByte(lngLead) , Convert.ToByte(lngTrail)} );
                         }catch(Exception e){
@@ -1036,7 +1040,7 @@ namespace GenStrings
                             Debug.WriteLine("Unexpected exception occured.. " + e.ToString() );
                         }
     
-                        if( blnValidate && System.Char.IsLetterOrDigit(strRet[0]) && System.Char.IsLetterOrDigit(strRet[1]))      //TODO: && System.Char.IsPrintable(strBuff)
+                        if( blnValidate && System.Char.IsLetterOrDigit(strRet[0]) && System.Char.IsLetterOrDigit(strRet[1]))
                             blnBreaker = false;                    
                         else
                              blnBreaker = true;
@@ -1044,7 +1048,7 @@ namespace GenStrings
                     break ;
                 case SINGLES:
                     do{  // Single byte char
-                        intchar = (Int16)rand.Next(1, 255) ;
+                        intchar = (Int16)s_rand.Next(1, 255) ;
                         strBuff = Convert.ToChar(intchar);
                         if( blnValidate ){
                             if (System.Char.IsLetterOrDigit(strBuff) ){  
@@ -1060,7 +1064,8 @@ namespace GenStrings
                     Debug.WriteLine("Invlid type... ");
                     break ;
                 }
-            }catch(Exception e){
+            }
+            catch(Exception e){
                 throw new Exception("Excetpion occured in GenerateRandChar.." + intNumberOfByte.ToString() +  "is an invalid character set", e  );
             }
             return strRet ;
@@ -1069,8 +1074,8 @@ namespace GenStrings
         //Helper function to retrieve the Index for the LeadByteRange for the current locale.
         private int GetLeadByteRangeIndex(int iLCID){
               int iLeadByteIndex = -1 ;
-              for(int iLoop = 0 ; iLoop < LeadByteRange.Length ; iLoop++){
-                  if( LeadByteRange[0].lcid == iLCID )
+              for(int iLoop = 0 ; iLoop < _leadByteRange.Length ; iLoop++){
+                  if( _leadByteRange[0].lcid == iLCID )
                       return iLoop ;
               }
               return iLeadByteIndex ;                                                    
@@ -1091,9 +1096,9 @@ namespace GenStrings
             bool blnBreaker = true;
             
             // If the current platform does not support DBCS, generate a single byte char instead.
-            int iIndex = GetLeadByteRangeIndex(iCurrentLCID);
+            int iIndex = GetLeadByteRangeIndex(_iCurrentLCID);
             if( iIndex > 0)
-                intNumberOfByte = (Int16)LeadByteRange[iIndex].iLangCharType ;
+                intNumberOfByte = (Int16)_leadByteRange[iIndex].iLangCharType ;
             else
                 intNumberOfByte = SINGLES ;
             
@@ -1103,21 +1108,21 @@ namespace GenStrings
                     case DOUBLES:
                         // Double byte char
                         do{     
-                                if( (intAlt % 2 != 0) && LeadByteRange[iIndex].intStart2 != 0 && LeadByteRange[iIndex].intEnd2 !=  0){                                     
-                                intCPPoint = intCPPoint + 1 ;
-                                if( intCPPoint + LeadByteRange[iIndex].intStart2 > LeadByteRange[iIndex].intEnd2) 
-                                    intCPPoint = 0 ;
-                                lngLead = LeadByteRange[iIndex].intStart2 + intCPPoint  ;
+                                if( (intAlt % 2 != 0) && _leadByteRange[iIndex].intStart2 != 0 && _leadByteRange[iIndex].intEnd2 !=  0){                                     
+                                _intCPPoint = _intCPPoint + 1 ;
+                                if( _intCPPoint + _leadByteRange[iIndex].intStart2 > _leadByteRange[iIndex].intEnd2) 
+                                    _intCPPoint = 0 ;
+                                lngLead = _leadByteRange[iIndex].intStart2 + _intCPPoint  ;
                             }
                             else{
-                                intCPPoint2 = intCPPoint2 + 1 ;
-                                if( LeadByteRange[iIndex].intEnd - intCPPoint2 < LeadByteRange[iIndex].intStart)
-                                    intCPPoint2 = 0 ;
-                                lngLead = LeadByteRange[iIndex].intEnd - intCPPoint2 ;
+                                _intCPPoint2 = _intCPPoint2 + 1 ;
+                                if( _leadByteRange[iIndex].intEnd - _intCPPoint2 < _leadByteRange[iIndex].intStart)
+                                    _intCPPoint2 = 0 ;
+                                lngLead = _leadByteRange[iIndex].intEnd - _intCPPoint2 ;
                             }
                                          
                             // trail byte can be any value between 48 and 254
-                            lngTrail =(Int16) rand.Next(48, 254) ;
+                            lngTrail =(Int16) s_rand.Next(48, 254) ;
                             strRet = Encoding.Default.GetString(new Byte[]{Convert.ToByte(lngLead) , Convert.ToByte(lngTrail)} );
                             if( blnValidate){
                                 for(int iLoop = 0 ; iLoop < strRet.Length ; iLoop++ ){
@@ -1134,13 +1139,13 @@ namespace GenStrings
                     case SINGLES:
                         // Single byte char
                         do{
-                            if( (intCPPoint + 47) > 255) // incrementing string
-                                intCPPoint = 1 ;
+                            if( (_intCPPoint + 47) > 255) // incrementing string
+                                _intCPPoint = 1 ;
     
-                            if( (intCPPoint + intCharOffset + 47) > 255)
-                                intCharOffset = 0;
+                            if( (_intCPPoint + _intCharOffset + 47) > 255)
+                                _intCharOffset = 0;
     
-                            intchar =(Int16) (intCPPoint + intCharOffset + 47) ;
+                            intchar =(Int16) (_intCPPoint + _intCharOffset + 47) ;
                             strBuff = Convert.ToChar(intchar) ;
                             
                             if( blnValidate ){
@@ -1150,8 +1155,8 @@ namespace GenStrings
                                     return strRet ;
                                 }
                                 else{
-                                    if( (intCPPoint + 47 + 1) < 254 )
-                                        intCPPoint = intCPPoint + 1 ;
+                                    if( (_intCPPoint + 47 + 1) < 254 )
+                                        _intCPPoint = _intCPPoint + 1 ;
                                 }
                             }
                             else
@@ -1193,7 +1198,7 @@ namespace GenStrings
             Int16[] wResult ;                                      
             StringBuilder strLCData =new StringBuilder(10) ; 
             try{
-                int iValue = GetLocaleInfo(iCurrentLCID, LOCALE_IDEFAULTANSICODEPAGE, strLCData, 20);
+                int iValue = GetLocaleInfo(_iCurrentLCID, LOCALE_IDEFAULTANSICODEPAGE, strLCData, 20);
                 if( iValue != 0){                                  
                     iCodePage = Convert.ToInt32(strLCData.ToString());
                     if( IsValidCodePage(iCodePage) == 1)                                     
@@ -1203,7 +1208,7 @@ namespace GenStrings
                     wResult = new Int16[strTestStr.Length] ;  
                     Int16 iCharType = Convert.ToInt16(wResult[0]) ;
 
-                    int iReturn = GetStringTypeA(iCurrentLCID, CT_CTYPE1, strTestStr, -1,ref iCharType);
+                    int iReturn = GetStringTypeA(_iCurrentLCID, CT_CTYPE1, strTestStr, -1,ref iCharType);
                     if( iReturn != 1)
                         return false ;
                     if( iReturn != 0 &&  iCharType == 0)                                     
@@ -1236,17 +1241,17 @@ namespace GenStrings
             if( blnAbsolute)
                 intRandNum = intMaxChar ;
             else
-                intRandNum = (Int16)rand.Next(1, intMaxChar); 
+                intRandNum = (Int16)s_rand.Next(1, intMaxChar); 
 
-            intCPPoint = intCPPoint + 1;
-            intCharOffset = 0;
+            _intCPPoint = _intCPPoint + 1;
+            _intCharOffset = 0;
 
-            int iIndex = GetLeadByteRangeIndex(iCurrentLCID);
+            int iIndex = GetLeadByteRangeIndex(_iCurrentLCID);
 
             if( iIndex !=  -1){
                 for(int iLoop = 0 ; iLoop < intRandNum ; iLoop++ ){
                     // Create random string
-                    intOddEven = rand.Next(0, 1000);
+                    intOddEven = s_rand.Next(0, 1000);
                     if( intOddEven % 2 == 1)
                         strRetStr = strRetStr + GenerateRandChar(SINGLES, blnValidate);  // odd number, gen RANDOM single one byte char
                     else
@@ -1260,9 +1265,9 @@ namespace GenStrings
             }
             else{
                 for(int iLoop = 0 ; iLoop < intRandNum ; iLoop++ ){
-                    intCharOffset = intCharOffset + 1 ;
-                    if ( (intCharOffset + intCPPoint + 47 + 1) > 254 )
-                        intCharOffset = 0 ;
+                    _intCharOffset = _intCharOffset + 1 ;
+                    if ( (_intCharOffset + _intCPPoint + 47 + 1) > 254 )
+                        _intCharOffset = 0 ;
                     
                     strRetStr = strRetStr + GenerateChar(SINGLES, blnValidate) ;
                                      
@@ -1292,11 +1297,11 @@ namespace GenStrings
             if( blnAbsolute)
                 intRandNum = intMaxChar ;
             else
-                intRandNum = (Int16)rand.Next(1, intMaxChar);   
+                intRandNum = (Int16)s_rand.Next(1, intMaxChar);   
 
             for(int iLoop = 0 ; iLoop < intRandNum ; iLoop++ ){
                 // Create random string
-                intOddEven = (Int16)rand.Next(0, 1000);
+                intOddEven = (Int16)s_rand.Next(0, 1000);
                 if ((intOddEven % 2) == 1) {
                     // odd number, generate single one byte char
                     strRetStr = strRetStr + GenerateRandChar(SINGLES, blnValidate);
@@ -1335,36 +1340,36 @@ namespace GenStrings
         //-------------------------------------------------------------------------------
         private void SetLeadByteRange() {
                 // Japan , next time: and 0x0E0-0x0FC
-              LeadByteRange[0].lcid = 0x0411 ;
-              LeadByteRange[0].intStart = 0x081 ;
-              LeadByteRange[0].intEnd = 0x09F  ;
-              LeadByteRange[0].intStart2 = 0x0E0 ;
-              LeadByteRange[0].intEnd2 = 0x0FC  ;
-              LeadByteRange[0].iLangCharType = DOUBLES ;
+              _leadByteRange[0].lcid = 0x0411 ;
+              _leadByteRange[0].intStart = 0x081 ;
+              _leadByteRange[0].intEnd = 0x09F  ;
+              _leadByteRange[0].intStart2 = 0x0E0 ;
+              _leadByteRange[0].intEnd2 = 0x0FC  ;
+              _leadByteRange[0].iLangCharType = DOUBLES ;
 
                   // Taiwain
-              LeadByteRange[1].lcid = 0x0404  ;
-              LeadByteRange[1].intStart = 0x0A1  ;
-              LeadByteRange[1].intEnd = 0x0F9   ;
-              LeadByteRange[1].intStart2 = 0x00  ;
-              LeadByteRange[1].intEnd2 = 0x00   ;
-              LeadByteRange[0].iLangCharType = DOUBLES ;
+              _leadByteRange[1].lcid = 0x0404  ;
+              _leadByteRange[1].intStart = 0x0A1  ;
+              _leadByteRange[1].intEnd = 0x0F9   ;
+              _leadByteRange[1].intStart2 = 0x00  ;
+              _leadByteRange[1].intEnd2 = 0x00   ;
+              _leadByteRange[0].iLangCharType = DOUBLES ;
 
                   // PRC
-        	  LeadByteRange[2].lcid = 0x0804  ;
-              LeadByteRange[2].intStart = 0x0A1;
-              LeadByteRange[2].intEnd = 0x0F7 ;
-              LeadByteRange[2].intStart2 = 0x00   ;
-              LeadByteRange[2].intEnd2 = 0x00  ;
-              LeadByteRange[0].iLangCharType = DOUBLES ;
+        	  _leadByteRange[2].lcid = 0x0804  ;
+              _leadByteRange[2].intStart = 0x0A1;
+              _leadByteRange[2].intEnd = 0x0F7 ;
+              _leadByteRange[2].intStart2 = 0x00   ;
+              _leadByteRange[2].intEnd2 = 0x00  ;
+              _leadByteRange[0].iLangCharType = DOUBLES ;
 
                   // Korean
-              LeadByteRange[3].lcid = 0x0412 ;
-              LeadByteRange[3].intStart = 0x081 ;
-              LeadByteRange[3].intEnd = 0x0FD  ;
-              LeadByteRange[3].intStart2 = 0x00  ;
-              LeadByteRange[3].intEnd2 = 0x00  ;
-              LeadByteRange[0].iLangCharType = DOUBLES ;
+              _leadByteRange[3].lcid = 0x0412 ;
+              _leadByteRange[3].intStart = 0x081 ;
+              _leadByteRange[3].intEnd = 0x0FD  ;
+              _leadByteRange[3].intStart2 = 0x00  ;
+              _leadByteRange[3].intEnd2 = 0x00  ;
+              _leadByteRange[0].iLangCharType = DOUBLES ;
         }
 
     } 

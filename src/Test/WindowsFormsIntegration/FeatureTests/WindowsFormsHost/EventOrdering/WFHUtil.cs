@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
@@ -8,15 +12,15 @@ using System.Windows.Forms.Integration;
 public class WFHUtil
 {
     // class vars
-    private static string _events;
+    private static string s_events;
 
     // member functions
-    public static void ResetEvents() { _events = ""; }
-    public static string GetEvents() { return _events; }
+    public static void ResetEvents() { s_events = ""; }
+    public static string GetEvents() { return s_events; }
 
     private static void LogEvent(string evt)
     {
-        _events += evt + ':';
+        s_events += evt + ':';
     }
 
     // AddHandlers function

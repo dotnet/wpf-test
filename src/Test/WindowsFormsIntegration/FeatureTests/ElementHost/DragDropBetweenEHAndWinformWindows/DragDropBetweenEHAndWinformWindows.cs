@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -19,23 +23,20 @@ using MS.Internal.Mita.Foundation.Collections;
 using MS.Internal.Mita.Foundation.Controls;
 using MS.Internal.Mita.Foundation.Waiters;
 
-//
+
 // Testcase:    DragDropBetweenelementHost1AndWinformWindows
 // Description: Drag and drop between Element Host and WinForm Windows
-// Author:      a-rickyt
-//
 public class DragDropBetweenEHAndWinformWindows : ReflectBase
 {
     #region Testcase setup
 
-    WinFormWindows winform;
-    ElementHost elementHost1;
-    SWC.TextBox avTextBox;
+    WinFormWindows _winform;
+    ElementHost _elementHost1;
+    SWC.TextBox _avTextBox;
     Edit _edit1;
     Edit _edit2;
 
     public DragDropBetweenEHAndWinformWindows(string[] args) : base(args) { }
-
 
     protected override void InitTest(TParams p)
     {
@@ -51,30 +52,30 @@ public class DragDropBetweenEHAndWinformWindows : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        winform = new WinFormWindows();
-        winform.Show();
+        _winform = new WinFormWindows();
+        _winform.Show();
 
-        winform.wfTextBox.DragDrop += delegate(object o, SWF.DragEventArgs eArgs)
+        _winform.wfTextBox.DragDrop += delegate(object o, SWF.DragEventArgs eArgs)
         {
             if (eArgs.Data.GetDataPresent(typeof(string)))
             {
                 string s = (String)eArgs.Data.GetData(typeof(String));
-                winform.wfTextBox.Text = s;
+                _winform.wfTextBox.Text = s;
             }
         };
 
         //Create an Avalon TextBox
-        avTextBox = new SWC.TextBox();
-        avTextBox.Name = "avTextBox";
-        avTextBox.Text = "Avalon Text Box";
-        avTextBox.AllowDrop = true;
+        _avTextBox = new SWC.TextBox();
+        _avTextBox.Name = "avTextBox";
+        _avTextBox.Text = "Avalon Text Box";
+        _avTextBox.AllowDrop = true;
 
         //Create Element Host and set Child = avTextBox
-        elementHost1 = new ElementHost();
-        elementHost1.Dock = SWF.DockStyle.Top;
-        elementHost1.Child = avTextBox;
-        elementHost1.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Dock = SWF.DockStyle.Top;
+        _elementHost1.Child = _avTextBox;
+        _elementHost1.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_elementHost1);
 
         switch (scenario.Name)
         {
@@ -108,14 +109,14 @@ public class DragDropBetweenEHAndWinformWindows : ReflectBase
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult sr)
     {
         this.Controls.Clear();
-        avTextBox.Text = "";
-        winform.Close();
+        _avTextBox.Text = "";
+        _winform.Close();
         base.AfterScenario(p, scenario, sr);
     }
 
     private void SetupScenario1(TParams p)
     {
-        winform.wfTextBox.DragEnter += delegate(object sender, SWF.DragEventArgs eArgs)
+        _winform.wfTextBox.DragEnter += delegate(object sender, SWF.DragEventArgs eArgs)
         {
             if (eArgs.Data.GetDataPresent(typeof(string)))
                 eArgs.Effect = SWF.DragDropEffects.Copy;
@@ -126,7 +127,7 @@ public class DragDropBetweenEHAndWinformWindows : ReflectBase
 
     private void SetupScenario2(TParams p)
     {
-        winform.wfTextBox.DragEnter += delegate(object sender, SWF.DragEventArgs eArgs)
+        _winform.wfTextBox.DragEnter += delegate(object sender, SWF.DragEventArgs eArgs)
         {
             if (eArgs.Data.GetDataPresent(typeof(string)))
                 eArgs.Effect = SWF.DragDropEffects.Move;
@@ -137,7 +138,7 @@ public class DragDropBetweenEHAndWinformWindows : ReflectBase
 
     private void SetupScenario3(TParams p)
     {
-        winform.wfTextBox.DragEnter += delegate(object sender, SWF.DragEventArgs eArgs)
+        _winform.wfTextBox.DragEnter += delegate(object sender, SWF.DragEventArgs eArgs)
         {
             eArgs.Effect = SWF.DragDropEffects.None;
         };
@@ -145,32 +146,32 @@ public class DragDropBetweenEHAndWinformWindows : ReflectBase
 
     private void SetupScenario4(TParams p)
     {
-        avTextBox.Text = "";
-        winform.wfTextBox.Text = "WinForm Text Box";
-        winform.wfTextBox.MouseDown += delegate(object sender, SWF.MouseEventArgs eArgs)
+        _avTextBox.Text = "";
+        _winform.wfTextBox.Text = "WinForm Text Box";
+        _winform.wfTextBox.MouseDown += delegate(object sender, SWF.MouseEventArgs eArgs)
         {
-            winform.wfTextBox.DoDragDrop(winform.wfTextBox.Text, SWF.DragDropEffects.Copy);
+            _winform.wfTextBox.DoDragDrop(_winform.wfTextBox.Text, SWF.DragDropEffects.Copy);
         };
     }
 
     private void SetupScenario5(TParams p)
     {
-        avTextBox.Text = "";
-        winform.wfTextBox.Text = "WinForm Text Box";
-        winform.wfTextBox.MouseDown += delegate(object sender, SWF.MouseEventArgs eArgs)
+        _avTextBox.Text = "";
+        _winform.wfTextBox.Text = "WinForm Text Box";
+        _winform.wfTextBox.MouseDown += delegate(object sender, SWF.MouseEventArgs eArgs)
         {
-            winform.wfTextBox.DoDragDrop(winform.wfTextBox.Text, SWF.DragDropEffects.Move);
-            winform.wfTextBox.Text = "";
+            _winform.wfTextBox.DoDragDrop(_winform.wfTextBox.Text, SWF.DragDropEffects.Move);
+            _winform.wfTextBox.Text = "";
         };
     }
 
     private void SetupScenario6(TParams p)
     {
-        avTextBox.Text = "";
-        winform.wfTextBox.Text = "WinForm Text Box";
-        winform.wfTextBox.MouseDown += delegate(object sender, SWF.MouseEventArgs eArgs)
+        _avTextBox.Text = "";
+        _winform.wfTextBox.Text = "WinForm Text Box";
+        _winform.wfTextBox.MouseDown += delegate(object sender, SWF.MouseEventArgs eArgs)
         {
-            winform.wfTextBox.DoDragDrop(winform.wfTextBox.Text, SWF.DragDropEffects.None);
+            _winform.wfTextBox.DoDragDrop(_winform.wfTextBox.Text, SWF.DragDropEffects.None);
         };
     }
 

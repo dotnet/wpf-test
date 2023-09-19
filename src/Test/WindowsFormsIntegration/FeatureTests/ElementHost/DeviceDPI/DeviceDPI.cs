@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -17,18 +21,15 @@ using System.Diagnostics;
 using System.Reflection;
 using Microsoft.Test.Display;
 
-//
+
 // Testcase:    DeviceDPI
 // Description: Verify a ElementHost's dimensions are scaled to its output device.
-// Author:      a-rickyt
-//
 public class DeviceDPI : ReflectBase
 {
     #region Test case setup
 
-    ElementHost elementHost1;
-    Bitmap bmp;
-
+    ElementHost _elementHost1;
+    Bitmap _bmp;
 
     public DeviceDPI(String[] args) : base(args) { }
 
@@ -45,15 +46,15 @@ public class DeviceDPI : ReflectBase
         Controls.Clear();
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Size = new System.Drawing.Size(200, 100);
-        elementHost1.BackColor = Color.Red;
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Size = new System.Drawing.Size(200, 100);
+        _elementHost1.BackColor = Color.Red;
+        Controls.Add(_elementHost1);
 
         SWC.Button avButton1 = new SWC.Button();
         avButton1.Content = "Avalon Button";
         avButton1.Background = SWM.Brushes.White;
-        elementHost1.Child = avButton1;
+        _elementHost1.Child = avButton1;
 
         return base.BeforeScenario(p, scenario);
     }
@@ -147,13 +148,13 @@ public class DeviceDPI : ReflectBase
     private void BitmapTest(ScenarioResult sr, TParams p, int x, int y,
         int width, int height, Color color, int percent)
     {
-        bmp = Utilities.GetBitmapOfControl(this);
+        _bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, x, y, 
+        sr.IncCounters(BitmapsColorPercent(_bmp, x, y, 
 		(int)Monitor.ConvertScreenToLogical(Dimension.Width, width), 
 		(int)Monitor.ConvertScreenToLogical(Dimension.Height, height), color) >= percent,
             "Bitmap Failed at Color=" + color + ". Percent match: " +
-            (BitmapsColorPercent(bmp, x, y, 
+            (BitmapsColorPercent(_bmp, x, y, 
 		(int)Monitor.ConvertScreenToLogical(Dimension.Width, width), 
 		(int)Monitor.ConvertScreenToLogical(Dimension.Height, height), color)) + "%. Expected: more than " + 
             percent + "%", p.log);

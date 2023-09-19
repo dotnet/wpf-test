@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -17,19 +21,16 @@ using System.Diagnostics;
 using System.Threading;
 using System.Reflection;
 
-//
+
 // Testcase:    Layering
 // Description: Verify z-ordering and painting of avalon elements on EH.
-// Author:      a-rickyt
-//
 public class Layering : ReflectBase
 {
     #region Test case setup
 
-    ElementHost elementHost1;
-    SWF.Button wfButton1;
-    Bitmap bmp;
-
+    ElementHost _elementHost1;
+    SWF.Button _wfButton1;
+    Bitmap _bmp;
 
     public Layering(String[] args) : base(args) { }
 
@@ -39,17 +40,17 @@ public class Layering : ReflectBase
         this.Size = new System.Drawing.Size(400, 400);
 
         //Add WF button to partially cover EH
-        wfButton1 = new SWF.Button();
-        wfButton1.Text = "WinForm Button";
-        wfButton1.Size = new System.Drawing.Size(100, 25);
-        wfButton1.BackColor = Color.Blue;
-        wfButton1.ForeColor = Color.White;
-        Controls.Add(wfButton1);
+        _wfButton1 = new SWF.Button();
+        _wfButton1.Text = "WinForm Button";
+        _wfButton1.Size = new System.Drawing.Size(100, 25);
+        _wfButton1.BackColor = Color.Blue;
+        _wfButton1.ForeColor = Color.White;
+        Controls.Add(_wfButton1);
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.BackColor = Color.Red;
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.BackColor = Color.Red;
+        Controls.Add(_elementHost1);
 
         base.InitTest(p);
     }
@@ -75,7 +76,7 @@ public class Layering : ReflectBase
         SWC.Button avButton1 = new SWC.Button();
         avButton1.Content = "Avalon Button";
         avButton1.Background = SWM.Brushes.White;
-        elementHost1.Child = avButton1;
+        _elementHost1.Child = avButton1;
         Utilities.SleepDoEvents(20);
 
         //Verify no painting issues on Element Host
@@ -92,19 +93,19 @@ public class Layering : ReflectBase
     public ScenarioResult Scenario2(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Child = null;
+        _elementHost1.Child = null;
         Utilities.SleepDoEvents(5);
 
         //Remove WF button
-        Controls.Remove(wfButton1);
+        Controls.Remove(_wfButton1);
         Utilities.SleepDoEvents(5);
 
         //Verify no painting issues on Element Host
         BitmapTest(sr, p, 0, 0, 200, 100, Color.Red, 100);
 
         //Restore WF button to test on AV control
-        Controls.Add(wfButton1);
-        wfButton1.BringToFront();
+        Controls.Add(_wfButton1);
+        _wfButton1.BringToFront();
         Utilities.SleepDoEvents(5);
 
         //Verify no painting issues on Element Host
@@ -118,11 +119,11 @@ public class Layering : ReflectBase
         SWC.Button avButton1 = new SWC.Button();
         avButton1.Content = "Avalon Button";
         avButton1.Background = SWM.Brushes.White;
-        elementHost1.Child = avButton1;
+        _elementHost1.Child = avButton1;
         Utilities.SleepDoEvents(20);
 
         //Remove WF button
-        Controls.Remove(wfButton1);
+        Controls.Remove(_wfButton1);
 
         //Verify no painting issues on Element Host
         BitmapTest(sr, p, 0, 0, 200, 100, Color.White, 75);
@@ -139,11 +140,11 @@ public class Layering : ReflectBase
     private void BitmapTest(ScenarioResult sr, TParams p, int x, int y,
         int width, int height, Color color, int percent)
     {
-        bmp = Utilities.GetBitmapOfControl(this);
+        _bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, x, y, width, height, color) >= percent,
+        sr.IncCounters(BitmapsColorPercent(_bmp, x, y, width, height, color) >= percent,
             "Bitmap Failed at Color=" + color + ". Percent match: " +
-            BitmapsColorPercent(bmp, x, y, width, height, color) + "%. Expected: greater than " +
+            BitmapsColorPercent(_bmp, x, y, width, height, color) + "%. Expected: greater than " +
             percent + "%", p.log);
     }
 

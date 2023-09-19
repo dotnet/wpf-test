@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -17,24 +21,21 @@ using System.Diagnostics;
 using System.Reflection;
 using Microsoft.Test.Display;
 
-//
+
 // Testcase:    ScalingAndAutoScaling
 // Description: EH controls should respond to any scaling applied to EH.
-// Author:      a-rickyt
-//
 public class ScalingAndAutoScaling : ReflectBase
 {
     #region Test case setup
 
-    ElementHost elementHost1;
-    SWC.Button avButton1;
-    Bitmap bmp;
+    ElementHost _elementHost1;
+    SWC.Button _avButton1;
+    Bitmap _bmp;
 
-    private int origX;
-    private int origY;
-    private int origWidth;
-    private int origHeight;
-
+    private int _origX;
+    private int _origY;
+    private int _origWidth;
+    private int _origHeight;
 
     public ScalingAndAutoScaling(String[] args) : base(args) { }
 
@@ -52,14 +53,14 @@ public class ScalingAndAutoScaling : ReflectBase
         this.Font = null;
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Location = new System.Drawing.Point(100, 100);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Location = new System.Drawing.Point(100, 100);
+        Controls.Add(_elementHost1);
 
-        avButton1 = new SWC.Button();
-        avButton1.Content = "Avalon Button";
-        avButton1.Background = SWM.Brushes.White;
-        elementHost1.Child = avButton1;
+        _avButton1 = new SWC.Button();
+        _avButton1.Content = "Avalon Button";
+        _avButton1.Background = SWM.Brushes.White;
+        _elementHost1.Child = _avButton1;
 
         return base.BeforeScenario(p, scenario);
     }
@@ -72,15 +73,15 @@ public class ScalingAndAutoScaling : ReflectBase
     public ScenarioResult Scenario1(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = true;
+        _elementHost1.AutoSize = true;
         Utilities.SleepDoEvents(2);
 
-        GetOriginalLocationAndSize(elementHost1);
+        GetOriginalLocationAndSize(_elementHost1);
 
         //Verify initial state
-        Verify(sr, p, origX, origY, origWidth, origHeight, 40);
-        p.log.WriteLine("Initial state: " + elementHost1.Size.ToString() + ", " + 
-            elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, _origWidth, _origHeight, 40);
+        p.log.WriteLine("Initial state: " + _elementHost1.Size.ToString() + ", " + 
+            _elementHost1.Location.ToString());
 
         //-- Check AutoScaleMode=Font --//
         this.AutoScaleMode = SWF.AutoScaleMode.Font;
@@ -90,18 +91,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, (int)(origX * 1.5), (int)(origY * 1.9), (int)(origWidth * 1.5), 
-            (int)(origHeight * 1), 33);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, (int)(_origX * 1.5), (int)(_origY * 1.9), (int)(_origWidth * 1.5), 
+            (int)(_origHeight * 1), 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, (int)(origX * 0.8), (int)(origY * 0.8), (int)(origWidth * 0.8),
-            (int)(origHeight * 1), 33);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, (int)(_origX * 0.8), (int)(_origY * 0.8), (int)(_origWidth * 0.8),
+            (int)(_origHeight * 1), 33);
 
         //-- Check AutoScaleMode=None --//
         this.AutoScaleMode = SWF.AutoScaleMode.None;
@@ -111,18 +112,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, (int)(origX * 0.8), (int)(origY * 0.8), (int)(origWidth * 1.5),
-            (int)(origHeight * 1), 33);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, (int)(_origX * 0.8), (int)(_origY * 0.8), (int)(_origWidth * 1.5),
+            (int)(_origHeight * 1), 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, (int)(origX * 0.8), (int)(origY * 0.8), (int)(origWidth * 0.8),
-            (int)(origHeight * 1), 33);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, (int)(_origX * 0.8), (int)(_origY * 0.8), (int)(_origWidth * 0.8),
+            (int)(_origHeight * 1), 33);
 
         //-- Check AutoScaleMode=Dpi --//
         this.AutoScaleMode = SWF.AutoScaleMode.Dpi;
@@ -132,18 +133,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, (int)(origX * 0.8), (int)(origY * 0.8), (int)(origWidth * 1.5),
-            (int)(origHeight * 1), 33);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, (int)(_origX * 0.8), (int)(_origY * 0.8), (int)(_origWidth * 1.5),
+            (int)(_origHeight * 1), 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, (int)(origX * 0.8), (int)(origY * 0.8), (int)(origWidth * 0.8),
-            (int)(origHeight * 1), 33);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, (int)(_origX * 0.8), (int)(_origY * 0.8), (int)(_origWidth * 0.8),
+            (int)(_origHeight * 1), 33);
 
         return sr;
     }
@@ -152,7 +153,7 @@ public class ScalingAndAutoScaling : ReflectBase
     public ScenarioResult Scenario2(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = false;
+        _elementHost1.AutoSize = false;
         Utilities.SleepDoEvents(2);
 
         //Verify initial state
@@ -166,16 +167,16 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
 
         Verify(sr, p, 167, 192, 333, 192, 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 40);
 
         //-- Check AutoScaleMode=None --//
@@ -186,15 +187,15 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 40);
 
         //-- Check AutoScaleMode=Dpi --//
@@ -205,15 +206,15 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 40);
 
         return sr;
@@ -223,14 +224,14 @@ public class ScalingAndAutoScaling : ReflectBase
     public ScenarioResult Scenario3(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = true;
-        elementHost1.Dock = SWF.DockStyle.Top;
+        _elementHost1.AutoSize = true;
+        _elementHost1.Dock = SWF.DockStyle.Top;
         Utilities.SleepDoEvents(2);
 
-        GetOriginalLocationAndSize(elementHost1);
+        GetOriginalLocationAndSize(_elementHost1);
 
         //Verify initial state
-        Verify(sr, p, origX, origY, (int)Monitor.ConvertLogicalToScreen(Dimension.Width, origWidth), origHeight, 40);
+        Verify(sr, p, _origX, _origY, (int)Monitor.ConvertLogicalToScreen(Dimension.Width, _origWidth), _origHeight, 40);
 
         //-- Check AutoScaleMode=Font --//
         this.AutoScaleMode = SWF.AutoScaleMode.Font;
@@ -240,18 +241,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 1.7),
-            (int)(origHeight * 1), 33);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 1.7),
+            (int)(_origHeight * 1), 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 40);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 40);
 
         //-- Check AutoScaleMode=None --//
         this.AutoScaleMode = SWF.AutoScaleMode.None;
@@ -261,18 +262,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 33);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 40);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 40);
 
         //-- Check AutoScaleMode=Dpi --//
         this.AutoScaleMode = SWF.AutoScaleMode.Dpi;
@@ -282,18 +283,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 40);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 40);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 40);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 40);
 
         return sr;
     }
@@ -302,14 +303,14 @@ public class ScalingAndAutoScaling : ReflectBase
     public ScenarioResult Scenario4(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = false;
-        elementHost1.Dock = SWF.DockStyle.Top;
+        _elementHost1.AutoSize = false;
+        _elementHost1.Dock = SWF.DockStyle.Top;
         Utilities.SleepDoEvents(2);
 
-        GetOriginalLocationAndSize(elementHost1);
+        GetOriginalLocationAndSize(_elementHost1);
 
         //Verify initial state
-        Verify(sr, p, origX, origY, (int)Monitor.ConvertLogicalToScreen(Dimension.Width, origWidth), origHeight, 80);
+        Verify(sr, p, _origX, _origY, (int)Monitor.ConvertLogicalToScreen(Dimension.Width, _origWidth), _origHeight, 80);
 
         //-- Check AutoScaleMode=Font --//
         this.AutoScaleMode = SWF.AutoScaleMode.Font;
@@ -319,18 +320,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 1.7),
-            (int)(origHeight * 1.9), 33);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 1.7),
+            (int)(_origHeight * 1.9), 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 80);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 80);
 
         //-- Check AutoScaleMode=None --//
         this.AutoScaleMode = SWF.AutoScaleMode.None;
@@ -340,18 +341,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 80);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 80);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 80);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 80);
 
         //-- Check AutoScaleMode=Dpi --//
         this.AutoScaleMode = SWF.AutoScaleMode.Dpi;
@@ -361,18 +362,18 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 80);
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 80);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
-        Verify(sr, p, origX, origY, (int)(origWidth * 0.7),
-            (int)(origHeight * 1), 80);
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
+        Verify(sr, p, _origX, _origY, (int)(_origWidth * 0.7),
+            (int)(_origHeight * 1), 80);
 
         return sr;
     }
@@ -382,7 +383,7 @@ public class ScalingAndAutoScaling : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        elementHost1.Scale(new SizeF(1.1f, 1.1f));
+        _elementHost1.Scale(new SizeF(1.1f, 1.1f));
         Utilities.SleepDoEvents(2);
 
         //Verify 1.1 scale state
@@ -396,15 +397,15 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 183, 212, 367, 212, 80);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 73, 93, 147, 93, 75);
 
         //-- Check AutoScaleMode=None --//
@@ -415,15 +416,15 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 73, 93, 147, 93, 75);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 73, 93, 147, 93, 75);
 
         //-- Check AutoScaleMode=Dpi --//
@@ -434,15 +435,15 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 73, 93, 147, 93, 75);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 73, 93, 147, 93, 75);
 
         return sr;
@@ -477,15 +478,15 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 167, 192, 333, 192, 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 40);
 
         //-- Check AutoScaleMode=None --//
@@ -496,15 +497,15 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 40);
 
         //-- Check AutoScaleMode=Dpi --//
@@ -515,15 +516,15 @@ public class ScalingAndAutoScaling : ReflectBase
         //Increase the font
         this.Font = new Font("Impact", 20, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font increase to 20: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font increase to 20: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 33);
 
         //Decrease the font
         this.Font = new Font("Impact", 8, SD.FontStyle.Regular, GraphicsUnit.Pixel);
         Utilities.SleepDoEvents(2);
-        p.log.WriteLine("After font decrease to 8: " + elementHost1.Size.ToString() + ", " +
-            elementHost1.Location.ToString());
+        p.log.WriteLine("After font decrease to 8: " + _elementHost1.Size.ToString() + ", " +
+            _elementHost1.Location.ToString());
         Verify(sr, p, 67, 84, 133, 84, 40);
 
         return sr;
@@ -535,10 +536,10 @@ public class ScalingAndAutoScaling : ReflectBase
 
     void GetOriginalLocationAndSize(ElementHost elementHost1)
     {
-        origX = elementHost1.Location.X;
-        origY = elementHost1.Location.Y;
-        origWidth = elementHost1.Width;
-        origHeight = elementHost1.Height;
+        _origX = elementHost1.Location.X;
+        _origY = elementHost1.Location.Y;
+        _origWidth = elementHost1.Width;
+        _origHeight = elementHost1.Height;
     }
 
 
@@ -550,20 +551,20 @@ public class ScalingAndAutoScaling : ReflectBase
         height = (int)Monitor.ConvertScreenToLogical(Dimension.Height, height);
 	int variance = (int)Monitor.ConvertLogicalToScreen(Dimension.Height, 40);
 
-        sr.IncCounters((elementHost1.Location.X >= x - variance && elementHost1.Location.X <= x + variance), 
+        sr.IncCounters((_elementHost1.Location.X >= x - variance && _elementHost1.Location.X <= x + variance), 
             "Failed at elementHost1.Location.X.  Expected (estimate): " +
-            x + ", Actual: " + elementHost1.Location.X, p.log);
-        sr.IncCounters((elementHost1.Location.Y >= y - variance && elementHost1.Location.Y <= y + variance), 
+            x + ", Actual: " + _elementHost1.Location.X, p.log);
+        sr.IncCounters((_elementHost1.Location.Y >= y - variance && _elementHost1.Location.Y <= y + variance), 
             "Failed at elementHost1.Location.Y.  Expected (estimate): " +
-            y + ", Actual: " + elementHost1.Location.Y, p.log);
-        sr.IncCounters((elementHost1.Width >= width - variance && elementHost1.Width <= width + variance), 
+            y + ", Actual: " + _elementHost1.Location.Y, p.log);
+        sr.IncCounters((_elementHost1.Width >= width - variance && _elementHost1.Width <= width + variance), 
             "Failed at elementHost1.Width.  Expected: " +
-            width + ", Actual: " + elementHost1.Width, p.log);
-        sr.IncCounters((elementHost1.Height >= height - variance && elementHost1.Height <= height + variance), 
+            width + ", Actual: " + _elementHost1.Width, p.log);
+        sr.IncCounters((_elementHost1.Height >= height - variance && _elementHost1.Height <= height + variance), 
             "Failed at elementHost1.Height.  Expected: " +
-            height + ", Actual: " + elementHost1.Height, p.log);
-        BitmapTest(sr, p, elementHost1.Location.X, elementHost1.Location.Y, elementHost1.Width,
-            elementHost1.Height, Color.White, 0.5);
+            height + ", Actual: " + _elementHost1.Height, p.log);
+        BitmapTest(sr, p, _elementHost1.Location.X, _elementHost1.Location.Y, _elementHost1.Width,
+            _elementHost1.Height, Color.White, 0.5);
     }
 
     //Takes a bitmap of the form and checks the color of pixels of the bitmap in the given area by 
@@ -571,11 +572,11 @@ public class ScalingAndAutoScaling : ReflectBase
     private void BitmapTest(ScenarioResult sr, TParams p, int x, int y,
         int width, int height, Color color, double percent)
     {
-        bmp = Utilities.GetBitmapOfControl(this);
+        _bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(2);
-        sr.IncCounters(BitmapsColorPercent(bmp, x, y, width, height, color) >= percent,
+        sr.IncCounters(BitmapsColorPercent(_bmp, x, y, width, height, color) >= percent,
             "Bitmap Failed at Color=" + color + ". Percent match: " +
-            BitmapsColorPercent(bmp, x, y, width, height, color) + "%. Expected: more than " + 
+            BitmapsColorPercent(_bmp, x, y, width, height, color) + "%. Expected: more than " + 
             percent + "%", p.log);
     }
 

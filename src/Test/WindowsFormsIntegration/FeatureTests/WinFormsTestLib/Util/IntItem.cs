@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 
 namespace WFCTestLib.Util
@@ -16,7 +20,7 @@ namespace WFCTestLib.Util
         //  The integer value to attach to the string
         // </desc>
         // </doc>
-        private int    nValue;
+        private int    _nValue;
 
         // <doc>
         // <desc>
@@ -24,7 +28,7 @@ namespace WFCTestLib.Util
         // </desc>
         // <seealso member="ToString"/>
         // </doc>
-        private String s;
+        private String _s;
 
         // <doc>
         // <desc>
@@ -40,8 +44,8 @@ namespace WFCTestLib.Util
         // </doc>
         public IntItem(int nValue, String s)
         {
-            this.nValue = nValue;
-            this.s      = s;
+            this._nValue = nValue;
+            this._s      = s;
         }
 
         // <doc>
@@ -70,7 +74,7 @@ namespace WFCTestLib.Util
         // </doc>
         public override String ToString()
         {
-            return s;
+            return _s;
         }
 
         // <doc>
@@ -82,7 +86,7 @@ namespace WFCTestLib.Util
         {
             get
             {
-                return nValue;
+                return _nValue;
             }
         }
     }

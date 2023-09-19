@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Diagnostics;
 using System.Collections;
@@ -34,7 +38,7 @@ namespace WFCTestLib.Util
         //
         // Various permissions asserted in RandomUtil.
         //
-        private static readonly SecurityPermission unmanagedCodePermission = new SecurityPermission(SecurityPermissionFlag.UnmanagedCode);
+        private static readonly SecurityPermission s_unmanagedCodePermission = new SecurityPermission(SecurityPermissionFlag.UnmanagedCode);
 
         // <doc>
         // <desc>
@@ -59,7 +63,7 @@ namespace WFCTestLib.Util
         //                    seed value.
         // </desc>
         // </doc>
-        private static Random rand = null;
+        private static Random s_rand = null;
 
         // <doc>
         // <desc>
@@ -67,7 +71,7 @@ namespace WFCTestLib.Util
         // </desc>
         // <seealso class="IntlString"/>
         // </doc>
-        private IntlStrings intlStr = null;
+        private IntlStrings _intlStr = null;
 
         // <doc>
         // <desc>
@@ -78,7 +82,7 @@ namespace WFCTestLib.Util
         // <seealso class="ImageStyle"/>
         // <seealso member="GetImage"/>
         // </doc>
-        private String[] ImageNames = new string[]
+        private String[] _imageNames = new string[]
         {
             "BEANY.BMP",   /* 0 */
             "MS.EMF",      /* 1 */
@@ -95,7 +99,7 @@ namespace WFCTestLib.Util
         // </desc>
         // <seealso member="GetIcon"/>
         // </doc>
-        private String[] IconNames = new string[]
+        private String[] _iconNames = new string[]
         {
             "applet.ico",
             "button.ico",
@@ -110,7 +114,7 @@ namespace WFCTestLib.Util
         // For use with GetValidDateTime() method.  Represents the minimum valid date for
         // the current culture.
         //
-        private DateTime minValidDate;
+        private DateTime _minValidDate;
 
         // <doc>
         // <desc>
@@ -118,11 +122,7 @@ namespace WFCTestLib.Util
         // </desc>
         // <seealso member="GetIFormatProvider"/>
         // </doc>
-        // changeddate: 06-28-2006, changedby: v-hzhang
-        // changed the name of culture: "az-AZ-Latn" to "az-Latn-AZ", "az-AZ-Cyrl" to "az-Cyrl-AZ", "uz-UZ-Cyrl" to "uz-Cyrl-UZ", "uz-UZ-Latn" to "uz-Latn-UZ"
-        // changeddate: 07-10-2006, changedby: v-boyin
-        // changed the above names back again
-        private string[] cultureFormats = new string[]
+        private string[] _cultureFormats = new string[]
 		{
 			"",				// invariant culture
 			"af",			// Afrikaans
@@ -164,7 +164,7 @@ namespace WFCTestLib.Util
 			"zh-CN",		// Chinese - China
 			"zh-CHS",		// Chinese (Simplified)
 			"zh-SG",		// Chinese - Singapore
-			"zh-TW",		// Chinese - Taiwan
+			"zh-TW",		// Chinese - ----
 			"zh-CHT",		// Chinese (Traditional)
 			"hr",			// Croatian
 			"hr-HR",		// Croatian - Croatia
@@ -195,8 +195,8 @@ namespace WFCTestLib.Util
 			"et-EE",		// Estonian - Estonia
 			"fo",			// Faroese
 			"fo-FO",		// Faroese - Faroe Islands
-			"fa",			// Farsi
-			"fa-IR",		// Farsi - Iran
+			"fa",			// ----
+			"fa-IR",		// ---- - Iran
 			"fi",			// Finnish
 			"fi-FI",		// Finnish - Finland
 			"fr",			// French
@@ -249,8 +249,8 @@ namespace WFCTestLib.Util
 			"lv-LV",		// Latvian - Latvia
 			"lt",			// Lithuanian
 			"lt-LT",		// Lithuanian - Lithuania
-			"mk",			// Macedonian
-			"mk-MK",		// Macedonian - FYROM
+			"mk",			// ----n
+			"mk-MK",		// ----n - FYROM
 			"ms",			// Malay
 			"ms-BN",		// Malay - Brunei
 			"ms-MY",		// Malay - Malaysia
@@ -328,9 +328,6 @@ namespace WFCTestLib.Util
 			"vi-VN",		// Vietnamese - Vietnam
 		};
 
-
-
-
         // <doc>
         // <desc>
         //  The list of culture codes that the CultureInfo class supports for Vista.
@@ -338,8 +335,7 @@ namespace WFCTestLib.Util
         // </desc>
         // <seealso member="GetIFormatProvider"/>
         // </doc>
-        // created: namitap:08/06/2006
-        private string[] cultureFormatsVista = new string[]
+        private string[] _cultureFormatsVista = new string[]
 		{
 			"",				// invariant culture
 			"af",			// Afrikaans
@@ -381,7 +377,7 @@ namespace WFCTestLib.Util
 			"zh-CN",		// Chinese - China
 			"zh-Hans",		// Chinese (Simplified)
 			"zh-SG",		// Chinese - Singapore
-			"zh-TW",		// Chinese - Taiwan
+			"zh-TW",		// Chinese - ----
 			"zh-Hant",		// Chinese (Traditional)
 			"hr",			// Croatian
 			"hr-HR",		// Croatian - Croatia
@@ -412,8 +408,8 @@ namespace WFCTestLib.Util
 			"et-EE",		// Estonian - Estonia
 			"fo",			// Faroese
 			"fo-FO",		// Faroese - Faroe Islands
-			"fa",			// Farsi
-			"fa-IR",		// Farsi - Iran
+			"fa",			// ----
+			"fa-IR",		// ---- - Iran
 			"fi",			// Finnish
 			"fi-FI",		// Finnish - Finland
 			"fr",			// French
@@ -466,8 +462,8 @@ namespace WFCTestLib.Util
 			"lv-LV",		// Latvian - Latvia
 			"lt",			// Lithuanian
 			"lt-LT",		// Lithuanian - Lithuania
-			"mk",			// Macedonian
-			"mk-MK",		// Macedonian - FYROM
+			"mk",			// ----n
+			"mk-MK",		// ----n - FYROM
 			"ms",			// Malay
 			"ms-BN",		// Malay - Brunei
 			"ms-MY",		// Malay - Malaysia
@@ -555,7 +551,7 @@ namespace WFCTestLib.Util
         // </desc>
         // <see also member="GetValidJapaneseImeValue()"/>
         // </doc>
-        private ImeMode[] validJapaneseImeModes = new ImeMode[]
+        private ImeMode[] _validJapaneseImeModes = new ImeMode[]
 		{
             ImeMode.Alpha,
             ImeMode.AlphaFull,
@@ -573,7 +569,7 @@ namespace WFCTestLib.Util
         // </desc>
         // <see also member="GetValidKoreanImeValue"/>
         // </doc>
-        private ImeMode[] validKoreanImeModes = new ImeMode[]
+        private ImeMode[] _validKoreanImeModes = new ImeMode[]
 		{
             ImeMode.Alpha,
             ImeMode.AlphaFull,
@@ -594,7 +590,7 @@ namespace WFCTestLib.Util
             // Only create a new one if it doesn't already exist.  That way, new
             // instances of RandomUtils won't overwrite rand, which is static.
             //
-            if (rand == null)
+            if (s_rand == null)
                 InitializeRandoms(new Random().Next());
 
             // This ensures we have a valid min DateTime for the current culture.
@@ -606,7 +602,7 @@ namespace WFCTestLib.Util
             try
             {
                 DateTime min = DateTime.MinValue;
-                minValidDate = new DateTime(cal.GetYear(min), cal.GetMonth(min), cal.GetDayOfMonth(min), CultureInfo.CurrentCulture.Calendar);
+                _minValidDate = new DateTime(cal.GetYear(min), cal.GetMonth(min), cal.GetDayOfMonth(min), CultureInfo.CurrentCulture.Calendar);
             }
             catch
             {
@@ -616,7 +612,7 @@ namespace WFCTestLib.Util
 
                 try
                 {
-                    minValidDate = DateTime.Now;
+                    _minValidDate = DateTime.Now;
                 }
                 catch
                 {
@@ -631,29 +627,29 @@ namespace WFCTestLib.Util
             this.Log = log;
         }
 
-        private Log.Log log = null;
+        private Log.Log _log = null;
         public Log.Log Log
         {
             get
             {
-                return log;
+                return _log;
             }
             set
             {
-                log = value;
+                _log = value;
             }
         }
 
-        private bool logRandomValues = false;
+        private bool _logRandomValues = false;
         public bool LogRandomValues
         {
             get
             {
-                return logRandomValues;
+                return _logRandomValues;
             }
             set
             {
-                logRandomValues = value;
+                _logRandomValues = value;
             }
         }
 
@@ -662,16 +658,16 @@ namespace WFCTestLib.Util
         //  1 - string with the method argument types & names
         //  2 - return value
         // Example: if you wanted to show "**** 5 ****" when calling GetInteger, you'd set this to "**** {2} ****"
-        private string logRandomValueFormat = "RandomUtil: {0}{1} returned {2}";
+        private string _logRandomValueFormat = "RandomUtil: {0}{1} returned {2}";
         public string LogRandomValueFormat
         {
             get
             {
-                return logRandomValueFormat;
+                return _logRandomValueFormat;
             }
             set
             {
-                logRandomValueFormat = value;
+                _logRandomValueFormat = value;
             }
         }
 
@@ -691,7 +687,7 @@ namespace WFCTestLib.Util
                     string methodName = mi.Name;
                     string methodString = ReflectBase.GetParameterList(mi);
                     string returnValue = obj.ToString();
-                    Log.WriteLine(string.Format(logRandomValueFormat, methodName, methodString, returnValue));
+                    Log.WriteLine(string.Format(_logRandomValueFormat, methodName, methodString, returnValue));
                 }
             }
         }
@@ -704,10 +700,10 @@ namespace WFCTestLib.Util
         //
         private void InitializeRandoms(int seed)
         {
-            rand = new Random(seed);
+            s_rand = new Random(seed);
 
-            unmanagedCodePermission.Assert();
-            intlStr = new IntlStrings((long)seed);
+            s_unmanagedCodePermission.Assert();
+            _intlStr = new IntlStrings((long)seed);
             CodeAccessPermission.RevertAssert();
         }
 
@@ -794,9 +790,6 @@ namespace WFCTestLib.Util
         // <desc>
         //  Returns a random element of the given one-dimensional array.
         //
-        //  TODO: handling multidimensional arrays wouldn't be too difficult, but there
-        //        is no current need for them.
-        //
         // </desc>
         // <param term="array">
         //  The array from which to select an element
@@ -810,9 +803,6 @@ namespace WFCTestLib.Util
             if (array == null || array.Length == 0)
                 return null;
 
-            // TODO: if array is multidimensional, GetValue(int) will throw an exception.
-            //       To handle a multidimensional array, we should use GetValue(int[]).
-            //
             int val = GetRange(0, array.Length - 1);
             LogValueIfLogging(array.GetValue(val));
             return array.GetValue(val);
@@ -1035,8 +1025,8 @@ namespace WFCTestLib.Util
         public virtual int GetValidJapaneseImeValue()
         {
             int nValue;
-            int nIndex = GetRange(0, validJapaneseImeModes.Length - 1);
-            nValue = (int)validJapaneseImeModes[nIndex];
+            int nIndex = GetRange(0, _validJapaneseImeModes.Length - 1);
+            nValue = (int)_validJapaneseImeModes[nIndex];
             LogValueIfLogging(nValue);
             return nValue;
         }
@@ -1053,8 +1043,8 @@ namespace WFCTestLib.Util
         public virtual int GetValidKoreanImeValue()
         {
             int nValue;
-            int nIndex = GetRange(0, validKoreanImeModes.Length - 1);
-            nValue = (int)validKoreanImeModes[nIndex];
+            int nIndex = GetRange(0, _validKoreanImeModes.Length - 1);
+            nValue = (int)_validKoreanImeModes[nIndex];
             LogValueIfLogging(nValue);
             return nValue;
         }
@@ -1099,7 +1089,7 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual int GetInt()
         {
-            int retVal = rand.Next();
+            int retVal = s_rand.Next();
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -1114,7 +1104,7 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual double GetDouble()
         {
-            double retVal = rand.NextDouble();
+            double retVal = s_rand.NextDouble();
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -1420,7 +1410,7 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual int GetInt(bool bUnsigned)
         {
-            int i = rand.Next();
+            int i = s_rand.Next();
             if (bUnsigned && (i < 0))
                 i = -i;
 
@@ -1540,7 +1530,7 @@ namespace WFCTestLib.Util
         //
         public virtual DateTime GetValidDateTime()
         {
-            DateTime retVal = GetDateTime(minValidDate, DateTime.MaxValue);
+            DateTime retVal = GetDateTime(_minValidDate, DateTime.MaxValue);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -1609,10 +1599,10 @@ namespace WFCTestLib.Util
             if (type == ImageStyle.Random)
                 type = (ImageStyle)(GetInt(true) % (int)type);
 
-            // BUGBUG: once the resource manager stuff works, get rid of the hard-coded
-            // filepath in the #else clause below...
+            // 
 
-            String fileName = ImageNames[(int)type];
+
+            String fileName = _imageNames[(int)type];
 
             // Arrrrrrrgh!!  Got OutOfMemoryExceptions in XCheckBox with this fix.
             // We'll have to hold off for now.
@@ -1691,8 +1681,8 @@ namespace WFCTestLib.Util
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
         public virtual Icon GetIcon()
         {
-            int index = GetRange(0, IconNames.Length - 1);
-            String fileName = IconNames[index];
+            int index = GetRange(0, _iconNames.Length - 1);
+            String fileName = _iconNames[index];
             Console.WriteLine("RandomUtil.GetIcon(): loading " + fileName);
             //FileStream fs = File.OpenRead(fileName);
             Stream fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -1809,7 +1799,7 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual Size GetSize()
         {
-            Size retVal = new Size(rand.Next(), rand.Next());
+            Size retVal = new Size(s_rand.Next(), s_rand.Next());
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -1895,7 +1885,7 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual Padding GetPadding()
         {
-            Padding retVal = new Padding(rand.Next(), rand.Next(), rand.Next(), rand.Next());
+            Padding retVal = new Padding(s_rand.Next(), s_rand.Next(), s_rand.Next(), s_rand.Next());
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -1999,7 +1989,7 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual Padding GetPaddingAll()
         {
-            Padding retVal = new Padding(rand.Next());
+            Padding retVal = new Padding(s_rand.Next());
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2226,7 +2216,7 @@ namespace WFCTestLib.Util
         // <doc>
         // <desc>
         //  Generates a string composed of consecutive ascending ansi chars values thus
-        //  assurring every character is hit
+        //  ----urring every character is hit
         // </desc>
         // <param term="nMaxLength">
         //  The maximum length for the generated string.
@@ -2243,7 +2233,7 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetAnsiString(short nMaxLength, bool bAbsolute, bool bValidOnly)
         {
-            string retVal = intlStr.GetString(nMaxLength, bAbsolute, bValidOnly, false);
+            string retVal = _intlStr.GetString(nMaxLength, bAbsolute, bValidOnly, false);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2281,7 +2271,7 @@ namespace WFCTestLib.Util
                 }
             }
 
-            if (!found) { retVal = intlStr.GetStrLcid(nMaxLength, true, true, enuLCIDList.Japanese); }
+            if (!found) { retVal = _intlStr.GetStrLcid(nMaxLength, true, true, enuLCIDList.Japanese); }
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2305,7 +2295,7 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetProbCharString(short nMaxLength, bool bAbsolute, bool bValidOnly)
         {
-            string retVal = intlStr.GetProbCharString(nMaxLength, bAbsolute, bValidOnly);
+            string retVal = _intlStr.GetProbCharString(nMaxLength, bAbsolute, bValidOnly);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2320,7 +2310,7 @@ namespace WFCTestLib.Util
         // </doc>
         public string[] GetProblematicStrings()
         {
-            return intlStr.GetProblematicStrings();
+            return _intlStr.GetProblematicStrings();
         }
 
         // <doc>
@@ -2343,7 +2333,7 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetProbURTCString(short nMaxLength, bool bAbsolute, bool bValidOnly)
         {
-            string retVal = intlStr.GetProbURTCString(nMaxLength, bAbsolute, bValidOnly);
+            string retVal = _intlStr.GetProbURTCString(nMaxLength, bAbsolute, bValidOnly);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2372,8 +2362,7 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetRandStrLCID(short nMaxLength, bool bAbsolute, bool bValidOnly, enuLCIDList LCIDType)
         {
-            //TODO: Verify the LCID value.
-            string retVal = intlStr.GetRandStrLCID(nMaxLength, bAbsolute, bValidOnly, LCIDType, false);
+            string retVal = _intlStr.GetRandStrLCID(nMaxLength, bAbsolute, bValidOnly, LCIDType, false);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2381,7 +2370,7 @@ namespace WFCTestLib.Util
         // <doc>
         // <desc>
         //  To generate a string composed of consecutive ascending ansi characters values
-        //  thus assurring every character is hit.
+        //  thus ----urring every character is hit.
         // </desc>
         // <param term="nMaxLength">
         //  The maximum length for the generated string.
@@ -2401,8 +2390,7 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetStrLcid(short nMaxLength, bool bAbsolute, bool bValidOnly, enuLCIDList enuLCIDType)
         {
-            //TODO: Verify the LCID value.
-            string retVal = intlStr.GetStrLcid(nMaxLength, bAbsolute, bValidOnly, enuLCIDType, false);
+            string retVal = _intlStr.GetStrLcid(nMaxLength, bAbsolute, bValidOnly, enuLCIDType, false);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2429,8 +2417,7 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetProbCharStrLCID(short nMaxLength, bool bAbsolute, bool bValidOnly, enuLCIDList enuLCIDType)
         {
-            //TODO: Verify the LCID value.
-            string retVal = intlStr.GetProbCharStrLCID(nMaxLength, bAbsolute, bValidOnly, enuLCIDType);
+            string retVal = _intlStr.GetProbCharStrLCID(nMaxLength, bAbsolute, bValidOnly, enuLCIDType);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2455,8 +2442,7 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetProbURTCStrLCID(short nMaxLength, bool bAbsolute, bool bValidOnly, enuLCIDList enuLCIDType)
         {
-            //TODO: Verify the LCID value.
-            string retVal = intlStr.GetProbURTCStrLCID(nMaxLength, bAbsolute, true, enuLCIDType);
+            string retVal = _intlStr.GetProbURTCStrLCID(nMaxLength, bAbsolute, true, enuLCIDType);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2488,9 +2474,8 @@ namespace WFCTestLib.Util
         [Obsolete("This method is obsolete in GenStrings.")]
         public string GetUniStrRandAnsi(short nMaxLength, bool bAbsolute, bool bValidOnly, enuCodeType CodeType, enuLCIDList enuLCIDType)
         {
-            // TODO: Verify the LCID value.
             //return intlStr.GetUniStrRandAnsi(nMaxLength, bAbsolute, bValidOnly, CodeType, enuLCIDType, false);
-            return intlStr.GetRandStrLCID(nMaxLength, bAbsolute, bValidOnly, enuLCIDType, false);
+            return _intlStr.GetRandStrLCID(nMaxLength, bAbsolute, bValidOnly, enuLCIDType, false);
         }
 
         // <doc>
@@ -2507,7 +2492,7 @@ namespace WFCTestLib.Util
         public virtual bool GetPrintable(char c)
         {
             String chrToCheck = c.ToString();
-            return intlStr.IsValidChar(chrToCheck);
+            return _intlStr.IsValidChar(chrToCheck);
         }
 
         // <doc>
@@ -2541,7 +2526,7 @@ namespace WFCTestLib.Util
         public virtual char GetChar(bool bValidOnly)
         {
             short nMaxChars = 4;  //GetUniStrRandAnsi method returns nothing if the nMaxChars < 4. It doesn't make sense but we don't have any other choice right now.
-            string strChar = intlStr.GetString(nMaxChars, true, bValidOnly, false);
+            string strChar = _intlStr.GetString(nMaxChars, true, bValidOnly, false);
             LogValueIfLogging(strChar[0]);
             return strChar[0];
         }
@@ -2590,7 +2575,7 @@ namespace WFCTestLib.Util
 
             for (int i = 0; i < MAXTRIES; i++)
             {
-                randomString = intlStr.GetString(nMaxChars, true, bValidOnly, false);
+                randomString = _intlStr.GetString(nMaxChars, true, bValidOnly, false);
                 if (excludedString.IndexOf(randomString[0]) == -1)
                 {
                     LogValueIfLogging(randomString[0]);
@@ -2693,7 +2678,7 @@ namespace WFCTestLib.Util
         //
         // NOTE: This is NOT a good method to use for getting random strings if you're concerned with
         //       testing international strings.  This is sort of a hack to get around the fact that
-        //       Win9x sucks and doesn't properly round-trip some valid Unicode characters.
+        //       Win9x ----s and doesn't properly round-trip some valid Unicode characters.
         //
         public virtual String GetValidString(int maxLen)
         {
@@ -2756,15 +2741,15 @@ namespace WFCTestLib.Util
 
             length = this.GetRange(iMinLength, iMaxLength);
 
-            // REVIEW: what is going on here?
+            // 
             if (length > Int16.MaxValue)
                 length = Int16.MaxValue;
 
             while (strText.Length < length)
-                strText += intlStr.GetString(length, true, true);
+                strText += _intlStr.GetString(length, true, true);
 
             // get all the interesting characters and include into the string.
-            String strInterestingChars = intlStr.GetTop20String(10, true, true);
+            String strInterestingChars = _intlStr.GetTop20String(10, true, true);
             string retVal;
 
             // If the random length is smaller than the set of interesting chars, return a substring
@@ -2807,7 +2792,7 @@ namespace WFCTestLib.Util
 
             //Get all the interesting chracters and inlcude into the string.
 
-            String strProblematicChars = intlStr.GetProbCharString(10, true, true);
+            String strProblematicChars = _intlStr.GetProbCharString(10, true, true);
             if (iMaxLength <= strProblematicChars.Length)
                 return strProblematicChars.Substring(0, iMaxLength);
 
@@ -2904,7 +2889,7 @@ namespace WFCTestLib.Util
             if (nMax != Int32.MaxValue)
                 ++nMax;
 
-            int retVal = rand.Next(nMin, nMax);
+            int retVal = s_rand.Next(nMin, nMax);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -2926,8 +2911,6 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual Point GetScreenPoint()
         {
-            //TODO: make this thing work for multi monitors!
-
             int nX = GetRange(0, Screen.PrimaryScreen.Bounds.Width);
             int nY = GetRange(0, Screen.PrimaryScreen.Bounds.Height);
 
@@ -2961,7 +2944,7 @@ namespace WFCTestLib.Util
                     float emSize = GetFloat(0, 200);
                     FontStyle style = (FontStyle)GetEnumValue(typeof(FontStyle));
 
-                    // Workaround for bug #27605 (by design).  Some fonts don't support a regular style
+                    // Workaround for Regression_Bug64 (by design).  Some fonts don't support a regular style
                     if (family.Name == "Monotype Corsiva")
                         style |= FontStyle.Italic;
                     else if (family.Name == "Aharoni")
@@ -2996,7 +2979,7 @@ namespace WFCTestLib.Util
         public virtual Decimal GetDecimal(Decimal minimum, Decimal maximum)
         {
             // Get a random double, remap to between provided minimum and maximum
-            Decimal retVal = (((Decimal)rand.NextDouble()) * (maximum - minimum) + minimum);
+            Decimal retVal = (((Decimal)s_rand.NextDouble()) * (maximum - minimum) + minimum);
             LogValueIfLogging(retVal);
             return retVal;
         }
@@ -3116,7 +3099,6 @@ namespace WFCTestLib.Util
                     return new Region(new Rectangle(size.Width / 4, size.Height / 4, size.Width / 2, size.Height / 2));
 
                 case RegionType.RoundRect:
-                    // TODO: no support for rounded rectangle region yet. Use code from Rect instead.
 #if false
                     return Region.CreateRoundedRectangular(size.Width / 4, size.Height / 4, size.Width / 2, size.Height / 2, size.Width/12);
 #else
@@ -3264,11 +3246,11 @@ namespace WFCTestLib.Util
             if (Utilities.IsVista)
             {
 
-                culture = new CultureInfo(GetArrayElement(cultureFormatsVista).ToString());
+                culture = new CultureInfo(GetArrayElement(_cultureFormatsVista).ToString());
             }
             else
             {
-                culture = new CultureInfo(GetArrayElement(cultureFormats).ToString());
+                culture = new CultureInfo(GetArrayElement(_cultureFormats).ToString());
             }
 
             // Neutral cultures can't be used
@@ -3279,11 +3261,11 @@ namespace WFCTestLib.Util
                     if (Utilities.IsVista)
                     {
 
-                        culture = new CultureInfo(GetArrayElement(cultureFormatsVista).ToString());
+                        culture = new CultureInfo(GetArrayElement(_cultureFormatsVista).ToString());
                     }
                     else
                     {
-                        culture = new CultureInfo(GetArrayElement(cultureFormats).ToString());
+                        culture = new CultureInfo(GetArrayElement(_cultureFormats).ToString());
                     }
                 }
             }
@@ -3305,7 +3287,7 @@ namespace WFCTestLib.Util
             CultureInfo culture = GetCultureInfo(false);
 
             // Select a type of IFormatProvider
-            int type = rand.Next() % 3;
+            int type = s_rand.Next() % 3;
             switch (type)
             {
                 case 1:
@@ -3361,7 +3343,7 @@ namespace WFCTestLib.Util
         // <desc>
         //  Retrieves a random GraphicsPath suitable for use as a CustomLineCap.
         //  Due to limitations of CustomLineCap, it has to be on the negative side.
-        //  The people in GDI+ can't code for shit.
+        //  The people in GDI+ can't code for ----.
         // </desc>
         // <retvalue>
         //  A random GraphicsPath.
@@ -3383,18 +3365,18 @@ namespace WFCTestLib.Util
         public VisualStyleElement GetVisualStyleElement(bool validOnly)
         {
             GenerateVisualStyleElementTable(typeof(VisualStyleElement));
-            if (elementTable == null || elementTable.Count == 0)
+            if (s_elementTable == null || s_elementTable.Count == 0)
             { return VisualStyleElement.Button.PushButton.Default; } // give them something
 
-            int index = this.GetRange(0, elementTable.Count - 1);
-            VisualStyleElement element = (VisualStyleElement)elementTable[index].Invoke(null, null);
+            int index = this.GetRange(0, s_elementTable.Count - 1);
+            VisualStyleElement element = (VisualStyleElement)s_elementTable[index].Invoke(null, null);
 
             if (validOnly)
             {
                 while (!VisualStyleRenderer.IsElementDefined(element))
                 {
-                    index = this.GetRange(0, elementTable.Count - 1);
-                    element = (VisualStyleElement)elementTable[index].Invoke(null, null);
+                    index = this.GetRange(0, s_elementTable.Count - 1);
+                    element = (VisualStyleElement)s_elementTable[index].Invoke(null, null);
                 }
             }
 
@@ -3414,33 +3396,33 @@ namespace WFCTestLib.Util
         public VisualStyleElement GetVisualStyleElement(Type root, bool validOnly)
         {
             GenerateVisualStyleElementTable(root);
-            if (elementTable == null || elementTable.Count == 0) { return null; }
+            if (s_elementTable == null || s_elementTable.Count == 0) { return null; }
 
-            int index = this.GetRange(0, elementTable.Count - 1);
-            VisualStyleElement element = (VisualStyleElement)elementTable[index].Invoke(null, null);
+            int index = this.GetRange(0, s_elementTable.Count - 1);
+            VisualStyleElement element = (VisualStyleElement)s_elementTable[index].Invoke(null, null);
 
             if (validOnly)
             {
                 while (!VisualStyleRenderer.IsElementDefined(element))
                 {
-                    index = this.GetRange(0, elementTable.Count - 1);
-                    element = (VisualStyleElement)elementTable[index].Invoke(null, null);
+                    index = this.GetRange(0, s_elementTable.Count - 1);
+                    element = (VisualStyleElement)s_elementTable[index].Invoke(null, null);
                 }
             }
 
             return element;
         }
 
-        private static List<MethodInfo> elementTable = null;
-        private static Type rootOfTable = null;
+        private static List<MethodInfo> s_elementTable = null;
+        private static Type s_rootOfTable = null;
 
         private void GenerateVisualStyleElementTable(Type root)
         {
-            if (elementTable == null || rootOfTable != root)
+            if (s_elementTable == null || s_rootOfTable != root)
             {
-                rootOfTable = root;
-                elementTable = new List<MethodInfo>();
-                TypeWalker walker = new TypeWalker(rootOfTable);
+                s_rootOfTable = root;
+                s_elementTable = new List<MethodInfo>();
+                TypeWalker walker = new TypeWalker(s_rootOfTable);
                 walker.NestedTypes += new TypeWalker.NestedTypeCallback(GetVisualStyleElement_OnNestedType);
                 walker.Walk();
             }
@@ -3461,7 +3443,7 @@ namespace WFCTestLib.Util
         private static void GetVisualStyleElement_OnMethod(MethodInfo info)
         {
             if (info.ReturnType != typeof(VisualStyleElement)) { return; }
-            elementTable.Add(info);
+            s_elementTable.Add(info);
         }
     }
 }

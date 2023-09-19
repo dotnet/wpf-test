@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -10,26 +14,21 @@ namespace WFCTestLib.Util
 {
   public class GraphicsTools
   {
-    static RandomUtil ru = new RandomUtil();
+    static RandomUtil s_ru = new RandomUtil();
 
     public GraphicsTools() : this(new Random().Next())
     {} // End ctor
       
     public GraphicsTools(int seed)
     {
-      ru.SeedRandomGenerator(seed);
+      s_ru.SeedRandomGenerator(seed);
     } // End ctor
 
-    static private float defaultFloatTolerance = 0.5f;
-    static private double defaultDoubleTolerance = 0.05;
+    static private float s_defaultFloatTolerance = 0.5f;
+    static private double s_defaultDoubleTolerance = 0.05;
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Bitmap methods
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
 	  // <doc>
     // <desc>
     //  Do a bitwise compare of two Bitmap objects
@@ -48,8 +47,8 @@ namespace WFCTestLib.Util
     //      Color.Red   -> bmp2 has a pixel drawn where bmp1 is Color.Empty
     //      Color.Yellow-> both Bitmaps have different colors drawn
     // </param>
-	// <retvalue>
-	//  True if bmp1 and bmp2 are identical in size and contents; false otherwise
+    // <retvalue>
+    //  True if bmp1 and bmp2 are identical in size and contents; false otherwise
     // </retvalue>
     // </doc>
 	  [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
@@ -78,9 +77,9 @@ namespace WFCTestLib.Util
     // </param>
 	  // <param term="tolerance">
 	  //  amount bitmaps can be different to be considered an error
-	// </param>
-	// <retvalue>
-	//  True if bmp1 and bmp2 are identical in size and contents; false otherwise
+    // </param>
+    // <retvalue>
+    //  True if bmp1 and bmp2 are identical in size and contents; false otherwise
     // </retvalue>
     // </doc>
     [SecurityPermission(SecurityAction.Assert, UnmanagedCode=true)]
@@ -115,66 +114,61 @@ namespace WFCTestLib.Util
         int color1, color2, color3;
         int height = bmp1.Height;
         int width  = bmp1.Width;
-		int numPixels = 0, numDifferentPixels = 0;
+        int numPixels = 0, numDifferentPixels = 0;
 
-		int empty = Color.Empty.ToArgb(); // Nothing has been drawn
+        int empty = Color.Empty.ToArgb(); // Nothing has been drawn
         int red   = Color.Red.ToArgb();
         int green = Color.Green.ToArgb();
         int yellow= Color.Yellow.ToArgb();
   
         for (int y = 0; y < height; y++) 
         {
-        scan1 = data1.Scan0.ToInt64() + y * data1.Stride;
-        scan2 = data2.Scan0.ToInt64() + y * data2.Stride;
-        scan3 = data3.Scan0.ToInt64() + y * data3.Stride;		
+          scan1 = data1.Scan0.ToInt64() + y * data1.Stride;
+          scan2 = data2.Scan0.ToInt64() + y * data2.Stride;
+          scan3 = data3.Scan0.ToInt64() + y * data3.Stride;		
 
-        for (int x = 0; x < width; x++) 
-        {
-			color1 = Marshal.ReadInt32((IntPtr)(scan1 + x * 4));
-			color2 = Marshal.ReadInt32((IntPtr)(scan2 + x * 4));
-			if (color1 == empty && color2 == empty)	// both pixels are empty
-				color3 = empty;
-			if (color1 == color2)			// pixels are equal.
-			{
-				color3 = empty;
-				numPixels++;
-			}
-			else
-			{
-				numPixels++;
-				numDifferentPixels++;
-				if (color1 == empty)		// bmp2 has a pixel drawn where bmp1 doesn't
-					color3 = red;
-				else if (color2 == empty)	// bmp1 has a pixel drawn where bmp2 doesn't
-					color3 = green;
-				else						// they both have pixels drawn, but they aren't the same color
-					color3 = yellow;
-			}
-			Marshal.WriteInt32((IntPtr)(scan3 + x * 4), color3);
-		}
-      }
-      bmp1.UnlockBits(data1);
-      bmp2.UnlockBits(data2);
-      bmp3.UnlockBits(data3);
+          for (int x = 0; x < width; x++) 
+          {
+            color1 = Marshal.ReadInt32((IntPtr)(scan1 + x * 4));
+            color2 = Marshal.ReadInt32((IntPtr)(scan2 + x * 4));
+            if (color1 == empty && color2 == empty)	// both pixels are empty
+              color3 = empty;
+            if (color1 == color2)			// pixels are equal.
+            {
+              color3 = empty;
+              numPixels++;
+            }
+            else
+            {
+              numPixels++;
+              numDifferentPixels++;
+              if (color1 == empty)		// bmp2 has a pixel drawn where bmp1 doesn't
+                color3 = red;
+              else if (color2 == empty)	// bmp1 has a pixel drawn where bmp2 doesn't
+                color3 = green;
+              else						// they both have pixels drawn, but they aren't the same color
+                color3 = yellow;
+            }
+            Marshal.WriteInt32((IntPtr)(scan3 + x * 4), color3);
+          }
+        }
+        bmp1.UnlockBits(data1);
+        bmp2.UnlockBits(data2);
+        bmp3.UnlockBits(data3);
 
-	  float pixelDiff = numDifferentPixels / numPixels;
-	  return (pixelDiff <= tolerance);
-  } // End Compare
+      float pixelDiff = numDifferentPixels / numPixels;
+      return (pixelDiff <= tolerance);
+    } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Boolean CheckPointInBitmap(Bitmap b, Point pt, Color c)
@@ -182,20 +176,15 @@ namespace WFCTestLib.Util
       return CheckPointInBitmap(b, pt, c, "");
     } // End CheckPointInBitmap
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Boolean CheckPointInBitmap(Bitmap b, Point pt, Color c, String name)
@@ -216,17 +205,13 @@ namespace WFCTestLib.Util
     //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Boolean CheckPointsInBitmap(Bitmap b, Point[] pts, Color c )
@@ -242,13 +227,8 @@ namespace WFCTestLib.Util
       return b1;
     } // End CheckPointsInBitmap
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Int/Float value methods
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // 
     // <doc>
     // <desc>
     //  Return an integer angle value within +/- 360 degrees
@@ -258,9 +238,10 @@ namespace WFCTestLib.Util
     // </retvalue>
     // </doc>
     public int GetAngle()
-    { return ru.GetRange( -360, 360 ); }
+    { 
+      return s_ru.GetRange( -360, 360 ); 
+    }
 
-    // 
     // <doc>
     // <desc>
     // Return a floating point angle value within +/- 360.0 degrees
@@ -269,13 +250,14 @@ namespace WFCTestLib.Util
     //  A float value between -360.0 and 360.0
     // </retvalue>
     // </doc>
-
     public float GetAngleF()
-    { return ru.GetFloat( (float)-360.0, (float)360.0 ); }
+    { 
+      return s_ru.GetFloat((float)-360.0, (float)360.0 ); 
+    }
 
     public Boolean Compare(double d1,double d2)
     {
-	return Compare(d1, d2, defaultDoubleTolerance);
+	    return Compare(d1, d2, s_defaultDoubleTolerance);
     }
 
     public Boolean Compare(double d1, double d2, double tolerance)
@@ -291,7 +273,7 @@ namespace WFCTestLib.Util
 
     public Boolean Compare(double[] d1, double[] d2)
     {
-      return Compare(d1, d2, defaultDoubleTolerance);
+      return Compare(d1, d2, s_defaultDoubleTolerance);
     }
 
     public Boolean Compare(double[] d1, double[] d2, double tolerance)
@@ -315,24 +297,23 @@ namespace WFCTestLib.Util
 
     public Boolean Compare(float f1,float f2)
     {
-      return Compare(f1, f2, defaultFloatTolerance);
+      return Compare(f1, f2, s_defaultFloatTolerance);
     }
 
     public Boolean Compare(float f1, float f2, float tolerance)
     {
-		Console.WriteLine ("F1=" + f1.ToString ());
-		Console.WriteLine ("F2=" + f2.ToString ());
-		float abs = Math.Abs (f1 - f2);
-		Console.WriteLine ("ABS=" + abs.ToString ());
-		Console.WriteLine ("F1=" + f1.ToString ());
-		Console.WriteLine ("F2=" + f2.ToString ());
-		Console.WriteLine ("TOL=" + tolerance.ToString ());
-
+      Console.WriteLine ("F1=" + f1.ToString ());
+      Console.WriteLine ("F2=" + f2.ToString ());
+      float abs = Math.Abs (f1 - f2);
+      Console.WriteLine ("ABS=" + abs.ToString ());
+      Console.WriteLine ("F1=" + f1.ToString ());
+      Console.WriteLine ("F2=" + f2.ToString ());
+      Console.WriteLine ("TOL=" + tolerance.ToString ());
 
       if (Math.Abs(f1-f2) > tolerance)
       {
         Console.WriteLine(f1.ToString() + " is not within tolerance of " + f2.ToString());
-	Console.WriteLine("difference: " + Math.Abs(f1-f2).ToString());
+	      Console.WriteLine("difference: " + Math.Abs(f1-f2).ToString());
         return false;
       }
       else
@@ -341,7 +322,7 @@ namespace WFCTestLib.Util
 
     public Boolean Compare(float[] f1, float[] f2)
     {
-      return Compare(f1, f2, defaultFloatTolerance);
+      return Compare(f1, f2, s_defaultFloatTolerance);
     }
 
     public Boolean Compare(float[] f1, float[] f2, float tolerance)
@@ -363,13 +344,8 @@ namespace WFCTestLib.Util
       return b1;
     }
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Rectangle/Point methods
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //
+    
     // <doc>
     // <desc>
     // Find the minimum bounding Rectangle for two Points
@@ -393,7 +369,6 @@ namespace WFCTestLib.Util
       return new Rectangle(x, y, width, height);
     } // End FindBounds
 
-    //
     // <doc>
     // <desc>
     // Find the minimum bounding Rectangle for two PointFs
@@ -417,7 +392,6 @@ namespace WFCTestLib.Util
       return new Rectangle((int)Math.Round(x), (int)Math.Round(y), (int)Math.Round(width), (int)Math.Round(height));
     } // End FindBounds
 
-    //
     // <doc>
     // <desc>
     // Find the minimum bounding RectangleF for two PointFs
@@ -441,7 +415,6 @@ namespace WFCTestLib.Util
       return new RectangleF(x, y, width, height);
     } // End FindBounds
 
-    //
     // <doc>
     // <desc>
     // Find the minimum bounding Rectangle for an array of Points
@@ -468,7 +441,6 @@ namespace WFCTestLib.Util
       return new Rectangle(min.X, min.Y, max.X-min.X, max.Y-min.Y);
     } // End FindBounds
 
-    //
     // <doc>
     // <desc>
     // Find the minimum bounding Rectangle for an array of PointFs
@@ -495,7 +467,6 @@ namespace WFCTestLib.Util
       return new Rectangle((int)min.X, (int)min.Y, (int)(max.X-min.X+0.5), (int)(max.Y-min.Y+0.5));
     } // End FindBounds
 
-    //
     // <doc>
     // <desc>
     // Find the minimum bounding RectangleF for an array of PointFs
@@ -558,10 +529,10 @@ namespace WFCTestLib.Util
         return Rectangle.Empty;
       else
       {
-        x = ru.GetRange(r.X, r.Right-min);
-        y = ru.GetRange(r.Y, r.Bottom-min);
-        w = ru.GetRange(min, r.Right-x);
-        h = ru.GetRange(min, r.Bottom-y);
+        x = s_ru.GetRange(r.X, r.Right-min);
+        y = s_ru.GetRange(r.Y, r.Bottom-min);
+        w = s_ru.GetRange(min, r.Right-x);
+        h = s_ru.GetRange(min, r.Bottom-y);
         return new Rectangle(x, y, w, h);
       }
     }
@@ -577,18 +548,18 @@ namespace WFCTestLib.Util
       else
       {
         Point p1 = GetPointInRectangle(r);
-	x = (int)Math.Max((long)r.X - (long)r.Width, (long)int.MinValue);
-	y = (int)Math.Max((long)r.Y - (long)r.Height, (long)int.MinValue);
-	w = (int)Math.Min((long)r.Width * 2, (long)int.MaxValue);
-	h = (int)Math.Min((long)r.Height * 2, (long)int.MaxValue);
-	
-	Point p2 = GetPointInRectangle(new Rectangle(x, y, w, h));
-	Rectangle rect = FindBounds(p1, p2);
-	if (rect.Height == 0)
-	  rect.Height = 1;
-	if (rect.Width == 0)
-	  rect.Width = 1;
-	return rect;
+        x = (int)Math.Max((long)r.X - (long)r.Width, (long)int.MinValue);
+        y = (int)Math.Max((long)r.Y - (long)r.Height, (long)int.MinValue);
+        w = (int)Math.Min((long)r.Width * 2, (long)int.MaxValue);
+        h = (int)Math.Min((long)r.Height * 2, (long)int.MaxValue);
+        
+        Point p2 = GetPointInRectangle(new Rectangle(x, y, w, h));
+        Rectangle rect = FindBounds(p1, p2);
+        if (rect.Height == 0)
+          rect.Height = 1;
+        if (rect.Width == 0)
+          rect.Width = 1;
+        return rect;
       }
     }
     
@@ -601,24 +572,19 @@ namespace WFCTestLib.Util
       if (pt.X < r.Right) max.Height = (r.Y - pt.Y);
       if (pt.Y < r.Bottom) max.Width = (r.X - pt.X);
 
-      Size sz = ru.GetSize(1, max.Width, 1, max.Height);      
+      Size sz = s_ru.GetSize(1, max.Width, 1, max.Height);      
       return new Rectangle(pt, sz);
     }
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare two RectangleF within a given tolerance
@@ -630,47 +596,41 @@ namespace WFCTestLib.Util
              && (Math.Abs(r1.Height - r2.Height) <= tolerance));
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare two RectangleF within a given tolerance
     public Boolean Compare(RectangleF r1, RectangleF r2, int precision)
     {
-		float tolerance;
+      float tolerance;
 
-		tolerance = (r1.X + r2.X) / 2.0f / (10 ^ precision);
-		if (Math.Abs(r1.X - r2.X) > tolerance)
-			return false;
+      tolerance = (r1.X + r2.X) / 2.0f / (10 ^ precision);
+      if (Math.Abs(r1.X - r2.X) > tolerance)
+        return false;
 
-		tolerance = (r1.Y + r2.Y) / 2.0f / (float)(10 ^ precision);
-		if (Math.Abs(r1.Y - r2.Y) > tolerance)
-			return false;
+      tolerance = (r1.Y + r2.Y) / 2.0f / (float)(10 ^ precision);
+      if (Math.Abs(r1.Y - r2.Y) > tolerance)
+        return false;
 
-		tolerance = (r1.Width + r2.Width) / 2.0f / (float)(10 ^ precision);
-		if (Math.Abs(r1.Width - r2.Width) > tolerance)
-			return false;
+      tolerance = (r1.Width + r2.Width) / 2.0f / (float)(10 ^ precision);
+      if (Math.Abs(r1.Width - r2.Width) > tolerance)
+        return false;
 
-		tolerance = (r1.Height + r2.Height) / 2.0f / (float)(10 ^ precision);
-		if (Math.Abs(r1.Height - r2.Height) > tolerance)
-			return false;
+      tolerance = (r1.Height + r2.Height) / 2.0f / (float)(10 ^ precision);
+      if (Math.Abs(r1.Height - r2.Height) > tolerance)
+        return false;
 
-		return true;
+      return true;
     } // End Compare
 
-    //
     // <doc>
     // <desc>
     // Return a random Point contained within the given Rectangle
@@ -684,8 +644,8 @@ namespace WFCTestLib.Util
     // </doc>
     public Point GetPointInRectangle(Rectangle rc)
     {
-        return new Point(ru.GetRange(rc.Left, rc.Right-1),
-                         ru.GetRange(rc.Top , rc.Bottom-1));
+        return new Point(s_ru.GetRange(rc.Left, rc.Right-1),
+                         s_ru.GetRange(rc.Top , rc.Bottom-1));
     }
 
     // Generate a point guarantee not to be within a given rectangle
@@ -697,40 +657,39 @@ namespace WFCTestLib.Util
 
       do 
       {
-        horizontal = ru.GetRange(0, 2);
-        vertical   = ru.GetRange(0, 2);
+        horizontal = s_ru.GetRange(0, 2);
+        vertical   = s_ru.GetRange(0, 2);
       } while (((vertical==1) && (horizontal==1)) ||       // Not both within rect bounds
                ((vertical==0) && (r.Left<int.MinValue+2)) || // Not less than Left when Left is min
                ((horizontal==0) && (r.Top<int.MinValue+2)) );// Not less than Top when Top is min
 
       switch (horizontal)
       {
-      case 0:
-        pt.X = ru.GetRange(int.MinValue, r.X-1);
-        break;
-      case 1:
-        pt.X = ru.GetRange(r.X, r.Right-1);
-        break;
-      case 2:
-        pt.X = ru.GetRange(r.Right, int.MaxValue);
-        break;
+        case 0:
+          pt.X = s_ru.GetRange(int.MinValue, r.X-1);
+          break;
+        case 1:
+          pt.X = s_ru.GetRange(r.X, r.Right-1);
+          break;
+        case 2:
+          pt.X = s_ru.GetRange(r.Right, int.MaxValue);
+          break;
       }
       switch (vertical)
       {
-      case 0:
-        pt.Y = ru.GetRange(int.MinValue, r.Y-1);
-        break;
-      case 1:
-        pt.Y = ru.GetRange(r.Y, r.Bottom-1);
-        break;
-      case 2:
-        pt.Y = ru.GetRange(r.Bottom, int.MaxValue);
-        break;
+        case 0:
+          pt.Y = s_ru.GetRange(int.MinValue, r.Y-1);
+          break;
+        case 1:
+          pt.Y = s_ru.GetRange(r.Y, r.Bottom-1);
+          break;
+        case 2:
+          pt.Y = s_ru.GetRange(r.Bottom, int.MaxValue);
+          break;
       }
       return pt;
     }
 
-    //
     // <doc>
     // <desc>
     // If the Point within the Rectangle, return true, otherwise return false.
@@ -752,7 +711,6 @@ namespace WFCTestLib.Util
                 (pt.Y >= rc.Top)  && (pt.Y <  rc.Bottom));
     }
 
-    //
     // <doc>
     // <desc>
     // If the Point within the RectangleF, return true, otherwise return false.
@@ -774,20 +732,15 @@ namespace WFCTestLib.Util
                 ((float)pt.Y >= rc.Top)  && ((float)pt.Y < rc.Bottom));
     }
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare two Points
@@ -797,20 +750,15 @@ namespace WFCTestLib.Util
                 (p1.Y==p2.Y));
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare an array of Points
@@ -830,20 +778,15 @@ namespace WFCTestLib.Util
       return b1;
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare two Points
@@ -853,20 +796,15 @@ namespace WFCTestLib.Util
                 (p1.Y==p2.Y));
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare an array of Points
@@ -886,20 +824,15 @@ namespace WFCTestLib.Util
       return b1;
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare two Points
@@ -909,20 +842,15 @@ namespace WFCTestLib.Util
                 (Math.Abs(p1.Y - p2.Y) <= tolerance));
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare an array of Points
@@ -942,26 +870,17 @@ namespace WFCTestLib.Util
       return b1;
     } // End Compare
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Color methods
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //
+    
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare Colors based only on their ARGB values.
@@ -980,20 +899,15 @@ namespace WFCTestLib.Util
       return retval;
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     // Compare Colors based only on their ARGB values.
@@ -1025,47 +939,33 @@ namespace WFCTestLib.Util
       return b1;
     } // End Compare
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Matrix methods
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //
+    
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Boolean Compare(Matrix m1, Matrix m2) 
     {
-      return Compare(m1, m2, defaultFloatTolerance);
+      return Compare(m1, m2, s_defaultFloatTolerance);
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Boolean Compare(Matrix m1, Matrix m2, float tolerance)
@@ -1116,20 +1016,15 @@ namespace WFCTestLib.Util
       else return false;
     } // End Compare
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Matrix GetMatrixInt()
@@ -1140,43 +1035,34 @@ namespace WFCTestLib.Util
     //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Matrix GetMatrixInt(int min, int max)
     {
-      return new Matrix(ru.GetRange(min, max), 
-                        ru.GetRange(min, max), 
-                        ru.GetRange(min, max), 
-                        ru.GetRange(min, max), 
-                        ru.GetRange(min, max), 
-                        ru.GetRange(min, max));
+      return new Matrix(s_ru.GetRange(min, max), 
+                        s_ru.GetRange(min, max), 
+                        s_ru.GetRange(min, max), 
+                        s_ru.GetRange(min, max), 
+                        s_ru.GetRange(min, max), 
+                        s_ru.GetRange(min, max));
     } // End GetMatrixInt
     
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Matrix GetMatrixFloat()
@@ -1184,30 +1070,25 @@ namespace WFCTestLib.Util
       return GetMatrixFloat(float.MinValue, float.MaxValue);
     } // End GetMatrixFloat
 
-    //
     // <doc>
     // <desc>
-    // TODO function description
     // </desc>
     // <param term="param1">
-    //  TODO param description
     // </param>
     // <retvalue>
     // <param term="param2">
-    //  TODO param description
     // </param>
     // <retvalue>
-    // TODO Return value description
     // </retvalue>
     // </doc>
     public Matrix GetMatrixFloat(float min, float max)
     {
-      return new Matrix(ru.GetFloat(min, max), 
-                        ru.GetFloat(min, max), 
-                        ru.GetFloat(min, max), 
-                        ru.GetFloat(min, max), 
-                        ru.GetFloat(min, max), 
-                        ru.GetFloat(min, max));
+      return new Matrix(s_ru.GetFloat(min, max), 
+                        s_ru.GetFloat(min, max), 
+                        s_ru.GetFloat(min, max), 
+                        s_ru.GetFloat(min, max), 
+                        s_ru.GetFloat(min, max), 
+                        s_ru.GetFloat(min, max));
     } // End GetMatrixFloat
 
     public Boolean ValidateMultiply(Matrix A, Matrix B, Matrix C, MatrixOrder order)
@@ -1216,14 +1097,14 @@ namespace WFCTestLib.Util
 
       switch (order)
       {
-      case MatrixOrder.Prepend:
-        Console.WriteLine("Multiply Prepend");
-        retval = ValidateMultiply( A, B, C);
-        break;
-      case MatrixOrder.Append:
-        Console.WriteLine("Multiply Append");
-        retval = ValidateMultiply( B, A, C);
-        break;
+        case MatrixOrder.Prepend:
+          Console.WriteLine("Multiply Prepend");
+          retval = ValidateMultiply( A, B, C);
+          break;
+        case MatrixOrder.Append:
+          Console.WriteLine("Multiply Append");
+          retval = ValidateMultiply( B, A, C);
+          break;
       }
 
       return retval;
@@ -1266,6 +1147,7 @@ namespace WFCTestLib.Util
       result[4] = offset.X * A.Elements[0] + offset.Y * A.Elements[2] + A.Elements[4];
       result[5] = offset.Y * A.Elements[3] + offset.X * A.Elements[1] + A.Elements[5];
       retval = Compare(result, C.Elements);
+
       if (!retval)
       {
         ToConsole("Matrix A : ", A.Elements);
@@ -1283,11 +1165,11 @@ namespace WFCTestLib.Util
     {
       switch (mo)
       {
-      case MatrixOrder.Prepend:
-        return ValidateTranslate(A, offset, C);
-      case MatrixOrder.Append:
-        Boolean retval = false;
-        float[] result = new float[6];
+        case MatrixOrder.Prepend:
+          return ValidateTranslate(A, offset, C);
+        case MatrixOrder.Append:
+          Boolean retval = false;
+          float[] result = new float[6];
 
         result[0] = A.Elements[0];
         result[1] = A.Elements[1];
@@ -1341,10 +1223,10 @@ namespace WFCTestLib.Util
     {
       switch (mo)
       {
-      case MatrixOrder.Prepend:
-        return ValidateScale(A, scale, C);
-      case MatrixOrder.Append:
-        Boolean retval;
+        case MatrixOrder.Prepend:
+          return ValidateScale(A, scale, C);
+        case MatrixOrder.Append:
+          Boolean retval;
         float[] result = new float[6];
         result[0] = A.Elements[0] * scale.X;
         result[1] = A.Elements[1] * scale.Y;
@@ -1358,7 +1240,7 @@ namespace WFCTestLib.Util
         {
           ToConsole("Matrix A : ", A.Elements);
           Console.WriteLine("Scaled (Append) by ...");
-          Console.WriteLine("Scale    : " + (Point.Truncate(scale)).ToString()); // Cast due to PointF.ToString bug
+          Console.WriteLine("Scale    : " + (Point.Truncate(scale)).ToString()); // Cast due to PointF.ToString 
           Console.WriteLine("Should equal ...");
           ToConsole("NewMatrix: ", result);
           Console.WriteLine("Actual value returned ...");
@@ -1401,10 +1283,10 @@ namespace WFCTestLib.Util
     {
       switch (mo)
       {
-      case MatrixOrder.Prepend:
-        return ValidateRotate(A, angle, C, tolerance);
-      case MatrixOrder.Append:
-        Boolean retval;
+        case MatrixOrder.Prepend:
+          return ValidateRotate(A, angle, C, tolerance);
+        case MatrixOrder.Append:
+          Boolean retval;
 
         float sx = (float)Math.Cos(angle / (180.0f / Math.PI));
         float sy = (float)Math.Sin(angle / (180.0f / Math.PI));
@@ -1442,18 +1324,18 @@ namespace WFCTestLib.Util
 
       switch (mo)
       {
-      case MatrixOrder.Append:
-        Console.WriteLine("RotateAt (Append)");
-        B.Translate(-pt.X, -pt.Y, mo);
-        B.Rotate(angle, mo);
-        B.Translate(pt.X, pt.Y, mo);
-        break;
-      case MatrixOrder.Prepend:
-        Console.WriteLine("RotateAt (Prepend)");
-        B.Translate(pt.X, pt.Y, mo);
-        B.Rotate(angle, mo);
-        B.Translate(-pt.X, -pt.Y, mo);
-        break;
+        case MatrixOrder.Append:
+          Console.WriteLine("RotateAt (Append)");
+          B.Translate(-pt.X, -pt.Y, mo);
+          B.Rotate(angle, mo);
+          B.Translate(pt.X, pt.Y, mo);
+          break;
+        case MatrixOrder.Prepend:
+          Console.WriteLine("RotateAt (Prepend)");
+          B.Translate(pt.X, pt.Y, mo);
+          B.Rotate(angle, mo);
+          B.Translate(-pt.X, -pt.Y, mo);
+          break;
       }
 
       Boolean retval = Compare(C.Elements, B.Elements, tolerance);
@@ -1500,10 +1382,10 @@ namespace WFCTestLib.Util
     {
       switch (mo)
       {
-      case MatrixOrder.Prepend:
-        return ValidateShear(A, shear, C, tolerance);
-      case MatrixOrder.Append:
-        float[] B = new float[6];
+        case MatrixOrder.Prepend:
+          return ValidateShear(A, shear, C, tolerance);
+        case MatrixOrder.Append:
+          float[] B = new float[6];
         B[0] = shear.X * A.Elements[1] + A.Elements[0];
         B[1] = shear.Y * A.Elements[0] + A.Elements[1];
         B[2] = shear.X * A.Elements[3] + A.Elements[2];
@@ -1527,13 +1409,7 @@ namespace WFCTestLib.Util
       return false;
     }
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Font methods
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public Boolean Compare(Font f1, Font f2, Boolean fAdjustGraphicsUnits)
     {
       if (!(f1.Name.Equals(f2.Name)
@@ -1583,15 +1459,15 @@ namespace WFCTestLib.Util
       GraphicsUnit gu;
 
       InstalledFontCollection ifc = new InstalledFontCollection();
-      ff = ifc.Families[ru.GetRange(0, ifc.Families.Length-1)];
+      ff = ifc.Families[s_ru.GetRange(0, ifc.Families.Length-1)];
 
-      es = ru.GetRange(1, 144);
-      fs = (FontStyle)ru.GetEnumValue(typeof(FontStyle), true);
+      es = s_ru.GetRange(1, 144);
+      fs = (FontStyle)s_ru.GetEnumValue(typeof(FontStyle), true);
       if (ff.Name == "Monotype Corsiva") // If Monotype Corsiva is not Italic, it causes exceptions.
         fs |= FontStyle.Italic;
 
-      gu = (GraphicsUnit)ru.GetDifferentEnumValue(typeof(GraphicsUnit), (int)GraphicsUnit.Display);
-      // Get anything but Display, TODO still working on determining the purpose of Display.
+      gu = (GraphicsUnit)s_ru.GetDifferentEnumValue(typeof(GraphicsUnit), (int)GraphicsUnit.Display);
+      // Get anything but Display
 
       Font f = new Font(ff, es, fs, gu);
 
@@ -1600,13 +1476,7 @@ namespace WFCTestLib.Util
       return f;
     }
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Console output methods
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     public void ToConsole(Font f)
     {
       Console.WriteLine("FontFamily : " + f.FontFamily.ToString());
@@ -1635,12 +1505,7 @@ namespace WFCTestLib.Util
         Console.WriteLine(f[i].ToString());
     } // End ToConsole
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Brush and Pen methods
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     public Boolean Compare(PathGradientBrush br1, PathGradientBrush br2)
     {
       Boolean retval = true;

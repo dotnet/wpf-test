@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 using WFCTestLib.Util;
@@ -10,18 +14,13 @@ using System.Windows.Media;
 using SWF=System.Windows.Forms;
 using System.Windows.Controls;
 
-///
+
 /// <TestCase>
 /// Visible
 /// </TestCase>
 /// <summary>
 /// Verify that the WF's Visible Property and WPF's IsVisible Property work properly
 /// </summary>
-/// <history>
-///  [sameerm]   3/28/2006   Created
-/// </history>
-///
-
 public class Visible : ReflectBase {
 
     private SWC.Button _ehBtn;
@@ -30,16 +29,17 @@ public class Visible : ReflectBase {
     #region Testcase setup
     public Visible(string[] args) : base(args) { }
 
-
     protected override void InitTest(TParams p)
     {
         this.Size = new System.Drawing.Size(500, 500);
         base.InitTest(p);
     }
+
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
         return base.BeforeScenario(p, scenario);
     }
+
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result)
     {
         Controls.Clear();
@@ -93,7 +93,6 @@ public class Visible : ReflectBase {
         Utilities.SleepDoEvents(1, 1000);
         return sr;
     }
-
     
     [Scenario("EH with composite control")]
     public ScenarioResult Scenario2(TParams p) {
@@ -167,7 +166,6 @@ public class Visible : ReflectBase {
             _eh1.BackColor = System.Drawing.Color.Cyan;
             _eh1.Child = _ehBtn;
             this.Controls.Add(_eh1);
-
             
             _eh1.Visible = true;
             this.Text = _eh1.Visible.ToString();
@@ -188,7 +186,6 @@ public class Visible : ReflectBase {
             this.Text = _eh1.Visible.ToString();
             Utilities.SleepDoEvents(1, 500);
             sr.IncCounters(_eh1.Visible == false, String.Format("Visible property did not change. Expected: {0}, Actual: {1} ", false.ToString(), _eh1.Visible.ToString(), p.log), p.log);
-
         }
         catch (Exception ex)
         {
@@ -200,8 +197,7 @@ public class Visible : ReflectBase {
     #endregion
     //==========================================
     // Scenarios
-    //==========================================
-   
+    //==========================================   
 }
 
 // Keep these in sync by running the testcase locally through the driver whenever

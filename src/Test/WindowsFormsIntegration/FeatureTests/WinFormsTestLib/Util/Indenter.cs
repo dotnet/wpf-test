@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Text;
 
@@ -12,9 +16,9 @@ namespace WFCTestLib.Util
 		#region members
 		private const int numSpaces = 4;
 		private const string spaceChars = " ";
-		private StringBuilder spaces = new StringBuilder();
-		private string indentSpace;
-		private int level = 0;
+		private StringBuilder _spaces = new StringBuilder();
+		private string _indentSpace;
+		private int _level = 0;
 		#endregion
 
 		/// <summary>
@@ -22,10 +26,10 @@ namespace WFCTestLib.Util
 		/// </summary>
 		public int Level
 		{
-			get { return level; }
+			get { return _level; }
 			set
 			{
-				level = value;
+				_level = value;
 				UpdateSpaces();
 			}
 		}
@@ -37,7 +41,7 @@ namespace WFCTestLib.Util
 		{
 			StringBuilder buf = new StringBuilder();
 			for(int i = 0; i < numSpaces; i++) { buf.Append(spaceChars); }
-			indentSpace = buf.ToString();
+			_indentSpace = buf.ToString();
 		}
 
 		/// <summary>
@@ -46,7 +50,7 @@ namespace WFCTestLib.Util
 		/// <returns>string representing the number of spaces for indentation</returns>
 		public override string ToString()
 		{
-			return spaces.ToString();
+			return _spaces.ToString();
 		}
 
 		/// <summary>
@@ -54,8 +58,8 @@ namespace WFCTestLib.Util
 		/// </summary>
 		private void UpdateSpaces()
 		{
-			spaces.Length = 0;
-			for(int i = 0; i < Level; i++) { spaces.Append(indentSpace); }
+			_spaces.Length = 0;
+			for(int i = 0; i < Level; i++) { _spaces.Append(_indentSpace); }
 		}
 	}
 }

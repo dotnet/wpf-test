@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 
 namespace WFCTestLib.XmlLogTree.Util {
@@ -14,9 +18,9 @@ namespace WFCTestLib.XmlLogTree.Util {
 		/// <param name="result"></param>
 		/// <returns>
 		/// If the only failures in this test result were caused by known bugs, returns a
-		/// collection of them.  If one or more failures was not caused by a known bug, or
-		/// the testcase passed, returns null.
-		/// </returns>
+		/// collection of them.  If one or more failures was not caused by a known 
+
+
 		public static BugInfoCollection AnalyzeBugs(TestResult result) {
 			if ( result.Passed )
 				return null;
@@ -31,7 +35,7 @@ namespace WFCTestLib.XmlLogTree.Util {
 				foreach ( Scenario scenario in group.Scenarios ) {
 					if ( !scenario.Passed ) {
 						if ( scenario.KnownBugs.Count == 0 )
-							return null;	// Found failure that wasn't caused by a known bug
+							return null;	// Found failure that wasn't caused by a known 
 
 						retVal.AddRange(scenario.KnownBugs);
 					}
@@ -42,9 +46,7 @@ namespace WFCTestLib.XmlLogTree.Util {
 		}
 
 #if TEST_UTILITIES
-		//
 		// Test method
-		//
 		private static void Main(string[] args) {
 			string filename;
 

@@ -1,4 +1,8 @@
-﻿#region Using directives
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -33,17 +37,17 @@ namespace WFCTestLib.Util
         {
             internal EventHandlerRef(Delegate routerDelegate, object eventSourceObject, EventInfo eventToAttach)
             {
-                this.routerDelegate = routerDelegate;
-                this.eventSourceObject = eventSourceObject;
-                this.eventToAttach = eventToAttach;
+                this._routerDelegate = routerDelegate;
+                this._eventSourceObject = eventSourceObject;
+                this._eventToAttach = eventToAttach;
             }
-            Delegate routerDelegate;
-            object eventSourceObject;
-            EventInfo eventToAttach;
+            Delegate _routerDelegate;
+            object _eventSourceObject;
+            EventInfo _eventToAttach;
             public void DetachHandler()
-            { eventToAttach.RemoveEventHandler(eventSourceObject, routerDelegate); }
+            { _eventToAttach.RemoveEventHandler(_eventSourceObject, _routerDelegate); }
             internal void AttachHandlerActual()
-            { eventToAttach.AddEventHandler(eventSourceObject, routerDelegate); }
+            { _eventToAttach.AddEventHandler(_eventSourceObject, _routerDelegate); }
         }
 
         public static void DetachHandler(EventHandlerRef eventHandlerRef)

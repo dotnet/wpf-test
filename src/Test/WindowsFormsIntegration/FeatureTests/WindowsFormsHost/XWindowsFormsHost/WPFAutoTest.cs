@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Collections;
 using System.Drawing;
@@ -26,9 +30,6 @@ namespace ReflectTools
     /// properties with pre-defined scenarios.  Currently AutoTest tests read/write properties of
     /// types bool, enum, and string.
     ///
-    /// Added 4/24/01: Tests event add/remove methods using the OnXxxx() methods to fire events.
-    ///                AutoTest puts the "E" in AutoPME!
-    ///
     /// To use AutoTest, simply have your test subclass AutoTest.  XObject subclasses AutoTest
     /// so all AutoPME tests will get this functionality for free.
     ///
@@ -38,23 +39,23 @@ namespace ReflectTools
     /// </summary>
     public abstract class WPFAutoTest : WPFAutoPME
     {
-        private StringTable excludedProperties = new StringTable();
-        private StringTable excludedEvents = new StringTable();
+        private StringTable _excludedProperties = new StringTable();
+        private StringTable _excludedEvents = new StringTable();
 
         // PropertyChanged event testing in progress (NYI)
         //		private StringTable excludedPropertyChangedEvents = new StringTable();
 
-        private PropertyInfo[] properties;
-        private EventInfo[] events;
+        private PropertyInfo[] _properties;
+        private EventInfo[] _events;
 
         // For counting events fired
-        private static AutoTestEventCounter eventCounter = new AutoTestEventCounter();
+        private static AutoTestEventCounter s_eventCounter = new AutoTestEventCounter();
 
         // Command-line flags
-        private bool noAutoProp = false;
-        private bool noAutoEvent = false;
-        private bool noEnumBoundsTest = false;
-        private bool ignoreMissingDelegates = false;
+        private bool _noAutoProp = false;
+        private bool _noAutoEvent = false;
+        private bool _noEnumBoundsTest = false;
+        private bool _ignoreMissingDelegates = false;
 
         const BindingFlags DefaultLookup = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
         const BindingFlags LookupAll = DefaultLookup | BindingFlags.NonPublic;
@@ -68,26 +69,10 @@ namespace ReflectTools
         protected override void InitTest(TParams p)
         {
             base.InitTest(p);
-            properties = Class.GetProperties();
-            events = Class.GetEvents();
+            _properties = Class.GetProperties();
+            _events = Class.GetEvents();
         }
 
-
-        //
-        // (KevinTao 9/13/02)
-        // TODO: Remove this when work items to add unimplemented scenarios are complete.
-        //       We're temporarily disabling missing scenario failures for early M1 Whidbey
-        //       nightlies (so they don't skew failure rates).
-        //
-        // (KevinTao 5/29/03): Removed.
-        //
-        //        protected override void SetOptions() {
-        //            base.SetOptions();
-        //            IgnoreMissing = true;
-        //            IgnoreMissingDelegates = true;
-        //        }
-
-        //
         // The list of properties to exclude from auto-testing.  Occasionally, a property doesn't
         // behave like other properties of its type or shouldn't be auto-tested for whatever
         // reason.  AutoTest will ignore any properties in this list.
@@ -96,18 +81,15 @@ namespace ReflectTools
         //
         protected StringTable ExcludedProperties
         {
-            get { return excludedProperties; }
+            get { return _excludedProperties; }
         }
 
-        //
         // Same as ExcludedProperties, except for events.
-        //
         protected StringTable ExcludedEvents
         {
-            get { return excludedEvents; }
+            get { return _excludedEvents; }
         }
 
-        //
         // Same as ExcludedPropertyChangedEvents, except for property changed events.  This only
         // affects the AutoTestPropertyChangedEvents autotest scenario.
         //
@@ -115,42 +97,34 @@ namespace ReflectTools
         //            get { return excludedEvents; }
         //        }
 
-        //
         // If true, AutoTest's property tests will not be executed.
-        //
         protected bool NoAutoProp
         {
-            get { return noAutoProp; }
-            set { noAutoProp = value; }
+            get { return _noAutoProp; }
+            set { _noAutoProp = value; }
         }
 
-        //
         // If true, AutoTest's event test will not be executed.
-        //
         protected bool NoAutoEvent
         {
-            get { return noAutoEvent; }
-            set { noAutoEvent = value; }
+            get { return _noAutoEvent; }
+            set { _noAutoEvent = value; }
         }
 
-        //
         // If true, AutoTestEvents() ignores events which are missing delegate methods.
-        //
         protected bool IgnoreMissingDelegates
         {
-            get { return ignoreMissingDelegates; }
-            set { ignoreMissingDelegates = value; }
+            get { return _ignoreMissingDelegates; }
+            set { _ignoreMissingDelegates = value; }
         }
 
-        //
         // If true, AutoTest will not check that out-of-bound enums throw an exception.
         // We need this because 3rd party controls tend to not check for out-of-bound
         // enums like our controls do and we still want to autotest them.
-        //
         protected bool NoEnumBoundsTest
         {
-            get { return noEnumBoundsTest; }
-            set { noEnumBoundsTest = value; }
+            get { return _noEnumBoundsTest; }
+            set { _noEnumBoundsTest = value; }
         }
 
         protected override void ProcessCommandLineParameters()
@@ -236,10 +210,8 @@ namespace ReflectTools
                 //result.IncCounters(false, "FAIL: caught unexpected exception " + e.GetType().ToString(), p.log);
         }
 
-        //
         // Automatically tests all boolean properties on the target class. Sets each enum property to
         // true, then false, verifies that after each set the value "stuck".
-        //
         [PreHandleScenario(true)]
         protected virtual ScenarioResult AutoTestBoolProperties(TParams p)
         {
@@ -252,7 +224,7 @@ namespace ReflectTools
             // Start passing by default in case there aren't any bool props
             ScenarioResult result = new ScenarioResult(true);
 
-            foreach (PropertyInfo pi in properties)
+            foreach (PropertyInfo pi in _properties)
             {
                 string name = pi.Name;
 
@@ -261,7 +233,7 @@ namespace ReflectTools
                     continue;
 
                 // Skip excluded properties
-                if (excludedProperties.Contains(name))
+                if (_excludedProperties.Contains(name))
                 {
                     p.log.WriteLine("*****Excluding {0}.{1}*****\r\n", pi.DeclaringType, name);
                     continue;
@@ -272,9 +244,7 @@ namespace ReflectTools
 
                 p.log.WriteLine("*****Testing {0}.{1}", pi.DeclaringType, name);
 
-                //
                 // Perform automatic tests
-                //
                 try
                 {
                     bool returned = (bool)getMethod.Invoke(p.target, null);
@@ -298,10 +268,8 @@ namespace ReflectTools
             return result;
         }
 
-        //
         // Perform the work of setting the property to a value, getting the value, and verifying
         // it matches what was set.
-        //
         private void TestBoolPropGetSet(TParams p,
                                         MethodInfo getMethod,
                                         MethodInfo setMethod,
@@ -319,13 +287,9 @@ namespace ReflectTools
             //result.IncCounters(returned == value, "FAIL: (" + propertyName + ") set to " + value + "; get returned " + returned, p.log);
         }
 
-        //
         // Performs 2 automatic tests on each enum property:
         //      1) Set property to every valid value
         //      2) Set property to lower bound - 1 and upper bound + 1 and verify exception
-        //
-        // TODO: Doesn't do any special handling of bit-flag enums.
-        //
         [PreHandleScenario(true)]
         protected virtual ScenarioResult AutoTestEnumProperties(TParams p)
         {
@@ -338,7 +302,7 @@ namespace ReflectTools
             // Start passing by default in case there aren't any enum props
             ScenarioResult result = new ScenarioResult(true);
 
-            foreach (PropertyInfo pi in properties)
+            foreach (PropertyInfo pi in _properties)
             {
                 string name = pi.Name;
 
@@ -347,7 +311,7 @@ namespace ReflectTools
                     continue;
 
                 // Skip excluded properties
-                if (excludedProperties.Contains(name))
+                if (_excludedProperties.Contains(name))
                 {
                     p.log.WriteLine("*****Excluding {0}.{1}*****\r\n", pi.DeclaringType, name);
                     continue;
@@ -366,9 +330,7 @@ namespace ReflectTools
 
                 p.log.WriteLine("*****Testing {0}.{1}", pi.DeclaringType, name);
 
-                //
                 // Perform automatic tests
-                //
                 Array values = Enum.GetValues(pi.PropertyType);
                 Enum returned;
 
@@ -413,10 +375,8 @@ namespace ReflectTools
             return result;
         }
 
-        //
         // Perform the work of setting the property to a valid value, getting the value, and verifying
         // it matches what was set.
-        //
         private void TestEnumPropGetSet(TParams p,
                                         MethodInfo getMethod,
                                         MethodInfo setMethod,
@@ -436,10 +396,8 @@ namespace ReflectTools
             //   "; get returned " + returned.ToString(), p.log);
         }
 
-        //
         // Set the property to an invalid value and verify an ArgumentException (or subclass) is
         // thrown.  Value used must be an invalid enum or this method will produce faulty results.
-        //
         private void TestEnumPropInvalidInt(TParams p,
                                             MethodInfo getMethod,
                                             MethodInfo setMethod,
@@ -481,13 +439,11 @@ namespace ReflectTools
             }
         }
 
-        //
         // Performs 4 automatic tests on string properties:
         //      1) Set the string to null
         //      2) Set the string to an empty string
         //      3) Set the string to a short random string
         //      4) Set the string to a long random string
-        //
         [PreHandleScenario(true)]
         protected virtual ScenarioResult AutoTestStringProperties(TParams p)
         {
@@ -503,7 +459,7 @@ namespace ReflectTools
             // Start passing by default in case there aren't any string props
             ScenarioResult result = new ScenarioResult(true);
 
-            foreach (PropertyInfo pi in properties)
+            foreach (PropertyInfo pi in _properties)
             {
                 string name = pi.Name;
 
@@ -512,7 +468,7 @@ namespace ReflectTools
                     continue;
 
                 // Skip excluded properties
-                if (excludedProperties.Contains(name))
+                if (_excludedProperties.Contains(name))
                 {
                     p.log.WriteLine("*****Excluding {0}.{1}*****\r\n", pi.DeclaringType, name);
                     continue;
@@ -523,9 +479,7 @@ namespace ReflectTools
 
                 p.log.WriteLine("*****Testing {0}.{1}", pi.DeclaringType, name);
 
-                //
                 // Perform automatic tests
-                //
                 try
                 {
                     string returned = (string)getMethod.Invoke(p.target, null);
@@ -551,10 +505,8 @@ namespace ReflectTools
             return result;
         }
 
-        //
         // Perform the work of setting the property to a value, getting the value, and verifying
         // it matches what was set.
-        //
         private void TestStringPropGetSet(TParams p,
                                           MethodInfo getMethod,
                                           MethodInfo setMethod,
@@ -611,7 +563,6 @@ namespace ReflectTools
             return mi;
         }
 
-        //
         // Automatically tests all event add/remove methods.  This is how it works for an
         // event named Foo of type BarEventHandler:
         //  1) Adds an event handler to Foo using the required delegate method BarEventHandler()
@@ -650,14 +601,14 @@ namespace ReflectTools
 
             return result;
         }
+
         [Scenario(false)]
         private ScenarioResult AutoTestEventsActual(TParams p)
         {
-
             // Start passing by default in case there aren't any events
             ScenarioResult result = new ScenarioResult(true);
 
-            foreach (EventInfo info in events)
+            foreach (EventInfo info in _events)
             {
                 string name = info.Name;
                 Type handlerType = info.EventHandlerType;
@@ -665,7 +616,7 @@ namespace ReflectTools
                 MethodInfo onMethod = null;
 
                 // Skip excluded properties
-                if (excludedEvents.Contains(name))
+                if (_excludedEvents.Contains(name))
                 {
                     p.log.WriteLine("*****Excluding {0}.{1}*****\r\n", info.DeclaringType, name);
                     continue;
@@ -698,16 +649,6 @@ namespace ReflectTools
                               "onMethod or customRaiseMethod must be non-null and the other must be null");
 
                 // 2. Has to have a delegate method defined
-                //
-                // KevinTao 10/24/01:
-                //     Now you can define this in the test class itself.  Makes it easier to test
-                //     events which take arguments that are defined in another assembly (e.g.
-                //     an ActiveX event test).
-                //
-                //     Now we search the test class first, then if the delegate method is not found, we
-                //     search AutoTestEventDelegates.  This allows a test to define event delegates, or
-                //     "override" the one from AutoTestEventDelegates if necessaary for some reason.
-                //  
 
                 DynamicDelegate.EventHandlerRef token = null;
                 MethodInfo mi;
@@ -721,7 +662,6 @@ namespace ReflectTools
                     // fake EventArgs using CreateInstance() and call the OnFoo() method.
                     try
                     {
-
                         if (customRaiseMethod != null)
                         {  // set up for invoking the custom raise method
                             mi = customRaiseMethod;
@@ -750,11 +690,11 @@ namespace ReflectTools
 
                         // 1. Verify event raised when event handler is attached
                         p.log.WriteLine("1. Verify event raised when event handler is attached");
-                        eventCounter.Reset();
+                        s_eventCounter.Reset();
                         mi.Invoke(declaringType, parameters);
 
-                        WPFMiscUtils.IncCounters(result, p.log, eventCounter.TimesFired == 1, "FAIL: Event raised " + eventCounter.TimesFired + " times.");
-                        WPFMiscUtils.IncCounters(result, p.log, eventCounter.Sender == p.target, "FAIL: Expected sender = " + p.target + ", but got " + eventCounter.Sender);
+                        WPFMiscUtils.IncCounters(result, p.log, s_eventCounter.TimesFired == 1, "FAIL: Event raised " + s_eventCounter.TimesFired + " times.");
+                        WPFMiscUtils.IncCounters(result, p.log, s_eventCounter.Sender == p.target, "FAIL: Expected sender = " + p.target + ", but got " + s_eventCounter.Sender);
                         //result.IncCounters(eventCounter.TimesFired == 1, "FAIL: Event raised " + eventCounter.TimesFired + " times.", p.log);
                         //result.IncCounters(eventCounter.Sender == p.target, "FAIL: Expected sender = " + p.target + ", but got " + eventCounter.Sender, p.log);
                     }
@@ -764,14 +704,13 @@ namespace ReflectTools
                         { token.DetachHandler(); }
                         //// Remove event handler
                         //info.RemoveEventHandler(p.target, handler);
-
                     }
 
                     // 2. Verify event not raised after event handler is removed
                     p.log.WriteLine("2. Verify event not raised after event handler is removed");
-                    eventCounter.Reset();
+                    s_eventCounter.Reset();
                     mi.Invoke(declaringType, parameters);
-                    WPFMiscUtils.IncCounters(result, p.log, eventCounter.TimesFired == 0, "FAIL: Event raised " + eventCounter.TimesFired + " times.");
+                    WPFMiscUtils.IncCounters(result, p.log, s_eventCounter.TimesFired == 0, "FAIL: Event raised " + s_eventCounter.TimesFired + " times.");
                     //result.IncCounters(eventCounter.TimesFired == 0, "FAIL: Event raised " + eventCounter.TimesFired + " times.", p.log);
                     //Add this code to try to get any exceptions caused by hooking this event to occur within this sub-scenario
                     ScenarioEpilog();
@@ -793,19 +732,15 @@ namespace ReflectTools
             SWF.Application.DoEvents();
         }
 
-        //
         // The OnFoo() methods are protected.  You can use this method to invoke one for your
         // event.  E.g. InvokeOnEventMethod(myButton, "Click", new object[] { new EventArgs() });
         // will execute the OnClick() event on myButton.
-        //
         protected void InvokeOnEventMethod(object target, string eventName, object[] args)
         {
             InvokeMethod(target, "On" + eventName, args);
         }
 
-        //
         // Invokes any method on a given class.
-        //
         [ReflectionPermission(SecurityAction.Assert, Unrestricted = true)]
         protected void InvokeMethod(object target, string methodName, object[] args)
         {
@@ -826,57 +761,46 @@ namespace ReflectTools
 
         public static object AutoTestEventHandler(object[] parameters)
         {
-            eventCounter.RaiseEvent(parameters.Length > 1 ? parameters[1] : null, parameters.Length > 2 ? parameters[2] as RoutedEventArgs : null);
+            s_eventCounter.RaiseEvent(parameters.Length > 1 ? parameters[1] : null, parameters.Length > 2 ? parameters[2] as RoutedEventArgs : null);
             return null;
         }
-        //
+        
         // Call this from the event delegate methods to record the event firing.
-        //
         internal protected static void EventRaised(object sender, RoutedEventArgs e)
         {
-            eventCounter.RaiseEvent(sender, e);
+            s_eventCounter.RaiseEvent(sender, e);
         }
 
-        //
         // Subclasses WFCTestLib.Util.EventCounterBase.  Inherits members TimesFired
         // and Reset().
-        //
         class AutoTestEventCounter : EventCounterBase
         {
-            private RoutedEventArgs routedEventArgs = new RoutedEventArgs();
-            private object sender;
+            private RoutedEventArgs _routedEventArgs = new RoutedEventArgs();
+            private object _sender;
 
             public RoutedEventArgs RoutedEventArgs
             {
-                get { return routedEventArgs; }
+                get { return _routedEventArgs; }
             }
 
             public object Sender
             {
-                get { return sender; }
+                get { return _sender; }
             }
 
             public override void Reset()
             {
                 base.Reset();
-                routedEventArgs = null;
-                sender = null;
+                _routedEventArgs = null;
+                _sender = null;
             }
 
             public void RaiseEvent(object sender, RoutedEventArgs e)
             {
                 ++TimesFired;
-                this.sender = sender;
-                routedEventArgs = e;
+                this._sender = sender;
+                _routedEventArgs = e;
             }
         }
-
-        /// <summary>
-        /// Verifies that property changed events have the same browser and editor
-        /// visibility as the corresponding property.
-        /// </summary>
-        //		protected virtual ScenarioResult AutoTestPropertyChangedEvents() {
-        //			return null;
-        //		}
     }
 }

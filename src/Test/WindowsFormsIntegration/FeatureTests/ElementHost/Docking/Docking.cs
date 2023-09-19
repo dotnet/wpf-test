@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -15,18 +19,15 @@ using System.Diagnostics;
 using System.Threading;
 using System.Reflection;
 
-//
+
 // Testcase:    Docking
 // Description: Verify docking scenarios for Avalon controls in EH host.
-// Author:      a-rickyt
-//
 public class Docking : ReflectBase
 {
     #region Test case setup
 
-    ElementHost elementHost1;
-    SWC.TextBox avTextBox;
-
+    ElementHost _elementHost1;
+    SWC.TextBox _avTextBox;
 
     public Docking(String[] args) : base(args) { }
 
@@ -43,16 +44,16 @@ public class Docking : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        avTextBox = new SWC.TextBox();
-        avTextBox.Text = "TextBox";
+        _avTextBox = new SWC.TextBox();
+        _avTextBox.Text = "TextBox";
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Child = avTextBox;
-        elementHost1.BackColor = Color.White;
-        elementHost1.Size = new System.Drawing.Size(100, 50);
-        elementHost1.Location = new System.Drawing.Point(150, 50);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _avTextBox;
+        _elementHost1.BackColor = Color.White;
+        _elementHost1.Size = new System.Drawing.Size(100, 50);
+        _elementHost1.Location = new System.Drawing.Point(150, 50);
+        Controls.Add(_elementHost1);
 
         return base.BeforeScenario(p, scenario);
     }
@@ -66,9 +67,9 @@ public class Docking : ReflectBase
     [Scenario("Add an Avalon TextBox to an EH and EH.Dock = None.")]
     public ScenarioResult Scenario1(TParams p)
     {
-	MyPause();
+	    MyPause();
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Dock = SWF.DockStyle.None;
+        _elementHost1.Dock = SWF.DockStyle.None;
 
         MyPause();
 
@@ -86,7 +87,7 @@ public class Docking : ReflectBase
     public ScenarioResult Scenario2(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Dock = SWF.DockStyle.Top;
+        _elementHost1.Dock = SWF.DockStyle.Top;
 
         MyPause();
 
@@ -104,7 +105,7 @@ public class Docking : ReflectBase
     public ScenarioResult Scenario3(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Dock = SWF.DockStyle.Left;
+        _elementHost1.Dock = SWF.DockStyle.Left;
 
         MyPause();
 
@@ -122,7 +123,7 @@ public class Docking : ReflectBase
     public ScenarioResult Scenario4(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Dock = SWF.DockStyle.Bottom;
+        _elementHost1.Dock = SWF.DockStyle.Bottom;
 
         MyPause();
 
@@ -140,7 +141,7 @@ public class Docking : ReflectBase
     public ScenarioResult Scenario5(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Dock = SWF.DockStyle.Right;
+        _elementHost1.Dock = SWF.DockStyle.Right;
 
         MyPause();
 
@@ -158,7 +159,7 @@ public class Docking : ReflectBase
     public ScenarioResult Scenario6(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Dock = SWF.DockStyle.Fill;
+        _elementHost1.Dock = SWF.DockStyle.Fill;
 
         MyPause();
 

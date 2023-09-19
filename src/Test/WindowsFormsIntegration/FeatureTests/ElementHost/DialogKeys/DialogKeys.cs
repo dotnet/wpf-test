@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -19,30 +23,28 @@ using MS.Internal.Mita.Foundation.Waiters;
 using System.Threading;
 using System.Reflection;
 
-//
+
 // Testcase:    DialogKeys
 // Description: When a WF control has dialog keys assigned and is hosted in an EH, we need 
 //              to make sure that those dialog keys still function correctly.
-// Author:      a-rickyt
-//
 public class DialogKeys : ReflectBase
 {
     #region Testcase setup
 
     Edit _edit1;
-    SWF.Button wfOkButton = new SWF.Button();
-    SWF.Button wfCancelButton = new SWF.Button();
-    SWC.Button avOkButton = new SWC.Button();
-    SWC.Button avCancelButton = new SWC.Button();
-    ElementHost elementHost1 = new ElementHost();
-    ElementHost elementHost2 = new ElementHost();
-    ElementHost elementHost3 = new ElementHost();
-    SWC.StackPanel stackPanel = new SWC.StackPanel();
-    SWC.TextBox avTextBox = new SWC.TextBox();
-    SWC.TextBox avTextBox2 = new SWC.TextBox();
-    SWC.RichTextBox avRichTextBox = new SWC.RichTextBox();
-    SWF.TextBox wfTextBox = new SWF.TextBox();
-    SWF.Label label = new SWF.Label();
+    SWF.Button _wfOkButton = new SWF.Button();
+    SWF.Button _wfCancelButton = new SWF.Button();
+    SWC.Button _avOkButton = new SWC.Button();
+    SWC.Button _avCancelButton = new SWC.Button();
+    ElementHost _elementHost1 = new ElementHost();
+    ElementHost _elementHost2 = new ElementHost();
+    ElementHost _elementHost3 = new ElementHost();
+    SWC.StackPanel _stackPanel = new SWC.StackPanel();
+    SWC.TextBox _avTextBox = new SWC.TextBox();
+    SWC.TextBox _avTextBox2 = new SWC.TextBox();
+    SWC.RichTextBox _avRichTextBox = new SWC.RichTextBox();
+    SWF.TextBox _wfTextBox = new SWF.TextBox();
+    SWF.Label _label = new SWF.Label();
 
     public DialogKeys(String[] args) : base(args) { }
 
@@ -51,104 +53,104 @@ public class DialogKeys : ReflectBase
         this.UseMita = true;
         this.Text = "DialogKeys";
         this.Size = new System.Drawing.Size(400, 400);
-        this.AcceptButton = wfOkButton;
-        this.CancelButton = wfCancelButton;
+        this.AcceptButton = _wfOkButton;
+        this.CancelButton = _wfCancelButton;
 
-        wfTextBox.Name = "wfTextBox";
-        wfTextBox.Text = "WinForm TextBox";
-        wfTextBox.AcceptsReturn = false;
-        wfTextBox.Multiline = true;
-        wfTextBox.Size = new System.Drawing.Size(150, 100);
-        wfTextBox.Location = new System.Drawing.Point(200, 50);
-        Controls.Add(wfTextBox);
+        _wfTextBox.Name = "wfTextBox";
+        _wfTextBox.Text = "WinForm TextBox";
+        _wfTextBox.AcceptsReturn = false;
+        _wfTextBox.Multiline = true;
+        _wfTextBox.Size = new System.Drawing.Size(150, 100);
+        _wfTextBox.Location = new System.Drawing.Point(200, 50);
+        Controls.Add(_wfTextBox);
 
-        label.Width = 200;
-        label.Location = new System.Drawing.Point(120, 200);
-        Controls.Add(label);
+        _label.Width = 200;
+        _label.Location = new System.Drawing.Point(120, 200);
+        Controls.Add(_label);
 
-        wfOkButton.Text = "OK";
-        wfOkButton.Location = new System.Drawing.Point(115, 330);
-        wfOkButton.Click += new EventHandler(wfOkButton_Click);
-        Controls.Add(wfOkButton);
+        _wfOkButton.Text = "OK";
+        _wfOkButton.Location = new System.Drawing.Point(115, 330);
+        _wfOkButton.Click += new EventHandler(wfOkButton_Click);
+        Controls.Add(_wfOkButton);
 
-        wfCancelButton.Text = "Cancel";
-        wfCancelButton.Location = new System.Drawing.Point(200, 330);
-        wfCancelButton.Click += new EventHandler(wfCancelButton_Click);
-        Controls.Add(wfCancelButton);
+        _wfCancelButton.Text = "Cancel";
+        _wfCancelButton.Location = new System.Drawing.Point(200, 330);
+        _wfCancelButton.Click += new EventHandler(wfCancelButton_Click);
+        Controls.Add(_wfCancelButton);
 
-        avTextBox.Name = "avTextBox";
-        avTextBox.Text = "Avalon TextBox";
-        avTextBox.AcceptsReturn = false;
+        _avTextBox.Name = "avTextBox";
+        _avTextBox.Text = "Avalon TextBox";
+        _avTextBox.AcceptsReturn = false;
 
-        avTextBox2.Name = "avTextBox2";
-        avTextBox2.Text = "Avalon TextBox 2";
-        avTextBox2.AcceptsReturn = false;
+        _avTextBox2.Name = "avTextBox2";
+        _avTextBox2.Text = "Avalon TextBox 2";
+        _avTextBox2.AcceptsReturn = false;
 
-        avRichTextBox.Name = "avRichTextBox";
-        avRichTextBox.AppendText("Avalon Rich Text Box");
-        avRichTextBox.AcceptsReturn = false;
+        _avRichTextBox.Name = "avRichTextBox";
+        _avRichTextBox.AppendText("Avalon Rich Text Box");
+        _avRichTextBox.AcceptsReturn = false;
 
-        avOkButton.Name = "avOkButton";
-        avOkButton.Content = "OK";
-        avOkButton.IsDefault = true;
-        avOkButton.Click += new RoutedEventHandler(avOkButton_Click);
+        _avOkButton.Name = "avOkButton";
+        _avOkButton.Content = "OK";
+        _avOkButton.IsDefault = true;
+        _avOkButton.Click += new RoutedEventHandler(avOkButton_Click);
 
-        avCancelButton.Name = "avCancelButton";
-        avCancelButton.Content = "Cancel";
-        avCancelButton.IsCancel = true;
-        avCancelButton.Click += new RoutedEventHandler(avCancelButton_Click);
+        _avCancelButton.Name = "avCancelButton";
+        _avCancelButton.Content = "Cancel";
+        _avCancelButton.IsCancel = true;
+        _avCancelButton.Click += new RoutedEventHandler(avCancelButton_Click);
 
-        stackPanel.Name = "stackPanel";
-        stackPanel.Orientation = SWC.Orientation.Horizontal;
-        stackPanel.Children.Add(avTextBox2);
-        stackPanel.Children.Add(avOkButton);
-        stackPanel.Children.Add(avCancelButton);
+        _stackPanel.Name = "stackPanel";
+        _stackPanel.Orientation = SWC.Orientation.Horizontal;
+        _stackPanel.Children.Add(_avTextBox2);
+        _stackPanel.Children.Add(_avOkButton);
+        _stackPanel.Children.Add(_avCancelButton);
 
         //Create Element Host 1
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = avTextBox;
-        elementHost1.Size = new System.Drawing.Size(150, 100);
-        elementHost1.Location = new System.Drawing.Point(40, 50);
-        elementHost1.BackColor = Color.Red;
-        Controls.Add(elementHost1);
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _avTextBox;
+        _elementHost1.Size = new System.Drawing.Size(150, 100);
+        _elementHost1.Location = new System.Drawing.Point(40, 50);
+        _elementHost1.BackColor = Color.Red;
+        Controls.Add(_elementHost1);
 
         //Create Element Host 2
-        elementHost2.Name = "elementHost2";
-        elementHost2.Child = stackPanel; 
-        elementHost2.Location = new System.Drawing.Point(70, 230);
-        elementHost2.BackColor = Color.Red;
-        elementHost2.AutoSize = true;
-        Controls.Add(elementHost2);
+        _elementHost2.Name = "elementHost2";
+        _elementHost2.Child = _stackPanel; 
+        _elementHost2.Location = new System.Drawing.Point(70, 230);
+        _elementHost2.BackColor = Color.Red;
+        _elementHost2.AutoSize = true;
+        Controls.Add(_elementHost2);
 
         //Create Element Host 3
-        elementHost3.Name = "elementHost3";
-        elementHost3.Child = avRichTextBox;
-        elementHost3.Size = new System.Drawing.Size(150, 50);
-        elementHost3.Location = new System.Drawing.Point(120, 270);
-        elementHost3.BackColor = Color.Red;
-        Controls.Add(elementHost3);
+        _elementHost3.Name = "elementHost3";
+        _elementHost3.Child = _avRichTextBox;
+        _elementHost3.Size = new System.Drawing.Size(150, 50);
+        _elementHost3.Location = new System.Drawing.Point(120, 270);
+        _elementHost3.BackColor = Color.Red;
+        Controls.Add(_elementHost3);
 
         base.InitTest(p);
     }
 
     void wfOkButton_Click(object sender, EventArgs e)
     {
-        label.Text = "WinForm OK button clicked.";
+        _label.Text = "WinForm OK button clicked.";
     }
 
     void wfCancelButton_Click(object sender, EventArgs e)
     {
-        label.Text = "WinForm Cancel button clicked.";
+        _label.Text = "WinForm Cancel button clicked.";
     }
 
     void avOkButton_Click(object sender, RoutedEventArgs e)
     {
-        label.Text = "Avalon OK button clicked.";
+        _label.Text = "Avalon OK button clicked.";
     }
 
     void avCancelButton_Click(object sender, RoutedEventArgs e)
     {
-        label.Text = "Avalon Cancel button clicked.";
+        _label.Text = "Avalon Cancel button clicked.";
     }
 
     #endregion
@@ -167,7 +169,7 @@ public class DialogKeys : ReflectBase
         _edit1.SendKeys("{ENTER}");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "WinForm OK button clicked.", 
+        sr.IncCounters(_label.Text == "WinForm OK button clicked.", 
             "Failed at OK button with focus on Avalon element.", p.log);
 
         return sr;
@@ -186,7 +188,7 @@ public class DialogKeys : ReflectBase
 
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "WinForm Cancel button clicked.",
+        sr.IncCounters(_label.Text == "WinForm Cancel button clicked.",
             "Failed at ESC button with focus on Avalon element.", p.log);
  
         return sr;
@@ -205,7 +207,7 @@ public class DialogKeys : ReflectBase
         _edit1.SendKeys("{ENTER}");
 
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(label.Text == "WinForm OK button clicked.",
+        sr.IncCounters(_label.Text == "WinForm OK button clicked.",
             "Failed at Avalon element on EH with OK button assigned and focus on a WF control.", p.log);
 
         return sr;
@@ -224,7 +226,7 @@ public class DialogKeys : ReflectBase
         _edit1.SendKeys("{ESC}");
 
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(label.Text == "WinForm Cancel button clicked.",
+        sr.IncCounters(_label.Text == "WinForm Cancel button clicked.",
             "Failed at Avalon element on EH with Cancel button assigned and focus on a WF control.", p.log);
 
         return sr;
@@ -244,7 +246,7 @@ public class DialogKeys : ReflectBase
         _edit1.SendKeys("{ENTER}");
 
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(label.Text == "WinForm OK button clicked.",
+        sr.IncCounters(_label.Text == "WinForm OK button clicked.",
            "Failed at Avalon element on EH and Winform control both have OK button assigned.", p.log);
 
         return sr;
@@ -263,7 +265,7 @@ public class DialogKeys : ReflectBase
         _edit1.SendKeys("{ESC}");
 
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(label.Text == "WinForm Cancel button clicked.",
+        sr.IncCounters(_label.Text == "WinForm Cancel button clicked.",
             "Failed at Avalon element on EH and Winform control both have ESC button assigned.", p.log);
 
         return sr;
@@ -281,7 +283,7 @@ public class DialogKeys : ReflectBase
         _edit1.SendKeys("{ENTER}");
 
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(label.Text == "WinForm OK button clicked.",
+        sr.IncCounters(_label.Text == "WinForm OK button clicked.",
            "Failed at Avalon RichText on EH with acceptReturn==false.", p.log);
 
         return sr;
@@ -299,7 +301,7 @@ public class DialogKeys : ReflectBase
         _edit1.SendKeys("{ENTER}");
 
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(label.Text == "Avalon OK button clicked.",
+        sr.IncCounters(_label.Text == "Avalon OK button clicked.",
            "Failed at AV control with OK button assigned with a EH on the app with a control (ENTER).", p.log);
 
         return sr;
@@ -317,7 +319,7 @@ public class DialogKeys : ReflectBase
         _edit1.SendKeys("{ESC}");
 
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(label.Text == "Avalon Cancel button clicked.",
+        sr.IncCounters(_label.Text == "Avalon Cancel button clicked.",
            "Failed at AV control with Cancel button assigned with a EH on the app with a control (ESC).", p.log);
 
         return sr;

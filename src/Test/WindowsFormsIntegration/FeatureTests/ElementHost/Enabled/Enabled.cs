@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 using WFCTestLib.Util;
@@ -10,19 +14,13 @@ using System.Windows.Media;
 using SWF = System.Windows.Forms;
 using System.Windows.Controls;
 
-///
+
 /// <TestCase>
 /// Enabled
 /// </TestCase>
 /// <summary>
 /// Verify that the WF's Enabled Property works
 /// </summary>
-/// <history>
-///  [sameerm]   3/28/2006   Created
-///  [sameerm]   3/30/2006   Incorporated review feedback.
-/// </history>
-///
-///
 public class Enabled : ReflectBase
 {
 
@@ -233,7 +231,6 @@ public class Enabled : ReflectBase
     //==========================================
     // Scenarios
     //==========================================
-
 }
 
 // Keep these in sync by running the testcase locally through the driver whenever

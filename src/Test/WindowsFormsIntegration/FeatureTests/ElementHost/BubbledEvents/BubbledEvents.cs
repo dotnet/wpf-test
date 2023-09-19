@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 
@@ -9,85 +13,83 @@ using WFCTestLib.Util;
 using WFCTestLib.Log;
 using ReflectTools;
 
-//
+
 // Testcase:    BubbledEvents
 // Description: Verify Bubbled events work in EH
-// Author:      a-larryl
-//
 public class BubbledEvents : ReflectBase {
 
     #region Testcase setup
     public BubbledEvents(string[] args) : base(args) { }
 
-    ElementHost host = new ElementHost();
-    System.Windows.Controls.TextBox avTextbox = new System.Windows.Controls.TextBox();
-    System.Windows.Controls.DockPanel avDockPanel = new System.Windows.Controls.DockPanel();
-    System.Windows.Controls.Grid avGrid = new System.Windows.Controls.Grid();
-    System.Windows.Controls.Button avButton = new System.Windows.Controls.Button();
-    ScenarioResult sr;
-    UIObject uiApp;
-    System.Windows.Controls.StackPanel avStackPanel = new System.Windows.Controls.StackPanel();
-    string RoutingStrategy;
-    string ExpectedRoutingStrategy = System.Windows.RoutingStrategy.Bubble.ToString();
+    ElementHost _host = new ElementHost();
+    System.Windows.Controls.TextBox _avTextbox = new System.Windows.Controls.TextBox();
+    System.Windows.Controls.DockPanel _avDockPanel = new System.Windows.Controls.DockPanel();
+    System.Windows.Controls.Grid _avGrid = new System.Windows.Controls.Grid();
+    System.Windows.Controls.Button _avButton = new System.Windows.Controls.Button();
+    ScenarioResult _sr;
+    UIObject _uiApp;
+    System.Windows.Controls.StackPanel _avStackPanel = new System.Windows.Controls.StackPanel();
+    string _routingStrategy;
+    string _expectedRoutingStrategy = System.Windows.RoutingStrategy.Bubble.ToString();
 
     protected override void InitTest(TParams p) {
         base.InitTest(p);
         UseMita = true;
         this.Text = "BubbledEventsTest";
-        avTextbox.Name = "avTextbox";
-        avTextbox.Background = System.Windows.Media.Brushes.Cyan;
-        avStackPanel.Name = "avStackPanel";
-        avStackPanel.Background = System.Windows.Media.Brushes.Cornsilk;
-        avGrid.Name = "avGrid";
-        avGrid.Background = System.Windows.Media.Brushes.Aqua;
-        host.BackColor = System.Drawing.Color.Red;
-        avTextbox.KeyDown += new System.Windows.Input.KeyEventHandler(avControl_KeyDown);
-        avStackPanel.KeyDown += new System.Windows.Input.KeyEventHandler(avControl_KeyDown);
-        avGrid.KeyDown += new System.Windows.Input.KeyEventHandler(avControl_KeyDown);
-        avButton.Name = "avButton";
-        avButton.KeyDown += new System.Windows.Input.KeyEventHandler(avControl_KeyDown);
+        _avTextbox.Name = "avTextbox";
+        _avTextbox.Background = System.Windows.Media.Brushes.Cyan;
+        _avStackPanel.Name = "avStackPanel";
+        _avStackPanel.Background = System.Windows.Media.Brushes.Cornsilk;
+        _avGrid.Name = "avGrid";
+        _avGrid.Background = System.Windows.Media.Brushes.Aqua;
+        _host.BackColor = System.Drawing.Color.Red;
+        _avTextbox.KeyDown += new System.Windows.Input.KeyEventHandler(avControl_KeyDown);
+        _avStackPanel.KeyDown += new System.Windows.Input.KeyEventHandler(avControl_KeyDown);
+        _avGrid.KeyDown += new System.Windows.Input.KeyEventHandler(avControl_KeyDown);
+        _avButton.Name = "avButton";
+        _avButton.KeyDown += new System.Windows.Input.KeyEventHandler(avControl_KeyDown);
     }
 
     protected override bool BeforeScenario(TParams p, System.Reflection.MethodInfo scenario)
     {
-        uiApp = UIObject.Root.Children.Find(UICondition.CreateFromName("BubbledEventsTest"));
+        _uiApp = UIObject.Root.Children.Find(UICondition.CreateFromName("BubbledEventsTest"));
         this.Controls.Clear();
-        host.Child = null;
-        avStackPanel.Children.Clear();
-        avGrid.Children.Clear();
-        avDockPanel.Children.Clear();
-        RoutingStrategy = string.Empty;
+        _host.Child = null;
+        _avStackPanel.Children.Clear();
+        _avGrid.Children.Clear();
+        _avDockPanel.Children.Clear();
+        _routingStrategy = string.Empty;
         switch (scenario.Name)
         {
             case "Scenario1":
-                avStackPanel.Children.Add(avTextbox);
-                host.Child = avStackPanel;
-                this.Controls.Add(host);
-                sr = new ScenarioResult();
+                _avStackPanel.Children.Add(_avTextbox);
+                _host.Child = _avStackPanel;
+                this.Controls.Add(_host);
+                _sr = new ScenarioResult();
                 break;
             case "Scenario2":
-                avGrid.Children.Add(avStackPanel);
-                avStackPanel.Children.Add(avTextbox);
-                host.Child = avGrid;
-                this.Controls.Add(host);
-                sr = new ScenarioResult();
+                _avGrid.Children.Add(_avStackPanel);
+                _avStackPanel.Children.Add(_avTextbox);
+                _host.Child = _avGrid;
+                this.Controls.Add(_host);
+                _sr = new ScenarioResult();
                 break;
             case "Scenario3":
-                avGrid.Children.Add(avStackPanel);
-                avStackPanel.Children.Add(avDockPanel);
-                avDockPanel.Children.Add(avTextbox);
-                host.Child = avGrid;
-                this.Controls.Add(host);
-                sr = new ScenarioResult();
+                _avGrid.Children.Add(_avStackPanel);
+                _avStackPanel.Children.Add(_avDockPanel);
+                _avDockPanel.Children.Add(_avTextbox);
+                _host.Child = _avGrid;
+                this.Controls.Add(_host);
+                _sr = new ScenarioResult();
                 break;
             case "Scenario4":
-                avGrid.Children.Add(avStackPanel);
-                avStackPanel.Children.Add(avDockPanel);
-                avDockPanel.Children.Add(avButton);
-                avButton.Content = avTextbox;
-                host.Child = avGrid;
-                this.Controls.Add(host);
-                sr = new ScenarioResult();
+                _avGrid.Children.Add(_avStackPanel);
+                _avStackPanel.Children.Add(_avDockPanel);
+                _avDockPanel.Children.Add(_avButton);
+                _avButton.Content = _avTextbox;
+                _host.Child = _avGrid;
+                this.Controls.Add(_host);
+                _sr = new ScenarioResult();
                 break;
         }
         return base.BeforeScenario(p, scenario);
@@ -99,7 +101,7 @@ public class BubbledEvents : ReflectBase {
         //RoutingStrategy += ((System.Windows.FrameworkElement)sender).Name + ":" + e.RoutedEvent.RoutingStrategy.ToString() + "::";
 
         //Changed 4/27/06 per Nathan Enright to only look at the routing strategy itself:
-        RoutingStrategy = e.RoutedEvent.RoutingStrategy.ToString();
+        _routingStrategy = e.RoutedEvent.RoutingStrategy.ToString();
     }
     #endregion
 
@@ -112,22 +114,22 @@ public class BubbledEvents : ReflectBase {
         UIObject uiavTextbox = null;
         try
         {
-            uiavTextbox = uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
+            uiavTextbox = _uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
             //type a character in the AV textbox.  See that the top level StackPanel gets the bubbled event.
             uiavTextbox.SendKeys("x");
             Utilities.SleepDoEvents(10);
-            sr.IncCounters(RoutingStrategy == ExpectedRoutingStrategy, "Bubbled event not seen for AV Textbox", p.log);
-            if (RoutingStrategy != ExpectedRoutingStrategy)
+            _sr.IncCounters(_routingStrategy == _expectedRoutingStrategy, "Bubbled event not seen for AV Textbox", p.log);
+            if (_routingStrategy != _expectedRoutingStrategy)
             {
-                p.log.WriteLine("Scenario 1 expected: " + ExpectedRoutingStrategy);
-                p.log.WriteLine("Scenario 1 received: " + RoutingStrategy);
+                p.log.WriteLine("Scenario 1 expected: " + _expectedRoutingStrategy);
+                p.log.WriteLine("Scenario 1 received: " + _routingStrategy);
             }
         }
         catch (Exception ex)
         {
             p.log.WriteLine("Failed to Get Mita wrapper controls: " + ex.ToString());
         }
-        return sr;
+        return _sr;
     }
 
     [Scenario("Verify that bubbled events work for Grid->StackPanel->TextBox inside EH boundary.")]
@@ -136,22 +138,22 @@ public class BubbledEvents : ReflectBase {
         UIObject uiavTextbox = null;
         try
         {
-            uiavTextbox = uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
+            uiavTextbox = _uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
             //type a character in the AV textbox.  See that the top level Grid gets the bubbled event.
             uiavTextbox.SendKeys("x");
             Utilities.SleepDoEvents(10);
-            sr.IncCounters(RoutingStrategy == ExpectedRoutingStrategy, "Bubbled event not seen for AV Textbox", p.log);
-            if (RoutingStrategy != ExpectedRoutingStrategy)
+            _sr.IncCounters(_routingStrategy == _expectedRoutingStrategy, "Bubbled event not seen for AV Textbox", p.log);
+            if (_routingStrategy != _expectedRoutingStrategy)
             {
-                p.log.WriteLine("Scenario 2 expected: " + ExpectedRoutingStrategy);
-                p.log.WriteLine("Scenario 2 received: " + RoutingStrategy);
+                p.log.WriteLine("Scenario 2 expected: " + _expectedRoutingStrategy);
+                p.log.WriteLine("Scenario 2 received: " + _routingStrategy);
             }
         }
         catch (Exception ex)
         {
             p.log.WriteLine("Failed to Get Mita wrapper controls: " + ex.ToString());
         }
-        return sr;
+        return _sr;
     }
 
     [Scenario("Verify that bubbled events work for Grid->StackPanel->DockPanel->TextBox inside EH boundary.")]
@@ -160,22 +162,22 @@ public class BubbledEvents : ReflectBase {
         UIObject uiavTextbox = null;
         try
         {
-            uiavTextbox = uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
+            uiavTextbox = _uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
             //type a character in the AV textbox.  See that the top level Grid gets the bubbled event.
             uiavTextbox.SendKeys("x");
             Utilities.SleepDoEvents(10);
-            sr.IncCounters(RoutingStrategy == ExpectedRoutingStrategy, "Bubbled event not seen for AV Textbox", p.log);
-            if (RoutingStrategy != ExpectedRoutingStrategy)
+            _sr.IncCounters(_routingStrategy == _expectedRoutingStrategy, "Bubbled event not seen for AV Textbox", p.log);
+            if (_routingStrategy != _expectedRoutingStrategy)
             {
-                p.log.WriteLine("Scenario 3 expected: " + ExpectedRoutingStrategy);
-                p.log.WriteLine("Scenario 3 received: " + RoutingStrategy);
+                p.log.WriteLine("Scenario 3 expected: " + _expectedRoutingStrategy);
+                p.log.WriteLine("Scenario 3 received: " + _routingStrategy);
             }
         }
         catch (Exception ex)
         {
             p.log.WriteLine("Failed to Get Mita wrapper controls: " + ex.ToString());
         }
-        return sr;
+        return _sr;
     }
 
     [Scenario("Verify that bubbled events work for Grid->StackPanel->DockPanel->Button->TextBox inside EH boundary.")]
@@ -184,22 +186,22 @@ public class BubbledEvents : ReflectBase {
         UIObject uiavTextbox = null;
         try
         {
-            uiavTextbox = uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
+            uiavTextbox = _uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
             //type a character in the AV textbox.  See that the top level Grid gets the bubbled event.
             uiavTextbox.SendKeys("x");
             Utilities.SleepDoEvents(10);
-            sr.IncCounters(RoutingStrategy == ExpectedRoutingStrategy, "Bubbled event not seen for AV Textbox", p.log);
-            if (RoutingStrategy != ExpectedRoutingStrategy)
+            _sr.IncCounters(_routingStrategy == _expectedRoutingStrategy, "Bubbled event not seen for AV Textbox", p.log);
+            if (_routingStrategy != _expectedRoutingStrategy)
             {
-                p.log.WriteLine("Scenario 4 expected: " + ExpectedRoutingStrategy);
-                p.log.WriteLine("Scenario 4 received: " + RoutingStrategy);
+                p.log.WriteLine("Scenario 4 expected: " + _expectedRoutingStrategy);
+                p.log.WriteLine("Scenario 4 received: " + _routingStrategy);
             }
         }
         catch (Exception ex)
         {
             p.log.WriteLine("Failed to Get Mita wrapper controls: " + ex.ToString());
         }
-        return sr;
+        return _sr;
     }
 
     #endregion

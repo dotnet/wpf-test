@@ -1,8 +1,12 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace WFCTestLib.Util {
 
     using System;
     using System.Text;
-	 using System.Runtime.InteropServices;
+	using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
 
@@ -27,10 +31,6 @@ namespace WFCTestLib.Util {
         public static int SignedHIWORD(int n) {
             int i = (int)(short)((n >> 16) & 0xffff);
 
-            // UNDONE : BrianPe, 5/18/99 - HACK.  Our compiler has a bug
-            //        : and isn't recognizing signed shorts.  We must do
-            //        : this to get proper sign extension.
-            //
             i = i << 16;
             i = i >> 16;
 
@@ -40,10 +40,6 @@ namespace WFCTestLib.Util {
         public static int SignedLOWORD(int n) {
             int i = (int)(short)(n & 0xFFFF);
 
-            // UNDONE : BrianPe, 5/18/99 - HACK.  Our compiler has a bug
-            //        : and isn't recognizing signed shorts.  We must do
-            //        : this to get proper sign extension.
-            //
             i = i << 16;
             i = i >> 16;
 
@@ -91,12 +87,10 @@ namespace WFCTestLib.Util {
             }
         }
 
-        //
         // Native methods -- we need to declare these guys internally and just call them here for
         // security purposes.  Apparently, you can't assert unmanaged code permission on a native
         // declaration, so we assert it on these methods below, and they call the native versions
         // of the methods.
-        //
         public static int lstrlen(String s) {
             return InternalDeclares.lstrlen(s);
         }
@@ -312,10 +306,6 @@ namespace WFCTestLib.Util {
             [DllImport("user32", CharSet=CharSet.Auto)] 
             internal static extern bool SystemParametersInfo(int nAction, int nParam, HIGHCONTRAST_I rc, int nUpdate);
 
-			//$REVIEW:  Is this why we couldn't get tests for HIGHCONTRAST to work?
-			//The NativeMethod declaration was incorrect??? (antonioa - 2/12/2003)
-			//[DllImport("user32", CharSet=CharSet.Auto)] 
-			//internal static extern bool SystemParametersInfo(int nAction, int nParam, ref HIGHCONTRAST_I rc, int nUpdate);
 
 			[DllImport("user32", CharSet=CharSet.Auto)] 
 			internal static extern bool SystemParametersInfo(int nAction, int nParam, [In,Out] NONCLIENTMETRICS rc, int nUpdate);
@@ -352,17 +342,13 @@ namespace WFCTestLib.Util {
             [DllImport("uxtheme", CharSet=CharSet.Auto)]
             internal static extern bool IsThemeActive();     // Is theming enabled?
 
-			//
 			//  For XScreen tests to verify BitsPerPixel.
-			//
 			[DllImport("Gdi32", CharSet=System.Runtime.InteropServices.CharSet.Auto)]
 			internal static extern int GetDeviceCaps(IntPtr hDC, int nIndex);
 		}
     }
 
-    //
     // Types used by Win32 methods
-    //
     public struct HIGHCONTRAST_I {
         public int cbSize;
         public int dwFlags;
@@ -390,9 +376,7 @@ namespace WFCTestLib.Util {
         }
     }
 
-	//
 	//  Added to support new SystemInformation members for Whidbey TopAPI feature set.
-	//  antonioa - 2/12/2003
 	[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
 	public class LOGFONT
 	{
@@ -413,9 +397,7 @@ namespace WFCTestLib.Util {
 		public string   lfFaceName;
 	}
 
-	//
 	//  Added to support new SystemInformation members for Whidbey TopAPI feature set.
-	//  antonioa - 2/12/2003
 	[StructLayout(LayoutKind.Sequential)]
 	public class NONCLIENTMETRICS
 	{

@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -18,28 +22,25 @@ using MS.Internal.Mita.Foundation.Collections;
 using MitaControl = MS.Internal.Mita.Foundation.Controls;
 using MS.Internal.Mita.Foundation.Waiters;
 
+
 // Testcase:    SeparateThreads
 // Description: Running  EH on seperate Form on seperate threads
-// Author:      pachan
-//
 public class SeparateThreads : ReflectBase 
 {
     #region Testcase setup
-    SWF.Button WFButton;
+    SWF.Button _WFButton;
 
     // Second WinForms window
-    SWF.Form WFForm;
-    ElementHost eh;
-    SWC.Button AVButton;
+    SWF.Form _WFForm;
+    ElementHost _eh;
+    SWC.Button _AVButton;
 
     private const string AVButtonName = "AVButton";
     private const string WFFormName = "WFForm";
     private const string WFButtonName = "WFButton";
     private const string AppName = "SeparateThreads";
 
-
     public SeparateThreads(string[] args) : base(args) { }
-
 
     protected override void InitTest(TParams p) 
     {
@@ -50,11 +51,11 @@ public class SeparateThreads : ReflectBase
         this.Left = 0;
         this.Top = 200;
 
-        WFButton = new SWF.Button();
-        WFButton.Text = WFButton.Name = WFButtonName;
-        WFButton.AutoSize = true;
-        WFButton.Click += new EventHandler(WFButton_Click);
-        this.Controls.Add(WFButton);
+        _WFButton = new SWF.Button();
+        _WFButton.Text = _WFButton.Name = WFButtonName;
+        _WFButton.AutoSize = true;
+        _WFButton.Click += new EventHandler(WFButton_Click);
+        this.Controls.Add(_WFButton);
         base.InitTest(p);
     }
     #endregion
@@ -68,27 +69,27 @@ public class SeparateThreads : ReflectBase
 
     private void WFDialogThread()
     {
-        WFForm = new System.Windows.Forms.Form();
-        WFForm.Text = WFFormName;
-        WFForm.Size = new System.Drawing.Size(200, 200);
-        WFForm.Left = 400;
-        WFForm.Top = 200;
+        _WFForm = new System.Windows.Forms.Form();
+        _WFForm.Text = WFFormName;
+        _WFForm.Size = new System.Drawing.Size(200, 200);
+        _WFForm.Left = 400;
+        _WFForm.Top = 200;
 
-        eh = new ElementHost();
-        AVButton = new System.Windows.Controls.Button();
-        AVButton.Content = AVButton.Name = AVButtonName;
-        eh.Child = AVButton;
-        WFForm.Controls.Add(eh);
+        _eh = new ElementHost();
+        _AVButton = new System.Windows.Controls.Button();
+        _AVButton.Content = _AVButton.Name = AVButtonName;
+        _eh.Child = _AVButton;
+        _WFForm.Controls.Add(_eh);
 
-        AVButton.Click += new System.Windows.RoutedEventHandler(AVButton_Click);
+        _AVButton.Click += new System.Windows.RoutedEventHandler(AVButton_Click);
 
         // start the WF Dialog Box on a separate thread
-        WFForm.ShowDialog();
+        _WFForm.ShowDialog();
     }
 
     void AVButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        WFForm.Close();
+        _WFForm.Close();
     }
 
     //==========================================
@@ -131,4 +132,3 @@ public class SeparateThreads : ReflectBase
 //
 // [Scenarios]
 //@ Verify that an Winform App can spawn a new thread with a new  Form that contains an EH with Avalon controls. We want to make sure that this scenario works i.e. no exception are thrown.
-

@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System.Reflection;
 using System;
 using System.Collections.Generic;
@@ -73,17 +77,17 @@ namespace WFCTestLib.Util
 			{
 				get
 				{
-					return findText.Text;
+					return _findText.Text;
 				}
 				set
 				{
-					findText.Text = value;
+					_findText.Text = value;
 				}
 			}
 
-			private System.Windows.Forms.TextBox findText;
+			private System.Windows.Forms.TextBox _findText;
 
-			private System.Windows.Forms.Button findButton;
+			private System.Windows.Forms.Button _findButton;
 
 			/// <summary>
 			/// Simple Constructor creates a default user control and initializes it.
@@ -91,17 +95,17 @@ namespace WFCTestLib.Util
 			/// </summary>
 			public ToolStripSearchBox()
 			{
-				this.findText = new System.Windows.Forms.TextBox();
-				this.findButton = new System.Windows.Forms.Button();
+				this._findText = new System.Windows.Forms.TextBox();
+				this._findButton = new System.Windows.Forms.Button();
 				this.SuspendLayout();
-				this.findText.Location = new System.Drawing.Point(4, 4);
-				this.findText.Size = new System.Drawing.Size(120, 20);
-				this.findText.TabIndex = 0;
-				this.findButton.Location = new System.Drawing.Point(128, 4);
-				this.findButton.Size = new System.Drawing.Size(50, 20);
-				this.findButton.TabIndex = 1;
-				this.findButton.Text = "&Find";
-				this.Controls.AddRange(new Control[] { this.findButton, this.findText });
+				this._findText.Location = new System.Drawing.Point(4, 4);
+				this._findText.Size = new System.Drawing.Size(120, 20);
+				this._findText.TabIndex = 0;
+				this._findButton.Location = new System.Drawing.Point(128, 4);
+				this._findButton.Size = new System.Drawing.Size(50, 20);
+				this._findButton.TabIndex = 1;
+				this._findButton.Text = "&Find";
+				this.Controls.AddRange(new Control[] { this._findButton, this._findText });
 				this.Name = "ToolStripSearchBox";
 				this.Size = new System.Drawing.Size(182, 28);
 				this.ResumeLayout(false);
@@ -256,7 +260,7 @@ namespace WFCTestLib.Util
 	/// </summary>
 	public struct ToolStripItemDescription
 	{
-		private ToolStripItemFlags flags;
+		private ToolStripItemFlags _flags;
 
 		/// <summary>
 		/// A Type object representing the Item
@@ -357,7 +361,7 @@ namespace WFCTestLib.Util
 		/// <returns>true if the Description is compatible with the input values, else false.</returns>
 		public bool IsCompatible(ToolStripItemFlags mask, ToolStripItemFlags values)
 		{
-			return (flags & mask) == (values & mask);
+			return (_flags & mask) == (values & mask);
 		}
 
 		public static ToolStripItem CreateRandomItem(RandomUtil ru, params ToolStripItemDescription[] possible)
@@ -447,16 +451,16 @@ namespace WFCTestLib.Util
 		internal ToolStripItemDescription(Type t, bool supportsVertical, bool supportsChildren, bool isBuiltin, bool isSeperator, bool shouldRotate)
 		{
 			T = t;
-			flags = 0;
-			if (supportsVertical) { flags |= ToolStripItemFlags.SupportsVertical; }
+			_flags = 0;
+			if (supportsVertical) { _flags |= ToolStripItemFlags.SupportsVertical; }
 
-			if (supportsChildren) { flags |= ToolStripItemFlags.SupportsChildren; }
+			if (supportsChildren) { _flags |= ToolStripItemFlags.SupportsChildren; }
 
-			if (isBuiltin) { flags |= ToolStripItemFlags.IsBuiltin; }
+			if (isBuiltin) { _flags |= ToolStripItemFlags.IsBuiltin; }
 
-			if (isSeperator) { flags |= ToolStripItemFlags.IsSeperator; }
+			if (isSeperator) { _flags |= ToolStripItemFlags.IsSeperator; }
 
-			if (shouldRotate) { flags |= ToolStripItemFlags.ShouldRotate; }
+			if (shouldRotate) { _flags |= ToolStripItemFlags.ShouldRotate; }
 		}
 
 		#region Flags properties
@@ -465,28 +469,28 @@ namespace WFCTestLib.Util
 		/// (docked left/right/fill).  If false, the item should move to overflow when orientation is vertical.
 		/// </summary>
 		public bool SupportsVertical
-		{ get { return 0 != (flags & ToolStripItemFlags.SupportsVertical); } }
+		{ get { return 0 != (_flags & ToolStripItemFlags.SupportsVertical); } }
 
 		/// <summary>
 		/// Identifies whether or not the object invokes ToolStripDropDownMenus.
 		/// </summary>
 		public bool SupportsChildren
-		{ get { return 0 != (flags & ToolStripItemFlags.SupportsChildren); } }
+		{ get { return 0 != (_flags & ToolStripItemFlags.SupportsChildren); } }
 
 		/// <summary>
 		/// Identifies whether or not the Item is a builtin ToolStripMenuItem type.
 		/// </summary>
 		public bool IsBuiltin
-		{ get { return 0 != (flags & ToolStripItemFlags.IsBuiltin); } }
+		{ get { return 0 != (_flags & ToolStripItemFlags.IsBuiltin); } }
 
 		/// <summary>
 		/// Identifies whether or not the Item is a Seperator.
 		/// </summary>
 		public bool IsSeperator
-		{ get { return 0 != (flags & ToolStripItemFlags.IsSeperator); } }
+		{ get { return 0 != (_flags & ToolStripItemFlags.IsSeperator); } }
 
 		public bool ShouldRotate
-		{ get { return 0 != (flags & ToolStripItemFlags.ShouldRotate); } }
+		{ get { return 0 != (_flags & ToolStripItemFlags.ShouldRotate); } }
 		#endregion Flags properties
 	}
 
@@ -495,7 +499,7 @@ namespace WFCTestLib.Util
 	/// </summary>
 	public sealed class ToolStripUtil
 	{
-		private static Color VISIBLE_FLAG_COLOR = Color.HotPink;
+		private static Color s_VISIBLE_FLAG_COLOR = Color.HotPink;
 
 		public static bool IsToolStripItemVisible(ToolStrip wb, ToolStripItem itm)
 		{
@@ -504,12 +508,12 @@ namespace WFCTestLib.Util
 
 			try
 			{
-				itm.BackColor = VISIBLE_FLAG_COLOR;
-				itm.ForeColor = VISIBLE_FLAG_COLOR;
+				itm.BackColor = s_VISIBLE_FLAG_COLOR;
+				itm.ForeColor = s_VISIBLE_FLAG_COLOR;
 				wb.Refresh();
 				using (Bitmap bmp = Utilities.GetBitmapOfControl(wb))
 				{
-					bool bRet = Utilities.ContainsColor(bmp, VISIBLE_FLAG_COLOR);
+					bool bRet = Utilities.ContainsColor(bmp, s_VISIBLE_FLAG_COLOR);
 					return bRet;
 				}
 			}

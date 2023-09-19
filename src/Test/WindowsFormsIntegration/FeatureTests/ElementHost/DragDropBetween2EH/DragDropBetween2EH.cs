@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -13,20 +17,14 @@ using System.Windows.Controls;
 using System.Reflection;
 
 
-//
 // Testcase:    DragDropBetween2EH
 // Description: Drag And Drop Between two EHs
-// Author:      pachan
-//
-//
 public class DragDropBetween2EH : ReflectBase
 {
-
     private System.Windows.DragDropEffects _ddEffect;
 
     #region Testcase setup
     public DragDropBetween2EH(string[] args) : base(args) { }
-
 
     protected override void InitTest(TParams p)
     {
@@ -43,20 +41,18 @@ public class DragDropBetween2EH : ReflectBase
     //==========================================
 
     #region CLASSVARS
-    ElementHost eh1 = null;
-    ElementHost eh2 = null;
-    System.Windows.Controls.Button avButton1 = null;
-    System.Windows.Controls.TextBox avText2 = null;
+    ElementHost _eh1 = null;
+    ElementHost _eh2 = null;
+    System.Windows.Controls.Button _avButton1 = null;
+    System.Windows.Controls.TextBox _avText2 = null;
     
     //Mita wrappers for TextBoxes
     MS.Internal.Mita.Foundation.Controls.Button _button1 = null;
     Edit _edit2 = null;
     #endregion
 
-
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-
         switch (scenario.Name)
         {
             case "Scenario1":
@@ -77,45 +73,43 @@ public class DragDropBetween2EH : ReflectBase
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result)
     {
         this.Controls.Clear();
-        avButton1 = null;
-        avText2 = null;
-        eh1 = null;
-        eh2 = null;
+        _avButton1 = null;
+        _avText2 = null;
+        _eh1 = null;
+        _eh2 = null;
         base.AfterScenario(p, scenario, result);
     }
-
 
     #region SCENARIOSETUP
     void CommonSetup(TParams p)
     {
-        avButton1 = new System.Windows.Controls.Button();
-        avButton1.Name = "AVButton1";
-        avButton1.Content = "Avalon Button 1";
-        avButton1.AllowDrop = true;
+        _avButton1 = new System.Windows.Controls.Button();
+        _avButton1.Name = "AVButton1";
+        _avButton1.Content = "Avalon Button 1";
+        _avButton1.AllowDrop = true;
 
-        avText2 = new System.Windows.Controls.TextBox();
-        avText2.Name = "AVTextBox2";
-        avText2.Text = "Avalon Text Box 2";
-        avText2.AllowDrop = true;
+        _avText2 = new System.Windows.Controls.TextBox();
+        _avText2.Name = "AVTextBox2";
+        _avText2.Text = "Avalon Text Box 2";
+        _avText2.AllowDrop = true;
 
         //Creat Element Host1
-        eh1 = new ElementHost();
-        eh1.Dock = DockStyle.Top;
-        eh1.Child = avButton1;
-        eh1.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(eh1);
-
+        _eh1 = new ElementHost();
+        _eh1.Dock = DockStyle.Top;
+        _eh1.Child = _avButton1;
+        _eh1.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_eh1);
 
         //Creat Element Host 2 
-        eh2 = new ElementHost();
-        eh2.Dock = DockStyle.Bottom;
-        eh2.Child = avText2;
-        eh2.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(eh2);
+        _eh2 = new ElementHost();
+        _eh2.Dock = DockStyle.Bottom;
+        _eh2.Child = _avText2;
+        _eh2.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_eh2);
 
-        avButton1.PreviewDragEnter += delegate(object o, System.Windows.DragEventArgs eArgs)
+        _avButton1.PreviewDragEnter += delegate(object o, System.Windows.DragEventArgs eArgs)
         {
-            p.log.WriteLine("Got Drag Enter: " + avButton1);
+            p.log.WriteLine("Got Drag Enter: " + _avButton1);
 
             if (eArgs.Data.GetDataPresent(typeof(string)))
             {
@@ -125,23 +119,23 @@ public class DragDropBetween2EH : ReflectBase
             eArgs.Handled = true;
         };
 
-        avButton1.PreviewDrop += delegate(object o, System.Windows.DragEventArgs eArgs)
+        _avButton1.PreviewDrop += delegate(object o, System.Windows.DragEventArgs eArgs)
         {
-            p.log.WriteLine("Got Drop event " + avButton1);
+            p.log.WriteLine("Got Drop event " + _avButton1);
             System.Windows.Controls.TextBox txtBox = o as System.Windows.Controls.TextBox;
             if (eArgs.Data.GetDataPresent(typeof(string)) &&
                 ((eArgs.Effects & System.Windows.DragDropEffects.Move) == System.Windows.DragDropEffects.Move ||
                     (eArgs.Effects & System.Windows.DragDropEffects.Copy) == System.Windows.DragDropEffects.Copy))
             {
                 string s = (String)eArgs.Data.GetData(typeof(String));
-                avButton1.Content = s;
+                _avButton1.Content = s;
             }
             eArgs.Handled = true;
         };
 
-        avText2.PreviewMouseDown += delegate(object o, System.Windows.Input.MouseButtonEventArgs eArgs)
+        _avText2.PreviewMouseDown += delegate(object o, System.Windows.Input.MouseButtonEventArgs eArgs)
         {
-            p.log.WriteLine("Got MouseDown " + avText2);
+            p.log.WriteLine("Got MouseDown " + _avText2);
             System.Windows.Controls.TextBox tb = o as System.Windows.Controls.TextBox;
             if (tb.SelectedText.Equals(tb.Text) == true)
             {
@@ -156,21 +150,21 @@ public class DragDropBetween2EH : ReflectBase
     private void SetupScenario1(TParams p)
     {
         CommonSetup(p);
-        avText2.Text = "Scenario1";
+        _avText2.Text = "Scenario1";
         _ddEffect = System.Windows.DragDropEffects.Copy;
     }
 
     private void SetupScenario2(TParams p)
     {
         CommonSetup(p);
-        avText2.Text = "Scenario2";
+        _avText2.Text = "Scenario2";
         _ddEffect = System.Windows.DragDropEffects.Move;
     }
 
     private void SetupScenario3(TParams p)
     {
         CommonSetup(p);
-        avText2.Text  = "Scenario3";
+        _avText2.Text  = "Scenario3";
         _ddEffect = System.Windows.DragDropEffects.None;
     } 
     #endregion
@@ -234,7 +228,6 @@ public class DragDropBetween2EH : ReflectBase
     }
     #endregion
 
-
     #region Helper Functions
 
     void GetEditControls(TParams p)
@@ -273,7 +266,7 @@ public class DragDropBetween2EH : ReflectBase
             Utilities.SleepDoEvents(2);
             Mouse.Instance.Move(sourcePoint);*/
 
-	    dragSource.DoubleClick();
+	        dragSource.DoubleClick();
             Mouse.Instance.Press(PointerButtons.Primary);
             Utilities.SleepDoEvents(2);
 
@@ -283,7 +276,6 @@ public class DragDropBetween2EH : ReflectBase
                 targetRect.X + targetRect.Height / 2,
                 targetRect.Y + targetRect.Height / 2
             );
-
 
             Mouse.Instance.Move(targetPoint);
             Mouse.Instance.Release(PointerButtons.Primary);

@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -18,39 +22,32 @@ using System.Windows;
 /// <summary>
 /// Make sure that the sync context doesn't change when we add a host.
 /// </summary>
-/// <history>
-///  [sameerm]   3/27/2006   Created
-///   [sameerm]  3/29/2006   Added CR feedback.
-/// </history>
-
 public class SyncContext : ReflectBase
 {
-
     #region Testcase setup
     public SyncContext(string[] args) : base(args) { }
 
-
-    // class vars
-        
+    // class vars        
     private ElementHost _eh1;
     private SWC.Button _ehBtn;
-    List<Type> panelTypes;
-    Window window;
-    Form f2 ;
-    
+    List<Type> _panelTypes;
+    Window _window;
+    Form _f2;    
 
     protected override void InitTest(TParams p)
     {
         this.Size = new System.Drawing.Size(500, 500);
-        panelTypes = GetDerivedType("System.Windows.Forms.dll", typeof(Panel));
+        _panelTypes = GetDerivedType("System.Windows.Forms.dll", typeof(Panel));
         base.InitTest(p);
     }
+
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result)
     {
-         Controls.Clear();
-         this.Text = "";
-         base.AfterScenario(p, scenario, result);
+        Controls.Clear();
+        this.Text = "";
+        base.AfterScenario(p, scenario, result);
     }
+
     private void SleepUpdateUI(int seconds)
     {
         while (true)
@@ -75,7 +72,7 @@ public class SyncContext : ReflectBase
         // update app title bar and log file
         try
         {
-            foreach (Type t in panelTypes)
+            foreach (Type t in _panelTypes)
             {
                 int i = t.GetConstructors().Length;
                 if (t == typeof(TabPage) || t.GetConstructors().Length == 0 || t.IsAbstract)
@@ -89,7 +86,6 @@ public class SyncContext : ReflectBase
                 catch (MissingMethodException )
                 {
                     continue;
-
                 }
 
                 string str = string.Format("Container type: {0}", t.ToString());
@@ -100,8 +96,7 @@ public class SyncContext : ReflectBase
                 Panel panel = o as Panel;
                 panel.Dock = DockStyle.Fill;
                 panel.Visible = true;
-                panel.BackColor = Color.Crimson;
-                
+                panel.BackColor = Color.Crimson;        
 
                 // save current context
                 System.Threading.SynchronizationContext scBefore = System.Threading.SynchronizationContext.Current;
@@ -130,8 +125,6 @@ public class SyncContext : ReflectBase
                 Utilities.SleepDoEvents(1, 1000);
                 Controls.Clear();
             }
-
-            
         }
         catch (Exception ex)
         {
@@ -175,14 +168,10 @@ public class SyncContext : ReflectBase
         }
         return sr;
     }
-
     
     [Scenario("AV control that starts a new Form (nested pump)")]
     public ScenarioResult Scenario3(TParams p)
     {
-        
-        
-        
         ScenarioResult sr = new ScenarioResult();
         try
         {
@@ -209,7 +198,7 @@ public class SyncContext : ReflectBase
             bool b = scBefore.Equals(scAfter);
             p.log.WriteLine("Matches = {0}", b);
             sr.IncCounters(b, "Synchronization Context does not match after adding Element Host.", p.log);
-            f2.Close();
+            _f2.Close();
         }
         catch (Exception ex)
         {
@@ -225,17 +214,16 @@ public class SyncContext : ReflectBase
         System.Windows.Controls.CheckBox chkBox = new System.Windows.Controls.CheckBox();
         chkBox.Content = "Check Me";
         eh2.Child = chkBox;
-        f2 = new Form();
-        this.AddOwnedForm(f2);
-        f2.Controls.Add(eh2);
-        f2.Text = "Form2";
-        f2.Show();
+        _f2 = new Form();
+        this.AddOwnedForm(_f2);
+        _f2.Controls.Add(eh2);
+        _f2.Text = "Form2";
+        _f2.Show();
     }
 
     [Scenario("AV control that starts a new Window(nested pump)")]
     public ScenarioResult Scenario4(TParams p)
-    {
-        
+    {        
         ScenarioResult sr = new ScenarioResult();
         try
         {
@@ -265,7 +253,7 @@ public class SyncContext : ReflectBase
             p.log.WriteLine("Matches = {0}", b);
             sr.IncCounters(b, "Synchronization Context does not match after adding Element Host.", p.log);
             Utilities.SleepDoEvents(1, 500);
-            window.Close();
+            _window.Close();
         }
         catch (Exception ex)
         {
@@ -275,14 +263,11 @@ public class SyncContext : ReflectBase
         return sr;
     }
 
-
     void _ehBtn_ClickScenario4(object sender, RoutedEventArgs e)
     {
-        window = new Window();
-        window.Show();
+        _window = new Window();
+        _window.Show();
     }
-
-
     #endregion
 
     #region Helper Functions
@@ -291,7 +276,6 @@ public class SyncContext : ReflectBase
     /// </summary>
     /// <param name="p"></param>
     /// <param name="contType"></param>
-
     static void LoadAssemblies()
     {
         String[] assemblies = {"System.Windows.Forms,      PublicKeyToken={0}"};
@@ -314,7 +298,6 @@ public class SyncContext : ReflectBase
             Assembly.Load(AssemblyIdentity);
         }
     }
-
 
     List<Type> GetDerivedType(string assembly, Type requestedType)
     {
@@ -345,12 +328,10 @@ public class SyncContext : ReflectBase
         }
 
         return list;
-
     }
-
-
     #endregion
 }
+
 // Keep these in sync by running the testcase locally through the driver whenever
 // you add, remove, or rename scenarios.
 //

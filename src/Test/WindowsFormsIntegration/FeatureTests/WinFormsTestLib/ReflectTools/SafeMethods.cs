@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace ReflectTools {
 	using System;
 	using System.ComponentModel;
@@ -111,23 +115,27 @@ namespace ReflectTools {
             rw.Close();
             return filePath;
         }
+
         [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
         public static ResourceReader CreateResourceReader(string fileName)
-        { return new ResourceReader(fileName); }
+        { 
+			return new ResourceReader(fileName);
+		}
 
 		[SecurityPermission(SecurityAction.Assert, Unrestricted=true)]
 		public static void InvokeCloseForm(Form f)
 		{
 			f.BeginInvoke(new FTCD(CloseForm), f);
 		}
+		
 		private delegate void FTCD(Form f);
 		private static void CloseForm(Form fToClose)
-		{ fToClose.Close(); }
+		{
+			fToClose.Close();
+		}
 
-        private static string events;
+        private static string s_events;
 
-
-		//
 		// SECURITY: The following methods are here to allow tests to perform actions that
 		//           might not be permitted without the appropriate permissions but are "safe"
 		//           to use in a test.
@@ -135,9 +143,6 @@ namespace ReflectTools {
 		// All properties and methods that are directly being tested should not use these methods
 		// and should directly call the method or property being tested in order to ensure proper
 		// security coverage.
-		//
-
-
         public static void AddUrlToHistory(string targetUrl)
         {
             PermissionSet permissions = new PermissionSet(PermissionState.Unrestricted);
@@ -160,14 +165,12 @@ namespace ReflectTools {
             f.Close();
             f.Dispose();
             CodeAccessPermission.RevertAssert();
-
         }
 
         private static void wb_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            events += "DocumentCompleted ";
+            s_events += "DocumentCompleted ";
         }
-
 
         private static bool NavigateTo(WebBrowser wb, string url, int milliseconds)
         {
@@ -177,14 +180,14 @@ namespace ReflectTools {
             long stoptime = start.AddMilliseconds(milliseconds).Ticks;
             bool navigated = false;
 
-            events = "";
+            s_events = "";
 
             SafeMethods.Navigate(wb, url);
             navigated = false;
             while (DateTime.Now.Ticks < stoptime)
             {
                 Application.DoEvents();
-                if (events.Contains("DocumentCompleted"))
+                if (s_events.Contains("DocumentCompleted"))
                 {
                     navigated = true;
                     break;
@@ -194,17 +197,13 @@ namespace ReflectTools {
             return navigated;
         }
 
-
         [UIPermission(SecurityAction.Assert, Unrestricted = true)]
         public static void AddRenderItemImageHandler(ToolStrip ts, ToolStripItemImageRenderEventHandler h)
         {
             ts.Renderer.RenderItemImage += new ToolStripItemImageRenderEventHandler(h);
         }
-
-
-		//
+		
 		// Control members
-		//
 		[UIPermission(SecurityAction.Assert, Unrestricted = true)]
 		public static Control GetParent(Control c) {
 			return c.Parent;
@@ -214,10 +213,11 @@ namespace ReflectTools {
         public static void SetCapture(Control c, bool value)
         { c.Capture = value; }
 
-	[System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.Assert, Unrestricted=true)]
-	public static Microsoft.Win32.RegistryKey GetRegistryCurrentUserName()
-	{ return Microsoft.Win32.Registry.CurrentUser; }
-
+		[System.Security.Permissions.RegistryPermission(System.Security.Permissions.SecurityAction.Assert, Unrestricted=true)]
+		public static Microsoft.Win32.RegistryKey GetRegistryCurrentUserName()
+		{ 
+			return Microsoft.Win32.Registry.CurrentUser;
+		}
 
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
 		public static AccessibleObject GetAccessibilityObject(Control c)
@@ -268,7 +268,6 @@ namespace ReflectTools {
 			return Clipboard.GetDataObject();
 		}
 
-
         // If Clipboard does not contain string then this method returns
         // "no String.class data present"
         [UIPermission(SecurityAction.Assert, Clipboard = UIPermissionClipboard.AllClipboard)]
@@ -285,7 +284,6 @@ namespace ReflectTools {
             return got;
         }
 
-
 		[UIPermission(SecurityAction.Assert, Unrestricted = true)]
 		public static ContainerControl GetContainerControl(ErrorProvider p) {
 			return p.ContainerControl;
@@ -296,13 +294,11 @@ namespace ReflectTools {
 			rtb.LoadFile(filename);
 		}
 
-
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
         public static void SetAutoCompleteSource(ComboBox cb, AutoCompleteSource acs)
         {
             cb.AutoCompleteSource = acs;
         }
-
 
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
         public static string GetEscapedCodeBase()
@@ -310,18 +306,13 @@ namespace ReflectTools {
             return Assembly.GetEntryAssembly().Location;
         }
 
-
-		//
 		// ControlPaint members
-		//
 		[SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
 		public static IntPtr CreateHBitmapTransparencyMask(Bitmap bitmap) {
 			return ControlPaint.CreateHBitmapTransparencyMask(bitmap);
 		}
 
-		//
 		// Form members
-		//
 		[UIPermission(SecurityAction.Assert, Unrestricted = true)]
 		public static void Activate(Form f) {
 			f.Activate();
@@ -333,7 +324,6 @@ namespace ReflectTools {
             return Application.OpenForms;
         }
 
-
 		[UIPermission(SecurityAction.Assert, Unrestricted = true)]
 		public static Form GetMdiParent(Form f) {
 			return f.MdiParent;
@@ -344,9 +334,7 @@ namespace ReflectTools {
 			return f.Owner;
 		}
 
-		//
 		// Environment members
-		//
 		[EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
 		public static OperatingSystem GetOSVersion() {
 			return Environment.OSVersion;
@@ -378,18 +366,13 @@ namespace ReflectTools {
             return Environment.GetEnvironmentVariable(variable);
         }
 
-
-		[
-		EnvironmentPermission(SecurityAction.Assert, Unrestricted = true),
-		SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)
-		]
+		[EnvironmentPermission(SecurityAction.Assert, Unrestricted = true),
+		SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
 		public static string GetMachineName() {
 			return Environment.MachineName;
 		}
 
-		//
 		// SendKeys members
-		//
 		[SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
 		public static void SendWait(string keys) {
 			SendKeys.SendWait(keys);
@@ -400,9 +383,7 @@ namespace ReflectTools {
 			SendKeys.Send(keys);
 		}
 
-        //
         // EmulateKeyPress members
-        //
         [DllImport("user32.dll")]
         private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
         // for info on "keybd_event", see:
@@ -459,9 +440,7 @@ namespace ReflectTools {
             }
         }
 
-        //
 		// Graphics members
-		//
 		[SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
 		public static Graphics GraphicsFromHdc(IntPtr h) {
 			return Graphics.FromHdc(h);
@@ -602,10 +581,8 @@ namespace ReflectTools {
 		{
 			gfx.ReleaseHdc(hdc);
 		}
-
-		//
+		
 		// Printing members
-		//
 		[PrintingPermission(SecurityAction.Assert, Unrestricted = true)]
 		public static void SetPrinterName(PrinterSettings ps, string name) {
 			ps.PrinterName = name;
@@ -686,9 +663,7 @@ namespace ReflectTools {
 			ps.PrintFileName = name;
 		}
 
-		//
 		// FileDialog members
-		//
 		[FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
 		public static string GetFileDialogFileName(System.Windows.Forms.FileDialog d) {
 			return d.FileName;
@@ -716,12 +691,10 @@ namespace ReflectTools {
             d.Title = title;
         }
 
-        //
 		// Reflection members
 		//
 		// Need to assert full trust because if we don't have the permissions that
 		// the target method demands, then we don't even see it through reflection.
-		//
 		[PermissionSetAttribute(SecurityAction.Assert, Name = "FullTrust")]
 		public static ConstructorInfo[] GetConstructors(Type t)
 		{
@@ -808,9 +781,7 @@ namespace ReflectTools {
 			return t.GetProperties(flags);
 		}
 
-		//
 		// Application members
-		//
 		public static string SafeTopLevelCaptionFormat {
 			[UIPermission(SecurityAction.Assert, Unrestricted = true)]
 			set {
@@ -829,18 +800,13 @@ namespace ReflectTools {
             t.Abort();
         }
 
-
-		//NOTE: The permissions on this now are just screwy
+		//NOTE: The permissions on this now are just ----y
 		[SecurityPermission(SecurityAction.Assert, Unrestricted = true)]
 		public static void ApplicationRestart() {
 			Application.Restart();
 		}
 
-
-
-		//
 		// Miscellaneous methods
-		//
 		[SecurityPermission(SecurityAction.Assert, ControlThread = true)]
 		public static void ThreadAbort(Thread t) {
 			t.Abort();
@@ -930,7 +896,6 @@ namespace ReflectTools {
             return System.IO.Directory.GetFiles(directoryName, searchPattern);
         }
 
-
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
         public static string GetFullPath(string fileName)
         {
@@ -952,7 +917,7 @@ namespace ReflectTools {
 			return p.Start();
 		}
 
-	public static Process StartProcess(string exeName) 
+		public static Process StartProcess(string exeName) 
         {
 			return StartProcess(exeName, "");
 		}

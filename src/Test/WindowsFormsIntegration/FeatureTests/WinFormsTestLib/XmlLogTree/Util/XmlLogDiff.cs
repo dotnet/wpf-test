@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 #define DEBUG
 
 using System;
@@ -6,11 +10,11 @@ using System.IO;
 
 namespace WFCTestLib.XmlLogTree.Util {
     public class XmlLogDiff : ILogDiff {
-        bool allowMoreFailuresInBase = false;
-        bool matchSameFailComments = true;
-        bool matchSameFailedScenarioText = false;
+        bool _allowMoreFailuresInBase = false;
+        bool _matchSameFailComments = true;
+        bool _matchSameFailedScenarioText = false;
 
-        ScenarioDiffEventHandler onScenarioDiff;
+        ScenarioDiffEventHandler _onScenarioDiff;
 
         public XmlLogDiff() { }
 
@@ -21,8 +25,8 @@ namespace WFCTestLib.XmlLogTree.Util {
         /// with multiple bugs, some of which have been fixed).
 		/// </summary>
         public bool AllowMoreFailuresInBase {
-            get { return allowMoreFailuresInBase; }
-            set { allowMoreFailuresInBase = value; }
+            get { return _allowMoreFailuresInBase; }
+            set { _allowMoreFailuresInBase = value; }
         }
 
         /// <summary>
@@ -30,8 +34,8 @@ namespace WFCTestLib.XmlLogTree.Util {
         /// Default is true.
 		/// </summary>
         public bool MatchSameFailComments {
-            get { return matchSameFailComments; }
-            set { matchSameFailComments = value; }
+            get { return _matchSameFailComments; }
+            set { _matchSameFailComments = value; }
         }
 
         /// <summary>
@@ -39,21 +43,21 @@ namespace WFCTestLib.XmlLogTree.Util {
 		/// (i.e. log output).  Default is false.
         /// </summary>
         public bool MatchSameFailedScenarioText {
-            get { return matchSameFailedScenarioText; }
-            set { matchSameFailedScenarioText = value; }
+            get { return _matchSameFailedScenarioText; }
+            set { _matchSameFailedScenarioText = value; }
         }
 
         /// <summary>
 		/// Raises an event whenever a scenario fails the diff.
         /// </summary>
         public event ScenarioDiffEventHandler ScenarioDiff {
-            add    { onScenarioDiff += value; }
-            remove { onScenarioDiff -= value; }
+            add    { _onScenarioDiff += value; }
+            remove { _onScenarioDiff -= value; }
         }
 
         protected virtual void OnScenarioDiff(ScenarioDiffEventArgs e) {
-            if ( onScenarioDiff != null )
-                onScenarioDiff(this, e);
+            if ( _onScenarioDiff != null )
+                _onScenarioDiff(this, e);
         }
 
         public bool LogsMatch(TextReader baseLog, TextReader compareLog) {
@@ -213,35 +217,35 @@ namespace WFCTestLib.XmlLogTree.Util {
     public delegate void ScenarioDiffEventHandler(object sender, ScenarioDiffEventArgs e);
 
     public class ScenarioDiffEventArgs : EventArgs {
-        Scenario baseScenario;
-        Scenario compareScenario;
-		FailureReason reason;
-        bool overrideFailure = false;
+        Scenario _baseScenario;
+        Scenario _compareScenario;
+		FailureReason _reason;
+        bool _overrideFailure = false;
 
 		public ScenarioDiffEventArgs(Scenario baseScenario, Scenario compareScenario) : this(baseScenario, compareScenario, FailureReason.None)
         { }
 
 		public ScenarioDiffEventArgs(Scenario baseScenario, Scenario compareScenario, FailureReason reason) {
-            this.baseScenario = baseScenario;
-            this.compareScenario = compareScenario;
-			this.reason = reason;
+            this._baseScenario = baseScenario;
+            this._compareScenario = compareScenario;
+			this._reason = reason;
         }
 
         public Scenario BaseScenario {
-            get { return baseScenario; }
+            get { return _baseScenario; }
         }
 
         public Scenario CompareScenario {
-            get { return compareScenario; }
+            get { return _compareScenario; }
         }
 
 		public FailureReason FailureReason {
-			get { return reason; }
+			get { return _reason; }
 		}
 
         public bool OverrideFailure {
-            get { return overrideFailure; }
-            set { overrideFailure = value; }
+            get { return _overrideFailure; }
+            set { _overrideFailure = value; }
         }
     }
 }

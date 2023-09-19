@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 
@@ -7,7 +11,7 @@ namespace WFCTestLib.Util
     // <desc>
     //  Collection of methods which allow you to access a listview report row as
     //  if it was a grid (instead of in the Item & SubItem paradigm).  See
-    //  VisualStudio bug #187 opened 6/98.
+    //  VisualStudio Regression_Bug63
     // </desc>
     // </doc>
     public class ListViewHelper
@@ -104,7 +108,6 @@ namespace WFCTestLib.Util
 
             return s;
         }
-
 
         // <doc>
         // <desc>

@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -20,35 +24,33 @@ using MS.Internal.Mita.Foundation.Waiters;
 using System.Threading;
 using System.Reflection;
 
-//
+
 // Testcase:    CutAndPaste
 // Description: This test is to verify that clipboard functionality works 
 //              1) within a EH, 2) Across multiple EH's, and 3) between EH's and Avalon.
-// Author:      a-rickyt
-//
 public class CutAndPaste : ReflectBase
 {
     #region Testcase setup
 
     Edit _edit1;
     Edit _edit2;
-    ElementHost elementHost1 = new ElementHost();
-    ElementHost elementHost2 = new ElementHost();
-    ElementHost elementHost3 = new ElementHost();
-    ElementHost elementHost4 = new ElementHost();
-    ElementHost elementHost5 = new ElementHost();
-    SWC.StackPanel stackPanel1 = new SWC.StackPanel();
-    SWC.StackPanel stackPanel2 = new SWC.StackPanel();
-    SWC.TextBox avTextBox1 = new SWC.TextBox();
-    SWC.TextBox avTextBox2 = new SWC.TextBox();
-    SWC.TextBox avTextBox3 = new SWC.TextBox();
-    SWC.TextBox avTextBox4 = new SWC.TextBox();
-    SWC.RichTextBox avRichTextBox1 = new SWC.RichTextBox();
-    SWC.RichTextBox avRichTextBox2 = new SWC.RichTextBox();
-    SWF.RichTextBox wfRichTextBox1 = new SWF.RichTextBox();
+    ElementHost _elementHost1 = new ElementHost();
+    ElementHost _elementHost2 = new ElementHost();
+    ElementHost _elementHost3 = new ElementHost();
+    ElementHost _elementHost4 = new ElementHost();
+    ElementHost _elementHost5 = new ElementHost();
+    SWC.StackPanel _stackPanel1 = new SWC.StackPanel();
+    SWC.StackPanel _stackPanel2 = new SWC.StackPanel();
+    SWC.TextBox _avTextBox1 = new SWC.TextBox();
+    SWC.TextBox _avTextBox2 = new SWC.TextBox();
+    SWC.TextBox _avTextBox3 = new SWC.TextBox();
+    SWC.TextBox _avTextBox4 = new SWC.TextBox();
+    SWC.RichTextBox _avRichTextBox1 = new SWC.RichTextBox();
+    SWC.RichTextBox _avRichTextBox2 = new SWC.RichTextBox();
+    SWF.RichTextBox _wfRichTextBox1 = new SWF.RichTextBox();
     public SWF.Label label1 = new SWF.Label();
     public SWF.Label label2 = new SWF.Label();
-    Process notepad;
+    Process _notepad;
 
     public CutAndPaste(String[] args) : base(args) { }
 
@@ -58,38 +60,38 @@ public class CutAndPaste : ReflectBase
         this.Text = "CutAndPaste";
         this.Size = new System.Drawing.Size(400, 400);
 
-        avTextBox1.Name = "avTextBox1";
-        avTextBox1.Text = "Avalon TextBox 1";
+        _avTextBox1.Name = "avTextBox1";
+        _avTextBox1.Text = "Avalon TextBox 1";
 
-        avTextBox2.Name = "avTextBox2";
+        _avTextBox2.Name = "avTextBox2";
 
-        avTextBox3.Name = "avTextBox3";
-        avTextBox3.Text = "Avalon TextBox 3";
+        _avTextBox3.Name = "avTextBox3";
+        _avTextBox3.Text = "Avalon TextBox 3";
 
-        avTextBox4.Name = "avTextBox4";
+        _avTextBox4.Name = "avTextBox4";
 
-        stackPanel1.Children.Add(avTextBox1);
-        stackPanel1.Children.Add(avTextBox2);
+        _stackPanel1.Children.Add(_avTextBox1);
+        _stackPanel1.Children.Add(_avTextBox2);
 
-        avRichTextBox1.Name = "avRichTextBox1";
-        avRichTextBox2.Name = "avRichTextBox2";
-        avRichTextBox1.Height = 50;
-        avRichTextBox2.Height = 50;
-        avRichTextBox1.SelectionChanged += new RoutedEventHandler(avRichTextBox1_SelectionChanged);
-        avRichTextBox2.SelectionChanged += new RoutedEventHandler(avRichTextBox2_SelectionChanged);
+        _avRichTextBox1.Name = "avRichTextBox1";
+        _avRichTextBox2.Name = "avRichTextBox2";
+        _avRichTextBox1.Height = 50;
+        _avRichTextBox2.Height = 50;
+        _avRichTextBox1.SelectionChanged += new RoutedEventHandler(avRichTextBox1_SelectionChanged);
+        _avRichTextBox2.SelectionChanged += new RoutedEventHandler(avRichTextBox2_SelectionChanged);
 
         Ellipse ellipse = new Ellipse();
         ellipse.Width = 100;
         ellipse.Height = 30;
         ellipse.Fill = System.Windows.Media.Brushes.Blue;
         ellipse.Stroke = System.Windows.Media.Brushes.Red;
-        new System.Windows.Documents.InlineUIContainer(ellipse, avRichTextBox1.Selection.Start);
+        new System.Windows.Documents.InlineUIContainer(ellipse, _avRichTextBox1.Selection.Start);
 
-        wfRichTextBox1.Name = "wfRichTextBox1";
-        wfRichTextBox1.Location = new System.Drawing.Point(20, 180);
-	wfRichTextBox1.Width = 150;
-        wfRichTextBox1.SelectionChanged += new EventHandler(wfRichTextBox1_SelectionChanged);
-        Controls.Add(wfRichTextBox1);
+        _wfRichTextBox1.Name = "wfRichTextBox1";
+        _wfRichTextBox1.Location = new System.Drawing.Point(20, 180);
+	_wfRichTextBox1.Width = 150;
+        _wfRichTextBox1.SelectionChanged += new EventHandler(wfRichTextBox1_SelectionChanged);
+        Controls.Add(_wfRichTextBox1);
 
         label1.AutoSize = true;
         Controls.Add(label1);
@@ -97,61 +99,61 @@ public class CutAndPaste : ReflectBase
         Controls.Add(label2);
 
         //Create Element Host 1
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = stackPanel1;
-        elementHost1.Location = new System.Drawing.Point(20, 20);
-        elementHost1.BackColor = Color.Red;
-        elementHost1.AutoSize = true;
-        Controls.Add(elementHost1);
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _stackPanel1;
+        _elementHost1.Location = new System.Drawing.Point(20, 20);
+        _elementHost1.BackColor = Color.Red;
+        _elementHost1.AutoSize = true;
+        Controls.Add(_elementHost1);
 
         //Create Element Host 2
-        elementHost2.Name = "elementHost2";
-        elementHost2.Child = avTextBox3;
-        elementHost2.Location = new System.Drawing.Point(20, 100);
-        elementHost2.BackColor = Color.Red;
-        elementHost2.AutoSize = true;
-        Controls.Add(elementHost2);
+        _elementHost2.Name = "elementHost2";
+        _elementHost2.Child = _avTextBox3;
+        _elementHost2.Location = new System.Drawing.Point(20, 100);
+        _elementHost2.BackColor = Color.Red;
+        _elementHost2.AutoSize = true;
+        Controls.Add(_elementHost2);
 
         //Create Element Host 3
-        elementHost3.Name = "elementHost3";
-        elementHost3.Child = avTextBox4;
-        elementHost3.Location = new System.Drawing.Point(20, 130);
-        elementHost3.BackColor = Color.Red;
-        elementHost3.AutoSize = true;
-        Controls.Add(elementHost3);
+        _elementHost3.Name = "elementHost3";
+        _elementHost3.Child = _avTextBox4;
+        _elementHost3.Location = new System.Drawing.Point(20, 130);
+        _elementHost3.BackColor = Color.Red;
+        _elementHost3.AutoSize = true;
+        Controls.Add(_elementHost3);
 
         //Create Element Host 4
-        elementHost4.Name = "elementHost4";
-        elementHost4.Child = avRichTextBox1;
-        elementHost4.Location = new System.Drawing.Point(180, 20);
-        elementHost4.BackColor = Color.Red;
-        Controls.Add(elementHost4);
+        _elementHost4.Name = "elementHost4";
+        _elementHost4.Child = _avRichTextBox1;
+        _elementHost4.Location = new System.Drawing.Point(180, 20);
+        _elementHost4.BackColor = Color.Red;
+        Controls.Add(_elementHost4);
 
         //Create Element Host 5
-        elementHost5.Name = "elementHost5";
-        elementHost5.Child = avRichTextBox2;
-        elementHost5.Location = new System.Drawing.Point(180, 160);
-        elementHost5.BackColor = Color.Red;
-        Controls.Add(elementHost5);
+        _elementHost5.Name = "elementHost5";
+        _elementHost5.Child = _avRichTextBox2;
+        _elementHost5.Location = new System.Drawing.Point(180, 160);
+        _elementHost5.BackColor = Color.Red;
+        Controls.Add(_elementHost5);
 
         base.InitTest(p);
     }
 
     void wfRichTextBox1_SelectionChanged(object sender, EventArgs e)
     {
-        label1.Text = wfRichTextBox1.Text;
+        label1.Text = _wfRichTextBox1.Text;
     }
     void avRichTextBox1_SelectionChanged(object sender, RoutedEventArgs e)
     {
         System.Windows.Documents.TextRange textRange1 = new System.Windows.Documents.TextRange(
-            avRichTextBox1.Document.ContentStart, avRichTextBox1.Document.ContentEnd);
+            _avRichTextBox1.Document.ContentStart, _avRichTextBox1.Document.ContentEnd);
 
         label1.Text = textRange1.Text;
     }
     void avRichTextBox2_SelectionChanged(object sender, RoutedEventArgs e)
     {
         System.Windows.Documents.TextRange textRange2 = new System.Windows.Documents.TextRange(
-            avRichTextBox2.Document.ContentStart, avRichTextBox2.Document.ContentEnd);
+            _avRichTextBox2.Document.ContentStart, _avRichTextBox2.Document.ContentEnd);
 
         label2.Text = textRange2.Text;
     }
@@ -174,7 +176,7 @@ public class CutAndPaste : ReflectBase
         }
         if (scenario.Name == "Scenario6")
         {
-            notepad = Process.Start(Environment.SystemDirectory + @"\notepad.exe");
+            _notepad = Process.Start(Environment.SystemDirectory + @"\notepad.exe");
 	    Utilities.SleepDoEvents(10);
         }
         return base.BeforeScenario(p, scenario);
@@ -184,7 +186,7 @@ public class CutAndPaste : ReflectBase
     {
         if (scenario.Name == "Scenario6")
         {
-            notepad.Kill();
+            _notepad.Kill();
         }
 
         base.AfterScenario(p, scenario, sr);
@@ -423,7 +425,7 @@ public class CutAndPaste : ReflectBase
     }
 
     //Scenario temporarily removed.  Avalon currently does not support copying images (by design).
-    //See WindowsOSBugs 1532320 for more details.
+    //See Regression_Bug1 for more details.
     /*
     [Scenario("Cut, Copy and Paste Image between EH controls in a single EH.")]
     public ScenarioResult Scenario7(TParams p)
@@ -474,8 +476,6 @@ public class CutAndPaste : ReflectBase
             Utilities.BitmapsIdentical(bmp2, bmpOriginal),
             "Failed at Copy and Paste Image between EH controls in a single EH.", p.log);
        
-        p.log.LogKnownBug(BugDb.WindowsOSBugs, 1532320, 
-            "Known bug: Cannot cut/copy/paste image from Avalon RichTextBox");
        
         return sr;
     }
@@ -554,14 +554,14 @@ public class CutAndPaste : ReflectBase
 //class WinFormWindow creates a new WinForm window with one RichTextBox
 public class WinFormWindow : SWF.Form
 {
-    CutAndPaste parent;
+    CutAndPaste _parent;
     public SWF.RichTextBox wfRichTextBox = new SWF.RichTextBox();
     public SWC.RichTextBox avRichTextBox = new SWC.RichTextBox();
-    ElementHost elementHost1 = new ElementHost();
+    ElementHost _elementHost1 = new ElementHost();
 
     public WinFormWindow(CutAndPaste parent)
     {
-        this.parent = parent;
+        this._parent = parent;
         this.SuspendLayout();
         // 
         // wfRichTextBox
@@ -579,11 +579,11 @@ public class WinFormWindow : SWF.Form
         // 
         // elementHost1
         // 
-        this.elementHost1.Location = new System.Drawing.Point(25, 123);
-        this.elementHost1.Name = "elementHost1";
-        this.elementHost1.Child = avRichTextBox;
+        this._elementHost1.Location = new System.Drawing.Point(25, 123);
+        this._elementHost1.Name = "elementHost1";
+        this._elementHost1.Child = avRichTextBox;
         //this.elementHost1.AutoSize = true;
-        this.Controls.Add(this.elementHost1);
+        this.Controls.Add(this._elementHost1);
         // 
         // winform
         // 
@@ -603,12 +603,12 @@ public class WinFormWindow : SWF.Form
         System.Windows.Documents.TextRange textRange = new System.Windows.Documents.TextRange(
             avRichTextBox.Document.ContentStart, avRichTextBox.Document.ContentEnd);
 
-        parent.label1.Text = textRange.Text;
+        _parent.label1.Text = textRange.Text;
     }
 
     void wfRichTextBox_SelectionChanged(object sender, EventArgs e)
     {
-        parent.label1.Text = wfRichTextBox.Text;
+        _parent.label1.Text = wfRichTextBox.Text;
     }
 }
 

@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace WFCTestLib.Util {
     using System;
     using System.Windows.Forms;
@@ -12,21 +16,21 @@ namespace WFCTestLib.Util {
     ///     then TimesFired returns the number of times the event was fired.
     /// </summary
     public abstract class EventCounterBase {
-        private int fired = 0;
+        private int _fired = 0;
 
         /// <summary>
         ///     The number of times the event has been fired.
         /// </summary
         public virtual int TimesFired {
-            get { return fired; }
-            set { fired = value; }
+            get { return _fired; }
+            set { _fired = value; }
         }
 
         /// <summary>
         ///     Reset the TimesFired counter to 0.
         /// </summary
         public virtual void Reset() {
-            fired = 0;
+            _fired = 0;
         }
     }
 
@@ -35,18 +39,18 @@ namespace WFCTestLib.Util {
     ///     events.
     /// </summary
     public class EventCounter : EventCounterBase {
-        private EventHandler handler;
-        private EventArgs eventArgs;
+        private EventHandler _handler;
+        private EventArgs _eventArgs;
 
         public EventCounter() {
-            handler = new EventHandler(Handler);
+            _handler = new EventHandler(Handler);
         }
 
         /// <summary>
         ///     The EventArgs passed to the event handler.
         /// </summary>
         public EventArgs EventArgs {
-            get { return eventArgs; }
+            get { return _eventArgs; }
         }
 
         /// <summary>
@@ -54,7 +58,7 @@ namespace WFCTestLib.Util {
         ///     you are testing Button1.Click, you coud say "Button1.Click += counter.EventHandler;"
         /// </summary>
         public EventHandler EventHandler {
-            get { return handler; }
+            get { return _handler; }
         }
 
         /// <summary>
@@ -62,7 +66,7 @@ namespace WFCTestLib.Util {
         /// </summary>
         public override void Reset() {
             base.Reset();
-            eventArgs = null;
+            _eventArgs = null;
         }
 
         /// <summary>
@@ -70,7 +74,7 @@ namespace WFCTestLib.Util {
         /// </summary>
         private void Handler(object s, EventArgs e) {
             ++this.TimesFired;
-            eventArgs = e;
+            _eventArgs = e;
         }
     }
 }

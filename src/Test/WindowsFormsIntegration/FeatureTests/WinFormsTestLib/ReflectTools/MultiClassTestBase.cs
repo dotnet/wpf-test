@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -9,23 +13,18 @@ using WFCTestLib.Log;
 namespace ReflectTools {
 	/// <remarks>
 	/// Base class for multi-class tests, providing functionality for excluding classes and members,
-	/// listing known bugs, and logging bug summaries.
-	/// 
-	/// Author: KevinTao
-	/// </remarks>
+	/// listing known bugs, and logging 
+
 	public class MultiClassTestBase : ReflectBase {
-		private string[] m_excludedClasses = new string[0];
-		private string[] m_excludedMembers = new string[0];
-		private KnownBug[] m_knownBugs = new KnownBug[0];
+		private string[] _excludedClasses = new string[0];
+		private string[] _excludedMembers = new string[0];
+		private KnownBug[] _knownBugs = new KnownBug[0];
 
 		// Stat tracking: when LogKnownBugInfo is called it'll keep track of what bugs
 		// were logged, and how many unknown bugs there were so these can be reported
 		// at the end of the test.
-		//
-		// TODO: Implement a generic HashSet<T> - only unique items, and fast lookup.
-		//		private Dictionary<KnownBug, KnownBug> m_knownBugsLogged = new Dictionary<KnownBug, KnownBug>();
-		private List<KnownBug> m_knownBugsLogged = new List<KnownBug>();
-		private int m_unknownBugCount = 0;
+		private List<KnownBug> _knownBugsLogged = new List<KnownBug>();
+		private int _unknownBugCount = 0;
 
 		public MultiClassTestBase(string[] args) : base(args) { }
 
@@ -35,8 +34,8 @@ namespace ReflectTools {
 		/// </summary>
 		/// <value>An array of fully-qualified class names.</value>
 		public string[] ExcludedClasses {
-			get { return m_excludedClasses; }
-			set { m_excludedClasses = value; }
+			get { return _excludedClasses; }
+			set { _excludedClasses = value; }
 		}
 
 		/// <summary>
@@ -49,19 +48,19 @@ namespace ReflectTools {
 		/// </summary>
 		/// <value>An array of member names of the form "Class.Member".</value>
 		public string[] ExcludedMembers {
-			get { return m_excludedMembers; }
-			set { m_excludedMembers = value; }
+			get { return _excludedMembers; }
+			set { _excludedMembers = value; }
 		}
 
 		/// <summary>
 		/// A list of known bugs associated with class members.  Use LogKnownBugInfo()
-		/// to log this bug info and track bug stats (which known bugs were logged, and
-		/// how many unknown bugs were detected.
-		/// </summary>
-		/// <value>An array of KnownBugs.</value>
+		/// to log this 
+
+
+
 		public KnownBug[] KnownBugs {
-			get { return m_knownBugs; }
-			set { m_knownBugs = value; }
+			get { return _knownBugs; }
+			set { _knownBugs = value; }
 		}
 
 		/// <summary>
@@ -69,7 +68,7 @@ namespace ReflectTools {
 		/// </summary>
 		/// <value>A List of logged known bugs.</value>
 		public List<KnownBug> KnownBugsLogged {
-			get { return m_knownBugsLogged; }
+			get { return _knownBugsLogged; }
 		}
 
 		/// <summary>
@@ -77,7 +76,7 @@ namespace ReflectTools {
 		/// </summary>
 		/// <value>The number of unknown bugs detected by LogKnownBugInfo().</value>
 		public int UnknownBugCount {
-			get { return m_unknownBugCount; }
+			get { return _unknownBugCount; }
 		}
 
 		/// <summary>
@@ -111,13 +110,13 @@ namespace ReflectTools {
 		}
 
 		/// <summary>
-		/// If the given MemberInfo is found in one of the KnownBugs, the known bug information
-		/// will be output to the log.  Otherwise, alternateFailText will be written to the log
-		/// if it is not null or empty.
-		/// </summary>
-		/// <param name="log">Log object to write to.</param>
-		/// <param name="mi">MemberInfo to look for in KnownBugs collection</param>
-		/// <param name="alternateFailText">Alternate text to output if bug is not known.</param>
+		/// If the given MemberInfo is found in one of the KnownBugs, the known 
+
+
+
+
+
+
 		public void LogKnownBugInfo(Log log, MemberInfo mi, string alternateFailText) {
 			bool foundBug = false;
 			foreach (KnownBug bug in KnownBugs) {
@@ -125,14 +124,13 @@ namespace ReflectTools {
 					foundBug = true;
 					log.LogKnownBug(bug.BugDb, bug.BugId);
 
-					// TODO: can yank this when we move to a HashSet<KnownBug>
-					if (!m_knownBugsLogged.Contains(bug))
-						m_knownBugsLogged.Add(bug);
+					if (!_knownBugsLogged.Contains(bug))
+						_knownBugsLogged.Add(bug);
 				}
 			}
 
 			if (!foundBug) {
-				m_unknownBugCount++;
+				_unknownBugCount++;
 
 				if (!string.IsNullOrEmpty(alternateFailText))
 					log.WriteLine(alternateFailText);
@@ -140,10 +138,10 @@ namespace ReflectTools {
 		}
 
 		/// <summary>
-		/// Overload of LogKnownBugInfo where alternate text defaults to "NO KNOWN BUG".
-		/// </summary>
-		/// <param name="log">Log object to write to.</param>
-		/// <param name="mi">MemberInfo to look for in KnownBugs collection</param>
+		/// Overload of LogKnownBugInfo where alternate text defaults to "NO KNOWN 
+
+
+
 		public void LogKnownBugInfo(Log log, MemberInfo mi) {
 			LogKnownBugInfo(log, mi, "NO KNOWN BUG");
 		}
@@ -151,11 +149,11 @@ namespace ReflectTools {
 		public void LogBugSummary(Log log) {
 			log.WriteTag("BugSummary", false);
 			log.WriteTag("KnownBugs", false);
-			foreach ( KnownBug bug in m_knownBugsLogged ) {
+			foreach ( KnownBug bug in _knownBugsLogged ) {
 				log.WriteLine(bug.ToString());
 			}
 			log.CloseTag();
-			log.WriteTag("UnknownBugs", true, new LogAttribute("Count", m_unknownBugCount.ToString()));
+			log.WriteTag("UnknownBugs", true, new LogAttribute("Count", _unknownBugCount.ToString()));
 			log.CloseTag();
 		}
 
@@ -170,11 +168,11 @@ namespace ReflectTools {
 
             buf.Append("Known Bugs: ");
 
-            for (int i = 0; i < m_knownBugsLogged.Count; i++) {
-                if (i < m_knownBugsLogged.Count - 1)
-                    buf.Append(m_knownBugsLogged[i].BugId + ",");
+            for (int i = 0; i < _knownBugsLogged.Count; i++) {
+                if (i < _knownBugsLogged.Count - 1)
+                    buf.Append(_knownBugsLogged[i].BugId + ",");
                 else
-                    buf.Append(m_knownBugsLogged[i].BugId);
+                    buf.Append(_knownBugsLogged[i].BugId);
             }
 
             return buf.ToString();
@@ -211,28 +209,28 @@ namespace ReflectTools {
 
 	#region KnownBug class
 	/// <remarks>
-	/// Represents a known bug associated with a class member.
-	/// </remarks>
+	/// Represents a known 
+
 	public class KnownBug {
-		List<string> m_memberNames = new List<string>();
-		BugDb m_bugDb;
-		int m_bugId;
+		List<string> _memberNames = new List<string>();
+		BugDb _bugDb;
+		int _bugId;
 
 		/// <summary>
 		/// Construct a KnownBug.
 		/// </summary>
-		/// <param name="bugDb">Bug database</param>
-		/// <param name="bugId">Bug ID</param>
-		/// <param name="memberNames">In the form of "Class.MemberName"</param>
+		/// <param name="bugDb">
+
+
 		public KnownBug(BugDb bugDb, int bugId, string[] memberNames) {
 			// HACK: string[] is supposed to implement IList<T> but it doesn't yet.
 			// m_memberNames.AddRange(memberNames);
 			foreach (string memberName in memberNames) {
-				m_memberNames.Add(memberName);
+				_memberNames.Add(memberName);
 			}
 
-			m_bugDb = bugDb;
-			m_bugId = bugId;
+			_bugDb = bugDb;
+			_bugId = bugId;
 		}
 
 		public KnownBug(BugDb bugDb, int bugId, string memberName)	: this(bugDb, bugId, new string[] { memberName }) { }
@@ -240,27 +238,27 @@ namespace ReflectTools {
 		public KnownBug(int bugId, string memberName)				: this(BugDb.VSWhidbey, bugId, memberName) { }
 
 		public List<string> MemberNames {
-			get { return m_memberNames; }
+			get { return _memberNames; }
 		}
 
 		public BugDb BugDb {
-			get { return m_bugDb; }
-			set { m_bugDb = value; }
+			get { return _bugDb; }
+			set { _bugDb = value; }
 		}
 
 		public int BugId {
-			get { return m_bugId; }
-			set { m_bugId = value; }
+			get { return _bugId; }
+			set { _bugId = value; }
 		}
 
 		/// <summary>
-		/// Does this bug cover the member represented by mi.  Also includes base classes
-		/// in the search, i.e. Button.Text is covered by Control.Text.
-		/// </summary>
-		/// <param name="mi">Is mi covered by this bug?</param>
-		/// <returns>True if this bug is associated with mi, false otherwise.</returns>
+		/// Does this 
+
+
+
+
 		public bool CoversMember(MemberInfo mi) {
-			foreach (string memberName in m_memberNames) {
+			foreach (string memberName in _memberNames) {
 				if (ReflectionUtils.MemberMatchesName(mi, memberName))
 					return true;
 			}
@@ -269,13 +267,13 @@ namespace ReflectTools {
 		}
 
 		public override string ToString() {
-			return m_bugDb + " #" + m_bugId;
+			return _bugDb + " #" + _bugId;
 		}
 
 		// Same implementation as ToString() but we don't want to tie this method to
 		// ToString().
 		public override int GetHashCode() {
-			return (m_bugDb + " #" + m_bugId).GetHashCode();
+			return (_bugDb + " #" + _bugId).GetHashCode();
 		}
 	}
 	#endregion

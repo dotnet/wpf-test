@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -13,12 +17,8 @@ using MS.Internal.Mita.Foundation.Controls;
 using System.Reflection;
 
 
-//
 // Testcase:    DragDropBetweenEHAndWinform
 // Description: Drag And Drop Between WinForm and EH
-// Author:      pachan
-//
-//
 public class DragDropBetweenEHAndWinform : ReflectBase
 {
     #region Testcase setup
@@ -39,18 +39,16 @@ public class DragDropBetweenEHAndWinform : ReflectBase
     //==========================================
 
     #region CLASSVARS
-    ElementHost eh = null;
-    System.Windows.Forms.TextBox wfText = null;
-    System.Windows.Controls.TextBox avText = null;
+    ElementHost _eh = null;
+    System.Windows.Forms.TextBox _wfText = null;
+    System.Windows.Controls.TextBox _avText = null;
     //Mita wrappers for TextBoxes
     Edit _edit1 = null;
     Edit _edit2 = null;
     #endregion
 
-
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        
         switch (scenario.Name)
         {
             case "Scenario1":
@@ -64,7 +62,6 @@ public class DragDropBetweenEHAndWinform : ReflectBase
             case "Scenario3":
                 SetupScenario3(p);
                 break;
-
 
             case "Scenario4":
                 SetupScenario4(p);
@@ -84,86 +81,81 @@ public class DragDropBetweenEHAndWinform : ReflectBase
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result)
     {
         this.Controls.Clear();
-        wfText = null ;
-        avText = null;
-        eh = null;
+        _wfText = null ;
+        _avText = null;
+        _eh = null;
         base.AfterScenario(p, scenario, result);
     }
 
     #region SCENARIOSETUP
     private void SetupScenario1(TParams p)
-    {
-        
-        avText = new System.Windows.Controls.TextBox();
-        avText.Name = "AVTextBox";
-        avText.Text = "Avalon Text Box";
-        
+    {        
+        _avText = new System.Windows.Controls.TextBox();
+        _avText.Name = "AVTextBox";
+        _avText.Text = "Avalon Text Box";        
         
         //Create a Winforms TextBox
-        wfText = new System.Windows.Forms.TextBox();
-        wfText.Name = "WFTextBox";
-        wfText.Text = "Winforms Text Box";
-        wfText.AllowDrop = true;
-        wfText.Dock = DockStyle.Bottom;
-        Controls.Add(wfText);
+        _wfText = new System.Windows.Forms.TextBox();
+        _wfText.Name = "WFTextBox";
+        _wfText.Text = "Winforms Text Box";
+        _wfText.AllowDrop = true;
+        _wfText.Dock = DockStyle.Bottom;
+        Controls.Add(_wfText);
 
         //Creat Element Host 
-        eh = new ElementHost();
-        eh.Dock = DockStyle.Top;
-        eh.Child = avText;
-        eh.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(eh);
+        _eh = new ElementHost();
+        _eh.Dock = DockStyle.Top;
+        _eh.Child = _avText;
+        _eh.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_eh);
 
         SetupEventAVToWF(p, System.Windows.DragDropEffects.Copy);
     }
 
     private  void SetupScenario2(TParams p)
-    {
-        
-        avText = new System.Windows.Controls.TextBox();
-        avText.Name = "AVTextBox";
-        avText.Text = "Avalon Text Box";
+    {        
+        _avText = new System.Windows.Controls.TextBox();
+        _avText.Name = "AVTextBox";
+        _avText.Text = "Avalon Text Box";
         
         //Create a Winforms TextBox
-        wfText = new System.Windows.Forms.TextBox();
-        wfText.Name = "WFTextBox";
-        wfText.Text = "Winforms Text Box";
-        wfText.AllowDrop = true;
-        wfText.Dock = DockStyle.Bottom;
-        Controls.Add(wfText);
+        _wfText = new System.Windows.Forms.TextBox();
+        _wfText.Name = "WFTextBox";
+        _wfText.Text = "Winforms Text Box";
+        _wfText.AllowDrop = true;
+        _wfText.Dock = DockStyle.Bottom;
+        Controls.Add(_wfText);
 
         //Creat Element Host 
-        eh = new ElementHost();
-        eh.Dock = DockStyle.Top;
-        eh.Child = avText;
-        eh.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(eh);
+        _eh = new ElementHost();
+        _eh.Dock = DockStyle.Top;
+        _eh.Child = _avText;
+        _eh.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_eh);
 
         SetupEventAVToWF(p, System.Windows.DragDropEffects.Move);
-
     }
 
     private void SetupScenario3(TParams p)
     {
-
-        avText = new System.Windows.Controls.TextBox();
-        avText.Name = "AVTextBox";
-        avText.Text = "Avalon Text Box";
+        _avText = new System.Windows.Controls.TextBox();
+        _avText.Name = "AVTextBox";
+        _avText.Text = "Avalon Text Box";
 
         //Create a Winforms TextBox
-        wfText = new System.Windows.Forms.TextBox();
-        wfText.Name = "WFTextBox";
-        wfText.Text = "Winforms Text Box";
-        wfText.AllowDrop = true;
-        wfText.Dock = DockStyle.Bottom;
-        Controls.Add(wfText);
+        _wfText = new System.Windows.Forms.TextBox();
+        _wfText.Name = "WFTextBox";
+        _wfText.Text = "Winforms Text Box";
+        _wfText.AllowDrop = true;
+        _wfText.Dock = DockStyle.Bottom;
+        Controls.Add(_wfText);
 
         //Creat Element Host 
-        eh = new ElementHost();
-        eh.Dock = DockStyle.Top;
-        eh.Child = avText;
-        eh.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(eh);
+        _eh = new ElementHost();
+        _eh.Dock = DockStyle.Top;
+        _eh.Child = _avText;
+        _eh.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_eh);
 
         SetupEventAVToWF(p, System.Windows.DragDropEffects.None);
     }
@@ -171,89 +163,84 @@ public class DragDropBetweenEHAndWinform : ReflectBase
     private void SetupScenario4(TParams p)
     {
         //Avalon TextBox 
-        avText = new System.Windows.Controls.TextBox();
-        avText.Name = "AVTextBox";
-        avText.Text = "Avalon Text Box";
-        avText.AllowDrop = true; 
+        _avText = new System.Windows.Controls.TextBox();
+        _avText.Name = "AVTextBox";
+        _avText.Text = "Avalon Text Box";
+        _avText.AllowDrop = true; 
 
         //Create a Winforms TextBox
-        wfText = new System.Windows.Forms.TextBox();
-        wfText.Name = "WFTextBox";
-        wfText.Text = "Winforms Text Box";
-        wfText.AllowDrop = true;
-        wfText.Dock = DockStyle.Bottom;
-        Controls.Add(wfText);
+        _wfText = new System.Windows.Forms.TextBox();
+        _wfText.Name = "WFTextBox";
+        _wfText.Text = "Winforms Text Box";
+        _wfText.AllowDrop = true;
+        _wfText.Dock = DockStyle.Bottom;
+        Controls.Add(_wfText);
 
         //Creat Element Host 
-        eh = new ElementHost();
-        eh.Dock = DockStyle.Top;
-        eh.Child = avText;
-        eh.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(eh);
+        _eh = new ElementHost();
+        _eh.Dock = DockStyle.Top;
+        _eh.Child = _avText;
+        _eh.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_eh);
         SetupEventWFToAV(p, System.Windows.Forms.DragDropEffects.Copy);
-
     }
 
     private void SetupScenario5(TParams p)
     {
         //Avalon TextBox 
-        avText = new System.Windows.Controls.TextBox();
-        avText.Name = "AVTextBox";
-        avText.Text = "Avalon Text Box";
-        avText.AllowDrop = true;
-
+        _avText = new System.Windows.Controls.TextBox();
+        _avText.Name = "AVTextBox";
+        _avText.Text = "Avalon Text Box";
+        _avText.AllowDrop = true;
 
         //Create a Winforms TextBox
-        wfText = new System.Windows.Forms.TextBox();
-        wfText.Name = "WFTextBox";
-        wfText.Text = "Winforms Text Box";
-        wfText.AllowDrop = true;
-        wfText.Dock = DockStyle.Bottom;
-        Controls.Add(wfText);
+        _wfText = new System.Windows.Forms.TextBox();
+        _wfText.Name = "WFTextBox";
+        _wfText.Text = "Winforms Text Box";
+        _wfText.AllowDrop = true;
+        _wfText.Dock = DockStyle.Bottom;
+        Controls.Add(_wfText);
 
         //Creat Element Host 
-        eh = new ElementHost();
-        eh.Dock = DockStyle.Top;
-        eh.Child = avText;
-        eh.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(eh);
+        _eh = new ElementHost();
+        _eh.Dock = DockStyle.Top;
+        _eh.Child = _avText;
+        _eh.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_eh);
 
         SetupEventWFToAV(p, System.Windows.Forms.DragDropEffects.Move);
     }
 
     private void SetupScenario6(TParams p)
     {
-
-        avText = new System.Windows.Controls.TextBox();
-        avText.Name = "AVTextBox";
-        avText.Text = "Avalon Text Box";
-        avText.AllowDrop = true;
+        _avText = new System.Windows.Controls.TextBox();
+        _avText.Name = "AVTextBox";
+        _avText.Text = "Avalon Text Box";
+        _avText.AllowDrop = true;
 
         //Create a Winforms TextBox
-        wfText = new System.Windows.Forms.TextBox();
-        wfText.Name = "WFTextBox";
-        wfText.Text = "Winforms Text Box";
-        wfText.AllowDrop = true;
-        wfText.Dock = DockStyle.Bottom;
-        Controls.Add(wfText);
+        _wfText = new System.Windows.Forms.TextBox();
+        _wfText.Name = "WFTextBox";
+        _wfText.Text = "Winforms Text Box";
+        _wfText.AllowDrop = true;
+        _wfText.Dock = DockStyle.Bottom;
+        Controls.Add(_wfText);
 
         //Creat Element Host 
-        eh = new ElementHost();
-        eh.Dock = DockStyle.Top;
-        eh.Child = avText;
-        eh.Size = new System.Drawing.Size(60, 25);
-        Controls.Add(eh);
+        _eh = new ElementHost();
+        _eh.Dock = DockStyle.Top;
+        _eh.Child = _avText;
+        _eh.Size = new System.Drawing.Size(60, 25);
+        Controls.Add(_eh);
 
         SetupEventWFToAV(p, System.Windows.Forms.DragDropEffects.None);
-
     }
     #endregion
 
     #region Scenarios
     //WF TextBox is the source and Avalon TextBox the target
     [Scenario("Drag drop text from Avalon control to Winform conrol - DragDropEffects = Copy.")]
-    public ScenarioResult Scenario1(TParams p)
-    
+    public ScenarioResult Scenario1(TParams p)    
     {
         ScenarioResult sr = new ScenarioResult();
         GetEditControls(p);  //Get Mita wrappers
@@ -273,7 +260,6 @@ public class DragDropBetweenEHAndWinform : ReflectBase
         }
         return sr;
     }
-
 
     [Scenario("Drag drop text from Avalon control to Winform conrol - DragDropEffects = Move.")]
     public ScenarioResult Scenario2(TParams p)
@@ -297,7 +283,6 @@ public class DragDropBetweenEHAndWinform : ReflectBase
         return sr;
     }
 
-
     [Scenario("Drag drop text from Avalon control to Winform conrol - DragDropEffects = None.")]
     public ScenarioResult Scenario3(TParams p)
     {
@@ -309,8 +294,7 @@ public class DragDropBetweenEHAndWinform : ReflectBase
 
         }
         catch (Exception)
-        {
-            
+        {            
             throw;
         }
 
@@ -329,8 +313,7 @@ public class DragDropBetweenEHAndWinform : ReflectBase
         return sr;
     }
 
-
-     //Avalon Text is the source and WF TextBox the target
+    //Avalon Text is the source and WF TextBox the target
     [Scenario("Drag drop text from Winform conrol to Avalon Control on EH - DragDropEffects = Copy.")]
     public ScenarioResult Scenario4(TParams p)
     {
@@ -352,7 +335,6 @@ public class DragDropBetweenEHAndWinform : ReflectBase
         }
         return sr;
     }
-
     
     [Scenario("Drag drop text from Winform conrol to Avalon Control on EH - DragDropEffects = Move.")]
     public ScenarioResult Scenario5(TParams p)
@@ -389,7 +371,6 @@ public class DragDropBetweenEHAndWinform : ReflectBase
         }
         catch (Exception)
         {
-
             throw;
         }
 
@@ -409,7 +390,6 @@ public class DragDropBetweenEHAndWinform : ReflectBase
         return sr;
     }
     #endregion
-
 
     #region Helper Functions
 
@@ -467,9 +447,9 @@ public class DragDropBetweenEHAndWinform : ReflectBase
 
     void SetupEventWFToAV(TParams p, System.Windows.Forms.DragDropEffects _ddEffect)
     {
-        avText.PreviewDragEnter += delegate(object o, System.Windows.DragEventArgs eArgs)
+        _avText.PreviewDragEnter += delegate(object o, System.Windows.DragEventArgs eArgs)
         {
-            p.log.WriteLine("Got Drag Enter: " + avText);
+            p.log.WriteLine("Got Drag Enter: " + _avText);
             if (eArgs.Data.GetDataPresent(typeof(string)))
                 eArgs.Effects = (System.Windows.DragDropEffects)_ddEffect;
             else
@@ -477,18 +457,18 @@ public class DragDropBetweenEHAndWinform : ReflectBase
             eArgs.Handled = true;
         };
 
-        avText.PreviewDrop += delegate(object o, System.Windows.DragEventArgs eArgs)
+        _avText.PreviewDrop += delegate(object o, System.Windows.DragEventArgs eArgs)
         {
-            p.log.WriteLine("Got Drop event " + avText);
+            p.log.WriteLine("Got Drop event " + _avText);
             System.Windows.Controls.TextBox txtBox = o as System.Windows.Controls.TextBox;
             if (eArgs.Data.GetDataPresent(typeof(string)))
             {
                 string s = (String)eArgs.Data.GetData(typeof(String));
-                avText.Text = s;
+                _avText.Text = s;
             }
             eArgs.Handled = true;
         };
-        wfText.MouseDown += delegate(object o, System.Windows.Forms.MouseEventArgs eArgs)
+        _wfText.MouseDown += delegate(object o, System.Windows.Forms.MouseEventArgs eArgs)
         {
             p.log.WriteLine("Got Mouse Down");
             System.Windows.Forms.TextBox txtBox = o as System.Windows.Forms.TextBox;
@@ -500,26 +480,26 @@ public class DragDropBetweenEHAndWinform : ReflectBase
 
     void SetupEventAVToWF(TParams p, System.Windows.DragDropEffects _ddEffect)
     {
-        wfText.DragEnter += delegate(object o, System.Windows.Forms.DragEventArgs eArgs)
+        _wfText.DragEnter += delegate(object o, System.Windows.Forms.DragEventArgs eArgs)
         {
-            p.log.WriteLine("Got Drag Enter: " + wfText);
+            p.log.WriteLine("Got Drag Enter: " + _wfText);
             if (eArgs.Data.GetDataPresent(typeof(string)))
                 eArgs.Effect = (System.Windows.Forms.DragDropEffects)_ddEffect;
             else
                 eArgs.Effect = System.Windows.Forms.DragDropEffects.None;
         };
 
-        wfText.DragDrop += delegate(object o, System.Windows.Forms.DragEventArgs eArgs)
+        _wfText.DragDrop += delegate(object o, System.Windows.Forms.DragEventArgs eArgs)
         {
-            p.log.WriteLine("Got Drop event " + wfText);
+            p.log.WriteLine("Got Drop event " + _wfText);
             System.Windows.Controls.TextBox txtBox = o as System.Windows.Controls.TextBox;
             if (eArgs.Data.GetDataPresent(typeof(string)))
             {
                 string s = (String)eArgs.Data.GetData(typeof(String));
-                wfText.Text = s;
+                _wfText.Text = s;
             }
         };
-        avText.PreviewMouseDown += delegate(object o, System.Windows.Input.MouseButtonEventArgs eArgs)
+        _avText.PreviewMouseDown += delegate(object o, System.Windows.Input.MouseButtonEventArgs eArgs)
         {
             p.log.WriteLine("Got Mouse Down");
             System.Windows.Controls.TextBox txtBox = o as System.Windows.Controls.TextBox;
