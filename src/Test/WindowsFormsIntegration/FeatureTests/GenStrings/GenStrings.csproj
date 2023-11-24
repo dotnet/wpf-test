@@ -1,0 +1,37 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood" >
+  <!--Automatically converted using custom WPF settings-->
+  <!--Import the settings-->
+  <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Settings.targets" />
+  <!--Leaf project Properties-->
+  <PropertyGroup>
+    <AssemblyName>GenStrings</AssemblyName>
+    <OutputType>Library</OutputType>
+    <SignAssemblyAttribute>true</SignAssemblyAttribute>
+    <AssemblyKeyFile>$(TestTrustedKey)</AssemblyKeyFile>
+    <OutputSubFolder>FeatureTests\WindowsFormsIntegration</OutputSubFolder>
+    <!--Auto-converted: BINPLACE_FLAGS-->
+    <BinplaceFlags>$(BinplaceFlags)</BinplaceFlags>
+  </PropertyGroup>
+  <!--Leaf Project Items-->
+  <ItemGroup>
+    <EmbeddedResource Include="IntlStrings.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IntlStrings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" >
+      <Name>TestRuntime</Name>
+      <Project>{C2FE511F-B1BA-42E2-A24F-41F93926DE51}</Project>
+    </ProjectReference>
+    <Reference Include="System" />
+    <Reference Include="System.xml" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <!--Import the targets-->
+  <Import Project="$(WpfTest)\Microsoft.Wpf.Test.targets" />
+</Project>
