@@ -25,18 +25,18 @@ public sealed class ElementHostTestSuite : DrtTestSuite
 {
     public ElementHostTestSuite() : base("ElementHostTestSuite") { }
 
-    ElementHost _elementHost;
-    SWF.Form _form;
-    SWC.Button _button;
+    ElementHost elementHost;
+    SWF.Form form;
+    SWC.Button button;
     public override DrtTest[] PrepareTests()
     {
-        _form = new SWF.Form();
-        _elementHost = new ElementHost();
-        _button = new SWC.Button();
-        _button.Content = "Avalon button";
-        _elementHost.Child = _button;
-        _form.Controls.Add(_elementHost);
-        _form.Show();
+        form = new SWF.Form();
+        elementHost = new ElementHost();
+        button = new SWC.Button();
+        button.Content = "Avalon button";
+        elementHost.Child = button;
+        form.Controls.Add(elementHost);
+        form.Show();
 
         return new DrtTest[] 
             {
@@ -47,31 +47,31 @@ public sealed class ElementHostTestSuite : DrtTestSuite
 
     private void TestVisibility()
     {
-        _elementHost.Visible = false;
-        DRT.Assert(!_elementHost.Child.IsVisible, "PropertyMapping didn't work for ElementHost visible (false)");
-        _elementHost.Visible = true;
-        DRT.Assert(_elementHost.Child.IsVisible, "PropertyMapping didn't work for ElementHost visible (true)");
+        elementHost.Visible = false;
+        DRT.Assert(!elementHost.Child.IsVisible, "PropertyMapping didn't work for ElementHost visible (false)");
+        elementHost.Visible = true;
+        DRT.Assert(elementHost.Child.IsVisible, "PropertyMapping didn't work for ElementHost visible (true)");
     }
 
     private void TestResize()
     {
-        _elementHost.AutoSize = true;
-        _form.PerformLayout();
+        elementHost.AutoSize = true;
+        form.PerformLayout();
         SWF.Application.DoEvents();
-        double originalWidth = _button.ActualWidth;
-        _form.PerformLayout();
-        _button.Content += " with a bunch of text";
+        double originalWidth = button.ActualWidth;
+        form.PerformLayout();
+        button.Content += " with a bunch of text";
         SWF.Application.DoEvents();
-        DRT.Assert(_button.ActualWidth > originalWidth, "ElementHost layout issue: Width didn't grow as hosted element grew");
+        DRT.Assert(button.ActualWidth > originalWidth, "ElementHost layout issue: Width didn't grow as hosted element grew");
 
-        _elementHost.AutoSize = false;
-        _elementHost.Width = 150;
-        _form.PerformLayout();
+        elementHost.AutoSize = false;
+        elementHost.Width = 150;
+        form.PerformLayout();
         SWF.Application.DoEvents();
-        originalWidth = _button.ActualWidth;
-        _form.PerformLayout();
-        _button.Content += " and even more text";
+        originalWidth = button.ActualWidth;
+        form.PerformLayout();
+        button.Content += " and even more text";
         SWF.Application.DoEvents();
-        DRT.AssertEqual(originalWidth, _button.ActualWidth, "ElementHost layout issue: Width grew when host's Width was explicitly set");
+        DRT.AssertEqual(originalWidth, button.ActualWidth, "ElementHost layout issue: Width grew when host's Width was explicitly set");
     }
 }
