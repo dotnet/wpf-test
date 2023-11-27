@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -19,14 +23,12 @@ using System.Reflection;
 //
 // Testcase:    DefaultPropertyValues
 // Description: Verify Default Property values for Element Host.
-// Author:      a-rickyt
 //
 public class DefaultPropertyValues : ReflectBase
 {
     #region Test case setup
 
-    ElementHost elementHost1;
-
+    ElementHost _elementHost1;
 
     public DefaultPropertyValues(String[] args) : base(args) { }
 
@@ -37,9 +39,9 @@ public class DefaultPropertyValues : ReflectBase
         base.InitTest(p);
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.BackColor = Color.Red;
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.BackColor = Color.Red;
+        Controls.Add(_elementHost1);
     }
 
     #endregion
@@ -51,14 +53,14 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(elementHost1.AutoSize == false, "Failed at AutoSize=False", p.log);
+        sr.IncCounters(_elementHost1.AutoSize == false, "Failed at AutoSize=False", p.log);
 
         SWC.Button avButton1 = new SWC.Button();
         avButton1.Content = "Avalon Button";
         avButton1.Background = SWM.Brushes.White;
-        elementHost1.Child = avButton1;
+        _elementHost1.Child = avButton1;
 
-        sr.IncCounters(elementHost1.AutoSize == false, "Failed at AutoSize=False", p.log);
+        sr.IncCounters(_elementHost1.AutoSize == false, "Failed at AutoSize=False", p.log);
 
         return sr;
     }
@@ -68,7 +70,7 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(elementHost1.Dock == SWF.DockStyle.None, "Failed at Dock=None", p.log);
+        sr.IncCounters(_elementHost1.Dock == SWF.DockStyle.None, "Failed at Dock=None", p.log);
 
         return sr;
     }
@@ -78,8 +80,8 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(elementHost1.Anchor == (SWF.AnchorStyles.Top | SWF.AnchorStyles.Left), 
-            "Failed at Anchor=Top, Left. Actual: " + elementHost1.Anchor.ToString(), p.log);
+        sr.IncCounters(_elementHost1.Anchor == (SWF.AnchorStyles.Top | SWF.AnchorStyles.Left), 
+            "Failed at Anchor=Top, Left. Actual: " + _elementHost1.Anchor.ToString(), p.log);
 
         return sr;
     }
@@ -89,7 +91,7 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(elementHost1.Top == 0 && elementHost1.Left == 0, "Failed at Top = Left = 0", p.log);
+        sr.IncCounters(_elementHost1.Top == 0 && _elementHost1.Left == 0, "Failed at Top = Left = 0", p.log);
 
         return sr;
     }
@@ -99,7 +101,7 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(200, elementHost1.Width, "Failed at Width = 200", p.log);
+        sr.IncCounters(200, _elementHost1.Width, "Failed at Width = 200", p.log);
 
         return sr;
     }
@@ -109,7 +111,7 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(100, elementHost1.Height, "Failed at Height = 100", p.log);
+        sr.IncCounters(100, _elementHost1.Height, "Failed at Height = 100", p.log);
 
         return sr;
     }
@@ -118,11 +120,11 @@ public class DefaultPropertyValues : ReflectBase
     public ScenarioResult Scenario7(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        sr.IncCounters(3, elementHost1.Margin.Top, "Failed at Margin.Top", p.log);
-        sr.IncCounters(3, elementHost1.Margin.Left, "Failed at Margin.Left", p.log);
-        sr.IncCounters(3, elementHost1.Margin.Right, "Failed at Margin.Right", p.log);
-        sr.IncCounters(3, elementHost1.Margin.Bottom, "Failed at Margin.Bottom", p.log);
-        sr.IncCounters(elementHost1.Margin.All == 3, "Failed at Margin = {3,3,3,3}", p.log);
+        sr.IncCounters(3, _elementHost1.Margin.Top, "Failed at Margin.Top", p.log);
+        sr.IncCounters(3, _elementHost1.Margin.Left, "Failed at Margin.Left", p.log);
+        sr.IncCounters(3, _elementHost1.Margin.Right, "Failed at Margin.Right", p.log);
+        sr.IncCounters(3, _elementHost1.Margin.Bottom, "Failed at Margin.Bottom", p.log);
+        sr.IncCounters(_elementHost1.Margin.All == 3, "Failed at Margin = {3,3,3,3}", p.log);
 
         return sr;
     }
@@ -132,7 +134,7 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(elementHost1.MinimumSize == new System.Drawing.Size(0, 0),
+        sr.IncCounters(_elementHost1.MinimumSize == new System.Drawing.Size(0, 0),
             "Failed at MinimumSize = 0,0", p.log);
 
         return sr;
@@ -143,7 +145,7 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(elementHost1.MaximumSize == new System.Drawing.Size(0, 0),
+        sr.IncCounters(_elementHost1.MaximumSize == new System.Drawing.Size(0, 0),
             "Failed at MaximumSize = 0,0", p.log);
 
         return sr;
@@ -154,7 +156,7 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(elementHost1.Visible == true, "Failed at Visible = true", p.log);
+        sr.IncCounters(_elementHost1.Visible == true, "Failed at Visible = true", p.log);
 
         return sr;
     }
@@ -164,7 +166,7 @@ public class DefaultPropertyValues : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        sr.IncCounters(elementHost1.Enabled == true, "Failed at Enabled = true", p.log);
+        sr.IncCounters(_elementHost1.Enabled == true, "Failed at Enabled = true", p.log);
 
         return sr;
     }

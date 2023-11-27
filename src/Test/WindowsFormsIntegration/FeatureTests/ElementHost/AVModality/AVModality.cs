@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -23,19 +27,18 @@ using MS.Internal.Mita.Foundation.Waiters;
 //
 // Testcase:    AVModality
 // Description: Verify the modality of Avalon windows launched from WinForms
-// Author:      a-rickyt
 //
 public class AVModality : ReflectBase
 {
     #region Testcase setup
 
-    SWF.Button wfButton1;
-    SWF.Button wfButton2;
-    SWF.Button wfButton3;
+    SWF.Button _wfButton1;
+    SWF.Button _wfButton2;
+    SWF.Button _wfButton3;
     Edit _edit1;
-    System.Windows.Window window1;
-    System.Windows.Window window2;
-    Bitmap bmp;
+    System.Windows.Window _window1;
+    System.Windows.Window _window2;
+    Bitmap _bmp;
 
     public AVModality(string[] args) : base(args) { }
 
@@ -47,28 +50,28 @@ public class AVModality : ReflectBase
         this.Left = 0;
         this.Top = 260;
 
-        wfButton1 = new SWF.Button();
-        wfButton1.Name = "wfButton1";
-        wfButton1.Text = "Launch a Modal AV Window";
-        wfButton1.AutoSize = true;
-        wfButton1.Click += new EventHandler(wfButton1_Click);
-        this.Controls.Add(wfButton1);
+        _wfButton1 = new SWF.Button();
+        _wfButton1.Name = "wfButton1";
+        _wfButton1.Text = "Launch a Modal AV Window";
+        _wfButton1.AutoSize = true;
+        _wfButton1.Click += new EventHandler(wfButton1_Click);
+        this.Controls.Add(_wfButton1);
 
-        wfButton2 = new SWF.Button();
-        wfButton2.Name = "wfButton2";
-        wfButton2.Text = "Launch a Non Modal AV Window";
-        wfButton2.AutoSize = true;
-        wfButton2.Location = new System.Drawing.Point(0, 50);
-        wfButton2.Click += new EventHandler(wfButton2_Click);
-        this.Controls.Add(wfButton2);
+        _wfButton2 = new SWF.Button();
+        _wfButton2.Name = "wfButton2";
+        _wfButton2.Text = "Launch a Non Modal AV Window";
+        _wfButton2.AutoSize = true;
+        _wfButton2.Location = new System.Drawing.Point(0, 50);
+        _wfButton2.Click += new EventHandler(wfButton2_Click);
+        this.Controls.Add(_wfButton2);
 
-        wfButton3 = new SWF.Button();
-        wfButton3.Name = "wfButton3";
-        wfButton3.Text = "Launch a Another Modal AV Window";
-        wfButton3.AutoSize = true;
-        wfButton3.Location = new System.Drawing.Point(0, 100);
-        wfButton3.Click += new EventHandler(wfButton3_Click);
-        this.Controls.Add(wfButton3);
+        _wfButton3 = new SWF.Button();
+        _wfButton3.Name = "wfButton3";
+        _wfButton3.Text = "Launch a Another Modal AV Window";
+        _wfButton3.AutoSize = true;
+        _wfButton3.Location = new System.Drawing.Point(0, 100);
+        _wfButton3.Click += new EventHandler(wfButton3_Click);
+        this.Controls.Add(_wfButton3);
 	
 	Utilities.SleepDoEvents(20);
 
@@ -78,70 +81,70 @@ public class AVModality : ReflectBase
     void wfButton1_Click(object sender, EventArgs e)
     {
         InitializeAvalonWindow();
-        window1.ShowDialog();
+        _window1.ShowDialog();
     }
 
     void wfButton2_Click(object sender, EventArgs e)
     {
         InitializeAvalonWindow();
-        window1.Show();
+        _window1.Show();
     }
 
     void wfButton3_Click(object sender, EventArgs e)
     {
         InitializeAnotherAvalonWindow();
-        window2.ShowDialog();
+        _window2.ShowDialog();
     }
 
     void avButton1_Click(object sender, RoutedEventArgs e)
     {
-        window1.Close();
+        _window1.Close();
     }
     void avButton2_Click(object sender, RoutedEventArgs e)
     {
-        window2.Close();
+        _window2.Close();
     }
 
     void InitializeAvalonWindow()
     {
-        window1 = new System.Windows.Window();
+        _window1 = new System.Windows.Window();
         SWC.Button avButton1 = new SWC.Button();
         SWC.Label label = new SWC.Label();
         SWC.StackPanel stackPanel = new SWC.StackPanel();
 
-        window1.Title = "AvalonWindow";
-        window1.Width = 300;
-        window1.Height = 300;
-        window1.Top = 0;
-        window1.Left = 0;
+        _window1.Title = "AvalonWindow";
+        _window1.Width = 300;
+        _window1.Height = 300;
+        _window1.Top = 0;
+        _window1.Left = 0;
         label.Content = "I am an Avalon Window";
         avButton1.Name = "avButton1";
         avButton1.Content = "Close Window";
         avButton1.Click += new RoutedEventHandler(avButton1_Click);
         stackPanel.Children.Add(label);
         stackPanel.Children.Add(avButton1);
-        window1.Content = stackPanel;
+        _window1.Content = stackPanel;
     }
 
     void InitializeAnotherAvalonWindow()
     {
-        window2 = new System.Windows.Window();
+        _window2 = new System.Windows.Window();
         SWC.Button avButton2 = new SWC.Button();
         SWC.Label label = new SWC.Label();
         SWC.StackPanel stackPanel = new SWC.StackPanel();
 
-        window2.Title = "AnotherAvalonWindow";
-        window2.Width = 300;
-        window2.Height = 300;
-        window2.Top = 0;
-        window2.Left = 300;
+        _window2.Title = "AnotherAvalonWindow";
+        _window2.Width = 300;
+        _window2.Height = 300;
+        _window2.Top = 0;
+        _window2.Left = 300;
         label.Content = "I am another Avalon Window";
         avButton2.Name = "avButton2";
         avButton2.Content = "Close Window";
         avButton2.Click += new RoutedEventHandler(avButton2_Click);
         stackPanel.Children.Add(label);
         stackPanel.Children.Add(avButton2);
-        window2.Content = stackPanel;
+        _window2.Content = stackPanel;
     }
 
     #endregion
@@ -161,11 +164,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(300);
 
         //Verify that Modal AV Window is launched.
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) >= 75,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) >= 75,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%. Expected >= 75.", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%. Expected >= 75.", p.log);
 
         //Verify that the window is really modal
         if (!GetEditControls(p, "AVModality", "wfButton2"))
@@ -191,11 +194,11 @@ public class AVModality : ReflectBase
         _edit1.Click();
         Utilities.SleepDoEvents(20);
         //Verify that Modal AV Window has been closed.
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) <= 40,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) <= 40,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%. Expected <= 40.", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%. Expected <= 40.", p.log);
 
         return sr;
     }
@@ -213,11 +216,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         //Verify that Non-Modal AV Window is launched.
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) >= 75,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) >= 75,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%. Expected >= 75", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%. Expected >= 75", p.log);
 
         //Verify that the window is really non-modal
         if (!GetEditControls(p, "AVModality", "wfButton2"))
@@ -226,11 +229,11 @@ public class AVModality : ReflectBase
         }
         _edit1.SetFocus();
         Utilities.SleepDoEvents(20);
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) <= 75,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) <= 75,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%. Expected <= 75", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%. Expected <= 75", p.log);
 
         //Close non-modal window
         if (!GetEditControls(p, "AvalonWindow", "avButton1"))
@@ -242,11 +245,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         //Verify that Non-Modal AV Window has been closed.
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) <= 40,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) <= 40,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%. Expected <= 40", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%. Expected <= 40", p.log);
 
         return sr;
     }
@@ -264,11 +267,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         p.log.WriteLine("Verify that Modal AV Window is launched.");
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) >= 50,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) >= 50,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
 
         //Try to launch second modal AV window, should throw exception
         if (!GetEditControls(p, "AVModality", "wfButton3"))
@@ -295,11 +298,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         p.log.WriteLine("Verify that Modal AV Window has been closed.");
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) <= 40,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) <= 40,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
 
         //Launch second modal AV window
         if (!GetEditControls(p, "AVModality", "wfButton3"))
@@ -310,11 +313,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         p.log.WriteLine("Verify that Second Modal AV Window is launched.");
-        bmp = Utilities.GetScreenBitmap(new Rectangle(300, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(300, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) >= 50,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) >= 50,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
 
         //Close second modal window
         if (!GetEditControls(p, "AnotherAvalonWindow", "avButton2"))
@@ -325,11 +328,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         p.log.WriteLine("Verify that Modal AV Window has been closed.");
-        bmp = Utilities.GetScreenBitmap(new Rectangle(300, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(300, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) <= 40,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) <= 40,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
 
         return sr;
     }
@@ -348,11 +351,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         p.log.WriteLine("Verify that Non-Modal AV Window is launched.");
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) >= 50,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) >= 50,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
 
         //Launch second (modal) AV window
         if (!GetEditControls(p, "AVModality", "wfButton3"))
@@ -363,11 +366,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         p.log.WriteLine("Verify that second (modal) AV Window is launched.");
-        bmp = Utilities.GetScreenBitmap(new Rectangle(300, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(300, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) >= 50,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) >= 50,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
 
         //Verify modality of second (modal) AV window, should throw exception if it is modal
         if (!GetEditControls(p, "AVModality", "wfButton3"))
@@ -394,11 +397,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         p.log.WriteLine("Verify that second (modal) AV Window has been closed.");
-        bmp = Utilities.GetScreenBitmap(new Rectangle(300, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(300, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) <= 40,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) <= 40,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
 
         //Close non-modal window
         if (!GetEditControls(p, "AvalonWindow", "avButton1"))
@@ -409,11 +412,11 @@ public class AVModality : ReflectBase
         Utilities.SleepDoEvents(20);
 
         p.log.WriteLine("Verify that Non-Modal AV Window has been closed.");
-        bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
+        _bmp = Utilities.GetScreenBitmap(new Rectangle(0, 0, 300, 300));
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) <= 40,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) <= 40,
             "Bitmap Failed at Color=" + Color.White + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 300, 300, Color.White) + "%", p.log);
 
         return sr;
     }

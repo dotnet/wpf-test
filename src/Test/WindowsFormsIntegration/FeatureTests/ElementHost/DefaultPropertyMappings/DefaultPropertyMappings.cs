@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -22,15 +26,6 @@ using System.Windows.Forms;
 /// <summary>
 /// Test default Property Mappings for Element Host Control
 /// </summary>
-/// <history>
-///  [sameerm]   3/15/2006   Created
-///  [sameerm]   3/23/2006   Inc code review suggestions
-///  [sameerm]   3/24/2006   API change PropertyMapDictionary was removed.
-///  [sameerm]   3/28/2006   Removed ForeColor from Default props
-///  [sameerm]   4/2/2006    Remove some property mappings.
-/// </history>
-
-
 public class PropertyMappings : ReflectBase
 {
     #region Testcase setup
@@ -46,34 +41,34 @@ public class PropertyMappings : ReflectBase
     {
         base.InitTest(p);
         //defaultProps.Add("AllowDrop");
-        defaultProps.Add("BackColor");
-        defaultProps.Add("BackgroundImage");
-        defaultProps.Add("BackgroundImageLayout");
-        defaultProps.Add("Cursor");
-        defaultProps.Add("Enabled");
-        defaultProps.Add("Font");
-        defaultProps.Add("ImeMode");
-        defaultProps.Add("RightToLeft");
-        defaultProps.Add("Visible");
+        _defaultProps.Add("BackColor");
+        _defaultProps.Add("BackgroundImage");
+        _defaultProps.Add("BackgroundImageLayout");
+        _defaultProps.Add("Cursor");
+        _defaultProps.Add("Enabled");
+        _defaultProps.Add("Font");
+        _defaultProps.Add("ImeMode");
+        _defaultProps.Add("RightToLeft");
+        _defaultProps.Add("Visible");
 
     }
 
     #region Class Vars and other definitions
-    ElementHost eh;
-    private static System.Windows.Controls.CheckBox avChk;                        // our Avalon button
-    private List<String> defaultProps = new List<String>();
+    ElementHost _eh;
+    private static System.Windows.Controls.CheckBox s_avChk;                        // our Avalon button
+    private List<String> _defaultProps = new List<String>();
     #endregion
 
     protected override bool BeforeScenario(TParams p, System.Reflection.MethodInfo scenario)
     {
-        eh = null;
+        _eh = null;
         this.ClientSize = new System.Drawing.Size(300, 200);
         // add Avalon button 
-        avChk = new SWC.CheckBox();
-        avChk.Content = "Avalon Button";
-        eh = new ElementHost();
-        eh.Child = avChk;
-        Controls.Add(eh);
+        s_avChk = new SWC.CheckBox();
+        s_avChk.Content = "Avalon Button";
+        _eh = new ElementHost();
+        _eh.Child = s_avChk;
+        Controls.Add(_eh);
 
         return base.BeforeScenario(p, scenario);
     }
@@ -96,19 +91,19 @@ public class PropertyMappings : ReflectBase
         bool failed = false;
 
         
-        PropertyMap propMap = eh.PropertyMap;
+        PropertyMap propMap = _eh.PropertyMap;
         if (propMap == null)
             sr.IncCounters(false, "Property Map propMap did not return prop map.", p.log);
 
         ICollection keys = propMap.Keys;
         ICollection values = propMap.Values;
 
-        if (keys.Count != defaultProps.Count)
-            sr.IncCounters(false, String.Format("Properties Expected: {0} Actual {1} ", defaultProps.Count, keys.Count), p.log);
+        if (keys.Count != _defaultProps.Count)
+            sr.IncCounters(false, String.Format("Properties Expected: {0} Actual {1} ", _defaultProps.Count, keys.Count), p.log);
 
         foreach (String k in keys)
         {
-            if (!defaultProps.Contains(k))
+            if (!_defaultProps.Contains(k))
             {
                 sr.IncCounters(false, String.Format("{0} property not found in default Property map", k), p.log);
                 failed = true;
@@ -120,33 +115,33 @@ public class PropertyMappings : ReflectBase
         return sr;
     }
 
-    ScenarioResult sr = new ScenarioResult();
+    ScenarioResult _sr = new ScenarioResult();
     [Scenario("BackColor Transparent")]
     public ScenarioResult BackColorTransparent(TParams p)
     {
         bool bBackColor; 
         ScenarioResult sr = new ScenarioResult();
 
-        Bitmap before = WFCTestLib.Util.Utilities.GetBitmapOfControl(eh, true);
-        bBackColor = eh.BackColorTransparent;
-        eh.BackColorTransparent = !eh.BackColorTransparent;
+        Bitmap before = WFCTestLib.Util.Utilities.GetBitmapOfControl(_eh, true);
+        bBackColor = _eh.BackColorTransparent;
+        _eh.BackColorTransparent = !_eh.BackColorTransparent;
         SWF.Application.DoEvents();
-        if (eh.BackColorTransparent == bBackColor)
+        if (_eh.BackColorTransparent == bBackColor)
         {
-            sr.IncCounters(false, String.Format("BackColorTansparent failed Expected:{0} Actual: {1}", (!bBackColor).ToString(), eh.BackColorTransparent), p.log);
+            sr.IncCounters(false, String.Format("BackColorTansparent failed Expected:{0} Actual: {1}", (!bBackColor).ToString(), _eh.BackColorTransparent), p.log);
             return sr;
         }
 
-        Bitmap after = WFCTestLib.Util.Utilities.GetBitmapOfControl(eh, true);
+        Bitmap after = WFCTestLib.Util.Utilities.GetBitmapOfControl(_eh, true);
         //Compare before and after. We might not do this as this might fail on 16bit color machines.
 
-        bBackColor = eh.BackColorTransparent;
-        eh.BackColorTransparent = !eh.BackColorTransparent;
+        bBackColor = _eh.BackColorTransparent;
+        _eh.BackColorTransparent = !_eh.BackColorTransparent;
         SWF.Application.DoEvents();
-        Bitmap revert = WFCTestLib.Util.Utilities.GetBitmapOfControl(eh, true);
-        if (eh.BackColorTransparent == bBackColor)
+        Bitmap revert = WFCTestLib.Util.Utilities.GetBitmapOfControl(_eh, true);
+        if (_eh.BackColorTransparent == bBackColor)
         {
-            sr.IncCounters(false, String.Format("BackColorTansparent failed Expected:{0} Actual: {1}", bBackColor, eh.BackColorTransparent), p.log);
+            sr.IncCounters(false, String.Format("BackColorTansparent failed Expected:{0} Actual: {1}", bBackColor, _eh.BackColorTransparent), p.log);
             return sr;
         }
         // Compare revert and after. We might not do this as this might fail on 16bit color machines.
@@ -161,16 +156,16 @@ public class PropertyMappings : ReflectBase
     [Scenario("Verify BackColor.")]
     public ScenarioResult VerifyBackColor(TParams p)
     {
-        avChk.Width = 80;
-        avChk.Height = 50;
+        s_avChk.Width = 80;
+        s_avChk.Height = 50;
         ScenarioResult sr = new ScenarioResult();
         SD.Color newColor;
-        SD.Color originalColor = eh.BackColor;
+        SD.Color originalColor = _eh.BackColor;
 
         System.Drawing.KnownColor  ctlColor = KnownColor.Control;
         if (originalColor.ToKnownColor() != ctlColor)
         {
-            p.log.WriteLine(String.Format("Default Control Color: Actual {0} -- Expected {1}", eh.BackColor.ToString(), ctlColor.ToString()));
+            p.log.WriteLine(String.Format("Default Control Color: Actual {0} -- Expected {1}", _eh.BackColor.ToString(), ctlColor.ToString()));
             sr.IncCounters(false, "Default Color failed", p.log);
         }
 
@@ -178,24 +173,24 @@ public class PropertyMappings : ReflectBase
         {
             newColor = p.ru.GetARGBColor();
         } while (newColor == originalColor);
-        eh.BackColor = newColor;
+        _eh.BackColor = newColor;
         Utilities.SleepDoEvents(1, 100);
 
-        if (eh.BackColor == originalColor)
+        if (_eh.BackColor == originalColor)
         {
-            p.log.WriteLine(String.Format("BackColor property did not change. Expected: {0}, Actual: {1} ", newColor, eh.BackColor.ToString()));
+            p.log.WriteLine(String.Format("BackColor property did not change. Expected: {0}, Actual: {1} ", newColor, _eh.BackColor.ToString()));
             sr.IncCounters(false, "BackColor property failed", p.log);
 
         }
         else
         {
             //Reset it back again.
-            eh.BackColor = originalColor;
+            _eh.BackColor = originalColor;
             SWF.Application.DoEvents();
 
-            if (eh.BackColor != originalColor)
+            if (_eh.BackColor != originalColor)
             {
-                p.log.WriteLine(String.Format("BackColor property did not change. Expected: {0}, Actual: {1} ", originalColor, eh.BackColor.ToString()));
+                p.log.WriteLine(String.Format("BackColor property did not change. Expected: {0}, Actual: {1} ", originalColor, _eh.BackColor.ToString()));
                 sr.IncCounters(false, "BackColor property failed", p.log);
             }
             sr.IncCounters(true);
@@ -214,13 +209,13 @@ public class PropertyMappings : ReflectBase
         ScenarioResult sr = new ScenarioResult();
         bmp = new System.Drawing.Bitmap("GreenStone.bmp");
         
-        eh.BackgroundImage = bmp;
+        _eh.BackgroundImage = bmp;
         Utilities.SleepDoEvents(1, 100);
         
        
-        if (eh.BackgroundImage != bmp)
+        if (_eh.BackgroundImage != bmp)
         {
-            p.log.WriteLine(String.Format("Backgroud Image did not change: Actual {0} -- Expected {1}", eh.BackgroundImage.ToString(), bmp.ToString()));
+            p.log.WriteLine(String.Format("Backgroud Image did not change: Actual {0} -- Expected {1}", _eh.BackgroundImage.ToString(), bmp.ToString()));
             sr.IncCounters(false, "Background Image failed.", p.log);
         }
         
@@ -234,12 +229,12 @@ public class PropertyMappings : ReflectBase
     {
         Bitmap bmp;
 
-        eh.Width = this.Width;
-        eh.Height = this.Height;
+        _eh.Width = this.Width;
+        _eh.Height = this.Height;
         ScenarioResult sr = new ScenarioResult();
-        avChk.Content = "VerifyBackgroundImageLayout";
+        s_avChk.Content = "VerifyBackgroundImageLayout";
         bmp = new System.Drawing.Bitmap("GreenStone.bmp");
-        eh.BackgroundImage = bmp;
+        _eh.BackgroundImage = bmp;
         Utilities.SleepDoEvents(1, 100);
 
         bool failed = false;
@@ -247,14 +242,14 @@ public class PropertyMappings : ReflectBase
 
         foreach (ImageLayout  imgLayout in layouts)
         {
-            avChk.Content = "Backgound ImageLayout : " + imgLayout.ToString();
-            eh.BackgroundImageLayout = imgLayout;
+            s_avChk.Content = "Backgound ImageLayout : " + imgLayout.ToString();
+            _eh.BackgroundImageLayout = imgLayout;
             SWF.Application.DoEvents();
             Utilities.SleepDoEvents(5);
 
-            if (eh.BackgroundImageLayout != imgLayout)
+            if (_eh.BackgroundImageLayout != imgLayout)
             {
-                    p.log.WriteLine(String.Format("BackgroundImageLayout property failed. Expected: {0}, Actual: {1} ", imgLayout, this.eh.BackgroundImageLayout.ToString(), p.log));
+                    p.log.WriteLine(String.Format("BackgroundImageLayout property failed. Expected: {0}, Actual: {1} ", imgLayout, this._eh.BackgroundImageLayout.ToString(), p.log));
                     sr.IncCounters(false, "BackgroundImageLayout failed.", p.log);
                     failed = true;
             }
@@ -270,15 +265,15 @@ public class PropertyMappings : ReflectBase
     [Scenario("Verify Cursor.")]
     public ScenarioResult VerifyCursor(TParams p)
     {
-        avChk.Width = 80;
-        avChk.Height = 50;
+        s_avChk.Width = 80;
+        s_avChk.Height = 50;
 
         ScenarioResult sr = new ScenarioResult();
         //Cursor
-        Cursor originalCursor = eh.Cursor;
+        Cursor originalCursor = _eh.Cursor;
         if (originalCursor != Cursors.Arrow)
         {
-            p.log.WriteLine(String.Format("Default Cursor -- Expected: {0}, Actual: {1} ", originalCursor, eh.Cursor));
+            p.log.WriteLine(String.Format("Default Cursor -- Expected: {0}, Actual: {1} ", originalCursor, _eh.Cursor));
             sr.IncCounters(false);
         }
         Cursor newCursor;
@@ -288,23 +283,23 @@ public class PropertyMappings : ReflectBase
         } while (newCursor == originalCursor);
 
 
-        eh.Cursor = newCursor;
+        _eh.Cursor = newCursor;
         SWF.Application.DoEvents();
 
 
-        if (eh.Cursor == originalCursor)
+        if (_eh.Cursor == originalCursor)
         {
-            p.log.WriteLine(String.Format("Allow drop property did not change. Expected: {0}, Actual: {1} ", newCursor, eh.Cursor.ToString()), p.log);
+            p.log.WriteLine(String.Format("Allow drop property did not change. Expected: {0}, Actual: {1} ", newCursor, _eh.Cursor.ToString()), p.log);
             sr.IncCounters(false, "Cursor failed.", p.log);
         }
         else
         {
             //Reset it back again.
-            eh.Cursor = originalCursor;
+            _eh.Cursor = originalCursor;
             SWF.Application.DoEvents();
-            if (eh.Cursor != originalCursor)
+            if (_eh.Cursor != originalCursor)
             {
-                p.log.WriteLine(String.Format("Cursor property did not change. Expected: {0}, Actual: {1} ", originalCursor, eh.Cursor.ToString()));
+                p.log.WriteLine(String.Format("Cursor property did not change. Expected: {0}, Actual: {1} ", originalCursor, _eh.Cursor.ToString()));
                 sr.IncCounters(false, "Cursor failed.", p.log);
             }
             sr.IncCounters(true);
@@ -317,33 +312,33 @@ public class PropertyMappings : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
         //Enabled
-        bool originallyEnabled = eh.Enabled;
+        bool originallyEnabled = _eh.Enabled;
         bool enable = !originallyEnabled;
 
         if (originallyEnabled == false)
         {
-            p.log.WriteLine(String.Format("Default Enabled. Expected: {0}, Actual: {1} ", true.ToString(), eh.Enabled.ToString()));
+            p.log.WriteLine(String.Format("Default Enabled. Expected: {0}, Actual: {1} ", true.ToString(), _eh.Enabled.ToString()));
             sr.IncCounters(false);
         }
-        eh.Enabled = enable;
+        _eh.Enabled = enable;
         SWF.Application.DoEvents();
 
         
 
-        if (eh.Enabled == originallyEnabled)
+        if (_eh.Enabled == originallyEnabled)
         {
-            p.log.WriteLine(String.Format("Enabled property did not change. Expected: {0}, Actual: {1} ", enable, eh.Enabled.ToString()), p.log);
+            p.log.WriteLine(String.Format("Enabled property did not change. Expected: {0}, Actual: {1} ", enable, _eh.Enabled.ToString()), p.log);
             sr.IncCounters(false, "Cursor failed.", p.log);
 
         }
         else
         {
             //Reset it back again.
-            eh.Enabled = originallyEnabled;
+            _eh.Enabled = originallyEnabled;
             SWF.Application.DoEvents();
-            if (eh.Enabled != originallyEnabled)
+            if (_eh.Enabled != originallyEnabled)
             {
-                p.log.WriteLine(String.Format("Enabled property did not change. Expected: {0}, Actual: {1} ", originallyEnabled, eh.Cursor.ToString()), p.log);
+                p.log.WriteLine(String.Format("Enabled property did not change. Expected: {0}, Actual: {1} ", originallyEnabled, _eh.Cursor.ToString()), p.log);
                 sr.IncCounters(false, "Cursor failed.", p.log);
 
             }
@@ -357,31 +352,31 @@ public class PropertyMappings : ReflectBase
     public ScenarioResult VerifyFont(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        Font originalFont = eh.Font;
-        string s = eh.Font.ToString();
+        Font originalFont = _eh.Font;
+        string s = _eh.Font.ToString();
         
         Font newFont;
         do
         {
             newFont = p.ru.GetFont();
         } while (newFont == originalFont);
-        eh.Font = newFont;
+        _eh.Font = newFont;
         SWF.Application.DoEvents();
 
-        if (eh.Font == originalFont)
+        if (_eh.Font == originalFont)
         {
-            p.log.WriteLine(String.Format("Font drop property did not change. Expected: {0}, Actual: {1} ", newFont, eh.Font.ToString()), p.log);
+            p.log.WriteLine(String.Format("Font drop property did not change. Expected: {0}, Actual: {1} ", newFont, _eh.Font.ToString()), p.log);
             sr.IncCounters(false, "Font failed.", p.log);
 
         }
         else
         {
             //Reset it back again.
-            eh.Font = originalFont;
+            _eh.Font = originalFont;
             SWF.Application.DoEvents();
-            if (eh.Font != originalFont)
+            if (_eh.Font != originalFont)
             {
-                p.log.WriteLine(String.Format("Font drop property did not change. Expected: {0}, Actual: {1} ", originalFont, eh.Font.ToString()), p.log);
+                p.log.WriteLine(String.Format("Font drop property did not change. Expected: {0}, Actual: {1} ", originalFont, _eh.Font.ToString()), p.log);
                 sr.IncCounters(false, "Cursor failed.", p.log);
             }
             sr.IncCounters(true);
@@ -395,11 +390,11 @@ public class PropertyMappings : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
         bool failed = false;
-        RightToLeft originalRTL = eh.RightToLeft;
+        RightToLeft originalRTL = _eh.RightToLeft;
 
         if (originalRTL != RightToLeft.No)
         {
-            p.log.WriteLine(String.Format("Default RTL : Actual {0} -- Expected {1}", eh.RightToLeft.ToString(), RightToLeft.No.ToString()));
+            p.log.WriteLine(String.Format("Default RTL : Actual {0} -- Expected {1}", _eh.RightToLeft.ToString(), RightToLeft.No.ToString()));
             sr.IncCounters(false, "Default Color failed", p.log);
         }
       
@@ -407,23 +402,23 @@ public class PropertyMappings : ReflectBase
 
         foreach (RightToLeft rtl in rtls)
         {
-            eh.RightToLeft = rtl;
+            _eh.RightToLeft = rtl;
             SWF.Application.DoEvents();
 
             if (rtl == RightToLeft.Inherit)
             {
-                if (eh.RightToLeft != this.RightToLeft)
+                if (_eh.RightToLeft != this.RightToLeft)
                 {
-                    p.log.WriteLine(String.Format("RightToLeft property was not inherited from Form. Expected: {0}, Actual: {1} ", this.eh.RightToLeft.ToString(), eh.RightToLeft.ToString()), p.log);
+                    p.log.WriteLine(String.Format("RightToLeft property was not inherited from Form. Expected: {0}, Actual: {1} ", this._eh.RightToLeft.ToString(), _eh.RightToLeft.ToString()), p.log);
                     sr.IncCounters(false, "RightToLeft failed.", p.log);
                     failed = true;
                 }
             }
             else
             {
-                if (eh.RightToLeft != rtl)
+                if (_eh.RightToLeft != rtl)
                 {
-                    p.log.WriteLine(String.Format("RightToLeft property did not change. Expected: {0}, Actual: {1} ", rtl, eh.RightToLeft.ToString()), p.log);
+                    p.log.WriteLine(String.Format("RightToLeft property did not change. Expected: {0}, Actual: {1} ", rtl, _eh.RightToLeft.ToString()), p.log);
                     sr.IncCounters(false, "RightToLeft failed.", p.log);
                     failed = true;
                 }
@@ -443,32 +438,32 @@ public class PropertyMappings : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
         //defaultProps.Add("Visible");
-        bool originallyVisible = eh.Visible;
+        bool originallyVisible = _eh.Visible;
         if (originallyVisible == false)
         {
-            p.log.WriteLine(String.Format("Default Visible : Actual {0} -- Expected {1}", eh.Visible.ToString(), true.ToString()));
+            p.log.WriteLine(String.Format("Default Visible : Actual {0} -- Expected {1}", _eh.Visible.ToString(), true.ToString()));
             sr.IncCounters(false, "Default Visible failed", p.log);
         }
       
 
         bool newVisible = !originallyVisible;
 
-        eh.Visible = newVisible;
+        _eh.Visible = newVisible;
         SWF.Application.DoEvents();
 
-        if (eh.Visible == originallyVisible)
+        if (_eh.Visible == originallyVisible)
         {
-            p.log.WriteLine(String.Format("Visible property did not change. Expected: {0}, Actual: {1} ", newVisible, eh.Visible.ToString()), p.log);
+            p.log.WriteLine(String.Format("Visible property did not change. Expected: {0}, Actual: {1} ", newVisible, _eh.Visible.ToString()), p.log);
             sr.IncCounters(false, "Visible failed.", p.log);
         }
         else
         {
             //Reset it back again.
-            eh.Visible = originallyVisible;
+            _eh.Visible = originallyVisible;
             SWF.Application.DoEvents();
-            if (eh.Visible != originallyVisible)
+            if (_eh.Visible != originallyVisible)
             {
-                p.log.WriteLine(String.Format("Allow drop property did not change. Expected: {0}, Actual: {1} ", originallyVisible, eh.Cursor.ToString()), p.log);
+                p.log.WriteLine(String.Format("Allow drop property did not change. Expected: {0}, Actual: {1} ", originallyVisible, _eh.Cursor.ToString()), p.log);
                 sr.IncCounters(false, "Visible failed.", p.log);
             }
             sr.IncCounters(true);

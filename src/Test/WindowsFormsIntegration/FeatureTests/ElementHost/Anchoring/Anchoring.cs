@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -18,14 +22,13 @@ using System.Reflection;
 //
 // Testcase:    Anchoring
 // Description: Verify anchoring scenarios for Avalon controls in EH host.
-// Author:      a-rickyt
 //
 public class Anchoring : ReflectBase
 {
     #region Testcase setup
 
-    ElementHost elementHost1;
-    SWC.Button avButton;
+    ElementHost _elementHost1;
+    SWC.Button _avButton;
 
     public Anchoring(String[] args) : base(args) { }
 
@@ -42,17 +45,17 @@ public class Anchoring : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        avButton = new SWC.Button();
-        avButton.Background = System.Windows.Media.Brushes.White;
-        avButton.Content = "Button";
+        _avButton = new SWC.Button();
+        _avButton.Background = System.Windows.Media.Brushes.White;
+        _avButton.Content = "Button";
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Child = avButton;
-        elementHost1.Size = new System.Drawing.Size(100, 50);
-        elementHost1.Location = new System.Drawing.Point(0, 0);
-        elementHost1.BackColor = Color.White;
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _avButton;
+        _elementHost1.Size = new System.Drawing.Size(100, 50);
+        _elementHost1.Location = new System.Drawing.Point(0, 0);
+        _elementHost1.BackColor = Color.White;
+        Controls.Add(_elementHost1);
         SWF.Application.DoEvents();
 
         return base.BeforeScenario(p, scenario);
@@ -69,7 +72,7 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario1(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.None;
+        _elementHost1.Anchor = SWF.AnchorStyles.None;
         SWF.Application.DoEvents();
         Utilities.SleepDoEvents(10);
         this.Size = new System.Drawing.Size(600, 600);
@@ -77,10 +80,10 @@ public class Anchoring : ReflectBase
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Width Failed at AnchorStyles.None.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Height Failed at AnchorStyles.None.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at AnchorStyles.None.", p.log);
-        sr.IncCounters(elementHost1.Top == 150, "Top Failed at AnchorStyles.None.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Width Failed at AnchorStyles.None.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Height Failed at AnchorStyles.None.", p.log);
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at AnchorStyles.None.", p.log);
+        sr.IncCounters(_elementHost1.Top == 150, "Top Failed at AnchorStyles.None.", p.log);
 
         Utilities.SleepDoEvents(10);
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
@@ -97,15 +100,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario2(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Top;
+        _elementHost1.Anchor = SWF.AnchorStyles.Top;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Width Failed at AnchorStyles.Top.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Height Failed at AnchorStyles.Top.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at AnchorStyles.Top.", p.log);
-        sr.IncCounters(elementHost1.Top == 0, "Top Failed at AnchorStyles.Top.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Width Failed at AnchorStyles.Top.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Height Failed at AnchorStyles.Top.", p.log);
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at AnchorStyles.Top.", p.log);
+        sr.IncCounters(_elementHost1.Top == 0, "Top Failed at AnchorStyles.Top.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
@@ -120,15 +123,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario3(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Left;
+        _elementHost1.Anchor = SWF.AnchorStyles.Left;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Width Failed at AnchorStyles.Left.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Height Failed at AnchorStyles.Left.", p.log);
-        sr.IncCounters(elementHost1.Left == 0, "Left Failed at AnchorStyles.Left.", p.log);
-        sr.IncCounters(elementHost1.Top == 150, "Top Failed at AnchorStyles.Left.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Width Failed at AnchorStyles.Left.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Height Failed at AnchorStyles.Left.", p.log);
+        sr.IncCounters(_elementHost1.Left == 0, "Left Failed at AnchorStyles.Left.", p.log);
+        sr.IncCounters(_elementHost1.Top == 150, "Top Failed at AnchorStyles.Left.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
@@ -143,15 +146,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario4(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Bottom;
+        _elementHost1.Anchor = SWF.AnchorStyles.Bottom;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Width Failed at AnchorStyles.Bottom.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Height Failed at AnchorStyles.Bottom.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at AnchorStyles.Bottom.", p.log);
-        sr.IncCounters(elementHost1.Top == 300, "Top Failed at AnchorStyles.Bottom.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Width Failed at AnchorStyles.Bottom.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Height Failed at AnchorStyles.Bottom.", p.log);
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at AnchorStyles.Bottom.", p.log);
+        sr.IncCounters(_elementHost1.Top == 300, "Top Failed at AnchorStyles.Bottom.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
@@ -166,15 +169,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario5(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Right;
+        _elementHost1.Anchor = SWF.AnchorStyles.Right;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Failed at AnchorStyles.Right.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Failed at AnchorStyles.Right.", p.log);
-        sr.IncCounters(elementHost1.Left == 300, "Failed at AnchorStyles.Right.", p.log);
-        sr.IncCounters(elementHost1.Top == 150, "Failed at AnchorStyles.Right.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Failed at AnchorStyles.Right.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Failed at AnchorStyles.Right.", p.log);
+        sr.IncCounters(_elementHost1.Left == 300, "Failed at AnchorStyles.Right.", p.log);
+        sr.IncCounters(_elementHost1.Top == 150, "Failed at AnchorStyles.Right.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
@@ -189,15 +192,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario6(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Top | SWF.AnchorStyles.Right;
+        _elementHost1.Anchor = SWF.AnchorStyles.Top | SWF.AnchorStyles.Right;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Failed at AnchorStyles.Top, Right.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Failed at AnchorStyles.Top, Right.", p.log);
-        sr.IncCounters(elementHost1.Left == 300, "Failed at AnchorStyles.Top, Right.", p.log);
-        sr.IncCounters(elementHost1.Top == 0, "Failed at AnchorStyles.Top, Right.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Failed at AnchorStyles.Top, Right.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Failed at AnchorStyles.Top, Right.", p.log);
+        sr.IncCounters(_elementHost1.Left == 300, "Failed at AnchorStyles.Top, Right.", p.log);
+        sr.IncCounters(_elementHost1.Top == 0, "Failed at AnchorStyles.Top, Right.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
@@ -212,15 +215,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario7(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Top | SWF.AnchorStyles.Left;
+        _elementHost1.Anchor = SWF.AnchorStyles.Top | SWF.AnchorStyles.Left;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Failed at AnchorStyles.Top, Left.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Failed at AnchorStyles.Top, Left.", p.log);
-        sr.IncCounters(elementHost1.Left == 0, "Failed at AnchorStyles.Top, Left.", p.log);
-        sr.IncCounters(elementHost1.Top == 0, "Failed at AnchorStyles.Top, Left.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Failed at AnchorStyles.Top, Left.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Failed at AnchorStyles.Top, Left.", p.log);
+        sr.IncCounters(_elementHost1.Left == 0, "Failed at AnchorStyles.Top, Left.", p.log);
+        sr.IncCounters(_elementHost1.Top == 0, "Failed at AnchorStyles.Top, Left.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
@@ -235,15 +238,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario8(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Bottom | SWF.AnchorStyles.Left;
+        _elementHost1.Anchor = SWF.AnchorStyles.Bottom | SWF.AnchorStyles.Left;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Failed at AnchorStyles.Bottom, Left.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Failed at AnchorStyles.Bottom, Left.", p.log);
-        sr.IncCounters(elementHost1.Left == 0, "Failed at AnchorStyles.Bottom, Left.", p.log);
-        sr.IncCounters(elementHost1.Top == 300, "Failed at AnchorStyles.Bottom, Left.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Failed at AnchorStyles.Bottom, Left.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Failed at AnchorStyles.Bottom, Left.", p.log);
+        sr.IncCounters(_elementHost1.Left == 0, "Failed at AnchorStyles.Bottom, Left.", p.log);
+        sr.IncCounters(_elementHost1.Top == 300, "Failed at AnchorStyles.Bottom, Left.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
@@ -258,15 +261,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario9(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Bottom | SWF.AnchorStyles.Right;
+        _elementHost1.Anchor = SWF.AnchorStyles.Bottom | SWF.AnchorStyles.Right;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Failed at AnchorStyles.Bottom, Right.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Failed at AnchorStyles.Bottom, Right.", p.log);
-        sr.IncCounters(elementHost1.Left == 300, "Failed at AnchorStyles.Bottom, Right.", p.log);
-        sr.IncCounters(elementHost1.Top == 300, "Failed at AnchorStyles.Bottom, Right.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Failed at AnchorStyles.Bottom, Right.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Failed at AnchorStyles.Bottom, Right.", p.log);
+        sr.IncCounters(_elementHost1.Left == 300, "Failed at AnchorStyles.Bottom, Right.", p.log);
+        sr.IncCounters(_elementHost1.Top == 300, "Failed at AnchorStyles.Bottom, Right.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);
@@ -281,15 +284,15 @@ public class Anchoring : ReflectBase
     public ScenarioResult Scenario10(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Anchor = SWF.AnchorStyles.Top | SWF.AnchorStyles.Bottom | SWF.AnchorStyles.Right;
+        _elementHost1.Anchor = SWF.AnchorStyles.Top | SWF.AnchorStyles.Bottom | SWF.AnchorStyles.Right;
         this.Size = new System.Drawing.Size(600, 600);
         Utilities.SleepDoEvents(10);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Width Failed at AnchorStyles.Top, Bottom, Right.", p.log);
-        sr.IncCounters(elementHost1.Height == 350, "Height Failed at AnchorStyles.Top, Bottom, Right.", p.log);
-        sr.IncCounters(elementHost1.Left == 300, "Left Failed at AnchorStyles.Top, Bottom, Right.", p.log);
-        sr.IncCounters(elementHost1.Top == 0, "Top Failed at AnchorStyles.Top, Bottom, Right.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Width Failed at AnchorStyles.Top, Bottom, Right.", p.log);
+        sr.IncCounters(_elementHost1.Height == 350, "Height Failed at AnchorStyles.Top, Bottom, Right.", p.log);
+        sr.IncCounters(_elementHost1.Left == 300, "Left Failed at AnchorStyles.Top, Bottom, Right.", p.log);
+        sr.IncCounters(_elementHost1.Top == 0, "Top Failed at AnchorStyles.Top, Bottom, Right.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(10);

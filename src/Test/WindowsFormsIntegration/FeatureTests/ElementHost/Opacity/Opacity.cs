@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -23,17 +27,15 @@ using System.IO;
 //
 // Testcase:    Opacity
 // Description: Verify opacity works and can be set to any value and no exception will be thrown.
-// Author:      a-rickyt
 //
 public class Opacity : ReflectBase
 {
     #region Testcase setup
 
-    ElementHost elementHost1;
-    SWC.StackPanel stackPanel;
-    SWC.Button avButton1;
-    Bitmap bmp;
-
+    ElementHost _elementHost1;
+    SWC.StackPanel _stackPanel;
+    SWC.Button _avButton1;
+    Bitmap _bmp;
 
     public Opacity(String[] args) : base(args) { }
 
@@ -42,15 +44,15 @@ public class Opacity : ReflectBase
         this.Text = "Opacity";
         this.Size = new System.Drawing.Size(400, 400);
 
-        avButton1 = new SWC.Button();
-        avButton1.Content = "WPF";
+        _avButton1 = new SWC.Button();
+        _avButton1.Content = "WPF";
 
-        stackPanel = new SWC.StackPanel();
-        stackPanel.Children.Add(avButton1);
+        _stackPanel = new SWC.StackPanel();
+        _stackPanel.Children.Add(_avButton1);
 
-        elementHost1 = new ElementHost();
-        elementHost1.Child = stackPanel;
-        this.Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _stackPanel;
+        this.Controls.Add(_elementHost1);
 
         base.InitTest(p);
     }
@@ -71,15 +73,15 @@ public class Opacity : ReflectBase
     {
         if (scenario.Name != "Scenario1")
         {
-            avButton1 = new SWC.Button();
-            avButton1.Content = "WPF";
+            _avButton1 = new SWC.Button();
+            _avButton1.Content = "WPF";
 
-            stackPanel = new SWC.StackPanel();
-            stackPanel.Children.Add(avButton1);
+            _stackPanel = new SWC.StackPanel();
+            _stackPanel.Children.Add(_avButton1);
 
-            elementHost1 = new ElementHost();
-            elementHost1.Child = stackPanel;
-            this.Controls.Add(elementHost1);
+            _elementHost1 = new ElementHost();
+            _elementHost1.Child = _stackPanel;
+            this.Controls.Add(_elementHost1);
         }
         return base.BeforeScenario(p, scenario);
     }
@@ -104,10 +106,10 @@ public class Opacity : ReflectBase
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 1.0, "Failed at this.Opacity=1.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, SD.SystemColors.Control) >= 70,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, SD.SystemColors.Control) >= 70,
             "Bitmap Failed at elementHost1.BackColor=" + SD.SystemColors.Control + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, SD.SystemColors.Control) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, SD.SystemColors.Control) + "%", p.log);
 
         return sr;
     }
@@ -121,10 +123,10 @@ public class Opacity : ReflectBase
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.0, "Failed at this.Opacity=0.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, SD.SystemColors.Control) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, SD.SystemColors.Control) <= 10,
             "Bitmap Failed at elementHost1.BackColor=" + SD.SystemColors.Control + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, SD.SystemColors.Control) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, SD.SystemColors.Control) + "%", p.log);
 
         return sr;
     }
@@ -134,52 +136,52 @@ public class Opacity : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        elementHost1.BackColor = Color.Red;
+        _elementHost1.BackColor = Color.Red;
 
         this.Opacity = 0;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.0, "Failed at this.Opacity=0.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) <= 10,
             "Bitmap Failed at Opacity=0, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         this.Opacity = 0.25;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.25, "Failed at this.Opacity=0.25.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) <= 10,
             "Bitmap Failed at Opacity=0.25, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         this.Opacity = 0.5;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.5, "Failed at this.Opacity=0.5.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) <= 10,
             "Bitmap Failed at Opacity=0.5, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         this.Opacity = 0.75;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.75, "Failed at this.Opacity=0.75.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) <= 10,
             "Bitmap Failed at Opacity=0.75, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         this.Opacity = 1;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 1.0, "Failed at this.Opacity=1.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) >= 70,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) >= 70,
             "Bitmap Failed at Opacity=1.0, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         return sr;
     }
@@ -190,44 +192,44 @@ public class Opacity : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         this.Paint += new System.Windows.Forms.PaintEventHandler(Opacity_Paint);
-        elementHost1.BackColorTransparent = true;
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColor = Color.Transparent;
 
         this.Opacity = 0;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.0, "Failed at this.Opacity=0.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) <= 1,
             "Bitmap Failed at Opacity=0, elementHost1.BackColor=" + Color.Blue + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
 
         this.Opacity = 0.5;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.5, "Failed at this.Opacity=0.5.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) <= 1,
             "Bitmap Failed at Opacity=0.5, elementHost1.BackColor=" + Color.Blue + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
 
         this.Opacity = 0.9;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.9, "Failed at this.Opacity=0.9.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) <= 1,
             "Bitmap Failed at Opacity=0.9, elementHost1.BackColor=" + Color.Blue + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
 
         this.Opacity = 1;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 1.0, "Failed at this.Opacity=1.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) >= 1.5,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) >= 1.5,
             "Bitmap Failed at Opacity=1.0, elementHost1.BackColor=" + Color.Blue + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
 
         return sr;
     }
@@ -240,7 +242,7 @@ public class Opacity : ReflectBase
         try
         {
             Bitmap background = new Bitmap("Greenstone.bmp");
-            elementHost1.BackgroundImage = background;
+            _elementHost1.BackgroundImage = background;
         }
         catch(Exception)
         {
@@ -252,38 +254,38 @@ public class Opacity : ReflectBase
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.0, "Failed at this.Opacity=0.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) <= 1,
             "Bitmap Failed at Opacity=0, elementHost1.BackColor=" + greenstone + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 1%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 1%", p.log);
 
         this.Opacity = 0.5;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.5, "Failed at this.Opacity=0.5.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) <= 1,
             "Bitmap Failed at Opacity=0.5, elementHost1.BackColor=" + greenstone + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 1%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 1%", p.log);
 
         this.Opacity = 0.9;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.9, "Failed at this.Opacity=0.9.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) <= 30,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) <= 30,
             "Bitmap Failed at Opacity=0.9, elementHost1.BackColor=" + greenstone + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 30%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 30%", p.log);
 
         this.Opacity = 1;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 1.0, "Failed at this.Opacity=1.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) >= 30, p.log, 
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) >= 30, p.log, 
             BugDb.WindowsOSBugs, 1600040, 
             "Bitmap Failed at Opacity=1.0, elementHost1.BackColor=" + greenstone + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) + "%. Expected: >= 30%");
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) + "%. Expected: >= 30%");
 
         return sr;
     }
@@ -299,47 +301,47 @@ public class Opacity : ReflectBase
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.0, "Failed at this.Opacity=0.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) <= 10,
             "Bitmap Failed at Opacity=0, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         this.Opacity = 0.25;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.25, "Failed at this.Opacity=0.25.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) <= 10,
             "Bitmap Failed at Opacity=0.25, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         this.Opacity = 0.5;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.5, "Failed at this.Opacity=0.5.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) <= 10,
             "Bitmap Failed at Opacity=0.5, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         this.Opacity = 0.75;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.75, "Failed at this.Opacity=0.75.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) <= 10,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) <= 10,
             "Bitmap Failed at Opacity=0.75, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         this.Opacity = 1;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 1.0, "Failed at this.Opacity=1.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) >= 70,
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) >= 70,
             "Bitmap Failed at Opacity=1.0, elementHost1.BackColor=" + Color.Red + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Red) + "%", p.log);
 
         return sr;
     }
@@ -350,44 +352,44 @@ public class Opacity : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         this.Paint += new System.Windows.Forms.PaintEventHandler(Opacity_Paint);
-        elementHost1.BackColorTransparent = true;
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColor = Color.Transparent;
 
         this.Opacity = 0;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.0, "Failed at this.Opacity=0.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) <= 1,
             "Bitmap Failed at Opacity=0, elementHost1.BackColor=" + Color.Blue + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
 
         this.Opacity = 0.5;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.5, "Failed at this.Opacity=0.5.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) <= 1,
             "Bitmap Failed at Opacity=0.5, elementHost1.BackColor=" + Color.Blue + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
 
         this.Opacity = 0.9;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.9, "Failed at this.Opacity=0.9.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) <= 1,
             "Bitmap Failed at Opacity=0.9, elementHost1.BackColor=" + Color.Blue + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
 
         this.Opacity = 1;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 1.0, "Failed at this.Opacity=1.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) >= 1.5,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) >= 1.5,
             "Bitmap Failed at Opacity=1.0, elementHost1.BackColor=" + Color.Blue + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, Color.Blue) + "%", p.log);
 
         return sr;
     }
@@ -408,44 +410,44 @@ public class Opacity : ReflectBase
             throw new Exception("Error: Greenstone.bmp file not found.");
         }
         Color greenstone = Color.FromArgb(140, 148, 123);
-        elementHost1.BackColorTransparent = true;
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColor = Color.Transparent;
 
         this.Opacity = 0;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.0, "Failed at this.Opacity=0.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) <= 1,
             "Bitmap Failed at Opacity=0, elementHost1.BackColor=" + greenstone + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 1%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 1%", p.log);
 
         this.Opacity = 0.3;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.3, "Failed at this.Opacity=0.3.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) <= 1,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) <= 1,
             "Bitmap Failed at Opacity=0.3, elementHost1.BackColor=" + greenstone + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 1%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 1%", p.log);
 
         this.Opacity = 0.9;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 0.9, "Failed at this.Opacity=0.75.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) <= 30,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) <= 30,
             "Bitmap Failed at Opacity=0.9, elementHost1.BackColor=" + greenstone + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 30%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) + "%. Expected: <= 30%", p.log);
 
         this.Opacity = 1;
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(this.Opacity, 1.0, "Failed at this.Opacity=1.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) >= 30,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) >= 30,
             "Bitmap Failed at Opacity=1.0, elementHost1.BackColor=" + greenstone + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, greenstone) + "%. Expected: >= 30%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, greenstone) + "%. Expected: >= 30%", p.log);
 
         return sr;
     }

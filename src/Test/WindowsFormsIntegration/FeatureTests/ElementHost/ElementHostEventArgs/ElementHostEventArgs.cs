@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Reflection;
 using System.Windows.Forms;
@@ -14,29 +18,28 @@ using System.Text;
 /// <summary>
 /// Testcase:    ElementHostEventArgs
 /// Description: Verify that WPF element host raises and interprets its events correctly.
-/// Author:      gregfra
 /// </summary>
 public class ElementHostEventArgs : ReflectBase
 {
     /// <summary>
     /// List of events raised by test.
     /// </summary>
-    private StringBuilder eventsTrace = null;
+    private StringBuilder _eventsTrace = null;
     
     /// <summary>
     /// Flag - was the previous root null?
     /// </summary>
-    private bool foundOneNull = false;
+    private bool _foundOneNull = false;
     
     /// <summary>
     /// Flag - was the previous root an actual element tree?
     /// </summary>
-    private bool foundPreviousRoot = false;
+    private bool _foundPreviousRoot = false;
     
     /// <summary>
     /// WPF button created to be available throughout class.
     /// </summary>
-    private System.Windows.Controls.Button sharedWpfButton;
+    private System.Windows.Controls.Button _sharedWpfButton;
 
     #region Testcase setup
     public ElementHostEventArgs(string[] args) : base(args) { }
@@ -54,8 +57,8 @@ public class ElementHostEventArgs : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        eventsTrace = new StringBuilder();
-        sharedWpfButton = new System.Windows.Controls.Button();
+        _eventsTrace = new StringBuilder();
+        _sharedWpfButton = new System.Windows.Controls.Button();
 
         return base.BeforeScenario(p, scenario);
     }
@@ -79,7 +82,7 @@ public class ElementHostEventArgs : ReflectBase
         //put the elementHost on a new Windows Form, host the WPF button, host the second WPF button
         Form secondForm = new Form();
         secondForm.Controls.Add(elementHost);
-        elementHost.Child = sharedWpfButton;
+        elementHost.Child = _sharedWpfButton;
         secondForm.Show();
         Application.DoEvents();
         
@@ -91,13 +94,13 @@ public class ElementHostEventArgs : ReflectBase
         Application.DoEvents();
 
         //validate
-        bool expected = (eventsTrace.ToString() == "ChildChanged:ChildChanged:") && foundOneNull && foundPreviousRoot;
+        bool expected = (_eventsTrace.ToString() == "ChildChanged:ChildChanged:") && _foundOneNull && _foundPreviousRoot;
 
         //validate the order of events (for both ElemnentHost and WPF Button)
         result.IncCounters(expected, 
-                        "Unexpected events were raised. Raised events were: " + eventsTrace.ToString() + 
-                            "; foundOneNull="+ foundOneNull + 
-                            " (expected true);foundPreviousRoot="+foundPreviousRoot+" (expected true)",
+                        "Unexpected events were raised. Raised events were: " + _eventsTrace.ToString() + 
+                            "; foundOneNull="+ _foundOneNull + 
+                            " (expected true);foundPreviousRoot="+_foundPreviousRoot+" (expected true)",
                         p.log );
 
         elementHostListener.Clear();
@@ -113,19 +116,19 @@ public class ElementHostEventArgs : ReflectBase
     void childChangedEventRaised(object sender, EventFiredEventArgs e)
     {
         //we handle this because we want to merge the events for elementHost and for the hosted control. 
-        eventsTrace.Append(e.EventInfo.EventName + ":");
+        _eventsTrace.Append(e.EventInfo.EventName + ":");
 
         if (e.EventInfo.EventName == "ChildChanged")
         {
             ChildChangedEventArgs args = (ChildChangedEventArgs)e.EventInfo.E;
-            if (!foundOneNull)
+            if (!_foundOneNull)
             {
                 if (args.PreviousChild == null)
                 {
-                    foundOneNull = true;
+                    _foundOneNull = true;
                 }
             }
-            foundPreviousRoot = (args.PreviousChild == sharedWpfButton);
+            _foundPreviousRoot = (args.PreviousChild == _sharedWpfButton);
         }
     }
 

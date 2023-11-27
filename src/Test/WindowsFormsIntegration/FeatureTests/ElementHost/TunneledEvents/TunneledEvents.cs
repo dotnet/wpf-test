@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 
@@ -12,66 +16,63 @@ using ReflectTools;
 //
 // Testcase:    TunneledEvents
 // Description: Verify Tunneled events work in EH
-// Author:      a-larryl
 //
 public class TunneledEvents : ReflectBase {
-
     #region Testcase setup
     public TunneledEvents(string[] args) : base(args) { }
 
-    ElementHost host = new ElementHost();
-    System.Windows.Controls.TextBox avTextbox = new System.Windows.Controls.TextBox();
-    System.Windows.Controls.DockPanel avDockPanel = new System.Windows.Controls.DockPanel();
-    System.Windows.Controls.Grid avGrid = new System.Windows.Controls.Grid();
-    ScenarioResult sr;
-    UIObject uiApp;
-    System.Windows.Controls.StackPanel avStackPanel = new System.Windows.Controls.StackPanel();
-    string RoutingStrategy;
-
+    ElementHost _host = new ElementHost();
+    System.Windows.Controls.TextBox _avTextbox = new System.Windows.Controls.TextBox();
+    System.Windows.Controls.DockPanel _avDockPanel = new System.Windows.Controls.DockPanel();
+    System.Windows.Controls.Grid _avGrid = new System.Windows.Controls.Grid();
+    ScenarioResult _sr;
+    UIObject _uiApp;
+    System.Windows.Controls.StackPanel _avStackPanel = new System.Windows.Controls.StackPanel();
+    string _routingStrategy;
 
     protected override void InitTest(TParams p) {
         base.InitTest(p);
         UseMita = true;
         this.Text = "TunneledEventsTest";
-        avTextbox.Name = "avTextbox";
-        avTextbox.Background = System.Windows.Media.Brushes.Cyan;
-        avStackPanel.Name = "avStackPanel";
-        avStackPanel.Background = System.Windows.Media.Brushes.Cornsilk;
-        host.BackColor = System.Drawing.Color.Red;
+        _avTextbox.Name = "avTextbox";
+        _avTextbox.Background = System.Windows.Media.Brushes.Cyan;
+        _avStackPanel.Name = "avStackPanel";
+        _avStackPanel.Background = System.Windows.Media.Brushes.Cornsilk;
+        _host.BackColor = System.Drawing.Color.Red;
     }
 
     protected override bool BeforeScenario(TParams p, System.Reflection.MethodInfo scenario)
     {
-        uiApp = UIObject.Root.Children.Find(UICondition.CreateFromName("TunneledEventsTest"));
+        _uiApp = UIObject.Root.Children.Find(UICondition.CreateFromName("TunneledEventsTest"));
         this.Controls.Clear();
-        host.Child = null;
-        avStackPanel.Children.Clear();
-        avGrid.Children.Clear();
+        _host.Child = null;
+        _avStackPanel.Children.Clear();
+        _avGrid.Children.Clear();
         switch (scenario.Name)
         {
             case "Scenario1":
-                avStackPanel.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(avControl_PreviewKeyDown);
-                avStackPanel.Children.Add(avTextbox);
-                host.Child = avStackPanel;
-                this.Controls.Add(host);
-                sr = new ScenarioResult();
+                _avStackPanel.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(avControl_PreviewKeyDown);
+                _avStackPanel.Children.Add(_avTextbox);
+                _host.Child = _avStackPanel;
+                this.Controls.Add(_host);
+                _sr = new ScenarioResult();
                 break;
             case "Scenario2":
-                avGrid.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(avControl_PreviewKeyDown);
-                avGrid.Children.Add(avStackPanel);
-                avStackPanel.Children.Add(avTextbox);
-                host.Child = avGrid;
-                this.Controls.Add(host);
-                sr = new ScenarioResult();
+                _avGrid.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(avControl_PreviewKeyDown);
+                _avGrid.Children.Add(_avStackPanel);
+                _avStackPanel.Children.Add(_avTextbox);
+                _host.Child = _avGrid;
+                this.Controls.Add(_host);
+                _sr = new ScenarioResult();
                 break;
             case "Scenario3":
-                avGrid.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(avControl_PreviewKeyDown);
-                avGrid.Children.Add(avStackPanel);
-                avStackPanel.Children.Add(avDockPanel);
-                avDockPanel.Children.Add(avTextbox);
-                host.Child = avGrid;
-                this.Controls.Add(host);
-                sr = new ScenarioResult();
+                _avGrid.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(avControl_PreviewKeyDown);
+                _avGrid.Children.Add(_avStackPanel);
+                _avStackPanel.Children.Add(_avDockPanel);
+                _avDockPanel.Children.Add(_avTextbox);
+                _host.Child = _avGrid;
+                this.Controls.Add(_host);
+                _sr = new ScenarioResult();
                 break;
         }
         return base.BeforeScenario(p, scenario);
@@ -80,7 +81,7 @@ public class TunneledEvents : ReflectBase {
     void avControl_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         //assign RoutingStrategy to global string so a given scenario can examine it.
-        RoutingStrategy = e.RoutedEvent.RoutingStrategy.ToString();
+        _routingStrategy = e.RoutedEvent.RoutingStrategy.ToString();
     }
     #endregion
 
@@ -93,19 +94,19 @@ public class TunneledEvents : ReflectBase {
         UIObject uiavTextbox = null;
         try
         {
-            uiavTextbox = uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
-            RoutingStrategy = "";
+            uiavTextbox = _uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
+            _routingStrategy = "";
             //type a character in the AV textbox.  See that the top level StackPanel gets the tunneled event.
             uiavTextbox.SendKeys("X");
             Utilities.SleepDoEvents(10);
-            sr.IncCounters(RoutingStrategy == System.Windows.RoutingStrategy.Tunnel.ToString(), "Tunneled event not seen for AV Textbox", p.log);
+            _sr.IncCounters(_routingStrategy == System.Windows.RoutingStrategy.Tunnel.ToString(), "Tunneled event not seen for AV Textbox", p.log);
         }
         catch (Exception ex)
         {
             p.log.WriteLine("Failed to Get Mita wrapper controls: " + ex.ToString());
         }
         //KeepRunningTests = false;
-        return sr;
+        return _sr;
     }
 
     [Scenario("Verify that tunneled events work for Grid->StackPanel->TextBox inside EH boundary.")]
@@ -114,19 +115,19 @@ public class TunneledEvents : ReflectBase {
         UIObject uiavTextbox = null;
         try
         {
-            uiavTextbox = uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
-            RoutingStrategy = "";
+            uiavTextbox = _uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
+            _routingStrategy = "";
             //type a character in the AV textbox.  See that the top level Grid gets the tunneled event.
             uiavTextbox.SendKeys("X");
             Utilities.SleepDoEvents(2);
-            sr.IncCounters(RoutingStrategy == System.Windows.RoutingStrategy.Tunnel.ToString(), "Tunneled event not seen for AV Textbox", p.log);
+            _sr.IncCounters(_routingStrategy == System.Windows.RoutingStrategy.Tunnel.ToString(), "Tunneled event not seen for AV Textbox", p.log);
         }
         catch (Exception ex)
         {
             p.log.WriteLine("Failed to Get Mita wrapper controls: " + ex.ToString());
         }
         //KeepRunningTests = false;
-        return sr;
+        return _sr;
     }
 
     [Scenario("Verify that tunneled events work for Grid->StackPanel->DockPanel->TextBox inside EH boundary.")]
@@ -135,19 +136,19 @@ public class TunneledEvents : ReflectBase {
         UIObject uiavTextbox = null;
         try
         {
-            uiavTextbox = uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
-            RoutingStrategy = "";
+            uiavTextbox = _uiApp.Descendants.Find(UICondition.CreateFromId("avTextbox"));
+            _routingStrategy = "";
             //type a character in the AV textbox.  See that the top level Grid gets the tunneled event.
             uiavTextbox.SendKeys("X");
             Utilities.SleepDoEvents(2);
-            sr.IncCounters(RoutingStrategy == System.Windows.RoutingStrategy.Tunnel.ToString(), "Tunneled event not seen for AV Textbox", p.log);
+            _sr.IncCounters(_routingStrategy == System.Windows.RoutingStrategy.Tunnel.ToString(), "Tunneled event not seen for AV Textbox", p.log);
         }
         catch (Exception ex)
         {
             p.log.WriteLine("Failed to Get Mita wrapper controls: " + ex.ToString());
         }
         //KeepRunningTests = false;
-        return sr;
+        return _sr;
     }
     #endregion
 }

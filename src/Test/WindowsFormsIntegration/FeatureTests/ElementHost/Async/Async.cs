@@ -1,3 +1,6 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
 
 using System;
 using System.Windows.Forms;
@@ -25,11 +28,6 @@ using System.Reflection;
 /// <summary>
 /// Verify that Async operations work on a Avalon control hosted in EHameerm
 /// </summary>
-/// <history>
-///  [sameerm]   4/4/2006   Created
-/// </history>
-
-
 public class Async : ReflectBase 
 {
 
@@ -50,32 +48,32 @@ public class Async : ReflectBase
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result)
     {
         Controls.Clear();
-        avButton = null;
-        elementHost = null;
+        _avButton = null;
+        _elementHost = null;
         base.AfterScenario(p, scenario, result);
     }
     [Scenario("Host an Avalon Button in an EH. On a worker thread user call Dispatcher.BeginInvoke to update the Avalon control hosted in EH. Verify that you can change change the hosted controls props/methodsand the EH properties.")]
     public ScenarioResult Scenario1(TParams p) {
         ScenarioResult sr = new  ScenarioResult();
         
-        elementHost = new ElementHost();
-        avButton = new System.Windows.Controls.Button();
-        useInvoke = false;  
+        _elementHost = new ElementHost();
+        _avButton = new System.Windows.Controls.Button();
+        _useInvoke = false;  
         
         //Avalon Button
-        elementHost.Child = avButton; //Host it on the ElementHost
-        Controls.Add(elementHost);
+        _elementHost.Child = _avButton; //Host it on the ElementHost
+        Controls.Add(_elementHost);
         
-        dispatcher = avButton.Dispatcher;  // Get the Buttons Dispatcher object
-        t = new Thread(new ThreadStart(WorkerMethod)); //Start a new thread
-        t.Start();
+        dispatcher = _avButton.Dispatcher;  // Get the Buttons Dispatcher object
+        _t = new Thread(new ThreadStart(WorkerMethod)); //Start a new thread
+        _t.Start();
 	
         Utilities.SleepDoEvents(2, 1000); //Wait for worker thread to complete
 
-        if (elementHost.Size != newSize || avButton.Background != System.Windows.Media.Brushes.BlanchedAlmond)
+        if (_elementHost.Size != _newSize || _avButton.Background != System.Windows.Media.Brushes.BlanchedAlmond)
         {
-            p.log.WriteLine("Element Host Size after return from Async function: Expected: {0} Actual {1}: ", newSize.ToString(), elementHost.Size.ToString());
-            p.log.WriteLine("AV Button Background after return from Async function: Expected: {0} Actual {1}: ",  System.Windows.Media.Brushes.BlanchedAlmond.ToString() ,avButton.Background.ToString());
+            p.log.WriteLine("Element Host Size after return from Async function: Expected: {0} Actual {1}: ", _newSize.ToString(), _elementHost.Size.ToString());
+            p.log.WriteLine("AV Button Background after return from Async function: Expected: {0} Actual {1}: ",  System.Windows.Media.Brushes.BlanchedAlmond.ToString() ,_avButton.Background.ToString());
             sr.IncCounters(false);
         }
         else
@@ -89,23 +87,23 @@ public class Async : ReflectBase
     public ScenarioResult Scenario2(TParams p) 
     {
         ScenarioResult sr = new  ScenarioResult();
-        avButton = new System.Windows.Controls.Button();
-        elementHost = new ElementHost();
-        useInvoke = true;
+        _avButton = new System.Windows.Controls.Button();
+        _elementHost = new ElementHost();
+        _useInvoke = true;
 
         //Avalon Button
-        elementHost.Child = avButton; //Host it on the ElementHost
-        Controls.Add(elementHost);
+        _elementHost.Child = _avButton; //Host it on the ElementHost
+        Controls.Add(_elementHost);
 
-        dispatcher = avButton.Dispatcher;  // Get the Buttons Dispatcher object
-        t = new Thread(new ThreadStart(WorkerMethod)); //Start a new thread
-        t.Start();
+        dispatcher = _avButton.Dispatcher;  // Get the Buttons Dispatcher object
+        _t = new Thread(new ThreadStart(WorkerMethod)); //Start a new thread
+        _t.Start();
         Utilities.SleepDoEvents(1, 1000); //Wait for worker thread to complete
 
-        if (elementHost.Size != newSize || avButton.Background != System.Windows.Media.Brushes.BlanchedAlmond)
+        if (_elementHost.Size != _newSize || _avButton.Background != System.Windows.Media.Brushes.BlanchedAlmond)
         {
-            p.log.WriteLine("Element Host Size after return from Async function: Expected: {0} Actual {1}: ", newSize.ToString(), elementHost.Size.ToString());
-            p.log.WriteLine("AV Button Background after return from Async function: Expected: {0} Actual {1}: ",  System.Windows.Media.Brushes.BlanchedAlmond.ToString() ,avButton.Background.ToString());
+            p.log.WriteLine("Element Host Size after return from Async function: Expected: {0} Actual {1}: ", _newSize.ToString(), _elementHost.Size.ToString());
+            p.log.WriteLine("AV Button Background after return from Async function: Expected: {0} Actual {1}: ",  System.Windows.Media.Brushes.BlanchedAlmond.ToString() ,_avButton.Background.ToString());
             sr.IncCounters(false);
         }
         else
@@ -121,7 +119,7 @@ public class Async : ReflectBase
     public void WorkerMethod()
     {
         ChangeProp ChangeContolProp = new ChangeProp(ChangeButtonProp); 
-        if (useInvoke)
+        if (_useInvoke)
             dispatcher.Invoke(DispatcherPriority.Normal, ChangeContolProp);
         else
             dispatcher.BeginInvoke(DispatcherPriority.Normal, ChangeContolProp);
@@ -129,18 +127,18 @@ public class Async : ReflectBase
 
     private void ChangeButtonProp()
     {
-        this.avButton.Background = SWM.Brushes.BlanchedAlmond;
-        this.elementHost.Size = newSize; // Change the size
+        this._avButton.Background = SWM.Brushes.BlanchedAlmond;
+        this._elementHost.Size = _newSize; // Change the size
     }
 
     #endregion
 
-    Size newSize = new Size(100, 100);
+    Size _newSize = new Size(100, 100);
     protected Dispatcher dispatcher;
-    ElementHost elementHost ;
-    SWC.Button avButton ; 
-    bool useInvoke;
-    private Thread t;
+    ElementHost _elementHost ;
+    SWC.Button _avButton ; 
+    bool _useInvoke;
+    private Thread _t;
 }
 
 // Keep these in sync by running the testcase locally through the driver whenever

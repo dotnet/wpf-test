@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -20,14 +24,12 @@ using System.Reflection;
 // Testcase:    WindowsOSBug1547794
 // Description: Verify that setting the enabled property of ElementHost to false does not 
 //              expose the backcolor of ElementHost
-// Author:      a-rickyt
 //
 public class WindowsOSBug1547794 : ReflectBase
 {
     #region Test case setup
 
-    ElementHost elementHost1;
-
+    ElementHost _elementHost1;
 
     public WindowsOSBug1547794(String[] args) : base(args) { }
 
@@ -38,14 +40,14 @@ public class WindowsOSBug1547794 : ReflectBase
         base.InitTest(p);
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.BackColor = Color.Black;
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.BackColor = Color.Black;
+        Controls.Add(_elementHost1);
 
         SWC.TextBox avTextBox1 = new SWC.TextBox();
         avTextBox1.Text = "Avalon TextBox";
         avTextBox1.Background = SWM.Brushes.White;
-        elementHost1.Child = avTextBox1;
+        _elementHost1.Child = avTextBox1;
     }
 
     #endregion
@@ -59,18 +61,18 @@ public class WindowsOSBug1547794 : ReflectBase
 
         Utilities.SleepDoEvents(20);
         //Verify initial properties
-        sr.IncCounters(elementHost1.Enabled == true, "Failed at Enabled==true", p.log);
+        sr.IncCounters(_elementHost1.Enabled == true, "Failed at Enabled==true", p.log);
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.White) >= 80,
           "Bitmap failed at Color.White >= 80%. Percent: " + 
           BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.White) + "%", p.log);
 
-        elementHost1.Enabled = false;
+        _elementHost1.Enabled = false;
 
         //Verify that the black BackColor of ElementHost is not exposed.
         //The faded black is by design.
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(elementHost1.Enabled == false, "Failed at Enabled==False", p.log);
+        sr.IncCounters(_elementHost1.Enabled == false, "Failed at Enabled==False", p.log);
         bmp = Utilities.GetBitmapOfControl(this);
         sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, Color.Black) <= 1,
           "Bitmap failed at Color.Black <= 1%. Percent: " +

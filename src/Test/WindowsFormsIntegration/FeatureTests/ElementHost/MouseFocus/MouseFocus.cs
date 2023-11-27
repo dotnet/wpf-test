@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -22,7 +26,6 @@ using System.Reflection;
 //
 // Testcase:    MouseFocus
 // Description: Verify that when clicking on either WF or AV control, Focus is correct
-// Author:      a-rickyt
 //
 public class MouseFocus : ReflectBase
 {
@@ -30,16 +33,16 @@ public class MouseFocus : ReflectBase
 
     Edit _edit1;
     Edit _edit2;
-    SWF.Button wfButton = new SWF.Button();
-    SWC.Button avButton = new SWC.Button();
-    SWC.Button avOkButton = new SWC.Button();
-    SWC.Button avCancelButton = new SWC.Button();
-    SWC.StackPanel stackPanel = new SWC.StackPanel();
-    ElementHost elementHost1 = new ElementHost();
-    ElementHost elementHost2 = new ElementHost();
+    SWF.Button _wfButton = new SWF.Button();
+    SWC.Button _avButton = new SWC.Button();
+    SWC.Button _avOkButton = new SWC.Button();
+    SWC.Button _avCancelButton = new SWC.Button();
+    SWC.StackPanel _stackPanel = new SWC.StackPanel();
+    ElementHost _elementHost1 = new ElementHost();
+    ElementHost _elementHost2 = new ElementHost();
     public SWF.Label label1 = new SWF.Label();
     public SWF.Label label2 = new SWF.Label();
-    MouseWinFormWindow winform;
+    MouseWinFormWindow _winform;
 
     public MouseFocus(String[] args) : base(args) { }
 
@@ -56,48 +59,48 @@ public class MouseFocus : ReflectBase
         label2.Location = new System.Drawing.Point(100, 180);
         Controls.Add(label2);
 
-        wfButton.Name = "wfButton";
-        wfButton.Text = "WinForm Button";
-        wfButton.AutoSize = true;
-        wfButton.Location = new System.Drawing.Point(100, 300);
-        wfButton.GotFocus += new EventHandler(wfButton_GotFocus);
-        wfButton.LostFocus += new EventHandler(wfButton_LostFocus);
-        Controls.Add(wfButton);
+        _wfButton.Name = "wfButton";
+        _wfButton.Text = "WinForm Button";
+        _wfButton.AutoSize = true;
+        _wfButton.Location = new System.Drawing.Point(100, 300);
+        _wfButton.GotFocus += new EventHandler(wfButton_GotFocus);
+        _wfButton.LostFocus += new EventHandler(wfButton_LostFocus);
+        Controls.Add(_wfButton);
 
-        avButton.Name = "avButton";
-        avButton.Content = "Avalon Button";
-        avButton.GotFocus += new RoutedEventHandler(avButton_GotFocus);
-        avButton.LostFocus += new RoutedEventHandler(avButton_LostFocus);
+        _avButton.Name = "avButton";
+        _avButton.Content = "Avalon Button";
+        _avButton.GotFocus += new RoutedEventHandler(avButton_GotFocus);
+        _avButton.LostFocus += new RoutedEventHandler(avButton_LostFocus);
 
-        avOkButton.Name = "avOkButton";
-        avOkButton.Content = "Avalon OK Button";
-        avOkButton.GotFocus += new RoutedEventHandler(avOkButton_GotFocus);
-        avOkButton.LostFocus += new RoutedEventHandler(avOkButton_LostFocus);
+        _avOkButton.Name = "avOkButton";
+        _avOkButton.Content = "Avalon OK Button";
+        _avOkButton.GotFocus += new RoutedEventHandler(avOkButton_GotFocus);
+        _avOkButton.LostFocus += new RoutedEventHandler(avOkButton_LostFocus);
 
-        avCancelButton.Name = "avCancelButton";
-        avCancelButton.Content = "Avalon Cancel Button";
-        avCancelButton.GotFocus += new RoutedEventHandler(avCancelButton_GotFocus);
-        avCancelButton.LostFocus += new RoutedEventHandler(avCancelButton_LostFocus);
+        _avCancelButton.Name = "avCancelButton";
+        _avCancelButton.Content = "Avalon Cancel Button";
+        _avCancelButton.GotFocus += new RoutedEventHandler(avCancelButton_GotFocus);
+        _avCancelButton.LostFocus += new RoutedEventHandler(avCancelButton_LostFocus);
 
-        stackPanel.Children.Add(avOkButton);
-        stackPanel.Children.Add(avCancelButton);
-        stackPanel.Orientation = SWC.Orientation.Horizontal;
+        _stackPanel.Children.Add(_avOkButton);
+        _stackPanel.Children.Add(_avCancelButton);
+        _stackPanel.Orientation = SWC.Orientation.Horizontal;
 
         //Create Element Host 1
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = avButton;
-        elementHost1.Size = new System.Drawing.Size(150, 100);
-        elementHost1.Location = new System.Drawing.Point(100, 20);
-        elementHost1.BackColor = Color.Red;
-        Controls.Add(elementHost1);
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _avButton;
+        _elementHost1.Size = new System.Drawing.Size(150, 100);
+        _elementHost1.Location = new System.Drawing.Point(100, 20);
+        _elementHost1.BackColor = Color.Red;
+        Controls.Add(_elementHost1);
 
         //Create Element Host 2
-        elementHost2.Name = "elementHost2";
-        elementHost2.Child = stackPanel; 
-        elementHost2.Location = new System.Drawing.Point(100, 230);
-        elementHost2.BackColor = Color.Red;
-        elementHost2.AutoSize = true;
-        Controls.Add(elementHost2);
+        _elementHost2.Name = "elementHost2";
+        _elementHost2.Child = _stackPanel; 
+        _elementHost2.Location = new System.Drawing.Point(100, 230);
+        _elementHost2.BackColor = Color.Red;
+        _elementHost2.AutoSize = true;
+        Controls.Add(_elementHost2);
 
         base.InitTest(p);
     }
@@ -146,17 +149,17 @@ public class MouseFocus : ReflectBase
     {
         if (scenario.Name == "Scenario2")
         {
-            winform = new MouseWinFormWindow(this);
-            winform.Show();
+            _winform = new MouseWinFormWindow(this);
+            _winform.Show();
         }
         else if (scenario.Name == "Scenario4")
         {
-            avOkButton.CaptureMouse();
+            _avOkButton.CaptureMouse();
         }
         else if (scenario.Name == "Scenario5")
         {
-            avOkButton.CaptureMouse();
-            avOkButton.ReleaseMouseCapture();
+            _avOkButton.CaptureMouse();
+            _avOkButton.ReleaseMouseCapture();
         }
         return base.BeforeScenario(p, scenario);
     }
@@ -450,30 +453,30 @@ public class MouseFocus : ReflectBase
 //class MouseWinFormWindow creates a new WinForm window with one TextBox
 public class MouseWinFormWindow : SWF.Form
 {
-    SWF.Button wfButton = new SWF.Button();
-    MouseFocus mainWindow;
+    SWF.Button _wfButton = new SWF.Button();
+    MouseFocus _mainWindow;
 
     public MouseWinFormWindow(MouseFocus mainWindow)
     {
-        this.mainWindow = mainWindow;
+        this._mainWindow = mainWindow;
 
         this.SuspendLayout();
         // 
         // wfButton
         // 
-        this.wfButton.Location = new System.Drawing.Point(95, 63);
-        this.wfButton.Name = "wfButton";
-        this.wfButton.Text = "WinForm Button";
-        this.wfButton.AutoSize = true;
-        this.wfButton.GotFocus += new EventHandler(wfButton_GotFocus);
-        this.wfButton.LostFocus += new EventHandler(wfButton_LostFocus);
+        this._wfButton.Location = new System.Drawing.Point(95, 63);
+        this._wfButton.Name = "wfButton";
+        this._wfButton.Text = "WinForm Button";
+        this._wfButton.AutoSize = true;
+        this._wfButton.GotFocus += new EventHandler(wfButton_GotFocus);
+        this._wfButton.LostFocus += new EventHandler(wfButton_LostFocus);
         // 
         // winform
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = SWF.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(292, 266);
-        this.Controls.Add(this.wfButton);
+        this.Controls.Add(this._wfButton);
         this.Name = "MouseWinFormWindow";
         this.StartPosition = SWF.FormStartPosition.CenterScreen;
         this.Text = "MouseWinFormWindow";
@@ -484,12 +487,12 @@ public class MouseWinFormWindow : SWF.Form
 
     void wfButton_GotFocus(object sender, EventArgs e)
     {
-        mainWindow.label1.Text = "WinForm Button on separate window got focus.";
+        _mainWindow.label1.Text = "WinForm Button on separate window got focus.";
     }
 
     void wfButton_LostFocus(object sender, EventArgs e)
     {
-        mainWindow.label1.Text = "WinForm Button lost focus.";
+        _mainWindow.label1.Text = "WinForm Button lost focus.";
     }
 }
 

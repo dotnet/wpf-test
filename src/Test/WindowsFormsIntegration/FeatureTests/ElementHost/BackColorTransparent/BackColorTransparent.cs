@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -22,16 +26,15 @@ using System.IO;
 //
 // Testcase:    BackColorTransparent
 // Description: Verify BackColor=Transparent and BackColorTransparent properties. 
-// Author:      a-rickyt
 //
 public class BackColorTransparent : ReflectBase
 {
     #region Testcase setup
 
-    ElementHost elementHost1;
-    SWC.StackPanel stackPanel;
-    SWC.Button avButton1;
-    Bitmap bmp;
+    ElementHost _elementHost1;
+    SWC.StackPanel _stackPanel;
+    SWC.Button _avButton1;
+    Bitmap _bmp;
 
     public BackColorTransparent(String[] args) : base(args) { }
 
@@ -57,16 +60,16 @@ public class BackColorTransparent : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        elementHost1 = new ElementHost();
-        this.Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        this.Controls.Add(_elementHost1);
 
-        avButton1 = new SWC.Button();
-        avButton1.Content = "Avalon Button";
+        _avButton1 = new SWC.Button();
+        _avButton1.Content = "Avalon Button";
 
-        stackPanel = new SWC.StackPanel();
-        stackPanel.Children.Add(avButton1);
+        _stackPanel = new SWC.StackPanel();
+        _stackPanel.Children.Add(_avButton1);
 
-        elementHost1.Child = stackPanel;
+        _elementHost1.Child = _stackPanel;
 
         if (scenario.Name == "Scenario3")
         {
@@ -94,19 +97,19 @@ public class BackColorTransparent : ReflectBase
         Utilities.SleepDoEvents(10);
         TestProperties(sr, p, Color.Red, false, Color.Red, 75);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(10);
         TestProperties(sr, p, Color.Red, true, Color.Red, 75);
 
-        elementHost1.BackColor = Color.White;
+        _elementHost1.BackColor = Color.White;
         Utilities.SleepDoEvents(10);
         TestProperties(sr, p, Color.White, true, Color.Red, 75);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(10);
         TestProperties(sr, p, Color.White, true, Color.Red, 75);
 
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColor = Color.Transparent;
         Utilities.SleepDoEvents(10);
         TestProperties(sr, p, Color.Transparent, true, Color.Red, 75);
 
@@ -114,23 +117,23 @@ public class BackColorTransparent : ReflectBase
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, true, Color.Red, 75);
 
-        elementHost1.BackColor = Color.Red;
+        _elementHost1.BackColor = Color.Red;
         Utilities.SleepDoEvents(10);
         TestProperties(sr, p, Color.Red, true, Color.Green, 75);
 
-        elementHost1.BackColor = Color.Blue;
+        _elementHost1.BackColor = Color.Blue;
         Utilities.SleepDoEvents(10);
         TestProperties(sr, p, Color.Blue, true, Color.Green, 75);
 
-        elementHost1.BackColorTransparent = false;
+        _elementHost1.BackColorTransparent = false;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Blue, false, Color.Blue, 75);
 
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColor = Color.Transparent;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, false, Color.Green, 75);
 
-        elementHost1.BackColor = Color.Green;
+        _elementHost1.BackColor = Color.Green;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Green, false, Color.Green, 75);
 
@@ -149,23 +152,23 @@ public class BackColorTransparent : ReflectBase
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, SD.SystemColors.Control, false, SD.SystemColors.Control, 75);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, SD.SystemColors.Control, true, greenstone, 30);
 
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColor = Color.Transparent;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, true, greenstone, 30);
 
-        elementHost1.BackColorTransparent = false;
+        _elementHost1.BackColorTransparent = false;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, false, greenstone, 30);
 
-        elementHost1.BackColor = Color.Blue;
+        _elementHost1.BackColor = Color.Blue;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Blue, false, Color.Blue, 75);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Blue, true, greenstone, 30);
 
@@ -177,28 +180,28 @@ public class BackColorTransparent : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avButton1.Background = System.Windows.Media.Brushes.Yellow;
+        _avButton1.Background = System.Windows.Media.Brushes.Yellow;
 
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, SD.SystemColors.Control, false, SD.SystemColors.Control, 75);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, SD.SystemColors.Control, true, Color.Blue, 1.5);
 
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColor = Color.Transparent;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, true, Color.Blue, 1.5);
 
-        elementHost1.BackColorTransparent = false;
+        _elementHost1.BackColorTransparent = false;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, false, Color.Blue, 1.5);
 
-        elementHost1.BackColor = Color.Blue;
+        _elementHost1.BackColor = Color.Blue;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Blue, false, Color.Blue, 1.5);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Blue, true, Color.Blue, 1.5);
 
@@ -210,9 +213,9 @@ public class BackColorTransparent : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avButton1.Background = System.Windows.Media.Brushes.Yellow;
+        _avButton1.Background = System.Windows.Media.Brushes.Yellow;
 
-        elementHost1.Location = new System.Drawing.Point(0, 0);
+        _elementHost1.Location = new System.Drawing.Point(0, 0);
 
         try
         {
@@ -228,23 +231,23 @@ public class BackColorTransparent : ReflectBase
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, SD.SystemColors.Control, false, SD.SystemColors.Control, 75);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, SD.SystemColors.Control, true, SD.SystemColors.Control, 75);
 
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColor = Color.Transparent;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, true, SD.SystemColors.Control, 75);
 
-        elementHost1.BackColorTransparent = false;
+        _elementHost1.BackColorTransparent = false;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, false, SD.SystemColors.Control, 75);
 
-        elementHost1.BackColor = Color.Blue;
+        _elementHost1.BackColor = Color.Blue;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Blue, false, Color.Blue, 75);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Blue, true, SD.SystemColors.Control, 75);
 
@@ -258,14 +261,14 @@ public class BackColorTransparent : ReflectBase
     void TestProperties(ScenarioResult sr, TParams p, Color ehBackColor, bool ehBackColorTransparent,
         Color bitmapBackColor, double percent)
     {
-        sr.IncCounters(ehBackColor, elementHost1.BackColor,
+        sr.IncCounters(ehBackColor, _elementHost1.BackColor,
             "Failed at elementHost1.BackColor.", p.log);
-        sr.IncCounters(elementHost1.BackColorTransparent, ehBackColorTransparent,
+        sr.IncCounters(_elementHost1.BackColorTransparent, ehBackColorTransparent,
             "Failed at elementHost1.BackColorTransparent.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, bitmapBackColor) >= percent,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, bitmapBackColor) >= percent,
             "Bitmap Failed at elementHost1.BackColor=" + bitmapBackColor + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, bitmapBackColor) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, bitmapBackColor) + "%", p.log);
     }
 
     // BitmapsColorPercent

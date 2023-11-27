@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -11,38 +15,29 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows;
 
-
 /// <TestCase>
 /// SyncContext
 /// </TestCase>
 /// <summary>
 /// Make sure that the sync context doesn't change when we add a host.
 /// </summary>
-/// <history>
-///  [sameerm]   3/27/2006   Created
-///   [sameerm]  3/29/2006   Added CR feedback.
-/// </history>
-
 public class SyncContext : ReflectBase
 {
-
     #region Testcase setup
     public SyncContext(string[] args) : base(args) { }
 
-
     // class vars
-        
     private ElementHost _eh1;
     private SWC.Button _ehBtn;
-    List<Type> panelTypes;
-    Window window;
-    Form f2 ;
+    List<Type> _panelTypes;
+    Window _window;
+    Form _f2 ;
     
 
     protected override void InitTest(TParams p)
     {
         this.Size = new System.Drawing.Size(500, 500);
-        panelTypes = GetDerivedType("System.Windows.Forms.dll", typeof(Panel));
+        _panelTypes = GetDerivedType("System.Windows.Forms.dll", typeof(Panel));
         base.InitTest(p);
     }
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result)
@@ -75,7 +70,7 @@ public class SyncContext : ReflectBase
         // update app title bar and log file
         try
         {
-            foreach (Type t in panelTypes)
+            foreach (Type t in _panelTypes)
             {
                 int i = t.GetConstructors().Length;
                 if (t == typeof(TabPage) || t.GetConstructors().Length == 0 || t.IsAbstract)
@@ -209,7 +204,7 @@ public class SyncContext : ReflectBase
             bool b = scBefore.Equals(scAfter);
             p.log.WriteLine("Matches = {0}", b);
             sr.IncCounters(b, "Synchronization Context does not match after adding Element Host.", p.log);
-            f2.Close();
+            _f2.Close();
         }
         catch (Exception ex)
         {
@@ -225,11 +220,11 @@ public class SyncContext : ReflectBase
         System.Windows.Controls.CheckBox chkBox = new System.Windows.Controls.CheckBox();
         chkBox.Content = "Check Me";
         eh2.Child = chkBox;
-        f2 = new Form();
-        this.AddOwnedForm(f2);
-        f2.Controls.Add(eh2);
-        f2.Text = "Form2";
-        f2.Show();
+        _f2 = new Form();
+        this.AddOwnedForm(_f2);
+        _f2.Controls.Add(eh2);
+        _f2.Text = "Form2";
+        _f2.Show();
     }
 
     [Scenario("AV control that starts a new Window(nested pump)")]
@@ -265,7 +260,7 @@ public class SyncContext : ReflectBase
             p.log.WriteLine("Matches = {0}", b);
             sr.IncCounters(b, "Synchronization Context does not match after adding Element Host.", p.log);
             Utilities.SleepDoEvents(1, 500);
-            window.Close();
+            _window.Close();
         }
         catch (Exception ex)
         {
@@ -278,8 +273,8 @@ public class SyncContext : ReflectBase
 
     void _ehBtn_ClickScenario4(object sender, RoutedEventArgs e)
     {
-        window = new Window();
-        window.Show();
+        _window = new Window();
+        _window.Show();
     }
 
 

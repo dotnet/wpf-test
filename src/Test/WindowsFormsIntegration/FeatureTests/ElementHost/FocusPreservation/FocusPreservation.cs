@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -22,7 +26,6 @@ using System.Reflection;
 //
 // Testcase:    FocusPreservation
 // Description: Verify that when clicking on either WF or AV control, Focus is correct
-// Author:      a-rickyt
 //
 public class FocusPreservation : ReflectBase
 {
@@ -33,19 +36,19 @@ public class FocusPreservation : ReflectBase
     Edit _edit3;
     Edit _edit4;
     Edit _edit5;
-    Edit form;
-    SWF.Button wfButton1 = new SWF.Button();
-    SWF.MenuStrip menuStrip1 = new SWF.MenuStrip();
-    SWC.Button avButton1 = new SWC.Button();
-    SWC.Button avButton2 = new SWC.Button();
-    SWC.Button avButton3 = new SWC.Button();
-    SWC.StackPanel stackPanel = new SWC.StackPanel();
-    ElementHost elementHost1 = new ElementHost();
-    ElementHost elementHost2 = new ElementHost();
+    Edit _form;
+    SWF.Button _wfButton1 = new SWF.Button();
+    SWF.MenuStrip _menuStrip1 = new SWF.MenuStrip();
+    SWC.Button _avButton1 = new SWC.Button();
+    SWC.Button _avButton2 = new SWC.Button();
+    SWC.Button _avButton3 = new SWC.Button();
+    SWC.StackPanel _stackPanel = new SWC.StackPanel();
+    ElementHost _elementHost1 = new ElementHost();
+    ElementHost _elementHost2 = new ElementHost();
     public SWF.Label label1 = new SWF.Label();
     public SWF.Label label2 = new SWF.Label();
     public SWF.Label label3 = new SWF.Label();
-    SWF.Form newForm = new SWF.Form();
+    SWF.Form _newForm = new SWF.Form();
 
     private const string wfButton1GotFocus = "WinForm Button 1 Got Focus";
     private const string wfButton1LostFocus = "WinForm Button 1 Lost Focus";
@@ -57,7 +60,6 @@ public class FocusPreservation : ReflectBase
     private const string avButton3LostFocus = "Avalon Button 3 Lost Focus";
     private const string avTextBox1GotFocus = "Avalon TextBox 1 Got Focus";
     private const string avTextBox1LostFocus = "Avalon TextBox 1 Lost Focus";
-
 
     public FocusPreservation(String[] args) : base(args) { }
 
@@ -77,53 +79,53 @@ public class FocusPreservation : ReflectBase
         label3.Location = new System.Drawing.Point(100, 210);
         Controls.Add(label3);
 
-        avButton1.Name = "avButton1";
-        avButton1.Content = "Avalon Button _1";
-        avButton1.GotFocus += new RoutedEventHandler(avButton1_GotFocus);
-        avButton1.LostFocus += new RoutedEventHandler(avButton1_LostFocus);
+        _avButton1.Name = "avButton1";
+        _avButton1.Content = "Avalon Button _1";
+        _avButton1.GotFocus += new RoutedEventHandler(avButton1_GotFocus);
+        _avButton1.LostFocus += new RoutedEventHandler(avButton1_LostFocus);
 
-        avButton2.Name = "avButton2";
-        avButton2.Content = "Avalon Button _2";
-        avButton2.GotFocus += new RoutedEventHandler(avButton2_GotFocus);
-        avButton2.LostFocus += new RoutedEventHandler(avButton2_LostFocus);
+        _avButton2.Name = "avButton2";
+        _avButton2.Content = "Avalon Button _2";
+        _avButton2.GotFocus += new RoutedEventHandler(avButton2_GotFocus);
+        _avButton2.LostFocus += new RoutedEventHandler(avButton2_LostFocus);
 
-        avButton3.Name = "avButton3";
-        avButton3.Content = "Avalon Button _3";
-        avButton3.GotFocus += new RoutedEventHandler(avButton3_GotFocus);
-        avButton3.LostFocus += new RoutedEventHandler(avButton3_LostFocus);
+        _avButton3.Name = "avButton3";
+        _avButton3.Content = "Avalon Button _3";
+        _avButton3.GotFocus += new RoutedEventHandler(avButton3_GotFocus);
+        _avButton3.LostFocus += new RoutedEventHandler(avButton3_LostFocus);
 
         SWC.TextBox avTextBox1 = new SWC.TextBox();
         avTextBox1.Name = "avTextBox1";
         avTextBox1.GotFocus += new RoutedEventHandler(avTextBox1_GotFocus);
         avTextBox1.LostFocus += new RoutedEventHandler(avTextBox1_LostFocus);
 
-        stackPanel.Children.Add(avButton1);
-        stackPanel.Children.Add(avButton2);
-        stackPanel.Children.Add(avButton3);
-        stackPanel.Children.Add(avTextBox1);
+        _stackPanel.Children.Add(_avButton1);
+        _stackPanel.Children.Add(_avButton2);
+        _stackPanel.Children.Add(_avButton3);
+        _stackPanel.Children.Add(avTextBox1);
 
         //Create Element Host 1
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = stackPanel;
-        elementHost1.AutoSize = true;
-        elementHost1.Location = new System.Drawing.Point(100, 20);
-        elementHost1.BackColor = Color.Red;
-        Controls.Add(elementHost1);
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _stackPanel;
+        _elementHost1.AutoSize = true;
+        _elementHost1.Location = new System.Drawing.Point(100, 20);
+        _elementHost1.BackColor = Color.Red;
+        Controls.Add(_elementHost1);
 
-        wfButton1.Name = "wfButton1";
-        wfButton1.Text = "&WinForm Button";
-        wfButton1.AutoSize = true;
-        wfButton1.Location = new System.Drawing.Point(100, 300);
-        wfButton1.GotFocus += new EventHandler(wfButton1_GotFocus);
-        wfButton1.LostFocus += new EventHandler(wfButton1_LostFocus);
-        Controls.Add(wfButton1);
+        _wfButton1.Name = "wfButton1";
+        _wfButton1.Text = "&WinForm Button";
+        _wfButton1.AutoSize = true;
+        _wfButton1.Location = new System.Drawing.Point(100, 300);
+        _wfButton1.GotFocus += new EventHandler(wfButton1_GotFocus);
+        _wfButton1.LostFocus += new EventHandler(wfButton1_LostFocus);
+        Controls.Add(_wfButton1);
 
-        menuStrip1 = new SWF.MenuStrip();
+        _menuStrip1 = new SWF.MenuStrip();
         SWF.ToolStripMenuItem item1 = new SWF.ToolStripMenuItem();
         SWF.ToolStripMenuItem item2 = new SWF.ToolStripMenuItem();
         SWF.ToolStripMenuItem item3 = new SWF.ToolStripMenuItem();
-        menuStrip1.Items.AddRange(new SWF.ToolStripItem[] { item1 });
-        menuStrip1.Text = "menuStrip1";
+        _menuStrip1.Items.AddRange(new SWF.ToolStripItem[] { item1 });
+        _menuStrip1.Text = "menuStrip1";
         item1.DropDownItems.AddRange(new SWF.ToolStripItem[] { item2, item3 });
         item1.Name = "toolStripMenuItem1";
         item1.Text = "File";
@@ -132,7 +134,7 @@ public class FocusPreservation : ReflectBase
         item2.Text = "Test";
         item3.Name = "item2ToolStripMenuItem1";
         item3.Text = "Exit";
-        this.Controls.Add(this.menuStrip1);
+        this.Controls.Add(this._menuStrip1);
 
         base.InitTest(p);
     }
@@ -188,15 +190,15 @@ public class FocusPreservation : ReflectBase
         wfButton2.Name = "wfButton2";
         wfButton2.Text = "OK";
         wfButton2.Click += new EventHandler(wfButton2_Click);
-        newForm.Controls.Add(wfButton2);
-        newForm.AcceptButton = wfButton2;
-        newForm.Name = "newForm";
-        newForm.ShowDialog();
+        _newForm.Controls.Add(wfButton2);
+        _newForm.AcceptButton = wfButton2;
+        _newForm.Name = "newForm";
+        _newForm.ShowDialog();
     }
 
     void wfButton2_Click(object sender, EventArgs e)
     {
-        newForm.Close();
+        _newForm.Close();
     }
 
     #endregion
@@ -205,11 +207,11 @@ public class FocusPreservation : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        avButton1.Focus();
+        _avButton1.Focus();
 
         if (scenario.Name == "Scenario9")
         {
-            avButton2.Click += new RoutedEventHandler(avButton2_Click);
+            _avButton2.Click += new RoutedEventHandler(avButton2_Click);
         }
 
         return base.BeforeScenario(p, scenario);
@@ -352,7 +354,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton1GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 1.", p.log);
 
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(!_edit1.HasKeyboardFocus,
@@ -364,7 +366,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton2GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 2.", p.log);
 
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(!_edit2.HasKeyboardFocus,
@@ -376,7 +378,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton3GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 3.", p.log);
 
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(!_edit3.HasKeyboardFocus,
@@ -388,7 +390,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avTextBox1GotFocus, label1.Text,
             "Failed at GotFocus on Avalon TextBox 1.", p.log);
 
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(!_edit4.HasKeyboardFocus,
@@ -400,7 +402,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(wfButton1GotFocus, label3.Text,
             "Failed at GotFocus on WinForm Button 1.", p.log);
 
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(!_edit5.HasKeyboardFocus,
@@ -428,7 +430,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton1GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 1.", p.log);
 
-        form.SendKeys("%w");
+        _form.SendKeys("%w");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(_edit1.HasKeyboardFocus,
@@ -436,7 +438,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton1GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 1.", p.log);
 
-        form.SendKeys("%2");
+        _form.SendKeys("%2");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(_edit1.HasKeyboardFocus,
@@ -444,7 +446,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton1GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 1.", p.log);
 
-        form.SendKeys("%3");
+        _form.SendKeys("%3");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(_edit1.HasKeyboardFocus,
@@ -452,7 +454,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton1GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 1.", p.log);
 
-        form.SendKeys("%w");
+        _form.SendKeys("%w");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(_edit1.HasKeyboardFocus,
@@ -460,7 +462,7 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton1GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 1.", p.log);
 
-        form.SendKeys("%1");
+        _form.SendKeys("%1");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(_edit1.HasKeyboardFocus,
@@ -477,7 +479,7 @@ public class FocusPreservation : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         GetAllEditControls(p);
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         //Verify initial state
@@ -486,9 +488,9 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton2GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 2.", p.log);
 
-        form.SendKeys("%f");
+        _form.SendKeys("%f");
         Utilities.SleepDoEvents(10);
-        form.SendKeys("{ENTER}");
+        _form.SendKeys("{ENTER}");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(_edit2.HasKeyboardFocus,
@@ -496,10 +498,10 @@ public class FocusPreservation : ReflectBase
         sr.IncCounters(avButton2GotFocus, label1.Text,
             "Failed at GotFocus on Avalon Button 2.", p.log);
 
-        form.SendKeys("{TAB}");
-        form.SendKeys("%f");
+        _form.SendKeys("{TAB}");
+        _form.SendKeys("%f");
         Utilities.SleepDoEvents(10);
-        form.SendKeys("{ENTER}");
+        _form.SendKeys("{ENTER}");
         Utilities.SleepDoEvents(10);
 
         sr.IncCounters(_edit3.HasKeyboardFocus,
@@ -516,7 +518,7 @@ public class FocusPreservation : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         GetAllEditControls(p);
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         //Verify initial state
@@ -545,7 +547,7 @@ public class FocusPreservation : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         GetAllEditControls(p);
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         //Verify initial state
@@ -574,7 +576,7 @@ public class FocusPreservation : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         GetAllEditControls(p);
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         //Verify initial state
@@ -606,7 +608,7 @@ public class FocusPreservation : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         GetAllEditControls(p);
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         //Verify initial state
@@ -646,7 +648,7 @@ public class FocusPreservation : ReflectBase
         ScenarioResult sr = new ScenarioResult();
 
         GetAllEditControls(p);
-        form.SendKeys("{TAB}");
+        _form.SendKeys("{TAB}");
         Utilities.SleepDoEvents(10);
 
         //Verify initial state
@@ -686,7 +688,7 @@ public class FocusPreservation : ReflectBase
         try
         {
             UIObject uiApp = UIObject.Root.Children.Find(UICondition.CreateFromName("FocusPreservation"));
-            form = new Edit(uiApp);
+            _form = new Edit(uiApp);
 
             UIObject uiControl = uiApp.Descendants.Find(UICondition.CreateFromId("avButton1"));
             _edit1 = new Edit(uiControl);
@@ -699,7 +701,7 @@ public class FocusPreservation : ReflectBase
             uiControl = uiApp.Descendants.Find(UICondition.CreateFromId("wfButton1"));
             _edit5 = new Edit(uiControl);
 
-            form.SetFocus();
+            _form.SetFocus();
             return true;
         }
         catch (Exception ex)

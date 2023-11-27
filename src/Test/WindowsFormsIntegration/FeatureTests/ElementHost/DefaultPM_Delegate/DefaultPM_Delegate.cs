@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -21,7 +25,6 @@ using System.Reflection;
 //
 // Testcase:    DefaultPM_Delegate
 // Description: Test existing spec defined Mappings
-// Author:      sameerm
 //
 public class DefaultPM_Delegate : ReflectBase
 {
@@ -32,11 +35,11 @@ public class DefaultPM_Delegate : ReflectBase
         {
             this._name = name;
         }
-        int count = 0;
+        int _count = 0;
         public int Count
         {
-            get { return count; }
-            set { count = value; }
+            get { return _count; }
+            set { _count = value; }
         }
 
         string _name;
@@ -65,23 +68,23 @@ public class DefaultPM_Delegate : ReflectBase
     }
 
 
-    ElementHost eh;
+    ElementHost _eh;
     //private static System.Windows.Controls.TextBox avLbl;                        // our Avalon button
-    private static System.Windows.Controls.Label avLbl;                        // our Avalon button
-    private DefaultProp currentProperty;
+    private static System.Windows.Controls.Label s_avLbl;                        // our Avalon button
+    private DefaultProp _currentProperty;
     
     protected override bool BeforeScenario(TParams p, System.Reflection.MethodInfo scenario)
     {
         this.ClientSize = new System.Drawing.Size(300, 200);
-        avLbl = new SWC.Label();
+        s_avLbl = new SWC.Label();
         
-        avLbl.Content = "Avalon Button";
-        eh = new ElementHost();
-        eh.Child = avLbl;
-        eh.BackColor = System.Drawing.Color.Red;
-        avLbl.Height = 50;
-        avLbl.Width = 100;
-        Controls.Add(eh);
+        s_avLbl.Content = "Avalon Button";
+        _eh = new ElementHost();
+        _eh.Child = s_avLbl;
+        _eh.BackColor = System.Drawing.Color.Red;
+        s_avLbl.Height = 50;
+        s_avLbl.Width = 100;
+        Controls.Add(_eh);
         return base.BeforeScenario(p, scenario);
     }
 
@@ -101,7 +104,7 @@ public class DefaultPM_Delegate : ReflectBase
     public ScenarioResult OverrideDelegate(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        PropertyMap dictionary = eh.PropertyMap;
+        PropertyMap dictionary = _eh.PropertyMap;
         if (dictionary == null)
         {
             sr.IncCounters(false, "Property Map Dictionary did not return prop map.", p.log);
@@ -115,20 +118,20 @@ public class DefaultPM_Delegate : ReflectBase
 
         for (int i = 0; i < keys.Length; i++)
         {
-            currentProperty = new DefaultProp(keys[i]);
-            eh.PropertyMap.ResetAll();
-            eh.PropertyMap.Remove((String)keys[i]);
-            eh.PropertyMap.Add((String)keys[i], new PropertyTranslator(OnPropChange));
+            _currentProperty = new DefaultProp(keys[i]);
+            _eh.PropertyMap.ResetAll();
+            _eh.PropertyMap.Remove((String)keys[i]);
+            _eh.PropertyMap.Add((String)keys[i], new PropertyTranslator(OnPropChange));
 
             this.Text = keys[i]; 
             switch  (keys[i]) 
             {
                 case "BackColor":
-                    eh.BackColor = System.Drawing.Color.Bisque;
+                    _eh.BackColor = System.Drawing.Color.Bisque;
                     Utilities.SleepDoEvents(1, 100);
-                    if (currentProperty.Name != "BackColor" ||  currentProperty.Count != 2 || (System.Drawing.Color)currentProperty.Val != System.Drawing.Color.Bisque)
+                    if (_currentProperty.Name != "BackColor" ||  _currentProperty.Count != 2 || (System.Drawing.Color)_currentProperty.Val != System.Drawing.Color.Bisque)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString())); 
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString())); 
                         sr.IncCounters(false);
                     }
                     break;
@@ -136,91 +139,91 @@ public class DefaultPM_Delegate : ReflectBase
 
                 case "BackgroundImage":
                         bmp = new System.Drawing.Bitmap("GreenStone.bmp");
-                        eh.BackgroundImage = bmp;
+                        _eh.BackgroundImage = bmp;
                         Utilities.SleepDoEvents(1, 100);
-                        if (currentProperty.Name != "BackgroundImage" || currentProperty.Count != 2 ||   (System.Drawing.Bitmap)currentProperty.Val != bmp)
+                        if (_currentProperty.Name != "BackgroundImage" || _currentProperty.Count != 2 ||   (System.Drawing.Bitmap)_currentProperty.Val != bmp)
                         {
-                           p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                           p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                            sr.IncCounters(false);
                         }
-                        eh.BackgroundImage = null;
+                        _eh.BackgroundImage = null;
                     break;
 
                 case "BackgroundImageLayout":
                     bmp = new System.Drawing.Bitmap("GreenStone.bmp");
-                    eh.BackgroundImage = bmp;
-                    eh.BackgroundImageLayout = ImageLayout.Stretch;
+                    _eh.BackgroundImage = bmp;
+                    _eh.BackgroundImageLayout = ImageLayout.Stretch;
                     Utilities.SleepDoEvents(1, 100);
-                    if (currentProperty.Name != "BackgroundImageLayout" || currentProperty.Count != 2 || (ImageLayout)currentProperty.Val != ImageLayout.Stretch)
+                    if (_currentProperty.Name != "BackgroundImageLayout" || _currentProperty.Count != 2 || (ImageLayout)_currentProperty.Val != ImageLayout.Stretch)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
-                    eh.BackgroundImage = null;
-                    eh.BackgroundImageLayout = ImageLayout.None;
+                    _eh.BackgroundImage = null;
+                    _eh.BackgroundImageLayout = ImageLayout.None;
 
                     break;
 
                 case "Cursor":
-                    eh.Cursor = System.Windows.Forms.Cursors.Hand;
+                    _eh.Cursor = System.Windows.Forms.Cursors.Hand;
                     Utilities.SleepDoEvents(10);
-                    if (currentProperty.Name != "Cursor" || currentProperty.Count != 2 || (System.Windows.Forms.Cursor)currentProperty.Val != System.Windows.Forms.Cursors.Hand)
+                    if (_currentProperty.Name != "Cursor" || _currentProperty.Count != 2 || (System.Windows.Forms.Cursor)_currentProperty.Val != System.Windows.Forms.Cursors.Hand)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
-                    eh.Cursor = Cursors.Arrow;
+                    _eh.Cursor = Cursors.Arrow;
                     break;
 
 
                 case "Enabled":
-                    eh.Enabled = false;
+                    _eh.Enabled = false;
                     Utilities.SleepDoEvents(10);
-                    if (currentProperty.Name != "Enabled" || currentProperty.Count != 2 || (bool)currentProperty.Val != false)
+                    if (_currentProperty.Name != "Enabled" || _currentProperty.Count != 2 || (bool)_currentProperty.Val != false)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.Enabled = true; //reset 
+                    _eh.Enabled = true; //reset 
                     break;
 
 
                 case "Font":
                     Utilities.SleepDoEvents(10);
-                    eh.Font = new Font(System.Drawing.FontFamily.GenericMonospace, 10);
-                    Font fnt = (Font)currentProperty.Val;
-                    if (currentProperty.Name != "Font" || currentProperty.Count != 2)
+                    _eh.Font = new Font(System.Drawing.FontFamily.GenericMonospace, 10);
+                    Font fnt = (Font)_currentProperty.Val;
+                    if (_currentProperty.Name != "Font" || _currentProperty.Count != 2)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.Font = fnt; // Reset to original 
+                    _eh.Font = fnt; // Reset to original 
                     break;
 
                 case "RightToLeft":
                     Utilities.SleepDoEvents(10);
-                    eh.RightToLeft = RightToLeft.Yes;
-                    if (currentProperty.Name != "RightToLeft" || currentProperty.Count != 2 || (SWF.RightToLeft)currentProperty.Val != RightToLeft.Yes)
+                    _eh.RightToLeft = RightToLeft.Yes;
+                    if (_currentProperty.Name != "RightToLeft" || _currentProperty.Count != 2 || (SWF.RightToLeft)_currentProperty.Val != RightToLeft.Yes)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.RightToLeft = RightToLeft.No;
+                    _eh.RightToLeft = RightToLeft.No;
                     break;
 
                 case "Visible":
                     Utilities.SleepDoEvents(10);
-                    eh.Visible = false;
-                    if (currentProperty.Name != "Visible" || currentProperty.Count != 2 || (bool)currentProperty.Val != false)
+                    _eh.Visible = false;
+                    if (_currentProperty.Name != "Visible" || _currentProperty.Count != 2 || (bool)_currentProperty.Val != false)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.Visible = true;
+                    _eh.Visible = true;
                     break;
             }
             Utilities.SleepDoEvents(1, 100);
-            currentProperty  = null;
+            _currentProperty  = null;
         }
         sr.IncCounters(true);
       
@@ -233,7 +236,7 @@ public class DefaultPM_Delegate : ReflectBase
     public ScenarioResult AddDelegate(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        PropertyMap dictionary = eh.PropertyMap;
+        PropertyMap dictionary = _eh.PropertyMap;
         Bitmap bmp = null;
         if (dictionary == null)
         {
@@ -247,19 +250,19 @@ public class DefaultPM_Delegate : ReflectBase
 
         for (int i = 0; i < keys.Length; i++)
         {
-            currentProperty = new DefaultProp(keys[i]);
-            eh.PropertyMap.ResetAll();
-            eh.PropertyMap[keys[i]] += new PropertyTranslator(OnPropChange);
+            _currentProperty = new DefaultProp(keys[i]);
+            _eh.PropertyMap.ResetAll();
+            _eh.PropertyMap[keys[i]] += new PropertyTranslator(OnPropChange);
 
             this.Text = keys[i];
             switch (keys[i])
             {
                 case "BackColor":
-                    eh.BackColor = System.Drawing.Color.Bisque;
+                    _eh.BackColor = System.Drawing.Color.Bisque;
                     Utilities.SleepDoEvents(1, 100);
-                    if (currentProperty.Name != "BackColor" || currentProperty.Count != 2 || (System.Drawing.Color)currentProperty.Val != System.Drawing.Color.Bisque)
+                    if (_currentProperty.Name != "BackColor" || _currentProperty.Count != 2 || (System.Drawing.Color)_currentProperty.Val != System.Drawing.Color.Bisque)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
                     
@@ -268,92 +271,92 @@ public class DefaultPM_Delegate : ReflectBase
 
                 case "BackgroundImage":
                     bmp = new System.Drawing.Bitmap("GreenStone.bmp");
-                    eh.BackgroundImage = bmp;
+                    _eh.BackgroundImage = bmp;
                     Utilities.SleepDoEvents(1, 100);
-                    if (currentProperty.Name != "BackgroundImage" || currentProperty.Count != 2 || (System.Drawing.Bitmap)currentProperty.Val != bmp)
+                    if (_currentProperty.Name != "BackgroundImage" || _currentProperty.Count != 2 || (System.Drawing.Bitmap)_currentProperty.Val != bmp)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
-                    eh.BackgroundImage = null;
+                    _eh.BackgroundImage = null;
                     break;
 
                 case "BackgroundImageLayout":
                     bmp = new System.Drawing.Bitmap("GreenStone.bmp");
-                    eh.BackgroundImage = bmp;
-                    eh.BackgroundImageLayout = ImageLayout.Stretch;
+                    _eh.BackgroundImage = bmp;
+                    _eh.BackgroundImageLayout = ImageLayout.Stretch;
                     Utilities.SleepDoEvents(1, 100);
-                    if (currentProperty.Name != "BackgroundImageLayout" || currentProperty.Count != 2 || (ImageLayout)currentProperty.Val != ImageLayout.Stretch)
+                    if (_currentProperty.Name != "BackgroundImageLayout" || _currentProperty.Count != 2 || (ImageLayout)_currentProperty.Val != ImageLayout.Stretch)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
-                    eh.BackgroundImage = null;
-                    eh.BackgroundImageLayout = ImageLayout.None;
+                    _eh.BackgroundImage = null;
+                    _eh.BackgroundImageLayout = ImageLayout.None;
 
                     break;
 
                 case "Cursor":
-                    eh.Cursor = System.Windows.Forms.Cursors.Hand;
+                    _eh.Cursor = System.Windows.Forms.Cursors.Hand;
                     Utilities.SleepDoEvents(10);
-                    if (currentProperty.Name != "Cursor" || currentProperty.Count != 2 || (System.Windows.Forms.Cursor)currentProperty.Val != System.Windows.Forms.Cursors.Hand)
+                    if (_currentProperty.Name != "Cursor" || _currentProperty.Count != 2 || (System.Windows.Forms.Cursor)_currentProperty.Val != System.Windows.Forms.Cursors.Hand)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
-                    eh.Cursor = Cursors.Arrow;
+                    _eh.Cursor = Cursors.Arrow;
                     break;
 
 
                 case "Enabled":
-                    eh.Enabled = false;
+                    _eh.Enabled = false;
                     Utilities.SleepDoEvents(10);
-                    if (currentProperty.Name != "Enabled" || currentProperty.Count != 2 || (bool)currentProperty.Val != false)
+                    if (_currentProperty.Name != "Enabled" || _currentProperty.Count != 2 || (bool)_currentProperty.Val != false)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.Enabled = true; //reset 
+                    _eh.Enabled = true; //reset 
                     break;
 
 
                 case "Font":
                     Utilities.SleepDoEvents(10);
-                    eh.Font = new Font(System.Drawing.FontFamily.GenericMonospace, 10);
-                    Font fnt = (Font)currentProperty.Val;
-                    //SAM TODO
-                    if (currentProperty.Name != "Font" || currentProperty.Count != 2)
+                    _eh.Font = new Font(System.Drawing.FontFamily.GenericMonospace, 10);
+                    Font fnt = (Font)_currentProperty.Val;
+
+                    if (_currentProperty.Name != "Font" || _currentProperty.Count != 2)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.Font = fnt; // Reset to original 
+                    _eh.Font = fnt; // Reset to original 
                     break;
 
                 case "RightToLeft":
                     Utilities.SleepDoEvents(10);
-                    eh.RightToLeft = RightToLeft.Yes;
-                    if (currentProperty.Name != "RightToLeft" || currentProperty.Count != 2 || (SWF.RightToLeft)currentProperty.Val != RightToLeft.Yes)
+                    _eh.RightToLeft = RightToLeft.Yes;
+                    if (_currentProperty.Name != "RightToLeft" || _currentProperty.Count != 2 || (SWF.RightToLeft)_currentProperty.Val != RightToLeft.Yes)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.RightToLeft = RightToLeft.No;
+                    _eh.RightToLeft = RightToLeft.No;
                     break;
 
                 case "Visible":
                     Utilities.SleepDoEvents(10);
-                    eh.Visible = false;
-                    if (currentProperty.Name != "Visible" || currentProperty.Count != 2 || (bool)currentProperty.Val != false)
+                    _eh.Visible = false;
+                    if (_currentProperty.Name != "Visible" || _currentProperty.Count != 2 || (bool)_currentProperty.Val != false)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.Visible = true;
+                    _eh.Visible = true;
                     break;
             }
-            currentProperty = null;
-            eh.PropertyMap.ResetAll();
+            _currentProperty = null;
+            _eh.PropertyMap.ResetAll();
         }
         Utilities.SleepDoEvents(1, 100);
         sr.IncCounters(true);
@@ -366,7 +369,7 @@ public class DefaultPM_Delegate : ReflectBase
     public ScenarioResult RemovePropTranslator(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        PropertyMap dictionary = eh.PropertyMap;
+        PropertyMap dictionary = _eh.PropertyMap;
         Bitmap bmp = null;
 
         if (dictionary == null)
@@ -380,21 +383,21 @@ public class DefaultPM_Delegate : ReflectBase
 
         for (int i = 0; i < keys.Length; i++)
         {
-            currentProperty = new DefaultProp(keys[i]);
-            eh.PropertyMap.ResetAll();
-            eh.PropertyMap.Remove(keys[i]);
+            _currentProperty = new DefaultProp(keys[i]);
+            _eh.PropertyMap.ResetAll();
+            _eh.PropertyMap.Remove(keys[i]);
 
             this.Text = keys[i]; 
             switch (keys[i])
             {
                 case "BackColor":
-                    eh.BackColor = System.Drawing.Color.Bisque;
+                    _eh.BackColor = System.Drawing.Color.Bisque;
                     Utilities.SleepDoEvents(1, 100);
                     try
                     {
-                        if (currentProperty.Name != "BackColor" || currentProperty.Count != 0 || currentProperty.Val != null)
+                        if (_currentProperty.Name != "BackColor" || _currentProperty.Count != 0 || _currentProperty.Val != null)
                         {
-                            p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                            p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                             sr.IncCounters(false);
                         }
                     }
@@ -408,90 +411,90 @@ public class DefaultPM_Delegate : ReflectBase
 
                 case "BackgroundImage":
                     bmp = new System.Drawing.Bitmap("GreenStone.bmp");
-                    eh.BackgroundImage = bmp;
+                    _eh.BackgroundImage = bmp;
                     Utilities.SleepDoEvents(1, 100);
-                    if (currentProperty.Name != "BackgroundImage" || currentProperty.Count != 0 || currentProperty.Val != null)
+                    if (_currentProperty.Name != "BackgroundImage" || _currentProperty.Count != 0 || _currentProperty.Val != null)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
-                    eh.BackgroundImage = null;
+                    _eh.BackgroundImage = null;
                     break;
 
                 case "BackgroundImageLayout":
                     bmp = new System.Drawing.Bitmap("GreenStone.bmp");
-                    eh.BackgroundImage = bmp;
-                    eh.BackgroundImageLayout = ImageLayout.Stretch;
+                    _eh.BackgroundImage = bmp;
+                    _eh.BackgroundImageLayout = ImageLayout.Stretch;
                     Utilities.SleepDoEvents(1, 100);
-                    if (currentProperty.Name != "BackgroundImageLayout" ||  currentProperty.Count != 0 || currentProperty.Val != null)
+                    if (_currentProperty.Name != "BackgroundImageLayout" ||  _currentProperty.Count != 0 || _currentProperty.Val != null)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
-                    eh.BackgroundImage = null;
-                    eh.BackgroundImageLayout = ImageLayout.None;
+                    _eh.BackgroundImage = null;
+                    _eh.BackgroundImageLayout = ImageLayout.None;
 
                     break;
 
                 case "Cursor":
-                    eh.Cursor = System.Windows.Forms.Cursors.Hand;
+                    _eh.Cursor = System.Windows.Forms.Cursors.Hand;
                     Utilities.SleepDoEvents(10);
-                    if (currentProperty.Name != "Cursor" || currentProperty.Count != 0  ||  currentProperty.Val != null)
+                    if (_currentProperty.Name != "Cursor" || _currentProperty.Count != 0  ||  _currentProperty.Val != null)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", currentProperty.Name, currentProperty.Count.ToString()));
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1}", _currentProperty.Name, _currentProperty.Count.ToString()));
                         sr.IncCounters(false);
                     }
-                    eh.Cursor = Cursors.Arrow;
+                    _eh.Cursor = Cursors.Arrow;
                     break;
 
 
                 case "Enabled":
-                    eh.Enabled = false;
+                    _eh.Enabled = false;
                     Utilities.SleepDoEvents(10);
-                    if (currentProperty.Name != "Enabled" || currentProperty.Count != 0 || currentProperty.Val != null)
+                    if (_currentProperty.Name != "Enabled" || _currentProperty.Count != 0 || _currentProperty.Val != null)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.Enabled = true; //reset 
+                    _eh.Enabled = true; //reset 
                     break;
 
 
                 case "Font":
                     Utilities.SleepDoEvents(10);
-                    eh.Font = new Font(System.Drawing.FontFamily.GenericMonospace, 10);
-                    Font fnt = (Font)currentProperty.Val;
-                    //SAM TODO
-                    if (currentProperty.Name != "Font" || currentProperty.Count != 0 || currentProperty.Val != null)
+                    _eh.Font = new Font(System.Drawing.FontFamily.GenericMonospace, 10);
+                    Font fnt = (Font)_currentProperty.Val;
+
+                    if (_currentProperty.Name != "Font" || _currentProperty.Count != 0 || _currentProperty.Val != null)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
-                    eh.Font = fnt; // Reset to original 
+                    _eh.Font = fnt; // Reset to original 
                     break;
 
                 case "RightToLeft":
                     Utilities.SleepDoEvents(10);
-                    eh.RightToLeft = RightToLeft.Yes;
-                    if (currentProperty.Name != "RightToLeft" || currentProperty.Count != 0 || currentProperty.Val != null)
+                    _eh.RightToLeft = RightToLeft.Yes;
+                    if (_currentProperty.Name != "RightToLeft" || _currentProperty.Count != 0 || _currentProperty.Val != null)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
                         sr.IncCounters(false);
                     }
                     break;
 
                 case "Visible":
                     Utilities.SleepDoEvents(10);
-                    eh.Visible = false;
-                    if (currentProperty.Name != "Visible" || currentProperty.Count != 0 || currentProperty.Val != null)
+                    _eh.Visible = false;
+                    if (_currentProperty.Name != "Visible" || _currentProperty.Count != 0 || _currentProperty.Val != null)
                     {
-                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", currentProperty.Name, currentProperty.Count.ToString()), currentProperty.Val.ToString());
-                        eh.RightToLeft = RightToLeft.No;
+                        p.log.WriteLine(String.Format("Current Property Name: {0}, Count: {1} Value: ", _currentProperty.Name, _currentProperty.Count.ToString()), _currentProperty.Val.ToString());
+                        _eh.RightToLeft = RightToLeft.No;
                     }
-                    eh.Visible = true;
+                    _eh.Visible = true;
                     break;
             }
-            currentProperty = null;
+            _currentProperty = null;
         }
         Utilities.SleepDoEvents(1, 100);
         sr.IncCounters(true);
@@ -501,9 +504,9 @@ public class DefaultPM_Delegate : ReflectBase
 
     public void OnPropChange(object host, String propertyName, object val)
     {
-        currentProperty.Name = propertyName;
-        currentProperty.Count++;
-        currentProperty.Val = val;
+        _currentProperty.Name = propertyName;
+        _currentProperty.Count++;
+        _currentProperty.Val = val;
     }
 
 

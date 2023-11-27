@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -24,17 +28,15 @@ using System.IO;
 // Description: If the BackColorTransparent is explicitly set to false, setting the 
 //              BackColor to Color.Transparent should not override what was explicitly 
 //              set and make BackColorTransparent=true. 
-// Author:      a-rickyt
 //
 public class WindowsOSBug1370842 : ReflectBase
 {
     #region Testcase setup
 
-    ElementHost elementHost1;
-    SWC.StackPanel stackPanel;
-    SWC.Button avButton1;
-    Bitmap bmp;
-
+    ElementHost _elementHost1;
+    SWC.StackPanel _stackPanel;
+    SWC.Button _avButton1;
+    Bitmap _bmp;
 
     public WindowsOSBug1370842(String[] args) : base(args) { }
 
@@ -45,16 +47,16 @@ public class WindowsOSBug1370842 : ReflectBase
 
         this.BackColor = Color.Red;
 
-        avButton1 = new SWC.Button();
-        avButton1.Content = "Avalon Button";
+        _avButton1 = new SWC.Button();
+        _avButton1.Content = "Avalon Button";
 
-        stackPanel = new SWC.StackPanel();
-        stackPanel.Children.Add(avButton1);
+        _stackPanel = new SWC.StackPanel();
+        _stackPanel.Children.Add(_avButton1);
 
-        elementHost1 = new ElementHost();
-        elementHost1.Child = stackPanel;
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _stackPanel;
 
-        this.Controls.Add(elementHost1);
+        this.Controls.Add(_elementHost1);
 
         base.InitTest(p);
     }
@@ -78,15 +80,15 @@ public class WindowsOSBug1370842 : ReflectBase
 
         TestProperties(sr, p, Color.Red, false, Color.Red, 75);
 
-        elementHost1.BackColorTransparent = true;
+        _elementHost1.BackColorTransparent = true;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Red, true, Color.Red, 75);
 
-        elementHost1.BackColorTransparent = false;
+        _elementHost1.BackColorTransparent = false;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Red, false, Color.Red, 75);
 
-        elementHost1.BackColor = Color.Transparent;
+        _elementHost1.BackColor = Color.Transparent;
         Utilities.SleepDoEvents(20);
         TestProperties(sr, p, Color.Transparent, false, Color.Red, 75);
 
@@ -101,14 +103,14 @@ public class WindowsOSBug1370842 : ReflectBase
         Color bitmapBackColor, double percent)
     {
         this.Text = "elementHost1.BackColorTransparent = " + ehBackColorTransparent;
-        sr.IncCounters(ehBackColor, elementHost1.BackColor,
+        sr.IncCounters(ehBackColor, _elementHost1.BackColor,
             "Failed at elementHost1.BackColor.", p.log);
-        sr.IncCounters(elementHost1.BackColorTransparent, ehBackColorTransparent,
+        sr.IncCounters(_elementHost1.BackColorTransparent, ehBackColorTransparent,
             "Failed at elementHost1.BackColorTransparent.", p.log);
-        bmp = Utilities.GetBitmapOfControl(elementHost1);
-        sr.IncCounters(BitmapsColorPercent(bmp, 0, 0, 200, 100, bitmapBackColor) >= percent,
+        _bmp = Utilities.GetBitmapOfControl(_elementHost1);
+        sr.IncCounters(BitmapsColorPercent(_bmp, 0, 0, 200, 100, bitmapBackColor) >= percent,
             "Bitmap Failed at elementHost1.BackColor=" + bitmapBackColor + ". Percent match: " +
-            BitmapsColorPercent(bmp, 0, 0, 200, 100, bitmapBackColor) + "%", p.log);
+            BitmapsColorPercent(_bmp, 0, 0, 200, 100, bitmapBackColor) + "%", p.log);
     }
 
     // BitmapsColorPercent

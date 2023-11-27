@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -15,18 +19,17 @@ using System.Collections;
 //
 // Testcase:    MasterDetail
 // Description: WF control represents the details of an Avalon Datasource
-// Author:      bogdanbr
 //
 public class MasterDetail : ReflectBase
 {
     //controls 
-    private ListBox wflbMaster = null;
-    private ListBox wflbDetail = null;
-    private System.Windows.Controls.ListBox avlbMaster = null;
-    private System.Windows.Controls.ListBox avlbDetail = null;
+    private ListBox _wflbMaster = null;
+    private ListBox _wflbDetail = null;
+    private System.Windows.Controls.ListBox _avlbMaster = null;
+    private System.Windows.Controls.ListBox _avlbDetail = null;
 
     //data-components
-    private DataSet nwindDataSet = null;
+    private DataSet _nwindDataSet = null;
     public BindingSource categoriesProductsBindingSource = null;
     public BindingSource categoriesBindingSource = null;
 
@@ -43,19 +46,19 @@ public class MasterDetail : ReflectBase
         InitializeData();
 
         //bind controls 
-        wflbMaster.DataSource = categoriesBindingSource;
-        wflbMaster.DisplayMember = "CategoryName";
+        _wflbMaster.DataSource = categoriesBindingSource;
+        _wflbMaster.DisplayMember = "CategoryName";
 
-        wflbDetail.DataSource = categoriesProductsBindingSource;
-        wflbDetail.DisplayMember = "ProductName";
+        _wflbDetail.DataSource = categoriesProductsBindingSource;
+        _wflbDetail.DisplayMember = "ProductName";
 
-        avlbMaster.IsSynchronizedWithCurrentItem = true;
-        avlbMaster.ItemsSource = categoriesBindingSource;
-        avlbMaster.DisplayMemberPath = "CategoryName";
+        _avlbMaster.IsSynchronizedWithCurrentItem = true;
+        _avlbMaster.ItemsSource = categoriesBindingSource;
+        _avlbMaster.DisplayMemberPath = "CategoryName";
 
-        avlbDetail.IsSynchronizedWithCurrentItem = true;
-        avlbDetail.ItemsSource = categoriesProductsBindingSource;
-        avlbDetail.DisplayMemberPath = "ProductName";
+        _avlbDetail.IsSynchronizedWithCurrentItem = true;
+        _avlbDetail.ItemsSource = categoriesProductsBindingSource;
+        _avlbDetail.DisplayMemberPath = "ProductName";
 
         base.InitTest(p);
     }
@@ -72,17 +75,17 @@ public class MasterDetail : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //navigate in the WPF control showing the MasterData
-        for (int i = 0; i < avlbMaster.Items.Count; i++)
+        for (int i = 0; i < _avlbMaster.Items.Count; i++)
         {
-            avlbMaster.Items.MoveCurrentToPosition(i);
+            _avlbMaster.Items.MoveCurrentToPosition(i);
             Application.DoEvents();
 
             //get the selected CategoryID
-            DataRowView selectedRow = avlbMaster.SelectedItem as DataRowView;
+            DataRowView selectedRow = _avlbMaster.SelectedItem as DataRowView;
             int selectedCategoryID = Convert.ToInt32(selectedRow.Row["CategoryID"]);
 
             //Validate the products displayed by the WF list-box
-            ValidateProducts(sr, selectedCategoryID, wflbDetail.Items);
+            ValidateProducts(sr, selectedCategoryID, _wflbDetail.Items);
         }
 
         return sr;
@@ -94,17 +97,17 @@ public class MasterDetail : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //navigate(backwards) in the WF control showing the MasterData
-        for (int i = wflbMaster.Items.Count - 1; i >= 0; i--)
+        for (int i = _wflbMaster.Items.Count - 1; i >= 0; i--)
         {
-            wflbMaster.SelectedIndex = i;
+            _wflbMaster.SelectedIndex = i;
             Application.DoEvents();
 
             //get the selected CategoryID
-            DataRowView selectedRow = wflbMaster.SelectedItem as DataRowView;
+            DataRowView selectedRow = _wflbMaster.SelectedItem as DataRowView;
             int selectedCategoryID = Convert.ToInt32(selectedRow.Row["CategoryID"]);
 
             //Validate the products displayed by the WPF list-box
-            ValidateProducts(sr, selectedCategoryID, avlbDetail.Items);
+            ValidateProducts(sr, selectedCategoryID, _avlbDetail.Items);
         }
 
         return sr;
@@ -116,17 +119,17 @@ public class MasterDetail : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //navigate in the WPF control showing the MasterData
-        for (int i = 0; i < avlbMaster.Items.Count; i++)
+        for (int i = 0; i < _avlbMaster.Items.Count; i++)
         {
-            avlbMaster.Items.MoveCurrentToPosition(i);
+            _avlbMaster.Items.MoveCurrentToPosition(i);
             Application.DoEvents();
 
             //get the selected CategoryID
-            DataRowView selectedRow = avlbMaster.SelectedItem as DataRowView;
+            DataRowView selectedRow = _avlbMaster.SelectedItem as DataRowView;
             int selectedCategoryID = Convert.ToInt32(selectedRow.Row["CategoryID"]);
 
             //Validate the products displayed by the WPF control showing the details 
-            ValidateProducts(sr, selectedCategoryID, avlbDetail.Items);
+            ValidateProducts(sr, selectedCategoryID, _avlbDetail.Items);
         }
 
         return sr;
@@ -152,8 +155,8 @@ public class MasterDetail : ReflectBase
             int selectedCategoryID = Convert.ToInt32(selectedRow.Row["CategoryID"]);
 
             //Validate the products displayed by the controls in main form
-            ValidateProducts(sr, selectedCategoryID, avlbDetail.Items);
-            ValidateProducts(sr, selectedCategoryID, wflbDetail.Items);
+            ValidateProducts(sr, selectedCategoryID, _avlbDetail.Items);
+            ValidateProducts(sr, selectedCategoryID, _wflbDetail.Items);
         }
 
 
@@ -173,13 +176,13 @@ public class MasterDetail : ReflectBase
         detailWPFWnd.Show();
 
         //navigate in the WF control showing the MasterData
-        for (int i = 0; i < wflbMaster.Items.Count; i++)
+        for (int i = 0; i < _wflbMaster.Items.Count; i++)
         {
-            wflbMaster.SelectedIndex = i;
+            _wflbMaster.SelectedIndex = i;
             Application.DoEvents();
 
             //get the selected CategoryID
-            DataRowView selectedRow = wflbMaster.SelectedItem as DataRowView;
+            DataRowView selectedRow = _wflbMaster.SelectedItem as DataRowView;
             int selectedCategoryID = Convert.ToInt32(selectedRow.Row["CategoryID"]);
 
             //Validate the products displayed by the control in WPF Window
@@ -187,13 +190,13 @@ public class MasterDetail : ReflectBase
         }
 
         //navigate in the WPF control showing the MasterData
-        for (int i = 0; i < avlbMaster.Items.Count; i++)
+        for (int i = 0; i < _avlbMaster.Items.Count; i++)
         {
-            avlbMaster.Items.MoveCurrentToPosition(i);
+            _avlbMaster.Items.MoveCurrentToPosition(i);
             Application.DoEvents();
 
             //get the selected CategoryID
-            DataRowView selectedRow = avlbMaster.SelectedItem as DataRowView;
+            DataRowView selectedRow = _avlbMaster.SelectedItem as DataRowView;
             int selectedCategoryID = Convert.ToInt32(selectedRow.Row["CategoryID"]);
 
             //Validate the products displayed by the control in WPF Window
@@ -216,13 +219,13 @@ public class MasterDetail : ReflectBase
         detailWFForm.Show();
 
         //navigate in the WPF control showing the MasterData
-        for (int i = 0; i < avlbMaster.Items.Count; i++)
+        for (int i = 0; i < _avlbMaster.Items.Count; i++)
         {
-            avlbMaster.Items.MoveCurrentToPosition(i);
+            _avlbMaster.Items.MoveCurrentToPosition(i);
             Application.DoEvents();
 
             //get the selected CategoryID
-            DataRowView selectedRow = avlbMaster.SelectedItem as DataRowView;
+            DataRowView selectedRow = _avlbMaster.SelectedItem as DataRowView;
             int selectedCategoryID = Convert.ToInt32(selectedRow.Row["CategoryID"]);
 
             //Validate the products displayed by the control in WPF Window
@@ -282,14 +285,14 @@ public class MasterDetail : ReflectBase
         this.Controls.Add(formMainPanel);
         
         //Create a WF ListBox that will display the master-data
-        wflbMaster = new ListBox();
-        wflbMaster.Dock = DockStyle.Fill;
-        formMainPanel.Controls.Add(wflbMaster, 0, 0);
+        _wflbMaster = new ListBox();
+        _wflbMaster.Dock = DockStyle.Fill;
+        formMainPanel.Controls.Add(_wflbMaster, 0, 0);
 
         //create a WF ListBox that will display the detail-data
-        wflbDetail = new ListBox();
-        wflbDetail.Dock = DockStyle.Fill;
-        formMainPanel.Controls.Add(wflbDetail, 0, 1);
+        _wflbDetail = new ListBox();
+        _wflbDetail.Dock = DockStyle.Fill;
+        formMainPanel.Controls.Add(_wflbDetail, 0, 1);
 
         //create the ElementHost that will host the WPF with master data
         ElementHost ehMaster = new ElementHost();
@@ -297,8 +300,8 @@ public class MasterDetail : ReflectBase
         formMainPanel.Controls.Add(ehMaster, 1, 0);
 
         //create the WPF ListBox that will display the master-data 
-        avlbMaster = new System.Windows.Controls.ListBox();
-        ehMaster.Child = avlbMaster;
+        _avlbMaster = new System.Windows.Controls.ListBox();
+        ehMaster.Child = _avlbMaster;
 
         //create the ElementHost that will host the WPF with detail-data
         ElementHost ehDetail = new ElementHost();
@@ -306,18 +309,18 @@ public class MasterDetail : ReflectBase
         formMainPanel.Controls.Add(ehDetail, 1, 1);
 
         //create the WPF ListBox that will display the detail-data 
-        avlbDetail = new System.Windows.Controls.ListBox();
-        ehDetail.Child = avlbDetail;
+        _avlbDetail = new System.Windows.Controls.ListBox();
+        ehDetail.Child = _avlbDetail;
     }
 
     //helper method that creates & sets all the needed data-objects;
     private void InitializeData()
     {
-        nwindDataSet = GetData();
+        _nwindDataSet = GetData();
 
         categoriesBindingSource = new BindingSource();
         this.categoriesBindingSource.DataMember = "Categories";
-        this.categoriesBindingSource.DataSource = nwindDataSet;
+        this.categoriesBindingSource.DataSource = _nwindDataSet;
 
         categoriesProductsBindingSource = new BindingSource();
         categoriesProductsBindingSource.DataMember = "FK_Categories_Products";
@@ -345,7 +348,7 @@ public class MasterDetail : ReflectBase
     private void ValidateProducts(ScenarioResult sr, int categoryID, IList displayedProducts)
     {
         //get the products for the categoryID 
-        DataRow[] expectedProducts = nwindDataSet.Tables["Products"].Select("CategoryID=" + categoryID.ToString());
+        DataRow[] expectedProducts = _nwindDataSet.Tables["Products"].Select("CategoryID=" + categoryID.ToString());
 
         //validate the number of products displayed
         sr.IncCounters( expectedProducts.Length == displayedProducts.Count,
@@ -370,12 +373,12 @@ public class MasterDetail : ReflectBase
 
 class MasterWPFWindow : System.Windows.Window
 {
-    private MasterDetail m_parent = null;
+    private MasterDetail _parent = null;
     public System.Windows.Controls.ListBox avlbMaster = null;
 
     public MasterWPFWindow(MasterDetail parent)
     {
-        m_parent = parent;
+        _parent = parent;
 
         this.Height = 200;
         this.Width = 300;
@@ -384,18 +387,18 @@ class MasterWPFWindow : System.Windows.Window
         this.Content = avlbMaster;
         
         avlbMaster.IsSynchronizedWithCurrentItem = true;
-        avlbMaster.ItemsSource = m_parent.categoriesBindingSource;
+        avlbMaster.ItemsSource = _parent.categoriesBindingSource;
         avlbMaster.DisplayMemberPath = "CategoryName";
     }
 }
 class DetailWPFWindow : System.Windows.Window
 {
-    private MasterDetail m_parent = null;
+    private MasterDetail _parent = null;
     public System.Windows.Controls.ListBox avlbDetails = null;
 
     public DetailWPFWindow(MasterDetail parent)
     {
-        m_parent = parent;
+        _parent = parent;
 
         this.Height = 200;
         this.Width = 300;
@@ -404,18 +407,18 @@ class DetailWPFWindow : System.Windows.Window
         this.Content = avlbDetails;
 
         avlbDetails.IsSynchronizedWithCurrentItem = true;
-        avlbDetails.ItemsSource = m_parent.categoriesProductsBindingSource;
+        avlbDetails.ItemsSource = _parent.categoriesProductsBindingSource;
         avlbDetails.DisplayMemberPath = "ProductName";
     }
 }
 class DetailWFForm : Form
 {
-    private MasterDetail m_parent = null;
+    private MasterDetail _parent = null;
     public System.Windows.Controls.ListBox avlbDetails = null;
 
     public DetailWFForm(MasterDetail parent)
     {
-        m_parent = parent;
+        _parent = parent;
 
         this.Height = 200;
         this.Width = 300;
@@ -428,7 +431,7 @@ class DetailWFForm : Form
         ehDetail.Child = avlbDetails;
 
         avlbDetails.IsSynchronizedWithCurrentItem = true;
-        avlbDetails.ItemsSource = m_parent.categoriesProductsBindingSource;
+        avlbDetails.ItemsSource = _parent.categoriesProductsBindingSource;
         avlbDetails.DisplayMemberPath = "ProductName";
     }
 }

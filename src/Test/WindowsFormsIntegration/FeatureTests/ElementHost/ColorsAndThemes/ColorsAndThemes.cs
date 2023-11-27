@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -20,7 +24,6 @@ using System.Windows.Forms;
 //
 // Testcase:    ColorsAndThemes
 // Description: Test existing spec defined Mappings
-// Author:      sameerm
 //
 public class ColorsAndThemes : ReflectBase
 {
@@ -28,51 +31,49 @@ public class ColorsAndThemes : ReflectBase
     public ColorsAndThemes(string[] args) : base(args) { }
 
 
-
     protected override void InitTest(TParams p)
     {
         _tp = p;
         base.InitTest(p);
     }
-
     
     
     #region Class Vars and other definitions
-    private bool debug = false;
-    private ElementHost eh;
+    private bool _debug = false;
+    private ElementHost _eh;
     private TParams _tp;
-    private static DockPanel dp;                        // our Dockpanel
-    private static System.Windows.Controls.Button avBtn;                        // our Avalon button
+    private static DockPanel s_dp;                        // our Dockpanel
+    private static System.Windows.Controls.Button s_avBtn;                        // our Avalon button
     #endregion
 
     protected override bool BeforeScenario(TParams p, System.Reflection.MethodInfo scenario)
     {
         //Avalon Button  
-        avBtn = new SWC.Button();
-        avBtn.Content = (char)0x2588; // UNICODE block character (so that we can fill up the control for the foreColor tests)
-        avBtn.MaxWidth = avBtn.Width = 100;
-        avBtn.MaxHeight = avBtn.Height = 100;
-        avBtn.FontSize = 14;
-        avBtn.FontWeight = System.Windows.FontWeights.Bold;
+        s_avBtn = new SWC.Button();
+        s_avBtn.Content = (char)0x2588; // UNICODE block character (so that we can fill up the control for the foreColor tests)
+        s_avBtn.MaxWidth = s_avBtn.Width = 100;
+        s_avBtn.MaxHeight = s_avBtn.Height = 100;
+        s_avBtn.FontSize = 14;
+        s_avBtn.FontWeight = System.Windows.FontWeights.Bold;
 
-        dp = new DockPanel();
-        dp.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-        dp.VerticalAlignment = VerticalAlignment.Center;
+        s_dp = new DockPanel();
+        s_dp.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+        s_dp.VerticalAlignment = VerticalAlignment.Center;
 
-        eh = new ElementHost();
-        eh.Size = new SD.Size(200, 200);
+        _eh = new ElementHost();
+        _eh.Size = new SD.Size(200, 200);
 
         if (scenario.Name == "Scenario5" || scenario.Name == "Scenario6")
         {
-            avBtn.FontSize = 200;
-            eh.Child = avBtn;
+            s_avBtn.FontSize = 200;
+            _eh.Child = s_avBtn;
         }
         else
         {
-            dp.Children.Add(avBtn);
-            eh.Child = dp;
+            s_dp.Children.Add(s_avBtn);
+            _eh.Child = s_dp;
         }
-        Controls.Add(eh);
+        Controls.Add(_eh);
 
         this.Width = 300;
         this.Height = 300;
@@ -82,9 +83,9 @@ public class ColorsAndThemes : ReflectBase
     protected override void AfterScenario(TParams p, System.Reflection.MethodInfo scenario, ScenarioResult result)
     {
         this.Controls.Clear();
-        avBtn = null;
-        dp = null;
-        eh = null;
+        s_avBtn = null;
+        s_dp = null;
+        _eh = null;
         this.ForeColor = System.Drawing.Color.Black;
         this.BackColor = System.Drawing.SystemColors.Control;
         base.AfterScenario(p, scenario, result);
@@ -100,23 +101,23 @@ public class ColorsAndThemes : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avBtn.Background = System.Windows.Media.Brushes.White;
-        eh.BackColor = System.Drawing.Color.Red;
+        s_avBtn.Background = System.Windows.Media.Brushes.White;
+        _eh.BackColor = System.Drawing.Color.Red;
         SWF.Application.DoEvents();
         Utilities.SleepDoEvents(2);
-        Bitmap ehBitmap = CreateBitmap(eh);
+        Bitmap ehBitmap = CreateBitmap(_eh);
 
         Utilities.SleepDoEvents(2);
-        Bitmap avBtnBitmap = CreateBitmap(avBtn);
+        Bitmap avBtnBitmap = CreateBitmap(s_avBtn);
 
-        if (debug) ehBitmap.Save(@"eh.bmp");
-        if (debug) avBtnBitmap.Save(@"avBtn.bmp");
+        if (_debug) ehBitmap.Save(@"eh.bmp");
+        if (_debug) avBtnBitmap.Save(@"avBtn.bmp");
 
         // DockPanel Background should have a default of null
-        sr.IncCounters(null, dp.Background, "DockPanel default Background not null", p.log);
+        sr.IncCounters(null, s_dp.Background, "DockPanel default Background not null", p.log);
 
         // Check and make sure the eh back color is changed
-        sr.IncCounters(System.Drawing.Color.Red, eh.BackColor, "Failed at eh.BackColor.", p.log);
+        sr.IncCounters(System.Drawing.Color.Red, _eh.BackColor, "Failed at eh.BackColor.", p.log);
 
         // ElementHost (DockPanel) should inherent the BackColor
         sr.IncCounters(BitmapsColorPercent(ehBitmap, 5, 5, 50, 50, System.Drawing.Color.Red) >= 95,
@@ -135,21 +136,21 @@ public class ColorsAndThemes : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avBtn.Background = null;
+        s_avBtn.Background = null;
         //dp.Background = System.Windows.Media.Brushes.Aqua;
         //        avBtn.Background = null;
-        eh.BackColor = System.Drawing.Color.White;
+        _eh.BackColor = System.Drawing.Color.White;
         SWF.Application.DoEvents();
         Utilities.SleepDoEvents(2);
-        Bitmap ehBitmap = CreateBitmap(eh);
+        Bitmap ehBitmap = CreateBitmap(_eh);
         Utilities.SleepDoEvents(2);
-        Bitmap avBtnBitmap = CreateBitmap(avBtn);
+        Bitmap avBtnBitmap = CreateBitmap(s_avBtn);
 
         // DockPanel Background should have a default of null
-        sr.IncCounters(null, dp.Background, "DockPanel default Background not null", p.log);
+        sr.IncCounters(null, s_dp.Background, "DockPanel default Background not null", p.log);
 
         // Check and make sure the eh back color is changed
-        sr.IncCounters(System.Drawing.Color.White, eh.BackColor, "Failed at eh.BackColor.", p.log);
+        sr.IncCounters(System.Drawing.Color.White, _eh.BackColor, "Failed at eh.BackColor.", p.log);
 
         // ElementHost (DockPanel) should inherent the BackColor
         sr.IncCounters(BitmapsColorPercent(ehBitmap, 5, 5, 50, 50, System.Drawing.Color.White) >= 95,
@@ -167,19 +168,19 @@ public class ColorsAndThemes : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avBtn.Background = System.Windows.Media.Brushes.White;
+        s_avBtn.Background = System.Windows.Media.Brushes.White;
         this.BackColor = System.Drawing.Color.Red;
         SWF.Application.DoEvents();
         Utilities.SleepDoEvents(2);
-        Bitmap ehBitmap = CreateBitmap(eh);
+        Bitmap ehBitmap = CreateBitmap(_eh);
         Utilities.SleepDoEvents(2);
-        Bitmap avBtnBitmap = CreateBitmap(avBtn);
+        Bitmap avBtnBitmap = CreateBitmap(s_avBtn);
 
         // DockPanel Background should have a default of null
-        sr.IncCounters(null, dp.Background, "DockPanel default Background not null", p.log);
+        sr.IncCounters(null, s_dp.Background, "DockPanel default Background not null", p.log);
 
         // Check and make sure the eh back color is changed
-        sr.IncCounters(System.Drawing.Color.Red, eh.BackColor, "Failed at eh.BackColor.", p.log);
+        sr.IncCounters(System.Drawing.Color.Red, _eh.BackColor, "Failed at eh.BackColor.", p.log);
 
         // ElementHost (DockPanel) should inherent the BackColor
         sr.IncCounters(BitmapsColorPercent(ehBitmap, 5, 5, 50, 50, System.Drawing.Color.Red) >= 95,
@@ -198,19 +199,19 @@ public class ColorsAndThemes : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avBtn.Background = null;
+        s_avBtn.Background = null;
         this.BackColor = System.Drawing.Color.White;
         SWF.Application.DoEvents();
         Utilities.SleepDoEvents(2);
-        Bitmap ehBitmap = CreateBitmap(eh);
+        Bitmap ehBitmap = CreateBitmap(_eh);
         Utilities.SleepDoEvents(2);
-        Bitmap avBtnBitmap = CreateBitmap(avBtn);
+        Bitmap avBtnBitmap = CreateBitmap(s_avBtn);
 
         // DockPanel Background should have a default of null
-        sr.IncCounters(null, dp.Background, "DockPanel default Background not null", p.log);
+        sr.IncCounters(null, s_dp.Background, "DockPanel default Background not null", p.log);
 
         // Check and make sure the eh back color is changed
-        sr.IncCounters(System.Drawing.Color.White, eh.BackColor, "Failed at eh.BackColor.", p.log);
+        sr.IncCounters(System.Drawing.Color.White, _eh.BackColor, "Failed at eh.BackColor.", p.log);
 
         // ElementHost (DockPanel) should inherent the BackColor
         sr.IncCounters(BitmapsColorPercent(ehBitmap, 5, 5, 50, 50, System.Drawing.Color.White) >= 95,
@@ -229,16 +230,16 @@ public class ColorsAndThemes : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avBtn.Foreground = System.Windows.Media.Brushes.Blue;
-        eh.ForeColor = System.Drawing.Color.Red;
+        s_avBtn.Foreground = System.Windows.Media.Brushes.Blue;
+        _eh.ForeColor = System.Drawing.Color.Red;
         SWF.Application.DoEvents();
 
         Utilities.SleepDoEvents(2);
-        Bitmap avBtnBitmap = CreateBitmap(avBtn);
+        Bitmap avBtnBitmap = CreateBitmap(s_avBtn);
 //        Utilities.ActiveFreeze("aaa");
 
         // Check and make sure the eh fore color is changed
-        sr.IncCounters(System.Drawing.Color.Red, eh.ForeColor, "Failed at eh.ForeColor.", p.log);
+        sr.IncCounters(System.Drawing.Color.Red, _eh.ForeColor, "Failed at eh.ForeColor.", p.log);
 
         // Hosted control ForeColor should stay 
         sr.IncCounters(BitmapsColorPercent(avBtnBitmap, 40, 40, 10, 10, System.Drawing.Color.Blue) >= 20,
@@ -253,16 +254,16 @@ public class ColorsAndThemes : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        avBtn.Foreground = System.Windows.Media.Brushes.Blue;
+        s_avBtn.Foreground = System.Windows.Media.Brushes.Blue;
         this.ForeColor = System.Drawing.Color.Red;
         SWF.Application.DoEvents();
 
         Utilities.SleepDoEvents(2);
-        Bitmap avBtnBitmap = CreateBitmap(avBtn);
+        Bitmap avBtnBitmap = CreateBitmap(s_avBtn);
         //        Utilities.ActiveFreeze("aaa");
 
         // Check and make sure the eh fore color is changed
-        sr.IncCounters(System.Drawing.Color.Red, eh.ForeColor, "Failed at eh.ForeColor.", p.log);
+        sr.IncCounters(System.Drawing.Color.Red, _eh.ForeColor, "Failed at eh.ForeColor.", p.log);
 
         // Hosted control ForeColor should stay 
         sr.IncCounters(BitmapsColorPercent(avBtnBitmap, 40, 40, 10, 10, System.Drawing.Color.Blue) >= 20,

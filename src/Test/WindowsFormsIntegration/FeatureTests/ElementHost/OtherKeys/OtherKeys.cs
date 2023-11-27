@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -22,24 +26,23 @@ using System.Reflection;
 //
 // Testcase:    OtherKeys
 // Description: This test catches any keys not listed in other tests.
-// Author:      a-rickyt
 //
 public class OtherKeys : ReflectBase
 {
     #region Testcase setup
 
     Edit _edit1;
-    ElementHost elementHost1;
-    ElementHost elementHost2;
-    ElementHost elementHost3;
-    ElementHost elementHost4;
-    SWC.TextBox avTextBox;
-    SWC.Button avButton;
-    SWC.CheckBox avCheckBox;
-    SWC.RadioButton avRadioButton1;
-    SWC.RadioButton avRadioButton2;
-    SWC.StackPanel stackPanel;
-    SWF.Label label = new SWF.Label();
+    ElementHost _elementHost1;
+    ElementHost _elementHost2;
+    ElementHost _elementHost3;
+    ElementHost _elementHost4;
+    SWC.TextBox _avTextBox;
+    SWC.Button _avButton;
+    SWC.CheckBox _avCheckBox;
+    SWC.RadioButton _avRadioButton1;
+    SWC.RadioButton _avRadioButton2;
+    SWC.StackPanel _stackPanel;
+    SWF.Label _label = new SWF.Label();
 
 
     public OtherKeys(String[] args) : base(args) { }
@@ -51,91 +54,91 @@ public class OtherKeys : ReflectBase
         this.Size = new System.Drawing.Size(400, 500);
 
         //Create label
-        label.Width = 200;
-        label.Location = new System.Drawing.Point(120, 430);
-        Controls.Add(label);
+        _label.Width = 200;
+        _label.Location = new System.Drawing.Point(120, 430);
+        Controls.Add(_label);
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Size = new System.Drawing.Size(150, 100);
-        elementHost1.Location = new System.Drawing.Point(100, 50);
-        elementHost1.BackColor = Color.Red;
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Size = new System.Drawing.Size(150, 100);
+        _elementHost1.Location = new System.Drawing.Point(100, 50);
+        _elementHost1.BackColor = Color.Red;
+        Controls.Add(_elementHost1);
 
         //Create AV TextBox
-        avTextBox = new SWC.TextBox();
-        avTextBox.Name = "avTextBox";
-        avTextBox.AcceptsReturn = true;
-        avTextBox.Width = 150;
-        avTextBox.FontFamily = new System.Windows.Media.FontFamily("Arial");
-        avTextBox.FontSize = 11;
-        avTextBox.TextWrapping = TextWrapping.Wrap;
-        elementHost1.Child = avTextBox;
+        _avTextBox = new SWC.TextBox();
+        _avTextBox.Name = "avTextBox";
+        _avTextBox.AcceptsReturn = true;
+        _avTextBox.Width = 150;
+        _avTextBox.FontFamily = new System.Windows.Media.FontFamily("Arial");
+        _avTextBox.FontSize = 11;
+        _avTextBox.TextWrapping = TextWrapping.Wrap;
+        _elementHost1.Child = _avTextBox;
 
         //Create Element Host 2
-        elementHost2 = new ElementHost();
-        elementHost2.Size = new System.Drawing.Size(150, 50);
-        elementHost2.Location = new System.Drawing.Point(100, 200);
-        elementHost2.BackColor = this.BackColor;
-        Controls.Add(elementHost2);
+        _elementHost2 = new ElementHost();
+        _elementHost2.Size = new System.Drawing.Size(150, 50);
+        _elementHost2.Location = new System.Drawing.Point(100, 200);
+        _elementHost2.BackColor = this.BackColor;
+        Controls.Add(_elementHost2);
 
         //Create AV Button
-        avButton = new SWC.Button();
-        avButton.Content = "Avalon Button";
-        avButton.Name = "avButton";
-        elementHost2.Child = avButton;
+        _avButton = new SWC.Button();
+        _avButton.Content = "Avalon Button";
+        _avButton.Name = "avButton";
+        _elementHost2.Child = _avButton;
 
         //Create Element Host 3
-        elementHost3 = new ElementHost();
-        elementHost3.Size = new System.Drawing.Size(150, 50);
-        elementHost3.Location = new System.Drawing.Point(100, 275);
-        elementHost3.BackColor = this.BackColor;
-        Controls.Add(elementHost3);
+        _elementHost3 = new ElementHost();
+        _elementHost3.Size = new System.Drawing.Size(150, 50);
+        _elementHost3.Location = new System.Drawing.Point(100, 275);
+        _elementHost3.BackColor = this.BackColor;
+        Controls.Add(_elementHost3);
 
         //Create AV CheckBox
-        avCheckBox = new SWC.CheckBox();
-        avCheckBox.Content = "Avalon CheckBox";
-        avCheckBox.Name = "avCheckBox";
-        avCheckBox.Unchecked += new RoutedEventHandler(avCheckBox_Unchecked);
-        elementHost3.Child = avCheckBox;
+        _avCheckBox = new SWC.CheckBox();
+        _avCheckBox.Content = "Avalon CheckBox";
+        _avCheckBox.Name = "avCheckBox";
+        _avCheckBox.Unchecked += new RoutedEventHandler(avCheckBox_Unchecked);
+        _elementHost3.Child = _avCheckBox;
 
         //Create Element Host 4
-        elementHost4 = new ElementHost();
-        elementHost4.Size = new System.Drawing.Size(150, 50);
-        elementHost4.Location = new System.Drawing.Point(100, 330);
-        elementHost4.BackColor = this.BackColor;
-        Controls.Add(elementHost4);
+        _elementHost4 = new ElementHost();
+        _elementHost4.Size = new System.Drawing.Size(150, 50);
+        _elementHost4.Location = new System.Drawing.Point(100, 330);
+        _elementHost4.BackColor = this.BackColor;
+        Controls.Add(_elementHost4);
 
         //Create AV RadioButton
-        avRadioButton1 = new SWC.RadioButton();
-        avRadioButton1.Content = "Avalon RadioButton 1";
-        avRadioButton1.Name = "avRadioButton1";
-        avRadioButton2 = new SWC.RadioButton();
-        avRadioButton2.Content = "Avalon RadioButton 2";
-        avRadioButton2.Name = "avRadioButton2";
-        avRadioButton2.Click += new RoutedEventHandler(avRadioButton_Click);
-        stackPanel = new SWC.StackPanel();
-        stackPanel.Name = "stackPanel";
-        stackPanel.Children.Add(avRadioButton1);
-        stackPanel.Children.Add(avRadioButton2);
-        elementHost4.Child = stackPanel;
+        _avRadioButton1 = new SWC.RadioButton();
+        _avRadioButton1.Content = "Avalon RadioButton 1";
+        _avRadioButton1.Name = "avRadioButton1";
+        _avRadioButton2 = new SWC.RadioButton();
+        _avRadioButton2.Content = "Avalon RadioButton 2";
+        _avRadioButton2.Name = "avRadioButton2";
+        _avRadioButton2.Click += new RoutedEventHandler(avRadioButton_Click);
+        _stackPanel = new SWC.StackPanel();
+        _stackPanel.Name = "stackPanel";
+        _stackPanel.Children.Add(_avRadioButton1);
+        _stackPanel.Children.Add(_avRadioButton2);
+        _elementHost4.Child = _stackPanel;
 
         base.InitTest(p);
     }
 
     void avButton_Click(object sender, RoutedEventArgs e)
     {
-        label.Text = "SpaceBar works for Button";
+        _label.Text = "SpaceBar works for Button";
     }
 
     void avCheckBox_Unchecked(object sender, RoutedEventArgs e)
     {
-        label.Text = "SpaceBar works for CheckBox";
+        _label.Text = "SpaceBar works for CheckBox";
     }
 
     void avRadioButton_Click(object sender, RoutedEventArgs e)
     {
-        label.Text = "SpaceBar works for RadioButton";
+        _label.Text = "SpaceBar works for RadioButton";
     }
 
     #endregion
@@ -144,7 +147,7 @@ public class OtherKeys : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        avTextBox.Text = "";
+        _avTextBox.Text = "";
         return base.BeforeScenario(p, scenario);
     }
 
@@ -221,11 +224,11 @@ public class OtherKeys : ReflectBase
         }
 
         _edit1.Click(PointerButtons.Primary);
-        avButton.Click += new RoutedEventHandler(avButton_Click);
+        _avButton.Click += new RoutedEventHandler(avButton_Click);
         _edit1.SendKeys(" ");
  
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(label.Text == "SpaceBar works for Button", "Failed at SpaceBar on Button", p.log);
+        sr.IncCounters(_label.Text == "SpaceBar works for Button", "Failed at SpaceBar on Button", p.log);
 
         return sr;
     }
@@ -242,7 +245,7 @@ public class OtherKeys : ReflectBase
         _edit1.SendKeys(" ");
 
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(label.Text == "SpaceBar works for CheckBox", "Failed at SpaceBar on CheckBox", p.log);
+        sr.IncCounters(_label.Text == "SpaceBar works for CheckBox", "Failed at SpaceBar on CheckBox", p.log);
 
         return sr;
     }
@@ -264,7 +267,7 @@ public class OtherKeys : ReflectBase
         SWF.SendKeys.SendWait(" ");
 
         Utilities.SleepDoEvents(10);
-        sr.IncCounters(label.Text == "SpaceBar works for RadioButton", "Failed at SpaceBar on RadioButton", p.log);
+        sr.IncCounters(_label.Text == "SpaceBar works for RadioButton", "Failed at SpaceBar on RadioButton", p.log);
 
         return sr;
     }

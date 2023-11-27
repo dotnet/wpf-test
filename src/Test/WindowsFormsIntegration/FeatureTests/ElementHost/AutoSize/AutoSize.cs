@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -18,14 +22,13 @@ using System.Reflection;
 //
 // Testcase:    AutoSize
 // Description: Verify that auto-sizing for static control in a static container is correct.
-// Author:      a-rickyt
 //
 public class AutoSize : ReflectBase
 {
     #region Test case setup
 
-    ElementHost elementHost1;
-    SWC.Button avButton;
+    ElementHost _elementHost1;
+    SWC.Button _avButton;
 
     public AutoSize(String[] args) : base(args) { }
 
@@ -42,16 +45,16 @@ public class AutoSize : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        avButton = new SWC.Button();
-        avButton.Content = "Av Button";
-        avButton.Background = System.Windows.Media.Brushes.White;
+        _avButton = new SWC.Button();
+        _avButton.Content = "Av Button";
+        _avButton.Background = System.Windows.Media.Brushes.White;
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Child = avButton;
-        elementHost1.BackColor = Color.Red;
-        elementHost1.Location = new System.Drawing.Point(150, 50);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _avButton;
+        _elementHost1.BackColor = Color.Red;
+        _elementHost1.Location = new System.Drawing.Point(150, 50);
+        Controls.Add(_elementHost1);
         SWF.Application.DoEvents();
 
         return base.BeforeScenario(p, scenario);
@@ -67,37 +70,37 @@ public class AutoSize : ReflectBase
     public ScenarioResult Scenario1(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = true;
+        _elementHost1.AutoSize = true;
 
         SWC.StackPanel stackPanel = new SWC.StackPanel();
-        elementHost1.Child = stackPanel;
-        stackPanel.Children.Add(avButton);
+        _elementHost1.Child = stackPanel;
+        stackPanel.Children.Add(_avButton);
         Utilities.SleepDoEvents(20);
 
         //Check size properties
-        sr.IncCounters(true, elementHost1.AutoSize, "Failed at AutoSize=true on EH.", p.log);
-        sr.IncCounters(elementHost1.Width < 200, "Failed at AutoSize=true on EH (width).", p.log);
-        sr.IncCounters(elementHost1.Height < 100, "Failed at AutoSize=true on EH (height).", p.log);
+        sr.IncCounters(true, _elementHost1.AutoSize, "Failed at AutoSize=true on EH.", p.log);
+        sr.IncCounters(_elementHost1.Width < 200, "Failed at AutoSize=true on EH (width).", p.log);
+        sr.IncCounters(_elementHost1.Height < 100, "Failed at AutoSize=true on EH (height).", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
-        sr.IncCounters(BitmapsColorPercent(bmp, 150, 50, elementHost1.Width, elementHost1.Height, Color.White) >= 1,
+        sr.IncCounters(BitmapsColorPercent(bmp, 150, 50, _elementHost1.Width, _elementHost1.Height, Color.White) >= 1,
             "Bitmap Failed at AutoSize=true on EH. EH is not sized to fit contents of hosted avalon Windows. " +
-            "Percent match: " + BitmapsColorPercent(bmp, 150, 50, elementHost1.Width, elementHost1.Height, Color.White) + "%. Expected >= 1.", p.log);
+            "Percent match: " + BitmapsColorPercent(bmp, 150, 50, _elementHost1.Width, _elementHost1.Height, Color.White) + "%. Expected >= 1.", p.log);
 
 
         //Add more text
-        avButton.Content = "Av Button that is much longer than usually expected";
+        _avButton.Content = "Av Button that is much longer than usually expected";
         Utilities.SleepDoEvents(20);
 
         //Check size properties
-        sr.IncCounters(elementHost1.Width > 200, "Failed at AutoSize=true on EH with long text string.", p.log);
-        sr.IncCounters(elementHost1.Height < 100, "Failed at AutoSize=true on EH (height).", p.log);
+        sr.IncCounters(_elementHost1.Width > 200, "Failed at AutoSize=true on EH with long text string.", p.log);
+        sr.IncCounters(_elementHost1.Height < 100, "Failed at AutoSize=true on EH (height).", p.log);
 
         bmp = Utilities.GetBitmapOfControl(this);
         bmp.Save("1.jpg");
-        sr.IncCounters(BitmapsColorPercent(bmp, 150, 50, this.ClientSize.Width - 150, elementHost1.Height, Color.White) >= 1,
+        sr.IncCounters(BitmapsColorPercent(bmp, 150, 50, this.ClientSize.Width - 150, _elementHost1.Height, Color.White) >= 1,
             "Bitmap Failed at AutoSize=true on EH with longer text. EH is not sized to fit contents of hosted avalon Windows. " +
-            "Percent match: " + BitmapsColorPercent(bmp, 150, 50, this.ClientSize.Width - 150, elementHost1.Height, Color.White) + "%. Expected >= 1.", p.log);
+            "Percent match: " + BitmapsColorPercent(bmp, 150, 50, this.ClientSize.Width - 150, _elementHost1.Height, Color.White) + "%. Expected >= 1.", p.log);
 
         return sr;
     }
@@ -107,19 +110,19 @@ public class AutoSize : ReflectBase
     public ScenarioResult Scenario2(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = false;
-        elementHost1.Size = new System.Drawing.Size(70, 50);
-        avButton.Content = "Av Button with more content than usual";
+        _elementHost1.AutoSize = false;
+        _elementHost1.Size = new System.Drawing.Size(70, 50);
+        _avButton.Content = "Av Button with more content than usual";
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 70, "Width Failed at AutoSize=false and EH size to less than " +
+        sr.IncCounters(_elementHost1.Width == 70, "Width Failed at AutoSize=false and EH size to less than " +
             "content of Avalon control.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Height Failed at AutoSize=false and EH size to less than " +
+        sr.IncCounters(_elementHost1.Height == 50, "Height Failed at AutoSize=false and EH size to less than " +
             "content of Avalon control.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at AutoSize=false and EH size to less than " +
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at AutoSize=false and EH size to less than " +
             "content of Avalon control.", p.log);
-        sr.IncCounters(elementHost1.Top == 50, "Top Failed at AutoSize=false and EH size to less than " +
+        sr.IncCounters(_elementHost1.Top == 50, "Top Failed at AutoSize=false and EH size to less than " +
             "content of Avalon control.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
@@ -138,22 +141,22 @@ public class AutoSize : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        elementHost1.AutoSize = true;
+        _elementHost1.AutoSize = true;
 
         SWC.StackPanel stackPanel = new SWC.StackPanel();
-        elementHost1.Child = stackPanel;
-        stackPanel.Children.Add(avButton);
+        _elementHost1.Child = stackPanel;
+        stackPanel.Children.Add(_avButton);
         Utilities.SleepDoEvents(20);
         //Increase font size
-        avButton.FontSize = 50;
+        _avButton.FontSize = 50;
 
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width > 200, "Width Failed at AutoSize=true and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Height < 100, "Height Failed at AutoSize=true and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at AutoSize=true and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Top == 50, "Top Failed at AutoSize=true and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Width > 200, "Width Failed at AutoSize=true and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Height < 100, "Height Failed at AutoSize=true and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at AutoSize=true and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Top == 50, "Top Failed at AutoSize=true and FontSize increase.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         sr.IncCounters(BitmapsColorPercent(bmp, 150, 50, 224, 64, Color.White) >= 1,
@@ -168,16 +171,16 @@ public class AutoSize : ReflectBase
     public ScenarioResult Scenario4(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = false;
+        _elementHost1.AutoSize = false;
 
-        avButton.FontSize = 60;
+        _avButton.FontSize = 60;
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 200, "Width Failed at AutoSize=false and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Height == 100, "Height Failed at AutoSize=false and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at AutoSize=false and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Top == 50, "Top Failed at AutoSize=false and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Width == 200, "Width Failed at AutoSize=false and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Height Failed at AutoSize=false and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at AutoSize=false and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Top == 50, "Top Failed at AutoSize=false and FontSize increase.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         sr.IncCounters(BitmapsColorPercent(bmp, 150, 50, 200, 100, Color.White) >= 1 &&
@@ -186,14 +189,14 @@ public class AutoSize : ReflectBase
             "Bitmap Failed at AutoSize=false and FontSize increase. Percent match: " +
             BitmapsColorPercent(bmp, 150, 50, 200, 100, Color.White) + "%", p.log);
 
-        avButton.FontSize = 80;
+        _avButton.FontSize = 80;
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 200, "Width Failed at AutoSize=false and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Height == 100, "Height Failed at AutoSize=false and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at AutoSize=false and FontSize increase.", p.log);
-        sr.IncCounters(elementHost1.Top == 50, "Top Failed at AutoSize=false and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Width == 200, "Width Failed at AutoSize=false and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Height Failed at AutoSize=false and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at AutoSize=false and FontSize increase.", p.log);
+        sr.IncCounters(_elementHost1.Top == 50, "Top Failed at AutoSize=false and FontSize increase.", p.log);
 
         bmp = Utilities.GetBitmapOfControl(this);
         sr.IncCounters(BitmapsColorPercent(bmp, 150, 50, 200, 100, Color.White) >= 1 &&
@@ -209,7 +212,7 @@ public class AutoSize : ReflectBase
     public ScenarioResult Scenario5(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = true;
+        _elementHost1.AutoSize = true;
         Utilities.SleepDoEvents(20);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
@@ -221,10 +224,10 @@ public class AutoSize : ReflectBase
 
         //Set MaxWidth and MaxHeight of hosted element to smaller than element host.  Element
         //host should resize to fit hosted element.
-        avButton.MaxWidth = 50;
-        avButton.MaxHeight = 50;
-        elementHost1.Width = 150;
-        elementHost1.Height = 150;
+        _avButton.MaxWidth = 50;
+        _avButton.MaxHeight = 50;
+        _elementHost1.Width = 150;
+        _elementHost1.Height = 150;
         Utilities.SleepDoEvents(20);
 
         bmp = Utilities.GetBitmapOfControl(this);
@@ -242,7 +245,7 @@ public class AutoSize : ReflectBase
     public ScenarioResult Scenario6(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.AutoSize = false;
+        _elementHost1.AutoSize = false;
         Utilities.SleepDoEvents(20);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
@@ -250,7 +253,7 @@ public class AutoSize : ReflectBase
             "Bitmap Failed at AutoSize = true (HostContainer should not be visible). Percent match: " +
             BitmapsColorPercent(bmp, 150, 50, 200, 100, Color.White) + "%", p.log);
 
-        elementHost1.Width = 150;
+        _elementHost1.Width = 150;
         Utilities.SleepDoEvents(20);
 
         bmp = Utilities.GetBitmapOfControl(this);
@@ -258,7 +261,7 @@ public class AutoSize : ReflectBase
             "Bitmap Failed at AutoSize = true (HostContainer should not be visible). Percent match: " +
             BitmapsColorPercent(bmp, 150, 50, 150, 100, Color.White) + "%", p.log);
 
-        elementHost1.Height = 150;
+        _elementHost1.Height = 150;
         Utilities.SleepDoEvents(20);
 
         bmp = Utilities.GetBitmapOfControl(this);

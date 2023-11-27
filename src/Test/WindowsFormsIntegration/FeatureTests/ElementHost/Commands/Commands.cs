@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -25,25 +29,23 @@ using System.Reflection;
 // Testcase:    Commands
 // Description: Command Key Combination can be bound to any level of UI hierarchy in Avalon. 
 //              We need to verify that the command handler executes correctly.
-// Author:      a-rickyt
 //
-
 public class Commands : ReflectBase
 {
     #region Testcase setup
 
     Edit _edit1;
     Edit _edit2;
-    CommandBinding binding;
-    ElementHost elementHost1;
-    ElementHost elementHost2;
-    SWC.Button avButton1;
-    SWC.Button avButton2;
-    SWC.Button avButton3;
-    SWC.StackPanel stackPanel;
-    SWF.Label label;
-    SWF.Button wfButton1;
-    int counter;
+    CommandBinding _binding;
+    ElementHost _elementHost1;
+    ElementHost _elementHost2;
+    SWC.Button _avButton1;
+    SWC.Button _avButton2;
+    SWC.Button _avButton3;
+    SWC.StackPanel _stackPanel;
+    SWF.Label _label;
+    SWF.Button _wfButton1;
+    int _counter;
 
 
     public Commands(String[] args) : base(args) { }
@@ -54,17 +56,17 @@ public class Commands : ReflectBase
         this.Text = "Commands";
         this.Size = new System.Drawing.Size(400, 400);
 
-        binding = new CommandBinding(ApplicationCommands.Copy);
-        binding.Executed += new ExecutedRoutedEventHandler(binding_Executed);
+        _binding = new CommandBinding(ApplicationCommands.Copy);
+        _binding.Executed += new ExecutedRoutedEventHandler(binding_Executed);
 
         base.InitTest(p);
     }
 
     void binding_Executed(object sender, ExecutedRoutedEventArgs e)
     {
-        counter++;
-        label.Text = "CommandBinding executed by " + sender.ToString() + 
-            ". Number of times: " + counter;
+        _counter++;
+        _label.Text = "CommandBinding executed by " + sender.ToString() + 
+            ". Number of times: " + _counter;
         Utilities.SleepDoEvents(10);
     }
 
@@ -74,10 +76,10 @@ public class Commands : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        label = new SWF.Label();
-        label.Width = 400;
-        label.Height = 50;
-        Controls.Add(label);
+        _label = new SWF.Label();
+        _label.Width = 400;
+        _label.Height = 50;
+        Controls.Add(_label);
 
         switch (scenario.Name)
         {
@@ -101,111 +103,111 @@ public class Commands : ReflectBase
                 SetupScenario5();
                 break;
         }
-        counter = 0;
+        _counter = 0;
         Utilities.SleepDoEvents(20);
         return base.BeforeScenario(p, scenario);
     }
 
     void SetupScenario1()
     {
-        avButton1 = new SWC.Button();
-        avButton1.Name = "avButton1";
-        avButton1.Content = "avButton1";
+        _avButton1 = new SWC.Button();
+        _avButton1.Name = "avButton1";
+        _avButton1.Content = "avButton1";
 
-        avButton1.CommandBindings.Add(binding);
+        _avButton1.CommandBindings.Add(_binding);
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = avButton1;
-        elementHost1.Location = new System.Drawing.Point(20, 50);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _avButton1;
+        _elementHost1.Location = new System.Drawing.Point(20, 50);
+        Controls.Add(_elementHost1);
     }
 
     void SetupScenario2()
     {
-        avButton1 = new SWC.Button();
-        avButton1.Name = "avButton1";
-        avButton1.Content = "avButton1";
+        _avButton1 = new SWC.Button();
+        _avButton1.Name = "avButton1";
+        _avButton1.Content = "avButton1";
 
-        avButton2 = new SWC.Button();
-        avButton2.Name = "avButton2";
-        avButton2.Content = "avButton2";
+        _avButton2 = new SWC.Button();
+        _avButton2.Name = "avButton2";
+        _avButton2.Content = "avButton2";
 
-        stackPanel = new SWC.StackPanel();
-        stackPanel.CommandBindings.Add(binding);
-        stackPanel.Children.Add(avButton1);
-        stackPanel.Children.Add(avButton2);
+        _stackPanel = new SWC.StackPanel();
+        _stackPanel.CommandBindings.Add(_binding);
+        _stackPanel.Children.Add(_avButton1);
+        _stackPanel.Children.Add(_avButton2);
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = stackPanel;
-        elementHost1.Location = new System.Drawing.Point(20, 50);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _stackPanel;
+        _elementHost1.Location = new System.Drawing.Point(20, 50);
+        Controls.Add(_elementHost1);
     }
 
     void SetupScenario3()
     {
-        avButton1 = new SWC.Button();
-        avButton1.Name = "avButton1";
-        avButton1.Content = "avButton1";
+        _avButton1 = new SWC.Button();
+        _avButton1.Name = "avButton1";
+        _avButton1.Content = "avButton1";
 
-        avButton2 = new SWC.Button();
-        avButton2.Name = "avButton2";
-        avButton2.Content = "avButton2";
+        _avButton2 = new SWC.Button();
+        _avButton2.Name = "avButton2";
+        _avButton2.Content = "avButton2";
 
-        avButton3 = new SWC.Button();
-        avButton3.Name = "avButton3";
-        avButton3.Content = "avButton3";
+        _avButton3 = new SWC.Button();
+        _avButton3.Name = "avButton3";
+        _avButton3.Content = "avButton3";
 
-        stackPanel = new SWC.StackPanel();
-        stackPanel.Children.Add(avButton1);
-        stackPanel.Children.Add(avButton2);
-        stackPanel.Children.Add(avButton3);
+        _stackPanel = new SWC.StackPanel();
+        _stackPanel.Children.Add(_avButton1);
+        _stackPanel.Children.Add(_avButton2);
+        _stackPanel.Children.Add(_avButton3);
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = stackPanel;
-        elementHost1.Location = new System.Drawing.Point(20, 50);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _stackPanel;
+        _elementHost1.Location = new System.Drawing.Point(20, 50);
+        Controls.Add(_elementHost1);
 
-        avButton1.CommandBindings.Add(binding);
-        avButton2.CommandBindings.Add(binding);
+        _avButton1.CommandBindings.Add(_binding);
+        _avButton2.CommandBindings.Add(_binding);
     }
 
     void SetupScenario4()
     {
-        avButton1 = new SWC.Button();
-        avButton1.Name = "avButton1";
-        avButton1.Content = "avButton1";
+        _avButton1 = new SWC.Button();
+        _avButton1.Name = "avButton1";
+        _avButton1.Content = "avButton1";
 
-        avButton2 = new SWC.Button();
-        avButton2.Name = "avButton2";
-        avButton2.Content = "avButton2";
+        _avButton2 = new SWC.Button();
+        _avButton2.Name = "avButton2";
+        _avButton2.Content = "avButton2";
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = avButton1;
-        elementHost1.Location = new System.Drawing.Point(20, 50);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _avButton1;
+        _elementHost1.Location = new System.Drawing.Point(20, 50);
+        Controls.Add(_elementHost1);
 
         //Create Element Host 2
-        elementHost2 = new ElementHost();
-        elementHost2.Name = "elementHost2";
-        elementHost2.Child = avButton2;
-        elementHost2.Location = new System.Drawing.Point(20, 220);
-        Controls.Add(elementHost2);
+        _elementHost2 = new ElementHost();
+        _elementHost2.Name = "elementHost2";
+        _elementHost2.Child = _avButton2;
+        _elementHost2.Location = new System.Drawing.Point(20, 220);
+        Controls.Add(_elementHost2);
 
-        avButton1.CommandBindings.Add(binding);
-        avButton2.CommandBindings.Add(binding);
+        _avButton1.CommandBindings.Add(_binding);
+        _avButton2.CommandBindings.Add(_binding);
     }
 
     void SetupScenario5()
     {
-        label.Location = new System.Drawing.Point(0, 50);
+        _label.Location = new System.Drawing.Point(0, 50);
 
         SWF.ToolStripMenuItem menuItem = new SWF.ToolStripMenuItem();
         menuItem.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C;
@@ -216,42 +218,42 @@ public class Commands : ReflectBase
         wfMenuStrip.Items.Add(menuItem);
         Controls.Add(wfMenuStrip);
 
-        wfButton1 = new SWF.Button();
-        wfButton1.Name = "wfButton1";
-        wfButton1.Text = "wfButton1";
-        wfButton1.AutoSize = true;
-        wfButton1.Location = new System.Drawing.Point(0, 100);
-        Controls.Add(wfButton1);
+        _wfButton1 = new SWF.Button();
+        _wfButton1.Name = "wfButton1";
+        _wfButton1.Text = "wfButton1";
+        _wfButton1.AutoSize = true;
+        _wfButton1.Location = new System.Drawing.Point(0, 100);
+        Controls.Add(_wfButton1);
 
-        avButton1 = new SWC.Button();
-        avButton1.Name = "avButton1";
-        avButton1.Content = "avButton1";
+        _avButton1 = new SWC.Button();
+        _avButton1.Name = "avButton1";
+        _avButton1.Content = "avButton1";
 
-        avButton2 = new SWC.Button();
-        avButton2.Name = "avButton2";
-        avButton2.Content = "avButton2";
+        _avButton2 = new SWC.Button();
+        _avButton2.Name = "avButton2";
+        _avButton2.Content = "avButton2";
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Name = "elementHost1";
-        elementHost1.Child = avButton1;
-        elementHost1.Location = new System.Drawing.Point(20, 140);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Name = "elementHost1";
+        _elementHost1.Child = _avButton1;
+        _elementHost1.Location = new System.Drawing.Point(20, 140);
+        Controls.Add(_elementHost1);
 
         //Create Element Host 2
-        elementHost2 = new ElementHost();
-        elementHost2.Name = "elementHost2";
-        elementHost2.Child = avButton2;
-        elementHost2.Location = new System.Drawing.Point(20, 260);
-        Controls.Add(elementHost2);
+        _elementHost2 = new ElementHost();
+        _elementHost2.Name = "elementHost2";
+        _elementHost2.Child = _avButton2;
+        _elementHost2.Location = new System.Drawing.Point(20, 260);
+        Controls.Add(_elementHost2);
 
-        avButton1.CommandBindings.Add(binding);
-        avButton2.CommandBindings.Add(binding);
+        _avButton1.CommandBindings.Add(_binding);
+        _avButton2.CommandBindings.Add(_binding);
     }
 
     void menuItem_Click(object sender, EventArgs e)
     {
-        label.Text = "WinForm menu command executed.";
+        _label.Text = "WinForm menu command executed.";
         Utilities.SleepDoEvents(10);
     }
 
@@ -276,17 +278,17 @@ public class Commands : ReflectBase
             return new ScenarioResult(false);
         }
 
-        sr.IncCounters(label.Text == "",
+        sr.IncCounters(_label.Text == "",
             "Failed at initial state. Label: "
-            + label.Text, p.log);
+            + _label.Text, p.log);
 
         _edit1.SetFocus();
         _edit1.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "CommandBinding executed by " + avButton1.ToString() +
-            ". Number of times: " + counter, "Failed at CommandBinding executed. Label: " 
-            + label.Text, p.log);
+        sr.IncCounters(_label.Text == "CommandBinding executed by " + _avButton1.ToString() +
+            ". Number of times: " + _counter, "Failed at CommandBinding executed. Label: " 
+            + _label.Text, p.log);
 
         
         return sr;
@@ -301,25 +303,25 @@ public class Commands : ReflectBase
             return new ScenarioResult(false);
         }
 
-        sr.IncCounters(label.Text == "",
+        sr.IncCounters(_label.Text == "",
             "Failed at initial state. Label: "
-            + label.Text, p.log);
+            + _label.Text, p.log);
 
         _edit1.SetFocus();
         _edit1.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "CommandBinding executed by " + stackPanel.ToString() +
-            ". Number of times: " + counter, "Failed at CommandBinding executed. Label: "
-            + label.Text + ". Expected number of times: " + counter, p.log);
+        sr.IncCounters(_label.Text == "CommandBinding executed by " + _stackPanel.ToString() +
+            ". Number of times: " + _counter, "Failed at CommandBinding executed. Label: "
+            + _label.Text + ". Expected number of times: " + _counter, p.log);
 
         _edit2.SetFocus();
         _edit2.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "CommandBinding executed by " + stackPanel.ToString() +
-            ". Number of times: " + counter, "Failed at CommandBinding executed. Label: "
-            + label.Text + ". Expected number of times: " + counter, p.log);
+        sr.IncCounters(_label.Text == "CommandBinding executed by " + _stackPanel.ToString() +
+            ". Number of times: " + _counter, "Failed at CommandBinding executed. Label: "
+            + _label.Text + ". Expected number of times: " + _counter, p.log);
 
         return sr;
     }
@@ -334,25 +336,25 @@ public class Commands : ReflectBase
             return new ScenarioResult(false);
         }
 
-        sr.IncCounters(label.Text == "",
+        sr.IncCounters(_label.Text == "",
             "Failed at initial state. Label: "
-            + label.Text, p.log);
+            + _label.Text, p.log);
         
         _edit1.SetFocus();
         _edit1.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "CommandBinding executed by " + avButton1 +
-            ". Number of times: " + counter, "Failed at CommandBinding executed. Label: "
-            + label.Text + ". Expected number of times: " + counter, p.log);
+        sr.IncCounters(_label.Text == "CommandBinding executed by " + _avButton1 +
+            ". Number of times: " + _counter, "Failed at CommandBinding executed. Label: "
+            + _label.Text + ". Expected number of times: " + _counter, p.log);
 
         _edit2.SetFocus();
         _edit2.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "CommandBinding executed by " + avButton2 +
-            ". Number of times: " + counter, "Failed at CommandBinding executed. Label: "
-            + label.Text + ". Expected number of times: " + counter, p.log);
+        sr.IncCounters(_label.Text == "CommandBinding executed by " + _avButton2 +
+            ". Number of times: " + _counter, "Failed at CommandBinding executed. Label: "
+            + _label.Text + ". Expected number of times: " + _counter, p.log);
 
         return sr;
     }
@@ -366,25 +368,25 @@ public class Commands : ReflectBase
             return new ScenarioResult(false);
         }
 
-        sr.IncCounters(label.Text == "",
+        sr.IncCounters(_label.Text == "",
             "Failed at initial state. Label: "
-            + label.Text, p.log);
+            + _label.Text, p.log);
 
         _edit1.SetFocus();
         _edit1.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "CommandBinding executed by " + avButton1 +
-            ". Number of times: " + counter, "Failed at CommandBinding executed. Label: "
-            + label.Text + ". Expected number of times: " + counter, p.log);
+        sr.IncCounters(_label.Text == "CommandBinding executed by " + _avButton1 +
+            ". Number of times: " + _counter, "Failed at CommandBinding executed. Label: "
+            + _label.Text + ". Expected number of times: " + _counter, p.log);
 
         _edit2.SetFocus();
         _edit2.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "CommandBinding executed by " + avButton2 +
-            ". Number of times: " + counter, "Failed at CommandBinding executed. Label: "
-            + label.Text + ". Expected number of times: " + counter, p.log);
+        sr.IncCounters(_label.Text == "CommandBinding executed by " + _avButton2 +
+            ". Number of times: " + _counter, "Failed at CommandBinding executed. Label: "
+            + _label.Text + ". Expected number of times: " + _counter, p.log);
 
         return sr;
     }
@@ -399,24 +401,24 @@ public class Commands : ReflectBase
             return new ScenarioResult(false);
         }
 
-        sr.IncCounters(label.Text == "", "Failed at initial state. Label: "
-            + label.Text, p.log);
+        sr.IncCounters(_label.Text == "", "Failed at initial state. Label: "
+            + _label.Text, p.log);
 
         _edit1.SetFocus();
         _edit1.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "CommandBinding executed by " + avButton1 +
-            ". Number of times: " + counter, "Failed at CommandBinding executed. Label: "
-            + label.Text + ". Expected number of times: " + counter, p.log);
+        sr.IncCounters(_label.Text == "CommandBinding executed by " + _avButton1 +
+            ". Number of times: " + _counter, "Failed at CommandBinding executed. Label: "
+            + _label.Text + ". Expected number of times: " + _counter, p.log);
 
         _edit2.SetFocus();
         _edit2.SendKeys("^c");
         Utilities.SleepDoEvents(10);
 
-        sr.IncCounters(label.Text == "WinForm menu command executed.",
+        sr.IncCounters(_label.Text == "WinForm menu command executed.",
             "Failed at WinForm menu command executed. Label: "
-            + label.Text, p.log);
+            + _label.Text, p.log);
 
         return sr;
     }

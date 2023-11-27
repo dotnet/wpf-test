@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 using WFCTestLib.Util;
@@ -10,38 +14,31 @@ using System.Windows.Media;
 using SWF = System.Windows.Forms;
 using System.Windows.Controls;
 
-///
 /// <TestCase>
 /// Enabled
 /// </TestCase>
 /// <summary>
 /// Verify that the WF's Enabled Property works
 /// </summary>
-/// <history>
-///  [sameerm]   3/28/2006   Created
-///  [sameerm]   3/30/2006   Incorporated review feedback.
-/// </history>
-///
-///
 public class Enabled : ReflectBase
 {
-
     private SWC.TextBox _avTxtBox;
     private ElementHost _eh1;
 
     #region Testcase setup
     public Enabled(string[] args) : base(args) { }
 
-
     protected override void InitTest(TParams p)
     {
         this.Size = new System.Drawing.Size(500, 500);
         base.InitTest(p);
     }
+
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
         return base.BeforeScenario(p, scenario);
     }
+    
     protected override void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result)
     {
         Controls.Clear();

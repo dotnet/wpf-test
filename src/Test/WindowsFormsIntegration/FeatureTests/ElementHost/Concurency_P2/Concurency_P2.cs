@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 
@@ -13,15 +17,14 @@ using System.ComponentModel;
 //
 // Testcase:    Concurency_P2
 // Description: Verify that Binding works across windows.
-// Author:      bogdanbr
 //
 public class Concurency_P2 : ReflectBase
 {
     //controls
-    private ListBox wflbProducts = null;
-    private TextBox wftbProductName = null;
-    private TextBox wftbUnitPrice = null;
-    private SecondForm secondForm = null;
+    private ListBox _wflbProducts = null;
+    private TextBox _wftbProductName = null;
+    private TextBox _wftbUnitPrice = null;
+    private SecondForm _secondForm = null;
 
     //data-object
     public Products m_products;
@@ -32,7 +35,6 @@ public class Concurency_P2 : ReflectBase
     { 
     }
 
-
     protected override void InitTest(TParams p)
     {
         //create & set the needed controls
@@ -42,22 +44,22 @@ public class Concurency_P2 : ReflectBase
         InitializeData();
 
         //bind the controls 
-        wflbProducts.DataSource = m_products;
-        wflbProducts.DisplayMember = "ProductName";
+        _wflbProducts.DataSource = m_products;
+        _wflbProducts.DisplayMember = "ProductName";
 
-        wftbProductName.DataBindings.Add("Text", m_products, "ProductName");
-        wftbUnitPrice.DataBindings.Add("Text", m_products, "UnitPrice");
+        _wftbProductName.DataBindings.Add("Text", m_products, "ProductName");
+        _wftbUnitPrice.DataBindings.Add("Text", m_products, "UnitPrice");
 
         //show the secondForm 
-        secondForm = new SecondForm(this);
-        secondForm.Show();
+        _secondForm = new SecondForm(this);
+        _secondForm.Show();
 
         base.InitTest(p);
     }
 
     protected override void EndTest(TParams p)
     {
-        secondForm.Close();
+        _secondForm.Close();
         base.EndTest(p);
     }
 
@@ -72,21 +74,21 @@ public class Concurency_P2 : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult(true);
 
-        for (int i = 0; i < secondForm.avlvProducts.Items.Count; i++)
+        for (int i = 0; i < _secondForm.avlvProducts.Items.Count; i++)
         {
             //Select the same row in the WPF ListView and WF ListBox;
-            secondForm.avlvProducts.Items.MoveCurrentToPosition(i);
-            wflbProducts.SelectedIndex = i;
+            _secondForm.avlvProducts.Items.MoveCurrentToPosition(i);
+            _wflbProducts.SelectedIndex = i;
             Application.DoEvents();
 
             //change the price of the current product to a new value - use the WPF TextBox to do this change
-            int newPrice = Convert.ToInt32(secondForm.avtbUnitPrice.Text) + 10;
-            secondForm.avtbUnitPrice.Focus();
-            secondForm.avtbUnitPrice.Text = newPrice.ToString();
-            secondForm.avlvProducts.Focus();
+            int newPrice = Convert.ToInt32(_secondForm.avtbUnitPrice.Text) + 10;
+            _secondForm.avtbUnitPrice.Focus();
+            _secondForm.avtbUnitPrice.Text = newPrice.ToString();
+            _secondForm.avlvProducts.Focus();
 
             //verify that the new value appears in the WF text-box 
-            sr.IncCounters( newPrice == Convert.ToInt32(wftbUnitPrice.Text),
+            sr.IncCounters( newPrice == Convert.ToInt32(_wftbUnitPrice.Text),
                             "The Price-change in WPF Text-Box wasn't reflected in the WF TextBox",
                             p.log);
 
@@ -103,21 +105,21 @@ public class Concurency_P2 : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult(true);
 
-        for (int i = wflbProducts.Items.Count - 1; i >= 0; i--)
+        for (int i = _wflbProducts.Items.Count - 1; i >= 0; i--)
         {
             //Select the same row in the WPF ListView and WF ListBox;
-            secondForm.avlvProducts.Items.MoveCurrentToPosition(i);
-            wflbProducts.SelectedIndex = i;
+            _secondForm.avlvProducts.Items.MoveCurrentToPosition(i);
+            _wflbProducts.SelectedIndex = i;
             Application.DoEvents();
 
             //change the price of the current product to a new value - use the WF TextBox to do this change
-            int newPrice = Convert.ToInt32(wftbUnitPrice.Text) + 10;
-            wftbUnitPrice.Focus();
-            wftbUnitPrice.Text = newPrice.ToString();
-            wflbProducts.Focus();
+            int newPrice = Convert.ToInt32(_wftbUnitPrice.Text) + 10;
+            _wftbUnitPrice.Focus();
+            _wftbUnitPrice.Text = newPrice.ToString();
+            _wflbProducts.Focus();
 
             //verify that the new value appears in the WF text-box 
-            sr.IncCounters(newPrice == Convert.ToInt32(secondForm.avtbUnitPrice.Text),
+            sr.IncCounters(newPrice == Convert.ToInt32(_secondForm.avtbUnitPrice.Text),
                             "The Price-change in WPF Text-Box wasn't reflected in the WF TextBox",
                             p.log);
 
@@ -136,38 +138,38 @@ public class Concurency_P2 : ReflectBase
         ScenarioResult sr = new ScenarioResult(true);
 
         //remember the second Product 
-        Product secondProduct = wflbProducts.Items[1] as Product;
+        Product secondProduct = _wflbProducts.Items[1] as Product;
 
         //delete the first row
-        m_products.Remove( wflbProducts.Items[0] as Product );
+        m_products.Remove( _wflbProducts.Items[0] as Product );
 
         //Select the first row in the WPF ListView and WF ListBox;
-        secondForm.avlvProducts.Items.MoveCurrentToPosition(0);
-        wflbProducts.SelectedIndex = 0;
+        _secondForm.avlvProducts.Items.MoveCurrentToPosition(0);
+        _wflbProducts.SelectedIndex = 0;
         Application.DoEvents(); 
         
         //verify that the all controls are updated to reflect the recent delete.
-        sr.IncCounters( secondProduct.ProductName == (wflbProducts.SelectedItem as Product).ProductName,
+        sr.IncCounters( secondProduct.ProductName == (_wflbProducts.SelectedItem as Product).ProductName,
                         "WF ListBox wasn't updated after the delete-operation",
                         p.log);
 
-        sr.IncCounters( secondProduct.ProductName == wftbProductName.Text,
+        sr.IncCounters( secondProduct.ProductName == _wftbProductName.Text,
                         "WF TextBox wasn't updated after the delete-operation",
                         p.log);
 
-        sr.IncCounters( secondProduct.UnitPrice == Convert.ToInt32(wftbUnitPrice.Text),
+        sr.IncCounters( secondProduct.UnitPrice == Convert.ToInt32(_wftbUnitPrice.Text),
                         "WF TextBox wasn't updated after the delete-operation",
                         p.log);
 
-        sr.IncCounters( secondProduct.ProductName == (secondForm.avlvProducts.SelectedItem as Product).ProductName,
+        sr.IncCounters( secondProduct.ProductName == (_secondForm.avlvProducts.SelectedItem as Product).ProductName,
                         "WPF ListView wasn't updated after the delete-operation",
                         p.log);
 
-        sr.IncCounters( secondProduct.UnitPrice == Convert.ToInt32(secondForm.avtbUnitPrice.Text),
+        sr.IncCounters( secondProduct.UnitPrice == Convert.ToInt32(_secondForm.avtbUnitPrice.Text),
                         "WPF TextBox wasn't updated after the delete-operation",
                         p.log);
 
-        sr.IncCounters( secondProduct.ProductName == (secondForm.avcbProducts.SelectedItem as Product).ProductName,
+        sr.IncCounters( secondProduct.ProductName == (_secondForm.avcbProducts.SelectedItem as Product).ProductName,
                         "WPF ComboBox wasn't updated after the delete-operation",
                         p.log);
    
@@ -186,32 +188,32 @@ public class Concurency_P2 : ReflectBase
         m_products.Add( newProduct );
 
         //Select the last row in the WPF ListView and WF ListBox;
-        secondForm.avlvProducts.Items.MoveCurrentToPosition(secondForm.avlvProducts.Items.Count - 1);
-        wflbProducts.SelectedIndex = wflbProducts.Items.Count - 1;
+        _secondForm.avlvProducts.Items.MoveCurrentToPosition(_secondForm.avlvProducts.Items.Count - 1);
+        _wflbProducts.SelectedIndex = _wflbProducts.Items.Count - 1;
         Application.DoEvents(); 
 
         //verify that all controls are updated to reflect the recent add.
-        sr.IncCounters( newProduct.ProductName == (wflbProducts.SelectedItem as Product).ProductName,
+        sr.IncCounters( newProduct.ProductName == (_wflbProducts.SelectedItem as Product).ProductName,
                         "WF ListBox wasn't updated after the add-operation",
                         p.log);
 
-        sr.IncCounters( newProduct.ProductName == wftbProductName.Text,
+        sr.IncCounters( newProduct.ProductName == _wftbProductName.Text,
                         "WF TextBox wasn't updated after the add-operation",
                         p.log);
 
-        sr.IncCounters( newProduct.UnitPrice == Convert.ToInt32(wftbUnitPrice.Text),
+        sr.IncCounters( newProduct.UnitPrice == Convert.ToInt32(_wftbUnitPrice.Text),
                         "WF TextBox wasn't updated after the add-operation",
                         p.log);
 
-        sr.IncCounters( newProduct.ProductName == (secondForm.avlvProducts.SelectedItem as Product).ProductName,
+        sr.IncCounters( newProduct.ProductName == (_secondForm.avlvProducts.SelectedItem as Product).ProductName,
                         "WPF ListView wasn't updated after the add-operation",
                         p.log);
 
-        sr.IncCounters( newProduct.UnitPrice == Convert.ToInt32(secondForm.avtbUnitPrice.Text),
+        sr.IncCounters( newProduct.UnitPrice == Convert.ToInt32(_secondForm.avtbUnitPrice.Text),
                         "WPF TextBox wasn't updated after the add-operation",
                         p.log);
 
-        sr.IncCounters( newProduct.ProductName == (secondForm.avcbProducts.SelectedItem as Product).ProductName,
+        sr.IncCounters( newProduct.ProductName == (_secondForm.avcbProducts.SelectedItem as Product).ProductName,
                         "WPF ComboBox wasn't updated after the add-operation",
                         p.log);
 
@@ -239,20 +241,20 @@ public class Concurency_P2 : ReflectBase
         this.Controls.Add(wfControlsPanel);
 
         //create the WinForms ListBox that will display product-names 
-        wflbProducts = new ListBox();
-        wflbProducts.Dock = DockStyle.Fill;
-        wflbProducts.FormattingEnabled = true;
-        wfControlsPanel.Controls.Add(wflbProducts, 0, 0);
+        _wflbProducts = new ListBox();
+        _wflbProducts.Dock = DockStyle.Fill;
+        _wflbProducts.FormattingEnabled = true;
+        wfControlsPanel.Controls.Add(_wflbProducts, 0, 0);
 
         //create a TextBox that will display the Name for the current product (the one selected in the wflbProductNames listBox )
-        wftbProductName = new TextBox();
-        wftbProductName.Dock = DockStyle.Top;
-        wfControlsPanel.Controls.Add(wftbProductName, 0, 1);
+        _wftbProductName = new TextBox();
+        _wftbProductName.Dock = DockStyle.Top;
+        wfControlsPanel.Controls.Add(_wftbProductName, 0, 1);
 
         //create a TextBox that will display the UnitPrice for the current product (the one selected in the wflbProductNames listBox )
-        wftbUnitPrice = new TextBox();
-        wftbUnitPrice.Dock = DockStyle.Bottom;
-        wfControlsPanel.Controls.Add(wftbUnitPrice, 0, 2);
+        _wftbUnitPrice = new TextBox();
+        _wftbUnitPrice.Dock = DockStyle.Bottom;
+        wfControlsPanel.Controls.Add(_wftbUnitPrice, 0, 2);
     }
 
     //helper method that creates & sets all the needed data-objects;
@@ -287,26 +289,26 @@ public class Concurency_P2 : ReflectBase
 
 public class Product : INotifyPropertyChanged
 {
-    private string m_productName = "";
-    private int m_unitPrice = 0;
+    private string _productName = "";
+    private int _unitPrice = 0;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
     public Product(string productName, int unitPrice)
     {
-        this.m_productName = productName;
-        this.m_unitPrice = unitPrice;
+        this._productName = productName;
+        this._unitPrice = unitPrice;
     }
 
     public string ProductName
     {
         get
         {
-            return m_productName;
+            return _productName;
         }
         set
         {
-            m_productName = value;
+            _productName = value;
             OnPropertyChanged("ProductName");
         }
     }
@@ -314,11 +316,11 @@ public class Product : INotifyPropertyChanged
     {
         get
         {
-            return m_unitPrice;
+            return _unitPrice;
         }
         set
         {
-            m_unitPrice = value;
+            _unitPrice = value;
             OnPropertyChanged("UnitPrice");
         }
     }
@@ -339,17 +341,17 @@ public class Products : BindingList<Product>
 
 public class SecondForm : Form
 {
-    private Concurency_P2 m_parent = null;
+    private Concurency_P2 _parent = null;
 
     //controls
-    private System.Windows.Controls.Grid avGrid = null;
+    private System.Windows.Controls.Grid _avGrid = null;
     public System.Windows.Controls.ComboBox avcbProducts = null;
     public System.Windows.Controls.ListView avlvProducts = null;
     public System.Windows.Controls.TextBox avtbUnitPrice = null;
 
     public SecondForm(Concurency_P2 parent)
     {
-        m_parent = parent;
+        _parent = parent;
         this.Load += new EventHandler(SecondForm_Load);
     }
 
@@ -359,8 +361,8 @@ public class SecondForm : Form
         InitializeControls();
 
         //bind the controls
-        avGrid.DataContext = m_parent.m_products;
-        avlvProducts.ItemsSource = m_parent.m_products;
+        _avGrid.DataContext = _parent.m_products;
+        avlvProducts.ItemsSource = _parent.m_products;
         ((System.Windows.Controls.GridView)avlvProducts.View).Columns[0].DisplayMemberBinding = new System.Windows.Data.Binding("ProductName");
         ((System.Windows.Controls.GridView)avlvProducts.View).Columns[1].DisplayMemberBinding = new System.Windows.Data.Binding("UnitPrice");
 
@@ -368,14 +370,14 @@ public class SecondForm : Form
                                                           System.Windows.Controls.TextBox.TextProperty,
                                                           new System.Windows.Data.Binding("UnitPrice"));
 
-        avcbProducts.ItemsSource = m_parent.m_products;
+        avcbProducts.ItemsSource = _parent.m_products;
         avcbProducts.DisplayMemberPath = "ProductName";
     }
 
     //helper method that creates & sets all the needed controls
     private void InitializeControls()
     {
-        this.Location = new System.Drawing.Point(m_parent.Location.X + m_parent.Width + 5, 0);
+        this.Location = new System.Drawing.Point(_parent.Location.X + _parent.Width + 5, 0);
 
         //Create the TableLayoutPanel for element-hosts ( with 2 rows; will put 2 element-hosts in these rows )
         TableLayoutPanel elementHostPanel = new TableLayoutPanel();
@@ -398,11 +400,11 @@ public class SecondForm : Form
         elementHostPanel.Controls.Add(ehSecond, 0, 1);
 
         //create the WPF Grid that will be hosted by the ehFirst and that will contain a ListBox and a TextBox
-        avGrid = new System.Windows.Controls.Grid();
-        avGrid.RowDefinitions.Add(new System.Windows.Controls.RowDefinition());
-        avGrid.RowDefinitions.Add(new System.Windows.Controls.RowDefinition());
-        avGrid.RowDefinitions[1].Height = new System.Windows.GridLength(20, System.Windows.GridUnitType.Pixel);
-        ehFirst.Child = avGrid;
+        _avGrid = new System.Windows.Controls.Grid();
+        _avGrid.RowDefinitions.Add(new System.Windows.Controls.RowDefinition());
+        _avGrid.RowDefinitions.Add(new System.Windows.Controls.RowDefinition());
+        _avGrid.RowDefinitions[1].Height = new System.Windows.GridLength(20, System.Windows.GridUnitType.Pixel);
+        ehFirst.Child = _avGrid;
 
         //create the WPF ComboBox that will be hosted by the ehSecond - this combo will contain all the ProductNames 
         avcbProducts = new System.Windows.Controls.ComboBox();
@@ -423,13 +425,13 @@ public class SecondForm : Form
         avlvProducts.Margin = new System.Windows.Thickness(5, 5, 5, 5);
         System.Windows.Controls.Grid.SetColumn(avlvProducts, 0);
         System.Windows.Controls.Grid.SetRow(avlvProducts, 0);
-        avGrid.Children.Add(avlvProducts);
+        _avGrid.Children.Add(avlvProducts);
 
         //create the WPF TextBox that will display the UnitPrice for the current product
         avtbUnitPrice = new System.Windows.Controls.TextBox();
         System.Windows.Controls.Grid.SetRow(avtbUnitPrice, 1);
         System.Windows.Controls.Grid.SetColumn(avtbUnitPrice, 0);
-        avGrid.Children.Add(avtbUnitPrice);
+        _avGrid.Children.Add(avtbUnitPrice);
     }
 }
 

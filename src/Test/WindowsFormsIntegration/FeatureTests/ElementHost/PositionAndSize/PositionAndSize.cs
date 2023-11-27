@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using WFCTestLib.Util;
 using WFCTestLib.Log;
@@ -18,17 +22,15 @@ using System.Reflection;
 //
 // Testcase:    PositionAndSize
 // Description: Verify that sizing for static control in a static container is correct.
-// Author:      a-rickyt
 //
 public class PositionAndSize : ReflectBase
 {
     #region Test case setup
 
-    ElementHost elementHost1;
-    ElementHost elementHost2;
-    SWC.Button avButton;
-    SWC.ComboBox avComboBox;
-
+    ElementHost _elementHost1;
+    ElementHost _elementHost2;
+    SWC.Button _avButton;
+    SWC.ComboBox _avComboBox;
 
     public PositionAndSize(String[] args) : base(args) { }
 
@@ -45,16 +47,16 @@ public class PositionAndSize : ReflectBase
 
     protected override bool BeforeScenario(TParams p, MethodInfo scenario)
     {
-        avButton = new SWC.Button();
-        avButton.Content = "AV Button";
-        avButton.Background = System.Windows.Media.Brushes.White;
+        _avButton = new SWC.Button();
+        _avButton.Content = "AV Button";
+        _avButton.Background = System.Windows.Media.Brushes.White;
 
         //Create Element Host 1
-        elementHost1 = new ElementHost();
-        elementHost1.Child = avButton;
-        elementHost1.BackColor = Color.White;
-        elementHost1.Location = new System.Drawing.Point(150, 50);
-        Controls.Add(elementHost1);
+        _elementHost1 = new ElementHost();
+        _elementHost1.Child = _avButton;
+        _elementHost1.BackColor = Color.White;
+        _elementHost1.Location = new System.Drawing.Point(150, 50);
+        Controls.Add(_elementHost1);
         SWF.Application.DoEvents();
 
         return base.BeforeScenario(p, scenario);
@@ -69,25 +71,25 @@ public class PositionAndSize : ReflectBase
     [Scenario("Element Host and hosted control should be sized to default 200, 100.")]
     public ScenarioResult Scenario1(TParams p)
     {
-        avComboBox = new SWC.ComboBox();
-        avComboBox.Text = "AV ComboBox";
+        _avComboBox = new SWC.ComboBox();
+        _avComboBox.Text = "AV ComboBox";
 
         //Create Element Host 2
-        elementHost2 = new ElementHost();
-        elementHost2.Child = avComboBox;
-        elementHost2.Location = new System.Drawing.Point(150, 200);
-        Controls.Add(elementHost2);
+        _elementHost2 = new ElementHost();
+        _elementHost2.Child = _avComboBox;
+        _elementHost2.Location = new System.Drawing.Point(150, 200);
+        Controls.Add(_elementHost2);
         
         ScenarioResult sr = new ScenarioResult();
         Utilities.SleepDoEvents(20);
 
         //Check default size properties
-        sr.IncCounters(elementHost1.Width == 200, "Failed at default width 200.", p.log);
-        sr.IncCounters(elementHost1.Height == 100, "Failed at default height 100.", p.log);
+        sr.IncCounters(_elementHost1.Width == 200, "Failed at default width 200.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Failed at default height 100.", p.log);
 
         //Check second element host default size properties
-        sr.IncCounters(elementHost2.Width == 200, "Failed at default width 200.", p.log);
-        sr.IncCounters(elementHost2.Height == 100, "Failed at default height 100.", p.log);
+        sr.IncCounters(_elementHost2.Width == 200, "Failed at default width 200.", p.log);
+        sr.IncCounters(_elementHost2.Height == 100, "Failed at default height 100.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
@@ -103,14 +105,14 @@ public class PositionAndSize : ReflectBase
     {
         ScenarioResult sr = new ScenarioResult();
 
-        elementHost1.Bounds = new Rectangle(10, 10, 100, 100);
+        _elementHost1.Bounds = new Rectangle(10, 10, 100, 100);
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Failed at width 100.", p.log);
-        sr.IncCounters(elementHost1.Height == 100, "Failed at height 100.", p.log);
-        sr.IncCounters(elementHost1.Left == 10, "Left Failed at Change Bounds.", p.log);
-        sr.IncCounters(elementHost1.Top == 10, "Top Failed at Change Bounds.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Failed at width 100.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Failed at height 100.", p.log);
+        sr.IncCounters(_elementHost1.Left == 10, "Left Failed at Change Bounds.", p.log);
+        sr.IncCounters(_elementHost1.Top == 10, "Top Failed at Change Bounds.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
@@ -119,26 +121,26 @@ public class PositionAndSize : ReflectBase
             BitmapsColorPercent(bmp, 10, 10, 100, 100, Color.White) + "%", p.log);
 
         //Set bounds smaller than MinimumSize
-        elementHost1.MinimumSize = new System.Drawing.Size(50, 50);
-        elementHost1.Bounds = new Rectangle(10, 10, 20, 20);
+        _elementHost1.MinimumSize = new System.Drawing.Size(50, 50);
+        _elementHost1.Bounds = new Rectangle(10, 10, 20, 20);
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 50, "Width Failed at Change Bounds at MinimumSize 50,50.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Height Failed at Change Bounds at MinimumSize 50,50.", p.log);
-        sr.IncCounters(elementHost1.Left == 10, "Left Failed at Change Bounds at MinimumSize 50,50.", p.log);
-        sr.IncCounters(elementHost1.Top == 10, "Top Failed at Change Bounds at MinimumSize 50,50.", p.log);
+        sr.IncCounters(_elementHost1.Width == 50, "Width Failed at Change Bounds at MinimumSize 50,50.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Height Failed at Change Bounds at MinimumSize 50,50.", p.log);
+        sr.IncCounters(_elementHost1.Left == 10, "Left Failed at Change Bounds at MinimumSize 50,50.", p.log);
+        sr.IncCounters(_elementHost1.Top == 10, "Top Failed at Change Bounds at MinimumSize 50,50.", p.log);
 
         //Set bounds larger than MaximumSize
-        elementHost1.MaximumSize = new System.Drawing.Size(210, 210);
-        elementHost1.Bounds = new Rectangle(10, 10, 260, 260);
+        _elementHost1.MaximumSize = new System.Drawing.Size(210, 210);
+        _elementHost1.Bounds = new Rectangle(10, 10, 260, 260);
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 210, "Width Failed at MaximumSize 210,210.", p.log);
-        sr.IncCounters(elementHost1.Height == 210, "Height Failed at MaximumSize 210,210.", p.log);
-        sr.IncCounters(elementHost1.Left == 10, "Left Failed at Change Bounds at MaximumSize 210,210.", p.log);
-        sr.IncCounters(elementHost1.Top == 10, "Top Failed at Change Bounds at MaximumSize 210,210.", p.log);
+        sr.IncCounters(_elementHost1.Width == 210, "Width Failed at MaximumSize 210,210.", p.log);
+        sr.IncCounters(_elementHost1.Height == 210, "Height Failed at MaximumSize 210,210.", p.log);
+        sr.IncCounters(_elementHost1.Left == 10, "Left Failed at Change Bounds at MaximumSize 210,210.", p.log);
+        sr.IncCounters(_elementHost1.Top == 10, "Top Failed at Change Bounds at MaximumSize 210,210.", p.log);
 
         return sr;
     }
@@ -147,14 +149,14 @@ public class PositionAndSize : ReflectBase
     public ScenarioResult Scenario3(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Top = 5;
+        _elementHost1.Top = 5;
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 200, "Width Failed at Change Top.", p.log);
-        sr.IncCounters(elementHost1.Height == 100, "Height Failed at Change Top.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at Change Top.", p.log);
-        sr.IncCounters(elementHost1.Top == 5, "Top Failed at Change Top.", p.log);
+        sr.IncCounters(_elementHost1.Width == 200, "Width Failed at Change Top.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Height Failed at Change Top.", p.log);
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at Change Top.", p.log);
+        sr.IncCounters(_elementHost1.Top == 5, "Top Failed at Change Top.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
@@ -169,14 +171,14 @@ public class PositionAndSize : ReflectBase
     public ScenarioResult Scenario4(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Left = 5;
+        _elementHost1.Left = 5;
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 200, "Width Failed at Change Left.", p.log);
-        sr.IncCounters(elementHost1.Height == 100, "Height Failed at Change Left.", p.log);
-        sr.IncCounters(elementHost1.Left == 5, "Left Failed at Change Left.", p.log);
-        sr.IncCounters(elementHost1.Top == 50, "Top Failed at Change Left.", p.log);
+        sr.IncCounters(_elementHost1.Width == 200, "Width Failed at Change Left.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Height Failed at Change Left.", p.log);
+        sr.IncCounters(_elementHost1.Left == 5, "Left Failed at Change Left.", p.log);
+        sr.IncCounters(_elementHost1.Top == 50, "Top Failed at Change Left.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
@@ -191,14 +193,14 @@ public class PositionAndSize : ReflectBase
     public ScenarioResult Scenario5(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Location = new System.Drawing.Point(180, 250);
+        _elementHost1.Location = new System.Drawing.Point(180, 250);
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 200, "Width Failed at Change Location.", p.log);
-        sr.IncCounters(elementHost1.Height == 100, "Height Failed at Change Location.", p.log);
-        sr.IncCounters(elementHost1.Left == 180, "Left Failed at Change Bounds at Change Location.", p.log);
-        sr.IncCounters(elementHost1.Top == 250, "Top Failed at Change Bounds at Change Location.", p.log);
+        sr.IncCounters(_elementHost1.Width == 200, "Width Failed at Change Location.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Height Failed at Change Location.", p.log);
+        sr.IncCounters(_elementHost1.Left == 180, "Left Failed at Change Bounds at Change Location.", p.log);
+        sr.IncCounters(_elementHost1.Top == 250, "Top Failed at Change Bounds at Change Location.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
@@ -213,12 +215,12 @@ public class PositionAndSize : ReflectBase
     public ScenarioResult Scenario6(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Size = new System.Drawing.Size(230, 230);
+        _elementHost1.Size = new System.Drawing.Size(230, 230);
         Utilities.SleepDoEvents(20);
  
         //Check size properties
-        sr.IncCounters(elementHost1.Width == 230, "Width Failed at width 230.", p.log);
-        sr.IncCounters(elementHost1.Height == 230, "Height Failed at height 230.", p.log);
+        sr.IncCounters(_elementHost1.Width == 230, "Width Failed at width 230.", p.log);
+        sr.IncCounters(_elementHost1.Height == 230, "Height Failed at height 230.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
@@ -227,22 +229,22 @@ public class PositionAndSize : ReflectBase
             BitmapsColorPercent(bmp, 150, 50, 230, 230, Color.White) + "%", p.log);
 
         //Set size smaller than MinimumSize
-        elementHost1.MinimumSize = new System.Drawing.Size(50, 50);
-        elementHost1.Size = new System.Drawing.Size(30, 30);
+        _elementHost1.MinimumSize = new System.Drawing.Size(50, 50);
+        _elementHost1.Size = new System.Drawing.Size(30, 30);
         Utilities.SleepDoEvents(20);
 
         //Check size properties
-        sr.IncCounters(elementHost1.Width == 50, "Width Failed at MinimumSize 50,50.", p.log);
-        sr.IncCounters(elementHost1.Height == 50, "Height Failed at MinimumSize 50,50.", p.log);
+        sr.IncCounters(_elementHost1.Width == 50, "Width Failed at MinimumSize 50,50.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Height Failed at MinimumSize 50,50.", p.log);
 
         //Set size larger than MaximumSize
-        elementHost1.MaximumSize = new System.Drawing.Size(100, 100);
-        elementHost1.Size = new System.Drawing.Size(200, 200);
+        _elementHost1.MaximumSize = new System.Drawing.Size(100, 100);
+        _elementHost1.Size = new System.Drawing.Size(200, 200);
         Utilities.SleepDoEvents(20);
 
         //Check size properties
-        sr.IncCounters(elementHost1.Width == 100, "Width Failed at MaximumSize 100,100.", p.log);
-        sr.IncCounters(elementHost1.Height == 100, "Height Failed at MaximumSize 100,100.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Width Failed at MaximumSize 100,100.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Height Failed at MaximumSize 100,100.", p.log);
 
         return sr;
     }
@@ -251,34 +253,34 @@ public class PositionAndSize : ReflectBase
     public ScenarioResult Scenario7(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Width = 60;
+        _elementHost1.Width = 60;
         Utilities.SleepDoEvents(20);
   
         //Check size properties
-        sr.IncCounters(elementHost1.Width == 60, "Failed at width 60.", p.log);
+        sr.IncCounters(_elementHost1.Width == 60, "Failed at width 60.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
-        sr.IncCounters(BitmapsColorPercent(bmp, elementHost1.Left, elementHost1.Top, elementHost1.Width, elementHost1.Height, Color.White) >= 1 &&
+        sr.IncCounters(BitmapsColorPercent(bmp, _elementHost1.Left, _elementHost1.Top, _elementHost1.Width, _elementHost1.Height, Color.White) >= 1 &&
             BitmapsColorPercent(bmp, 210, 50, 60, 100, this.BackColor) == 100,
             "Bitmap Failed at Change Width. Percent match: " +
-            BitmapsColorPercent(bmp, elementHost1.Left, elementHost1.Top, elementHost1.Width, elementHost1.Height, Color.White) + "%", p.log);
+            BitmapsColorPercent(bmp, _elementHost1.Left, _elementHost1.Top, _elementHost1.Width, _elementHost1.Height, Color.White) + "%", p.log);
 
         //Set width smaller than MinimumSize
-        elementHost1.MinimumSize = new System.Drawing.Size(50, 50);
-        elementHost1.Width = 20;
+        _elementHost1.MinimumSize = new System.Drawing.Size(50, 50);
+        _elementHost1.Width = 20;
         Utilities.SleepDoEvents(20);
 
         //Check size properties
-        sr.IncCounters(elementHost1.Width == 50, "Failed at MinimumSize 50,50.", p.log);
+        sr.IncCounters(_elementHost1.Width == 50, "Failed at MinimumSize 50,50.", p.log);
 
         //Set width larger than MaximumSize
-        elementHost1.MaximumSize = new System.Drawing.Size(100, 100);
-        elementHost1.Width = 120;
+        _elementHost1.MaximumSize = new System.Drawing.Size(100, 100);
+        _elementHost1.Width = 120;
         Utilities.SleepDoEvents(20);
 
         //Check size properties
-        sr.IncCounters(elementHost1.Width == 100, "Failed at MaximumSize 100,100.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Failed at MaximumSize 100,100.", p.log);
 
         return sr;
     }
@@ -287,11 +289,11 @@ public class PositionAndSize : ReflectBase
     public ScenarioResult Scenario8(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.Height = 50;
+        _elementHost1.Height = 50;
         Utilities.SleepDoEvents(20);
         
         //Check size properties
-        sr.IncCounters(elementHost1.Height == 50, "Failed at height 50.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Failed at height 50.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
@@ -300,20 +302,20 @@ public class PositionAndSize : ReflectBase
             BitmapsColorPercent(bmp, 150, 50, 200, 30, Color.White) + "%", p.log);
 
         //Set height smaller than MinimumSize
-        elementHost1.MinimumSize = new System.Drawing.Size(50, 50);
-        elementHost1.Height = 20;
+        _elementHost1.MinimumSize = new System.Drawing.Size(50, 50);
+        _elementHost1.Height = 20;
         Utilities.SleepDoEvents(20);
 
         //Check size properties
-        sr.IncCounters(elementHost1.Height == 50, "Failed at MinimumSize 50,50.", p.log);
+        sr.IncCounters(_elementHost1.Height == 50, "Failed at MinimumSize 50,50.", p.log);
 
         //Set height larger than MaximumSize
-        elementHost1.MaximumSize = new System.Drawing.Size(100, 100);
-        elementHost1.Height = 120;
+        _elementHost1.MaximumSize = new System.Drawing.Size(100, 100);
+        _elementHost1.Height = 120;
         Utilities.SleepDoEvents(20);
 
         //Check size properties
-        sr.IncCounters(elementHost1.Height == 100, "Failed at MaximumSize 100,100.", p.log);
+        sr.IncCounters(_elementHost1.Height == 100, "Failed at MaximumSize 100,100.", p.log);
 
         return sr;
     }
@@ -322,14 +324,14 @@ public class PositionAndSize : ReflectBase
     public ScenarioResult Scenario9(TParams p)
     {
         ScenarioResult sr = new ScenarioResult();
-        elementHost1.ClientSize = new System.Drawing.Size(100, 210);
+        _elementHost1.ClientSize = new System.Drawing.Size(100, 210);
         Utilities.SleepDoEvents(20);
 
         //Check size and location properties
-        sr.IncCounters(elementHost1.Width == 100, "Width Failed at Change Location.", p.log);
-        sr.IncCounters(elementHost1.Height == 210, "Height Failed at Change Location.", p.log);
-        sr.IncCounters(elementHost1.Left == 150, "Left Failed at Change Bounds at Change Location.", p.log);
-        sr.IncCounters(elementHost1.Top == 50, "Top Failed at Change Bounds at Change Location.", p.log);
+        sr.IncCounters(_elementHost1.Width == 100, "Width Failed at Change Location.", p.log);
+        sr.IncCounters(_elementHost1.Height == 210, "Height Failed at Change Location.", p.log);
+        sr.IncCounters(_elementHost1.Left == 150, "Left Failed at Change Bounds at Change Location.", p.log);
+        sr.IncCounters(_elementHost1.Top == 50, "Top Failed at Change Bounds at Change Location.", p.log);
 
         Bitmap bmp = Utilities.GetBitmapOfControl(this);
         Utilities.SleepDoEvents(20);
