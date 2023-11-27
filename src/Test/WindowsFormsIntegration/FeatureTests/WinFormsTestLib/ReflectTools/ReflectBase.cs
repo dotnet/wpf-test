@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.ComponentModel;
 using System.Collections;
@@ -25,24 +29,11 @@ namespace ReflectTools
     //  Provides engine for calling all methods that return a ScenarioResult object.
     //  Also provides logging to "results.log", where results.log is in XML format.
     //
-    //  TODO: Pop up a second form on a different thread with info about scenario currently
-    //        executing, current scenario running time, total running time, etc.
-    //
-    //  Granted all permissions for running ReflectBase tests in a secure context.  This
-    //  should let ReflectBase do everything it needs to while not granting tests any
-    //  extra permissions.
-    // </desc>
-    // </doc>
     [System.ComponentModel.DesignerCategory("Code")]
     public class ReflectBase : Form, IMessageFilter
     {
         // <doc>
         // <desc>
-        //  (nathane 3/22/06 This is a hack.  Don't like that this is a public static but need to call it
-        //  from outside the test and it needs to be accessed inside of GetAllScenarios().  We should investigate
-        //  why GetAllScenarios is Static.  We should also look to see if this functionality can be pushed
-        //  down to AutoTest.cs or AutoPME.cs...
-        //
         //  This will allow us to exclude scenarios that we don't want to be executed.
         // </desc>
         // </doc>
@@ -86,7 +77,7 @@ namespace ReflectTools
 
 		//If this is set to true and BeginSecurityCheck is called again, then fail the scenario
 		//It is an error in testcase code if BeginSecurityCheck is called more than once in the same method
-		private bool beginSecurityCheckCalledForCurrentScenario = false;
+		private bool _beginSecurityCheckCalledForCurrentScenario = false;
 
         // <doc>
         // <desc>
@@ -131,7 +122,7 @@ namespace ReflectTools
         // <seealso member="TestIsDone"/>
         // <seealso member="OnClosed"/>
         // </doc>
-        private bool stopTests = false;
+        private bool _stopTests = false;
 
         // <doc>
         // <desc>
@@ -141,7 +132,7 @@ namespace ReflectTools
         // </desc>
         // <seealso member="Sleep"/>
         // </doc>
-        private int sleep = 0;
+        private int _sleep = 0;
 
         // <doc>
         // <desc>
@@ -149,7 +140,7 @@ namespace ReflectTools
         //  command line; false otherwise;
         // </desc>
         // </doc>
-        private bool seeded = false;
+        private bool _seeded = false;
 
         // <doc>
         // <desc>
@@ -157,7 +148,7 @@ namespace ReflectTools
         //  command line; false otherwise;
         // </desc>
         // </doc>
-        private int seed = -1;
+        private int _seed = -1;
 
         // <doc>
         // <desc>
@@ -165,7 +156,7 @@ namespace ReflectTools
         //  the next scenario.
         // </desc>
         // </doc>
-        private bool pauseBetweenScenarios = false;
+        private bool _pauseBetweenScenarios = false;
 
         // <doc>
         // <desc>
@@ -173,21 +164,21 @@ namespace ReflectTools
         // a failure.
         // </desc>
         // </doc>
-        private bool stopOnFailureInGroup = false;
+        private bool _stopOnFailureInGroup = false;
 
         // <doc>
         // <desc>
         //  If true, a MessageBox is displayed when a failure occurs.
         // </desc>
         // </doc>
-        private bool pauseOnFailure = false;
+        private bool _pauseOnFailure = false;
 
         // <doc>
         // <desc>
         // If true, sets KeepRunningTests to false when a failure occurs.
         // </desc>
         // </doc>
-        private bool stopOnFailureInScenario = false;
+        private bool _stopOnFailureInScenario = false;
 
         // <doc>
         // <desc>
@@ -195,7 +186,7 @@ namespace ReflectTools
         // method name.
         // </desc>
         // </doc>
-        private bool fullNames = false;
+        private bool _fullNames = false;
 
         // <doc>
         // <desc>
@@ -203,7 +194,7 @@ namespace ReflectTools
         // test writer can debug the testcase.
         // </desc>
         // </doc>
-        private bool keepRunningTests = true;
+        private bool _keepRunningTests = true;
 
         // <doc>
         // <desc>
@@ -218,7 +209,7 @@ namespace ReflectTools
         // passes, or pass if it throws a SecurityException.
         // </desc>
         // </doc>
-        private bool testSecurity = true;
+        private bool _testSecurity = true;
 
         // <doc>
         // <desc>
@@ -228,7 +219,7 @@ namespace ReflectTools
         // only happens when you set the property to true.
         // </desc>
         // </doc>
-        private bool logKeystrokes = false;
+        private bool _logKeystrokes = false;
 
         // <doc>
         // <desc>
@@ -237,20 +228,20 @@ namespace ReflectTools
         //  the form's handle is created, which has led to a number of bugs.
         // </desc>
         // </doc>
-        private bool preHandleMode = false;
+        private bool _preHandleMode = false;
 
         /// <summary>
         /// If true, test is in manual mode.  Calls to ManualFreeze() are enabled, and ManualMode
         /// property is true.  This allows tests to behave differently if run in manual mode,
         /// e.g. ManualFreeze() when visual verification required, etc.
         /// </summary>
-        private bool manualMode = false;
+        private bool _manualMode = false;
 
 		/// <summary>
 		/// If true, Application.EnableVisualStyles() is called in the constructor, thus turning on
 		/// Windows XP themes.
 		/// </summary>
-		private bool visualStylesEnabled = true;
+		private bool _visualStylesEnabled = true;
 
 
         /// <summary>
@@ -259,11 +250,11 @@ namespace ReflectTools
         /// </summary>
         /// <value></value>
         private delegate ScenarioResult AsyncScenario(MethodInfo mi, object[] parameters);
-        private bool useMita = false;
+        private bool _useMita = false;
         public bool UseMita
         {
-            get { return useMita; }
-            set { useMita = value; }
+            get { return _useMita; }
+            set { _useMita = value; }
         }
 
 
@@ -274,7 +265,7 @@ namespace ReflectTools
         // the list between scenarios.
         // </desc>
         // </doc>
-        private PermissionCollection requiredPermissions = new PermissionCollection();
+        private PermissionCollection _requiredPermissions = new PermissionCollection();
 
         // <doc>
         // <desc>
@@ -287,11 +278,10 @@ namespace ReflectTools
 		// If true, checks to make sure the currently tested method appears on
 		// the stack of any SecurityExceptions thrown (when running in semi-trust).
 		//
-		private bool stackCheck = false;
+		private bool _stackCheck = false;
 
-		// Added by nathane 3/2/05
 		// If true, the scenario picker dialog will be displayed
-		private bool useScenarioPicker = false;
+		private bool _useScenarioPicker = false;
 
 		//
 		// If true, checks to make sure the currently tested method appears on
@@ -299,8 +289,8 @@ namespace ReflectTools
 		//
 		protected bool StackCheck
 		{
-			get { return stackCheck; }
-			set { stackCheck = value; }
+			get { return _stackCheck; }
+			set { _stackCheck = value; }
 		}
 
         // <doc>
@@ -309,7 +299,7 @@ namespace ReflectTools
         // </desc>
         // <seealso member="CommandLineParameters"/>
         // </doc>
-        private ArrayList commandLineParameters;
+        private ArrayList _commandLineParameters;
 
         // <doc>
         // <desc>
@@ -317,7 +307,7 @@ namespace ReflectTools
         // </desc>
         // <seealso member="SetAssertOrExceptionFailure"/>
         // </doc>
-        private bool assertOrExceptionFailure = false;
+        private bool _assertOrExceptionFailure = false;
 
         // <doc>
         // <desc>
@@ -325,7 +315,7 @@ namespace ReflectTools
         // </desc>
         // <seealso member="SetAssertOrExceptionFailure"/>
         // </doc>
-        private string shortErrorMsg = "";
+        private string _shortErrorMsg = "";
 
         // <doc>
         // <desc>
@@ -333,14 +323,14 @@ namespace ReflectTools
         // </desc>
         // <seealso member="SetAssertOrExceptionFailure"/>
         // </doc>
-        private string detailErrorMsg = "";
+        private string _detailErrorMsg = "";
 
         //
         // If this value is set, ReflectBase will use it as the ScenarioResult for the
         // current scenario, rather than the result returned by the scenario, or the
         // result generated by a thread exception, etc.
         //
-        private ScenarioResult overriddenScenarioResult = null;
+        private ScenarioResult _overriddenScenarioResult = null;
 
         // <doc>
         // <desc>
@@ -350,7 +340,7 @@ namespace ReflectTools
         // </desc>
         // <seealso member="CreateInstance"/>
         // </doc>
-        private int numIterations = 0;
+        private int _numIterations = 0;
 
         // <doc>
         // <desc>
@@ -360,25 +350,25 @@ namespace ReflectTools
         // </desc>
         // <seealso member="InitTest"/>
         // </doc>
-        private bool baseInitTestCalled = false;
+        private bool _baseInitTestCalled = false;
 
 		/// <summary>
 		/// Same as baseInitTestCalled--if ReflectBase's BeforeScenario() is not called,
 		/// we'll fail the scenario.
 		/// </summary>
-		private bool baseBeforeScenarioCalled = false;
+		private bool _baseBeforeScenarioCalled = false;
 
 		/// <summary>
 		/// Same as baseInitTestCalled--if ReflectBase's AfterScenario() is not called,
 		/// we'll fail the scenario.
 		/// </summary>
-		private bool baseAfterScenarioCalled = false;
+		private bool _baseAfterScenarioCalled = false;
 
 		//
         // Once the test has started running, this is set to true to prevent form handle
         // recreation from restarting the test.
         //
-        private bool testStarted = false;
+        private bool _testStarted = false;
 
 		// The scenario we are currently executing, or null if we're between scenarios.
 		private MethodInfo _currentScenario;
@@ -388,7 +378,7 @@ namespace ReflectTools
 			private set { _currentScenario = value; }
 		}
 
-        private static string _initialDirectory;
+        private static string s_initialDirectory;
         // <doc>
         // <desc>
         //  Static constructor to set the apartment state to STA.  Without this being called
@@ -402,10 +392,10 @@ namespace ReflectTools
 #pragma warning disable 618
             Thread.CurrentThread.ApartmentState = ApartmentState.STA;
 #pragma warning restore 618
-            _initialDirectory = SafeMethods.GetCurrentDirectory();
+            s_initialDirectory = SafeMethods.GetCurrentDirectory();
         }
 
-        private string workingDir;
+        private string _workingDir;
         // <doc>
         // <desc>
         //  Constructs a ReflectBase object. If there isn't a log object one is
@@ -422,23 +412,23 @@ namespace ReflectTools
             // If the ReflectBaseWorkingDir env var is set, we'll use that path
             // for the working directory.
             LibSecurity.Environment.Assert();
-            workingDir = Environment.GetEnvironmentVariable("ReflectBaseWorkingDir");
+            _workingDir = Environment.GetEnvironmentVariable("ReflectBaseWorkingDir");
             CodeAccessPermission.RevertAssert();
 
-            if ( workingDir != null ) {
+            if ( _workingDir != null ) {
 
                 try {
-                    SafeMethods.SetCurrentDirectory(workingDir);
-                    _initialDirectory = workingDir;
+                    SafeMethods.SetCurrentDirectory(_workingDir);
+                    s_initialDirectory = _workingDir;
                 }
                 catch (Exception e) {
                     // Ignore exception if we get one because of invalid path, etc.
-                    Console.WriteLine("Exception setting working directory.  workingDir was \"{0}\"", workingDir);
+                    Console.WriteLine("Exception setting working directory.  workingDir was \"{0}\"", _workingDir);
                     Console.WriteLine(e.ToString());
                 }
             }
 
-            this.commandLineParameters = new ArrayList((IList)args);
+            this._commandLineParameters = new ArrayList((IList)args);
             CheckOptionsFile();
             CheckEnvironmentOptions();
             ProcessCommandLineParameters();
@@ -463,19 +453,19 @@ namespace ReflectTools
             scenarioParams.log.StartTest(testName);
             LogCommandLineParameters();
 
-            if ( workingDir != null )
-                LogCommandLineParameter("workingdir", workingDir);
+            if ( _workingDir != null )
+                LogCommandLineParameter("workingdir", _workingDir);
             
             // If RandomUtil hasn't been seeded yet, do so now.
-            if (!seeded)
+            if (!_seeded)
             {
                 if ( Seed == -1 ) {
                     Seed = scenarioParams.ru.GetInt();
                     LogCommandLineParameter("autoseed", Seed.ToString());
                 }
 
-                seeded = true;
-                scenarioParams.ru.SeedRandomGenerator(seed);
+                _seeded = true;
+                scenarioParams.ru.SeedRandomGenerator(_seed);
             }
 
             HandleCreated += new EventHandler(FormHandleCreated);
@@ -486,7 +476,7 @@ namespace ReflectTools
             CodeAccessPermission.RevertAssert();
 
             if ( PreHandleMode ) {
-                testStarted = true;
+                _testStarted = true;
 
                 if ( PerformInitialization() )
                     BeginTest();
@@ -504,10 +494,10 @@ namespace ReflectTools
         // </doc>
         private void FormHandleCreated(object sender, EventArgs ev) {
             // This is to stop the test from restarting when the form's handle is recreated
-            if ( testStarted || preHandleMode )
+            if ( _testStarted || _preHandleMode )
                 return;
             else
-                testStarted = true;
+                _testStarted = true;
 
             // We need to use InvokeAsync here in order to allow the form
             // to display before BeginTest starts (or TestIsDone is called)
@@ -526,13 +516,12 @@ namespace ReflectTools
         private bool PerformInitialization() {
             bool initPassed = false;
 
-            // TODO: Move tag to Log class?
             log.WriteTag("TestInitialize", false);
 
             try {
                 InitTest(scenarioParams);
 
-                if ( baseInitTestCalled )
+                if ( _baseInitTestCalled )
                     initPassed = true;
                 else {
                     initPassed = false;
@@ -574,7 +563,7 @@ namespace ReflectTools
         // </doc>
 		[SecurityPermission(SecurityAction.Assert, Unrestricted=true)]
         protected virtual void InitTest(TParams p) {
-            baseInitTestCalled = true;
+            _baseInitTestCalled = true;
             p.log.WriteLine("Start time:  " + DateTime.Now.ToString(null, null));
 			p.log.WriteLine("CLR Version: " + Environment.Version);
 			p.log.WriteLine("Bitness:     " + (Marshal.SizeOf(typeof(IntPtr)) * 8) + "-bit");
@@ -703,9 +692,9 @@ namespace ReflectTools
 		// </doc>
 		internal void SetAssertOrExceptionFailure(string shortMsg, string detailMsg)
 		{
-			assertOrExceptionFailure = true;
-            shortErrorMsg = shortMsg;
-            detailErrorMsg = detailMsg;
+			_assertOrExceptionFailure = true;
+            _shortErrorMsg = shortMsg;
+            _detailErrorMsg = detailMsg;
         }
 
         // <doc>
@@ -733,11 +722,8 @@ namespace ReflectTools
         // obtained for the current scenario, either returned from the scenario or from
         // a thread exception, etc.
         //
-        // You can use it to log a failure with a known bug even from a different method
-        // (e.g. overridden OnThreadException()).
-        //
         protected void OverrideCurrentScenarioResult(ScenarioResult r) {
-            overriddenScenarioResult = r;
+            _overriddenScenarioResult = r;
         }
 
         //
@@ -756,10 +742,10 @@ namespace ReflectTools
         // </doc>
         protected ArrayList CommandLineParameters {
             get {
-                if (commandLineParameters == null)
-                    commandLineParameters = new ArrayList();
+                if (_commandLineParameters == null)
+                    _commandLineParameters = new ArrayList();
                     
-                return commandLineParameters;
+                return _commandLineParameters;
             }
         }
         
@@ -772,8 +758,8 @@ namespace ReflectTools
         // <seealso member="sleep"/>
         // </doc>
         protected int Sleep {
-            get { return sleep; }
-            set { sleep = value; }
+            get { return _sleep; }
+            set { _sleep = value; }
         }
 
         // <doc>
@@ -784,15 +770,15 @@ namespace ReflectTools
         // <seealso member="seed"/>
         // </doc>
         protected int Seed {
-            get { return seed; }
+            get { return _seed; }
             set {
-                seed = value;
+                _seed = value;
 
                 if ( scenarioParams == null )
-                    seeded = false;
+                    _seeded = false;
                 else {
-                    seeded = true;
-                    scenarioParams.ru.SeedRandomGenerator(seed);
+                    _seeded = true;
+                    scenarioParams.ru.SeedRandomGenerator(_seed);
                 }
             }
         }
@@ -805,8 +791,8 @@ namespace ReflectTools
         // <seealso member="pauseBetweenScenarios"/>
         // </doc>
         protected bool Pause {
-            get { return pauseBetweenScenarios; }
-            set { pauseBetweenScenarios = value; }
+            get { return _pauseBetweenScenarios; }
+            set { _pauseBetweenScenarios = value; }
         }
 
         // <doc>
@@ -817,8 +803,8 @@ namespace ReflectTools
         // <seealso member="stopOnFailureInGroup"/>
         // </doc>
         protected bool StopOnFailureInGroup {
-            get { return stopOnFailureInGroup; }
-            set { stopOnFailureInGroup = value; }
+            get { return _stopOnFailureInGroup; }
+            set { _stopOnFailureInGroup = value; }
         }
 
         // <doc>
@@ -829,8 +815,8 @@ namespace ReflectTools
         // <seealso member="pauseOnFailure"/>
         // </doc>
         protected bool PauseOnFailure {
-            get { return pauseOnFailure; }
-            set { pauseOnFailure = value; }
+            get { return _pauseOnFailure; }
+            set { _pauseOnFailure = value; }
         }
 
         // <doc>
@@ -841,8 +827,8 @@ namespace ReflectTools
         // <seealso member="stopOnFailureInScenario"/>
         // </doc>
         protected bool StopOnFailureInScenario {
-            get { return stopOnFailureInScenario; }
-            set { stopOnFailureInScenario = value; }
+            get { return _stopOnFailureInScenario; }
+            set { _stopOnFailureInScenario = value; }
         }
 
         // <doc>
@@ -853,8 +839,8 @@ namespace ReflectTools
         // <seealso member="fullNames"/>
         // </doc>
         protected bool FullNames {
-            get { return fullNames; }
-            set { fullNames = value; }
+            get { return _fullNames; }
+            set { _fullNames = value; }
         }
 
         // <doc>
@@ -867,8 +853,8 @@ namespace ReflectTools
         // <seealso member="keepRunningTests"/>
         // </doc>
         protected bool KeepRunningTests {
-            get { return keepRunningTests; }
-            set { keepRunningTests = value; }
+            get { return _keepRunningTests; }
+            set { _keepRunningTests = value; }
         }
 
         // <doc>
@@ -886,8 +872,8 @@ namespace ReflectTools
         // <seealso member="testSecurity"/>
         // </doc>
         protected bool TestSecurity {
-            get { return testSecurity; }
-            set { testSecurity = value; }
+            get { return _testSecurity; }
+            set { _testSecurity = value; }
         }
 
         // <doc>
@@ -898,14 +884,14 @@ namespace ReflectTools
         // </desc>
         // </doc>
         protected bool LogKeystrokes {
-            get { return logKeystrokes; }
+            get { return _logKeystrokes; }
             set {
-                if ( logKeystrokes != value ) {
-                    logKeystrokes = value;
+                if ( _logKeystrokes != value ) {
+                    _logKeystrokes = value;
 
                     LibSecurity.UnmanagedCode.Assert();
 
-                    if ( logKeystrokes )
+                    if ( _logKeystrokes )
                         Application.AddMessageFilter(this);
                     else
                         Application.RemoveMessageFilter(this);
@@ -918,7 +904,7 @@ namespace ReflectTools
         // no property set because you need to set this before the
         // test starts, i.e. on command-line
         protected bool PreHandleMode {
-            get { return preHandleMode; }
+            get { return _preHandleMode; }
         }
 
         /// <summary>
@@ -929,8 +915,8 @@ namespace ReflectTools
         /// </summary>
         /// <value></value>
         protected bool ManualMode {
-            get { return manualMode; }
-            set { manualMode = value; }
+            get { return _manualMode; }
+            set { _manualMode = value; }
         }
 
 		/// <summary>
@@ -939,8 +925,8 @@ namespace ReflectTools
 		/// </summary>
 		/// <value></value>
 		protected bool VisualStylesEnabled {
-			get { return visualStylesEnabled; }
-			set { visualStylesEnabled = value; }
+			get { return _visualStylesEnabled; }
+			set { _visualStylesEnabled = value; }
 		}
 
         // <doc>
@@ -1018,7 +1004,7 @@ namespace ReflectTools
 
 		protected void BeginSecurityCheck(CodeAccessPermission[] ps, MethodInfo expectedMethod)
         {
-            if (beginSecurityCheckCalledForCurrentScenario)
+            if (_beginSecurityCheckCalledForCurrentScenario)
                 { throw new ReflectBaseException("BeginSecurityCheck was called more than once in this test method, this is an error in the testcase"); }
 
 			if (ps == null) { scenarioParams.log.WriteLine("SECURITY: doing blanket security check (no specific permissions are checked)"); }
@@ -1029,11 +1015,11 @@ namespace ReflectTools
 					if (TestSecurity)
 					{ scenarioParams.log.WriteLine("SECURITY: Required permission \"{0}\" granted? {1}", p.GetType().Name, Utilities.HavePermission(p)); }
 
-					requiredPermissions.Add(p);
+					_requiredPermissions.Add(p);
 				}
 			}
 
-            beginSecurityCheckCalledForCurrentScenario = true;
+            _beginSecurityCheckCalledForCurrentScenario = true;
             securityCheckExpectedMethod = expectedMethod;
         }
 
@@ -1047,10 +1033,10 @@ namespace ReflectTools
 			// No exception was thrown
 			if (TestSecurity) 
 			{
-				if (requiredPermissions.Count <= 0) { throw new ReflectBaseException("FAIL (SECURITY): no SecurityException was thrown."); }
+				if (_requiredPermissions.Count <= 0) { throw new ReflectBaseException("FAIL (SECURITY): no SecurityException was thrown."); }
 				else
 				{
-					foreach (CodeAccessPermission perm in requiredPermissions)
+					foreach (CodeAccessPermission perm in _requiredPermissions)
 					{
 						if (!Utilities.HavePermission(perm))
 							throw new ReflectBaseException("FAIL (SECURITY): didn't have \"" + perm.GetType().Name + "\", but SecurityException wasn't thrown.");
@@ -1156,7 +1142,7 @@ namespace ReflectTools
                         paramsToRemove.Add(en.Current);
                     }
                     else if (param.Equals("/PAUSE")) {
-                        pauseBetweenScenarios = true;
+                        _pauseBetweenScenarios = true;
                         paramsToRemove.Add(en.Current);
                     }
                     else if (param.Equals("/STOP")) {
@@ -1164,7 +1150,7 @@ namespace ReflectTools
                         paramsToRemove.Add(en.Current);
                     }
                     else if (param.Equals("/PAUSEFAIL")) {
-                        pauseOnFailure = true;
+                        _pauseOnFailure = true;
                         paramsToRemove.Add(en.Current);
                     }
                     else if (param.Equals("/STOPFAIL")) {
@@ -1184,20 +1170,19 @@ namespace ReflectTools
                         paramsToRemove.Add(en.Current);
                     }
                     else if (param.Equals("/PREHANDLE")) {
-                        preHandleMode = true;
+                        _preHandleMode = true;
                         paramsToRemove.Add(en.Current);
                     }
                     else if (param.Equals("/MANUAL")) {
-                        manualMode = true;
+                        _manualMode = true;
                         paramsToRemove.Add(en.Current);
                     }
 					else if (param.Equals("/NOVISUALSTYLES")) {
-						visualStylesEnabled = false;
+						_visualStylesEnabled = false;
 						paramsToRemove.Add(en.Current);
 					}
-					// added by nathane 03/02/05 to enable Scenario Picker functionality
 					else if (param.Equals("/SCENARIOPICKER")) {  
-						useScenarioPicker = true;
+						_useScenarioPicker = true;
 						paramsToRemove.Add(en.Current);
 					}
 					else if (param.StartsWith("/?") || param.StartsWith("/HELP"))
@@ -1263,7 +1248,7 @@ namespace ReflectTools
                 LogCommandLineParameter("pausefail", PauseOnFailure.ToString());
             if ( StopOnFailureInScenario != false )
                 LogCommandLineParameter("stopfail", StopOnFailureInScenario.ToString());
-            if ( fullNames != false )
+            if ( _fullNames != false )
                 LogCommandLineParameter("fullnames", FullNames.ToString());
             if ( TestSecurity != true )
                 LogCommandLineParameter("nosecurity", (!TestSecurity).ToString());
@@ -1417,7 +1402,7 @@ namespace ReflectTools
             // We'll try to avoid that situation and print a friendlier error message.
             //
             // If we've recursed 15 times, we'll assume we're stuck in a loop.
-            if ( numIterations > 15 )
+            if ( _numIterations > 15 )
                 throw new ApplicationException("CreateInstance stuck in recursive loop");
 
             // We first cover special-case types that we at one point or another had a
@@ -1477,7 +1462,6 @@ namespace ReflectTools
             // if the paramter is a member of an enum, we just get the first field
             // we find in the enum.
             //
-            // CONSIDER: what if the enum is empty?
             //
             if (type.IsEnum)
                 return Enum.GetValues(type).GetValue(0);
@@ -1499,7 +1483,7 @@ namespace ReflectTools
                 Object[] va = new Object[pai.Length];
 
                 try {
-                    ++numIterations;    // keep an eye on the # of recursive calls
+                    ++_numIterations;    // keep an eye on the # of recursive calls
 
                     for (int i=0; i < va.Length; i++)
                         va[i] = CreateInstance(pai[i].ParameterType);
@@ -1508,7 +1492,7 @@ namespace ReflectTools
                     // We recursively called CreateInstance() too many times.
                     // Jump back to the first call, print error message, and rethrow
 
-                    if ( numIterations <= 1 ) {     // back at the top level
+                    if ( _numIterations <= 1 ) {     // back at the top level
                         log.WriteLine("ERROR: Recursive loop encountered creating " +
                             "type \"" + type+ "\".");
                         log.WriteLine("Consider special case code in " +
@@ -1518,7 +1502,7 @@ namespace ReflectTools
                     throw e;
                 }
                 finally {
-                    --numIterations;
+                    --_numIterations;
                 }
 
                 return cia[0].Invoke(va);
@@ -1552,13 +1536,13 @@ namespace ReflectTools
                 for (int i = 1; i < va.Length; i++)
                     va[i] = CreateInstance(pi[i].ParameterType);
 
-                requiredPermissions.Clear();    // Clear the security permissions list for the next scenario
-				baseBeforeScenarioCalled = false;
+                _requiredPermissions.Clear();    // Clear the security permissions list for the next scenario
+				_baseBeforeScenarioCalled = false;
 
 				if (!BeforeScenario(p, mi))
                     sr = new ScenarioResult(false, "BeforeScenario() returned false.  Scenario will not execute.");
                 else {
-					if (!baseBeforeScenarioCalled) {
+					if (!_baseBeforeScenarioCalled) {
 						p.log.WriteLine("*****ERROR: ReflectBase.BeforeScenario() was not called!");
 						p.log.WriteLine("*****All test classes which override BeforeScenario() must call base.BeforeScenario().");
 						sr = new ScenarioResult(false, "FAIL: ReflectBase.BeforeScenario() was not called.");
@@ -1568,7 +1552,7 @@ namespace ReflectTools
                         try
                         {
                             //If use Mita is true call Scenarios on a non-UI thread. 
-                            if (useMita)
+                            if (_useMita)
                             {
                                 AsyncScenario scenario = new AsyncScenario(CallScenarioAsync);
                                 IAsyncResult result = scenario.BeginInvoke(mi, va, null, null);
@@ -1586,7 +1570,7 @@ namespace ReflectTools
 						}
 						if (TestSecurity) {
 							// No exception was thrown
-							foreach (CodeAccessPermission perm in requiredPermissions) {
+							foreach (CodeAccessPermission perm in _requiredPermissions) {
 								if (!Utilities.HavePermission(perm))
 									sr.IncCounters(false, "FAIL (SECURITY): didn't have \"" + perm.GetType().Name + "\", but SecurityException wasn't thrown.", p.log);
 							}
@@ -1643,24 +1627,24 @@ namespace ReflectTools
             Application.DoEvents();
 
             // Log any thread exceptions or asserts and fail.
-            if ( assertOrExceptionFailure ) {
-                sr = new ScenarioResult(false, "Uncaught exception or assertion failure: " + shortErrorMsg);
-                p.log.WriteLine(sr.Comments + "\r\n" + detailErrorMsg);
+            if ( _assertOrExceptionFailure ) {
+                sr = new ScenarioResult(false, "Uncaught exception or assertion failure: " + _shortErrorMsg);
+                p.log.WriteLine(sr.Comments + "\r\n" + _detailErrorMsg);
             }
 
             // If user chose to override the current scenario result we'll use it as our result.
-            if ( overriddenScenarioResult != null )
-                sr = overriddenScenarioResult;
+            if ( _overriddenScenarioResult != null )
+                sr = _overriddenScenarioResult;
 
             // Clear state for next scenario
-            overriddenScenarioResult = null;
-            assertOrExceptionFailure = false;
+            _overriddenScenarioResult = null;
+            _assertOrExceptionFailure = false;
 
             try {
-				baseAfterScenarioCalled = false;
+				_baseAfterScenarioCalled = false;
 				AfterScenario(p, mi, sr);
 
-				if (!baseAfterScenarioCalled) {
+				if (!_baseAfterScenarioCalled) {
 					p.log.WriteLine("*****ERROR: ReflectBase.AfterScenario() was not called!");
 					p.log.WriteLine("*****All test classes which override AfterScenario() must call base.AfterScenario().");
 					sr = new ScenarioResult(false, "FAIL: ReflectBase.AfterScenario() was not called.");
@@ -1706,7 +1690,7 @@ namespace ReflectTools
         {
 			ScenarioResult result = new ScenarioResult();
 
-			if (requiredPermissions.Count <= 0)
+			if (_requiredPermissions.Count <= 0)
 			{
 				p.log.WriteLine("Unexpected security exception");
 				p.log.LogException(se);
@@ -1720,7 +1704,7 @@ namespace ReflectTools
 				LibSecurity.CrackSecurityException(se, out dip, out dps);
 
 				// check permissions
-				foreach (CodeAccessPermission perm in requiredPermissions)
+				foreach (CodeAccessPermission perm in _requiredPermissions)
 				{
 					bool found = false;
 					if (dps != null) { found = CheckPermissionSet(result, dps, perm); }
@@ -1778,8 +1762,8 @@ namespace ReflectTools
         /// <returns>True if the scenario should be executed, false otherwise.</returns>
         protected virtual bool BeforeScenario(TParams p, MethodInfo scenario) {
 			currentScenario = scenario;
-			baseBeforeScenarioCalled = true;
-			beginSecurityCheckCalledForCurrentScenario = false;
+			_baseBeforeScenarioCalled = true;
+			_beginSecurityCheckCalledForCurrentScenario = false;
 			securityCheckExpectedMethod = null;
 			return true;
         }
@@ -1794,8 +1778,8 @@ namespace ReflectTools
         /// <param name="result">The ScenarioResult returned by the scenario.</param>
         protected virtual void AfterScenario(TParams p, MethodInfo scenario, ScenarioResult result) {
 			currentScenario = null;
-			baseAfterScenarioCalled = true;
-			beginSecurityCheckCalledForCurrentScenario = false;
+			_baseAfterScenarioCalled = true;
+			_beginSecurityCheckCalledForCurrentScenario = false;
 			securityCheckExpectedMethod = null;
 		}
 
@@ -1823,9 +1807,8 @@ namespace ReflectTools
                 //PairwiseModelManager modelManager = new PairwiseModelManager();
                 //modelManager.InitializeDefaultModel(this);
 
-				//Added by nathane 3/8/05 to enable ScenarioPicker Functionality.
 				//This code is only run if the /SCENARIOPICKER command line arg is supplied
-				if (useScenarioPicker)
+				if (_useScenarioPicker)
 				{
 					ScenarioPicker sp = new ScenarioPicker(tests, testName);
 					DialogResult result = sp.ShowDialog(this);
@@ -1840,7 +1823,7 @@ namespace ReflectTools
                  */
                 for (int j = 0; j < tests.Count; j++)
                 {
-                    if (stopTests) break;
+                    if (_stopTests) break;
                     ScenarioGroup g = (ScenarioGroup)tests[j];
 					SortScenariosByOrder(g); 
 					
@@ -1854,7 +1837,7 @@ namespace ReflectTools
                     {
                         for (int i = 0; i < g.Scenarios.Length; i++)
                         {
-                            if (stopTests) break;
+                            if (_stopTests) break;
                             bool b = ExecuteScenario(p, g, i);
                             groupTotal++;
 
@@ -1934,10 +1917,10 @@ namespace ReflectTools
         {
             try
             {
-                if (string.IsNullOrEmpty(this.workingDir))
-                { SafeMethods.SetCurrentDirectory(_initialDirectory); }
+                if (string.IsNullOrEmpty(this._workingDir))
+                { SafeMethods.SetCurrentDirectory(s_initialDirectory); }
                 else
-                { SafeMethods.SetCurrentDirectory(this.workingDir); }
+                { SafeMethods.SetCurrentDirectory(this._workingDir); }
 
             }
             catch (Exception ex)
@@ -1946,14 +1929,14 @@ namespace ReflectTools
                 {
                     scenarioParams.log.WriteLine("Exception attempting to reset current directory");
                     scenarioParams.log.WriteLine("Current value: {0}", SafeMethods.GetCurrentDirectory());
-                    scenarioParams.log.WriteLine("Attempted value: {0}", _initialDirectory);
+                    scenarioParams.log.WriteLine("Attempted value: {0}", s_initialDirectory);
                     scenarioParams.log.WriteLine(ex.ToString());
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Exception attempting to reset current directory");
                     Console.WriteLine("Current value: {0}", SafeMethods.GetCurrentDirectory());
-                    Console.WriteLine("Attempted value: {0}", _initialDirectory);
+                    Console.WriteLine("Attempted value: {0}", s_initialDirectory);
                     Console.WriteLine(ex.ToString());
                 }
             }
@@ -1996,7 +1979,7 @@ namespace ReflectTools
         // </doc>
         protected virtual void TestIsDone(TParams p)
         {
-            stopTests = true;
+            _stopTests = true;
             p.log.EndTest();
             CreateSemaphoreFile();
             CreateMadDogResultsFiles(p.log.TestResults);
@@ -2143,9 +2126,9 @@ namespace ReflectTools
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            if (stopTests == false)
+            if (_stopTests == false)
             {
-                stopTests = true;
+                _stopTests = true;
                 log.TestResults.IncCounters(false);
                 log.TestResults.Comments = "Test aborted by user";
             }
@@ -2229,7 +2212,7 @@ namespace ReflectTools
                     // Include any ScenarioResult method which doesn't define ScenarioAttribute or
                     // does define ScenarioAttribute(true)
                     if ( attr == null || (attr != null && attr.IsScenario) )
-                        if (!excludedMethods.Contains(mi[i].Name))  //(nathane 3/22/06) adding support for excluding methods
+                        if (!excludedMethods.Contains(mi[i].Name))
                             l.Add(mi[i]);
                 }
             }
@@ -2356,7 +2339,7 @@ namespace ReflectTools
 							permission.GetType().Name ), p.log);
 						p.log.WriteLine("The test code should have thrown a security exception but did not, fix this issue " +
 							"before looking into further failures in this scenario");
-						return false;//TODO: in this case, we didn't throw an exception but we _should_ have done so
+						return false;
 						//The caller should assume that the testCode had no side affects (though it probably did)
 					}
 				}

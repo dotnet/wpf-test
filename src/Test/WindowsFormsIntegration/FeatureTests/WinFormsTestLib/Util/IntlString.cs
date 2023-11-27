@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.IO;
 using System.Configuration.Assemblies;
@@ -93,14 +97,14 @@ namespace WFCTestLib.Util
         //  The codepage we are testing for.
         // </desc>
         // </doc>
-        private int    codePage;
+        private int    _codePage;
 
         // <doc>
         // <desc>
         //  A list of unicode character ranges
         // </desc>
         // </doc>
-        private System.Collections.ArrayList   lUnicodeCharRanges;
+        private System.Collections.ArrayList   _lUnicodeCharRanges;
 
         // <doc>
         // <desc>
@@ -117,7 +121,7 @@ namespace WFCTestLib.Util
         public IntlString(int codePage, Random rand)
         {
             IntlString.rand = rand;
-            this.codePage = codePage;
+            this._codePage = codePage;
 
             MakeByteRanges();
         }
@@ -150,7 +154,6 @@ namespace WFCTestLib.Util
                 nMax = nTemp;
             }
 
-            // CONSIDER: Why do we halve the min and max values here?
             if ((nMin == Int32.MinValue) || (nMin == Int32.MaxValue))
                 nMin /= 2;
             if ((nMax == Int32.MinValue) || (nMax == Int32.MaxValue))
@@ -211,8 +214,8 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual char GetChar(bool bPrintableOnly)
         {
-            int nRange       = this.GetRange(0, lUnicodeCharRanges.Count - 1);
-            ByteRange range  = (ByteRange)(lUnicodeCharRanges[nRange]);
+            int nRange       = this.GetRange(0, _lUnicodeCharRanges.Count - 1);
+            ByteRange range  = (ByteRange)(_lUnicodeCharRanges[nRange]);
 
             //Vinay added this code to make it work with Win95 & Win98
             OperatingSystem os = System.Environment.OSVersion ;
@@ -281,9 +284,9 @@ namespace WFCTestLib.Util
         // </doc>
         internal virtual void AddRangesForAllFE()
         {
-            lUnicodeCharRanges.Add(new ByteRange(0x0000, 0x007F));
-            lUnicodeCharRanges.Add(new ByteRange(0x3000, 0x303F));
-            lUnicodeCharRanges.Add(new ByteRange(0x4E00, 0x9FFF));
+            _lUnicodeCharRanges.Add(new ByteRange(0x0000, 0x007F));
+            _lUnicodeCharRanges.Add(new ByteRange(0x3000, 0x303F));
+            _lUnicodeCharRanges.Add(new ByteRange(0x4E00, 0x9FFF));
         }
 
         // <doc>
@@ -294,46 +297,44 @@ namespace WFCTestLib.Util
         // </doc>
         internal virtual void MakeByteRanges()
         {
-            sPresetFile = Directory.GetCurrentDirectory() + "\\" + PREFIX + codePage.ToString() + EXTENSION;
+            sPresetFile = Directory.GetCurrentDirectory() + "\\" + PREFIX + _codePage.ToString() + EXTENSION;
 
             // if (!File.Exists(sPresetFile))
             //     Text.Error.WriteLine("IntlString: can't find preset string file: " + sPresetFile);
 
-            lUnicodeCharRanges = new System.Collections.ArrayList();
+            _lUnicodeCharRanges = new System.Collections.ArrayList();
 
-            // TODO: read this stuff from the preset file instead of in here, or make a app to figure it out...
-            switch (codePage)
+            switch (_codePage)
             {
                 case CP_SIMPLIFIED_CHINESE:
                 case CP_TRADITIONAL_CHINESE:
                     AddRangesForAllFE();
-                    lUnicodeCharRanges.Add(new ByteRange(0x3100, 0x312f));
+                    _lUnicodeCharRanges.Add(new ByteRange(0x3100, 0x312f));
                     break;
 
                 case CP_JAPANESE:
                     AddRangesForAllFE();
-                    lUnicodeCharRanges.Add(new ByteRange(0x3041, 0x309E));
-                    lUnicodeCharRanges.Add(new ByteRange(0x30A0, 0x30FF));
+                    _lUnicodeCharRanges.Add(new ByteRange(0x3041, 0x309E));
+                    _lUnicodeCharRanges.Add(new ByteRange(0x30A0, 0x30FF));
                     break;
 
                 case CP_KOREAN_WANSUNG:
                     AddRangesForAllFE();
-                    lUnicodeCharRanges.Add(new ByteRange(0x1100, 0x11FF));
-                    lUnicodeCharRanges.Add(new ByteRange(0x3130, 0x318F));
-                    lUnicodeCharRanges.Add(new ByteRange(0xAC00, 0xD7A3));
+                    _lUnicodeCharRanges.Add(new ByteRange(0x1100, 0x11FF));
+                    _lUnicodeCharRanges.Add(new ByteRange(0x3130, 0x318F));
+                    _lUnicodeCharRanges.Add(new ByteRange(0xAC00, 0xD7A3));
                     break;
 
                 // if this isn't one of the other code pages, default to USA.
                 default:
-                if (this.codePage != CP_USA)
+                if (this._codePage != CP_USA)
                 {
-                    // TODO: some error msg here that we need to add another code page
 #if Debug
                     Console.Error.WriteLine("IntlString: using default USA code page");
 #endif
-                    this.codePage = CP_USA;
+                    this._codePage = CP_USA;
                 }
-                lUnicodeCharRanges.Add(new ByteRange(0x0000, 0x00FF));
+                _lUnicodeCharRanges.Add(new ByteRange(0x0000, 0x00FF));
                 break;
             }
        }

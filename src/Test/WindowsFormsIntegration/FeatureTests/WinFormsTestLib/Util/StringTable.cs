@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace WFCTestLib.Util {
     using System;
     using System.Collections;
@@ -13,55 +17,55 @@ namespace WFCTestLib.Util {
     [Serializable]
     public class StringTable : ICollection
     {
-        private Hashtable table;
+        private Hashtable _table;
 
         public StringTable() {
-            table = new Hashtable();
+            _table = new Hashtable();
         }
     
         public StringTable(int capacity) {
-            table = new Hashtable(capacity);
+            _table = new Hashtable(capacity);
         }
     
         public StringTable(int capacity, float loadFactor) {
-            table = new Hashtable(capacity, loadFactor);
+            _table = new Hashtable(capacity, loadFactor);
         }
 
         public virtual int Count {
-            get { return table.Count; }
+            get { return _table.Count; }
         }
    
         public virtual void Add(String key) {
-            if ( !table.ContainsKey(key) )
-                table.Add(key, null);
+            if ( !_table.ContainsKey(key) )
+                _table.Add(key, null);
         }
         
         public virtual void Clear() {
-            table.Clear();
+            _table.Clear();
         }       
         
         public virtual bool Contains(String key) {
-            return table.ContainsKey(key);
+            return _table.ContainsKey(key);
         }
         
         public virtual void CopyTo(Array array, int index) {
-            table.Keys.CopyTo(array, index);
+            _table.Keys.CopyTo(array, index);
         }
     
         public virtual void CopyTo(String[] array, int index) {
-            table.Keys.CopyTo(array, index);
+            _table.Keys.CopyTo(array, index);
         }
         
         public virtual IEnumerator GetEnumerator() {
-            return table.GetEnumerator();
+            return _table.GetEnumerator();
         }
 
         public virtual void Remove(String key) {
-            table.Remove(key);
+            _table.Remove(key);
         }
     
         public virtual String[] ToArray() {
-            string[] array = new string[table.Count];
+            string[] array = new string[_table.Count];
             CopyTo(array, 0);
             return array;
         }

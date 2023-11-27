@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace WFCTestLib.Util {
 
     using System;
@@ -27,10 +31,6 @@ namespace WFCTestLib.Util {
         public static int SignedHIWORD(int n) {
             int i = (int)(short)((n >> 16) & 0xffff);
 
-            // UNDONE : BrianPe, 5/18/99 - HACK.  Our compiler has a bug
-            //        : and isn't recognizing signed shorts.  We must do
-            //        : this to get proper sign extension.
-            //
             i = i << 16;
             i = i >> 16;
 
@@ -40,10 +40,6 @@ namespace WFCTestLib.Util {
         public static int SignedLOWORD(int n) {
             int i = (int)(short)(n & 0xFFFF);
 
-            // UNDONE : BrianPe, 5/18/99 - HACK.  Our compiler has a bug
-            //        : and isn't recognizing signed shorts.  We must do
-            //        : this to get proper sign extension.
-            //
             i = i << 16;
             i = i >> 16;
 
@@ -312,10 +308,6 @@ namespace WFCTestLib.Util {
             [DllImport("user32", CharSet=CharSet.Auto)] 
             internal static extern bool SystemParametersInfo(int nAction, int nParam, HIGHCONTRAST_I rc, int nUpdate);
 
-			//$REVIEW:  Is this why we couldn't get tests for HIGHCONTRAST to work?
-			//The NativeMethod declaration was incorrect??? (antonioa - 2/12/2003)
-			//[DllImport("user32", CharSet=CharSet.Auto)] 
-			//internal static extern bool SystemParametersInfo(int nAction, int nParam, ref HIGHCONTRAST_I rc, int nUpdate);
 
 			[DllImport("user32", CharSet=CharSet.Auto)] 
 			internal static extern bool SystemParametersInfo(int nAction, int nParam, [In,Out] NONCLIENTMETRICS rc, int nUpdate);

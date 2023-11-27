@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -56,7 +60,7 @@ namespace WFCTestLib.Util
         {
             if (!e.IsEnum)
                 return e.ToString() + " not a valid enum type";
-            //UNDONE: can site be null?  
+            
             TypeConverter enumEditor = TypeDescriptor.GetConverter(e);
             //ValueEditor enumEditor = TypeDescriptor.TempCreateEditorHack(e,null);    
             //ValueEditor enumEditor = ComponentDescriptor.CreateValueEditor(e);
@@ -89,7 +93,7 @@ namespace WFCTestLib.Util
             if (!e.IsEnum)
                 return ENUM_ERROR;
                 
-            //UNDONE: can site be null?    
+            
             TypeConverter enumEditor = TypeDescriptor.GetConverter(e);
             
 

@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.ComponentModel;
 using System.Collections;
@@ -42,10 +46,7 @@ namespace ReflectTools.AutoPME
     // <seealso class="ReflectTools.ReflectBase"/>
     // </doc>
     //
-    // TODO: We should make every AutoPME test class use an attribute to specify which
-    //       actual class it is meant to test.  e.g. XControl tests Control, XObject tests
-    //       Object, etc.
-    //
+    // 
     public abstract class AutoPME : ReflectBase
     {
         // Prefixes found on event handler add/remove methods.  AutoPME does not count
@@ -69,52 +70,52 @@ namespace ReflectTools.AutoPME
         //   The group of scenarios we expected to see but didn't.
         // </desc>
         // </doc>
-        private static Hashtable missingScenariosInGroup = new Hashtable();
+        private static Hashtable s_missingScenariosInGroup = new Hashtable();
 
         // <doc>
         // <desc>
         //   The group of scenarios we didn't expect to see but did.
         // </desc>
         // </doc>
-        private static Hashtable extraScenariosInGroup = new Hashtable();
+        private static Hashtable s_extraScenariosInGroup = new Hashtable();
 
 		//
 		// We set this to true if the NoBase run flag is present.  We only use
 		// this variable in InitTest to output some debug info.
 		//
-		private bool noBaseRunFlagDetected = false;
+		private bool _noBaseRunFlagDetected = false;
 
         //
         // If true, base-class tests will be excluded.  Only the tests on the target class
         // will be run.
         //
-        private bool noBase = false;
+        private bool _noBase = false;
 
         //
         // If true, only the autotest scenarios will be run.
         //
-        private bool autoTestOnly = false;
+        private bool _autoTestOnly = false;
 
         //
         // If true, do not consider missing scenarios as failures.
         //
-        private bool ignoreMissing = false;
+        private bool _ignoreMissing = false;
 
 		//
 		// If true, ignore NoBase run flag--i.e. even if it's present we still want
 		// to run all scenarios.
 		//
-		private bool ignoreNoBaseRunFlag = false;
+		private bool _ignoreNoBaseRunFlag = false;
 
         //
         // The number of scenarios from the current group that we've excluded.  Used
         // to keep total counts consistent between pre-handle mode and normal mode runs.
         //
-        private int numExcludedScenarios = 0;
+        private int _numExcludedScenarios = 0;
 
 		// If set to true, we don't make sure the tested method is on the stack of SecurityExceptions
 		// This is reset to false in BeforeScenario().
-		private bool ignoreStackForCurrentScenario = false;
+		private bool _ignoreStackForCurrentScenario = false;
 
         // <doc>
         // <desc>
@@ -139,7 +140,7 @@ namespace ReflectTools.AutoPME
             // exactly reproduce the conditions under which their test ran.
             Rectangle screen = SystemInformation.WorkingArea;
 
-	    if (noBaseRunFlagDetected)
+	    if (_noBaseRunFlagDetected)
 	    {
 		p.log.WriteLine();
 		p.log.WriteLine("*****NOTE: \"" + NoBaseRunFlagName + "\" run flag detected; will run with NoBase option on*****");
@@ -177,13 +178,13 @@ namespace ReflectTools.AutoPME
         //
         protected bool NoBase {
             get {
-                return noBase && ! IgnoreNoBaseRunFlag;
+                return _noBase && ! IgnoreNoBaseRunFlag;
             }
             set {
 				if (!value)
-					noBaseRunFlagDetected = false;
+					_noBaseRunFlagDetected = false;
 
-				noBase = value;
+				_noBase = value;
             }
         }
 
@@ -192,10 +193,10 @@ namespace ReflectTools.AutoPME
         //
         protected bool AutoTestOnly {
             get {
-                return autoTestOnly;
+                return _autoTestOnly;
             }
             set {
-                autoTestOnly = value;
+                _autoTestOnly = value;
             }
         }
 
@@ -204,22 +205,19 @@ namespace ReflectTools.AutoPME
         //
         protected bool IgnoreMissing {
             get {
-                return ignoreMissing;
+                return _ignoreMissing;
             }
             set {
-                ignoreMissing = value;
+                _ignoreMissing = value;
             }
         }
 
 		protected bool IgnoreNoBaseRunFlag
 		{
-			get { return ignoreNoBaseRunFlag; }
-			set { ignoreNoBaseRunFlag = value; }
+			get { return _ignoreNoBaseRunFlag; }
+			set { _ignoreNoBaseRunFlag = value; }
 		}
 
-
-        // TODO: see if there's a better way to do this so the parsing code can be shared, and
-        //       we can guarantee the base gets called.
         protected override void CheckEnvironmentOptions() {
             base.CheckEnvironmentOptions();
 
@@ -387,14 +385,12 @@ namespace ReflectTools.AutoPME
         //  The scenario that is to override the base implementation.
         // </param>
         // </doc>
-// TODO: doesn't hurt to have it, but we might as well rip it when we're sure we don't need it anymore
-//		[Obsolete("OverrideScenario is no longer necessary in any situation.")]
         protected void OverrideScenario(MethodBase scenario)
         {
             for (int i = 0; i < tests.Count; i++)
             {
                 ScenarioGroup sg = (ScenarioGroup)tests[i];
-                ArrayList missing = (ArrayList)missingScenariosInGroup[sg];
+                ArrayList missing = (ArrayList)s_missingScenariosInGroup[sg];
                 for (int j = 0; j < missing.Count; j++)
                 {
                     if (MatchScenarioToMethod(scenario, (MethodInfo)missing[j]))
@@ -492,7 +488,7 @@ namespace ReflectTools.AutoPME
         protected override bool AfterScenarioGroup(TParams p, ScenarioGroup g, int total, int fail)
         {
             bool fullyImplemented = true;           // All scenarios are implemented
-            ArrayList missing = (ArrayList)missingScenariosInGroup[g];
+            ArrayList missing = (ArrayList)s_missingScenariosInGroup[g];
 
 			if (!IgnoreMissing)
 			{
@@ -508,9 +504,6 @@ namespace ReflectTools.AutoPME
             });
 
             // In AutoTest mode we don't want to gripe about missing scenarios
-            // BUGBUG: we technically shouldn't have to do this--but there are
-            //         bugs in AutoPME when your test class inheritance chain
-            //         doesn't match the target class's.
             if ( AutoTestOnly )
                 return true;
 
@@ -536,7 +529,7 @@ namespace ReflectTools.AutoPME
             }
 
             // Output extra methods--these don't count as failures but is useful to know anyway
-            ArrayList extra = (ArrayList)extraScenariosInGroup[g];
+            ArrayList extra = (ArrayList)s_extraScenariosInGroup[g];
             p.log.WriteLine();
 
             if ( extra == null || extra.Count == 0 )
@@ -553,8 +546,8 @@ namespace ReflectTools.AutoPME
             p.log.CloseTag("ClassResults");
 
             if ( PreHandleMode || NoBase ) {
-                p.log.TestResults.PassCount += numExcludedScenarios;
-                numExcludedScenarios = 0;
+                p.log.TestResults.PassCount += _numExcludedScenarios;
+                _numExcludedScenarios = 0;
             }
 
             if ( StopOnFailureInGroup )
@@ -564,7 +557,7 @@ namespace ReflectTools.AutoPME
         }
 
 		protected override bool BeforeScenario(TParams p, MethodInfo scenario) {
-			ignoreStackForCurrentScenario = false;
+			_ignoreStackForCurrentScenario = false;
 			return base.BeforeScenario(p, scenario);
 		}
 
@@ -590,13 +583,12 @@ namespace ReflectTools.AutoPME
 		{
 			bool origStackCheck = StackCheck;
 
-			// TODO: this needs to check for the correct method, not the AutoPME scenario method
-			if (ignoreStackForCurrentScenario) { StackCheck = false; }
+			if (_ignoreStackForCurrentScenario) { StackCheck = false; }
 			else if (securityCheckExpectedMethod != null) { securityCheckExpectedMethod = currentScenario; }
 
 			ScenarioResult result = base.VerifySecurityException(p, se);
 
-			if (ignoreStackForCurrentScenario) { StackCheck = origStackCheck; }
+			if (_ignoreStackForCurrentScenario) { StackCheck = origStackCheck; }
 
 			return result;
 		}
@@ -642,7 +634,7 @@ namespace ReflectTools.AutoPME
 			}
 
 			BeginSecurityCheck(p);
-			ignoreStackForCurrentScenario = ignoreStack;
+			_ignoreStackForCurrentScenario = ignoreStack;
 		}
 
 		protected void BeginSecurityCheck(CodeAccessPermission[] p, bool ignoreStack, string reason) {
@@ -654,7 +646,7 @@ namespace ReflectTools.AutoPME
 			}
 
 			BeginSecurityCheck(p);
-			ignoreStackForCurrentScenario = ignoreStack;
+			_ignoreStackForCurrentScenario = ignoreStack;
 		}
 
 		//
@@ -714,13 +706,6 @@ namespace ReflectTools.AutoPME
             // Loop up the inheritance chain of the target class and the test class.  It's possible
             // for there to be more test classes than there are target classes.
             //
-            // TODO: handle the case where there is a target class but no corresponding test class.
-            // HACK: This code assumes the test inheritance chain matches the target inheritance chain.
-            //       What should we do if it doesn't?  Fail and quit?
-            //       (8/10/01 KevinTao): The answer is in the TODO at the top--use an attribute for each
-            //                           test class to tell AutoPME what it tests.  If the inheritance
-            //                           chain doesn't match, fail.
-            //
             while (currentTestType != null) {
 
                 // If we're in AutoTestOnly mode, skip all the classes except for AutoTest.
@@ -761,11 +746,11 @@ namespace ReflectTools.AutoPME
                     ret.Add(sg);
                 }
 
-// We now create all scenario groups even if NoBase is specified.  We just exclude all the
-// scenarios in the base classes so the total count is the same (and MadDog doesn't complain
-// about missing scenarios.
-//                if ( NoBase )   // Stop after creating the first scenario group of NoBase flag was set
-//                    break;
+                // We now create all scenario groups even if NoBase is specified.  We just exclude all the
+                // scenarios in the base classes so the total count is the same (and MadDog doesn't complain
+                // about missing scenarios.
+                //                if ( NoBase )   // Stop after creating the first scenario group of NoBase flag was set
+                //                    break;
 
                 if ( currentType != null )
                     currentType = currentType.BaseType;
@@ -815,7 +800,7 @@ namespace ReflectTools.AutoPME
 			if (NoBase && g.Name != this.GetType().Name) {
 				// NoBase mode, and this is a base class scenario group.  We need to exclude all these scenarios.
 				foreach (MethodInfo mi in g.Scenarios) {
-					numExcludedScenarios++;
+					_numExcludedScenarios++;
 					LogExcludedMethod(p, mi);
 				}
 
@@ -832,7 +817,7 @@ namespace ReflectTools.AutoPME
                     if ( !IsExcludedMethod(mi) )
                         methods.Add(mi);
                     else {
-                        numExcludedScenarios++;
+                        _numExcludedScenarios++;
 						LogExcludedMethod(p, mi);
 					}
                 }
@@ -899,7 +884,7 @@ namespace ReflectTools.AutoPME
                 }
             }
 
-			missingScenariosInGroup[key] = missing;
+			s_missingScenariosInGroup[key] = missing;
         }
 
         // <doc>
@@ -936,7 +921,7 @@ namespace ReflectTools.AutoPME
                 }
             }
 
-            extraScenariosInGroup[key] = extra;
+            s_extraScenariosInGroup[key] = extra;
         }
 
         // <doc>
@@ -975,20 +960,6 @@ namespace ReflectTools.AutoPME
         //  Determines if the specified Object is a Control and if if is also
         //  a child of the testcase form.
         //
-        //  TODO: This code doesn't look like it handles nested controls (e.g.
-        //  a control in a groupbox in a form). This code should probably
-        //  be re-written to walk up the control's parent chain until the parent
-        //  object found is either 'this' (and return true) or 'null' (and return
-        //  false).
-        //
-        // </desc>
-        // <param term="o">
-        //  The object to determine if it is a child of the test form or not
-        // </param>
-        // <retvalue>
-        //  True if the control is a child of the test form; false otherwise.
-        // </retvalue>
-        // </doc>
         private bool IsChildOfThisForm(Object o)
         {
             if (o is Control)
@@ -1144,8 +1115,6 @@ namespace ReflectTools.AutoPME
     // OverrideScenario(MethodBase m) method.
     //
     [
-// TODO: doesn't hurt to have it, but we might as well rip it when we're sure we don't need it anymore
-//	Obsolete("OverrideScenario is no longer necessary in any situation"),
 	AttributeUsage(AttributeTargets.Method, Inherited=false, AllowMultiple=false)
 	]
     public class OverrideScenarioAttribute : Attribute { }

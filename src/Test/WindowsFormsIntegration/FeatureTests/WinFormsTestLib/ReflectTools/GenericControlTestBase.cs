@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Collections;
 using System.Windows.Forms;
@@ -18,7 +22,7 @@ namespace ReflectTools {
     // generic testcase that runs through every control.
     //
     public abstract class GenericControlTestBase : ReflectBase {
-        private Control testedControl;
+        private Control _testedControl;
 
         protected GenericControlTestBase(string[] args) : base(args) { }
 
@@ -27,12 +31,12 @@ namespace ReflectTools {
         // a control at any time after command-line parameters have been processed.
         //
         protected Control TestedControl {
-            get { return testedControl; }
-            set { testedControl = value; }
+            get { return _testedControl; }
+            set { _testedControl = value; }
         }
 		
 		protected Type TestedType {
-			get { return testedControl.GetType(); }
+			get { return _testedControl.GetType(); }
 		}
 
         protected override void ProcessCommandLineParameters() {

@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.ComponentModel;
 using System.Collections;
@@ -29,13 +33,13 @@ namespace WFCTestLib.Util
     {
         static Utilities()
         {
-            configFile =  "ServerConfig.xml";
+            s_configFile =  "ServerConfig.xml";
             DefaultTestFileShare = @"\\" + Utilities.GetServerName("ASPNET").ToLower() + @"\TestFiles";
             DefaultTestFileShareSsl = @"\\" + Utilities.GetServerName("ASPNET").ToLower() + @"\TestFilesSSL";
             DefaultTestFileShareUrl = @"http://" + Utilities.GetServerName("ASPNET").ToLower() + "/TestFiles";
             DefaultTestFileShareSslUrl = @"https://" + Utilities.GetServerName("ASPNET").ToLower() + "/TestFilesSSL";
         }
-        private static Regex formatRegex = new Regex(@"\{[^\}]*\}", RegexOptions.Compiled);
+        private static Regex s_formatRegex = new Regex(@"\{[^\}]*\}", RegexOptions.Compiled);
         /// <summary>
         /// Formats the given object based on the input string.  
         /// 
@@ -65,7 +69,7 @@ namespace WFCTestLib.Util
         /// <returns>A formatted string</returns>
         public static string FormatObject(object o, string format, bool throwOnMissingProperty)
         {
-            return formatRegex.Replace(format, delegate(Match m)
+            return s_formatRegex.Replace(format, delegate(Match m)
             {
                 string value = m.Value.Trim('{', '}');
                 string[] parts = value.Split('.');
@@ -107,18 +111,18 @@ namespace WFCTestLib.Util
         /// <summary>
         ///  ResourceManager for Windows Forms 
         /// </summary>
-        private static ResourceManager wfResourceManager;
+        private static ResourceManager s_wfResourceManager;
 
         //
         // Used by the AllControls property.
         //
-        private static ArrayList allControls;
+        private static ArrayList s_allControls;
 
         // Cached value of the latest installed version of the CLR's system directory.
-        private static string mostRecentClrRoot;
+        private static string s_mostRecentClrRoot;
 
         // Cached value of the latest installed version of the CLR.
-        private static string latestInstalledClrVersion;
+        private static string s_latestInstalledClrVersion;
 
         //public const string DefaultTestFileShare = @"\\aspnet-testweb\TestFiles";
         public static string DefaultTestFileShare = null; 
@@ -199,10 +203,10 @@ namespace WFCTestLib.Util
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
         public static string GetResourceString(string tokenString)
         {
-            if (wfResourceManager == null)
-                wfResourceManager = new ResourceManager(wfResourceBundle, typeof(Button).Assembly);
+            if (s_wfResourceManager == null)
+                s_wfResourceManager = new ResourceManager(wfResourceBundle, typeof(Button).Assembly);
 
-            return wfResourceManager.GetString(tokenString);
+            return s_wfResourceManager.GetString(tokenString);
         }
 
         /// <summary>
@@ -237,12 +241,12 @@ namespace WFCTestLib.Util
             return rm.GetString(tokenString);
         }
 
-        private static Type _ResourceManagerType = null;
+        private static Type s_resourceManagerType = null;
         private static Type ResourceManagerType
         {
             get
             {
-                if (null == _ResourceManagerType)
+                if (null == s_resourceManagerType)
                 {
                     Assembly assm = null;
                     try
@@ -250,19 +254,19 @@ namespace WFCTestLib.Util
                     catch (FileNotFoundException fnfe)
                     { throw new ReflectBaseException("Unable to load Maui.Core.  Make sure that you have added the Winforms Runtime MAUI requirement group", fnfe); }
 
-                    _ResourceManagerType = assm.GetType("Maui.Core.Resources.ResourceManager", true, false);
+                    s_resourceManagerType = assm.GetType("Maui.Core.Resources.ResourceManager", true, false);
                 }
-                return _ResourceManagerType;
+                return s_resourceManagerType;
             }
         }
-        private static object _ResourceManager = null;
+        private static object s_resourceManager = null;
         private static object ResourceManager
         {
             get
             {
-                if (null == _ResourceManager)
-                { _ResourceManager = Activator.CreateInstance(ResourceManagerType, new object[] { true }); }
-                return _ResourceManager;
+                if (null == s_resourceManager)
+                { s_resourceManager = Activator.CreateInstance(ResourceManagerType, new object[] { true }); }
+                return s_resourceManager;
             }
         }
         [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
@@ -300,9 +304,9 @@ namespace WFCTestLib.Util
             get
             {
                 // lazy initialization
-                if (allControls == null)
+                if (s_allControls == null)
                 {
-                    allControls = new ArrayList(new Control[] {
+                    s_allControls = new ArrayList(new Control[] {
                         new Button(),
                         new CheckBox(),
                         new CheckedListBox(),
@@ -350,10 +354,10 @@ namespace WFCTestLib.Util
                     });
 
                     // Make this ArrayList read-only.
-                    allControls = ArrayList.ReadOnly(allControls);
+                    s_allControls = ArrayList.ReadOnly(s_allControls);
                 }
 
-                return allControls;
+                return s_allControls;
             }
         }
 
@@ -750,32 +754,32 @@ namespace WFCTestLib.Util
 
         internal class ActivePromptHelper
         {
-            private string message;
-            private bool success;
+            private string _message;
+            private bool _success;
 
             public ActivePromptHelper(string message)
             {
-                this.message = message;
+                this._message = message;
             }
 
             public string Message
             {
-                get { return message; }
+                get { return _message; }
             }
 
             public bool Success
             {
-                get { return success; }
+                get { return _success; }
             }
 
             public void ShowPrompt()
             {
-                success = (DialogResult.Yes == MessageBox.Show(null, "Is the following correct?\r\n" + Message, "Manual test interaction", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2));
+                _success = (DialogResult.Yes == MessageBox.Show(null, "Is the following correct?\r\n" + Message, "Manual test interaction", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2));
             }
 
             public void ShowMessage()
             {
-                MessageBox.Show(null, message, "Testcase paused");
+                MessageBox.Show(null, _message, "Testcase paused");
             }
         }
 
@@ -818,10 +822,10 @@ namespace WFCTestLib.Util
         /// </summary>
         public static string GetClrRoot()
         {
-            if (mostRecentClrRoot == null)
-                mostRecentClrRoot = GetClrRoot(null);
+            if (s_mostRecentClrRoot == null)
+                s_mostRecentClrRoot = GetClrRoot(null);
 
-            return mostRecentClrRoot;
+            return s_mostRecentClrRoot;
         }
 
         /// <summary>
@@ -865,8 +869,8 @@ namespace WFCTestLib.Util
         /// <returns>The string returned is of the form "v1.0.3500".</returns>
         public static string GetLatestInstalledClrVersion()
         {
-            if (latestInstalledClrVersion != null)
-                return latestInstalledClrVersion;
+            if (s_latestInstalledClrVersion != null)
+                return s_latestInstalledClrVersion;
 
             string policyKeyName = @"SOFTWARE\Microsoft\.NETFramework\policy";
             RegistryKey policyKey = Registry.LocalMachine.OpenSubKey(policyKeyName);
@@ -938,8 +942,8 @@ namespace WFCTestLib.Util
             if (latest == 0)
                 throw new Exception("Couldn't determine latest installed CLR version");
 
-            latestInstalledClrVersion = prefix + "." + latest;
-            return latestInstalledClrVersion;
+            s_latestInstalledClrVersion = prefix + "." + latest;
+            return s_latestInstalledClrVersion;
         }
 
         /// <summary>
@@ -1404,7 +1408,7 @@ namespace WFCTestLib.Util
         /// <param name="token">The token for the actual server name</typeparam>
 
         
-        private static string configFile = null; // Init to "ServerConfig.xml" in constructor
+        private static string s_configFile = null; // Init to "ServerConfig.xml" in constructor
         [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
         public static string GetServerName(string token)
         {
@@ -1418,7 +1422,7 @@ namespace WFCTestLib.Util
             XmlDocument doc = new XmlDocument();
             try
             {
-                doc.Load(configFile);
+                doc.Load(s_configFile);
                 XmlNodeList serversList = doc.GetElementsByTagName(@"setting");
                 foreach (XmlNode server in serversList)
                 {

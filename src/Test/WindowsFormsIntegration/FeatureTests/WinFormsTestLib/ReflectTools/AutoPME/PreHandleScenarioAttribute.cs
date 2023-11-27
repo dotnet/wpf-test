@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace ReflectTools.AutoPME {
     using System;
 
@@ -10,14 +14,14 @@ namespace ReflectTools.AutoPME {
     //
     [AttributeUsage(AttributeTargets.Method)]
     public class PreHandleScenarioAttribute : Attribute {
-        private bool isPreHandleScenario;
+        private bool _isPreHandleScenario;
 
         public PreHandleScenarioAttribute(bool isPreHandleScenario) {
-            this.isPreHandleScenario = isPreHandleScenario;
+            this._isPreHandleScenario = isPreHandleScenario;
         }
 
         public bool IsPreHandleScenario {
-            get { return isPreHandleScenario; }
+            get { return _isPreHandleScenario; }
         }
     }
 }

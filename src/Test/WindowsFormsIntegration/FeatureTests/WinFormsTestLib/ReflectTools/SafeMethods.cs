@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 namespace ReflectTools {
 	using System;
 	using System.ComponentModel;
@@ -124,7 +128,7 @@ namespace ReflectTools {
 		private static void CloseForm(Form fToClose)
 		{ fToClose.Close(); }
 
-        private static string events;
+        private static string s_events;
 
 
 		//
@@ -165,7 +169,7 @@ namespace ReflectTools {
 
         private static void wb_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            events += "DocumentCompleted ";
+            s_events += "DocumentCompleted ";
         }
 
 
@@ -177,14 +181,14 @@ namespace ReflectTools {
             long stoptime = start.AddMilliseconds(milliseconds).Ticks;
             bool navigated = false;
 
-            events = "";
+            s_events = "";
 
             SafeMethods.Navigate(wb, url);
             navigated = false;
             while (DateTime.Now.Ticks < stoptime)
             {
                 Application.DoEvents();
-                if (events.Contains("DocumentCompleted"))
+                if (s_events.Contains("DocumentCompleted"))
                 {
                     navigated = true;
                     break;

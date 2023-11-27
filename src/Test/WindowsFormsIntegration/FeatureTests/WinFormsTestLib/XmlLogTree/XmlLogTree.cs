@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Collections;
 using System.Collections.Specialized;
@@ -6,11 +10,9 @@ using System.IO;
 using System.Xml;
 
 namespace WFCTestLib.XmlLogTree {
-
     /// <summary>
     /// Contains static methods for generating an XML log file parse tree.
-    /// </summary>
-	
+    /// </summary>	
     public class LogParser 
 	{
 		public static TestResult ParseLogFile(string filename)
@@ -143,33 +145,32 @@ namespace WFCTestLib.XmlLogTree {
                 }
             }
         }
-
     }
 
     /// <summary>
     /// Abstract parent class for all nodes in the XML log parse tree.
     /// </summary>
     public abstract class LogNode {
-        private string name;
-        private XmlNode xml;
+        private string _name;
+        private XmlNode _xml;
 
         public LogNode(XmlNode xml) {
-            this.xml = xml;
+            this._xml = xml;
 
             XmlAttribute nameAttr = xml.Attributes["name"];
 
             if ( nameAttr == null )
                 throw new Exception("No name on xml node");
 
-            name = nameAttr.Value;
+            _name = nameAttr.Value;
         }
 
         public string Name {
-            get { return name; }
+            get { return _name; }
         }
 
         public virtual XmlNode XmlNode {
-            get { return xml; }
+            get { return _xml; }
         }
 
         //
@@ -208,16 +209,16 @@ namespace WFCTestLib.XmlLogTree {
     /// Top-level node representing the entire result log.
     /// </summary>
     public class TestResult : LogNode {
-        private ScenarioGroupCollection groups;
-        private bool passed;
-        private int totalCount;
-        private int failCount;
-        private string comment;
-        private NameValueCollection commandLineParams;
-        private string initTestText;
+        private ScenarioGroupCollection _groups;
+        private bool _passed;
+        private int _totalCount;
+        private int _failCount;
+        private string _comment;
+        private NameValueCollection _commandLineParams;
+        private string _initTestText;
 
         internal TestResult(XmlNode xml) : base(xml) {
-            groups = new ScenarioGroupCollection(this);
+            _groups = new ScenarioGroupCollection(this);
 
             // Init FinalResults values
             XmlNode finalResults = xml.ChildNodes[FindElement(xml, "FinalResults")];
@@ -225,25 +226,25 @@ namespace WFCTestLib.XmlLogTree {
 			if (finalResults != null)
 			{
 				if (finalResults.Attributes["type"] != null)
-					passed = finalResults.Attributes["type"].Value == "Pass";
+					_passed = finalResults.Attributes["type"].Value == "Pass";
 
 				if (finalResults.Attributes["total"] != null)
-					totalCount = Int32.Parse(finalResults.Attributes["total"].Value);
+					_totalCount = Int32.Parse(finalResults.Attributes["total"].Value);
 				if (finalResults.Attributes["fail"] != null)
-					failCount = Int32.Parse(finalResults.Attributes["fail"].Value);
+					_failCount = Int32.Parse(finalResults.Attributes["fail"].Value);
 			}
 
             if ( finalResults.ChildNodes.Count > 0 ) {
                 XmlNode commentElement = finalResults.ChildNodes[FindElement(finalResults, "ResultComments")];
-                comment = commentElement.ChildNodes[0].Value.Trim();
+                _comment = commentElement.ChildNodes[0].Value.Trim();
             }
 
             // Init remaining values
             ArrayList elements = FindAllElements(xml, "CommandLineParameter");
-            commandLineParams = new NameValueCollection(elements.Count);
+            _commandLineParams = new NameValueCollection(elements.Count);
 
             foreach ( XmlNode param in elements )
-                commandLineParams.Add(param.Attributes["name"].Value, param.Attributes["value"].Value);
+                _commandLineParams.Add(param.Attributes["name"].Value, param.Attributes["value"].Value);
 
             XmlNode initTest = xml.ChildNodes[FindElement(xml, "TestInitialize")];
 
@@ -252,37 +253,37 @@ namespace WFCTestLib.XmlLogTree {
 				foreach (XmlNode child in initTest.ChildNodes)
 				{
 					if (child.NodeType == XmlNodeType.Text)
-						initTestText = child.Value;
+						_initTestText = child.Value;
 				}
 			}
         }
 
         public ScenarioGroupCollection ScenarioGroups {
-            get { return groups; }
+            get { return _groups; }
         }
 
         public bool Passed {
-            get { return passed; }
+            get { return _passed; }
         }
 
         public string Comment {
-            get { return comment; }
+            get { return _comment; }
         }
 
         public int TotalCount {
-            get { return totalCount; }
+            get { return _totalCount; }
         }
 
         public int FailCount {
-            get { return failCount; }
+            get { return _failCount; }
         }
 
         public NameValueCollection CommandLineParameters {
-            get { return commandLineParams; }
+            get { return _commandLineParams; }
         }
 
         public string InitTestText {
-            get { return initTestText; }
+            get { return _initTestText; }
         }
 
         public static TestResult BuildTestResult(XmlNode node) {
@@ -299,61 +300,61 @@ namespace WFCTestLib.XmlLogTree {
     /// Node representing a ScenarioGroup.
     /// </summary>
     public class ScenarioGroup : LogNode {
-        private TestResult parent;
-        private ScenarioCollection scenarios;
-        private bool passed;
-        private int totalCount;
-        private int failCount;
-        private StringCollection missingScenarios = new StringCollection();
-        private StringCollection extraScenarios = new StringCollection();
+        private TestResult _parent;
+        private ScenarioCollection _scenarios;
+        private bool _passed;
+        private int _totalCount;
+        private int _failCount;
+        private StringCollection _missingScenarios = new StringCollection();
+        private StringCollection _extraScenarios = new StringCollection();
 
         // Use BuildScenarioGroup() externally
         private ScenarioGroup(XmlNode xml) : base(xml) {
-            scenarios = new ScenarioCollection(this);
+            _scenarios = new ScenarioCollection(this);
             
             XmlNode classResults = xml.ChildNodes[FindElement(xml, "ClassResults")];
 
-            passed = classResults.Attributes["type"].Value == "Pass";
-            totalCount = Int32.Parse(classResults.Attributes["total"].Value);
-            failCount = Int32.Parse(classResults.Attributes["fail"].Value);
+            _passed = classResults.Attributes["type"].Value == "Pass";
+            _totalCount = Int32.Parse(classResults.Attributes["total"].Value);
+            _failCount = Int32.Parse(classResults.Attributes["fail"].Value);
 
             foreach ( XmlNode missing in FindAllElements(classResults, "MissingScenario") )
-                missingScenarios.Add(missing.Attributes["name"].Value);
+                _missingScenarios.Add(missing.Attributes["name"].Value);
 
             foreach ( XmlNode extra in FindAllElements(classResults, "ExtraScenario") )
-                extraScenarios.Add(extra.Attributes["name"].Value);
+                _extraScenarios.Add(extra.Attributes["name"].Value);
         }
         
         public TestResult Parent {
-            get { return parent; }
+            get { return _parent; }
         }
 
         internal void SetParent(TestResult r) {
-            parent = r;
+            _parent = r;
         }
 
         public ScenarioCollection Scenarios {
-            get { return scenarios; }
+            get { return _scenarios; }
         }
 
         public bool Passed {
-            get { return passed; }
+            get { return _passed; }
         }
 
         public int TotalCount {
-            get { return totalCount; }
+            get { return _totalCount; }
         }
 
         public int FailCount {
-            get { return failCount; }
+            get { return _failCount; }
         }
 
         public StringCollection MissingScenarios {
-            get { return missingScenarios; }
+            get { return _missingScenarios; }
         }
 
         public StringCollection ExtraScenarios {
-            get { return extraScenarios; }
+            get { return _extraScenarios; }
         }
 
         internal static ScenarioGroup BuildScenarioGroup(XmlNode node) {
@@ -370,15 +371,15 @@ namespace WFCTestLib.XmlLogTree {
     /// Node representing an individual Scenario.
     /// </summary>
     public class Scenario : LogNode {
-        private ScenarioGroup parent;
-        private bool passed;
-        private string comment;
-        private string text;
-        private int totalCount;
-        private int failCount;
-        private BugInfoCollection bugs = new BugInfoCollection();
-		private ExpectedActualInfoCollection expectedActualCol = new ExpectedActualInfoCollection();
-		private ExceptionInfoCollection exceptions = new ExceptionInfoCollection();
+        private ScenarioGroup _parent;
+        private bool _passed;
+        private string _comment;
+        private string _text;
+        private int _totalCount;
+        private int _failCount;
+        private BugInfoCollection _bugs = new BugInfoCollection();
+		private ExpectedActualInfoCollection _expectedActualCol = new ExpectedActualInfoCollection();
+		private ExceptionInfoCollection _exceptions = new ExceptionInfoCollection();
 
         // Use BuildScenario() externally
         private Scenario(XmlNode xml) : base(xml) {
@@ -386,24 +387,24 @@ namespace WFCTestLib.XmlLogTree {
 
             foreach ( XmlNode node in xml.ChildNodes ) {
                 if ( node.NodeType == XmlNodeType.Text )
-                    text += node.Value;
+                    _text += node.Value;
                 else if ( node.LocalName == "Result" ) {
                     // Child will be the optional comment
-                    passed = node.Attributes["type"].Value == "Pass";
+                    _passed = node.Attributes["type"].Value == "Pass";
                     gotPassed = true;
 
                     if ( node.Attributes.Count == 3 ) {
-                        totalCount = Int32.Parse(node.Attributes["total"].Value);
-                        failCount = Int32.Parse(node.Attributes["fail"].Value);
+                        _totalCount = Int32.Parse(node.Attributes["total"].Value);
+                        _failCount = Int32.Parse(node.Attributes["fail"].Value);
                     }
 
                     if ( node.ChildNodes.Count > 0 ) {
                         int index = FindElement(node, "ResultComments");
                         XmlNode commentElement = node.ChildNodes[index];
 
-                        // CONSIDER: This should never happen.  ChildNodes[] would throw first.
+                        // CONSIDER: This should never happen.  ChildNodes[] would throw first. 
                         if ( commentElement != null )
-                            comment = commentElement.ChildNodes[0].Value.Trim();
+                            _comment = commentElement.ChildNodes[0].Value.Trim();
                     }
                 }
                 else if ( node.LocalName == "KnownBug" ) {
@@ -415,7 +416,7 @@ namespace WFCTestLib.XmlLogTree {
                     if ( node.ChildNodes.Count == 1 )
                         comment = node.ChildNodes[0].Value.Trim();
 
-                    bugs.Add(new BugInfo(db, id, comment));
+                    _bugs.Add(new BugInfo(db, id, comment));
                 }
 				else if (node.LocalName == "ExpectedActual")
 				{
@@ -436,10 +437,12 @@ namespace WFCTestLib.XmlLogTree {
 						actualType = actualNode.Attributes["type"].Value;
 						if (actualNode.ChildNodes != null && actualNode.ChildNodes.Count > 0)
 							actualValue = actualNode.ChildNodes[0].Value.Trim();
-						this.expectedActualCol.Add(new ExpectedActualInfo(expectedValue, expectedType, actualValue, actualType));
+						this._expectedActualCol.Add(new ExpectedActualInfo(expectedValue, expectedType, actualValue, actualType));
 					}
 					catch (Exception ex)
-					{ Trace.WriteLine(ex.ToString()); }
+					{ 
+						Trace.WriteLine(ex.ToString()); 
+					}
 				}
 				else if (node.LocalName == "Exception" || node.LocalName == "InnerException")
 				{
@@ -450,7 +453,7 @@ namespace WFCTestLib.XmlLogTree {
 						ExceptionInfo ei = new ExceptionInfo(type, null, isInner);
 						if (node.ChildNodes == null || node.ChildNodes.Count <= 0)
 						{
-							this.exceptions.Add(ei);
+							this._exceptions.Add(ei);
 							continue;
 						}
 
@@ -459,7 +462,7 @@ namespace WFCTestLib.XmlLogTree {
 						int index = FindElement(node, "StackTrace");
 						if (index < 0)
 						{
-							this.exceptions.Add(ei);
+							this._exceptions.Add(ei);
 							continue;
 						}
 
@@ -473,7 +476,7 @@ namespace WFCTestLib.XmlLogTree {
 							int line = Int32.Parse(frameNode.Attributes["line"].Value);
 							ei.StackTrace.AddFrame(function, file, line);
 						}
-						this.exceptions.Add(ei);
+						this._exceptions.Add(ei);
 					}
 					catch (Exception ex)
 					{ Trace.WriteLine(ex.ToString()); }
@@ -485,45 +488,45 @@ namespace WFCTestLib.XmlLogTree {
         }
 
         public ScenarioGroup Parent {
-            get { return parent; }
+            get { return _parent; }
         }
 
         internal void SetParent(ScenarioGroup r) {
-            parent = r;
+            _parent = r;
         }
 
         public bool Passed {
-            get { return passed; }
+            get { return _passed; }
         }
 
         public string Comment {
-            get { return comment; }
+            get { return _comment; }
         }
 
         public string Text {
-            get { return text; }
+            get { return _text; }
         }
 
         public int TotalCount {
-            get { return totalCount; }
+            get { return _totalCount; }
         }
 
         public int FailCount {
-            get { return failCount; }
+            get { return _failCount; }
         }
 
         public BugInfoCollection KnownBugs {
-            get { return bugs; }
+            get { return _bugs; }
         }
 
 		public ExpectedActualInfoCollection ExpectedActualValues
 		{
-			get { return expectedActualCol; }
+			get { return _expectedActualCol; }
 		}
 
 		public ExceptionInfoCollection Exceptions
 		{
-			get { return exceptions; }
+			get { return _exceptions; }
 		}
 
         internal static Scenario BuildScenario(XmlNode node) {
@@ -535,59 +538,59 @@ namespace WFCTestLib.XmlLogTree {
     /// Simple data structure to hold information about a bug.
     /// </summary>
     public class BugInfo {
-        string db;
-        int id;
-        string comment;
+        string _db;
+        int _id;
+        string _comment;
 
         public BugInfo(string db, int id) : this(db, id, null) { }
 
         public BugInfo(string db, int id, string comment) {
-            this.db = db;
-            this.id = id;
-            this.comment = comment;
+            this._db = db;
+            this._id = id;
+            this._comment = comment;
         }
 
         public string Db {
-            get { return db; }
-            set { db = value; }
+            get { return _db; }
+            set { _db = value; }
         }
 
         public int Id {
-            get { return id; }
-            set { id = value; }
+            get { return _id; }
+            set { _id = value; }
         }
 
         public string Comment {
-            get { return comment == null ? "" : comment; }
-            set { comment = value; }
+            get { return _comment == null ? "" : _comment; }
+            set { _comment = value; }
         }
     }
 
 	public class ExpectedActualInfo
 	{
-		string expected;
-		string expectedType;
+		string _expected;
+		string _expectedType;
 
-		string actual;
-		string actualType;
+		string _actual;
+		string _actualType;
 
 		public ExpectedActualInfo(string expectedValue, string expectedType, string actualValue, string actualType)
 		{
-			this.expected = expectedValue;
-			this.expectedType = expectedType;
-			this.actual = actualValue;
-			this.actualType = actualType;
+			this._expected = expectedValue;
+			this._expectedType = expectedType;
+			this._actual = actualValue;
+			this._actualType = actualType;
 		}
 
 		public string ExpectedValue
 		{
 			get
 			{
-				return expected;
+				return _expected;
 			}
 			set
 			{
-				expected = value;
+				_expected = value;
 			}
 		}
 
@@ -595,11 +598,11 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return expectedType;
+				return _expectedType;
 			}
 			set
 			{
-				expectedType = value;
+				_expectedType = value;
 			}
 		}
 
@@ -607,11 +610,11 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return actual;
+				return _actual;
 			}
 			set
 			{
-				actual = value;
+				_actual = value;
 			}
 		}
 
@@ -619,46 +622,46 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return actualType;
+				return _actualType;
 			}
 			set
 			{
-				actualType = value;
+				_actualType = value;
 			}
 		}
 	}
 
 	public class ExceptionInfo
 	{
-		string type;
-		string message;
-		bool isInner = false;
-		StackTraceInfo stackTraceInfo = new StackTraceInfo();
+		string _type;
+		string _message;
+		bool _isInner = false;
+		StackTraceInfo _stackTraceInfo = new StackTraceInfo();
 
 		public ExceptionInfo(string type, string message, bool isInner)
 		{
-			this.type = type;
-			this.message = message;
-			this.isInner = isInner;
+			this._type = type;
+			this._message = message;
+			this._isInner = isInner;
 		}
 
 		public ExceptionInfo(string type, string message, bool isInner, StackTraceInfo stackTraceInfo)
 		{
-			this.type = type;
-			this.message = message;
-			this.isInner = isInner;
-			this.stackTraceInfo = stackTraceInfo;
+			this._type = type;
+			this._message = message;
+			this._isInner = isInner;
+			this._stackTraceInfo = stackTraceInfo;
 		}
 
 		public string Type
 		{
 			get
 			{
-				return type;
+				return _type;
 			}
 			set
 			{
-				type = value;
+				_type = value;
 			}
 		}
 
@@ -666,11 +669,11 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return message;
+				return _message;
 			}
 			set
 			{
-				message = value;
+				_message = value;
 			}
 		}
 
@@ -678,11 +681,11 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return isInner;
+				return _isInner;
 			}
 			set
 			{
-				isInner = value;
+				_isInner = value;
 			}
 		}
 
@@ -690,19 +693,18 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return stackTraceInfo;
+				return _stackTraceInfo;
 			}
 			set
 			{
-				stackTraceInfo = value;
+				_stackTraceInfo = value;
 			}
 		}
-
 	}
 
 	public class StackTraceInfo
 	{
-		FrameInfoCollection frameInfoCollection = new FrameInfoCollection();
+		FrameInfoCollection _frameInfoCollection = new FrameInfoCollection();
 
 		public StackTraceInfo()
 		{
@@ -712,42 +714,42 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return frameInfoCollection;
+				return _frameInfoCollection;
 			}
 			set
 			{
-				frameInfoCollection = value;
+				_frameInfoCollection = value;
 			}
 		}
 
 		public void AddFrame(string function, string fileName, int lineNumber)
 		{
-			frameInfoCollection.Add(new FrameInfo(function, fileName, lineNumber));
+			_frameInfoCollection.Add(new FrameInfo(function, fileName, lineNumber));
 		}
 	}
 
 	public class FrameInfo
 	{
-		string function;
-		string fileName;
-		int lineNumber;
+		string _function;
+		string _fileName;
+		int _lineNumber;
 
 		public FrameInfo(string function, string fileName, int lineNumber)
 		{
-			this.function = function;
-			this.fileName = fileName;
-			this.lineNumber = lineNumber;
+			this._function = function;
+			this._fileName = fileName;
+			this._lineNumber = lineNumber;
 		}
 
 		public string Function
 		{
 			get
 			{
-				return function;
+				return _function;
 			}
 			set
 			{
-				function = value;
+				_function = value;
 			}
 		}
 
@@ -755,11 +757,11 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return fileName;
+				return _fileName;
 			}
 			set
 			{
-				fileName = value;
+				_fileName = value;
 			}
 		}
 
@@ -767,15 +769,12 @@ namespace WFCTestLib.XmlLogTree {
 		{
 			get
 			{
-				return lineNumber;
+				return _lineNumber;
 			}
 			set
 			{
-				lineNumber = value;
+				_lineNumber = value;
 			}
 		}
-
 	}
-
-
 }

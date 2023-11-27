@@ -1,4 +1,8 @@
-﻿namespace WFCTestLib.XmlLogTree
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
+namespace WFCTestLib.XmlLogTree
 {
 	using System;
 	using System.Collections;
@@ -7,26 +11,17 @@
 	//  Project   : WFCTestLib.XmlLogTree
 	//  Class     : FrameInfoCollection
 	// 
-	//  Copyright (C) 2002, Microsoft Corporation
-	// ------------------------------------------------------------------------------
 	//  <summary>
 	//  Strongly-typed collection of FrameInfo objects
 	//  </summary>
 	//  <remarks></remarks>
-	//  <history>
-	//      [dineshc] 12/17/2004  Created
-	//  </history>
 	[Serializable()]
 	public class FrameInfoCollection : CollectionBase
 	{
-
 		///  <summary>
 		///       Initializes a new instance of <see cref="WFCTestLib.XmlLogTree.FrameInfoCollection"/>.
 		///  </summary>
 		///  <remarks></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public FrameInfoCollection()
 		{
 		}
@@ -38,9 +33,6 @@
 		///       A <see cref="WFCTestLib.XmlLogTree.FrameInfoCollection"/> from which the contents are copied
 		///  </param>
 		///  <remarks></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public FrameInfoCollection(FrameInfoCollection value)
 		{
 			this.AddRange(value);
@@ -53,9 +45,6 @@
 		///       A array of <see cref="WFCTestLib.XmlLogTree.FrameInfo"/> objects with which to intialize the collection
 		///  </param>
 		///  <remarks></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public FrameInfoCollection(FrameInfo[] value)
 		{
 			this.AddRange(value);
@@ -69,9 +58,6 @@
 		///  The entry at the specified index of the collection.
 		///  </value>
 		///  <remarks><exception cref="System.ArgumentOutOfRangeException"><paramref name="index"/> is outside the valid range of indexes for the collection.</exception></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public FrameInfo this[int index]
 		{
 			get
@@ -93,9 +79,6 @@
 		///    The index at which the new element was inserted.
 		///  </returns>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.FrameInfoCollection.AddRange"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public int Add(FrameInfo value)
 		{
 			return List.Add(value);
@@ -108,9 +91,6 @@
 		///    An array of type <see cref="WFCTestLib.XmlLogTree.FrameInfo"/> containing the objects to add to the collection.
 		///  </param>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.FrameInfoCollection.Add"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void AddRange(FrameInfo[] value)
 		{
 			for (int i = 0; (i < value.Length); i = (i + 1))
@@ -128,9 +108,6 @@
 		///    A <see cref="WFCTestLib.XmlLogTree.FrameInfoCollection"/> containing the objects to add to the collection.
 		///  </param>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.FrameInfoCollection.Add"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void AddRange(FrameInfoCollection value)
 		{
 			for (int i = 0; (i < value.Count); i = (i + 1))
@@ -149,9 +126,6 @@
 		///   otherwise, <see langword="false"/>.
 		///  </returns>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.FrameInfoCollection.IndexOf"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public bool Contains(FrameInfo value)
 		{
 			return List.Contains(value);
@@ -168,9 +142,6 @@
 		///  <exception cref="System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than <paramref name="array"/>"s lowbound. </exception>
 		///  <seealso cref="System.Array"/>
 		///  </remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void CopyTo(FrameInfo[] array, int index)
 		{
 			List.CopyTo(array, index);
@@ -186,9 +157,6 @@
 		///  <see cref="WFCTestLib.XmlLogTree.FrameInfoCollection"/>, if found; otherwise, -1.
 		///  </returns>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.FrameInfoCollection.Contains"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public int IndexOf(FrameInfo value)
 		{
 			return List.IndexOf(value);
@@ -200,9 +168,6 @@
 		///  <param name="index">The zero-based index where <paramref name="value"/> should be inserted.</param>
 		///  <param name=" value">The <see cref="WFCTestLib.XmlLogTree.FrameInfo"/> to insert.</param>
 		///  <remarks><seealso cref="WFCTestLib.XmlLogTree.FrameInfoCollection.Add"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void Insert(int index, FrameInfo value)
 		{
 			List.Insert(index, value);
@@ -214,9 +179,6 @@
 		///  </summary>
 		///  <returns>An enumerator for the collection</returns>
 		///  <remarks><seealso cref="System.Collections.IEnumerator"/></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public new FrameInfoEnumerator GetEnumerator()
 		{
 			return new FrameInfoEnumerator(this);
@@ -228,9 +190,6 @@
 		///  </summary>
 		///  <param name="value">The <see cref="WFCTestLib.XmlLogTree.FrameInfo"/> to remove from the <see cref="WFCTestLib.XmlLogTree.FrameInfoCollection"/> .</param>
 		///  <remarks><exception cref="System.ArgumentException"><paramref name="value"/> is not found in the Collection. </exception></remarks>
-		///  <history>
-		///      [dineshc] 12/17/2004  Created
-		///  </history>
 		public void Remove(FrameInfo value)
 		{
 			List.Remove(value);
@@ -239,21 +198,21 @@
 		public class FrameInfoEnumerator : object, IEnumerator
 		{
 
-			private IEnumerator baseEnumerator;
+			private IEnumerator _baseEnumerator;
 
-			private IEnumerable temp;
+			private IEnumerable _temp;
 
 			public FrameInfoEnumerator(FrameInfoCollection mappings)
 			{
-				this.temp = ((IEnumerable)(mappings));
-				this.baseEnumerator = temp.GetEnumerator();
+				this._temp = ((IEnumerable)(mappings));
+				this._baseEnumerator = _temp.GetEnumerator();
 			}
 
 			public FrameInfo Current
 			{
 				get
 				{
-					return ((FrameInfo)(baseEnumerator.Current));
+					return ((FrameInfo)(_baseEnumerator.Current));
 				}
 			}
 
@@ -261,28 +220,28 @@
 			{
 				get
 				{
-					return baseEnumerator.Current;
+					return _baseEnumerator.Current;
 				}
 			}
 
 			public bool MoveNext()
 			{
-				return baseEnumerator.MoveNext();
+				return _baseEnumerator.MoveNext();
 			}
 
 			bool IEnumerator.MoveNext()
 			{
-				return baseEnumerator.MoveNext();
+				return _baseEnumerator.MoveNext();
 			}
 
 			public void Reset()
 			{
-				baseEnumerator.Reset();
+				_baseEnumerator.Reset();
 			}
 
 			void IEnumerator.Reset()
 			{
-				baseEnumerator.Reset();
+				_baseEnumerator.Reset();
 			}
 		}
 	}
