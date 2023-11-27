@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Collections;
 using System.Drawing;
@@ -26,7 +30,7 @@ namespace ReflectTools
     /// properties with pre-defined scenarios.  Currently AutoTest tests read/write properties of
     /// types bool, enum, and string.
     ///
-    /// Added 4/24/01: Tests event add/remove methods using the OnXxxx() methods to fire events.
+    /// Added : Tests event add/remove methods using the OnXxxx() methods to fire events.
     ///                AutoTest puts the "E" in AutoPME!
     ///
     /// To use AutoTest, simply have your test subclass AutoTest.  XObject subclasses AutoTest
@@ -38,23 +42,23 @@ namespace ReflectTools
     /// </summary>
     public abstract class WPFAutoTest : WPFAutoPME
     {
-        private StringTable excludedProperties = new StringTable();
-        private StringTable excludedEvents = new StringTable();
+        private StringTable _excludedProperties = new StringTable();
+        private StringTable _excludedEvents = new StringTable();
 
         // PropertyChanged event testing in progress (NYI)
         //		private StringTable excludedPropertyChangedEvents = new StringTable();
 
-        private PropertyInfo[] properties;
-        private EventInfo[] events;
+        private PropertyInfo[] _properties;
+        private EventInfo[] _events;
 
         // For counting events fired
-        private static AutoTestEventCounter eventCounter = new AutoTestEventCounter();
+        private static AutoTestEventCounter s_eventCounter = new AutoTestEventCounter();
 
         // Command-line flags
-        private bool noAutoProp = false;
-        private bool noAutoEvent = false;
-        private bool noEnumBoundsTest = false;
-        private bool ignoreMissingDelegates = false;
+        private bool _noAutoProp = false;
+        private bool _noAutoEvent = false;
+        private bool _noEnumBoundsTest = false;
+        private bool _ignoreMissingDelegates = false;
 
         const BindingFlags DefaultLookup = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
         const BindingFlags LookupAll = DefaultLookup | BindingFlags.NonPublic;
@@ -68,24 +72,11 @@ namespace ReflectTools
         protected override void InitTest(TParams p)
         {
             base.InitTest(p);
-            properties = Class.GetProperties();
-            events = Class.GetEvents();
+            _properties = Class.GetProperties();
+            _events = Class.GetEvents();
         }
 
 
-        //
-        // (KevinTao 9/13/02)
-        // TODO: Remove this when work items to add unimplemented scenarios are complete.
-        //       We're temporarily disabling missing scenario failures for early M1 Whidbey
-        //       nightlies (so they don't skew failure rates).
-        //
-        // (KevinTao 5/29/03): Removed.
-        //
-        //        protected override void SetOptions() {
-        //            base.SetOptions();
-        //            IgnoreMissing = true;
-        //            IgnoreMissingDelegates = true;
-        //        }
 
         //
         // The list of properties to exclude from auto-testing.  Occasionally, a property doesn't
@@ -96,7 +87,7 @@ namespace ReflectTools
         //
         protected StringTable ExcludedProperties
         {
-            get { return excludedProperties; }
+            get { return _excludedProperties; }
         }
 
         //
@@ -104,7 +95,7 @@ namespace ReflectTools
         //
         protected StringTable ExcludedEvents
         {
-            get { return excludedEvents; }
+            get { return _excludedEvents; }
         }
 
         //
@@ -120,8 +111,8 @@ namespace ReflectTools
         //
         protected bool NoAutoProp
         {
-            get { return noAutoProp; }
-            set { noAutoProp = value; }
+            get { return _noAutoProp; }
+            set { _noAutoProp = value; }
         }
 
         //
@@ -129,8 +120,8 @@ namespace ReflectTools
         //
         protected bool NoAutoEvent
         {
-            get { return noAutoEvent; }
-            set { noAutoEvent = value; }
+            get { return _noAutoEvent; }
+            set { _noAutoEvent = value; }
         }
 
         //
@@ -138,8 +129,8 @@ namespace ReflectTools
         //
         protected bool IgnoreMissingDelegates
         {
-            get { return ignoreMissingDelegates; }
-            set { ignoreMissingDelegates = value; }
+            get { return _ignoreMissingDelegates; }
+            set { _ignoreMissingDelegates = value; }
         }
 
         //
@@ -149,8 +140,8 @@ namespace ReflectTools
         //
         protected bool NoEnumBoundsTest
         {
-            get { return noEnumBoundsTest; }
-            set { noEnumBoundsTest = value; }
+            get { return _noEnumBoundsTest; }
+            set { _noEnumBoundsTest = value; }
         }
 
         protected override void ProcessCommandLineParameters()
@@ -252,7 +243,7 @@ namespace ReflectTools
             // Start passing by default in case there aren't any bool props
             ScenarioResult result = new ScenarioResult(true);
 
-            foreach (PropertyInfo pi in properties)
+            foreach (PropertyInfo pi in _properties)
             {
                 string name = pi.Name;
 
@@ -261,7 +252,7 @@ namespace ReflectTools
                     continue;
 
                 // Skip excluded properties
-                if (excludedProperties.Contains(name))
+                if (_excludedProperties.Contains(name))
                 {
                     p.log.WriteLine("*****Excluding {0}.{1}*****\r\n", pi.DeclaringType, name);
                     continue;
@@ -324,8 +315,6 @@ namespace ReflectTools
         //      1) Set property to every valid value
         //      2) Set property to lower bound - 1 and upper bound + 1 and verify exception
         //
-        // TODO: Doesn't do any special handling of bit-flag enums.
-        //
         [PreHandleScenario(true)]
         protected virtual ScenarioResult AutoTestEnumProperties(TParams p)
         {
@@ -338,7 +327,7 @@ namespace ReflectTools
             // Start passing by default in case there aren't any enum props
             ScenarioResult result = new ScenarioResult(true);
 
-            foreach (PropertyInfo pi in properties)
+            foreach (PropertyInfo pi in _properties)
             {
                 string name = pi.Name;
 
@@ -347,7 +336,7 @@ namespace ReflectTools
                     continue;
 
                 // Skip excluded properties
-                if (excludedProperties.Contains(name))
+                if (_excludedProperties.Contains(name))
                 {
                     p.log.WriteLine("*****Excluding {0}.{1}*****\r\n", pi.DeclaringType, name);
                     continue;
@@ -503,7 +492,7 @@ namespace ReflectTools
             // Start passing by default in case there aren't any string props
             ScenarioResult result = new ScenarioResult(true);
 
-            foreach (PropertyInfo pi in properties)
+            foreach (PropertyInfo pi in _properties)
             {
                 string name = pi.Name;
 
@@ -512,7 +501,7 @@ namespace ReflectTools
                     continue;
 
                 // Skip excluded properties
-                if (excludedProperties.Contains(name))
+                if (_excludedProperties.Contains(name))
                 {
                     p.log.WriteLine("*****Excluding {0}.{1}*****\r\n", pi.DeclaringType, name);
                     continue;
@@ -657,7 +646,7 @@ namespace ReflectTools
             // Start passing by default in case there aren't any events
             ScenarioResult result = new ScenarioResult(true);
 
-            foreach (EventInfo info in events)
+            foreach (EventInfo info in _events)
             {
                 string name = info.Name;
                 Type handlerType = info.EventHandlerType;
@@ -665,7 +654,7 @@ namespace ReflectTools
                 MethodInfo onMethod = null;
 
                 // Skip excluded properties
-                if (excludedEvents.Contains(name))
+                if (_excludedEvents.Contains(name))
                 {
                     p.log.WriteLine("*****Excluding {0}.{1}*****\r\n", info.DeclaringType, name);
                     continue;
@@ -750,11 +739,11 @@ namespace ReflectTools
 
                         // 1. Verify event raised when event handler is attached
                         p.log.WriteLine("1. Verify event raised when event handler is attached");
-                        eventCounter.Reset();
+                        s_eventCounter.Reset();
                         mi.Invoke(declaringType, parameters);
 
-                        WPFMiscUtils.IncCounters(result, p.log, eventCounter.TimesFired == 1, "FAIL: Event raised " + eventCounter.TimesFired + " times.");
-                        WPFMiscUtils.IncCounters(result, p.log, eventCounter.Sender == p.target, "FAIL: Expected sender = " + p.target + ", but got " + eventCounter.Sender);
+                        WPFMiscUtils.IncCounters(result, p.log, s_eventCounter.TimesFired == 1, "FAIL: Event raised " + s_eventCounter.TimesFired + " times.");
+                        WPFMiscUtils.IncCounters(result, p.log, s_eventCounter.Sender == p.target, "FAIL: Expected sender = " + p.target + ", but got " + s_eventCounter.Sender);
                         //result.IncCounters(eventCounter.TimesFired == 1, "FAIL: Event raised " + eventCounter.TimesFired + " times.", p.log);
                         //result.IncCounters(eventCounter.Sender == p.target, "FAIL: Expected sender = " + p.target + ", but got " + eventCounter.Sender, p.log);
                     }
@@ -769,9 +758,9 @@ namespace ReflectTools
 
                     // 2. Verify event not raised after event handler is removed
                     p.log.WriteLine("2. Verify event not raised after event handler is removed");
-                    eventCounter.Reset();
+                    s_eventCounter.Reset();
                     mi.Invoke(declaringType, parameters);
-                    WPFMiscUtils.IncCounters(result, p.log, eventCounter.TimesFired == 0, "FAIL: Event raised " + eventCounter.TimesFired + " times.");
+                    WPFMiscUtils.IncCounters(result, p.log, s_eventCounter.TimesFired == 0, "FAIL: Event raised " + s_eventCounter.TimesFired + " times.");
                     //result.IncCounters(eventCounter.TimesFired == 0, "FAIL: Event raised " + eventCounter.TimesFired + " times.", p.log);
                     //Add this code to try to get any exceptions caused by hooking this event to occur within this sub-scenario
                     ScenarioEpilog();
@@ -826,7 +815,7 @@ namespace ReflectTools
 
         public static object AutoTestEventHandler(object[] parameters)
         {
-            eventCounter.RaiseEvent(parameters.Length > 1 ? parameters[1] : null, parameters.Length > 2 ? parameters[2] as RoutedEventArgs : null);
+            s_eventCounter.RaiseEvent(parameters.Length > 1 ? parameters[1] : null, parameters.Length > 2 ? parameters[2] as RoutedEventArgs : null);
             return null;
         }
         //
@@ -834,7 +823,7 @@ namespace ReflectTools
         //
         internal protected static void EventRaised(object sender, RoutedEventArgs e)
         {
-            eventCounter.RaiseEvent(sender, e);
+            s_eventCounter.RaiseEvent(sender, e);
         }
 
         //
@@ -843,31 +832,31 @@ namespace ReflectTools
         //
         class AutoTestEventCounter : EventCounterBase
         {
-            private RoutedEventArgs routedEventArgs = new RoutedEventArgs();
-            private object sender;
+            private RoutedEventArgs _routedEventArgs = new RoutedEventArgs();
+            private object _sender;
 
             public RoutedEventArgs RoutedEventArgs
             {
-                get { return routedEventArgs; }
+                get { return _routedEventArgs; }
             }
 
             public object Sender
             {
-                get { return sender; }
+                get { return _sender; }
             }
 
             public override void Reset()
             {
                 base.Reset();
-                routedEventArgs = null;
-                sender = null;
+                _routedEventArgs = null;
+                _sender = null;
             }
 
             public void RaiseEvent(object sender, RoutedEventArgs e)
             {
                 ++TimesFired;
-                this.sender = sender;
-                routedEventArgs = e;
+                this._sender = sender;
+                _routedEventArgs = e;
             }
         }
 

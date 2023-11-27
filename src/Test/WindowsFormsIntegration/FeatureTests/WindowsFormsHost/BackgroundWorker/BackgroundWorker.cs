@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Windows.Forms;
 using WFCTestLib.Util;
@@ -12,335 +16,323 @@ using SWF = System.Windows.Forms;
 using SWI = System.Windows.Input;
 
 
-
 /// <Testcase>BackgroundWorker</Testcase>
 /// <summary>
 /// Description: Test the BackgroundWorker and it's events work correctly when called from WF ctr
 /// </summary>
-/// <History>
-/// pachan 3/20/2006 Created
-/// </History>
-
 namespace WindowsFormsHostTests
 {
-
-public class BackgroundWorker : WPFReflectBase
-{
-   #region TestVariables
-
-    private WindowsFormsHost wfh;
-    private SWF.FlowLayoutPanel wf_FlowLayoutPanel;
-    private SWF.Button wf_btnStart;
-
-    private System.ComponentModel.BackgroundWorker bgW;
-
-    private static string WindowTitleName = "BackgroundWorkerTest";
-    private static string WFStartButtonName = "WFStartButton";
-    private static string WFFlowLayoutPanelName = "WFFlowLayoutPanelText";
-    private static string WFHostName = "WFH";
-
-    private const int numberToCompute = 35;
-    private const long answer = 14930352;
-
-    private bool bExpectedExcp = false;
-    private bool bProgressChangedFailed = false;
-    private string strErr = String.Empty;
-    private string strErr2 = String.Empty;
-
-    private int percentComplete = 0;
-    private int numberReportProgressCall = 0;
-    private int progressChangedBeingCalled = 0;
-    private int highestPercentageReached = 0;
-    private int computedAnswer = 0;
-
-    #endregion
-
-    #region Testcase setup
-    public BackgroundWorker(string[] args) : base(args) { }
-
-    protected override bool BeforeScenario(TParams p, System.Reflection.MethodInfo scenario)
+    public class BackgroundWorker : WPFReflectBase
     {
-        return base.BeforeScenario(p, scenario);
-    }
+    #region TestVariables
 
-    protected override void InitTest(TParams p) 
-    {
-        bgW = new System.ComponentModel.BackgroundWorker();
-        bgW.WorkerSupportsCancellation = true;
-        bgW.WorkerReportsProgress = true;
-        bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_DoWork);
-        bgW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bgW_RunWorkerCompleted);
-        bgW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bgW_ProgressChanged);
+        private WindowsFormsHost _wfh;
+        private SWF.FlowLayoutPanel _wf_FlowLayoutPanel;
+        private SWF.Button _wf_btnStart;
 
-        this.Title = WindowTitleName;
-        wfh = new WindowsFormsHost();
-        wf_FlowLayoutPanel = new FlowLayoutPanel();
-        wf_btnStart = new Button();
+        private System.ComponentModel.BackgroundWorker _bgW;
 
-        wfh.Name = WFHostName;
-        wf_FlowLayoutPanel.Name = WFFlowLayoutPanelName;
-        wf_btnStart.Name = WFStartButtonName;
-        wf_btnStart.Text = WFStartButtonName;
+        private static string s_windowTitleName = "BackgroundWorkerTest";
+        private static string s_WFStartButtonName = "WFStartButton";
+        private static string s_WFFlowLayoutPanelName = "WFFlowLayoutPanelText";
+        private static string s_WFHostName = "WFH";
 
-        wf_FlowLayoutPanel.Controls.Add(wf_btnStart);
-        wf_btnStart.Click += new EventHandler(wf_btnStart_Click);
+        private const int numberToCompute = 35;
+        private const long answer = 14930352;
 
-        // this will force the application to check for illegal cross thread calls
-        Control.CheckForIllegalCrossThreadCalls = true;
+        private bool _bExpectedExcp = false;
+        private bool _bProgressChangedFailed = false;
+        private string _strErr = String.Empty;
+        private string _strErr2 = String.Empty;
 
-        wf_FlowLayoutPanel.FlowDirection = SWF.FlowDirection.TopDown;
-        wfh.Child = wf_FlowLayoutPanel;
+        private int _percentComplete = 0;
+        private int _numberReportProgressCall = 0;
+        private int _progressChangedBeingCalled = 0;
+        private int _highestPercentageReached = 0;
+        private int _computedAnswer = 0;
 
-        this.Content = wfh;
-        base.InitTest(p);
-            
-    }
-    #endregion
+        #endregion
 
-    //==========================================
-    // Scenarios
-    //==========================================
-    #region Scenarios
-    [Scenario("Start BW from WFH hosted WF Control Verify that we cannot change the WF control in the DoWork method.")]
-    public ScenarioResult Scenario1(TParams p) 
-    {
-        ScenarioResult sr = new ScenarioResult();
-        string TCText = "Start BW from WFH hosted WF Control Verify that we cannot change the WF control in the DoWork method.";
-        TestSetup(p, TCText);
-        MyPause();
+        #region Testcase setup
+        public BackgroundWorker(string[] args) : base(args) { }
 
-        p.log.WriteLine(TCText + " - Test Run Start");
-
-        // change the wf_btnStart Visible property to false on the DoWork event
-        // click button wf_btnStart to start
-        wf_btnStart.Invoke(new EventHandler(wf_btnStart_Click));
-
-        // Wait for the BackgroundWorker to finish
-        while (bgW.IsBusy)
+        protected override bool BeforeScenario(TParams p, System.Reflection.MethodInfo scenario)
         {
-            WPFReflectBase.DoEvents();
+            return base.BeforeScenario(p, scenario);
         }
 
-        //check if we are getting the proper exception and correct result
-        WPFMiscUtils.IncCounters(sr, true, bExpectedExcp, "Did not get an exception on setting control value inside the DoWork Event ", p.log);
-        WPFMiscUtils.IncCounters(sr, true, wf_btnStart.Visible, "Control value being set to true", p.log);
-
-        return sr;
-    }
-
-    [Scenario("Start BW from WFH hosted WF Control Verify that BW Progress Changed Events work and we can change the WF control in the event")]
-    public ScenarioResult Scenario2(TParams p) 
-    {
-        ScenarioResult sr = new ScenarioResult();
-        string TCText = "Start BW from WFH hosted WF Control Verify that BW Progress Changed Events work and we can change the WF control in the event";
-        TestSetup(p, TCText);
-        MyPause();
-
-        p.log.WriteLine(TCText + " - Test Run Start");
-
-
-        // change the wf_btnStart BackColor to HotPink on the ProgressChanged Event
-        // click button wf_btnStart to start
-        wf_btnStart.Invoke(new EventHandler(wf_btnStart_Click));
-
-        // Wait for the BackgroundWorker to finish the download.
-        while (bgW.IsBusy)
+        protected override void InitTest(TParams p) 
         {
-            WPFReflectBase.DoEvents();
+            _bgW = new System.ComponentModel.BackgroundWorker();
+            _bgW.WorkerSupportsCancellation = true;
+            _bgW.WorkerReportsProgress = true;
+            _bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_DoWork);
+            _bgW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bgW_RunWorkerCompleted);
+            _bgW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bgW_ProgressChanged);
+
+            this.Title = s_windowTitleName;
+            _wfh = new WindowsFormsHost();
+            _wf_FlowLayoutPanel = new FlowLayoutPanel();
+            _wf_btnStart = new Button();
+
+            _wfh.Name = s_WFHostName;
+            _wf_FlowLayoutPanel.Name = s_WFFlowLayoutPanelName;
+            _wf_btnStart.Name = s_WFStartButtonName;
+            _wf_btnStart.Text = s_WFStartButtonName;
+
+            _wf_FlowLayoutPanel.Controls.Add(_wf_btnStart);
+            _wf_btnStart.Click += new EventHandler(wf_btnStart_Click);
+
+            // this will force the application to check for illegal cross thread calls
+            Control.CheckForIllegalCrossThreadCalls = true;
+
+            _wf_FlowLayoutPanel.FlowDirection = SWF.FlowDirection.TopDown;
+            _wfh.Child = _wf_FlowLayoutPanel;
+
+            this.Content = _wfh;
+            base.InitTest(p);                
         }
+        #endregion
 
-        //check if we are getting the proper exception and correct result
-        WPFMiscUtils.IncCounters(sr, String.Empty, strErr, "Error on changing WF Control property on the ProgressChanged Event", p.log);
-        WPFMiscUtils.IncCounters(sr, true, bProgressChangedFailed, "Incorrect Progress Changed Percentage", p.log);
-        WPFMiscUtils.IncCounters(sr, System.Drawing.Color.HotPink, wf_btnStart.BackColor, "Control property value not being changed", p.log);
-        WPFMiscUtils.IncCounters(sr, progressChangedBeingCalled, numberReportProgressCall, "Not getting the same number of ProgressChanged Calls", p.log);
-
-        //KeepRunningTests = false;
-        return sr;
-    }
-
-    [Scenario("Start BW from WFH hosted WF Control Verify that BW Completed Events work and we can change the WF control in the event")]
-    public ScenarioResult Scenario3(TParams p) 
-    {
-        ScenarioResult sr = new ScenarioResult();
-        string TCText = "Start BW from WFH hosted WF Control Verify that BW Completed Events work and we can change the WF control in the event";
-        TestSetup(p, TCText);
-        MyPause();
-
-        p.log.WriteLine(TCText + " - Test Run Start");
-
-        // change the wf_btnStart BackColor to HotPink on the RunWorkerCompleted Event
-        // click button wf_btnStart to start
-        wf_btnStart.Invoke(new EventHandler(wf_btnStart_Click));
-
-        // Wait for the BackgroundWorker to finish 
-        while (bgW.IsBusy)
+        //==========================================
+        // Scenarios
+        //==========================================
+        #region Scenarios
+        [Scenario("Start BW from WFH hosted WF Control Verify that we cannot change the WF control in the DoWork method.")]
+        public ScenarioResult Scenario1(TParams p) 
         {
-            WPFReflectBase.DoEvents();
-        }
+            ScenarioResult sr = new ScenarioResult();
+            string TCText = "Start BW from WFH hosted WF Control Verify that we cannot change the WF control in the DoWork method.";
+            TestSetup(p, TCText);
+            MyPause();
 
-        //check if we are getting the proper exception and correct result
-        WPFMiscUtils.IncCounters(sr, String.Empty, strErr2, "Error on changing WF Control property on the RunWorkerCompleted Event", p.log);
-        WPFMiscUtils.IncCounters(sr, System.Drawing.Color.Aqua, wf_btnStart.ForeColor, "Control property value not being changed", p.log);
-        WPFMiscUtils.IncCounters(sr, (long)answer, (long)computedAnswer, "Computed Answer is incorrect", p.log);
+            p.log.WriteLine(TCText + " - Test Run Start");
 
-        return sr;
-    }
+            // change the wf_btnStart Visible property to false on the DoWork event
+            // click button wf_btnStart to start
+            _wf_btnStart.Invoke(new EventHandler(wf_btnStart_Click));
 
-    #endregion
-
-
-
-    #region HelperFunction
-    // Helper function to set up app for particular Scenario
-    private static void MyPause()
-    {
-        WPFReflectBase.DoEvents();
-        System.Threading.Thread.Sleep(200);
-    }
-
-    private void TestSetup(TParams p, string strTC)
-    {
-        p.log.WriteLine(strTC + " - TestSetup -- Start ");
-
-        bExpectedExcp = false;
-        strErr = String.Empty;
-        strErr2 = String.Empty;
-        bProgressChangedFailed = false;
-        progressChangedBeingCalled = 0;
-        numberReportProgressCall = 0;
-        highestPercentageReached = 0;
-        computedAnswer = 0;
-        wf_btnStart.BackColor = System.Drawing.Color.White;
-
-        p.log.WriteLine(strTC + " - TestSetup -- End ");
-    }
-    #endregion
-
-
-    #region TestFunction
-
-    void wf_btnStart_Click(object sender, EventArgs e)
-    {
-        bgW.RunWorkerAsync(numberToCompute); 
-    }
-
-    void bgW_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-    {
-        try
-        {
-            // make sure we can change the WF control property 
-            wf_btnStart.BackColor = System.Drawing.Color.HotPink;
-        }
-        catch (Exception excp)
-        {
-            strErr = excp.Message;
-        }
-        finally
-        {
-            progressChangedBeingCalled++;
-            if (e.ProgressPercentage != percentComplete)
+            // Wait for the BackgroundWorker to finish
+            while (_bgW.IsBusy)
             {
-                bProgressChangedFailed = true;
+                WPFReflectBase.DoEvents();
+            }
+
+            //check if we are getting the proper exception and correct result
+            WPFMiscUtils.IncCounters(sr, true, _bExpectedExcp, "Did not get an exception on setting control value inside the DoWork Event ", p.log);
+            WPFMiscUtils.IncCounters(sr, true, _wf_btnStart.Visible, "Control value being set to true", p.log);
+
+            return sr;
+        }
+
+        [Scenario("Start BW from WFH hosted WF Control Verify that BW Progress Changed Events work and we can change the WF control in the event")]
+        public ScenarioResult Scenario2(TParams p) 
+        {
+            ScenarioResult sr = new ScenarioResult();
+            string TCText = "Start BW from WFH hosted WF Control Verify that BW Progress Changed Events work and we can change the WF control in the event";
+            TestSetup(p, TCText);
+            MyPause();
+
+            p.log.WriteLine(TCText + " - Test Run Start");
+
+            // change the wf_btnStart BackColor to HotPink on the ProgressChanged Event
+            // click button wf_btnStart to start
+            _wf_btnStart.Invoke(new EventHandler(wf_btnStart_Click));
+
+            // Wait for the BackgroundWorker to finish the download.
+            while (_bgW.IsBusy)
+            {
+                WPFReflectBase.DoEvents();
+            }
+
+            //check if we are getting the proper exception and correct result
+            WPFMiscUtils.IncCounters(sr, String.Empty, _strErr, "Error on changing WF Control property on the ProgressChanged Event", p.log);
+            WPFMiscUtils.IncCounters(sr, true, _bProgressChangedFailed, "Incorrect Progress Changed Percentage", p.log);
+            WPFMiscUtils.IncCounters(sr, System.Drawing.Color.HotPink, _wf_btnStart.BackColor, "Control property value not being changed", p.log);
+            WPFMiscUtils.IncCounters(sr, _progressChangedBeingCalled, _numberReportProgressCall, "Not getting the same number of ProgressChanged Calls", p.log);
+
+            //KeepRunningTests = false;
+            return sr;
+        }
+
+        [Scenario("Start BW from WFH hosted WF Control Verify that BW Completed Events work and we can change the WF control in the event")]
+        public ScenarioResult Scenario3(TParams p) 
+        {
+            ScenarioResult sr = new ScenarioResult();
+            string TCText = "Start BW from WFH hosted WF Control Verify that BW Completed Events work and we can change the WF control in the event";
+            TestSetup(p, TCText);
+            MyPause();
+
+            p.log.WriteLine(TCText + " - Test Run Start");
+
+            // change the wf_btnStart BackColor to HotPink on the RunWorkerCompleted Event
+            // click button wf_btnStart to start
+            _wf_btnStart.Invoke(new EventHandler(wf_btnStart_Click));
+
+            // Wait for the BackgroundWorker to finish 
+            while (_bgW.IsBusy)
+            {
+                WPFReflectBase.DoEvents();
+            }
+
+            //check if we are getting the proper exception and correct result
+            WPFMiscUtils.IncCounters(sr, String.Empty, _strErr2, "Error on changing WF Control property on the RunWorkerCompleted Event", p.log);
+            WPFMiscUtils.IncCounters(sr, System.Drawing.Color.Aqua, _wf_btnStart.ForeColor, "Control property value not being changed", p.log);
+            WPFMiscUtils.IncCounters(sr, (long)answer, (long)_computedAnswer, "Computed Answer is incorrect", p.log);
+
+            return sr;
+        }
+
+        #endregion
+
+        #region HelperFunction
+        // Helper function to set up app for particular Scenario
+        private static void MyPause()
+        {
+            WPFReflectBase.DoEvents();
+            System.Threading.Thread.Sleep(200);
+        }
+
+        private void TestSetup(TParams p, string strTC)
+        {
+            p.log.WriteLine(strTC + " - TestSetup -- Start ");
+
+            _bExpectedExcp = false;
+            _strErr = String.Empty;
+            _strErr2 = String.Empty;
+            _bProgressChangedFailed = false;
+            _progressChangedBeingCalled = 0;
+            _numberReportProgressCall = 0;
+            _highestPercentageReached = 0;
+            _computedAnswer = 0;
+            _wf_btnStart.BackColor = System.Drawing.Color.White;
+
+            p.log.WriteLine(strTC + " - TestSetup -- End ");
+        }
+        #endregion
+
+        #region TestFunction
+
+        void wf_btnStart_Click(object sender, EventArgs e)
+        {
+            _bgW.RunWorkerAsync(numberToCompute); 
+        }
+
+        void bgW_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            try
+            {
+                // make sure we can change the WF control property 
+                _wf_btnStart.BackColor = System.Drawing.Color.HotPink;
+            }
+            catch (Exception excp)
+            {
+                _strErr = excp.Message;
+            }
+            finally
+            {
+                _progressChangedBeingCalled++;
+                if (e.ProgressPercentage != _percentComplete)
+                {
+                    _bProgressChangedFailed = true;
+                }
             }
         }
-    }
 
-    void bgW_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-    {
-        try
+        void bgW_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            // make sure we can change the WF control property 
-            wf_btnStart.ForeColor = System.Drawing.Color.Aqua;
-        }
-        catch (Exception excp)
-        {
-            strErr2 = excp.Message;
-        }
-        finally
-        {
-            computedAnswer = Convert.ToInt32(e.Result);
-        }
-    }
-
-    void bgW_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-    {
-        try
-        {
-            // force it to fail
-            wf_btnStart.Visible = false;
-            //System.Diagnostics.Debugger.Break();          
-        }
-        
-        catch (System.InvalidOperationException)
-        {
-            //Make sure we are getting an exception that we cannot change the control value
-            bExpectedExcp = true;
-        }
-        finally
-        {
-            // Get the BackgroundWorker that raised this event.
-            System.ComponentModel.BackgroundWorker worker = sender as System.ComponentModel.BackgroundWorker;
-
-            // Assign the result of the computation
-            // to the Result property of the DoWorkEventArgs
-            // object. This is will be available to the 
-            // RunWorkerCompleted eventhandler.
-            e.Result = ComputeFibonacci((int)e.Argument, worker, e);
-
-        }
-    }
-
-    // This is the method that does the actual work. For this
-    // example, it computes a Fibonacci number and
-    // reports progress as it does its work.
-    private long ComputeFibonacci(int n, System.ComponentModel.BackgroundWorker worker, System.ComponentModel.DoWorkEventArgs e)
-    {
-        long result = 0;
-
-        // Abort the operation if the user has canceled.
-        // Note that a call to CancelAsync may have set 
-        // CancellationPending to true just after the
-        // last invocation of this method exits, so this 
-        // code will not have the opportunity to set the 
-        // DoWorkEventArgs.Cancel flag to true. This means
-        // that RunWorkerCompletedEventArgs.Cancelled will
-        // not be set to true in your RunWorkerCompleted
-        // event handler. This is a race condition.
-
-        if (worker.CancellationPending)
-        {
-            e.Cancel = true;
-        }
-        else
-        {
-            if (n < 2)
+            try
             {
-                result = 1;
+                // make sure we can change the WF control property 
+                _wf_btnStart.ForeColor = System.Drawing.Color.Aqua;
+            }
+            catch (Exception excp)
+            {
+                _strErr2 = excp.Message;
+            }
+            finally
+            {
+                _computedAnswer = Convert.ToInt32(e.Result);
+            }
+        }
+
+        void bgW_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                // force it to fail
+                _wf_btnStart.Visible = false;
+                //System.Diagnostics.Debugger.Break();          
+            }
+            
+            catch (System.InvalidOperationException)
+            {
+                //Make sure we are getting an exception that we cannot change the control value
+                _bExpectedExcp = true;
+            }
+            finally
+            {
+                // Get the BackgroundWorker that raised this event.
+                System.ComponentModel.BackgroundWorker worker = sender as System.ComponentModel.BackgroundWorker;
+
+                // Assign the result of the computation
+                // to the Result property of the DoWorkEventArgs
+                // object. This is will be available to the 
+                // RunWorkerCompleted eventhandler.
+                e.Result = ComputeFibonacci((int)e.Argument, worker, e);
+            }
+        }
+
+        // This is the method that does the actual work. For this
+        // example, it computes a Fibonacci number and
+        // reports progress as it does its work.
+        private long ComputeFibonacci(int n, System.ComponentModel.BackgroundWorker worker, System.ComponentModel.DoWorkEventArgs e)
+        {
+            long result = 0;
+
+            // Abort the operation if the user has canceled.
+            // Note that a call to CancelAsync may have set 
+            // CancellationPending to true just after the
+            // last invocation of this method exits, so this 
+            // code will not have the opportunity to set the 
+            // DoWorkEventArgs.Cancel flag to true. This means
+            // that RunWorkerCompletedEventArgs.Cancelled will
+            // not be set to true in your RunWorkerCompleted
+            // event handler. This is a race condition.
+
+            if (worker.CancellationPending)
+            {
+                e.Cancel = true;
             }
             else
             {
-                result = ComputeFibonacci(n - 1, worker, e) +
-                         ComputeFibonacci(n - 2, worker, e);
+                if (n < 2)
+                {
+                    result = 1;
+                }
+                else
+                {
+                    result = ComputeFibonacci(n - 1, worker, e) +
+                            ComputeFibonacci(n - 2, worker, e);
+                }
+
+                // Report progress as a percentage of the total task.
+                _percentComplete =
+                    (int)((float)n / (float)numberToCompute * 100);
+                if (_percentComplete > _highestPercentageReached)
+                {
+                    _highestPercentageReached = _percentComplete;
+                    worker.ReportProgress(_percentComplete);
+                    _numberReportProgressCall++;
+                }
             }
 
-            // Report progress as a percentage of the total task.
-            percentComplete =
-                (int)((float)n / (float)numberToCompute * 100);
-            if (percentComplete > highestPercentageReached)
-            {
-                highestPercentageReached = percentComplete;
-                worker.ReportProgress(percentComplete);
-                numberReportProgressCall++;
-            }
+            return result;
         }
 
-        return result;
+        #endregion
+
     }
-
-    #endregion
-
-}
 }
 
 // Keep these in sync by running the testcase locally through the driver whenever
