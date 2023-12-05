@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DrtFixedTest</AssemblyName>
+    <OutputType>EXE</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>FRAMEWORK_NATIVEMETHODS;CORE_NATIVEMETHODS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBase.cs" />
+    <Compile Include="$(DrtCommonRoot)\inc\DrtBaseInput.cs" />
+    <Compile Include="DrtFixedBase.cs" />
+    <Compile Include="FixedHyperlinkSuite.cs" />
+    <Compile Include="FixedStructureSuite.cs" />
+    <Compile Include="..\Common\NativeMethods.cs" />
+    <Compile Include="..\Common\UnsafeNativeMethods.cs" />
+    <None Include="DrtMetroTest.cmd">
+      <Link>%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- <PackageReference Include="Microsoft.NETCore.Platforms" Version="$(MicrosoftNETCorePlatformsVersion)" /> -->
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="$(SystemTextEncodingCodePagesVersion)" />
+  </ItemGroup>
+</Project>
