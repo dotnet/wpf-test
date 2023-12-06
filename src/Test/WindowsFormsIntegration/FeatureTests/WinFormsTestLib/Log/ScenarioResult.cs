@@ -16,7 +16,6 @@ namespace WFCTestLib.Log
     //
     public class ScenarioResult
     {
-        //
         public static Version OrcasVersion
         { get { return new Version(2, 1); } }
         public static Version WhidbeyVersion
@@ -241,28 +240,28 @@ namespace WFCTestLib.Log
 		/// <summary>
 		/// Constructs a new Scenario Result. If the Hack has expired it is considered a Fail else it 
 		/// it considered Pass. Appropriate comments are added to the log file. In case of Failure the known
-		/// 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		/// bug is logged.
+		/// </summary>
+		/// <param name="log">
+		///  If this is not null, comments and details are printed to the log.
+		/// </param>
+		/// <param name="db">
+		/// Bug Database
+		/// </param>
+		/// <param name="bugId">
+		/// Bug ID
+		/// </param>
+		/// <param name="bugComment">
+		/// Bug Comments
+		/// </param>		
+		/// <param name="hackComments">
+		///  If failure, then Comments property is set to this value and printed to the
+		///  given log.
+		/// </param>
+		/// <param name="failAfter">
+		/// Date till which the Hack is valid. If current DateTime is greater than failAfter
+		/// date then failure is reported
+		/// </param>
 		public ScenarioResult(Log log, BugDb db, int bugId, string bugComment, string hackComments, DateTime failAfter) : this(IsHackValid(failAfter), GetHackComments(db, bugId, bugComment, hackComments, failAfter), log)
 		{
 			if (log != null)
@@ -345,26 +344,26 @@ namespace WFCTestLib.Log
 
 		/// <summary>
 		/// Gets comments for the hack along with the information on the expiration
-		/// of the hack and the 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		/// of the hack and the bug comment.
+		/// </summary>
+		/// <param name="db">
+		/// Bug Database
+		/// </param>
+		/// <param name="bugId">
+		/// Bug ID
+		/// </param>
+		/// <param name="bugComment">
+		/// Bug Comments
+		/// </param>		
+		/// <param name="hackComments">
+		///  If failure, then Comments property is set to this value and printed to the
+		///  given log.
+		/// </param>
+		/// <param name="failAfter">
+		/// Date till which the Hack is valid. If current DateTime is greater than failAfter
+		/// date then failure is reported
+		/// </param>
+		/// <returns>Hack comments</returns>
 		private static string GetHackComments(BugDb db, int bugId, string bugComment, string hackComments, DateTime failAfter)
 		{
 			if (failAfter > DateTime.Now)
@@ -750,22 +749,22 @@ namespace WFCTestLib.Log
 		///  If this is not null, comments and details are printed to the log.
 		/// </param>
 		/// <param name="db">
-		/// 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		/// Bug Database
+		/// </param>
+		/// <param name="bugId">
+		/// Bug ID
+		/// </param>
+		/// <param name="bugComment">
+		/// Bug Comments
+		/// </param>		
+		/// <param name="hackComments">
+		///  If failure, then Comments property is set to this value and printed to the
+		///  given log.
+		/// </param>
+		/// <param name="failAfter">
+		/// Date till which the Hack is valid. If current DateTime is greater than failAfter
+		/// date then failure is reported
+		/// </param>
 		public void IncCounters(Log log, BugDb db, int bugId, string bugComment, string hackComments, DateTime failAfterVersion)
 		{
 			string comments = GetHackComments(db, bugId, bugComment, hackComments, failAfterVersion);
