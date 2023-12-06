@@ -58,9 +58,6 @@ public class AltTab : ReflectBase
                 break;
             case "Scenario2":
                 //need to show modal form on a separate thread.
-                //NOTE:  DON'T RUN THIS IN DEBUG MODE.
-                //       Doing so causes an MDA exception when the app ends.  Sameer said this 
-                //       could safely be ignored (4/3/2006).
                 _newThread = new System.Threading.Thread(new ThreadStart(ShowModalForm.ShowIt));
                 _newThread.SetApartmentState(ApartmentState.STA);
                 _newThread.Start();

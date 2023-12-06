@@ -100,7 +100,6 @@ public class BubbledEvents : ReflectBase {
         //assign RoutingStrategy to global string so a given scenario can examine it.
         //RoutingStrategy += ((System.Windows.FrameworkElement)sender).Name + ":" + e.RoutedEvent.RoutingStrategy.ToString() + "::";
 
-        //Changed 4/27/06 per Nathan Enright to only look at the routing strategy itself:
         _routingStrategy = e.RoutedEvent.RoutingStrategy.ToString();
     }
     #endregion
