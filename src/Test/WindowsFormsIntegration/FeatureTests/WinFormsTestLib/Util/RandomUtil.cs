@@ -1524,7 +1524,7 @@ namespace WFCTestLib.Util
         // the range of valid DateTimes is smaller than the standard Gregorian calendar.  This method
         // will return a DateTime that should be valid for the current culture.
         //
-        // HACK: We determine the min date by creating a DateTime for 1/1/0001 in the current culture's
+        // We determine the min date by creating a DateTime for 1/1/0001 in the current culture's
         //       calendar.  The max date we assume to still be MaxValue.
         //
         public virtual DateTime GetValidDateTime()

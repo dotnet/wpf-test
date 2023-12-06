@@ -649,10 +649,6 @@ namespace ReflectTools.AutoPME
 			_ignoreStackForCurrentScenario = ignoreStack;
 		}
 
-		//
-		// We're currently grandfathering tests which use AddRequiredPermissions()
-		// and letting them skip the stack check. We'll probably revisit this at a later date.
-		//
 		[
 		Obsolete("AddRequiredPermission() is obsolete.  Please use BeginSecurityCheck() instead"),
 		EditorBrowsable(EditorBrowsableState.Never)
