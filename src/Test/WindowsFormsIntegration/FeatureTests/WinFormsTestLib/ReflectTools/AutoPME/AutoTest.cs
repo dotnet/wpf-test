@@ -28,7 +28,7 @@ namespace ReflectTools.AutoPME
 	/// properties with pre-defined scenarios.  Currently AutoTest tests read/write properties of
 	/// types bool, enum, and string.
 	///
-	/// Added 4/24/01: Tests event add/remove methods using the OnXxxx() methods to fire events.
+	/// Tests event add/remove methods using the OnXxxx() methods to fire events.
 	///                AutoTest puts the "E" in AutoPME!
 	///
 	/// To use AutoTest, simply have your test subclass AutoTest.  XObject subclasses AutoTest

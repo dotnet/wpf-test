@@ -2588,7 +2588,6 @@ return ScenarioResult.Pass;
             Region orig = _c.Region;
             Region region = p.ru.GetRegion(_c.Size);
 
-            //willsad 3/2/00
             // Region Type enum cannot be null when setting the random region
             // need to get different region to avoid null ref exception
             while (region == null)

@@ -650,7 +650,7 @@ namespace ReflectTools.AutoPME
 		}
 
 		//
-		// (12/10/03) We're currently grandfathering tests which use AddRequiredPermissions()
+		// We're currently grandfathering tests which use AddRequiredPermissions()
 		// and letting them skip the stack check. We'll probably revisit this at a later date.
 		//
 		[
