@@ -125,14 +125,14 @@ namespace WFCTestLib.Log
         //  The XML stream we want to log to
         // </desc>
         // </doc>
-        private XmlLogWriter writer;
+        private XmlLogWriter _writer;
 
         // <doc>
         // <desc>
         //  The final results for this testcase
         // </desc>
         // </doc>
-        private ScenarioResult tcr = new ScenarioResult();
+        private ScenarioResult _tcr = new ScenarioResult();
 
         // <doc>
         // <desc>
@@ -140,12 +140,12 @@ namespace WFCTestLib.Log
         //  logged.
         // </desc>
         // </doc>
-        private string currentScenario;
+        private string _currentScenario;
 
         //
         // Filename to write the log to.
         //
-        private string fileName;
+        private string _fileName;
 
         // <doc>
         // <desc>
@@ -157,16 +157,16 @@ namespace WFCTestLib.Log
         // <seealso class="XMLWriter">
         // </doc>
         public Log(string fileName) {
-            this.fileName = fileName;
+            this._fileName = fileName;
             Console.WriteLine("*********** Logging to " + fileName);
-            writer = new XmlLogWriter(fileName);
+            _writer = new XmlLogWriter(fileName);
         }
 
         //
         // Filename to write the log to.
         //
         public string Filename {
-            get { return fileName; }
+            get { return _fileName; }
         }
 
         // <doc>
@@ -175,10 +175,10 @@ namespace WFCTestLib.Log
         // </desc>
         // </doc>
         public virtual ScenarioResult TestResults {
-            get { return tcr; }
+            get { return _tcr; }
         }
 		public void WriteRaw(string s)
-		{ writer.WriteRaw(s); }
+		{ _writer.WriteRaw(s); }
 
         public void WritePreFormatted(string s)
         {
@@ -216,7 +216,7 @@ namespace WFCTestLib.Log
         }
 
         public void WriteTag(string tagName, bool closeToo, string elementText, /*params*/ LogAttribute[] data) {
-            writer.WriteTag(tagName, closeToo, elementText, data);
+            _writer.WriteTag(tagName, closeToo, elementText, data);
         }
 
         // <doc>
@@ -234,7 +234,7 @@ namespace WFCTestLib.Log
         }
 
         public void CloseTag() {
-            writer.CloseTag();
+            _writer.CloseTag();
         }
 
         // <doc>
@@ -266,7 +266,7 @@ namespace WFCTestLib.Log
         // </doc>
         public virtual void StartScenario(string method, string scenarioName) {
             WriteTag(Scenario, false, null, new LogAttribute[] { new LogAttribute("method", method), new LogAttribute("name", scenarioName) });
-            currentScenario = scenarioName;
+            _currentScenario = scenarioName;
         }
 
         // <doc>
@@ -295,7 +295,7 @@ namespace WFCTestLib.Log
         // </param>
         // </doc>
         public virtual void EndScenario(bool result) {
-            string failString = "scenario \"" + currentScenario + "\" failed.";
+            string failString = "scenario \"" + _currentScenario + "\" failed.";
             EndScenario(result, result ? null : failString);
         }
 
@@ -329,18 +329,18 @@ namespace WFCTestLib.Log
         public virtual void EndScenario(ScenarioResult result) {
             ResultsBlock(Result, result);
 
-            TestLog testLog = new TestLog(currentScenario);
+            TestLog testLog = new TestLog(_currentScenario);
 
             if (result == ScenarioResult.Pass)
             {
-                tcr.PassCount++;
+                _tcr.PassCount++;
 	    	testLog.Result = TestResult.Pass;
             }
             else
             {
-                tcr.FailCount++;
+                _tcr.FailCount++;
                 if (result.Comments != null)
-                    tcr.Comments = result.Comments;
+                    _tcr.Comments = result.Comments;
 
 		testLog.LogEvidence(result.Comments);
                 testLog.Result = TestResult.Fail;
@@ -356,9 +356,9 @@ namespace WFCTestLib.Log
         // </desc>
         // </doc>
         public virtual void EndTest() {
-            ResultsBlock(FinalResults, tcr);
+            ResultsBlock(FinalResults, _tcr);
             CloseTag();
-            writer.Close();
+            _writer.Close();
         }
 
         // <doc>
@@ -445,17 +445,17 @@ namespace WFCTestLib.Log
 		/// <param name="actual">actual value</param>
 		public virtual void LogExpectedActual(object expected, object actual)
 		{
-			writer.WriteTag(ExpectedActual, false);
+			_writer.WriteTag(ExpectedActual, false);
 			if (expected == null)
-				writer.WriteTag(Expected, true, null, new LogAttribute[] { new LogAttribute(Type, null) });
+				_writer.WriteTag(Expected, true, null, new LogAttribute[] { new LogAttribute(Type, null) });
 			else
-				writer.WriteTag(Expected, true, expected.ToString(), new LogAttribute[] { new LogAttribute(Type, expected.GetType().ToString()) });
+				_writer.WriteTag(Expected, true, expected.ToString(), new LogAttribute[] { new LogAttribute(Type, expected.GetType().ToString()) });
 
 			if (actual == null)
-				writer.WriteTag(Actual, true, null, new LogAttribute[] { new LogAttribute(Type, null) });
+				_writer.WriteTag(Actual, true, null, new LogAttribute[] { new LogAttribute(Type, null) });
 			else
-				writer.WriteTag(Actual, true, actual.ToString(), new LogAttribute[] { new LogAttribute(Type, actual.GetType().ToString()) });
-			writer.CloseTag();
+				_writer.WriteTag(Actual, true, actual.ToString(), new LogAttribute[] { new LogAttribute(Type, actual.GetType().ToString()) });
+			_writer.CloseTag();
 		}
 
 		public virtual void LogException(Exception ex)
@@ -488,18 +488,18 @@ namespace WFCTestLib.Log
 				return;
 
 			if(isInnerException)
-				writer.WriteTag(InnerException, false, new LogAttribute(Type, ex.GetType().ToString()));
+				_writer.WriteTag(InnerException, false, new LogAttribute(Type, ex.GetType().ToString()));
 			else
-				writer.WriteTag(Exception, false, new LogAttribute(Type, ex.GetType().ToString()));
-			writer.WriteTag(Message, true, ex.Message, null);
+				_writer.WriteTag(Exception, false, new LogAttribute(Type, ex.GetType().ToString()));
+			_writer.WriteTag(Message, true, ex.Message, null);
 
-			writer.WriteTag(StackTrace, false);
+			_writer.WriteTag(StackTrace, false);
 			if (ex.StackTrace != null)
 			{
 				System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(ex, true);
 				foreach (System.Diagnostics.StackFrame stackFrame in stackTrace.GetFrames())
 				{
-					writer.WriteTag(Frame, true, new LogAttribute[]{
+					_writer.WriteTag(Frame, true, new LogAttribute[]{
 						new LogAttribute("function", stackFrame.GetMethod().Name),
 						new LogAttribute("file", stackFrame.GetFileName()),
 						new LogAttribute("line", stackFrame.GetFileLineNumber().ToString())
@@ -507,12 +507,12 @@ namespace WFCTestLib.Log
 				}
 			}
 			// StackTrace tag
-			writer.CloseTag();
+			_writer.CloseTag();
 
 			if(!isInnerException)
-				writer.WriteTag("Text", true, ex.ToString(), null);
+				_writer.WriteTag("Text", true, ex.ToString(), null);
 			// Exception tag
-			writer.CloseTag();
+			_writer.CloseTag();
 		}
 
         // <doc>
@@ -524,7 +524,7 @@ namespace WFCTestLib.Log
         // </param>
         // </doc>
         public virtual void Write(string data) {
-            writer.Write(data);
+            _writer.Write(data);
 	    if(TestLog.Current != null) TestLog.Current.LogEvidence(data);
 	    else { GlobalLog.LogEvidence(data); }
         }
@@ -535,7 +535,7 @@ namespace WFCTestLib.Log
         // </desc>
         // </doc>
         public virtual void WriteLine() {
-            writer.WriteLine();
+            _writer.WriteLine();
         }
 
         // <doc>
@@ -547,7 +547,7 @@ namespace WFCTestLib.Log
         // </param>
         // </doc>
         public virtual void WriteLine(string data) {
-            writer.WriteLine(data);
+            _writer.WriteLine(data);
 	    if(TestLog.Current != null) TestLog.Current.LogEvidence(data);
 	    else { GlobalLog.LogEvidence(data); }
         }
