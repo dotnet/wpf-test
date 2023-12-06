@@ -2142,7 +2142,6 @@ return ScenarioResult.Pass;
             return new ScenarioResult(result);
         }
 
-        //todo: may want to make this test against form or a container control and verify that the next control is selected(activated)
         protected virtual ScenarioResult SelectNextControl(TParams p, Control ctl, Boolean forward, Boolean tabStopOnly, Boolean nested, Boolean wrap)
         {
             if ((_c = GetControl(p)) == null) return ScenarioResult.Fail;

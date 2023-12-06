@@ -50,9 +50,6 @@ namespace WFCTestLib.Util
         // <doc>
         // <desc>
         //  Add a string to the list of items
-        //  TODO: Deal with the listbox getting full. If numItems
-        //        is greater than some MAX, then delete the first
-        //        third of the items in the list.
         // </desc>
         // <param term="s">
         //  The string to add to the listbox.

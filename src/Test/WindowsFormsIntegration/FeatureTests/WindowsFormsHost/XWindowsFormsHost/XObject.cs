@@ -13,7 +13,7 @@ public abstract class XObject : WPFAutoTest
 
     ScenarioResult ObjectIsNull(Log log)
     {
-        log.WriteLine("erk! object is null, returning PASS - what else can I do?");
+        log.WriteLine("object is null, returning PASS - what else can I do?");
         return ScenarioResult.Pass;
     }
 

@@ -791,10 +791,6 @@ namespace WFCTestLib.Util
         // <doc>
         // <desc>
         //  Returns a random element of the given one-dimensional array.
-        //
-        //  TODO: handling multidimensional arrays wouldn't be too difficult, but there
-        //        is no current need for them.
-        //
         // </desc>
         // <param term="array">
         //  The array from which to select an element
@@ -808,9 +804,6 @@ namespace WFCTestLib.Util
             if (array == null || array.Length == 0)
                 return null;
 
-            // TODO: if array is multidimensional, GetValue(int) will throw an exception.
-            //       To handle a multidimensional array, we should use GetValue(int[]).
-            //
             int val = GetRange(0, array.Length - 1);
             LogValueIfLogging(array.GetValue(val));
             return array.GetValue(val);
@@ -1531,10 +1524,8 @@ namespace WFCTestLib.Util
         // the range of valid DateTimes is smaller than the standard Gregorian calendar.  This method
         // will return a DateTime that should be valid for the current culture.
         //
-        // HACK: In v1, there is no direct way to query a calendar for its min and max dates.  So we
-        //       determine the min date by creating a DateTime for 1/1/0001 in the current culture's
-        //       calendar.  The max date we assume to still be MaxValue.  If properties are added in
-        //       a future version, we should use them instead of this hack.
+        // HACK: We determine the min date by creating a DateTime for 1/1/0001 in the current culture's
+        //       calendar.  The max date we assume to still be MaxValue.
         //
         public virtual DateTime GetValidDateTime()
         {
@@ -2370,7 +2361,6 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetRandStrLCID(short nMaxLength, bool bAbsolute, bool bValidOnly, enuLCIDList LCIDType)
         {
-            //TODO: Verify the LCID value.
             string retVal = _intlStr.GetRandStrLCID(nMaxLength, bAbsolute, bValidOnly, LCIDType, false);
             LogValueIfLogging(retVal);
             return retVal;
@@ -2399,7 +2389,6 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetStrLcid(short nMaxLength, bool bAbsolute, bool bValidOnly, enuLCIDList enuLCIDType)
         {
-            //TODO: Verify the LCID value.
             string retVal = _intlStr.GetStrLcid(nMaxLength, bAbsolute, bValidOnly, enuLCIDType, false);
             LogValueIfLogging(retVal);
             return retVal;
@@ -2427,7 +2416,6 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetProbCharStrLCID(short nMaxLength, bool bAbsolute, bool bValidOnly, enuLCIDList enuLCIDType)
         {
-            //TODO: Verify the LCID value.
             string retVal = _intlStr.GetProbCharStrLCID(nMaxLength, bAbsolute, bValidOnly, enuLCIDType);
             LogValueIfLogging(retVal);
             return retVal;
@@ -2453,7 +2441,6 @@ namespace WFCTestLib.Util
         // </doc>
         public string GetProbURTCStrLCID(short nMaxLength, bool bAbsolute, bool bValidOnly, enuLCIDList enuLCIDType)
         {
-            //TODO: Verify the LCID value.
             string retVal = _intlStr.GetProbURTCStrLCID(nMaxLength, bAbsolute, true, enuLCIDType);
             LogValueIfLogging(retVal);
             return retVal;
@@ -2486,7 +2473,6 @@ namespace WFCTestLib.Util
         [Obsolete("This method is obsolete in GenStrings.")]
         public string GetUniStrRandAnsi(short nMaxLength, bool bAbsolute, bool bValidOnly, enuCodeType CodeType, enuLCIDList enuLCIDType)
         {
-            // TODO: Verify the LCID value.
             //return intlStr.GetUniStrRandAnsi(nMaxLength, bAbsolute, bValidOnly, CodeType, enuLCIDType, false);
             return _intlStr.GetRandStrLCID(nMaxLength, bAbsolute, bValidOnly, enuLCIDType, false);
         }
@@ -2924,8 +2910,6 @@ namespace WFCTestLib.Util
         // </doc>
         public virtual Point GetScreenPoint()
         {
-            //TODO: make this thing work for multi monitors!
-
             int nX = GetRange(0, Screen.PrimaryScreen.Bounds.Width);
             int nY = GetRange(0, Screen.PrimaryScreen.Bounds.Height);
 
@@ -3111,7 +3095,6 @@ namespace WFCTestLib.Util
                     return new Region(new Rectangle(size.Width / 4, size.Height / 4, size.Width / 2, size.Height / 2));
 
                 case RegionType.RoundRect:
-                    // TODO: no support for rounded rectangle region yet. Use code from Rect instead.
 #if false
                     return Region.CreateRoundedRectangular(size.Width / 4, size.Height / 4, size.Width / 2, size.Height / 2, size.Width/12);
 #else

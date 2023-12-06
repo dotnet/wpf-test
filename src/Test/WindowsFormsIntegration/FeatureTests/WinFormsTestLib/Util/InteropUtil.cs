@@ -382,9 +382,7 @@ namespace WFCTestLib.Util {
         }
     }
 
-	//
 	//  Added to support new SystemInformation members for Whidbey TopAPI feature set.
-	//  antonioa - 2/12/2003
 	[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
 	public class LOGFONT
 	{
@@ -405,9 +403,7 @@ namespace WFCTestLib.Util {
 		public string   lfFaceName;
 	}
 
-	//
 	//  Added to support new SystemInformation members for Whidbey TopAPI feature set.
-	//  antonioa - 2/12/2003
 	[StructLayout(LayoutKind.Sequential)]
 	public class NONCLIENTMETRICS
 	{
