@@ -1512,9 +1512,6 @@ namespace WPFReflectTools
 
             if (type.IsPrimitive)
             {
-                // KevinTao 1/28/00: Yuck.  The primitives no longer have parameterless
-                //                   constructors.  We need to special case them.
-                //
                 // Boolean, Byte, SByte, Int16, UInt16, Int32, UInt32, Int64, UInt64,
                 // Char, Double, and Single.
                 if (type == typeof(Boolean))

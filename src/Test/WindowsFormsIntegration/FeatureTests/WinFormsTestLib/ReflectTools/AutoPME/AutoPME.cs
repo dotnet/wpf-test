@@ -861,10 +861,8 @@ namespace ReflectTools.AutoPME
         // </doc>
         private void InitMissingScenariosForGroup(ScenarioGroup key, MethodInfo[] scenarios, ArrayList expected)
         {
-			// KEVINTAO 10/17/03: Modified to search the entire scenario list for an expected test.
-			//    This essentially eliminates the need for OverrideScenario.  Scott and I couldn't
-			//    think of a reason why you'd want a failure in a base class where the scenario was
-			//    implemented in a child class.
+			//    Modified to search the entire scenario list for an expected test.
+			//    This essentially eliminates the need for OverrideScenario.
             ArrayList missing = new ArrayList(expected);
 
             for (int i=0; i<expected.Count; i++)

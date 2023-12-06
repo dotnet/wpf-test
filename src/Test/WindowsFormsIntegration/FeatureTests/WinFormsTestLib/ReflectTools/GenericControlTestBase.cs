@@ -80,14 +80,6 @@ namespace ReflectTools {
                         case "TRACKBAR" :           TestedControl = new TrackBar(); break;
                         case "TREEVIEW" :           TestedControl = new TreeView(); break;
                         case "VSCROLLBAR" :         TestedControl = new VScrollBar(); break;
-
-                        /* KevinTao: Added 3/25/04
-
-                           May eventually need:
-                                DataGridView
-                                ToolStrip (and subclasses)
-                                Others?
-                        */
                         case "SPLITCONTAINER" :     TestedControl = new SplitContainer(); break;
                         case "USERCONTROL" :        TestedControl = new UserControl(); break;
                         case "MASKEDTEXTBOX":       TestedControl = new MaskedTextBox(); break;

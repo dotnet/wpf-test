@@ -817,7 +817,7 @@ namespace ReflectTools.AutoPME
             textInASCII(s);
 
             // On Win9x, there are some chars that are not round-trippable even though
-            // they are valid Unicode chracters.  According to TadaoM, it is sufficient to
+            // they are valid Unicode chracters.  It is sufficient to
             // just test the string length rather than muck with filtering all those characters.
             if (Utilities.IsWin9x)
                 return new ScenarioResult(ss.Length == s.Length, "FAIL: Set string len = " + ss.Length + "; returned string len = " + s.Length, p.log);
@@ -1407,7 +1407,7 @@ return ScenarioResult.Pass;
 
             if (c is GroupBox) return true;
 
-            // KevinTao: These are UserPaint controls.  They should receive paint events.
+            // These are UserPaint controls.  They should receive paint events.
             //if (c is LinkLabel) return true;
             //if (c is Label) return true;
             if (c is ListBox) return true;
@@ -4713,7 +4713,7 @@ return ScenarioResult.Pass;
             return result;
         }
 
-        // KEVINTAO: ShouldSerialize methods are now internal.  I'll keep this code around for
+        // ShouldSerialize methods are now internal.  I'll keep this code around for
         //           now, in case we ever need a test for these again.
         /* ShouldSerializeMethods are now internal
         protected virtual ScenarioResult ShouldSerializeText(TParams p)

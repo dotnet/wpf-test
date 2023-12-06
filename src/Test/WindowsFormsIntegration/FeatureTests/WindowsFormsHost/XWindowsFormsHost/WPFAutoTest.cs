@@ -688,7 +688,6 @@ namespace ReflectTools
 
                 // 2. Has to have a delegate method defined
                 //
-                // KevinTao 10/24/01:
                 //     Now you can define this in the test class itself.  Makes it easier to test
                 //     events which take arguments that are defined in another assembly (e.g.
                 //     an ActiveX event test).

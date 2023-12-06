@@ -327,7 +327,7 @@ namespace WFCTestLib.Util
                         new Panel(),
                         new PictureBox(),
                         new ProgressBar(),
-                        new PrintPreviewControl(),  // KevinTao: Added 3/26/04
+                        new PrintPreviewControl(),
                         new RadioButton(),
                         new RichTextBox(),
                         new ScrollableControl(),
@@ -335,10 +335,9 @@ namespace WFCTestLib.Util
                         new TabControl(),
                         new TrackBar(),
                         new TreeView(),
-                        new UserControl(),          // KevinTao: Added 3/26/04
+                        new UserControl(),
                         new VScrollBar(),
 
-                        // New for Whidbey; KevinTao: Added 3/26/04
                         //new ActiveDocumentHost(),
                         new DataGridView(),
                         new BindingNavigator(),

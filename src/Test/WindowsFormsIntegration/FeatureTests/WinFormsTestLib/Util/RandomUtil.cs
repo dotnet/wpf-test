@@ -59,7 +59,7 @@ namespace WFCTestLib.Util
         // <doc>
         // <desc>
         //  The Random number generator
-        //  KevinTao 4/12/00: Made it static so all instances share the same
+        //  Made it static so all instances share the same
         //                    seed value.
         // </desc>
         // </doc>
@@ -3065,9 +3065,6 @@ namespace WFCTestLib.Util
             */
             GraphicsPath gp = new GraphicsPath();
 
-            // HACK: KevinTao: changed in 8774--I fixed it to compile, but I have no
-            // idea what most of these arguments are.  Need to go back and take a look.
-            //
             //gp.AddString("A", fnt, 0, 0);
             gp.AddString("A", new FontFamily(fnt.Name), (int)FontStyle.Regular,
                          1.5f, new PointF(0, 0), new StringFormat(0, 0));

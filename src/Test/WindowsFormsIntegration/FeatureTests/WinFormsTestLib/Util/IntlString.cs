@@ -86,7 +86,7 @@ namespace WFCTestLib.Util
         // <doc>
         // <desc>
         //  The random number generator
-        //  KevinTao 4/12/00: Made it static so all instances share the same
+        //  Made it static so all instances share the same
         //                    seed value.
         // </desc>
         // </doc>
@@ -217,7 +217,7 @@ namespace WFCTestLib.Util
             int nRange       = this.GetRange(0, _lUnicodeCharRanges.Count - 1);
             ByteRange range  = (ByteRange)(_lUnicodeCharRanges[nRange]);
 
-            //Vinay added this code to make it work with Win95 & Win98
+            //added this code to make it work with Win95 & Win98
             OperatingSystem os = System.Environment.OSVersion ;
 
             char c;

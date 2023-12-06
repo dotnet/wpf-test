@@ -74,10 +74,6 @@ namespace ReflectTools.AutoPME
 			_events = Class.GetEvents();
 		}
 
-
-		//
-		// (KevinTao 9/13/02)
-
 		//
 		// The list of properties to exclude from auto-testing.  Occasionally, a property doesn't
 		// behave like other properties of its type or shouldn't be auto-tested for whatever
@@ -681,7 +677,6 @@ namespace ReflectTools.AutoPME
 
 				// 2. Has to have a delegate method defined
 				//
-				// KevinTao 10/24/01:
 				//     Now you can define this in the test class itself.  Makes it easier to test
 				//     events which take arguments that are defined in another assembly (e.g.
 				//     an ActiveX event test).
