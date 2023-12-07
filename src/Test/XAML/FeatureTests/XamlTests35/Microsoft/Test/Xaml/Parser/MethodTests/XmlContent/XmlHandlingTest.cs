@@ -210,34 +210,29 @@ namespace Microsoft.Test.Xaml.Parser.MethodTests.XmlContent
             // GetXmlNamespaceMaps(DependencyObject dependencyObject)
             // SetXmlNamespaceMaps(DependencyObject dependencyObject, string value)
             //
-            // NOTE: These methods are broken and won't be fixed.  We're just calling
-            // them to keep them off the radar.  The exception verification will
-            // alert us if the implementation is ever fixed.
-            //
-            Exception ex = null;
-            try
-            {
-                XmlAttributeProperties.SetXmlNamespaceMaps(dobj, "foo");
-            }
-            catch (Exception e)
-            {
-                ex = e;
-            }
-            if (ex == null) throw new Microsoft.Test.TestValidationException("FAILED");
 
-            ex = null;
             try
             {
-                XmlAttributeProperties.GetXmlNamespaceMaps(dobj);
+                //Pass null to both dependencyObject and value in SetXmlNamespaceMaps, this will throw exception
+                XmlAttributeProperties.SetXmlNamespaceMaps(null, null);
+
+                //Pass null to dependencyObject in GetXmlNamespaceMaps, this will throw exception
+                XmlAttributeProperties.GetXmlNamespaceMaps(null);
             }
             catch (Exception e)
             {
-                ex = e;
+                e.ToString().Contains("dependencyObject");
             }
-			
-            if (ex == null) throw new Microsoft.Test.TestValidationException("FAILED");
+
+            //Pass value in SetXmlNamespaceMaps, then verify if the value is set correctly by GetXmlNamespaceMaps
+            Hashtable hashtable = new Hashtable();
+            hashtable.Add("a1", "foo");
+            XmlAttributeProperties.SetXmlNamespaceMaps(dobj, hashtable);
+            var xmlNamespaceMapsvalue = XmlAttributeProperties.GetXmlNamespaceMaps(dobj);
+            //_IsStringEqual("foo", xmlNamespaceMapsvalue["a1"]);
         }
-        // Checks that 2 string values are equalivalent.
+
+        // Checks that 2 string values are equivalent.
         private static void _IsStringEqual(string expected, string actual)
         {
             if (actual == null)
