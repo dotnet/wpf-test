@@ -1,0 +1,24 @@
+<Canvas 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="300" Width="300">
+
+	<Line X1="35" Y1="35" X2="220" Y2="70" Stroke="Orange" StrokeThickness="12" StrokeDashArray="2 1" />
+
+	<Line X1="35" Y1="65" X2="220" Y2="100" Stroke="Orange" StrokeThickness="12" StrokeDashArray="2 1" >
+   		<Line.BitmapEffect>
+			<BlurBitmapEffect Radius="3" />
+   		</Line.BitmapEffect>
+	</Line>
+
+	<Line X1="35" Y1="95" X2="220" Y2="130" Stroke="Orange" StrokeThickness="12" StrokeDashArray="2 1" >
+   		<Line.BitmapEffect>
+			<BlurBitmapEffect Radius="13" />
+   		</Line.BitmapEffect>
+	</Line>
+	
+</Canvas>
+
+<!-- Regression_Bug24BD_LargeRadiusBlurAppliedToLine.xaml -->
+<!-- Bug Behavior:  There was a black outline even though radius was small compared to line width.
+			  Blur effect to line looked worse and worse with increasing radius.   -->
+<!-- Correct Behavior: There should be no black outline.  -->

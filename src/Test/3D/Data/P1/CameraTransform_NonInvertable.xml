@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="NonInvertableCameraTransformTest"
+    SilhouetteEdgeTolerance="0.5"
+    DefaultColorTolerance="0,4,4,4"
+    
+    Light="WhiteAmbient"
+    
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+
+    TransformTarget="Camera"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- OrthographicCamera -->
+
+    <VARIATION
+        Description="Now you see it..."
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        />
+    <VARIATION
+        Description="...Now you don't"
+        RenderingEffect="NoRendering"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        CameraType="Orthographic"
+        CameraWidth="2"
+        TransformType="Scale"
+        ScaleVector="1,1,0"
+        />
+
+    <!-- PerspectiveCamera -->
+
+    <VARIATION
+        Description="Now you see it..."
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        CameraType="Perspective"
+        CameraFieldOfView="45"
+        />
+    <VARIATION
+        Description="...Now you don't"
+        RenderingEffect="NoRendering"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        CameraType="Perspective"
+        CameraFieldOfView="45"
+        TransformType="Scale"
+        ScaleVector="1,1,0"
+        />
+
+    <!-- MatrixCamera -->
+
+    <VARIATION
+        Description="Now you see it..."
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+        />
+    <VARIATION
+        Description="...Now you don't"
+        RenderingEffect="NoRendering"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        CameraType="MatrixOrtho"
+        CameraWidth="2"
+        CameraHeight="2"
+        TransformType="Scale"
+        ScaleVector="1,1,0"
+        />
+</INIT>

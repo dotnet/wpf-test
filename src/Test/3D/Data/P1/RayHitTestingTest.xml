@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RayHitTestingTest"
+    LogFilePrefix="RayHitTestingTest"
+
+    Scene="Explicit"
+    Visual0="Group"
+    Child00="WhiteAmbient"
+    Child01="WhiteDirectionalNegZ"
+    Child02="WhitePoint"
+    Child03="WhiteSpot"
+
+    Camera="OrthographicDefault"
+    UseViewport3D="false"
+    >
+    <VARIATION
+        Description="Cast a ray at simple scene from 0,0,5 down -z axis"
+        Expectation="Miss"
+        Origin="0,0,5"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple scene from 0,0,0 down -z axis"
+        Expectation="Miss"
+        Origin="0,0,0"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple scene from 0,0,-5 down -z axis"
+        Expectation="Miss"
+        Origin="0,0,-5"
+        Direction="0,0,-1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple scene from 0,0,-5 down +z axis"
+        Expectation="Miss"
+        Origin="0,0,-5"
+        Direction="0,0,1"
+        />
+</INIT>

@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="GeometryModel3DTest"
+    PixelToEdgeTolerance="0.05"
+    SilhouetteEdgeTolerance="1"
+
+    CameraType="Perspective"
+    CameraFieldOfView="45"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+
+    Material="255,50,50,50"
+
+    LightType="Ambient"
+    LightColor="255,255,255,255"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+<!-- **** CUBE MESH **** -->
+    <!-- Straight on front -->
+    <VARIATION
+        CameraPosition="0,0,5"
+        CameraLookDirection="0,0,-1"
+        CameraUp="0,1,0"
+        Mesh="SimpleCubeMesh"
+        />
+    <!-- Straight from right -->
+    <VARIATION
+        CameraPosition="5,0,0"
+        CameraLookDirection="-1,0,0"
+        CameraUp="0,1,0"
+        Mesh="SimpleCubeMesh"
+        />
+    <!-- Straight from top -->
+    <VARIATION
+        CameraPosition="0,5,0"
+        CameraLookDirection="0,-1,0"
+        CameraUp="0,0,-1"
+        Mesh="SimpleCubeMesh"
+        />
+    <!-- View from Diagonal -->
+    <VARIATION
+        CameraPosition="5,5,5"
+        CameraLookDirection="-1,-1,-1"
+        CameraUp="-0.4082,0.8165,-0.4082"
+        Mesh="SimpleCubeMesh"
+        />
+
+<!-- **** INDEXED DISK MESH **** -->
+    <!-- Straight on front -->
+    <VARIATION
+        CameraPosition="0,0,5"
+        CameraLookDirection="0,0,-1"
+        CameraUp="0,1,0"
+        Mesh="CreateFlatDisc 20"
+        />
+    <!-- Straight from right -->
+    <VARIATION
+        CameraPosition="5,0,0"
+        CameraLookDirection="-1,0,0"
+        CameraUp="0,1,0"
+        Mesh="CreateFlatDisc 20"
+        />
+    <!-- Straight from top -->
+    <VARIATION
+        CameraPosition="0,5,0"
+        CameraLookDirection="0,-1,0"
+        CameraUp="0,0,-1"
+        Mesh="CreateFlatDisc 20"
+        />
+    <!-- View from Diagonal -->
+    <VARIATION
+        CameraPosition="5,5,5"
+        CameraLookDirection="-1,-1,-1"
+        CameraUp="-0.4082,0.8165,-0.4082"
+        Mesh="CreateFlatDisc 20"
+        />
+
+</INIT>

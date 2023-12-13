@@ -1,0 +1,609 @@
+﻿<Window Name="AVWindow" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+  xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
+  SizeToContent="WidthAndHeight"
+  Title="XAML Property Mapping 1">
+
+  <Window.Resources>
+    <SolidColorBrush x:Key="MyRed" Color="Red" />
+    <SolidColorBrush x:Key="MyBlue" Color="Blue" />
+    <LinearGradientBrush x:Key="MyYellowBlueLin" StartPoint="0,0" EndPoint="1,1">
+      <LinearGradientBrush.GradientStops>
+        <GradientStop Color="Yellow" Offset="0"/>
+        <GradientStop Color="Blue" Offset="1"/>
+      </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="MyRedGreenLin" StartPoint="0,0" EndPoint="1,1">
+      <LinearGradientBrush.GradientStops>
+        <GradientStop Color="Red" Offset="0"/>
+        <GradientStop Color="Green" Offset="1"/>
+      </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <RadialGradientBrush x:Key="MyYellowBlueRad">
+      <RadialGradientBrush.GradientStops>
+        <GradientStop Color="Yellow" Offset="0"/>
+        <GradientStop Color="Blue" Offset="1"/>
+      </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="MyRedGreenRad">
+      <RadialGradientBrush.GradientStops>
+        <GradientStop Color="Red" Offset="0"/>
+        <GradientStop Color="Green" Offset="1"/>
+      </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+    <ImageBrush x:Key="MyBitmap" ImageSource="pack://siteoforigin:,,,/beany.bmp"></ImageBrush>
+  </Window.Resources>
+  
+  <ScrollViewer HorizontalScrollBarVisibility = "Auto" VerticalScrollBarVisibility="Auto">
+  <Grid ShowGridLines="True">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+      <Button Name="av_btn" Background ="Black" Foreground ="Red" FontSize="16"  Content="Click here to run test"/>
+      <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <WindowsFormsHost Cursor="Wait" Grid.Column="0" Grid.Row="0">
+          <wf:FlowLayoutPanel FlowDirection="TopDown">
+            <wf:FlowLayoutPanel.Controls>
+              <wf:Button x:Name="wf_btn_Wait"   Text="Wait Cursor (test all WF Controls)" Width="300" />
+              <wf:CheckBox x:Name="wf_CheckBox_Wait" Visible="False" />
+              <wf:RadioButton x:Name="wf_RadioButton_Wait" Visible="False" />
+              <wf:DataGrid x:Name="wf_DataGrid_Wait" Visible="False" />
+              <wf:DataGridView x:Name="wf_DataGridView_Wait" Visible="False" />
+              <wf:DateTimePicker x:Name="wf_DateTimePicker_Wait" Visible="False" />
+              <wf:GroupBox x:Name="wf_GroupBox_Wait" Visible="False" />
+              <wf:Label x:Name="wf_Label_Wait" Visible="False" />
+              <wf:ListView x:Name="wf_ListView_Wait" Visible="False" />
+              <wf:MdiClient x:Name="wf_MdiClient_Wait" Visible="False" />
+              <wf:MonthCalendar x:Name="wf_MonthCalendar_Wait" Visible="False" />
+              <wf:PictureBox x:Name="wf_PictureBox_Wait" Visible="False" />
+              <wf:ProgressBar x:Name="wf_ProgressBar_Wait" Visible="False" />
+              <wf:VScrollBar x:Name="wf_VScrollBar_Wait" Visible="False" />
+              <wf:HScrollBar x:Name="wf_HScrollBar_Wait" Visible="False" />
+              <wf:StatusBar x:Name="wf_StatusBar_Wait" Visible="False" />
+              <wf:ToolBar x:Name="wf_ToolBar_Wait" Visible="False" />
+              <wf:TrackBar x:Name="wf_TrackBar_Wait" Visible="False" />
+              <wf:TreeView x:Name="wf_TreeView_Wait" Visible="False" />
+              <wf:ContainerControl x:Name="wf_ContainerControl_Wait" Visible="False" />
+              <wf:Panel x:Name="wf_Panel_Wait" Visible="False" />
+              <wf:ToolStrip x:Name="wf_ToolStrip_Wait" Visible="False" />
+            </wf:FlowLayoutPanel.Controls>
+          </wf:FlowLayoutPanel>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhAppStarting" Cursor="AppStarting" Grid.Column="1" Grid.Row="0">
+          <wf:Button Text="App Starting Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhArrow" Cursor="Arrow" Grid.Column="2" Grid.Row="0">
+          <wf:Button  Text="Arrow Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhCross" Cursor="Cross" Grid.Column="3" Grid.Row="0">
+          <wf:Button  Text="Cross Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name ="wfhHand" Cursor="Hand" Grid.Column="4" Grid.Row="0">
+          <wf:Button  Text="Hand Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhHelp" Cursor="Help" Grid.Column="0" Grid.Row="1">
+          <wf:Button  Text="Help Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhIBeam" Cursor="IBeam" Grid.Column="1" Grid.Row="1">
+          <wf:Button  Text="IBeam Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhNo" Cursor="No" Grid.Column="2" Grid.Row="1">
+          <wf:Button  Text="No Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollAll" Cursor="ScrollAll" Grid.Column="3" Grid.Row="1">
+          <wf:Button  Text="ScrollAll Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollE" Cursor="ScrollE" Grid.Column="4" Grid.Row="1">
+          <wf:Button  Text="ScrollE Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollNE" Cursor="ScrollNE" Grid.Column="0" Grid.Row="2">
+          <wf:Button  Text="ScrollNE Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollN" Cursor="ScrollN" Grid.Column="1" Grid.Row="2">
+          <wf:Button  Text="ScrollN Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollNS" Cursor="ScrollNS" Grid.Column="2" Grid.Row="2">
+          <wf:Button  Text="ScrollNS Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollNW" Cursor="ScrollNW" Grid.Column="3" Grid.Row="2">
+          <wf:Button  Text="ScrollNW Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollS" Cursor="ScrollS" Grid.Column="4" Grid.Row="2">
+          <wf:Button  Text="ScrollS Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollSE" Cursor="ScrollSE" Grid.Column="0" Grid.Row="3">
+          <wf:Button  Text="ScrollSE Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollSW" Cursor="ScrollSW" Grid.Column="1" Grid.Row="3">
+          <wf:Button  Text="ScrollSW Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollW" Cursor="ScrollW" Grid.Column="2" Grid.Row="3">
+          <wf:Button  Text="ScrollW Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhScrollWE" Cursor="ScrollWE" Grid.Column="3" Grid.Row="3">
+          <wf:Button  Text="ScrollWE Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhSizeAll" Cursor="SizeAll" Grid.Column="4" Grid.Row="3">
+          <wf:Button  Text="SizeAll Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhSizeNESW" Cursor="SizeNESW" Grid.Column="0" Grid.Row="4">
+          <wf:Button  Text="SizeNESW Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhSizeNS" Cursor="SizeNS" Grid.Column="1" Grid.Row="4">
+          <wf:Button  Text="SizeNS Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhSizeNWSE" Cursor="SizeNWSE" Grid.Column="2" Grid.Row="4">
+          <wf:Button  Text="SizeNWSE Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhSizeWE" Cursor="SizeWE" Grid.Column="3" Grid.Row="4">
+          <wf:Button  Text="SizeWE Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhUpArrow" Cursor="UpArrow" Grid.Column="4" Grid.Row="4">
+          <wf:Button  Text="UpArrow Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhPen" Cursor="Pen" Grid.Column="0" Grid.Row="5">
+          <wf:Button  Text="Pen Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhArrowCD" Cursor="ArrowCD" Grid.Column="1" Grid.Row="5">
+          <wf:Button  Text="ArrowCD Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhNone" Cursor="None" Grid.Column="2" Grid.Row="5">
+          <wf:Button  Text="None Cursor"/>
+        </WindowsFormsHost>
+
+        <WindowsFormsHost Name="wfhWait" Cursor="Wait" Grid.Column="3" Grid.Row="5">
+          <wf:Button  Text="Wait Cursor"/>
+        </WindowsFormsHost>
+
+      </Grid>
+    </StackPanel>
+    
+    <StackPanel Grid.Column="0" Grid.Row="1">
+      <Label 
+        Margin="5,5" 
+        Content="WFH AllowDrop set to True in XAML" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhAD1" AllowDrop="True">
+        <wf:Button x:Name="wf_btn1" Text="Run test"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="1" Grid.Row="1">
+      <Label 
+        Margin="5,5" 
+        Content="WFH AllowDrop set to False in XAML" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhAD2" AllowDrop="False">
+        <wf:Button x:Name="wf_btn2" Text="Run test"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="0" Grid.Row="2">
+      <Label 
+        Margin="5,5" 
+        Content="WFH ForceCursor set to True in XAML" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhFC1" ForceCursor="True">
+        <wf:Button x:Name="wf_btn3" Text="Run test"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="1" Grid.Row="2">
+      <Label 
+        Margin="5,5" 
+        Content="WFH ForceCursor set to False in XAML" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhFC2" ForceCursor="False">
+        <wf:Button x:Name="wf_btn4" Text="Run test"/>
+      </WindowsFormsHost>
+    </StackPanel>
+    
+    <StackPanel Grid.Column="0" Grid.Row="3">
+      <Label 
+        Margin="5,5" 
+        Content="WFH IsEnabled set to True in XAML" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhIsEnabledTrue" IsEnabled="True">
+        <wf:Button x:Name="wf_btn5" Text="Run test"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="1" Grid.Row="3">
+      <Label 
+        Margin="5,5" 
+        Content="WFH IsEnabled set to False in XAML" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhIsEnabledFalse" IsEnabled="False">
+        <wf:Button x:Name="wf_btn6" Text="Run test"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="0" Grid.Row="4">
+      <Label 
+        Margin="5,5" 
+        Content="WFH IsVisible set to True in XAML" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhIsVisibleTrue">
+        <wf:Button x:Name="wf_btn7" Text="Run test"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="1" Grid.Row="4">
+      <Label 
+        Margin="5,5" 
+        Content="WFH IsVisible set to False in XAML" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhIsVisibleFalse">
+        <wf:Button x:Name="wf_btn8" Text="Run test"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal">
+      <StackPanel>
+        <Label 
+          Margin="5,5" 
+          Content="WFH Background set to Blue in XAML " 
+          Background="Cyan" 
+          Foreground="Black"/>
+        <WindowsFormsHost x:Name="wfhBGBlue" Background="Blue">
+          <wf:Button x:Name="wf_btn2_1" Text="Pass if background shown is Blue"/>
+        </WindowsFormsHost>
+      </StackPanel>
+
+      <StackPanel>
+        <Label 
+          Margin="5,5" 
+          Content="WFH Background set to Green in XAML" 
+          Background="Cyan" 
+          Foreground="Black"/>
+        <WindowsFormsHost x:Name="wfhBGGreen" Background="Green">
+          <wf:Button x:Name="wf_btn2_2" Text="Pass if background shown is Green"/>
+        </WindowsFormsHost>
+      </StackPanel>
+
+      <StackPanel>
+        <Label 
+          x:Name="labBGRed" 
+          Margin="5,5" 
+          Content="WFH Background set to Red in XAML as StaticResource" 
+          Background="{StaticResource MyRed}" 
+          Foreground="Black"/>
+        <WindowsFormsHost x:Name="wfhBGRed" Background="{StaticResource MyRed}">
+          <wf:Button x:Name="wf_btn2_3" Text="Pass if background shown is Red"/>
+        </WindowsFormsHost>
+      </StackPanel>    
+    </StackPanel>
+
+    <StackPanel Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal">
+      <StackPanel>
+        <Label 
+          x:Name="labBGYellowBlueLin" 
+          Margin="5,5" 
+          Content="wfhYellowBlueLin as StaticResource" 
+          Background="{StaticResource MyYellowBlueLin}" 
+          Foreground="Black"/>
+        <WindowsFormsHost x:Name="wfhBGYellowBlueLin" Background="{StaticResource MyYellowBlueLin}">
+          <wf:Button x:Name="wf_btn2_4" Text="Pass if background shown is Yellow/Blue Linear"/>
+        </WindowsFormsHost>
+      </StackPanel>
+
+      <StackPanel>
+        <Label 
+          x:Name="labBGRedGreenLin" 
+          Margin="5,5" 
+          Content="wfhRedGreenLin as StaticResource" 
+          Background="{StaticResource MyRedGreenLin}" 
+          Foreground="Black"/>
+        <WindowsFormsHost x:Name="wfhBGRedGreenLin" Background="{StaticResource MyRedGreenLin}">
+          <wf:Button x:Name="wf_btn2_5" Text="Pass if background shown is Red/Green Linear"/>
+        </WindowsFormsHost>
+      </StackPanel>
+
+      <StackPanel>
+        <Label 
+          Name="labBGYellowBlueRad" 
+          Margin="5,5" 
+          Content="wfhYellowBlueRad as StaticResource" 
+          Background="{StaticResource MyYellowBlueRad}" 
+          Foreground="Black"/>
+        <WindowsFormsHost x:Name="wfhBGYellowBlueRad" Background="{StaticResource MyYellowBlueRad}">
+          <wf:Button x:Name="wf_btn2_6" Text="Pass if background shown is Yellow/Blue Radial"/>
+        </WindowsFormsHost>
+      </StackPanel>
+      
+      <StackPanel>
+        <Label 
+          Name="labBGRedGreenRad" 
+          Margin="5,5" 
+          Content="wfhRedGreenRad as StaticResource" 
+          Background="{StaticResource MyRedGreenRad}" 
+          Foreground="Black"/>
+        <WindowsFormsHost x:Name="wfhBGRedGreenRad" Background="{StaticResource MyRedGreenRad}">
+          <wf:Button x:Name="wf_btn2_7" Text="Pass if background shown is Red/Green Radial"/>
+        </WindowsFormsHost>
+      </StackPanel>
+    </StackPanel>
+
+    <StackPanel Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Orientation="Horizontal">
+      <StackPanel Orientation="Horizontal" Height="100">
+        <Label 
+          Name="labBGBitmap" 
+          Margin="5,5" 
+          Content="wfhBitmap as StaticResource" 
+          Background="{StaticResource MyBitmap}" 
+          Foreground="Black"/>
+        <WindowsFormsHost x:Name="wfhBGBitmap" Background="{StaticResource MyBitmap}">
+          <wf:Button x:Name="wf_btn2_8" Text="Pass if background shown is Beany Bitmap"/>
+        </WindowsFormsHost>
+      </StackPanel>
+    </StackPanel>
+
+
+    <StackPanel   Grid.Column="0" Grid.Row="8">
+      <Label 
+        Margin="5,5" 
+        Content="WFH FlowDirection LeftToRight" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhLTR" FlowDirection="LeftToRight" >
+      <wf:FlowLayoutPanel FlowDirection="TopDown">
+      <!--<wf:FlowLayoutPanel>-->
+        <wf:FlowLayoutPanel.Controls>
+          <wf:Button Text="Flow Direction LeftToRight"   AutoSize="True"/>
+          <!--<wf:CheckBox Text="CheckBox"/>
+          <wf:RadioButton Text="RadioButton"/>
+          <wf:DataGrid Text="DataGrid"/>
+          <wf:DataGridView  Text="DataGridView"/>
+          <wf:DateTimePicker />
+          <wf:GroupBox Text="GroupBox"  />
+          <wf:Label Text="Label"  />
+          <wf:ListView Text="ListView"  />
+          <wf:MdiClient Text="MdiClient"  />
+          <wf:MonthCalendar/>
+          <wf:PictureBox Text="PictureBox"  />
+          <wf:ProgressBar Text="ProgressBar"  />
+          <wf:VScrollBar Text="VScrollBar"  />
+          <wf:HScrollBar Text="HScrollBar"  />
+          <wf:StatusBar Text="StatusBar"  />
+          <wf:ToolBar Text="ToolBar"  />
+          <wf:TrackBar Text="TrackBar"  />
+          <wf:TreeView Text="TreeView"  />
+          <wf:ContainerControl Text="ContainerControl"  />
+          <wf:Panel Text="Panel"  />
+          <wf:ToolStrip Text="ToolStrip"  />-->
+        </wf:FlowLayoutPanel.Controls>
+      </wf:FlowLayoutPanel>
+    </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel   Grid.Column="1" Grid.Row="8">
+      <Label 
+        Margin="5,5" 
+        Content="WFH FlowDirection RightToLeft" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhRTL" FlowDirection="RightToLeft" >
+        <wf:FlowLayoutPanel FlowDirection="BottomUp">
+          <wf:FlowLayoutPanel.Controls>
+            <wf:Button Text="Flow Direction RightToLeft" AutoSize="True" />
+            <!--<wf:CheckBox Text="CheckBox"/>
+          <wf:RadioButton Text="RadioButton"/>
+          <wf:DataGrid Text="DataGrid"/>
+          <wf:DataGridView  Text="DataGridView"/>
+          <wf:DateTimePicker />
+          <wf:GroupBox Text="GroupBox"  />
+          <wf:Label Text="Label"  />
+          <wf:ListView Text="ListView"  />
+          <wf:MdiClient Text="MdiClient"  />
+          <wf:MonthCalendar/>
+          <wf:PictureBox Text="PictureBox"  />
+          <wf:ProgressBar Text="ProgressBar"  />
+          <wf:VScrollBar Text="VScrollBar"  />
+          <wf:HScrollBar Text="HScrollBar"  />
+          <wf:StatusBar Text="StatusBar"  />
+          <wf:ToolBar Text="ToolBar"  />
+          <wf:TrackBar Text="TrackBar"  />
+          <wf:TreeView Text="TreeView"  />
+          <wf:ContainerControl Text="ContainerControl"  />
+          <wf:Panel Text="Panel"  />
+          <wf:ToolStrip Text="ToolStrip"  />-->
+          </wf:FlowLayoutPanel.Controls>
+        </wf:FlowLayoutPanel>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" Orientation="Vertical">
+      <StackPanel Orientation="Horizontal">
+        <Label 
+        Margin="5,5" 
+        Content="WFH Foreground" 
+        Background="Cyan" 
+        Foreground="Black"/>
+        
+        <StackPanel>
+          <Label Margin="5,5" Content="Foreground Blue" Background="Cyan" 
+                x:Name="labFGBlue" Foreground="Blue"/>
+          <WindowsFormsHost x:Name="wfhFGBlue" Foreground="Blue">
+            <wf:Button x:Name="wf_btn3_1" Text="Pass if foreground shown is Blue"/>
+          </WindowsFormsHost>
+        </StackPanel>
+
+        <StackPanel>
+          <Label Margin="5,5" Content="Foreground StaticResource MyRed" Background="Cyan" 
+                 x:Name="labFGRed" Foreground="{StaticResource MyRed}"/>
+          <WindowsFormsHost x:Name="wfhFGRed" Foreground="{StaticResource MyRed}">
+            <wf:Button x:Name="wf_btn3_2" Text="Pass if foreground shown is Red"/>
+          </WindowsFormsHost>
+        </StackPanel>
+
+        <StackPanel>
+          <Label Margin="5,5" Content="Foreground Green" Background="Cyan" 
+                x:Name="labFGGreen" Foreground="Green"/>
+          <WindowsFormsHost x:Name="wfhFGGreen" Foreground="Green">
+            <wf:Button x:Name="wf_btn3_3" Text="Pass if foreground shown is Green"/>
+          </WindowsFormsHost>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <Label Margin="5,5" Content="Foreground Bitmap" Background="Cyan" 
+                x:Name="labFGBitmap" Foreground="{StaticResource MyBitmap}"/>
+          <WindowsFormsHost x:Name="wfhFGBitmap" Foreground="{StaticResource MyBitmap}">
+            <wf:Button x:Name="wf_btn3_8" Text="Pass if foreground shown is Bitmap"/>
+          </WindowsFormsHost>
+        </StackPanel>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal">
+        <StackPanel>
+          <Label Margin="5,5" Content="Foreground YellowBlueLin" Background="Cyan" 
+                x:Name="labFGYellowBlueLin" Foreground="{StaticResource MyYellowBlueLin}"/>
+          <WindowsFormsHost x:Name="wfhFGYellowBlueLin" Foreground="{StaticResource MyYellowBlueLin}">
+            <wf:Button x:Name="wf_btn3_4" Text="Pass if foreground shown is Yellow/Blue Linear"/>
+          </WindowsFormsHost>
+        </StackPanel>
+
+        <StackPanel>
+          <Label Margin="5,5" Content="Foreground RedGreenLin" Background="Cyan" 
+                x:Name="labFGRedGreenLin" Foreground="{StaticResource MyRedGreenLin}"/>
+          <WindowsFormsHost x:Name="wfhFGRedGreenLin" Foreground="{StaticResource MyRedGreenLin}">
+            <wf:Button x:Name="wf_btn3_5" Text="Pass if foreground shown is Red/Green Linear"/>
+          </WindowsFormsHost>
+        </StackPanel>
+
+        <StackPanel>
+          <Label Margin="5,5" Content="Foreground YellowBlueRad" Background="Cyan" 
+                x:Name="labFGYellowBlueRad" Foreground="{StaticResource MyYellowBlueRad}"/>
+          <WindowsFormsHost x:Name="wfhFGYellowBlueRad" Foreground="{StaticResource MyYellowBlueRad}">
+            <wf:Button x:Name="wf_btn3_6" Text="Pass if foreground shown is Yellow/Blue Radial"/>
+          </WindowsFormsHost>
+        </StackPanel>
+        <StackPanel>
+          <Label Margin="5,5" Content="Foreground RedGreenRad" Background="Cyan" 
+                x:Name="labFGRedGreenRad" Foreground="{StaticResource MyRedGreenRad}"/>
+          <WindowsFormsHost x:Name="wfhFGRedGreenRad" Foreground="{StaticResource MyRedGreenRad}">
+            <wf:Button x:Name="wf_btn3_7" Text="Pass if foreground shown is Red/Green Radial"/>
+          </WindowsFormsHost>
+        </StackPanel>
+      </StackPanel>
+      
+    </StackPanel>
+
+    
+    <StackPanel Grid.Column="0" Grid.Row="10" Orientation="Horizontal">
+      <Label 
+        Margin="5,5" 
+        Content="WFH Visibility" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhVisVis" Visibility="Visible">
+        <wf:Button x:Name="btn1" Text="Visible"/>
+      </WindowsFormsHost>
+      <WindowsFormsHost x:Name="wfhVisHid" Visibility="Hidden">
+        <wf:Button x:Name="btn2" Text="Hidden"/>
+      </WindowsFormsHost>
+      <WindowsFormsHost x:Name="wfhVisCol" Visibility="Collapsed">
+        <wf:Button x:Name="btn3" Text="Collapsed"/>
+      </WindowsFormsHost>
+      <WindowsFormsHost x:Name="wfhVisVis2" Visibility="Visible">
+        <wf:Button x:Name="btn4" Text="Visible"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+    <StackPanel Grid.Column="1" Grid.Row="10" Orientation="Horizontal">
+      <Label 
+        Margin="5,5" 
+        Content="WFH Padding" 
+        Background="Cyan" 
+        Foreground="Black"/>
+      <WindowsFormsHost x:Name="wfhPad1" Padding="4">
+        <wf:Button x:Name="wf_btn3_10" Text="Padding 4"/>
+      </WindowsFormsHost>
+      <WindowsFormsHost x:Name="wfhPadL" Padding="10,0,0,0">
+        <wf:Button x:Name="wf_btn3_11" Text="Padding 10 Left"/>
+      </WindowsFormsHost>
+      <WindowsFormsHost x:Name="wfhPadT" Padding="0,10,0,0">
+        <wf:Button x:Name="wf_btn3_12" Text="Padding 10 Top"/>
+      </WindowsFormsHost>
+      <WindowsFormsHost x:Name="wfhPadR" Padding="0,0,10,0">
+        <wf:Button x:Name="wf_btn3_13" Text="Padding 10 Right"/>
+      </WindowsFormsHost>
+      <WindowsFormsHost x:Name="wfhPadB" Padding="0,0,0,10">
+        <wf:Button x:Name="wf_btn3_14" Text="Padding 10 Bottom"/>
+      </WindowsFormsHost>
+    </StackPanel>
+
+  </Grid>
+  </ScrollViewer>
+</Window>
+
+
+

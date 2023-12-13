@@ -49,7 +49,7 @@ namespace DRT
             const string paragraphText =
                     "The story which follows was first written out in Paris " +
                     "during the Peace Conference, from notes jotted daily on " +
-                    "the Microsoft, strengthened by some reports sent to my chiefs in " +
+                    "the march, strengthened by some reports sent to my chiefs in " +
                     "Cairo. Afterwards, in the autumn of 1919, this first draft " +
                     "and some of the notes were lost. It seemed to me historically " +
                     "needful to reproduce the tale, as perhaps no one but myself " +

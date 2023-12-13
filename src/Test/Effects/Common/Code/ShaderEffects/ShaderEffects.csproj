@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+        <AssemblyName>ShaderEffects</AssemblyName>
+        <OutputType>Library</OutputType>
+        <AssemblyType>Library</AssemblyType>
+        <PublishDir>$(WpfTestBasePublishPath)\Common\Effects</PublishDir>
+        <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ShaderBytecodeDirectory>$(WpfTestBasePath)\Effects\Common\Data\Shaders\ShaderBytecode</ShaderBytecodeDirectory>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Code Files below -->
+        <Compile Include="*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(TestRuntimeProject)"/>
+    </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(ShaderBytecodeDirectory)\*.ps" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="EmissiveDrawingBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    TextureLookUpTolerance="0.5"
+    DefaultColorTolerance="0,3,3,3"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="PerspectiveDefault"
+    Light="WhiteAmbient"
+    MaterialType="Emissive"
+    BackMaterialType="Emissive"
+    >
+
+    <VARIATION
+        Description="front = shapes, back = text"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        BackMaterial="DrawingBrushText"
+        />
+    <VARIATION
+        Description="front = text, back = image"
+        Light="WhiteDirectionalNegZ" 
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        BackMaterial="DrawingBrushImage check.png"
+        />
+    <VARIATION
+        Description="front = image, back = shapes"
+        Light="WhiteSpot"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushImage maui_turtle.jpg"
+        BackMaterial="DrawingBrushShapes"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = text, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        BackMaterial="DrawingBrushShapesOpacity"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = text"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushImage flare.png"
+        BackMaterial="DrawingBrushShapes"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapesOpacity"
+        BackMaterial="DrawingBrushTextOpacity"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = shapes * green, back = text * indigo"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="DrawingBrushText"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = text * green, back = shapes * indigo"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushText"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = shapes * mix"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushTextOpacity"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = shapes * mix, back = semi-transparent * mix"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="DrawingBrushImage spiral.png"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = shapes * transparent, back = text * semi-transparent"
+        Mesh="FrontAndBack"
+        Material="DrawingBrushShapes"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="DrawingBrushText"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = shapes * semi-transparent"
+        Mesh="BackAndFront"
+        Material="DrawingBrushTextOpacity"
+        MaterialColor="192,47,239,143"
+        BackMaterial="DrawingBrushShapes"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

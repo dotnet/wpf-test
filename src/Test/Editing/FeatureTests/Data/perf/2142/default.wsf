@@ -1,0 +1,24 @@
+<JOB ID="main">
+<SCRIPT LANGUAGE="JScript" SRC="..\..\include.js" />
+
+<SCRIPT LANGUAGE="JScript">
+var oTestProcess = new Process();
+
+var sCommandLine = "\"" + TESTBIN_PATH +  "\\WCP.EditingPerf.exe\" /Scenario=DocumentLoad /TargetControl=TextBox /InstanceCount=100 /PerfMeasurement=WorkingSet";
+g_oShell.CurrentDirectory = TESTBIN_PATH ; 
+
+ensureCScript();
+
+printBanner("Editing - DocumentLoad for TextBox x 100 paragraphs (WS)");
+
+warmUpApp(sCommandLine);
+
+if (oTestProcess.start(sCommandLine))
+{
+    WScript.Sleep(10000);
+    runAvWkSet(oTestProcess.processID);
+    oTestProcess.kill();
+}
+
+</SCRIPT>
+</JOB>

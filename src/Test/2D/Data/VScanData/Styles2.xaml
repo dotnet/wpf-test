@@ -1,0 +1,34 @@
+﻿<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="#CCCCCC">
+    <Canvas.Resources>
+        <Style x:Key="elli_style" TargetType="{x:Type Ellipse}">
+            <Setter Property="Opacity" Value="0.65" />
+            <Setter Property="Stroke" Value="yellow" />
+            <Setter Property="StrokeThickness" Value="10" />
+        </Style>
+        <Style x:Key="image_style" TargetType="{x:Type Image}">
+            <Setter Property="Source" Value="png.png" />
+        </Style>
+    </Canvas.Resources>
+    <Decorator>
+        <Decorator.RenderTransform>
+            <TransformGroup>
+                <TransformGroup.Children>
+                    <TransformCollection>
+                        <RotateTransform Angle="40" />
+                        <TranslateTransform X="50" Y="75" />
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                    </TransformCollection>
+                </TransformGroup.Children>
+            </TransformGroup>
+        </Decorator.RenderTransform>
+        <Path StrokeThickness="6" Style="{DynamicResource elli_style}">
+            <Path.Data>
+                <EllipseGeometry Center="100 75" RadiusX="75" RadiusY="50" />
+            </Path.Data>
+            <Path.Fill>blue</Path.Fill>
+        </Path>
+    </Decorator>
+    <Image Style="{DynamicResource image_style}" Canvas.Top="2" Canvas.Left="600" Width="162" Height="150" />
+    <Image Style="{DynamicResource image_style}" Canvas.Top="160" Canvas.Left="600" Width="121" Height="128" />
+    <Image Style="{DynamicResource image_style}" Canvas.Top="320" Canvas.Left="600" Width="159" Height="105" />
+</Canvas>

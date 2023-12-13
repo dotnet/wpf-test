@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="TransformPointLight"
+    PixelToEdgeTolerance="0.05"
+    DefaultColorTolerance="4,4,4,4"
+
+    Mesh="Sphere 25 50 1.8"
+    Material="255,255,0,0"
+    Camera="PerspectiveDefault"
+
+    LightType="Point"
+    LightColor="255,255,255,255"
+    LightPosition="0,0,5"
+    LightConstantAttenuation="1"
+    LightLinearAttenuation="0"
+    LightQuadraticAttenuation="0"
+    LightRange="10"
+
+    TransformTarget="Light"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- Translation -->
+
+    <VARIATION
+        Description="Translate - slight eclipse in the bottom left corner"
+        TransformType="Translate"
+        TranslateOffset="-3,-2,-5.5"
+        />
+    <VARIATION
+        Description="Translate - just enough to put part of the mesh out of range"
+        LightingRangeTolerance="0.1"
+        TransformType="Translate"
+        TranslateOffset="0,0,6.4"
+        />
+
+    <!-- Rotation -->
+
+    <VARIATION
+        Description="Rotate - 90 degrees about +y axis"
+        TransformType="RotateAxisAngle"
+        RotateAngle="90"
+        RotateAxis="0,1,0"
+        />
+    <VARIATION
+        Description="Rotate - 45 degrees about +y axis"
+        TransformType="RotateAxisAngle"
+        RotateAngle="45"
+        RotateAxis="0,1,0"
+        />
+    <VARIATION
+        Description="Rotate - 90 degrees about -y axis"
+        TransformType="RotateAxisAngle"
+        RotateAngle="90"
+        RotateAxis="0,-1,0"
+        />
+    <VARIATION
+        Description="Rotate - 180 degrees about +x axis centered at 0,2.5,2.5 - light above mesh"
+        TransformType="RotateAxisAngleCenter"
+        RotateAngle="180"
+        RotateAxis="1,0,0"
+        RotateCenter="0,2.5,2.5"
+        />
+
+    <!-- Scale -->
+
+<!--
+    <VARIATION
+        Description="Scale - shrink the light in half"
+        TransformType="Scale"
+        ScaleVector="0.5,0.5,0.5"
+        />
+    <VARIATION
+        Description="Scale - non-uniform scaling"
+        TransformType="Scale"
+        ScaleVector="1.25,0.35,0.65"
+        />
+-->
+
+</INIT>

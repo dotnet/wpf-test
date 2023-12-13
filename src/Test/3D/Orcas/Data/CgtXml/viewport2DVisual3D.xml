@@ -1,0 +1,211 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="ViewportVisual3DRenderingTest"
+    DefaultColorTolerance="4,4,4,4"
+    SilhouetteEdgeTolerance="1"
+    PixelToEdgeTolerance="0.05"
+
+    VisualType0="ViewportVisual3D"
+    Child0="CheckBox"
+    Camera="PerspectiveDefault"
+    UseViewport3D="false"
+    VerifySerialization="false"
+    >
+
+    <!-- This suite is just a Visual Verification Smoke Test on ViewportVisual3D's,
+    such that rendering occurs in same fashion as ModelVisual3D's -->
+
+    <!-- For the following variations, 	we're mostly making sure that the z-buffer is 
+    shared between visuals and that things actually show up when split up 
+    in different ways -->
+
+    <VARIATION
+        Scene="Explicit"        
+        Visual0="UnitPlaneTriangle"
+        Child0="RoundedRectangle"
+        Material0="255,255,128,0"
+        VisualTransform0="Translate 0,0,-2"
+        Visual1="WhiteAmbient"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="FullScreenMesh"
+        Material0="255,0,128,0"
+        Material1="255,255,128,255"
+        Child0="RoundedRectangle"
+        Visual1="WhiteAmbient"
+        Visual2="UnitPlaneTriangle"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="FullScreenMesh"
+        Material0="255,0,128,0"
+        Child0="Rectangle2"
+        ModelTransform0="Translate 0,0,-2"
+        Visual1="WhiteAmbient"
+        Visual2="UnitPlaneTriangle"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="FullScreenMesh"
+        Material0="255,0,128,0"
+        Child0="Rectangle2"
+        VisualTransform0="Translate 0,0,-2"
+        Visual1="WhiteAmbient"
+        Visual2="UnitPlaneTriangle"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual0="UnitPlaneTriangle"
+        Material0="255,0,128,0"
+
+        Child0="Rectangle2"
+        Visual1="WhiteAmbient"
+	VisualType1="ModelUIElement3D"
+        Visual2="FullScreenMesh"
+        Material2="255,0,128,0"
+        />
+
+    <!-- Multiple lights -->
+
+    <VARIATION
+        Description="2 AmbientLights"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Child0="CheckBox"
+        Material0="255,255,255,255"
+        Visual1="AmbientLight 255,100,0,100"
+        Visual2="AmbientLight 255,0,100,100"
+        />
+    <VARIATION
+        Description="AmbientLight + DirectionalLight"
+        Scene="Explicit"
+        Child0="CheckBox"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="AmbientLight 255,100,0,100"
+        Visual2="DirectionalLight 255,0,255,255 -1,-1,-1"
+        />
+    <VARIATION
+        Description="AmbientLight + PointLight"
+        Scene="Explicit"
+        Child0="CheckBox"
+        Visual0="PositionsNormalsUVIndices"
+        Material0="255,255,255,255"
+        Visual1="AmbientLight 255,100,0,100"
+        Visual2="PointLight 255,0,255,255 -2,-2,2 20 0 0 0.08"
+        />
+    <VARIATION
+        Description="AmbientLight + SpotLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Child0="CheckBox"
+        Material0="255,255,255,255"
+        Visual1="AmbientLight 255,100,0,100"
+        Visual2="SpotLight 255,0,255,255 0,0,5 0,0,-1 20 15 25"
+        />
+
+    <VARIATION
+        Description="2 DirectionalLights"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Child0="RoundedRectangle"
+        Material0="255,255,255,255"
+        Visual1="DirectionalLight 255,255,0,255 -1,-1,-1"
+        Visual2="DirectionalLight 255,0,255,255 1,-1,-1"
+        />
+    <VARIATION
+        Description="DirectionalLight + PointLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Child0="RoundedRectangle"
+        Material0="255,255,255,255"
+        Visual1="DirectionalLight 255,255,0,255 -1,-1,-1"
+        Visual2="PointLight 255,0,255,255 -2,-2,2 20 0 0 0.08"
+        />
+    <VARIATION
+        Description="DirectionalLight + SpotLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Child0="RoundedRectangle"
+        Material0="255,255,255,255"
+        Visual1="DirectionalLight 255,255,0,255 -1,-1,-1"
+        Visual2="SpotLight 255,0,255,255 0,0,5 0,0,-1 20 15 25"
+        />
+
+    <VARIATION
+        Description="2 PointLights"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Child0="RoundedRectangle"
+        Material0="255,255,255,255"
+        Visual1="PointLight 255,255,0,255 2,2,2 20 0 0 0.08"
+        Visual2="PointLight 255,0,255,255 -2,-2,2 20 0 0 0.08"
+        />
+    <VARIATION
+        Description="PointLight + SpotLight"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Child0="RoundedRectangle"
+        Material0="255,255,255,255"
+        Visual1="PointLight 255,0,255,255 -2,-2,2 20 0 0 0.08"
+        Visual2="SpotLight 255,0,255,255 0,0,5 0,0,-1 20 15 25"
+        />
+
+    <VARIATION
+        Description="2 SpotLights"
+        Scene="Explicit"
+        Visual0="PositionsNormalsUVIndices"
+        Child0="RoundedRectangle"
+        Material0="255,255,255,255"
+        Visual1="SpotLight 255,255,0,255 -1,0,1 2,0,-1 20 45 60"
+        Visual2="SpotLight 255,0,255,255 1,-1,1 -2,2,-1 20 45 60"
+        DefaultColorTolerance="7,7,7,7"
+        />
+
+    <!-- Ordered spheres with transforms on the visuals -->
+
+    <VARIATION
+        Scene="Explicit"
+        Visual0="DefaultSphere"
+        Child0="RoundedRectangle"
+        Material0="255,255,0,0"
+        ModelTransform0="Translate -1,0,2"
+
+        Visual1="DefaultSphere"
+        Child1="RoundedRectangle"
+	VisualType1="ViewportVisual3D"
+        Material1="255,0,255,0"
+
+        Visual2="DefaultSphere"
+        Child2="RoundedRectangle"
+	VisualType2="ViewportVisual3D"
+        Material2="255,0,0,255"
+        ModelTransform2="Translate 1,0,-2"
+
+        Visual3="WhiteDirectionalNegZ"
+        />
+    <VARIATION
+        Scene="Explicit"
+        Visual2="DefaultSphere"
+        Child2="RoundedRectangle"
+	VisualType2="ViewportVisual3D"
+        Material2="255,255,0,0"
+        ModelTransform2="Translate 1,0,2"
+
+        Visual1="DefaultSphere"
+	VisualType1="ViewportVisual3D"
+        Child1="RoundedRectangle"
+        Material1="255,0,255,0"
+
+        Visual0="DefaultSphere"
+        Child0="RoundedRectangle"
+	VisualType0="ViewportVisual3D"
+        Material0="255,0,0,255"
+        ModelTransform0="Translate -1,0,-2"
+
+        Visual3="WhiteDirectionalNegZ"
+        />
+
+</INIT>

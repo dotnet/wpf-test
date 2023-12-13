@@ -1,0 +1,122 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="EmissiveSolidBrushTest"
+    WindowWidth="300"
+    WindowHeight="200"
+    BackgroundColor="255,0,0,0"
+    
+    DefaultColorTolerance="0,3,3,3"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+
+    Camera="OrthographicDefaultWidth4"
+    Light="WhiteAmbient"
+    MaterialType="Emissive"
+    BackMaterialType="Emissive"
+    >
+
+    <!-- Verify lights have no effect -->
+
+    <VARIATION
+        Description="front = white, back = mix, AmbientLight (light ignored)"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        BackMaterial="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = mix, back = black, DirectionalLight (light ignored)"
+        Light="WhiteDirectionalNegZ" 
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        BackMaterial="255,0,0,0"
+        />
+    <VARIATION
+        Description="front = mix, back = mix, PointLight (light ignored)"
+        Light="WhitePoint"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        BackMaterial="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = black, back = white, SpotLight (light ignored)"
+        Light="WhiteSpot"
+        Mesh="FrontAndBack"
+        Material="255,0,0,0"
+        BackMaterial="255,255,255,255"
+        />
+
+    <!-- Semi-Transparent brushes -->
+
+    <VARIATION
+        Description="front = mix, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        BackMaterial="110,255,255,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = mix"
+        Mesh="FrontAndBack"
+        Material="160,180,50,124"
+        BackMaterial="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = semi-transparent, back = semi-transparent"
+        Mesh="FrontAndBack"
+        Material="160,180,50,124"
+        BackMaterial="110,255,255,255"
+        />
+
+    <!-- Test Color Knobs -->
+
+    <VARIATION
+        Description="front = white * green, back = mix * indigo"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="255,239,143,47"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = mix * green, back = white * indigo"
+        Mesh="FrontAndBack"
+        Material="255,239,143,47"
+        MaterialColor="255,0,255,0" 
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="255,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * mix, back = white * mix"
+        Mesh="FrontAndBack"
+        Material="187,255,255,255"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = white * mix, back = semi-transparent * mix"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialColor="255,47,239,143" 
+        BackMaterial="187,255,255,255"
+        BackMaterialColor="255,239,143,47"
+        />
+    <VARIATION
+        Description="front = white * transparent, back = mix * semi-transparent"
+        Mesh="FrontAndBack"
+        Material="255,255,255,255"
+        MaterialColor="0,0,255,0" 
+        BackMaterial="255,239,143,47"
+        BackMaterialColor="200,127,0,255"
+        />
+    <VARIATION
+        Description="front = semi-transparent * semi-transparent, back = white * semi-transparent"
+        Mesh="BackAndFront"
+        Material="187,255,255,255"
+        MaterialColor="192,47,239,143"
+        BackMaterial="255,255,255,255"
+        BackMaterialColor="100,239,143,47"
+        />
+
+</INIT>

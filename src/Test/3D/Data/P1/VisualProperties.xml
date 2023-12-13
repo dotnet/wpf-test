@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="Visual3DRenderingTest"
+    LogFilePrefix="VisualPropertiesTest"
+
+    DefaultColorTolerance="0,4,4,4"
+    SilhouetteEdgeTolerance="0.5"
+    UseViewport3D="false"
+    Priority="1"
+
+    Scene="Explicit"
+    Visual0="WhiteAmbient"
+
+    Visual1="FullScreenMesh"
+    VisualTransform1="Translate -0.5,-0.5,-0.5"
+    Material1="255,64,100,200"
+
+    Visual2="FullScreenMesh"
+    VisualTransform2="Translate 0.5,0.5,0.5"
+    Material2="100,255,128,64"
+
+    CameraType="Orthographic"
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="20"
+    CameraWidth="4"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- all pairs -->
+
+    <VARIATION
+        Opacity="0.90"
+        OpacityMask="SolidColorBrush 178,128,255,0"
+        />
+    <VARIATION
+        Opacity="0.45"
+        Clip="Circle"
+        />
+    <VARIATION
+        Opacity="0.75"
+        Effect="DropShadow 255,0,0,0 -45 20"
+        />
+    <VARIATION
+        Opacity="0.75"
+        Transform="Rotate 45 100,100"
+        />
+
+
+    <VARIATION
+        OpacityMask="LinearGradientBrush 185,128,255,0 24,0,255,34 0,0 1,1"
+        Clip="Square"
+        />
+
+    <VARIATION
+        OpacityMask="RadialGradientBrush 15,128,255,0 204,0,255,34"
+        Effect="DropShadow 255,23,187,100 135 10"
+        DefaultColorTolerance="0,6,6,6"
+        />
+    <VARIATION
+        OpacityMask="SolidColorBrush 178,128,255,0"
+        Transform="Scale 1.5 1.5 100,100"
+        />
+
+    <VARIATION
+        Clip="Square"
+        Effect="DropShadow 255,23,187,100 -15 30"
+        />
+
+<!--  BUG: 1487267
+
+    <VARIATION
+        Clip="Star"
+        Transform="Scale .5 .5 50,50"
+        />
+-->
+
+    <VARIATION
+        Transform="Translate 50 50"
+        Effect="DropShadow 255,0,0,0 -45 20"
+        />
+
+</INIT>

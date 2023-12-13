@@ -1,0 +1,50 @@
+﻿<!--
+	GuidelineSet in DrawingGroup BVT
+	Using GuidelineSet in the Resources
+	Author: Microsoft
+-->
+<Grid
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <Grid.Resources>
+        <GuidelineSet x:Key="Set1"
+                        GuidelinesX="0 10 20"
+                   >
+        </GuidelineSet>
+    </Grid.Resources>
+    <Rectangle Fill="Gray" />
+    <Rectangle>
+        <Rectangle.Fill>
+            <DrawingBrush
+                Viewport="0,0,201,200"
+                ViewportUnits="Absolute"
+                TileMode="None"
+            >
+                <DrawingBrush.Drawing>
+                    <DrawingGroup
+                        GuidelineSet="{DynamicResource Set1}"
+                    >
+                        <DrawingGroup.Children>
+                            <GeometryDrawing Brush="#f00">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0, 0, 10, 10" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#0f0">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="10, 0, 10, 10" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#00f">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0, 10, 10, 10" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup.Children>
+                    </DrawingGroup>
+                </DrawingBrush.Drawing>
+            </DrawingBrush>
+        </Rectangle.Fill>
+    </Rectangle>
+</Grid>

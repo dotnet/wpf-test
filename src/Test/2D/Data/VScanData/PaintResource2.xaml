@@ -1,0 +1,33 @@
+﻿<!-- this test covers setting paints via resources: linear and radial gradients applied to the strokes of rectangle and ellipse. Also applied to the background of canvas-->
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#cccccc" Offset="0" />
+                    <GradientStop Color="#333333" Offset="1" />
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Canvas.Background>
+    <Canvas.Resources>
+        <SolidColorBrush x:Key="MyBackground" Color="#FF99CC" />
+        <RadialGradientBrush x:Key="MyGradient" Center="0.5,0.5" SpreadMethod="Reflect" MappingMode="RelativeToBoundingBox">
+            <RadialGradientBrush.GradientStops>
+                <GradientStop Color="turquoise" Offset="0" />
+                <GradientStop Color="#CCCC33" Offset="1" />
+                <GradientStop Color="green" Offset="0.5" />
+            </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+        <LinearGradientBrush x:Key="MyLinear" StartPoint="0,0" EndPoint="0,1" MappingMode="RelativeToBoundingBox">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="white" Offset="0" />
+                <GradientStop Color="yellow" Offset="1" />
+                <GradientStop Color="pink" Offset="0.5" />
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Canvas.Resources>
+    <Canvas Background="{DynamicResource MyGradient}" Width="400" Height="600" />
+    <Rectangle Width="200" Height="300" Canvas.Left="500" StrokeThickness="40" Fill="{DynamicResource MyBackground}" Stroke="{DynamicResource MyLinear}" />
+    <Ellipse Width="217" Height="121" Canvas.Left="83.5" Canvas.Top="323.5" StrokeThickness="25" Opacity=".7" Fill="yellow" Stroke="{DynamicResource MyGradient}" />
+</Canvas>

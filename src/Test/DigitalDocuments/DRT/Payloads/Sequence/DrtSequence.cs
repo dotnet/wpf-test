@@ -4,7 +4,7 @@
 
 //
 // Copyright (C) Microsoft Corporation.  All rights reserved.
-// Description: DRT for fixed page and fixed panel. 
+// Description: DRT for Sequence. 
 //
 
 namespace DrtPayloads

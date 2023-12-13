@@ -1,0 +1,37 @@
+<Page Background="White" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+  <Canvas Background="White">
+<Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <BeginStoryboard.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Name="DoubleAnimationTranslate"
+                                Storyboard.TargetProperty="(Canvas.Top)"
+                                Storyboard.TargetName="r1"
+                                BeginTime="0:0:0"
+                                Duration="0:0:2"
+                                To="220"
+				     RepeatBehavior="Forever"
+                                  />
+			      <DoubleAnimation
+                                Name="DoubleAnimationTranslate2"
+                                Storyboard.TargetProperty="(Canvas.Left)"
+                                Storyboard.TargetName="r1"
+                                BeginTime="0:0:0"
+                                Duration="0:0:2"
+                                To="220"
+				     RepeatBehavior="Forever"
+                                  />
+                        </Storyboard>
+                    </BeginStoryboard.Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+    <Rectangle Name="r1" Width="200" Height="200" Canvas.Left="90" Canvas.Top="120" Fill="Green"/>
+       <Glyphs Canvas.Left="90" Canvas.Top="120" FontUri="pack://siteoforigin:,,,/arial.ttf" FontRenderingEmSize="101" Fill="Black" UnicodeString="   o" Name="glyphrun1" />
+  </Canvas>
+</Page>

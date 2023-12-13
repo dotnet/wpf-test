@@ -1,0 +1,28 @@
+﻿<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Canvas.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="Blue" Offset="0" />
+                    <GradientStop Color="White" Offset="1" />
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Canvas.Background>
+    <Canvas.Resources>
+        <Style x:Key="rect_style" TargetType="{x:Type Rectangle}">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="200" />
+            <Setter Property="Fill" Value="gold" />
+            <Setter Property="StrokeThickness" Value="15px" />
+        </Style>
+        <Style x:Key="Elli_style" TargetType="{x:Type Ellipse}">
+            <Setter Property="Opacity" Value="0.65" />
+            <Setter Property="Stroke" Value="blue" />
+            <Setter Property="StrokeThickness" Value="10" />
+        </Style>
+    </Canvas.Resources>
+    <Rectangle Style="{DynamicResource rect_style}" Stroke="red" Canvas.Top="10" Canvas.Left="10" />
+    <Rectangle Stroke="darkorchid" Canvas.Top="200" Canvas.Left="2" />
+    <Ellipse Width="193" Height="193" Canvas.Left="335.5" Canvas.Top="95.5" Style="{DynamicResource Elli_style}" Fill="yellow" />
+</Canvas>

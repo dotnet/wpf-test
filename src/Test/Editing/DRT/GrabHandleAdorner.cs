@@ -366,7 +366,6 @@ namespace DRT
         /// <param name="key">grab handle to position</param>
         protected virtual void PositionGrabHandle(GrabHandles key)
         {
-            // 
             Point point = GetGrabHandlePosition(key, DesiredSize);
             TranslateTransform transform = new TranslateTransform(point.X, point.Y);
             ((DrawingVisual)_handles[key]).Transform =  transform;

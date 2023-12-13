@@ -1,0 +1,17 @@
+<!-- Part1 Regression_Bug51: ShadeEffect modifies OpacityMask applied on the same control. -->
+
+<Grid xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+>
+    <Canvas Width="640" Height="480" ClipToBounds="True">
+        <Image x:Name="Layer_0" Width="640" Height="480" Source="pack://siteoforigin:,,,/ImageForPart1_Regression_Bug52.png">
+            <Image.Effect>
+                <ShaderEffects:MultiInputEffect PaddingBottom="100" PaddingLeft="20" PaddingRight="200" PaddingTop="10"/>
+           </Image.Effect>
+           <Image.OpacityMask>
+               <ImageBrush ImageSource="pack://siteoforigin:,,,/MaskForPart1_Regression_Bug52.png"/>
+           </Image.OpacityMask>
+        </Image>
+    </Canvas>
+</Grid>

@@ -1,0 +1,35 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" >
+    <Viewport3D ClipToBounds="true">
+        <Viewport3D.Camera>
+            <PerspectiveCamera
+                Position="0,0,2"
+                LookDirection="0,0,-1"
+                UpDirection="0,1,0"
+                FieldOfView="90"
+                />
+        </Viewport3D.Camera>
+
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+                    <AmbientLight Color="white"/>
+                    <GeometryModel3D>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <RadialGradientBrush GradientOrigin="0.75,0.25">
+                                        <GradientStop Color="Orange" Offset="0.0" />
+                                        <GradientStop Color="Red" Offset="1.0" />
+                                    </RadialGradientBrush>
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D Positions="0,0,0 1,0,0 0,1,0" />
+                        </GeometryModel3D.Geometry>
+                    </GeometryModel3D>
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+    </Viewport3D>
+</Grid>

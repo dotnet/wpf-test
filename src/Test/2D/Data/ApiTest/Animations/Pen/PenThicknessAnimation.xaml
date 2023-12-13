@@ -1,0 +1,48 @@
+﻿<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="White">
+
+    <Canvas.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                   <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="(Rectangle.Fill).(DrawingBrush.Drawing).(GeometryDrawing.Pen).(Pen.Thickness)"
+                            Storyboard.TargetName="R1"
+                            Name="Whatever"
+                            From="-100"
+                            To="100"
+                            BeginTime="00:00:03"
+                            Duration="00:00:06"
+                              />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Canvas.Triggers>
+
+<Rectangle Name="R1" Width="100" Height="100">
+    <Rectangle.Fill>
+        <DrawingBrush Viewbox="0,0,1,1" Viewport="0,0,1,1" TileMode="None">
+            <DrawingBrush.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Brush>
+                        <SolidColorBrush Color="green" />    
+                    </GeometryDrawing.Brush>
+                    <GeometryDrawing.Geometry>
+                        <LineGeometry StartPoint="10 10" EndPoint="400 400" />
+                    </GeometryDrawing.Geometry>
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="1" StartLineCap="Flat" EndLineCap="Square" DashCap="Round" LineJoin="Bevel" MiterLimit="5">
+                            <Pen.Brush>
+                                <SolidColorBrush Color="Red" />
+                            </Pen.Brush>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </Rectangle.Fill>
+</Rectangle>
+
+</Canvas>
+

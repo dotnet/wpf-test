@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+  <DEFAULTTESTINFO Area="2D" SubArea="API Tests">
+    <Driver Executable="sti.exe" />
+    <DriverParameters Assembly="ApiTest.dll" Class="Microsoft.Test.Graphics.ApiTestLauncher"  Method="Launch"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\APITest.*" />
+      <SupportFile Source="FeatureTests\2D\Fonts\arial.ttf" />
+      <SupportFile Source="FeatureTests\2D\2DApiTestTolerance.xml" />
+      <SupportFile Source="FeatureTests\2D\2DApiTestGradientTolerance.xml" />
+    </SupportFiles>
+  </DEFAULTTESTINFO>
+  <TEST Name="Color API Test" Priority="1" Timeout="123" Description="WCP_Colors API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Colors Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_ColorClass" />
+    <SupportFiles>
+      <SupportFile Source="Featuretests\2D\ApiTest\Color\sRGB Color Space Profile.icm" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="GradientEdgeCases - H/W" Priority="3" Timeout="123" Description="WCP_GradientEdgeCases - 30 different tests for GradientStop edge case scenarios such as multiple stops at the same offset, negative offsets and offsets  1.0. Uses Visual Verification with VScan and a master bitmap. ">
+    <DriverParameters Args="WCP_GradientEdgeCases /FormWidth:400 /FormHeight:400 /VV:True /Tolerance:2DApiTestGradientTolerance.xml" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_GradientEdgeCases_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="GradientEdgeCases - S/W" Priority="3" Timeout="123" Description="WCP_GradientEdgeCases - 30 different tests for GradientStop edge case scenarios such as multiple stops at the same offset, negative offsets and offsets  1.0. Uses Visual Verification with VScan and a master bitmap. ">
+    <DriverParameters Args="WCP_GradientEdgeCases /FormWidth:400 /FormHeight:400 /VV:True /Tolerance:2DApiTestGradientTolerance.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_GradientEdgeCases_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Regression_Bug1 - S/W" Priority="3" Timeout="123" Description="WCP_Regression_Bug1 - Regression case for Regression_Bug1 &quot;DPI isn't taken into account with ImageBrush&quot; Verification with VScan and a master bitmap. ">
+    <DriverParameters Args="WCP_Regression_Bug1 /FormWidth:450 /FormHeight:450 /VV:True /Tolerance:2DApiTestGradientTolerance.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_Regression_Bug1_SW.bmp" />
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Tulip.jpg" />
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Tulip48dpi.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SolidColorBrush API Test - S/W" Priority="2" Timeout="108" Description="WCP_SolidColorBrush API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the SolidColorBrush Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_SolidColorBrushClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_SolidColorBrushClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="LinearGradientBrush API Test - S/W" Priority="3" Timeout="108" Description="WCP_LinearGradientBrush API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the LinearGradientBrush Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_LinearGradientBrushClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_LinearGradientBrushClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RadialGradientBrush API Test - S/W" Priority="2" Timeout="108" Description="WCP_RadialGradientBrush API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the RadialGradientBrush Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_RadialGradientBrushClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_RadialGradientBrushClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DrawingBrush API Test - S/W" Priority="2" Timeout="123" Description="WCP_DrawingBrush API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the DrawingBrush Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_DrawingBrushClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_DrawingBrushClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Pen API Test - S/W" Priority="2" Timeout="123" Description="WCP_Pen API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Pen Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_PenClass " />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Pen\Master_WCP_PenClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Brushes API Test - S/W" Priority="3" Timeout="123" Description="WCP_Brushes API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Brushes Class a convenience class of static methods to create a SolidColorBrush from any standard color.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_BrushesClass /FormWidth:400 /FormHeight:400 /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_BrushesClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BrushConverter API Test - S/W" Priority="3" Timeout="123" Description="WCP_BrushConverter API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the BrushConverter Class a class For converting Brush data back and forth from XAML.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_BrushConverterClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_BrushConverterClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BrushMappingMode Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_BrushMappingModeEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the BrushMappingMode Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_BrushMappingModeEnum /VV:True " />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_BrushMappingModeEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ColorInterpolationMode Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_ColorInterpolationModeEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the ColorInterpolationMode Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_ColorInterpolationModeEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_ColorInterpolationModeEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="GradientSpreadMethod Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_GradientSpreadMethod API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the GradientSpreadMethod Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_GradientSpreadMethodEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_GradientSpreadMethodEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="GradientStop API Test - S/W" Priority="3" Timeout="123" Description="WCP_GradientStop API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the GradientStop Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_GradientStopClass /VV:True /Tolerance:2DApiTestGradientTolerance.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_GradientStopClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="GradientStopCollection API Test - S/W" Priority="3" Timeout="123" Description="WCP_GradientStopCollection API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the GradientStopCollection Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_GradientStopCollectionClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_GradientStopCollectionClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="AlignmentX Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_HorizontalAlignmentEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the HorizontalAlignment Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_AlignmentXEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_AlignmentXEnum_SW.bmp" />
+      <SupportFile Source="Featuretests\2D\ApiTest\Brush\blue.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stretch Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_StretchEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Stretch Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_StretchEnum /VV:True /Tolerance:2DApiTestGradientTolerance.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_StretchEnum_SW.bmp" />
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\S1.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="TileMode Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_TileModeEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the TileMode Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_TileModeEnum /VV:True /Tolerance:2DApiTestGradientTolerance.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_TileModeEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="[Broken, No master]AlignmentY Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_VerticalAlignmentEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the VerticalAlignment Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_AlignmentYEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_AlignmentYEnum_SW.bmp" />
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Blue.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PenLineCap Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_PenLineCapEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the PenLineCap Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_PenLineCapEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Pen\Master_WCP_PenLineCapEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PenLineJoin Enum API Test - S/W" Priority="3" Timeout="123" Description="WCP_PenLineJoinEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the PenLineJoin Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_PenLineJoinEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Pen\Master_WCP_PenLineJoinEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DashStyles API Test - S/W" Priority="3" Timeout="123" Description="WCP_DashArraysEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the DashArrays Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_DashStylesClass" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Pen\Master_WCP_DashStylesClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Colors API Test - S/W" Priority="1" Timeout="123" Description="WCP_Colors API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Colors Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_ColorsClass /FormWidth:400 /FormHeight:400 /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Color\Master_WCP_ColorsClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ColorConverter API Test - S/W" Priority="3" Timeout="123" Description="WCP_ColorConverter API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the ColorConverter Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_ColorConverterClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Color\Master_WCP_ColorConverterClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ColorConverter API Test - H/W" Priority="3" Timeout="123" Description="WCP_ColorConverter API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the ColorConverter Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_ColorConverterClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Color\Master_WCP_ColorConverterClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Colors API Test - H/W" Priority="1" Timeout="123" Description="WCP_Colors API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Colors Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_ColorsClass /FormWidth:400 /FormHeight:400 /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Color\Master_WCP_ColorsClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Pen API Test - H/W" Priority="3" Timeout="123" Description="WCP_Pen API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Pen Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_PenClass /HW:True " />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Pen\Master_WCP_PenClass_HW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PenLineCap Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_PenLineCapEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the PenLineCap Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_PenLineCapEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Pen\Master_WCP_PenLineCapEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="PenLineJoin Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_PenLineJoinEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the PenLineJoin Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_PenLineJoinEnum /HW:True /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Pen\Master_WCP_PenLineJoinEnum_HW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="DashStyles API Test - H/W" Priority="3" Timeout="123" Description="WCP_DashArraysEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the DashArrays Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_DashStylesClass /HW:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Pen\Master_WCP_DashStylesClass_HW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="SolidColorBrush API Test - H/W" Priority="3" Timeout="108" Description="WCP_SolidColorBrush API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the SolidColorBrush Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_SolidColorBrushClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_SolidColorBrushClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="LinearGradientBrush API Test - H/W" Priority="3" Timeout="108" Description="WCP_LinearGradientBrush API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the LinearGradientBrush Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_LinearGradientBrushClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_LinearGradientBrushClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="RadialGradientBrush API Test - H/W" Priority="3" Timeout="108" Description="WCP_RadialGradientBrush API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the RadialGradientBrush Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_RadialGradientBrushClass /HW:True /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_RadialGradientBrushClass_HW.bmp" />
+    </SupportFiles>
+  </TEST>  
+  <TEST Name="DrawingBrush API Test - H/W" Priority="3" Timeout="123" Description="WCP_DrawingBrush API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the DrawingBrush Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_DrawingBrushClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_DrawingBrushClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Brushes API Test - H/W" Priority="3" Timeout="123" Description="WCP_Brushes API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Brushes Class a convenience class of static methods to create a SolidColorBrush from any standard color.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_BrushesClass /FormWidth:400 /FormHeight:400 /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_BrushesClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BrushConverter API Test - H/W" Priority="3" Timeout="123" Description="WCP_BrushConverter API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the BrushConverter Class a class For converting Brush data back and forth from XAML.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_BrushConverterClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_BrushConverterClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="BrushMappingMode Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_BrushMappingModeEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the BrushMappingMode Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_BrushMappingModeEnum /VV:True " />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_BrushMappingModeEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="ColorInterpolationMode Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_ColorInterpolationModeEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the ColorInterpolationMode Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_ColorInterpolationModeEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_ColorInterpolationModeEnum_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="GradientSpreadMethod Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_GradientSpreadMethod API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the GradientSpreadMethod Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_GradientSpreadMethodEnum /VV:True /HW:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_GradientSpreadMethodEnum_HW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="GradientStop API Test - H/W" Priority="3" Timeout="123" Description="WCP_GradientStop API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the GradientStop Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_GradientStopClass /VV:True /Tolerance:2DApiTestGradientTolerance.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_GradientStopClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="GradientStopCollection API Test - H/W" Priority="3" Timeout="123" Description="WCP_GradientStopCollection API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the GradientStopCollection Class.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_GradientStopCollectionClass /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_GradientStopCollectionClass_SW.bmp" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="AlignmentX Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_HorizontalAlignmentEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the HorizontalAlignment Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_AlignmentXEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_AlignmentXEnum_SW.bmp" />
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Blue.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="Stretch Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_StretchEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the Stretch Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_StretchEnum /VV:True /Tolerance:2DApiTestGradientTolerance.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_StretchEnum_SW.bmp" />
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\S1.png" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="TileMode Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_TileModeEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the TileMode Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_TileModeEnum /VV:True /Tolerance:2DApiTestGradientTolerance.xml"/>
+    <SupportFiles>
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Master_WCP_AlignmentYEnum_SW.bmp" />
+      <SupportFile Source="Featuretests\2D\ApiTest\Brush\Master_WCP_TileModeEnum_SW.bmp" />
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Blue.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="AlignmentY Enum API Test - H/W" Priority="3" Timeout="123" Description="WCP_VerticalAlignmentEnum API Test - Test all public API's (Constructors, Properties, Methods, Operators) of the VerticalAlignment Enum.  Verify behavior by checking the return values of the API's and by basic rendering.">
+    <DriverParameters Args="WCP_AlignmentYEnum /VV:True" />
+    <SupportFiles>
+      <SupportFile Source="Featuretests\2D\ApiTest\Brush\Master_WCP_TileModeEnum_SW.bmp" />
+      <SupportFile Source="Featuretests\2D\ApiTest\Brush\Master_WCP_AlignmentYEnum_SW.bmp" />
+      <SupportFile Source="FeatureTests\2D\ApiTest\Brush\Blue.jpg" />
+    </SupportFiles>
+  </TEST>
+  <TEST Name="WCP TransformConverter unit testing" Priority="3" Timeout="113" Description="TransformConverter unit testing">
+    <DriverParameters Args="TransformConverterTest" />
+  </TEST>
+  <TEST Name="ColorMathVerification API Test - S/W" Priority="3" Timeout="123" Description="WCP_ColorMathVerification API Test - Compare values from MSAvalon Color with those that are in the MILTestGTO Color class.  Test converting between Gamma as well as Mixing and Blending.">
+    <DriverParameters Args="WCP_ColorMathVerification" />
+  </TEST>
+  <TEST Name="ColorMathVerification API Test - HW" Priority="3" Timeout="123" Description="WCP_ColorMathVerification API Test - Compare values from MSAvalon Color with those that are in the MILTestGTO Color class.  Test converting between Gamma as well as Mixing and Blending.">
+    <DriverParameters Args="WCP_ColorMathVerification" />
+  </TEST>
+  <TEST Name="Rectangle Shape Unit test" Priority="1" Timeout="60" Description="Rectangle Shape unit test.Tests every property of Rectangle">
+    <DriverParameters Args="RectangleShape" />
+  </TEST>
+  <TEST Name="Polyline Shape Unit test" Priority="1" Timeout="60" Description="Polyline Shape unit test.Tests every property of Polyline">
+    <DriverParameters Args="PolylineShape" />
+  </TEST>
+  <TEST Name="UnitTest - Ellipse Shape" Priority="1" Timeout="60" Description="Testing all public properties and APIs in Ellipse shape class">
+    <DriverParameters Args="EllipseShape" />
+  </TEST>
+  <TEST Name="UnitTest - Line Shape" Priority="1" Timeout="60" Description="Testing all public properties and APIs in Line shape class">
+    <DriverParameters Args="LineShape" />
+  </TEST>
+  <TEST Name="UnitTest - Path shape" Priority="1" Timeout="60" Description="Testing Path class">
+    <DriverParameters Args="PathShape" />
+  </TEST>
+  <TEST Name="UnitTest - Polygon shape" Priority="1" Timeout="60" Description="Test all public properties and APIs in the Polygon shape class">
+    <DriverParameters Args="PolygonShape" />
+  </TEST>
+  <TEST Name="WCP TransformDecorator regression test" Priority="3" Timeout="113" Description="TransformDecorator regression test">
+    <DriverParameters Args="TransformDecoratorTest" />
+  </TEST>
+  <TEST Name="BVT: LineGeometry HitTest" Priority="1" Timeout="60" Description="HitTest for LineGeometry:   Test all the Contains and ContainsWithDetail overloads.  ">
+    <DriverParameters Args="LineGeometryHitTest" />
+  </TEST>
+  <TEST Name="BVT: RectangleGeometry HitTest" Priority="1" Timeout="60" Description="HitTest for RectangleGeometry:  Test all Contains and ContainsWithDetail overloading on RectangleGeometry">
+    <DriverParameters Args="RectangleGeometryHitTest" />
+  </TEST>
+  <TEST Name="BVT: EllipseGeometry HitTest" Priority="1" Timeout="60" Description="HitTest for EllipseGeometry:   Test all the Contains and ContainsWithDetail overloadings on EllipseGeometry">
+    <DriverParameters Args="EllipseGeometryHitTest" />
+  </TEST>
+  <TEST Name="BVT: PathGeometry HitTest" Priority="1" Timeout="60" Description="HitTest for PathGeometry:    Test all of the Contains and ContainsWithDetail overloading on PathGeometry">
+    <DriverParameters Args="PathGeometryHitTest" />
+  </TEST>
+  <TEST Name="BVT: CombinedGeometry HitTest" Priority="1" Timeout="60" Description="HitTest for CombinedGeometry    Test all Contains and ContainsWithDetail overloading on CombinedGeometry">
+    <DriverParameters Args="CombinedGeometryHitTest" />
+  </TEST>
+  <TEST Name="BVT: GeometryGroup HitTest" Priority="1" Timeout="60" Description="HitTest on GeometryGroup     Test all Contains and ContainsWithDetail() overloading on GeometryGroup">
+    <DriverParameters Args="GeometryGroupHitTest" />
+  </TEST>
+  <TEST Name="PixelSnapping APIs Test" Priority="2" Timeout="60" Description="Test:     VisualOperations.SetXSnapGuidelines()     VisualOperations.SetYSnapGuidelines()     VisualOperations.GetXSnapGuidelines()     VisualOperations.GetYSnapGuidelines()">
+    <DriverParameters Args="PixelSnappingAPIs" />
+  </TEST>
+  <TEST Name="VisualOperationHitTest on Clipped Geometry" Priority="1" Timeout="120" Description="VisualOperation.HitTest(Visual, Point) on a Clipped Geometry:   1.  A hitpoint that is in the clipped region, so it resolves to be a hit   2.  A hitpoint that is not in the clipped region, but on the tested geometry, that is NOT hit   3.  A hitpiont htat is Neither on the Clipped region, nore on the tested geometry, that is definitely NOT hit.">
+    <DriverParameters Args="VisualOperationHitTest" />
+  </TEST>
+  <TEST Name="Unit Test: StreamGeometry" Priority="0" Timeout="60" Description="Unit test for StreamGeometry class:Test all of the public APIs and properties.">
+    <DriverParameters Args="StreamGeometryClass" />
+    <Keywords>
+      <Keyword>MicroSuite</Keyword>
+    </Keywords>
+  </TEST>
+  <TEST Name="Unit Test:  HitTest on StreamGeometry" Priority="2" Timeout="60" Description="Hit Test on StreamGeometry">
+    <DriverParameters Args="StreamGeometryHitTest" />
+  </TEST>
+</XTC>

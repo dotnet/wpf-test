@@ -1,0 +1,130 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="PointHitTestingTest"
+    LogFilePrefix="PHT_BackMaterial"
+
+    Scene="Explicit"
+    Visual0="SimpleCubeMesh"
+    Material0="255,0,0,255"
+    BackMaterial0="255,255,0,0"
+    Visual1="WhiteDirectionalNegZ"
+
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="11"
+
+    UseViewport3D="false"
+    >
+
+    <!-- MatrixCameras -->
+
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="3"
+        CameraHeight="2.5"
+
+        Description="Point testing (MatrixCamera-Ortho) at 99,79 - two materials"
+        Expectation="Hit 'Model' twice."
+        Point="99,79"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="3"
+        CameraHeight="2.5"
+        Material0="Null"
+
+        Description="Point testing (MatrixCamera-Ortho) at 99,79 - back material only"
+        Expectation="Hit 'Model' once."
+        Point="99,79"
+        />
+    <VARIATION
+        CameraType="MatrixOrtho"
+        CameraWidth="3"
+        CameraHeight="2.5"
+        Material0="Null"
+        BackMaterial0="Null"
+
+        Description="Point testing (MatrixCamera-Ortho) at 99,79 - no materials"
+        Expectation="Miss"
+        Point="99,79"
+        />
+
+    <VARIATION
+        CameraType="MatrixPersp"
+        CameraFieldOfViewX="45"
+        CameraFieldOfViewY="45"
+
+        Description="Point testing (MatrixCamera-Perspective) at 99,79"
+        Expectation="Hit 'Model' twice."
+        Point="99,79"
+        />
+
+    <!-- OrthographicCameras -->
+
+    <VARIATION
+        CameraType="Orthographic"
+        CameraWidth="3"
+
+        Description="Point testing (OrthographicCamera) at 99,79 - two materials"
+        Expectation="Hit 'Model' twice."
+        Point="99,79"
+        />
+    <VARIATION
+        CameraType="Orthographic"
+        CameraWidth="3"
+        Material0="Null"
+
+        Description="Point testing (OrthographicCamera) at 99,79 - back material only"
+        Expectation="Hit 'Model' once."
+        Point="99,79"
+        />
+    <VARIATION
+        CameraType="Orthographic"
+        CameraWidth="3"
+        Material0="Null"
+        BackMaterial0="Null"
+
+        Description="Point testing (OrthographicCamera) at 99,79 - no materials"
+        Expectation="Miss"
+        Point="99,79"
+        />
+
+    <!-- PerspectiveCameras -->
+
+    <VARIATION
+        CameraType="Perspective"
+        CameraPosition="5,0,0"
+        CameraLookDirection="-1,0,0"
+        CameraFieldOfView="45"
+
+        Description="Point testing (PerspectiveCamera) at 99,79 - two materials"
+        Expectation="Hit 'Model' twice."
+        Point="99,79"
+        />
+    <VARIATION
+        CameraType="Perspective"
+        CameraPosition="5,0,0"
+        CameraLookDirection="-1,0,0"
+        CameraFieldOfView="45"
+        Material0="Null"
+
+        Description="Point testing (PerspectiveCamera) at 99,79 - back material only"
+        Expectation="Hit 'Model' once."
+        Point="99,79"
+        />
+    <VARIATION
+        CameraType="Perspective"
+        CameraPosition="5,0,0"
+        CameraLookDirection="-1,0,0"
+        CameraFieldOfView="45"
+        Material0="Null"
+        BackMaterial0="Null"
+
+        Description="Point testing (PerspectiveCamera) at 99,79 - no materials"
+        Expectation="Miss"
+        Point="99,79"
+        />
+
+</INIT>

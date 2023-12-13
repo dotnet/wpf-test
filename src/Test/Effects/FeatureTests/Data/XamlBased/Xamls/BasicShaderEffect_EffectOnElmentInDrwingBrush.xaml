@@ -1,0 +1,30 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+            <ResourceDictionary>
+                 <!-- HACK: Add InvariantTheme to workaround Regression_Bug42 -->
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://siteoforigin:,,,/InvariantTheme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+    </Grid.Resources>
+    <Button Name="button" Width="250" Height="250">
+         <Button.Background>
+             <VisualBrush>
+	        <VisualBrush.Visual>
+                    <Button Width="100" Height="20" Background="#ff555555" FontFamily="Tahoma" FontWeight="Normal" FontStretch="Normal" FontStyle="Normal" FontSize="12pt" Foreground="Black">
+                        <Button.Effect>
+                           <ShaderEffects:BasicShaderEffect>
+                               <ShaderEffects:BasicShaderEffect.PixelShader>
+                                  <PixelShader UriSource="pack://application:,,,/ShaderEffects;component/Reddish.ps" />
+                              </ShaderEffects:BasicShaderEffect.PixelShader>
+                          </ShaderEffects:BasicShaderEffect>
+                        </Button.Effect>
+                        Text in Button
+                    </Button>
+	        </VisualBrush.Visual>
+             </VisualBrush>
+         </Button.Background>
+    </Button>
+</Grid>

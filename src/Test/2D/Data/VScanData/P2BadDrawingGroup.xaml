@@ -1,0 +1,464 @@
+﻿<Canvas Background="White"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+  <!-- Bad Clip1 Rect="NaN,NaN,NaN,NaN"-->
+<Ellipse Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+  <Ellipse.Fill>
+    <DrawingBrush Stretch="None">
+      <DrawingBrush.Drawing>
+        <DrawingGroup Opacity="0.9">
+          <DrawingGroup.ClipGeometry>
+            <RectangleGeometry Rect="NaN,NaN,NaN,NaN" />
+          </DrawingGroup.ClipGeometry>
+          <DrawingGroup.Transform>
+            <MatrixTransform Matrix="1,0,0,1,0,0" />
+          </DrawingGroup.Transform>
+
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="Red">
+              <GeometryDrawing.Pen>
+                <Pen Brush="Blue" Thickness="1" />
+              </GeometryDrawing.Pen>
+              <GeometryDrawing.Geometry>
+                <RectangleGeometry Rect="20,20,20,20" />
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+            <DrawingGroup>
+              <DrawingGroup.Children>
+                <GeometryDrawing Brush="#aaffff00">
+                  <GeometryDrawing.Geometry>
+                    <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup.Children>
+            </DrawingGroup>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+  </Ellipse.Fill>
+</Ellipse>
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- Bad Clip2 Rect="Min,Min,Max,Max"-->
+<Ellipse Canvas.Left="100" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+  <Ellipse.Fill>
+    <DrawingBrush Stretch="None">
+      <DrawingBrush.Drawing>
+        <DrawingGroup Opacity="0.9">
+          <DrawingGroup.ClipGeometry>
+            <RectangleGeometry Rect="-1.79e307,-1.79e307,1.79e307,1.79e307" />
+          </DrawingGroup.ClipGeometry>
+          <DrawingGroup.Transform>
+            <MatrixTransform Matrix="1,0,0,1,0,0" />
+          </DrawingGroup.Transform>
+
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="Red">
+              <GeometryDrawing.Pen>
+                <Pen Brush="Blue" Thickness="1" />
+              </GeometryDrawing.Pen>
+              <GeometryDrawing.Geometry>
+                <RectangleGeometry Rect="20,20,20,20" />
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+            <DrawingGroup>
+              <DrawingGroup.Children>
+                <GeometryDrawing Brush="#aaffff00">
+                  <GeometryDrawing.Geometry>
+                    <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup.Children>
+            </DrawingGroup>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+  </Ellipse.Fill>
+</Ellipse>
+
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- Bad Clip3 Rect="-Infinity,-infinity,Infinity,Infinity"-->
+<Ellipse Canvas.Left="200" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+  <Ellipse.Fill>
+    <DrawingBrush Stretch="None">
+      <DrawingBrush.Drawing>
+        <DrawingGroup Opacity="0.9">
+          <DrawingGroup.ClipGeometry>
+            <RectangleGeometry Rect="-Infinity,-Infinity,Infinity,Infinity" />
+          </DrawingGroup.ClipGeometry>
+          <DrawingGroup.Transform>
+            <MatrixTransform Matrix="1,0,0,1,0,0" />
+          </DrawingGroup.Transform>
+
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="Red">
+              <GeometryDrawing.Pen>
+                <Pen Brush="Blue" Thickness="1" />
+              </GeometryDrawing.Pen>
+              <GeometryDrawing.Geometry>
+                <RectangleGeometry Rect="20,20,20,20" />
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+            <DrawingGroup>
+              <DrawingGroup.Children>
+                <GeometryDrawing Brush="#aaffff00">
+                  <GeometryDrawing.Geometry>
+                    <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup.Children>
+            </DrawingGroup>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+  </Ellipse.Fill>
+</Ellipse>
+
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- Bad Clip4 PathGeometry with a lot of NaN, -Infinity, Infinity, Min, Max, Epsilon-->
+  <Ellipse Canvas.Left="300" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+    <Ellipse.Fill>
+      <DrawingBrush Stretch="None">
+        <DrawingBrush.Drawing>
+          <DrawingGroup Opacity="0.9">
+            <DrawingGroup.ClipGeometry>
+              <PathGeometry FillRule="NonZero">
+                <PathFigure StartPoint="NaN, 1.79e307" IsClosed="true" IsFilled="true">
+                  <LineSegment Point="15,NaN" />
+                  <ArcSegment Point="50,-1.79e307" IsLargeArc="true" SweepDirection="Clockwise" Size="10,10" RotationAngle="10" />
+                  <BezierSegment Point1="NaN,NaN" Point2="Infinity,-Infinity" Point3="1.79e307,1.79e307" />
+                  <PolyBezierSegment Points="NaN,1.79E307,-1.79E307,4.94E-323,50,Infinity" />
+                  <PolyLineSegment Points="30,NaN,1.79E307,4.94E-323" />
+                  <PolyQuadraticBezierSegment Points="NaN,95,100,-Infinity" />
+                  <QuadraticBezierSegment Point1="-1.79E307,-1.79E307" Point2="NaN,NaN" />
+                </PathFigure>
+              </PathGeometry>
+            </DrawingGroup.ClipGeometry>
+            <DrawingGroup.Transform>
+              <MatrixTransform Matrix="1,0,0,1,0,0" />
+            </DrawingGroup.Transform>
+
+            <DrawingGroup.Children>
+              <GeometryDrawing Brush="Red">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Blue" Thickness="1" />
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry Rect="20,20,20,20" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+              <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+              <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing Brush="#aaffff00">
+                    <GeometryDrawing.Geometry>
+                      <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                </DrawingGroup.Children>
+              </DrawingGroup>
+            </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+    </Ellipse.Fill>
+  </Ellipse>
+  
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  
+  <!-- Bad Clip5 RectangleGeometry with Empty Rect-->
+  <Ellipse Canvas.Left="400" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+    <Ellipse.Fill>
+      <DrawingBrush Stretch="None">
+        <DrawingBrush.Drawing>
+          <DrawingGroup Opacity="0.9">
+            <DrawingGroup.ClipGeometry>
+              <RectangleGeometry Rect="Empty" />
+            </DrawingGroup.ClipGeometry>
+            <DrawingGroup.Transform>
+              <MatrixTransform Matrix="1,0,0,1,0,0" />
+            </DrawingGroup.Transform>
+
+            <DrawingGroup.Children>
+              <GeometryDrawing Brush="Red">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Blue" Thickness="1" />
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry Rect="20,20,20,20" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+              <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+              <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing Brush="#aaffff00">
+                    <GeometryDrawing.Geometry>
+                      <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                </DrawingGroup.Children>
+              </DrawingGroup>
+            </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+    </Ellipse.Fill>
+  </Ellipse>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  
+  <!-- Bad Transform1-->
+  <Ellipse Canvas.Left="0" Canvas.Top="100" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+    <Ellipse.Fill>
+      <DrawingBrush Stretch="None">
+        <DrawingBrush.Drawing>
+          <DrawingGroup Opacity="0.9">
+            <DrawingGroup.Transform>
+              <MatrixTransform Matrix="NaN,1.79e307,-1.79e307,Infinity,-Infinity,4.94E-323" />
+            </DrawingGroup.Transform>
+
+            <DrawingGroup.Children>
+              <GeometryDrawing Brush="Red">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Blue" Thickness="1" />
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry Rect="20,20,20,20" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+              <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+              <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing Brush="#aaffff00">
+                    <GeometryDrawing.Geometry>
+                      <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                </DrawingGroup.Children>
+              </DrawingGroup>
+            </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+    </Ellipse.Fill>
+  </Ellipse>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+  <!-- Bad Opacity1 Opacity="NaN"-->
+  <Ellipse Canvas.Left="0" Canvas.Top="200" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+    <Ellipse.Fill>
+      <DrawingBrush Stretch="None">
+        <DrawingBrush.Drawing>
+          <DrawingGroup Opacity="NaN">
+            <DrawingGroup.Children>
+              <GeometryDrawing Brush="Red">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Blue" Thickness="1" />
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry Rect="20,20,20,20" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+              <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+              <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing Brush="#aaffff00">
+                    <GeometryDrawing.Geometry>
+                      <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                </DrawingGroup.Children>
+              </DrawingGroup>
+            </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+    </Ellipse.Fill>
+  </Ellipse>
+ 
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+  <!-- Bad Opacity2 Opacity="Infinity"-->
+<Ellipse Canvas.Left="100" Canvas.Top="200" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+  <Ellipse.Fill>
+    <DrawingBrush Stretch="None">
+      <DrawingBrush.Drawing>
+        <DrawingGroup Opacity="Infinity">
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="Red">
+              <GeometryDrawing.Pen>
+                <Pen Brush="Blue" Thickness="1" />
+              </GeometryDrawing.Pen>
+              <GeometryDrawing.Geometry>
+                <RectangleGeometry Rect="20,20,20,20" />
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+            <DrawingGroup>
+              <DrawingGroup.Children>
+                <GeometryDrawing Brush="#aaffff00">
+                  <GeometryDrawing.Geometry>
+                    <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup.Children>
+            </DrawingGroup>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+  </Ellipse.Fill>
+</Ellipse>
+
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- Bad Opacity3 Opacity="-Infinity"-->
+<Ellipse Canvas.Left="200" Canvas.Top="200" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+  <Ellipse.Fill>
+    <DrawingBrush Stretch="None">
+      <DrawingBrush.Drawing>
+        <DrawingGroup Opacity="-Infinity">
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="Red">
+              <GeometryDrawing.Pen>
+                <Pen Brush="Blue" Thickness="1" />
+              </GeometryDrawing.Pen>
+              <GeometryDrawing.Geometry>
+                <RectangleGeometry Rect="20,20,20,20" />
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+            <DrawingGroup>
+              <DrawingGroup.Children>
+                <GeometryDrawing Brush="#aaffff00">
+                  <GeometryDrawing.Geometry>
+                    <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup.Children>
+            </DrawingGroup>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+  </Ellipse.Fill>
+</Ellipse>
+
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- Bad Opacity4 Opacity="Max"-->
+<Ellipse Canvas.Left="300" Canvas.Top="200" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+  <Ellipse.Fill>
+    <DrawingBrush Stretch="None">
+      <DrawingBrush.Drawing>
+        <DrawingGroup Opacity="1.79E307">
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="Red">
+              <GeometryDrawing.Pen>
+                <Pen Brush="Blue" Thickness="1" />
+              </GeometryDrawing.Pen>
+              <GeometryDrawing.Geometry>
+                <RectangleGeometry Rect="20,20,20,20" />
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+            <DrawingGroup>
+              <DrawingGroup.Children>
+                <GeometryDrawing Brush="#aaffff00">
+                  <GeometryDrawing.Geometry>
+                    <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup.Children>
+            </DrawingGroup>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+  </Ellipse.Fill>
+</Ellipse>
+
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- Bad Opacity5 Opacity="Min"-->
+  <Ellipse Canvas.Left="400" Canvas.Top="200" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+    <Ellipse.Fill>
+      <DrawingBrush Stretch="None">
+        <DrawingBrush.Drawing>
+          <DrawingGroup Opacity="-1.79E307">
+            <DrawingGroup.Children>
+              <GeometryDrawing Brush="Red">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Blue" Thickness="1" />
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry Rect="20,20,20,20" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+              <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+              <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing Brush="#aaffff00">
+                    <GeometryDrawing.Geometry>
+                      <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                </DrawingGroup.Children>
+              </DrawingGroup>
+            </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+    </Ellipse.Fill>
+  </Ellipse>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+  <!-- Bad GuidelineSet1 GuidelinesX,Y="1.79E307, -1.79E303, 4.94E-323, Infinity, -Infinity, NaN"-->
+  <Ellipse Canvas.Left="0" Canvas.Top="300" Width="100" Height="100" Stroke="Black" StrokeThickness="3">
+    <Ellipse.Fill>
+      <DrawingBrush Stretch="None">
+        <DrawingBrush.Drawing>
+          <DrawingGroup Opacity="1">
+            <DrawingGroup.GuidelineSet>
+              <GuidelineSet GuidelinesX="1.79E307, -1.79E303, 4.94E-323, Infinity, -Infinity, NaN" GuidelinesY="1.79E307, -1.79E303, 4.94E-323, Infinity, -Infinity, NaN" />
+            </DrawingGroup.GuidelineSet>
+            <DrawingGroup.Children>
+              <GeometryDrawing Brush="Red">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Blue" Thickness="1" />
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry Rect="20,20,20,20" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+              <ImageDrawing ImageSource="\\scratch2\scratch\Microsoft\ashlee.jpg" Rect="0,0,20,20" />
+              <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing Brush="#aaffff00">
+                    <GeometryDrawing.Geometry>
+                      <EllipseGeometry RadiusX="10" RadiusY="12" Center="10,25" />
+                    </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                </DrawingGroup.Children>
+              </DrawingGroup>
+            </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+    </Ellipse.Fill>
+  </Ellipse>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+</Canvas>

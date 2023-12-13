@@ -1,0 +1,20 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+        <Storyboard x:Key="storyboard" Storyboard.TargetName="effect">
+            <DoubleAnimation From="0" To="50" Duration="0:0:3" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Radius" />
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="KernelType">
+                <DiscreteObjectKeyFrame KeyTime="0:0:3" Value="{x:Static KernelType.Box}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="RenderingBias">
+                <DiscreteObjectKeyFrame KeyTime="0:0:3.5" Value="{x:Static RenderingBias.Quality}" />
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Grid.Resources>
+    <Rectangle Width="200" Height="200" Fill="Blue">
+        <Rectangle.Effect>
+            <BlurEffect x:Name="effect" KernelType="Gaussian" Radius="0" RenderingBias="Performance"/>
+        </Rectangle.Effect>
+    </Rectangle>
+</Grid>

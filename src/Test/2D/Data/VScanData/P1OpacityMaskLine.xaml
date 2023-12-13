@@ -1,0 +1,59 @@
+﻿<!-- Opacitymask test that uses a drawingbrush -->
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="White">
+    <Line Stroke="red" StrokeThickness="40" X1="60" Y1="50" X2="350" Y2="340">
+        <Line.OpacityMask>
+            <DrawingBrush Viewport="0,0,0.25,0.25" TileMode="Tile">
+                <DrawingBrush.Drawing>
+                    <DrawingGroup>
+                        <DrawingGroup.Children>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="Black" Thickness="0.1" />
+                                </GeometryDrawing.Pen>
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0.0, 0.0, 0.9, 0.9" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Brush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="Black" Offset="0" />
+                                                <GradientStop Color="Transparent" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </GeometryDrawing.Brush>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="Transparent" Thickness="0.1" />
+                                </GeometryDrawing.Pen>
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0.0, 0.0, 0.9, 0.9" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Brush>
+                                    <RadialGradientBrush>
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="Black" Offset="0" />
+                                                <GradientStop Color="Transparent" Offset="1" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </RadialGradientBrush>
+                                </GeometryDrawing.Brush>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="Transparent" Thickness="0.1" />
+                                </GeometryDrawing.Pen>
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0.25" Rect="0.0, 0.0, 0.9, 0.9" RadiusY="0.25" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup.Children>
+                    </DrawingGroup>
+                </DrawingBrush.Drawing>
+            </DrawingBrush>
+        </Line.OpacityMask>
+    </Line>
+</Canvas>

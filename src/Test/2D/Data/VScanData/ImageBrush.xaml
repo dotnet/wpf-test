@@ -1,0 +1,110 @@
+﻿<!--This test covers the ImageBrush property with different types of stretch-->
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Border.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="Blue" Offset="0" />
+                    <GradientStop Color="White" Offset="1" />
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Border.Background>
+    <Canvas>
+        <Canvas>
+            <Rectangle Stroke="#444488" StrokeThickness="0.5px" Canvas.Left="0" Canvas.Top="0" Width="250px" Height="300px">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="puppies.jpg">
+                        <ImageBrush.Stretch>
+                        None
+                    </ImageBrush.Stretch>
+                        <ImageBrush.AlignmentX>
+                        Left
+                    </ImageBrush.AlignmentX>
+                        <ImageBrush.AlignmentY>
+                        Top
+                    </ImageBrush.AlignmentY>
+                        <ImageBrush.Viewport>
+                       0,0,1,1
+                    </ImageBrush.Viewport>
+                        <ImageBrush.ViewportUnits>
+                        Absolute
+                    </ImageBrush.ViewportUnits>
+                    </ImageBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+        <!-- SECOND PICTURE ************************************************************************ -->
+        <Canvas Canvas.Left="255px">
+            <Rectangle Canvas.Left="0" Canvas.Top="0" Width="250px" Height="300px">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="puppies.jpg">
+                        <ImageBrush.Stretch>
+                        Uniform
+                    </ImageBrush.Stretch>
+                        <ImageBrush.AlignmentX>
+                        Left
+                    </ImageBrush.AlignmentX>
+                        <ImageBrush.AlignmentY>
+                        Top
+                    </ImageBrush.AlignmentY>
+                        <ImageBrush.Viewport>
+                       0,0,1,1
+                    </ImageBrush.Viewport>
+                        <ImageBrush.ViewportUnits>
+                        RelativeToBoundingBox
+                    </ImageBrush.ViewportUnits>
+                    </ImageBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+        <!-- THIRD PICTURE ************************************************************************ -->
+        <Canvas Canvas.Left="560px">
+            <Rectangle Canvas.Left="0" Canvas.Top="0" Width="250px" Height="300px">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="puppies.jpg">
+                        <ImageBrush.Stretch>
+                        UniformToFill
+                    </ImageBrush.Stretch>
+                        <ImageBrush.AlignmentX>
+                        Left
+                    </ImageBrush.AlignmentX>
+                        <ImageBrush.AlignmentY>
+                        Top
+                    </ImageBrush.AlignmentY>
+                        <ImageBrush.Viewport>
+                       0,0,1,1
+                    </ImageBrush.Viewport>
+                        <ImageBrush.ViewportUnits>
+                        RelativeToBoundingBox
+                    </ImageBrush.ViewportUnits>
+                    </ImageBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+        <!--Fourth PICTURE ************************************************************************ -->
+        <Canvas Canvas.Top="320px">
+            <Rectangle Canvas.Left="0" Canvas.Top="0" Width="250px" Height="300px">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="puppies.jpg">
+                        <ImageBrush.Stretch>
+                        Fill
+                    </ImageBrush.Stretch>
+                        <ImageBrush.AlignmentX>
+                        Left
+                    </ImageBrush.AlignmentX>
+                        <ImageBrush.AlignmentY>
+                        Top
+                    </ImageBrush.AlignmentY>
+                        <ImageBrush.Viewport>
+                       0,0,1,1
+                    </ImageBrush.Viewport>
+                        <ImageBrush.ViewportUnits>
+                        RelativeToBoundingBox
+                    </ImageBrush.ViewportUnits>
+                    </ImageBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+    </Canvas>
+</Border>

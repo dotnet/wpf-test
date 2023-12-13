@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="PerspectiveCameraTransformTest"
+    SilhouetteEdgeTolerance="0.5"
+    DefaultColorTolerance="0,4,4,4"
+    
+    Light="WhiteAmbient"
+    
+    CameraType="Perspective"
+    CameraPosition="0,0,5"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+    CameraFieldOfView="30"
+
+    TransformTarget="Camera"
+
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <VARIATION
+        Description="Testing Camera.Transform = Identity"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        />
+
+    <VARIATION
+        Description="Testing Camera.Transform = Null"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Null"
+        />
+
+    <VARIATION
+        Description="Testing Camera.Transform = Translate +4.9 in z"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Translate"
+        TranslateOffset="0,0,4.9"
+        />
+    <VARIATION
+        Description="Testing Camera.Transform = Translate +1 in y"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Translate"
+        TranslateOffset="0,1,0"
+        />
+    <VARIATION
+        Description="Testing Camera.Transform = Translate +1 in x"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Translate"
+        TranslateOffset="1,0,0"
+        />
+    <VARIATION
+        Description="Testing Camera.Transform = Translate -3 in z"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Translate"
+        TranslateOffset="0,0,-3"
+        />
+    <VARIATION
+        Description="Testing Camera.Transform = Translate +10 in z (no rendering)"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Translate"
+        TranslateOffset="0,0,10"
+        />
+    <VARIATION
+        Description="Testing Camera.Transform = Translate -10 in z (no rendering)"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Translate"
+        TranslateOffset="0,0,-10"
+        />
+
+    <VARIATION
+        Description="Testing Camera.Transform = Scale 2 in z"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Scale"
+        ScaleVector="2,2,2"
+        />
+    <VARIATION
+        Description="Testing Camera.Transform = Scale .25 in z"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Scale"
+        ScaleVector=".25,.25,.25"
+        />
+    <VARIATION
+        Description="Testing Camera.Transform = Scale 3 in z"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="Scale"
+        ScaleVector="3,3,3"
+        />
+
+    <VARIATION
+        Description="Testing Camera.Transform = Rotate +y,+90"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="RotateAxisAngle"
+        RotateAngle="90"
+        RotateAxis="0,1,0"
+        />
+    <VARIATION
+        Description="Testing Camera.Transform = Rotate +x,-90"
+        Mesh="UnitPlaneTriangle"
+        Material="LinearGradientBrush 255,255,0,0 255,0,0,255 45"
+        TransformType="RotateAxisAngle"
+        RotateAngle="-90"
+        RotateAxis="1,0,0"
+        />
+
+</INIT>

@@ -1,0 +1,56 @@
+﻿<!-- this test covers LinearGradient, RadialGradient and SolidColor paints-->
+
+
+
+
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:media="clr-namespace:System.Windows.Media;assembly=PresentationCore"
+ Background="#CCCCCC" xmlns:MappingPIGen1="clr-namespace:System.Windows.Media;assembly=PresentationCore"> 
+    
+  <Canvas>  
+
+<Rectangle StrokeThickness="2" Canvas.Left="10" Canvas.Top="10" Width="300" Height="200" Stroke="blue">
+    <Rectangle.Fill>
+       
+       <media:LinearGradientBrush Opacity="0.5">
+       <media:LinearGradientBrush.GradientStops>
+       <media:GradientStopCollection>
+        <media:GradientStop Color="red" Offset="0" />
+        <media:GradientStop Color="yellow" Offset="1" />
+        <media:GradientStop Color="blue" Offset="0.5" />
+        <media:GradientStop Color="white" Offset="0.2" />
+    </media:GradientStopCollection>
+    </media:LinearGradientBrush.GradientStops>
+    </media:LinearGradientBrush>
+    </Rectangle.Fill>
+</Rectangle>
+
+<Rectangle StrokeThickness="2" Stroke="blue" Canvas.Left="320" Canvas.Top="10" Width="200" Height="200">
+    <Rectangle.Fill>
+       <media:RadialGradientBrush Opacity="0.5">
+       <media:RadialGradientBrush.GradientStops>
+       <media:GradientStopCollection>
+        <media:GradientStop Color="red" Offset="0" />
+        <media:GradientStop Color="yellow" Offset="1" />
+        <media:GradientStop Color="blue" Offset="0.5" />
+       </media:GradientStopCollection>
+    </media:RadialGradientBrush.GradientStops>
+    </media:RadialGradientBrush>
+    </Rectangle.Fill>
+   </Rectangle>
+
+
+<Rectangle StrokeThickness="2" Stroke="blue" Canvas.Left="10" Canvas.Top="220" Width="200" Height="200">
+    <Rectangle.Fill>
+       <media:SolidColorBrush Opacity="0.5" Color="#f33" />
+    </Rectangle.Fill>
+   </Rectangle>
+
+<Rectangle StrokeThickness="2" Stroke="blue" Canvas.Left="320" Canvas.Top="220" Width="200" Height="200">
+    <Rectangle.Fill>
+    <media:SolidColorBrush Color="green" Opacity="0.5" />             
+    </Rectangle.Fill>
+   </Rectangle> 
+   
+</Canvas>
+</Border>

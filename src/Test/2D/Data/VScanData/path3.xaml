@@ -1,0 +1,30 @@
+﻿<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="White">
+    <Canvas>
+        <Decorator ClipToBounds="False">
+            <Decorator.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <TransformCollection>
+                            <RotateTransform Angle="10" />
+                            <TranslateTransform X="-50" Y="-100" />
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                        </TransformCollection>
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Decorator.RenderTransform>
+            <Path Data="M 250,75 L 323,301 131,161 369,161 177,301 z">
+                <Path.StrokeThickness>10</Path.StrokeThickness>
+                <Path.StrokeEndLineCap>Round</Path.StrokeEndLineCap>
+                <Path.StrokeLineJoin>Miter</Path.StrokeLineJoin>
+                <Path.Stroke>
+                    <SolidColorBrush Color="red" Opacity="0.5" />
+                </Path.Stroke>
+                <Path.Fill>
+                    <SolidColorBrush Color="blue" Opacity="0.6" />
+                </Path.Fill>
+                <!-- the tips of the star will not be perfectly pointy due this low value-->
+                <Path.StrokeMiterLimit>2</Path.StrokeMiterLimit>
+            </Path>
+        </Decorator>
+    </Canvas>
+</Border>

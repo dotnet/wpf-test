@@ -1,0 +1,35 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:ShaderEffects="clr-namespace:Microsoft.Test.Effects;assembly=ShaderEffects"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid.Resources>
+        <ResourceDictionary>
+                <!-- HACK: Add InvariantTheme to workaround Regression_Bug42 -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://siteoforigin:,,,/InvariantTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Grid.Resources>  
+<Canvas>  
+    <Rectangle Fill="AntiqueWhite" Width="280" Height="280" Canvas.Left="0" >
+            <Rectangle.Effect>
+                <ShaderEffects:MultiParameterPS3Effect 
+                   Bool0="True" Bool1="False" Bool3="True" Bool15="True" Bool8="false"
+                   Bool2="false" Bool4="False" Bool6="True" Bool7="True" Bool9="True" Bool12="True"
+                   Int0="0" Int1="16" Int2="32" Int3="48" Int4="64" 
+                   Int5="80" Int6="96" Int7="112" Int8="128" Int9="144" 
+                   Int10="160" Int11="176" Int12="192" Int13="208" Int14="224" 
+                   Int15="240" Double10="0.3" Double50="0.54" Double200="0.5" Double223="0.54" 
+                    FloatValue="200" 
+                    DoubleValue="800" 
+                    PointValue="50,80"
+                    Point3DValue="30,40,100"
+                    Point4DValue="20,30,5,80"
+                    Vector3DValue="60,70,80" 
+                    SizeValue="40,60"
+                    VectorValue="50, 60" 
+                    ColorValue="#ff00ff00"
+                />
+            </Rectangle.Effect>
+        </Rectangle>
+    </Canvas>
+</Grid>

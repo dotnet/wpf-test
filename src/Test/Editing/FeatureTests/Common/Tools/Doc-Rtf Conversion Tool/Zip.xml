@@ -1,0 +1,684 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zip</name>
+    </assembly>
+    <members>
+        <member name="T:OrganicBit.Zip.ZipException">
+            <summary>Thrown whenever an error occurs during the build.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipException.#ctor">
+            <summary>Constructs an exception with no descriptive information.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipException.#ctor(System.String)">
+            <summary>Constructs an exception with a descriptive message.</summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipException.#ctor(System.String,System.Exception)">
+            <summary>Constructs an exception with a descriptive message and a reference to the instance of the <c>Exception</c> that is the root cause of the this exception.</summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">An instance of <c>Exception</c> that is the cause of the current Exception. If <paramref name="innerException"/> is non-null, then the current Exception is raised in a catch block handling <paramref>innerException</paramref>.</param>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>Initializes a new instance of the BuildException class with serialized data.</summary>
+            <param name="info">The object that holds the serialized object data.</param>
+            <param name="context">The contextual information about the source or destination.</param>
+        </member>
+        <member name="T:OrganicBit.Zip.CompressionMethod">
+            <summary>Specifies how the the zip entry should be compressed.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.CompressionMethod.Stored">
+            <summary>No compression.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.CompressionMethod.Deflated">
+            <summary>Default and only supported compression method.</summary>
+        </member>
+        <member name="T:OrganicBit.Zip.CompressionLevel">
+            <summary>Specifies the amount of compression to apply to compressed zip entires.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.CompressionLevel.Default">
+            <summary>Default compression level.  A good choice for speed and size.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.CompressionLevel.None">
+            <summary>Do not perfrom compression.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.CompressionLevel.Fastest">
+            <summary>Compress the entry as fast as possible size trading size for time.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.CompressionLevel.Average">
+            <summary>Compress the entry using a balance of size and time.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.CompressionLevel.Smallest">
+            <summary>Compress the entry to smallest possible size trading time for size.</summary>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipEntry">
+            <summary>Represents a entry in a zip file.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntry.#ctor(System.String)">
+            <summary>Initializes a instance of the <see cref="T:OrganicBit.Zip.ZipEntry"/> class with the given name.</summary>
+            <param name="name">The name of entry that will be stored in the directory of the zip file.</param>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntry.#ctor(System.IntPtr)">
+            <summary>Creates a new Zip file entry reading values from a zip file.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntry.ToString">
+            <summary>Returns a string representation of the Zip entry.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntry.IsAscii(System.String)">
+            <summary>Check if <paramref name="str"/> only contains Ascii 8 bit characters.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.Comment">
+            <summary>Gets and sets the local file comment for the entry.</summary>
+            <remarks>
+              <para>Currently only Ascii 8 bit characters are supported in comments.</para>
+              <para>A comment cannot exceed 65535 bytes.</para>
+            </remarks>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.CompressedLength">
+            <summary>Gets the compressed size of the entry data in bytes, or -1 if not known.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.Crc">
+            <summary>Gets the CRC-32 checksum of the uncompressed entry data.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.ExtraField">
+            <summary>Gets and sets the optional extra field data for the entry.</summary>
+            <remarks>ExtraField data cannot exceed 65535 bytes.</remarks>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.Method">
+            <summary>Gets and sets the default compresion method for zip file entries.  See <see cref="T:OrganicBit.Zip.CompressionMethod"/> for a list of possible values.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.Level">
+            <summary>Gets and sets the default compresion level for zip file entries.  See <see cref="T:OrganicBit.Zip.CompressionMethod"/> for a partial list of values.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.Length">
+            <summary>Gets the size of the uncompressed entry data in in bytes.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.ModifiedTime">
+            <summary>Gets and sets the modification time of the entry.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.Name">
+            <summary>Gets and sets the name of the entry.</summary>
+            <remarks>
+              <para>Currently only Ascii 8 bit characters are supported in comments.</para>
+              <para>A comment cannot exceed 65535 bytes.</para>
+            </remarks>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.IsDirectory">
+            <summary>Flag that indicates if this entry is a directory or a file.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntry.Ratio">
+            <summary>Gets the compression ratio as a percentage.</summary>
+            <remarks>Returns -1.0 if unknown.</remarks>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipLib">
+            <summary>Support methods for uncompressing zip files.</summary>
+            <remarks>
+              <para>This unzip package allow extract file from .ZIP file, compatible with PKZip 2.04g WinZip, InfoZip tools and compatible.</para>
+              <para>Encryption and multi volume ZipFile (span) are not supported.  Old compressions used by old PKZip 1.x are not supported.</para>
+              <para>Copyright (C) 1998 Gilles Vollant.  http://www.winimage.com/zLibDll/minizip.html</para>
+              <para>C# wrapper by Gerry Shaw (gerry_shaw@yahoo.com).  http://www.organicbit.com/zip/</para>
+            </remarks>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.zipOpen(System.String,System.Int32)">
+            <summary>Create a zip file.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.zipOpenNewFileInZip(System.IntPtr,System.String,OrganicBit.Zip.ZipFileEntryInfo*,System.Byte[],System.UInt32,System.Byte[],System.UInt32,System.String,System.Int32,System.Int32)">
+            <summary>Open a new zip entry for writing.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.zipWriteInFileInZip(System.IntPtr,System.Byte[],System.UInt32)">
+            <summary>Write data to the zip file.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.zipCloseFileInZip(System.IntPtr)">
+            <summary>Close the current entry in the zip file.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.zipClose(System.IntPtr,System.String)">
+            <summary>Close the zip file.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzOpen(System.String)">
+            <summary>Opens a zip file for reading.</summary>
+            <param name="fileName">The name of the zip to open.  At this time only file names with ANSI (8 bit) characters are supported.</param>
+            <returns>
+              <para>A handle usable with other functions of the ZipLib class.</para>
+              <para>Otherwise IntPtr.Zero if the zip file could not e opened (file doen not exist or is not valid).</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzClose(System.IntPtr)">
+            <summary>Closes a zip file opened with unzipOpen.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <remarks>If there are files inside the zip file opened with <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/> these files must be closed with <see cref="M:OrganicBit.Zip.ZipLib.unzCloseCurrentFile(System.IntPtr)"/> before call <c>unzClose</c>.</remarks>
+            <returns>
+              <para>Zero if there was no error.</para>
+              <para>Otherwise a value less than zero.  See <see cref="T:OrganicBit.Zip.ErrorCode"/> for the specific reason.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzGetGlobalInfo(System.IntPtr,OrganicBit.Zip.ZipFileInfo*)">
+            <summary>Get global information about the zip file.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <param name="globalInfoPtr">An address of a <see cref="T:OrganicBit.Zip.ZipFileInfo"/> struct to hold the information.  No preparation of the structure is needed.</param>
+            <returns>
+              <para>Zero if there was no error.</para>
+              <para>Otherwise a value less than zero.  See <see cref="T:OrganicBit.Zip.ErrorCode"/> for the specific reason.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzGetGlobalComment(System.IntPtr,System.SByte[],System.UInt32)">
+            <summary>Get the comment associated with the entire zip file.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/></param>
+            <param name="commentBuffer">The buffer to hold the comment.</param>
+            <param name="commentBufferLength">The length of the buffer in bytes (8 bit characters).</param>
+            <returns>
+              <para>The number of characters in the comment if there was no error.</para>
+              <para>Otherwise a value less than zero.  See <see cref="T:OrganicBit.Zip.ErrorCode"/> for the specific reason.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzGoToFirstFile(System.IntPtr)">
+            <summary>Set the current file of the zip file to the first file.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <returns>
+              <para>Zero if there was no error.</para>
+              <para>Otherwise a value less than zero.  See <see cref="T:OrganicBit.Zip.ErrorCode"/> for the specific reason.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzGoToNextFile(System.IntPtr)">
+            <summary>Set the current file of the zip file to the next file.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <returns>
+              <para>Zero if there was no error.</para>
+              <para>Otherwise <see cref="F:OrganicBit.Zip.ErrorCode.EndOfListOfFile"/> if there are no more entries.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzLocateFile(System.IntPtr,System.String,System.Int32)">
+            <summary>Try locate the entry in the zip file.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <param name="entryName">The name of the entry to look for.</param>
+            <param name="caseSensitivity">If 0 use the OS default.  If 1 use case sensitivity like strcmp, Unix style.  If 2 do not use case sensitivity like strcmpi, Windows style.</param>
+            <returns>
+              <para>Zero if there was no error.</para>
+              <para>Otherwise <see cref="F:OrganicBit.Zip.ErrorCode.EndOfListOfFile"/> if there are no more entries.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzGetCurrentFileInfo(System.IntPtr,OrganicBit.Zip.ZipEntryInfo*,System.SByte[],System.UInt32,System.Byte[],System.UInt32,System.SByte[],System.UInt32)">
+            <summary>Get information about the current entry in the zip file.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <param name="entryInfoPtr">A ZipEntryInfo struct to hold information about the entry or null.</param>
+            <param name="entryNameBuffer">An array of sbyte characters to hold the entry name or null.</param>
+            <param name="entryNameBufferLength">The length of the entryNameBuffer in bytes.</param>
+            <param name="extraField">An array to hold the extra field data for the entry or null.</param>
+            <param name="extraFieldLength">The length of the extraField array in bytes.</param>
+            <param name="commentBuffer">An array of sbyte characters to hold the entry name or null.</param>
+            <param name="commentBufferLength">The length of theh commentBuffer in bytes.</param>
+            <remarks>
+              <para>If entryInfoPtr is not null the structure will contain information about the current file.</para>
+              <para>If entryNameBuffer is not null the name of the entry will be copied into it.</para>
+              <para>If extraField is not null the extra field data of the entry will be copied into it.</para>
+              <para>If commentBuffer is not null the comment of the entry will be copied into it.</para>
+            </remarks>
+            <returns>
+              <para>Zero if there was no error.</para>
+              <para>Otherwise a value less than zero.  See <see cref="T:OrganicBit.Zip.ErrorCode"/> for the specific reason.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)">
+            <summary>Open the zip file entry for reading.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <returns>
+              <para>Zero if there was no error.</para>
+              <para>Otherwise a value from <see cref="T:OrganicBit.Zip.ErrorCode"/>.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzCloseCurrentFile(System.IntPtr)">
+            <summary>Close the file entry opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <returns>
+              <para>Zero if there was no error.</para>
+              <para>CrcError if the file was read but the Crc does not match.</para>
+              <para>Otherwise a value from <see cref="T:OrganicBit.Zip.ErrorCode"/>.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzReadCurrentFile(System.IntPtr,System.Byte[],System.UInt32)">
+            <summary>Read bytes from the current zip file entry.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <param name="buffer">Buffer to store the uncompressed data into.</param>
+            <param name="count">Number of bytes to write from <paramref name="buffer"/>.</param>
+            <returns>
+              <para>The number of byte copied if somes bytes are copied.</para>
+              <para>Zero if the end of file was reached.</para>
+              <para>Less than zero with error code if there is an error.  See <see cref="T:OrganicBit.Zip.ErrorCode"/> for a list of possible error codes.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unztell(System.IntPtr)">
+            <summary>Give the current position in uncompressed data of the zip file entry currently opened.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <returns>The number of bytes into the uncompressed data read so far.</returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.unzeof(System.IntPtr)">
+            <summary>Determine if the end of the zip file entry has been reached.</summary>
+            <param name="handle">The zip file handle opened by <see cref="M:OrganicBit.Zip.ZipLib.unzOpenCurrentFile(System.IntPtr)"/>.</param>
+            <returns>
+              <para>One if the end of file was reached.</para>
+              <para>Zero if elsewhere.</para>
+            </returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.StringToAnsi(System.String)">
+            <summary>Converts a CLR string to a 8 bit ANSI array of characters.</summary>
+            <param name="str">The string to convert.</param>
+            <returns>A 8 bit ANSI array of characters.</returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipLib.AnsiToString(System.SByte[])">
+            <summary>Converst an 8 bit ANSI C style string to a CLR string.</summary>
+            <param name="chars">The array of a characters that holds the string.</param>
+            <returns>The CLR string representing the characters passed in.</returns>
+        </member>
+        <member name="T:OrganicBit.Zip.ErrorCode">
+            <summary>List of possible error codes.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ErrorCode.Ok">
+            <summary>No error.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ErrorCode.Error">
+            <summary>Unknown error.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ErrorCode.EndOfListOfFile">
+            <summary>Last entry in directory reached.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ErrorCode.ParameterError">
+            <summary>Parameter error.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ErrorCode.BadZipFile">
+            <summary>Zip file is invalid.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ErrorCode.InternalError">
+            <summary>Internal program error.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ErrorCode.CrcError">
+            <summary>Crc values do not match.</summary>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipFileInfo">
+            <summary>Global information about the zip file.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipFileInfo.EntryCount">
+            <summary>The number of entries in the directory.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipFileInfo.CommentLength">
+            <summary>Length of zip file comment in bytes (8 bit characters).</summary>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipDateTimeInfo">
+            <summary>Custom ZipLib date time structure.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipDateTimeInfo.Seconds">
+            <summary>Seconds after the minute - [0,59]</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipDateTimeInfo.Minutes">
+            <summary>Minutes after the hour - [0,59]</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipDateTimeInfo.Hours">
+            <summary>Hours since midnight - [0,23]</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipDateTimeInfo.Day">
+            <summary>Day of the month - [1,31]</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipDateTimeInfo.Month">
+            <summary>Months since January - [0,11]</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipDateTimeInfo.Year">
+            <summary>Years - [1980..2044]</summary>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipEntryInfo">
+            <summary>Information stored in zip file directory about an entry.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.VersionNeeded">
+            <summary>Version needed to extract (2 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.Flag">
+            <summary>General purpose bit flag (2 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.CompressionMethod">
+            <summary>Compression method (2 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.DosDate">
+            <summary>Last mod file date in Dos fmt (4 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.Crc">
+            <summary>Crc-32 (4 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.CompressedSize">
+            <summary>Compressed size (4 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.UncompressedSize">
+            <summary>Uncompressed size (4 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.FileNameLength">
+            <summary>Filename length (2 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.ExtraFieldLength">
+            <summary>Extra field length (2 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.CommentLength">
+            <summary>File comment length (2 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.DiskStartNumber">
+            <summary>Disk number start (2 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.InternalFileAttributes">
+            <summary>Internal file attributes (2 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.ExternalFileAttributes">
+            <summary>External file attributes (4 bytes).</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipEntryInfo.DateTime">
+            <summary>File modification date of entry.</summary>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipEntryCollection">
+            <summary>A collection that stores <see cref="T:OrganicBit.Zip.ZipEntry"/> objects.</summary>
+            <seealso cref="T:OrganicBit.Zip.ZipEntryCollection"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.#ctor">
+            <summary>Initializes a new instance of <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.#ctor(OrganicBit.Zip.ZipEntryCollection)">
+            <summary>Initializes a new instance of <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> based on another <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>.</summary>
+            <param name="value">A <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> from which the contents are copied.</param>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.#ctor(OrganicBit.Zip.ZipEntry[])">
+            <summary>Initializes a new instance of <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> containing any array of <see cref="T:OrganicBit.Zip.ZipEntry"/> objects.</summary>
+            <param name="value">A array of <see cref="T:OrganicBit.Zip.ZipEntry"/> objects with which to intialize the collection.</param>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.Add(OrganicBit.Zip.ZipEntry)">
+            <summary>Adds a <see cref="T:OrganicBit.Zip.ZipEntry"/> with the specified value to the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>.</summary>
+            <param name="value">The <see cref="T:OrganicBit.Zip.ZipEntry"/> to add.</param>
+            <returns>The index at which the new element was inserted.</returns>
+            <seealso cref="M:OrganicBit.Zip.ZipEntryCollection.AddRange(OrganicBit.Zip.ZipEntry[])"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.AddRange(OrganicBit.Zip.ZipEntry[])">
+            <summary>Copies the elements of an array to the end of the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>.</summary>
+            <param name="value">An array of type <see cref="T:OrganicBit.Zip.ZipEntry"/> containing the objects to add to the collection.</param>
+            <returns>None.</returns>
+            <seealso cref="M:OrganicBit.Zip.ZipEntryCollection.Add(OrganicBit.Zip.ZipEntry)"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.AddRange(OrganicBit.Zip.ZipEntryCollection)">
+            <summary>Adds the contents of another <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> to the end of the collection.</summary>
+            <param name="value">A <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> containing the objects to add to the collection.</param>
+            <returns>None.</returns>
+            <seealso cref="M:OrganicBit.Zip.ZipEntryCollection.Add(OrganicBit.Zip.ZipEntry)"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.Contains(OrganicBit.Zip.ZipEntry)">
+            <summary>Gets a value indicating whether the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> contains the specified <see cref="T:OrganicBit.Zip.ZipEntry"/>.</summary>
+            <param name="value">The <see cref="T:OrganicBit.Zip.ZipEntry"/> to locate.</param>
+            <returns>
+            <para><see langword="true"/> if the <see cref="T:OrganicBit.Zip.ZipEntry"/> is contained in the collection; 
+              otherwise, <see langword="false"/>.</para>
+            </returns>
+            <seealso cref="M:OrganicBit.Zip.ZipEntryCollection.IndexOf(OrganicBit.Zip.ZipEntry)"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.CopyTo(OrganicBit.Zip.ZipEntry[],System.Int32)">
+            <summary>Copies the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> values to a one-dimensional <see cref="T:System.Array"/> instance at the specified index.</summary>
+            <param name="array"><para>The one-dimensional <see cref="T:System.Array"/> that is the destination of the values copied from <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> .</para></param>
+            <param name="index">The index in <paramref name="array"/> where copying begins.</param>
+            <returns>None.</returns>
+            <exception cref="T:System.ArgumentException"><para><paramref name="array"/> is multidimensional.</para> <para>-or-</para> <para>The number of elements in the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> is greater than the available space between <paramref name="arrayIndex"/> and the end of <paramref name="array"/>.</para></exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="array"/> is <see langword="null"/>. </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than <paramref name="array"/>'s lowbound. </exception>
+            <seealso cref="T:System.Array"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.IndexOf(OrganicBit.Zip.ZipEntry)">
+            <summary>Returns the index of a <see cref="T:OrganicBit.Zip.ZipEntry"/> in the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>.</summary>
+            <param name="value">The <see cref="T:OrganicBit.Zip.ZipEntry"/> to locate.</param>
+            <returns>
+            <para>The index of the <see cref="T:OrganicBit.Zip.ZipEntry"/> of <paramref name="value"/> in the 
+            <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>, if found; otherwise, -1.</para>
+            </returns>
+            <seealso cref="M:OrganicBit.Zip.ZipEntryCollection.Contains(OrganicBit.Zip.ZipEntry)"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.Insert(System.Int32,OrganicBit.Zip.ZipEntry)">
+            <summary>Inserts a <see cref="T:OrganicBit.Zip.ZipEntry"/> into the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> at the specified index.</summary>
+            <param name="index">The zero-based index where <paramref name="value"/> should be inserted.</param>
+            <param name=" value">The <see cref="T:OrganicBit.Zip.ZipEntry"/> to insert.</param>
+            <returns><para>None.</para></returns>
+            <seealso cref="M:OrganicBit.Zip.ZipEntryCollection.Add(OrganicBit.Zip.ZipEntry)"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.GetEnumerator">
+            <summary>Returns an enumerator that can iterate through the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>.</summary>
+            <returns><para>None.</para></returns>
+            <seealso cref="T:System.Collections.IEnumerator"/>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.Remove(OrganicBit.Zip.ZipEntry)">
+            <summary>Removes a specific <see cref="T:OrganicBit.Zip.ZipEntry"/> from the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>.</summary>
+            <param name="value">The <see cref="T:OrganicBit.Zip.ZipEntry"/> to remove from the <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> .</param>
+            <returns><para>None.</para></returns>
+            <exception cref="T:System.ArgumentException"><paramref name="value"/> is not found in the Collection. </exception>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntryCollection.Item(System.Int32)">
+            <summary>Represents the entry at the specified index of the <see cref="T:OrganicBit.Zip.ZipEntry"/>.</summary>
+            <param name="index"><para>The zero-based index of the entry to locate in the collection.</para></param>
+            <value>
+               <para>The entry at the specified index of the collection.</para>
+            </value>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is outside the valid range of indexes for the collection.</exception>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipEntryCollection.ZipEntryEnumerator">
+            <summary>Enumerator for <see cref="T:OrganicBit.Zip.ZipEntryCollection"/>.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.ZipEntryEnumerator.#ctor(OrganicBit.Zip.ZipEntryCollection)">
+            <summary>Initializes a new instance of the <see cref="T:OrganicBit.Zip.ZipEntryCollection.ZipEntryEnumerator"/> class.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.ZipEntryEnumerator.MoveNext">
+            <summary>Advance the enumerator to the next entry in the collection.</summary>
+            <returns><c>true</c> if there are more entries; <c>false</c> if there are no more entires in the collection.</returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipEntryCollection.ZipEntryEnumerator.Reset">
+            <summary>Set the enumerator to just before the start of the collection.  Call <see cref="M:OrganicBit.Zip.ZipEntryCollection.ZipEntryEnumerator.MoveNext"/> to advance to the first entry in the collection.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipEntryCollection.ZipEntryEnumerator.Current">
+            <summary>Gets the current entry.</summary>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipReader">
+            <summary>Provides support for reading files in the ZIP file format. Includes support for both compressed and uncompressed entries.</summary>
+            <example>This example shows how to view the entries in a ZIP file.
+            <code>
+            public static void View(string zipFileName) {
+                ZipReader reader = new ZipReader(zipFileName);
+            
+                Console.WriteLine("Archive: {0} ({1} files)", zipFileName, reader.Entries.Count);
+                Console.WriteLine(reader.Comment);
+            
+                string format = "{0,8} {1,8} {2,5} {3,10} {4,5} {5}";
+                Console.WriteLine(format, " Length ", "  Size  ", "Ratio", "   Date   ", "Time ", "Name");
+                Console.WriteLine(format, "--------", "--------", "-----", "----------", "-----", "----");
+            
+                foreach (ZipEntry entry in reader.Entries) {
+                    if (!entry.IsDirectory) {
+                        Console.WriteLine(format,
+                            entry.Length,
+                            entry.CompressedLength,
+                            entry.Ratio.ToString("P0"),
+                            entry.ModifiedTime.ToString("yyyy-MM-dd"),
+                            entry.ModifiedTime.ToString("hh:mm"),
+                            entry.Name);
+                    }
+                }
+                reader.Close();
+            }
+            </code>
+            </example>
+            <example>This example shows how to extract files from a ZIP file.
+            <code>
+            public static void Extract(string zipFileName) {
+                ZipReader reader = new ZipReader(zipFileName);
+                Console.WriteLine("Archive: {0}", zipFileName);
+                Console.WriteLine(reader.Comment);
+            
+                // buffer to hold temp bytes
+                byte[] buffer = new byte[4096];
+                int byteCount;
+            
+                // Get the zipped entries
+                while (reader.MoveNext()) {
+                    ZipEntry entry = reader.Current;
+            
+                    if (entry.IsDirectory) {
+                        Directory.CreateDirectory(entry.Name);
+                    } else {
+                        Console.Write("  {0}", entry.Name);
+            
+                        // create output stream
+                        FileStream writer = File.Open(entry.Name, FileMode.Create);
+            
+                        // write uncompressed data
+                        while ((byteCount = reader.Read(buffer, 0, buffer.Length)) > 0) {
+                            Console.Write(".");
+                            writer.Write(buffer, 0, byteCount);
+                        }
+                        writer.Close();
+                        Console.WriteLine();
+                    }
+                }
+                reader.Close();
+            }
+            </code>
+            </example>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipReader._handle">
+            <summary>ZipFile handle to read data from.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipReader._fileName">
+            <summary>Name of zip file.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipReader._entries">
+            <summary>Contents of zip file directory.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipReader._comment">
+            <summary>Global zip file comment.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipReader._entryOpen">
+            <summary>True if an entry is open for reading.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipReader._current">
+            <summary>Current zip entry open for reading.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipReader.#ctor(System.String)">
+            <summary>Initializes a instance of the <see cref="T:OrganicBit.Zip.ZipReader"/> class for reading the zip file with the given name.</summary>
+            <param name="fileName">The name of zip file that will be read.</param>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipReader.Finalize">
+            <summary>Cleans up the resources used by this zip file.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipReader.System#IDisposable#Dispose">
+            <remarks>Dispose is synonym for Close.</remarks>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipReader.Close">
+            <summary>Closes the zip file and releases any resources.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipReader.MoveNext">
+            <summary>Advances the enumerator to the next element of the collection.</summary>
+            <summary>Sets <see cref="P:OrganicBit.Zip.ZipReader.Current"/> to the next zip entry.</summary>
+            <returns><c>true</c> if the next entry is not <c>null</c>; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipReader.Reset">
+            <summary>Move to just before the first entry in the zip directory.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipReader.Seek(System.String)">
+            <summary>Seek to the specified entry.</summary>
+            <param name="entryName">The name of the entry to seek to.</param>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipReader.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>Uncompress a block of bytes from the current zip entry and writes the data in a given buffer.</summary>
+            <param name="buffer">The array to write data into.</param>
+            <param name="index">The byte offset in <paramref name="buffer"/> at which to begin writing.</param>
+            <param name="count">The maximum number of bytes to read.</param>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipReader.Name">
+            <summary>Gets the name of the zip file that was passed to the constructor.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipReader.Comment">
+            <summary>Gets the global comment for the zip file.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipReader.Entries">
+            <summary>Gets a <see cref="T:OrganicBit.Zip.ZipEntryCollection"/> object that contains all the entries in the zip file directory.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipReader.Current">
+            <summary>Gets the current entry in the zip file..</summary>
+        </member>
+        <member name="T:OrganicBit.Zip.ZipWriter">
+            <summary>Provides support for writing files in the ZIP file format. Includes support for both compressed and uncompressed entries.</summary>
+            <example>This example shows how to create a ZIP file.
+            <code>
+            public static void Add(string zipFileName, string[] entryPatterns) {
+                string currentDirectory = Directory.GetCurrentDirectory();
+                Console.WriteLine("Creating {0}", zipFileName);
+            
+                ZipWriter writer = new ZipWriter(zipFileName);
+            
+                // buffer to hold temp bytes
+                byte[] buffer = new byte[4096];
+                int byteCount;
+            
+                // add files to archive
+                foreach (string pattern in entryPatterns) {
+                    foreach (string path in Directory.GetFiles(currentDirectory, pattern)) {
+                        string fileName = Path.GetFileName(path);
+                        Console.Write("Adding {0}", fileName);
+            
+                        ZipEntry entry = new ZipEntry(fileName);
+                        entry.ModifiedTime = File.GetLastWriteTime(fileName);
+                        entry.Comment = "local file comment";
+            
+                        writer.AddEntry(entry);
+            
+                        FileStream reader = File.OpenRead(entry.Name);
+                        while ((byteCount = reader.Read(buffer, 0, buffer.Length)) > 0) {
+                            Console.Write(".");
+                            writer.Write(buffer, 0, byteCount);
+                        }
+                        reader.Close();
+                        Console.WriteLine();
+                    }
+                }
+            
+                writer.Close();
+            }
+            </code>
+            </example>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipWriter._fileName">
+            <summary>Name of the zip file.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipWriter._comment">
+            <summary>Zip file global comment.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipWriter._entryOpen">
+            <summary>True if currently writing a new zip file entry.</summary>
+        </member>
+        <member name="F:OrganicBit.Zip.ZipWriter._handle">
+            <summary>Zip file handle.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipWriter.#ctor(System.String)">
+            <summary>Initializes a new instance fo the <see cref="T:OrganicBit.Zip.ZipWriter"/> class with a specified file name.  Any Existing file will be overwritten.</summary>
+            <param name="fileName">The name of the zip file to create.</param>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipWriter.Finalize">
+            <summary>Cleans up the resources used by this zip file.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipWriter.System#IDisposable#Dispose">
+            <remarks>Dispose is synonym for Close.</remarks>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipWriter.Close">
+            <summary>Closes the zip file and releases any resources.</summary>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipWriter.AddEntry(OrganicBit.Zip.ZipEntry)">
+            <summary>Creates a new zip entry in the directory and positions the stream to the start of the entry data.</summary>
+            <param name="entry">The zip entry to be written.</param>
+            <remarks>Closes the current entry if still active.</remarks>
+        </member>
+        <member name="M:OrganicBit.Zip.ZipWriter.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>Compress a block of bytes from the given buffer and writes them into the current zip entry.</summary>
+            <param name="buffer">The array to read data from.</param>
+            <param name="index">The byte offset in <paramref name="buffer"/> at which to begin reading.</param>
+            <param name="count">The maximum number of bytes to write.</param>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipWriter.Name">
+            <summary>Gets the name of the zip file.</summary>
+        </member>
+        <member name="P:OrganicBit.Zip.ZipWriter.Comment">
+            <summary>Gets and sets the zip file comment.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+    <PropertyGroup>
+        <AssemblyName>EffectsTestsPart1</AssemblyName>
+        <OutputType>Library</OutputType>
+        <AssemblyType>Library</AssemblyType>
+        <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <EffectsCommon>$(WpfTestBasePath)\Effects\Common</EffectsCommon>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Code Files below -->
+        <Compile Include="*.cs" />
+        <Compile Include="VisualTest\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="$(TestContractsProject)" />
+      <ProjectReference Include="$(InternalUtilitiesProject)" />
+      <ProjectReference Include="$(TestRuntimeProject)" />
+        <ProjectReference Include="$(TestApiCoreProject)" />
+        <ProjectReference Include="$(TestApiWpfProject)" />
+        <ProjectReference Include="$(EffectsCommon)\Code\ShaderEffects\ShaderEffects.csproj">
+          <Name>ShaderEffects</Name>
+        </ProjectReference>
+        <ProjectReference Include="$(WpfTestBasePath)\Effects\FeatureTests\code\EffectsTests.csproj">
+          <Name>EffectsTests</Name>
+        </ProjectReference>
+    </ItemGroup>
+
+</Project>

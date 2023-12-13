@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RayHitTestingTest"
+    LogFilePrefix="RayHitTestingTest"
+
+    Scene="Explicit"
+    Visual0="UnitPlaneTriangle"
+    Visual1="WhiteAmbient"
+    Camera="OrthographicDefault"
+    UseViewport3D="false"
+
+    Fail="false"
+    NumericalPrecisionTolerance="0.000000001"
+    >
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,5 down -z axis - Flatten Z"
+        Expectation="Hit"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+        ModelTransform0="Scale 1,1,0"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,-5 down -z axis - Flatten Z"
+        Expectation="Miss"
+        Origin="0.25,0.25,-5"
+        Direction="0,0,-1"
+        ModelTransform0="Scale 1,1,0"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,5 down -z axis - Flatten Y"
+        Expectation="Miss"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+        ModelTransform0="Scale 1,0,1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,5 down -z axis - Flatten X"
+        Expectation="Miss"
+        Origin="0.25,0.25,5"
+        Direction="0,0,-1"
+        ModelTransform0="Scale 0,1,1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 5.25,0.25,5 down -1,0,-1 - Flatten Z"
+        Expectation="Hit"
+        Origin="5.25,0.25,5"
+        Direction="-1,0,-1"
+        ModelTransform0="Scale 1,1,0"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 5.25,0.25,-5 down -1,0,1 - Flatten Z"
+        Expectation="Miss"
+        Origin="5.25,0.25,-5"
+        Direction="-1,0,1"
+        ModelTransform0="Scale 1,1,0"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from -4.75,0.25,5 down 1,0,-1 - Flatten Z"
+        Expectation="Hit"
+        Origin="-4.75,0.25,5"
+        Direction="1,0,-1"
+        ModelTransform0="Scale 1,1,0"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,5.25,5 down 0,-1,-1 - Flatten Z"
+        Expectation="Hit"
+        NumericalPrecisionTolerance="0.0000001"
+        Origin="0.25,5.25,5"
+        Direction="0,-1,-1"
+        ModelTransform0="Scale 1,1,0"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,-4.75,5 down 0,1,-1 - Flatten Z"
+        Expectation="Hit"
+        NumericalPrecisionTolerance="0.0000001"
+        Origin="0.25,-4.75,5"
+        Direction="0,1,-1"
+        ModelTransform0="Scale 1,1,0"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,0.25,-5 down +z axis - Flatten Z"
+        Expectation="Miss"
+        Origin="0.25,0.25,-5"
+        Direction="0,0,-1"
+        ModelTransform0="Scale 1,1,0"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 5,0.25,0.25 down -x axis - Flatten X"
+        Expectation="Hit"
+        Origin="5,0.25,0.25"
+        Direction="-1,0,0"
+        ModelTransform0="Scale 0,1,1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from -5,0.25,0.25 down -x axis - Flatten X"
+        Expectation="Miss"
+        Origin="-5,0.25,0.25"
+        Direction="-1,0,0"
+        ModelTransform0="Scale 0,1,1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from -5,0.25,0.25 down +x axis - Flatten X"
+        Expectation="Miss"
+        Origin="-5,0.25,0.25"
+        Direction="1,0,0"
+        ModelTransform0="Scale 0,1,1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,5,0.25 down -y axis - Flatten Y"
+        Expectation="Hit"
+        Origin="0.25,5,0.25"
+        Direction="0,-1,0"
+        ModelTransform0="Scale 1,0,1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,-5,0.25 down -y axis - Flatten Y"
+        Expectation="Miss"
+        Origin="0.25,-5,0.25"
+        Direction="0,-1,0"
+        ModelTransform0="Scale 1,0,1"
+        />
+    <VARIATION
+        Description="Cast a ray at simple triangle from 0.25,-5,0.25 down +y axis - Flatten Y"
+        Expectation="Miss"
+        Origin="0.25,-5,0.25"
+        Direction="0,1,0"
+        ModelTransform0="Scale 1,0,1"
+        />
+</INIT>

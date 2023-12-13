@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Scenario2D</AssemblyName>
+    <OutputType>winexe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Application markup -->
+    <ApplicationDefinition Include="Application.xaml" />
+
+    <!-- Compiled Xaml Files list -->
+    <Page Include="Tests\*.xaml" />
+
+    <!-- CodeBehind file list -->
+    <Compile Include="*.xaml.cs" />
+    <Compile Include="Library\*.cs" />
+    <Compile Include="Tests\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TestRuntimeProject)" />
+    <ProjectReference Include="$(TestContractsProject)" />
+    <ProjectReference Include="$(InternalUtilitiesProject)" />
+  </ItemGroup>
+</Project>

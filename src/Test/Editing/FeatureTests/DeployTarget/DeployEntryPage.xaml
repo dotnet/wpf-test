@@ -1,0 +1,218 @@
+﻿<DockPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="DeployEntryPage" Initialized="TopPanelLoaded">
+    <DockPanel.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="LightYellow" Offset="0" />
+                    <GradientStop Color="Tan" Offset="1" />
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </DockPanel.Background>
+    <x:Code><![CDATA[
+
+private bool pageInitialized;
+private bool appHandlerSetup;
+private string[] testCaseNames;
+
+private string GetNameFromFullTypeName(string fullTypeName)
+{
+    return Test.Uis.Utils.ReflectionUtils.GetNameFromFullTypeName(fullTypeName);
+}
+
+private void LoadXmlClick(object sender, RoutedEventArgs e)
+{
+  // txtXml.Text = Test.Uis.IO.TextFileUtils.LoadFromFile("testxml.xml");
+  // We are still not performant enough. Load a stub instead.
+
+  string nl = Environment.NewLine;
+
+  // Ensure that we have some test case name for the values.
+  string testCaseName;
+  if (txtTestCaseName.Text.Length == 0)
+  {
+    txtTestCaseName.Text = "SampleCase";
+  }
+  testCaseName = txtTestCaseName.Text;
+  txtXml.Text = 
+    "<?xml version='1.0'?>" + nl +
+    "<TestCases>" + nl +
+    "  <" + testCaseName + ">" + nl +
+    "    <SampleArgument Value='SomeValue' />" + nl +
+    "  </" + testCaseName + ">" + nl +
+    "</TestCases>";
+}
+
+private void LoggerLog(object sender, Test.Uis.Loggers.LogEventArgs e)
+{
+  System.Diagnostics.Debug.Assert(e != null);
+  if (txtLogArea.CheckAccess())
+  {
+    txtLogArea.AppendText(e.Text);
+    txtLogArea.AppendText(Environment.NewLine);
+  }
+}
+
+private void RunTestClick(object sender, RoutedEventArgs e)
+{
+    if (TestCaseListBox.SelectedIndex == -1)
+    {
+        StatusBarText = "No test case selected.";
+    }
+    else
+    {
+        txtLogArea.Text = "";
+        if (!appHandlerSetup)
+        {
+            Test.Uis.Management.TestRunner.SetupApplicationExceptionHandler();
+            Test.Uis.Loggers.Logger.Current.LogEvent += LoggerLog;
+            appHandlerSetup = true;
+        }
+        string testTypeName = testCaseNames[TestCaseListBox.SelectedIndex];
+        System.Diagnostics.Debug.Assert(testTypeName != null && testTypeName.Length > 0);
+
+        txtLogArea.Text = testTypeName + " - app handler setup: " + appHandlerSetup;
+
+        string[] args;
+        if (txtTestCaseName.Text.Length > 0)
+        {
+            args = new string[3];
+            args[2] = "/TestName=" + txtTestCaseName.Text;
+        }
+        else
+        {
+            args = new string[2];
+        }
+        args[0] = "/TestCaseType=" + testTypeName;
+        args[1] = "/NoExit=true";
+        Test.Uis.Management.TestRunner.DoDeployWindowLoaded(args);
+    }
+}
+
+private void TopPanelLoaded(object sender, EventArgs e)
+{
+  const bool includeNamespaces = false;
+  if (pageInitialized) return;
+  TestCaseListBox.Items.Clear();
+  testCaseNames = Test.Uis.Management.TestFinder.ListAvailableTestCases(includeNamespaces);
+  System.Array.Sort(testCaseNames);
+  for (int i = 0; i < testCaseNames.Length; i++)
+  {
+    TestCaseListBox.Items.Add(testCaseNames[i]);
+  }
+  pageInitialized = true;
+}
+
+private void TestCaseSelectionChanged(object sender, SelectionChangedEventArgs e)
+{
+  if (TestCaseListBox.SelectedIndex == -1)
+  {
+    StatusBarText = "No test case selected.";
+  }
+  else
+  {
+    string testCaseName = testCaseNames[TestCaseListBox.SelectedIndex];
+    System.Diagnostics.Debug.Assert(testCaseName != null && testCaseName.Length > 0);
+    Type testCaseType = Test.Uis.Utils.ReflectionUtils.FindType(testCaseName);
+    System.Diagnostics.Debug.Assert(testCaseType != null);
+
+    StatusBarText = "Test case selected: " + testCaseName;
+
+    // Setup grid.    
+    txtTestCaseType.Text = testCaseName;
+    txtTestCaseName.Text = "";
+    
+    Test.Uis.Management.TestArgumentAttribute[] args = 
+      Test.Uis.Management.TestArgumentAttribute.FromType(testCaseType);
+    System.Diagnostics.Debug.Assert(args != null);
+    
+    txtArgumentsDescription.Text = "";
+    for (int i = 0; i < args.Length; i++)
+    {
+      Test.Uis.Management.TestArgumentAttribute arg = args[i];
+      System.Diagnostics.Debug.Assert(arg != null);
+      
+      txtArgumentsDescription.Text = txtArgumentsDescription.Text + args[i].Name;
+      txtArgumentsDescription.Text = txtArgumentsDescription.Text + ": ";
+      txtArgumentsDescription.Text = txtArgumentsDescription.Text + args[i].Description;
+      txtArgumentsDescription.Text = txtArgumentsDescription.Text + Environment.NewLine;
+    }
+  }
+}
+
+private string StatusBarText
+{
+  get { return StatusBarControl.Text; }
+  set { StatusBarControl.Text = value; }
+}
+
+]]></x:Code>
+    <TextBlock DockPanel.Dock="Top" FontSize="10pt" FontFamily="Arial" FontWeight="Bold">User Interaction Services - Test Case Applet</TextBlock>
+    <Border DockPanel.Dock="Top" BorderThickness="1" BorderBrush="Black">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="LightYellow" Offset="0" />
+                        <GradientStop Color="Tan" Offset="1" />
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Border.Background>
+        <FlowDocumentScrollViewer DockPanel.Dock="Top"><FlowDocument FontSize="9pt" FontFamily="Arial">
+            <Paragraph>
+                <Bold>Instructions</Bold>.</Paragraph>
+            <Paragraph>
+Use the list on the left to select a test case type to run. This will be used
+for the <Run FontFamily="Courier">TestCaseType</Run> argument. When the
+test case is selected, a list of declared arguments will be shown (from the
+<Run FontFamily="Courier New">TestArgument</Run> attributes).
+</Paragraph>
+            <Paragraph>
+Arguments can be set in XML form. Click the <Bold>Load XML</Bold> button
+to load the testxml.xml file (note: only a stub is loaded until perf
+improve), and then modify the contents. Note that the 
+<Run FontFamily="Courier New">/NoExit=True</Run> argument is always used,
+for interactive debugging.
+</Paragraph>
+        </FlowDocument></FlowDocumentScrollViewer>
+    </Border>
+    <TextBlock Name="StatusBarControl" DockPanel.Dock="Bottom" FontSize="9pt">Status Bar</TextBlock>
+    <ScrollViewer DockPanel.Dock="Left" Width="200px">
+        <ListBox Name="TestCaseListBox" SelectionChanged="TestCaseSelectionChanged">
+            <ListBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="LightYellow" Offset="0" />
+                            <GradientStop Color="Tan" Offset="1" />
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </ListBox.Background>
+            <!-- <ListBoxItem>Test Case 1</ListBoxItem> -->
+        </ListBox>
+    </ScrollViewer>
+    <!-- Area for property setting -->
+    <DockPanel>
+        <Button DockPanel.Dock="Bottom" Click="RunTestClick">Run test case</Button>
+        <Button DockPanel.Dock="Bottom" Click="LoadXmlClick">Load XML</Button>
+        <Grid DockPanel.Dock="Top" Name="ArgumentsPanel" Margin="2">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="2">Test case type</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0" Name="txtTestCaseType" Margin="2">TypeName</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="2">Test case name</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="1" Name="txtTestCaseName" Margin="2">TestName</TextBox>
+        </Grid>
+        <TextBlock Name="txtArgumentsDescription" DockPanel.Dock="Top" />
+        <TextBox Name="txtXml" DockPanel.Dock="Top" Height="120px" />
+        <TextBox Name="txtLogArea" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" />
+    </DockPanel>
+</DockPanel>

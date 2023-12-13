@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    WindowWidth="300"
+    WindowHeight="200"
+    LogFilePrefix="dLight"
+
+    BackgroundColor="255,0,0,0"
+    PixelToEdgeTolerance="0.05"
+    DefaultColorTolerance="3,3,3,3"
+
+    CameraType="Perspective"
+    CameraPosition="0,0,6"
+    CameraLookDirection="0,0,-1"
+    CameraUp="0,1,0"
+    CameraNearPlaneDistance="1"
+    CameraFarPlaneDistance="10"
+    CameraFieldOfView="45"
+    Material="255,255,255,255"
+    Mesh="Sphere 50 50 1.2"
+
+    LightType="Directional"
+    LightColor="255,255,255,255"
+    >
+
+    <!-- Front lit, sphere Mesh, white Light -->
+    <VARIATION
+        LightDirection="0, 0, -1"
+        />
+
+    <!-- Diagonally lit, sphere Mesh, white Light -->
+    <VARIATION
+        LightDirection="1, 1, -1"
+        />
+
+    <!-- Back lit, sphere Mesh, white Light -->
+    <VARIATION
+        LightDirection="0, 0, 1"
+        BackgroundColor="255,255,255,255"
+        />
+
+    <!-- Front lit, sphere Mesh, grayish Light -->
+    <VARIATION
+        LightColor="255,100,120,150"
+        LightDirection="0, 0, -1"
+        />
+
+</INIT>

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+        <AssemblyName>EffectsTests</AssemblyName>
+        <OutputType>Library</OutputType>
+        <AssemblyType>Library</AssemblyType>
+        <AssemblyAttributeClsCompliant>false</AssemblyAttributeClsCompliant>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <EffectsCommon>$(WpfTestBasePath)\Effects\Common</EffectsCommon>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Model\*.cs" />
+        <Compile Include="XamlBasedTest\*.cs" />
+        <Compile Include="Tests\*.cs" />
+        <Compile Include="ExplodeBitmapEffect\ExplodeBitmapEffect.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(TestApiCoreProject)" />
+        <ProjectReference Include="$(TestApiWpfProject)" />
+        <ProjectReference Include="$(InternalUtilitiesProject)" />
+        <ProjectReference Include="$(TestContractsProject)" />
+        <ProjectReference Include="$(TestRuntimeProject)" />
+        <ProjectReference Include="$(EffectsCommon)\Code\ShaderEffects\ShaderEffects.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="$(EffectsCommon)\Data\Shaders\ShaderBytecode\ContentReddish.ps"/>
+    </ItemGroup>
+</Project>

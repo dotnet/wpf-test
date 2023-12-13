@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<XTC Query="Important=1 Restricted=5 Root=WCPEffects branch='WCPEffects   ManagedEffectsTests   XamlTests EffectsXamlTemplateTests'" SyncDate="2006-05-02T14:59:28.656" Template="GTO">
+  <TEST Auto="1" Frequency="Weekly" Owner="Microsoft" Path="\\WCP\MIL-Effects\TestCases\GTO" Priority="1" Status="Lab-Pending" Timeout="5" Title="#14 of BitmapEffectsXamlRegressions P1">
+    <DIMENSION Name="Language" Value="*" />
+    <DIMENSION Name="Platform" Value="*" />
+    <RESOLVER Assembly="Gto.dll" Class="SuperMasterPlatformResolver" />
+    <SCENARIO ID="12678595">
+      <INIT Assembly="Gto.dll" Class="SuperMasterVerifyTest" Language="*:28325" Platform="*:26701">
+        <COMPARATOR Assembly="Gto.dll" Class="FuzzyComparator" Index="0">
+          <PROFILESET Assembly="Gto.dll" Class="DefaultDpiToHighDpiProfileSet" />
+        </COMPARATOR>
+        <RENDERER Assembly="Gto.dll" Class="XamlTemplateETC" LocalResourceDictionaryPath="InvariantTheme.xaml" />
+        <SURFACE Assembly="Gto.dll" Class="HwndSourceSurface" Height="300" Index="0" Width="300" X="200" Y="0" />
+      </INIT>
+      <VARIATION ID="12678616" MatchLevel="Good">
+        <SUPERMASTER Key="*:47545" ID="12678615">
+          <ELEMENTTREE ID="12678614" Source="Regression_Bug20BD_SetDrpShdwOrBlurOnBtnAndChldrnDisappear.xaml" />
+        </SUPERMASTER>
+      </VARIATION>
+    </SCENARIO>
+    <STEP Index="1" Loader="GTOLoader" LoaderSwitch="/NOSEE" Run="000006.xtc">
+      <FILE Path="*\Client\WcpTests\MIL\Effects\Data\XAMLRelated\Data\Regression_Bug20BD_SetDrpShdwOrBlurOnBtnAndChldrnDisappear.xaml" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Graphics\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Effects\Common\Gto.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\MILHookGTO.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Common\MILWin32GTO.dll" Type="support" />
+      <FILE Path="*\Client\WcpTests\MIL\Effects\BVT\XAMLRelated\XamlRenderTests\GTO\000964.000014\000006.xtc" Type="support" />
+    </STEP>
+  </TEST>
+</XTC>

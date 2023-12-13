@@ -2008,7 +2008,7 @@ namespace DRT
             {
                 _textbox.SpellCheck.IsEnabled = true;
 
-                // .Net BCL introduced a breaking change in 4.6.2,
+                // .Net BCL introduced a breaking change in 4.6.2 (see Regression_Bug267),
                 // so do some gymnastics to work around it.
                 const string FilePrefix = @"file:///";
                 string codebase = Assembly.GetExecutingAssembly().Location;
@@ -2024,7 +2024,7 @@ namespace DRT
                 TextPointer errorPosition = _textbox.GetNextSpellingErrorPosition(_textbox.Document.ContentStart, LogicalDirection.Forward);
                 DRT.Assert(errorPosition == null);// content is correct
 
-                // Replace the Document with a new one while SpellCheck.IsEnabled == true
+                // Related to Part1 Regression_Bug894. Replace the Document with a new one while SpellCheck.IsEnabled == true
                 // and make sure that custom dictionary get loaded properly.
                 _textbox.SpellCheck.IsEnabled = true;
                 _textbox.Document = new FlowDocument(new Paragraph(new Run("CustDictBWordA")));

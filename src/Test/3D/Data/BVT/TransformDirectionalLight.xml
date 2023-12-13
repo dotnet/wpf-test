@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<INIT
+    Class="RenderingTest3D"
+    LogFilePrefix="TransformDirectionalLight"
+    PixelToEdgeTolerance="0.05"
+    DefaultColorTolerance="4,4,4,4"
+
+    Mesh="Sphere 25 50 1.8"
+    Material="255,200,100,50"
+    Camera="PerspectiveDefault"
+
+    LightType="Directional"
+    LightColor="255,255,255,255"
+    LightDirection="0,0,-1"
+
+    TransformTarget="Light"
+    SaveExpectedZBuffer="false"
+    SaveDiffFrameBuffer="false"
+    SaveDiffZBuffer="false"
+    >
+
+    <!-- Translation -->
+
+    <VARIATION
+        Description="Translate - should have no effect"
+        TransformType="Translate"
+        TranslateOffset="100,100,100"
+        />
+
+    <!-- Rotation -->
+
+    <VARIATION
+        Description="Rotate - 90 degrees about +y axis"
+        TransformType="RotateAxisAngle"
+        RotateAngle="90"
+        RotateAxis="0,1,0"
+        />
+    <VARIATION
+        Description="Rotate - 45 degrees about +y axis"
+        TransformType="RotateAxisAngle"
+        RotateAngle="45"
+        RotateAxis="0,1,0"
+        />
+    <VARIATION
+        Description="Rotate - 90 degrees about -y axis"
+        TransformType="RotateAxisAngle"
+        RotateAngle="90"
+        RotateAxis="0,-1,0"
+        />
+    <VARIATION
+        Description="Rotate - 90 degrees about +y axis centered at 1,1,1"
+        TransformType="RotateAxisAngleCenter"
+        RotateAngle="90"
+        RotateAxis="0,1,0"
+        RotateCenter="1,1,1"
+        />
+
+    <!-- Scale -->
+
+    <VARIATION
+        Description="Scale - should make the light come from in front of the mesh"
+        LightDirection="1,1,1"
+        TransformType="Scale"
+        ScaleVector="-1,-1,-1"
+        />
+    <VARIATION
+        Description="Scale - lit from underneath and to the right"
+        LightDirection="-1,-1,-1"
+        TransformType="Scale"
+        ScaleVector="0.5,-0.5,1.5"
+        />
+</INIT>

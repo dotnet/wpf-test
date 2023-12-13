@@ -1,0 +1,37 @@
+﻿<!-- This test covers the polyline element the complex way with a rotate applied to it and filled with a HorizontalGradient
+-->
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="#CCCCCC">
+    <Canvas>
+        <Decorator>
+            <Decorator.LayoutTransform>
+                <RotateTransform Angle="10" />
+            </Decorator.LayoutTransform>
+            <Polyline>
+                <Polyline.Points>
+        50,375
+        150,375 150,325 250,325 250,375
+        350,375 350,250 450,250 450,375
+        550,375 550,175 650,175 650,375
+        750,375 750,100 850,100 850,375
+        950,375 950,25 1050,25 1050,375
+        1150,375 
+    </Polyline.Points>
+                <Polyline.Stroke>blue</Polyline.Stroke>
+                <Polyline.StrokeThickness>3</Polyline.StrokeThickness>
+                <!--Polyline.StrokeOpacity>.5</Polyline.StrokeOpacity-->
+                <Polyline.StrokeLineJoin>miter</Polyline.StrokeLineJoin>
+                <Polyline.StrokeMiterLimit>1</Polyline.StrokeMiterLimit>
+                <Polyline.Fill>
+                    <LinearGradientBrush Opacity="0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="yellow" Offset="0" />
+                                <GradientStop Color="green" Offset="1" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Polyline.Fill>
+            </Polyline>
+        </Decorator>
+    </Canvas>
+</Border>
