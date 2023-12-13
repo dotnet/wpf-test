@@ -27,9 +27,9 @@ In setters, templates, triggers... everywhere, to make sure they work fine.
                     <Setter Property="Control.Background" Value="{cc:CustomColorBlender {x:Null},Red}" />
                     <Setter Property="Button.FontSize" Value="{StaticResource FourtyEight}" />
                     <Setter Property="DockPanel.Dock">
-                        <Setter.Value>
+                        
                             <DynamicResource ResourceKey="LeftDock" />
-                        </Setter.Value>
+                        
                     </Setter>
                     <Setter Property="FontStyle" Value="{Binding Source={StaticResource DSO},XPath=fontstyle}" />
                     <Setter Property="Content" Value="{}{Hello}"></Setter>
@@ -41,7 +41,7 @@ In setters, templates, triggers... everywhere, to make sure they work fine.
             -->
             <Style x:Key="ButtonStyle1" BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type Button}">
                 <Setter Property="Template">
-                    <Setter.Value>
+                    
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Canvas x:Name="Canvas0">
                                 <Canvas.Background>
@@ -50,7 +50,7 @@ In setters, templates, triggers... everywhere, to make sure they work fine.
                                 <ContentPresenter x:Name="CP0" Content="{TemplateBinding Content}" />
                             </Canvas>
                         </ControlTemplate>
-                    </Setter.Value>
+                    
                 </Setter>
             </Style>
 
@@ -71,13 +71,13 @@ In setters, templates, triggers... everywhere, to make sure they work fine.
 
                     <Trigger Property="Foreground" Value="{StaticResource BlueBrush}">
                         <Setter Property="Content">
-                            <Setter.Value>
+                            
                                 <x:Array Type="{x:Type TextBlock}">
                                     <TextBlock>Text 0</TextBlock>
                                     <TextBlock>Text 1</TextBlock>
                                     <TextBlock>Text 2</TextBlock>
                                 </x:Array>
-                            </Setter.Value>
+                            
                         </Setter>
                     </Trigger>
                 </Style.Triggers>
@@ -87,13 +87,13 @@ In setters, templates, triggers... everywhere, to make sure they work fine.
             <Style x:Key="OpenEndedStyle">
                 <Style.Setters>
                     <Setter Property="Control.Background">
-                        <Setter.Value>
+                        
                             <cc:CustomColorBlender Core="Maroon" Additive="Navy">
                                 <x:Static Member="Colors.Green" />
                                 <StaticResource ResourceKey="Indigo Color"/>
                                 <Color>Blue</Color>
                             </cc:CustomColorBlender>
-                        </Setter.Value>
+                        
                     </Setter>
                     <Setter Property="DockPanel.Dock" Value="{x:Static Dock.Left}" />
                 </Style.Setters>

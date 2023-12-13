@@ -8,43 +8,41 @@
         <StackPanel.Resources>
             <Style x:Key="StyleKey" TargetType="{x:Type Control}">
                 <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <Border x:Name="TemplateControl" Background="blue" Width="50" Height="50">
-                                    <Border.LayoutTransform>
-                                        <ScaleTransform x:Name="AnimatedAnimatable" ScaleX="0" ScaleY="0" />
-                                    </Border.LayoutTransform>
-                                </Border>
-                                <TextBlock FontSize="24">Avalon!</TextBlock>
-                                <Border Background="red" Width="150" Height="150" />
-                            </StackPanel>
-                            <ControlTemplate.Triggers>
-                                <EventTrigger RoutedEvent="Control.Loaded">
-                                    <EventTrigger.Actions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetName       = "TemplateControl"
-                                                    Storyboard.TargetProperty   = "LayoutTransform.ScaleX"
-                                                    From                        = "0.0"
-                                                    To                          = "3.0"
-                                                    BeginTime                   = "0:0:1.5"
-                                                    Duration                    = "0:0:4" />
-                                                <DoubleAnimation
-                                                    Storyboard.TargetName       = "TemplateControl"
-                                                    Storyboard.TargetProperty   = "LayoutTransform.ScaleY"
-                                                    BeginTime                   = "0:0:1.5"
-                                                    From                        = "0.0"
-                                                    To                          = "3.0"
-                                                    Duration                    = "0:0:4" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger.Actions>
-                                </EventTrigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Border x:Name="TemplateControl" Background="blue" Width="50" Height="50">
+                                <Border.LayoutTransform>
+                                    <ScaleTransform x:Name="AnimatedAnimatable" ScaleX="0" ScaleY="0" />
+                                </Border.LayoutTransform>
+                            </Border>
+                            <TextBlock FontSize="24">Avalon!</TextBlock>
+                            <Border Background="red" Width="150" Height="150" />
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="Control.Loaded">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName       = "TemplateControl"
+                                                Storyboard.TargetProperty   = "LayoutTransform.ScaleX"
+                                                From                        = "0.0"
+                                                To                          = "3.0"
+                                                BeginTime                   = "0:0:1.5"
+                                                Duration                    = "0:0:4" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetName       = "TemplateControl"
+                                                Storyboard.TargetProperty   = "LayoutTransform.ScaleY"
+                                                BeginTime                   = "0:0:1.5"
+                                                From                        = "0.0"
+                                                To                          = "3.0"
+                                                Duration                    = "0:0:4" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                 </Setter>
             </Style>
         </StackPanel.Resources>

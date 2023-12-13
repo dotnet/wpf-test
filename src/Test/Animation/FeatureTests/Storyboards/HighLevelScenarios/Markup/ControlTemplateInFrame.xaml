@@ -6,42 +6,36 @@
         <Style TargetType="{x:Type Frame}" x:Key="GlassRadioButtonStyle">
             <Setter Property="Margin" Value="1" />
                 <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStopCollection>
-                                <GradientStop Color="#CCCCFF"     Offset="0" />
-                                <GradientStop Color="DarkGray"    Offset=".9"/>
-                            </GradientStopCollection>
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="#CCCCFF"     Offset="0" />
+                            <GradientStop Color="DarkGray"    Offset=".9"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
             </Setter>
 
             <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Frame}">
-                        <Grid
-                            Width="{TemplateBinding Width}" 
-                            Height="{TemplateBinding Height}" 
-                            ClipToBounds="true"
-                            Background="LightGreen">
+                <ControlTemplate TargetType="{x:Type Frame}">
+                    <Grid
+                        Width="{TemplateBinding Width}" 
+                        Height="{TemplateBinding Height}" 
+                        ClipToBounds="true"
+                        Background="LightGreen">
 
-                            <DockPanel Margin="10">
-                                <Viewbox Stretch="Uniform">
-                                    <ContentPresenter x:Name="myContentPresenter"  
-                                    Content="{TemplateBinding  Content}" TextBlock.Foreground="Black" />
-                                </Viewbox>
-                            </DockPanel>
+                        <DockPanel Margin="10">
+                            <Viewbox Stretch="Uniform">
+                                <ContentPresenter x:Name="myContentPresenter"  
+                                Content="{TemplateBinding  Content}" TextBlock.Foreground="Black" />
+                            </Viewbox>
+                        </DockPanel>
 
-                            <Rectangle Fill="Transparent" />
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
+                        <Rectangle Fill="Transparent" />
+                    </Grid>
+                </ControlTemplate>
             </Setter>
-
-        </Style>    
-
+        </Style>
     </Page.Resources>
 
     <Canvas Background="Black">

@@ -13,49 +13,47 @@
 
         <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}" BasedOn="{x:Null}">
             <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <ControlTemplate.Resources>
-                           <Storyboard BeginTime="0:0:0" x:Key="sb">
-                             <DoubleAnimation  Duration="0:0:.1" To="0" 
-                              Storyboard.TargetProperty="(Canvas.Width)" Storyboard.TargetName="canvas"/>
-                           </Storyboard>
-                    </ControlTemplate.Resources>
-                        <Viewport3D MinWidth="100" MinHeight="100" ClipToBounds="False" x:Name="Viewport3D" >
-                            <Viewport3D.Camera>
-                                <PerspectiveCamera x:Name="Camera" NearPlaneDistance="0" FarPlaneDistance="200" Position="0,0,5" LookDirection="1,0,-2." UpDirection="0,1,1" FieldOfView="0.1"/>
-                            </Viewport3D.Camera>
-                            <Viewport2DVisual3D >
-                             <Viewport2DVisual3D.Material>
-                                   <MaterialGroup>
-                                        <DiffuseMaterial  Viewport2DVisual3D.IsVisualHostMaterial="true" Color="White" Brush="White"/>
-                                   </MaterialGroup>
-                             </Viewport2DVisual3D.Material>
-                             <Viewport2DVisual3D.Geometry>
-                                   <MeshGeometry3D Positions="0 1 1, 0 2 2, 12 -2 0, 3 -1 0"
-                                                   TriangleIndices="2 0 2, 2 1 3"
-                                                   TextureCoordinates="0 0, 1 0, 1 1, 0 1" />
-                             </Viewport2DVisual3D.Geometry>
-                             <Viewport2DVisual3D.Visual>
-                                <Canvas Name="canvas" Background="White" Width="10" Height="300">
-                                    <Canvas.Triggers>
-                                      <EventTrigger RoutedEvent="Mouse.MouseDown">
-                                         <EventTrigger.Actions>
-                                           <BeginStoryboard Name="ActionTarget2" Storyboard="{StaticResource sb}" /> 
-                                         </EventTrigger.Actions>
-                                      </EventTrigger>
-                                    </Canvas.Triggers>
-                                </Canvas>
-                             </Viewport2DVisual3D.Visual>
-                             </Viewport2DVisual3D>
-                            <ModelVisual3D>
-                                    <ModelVisual3D.Content>
-                                      <PointLight Color="White" Position="0 0 6"/>
-                                    </ModelVisual3D.Content>
-                                 </ModelVisual3D>
-                        </Viewport3D>
-                    </ControlTemplate>
-                </Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Storyboard BeginTime="0:0:0" x:Key="sb">
+                            <DoubleAnimation  Duration="0:0:.1" To="0" 
+                            Storyboard.TargetProperty="(Canvas.Width)" Storyboard.TargetName="canvas"/>
+                        </Storyboard>
+                </ControlTemplate.Resources>
+                    <Viewport3D MinWidth="100" MinHeight="100" ClipToBounds="False" x:Name="Viewport3D" >
+                        <Viewport3D.Camera>
+                            <PerspectiveCamera x:Name="Camera" NearPlaneDistance="0" FarPlaneDistance="200" Position="0,0,5" LookDirection="1,0,-2." UpDirection="0,1,1" FieldOfView="0.1"/>
+                        </Viewport3D.Camera>
+                        <Viewport2DVisual3D >
+                            <Viewport2DVisual3D.Material>
+                                <MaterialGroup>
+                                    <DiffuseMaterial  Viewport2DVisual3D.IsVisualHostMaterial="true" Color="White" Brush="White"/>
+                                </MaterialGroup>
+                            </Viewport2DVisual3D.Material>
+                            <Viewport2DVisual3D.Geometry>
+                                <MeshGeometry3D Positions="0 1 1, 0 2 2, 12 -2 0, 3 -1 0"
+                                                TriangleIndices="2 0 2, 2 1 3"
+                                                TextureCoordinates="0 0, 1 0, 1 1, 0 1" />
+                            </Viewport2DVisual3D.Geometry>
+                            <Viewport2DVisual3D.Visual>
+                            <Canvas Name="canvas" Background="White" Width="10" Height="300">
+                                <Canvas.Triggers>
+                                    <EventTrigger RoutedEvent="Mouse.MouseDown">
+                                        <EventTrigger.Actions>
+                                        <BeginStoryboard Name="ActionTarget2" Storyboard="{StaticResource sb}" /> 
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </Canvas.Triggers>
+                            </Canvas>
+                            </Viewport2DVisual3D.Visual>
+                            </Viewport2DVisual3D>
+                        <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <PointLight Color="White" Position="0 0 6"/>
+                                </ModelVisual3D.Content>
+                                </ModelVisual3D>
+                    </Viewport3D>
+                </ControlTemplate>
             </Setter>
         </Style>
 

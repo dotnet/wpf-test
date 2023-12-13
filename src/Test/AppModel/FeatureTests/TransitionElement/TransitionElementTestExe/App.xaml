@@ -13,33 +13,31 @@
     <Style x:Key="{x:Type ResizeGrip}" TargetType="{x:Type ResizeGrip}">
       <Setter Property="OverridesDefaultStyle" Value="true"/>
       <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type ResizeGrip}">
-            <Border Background="Transparent"
-              SnapsToDevicePixels="True"
-              Width="16"
-              Height="16">
-              <Rectangle Margin="2">
-                <Rectangle.Fill>
-                  <DrawingBrush Viewport="0,0,4,4" 
-                    ViewportUnits="Absolute"
-                    Viewbox="0,0,8,8"
-                    ViewboxUnits="Absolute"
-                    TileMode="Tile">
-                    <DrawingBrush.Drawing>
-                      <DrawingGroup>
-                        <DrawingGroup.Children>
-                          <GeometryDrawing Brush="#AAA"
-                            Geometry="M 4 4 L 4 8 L 8 8 L 8 4 z"/>
-                        </DrawingGroup.Children>
-                      </DrawingGroup>
-                    </DrawingBrush.Drawing>
-                  </DrawingBrush>
-                </Rectangle.Fill>
-              </Rectangle>
-            </Border>
-          </ControlTemplate>
-        </Setter.Value>
+        <ControlTemplate TargetType="{x:Type ResizeGrip}">
+          <Border Background="Transparent"
+            SnapsToDevicePixels="True"
+            Width="16"
+            Height="16">
+            <Rectangle Margin="2">
+              <Rectangle.Fill>
+                <DrawingBrush Viewport="0,0,4,4" 
+                  ViewportUnits="Absolute"
+                  Viewbox="0,0,8,8"
+                  ViewboxUnits="Absolute"
+                  TileMode="Tile">
+                  <DrawingBrush.Drawing>
+                    <DrawingGroup>
+                      <DrawingGroup.Children>
+                        <GeometryDrawing Brush="#AAA"
+                          Geometry="M 4 4 L 4 8 L 8 8 L 8 4 z"/>
+                      </DrawingGroup.Children>
+                    </DrawingGroup>
+                  </DrawingBrush.Drawing>
+                </DrawingBrush>
+              </Rectangle.Fill>
+            </Rectangle>
+          </Border>
+        </ControlTemplate>
       </Setter>
     </Style>
 
@@ -163,52 +161,50 @@
       <Setter Property="Command" Value="NavigationCommands.BrowseBack"/>
       <Setter Property="Focusable" Value="false"/>
       <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="Button">
-            <Grid>
-              <Ellipse 
-                Name="Ellipse" 
-                Fill="{StaticResource NormalBrush}"
-                Stroke="{StaticResource NormalBorderBrush}"
-                StrokeThickness="1" 
-                Width="24"
-                Height="24"/>
+        <ControlTemplate TargetType="Button">
+          <Grid>
+            <Ellipse 
+              Name="Ellipse" 
+              Fill="{StaticResource NormalBrush}"
+              Stroke="{StaticResource NormalBorderBrush}"
+              StrokeThickness="1" 
+              Width="24"
+              Height="24"/>
 
-              <Path 
-                x:Name="Arrow"
-                Margin="0,0,3,0"
-                Fill="{StaticResource GlyphBrush}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Data="M 6 0 L 0 6 L 6 12 Z"/>
-            </Grid>
-            <ControlTemplate.Triggers>
-              <Trigger Property="Command"
-                       Value="{x:Static NavigationCommands.BrowseForward}">
-                <Setter TargetName="Arrow"
-                        Property="Data" Value="M 0 0 L 6 6 L 0 12 z"/>
-                <Setter TargetName="Arrow"
-                        Property="Margin" Value="3,0,0,0"/>
-              </Trigger>
-              <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="Ellipse"
-                        Property="Fill" Value="{StaticResource DarkBrush}"/>
-              </Trigger>
-              <Trigger Property="IsPressed" Value="true">
-                <Setter TargetName="Ellipse"
-                        Property="Fill" Value="{StaticResource PressedBrush}" />
-                <Setter TargetName="Ellipse"
-                        Property="Stroke" Value="{StaticResource PressedBorderBrush}" />
-              </Trigger>
-              <Trigger Property="IsEnabled" Value="false">
-                <Setter TargetName="Ellipse"
-                        Property="Fill" Value="{StaticResource DisabledBackgroundBrush}"/>
-                <Setter TargetName="Arrow"
-                        Property="Fill" Value="{StaticResource DisabledForegroundBrush}"/>
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
+            <Path 
+              x:Name="Arrow"
+              Margin="0,0,3,0"
+              Fill="{StaticResource GlyphBrush}"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Data="M 6 0 L 0 6 L 6 12 Z"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="Command"
+                      Value="{x:Static NavigationCommands.BrowseForward}">
+              <Setter TargetName="Arrow"
+                      Property="Data" Value="M 0 0 L 6 6 L 0 12 z"/>
+              <Setter TargetName="Arrow"
+                      Property="Margin" Value="3,0,0,0"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Ellipse"
+                      Property="Fill" Value="{StaticResource DarkBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+              <Setter TargetName="Ellipse"
+                      Property="Fill" Value="{StaticResource PressedBrush}" />
+              <Setter TargetName="Ellipse"
+                      Property="Stroke" Value="{StaticResource PressedBorderBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+              <Setter TargetName="Ellipse"
+                      Property="Fill" Value="{StaticResource DisabledBackgroundBrush}"/>
+              <Setter TargetName="Arrow"
+                      Property="Fill" Value="{StaticResource DisabledForegroundBrush}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
       </Setter>
     </Style>
 
@@ -219,11 +215,9 @@
       <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
       <Setter Property="IsMainMenu" Value="false"/>
       <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="Menu">
-            <DockPanel IsItemsHost="true"/>
-          </ControlTemplate>
-        </Setter.Value>
+        <ControlTemplate TargetType="Menu">
+          <DockPanel IsItemsHost="true"/>
+        </ControlTemplate>
       </Setter>
     </Style>
 
@@ -232,62 +226,60 @@
     <Style x:Key="NavWinHeaderMenuItem" TargetType="MenuItem">
       <Setter Property="OverridesDefaultStyle" Value="true"/>
       <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="MenuItem">
-            <Grid>
-              <Popup x:Name="PART_Popup"
-                Placement="Bottom"
-                VerticalOffset="2"
-                IsOpen="{TemplateBinding IsSubmenuOpen}"
-                AllowsTransparency="True" 
-                Focusable="False"
-                PopupAnimation="Fade">
-                <Border Name="SubMenuBorder"
-                  Background="{StaticResource WindowBackgroundBrush}"
-                  BorderThickness="1"
-                  BorderBrush="{StaticResource SolidBorderBrush}">
-                  <StackPanel IsItemsHost="true"
-                    Margin="2"
-                    KeyboardNavigation.TabNavigation="Cycle"
-                    KeyboardNavigation.DirectionalNavigation="Cycle"/>
-                </Border>
-              </Popup>
+        <ControlTemplate TargetType="MenuItem">
+          <Grid>
+            <Popup x:Name="PART_Popup"
+              Placement="Bottom"
+              VerticalOffset="2"
+              IsOpen="{TemplateBinding IsSubmenuOpen}"
+              AllowsTransparency="True" 
+              Focusable="False"
+              PopupAnimation="Fade">
+              <Border Name="SubMenuBorder"
+                Background="{StaticResource WindowBackgroundBrush}"
+                BorderThickness="1"
+                BorderBrush="{StaticResource SolidBorderBrush}">
+                <StackPanel IsItemsHost="true"
+                  Margin="2"
+                  KeyboardNavigation.TabNavigation="Cycle"
+                  KeyboardNavigation.DirectionalNavigation="Cycle"/>
+              </Border>
+            </Popup>
 
-              <Grid x:Name="Panel" 
-                Width="24" 
-                Background="Transparent"
-                HorizontalAlignment="Right" >
+            <Grid x:Name="Panel" 
+              Width="24" 
+              Background="Transparent"
+              HorizontalAlignment="Right" >
 
-                <Border Visibility="Hidden" 
-                  Name="HighlightBorder" 
-                  BorderThickness="1" 
-                  BorderBrush="{StaticResource NormalBorderBrush}" 
-                  Background="{StaticResource NormalBrush}" 
-                  CornerRadius="2" />
-                <Path x:Name="Arrow"
-                  SnapsToDevicePixels="false"
-                  HorizontalAlignment="Right"
-                  VerticalAlignment="Center"
-                  Margin="0,2,4,0"
-                  Fill="{StaticResource GlyphBrush}"
-                  StrokeLineJoin="Round"
-                  Data="M 0 0 L 4 4 L 8 0 Z"/>
-              </Grid>
+              <Border Visibility="Hidden" 
+                Name="HighlightBorder" 
+                BorderThickness="1" 
+                BorderBrush="{StaticResource NormalBorderBrush}" 
+                Background="{StaticResource NormalBrush}" 
+                CornerRadius="2" />
+              <Path x:Name="Arrow"
+                SnapsToDevicePixels="false"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,2,4,0"
+                Fill="{StaticResource GlyphBrush}"
+                StrokeLineJoin="Round"
+                Data="M 0 0 L 4 4 L 8 0 Z"/>
             </Grid>
-            <ControlTemplate.Triggers>
-              <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="HighlightBorder" Property="Visibility" Value="Visible"/>
-              </Trigger>
-              <Trigger Property="IsSubmenuOpen" Value="true">
-                <Setter TargetName="HighlightBorder" Property="Background" Value="{StaticResource PressedBrush}" />
-                <Setter TargetName="HighlightBorder" Property="BorderBrush" Value="{StaticResource PressedBorderBrush}" />
-              </Trigger>
-              <Trigger Property="IsEnabled" Value="false">
-                <Setter TargetName="Arrow" Property="Fill"  Value="{StaticResource DisabledForegroundBrush}"/>
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="true">
+              <Setter TargetName="HighlightBorder" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="true">
+              <Setter TargetName="HighlightBorder" Property="Background" Value="{StaticResource PressedBrush}" />
+              <Setter TargetName="HighlightBorder" Property="BorderBrush" Value="{StaticResource PressedBorderBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+              <Setter TargetName="Arrow" Property="Fill"  Value="{StaticResource DisabledForegroundBrush}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
       </Setter>
     </Style>
 
@@ -305,63 +297,61 @@
       <Setter Property="JournalEntryUnifiedViewConverter.JournalEntryPosition"
               Value="{Binding (JournalEntryUnifiedViewConverter.JournalEntryPosition)}"/>
       <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type MenuItem}">
-            <Grid Name="Panel"
-              Background="Transparent"
-              SnapsToDevicePixels="true">
-              <Path Name="Glyph"
-                SnapsToDevicePixels="false"
-                Margin="7,5"
-                Width="10"
-                Height="10"
-                HorizontalAlignment="Left"
-                StrokeStartLineCap="Triangle"
-                StrokeEndLineCap="Triangle"
-                StrokeThickness="2"
-                Stroke="{StaticResource GlyphBrush}" />
+        <ControlTemplate TargetType="{x:Type MenuItem}">
+          <Grid Name="Panel"
+            Background="Transparent"
+            SnapsToDevicePixels="true">
+            <Path Name="Glyph"
+              SnapsToDevicePixels="false"
+              Margin="7,5"
+              Width="10"
+              Height="10"
+              HorizontalAlignment="Left"
+              StrokeStartLineCap="Triangle"
+              StrokeEndLineCap="Triangle"
+              StrokeThickness="2"
+              Stroke="{StaticResource GlyphBrush}" />
 
-              <ContentPresenter ContentSource="Header"
-                Margin="24,5,50,5"/>
-            </Grid>
-            <ControlTemplate.Triggers>
-              <Trigger Value="Current"
-                       Property="JournalEntryUnifiedViewConverter.JournalEntryPosition" >
-                <Setter TargetName="Glyph" Property="Data"
-                        Value="M 0,5 L 2.5,8 L 7,3 "/>
-              </Trigger>
-              <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="Panel" Property="Background"
-                        Value="{StaticResource SelectedBackgroundBrush}"/>
-              </Trigger>
-              <MultiTrigger>
-                <MultiTrigger.Conditions>
-                  <Condition Property="MenuItem.IsHighlighted"
-                             Value="true"/>
-                  <Condition Value="Forward"
-                             Property="JournalEntryUnifiedViewConverter.JournalEntryPosition" />
-                </MultiTrigger.Conditions>
-                <Setter TargetName="Glyph" Property="Data"
-                        Value="M 3 1 L 7 5 L 3 9 z"/>
-                <Setter TargetName="Glyph" Property="Fill"
-                        Value="{StaticResource GlyphBrush}"/>
-                <Setter TargetName="Glyph" Property="Stroke"
-                        Value="{x:Null}"/>
-              </MultiTrigger>
-              <MultiTrigger>
-                <MultiTrigger.Conditions>
-                  <Condition Property="MenuItem.IsHighlighted"
-                             Value="true"/>
-                  <Condition Value="Back"
-                             Property="JournalEntryUnifiedViewConverter.JournalEntryPosition"/>
-                </MultiTrigger.Conditions>
-                <Setter TargetName="Glyph" Property="Data" Value="M 7 1 L 3 5 L 7 9 z"/>
-                <Setter TargetName="Glyph" Property="Fill" Value="{StaticResource GlyphBrush}"/>
-                <Setter TargetName="Glyph" Property="Stroke" Value="{x:Null}"/>
-              </MultiTrigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
+            <ContentPresenter ContentSource="Header"
+              Margin="24,5,50,5"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Value="Current"
+                      Property="JournalEntryUnifiedViewConverter.JournalEntryPosition" >
+              <Setter TargetName="Glyph" Property="Data"
+                      Value="M 0,5 L 2.5,8 L 7,3 "/>
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="true">
+              <Setter TargetName="Panel" Property="Background"
+                      Value="{StaticResource SelectedBackgroundBrush}"/>
+            </Trigger>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="MenuItem.IsHighlighted"
+                            Value="true"/>
+                <Condition Value="Forward"
+                            Property="JournalEntryUnifiedViewConverter.JournalEntryPosition" />
+              </MultiTrigger.Conditions>
+              <Setter TargetName="Glyph" Property="Data"
+                      Value="M 3 1 L 7 5 L 3 9 z"/>
+              <Setter TargetName="Glyph" Property="Fill"
+                      Value="{StaticResource GlyphBrush}"/>
+              <Setter TargetName="Glyph" Property="Stroke"
+                      Value="{x:Null}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="MenuItem.IsHighlighted"
+                            Value="true"/>
+                <Condition Value="Back"
+                            Property="JournalEntryUnifiedViewConverter.JournalEntryPosition"/>
+              </MultiTrigger.Conditions>
+              <Setter TargetName="Glyph" Property="Data" Value="M 7 1 L 3 5 L 7 9 z"/>
+              <Setter TargetName="Glyph" Property="Fill" Value="{StaticResource GlyphBrush}"/>
+              <Setter TargetName="Glyph" Property="Stroke" Value="{x:Null}"/>
+            </MultiTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
       </Setter>
     </Style>
 
@@ -375,240 +365,163 @@
       <Setter Property="SnapsToDevicePixels" Value="true"/>
       <Setter Property="Background" Value="silver"/>
       <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="NavigationWindow">
-            <DockPanel  Background="{StaticResource WindowBackgroundBrush}">
-              <Grid Background="{StaticResource LightBrush}"
-                DockPanel.Dock="Top"
-                Height="30">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition Width="16"/>
-                  <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <ControlTemplate TargetType="NavigationWindow">
+          <DockPanel  Background="{StaticResource WindowBackgroundBrush}">
+            <Grid Background="{StaticResource LightBrush}"
+              DockPanel.Dock="Top"
+              Height="30">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
 
-                <Menu Name="NavMenu"
-                  Grid.ColumnSpan="3"
-                  Height="20"
-                  Margin="1,0,0,0"
-                  VerticalAlignment="Center" 
-                  Style="{StaticResource NavWinMenu}">
-                  <MenuItem Style="{StaticResource NavWinHeaderMenuItem}"
-                    ItemContainerStyle="{StaticResource NavWinSubmenuItem}"
-                    IsSubmenuOpen="{Binding Path=(MenuItem.IsSubmenuOpen),
-                Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}">
-                    <MenuItem.ItemsSource>
-                      <MultiBinding Converter="{StaticResource JournalEntryUnifiedViewConverter}">
-                        <MultiBinding.Bindings>
-                          <Binding RelativeSource="{RelativeSource TemplatedParent}" 
-                            Path="BackStack" />
-                          <Binding RelativeSource="{RelativeSource TemplatedParent}" 
-                            Path="ForwardStack" />
-                        </MultiBinding.Bindings>
-                      </MultiBinding>
-                    </MenuItem.ItemsSource>
-                  </MenuItem>
-                </Menu>
+              <Menu Name="NavMenu"
+                Grid.ColumnSpan="3"
+                Height="20"
+                Margin="1,0,0,0"
+                VerticalAlignment="Center" 
+                Style="{StaticResource NavWinMenu}">
+                <MenuItem Style="{StaticResource NavWinHeaderMenuItem}"
+                  ItemContainerStyle="{StaticResource NavWinSubmenuItem}"
+                  IsSubmenuOpen="{Binding Path=(MenuItem.IsSubmenuOpen),
+              Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}">
+                  <MenuItem.ItemsSource>
+                    <MultiBinding Converter="{StaticResource JournalEntryUnifiedViewConverter}">
+                      <MultiBinding.Bindings>
+                        <Binding RelativeSource="{RelativeSource TemplatedParent}" 
+                          Path="BackStack" />
+                        <Binding RelativeSource="{RelativeSource TemplatedParent}" 
+                          Path="ForwardStack" />
+                      </MultiBinding.Bindings>
+                    </MultiBinding>
+                  </MenuItem.ItemsSource>
+                </MenuItem>
+              </Menu>
 
-                <Path Grid.Column="0" 
-                  SnapsToDevicePixels="false"
-                  IsHitTestVisible="false"
-                  Margin="2,0,0,0"
-                  Grid.ColumnSpan="3"
-                  StrokeThickness="1" 
-                  HorizontalAlignment="Left" 
-                  VerticalAlignment="Center" 
-                  Data="M22.5767,21.035 Q27,19.37 31.424,21.035 A12.5,12.5,0,0,0,53.5,13 A12.5,12.5,0,0,0,37.765,0.926 Q27,4.93 16.235,0.926 A12.5,12.5,0,0,0,0.5,13 A12.5,12.5,0,0,0,22.5767,21.035 z"
-                  Fill="{StaticResource PressedBrush}"
-                  Stroke="{StaticResource LightBorderBrush}"/>
-                <Button Style="{StaticResource NavWinButtonStyle}"
-                  Command="NavigationCommands.BrowseBack"
-                  Content="M 4 0 L 0 4 L 4 8 Z"
-                  Margin="3,0,2,0" 
-                  Grid.Column="0"/>
-                <Button Style="{StaticResource NavWinButtonStyle}"
-                  Command="NavigationCommands.BrowseForward"
-                  Content="M 4 0 L 0 4 L 4 8 Z"
-                  Margin="2,0,0,0" 
-                  Grid.Column="1"/>
-              </Grid>
-              <Grid>
-                <AdornerDecorator>
-                  <ContentPresenter Name="PART_NavWinCP" 
-                                    ClipToBounds="true"/>
-                </AdornerDecorator>
+              <Path Grid.Column="0" 
+                SnapsToDevicePixels="false"
+                IsHitTestVisible="false"
+                Margin="2,0,0,0"
+                Grid.ColumnSpan="3"
+                StrokeThickness="1" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Data="M22.5767,21.035 Q27,19.37 31.424,21.035 A12.5,12.5,0,0,0,53.5,13 A12.5,12.5,0,0,0,37.765,0.926 Q27,4.93 16.235,0.926 A12.5,12.5,0,0,0,0.5,13 A12.5,12.5,0,0,0,22.5767,21.035 z"
+                Fill="{StaticResource PressedBrush}"
+                Stroke="{StaticResource LightBorderBrush}"/>
+              <Button Style="{StaticResource NavWinButtonStyle}"
+                Command="NavigationCommands.BrowseBack"
+                Content="M 4 0 L 0 4 L 4 8 Z"
+                Margin="3,0,2,0" 
+                Grid.Column="0"/>
+              <Button Style="{StaticResource NavWinButtonStyle}"
+                Command="NavigationCommands.BrowseForward"
+                Content="M 4 0 L 0 4 L 4 8 Z"
+                Margin="2,0,0,0" 
+                Grid.Column="1"/>
+            </Grid>
+            <Grid>
+              <AdornerDecorator>
+                <ContentPresenter Name="PART_NavWinCP" 
+                                  ClipToBounds="true"/>
+              </AdornerDecorator>
 
-                <ResizeGrip x:Name="WindowResizeGrip"
-                  HorizontalAlignment="Right"
-                  VerticalAlignment="Bottom"
-                  Visibility="Collapsed" 
-                  IsTabStop="false"/>
-              </Grid>
-            </DockPanel>
-            <ControlTemplate.Triggers>
-              <MultiTrigger>
-                <MultiTrigger.Conditions>
-                  <Condition Property="CanGoForward" Value="false"/>
-                  <Condition Property="CanGoBack" Value="false"/>
-                </MultiTrigger.Conditions>
-                <Setter TargetName="NavMenu" Property="IsEnabled" Value="false"/>
-              </MultiTrigger>
-              <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
-                <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
+              <ResizeGrip x:Name="WindowResizeGrip"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Visibility="Collapsed" 
+                IsTabStop="false"/>
+            </Grid>
+          </DockPanel>
+          <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="CanGoForward" Value="false"/>
+                <Condition Property="CanGoBack" Value="false"/>
+              </MultiTrigger.Conditions>
+              <Setter TargetName="NavMenu" Property="IsEnabled" Value="false"/>
+            </MultiTrigger>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+              <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
       </Setter>
     </Style>
 
 
-
     <!-- Navigation Window style begins -->
-
 
     <Style x:Key="myNavWindowStyle" TargetType="NavigationWindow">
       <Setter Property="SnapsToDevicePixels" Value="true"/>
       <Setter Property="Background" Value="silver"/>
       <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="NavigationWindow">
-            <DockPanel  Background="{StaticResource WindowBackgroundBrush}">
-              <Grid Background="{StaticResource LightBrush}"
-                DockPanel.Dock="Top"
-                Height="30">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition Width="16"/>
-                  <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <ControlTemplate TargetType="NavigationWindow">
+          <DockPanel  Background="{StaticResource WindowBackgroundBrush}">
+            <Grid Background="{StaticResource LightBrush}"
+              DockPanel.Dock="Top"
+              Height="30">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
 
-                <Menu Name="NavMenu"
-                  Grid.ColumnSpan="3"
-                  Height="20"
-                  Margin="1,0,0,0"
-                  VerticalAlignment="Center" 
-                  Style="{StaticResource NavWinMenu}">
-                  <MenuItem Style="{StaticResource NavWinHeaderMenuItem}"
-                    ItemContainerStyle="{StaticResource NavWinSubmenuItem}"
-                    IsSubmenuOpen="{Binding Path=(MenuItem.IsSubmenuOpen),
-                Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}">
-                    <MenuItem.ItemsSource>
-                      <MultiBinding Converter="{StaticResource JournalEntryUnifiedViewConverter}">
-                        <MultiBinding.Bindings>
-                          <Binding RelativeSource="{RelativeSource TemplatedParent}" 
-                            Path="BackStack" />
-                          <Binding RelativeSource="{RelativeSource TemplatedParent}" 
-                            Path="ForwardStack" />
-                        </MultiBinding.Bindings>
-                      </MultiBinding>
-                    </MenuItem.ItemsSource>
-                  </MenuItem>
-                </Menu>
+              <Menu Name="NavMenu"
+                Grid.ColumnSpan="3"
+                Height="20"
+                Margin="1,0,0,0"
+                VerticalAlignment="Center" 
+                Style="{StaticResource NavWinMenu}">
+                <MenuItem Style="{StaticResource NavWinHeaderMenuItem}"
+                  ItemContainerStyle="{StaticResource NavWinSubmenuItem}"
+                  IsSubmenuOpen="{Binding Path=(MenuItem.IsSubmenuOpen),
+              Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}">
+                  <MenuItem.ItemsSource>
+                    <MultiBinding Converter="{StaticResource JournalEntryUnifiedViewConverter}">
+                      <MultiBinding.Bindings>
+                        <Binding RelativeSource="{RelativeSource TemplatedParent}" 
+                          Path="BackStack" />
+                        <Binding RelativeSource="{RelativeSource TemplatedParent}" 
+                          Path="ForwardStack" />
+                      </MultiBinding.Bindings>
+                    </MultiBinding>
+                  </MenuItem.ItemsSource>
+                </MenuItem>
+              </Menu>
 
-                <Path Grid.Column="0" 
-                  SnapsToDevicePixels="false"
-                  IsHitTestVisible="false"
-                  Margin="2,0,0,0"
-                  Grid.ColumnSpan="3"
-                  StrokeThickness="1" 
-                  HorizontalAlignment="Left" 
-                  VerticalAlignment="Center" 
-                  Data="M22.5767,21.035 Q27,19.37 31.424,21.035 A12.5,12.5,0,0,0,53.5,13 A12.5,12.5,0,0,0,37.765,0.926 Q27,4.93 16.235,0.926 A12.5,12.5,0,0,0,0.5,13 A12.5,12.5,0,0,0,22.5767,21.035 z"
-                  Fill="{StaticResource PressedBrush}"
-                  Stroke="{StaticResource LightBorderBrush}"/>
-                <Button Style="{StaticResource NavWinButtonStyle}"
-                  Command="NavigationCommands.BrowseBack"
-                  Content="M 4 0 L 0 4 L 4 8 Z"
-                  Margin="3,0,2,0" 
-                  Grid.Column="0"/>
-                <Button Style="{StaticResource NavWinButtonStyle}"
-                  Command="NavigationCommands.BrowseForward"
-                  Content="M 4 0 L 0 4 L 4 8 Z"
-                  Margin="2,0,0,0" 
-                  Grid.Column="1"/>
-              </Grid>
-              <Grid>
-                <AdornerDecorator>
-                  <!--
-                    Replaceing the old content presenter with the Transition Element
-                    <ContentPresenter Name="PART_NavWinCP" 
-                                      ClipToBounds="true"/>
-                    -->
-                  <local:TransitionElement
-                ClipToBounds="true"
-                Content="{TemplateBinding Content}"
-                ContentTemplate="{TemplateBinding ContentTemplate}"
-                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
-                    <local:TransitionElement.Transition>
-                      <local:StoryboardTransition TextSearch.Text="Rotate Wipe">
-                        <local:StoryboardTransition.NewContentStyle>
-                          <Style TargetType="ContentPresenter">
-                            <Setter Property="OpacityMask">
-                              <Setter.Value>
-                                <LinearGradientBrush EndPoint="1,0">
-                                  <LinearGradientBrush.Transform>
-                                    <RotateTransform Angle="10"/>
-                                  </LinearGradientBrush.Transform>
-                                  <GradientStop Offset="0" Color="White"/>
-                                  <GradientStop Offset="0.1" />
-                                </LinearGradientBrush>
-                              </Setter.Value>
-                            </Setter>
-                          </Style>
-                        </local:StoryboardTransition.NewContentStyle>
-                        <local:StoryboardTransition.NewContentStoryboard>
-                          <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="OpacityMask.Transform.Angle" To="-90" Duration="0:0:0.5"/>
-                          </Storyboard>
-                        </local:StoryboardTransition.NewContentStoryboard>
-                      </local:StoryboardTransition>
-                    </local:TransitionElement.Transition>
-                  </local:TransitionElement>
-                </AdornerDecorator>
-
-                <ResizeGrip x:Name="WindowResizeGrip"
-                  HorizontalAlignment="Right"
-                  VerticalAlignment="Bottom"
-                  Visibility="Collapsed" 
-                  IsTabStop="false"/>
-              </Grid>
-            </DockPanel>
-            <ControlTemplate.Triggers>
-              <MultiTrigger>
-                <MultiTrigger.Conditions>
-                  <Condition Property="CanGoForward" Value="false"/>
-                  <Condition Property="CanGoBack" Value="false"/>
-                </MultiTrigger.Conditions>
-                <Setter TargetName="NavMenu" Property="IsEnabled" Value="false"/>
-              </MultiTrigger>
-              <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
-                <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>
-
-    <!-- Navigation Window style ends-->
-
-
-    <!-- Window Style begins-->
-
-    <Style x:Key="myWindowStyle" TargetType="{x:Type Window}">
-      <Setter Property="SnapsToDevicePixels" Value="true"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type Window}">
-            <Grid Background="{StaticResource WindowBackgroundBrush}">
+              <Path Grid.Column="0" 
+                SnapsToDevicePixels="false"
+                IsHitTestVisible="false"
+                Margin="2,0,0,0"
+                Grid.ColumnSpan="3"
+                StrokeThickness="1" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Data="M22.5767,21.035 Q27,19.37 31.424,21.035 A12.5,12.5,0,0,0,53.5,13 A12.5,12.5,0,0,0,37.765,0.926 Q27,4.93 16.235,0.926 A12.5,12.5,0,0,0,0.5,13 A12.5,12.5,0,0,0,22.5767,21.035 z"
+                Fill="{StaticResource PressedBrush}"
+                Stroke="{StaticResource LightBorderBrush}"/>
+              <Button Style="{StaticResource NavWinButtonStyle}"
+                Command="NavigationCommands.BrowseBack"
+                Content="M 4 0 L 0 4 L 4 8 Z"
+                Margin="3,0,2,0" 
+                Grid.Column="0"/>
+              <Button Style="{StaticResource NavWinButtonStyle}"
+                Command="NavigationCommands.BrowseForward"
+                Content="M 4 0 L 0 4 L 4 8 Z"
+                Margin="2,0,0,0" 
+                Grid.Column="1"/>
+            </Grid>
+            <Grid>
               <AdornerDecorator>
                 <!--
-                    Replaceing the old content presenter with the Transition Element
-                    <ContentPresenter/>
-                    -->
+                  Replaceing the old content presenter with the Transition Element
+                  <ContentPresenter Name="PART_NavWinCP" 
+                                    ClipToBounds="true"/>
+                  -->
                 <local:TransitionElement
               ClipToBounds="true"
               Content="{TemplateBinding Content}"
@@ -619,15 +532,13 @@
                       <local:StoryboardTransition.NewContentStyle>
                         <Style TargetType="ContentPresenter">
                           <Setter Property="OpacityMask">
-                            <Setter.Value>
-                              <LinearGradientBrush EndPoint="1,0">
-                                <LinearGradientBrush.Transform>
-                                  <RotateTransform Angle="10"/>
-                                </LinearGradientBrush.Transform>
-                                <GradientStop Offset="0" Color="White"/>
-                                <GradientStop Offset="0.1" />
-                              </LinearGradientBrush>
-                            </Setter.Value>
+                            <LinearGradientBrush EndPoint="1,0">
+                              <LinearGradientBrush.Transform>
+                                <RotateTransform Angle="10"/>
+                              </LinearGradientBrush.Transform>
+                              <GradientStop Offset="0" Color="White"/>
+                              <GradientStop Offset="0.1" />
+                            </LinearGradientBrush>
                           </Setter>
                         </Style>
                       </local:StoryboardTransition.NewContentStyle>
@@ -639,58 +550,62 @@
                     </local:StoryboardTransition>
                   </local:TransitionElement.Transition>
                 </local:TransitionElement>
-
-
               </AdornerDecorator>
+
               <ResizeGrip x:Name="WindowResizeGrip"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Visibility="Collapsed" 
                 IsTabStop="false"/>
             </Grid>
-            <ControlTemplate.Triggers>
-              <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
-                <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
+          </DockPanel>
+          <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="CanGoForward" Value="false"/>
+                <Condition Property="CanGoBack" Value="false"/>
+              </MultiTrigger.Conditions>
+              <Setter TargetName="NavMenu" Property="IsEnabled" Value="false"/>
+            </MultiTrigger>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+              <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
       </Setter>
     </Style>
 
-    <!-- Window Style ends -->
+    <!-- Navigation Window style ends-->
 
+    <!-- Window Style begins-->
 
-    <!-- Frame style begins -->
-
-    <Style x:Key="myFrameStyle" TargetType="{x:Type Frame}">
+    <Style x:Key="myWindowStyle" TargetType="{x:Type Window}">
+      <Setter Property="SnapsToDevicePixels" Value="true"/>
       <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type Frame}">
-            <Border Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Padding="{TemplateBinding Padding}">
-              <!-- Replaceing the old content presenter with the Transition Element -->
+        <ControlTemplate TargetType="{x:Type Window}">
+          <Grid Background="{StaticResource WindowBackgroundBrush}">
+            <AdornerDecorator>
+              <!--
+                  Replaceing the old content presenter with the Transition Element
+                  <ContentPresenter/>
+                  -->
               <local:TransitionElement
-                                ClipToBounds="true"
-                                Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
+            ClipToBounds="true"
+            Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}"
+            ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
                 <local:TransitionElement.Transition>
                   <local:StoryboardTransition TextSearch.Text="Rotate Wipe">
                     <local:StoryboardTransition.NewContentStyle>
                       <Style TargetType="ContentPresenter">
                         <Setter Property="OpacityMask">
-                          <Setter.Value>
-                            <LinearGradientBrush EndPoint="1,0">
-                              <LinearGradientBrush.Transform>
-                                <RotateTransform Angle="10"/>
-                              </LinearGradientBrush.Transform>
-                              <GradientStop Offset="0" Color="White"/>
-                              <GradientStop Offset="0.1" />
-                            </LinearGradientBrush>
-                          </Setter.Value>
+                          <LinearGradientBrush EndPoint="1,0">
+                            <LinearGradientBrush.Transform>
+                              <RotateTransform Angle="10"/>
+                            </LinearGradientBrush.Transform>
+                            <GradientStop Offset="0" Color="White"/>
+                            <GradientStop Offset="0.1" />
+                          </LinearGradientBrush>
                         </Setter>
                       </Style>
                     </local:StoryboardTransition.NewContentStyle>
@@ -702,10 +617,64 @@
                   </local:StoryboardTransition>
                 </local:TransitionElement.Transition>
               </local:TransitionElement>
+            </AdornerDecorator>
+            <ResizeGrip x:Name="WindowResizeGrip"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom"
+              Visibility="Collapsed" 
+              IsTabStop="false"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+              <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter>
+    </Style>
 
-            </Border>
-          </ControlTemplate>
-        </Setter.Value>
+    <!-- Window Style ends -->
+
+    <!-- Frame style begins -->
+
+    <Style x:Key="myFrameStyle" TargetType="{x:Type Frame}">
+      <Setter Property="Template">
+        <ControlTemplate TargetType="{x:Type Frame}">
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Padding="{TemplateBinding Padding}">
+            <!-- Replaceing the old content presenter with the Transition Element -->
+            <local:TransitionElement
+                              ClipToBounds="true"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
+              <local:TransitionElement.Transition>
+                <local:StoryboardTransition TextSearch.Text="Rotate Wipe">
+                  <local:StoryboardTransition.NewContentStyle>
+                    <Style TargetType="ContentPresenter">
+                      <Setter Property="OpacityMask">
+                        <LinearGradientBrush EndPoint="1,0">
+                          <LinearGradientBrush.Transform>
+                            <RotateTransform Angle="10"/>
+                          </LinearGradientBrush.Transform>
+                          <GradientStop Offset="0" Color="White"/>
+                          <GradientStop Offset="0.1" />
+                        </LinearGradientBrush>
+                      </Setter>
+                    </Style>
+                  </local:StoryboardTransition.NewContentStyle>
+                  <local:StoryboardTransition.NewContentStoryboard>
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetProperty="OpacityMask.Transform.Angle" To="-90" Duration="0:0:0.5"/>
+                    </Storyboard>
+                  </local:StoryboardTransition.NewContentStoryboard>
+                </local:StoryboardTransition>
+              </local:TransitionElement.Transition>
+            </local:TransitionElement>
+          </Border>
+        </ControlTemplate>
       </Setter>
       <Style.Triggers>
       </Style.Triggers>
