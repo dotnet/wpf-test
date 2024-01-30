@@ -14,6 +14,7 @@ using System.Windows.Markup;
 using System.Windows.Threading;
 using Microsoft.Test.Serialization;
 using System.Windows.Media;
+using Microsoft.Test.Logging;
 using Microsoft.Test.Discovery;
 using Microsoft.Test.Xaml.Utilities;
 
@@ -215,21 +216,51 @@ namespace Microsoft.Test.Xaml.Parser.MethodTests.XmlContent
             {
                 //Pass null to both dependencyObject and value in SetXmlNamespaceMaps, this will throw exception
                 XmlAttributeProperties.SetXmlNamespaceMaps(null, null);
-
+            }
+            catch (Exception e)
+            {
+                GlobalLog.LogStatus("Exception is expected. Exception in SetXmlNamespaceMaps : " + e.ToString());
+            }
+            
+            try
+            {
                 //Pass null to dependencyObject in GetXmlNamespaceMaps, this will throw exception
                 XmlAttributeProperties.GetXmlNamespaceMaps(null);
             }
             catch (Exception e)
             {
-                e.ToString().Contains("dependencyObject");
+                GlobalLog.LogStatus("Exception is expected. Exception in GetXmlNamespaceMaps : " + e.ToString());
             }
 
             //Pass value in SetXmlNamespaceMaps, then verify if the value is set correctly by GetXmlNamespaceMaps
-            Hashtable hashtable = new Hashtable();
-            hashtable.Add("a1", "foo");
-            XmlAttributeProperties.SetXmlNamespaceMaps(dobj, hashtable);
-            var xmlNamespaceMapsvalue = XmlAttributeProperties.GetXmlNamespaceMaps(dobj);
-            //_IsStringEqual("foo", xmlNamespaceMapsvalue["a1"]);
+
+            DependencyObject dObj = new DependencyObject();
+            Hashtable hashTable = new Hashtable();
+            var hashTableKey = "dummyKey";
+            var hashTableValue = "dummyValue";
+            hashTable.Add(hashTableKey, hashTableValue);
+            XmlAttributeProperties.SetXmlNamespaceMaps(dObj, hashTable);
+            var xmlNamespaceMapsValue = XmlAttributeProperties.GetXmlNamespaceMaps(dObj);
+
+            if (xmlNamespaceMapsValue.GetType() == typeof(Hashtable))
+            {
+                foreach (DictionaryEntry entry in xmlNamespaceMapsValue)
+                {
+                    _IsStringEqual(entry.Key.ToString(), hashTableKey);
+                    if (entry.Value != null)
+                    {
+                        _IsStringEqual(entry.Value.ToString(), hashTableValue);
+                    }
+                    else
+                    {
+                        throw new Microsoft.Test.TestValidationException("Value is unexpected. Expected:" + hashTableValue + ", Actual:null");
+                    }
+                }
+            }
+            else
+            {
+                throw new Microsoft.Test.TestValidationException("Value is unexpected. Expected:" + typeof(Hashtable) + ", Actual:" + xmlNamespaceMapsValue.GetType());
+            }
         }
 
         // Checks that 2 string values are equivalent.
