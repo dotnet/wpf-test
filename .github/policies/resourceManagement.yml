@@ -13,7 +13,6 @@ configuration:
       - hourly:
           hour: 3
       filters:
-      - isPullRequest
       - isOpen
       - hasLabel:
           label: ':mailbox_with_no_mail: waiting-author-feedback'
@@ -21,7 +20,6 @@ configuration:
           label: ':zzz: no-recent-activity'
       - noActivitySince:
           days: 7
-      - isIssue
       actions:
       - closeIssue
       - removeMilestone
@@ -30,7 +28,6 @@ configuration:
       - hourly:
           hour: 3
       filters:
-      - isPullRequest
       - isOpen
       - hasLabel:
           label: ':mailbox_with_no_mail: waiting-author-feedback'
@@ -38,7 +35,6 @@ configuration:
           days: 14
       - isNotLabeledWith:
           label: ':zzz: no-recent-activity'
-      - isIssue
       actions:
       - addLabel:
           label: ':zzz: no-recent-activity'
@@ -53,6 +49,7 @@ configuration:
       - hourly:
           hour: 4
       filters:
+      - isPullRequest
       - isDraftPullRequest
       actions:
       - addLabel:
@@ -62,6 +59,7 @@ configuration:
       - hourly:
           hour: 4
       filters:
+      - isPullRequest
       - isNotDraftPullRequest
       actions:
       - removeLabel:
@@ -334,4 +332,4 @@ configuration:
           label: Community Contribution
       description: Label community PRs with `community contribution` label
 onFailure: 
-onSuccess: 
+onSuccess:
