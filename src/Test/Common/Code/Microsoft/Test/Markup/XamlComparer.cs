@@ -12,6 +12,8 @@ using System.Xml;
 using System.Collections;
 using Microsoft.Test.Logging;
 using Microsoft.Test.Serialization;
+using Microsoft.Test.Windows;
+using System.Reflection;
 
 namespace Microsoft.Test.Markup
 {
@@ -301,6 +303,59 @@ namespace Microsoft.Test.Markup
             return true;
         }
 
+        private static bool IsContentProperty(XmlNode xmlNode)
+        {
+            string fileName = "PropertiesToSkip.xml";
+
+            //
+            // Load PropertiesToSkip.xml document from assembly resources.
+            //
+            XmlDocument doc = new XmlDocument();
+            Stream xmlFileStream = null;
+            if (File.Exists(fileName))
+            {
+                SendCompareMessage("Opening '" + fileName + "' from the current directory.");
+                xmlFileStream = File.OpenRead(fileName);
+            }
+            else
+            {
+                SendCompareMessage("Opening '" + fileName + "' from the Assembly.");
+                Assembly asm = Assembly.GetAssembly(typeof(TreeComparer));
+                xmlFileStream = asm.GetManifestResourceStream(fileName);
+
+                if (xmlFileStream == null)
+                {
+                    throw new ArgumentException("The file '" + fileName + "' cannot be loaded.", "fileName");
+                }
+            }
+
+            try
+            {
+                StreamReader reader = new StreamReader(xmlFileStream);
+                doc.LoadXml(reader.ReadToEnd());
+            }
+            finally
+            {
+                xmlFileStream.Close();
+            }
+
+            //
+            // Store properties to skip in collection.
+            //
+            XmlNodeList nodeList = doc.GetElementsByTagName("PropertyToSkip");
+
+            foreach (XmlNode node in nodeList)
+            {
+                string property = TreeComparer.GetAttributeValue(node, "Owner");
+                if (property != null && (xmlNode.Name).Contains(property))
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
         private static bool CompareMappings()
         {
             if (_mappingTables[0].Count != _mappingTables[1].Count)
@@ -423,7 +478,7 @@ namespace Microsoft.Test.Markup
                 }
             }
 
-            //Record how many attibutes that is not xmlns and remains uncompared. 
+            //Record how many attributes that is not xmlns and remains uncompared. 
             int activeNonXmlnsAttributeCount = attributesTable2.Count;
 
             // Verify each attribute in the first node matches one in the second
@@ -506,8 +561,8 @@ namespace Microsoft.Test.Markup
                 return false;
             }
 
-            ArrayList childrenArray1 = SeperateMappingOut(children1, 0);
-            ArrayList childrenArray2 = SeperateMappingOut(children2, 1);
+            ArrayList childrenArray1 = SeparateMappingOut(children1, 0);
+            ArrayList childrenArray2 = SeparateMappingOut(children2, 1);
 
             if (ShouldConsiderSequence(node1.LocalName))
             {
@@ -530,6 +585,11 @@ namespace Microsoft.Test.Markup
             //Get all properties, whose name contains a ".".
             foreach (XmlNode node in children)
             {
+                if (IsContentProperty(node)) 
+                {
+                    return properties;
+                }
+
                 if (node.Name.Contains("."))
                 {
                     properties.Add(node);
@@ -543,12 +603,17 @@ namespace Microsoft.Test.Markup
             return properties;
         }
 
-        private static ArrayList SeperateMappingOut(XmlNodeList list, int index)
+        private static ArrayList SeparateMappingOut(XmlNodeList list, int index)
         {
             ArrayList listWithoutMapping = new ArrayList();
 
             foreach (XmlNode node in list)
             {
+                if (IsContentProperty(node))
+                {
+                    return listWithoutMapping;
+                }
+
                 if ("Mapping" == node.LocalName)
                 {
                     AddToMappingTable(node, index);
