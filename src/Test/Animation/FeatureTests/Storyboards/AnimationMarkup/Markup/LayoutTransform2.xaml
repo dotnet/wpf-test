@@ -12,38 +12,36 @@
 
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <ControlTemplate.Triggers>
-                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                <EventTrigger.Actions>
-                                    <BeginStoryboard>
-                                        <BeginStoryboard.Storyboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetProperty   = "(ScrollViewer.LayoutTransform).(RotateTransform.Angle)"
-                                                    Storyboard.TargetName       = "PART_ContentHost"
-                                                    From                        = "15"
-                                                    To                          = "60.0"
-                                                    Duration                    = "0:0:4"
-                                                    BeginTime                   = "0:0:2"
-                                                    />
-                                            </Storyboard>
-                                        </BeginStoryboard.Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger.Actions>
-                            </EventTrigger>
-                        </ControlTemplate.Triggers>
-                        
-                        <Border x:Name="TemplateControl" Background="LightGreen">
-                            <ScrollViewer x:Name="PART_ContentHost">
-                                    <ScrollViewer.LayoutTransform>
-                                        <RotateTransform Angle="15" CenterX="0" CenterY="0"/>
-                                    </ScrollViewer.LayoutTransform>
-                            </ScrollViewer>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
+                <ControlTemplate>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty   = "(ScrollViewer.LayoutTransform).(RotateTransform.Angle)"
+                                                Storyboard.TargetName       = "PART_ContentHost"
+                                                From                        = "15"
+                                                To                          = "60.0"
+                                                Duration                    = "0:0:4"
+                                                BeginTime                   = "0:0:2"
+                                                />
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                    
+                    <Border x:Name="TemplateControl" Background="LightGreen">
+                        <ScrollViewer x:Name="PART_ContentHost">
+                                <ScrollViewer.LayoutTransform>
+                                    <RotateTransform Angle="15" CenterX="0" CenterY="0"/>
+                                </ScrollViewer.LayoutTransform>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
             </Setter>
         </Style>
         

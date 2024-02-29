@@ -26,16 +26,12 @@
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
         <Style TargetType="{x:Type StickyNoteControl}">
             <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX=".5" ScaleY=".5"/>
-                </Setter.Value>
+              <ScaleTransform ScaleX=".5" ScaleY=".5"/>
             </Setter>
             <Style.Triggers>
                 <Trigger Property="StickyNoteControl.IsActive" Value="True">
                     <Setter Property="RenderTransform">
-                        <Setter.Value>
-                            <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        </Setter.Value>
+                      <ScaleTransform ScaleX="1" ScaleY="1"/>
                     </Setter>
                 </Trigger>
             </Style.Triggers>
@@ -53,13 +49,11 @@
             <Setter Property="Height" Value ="250" />
             <!-- Custom template that only contains required controls -->
             <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>                        
-                        <ScrollViewer Background="Yellow">
-                            <RichTextBox Name="PART_ContentControl" />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </Setter.Value>
+              <ControlTemplate>                        
+                  <ScrollViewer Background="Yellow">
+                      <RichTextBox Name="PART_ContentControl" />
+                  </ScrollViewer>
+              </ControlTemplate>
             </Setter>
         </Style>
     </ResourceDictionary>
@@ -74,13 +68,11 @@
             <Setter Property="Height" Value ="250" />
             <!-- Custom template that only contains required controls -->
             <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>                        
-                        <ScrollViewer Background="Yellow">
-                            <InkCanvas Name="PART_ContentControl" />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </Setter.Value>
+              <ControlTemplate>                        
+                  <ScrollViewer Background="Yellow">
+                      <InkCanvas Name="PART_ContentControl" />
+                  </ScrollViewer>
+              </ControlTemplate>
             </Setter>
         </Style>
     </ResourceDictionary>
@@ -93,13 +85,11 @@
         
         <Style TargetType="{x:Type StickyNoteControl}">
             <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <ScrollViewer>
-                            <RichTextBox Background="Yellow" Name="PART_ContentControl" />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </Setter.Value>
+              <ControlTemplate>
+                  <ScrollViewer>
+                      <RichTextBox Background="Yellow" Name="PART_ContentControl" />
+                  </ScrollViewer>
+              </ControlTemplate>
             </Setter>
         </Style>
 
@@ -111,13 +101,11 @@
         
         <Style TargetType="{x:Type StickyNoteControl}">
             <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <ScrollViewer>
-                            <InkCanvas Background="Yellow" Name="PART_ContentControl" />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </Setter.Value>
+              <ControlTemplate>
+                  <ScrollViewer>
+                      <InkCanvas Background="Yellow" Name="PART_ContentControl" />
+                  </ScrollViewer>
+              </ControlTemplate>
             </Setter>
         </Style>
 
@@ -131,11 +119,9 @@
             <Style.Triggers>
                 <Trigger Property="StickyNoteControl.IsExpanded" Value="False">
                     <Setter Property="Control.Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <DockPanel Background="Green"/>
-                            </ControlTemplate>
-                        </Setter.Value>
+                      <ControlTemplate>
+                          <DockPanel Background="Green"/>
+                      </ControlTemplate>
                     </Setter>
                 </Trigger>
             </Style.Triggers>
@@ -169,33 +155,29 @@
       <Style.Triggers>
         <Trigger Property="StickyNoteControl.IsExpanded" Value="False">
           <Setter Property="Control.Template">
-            <Setter.Value>
-              <ControlTemplate>
-                <DockPanel Background="Blue">
-                  <CheckBox IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
-                </DockPanel>
-              </ControlTemplate>
-            </Setter.Value>
+            <ControlTemplate>
+              <DockPanel Background="Blue">
+                <CheckBox IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
+              </DockPanel>
+            </ControlTemplate>
           </Setter>
         </Trigger>
       </Style.Triggers>
       <Setter Property="Control.Template">
-        <Setter.Value>
-          <ControlTemplate>
-            <Grid Background="Green" Name="TheGrid">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-              </Grid.RowDefinitions>
-              <Menu>
-                <CheckBox Name="CB" Width="20" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
-              </Menu>
-              <ScrollViewer Grid.Row="1">
-                <RichTextBox Name="PART_ContentControl" />
-              </ScrollViewer>
-            </Grid>
-          </ControlTemplate>
-        </Setter.Value>
+        <ControlTemplate>
+          <Grid Background="Green" Name="TheGrid">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <Menu>
+              <CheckBox Name="CB" Width="20" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
+            </Menu>
+            <ScrollViewer Grid.Row="1">
+              <RichTextBox Name="PART_ContentControl" />
+            </ScrollViewer>
+          </Grid>
+        </ControlTemplate>
       </Setter>
     </Style>
   </ResourceDictionary>
@@ -207,33 +189,29 @@
       <Style.Triggers>
         <Trigger Property="StickyNoteControl.IsExpanded" Value="False">
           <Setter Property="Control.Template">
-            <Setter.Value>
-              <ControlTemplate>
-                <DockPanel Background="Blue">
-                  <CheckBox IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
-                </DockPanel>
-              </ControlTemplate>
-            </Setter.Value>
+            <ControlTemplate>
+              <DockPanel Background="Blue">
+                <CheckBox IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
+              </DockPanel>
+            </ControlTemplate>
           </Setter>
         </Trigger>
       </Style.Triggers>
       <Setter Property="Control.Template">
-        <Setter.Value>
-          <ControlTemplate>
-            <Grid Background="Green" Name="TheGrid">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-              </Grid.RowDefinitions>
-              <Menu>
-                <CheckBox Name="CB" Width="20" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
-              </Menu>
-              <ScrollViewer Grid.Row="1">
-                <InkCanvas Name="PART_ContentControl" />
-              </ScrollViewer>
-            </Grid>
-          </ControlTemplate>
-        </Setter.Value>
+        <ControlTemplate>
+          <Grid Background="Green" Name="TheGrid">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <Menu>
+              <CheckBox Name="CB" Width="20" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=true}" />
+            </Menu>
+            <ScrollViewer Grid.Row="1">
+              <InkCanvas Name="PART_ContentControl" />
+            </ScrollViewer>
+          </Grid>
+        </ControlTemplate>
       </Setter>
     </Style>
   </ResourceDictionary>
@@ -245,15 +223,13 @@
     <Style TargetType="{x:Type StickyNoteControl}">
       <Setter Property="Background" Value="Red"/>
       <Setter Property="BitmapEffect">
-        <Setter.Value>
-          <BitmapEffectGroup>
-            <BlurBitmapEffect Radius="2"/>
-            <DropShadowBitmapEffect/>
-            <OuterGlowBitmapEffect/>
-            <BevelBitmapEffect/>
-            <EmbossBitmapEffect/>
-          </BitmapEffectGroup>
-        </Setter.Value>
+        <BitmapEffectGroup>
+          <BlurBitmapEffect Radius="2"/>
+          <DropShadowBitmapEffect/>
+          <OuterGlowBitmapEffect/>
+          <BevelBitmapEffect/>
+          <EmbossBitmapEffect/>
+        </BitmapEffectGroup>
       </Setter>
       <Setter Property="Opacity" Value="10" />
     </Style>

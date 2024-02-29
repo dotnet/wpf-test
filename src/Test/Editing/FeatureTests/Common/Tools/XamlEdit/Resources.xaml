@@ -3,7 +3,7 @@
                     xmlns:l="clr-namespace:XamlPadEdit">
   <Style x:Key="{x:Type l:ListTreeViewItemRow}" TargetType="{x:Type l:ListTreeViewItemRow}">
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type l:ListTreeViewItemRow}">
           <Border Name='border' Background="{Binding Background,ElementName=Bd}">
             <!--Border.Margin only gets changed when the length of the first column has been indented to be less than 0-->
@@ -34,7 +34,7 @@
             </l:IndentedRowPresenter>
           </Border>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -46,13 +46,13 @@
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type l:ListTreeView}">
           <ControlTemplate.Resources>
             <Style x:Key="sv" TargetType="{x:Type ScrollViewer}">
               <Setter Property="Focusable" Value="false" />
               <Setter Property="Template">
-                <Setter.Value>
+                
                   <ControlTemplate TargetType="{x:Type ScrollViewer}">
                     <Grid Background="{TemplateBinding Background}">
                       <Grid.ColumnDefinitions>
@@ -111,7 +111,7 @@
                                   Cursor="Arrow" />
                     </Grid>
                   </ControlTemplate>
-                </Setter.Value>
+                
               </Setter>
             </Style>
           </ControlTemplate.Resources>
@@ -123,7 +123,7 @@
             </ScrollViewer>
           </Border>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -131,11 +131,11 @@
          BasedOn="{StaticResource {x:Type TreeViewItem}}">
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
     <Setter Property="HeaderTemplate">
-      <Setter.Value>
+      
         <DataTemplate>
           <l:ListTreeViewItemRow Content="{Binding}"/>
         </DataTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -152,7 +152,7 @@
     <Setter Property="Background" Value="White"/>
     <Setter Property="ContextMenu" Value="{DynamicResource contextMenu}"/>
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type l:VisualTreeView}">
           <ControlTemplate.Resources>
             <HierarchicalDataTemplate x:Key="hdt1" ItemsSource="{Binding Items}">
@@ -172,7 +172,7 @@
                     ItemsSource="{TemplateBinding l:VisualTreeView.ViewTree}"
                     ItemTemplate="{DynamicResource hdt1}"/>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -190,7 +190,7 @@
     <Setter Property="ShowsRoot" Value="false" />
     <Setter Property="ContextMenu" Value="{DynamicResource contextMenu}"/>
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type l:PropertyTreeView}">
           <l:ListTreeView Name="PART_Tree" 
                           BorderBrush="{TemplateBinding Control.BorderBrush}"
@@ -212,7 +212,7 @@
             </l:ListTreeView.ItemTemplate>
           </l:ListTreeView>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 

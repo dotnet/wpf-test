@@ -27,21 +27,18 @@
             </DataTemplate>
             <Style x:Key="FirstLevelGroupItemStyle" TargetType="GroupItem">
                 <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type GroupItem}">
-                        <Expander IsExpanded="true">
-                            <Expander.Header>
-                                <TextBlock FontWeight="Bold" FontSize="15" Text="{Binding Path=Name}"/>
-                            </Expander.Header>
-                            <ItemsPresenter/>
-                        </Expander>
-                    </ControlTemplate>
-                </Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupItem}">
+                    <Expander IsExpanded="true">
+                        <Expander.Header>
+                            <TextBlock FontWeight="Bold" FontSize="15" Text="{Binding Path=Name}"/>
+                        </Expander.Header>
+                        <ItemsPresenter/>
+                    </Expander>
+                </ControlTemplate>
                 </Setter>
             </Style>
             <Style x:Key="SecondLevelGroupItemStyle" TargetType="GroupItem">
                 <Setter Property="Template">
-                <Setter.Value>
                     <ControlTemplate TargetType="{x:Type GroupItem}">
                         <Expander IsExpanded="true">
                             <Expander.Header>
@@ -50,7 +47,6 @@
                             <ItemsPresenter/>
                         </Expander>
                     </ControlTemplate>
-                </Setter.Value>
                 </Setter>
             </Style>
             <local:EnumConverter x:Key="MyEnumConverter" />

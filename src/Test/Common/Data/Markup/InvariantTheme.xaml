@@ -26,27 +26,25 @@ controls won't depend on the system.
         <Setter Property="FontSize"
                 Value="12pt"/>
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Label}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Padding="{TemplateBinding Padding}"
-                            SnapsToDevicePixels="true">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled"
-                                 Value="false">
-                            <Setter Property="Foreground"
-                                    Value="Gray"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
+          <ControlTemplate TargetType="{x:Type Label}">
+              <Border Background="{TemplateBinding Background}"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      Padding="{TemplateBinding Padding}"
+                      SnapsToDevicePixels="true">
+                  <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+              </Border>
+              <ControlTemplate.Triggers>
+                  <Trigger Property="IsEnabled"
+                            Value="false">
+                      <Setter Property="Foreground"
+                              Value="Gray"/>
+                  </Trigger>
+              </ControlTemplate.Triggers>
+          </ControlTemplate>
         </Setter>
     </Style>
 
@@ -75,132 +73,130 @@ controls won't depend on the system.
         <Setter Property="VerticalContentAlignment"
                 Value="Center"/>
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid KeyboardNavigation.TabNavigation="Local"
-                          SnapsToDevicePixels="true"
-                          ClipToBounds="true">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="ColumnDefinition0"/>
-                            <ColumnDefinition x:Name="ColumnDefinition1"
-                                              Width="0"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition x:Name="RowDefinition0"
-                                           Height="Auto"/>
-                            <RowDefinition x:Name="RowDefinition1"
-                                           Height="*"/>
-                        </Grid.RowDefinitions>
-                        <TabPanel x:Name="HeaderPanel"
-                                  Panel.ZIndex ="1" 
-                                  KeyboardNavigation.TabIndex="1"
-                                  Grid.Column="0"
-                                  Grid.Row="0"
-                                  Margin="2,2,2,0"
-                                  IsItemsHost="true"
-                                  Opacity="0"
-                                  Background="Transparent"/>
-                        <Grid x:Name="ContentPanel"
-                              KeyboardNavigation.TabNavigation="Local"
-                              KeyboardNavigation.DirectionalNavigation="Contained"
-                              KeyboardNavigation.TabIndex="2"
-                              Grid.Column="0"
-                              Grid.Row="1">
-                            <Decorator>
-                                <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                  Margin="2,2,2,2"
-                                                  ContentSource="SelectedContent"/>
-                            </Decorator>
-                        </Grid>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="TabStripPlacement"
-                                 Value="Bottom">
-                            <Setter Property="Grid.Row"
-                                    Value="1"
-                                    TargetName="HeaderPanel"/>
-                            <Setter Property="Grid.Row"
-                                    Value="0"
-                                    TargetName="ContentPanel"/>
-                            <Setter Property="Height"
-                                    Value="*"
-                                    TargetName="RowDefinition0"/>
-                            <Setter Property="Height"
-                                    Value="Auto"
-                                    TargetName="RowDefinition1"/>
-                            <Setter Property="Margin"
-                                    Value="2,0,2,2"
-                                    TargetName="HeaderPanel"/>
-                        </Trigger>
-                        <Trigger Property="TabStripPlacement"
-                                 Value="Left">
-                            <Setter Property="Grid.Row"
-                                    Value="0"
-                                    TargetName="HeaderPanel"/>
-                            <Setter Property="Grid.Row"
-                                    Value="0"
-                                    TargetName="ContentPanel"/>
-                            <Setter Property="Grid.Column"
-                                    Value="0"
-                                    TargetName="HeaderPanel"/>
-                            <Setter Property="Grid.Column"
-                                    Value="1"
-                                    TargetName="ContentPanel"/>
-                            <Setter Property="Width"
-                                    Value="Auto"
-                                    TargetName="ColumnDefinition0"/>
-                            <Setter Property="Width"
-                                    Value="*"
-                                    TargetName="ColumnDefinition1"/>
-                            <Setter Property="Height"
-                                    Value="*"
-                                    TargetName="RowDefinition0"/>
-                            <Setter Property="Height"
-                                    Value="0"
-                                    TargetName="RowDefinition1"/>
-                            <Setter Property="Margin"
-                                    Value="2,2,0,2"
-                                    TargetName="HeaderPanel"/>
-                        </Trigger>
-                        <Trigger Property="TabStripPlacement"
-                                 Value="Right">
-                            <Setter Property="Grid.Row"
-                                    Value="0"
-                                    TargetName="HeaderPanel"/>
-                            <Setter Property="Grid.Row"
-                                    Value="0"
-                                    TargetName="ContentPanel"/>
-                            <Setter Property="Grid.Column"
-                                    Value="1"
-                                    TargetName="HeaderPanel"/>
-                            <Setter Property="Grid.Column"
-                                    Value="0"
-                                    TargetName="ContentPanel"/>
-                            <Setter Property="Width"
-                                    Value="*"
-                                    TargetName="ColumnDefinition0"/>
-                            <Setter Property="Width"
-                                    Value="Auto"
-                                    TargetName="ColumnDefinition1"/>
-                            <Setter Property="Height"
-                                    Value="*"
-                                    TargetName="RowDefinition0"/>
-                            <Setter Property="Height"
-                                    Value="0"
-                                    TargetName="RowDefinition1"/>
-                            <Setter Property="Margin"
-                                    Value="0,2,2,2"
-                                    TargetName="HeaderPanel"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" 
-                                 Value="false">
-                            <Setter Property="Foreground" 
-                                    Value="Gray"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
+          <ControlTemplate TargetType="{x:Type TabControl}">
+              <Grid KeyboardNavigation.TabNavigation="Local"
+                    SnapsToDevicePixels="true"
+                    ClipToBounds="true">
+                  <Grid.ColumnDefinitions>
+                      <ColumnDefinition x:Name="ColumnDefinition0"/>
+                      <ColumnDefinition x:Name="ColumnDefinition1"
+                                        Width="0"/>
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                      <RowDefinition x:Name="RowDefinition0"
+                                      Height="Auto"/>
+                      <RowDefinition x:Name="RowDefinition1"
+                                      Height="*"/>
+                  </Grid.RowDefinitions>
+                  <TabPanel x:Name="HeaderPanel"
+                            Panel.ZIndex ="1" 
+                            KeyboardNavigation.TabIndex="1"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Margin="2,2,2,0"
+                            IsItemsHost="true"
+                            Opacity="0"
+                            Background="Transparent"/>
+                  <Grid x:Name="ContentPanel"
+                        KeyboardNavigation.TabNavigation="Local"
+                        KeyboardNavigation.DirectionalNavigation="Contained"
+                        KeyboardNavigation.TabIndex="2"
+                        Grid.Column="0"
+                        Grid.Row="1">
+                      <Decorator>
+                          <ContentPresenter x:Name="PART_SelectedContentHost"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                            Margin="2,2,2,2"
+                                            ContentSource="SelectedContent"/>
+                      </Decorator>
+                  </Grid>
+              </Grid>
+              <ControlTemplate.Triggers>
+                  <Trigger Property="TabStripPlacement"
+                            Value="Bottom">
+                      <Setter Property="Grid.Row"
+                              Value="1"
+                              TargetName="HeaderPanel"/>
+                      <Setter Property="Grid.Row"
+                              Value="0"
+                              TargetName="ContentPanel"/>
+                      <Setter Property="Height"
+                              Value="*"
+                              TargetName="RowDefinition0"/>
+                      <Setter Property="Height"
+                              Value="Auto"
+                              TargetName="RowDefinition1"/>
+                      <Setter Property="Margin"
+                              Value="2,0,2,2"
+                              TargetName="HeaderPanel"/>
+                  </Trigger>
+                  <Trigger Property="TabStripPlacement"
+                            Value="Left">
+                      <Setter Property="Grid.Row"
+                              Value="0"
+                              TargetName="HeaderPanel"/>
+                      <Setter Property="Grid.Row"
+                              Value="0"
+                              TargetName="ContentPanel"/>
+                      <Setter Property="Grid.Column"
+                              Value="0"
+                              TargetName="HeaderPanel"/>
+                      <Setter Property="Grid.Column"
+                              Value="1"
+                              TargetName="ContentPanel"/>
+                      <Setter Property="Width"
+                              Value="Auto"
+                              TargetName="ColumnDefinition0"/>
+                      <Setter Property="Width"
+                              Value="*"
+                              TargetName="ColumnDefinition1"/>
+                      <Setter Property="Height"
+                              Value="*"
+                              TargetName="RowDefinition0"/>
+                      <Setter Property="Height"
+                              Value="0"
+                              TargetName="RowDefinition1"/>
+                      <Setter Property="Margin"
+                              Value="2,2,0,2"
+                              TargetName="HeaderPanel"/>
+                  </Trigger>
+                  <Trigger Property="TabStripPlacement"
+                            Value="Right">
+                      <Setter Property="Grid.Row"
+                              Value="0"
+                              TargetName="HeaderPanel"/>
+                      <Setter Property="Grid.Row"
+                              Value="0"
+                              TargetName="ContentPanel"/>
+                      <Setter Property="Grid.Column"
+                              Value="1"
+                              TargetName="HeaderPanel"/>
+                      <Setter Property="Grid.Column"
+                              Value="0"
+                              TargetName="ContentPanel"/>
+                      <Setter Property="Width"
+                              Value="*"
+                              TargetName="ColumnDefinition0"/>
+                      <Setter Property="Width"
+                              Value="Auto"
+                              TargetName="ColumnDefinition1"/>
+                      <Setter Property="Height"
+                              Value="*"
+                              TargetName="RowDefinition0"/>
+                      <Setter Property="Height"
+                              Value="0"
+                              TargetName="RowDefinition1"/>
+                      <Setter Property="Margin"
+                              Value="0,2,2,2"
+                              TargetName="HeaderPanel"/>
+                  </Trigger>
+                  <Trigger Property="IsEnabled" 
+                            Value="false">
+                      <Setter Property="Foreground" 
+                              Value="Gray"/>
+                  </Trigger>
+              </ControlTemplate.Triggers>
+          </ControlTemplate>
         </Setter>
     </Style>
 
@@ -217,27 +213,25 @@ controls won't depend on the system.
         <Setter Property="Padding"
                 Value="2,0,0,0"/>
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <BulletDecorator>
-                        <BulletDecorator.Bullet>
-                                <Ellipse x:Name="Dot"
-                                      Visibility="Visible"
-                                      Fill="Black"
-                                      Width="8"
-                                      Height="8"/>
-                        </BulletDecorator.Bullet>
-                        <ContentPresenter Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          RecognizesAccessKey="True"
-                                          TextBlock.Foreground="Black"
-                                          TextBlock.FontSize="12"
-                                          TextBlock.FontFamily="Arial"
-                                         />
-                    </BulletDecorator>
-                </ControlTemplate>
-            </Setter.Value>
+          <ControlTemplate TargetType="{x:Type RadioButton}">
+              <BulletDecorator>
+                  <BulletDecorator.Bullet>
+                          <Ellipse x:Name="Dot"
+                                Visibility="Visible"
+                                Fill="Black"
+                                Width="8"
+                                Height="8"/>
+                  </BulletDecorator.Bullet>
+                  <ContentPresenter Margin="{TemplateBinding Padding}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    RecognizesAccessKey="True"
+                                    TextBlock.Foreground="Black"
+                                    TextBlock.FontSize="12"
+                                    TextBlock.FontFamily="Arial"
+                                    />
+              </BulletDecorator>
+          </ControlTemplate>
         </Setter>
     </Style>
 
@@ -255,43 +249,41 @@ controls won't depend on the system.
         <Setter Property="BorderThickness"
                 Value="1"/>
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Expander}">
-                    <Border 
-                            CornerRadius="3"
-                            SnapsToDevicePixels="true"
-                            Background="Gray"
-                            >
-                        <DockPanel>
-                            <Button x:Name="HeaderSite"
-                                          DockPanel.Dock="Top"
-                                          Margin="1"
-                                          MinWidth="0"
-                                          MinHeight="0"
-                                          Content="{TemplateBinding Header}"
-                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
-                                          Foreground="Gray"
-                                          FontFamily="Tahoma"
-                                          FontSize="12pt"
-                                          FontStyle="Normal"
-                                          FontStretch="Medium"
-                                          FontWeight="Medium"
-                                          HorizontalContentAlignment="Stretch"
-                                          VerticalContentAlignment="Stretch"
-                                          Background="LightGray"
+            <ControlTemplate TargetType="{x:Type Expander}">
+                <Border 
+                        CornerRadius="3"
+                        SnapsToDevicePixels="true"
+                        Background="Gray"
+                        >
+                    <DockPanel>
+                        <Button x:Name="HeaderSite"
+                                      DockPanel.Dock="Top"
+                                      Margin="1"
+                                      MinWidth="0"
+                                      MinHeight="0"
+                                      Content="{TemplateBinding Header}"
+                                      ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                      Foreground="Gray"
+                                      FontFamily="Tahoma"
+                                      FontSize="12pt"
+                                      FontStyle="Normal"
+                                      FontStretch="Medium"
+                                      FontWeight="Medium"
+                                      HorizontalContentAlignment="Stretch"
+                                      VerticalContentAlignment="Stretch"
+                                      Background="LightGray"
+                                      />
+                        <ContentPresenter x:Name="ExpandSite"
+                                          DockPanel.Dock="Bottom"
+                                          Visibility="Collapsed"
+                                          Focusable="false"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
                                           />
-                            <ContentPresenter x:Name="ExpandSite"
-                                              DockPanel.Dock="Bottom"
-                                              Visibility="Collapsed"
-                                              Focusable="false"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Stretch"
-                                              />
-                        </DockPanel>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
         </Setter>
     </Style>
 
@@ -300,17 +292,15 @@ controls won't depend on the system.
     ==================================================================-->
     <Style TargetType="{x:Type ItemsControl}">
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ItemsControl}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Padding="{TemplateBinding Padding}"
-                            SnapsToDevicePixels="true">
-                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
+            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}"
+                        SnapsToDevicePixels="true">
+                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                </Border>
+            </ControlTemplate>
         </Setter>
     </Style>
 
@@ -322,13 +312,11 @@ controls won't depend on the system.
     <Setter Property="TextElement.FontStyle" Value="Normal"/>
     <Setter Property="TextElement.FontSize" Value="12"/>
     <Setter Property="Control.Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="ComboBoxItem">
-          <Border BorderThickness="1" Padding="3,0,3,0" BorderBrush="Black" Background="lightgray">
-            <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="true" />
-          </Border>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate TargetType="ComboBoxItem">
+        <Border BorderThickness="1" Padding="3,0,3,0" BorderBrush="Black" Background="lightgray">
+          <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="true" />
+        </Border>
+      </ControlTemplate>
     </Setter>
   </Style>
 
@@ -340,34 +328,30 @@ controls won't depend on the system.
     <Setter Property="TextElement.FontStyle" Value="Normal"/>
     <Setter Property="TextElement.FontSize" Value="12"/>
     <Setter Property="Control.Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="ComboBox">
-          <Grid Name="MainGrid" SnapsToDevicePixels="True">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="200" />
-              <ColumnDefinition Width="16" MinWidth="16" />
-            </Grid.ColumnDefinitions>
-            <ToggleButton IsChecked="False" BorderBrush="Black" Background="LightGray" Grid.ColumnSpan="2">
-              <ToggleButton.Style>
-                <Style TargetType="ToggleButton">
-                  <Setter Property="Control.Template">
-                    <Setter.Value>
-                      <ControlTemplate TargetType="ToggleButton">
-                        <Border Background="LightGray" BorderBrush="Black" SnapsToDevicePixels="True">
-                          <Grid Width="16" HorizontalAlignment="Right">
-                            <Path Data="M0,0L3.5,4 7,0z" Fill="#FF000000" Margin="3,1,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                          </Grid>
-                        </Border>
-                      </ControlTemplate>
-                    </Setter.Value>
-                  </Setter>
-                </Style>
-              </ToggleButton.Style>
-            </ToggleButton>
-            <ContentPresenter Content="{TemplateBinding ComboBox.SelectionBoxItem}" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="true" IsHitTestVisible="False" />
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate TargetType="ComboBox">
+        <Grid Name="MainGrid" SnapsToDevicePixels="True">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="16" MinWidth="16" />
+          </Grid.ColumnDefinitions>
+          <ToggleButton IsChecked="False" BorderBrush="Black" Background="LightGray" Grid.ColumnSpan="2">
+            <ToggleButton.Style>
+              <Style TargetType="ToggleButton">
+                <Setter Property="Control.Template">
+                  <ControlTemplate TargetType="ToggleButton">
+                    <Border Background="LightGray" BorderBrush="Black" SnapsToDevicePixels="True">
+                      <Grid Width="16" HorizontalAlignment="Right">
+                        <Path Data="M0,0L3.5,4 7,0z" Fill="#FF000000" Margin="3,1,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                      </Grid>
+                    </Border>
+                  </ControlTemplate>
+                </Setter>
+              </Style>
+            </ToggleButton.Style>
+          </ToggleButton>
+          <ContentPresenter Content="{TemplateBinding ComboBox.SelectionBoxItem}" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="true" IsHitTestVisible="False" />
+        </Grid>
+      </ControlTemplate>
     </Setter>
   </Style>
 
@@ -379,9 +363,7 @@ controls won't depend on the system.
     <Setter Property="TextElement.FontStyle" Value="Normal"/>
     <Setter Property="TextElement.FontSize" Value="12"/>
     <Setter Property="Panel.Background">
-      <Setter.Value>
-        <SolidColorBrush>#00FFFFFF</SolidColorBrush>
-      </Setter.Value>
+      <SolidColorBrush>#00FFFFFF</SolidColorBrush>
     </Setter>
   </Style>
 
@@ -390,13 +372,11 @@ controls won't depend on the system.
     <Setter Property="Width" Value="300" />
     <Setter Property="Height" Value="100" />
     <Setter Property="Control.Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="Menu">
-          <Border BorderThickness="1" Padding="2" BorderBrush="Black" Background="#FFF6F6F6" SnapsToDevicePixels="True">
-            <ItemsPresenter />
-          </Border>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate TargetType="Menu">
+        <Border BorderThickness="1" Padding="2" BorderBrush="Black" Background="#FFF6F6F6" SnapsToDevicePixels="True">
+          <ItemsPresenter />
+        </Border>
+      </ControlTemplate>
     </Setter>
   </Style>
 
@@ -407,20 +387,18 @@ controls won't depend on the system.
     <Setter Property="Foreground" Value="Black"/>
     <Setter Property="Background" Value="LightGray"/>
     <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate>
-          <Border Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding Foreground}">
-            <ContentPresenter
-                Content="{TemplateBinding Button.Content}"
-                TextBlock.Foreground="{TemplateBinding Foreground}"
-                TextBlock.FontSize="12"
-                TextBlock.FontFamily="Arial"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Margin="3"/>
-          </Border>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding Foreground}">
+          <ContentPresenter
+              Content="{TemplateBinding Button.Content}"
+              TextBlock.Foreground="{TemplateBinding Foreground}"
+              TextBlock.FontSize="12"
+              TextBlock.FontFamily="Arial"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Margin="3"/>
+        </Border>
+      </ControlTemplate>
     </Setter>
     <Style.Triggers>
       <Trigger Property="Button.IsMouseOver" Value="true">
@@ -440,13 +418,11 @@ controls won't depend on the system.
     <Setter Property="TextElement.FontStyle" Value="Normal"/>
     <Setter Property="TextElement.FontSize" Value="12"/>
     <Setter Property="Control.Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="ListBoxItem">
-          <Border Padding="2" Background="white">
-            <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="left" VerticalAlignment="Center" SnapsToDevicePixels="true" />
-          </Border>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate TargetType="ListBoxItem">
+        <Border Padding="2" Background="white">
+          <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="left" VerticalAlignment="Center" SnapsToDevicePixels="true" />
+        </Border>
+      </ControlTemplate>
     </Setter>
   </Style>
 
@@ -458,19 +434,17 @@ controls won't depend on the system.
     <Setter Property="TextElement.FontStyle" Value="Normal"/>
     <Setter Property="TextElement.FontSize" Value="12"/>
     <Setter Property="Control.Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="ListBox">
-          <Grid Name="MainGrid" SnapsToDevicePixels="True">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="200" />
-              <ColumnDefinition Width="16" MinWidth="16" />
-            </Grid.ColumnDefinitions>
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled" CanContentScroll="true">
-              <VirtualizingStackPanel IsItemsHost="true" HorizontalAlignment="center"/>
-            </ScrollViewer>
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate TargetType="ListBox">
+        <Grid Name="MainGrid" SnapsToDevicePixels="True">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="16" MinWidth="16" />
+          </Grid.ColumnDefinitions>
+          <ScrollViewer HorizontalScrollBarVisibility="Disabled" CanContentScroll="true">
+            <VirtualizingStackPanel IsItemsHost="true" HorizontalAlignment="center"/>
+          </ScrollViewer>
+        </Grid>
+      </ControlTemplate>
     </Setter>
   </Style>
 
@@ -478,15 +452,13 @@ controls won't depend on the system.
     <Setter Property="Background" Value="LightGray"/>
     <Setter Property="OverridesDefaultStyle" Value="true" />
     <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type RepeatButton}">
-          <Grid Height="16" Width="16" >
-            <Border Height="16" Width="16" Background="{TemplateBinding Background}">
-              <Path Name="Path" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DarkGray" Data="M 0 4 L 7 4 L 3.5 0 Z"  />
-            </Border>
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate TargetType="{x:Type RepeatButton}">
+        <Grid Height="16" Width="16" >
+          <Border Height="16" Width="16" Background="{TemplateBinding Background}">
+            <Path Name="Path" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DarkGray" Data="M 0 4 L 7 4 L 3.5 0 Z"  />
+          </Border>
+        </Grid>
+      </ControlTemplate>
     </Setter>
   </Style>
 
@@ -494,15 +466,13 @@ controls won't depend on the system.
     <Setter Property="Background" Value="LightGray"/>
     <Setter Property="OverridesDefaultStyle" Value="true" />
     <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type RepeatButton}">
-          <Grid Height="16" Width="16" >
-            <Border Height="16" Width="16" Background="{TemplateBinding Background}">
-              <Path Name="Path" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DarkGray" Data="M 0 0 L 3.5 4 L 7 0 Z" />
-            </Border>
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
+      <ControlTemplate TargetType="{x:Type RepeatButton}">
+        <Grid Height="16" Width="16" >
+          <Border Height="16" Width="16" Background="{TemplateBinding Background}">
+            <Path Name="Path" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="DarkGray" Data="M 0 0 L 3.5 4 L 7 0 Z" />
+          </Border>
+        </Grid>
+      </ControlTemplate>
     </Setter>
   </Style>
 
@@ -510,7 +480,7 @@ controls won't depend on the system.
     <Setter Property="Background" Value="LightGray"/>
     <Setter Property="OverridesDefaultStyle" Value="true" />
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type RepeatButton}">
           <Grid Height="16" Width="16" >
             <Border Height="16" Width="16" Background="{TemplateBinding Background}">
@@ -518,7 +488,7 @@ controls won't depend on the system.
             </Border>
           </Grid>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -526,7 +496,7 @@ controls won't depend on the system.
     <Setter Property="Background" Value="LightGray"/>
     <Setter Property="OverridesDefaultStyle" Value="true" />
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type RepeatButton}">
           <Grid Height="16" Width="16" >
             <Border Height="16" Width="16" Background="{TemplateBinding Background}">
@@ -534,7 +504,7 @@ controls won't depend on the system.
             </Border>
           </Grid>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -543,23 +513,23 @@ controls won't depend on the system.
     <Setter Property="IsTabStop" Value="false" />
     <Setter Property="Focusable" Value="false" />
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type RepeatButton}">
           <Rectangle Fill="Transparent" />
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
   <Style x:Key="ScrollBar_Thumb" TargetType="{x:Type Thumb}">
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type Thumb}">
           <Grid>
             <Border Background="DarkGray" CornerRadius="1" Margin="2" />
           </Grid>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -571,7 +541,7 @@ controls won't depend on the system.
     <Setter Property="Height" Value="Auto" />
     <Setter Property="MinHeight" Value="0" />
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type ScrollBar}">
           <Grid>
             <Grid.RowDefinitions>
@@ -623,7 +593,7 @@ controls won't depend on the system.
 
           </Grid>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Style.Triggers>
       <Trigger Property="Orientation" Value="Horizontal">
@@ -632,7 +602,7 @@ controls won't depend on the system.
         <Setter Property="Height" Value="16" />
         <Setter Property="MinHeight" Value="16" />
         <Setter Property="Template">
-          <Setter.Value>
+          
             <ControlTemplate TargetType="{x:Type ScrollBar}">
               <Grid Background="{TemplateBinding Background}">
                 <Grid.ColumnDefinitions>
@@ -683,7 +653,7 @@ controls won't depend on the system.
                               Command="ScrollBar.LineRightCommand" />
               </Grid>
             </ControlTemplate>
-          </Setter.Value>
+          
         </Setter>
       </Trigger>
     </Style.Triggers>
@@ -693,7 +663,7 @@ controls won't depend on the system.
     <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
     <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate>
           <Grid Background="LightGray">
             <Grid.ColumnDefinitions>
@@ -713,7 +683,7 @@ controls won't depend on the system.
               Minimum="0" Maximum="{TemplateBinding ScrollViewer.ScrollableWidth}" Value="{TemplateBinding ScrollViewer.HorizontalOffset}" ViewportSize="{TemplateBinding ScrollViewer.ViewportWidth}" />
           </Grid>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -736,13 +706,13 @@ controls won't depend on the system.
     <Setter Property="TextElement.FontStyle" Value="Normal"/>
     <Setter Property="TextElement.FontSize" Value="12"/>
     <Setter Property="Control.Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="TextBoxBase">
           <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" Padding="5">
             <ScrollViewer Name="PART_ContentHost" />
           </Border>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -761,7 +731,7 @@ controls won't depend on the system.
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type FlowDocumentPageViewer}">
           <AdornerDecorator ClipToBounds="True">
             <Grid >
@@ -781,7 +751,7 @@ controls won't depend on the system.
             </Grid>
           </AdornerDecorator>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
 
@@ -795,7 +765,7 @@ controls won't depend on the system.
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type FlowDocumentReader}">
           <DockPanel LastChildFill="True">
             <!-- Page Content -->
@@ -810,9 +780,8 @@ controls won't depend on the system.
             </Grid>
           </DockPanel>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
-
-
+  
 </ResourceDictionary>

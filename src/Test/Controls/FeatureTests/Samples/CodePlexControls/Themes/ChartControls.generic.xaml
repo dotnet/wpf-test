@@ -21,19 +21,19 @@ All other rights reserved.
 
   <Style x:Key="{x:Type local:DiscreteAxis}" TargetType="{x:Type local:DiscreteAxis}">
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate>
           <ItemsPresenter/>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemsPanel">
-      <Setter.Value>
+      
         <ItemsPanelTemplate>
           <local:DiscreteAxisPanel Orientation="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:DiscreteAxis}}, Path=Orientation}"
                                    TickMarksLength="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:DiscreteAxis}}, Path=TickLength}"/>
         </ItemsPanelTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="Orientation" Value="Horizontal"/>
   </Style>
@@ -41,25 +41,25 @@ All other rights reserved.
 
   <Style x:Key="{x:Type local:ContinuousAxis}" TargetType="{x:Type local:ContinuousAxis}">
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate>
           <ItemsPresenter/>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemsPanel">
-      <Setter.Value>
+      
         <ItemsPanelTemplate>
           <local:ContinuousAxisPanel Orientation="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ContinuousAxis}}, Path=Orientation}"/>
         </ItemsPanelTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ReferenceLineSeperation" Value="50.0"/>
   </Style>
 
   <Style x:Key="{x:Type local:LineChart}" TargetType="{x:Type local:LineChart}">
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type local:LineChart}">
           <Border Background="{TemplateBinding Background}"
                   BorderThickness="{TemplateBinding BorderThickness}"
@@ -124,10 +124,10 @@ All other rights reserved.
             </Grid>
           </Border>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemsPanel">
-      <Setter.Value>
+      
         <ItemsPanelTemplate>
           <local:LineChartPanel XValues="{TemplateBinding local:LineChartPanel.XValues}"
                                 YValues="{TemplateBinding local:LineChartPanel.YValues}"
@@ -136,15 +136,15 @@ All other rights reserved.
                                 AreaBrush="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:LineChart}}, Path=AreaBrush}"
                                 IsSmoothOutline="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:LineChart}}, Path=IsSmoothOutline}"/>
         </ItemsPanelTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemTemplate">
-      <Setter.Value>
+      
         <DataTemplate>
           <Rectangle Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Converter={StaticResource ColorConverter}}"
                      Width="5" Height="5" Opacity="0.8"/>
         </DataTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="TickLength" Value="5.0"/>
     <Setter Property="LinePen" Value="{StaticResource AxisPen}"/>
@@ -158,7 +158,7 @@ All other rights reserved.
 
   <Style x:Key="{x:Type local:BarChart}" TargetType="{x:Type local:BarChart}">
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type local:BarChart}">
           <Border Background="{TemplateBinding Background}"
                   BorderThickness="{TemplateBinding BorderThickness}"
@@ -222,24 +222,24 @@ All other rights reserved.
             </Grid>
           </Border>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemsPanel">
-      <Setter.Value>
+      
         <ItemsPanelTemplate>
           <local:BarChartPanel XValues="{TemplateBinding local:BarChartPanel.XValues}"
                                ZeroReferenceLinePosition="{TemplateBinding local:BarChartPanel.ZeroReferenceLinePosition}"
                                YValues="{TemplateBinding local:BarChartPanel.YValues}"/>
         </ItemsPanelTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemTemplate">
-      <Setter.Value>
+      
         <DataTemplate>
           <Rectangle Opacity="0.8"
                      Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Converter={StaticResource ColorConverter}}"/>
         </DataTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="TickLength" Value="5.0"/>
     <Setter Property="ReferenceLinePen" Value="{StaticResource AxisPen}"/>
@@ -251,7 +251,7 @@ All other rights reserved.
 
   <Style x:Key="{x:Type local:HBarChart}" TargetType="{x:Type local:HBarChart}">
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type local:HBarChart}">
           <Border Background="{TemplateBinding Background}"
                   BorderThickness="{TemplateBinding BorderThickness}"
@@ -314,24 +314,24 @@ All other rights reserved.
             </Grid>
           </Border>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemsPanel">
-      <Setter.Value>
+      
         <ItemsPanelTemplate>
           <local:HBarPanel XValues="{TemplateBinding local:HBarPanel.XValues}"
                            ZeroReferenceLinePosition="{TemplateBinding local:HBarPanel.ZeroReferenceLinePosition}"
                            YValues="{TemplateBinding local:HBarPanel.YValues}"/>
         </ItemsPanelTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemTemplate">
-      <Setter.Value>
+      
         <DataTemplate>
           <Rectangle Opacity="0.8"
                      Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Converter={StaticResource ColorConverter}}" />
         </DataTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="TickLength" Value="5.0"/>
     <Setter Property="ReferenceLinePen" Value="{StaticResource AxisPen}"/>
@@ -344,7 +344,7 @@ All other rights reserved.
 
   <Style x:Key="{x:Type local:ScatterPlot}" TargetType="{x:Type local:ScatterPlot}">
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type local:ScatterPlot}">
           <Border Background="{TemplateBinding Background}"
                   BorderThickness="{TemplateBinding BorderThickness}"
@@ -407,25 +407,25 @@ All other rights reserved.
             </Grid>
           </Border>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemsPanel">
-      <Setter.Value>
+      
         <ItemsPanelTemplate>
           <local:ScatterPlotPanel XValues="{TemplateBinding local:ScatterPlotPanel.XValues}"
                                   YValues="{TemplateBinding local:ScatterPlotPanel.YValues}"
                                   PlottingPen="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ScatterPlot}}, Path=PlottingPen}"
                                   IsSmoothOutline="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ScatterPlot}}, Path=IsSmoothOutline}"/>
         </ItemsPanelTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemTemplate">
-      <Setter.Value>
+      
         <DataTemplate>
           <Rectangle Opacity="0.8" Height="5" Width="5"
                      Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Converter={StaticResource ColorConverter}}" />
         </DataTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="TickLength" Value="5.0"/>
     <Setter Property="AxisLinePen" Value="{StaticResource AxisPen}"/>
@@ -438,14 +438,14 @@ All other rights reserved.
 
   <Style x:Key="{x:Type local:PieChart}" TargetType="{x:Type local:PieChart}">
     <Setter Property="ItemsPanel">
-      <Setter.Value>
+      
         <ItemsPanelTemplate>
           <local:PiePanel Values="{TemplateBinding local:PiePanel.Values}"/>
         </ItemsPanelTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="Template">
-      <Setter.Value>
+      
         <ControlTemplate TargetType="{x:Type local:PieChart}">
           <Border Background="{TemplateBinding Background}"
                   BorderThickness="{TemplateBinding BorderThickness}"
@@ -485,13 +485,13 @@ All other rights reserved.
             </Grid>
           </Border>
         </ControlTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemContainerStyle">
-      <Setter.Value>
+      
         <Style TargetType="{x:Type local:ChartItem}">
           <Setter Property="Template">
-            <Setter.Value>
+            
               <ControlTemplate TargetType="{x:Type local:ChartItem}">
                 <local:ClipWedge WedgeAngle ="{TemplateBinding local:PiePanel.WedgeAngle}"
                   BeginFigurePoint ="{TemplateBinding local:PiePanel.BeginFigurePoint}"
@@ -500,28 +500,28 @@ All other rights reserved.
                   ContentTemplate="{TemplateBinding ContentTemplate}">
                 </local:ClipWedge>
               </ControlTemplate>
-            </Setter.Value>
+            
           </Setter>
         </Style>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="ItemTemplate">
-      <Setter.Value>
+      
         <DataTemplate>
           <Rectangle Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}, AncestorLevel=2}, Converter={StaticResource ColorConverter}}"
                      Opacity="0.8"/>
         </DataTemplate>
-      </Setter.Value>
+      
     </Setter>
     <Setter Property="LegendItemTemplate">
-      <Setter.Value>
+      
         <DataTemplate>
           <StackPanel Orientation="Horizontal">
             <TextBlock Height="20" Width="20" Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorConverter}}"/>
             <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>
           </StackPanel>
         </DataTemplate>
-      </Setter.Value>
+      
     </Setter>
   </Style>
   
