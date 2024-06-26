@@ -1672,7 +1672,9 @@ namespace RtfXamlView
 
          // Get rtf content as string from rtf binary reader
          byte[] rtfBytes = new byte[rtfBinaryReader.BaseStream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
          rtfBinaryReader.BaseStream.Read(rtfBytes, 0, rtfBytes.Length);
+#pragma warning restore CA2022
          Encoding rtfEncoding = Encoding.GetEncoding(RtfCodePage);
          string rtfContent = rtfEncoding.GetString(rtfBytes);
 

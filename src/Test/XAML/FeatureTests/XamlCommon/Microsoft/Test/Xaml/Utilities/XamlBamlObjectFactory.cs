@@ -154,7 +154,9 @@ namespace Microsoft.Test.Xaml.Utilities
                 }
 
                 byte[] bamlData = new byte[fileStream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                 fileStream.Read(bamlData, 0, Convert.ToInt32(fileStream.Length));
+#pragma warning restore CA2022
                 fileStream.Close();
 
                 MemoryStream memStream = new MemoryStream(bamlData);

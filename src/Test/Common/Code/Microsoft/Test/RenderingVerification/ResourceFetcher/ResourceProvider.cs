@@ -138,7 +138,9 @@ namespace Microsoft.Test.RenderingVerification.ResourceFetcher
                     long position =_stream.Position;
                     _stream.Position = 0;
                     retVal = new byte[_stream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                     _stream.Read(retVal, 0, retVal.Length);
+#pragma warning restore CA2022
                     _stream.Position = position;
 
                     return retVal;

@@ -234,7 +234,9 @@ namespace BamlLocalization
                         {
 			    Stream targetStream = new MemoryStream();
                             byte[] buffer = new byte[resourceStream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                             resourceStream.Read(buffer, 0, buffer.Length);
+#pragma warning restore CA2022
                             targetStream = new MemoryStream(buffer);
 			    resourceValue = targetStream;
                         }                        

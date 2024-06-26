@@ -307,7 +307,9 @@ namespace DRT
             {
                 stream.Seek(0, SeekOrigin.Begin);
                 byte[] bamlContent = new byte[stream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                 stream.Read(bamlContent, 0, bamlContent.Length);
+#pragma warning restore CA2022
 
                 using (BinaryWriter binaryWriter = new BinaryWriter(bamlDumpStream))
                 {

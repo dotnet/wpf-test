@@ -134,7 +134,9 @@ namespace Microsoft.Test.Xaml.Utilities
                             using (Stream target = File.Open(bamlFilePath, FileMode.Create))
                             {
                                 byte[] bamlBytes = new byte[source.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                                 source.Read(bamlBytes, 0, bamlBytes.Length);
+#pragma warning restore CA2022
                                 target.Write(bamlBytes, 0, bamlBytes.Length);
                             }
 
