@@ -176,8 +176,9 @@ namespace DRT
             // Register our scheme with WebRequest
             Console.WriteLine("Register PACK scheme with WebRequest");
             DRT.Assert(WebRequest.RegisterPrefix("pack", new PackWebRequestFactory()), "RegisterPrefix failed");
+#pragma warning disable SYSLIB0009 // Type or member is obsolete
             AuthenticationManager.CredentialPolicy = new Microsoft.Win32.IntranetZoneCredentialPolicy();
-
+#pragma warning restore SYSLIB0009 // Type or member is obsolete
         }
 
         public void EnsureContainer()
@@ -957,4 +958,3 @@ namespace DRT
         }
     }
 }
-
