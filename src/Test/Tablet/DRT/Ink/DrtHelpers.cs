@@ -235,7 +235,9 @@ namespace DRT
             using (FileStream fs = File.OpenRead (filename))
             {
                 data = new byte[fs.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                 fs.Read (data, 0, (int)fs.Length);
+#pragma warning restore CA2022
             }
             return data;
         }

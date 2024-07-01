@@ -421,28 +421,30 @@ namespace Microsoft.Test.RenderingVerification
                             return null;
                         }
                         XmlDocument xmlDoc = new XmlDocument();
-Stream stream = (Stream)_entries[LOADERINFO];
-byte[] buffer = null;
-if (stream.GetType() == typeof(MemoryStream))
-{
-     buffer = ((MemoryStream)stream).GetBuffer();
-}
-else
-{
-    stream.Seek(0, SeekOrigin.Begin);
-    buffer = new byte[stream.Length];
-    stream.Read(buffer, 0, buffer.Length);
-}
-string xmlString = System.Text.ASCIIEncoding.ASCII.GetString(buffer);
-try
-{
-    xmlDoc.LoadXml(xmlString);
-}
-catch (XmlException)
-{
-    // Remove the Byte Ordering Mark (BOM) from here
-    xmlDoc.LoadXml(xmlString.Substring(3));
-}
+                        Stream stream = (Stream)_entries[LOADERINFO];
+                        byte[] buffer = null;
+                        if (stream.GetType() == typeof(MemoryStream))
+                        {
+                            buffer = ((MemoryStream)stream).GetBuffer();
+                        }
+                        else
+                        {
+                            stream.Seek(0, SeekOrigin.Begin);
+                            buffer = new byte[stream.Length];
+#pragma warning disable CA2022 // Avoid inexact read       
+                            stream.Read(buffer, 0, buffer.Length);
+#pragma warning restore CA2022
+                        }
+                        string xmlString = System.Text.ASCIIEncoding.ASCII.GetString(buffer);
+                        try
+                        {
+                            xmlDoc.LoadXml(xmlString);
+                        }
+                        catch (XmlException)
+                        {
+                            // Remove the Byte Ordering Mark (BOM) from here
+                            xmlDoc.LoadXml(xmlString.Substring(3));
+                        }
 /*
                         XmlTextReader xmltextReader = new XmlTextReader((Stream)_entries[LOADERINFO]);
                         xmlDoc.Load(xmltextReader);
@@ -540,7 +542,9 @@ catch (XmlException)
                             // Bitmap
                             fileStream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                             buffer = new byte[fileStream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                             fileStream.Read(buffer, 0, buffer.Length);
+#pragma warning restore CA2022
                             Bitmap bmpDeepCopy = null;
                             using (Bitmap bmpStream = (Bitmap)Bitmap.FromStream(fileStream))
                             {
@@ -728,7 +732,9 @@ object debug = e;
                         fileStream = new FileStream(streamName, FileMode.Create);
                         stream.Seek(0, SeekOrigin.Begin);
                         byte[] buffer = new byte[stream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                         stream.Read(buffer, 0, buffer.Length);
+#pragma warning restore CA2022
                         fileStream.Write(buffer, 0, buffer.Length);
                         _archiver.AddFile(streamName, streamName, true);
                     }
@@ -787,7 +793,9 @@ object debug = e;
 
                     FileStream fileStream = new FileStream(streamName, FileMode.Open);
                     byte[] buffer = new byte[fileStream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                     fileStream.Read(buffer, 0, buffer.Length);
+#pragma warning restore CA2022
                     MemoryStream memoryStream = new MemoryStream(buffer, 0, buffer.Length, false, true);
 
                     return memoryStream;

@@ -1654,7 +1654,9 @@ namespace DataTransfer
                     Verifier.Verify(dataObject.GetAudioStream().CanRead, "GetAudioStream().CanRead should be true.", true);
 
                     byte[] buff = new byte[5];
+#pragma warning disable CA2022 // Avoid inexact read
                     setAudioStream.Read(buff, 0, 4);
+#pragma warning restore CA2022
                     dataObject.SetAudio(buff);
                     Verifier.Verify(dataObject.ContainsAudio(), "ContainsAudio for byte[] should be true.", true);
                     Verifier.Verify(dataObject.GetAudioStream().CanRead, "GetAudioStream().CanRead for byte[] should be true.", true);

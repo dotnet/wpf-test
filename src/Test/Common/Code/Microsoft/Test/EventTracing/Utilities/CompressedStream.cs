@@ -463,7 +463,9 @@ namespace Microsoft.Test.EventTracing.Utilities
             int blockStartLength = numberOfBlocks * sizeof(long);
             blockStarts = new byte[blockStartLength];
             compressedData.Seek(-blockStartLength - 8, SeekOrigin.End);
+#pragma warning disable CA2022 // Avoid inexact read
             compressedData.Read(blockStarts, 0, blockStartLength);
+#pragma warning restore CA2022
             compressedData.Position = origPosition;
 
             uncompressedStreamLength = (numberOfBlocks - 1) * (long)maxUncompressedBlockSize + lastBlockLength;

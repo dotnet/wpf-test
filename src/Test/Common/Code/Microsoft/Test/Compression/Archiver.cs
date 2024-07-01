@@ -691,7 +691,9 @@ namespace Microsoft.Test.Compression
                         {
                             stream.Seek (0, SeekOrigin.Begin);
                         }
+#pragma warning disable CA2022 // Avoid inexact read
                         stream.Read(buffer, 0, (int)stream.Length);
+#pragma warning restore CA2022
                     }
                     val = System.Text.ASCIIEncoding.ASCII.GetString (buffer, 0, (int)stream.Length);
                     AddStuffObjectInternal (key, val, "stream_");

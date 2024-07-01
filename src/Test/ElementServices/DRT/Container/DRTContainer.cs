@@ -1459,7 +1459,9 @@ class ContainerTests
 
         testStream.Write( testData, 8, 8 );
         testStream.Seek( 0, SeekOrigin.Begin );
+#pragma warning disable CA2022 // Avoid inexact read
         testStream.Read( readData, 7, 8 );
+#pragma warning restore CA2022
 
         retVal = 0; // Innocent until proved guilty
         for( int i = 0; i < testData.Length; i++ )

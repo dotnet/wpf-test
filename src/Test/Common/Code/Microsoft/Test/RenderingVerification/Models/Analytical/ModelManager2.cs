@@ -196,7 +196,9 @@ namespace Microsoft.Test.RenderingVerification.Model.Analytical
                         serializedStream = _descriptorManager.Serialize();
                         serializedStream.Seek(0, SeekOrigin.Begin);
                         byte[] buffer = new byte[serializedStream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                         serializedStream.Read(buffer, 0, buffer.Length);
+#pragma warning restore CA2022
                         stream.Write(buffer, 0, buffer.Length);
                     }
                     finally 

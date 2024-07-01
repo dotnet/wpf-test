@@ -180,7 +180,9 @@ namespace Avalon.Test.CoreUI.Container
             buffer = new byte[1024];
 
             // read the buffer back
+#pragma warning disable CA2022 // Avoid inexact read
             strm.Read( buffer, 0, 1024 );
+#pragma warning restore CA2022
 
             // check the content
             try
@@ -266,8 +268,10 @@ namespace Avalon.Test.CoreUI.Container
             for(i = 0; i < 1024; i++)
                 buffer[i] = 0;
 
+#pragma warning disable CA2022 // Avoid inexact read
             // read the buffer back
             strm.Read( buffer, 50, 1024-50 );
+#pragma warning restore CA2022
             // check the content
             try
             {
@@ -362,8 +366,10 @@ namespace Avalon.Test.CoreUI.Container
                 for(i = 0; i < 1024; i++)
                     buffer[i] = 0;
 
+#pragma warning disable CA2022 // Avoid inexact read
                 // read the buffer back
                 strm.Read( buffer, 0, 1024-50 );
+#pragma warning restore CA2022
                 // check the content
                 for(i = 0; i < 1024; i++)
                 {
@@ -451,8 +457,10 @@ namespace Avalon.Test.CoreUI.Container
                 for(i = 0; i < 1024; i++)
                     buffer[i] = 0;
 
+#pragma warning disable CA2022 // Avoid inexact read
                 // read the buffer back
                 strm.Read( buffer, 0, 1024-50 );
+#pragma warning restore CA2022
                 // check the content
                 for(i = 0; i < 1024; i++)
                 {
@@ -543,8 +551,10 @@ namespace Avalon.Test.CoreUI.Container
                 for(i = 0; i < 1024; i++)
                     buffer[i] = 0;
 
+#pragma warning disable CA2022 // Avoid inexact read
                 // read the buffer back
                 strm.Read( buffer, 0, 1024-50 );
+#pragma warning restore CA2022
                 // check the content
                 for(i = 0; i < 1024; i++)
                 {
@@ -631,8 +641,10 @@ namespace Avalon.Test.CoreUI.Container
                 for(i = 0; i < 1024; i++)
                     buffer[i] = 0;
 
+#pragma warning disable CA2022 // Avoid inexact read
                 // read the buffer back
                 strm.Read( buffer, 0, 1024-50 );
+#pragma warning restore CA2022
                 // check the content
                 for(i = 0; i < 1024; i++)
                 {
@@ -901,8 +913,10 @@ namespace Avalon.Test.CoreUI.Container
                 // fill the buffer with different data
                 for(i = 0; i < 1024; i++)
                     buffer[i] = (byte)(-i);
+#pragma warning disable CA2022 // Avoid inexact read
                 // read the buffer back
                 strm.Read( buffer, 24, 1000 );
+#pragma warning restore CA2022
                 // check the content
                 for(i = 0; i < 24; i++)
                 {
@@ -1099,8 +1113,10 @@ namespace Avalon.Test.CoreUI.Container
             // read the buffer back
             // ***** End Test Cases Initialization ****
 
+#pragma warning disable CA2022 // Avoid inexact read
             // ***** Avalon Test ****
             strm.Read( buffer, 1024, 0 );
+#pragma warning restore CA2022
             // ***** End Avalon Test ****
 
             #region validation 

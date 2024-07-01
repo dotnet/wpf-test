@@ -1660,7 +1660,9 @@ namespace Avalon.Test.CoreUI.Container
             // ***** Avalon Test ****
             GlobalLog.LogStatus("open a stream twice.");                        
             fStream = stInfo.GetStream(FileMode.Open);
+#pragma warning disable CA2022 // Avoid inexact read
             fStream.Read(new Byte[256], 0, 256);
+#pragma warning restore CA2022
             // Stream position is 256
             // this shoult return a new copy with position = 0
             fStream = stInfo.GetStream(FileMode.Open);

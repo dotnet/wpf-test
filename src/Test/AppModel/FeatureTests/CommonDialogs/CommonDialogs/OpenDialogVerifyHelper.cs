@@ -47,7 +47,9 @@ namespace Microsoft.Wpf.AppModel.CommonDialogs
                 FileStream knownFile = new FileStream(fileName, FileMode.Open);
                 knownFileSize = (int)knownFile.Length;
                 knownFileContents = new byte[knownFileSize];
+#pragma warning disable CA2022 // Avoid inexact read
                 knownFile.Read(knownFileContents, 0, knownFileSize);
+#pragma warning restore CA2022
                 knownFile.Close();
 
                 // Compare stream opened to that of a known file (check length, contents)

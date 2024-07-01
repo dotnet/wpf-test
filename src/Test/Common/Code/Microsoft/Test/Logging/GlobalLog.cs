@@ -73,7 +73,9 @@ namespace Microsoft.Test.Logging {
             //
             stream.Position = 0;
             byte[] buffer = new byte[stream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
             stream.Read(buffer, 0, (int)stream.Length);
+#pragma warning restore CA2022
             file.Write(buffer, 0, (int)stream.Length);
             file.Close();
 

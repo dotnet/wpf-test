@@ -1704,7 +1704,9 @@ namespace DRT
                 {
                     DRT.Assert(s.Length > 0, "Empty Cert Part found: " + part);
                     Byte[] byteArray = new Byte[s.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                     s.Read(byteArray, 0, (int)s.Length);
+#pragma warning restore CA2022
                     DumpCertificate(new X509Certificate2(byteArray));
                 }
             }

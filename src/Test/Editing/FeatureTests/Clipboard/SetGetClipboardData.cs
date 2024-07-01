@@ -440,7 +440,9 @@ namespace DataTransfer
             Clipboard.Clear();
             Verifier.Verify(!Clipboard.ContainsAudio(), "Failed: Clipboard should contains no audio format when it is cleared!");
             byte[] buff = new byte[5];
+#pragma warning disable CA2022 // Avoid inexact read
             audioStream.Read(buff, 0, 4);
+#pragma warning restore CA2022
             Clipboard.SetAudio(buff);
             Verifier.Verify(Clipboard.ContainsAudio(), "ContainsAudio for byte[] should be true.", true);
             Verifier.Verify(Clipboard.GetAudioStream().CanRead, "GetAudioStream().CanRead for byte[] should be true.", true);
