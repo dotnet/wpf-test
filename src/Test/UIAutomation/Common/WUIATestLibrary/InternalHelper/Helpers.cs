@@ -1186,8 +1186,9 @@ namespace InternalHelper
             // this and do it a cleaner way.
             byte[] buffer = new byte[tw.BaseStream.Length];
             tw.BaseStream.Seek(0, SeekOrigin.Begin);
+#pragma warning disable CA2022 // Avoid inexact read
             tw.BaseStream.Read(buffer, 0, (int)tw.BaseStream.Length);
-
+#pragma warning restore CA2022
             sb = new StringBuilder(buffer.Length);
             foreach (byte b in buffer)
                 sb.Append(Convert.ToChar(b));

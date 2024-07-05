@@ -55,7 +55,10 @@ namespace DRT
 
                 byte[] data = new byte[fs.Length];
 
+#pragma warning disable CA2022 // Avoid inexact read
                 fs.Read(data, 0, (int)fs.Length);
+#pragma warning restore CA2022
+
                 fs.Close();
 
                 using (MemoryStream stream = new MemoryStream(data))

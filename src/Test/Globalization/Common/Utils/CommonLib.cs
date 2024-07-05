@@ -290,7 +290,9 @@ namespace Microsoft.Test.Globalization
             {
                 stream.Seek(0, SeekOrigin.Begin);
                 byte[] bamlContent = new byte[stream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
                 stream.Read(bamlContent, 0, bamlContent.Length);
+#pragma warning restore CA2022
 
                 using (BinaryWriter binaryWriter = new BinaryWriter(bamlDumpStream))
                 {
@@ -315,9 +317,14 @@ namespace Microsoft.Test.Globalization
                 return (int)(first.Length - second.Length);
             }
             byte[] firstContent = new byte[first.Length];
+#pragma warning disable CA2022 // Avoid inexact read
             first.Read(firstContent, 0, firstContent.Length);
+#pragma warning restore CA2022
             byte[] secondContent = new byte[second.Length];
+#pragma warning disable CA2022 // Avoid inexact read
             second.Read(secondContent, 0, secondContent.Length);
+#pragma warning restore CA2022
+
             for (int i = 0; i < firstContent.Length; i++)
             {
                 if (firstContent[i] != secondContent[i])

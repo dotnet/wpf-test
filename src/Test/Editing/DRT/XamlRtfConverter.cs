@@ -64,7 +64,9 @@ namespace DRT
 
             // Get rtf bytes from rtfBinaryReader
             byte[] rtfBytes = new byte[rtfBinaryReader.BaseStream.Length];
+#pragma warning disable CA2022 // Avoid inexact read
             rtfBinaryReader.BaseStream.Read(rtfBytes, 0, rtfBytes.Length);
+#pragma warning restore CA2022
             Encoding ansiEncoding = Encoding.GetEncoding(RtfCodePage);
 
             // Get rtf content string

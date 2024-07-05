@@ -297,7 +297,9 @@ namespace Microsoft.Test.RenderingVerification.ResourceFetcher
                         {
                             stream.Flush();
                             stream.Position = 0;
+#pragma warning disable CA2022 // Avoid inexact read                            
                             stream.Read(buffer, 0, buffer.Length);
+#pragma warning restore CA2022
                             fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
                             fs.Write(buffer, 0, buffer.Length);
                         }
