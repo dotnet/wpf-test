@@ -840,7 +840,7 @@ namespace Microsoft.Test.Windows
             return PropertiesToSkip;
         }
 
-        private static string GetAttributeValue(
+        internal static string GetAttributeValue(
             XmlNode node,
             string attributeName)
         {

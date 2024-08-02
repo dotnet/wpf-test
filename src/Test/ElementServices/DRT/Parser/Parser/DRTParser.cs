@@ -141,6 +141,7 @@ namespace DRT
                         new DateTimeTests(),
                         new InitializationStringTest(),
                         new NoDefaultXmlNsTest(),
+                        new XamlValidationTest(), 
                         null           
                         };
 
@@ -2007,6 +2008,69 @@ namespace DRT
         FrameworkElement _rootElement;
     }
 
+    public class XamlValidationTest : ParserSuites
+    {
+        public XamlValidationTest() : base("XAML Validation Test")
+        {
+        }
 
+        public override DrtTest[] PrepareTests()
+        {
+            return new DrtTest[]{
+                        new DrtTest(RunXamlValidationTest),
+                        };
+        }
 
+        private void RunXamlValidationTest()
+        {
+            Console.WriteLine("XAML validation test started.");
+
+            // Define the path to the XAML file
+            string xamlPath = @"DrtFiles\Parser\DrtParser10.xaml";
+            Stream xamlStream = LoadTestFile(xamlPath);
+
+            try
+            {
+                // Parse the XAML
+                ParserContext parserContext = new ParserContext();
+                object rootElement = XamlReader.Load(xamlStream, parserContext);
+
+                // Check if the root element is a Window
+                if (rootElement is Window window)
+                {
+                    // Show and close the window
+                    window.Show();
+                    window.Close();
+                    Console.WriteLine("XAML validation test passed. The XAML is valid and renders correctly.");
+                }
+                else if (rootElement is UIElement uiElement)
+                {
+                    // Render the element if it's a UIElement
+                    Render(uiElement);
+                    Console.WriteLine("XAML validation test passed. The XAML is valid and renders correctly.");
+                }
+                else
+                {
+                    Console.WriteLine("XAML validation test failed. The root element is not a UIElement or Window.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"XAML validation test failed with exception: {ex.Message}");
+            }
+        }
+
+        private void Render(UIElement element)
+        {
+            // Create a new window to render the UIElement
+            Window window = new Window
+            {
+                Content = element,
+                Width = 800,
+                Height = 600
+            };
+            window.Show();
+            window.Close();
+        }
+    }
 }

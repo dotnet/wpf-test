@@ -1,0 +1,237 @@
+<Window x:Class="SetterExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Setter Example" Height="500" Width="450">
+    <Window.Resources>
+        <!-- Base Style with Multiple Setters -->
+        <Style x:Key="BaseButtonStyle" TargetType="Button">
+            <Setter Property="Height">
+                <Setter.Value>
+                    30
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width">
+                100
+            </Setter>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- Style with Linear Gradient Background with setter.value -->
+        <Style x:Key="GradientButtonStyle1" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <GradientStop Color="Red" Offset="0"/>
+                        <GradientStop Color="Blue" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style with Linear Gradient Background without setter.value -->
+        <Style x:Key="GradientButtonStyle2" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background">
+                <LinearGradientBrush>
+                    <GradientStop Color="Yellow" Offset="0"/>
+                    <GradientStop Color="Green" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter>
+        </Style>
+
+        <!-- Style with Setters and Triggers -->
+        <Style x:Key="HoverButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">Green</Setter>
+                    <Setter Property="FontSize" Value="16"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style with Nested-like Setters using Triggers -->
+        <Style x:Key="NestedSettersButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">Blue</Setter>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background">
+                        Red
+                    </Setter>
+                    <Setter Property="Opacity">
+                        <Setter.Value>
+                            0.5
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+               <!-- Define resources -->
+        <SolidColorBrush x:Key="myBrush" Color="Pink"/>
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+            <Border Background="{TemplateBinding Background}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </ControlTemplate>
+        <DataTemplate x:Key="DataTemplate">
+            <TextBlock Text="{Binding}"/>
+        </DataTemplate>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <!-- Primitive Values -->
+            <Setter Property="Width">100</Setter>
+            <Setter Property="Height">30</Setter>
+            <Setter Property="IsEnabled">True</Setter>
+
+            <!-- Brushes -->
+            <Setter Property="Background">LightGray</Setter>
+            <Setter Property="Foreground">
+                <StaticResource ResourceKey="myBrush"/>
+            </Setter>
+            <Setter Property="BorderBrush">
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Red" Offset="0"/>
+                    <GradientStop Color="Blue" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter>
+
+            <!-- Colors -->
+            <Setter Property="Background">
+                <SolidColorBrush Color="Yellow"/>
+            </Setter>
+
+            <!-- DynamicResource -->
+            <Setter Property="Background">
+                <DynamicResourceExtension ResourceKey="{x:Static SystemColors.ControlBrushKey}" />
+            </Setter>
+
+            <!-- StaticResource -->
+            <Setter Property="Background">
+                <StaticResource ResourceKey="myBrush"/>
+            </Setter>
+
+            <!-- Bindings -->
+            <Setter Property="FontSize" Value="{Binding Path=FontSize}"/>
+
+            <!-- Collections -->
+            <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+
+            <!-- Transformations -->
+            <Setter Property="RenderTransform">
+                <RotateTransform Angle="45"/>
+            </Setter>
+
+            <!-- Enumerations -->
+            <Setter Property="HorizontalAlignment">Center</Setter>
+            <Setter Property="VerticalAlignment">Center</Setter>
+        </Style>
+
+        <!-- Style with Setters -->
+        <Style x:Key="ExtendedButtonStyle" TargetType="Button">
+            <!-- RotateTransform -->
+            <Setter Property="RenderTransform">
+                <RotateTransform Angle="45"/>
+            </Setter>
+
+            <!-- ScaleTransform -->
+            <Setter Property="RenderTransform">
+                <ScaleTransform ScaleX="2" ScaleY="2"/>
+            </Setter>
+
+            <!-- SkewTransform -->
+            <Setter Property="RenderTransform">
+                <SkewTransform AngleX="20" AngleY="10"/>
+            </Setter>
+
+            <!-- TranslateTransform -->
+            <Setter Property="RenderTransform">
+                <TranslateTransform X="50" Y="50"/>
+            </Setter>
+
+            <!-- TransformGroup -->
+            <Setter Property="RenderTransform">
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    <RotateTransform Angle="45"/>
+                    <TranslateTransform X="50" Y="50"/>
+                </TransformGroup>
+            </Setter>
+
+            <!-- RadialGradientBrush -->
+            <Setter Property="Background">
+                <RadialGradientBrush>
+                    <GradientStop Color="Red" Offset="0"/>
+                    <GradientStop Color="Blue" Offset="1"/>
+                </RadialGradientBrush>
+            </Setter>
+
+            <!-- Trigger -->
+            <Setter Property="Template">
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+
+            <!-- PathGeometry -->
+            <Setter Property="Clip">
+                <PathGeometry Figures="M 0,0 L 100,0 100,100 0,100 Z"/>
+            </Setter>
+
+            <!-- Geometry -->
+            <Setter Property="Clip">
+                <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50"/>
+            </Setter>
+
+            <!-- DataTemplate -->
+            <Setter Property="ContentTemplate">
+                <StaticResource ResourceKey="DataTemplate"/>
+            </Setter>
+
+            <!-- DoubleAnimation -->
+            <Setter Property="RenderTransform">
+                <RotateTransform Angle="0"/>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 To="360" Duration="0:0:1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <!-- Basic Button -->
+        <Button Style="{StaticResource BaseButtonStyle}" Content="Basic Button" Margin="10"/>
+
+        <!-- Button with Linear Gradient Background with setter.value -->
+        <Button Style="{StaticResource GradientButtonStyle1}" Content="Gradient Button Style1" Margin="10"/>
+
+        <!-- Button with Linear Gradient Background without setter.value -->
+        <Button Style="{StaticResource GradientButtonStyle2}" Content="Gradient Button Style2" Margin="10"/>
+
+        <!-- Button with Setters and Triggers -->
+        <Button Style="{StaticResource HoverButtonStyle}" Content="Hover Button" Margin="10"/>
+
+        <!-- Button with Nested-like Setters using Triggers -->
+        <Button Style="{StaticResource NestedSettersButtonStyle}" Content="Nested Setters Button" Margin="10"/>
+
+        <!-- Button demonstrating various types of values that can be set using Setter -->
+        <Button Style="{StaticResource ButtonStyle}" Content="Test Button" Margin="10"/>
+        <Button Style="{StaticResource ExtendedButtonStyle}" Content="Test Button" Margin="10"/>
+    </StackPanel>
+</Window>
