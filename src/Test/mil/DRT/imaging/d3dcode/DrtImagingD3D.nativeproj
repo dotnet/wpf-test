@@ -1,0 +1,56 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="dogfood">
+
+    <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.WPF.Test.Settings.targets" />
+
+    <!-- BUILD SPECIFIC OPTIONS -->
+    <Choose>
+    <When Condition="'$(BuildType)' == 'Checked'">
+        <PropertyGroup>
+            <CDefines>
+                $(CDefines);
+                _DEBUG;
+            </CDefines>
+        </PropertyGroup>
+    </When>
+    </Choose>
+
+    <PropertyGroup>
+        <TargetType>DYNLINK</TargetType>
+        <OutputName>DrtImagingD3D</OutputName>
+        <OutputSubFolder>DRT</OutputSubFolder>
+
+        <CDefines>
+          $(CDefines);
+          WIN32;
+          _WINDOWS;
+          _USRDLL;
+          D3DCODE_EXPORTS;
+        </CDefines>
+
+        <UseClrCrt>true</UseClrCrt>
+
+        <LinkModuleDefinitionFile>DrtImagingD3D.def</LinkModuleDefinitionFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <CppCompile Include="d3dcode.cpp" />
+        <CppCompile Include="d3dcodemain.cpp" />
+    </ItemGroup>
+
+    <ItemGroup>
+
+        <TargetLib Include="$(SdkLibPath)\d3d9.lib" />
+        <TargetLib Include="$(DirectXLibPath)\d3dx9.deprecated.lib" />
+
+        <TargetLib Include="$(SdkLibPath)\user32.lib" />
+        <TargetLib Include="$(SdkLibPath)\kernel32.lib" />
+        <TargetLib Include="$(SdkLibPath)\gdi32.lib" />
+        <TargetLib Include="$(SdkLibPath)\advapi32.lib" />
+        <TargetLib Include="$(SdkLibPath)\ole32.lib" />
+        <TargetLib Include="$(SdkLibPath)\uuid.lib" />
+
+    </ItemGroup>
+
+    <Import Project="$(_NTDRIVE)$(_NTROOT)\wpf\Test\Microsoft.Wpf.Test.Native.targets" />
+
+</Project>
