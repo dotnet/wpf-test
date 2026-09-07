@@ -4,11 +4,6 @@
 
 # One-time setup for Wpf's custom toolset
 function InitializeWpfCustomToolset() {
-  if (Test-Path variable:global:_WpfToolsetBuildProj) {
-    return $global:_WpfToolsetBuildProj
-  }
-  $nugetCache = GetNuGetPackageCachePath
-
   # Get all sdks listed in repo's 'global.json' file
   $msbuild_sdks = $GlobalJson.'msbuild-sdks'
 
@@ -21,23 +16,6 @@ function InitializeWpfCustomToolset() {
   # a local copy of the WPF Arcade SDK and a 'global.json' entry for the sdk is not required.
   if ('Microsoft.DotNet.Arcade.Wpf.Sdk'  -in $msbuild_sdks.PSobject.Properties.Name) {
 
-      # Get the version of the Wpf Arcade SDK for the toolset location file name
-      $wpfToolsetVersion = $GlobalJson.'msbuild-sdks'.'Microsoft.DotNet.Arcade.Wpf.Sdk'
-      $wpfToolsetLocationFile = Join-Path $ToolsetDir "$wpfToolsetVersion.txt"
-
-      # If toolset file already exists, one-time setup has already run
-      if (Test-Path $wpfToolsetLocationFile) {
-        $path = Get-Content $wpfToolsetLocationFile -TotalCount 1
-        if (Test-Path $path) {
-          return $global:_WpfToolsetBuildProj = $path
-        }
-      }
-
-      if (-not $restore) {
-        Write-Host "Wpf Toolset version $toolsetVersion has not been restored." -ForegroundColor Red
-        ExitWithExitCode 1
-      }
-
       # Install WPF git hooks when WpfArcadeSdk is located in the NuGet cache (dotnet-wpf-int)
       if (!$ci)
       {
@@ -46,20 +24,6 @@ function InitializeWpfCustomToolset() {
           $installGitHooksBinLog = if ($binaryLog) { "/bl:" + (Join-Path $LogDir "InstallGitHooks.binlog") } else { "" }
           MSBuild $installGitHooksProject $installGitHooksBinlog /t:InstallWPFPreCommitGitHook /clp:ErrorsOnly`;NoSummary 
       }
-
-      # Write toolset location (e.g., dotnet-wpf-int\artifacts\toolset\4.8.0-preview7.19322.1.txt)
-      $proj = Join-Path $ToolsetDir "wpfRestore.proj"
-      $bl = if ($binaryLog) { "/bl:" + (Join-Path $LogDir "WpfToolsetRestore.binlog") } else { "" }
-      '<Project Sdk="Microsoft.DotNet.Arcade.Wpf.Sdk"/>' | Set-Content $proj
-      MSBuild $proj $bl /t:__WriteToolsetLocation /clp:ErrorsOnly`;NoSummary /p:__ToolsetLocationOutputFile=$wpfToolsetLocationFile
-
-      # Verify toolset file was successfully written
-      $path = Get-Content $wpfToolsetLocationFile -TotalCount 1
-      if (!(Test-Path $path)) {
-        throw "Invalid toolset path: $path"
-      }
-
-      return $global:_WpfToolsetBuildProj = $path
   }
 }
 
