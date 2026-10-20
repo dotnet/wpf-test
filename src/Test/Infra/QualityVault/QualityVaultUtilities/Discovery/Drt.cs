@@ -20,6 +20,7 @@ namespace Microsoft.Test.Discovery
         private string team;
         private string args;
         private int timeout;
+        private bool disabled;
         private List<string> deployments;
         private List<string> supportFiles;
 
@@ -77,6 +78,16 @@ namespace Microsoft.Test.Discovery
         {
             get { return timeout; }
             set { timeout = value; }
+        }
+
+        /// <summary>
+        /// Quarantines the DRT. QualityVault skips disabled tests unless run with /Disabled=true.
+        /// </summary>
+        [XmlAttribute]
+        public bool Disabled
+        {
+            get { return disabled; }
+            set { disabled = value; }
         }
 
         /// <summary>

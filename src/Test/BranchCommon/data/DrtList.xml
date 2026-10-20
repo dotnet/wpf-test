@@ -97,7 +97,8 @@ Rundrtlist
   <Drt Executable="DrtWindowDragMove.exe" Architecture="all" OS="all" Owner="Microsoft" Team="AppModel" />
   <Drt Executable="DrtAppShutdown.exe" Architecture="all" OS="all" Owner="Microsoft" Team="AppModel" />
   <Drt Executable="DrtAppThreadingModel.exe" Architecture="all" OS="all" Owner="Microsoft" Team="AppModel" />
-  <Drt Executable="DrtApplicationEvents.cmd" Architecture="all" OS="all" Owner="Microsoft" Team="AppModel" >
+  <!-- Quarantined: hangs until the QualityVault timeout on CI agents. See docs/drts-on-ci-implementation.md#m0-results. -->
+  <Drt Disabled="true" Executable="DrtApplicationEvents.cmd" Architecture="all" OS="all" Owner="Microsoft" Team="AppModel" >
     <SupportFiles>
       <SupportFile>DrtApplicationEvents.exe</SupportFile>
     </SupportFiles>
@@ -123,7 +124,8 @@ Rundrtlist
 		<SupportFile>DrtFiles\NavigationWindow\NavWindowFoo2.xaml</SupportFile>
 	</SupportFiles>
   </Drt>
-  <Drt Executable="DrtJournal.exe" Architecture="x86|amd64" OS="all" Owner="Microsoft" Team="AppModel" />
+  <!-- Quarantined: fails in "Basic Journal Navigation" on CI agents. See docs/drts-on-ci-implementation.md#m0-results. -->
+  <Drt Disabled="true" Executable="DrtJournal.exe" Architecture="x86|amd64" OS="all" Owner="Microsoft" Team="AppModel" />
   <Drt Executable="DrtReparentNavigator.exe" Architecture="x86|amd64" OS="all" Owner="Microsoft" Team="AppModel" >
 	<SupportFiles>
 		<SupportFile>DrtFiles\ReparentNavigator\ReparentFrame.xaml</SupportFile>
@@ -177,7 +179,8 @@ Rundrtlist
 	</SupportFiles>
   </Drt>
   <!--Controls-->
-  <Drt Executable="DrtControls.exe" Architecture="x86|amd64" OS="all" Owner="Microsoft" Team="Controls" >
+  <!-- Quarantined: intermittently hangs in the ToolTip suite on CI agents. See docs/drts-on-ci-implementation.md#m0-results. -->
+  <Drt Disabled="true" Executable="DrtControls.exe" Architecture="x86|amd64" OS="all" Owner="Microsoft" Team="Controls" >
     <SupportFiles>
       <SupportFile>DrtFiles\Controls</SupportFile>
       <SupportFile>DrtThemeDictionaryExtension.*</SupportFile>
@@ -203,7 +206,8 @@ Rundrtlist
       <SupportFile>DrtFiles\EncryptedPackageCoreProperties</SupportFile>
     </SupportFiles>
   </Drt>
-  <Drt Executable="DrtPackagingApis.exe" Architecture="all" OS="all" Owner="Microsoft" Team="DigitalDocuments" />
+  <!-- Quarantined: fails in the zip archive tests on CI agents. See docs/drts-on-ci-implementation.md#m0-results. -->
+  <Drt Disabled="true" Executable="DrtPackagingApis.exe" Architecture="all" OS="all" Owner="Microsoft" Team="DigitalDocuments" />
   <Drt Executable="DrtVisualSerialization.exe" Architecture="all" OS="all" Owner="Microsoft" Team="DigitalDocuments" >
     <SupportFiles>
       <SupportFile>DrtFiles\VisualSerialization\testCMYK1.icc</SupportFile>
@@ -375,7 +379,8 @@ Rundrtlist
     </SupportFiles>
   </Drt>
   <!--Printing-->
-  <Drt Executable="DrtPrinting.exe" Architecture="all" OS="all" Owner="Microsoft" Team="Printing" >
+  <!-- Quarantined: "Print Queue" PostScript output hash mismatch on CI agents. See docs/drts-on-ci-implementation.md#m0-results. -->
+  <Drt Disabled="true" Executable="DrtPrinting.exe" Architecture="all" OS="all" Owner="Microsoft" Team="Printing" >
     <SupportFiles>
       <SupportFile>DrtFiles\Printing</SupportFile>
     </SupportFiles>
@@ -398,7 +403,8 @@ Rundrtlist
   <!--WindowsFormsIntegration-->
   <Drt Executable="DrtWindowsFormsIntegration.exe" Architecture="all" OS="all" Owner="Microsoft" Team="WindowsFormsIntegration" />
   <!--XAML-->
-  <Drt Executable="Drtparser.exe" Architecture="all" OS="all" Owner="Microsoft" Team="Xaml" >
+  <!-- Quarantined: "DateTime Test" serialization mismatch on CI agents. See docs/drts-on-ci-implementation.md#m0-results. -->
+  <Drt Disabled="true" Executable="Drtparser.exe" Architecture="all" OS="all" Owner="Microsoft" Team="Xaml" >
     <SupportFiles>
       <SupportFile>testclasses.dll</SupportFile>
       <SupportFile>DrtFiles\Parser</SupportFile>
