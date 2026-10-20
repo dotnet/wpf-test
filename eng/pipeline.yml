@@ -28,7 +28,7 @@ jobs:
 
     jobs:
     - job: Windows_NT
-      timeoutInMinutes: 120  # how long to run the job before automatically cancelling; see https://github.com/dotnet/wpf/issues/952
+      timeoutInMinutes: 180  # TEMPORARY - M0 probe runs all DRTs; was 120, see https://github.com/dotnet/wpf/issues/952
       pool:
         # For public jobs, use the hosted pool.  For internal jobs use the internal pool.
         # Will eventually change this to two BYOC pools.
@@ -145,20 +145,10 @@ jobs:
         - script: |
             set DOTNET_ROOT=$(Build.SourcesDirectory)\.dotnet
             set DOTNET_MULTILEVEL_LOOKUP=0
-            cd /d $(Build.SourcesDirectory)\publish\Release\x64\Test\DRT
-            DrtControls.exe -suite ToolTip -verbose
-          displayName: M0 Probe - DrtControls ToolTip suite only
-          timeoutInMinutes: 5
-          continueOnError: true
-          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
-
-        - script: |
-            set DOTNET_ROOT=$(Build.SourcesDirectory)\.dotnet
-            set DOTNET_MULTILEVEL_LOOKUP=0
             cd /d $(Build.SourcesDirectory)\publish\Release\x64\Test
-            call RunDrts.cmd /Area=Controls
-          displayName: M0 Probe - Run DRTs (Area=Controls)
-          timeoutInMinutes: 30
+            call RunDrts.cmd
+          displayName: M0 Probe - Run all DRTs
+          timeoutInMinutes: 140
           condition: and(succeeded(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
 
         - powershell: |
@@ -176,7 +166,7 @@ jobs:
           inputs:
             testResultsFormat: XUnit
             testResultsFiles: $(Build.ArtifactStagingDirectory)\M0Probe\Report\testResults.xml
-            testRunTitle: DRT Controls x64 Release (M0 probe, attempt $(System.JobAttempt))
+            testRunTitle: All DRTs x64 Release (M0 probe, attempt $(System.JobAttempt))
             failTaskOnFailedTests: true
             failTaskOnMissingResultsFile: true
 
