@@ -135,6 +135,23 @@ jobs:
           displayName: M0 Probe - Agent environment
           condition: and(succeeded(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
 
+        - powershell: |
+            Get-Process ServerManager -ErrorAction SilentlyContinue | Stop-Process -Force
+            Start-Sleep 5
+            eng\probe\Probe-Agent.ps1 -Label after-close-servermanager -OutputDirectory '$(Build.ArtifactStagingDirectory)\M0Probe'
+          displayName: M0 Probe - Close Server Manager
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
+
+        - script: |
+            set DOTNET_ROOT=$(Build.SourcesDirectory)\.dotnet
+            set DOTNET_MULTILEVEL_LOOKUP=0
+            cd /d $(Build.SourcesDirectory)\publish\Release\x64\Test\DRT
+            DrtControls.exe -suite ToolTip -verbose
+          displayName: M0 Probe - DrtControls ToolTip suite only
+          timeoutInMinutes: 5
+          continueOnError: true
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
+
         - script: |
             set DOTNET_ROOT=$(Build.SourcesDirectory)\.dotnet
             set DOTNET_MULTILEVEL_LOOKUP=0
@@ -188,29 +205,3 @@ jobs:
           artifactName: Tests.$(_BuildConfig).$(_Platform).zip
         condition: notin(variables['Build.Reason'], 'PullRequest')
         
-
-# TEMPORARY - M0 probe (docs/drts-on-ci-implementation.md): do jobs share or reuse agents?
-- ${{ if eq(parameters.runAsPublic, 'true') }}:
-  - job: M0_AgentReuse
-    displayName: M0 Probe - Agent reuse
-    timeoutInMinutes: 15
-    pool:
-      name: NetCore-Public
-      demands: ImageOverride -equals windows.vs2026preview.scout.amd64.Open
-    strategy:
-      matrix:
-        Probe1: { _ProbeLabel: reuse1 }
-        Probe2: { _ProbeLabel: reuse2 }
-        Probe3: { _ProbeLabel: reuse3 }
-        Probe4: { _ProbeLabel: reuse4 }
-    steps:
-    - checkout: self
-      fetchDepth: 1
-    - powershell: eng\probe\Probe-Agent.ps1 -Label $(_ProbeLabel) -OutputDirectory $(Build.ArtifactStagingDirectory)\M0Probe
-      displayName: M0 Probe - Agent environment
-    - task: PublishPipelineArtifact@1
-      displayName: M0 Probe - Publish artifacts
-      condition: always()
-      inputs:
-        path: $(Build.ArtifactStagingDirectory)\M0Probe
-        artifactName: M0Probe_$(_ProbeLabel)_$(System.JobAttempt)
