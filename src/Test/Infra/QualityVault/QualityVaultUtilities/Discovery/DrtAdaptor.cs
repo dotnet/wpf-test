@@ -69,6 +69,11 @@ namespace Microsoft.Test.Discovery
                     drtTestInfo.Timeout = TimeSpan.FromSeconds(drtDef.Timeout);
                 }
 
+                if (drtDef.Disabled)
+                {
+                    drtTestInfo.Disabled = true;
+                }
+
                 SelectConfiguration(drtTestInfo, drtDef);
 
                 // Convert drt support files to a source/destination pair for TestInfo.
