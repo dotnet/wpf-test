@@ -129,6 +129,47 @@ jobs:
           $(_InternalRuntimeDownloadArgs)
         displayName: Windows Build / Publish
 
+      # TEMPORARY - M0 probe (docs/drts-on-ci-implementation.md). Release x64 only.
+      - ${{ if eq(parameters.runAsPublic, 'true') }}:
+        - powershell: eng\probe\Probe-Agent.ps1 -Label build-$(_BuildConfig)-$(_Platform) -OutputDirectory $(Build.ArtifactStagingDirectory)\M0Probe
+          displayName: M0 Probe - Agent environment
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
+
+        - script: |
+            set DOTNET_ROOT=$(Build.SourcesDirectory)\.dotnet
+            set DOTNET_MULTILEVEL_LOOKUP=0
+            cd /d $(Build.SourcesDirectory)\publish\Release\x64\Test
+            call RunDrts.cmd /Area=Controls
+          displayName: M0 Probe - Run DRTs (Area=Controls)
+          timeoutInMinutes: 30
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
+
+        - powershell: |
+            $report = Join-Path $env:APPDATA 'QualityVault\Run\Report'
+            $dest = '$(Build.ArtifactStagingDirectory)\M0Probe\Report'
+            if (Test-Path $report) { Copy-Item $report $dest -Recurse -Force } else { Write-Host "No report at $report" }
+            Get-ChildItem (Join-Path $env:APPDATA 'QualityVault\Run') -Recurse -Filter *.dmp -ErrorAction SilentlyContinue | Copy-Item -Destination '$(Build.ArtifactStagingDirectory)\M0Probe'
+            eng\probe\Probe-Agent.ps1 -Label after-drts -OutputDirectory '$(Build.ArtifactStagingDirectory)\M0Probe'
+          displayName: M0 Probe - Collect DRT report
+          condition: and(always(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
+
+        - task: PublishTestResults@2
+          displayName: M0 Probe - Publish DRT results
+          condition: and(always(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
+          inputs:
+            testResultsFormat: XUnit
+            testResultsFiles: $(Build.ArtifactStagingDirectory)\M0Probe\Report\testResults.xml
+            testRunTitle: DRT Controls x64 Release (M0 probe, attempt $(System.JobAttempt))
+            failTaskOnFailedTests: true
+            failTaskOnMissingResultsFile: true
+
+        - task: PublishPipelineArtifact@1
+          displayName: M0 Probe - Publish artifacts
+          condition: and(always(), eq(variables['_BuildConfig'], 'Release'), eq(variables['_Platform'], 'x64'))
+          inputs:
+            path: $(Build.ArtifactStagingDirectory)\M0Probe
+            artifactName: M0Probe_Build_$(System.JobAttempt)
+
       # Compress the test files in preparation of uploading 
       - task: PowerShell@2
         displayName: Compress Test Assemblies/Artifacts
@@ -147,3 +188,29 @@ jobs:
           artifactName: Tests.$(_BuildConfig).$(_Platform).zip
         condition: notin(variables['Build.Reason'], 'PullRequest')
         
+
+# TEMPORARY - M0 probe (docs/drts-on-ci-implementation.md): do jobs share or reuse agents?
+- ${{ if eq(parameters.runAsPublic, 'true') }}:
+  - job: M0_AgentReuse
+    displayName: M0 Probe - Agent reuse
+    timeoutInMinutes: 15
+    pool:
+      name: NetCore-Public
+      demands: ImageOverride -equals windows.vs2026preview.scout.amd64.Open
+    strategy:
+      matrix:
+        Probe1: { _ProbeLabel: reuse1 }
+        Probe2: { _ProbeLabel: reuse2 }
+        Probe3: { _ProbeLabel: reuse3 }
+        Probe4: { _ProbeLabel: reuse4 }
+    steps:
+    - checkout: self
+      fetchDepth: 1
+    - powershell: eng\probe\Probe-Agent.ps1 -Label $(_ProbeLabel) -OutputDirectory $(Build.ArtifactStagingDirectory)\M0Probe
+      displayName: M0 Probe - Agent environment
+    - task: PublishPipelineArtifact@1
+      displayName: M0 Probe - Publish artifacts
+      condition: always()
+      inputs:
+        path: $(Build.ArtifactStagingDirectory)\M0Probe
+        artifactName: M0Probe_$(_ProbeLabel)_$(System.JobAttempt)
