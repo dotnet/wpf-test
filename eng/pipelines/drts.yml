@@ -1,0 +1,42 @@
+# DRT pipeline for wpf-test. See docs/drts-on-ci-implementation.md.
+#
+# Not run on every PR. Start it with a PR comment, `/azp run <pipeline name>`, or from the
+# ADO "Run pipeline" dialog, where the filter parameters can be set.
+
+trigger: none
+pr: none
+
+parameters:
+- name: area
+  displayName: Area (QualityVault /Area=, blank for all)
+  type: string
+  default: ' '
+- name: name
+  displayName: Test name (QualityVault /Name=, blank for all)
+  type: string
+  default: ' '
+- name: keywords
+  displayName: Keywords (QualityVault /Keywords=)
+  type: string
+  default: ' '
+- name: priority
+  displayName: Priority (QualityVault /Priority=)
+  type: string
+  default: ' '
+- name: rerunFailures
+  displayName: Rerun failing DRTs once
+  type: boolean
+  default: true
+
+variables:
+- name: Build.Repository.Clean
+  value: true
+
+stages:
+- template: /eng/pipelines/templates/drt-stages.yml
+  parameters:
+    area: ${{ parameters.area }}
+    name: ${{ parameters.name }}
+    keywords: ${{ parameters.keywords }}
+    priority: ${{ parameters.priority }}
+    rerunFailures: ${{ parameters.rerunFailures }}

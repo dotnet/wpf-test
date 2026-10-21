@@ -2,7 +2,7 @@
 
 ## Status
 
-Draft plan. Nothing here has been implemented yet. For the background, required capabilities (C1–C4) and decisions, see [Running DRTs on CI](running-drts-on-ci.md).
+Draft plan. M0 is done. M1 is implemented (`eng/pipelines/drts.yml`, `eng/pipelines/templates/drt-stages.yml`, `eng/scripts/New-DrtPayload.ps1`, `eng/scripts/Invoke-Drts.ps1`) and is waiting for an ADO pipeline definition (D3). For the background, required capabilities (C1–C4) and decisions, see [Running DRTs on CI](running-drts-on-ci.md).
 
 ## Scope
 
@@ -186,8 +186,14 @@ Follow-ups:
   | `DrtPackagingApis` | DigitalDocuments | Failed in the zip archive tests. Needs `/verbose` to see why. |
   | `Drtparser` | Xaml | "DateTime Test": `DateTime` serialization differs from the expected string. |
   | `DrtPrinting` | Printing | "Print Queue": PostScript output hash differs from the expected value. |
-- **Quarantine (D5, decided):** these six are marked `Disabled="true"` in `DrtList.xml`, with a comment giving the reason. `DrtAdaptor` maps the attribute to `TestInfo.Disabled`, which QV already skips by default; run them with `RunDrts.cmd /Disabled=true`. In [build 1642817](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1642817) the result was 79 passed and 6 ignored. Each one still needs an issue and an owner.
-- Merging the latest `main`, which uses SDK 12.0 alpha, broke the restore for `net11.0-windows`. The probe branch keeps the 11.0 RC SDK in `global.json`. PR #355 will need the same fix.
+- **Quarantine (D5, decided):** these six are marked `Disabled="true"` in `DrtList.xml`, with a comment giving the reason. `DrtAdaptor` maps the attribute to `TestInfo.Disabled`, which QV already skips by default; run them with `RunDrts.cmd /Disabled=true`. In [build 1642817](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1642817) the result was 79 passed and 6 ignored. Issues and owners for the six: done.
+- Merging the latest `main`, which uses SDK 12.0 alpha, broke the restore for `net11.0-windows`. As a temporary workaround, this branch keeps the 11.0 RC SDK in `global.json` while taking `main`'s Arcade version. PR #355 needs the same fix.
+
+## Decisions
+
+- **D5, quarantine:** decided; see [M0 results](#m0-results).
+- **D7, triggers:** `/azp run <pipeline name>` from a PR comment, plus manual runs. No PR or CI trigger. A nightly schedule can come later (M4). Whether `/azp run` works with `pr: none` is still to be verified (I15).
+- **D3, the ADO pipeline definition:** open. `eng/pipelines/drts.yml` does nothing until a pipeline definition in the `dnceng-public/public` ADO project points at it. That definition is what gives the pipeline a name for `/azp run <name>`, connects it to the GitHub repo through the service connection, and lets people start it from the **Run pipeline** dialog. Creating one needs pipeline-creation rights in `dnceng-public`, which the WPF team may not have; the usual route is a request to dnceng. Until then, M1 can only be validated by running the template from a temporary PR, as M0 was.
 
 ## Open questions
 

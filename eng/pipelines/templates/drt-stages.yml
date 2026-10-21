@@ -1,0 +1,132 @@
+# Builds the tests and runs the DRTs on Azure DevOps build agents.
+# See docs/drts-on-ci-implementation.md. Phase 1: wpf-test, x64 Release, one test job.
+
+parameters:
+- name: configuration
+  type: string
+  default: Release
+- name: platform
+  type: string
+  default: x64
+# QualityVault filters. A single space means no filter: ADO needs a non-empty default to show the
+# parameter in the Run pipeline dialog.
+- name: area
+  type: string
+  default: ' '
+- name: name
+  type: string
+  default: ' '
+- name: keywords
+  type: string
+  default: ' '
+- name: priority
+  type: string
+  default: ' '
+- name: rerunFailures
+  type: boolean
+  default: true
+- name: pool
+  type: object
+  default:
+    name: NetCore-Public
+    demands: ImageOverride -equals windows.vs2026preview.scout.amd64.Open
+
+stages:
+- stage: Build
+  displayName: Build tests
+  jobs:
+  - job: Build
+    displayName: Build ${{ parameters.platform }} ${{ parameters.configuration }}
+    timeoutInMinutes: 90
+    pool: ${{ parameters.pool }}
+    steps:
+    - checkout: self
+      clean: true
+
+    - script: eng\scripts\CIBuild.cmd
+        -configuration ${{ parameters.configuration }}
+        -prepareMachine
+        /p:Platform=${{ parameters.platform }}
+      displayName: Build and publish tests
+
+    - powershell: eng\scripts\New-DrtPayload.ps1
+        -Configuration ${{ parameters.configuration }}
+        -Platform ${{ parameters.platform }}
+        -OutputDirectory $(Build.ArtifactStagingDirectory)\DrtPayload
+      displayName: Create DRT payload
+
+    - task: PublishPipelineArtifact@1
+      displayName: Publish DRT payload
+      inputs:
+        path: $(Build.ArtifactStagingDirectory)\DrtPayload
+        artifactName: DrtPayload_${{ parameters.platform }}_${{ parameters.configuration }}
+
+    - task: PublishPipelineArtifact@1
+      displayName: Publish build logs
+      condition: always()
+      inputs:
+        path: $(Build.SourcesDirectory)\artifacts\log
+        artifactName: BuildLogs_$(System.JobAttempt)
+
+- stage: Test
+  displayName: Run DRTs
+  dependsOn: Build
+  jobs:
+  - job: Drt
+    displayName: DRTs ${{ parameters.platform }} ${{ parameters.configuration }}
+    timeoutInMinutes: 90
+    pool: ${{ parameters.pool }}
+    variables:
+      DrtRoot: $(Pipeline.Workspace)\DrtPayload
+      QvRunDirectory: $(Agent.TempDirectory)\QualityVault\Run
+    steps:
+    # Only global.json and eng\common are needed, to install .NET.
+    - checkout: self
+      fetchDepth: 1
+
+    - task: DownloadPipelineArtifact@2
+      displayName: Download DRT payload
+      inputs:
+        artifact: DrtPayload_${{ parameters.platform }}_${{ parameters.configuration }}
+        path: $(DrtRoot)
+
+    # The DRTs are framework-dependent and need the exact runtime from global.json.
+    - powershell: |
+        $ci = $true
+        . eng\common\tools.ps1
+        $null = InitializeDotNetCli -install:$true
+        Write-Host "##vso[task.setvariable variable=DrtDotNetRoot]$env:DOTNET_INSTALL_DIR"
+      displayName: Install .NET from global.json
+
+    - powershell: $(DrtRoot)\Invoke-Drts.ps1
+        -TestRoot '$(DrtRoot)'
+        -RunDirectory '$(QvRunDirectory)'
+        -DotNetRoot '$(DrtDotNetRoot)'
+        -Area $env:DRT_AREA
+        -Name $env:DRT_NAME
+        -Keywords $env:DRT_KEYWORDS
+        -Priority $env:DRT_PRIORITY
+        -RerunFailures:$${{ parameters.rerunFailures }}
+      displayName: Run DRTs
+      env:
+        DRT_AREA: ${{ parameters.area }}
+        DRT_NAME: ${{ parameters.name }}
+        DRT_KEYWORDS: ${{ parameters.keywords }}
+        DRT_PRIORITY: ${{ parameters.priority }}
+
+    - task: PublishTestResults@2
+      displayName: Publish DRT results
+      condition: always()
+      inputs:
+        testResultsFormat: XUnit
+        testResultsFiles: $(QvRunDirectory)\Report\testResults.xml
+        testRunTitle: DRTs ${{ parameters.platform }} ${{ parameters.configuration }} (attempt $(System.JobAttempt))
+        failTaskOnFailedTests: true
+        failTaskOnMissingResultsFile: true
+
+    - task: PublishPipelineArtifact@1
+      displayName: Publish DRT report
+      condition: always()
+      inputs:
+        path: $(QvRunDirectory)\Report
+        artifactName: DrtReport_${{ parameters.platform }}_${{ parameters.configuration }}_$(System.JobAttempt)
