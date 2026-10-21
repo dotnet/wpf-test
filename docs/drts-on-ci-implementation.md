@@ -2,7 +2,7 @@
 
 ## Status
 
-Draft plan. M0 is done. M1 is implemented and validated (`eng/pipelines/drts.yml`, `eng/pipelines/templates/drt-stages.yml`, `eng/scripts/New-DrtPayload.ps1`, `eng/scripts/Invoke-Drts.ps1`) and is waiting for an ADO pipeline definition (D3). For the background, required capabilities (C1–C4) and decisions, see [Running DRTs on CI](running-drts-on-ci.md).
+Draft plan. M0 is done. M1 and M2 are implemented and validated (`eng/pipelines/drts.yml`, `eng/pipelines/templates/drt-stages.yml`, `eng/scripts/New-DrtPayload.ps1`, `eng/scripts/Get-DrtMatrix.ps1`, `eng/scripts/Invoke-Drts.ps1`): the DRTs run in one job per area. The pipeline is waiting for an ADO pipeline definition (D3). For the background, required capabilities (C1–C4) and decisions, see [Running DRTs on CI](running-drts-on-ci.md). For the background, required capabilities (C1–C4) and decisions, see [Running DRTs on CI](running-drts-on-ci.md).
 
 ## Scope
 
@@ -24,7 +24,8 @@ The pipeline logic goes into a template so that dotnet/wpf can reuse it in phase
 |---|---|
 | `eng/pipelines/drts.yml` | Pipeline entry point. Defines the triggers and runtime parameters, then calls the template. |
 | `eng/pipelines/templates/drt-stages.yml` | Reusable build and test stages. Parameters: the artifact source, platform, configuration, filters, and whether to rerun failures. |
-| `eng/scripts/New-DrtPayload.ps1` | Collects the minimal DRT payload from `publish\<config>\<platform>\Test`. Also writes the matrix of areas. |
+| `eng/scripts/New-DrtPayload.ps1` | Collects the minimal DRT payload from `publish\<config>\<platform>\Test`. |
+| `eng/scripts/Get-DrtMatrix.ps1` | Builds the test job matrix from `DrtList.xml`: one job per area with DRTs to run, after the area and name filters. |
 | `eng/scripts/Invoke-Drts.ps1` | Runs QV on the agent. Prepares the machine, runs, and sets the exit code. Used locally as well. |
 
 The existing `azure-pipelines.yml` and `eng/pipeline.yml` stay unchanged. Running DRTs on every PR would slow every PR down, so the DRT pipeline is a separate pipeline definition in ADO.
@@ -136,11 +137,13 @@ Each change below makes QV easier to drive from a pipeline. They are listed in o
 |---|---|---|---|
 | Q1 | Keep `QualityVaultFrontend`'s exit code in `QV.cmd` (`set rc=%errorlevel%` … `exit /b %rc%`). | `QV.cmd` ends with `rd`, so the frontend's `-1` for an infrastructure failure is lost and the step looks successful. | `src\Test\BranchCommon\data\QV.cmd` |
 | Q2 | Return a distinct exit code when tests fail: for example `0` for all passed, `1` for test failures, `-1` for an infrastructure error. Behind a switch such as `/FailOnTestFailure` so local behavior doesn't change. | Today `Main` returns 0 whenever the run finishes, so scripts check the pass rate in `DrtReport.xml` with `findstr`. | `QualityVaultFrontend\MainEntry.cs`, `RunCommand.cs` |
-| Q3 | ✅ Done; validated in [build 1643329](https://dev.azure.com/dnceng-public/public/_build/results?buildId=1643329), which published 80 results instead of 18, with an un-quarantined `Drtparser` showing its failure reason and output. Better xUnit report: name each `<assembly>` after its area; set `type` to the area and `method` to the test name; add `<trait>`s for Area, SubArea, Owner and Priority; put a short failure reason in `<message>` and the DRT's output in `<output>`. | Today each assembly is named after the first test's executable, and every DRT has `type="Microsoft.Test.Drt.DrtRunner"` and `method="Main"`. The failure message holds only the repro arguments, so the DRT's output is not visible in the Tests tab (seen in M0). In M1 the Tests tab showed 18 tests instead of 79: Azure DevOps treats tests that share 	ype and method as iterations of one data-driven test, so each area collapsed into one test. | `QualityVaultUtilities\Reporting\XUnitReportGenerator.cs` |
+| Q3 | ✅ Done; validated in [build 1643329](https://dev.azure.com/dnceng-public/public/_build/results?buildId=1643329), which published 80 results instead of 18, with an un-quarantined `Drtparser` showing its failure reason and output. Better xUnit report: name each `<assembly>` after its area; set `type` to the area and `method` to the test name; add `<trait>`s for Area, SubArea, Owner and Priority; put a short failure reason in `<message>` and the DRT's output in `<output>`. | Today each assembly is named after the first test's executable, and every DRT has `type="Microsoft.Test.Drt.DrtRunner"` and `method="Main"`. The failure message holds only the repro arguments, so the DRT's output is not visible in the Tests tab (seen in M0). In M1 the Tests tab showed 18 tests instead of 79: Azure DevOps treats tests that share `type` and `method` as iterations of one data-driven test, so each area collapsed into one test. | `QualityVaultUtilities\Reporting\XUnitReportGenerator.cs` |
 | Q4 | Record a pass on rerun: keep the first attempt's failure, and report the test as passed with a `Flaky=true` trait and a note in `<output>`. | `ClearResult` drops the first failure, so flaky tests are invisible. The xUnit format has no "flaky" outcome, so a trait is the best available option. | `ExecutionEngine.cs` (rerun around L335 and L386), `XUnitReportGenerator.cs` |
 | Q5 | `/RerunCount=N` instead of a single fixed rerun. | Makes it possible to tune retries. | `RunCommand.cs`, `ExecutionEngine.cs` (`ShouldRerun`) |
 | Q6 | Let QV run without copying `Infra` into `%ProgramFiles%`, for example with an environment variable or switch that runs it in place. | Copying needs administrator rights and shares one machine-wide location between runs. | `QV.cmd` |
 | Q7 | Remove the unused Helix result-upload code (`HELIX_RESULTS_CONTAINER_*`). | Cleanup. | `XUnitReportGenerator.cs` |
+| Q8 | ✅ Done in M2. `/ExactArea` matches `/Area` values exactly (case-insensitive) instead of as substrings. | `/Area=Integration` also runs `WindowsFormsIntegration`, so a per-area job would run another area's DRTs. | `FilterableCommand.cs`, `FilteringSettings.cs`, `FilteringEngine.cs` |
+| Q9 | ✅ Done in M2. Make writes to the `WPF Test Infrastructure` event log best effort. | On a fresh agent, writing to the event source QV has just created can fail with "Access is denied". That aborted one of 19 jobs in build 1643542 with no report. The event log is only diagnostic. | `ExecutionEventLog.cs` |
 
 `RunDrts.cmd` and `CIRunDrts.cmd` stay as they are for local use. The pipeline uses `Invoke-Drts.ps1`, which calls `QV.cmd` directly.
 
@@ -150,7 +153,7 @@ Each change below makes QV easier to drive from a pipeline. They are listed in o
 |---|---|---|
 | M0 | ✅ **Probe the agent.** Done; see [M0 results](#m0-results). A temporary PR pipeline step runs `RunDrts.cmd /Area=Controls` and logs elevation, session, resolution and the `%APPDATA%` path. A small matrix of 4 jobs also logs the machine name, OS install time, boot time and agent uptime, and writes then checks for a marker file under `%ProgramData%`. | We know whether DRTs can run on `windows.vs2026preview.scout.amd64.Open` as they are, and whether each job gets a freshly imaged machine or agents are reused across jobs (I20). |
 | M1 | ✅ `drts.yml` with a single test job that runs every DRT, publishes results and the report. Validated from a temporary PR in [build 1643282](https://dev.azure.com/dnceng-public/public/_build/results?buildId=1643282): 79 passed in 24 minutes. Needed Q3 so that each DRT shows up as its own test. | A manual run shows the DRT results in the Tests tab. |
-| M2 | A matrix with one job per area, built from `DrtList.xml`, plus filter parameters. | **Rerun failed jobs** reruns only failed areas. |
+| M2 | ✅ A matrix with one job per area, built from `DrtList.xml` by `Get-DrtMatrix.ps1`, plus area and name filter parameters. Needed Q8 and Q9. Validated from a temporary PR in [build 1643592](https://dev.azure.com/dnceng-public/public/_build/results?buildId=1643592): 18 area jobs passed 79 DRTs, an un-quarantined `Drtparser` failed only the Xaml job, and the Test stage took 3.5 minutes instead of about 24. **Rerun failed jobs** is standard ADO behavior for matrix jobs but has not been tried yet, because it needs a pipeline we can rerun from the UI (D3). | **Rerun failed jobs** reruns only failed areas. |
 | M3 | QV changes Q1–Q3 (Q3 done early, during M1). | Exit codes are reliable and the Tests tab is readable. |
 | M4 | `/azp run` comment trigger and the nightly schedule. | A wpf-test PR comment starts a DRT run. |
 | M5 | QV changes Q4 and Q5. | Flaky tests are visible. |
@@ -200,6 +203,6 @@ Follow-ups:
 - **I15:** Does `/azp run` work for a pipeline with `pr: none`? Which GitHub permissions does a user need to trigger it?
 - **I16:** Answered in M0: 1024×768. Whether some DRTs need more is still open; MAUI sets 1920×1080 before its UI tests.
 - **I21:** Does `DrtControls` pass locally? On the agent it hangs in the ToolTip suite. Is that caused by the agent (Server Manager in the foreground, 1024×768), or does it fail everywhere?
-- **I17:** Is there a sensible `maxParallel` and job size? There are 21 areas; small ones could be grouped.
+- **I17:** Decided in M2: one job per area, no grouping and no `maxParallel`. Per-DRT time in build 1643329 is 292 seconds in total; the largest areas are AppModel (68 s, 28 DRTs), ElementServices (57 s) and DigitalDocuments (50 s), and every other area takes 15 seconds or less. Each job adds about 2 minutes of fixed cost (checkout, payload download, .NET install, QV start-up), so grouping small areas would save agent time but not wall-clock time, and one area per job keeps **Rerun failed jobs** precise. Areas with no DRT to run (today Controls, Printing and Xaml, which are fully quarantined) get no job.
 - **I20:** Answered in M0: every job gets a freshly imaged VM, so cleanup between jobs is not needed. Cleanup within a job, for example between areas grouped into one job, still is.
 - **I18:** Do the DRTs leave machine-wide state (registry, `%ProgramFiles%\QualityVault`, fonts, themes) that matters on reused agents?
