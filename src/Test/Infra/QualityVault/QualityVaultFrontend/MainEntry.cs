@@ -93,6 +93,11 @@ namespace Microsoft.Test
                 commandToExecute.Execute();
                 Profiler.GenerateReport();
                 Console.WriteLine("Done.");
+
+                if (commandToExecute is RunCommand runCommand)
+                {
+                    return runCommand.ExitCode;
+                }
             }
             catch (Exception e)
             {

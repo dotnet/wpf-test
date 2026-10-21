@@ -7,4 +7,7 @@ REM ~dp0 grabs the directory path of the 0th argument, which is the cmd file its
 
 xcopy %~dp0\Infra "%ProgramFiles%\QualityVault\" /Q /Y /E
 "%ProgramFiles%\QualityVault\QualityVaultFrontend.exe" %*
+REM Keep the frontend's exit code: rd would otherwise reset it.
+set QV_EXIT_CODE=%ERRORLEVEL%
  rd /S /Q "%ProgramFiles%\QualityVault"
+exit /b %QV_EXIT_CODE%

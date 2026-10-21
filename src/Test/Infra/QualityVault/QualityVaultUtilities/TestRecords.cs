@@ -233,6 +233,23 @@ namespace Microsoft.Test
         }
 
         /// <summary>
+        /// Counts the tests whose outcome is Fail, using the same interpretation as the
+        /// console summary and the reports.
+        /// </summary>
+        public int CountFailures()
+        {
+            int failures = 0;
+            foreach (TestRecord test in TestCollection)
+            {
+                if (ReportingUtilities.InterpretTestOutcome(test) == Result.Fail)
+                {
+                    failures++;
+                }
+            }
+            return failures;
+        }
+
+        /// <summary>
         /// Produce a comprehensive static xml report from the test results
         /// </summary>
         public void GenerateXmlReport(TestRecords tests, RunInfo runInfo, DirectoryInfo reportRoot, DirectoryInfo testBinariesDirectory)

@@ -7,7 +7,7 @@ Used by eng/pipelines/templates/drt-stages.yml and locally. Run it elevated: Qua
 itself into %ProgramFiles%. See docs/drts-on-ci-implementation.md.
 
 Exit codes: 0 when every DRT that ran passed, 1 when a DRT failed or none ran, 2 when QualityVault
-produced no report.
+failed with an infrastructure error or produced no report.
 
 .EXAMPLE
 eng\scripts\Invoke-Drts.ps1 -TestRoot publish\Release\x64\Test -Area Controls -DotNetRoot .dotnet
@@ -81,36 +81,49 @@ foreach ($filter in $filters.GetEnumerator()) {
 if ($ExactArea) { $qvArgs += '/ExactArea' }
 if ($RerunFailures) { $qvArgs += '/RerunFailures' }
 if ($Disabled) { $qvArgs += '/Disabled=true' }
+# Exit code 0: no DRT failed, 1: a DRT failed, 2: no DRT ran, -1: infrastructure error.
+$qvArgs += '/FailOnTestFailure'
 
 Write-Host "QV.cmd $($qvArgs -join ' ')"
 # DrtAdaptor resolves DRT\ relative to the current directory.
 Push-Location $TestRoot
 try {
     & $qv @qvArgs
-    Write-Host "QualityVault exit code: $LASTEXITCODE (does not reflect test results)"
+    $qvExitCode = $LASTEXITCODE
+    Write-Host "QualityVault exit code: $qvExitCode"
 }
 finally {
     Pop-Location
 }
 
+# List the failed DRTs in the job's issues. The exit code below comes from QualityVault.
 $report = Join-Path $RunDirectory 'Report'
 $xunit = Join-Path $report 'testResults.xml'
-if (-not (Test-Path $xunit)) {
-    Write-Host "##vso[task.logissue type=error]QualityVault produced no report at $xunit."
-    exit 2
+if (Test-Path $xunit) {
+    $tests = @(([xml](Get-Content $xunit -Raw)).SelectNodes('//test'))
+    $failed = @($tests | Where-Object { $_.result -ne 'Pass' -and $_.result -ne 'Skip' })
+    Write-Host ''
+    Write-Host "DRTs run: $($tests.Count), failed: $($failed.Count). Report: $report"
+    foreach ($test in $failed) {
+        Write-Host "##vso[task.logissue type=error]$($test.name) failed ($($test.result))."
+    }
 }
 
-$tests = @(([xml](Get-Content $xunit -Raw)).SelectNodes('//test'))
-$failed = @($tests | Where-Object { $_.result -ne 'Pass' -and $_.result -ne 'Skip' })
-Write-Host ''
-Write-Host "DRTs run: $($tests.Count), failed: $($failed.Count). Report: $report"
-foreach ($test in $failed) {
-    Write-Host "##vso[task.logissue type=error]$($test.name) failed ($($test.result))."
+switch ($qvExitCode) {
+    0 {
+        if (-not (Test-Path $xunit)) {
+            Write-Host "##vso[task.logissue type=error]QualityVault produced no report at $xunit."
+            exit 2
+        }
+        exit 0
+    }
+    1 { exit 1 }
+    2 {
+        Write-Host '##vso[task.logissue type=error]No DRTs ran. Check the filters.'
+        exit 1
+    }
+    default {
+        Write-Host "##vso[task.logissue type=error]QualityVault failed with an infrastructure error (exit code $qvExitCode). See the log above."
+        exit 2
+    }
 }
-
-if ($tests.Count -eq 0) {
-    Write-Host '##vso[task.logissue type=error]No DRTs ran. Check the filters.'
-    exit 1
-}
-if ($failed.Count -gt 0) { exit 1 }
-exit 0

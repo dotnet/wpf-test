@@ -99,6 +99,23 @@ namespace Microsoft.Test.Commands
         public bool SkipDxDiag { get; set; }
 
         /// <summary>
+        /// Makes the exit code reflect the test results, for use from scripts and CI.
+        /// </summary>
+        [Description("Sets the exit code from the test results: 0 when no test failed, 1 when a test failed, 2 when no test ran. Without it the exit code is 0 unless an infrastructure error occurs (-1).")]
+        public bool FailOnTestFailure { get; set; }
+
+        /// <summary>
+        /// Exit code for the process, set by Execute. Always 0 unless FailOnTestFailure is set.
+        /// </summary>
+        public int ExitCode { get; private set; }
+
+        /// <summary>Exit code when a test failed and FailOnTestFailure is set.</summary>
+        public const int TestFailureExitCode = 1;
+
+        /// <summary>Exit code when no test ran and FailOnTestFailure is set.</summary>
+        public const int NoTestsExitCode = 2;
+
+        /// <summary>
         /// Encapsulates logic for running tests.
         /// </summary>
         public override void Execute()
@@ -165,6 +182,21 @@ namespace Microsoft.Test.Commands
             Console.WriteLine("Saving Report to: {0}\\LabReport.xml", reportDirectoryPath);
             tests.GenerateXmlReport(tests, runInfo, new DirectoryInfo(reportDirectoryPath), DiscoveryInfoPath.Directory);
             tests.DisplayConsoleSummary();
+
+            if (FailOnTestFailure)
+            {
+                int failures = tests.TestCollection.Count == 0 ? 0 : tests.CountFailures();
+                if (tests.TestCollection.Count == 0)
+                {
+                    Console.WriteLine("No tests ran. Exit code: {0}.", NoTestsExitCode);
+                    ExitCode = NoTestsExitCode;
+                }
+                else if (failures > 0)
+                {
+                    Console.WriteLine("{0} test(s) failed. Exit code: {1}.", failures, TestFailureExitCode);
+                    ExitCode = TestFailureExitCode;
+                }
+            }
         }
     }
 }
