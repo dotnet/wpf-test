@@ -62,16 +62,23 @@ namespace Microsoft.Test.Reporting
                     collection.SetAttributeValue("time", ReportingUtilities.FormatTimeSpanAsSeconds(ReportingUtilities.GetTestDuration(testRecord)));
                     assembly.Add(collection);
 
+                    var methodNames = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
                     foreach (VariationRecord variation in testRecord.Variations)
                     {
                         var test = new XElement("test");
                         string testName = testRecord.TestInfo.Name;
 
                         // Azure DevOps treats tests that share type and method as iterations of one
-                        // data-driven test, so each test needs its own type/method pair.
+                        // data-driven test and shows them as one row, so each variation needs its own
+                        // type/method pair. Feature tests can have hundreds of variations.
+                        string methodName = GetMethodName(testName, variation.VariationName);
+                        for (int i = 2; !methodNames.Add(methodName); i++)
+                        {
+                            methodName = GetMethodName(testName, variation.VariationName) + " (" + i + ")";
+                        }
                         test.SetAttributeValue("type", areaName);
-                        test.SetAttributeValue("method", testName);
-                        test.SetAttributeValue("name", GetResultName(areaName, testName, variation.VariationName));
+                        test.SetAttributeValue("method", methodName);
+                        test.SetAttributeValue("name", areaName + "." + methodName);
                         test.SetAttributeValue("time", GetResultDuration(testRecord, variation).TotalSeconds);
                         test.SetAttributeValue("result", variation.Result == Result.Ignore ? "Skip" : variation.Result.ToString());
 
@@ -111,9 +118,9 @@ namespace Microsoft.Test.Reporting
         private static readonly string[] OutcomeMarkers = { "Non-zero exit code", "Driver Error", "timed out", "timeout" };
         private static readonly string[] DetailMarkers = { "Exception", "Assert", "fail", "error" };
 
-        private static string GetResultName(string areaName, string testName, string variationName)
+        private static string GetMethodName(string testName, string variationName)
         {
-            string name = areaName + "." + testName;
+            string name = testName;
             if (!string.IsNullOrEmpty(variationName) && !string.Equals(variationName, testName, StringComparison.Ordinal))
             {
                 name += " - " + variationName;
