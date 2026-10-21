@@ -27,6 +27,8 @@ The pipeline logic goes into a template so that dotnet/wpf can reuse it in phase
 | `eng/scripts/New-DrtPayload.ps1` | Collects the minimal DRT payload from `publish\<config>\<platform>\Test`. |
 | `eng/scripts/Get-DrtMatrix.ps1` | Builds the test job matrix from `DrtList.xml`: one job per area with DRTs to run, after the area and name filters. |
 | `eng/scripts/Invoke-Drts.ps1` | Runs QV on the agent. Prepares the machine, runs, and sets the exit code. Used locally as well. |
+| `eng/pipelines/templates/microsuite-stages.yml` | Build and test stages for the MicroSuites. See [MicroSuites](#microsuites). |
+| `eng/scripts/New-TestPayload.ps1` | Splits the published feature tests into one payload per `FeatureTests` folder, for the tests that match a keyword, and builds the job matrix. |
 
 The existing `azure-pipelines.yml` and `eng/pipeline.yml` stay unchanged. Running DRTs on every PR would slow every PR down, so the DRT pipeline is a separate pipeline definition in ADO.
 
@@ -206,3 +208,38 @@ Follow-ups:
 - **I17:** Decided in M2: one job per area, no grouping and no `maxParallel`. Per-DRT time in build 1643329 is 292 seconds in total; the largest areas are AppModel (68 s, 28 DRTs), ElementServices (57 s) and DigitalDocuments (50 s), and every other area takes 15 seconds or less. Each job adds about 2 minutes of fixed cost (checkout, payload download, .NET install, QV start-up), so grouping small areas would save agent time but not wall-clock time, and one area per job keeps **Rerun failed jobs** precise. Areas with no DRT to run (today Controls, Printing and Xaml, which are fully quarantined) get no job.
 - **I20:** Answered in M0: every job gets a freshly imaged VM, so cleanup between jobs is not needed. Cleanup within a job, for example between areas grouped into one job, still is.
 - **I18:** Do the DRTs leave machine-wide state (registry, `%ProgramFiles%\QualityVault`, fonts, themes) that matters on reused agents?
+
+## MicroSuites
+
+MicroSuites are the feature tests tagged with the `MicroSuite` keyword (`RunTests.cmd /Keywords=MicroSuite`). They use the same runner (`Invoke-Drts.ps1 -DiscoveryInfo DiscoveryInfo.xml -Keywords MicroSuite`) and the same pipeline pattern as the DRTs, in `eng/pipelines/templates/microsuite-stages.yml`.
+
+### Baseline
+
+[Build 1644288](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1644288) ran every MicroSuite test in one job, straight from the build output: 99 tests in 13 areas, 236 variations, 229 passed and 7 failed. The build step took 313 seconds and the test step 687 seconds (about 449 seconds of test time). The slowest areas were AppModel (126 s), Controls (82 s) and Annotations (72 s).
+
+### Quarantine
+
+The seven failures are quarantined with `Disabled = true` (`Disabled="true"` in `.xtc` files) and a comment giving the reason:
+
+| Test | Reason |
+|---|---|
+| `AppModel.LooseXaml` (`Navigation.xtc`) | Times out after 120 seconds; it navigates to `http://wpfapps`, which the agents cannot reach. |
+| `Controls.DataGridRegressionTest27` | Dragging rows while grouped: "SelectedItems.Count is incorrect. Expected: 4, Actual: 0". |
+| `Controls.AccessKeyMenuItemEventDelegateBVT(AccessKeysBVT.xaml)` | "The Click event did not fire". |
+| `Editing.CustomSpellerDictionary_Pri0` | Test bug: "Unable to find field testIgnoreSpellingError". |
+| `Editing.IMEInsertDeleteTest_Japanese` | Test bug: "Unable to find field locale". |
+| `FlowLayout.FindTest`, the two `Reader.TwoPage` variations (`PressF3Key`, `InvokeFindNext`) | `PlatformNotSupportedException` in `Initialize`. |
+
+### Editing tests that silently did not run
+
+Nine Editing tests from `EditingTest.exe` (XamlPackageBVTTest, ClipboardAPITest, ImageCopyPasteTest, DataObjectStrObjBitmapAPI1, TableSelectionsTest1, TableNegativeTest, ParagraphEditingWithMouse2, TextRangeSaveLoadTest, TextRangeSerializationTestBVT) did not run in the baseline. Their target in `DiscoveryInfo.xml` listed `Common\AssemblyLinker\%PROCESSOR_ARCHITECTURE%\al.exe`, `alink.dll` and `alinkui.dll` as support files, and that folder is not in this repository. Copying the support files failed, so QV marked the whole execution group `Ignore` with no variations. Ignored tests are not in `testResults.xml` and do not fail the job. No Editing test uses `al.exe`, so the three support files are removed.
+
+QV still turns an execution-group error into silent `Ignore` results. Making those fail the job is a follow-up.
+
+### Per-folder payloads
+
+The published `Test` folder is about 1.8 GB, of which 1.7 GB is `FeatureTests`. `eng/scripts/New-TestPayload.ps1` runs QV discovery (no tests run, no elevation needed) with the keyword filter, and maps each enabled test to the `FeatureTests\<folder>` its support files use. Today every MicroSuite area uses only its own folder. For each folder it creates a payload with `Infra\`, `Common\`, the QV scripts, `Invoke-Drts.ps1`, the folder, and a `DiscoveryInfo.xml` with only the targets in that folder. It also writes the job matrix: one job per payload.
+
+For MicroSuites that gives 12 payloads (XamlV3 and XamlV4 share `FeatureTests\XAML`), 1.29 GB in total and 48 to 271 MB each, from 92 enabled test records (QV counts each variation of a `VariationAttributeAdaptor` test as a record). The script takes about 40 seconds locally. Discovery inside each payload, with the job's `/Area` and `/ExactArea` filters, finds the same tests as discovery over the full folder.
+
+The Build stage publishes all payloads as one artifact, and each test job downloads only its folder (`DownloadPipelineArtifact@2` with `itemPattern`). The `area` parameter (exact test areas, for example `Controls,XamlV4`) leaves out payloads with no test in those areas.

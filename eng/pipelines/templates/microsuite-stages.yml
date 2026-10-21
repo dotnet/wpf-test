@@ -1,6 +1,7 @@
-# Builds the tests and runs the MicroSuite feature tests on an Azure DevOps build agent.
-# Baseline: one job that runs every MicroSuite test straight from the build output, to measure
-# run time and pass rate before splitting into per-area jobs with per-area payloads.
+# Builds the tests and runs the MicroSuite feature tests on Azure DevOps build agents.
+# See docs/drts-on-ci-implementation.md (MicroSuites). The Build stage splits the published tests
+# into one payload per FeatureTests folder (New-TestPayload.ps1); the Test stage runs one job per
+# payload, and each job downloads only its own payload.
 
 parameters:
 - name: configuration
@@ -12,6 +13,11 @@ parameters:
 - name: keywords
   type: string
   default: MicroSuite
+# Comma-separated test areas, matched exactly, for example Controls,XamlV4. A single space means
+# all areas: ADO needs a non-empty default to show the parameter in the Run pipeline dialog.
+- name: area
+  type: string
+  default: ' '
 - name: rerunFailures
   type: boolean
   default: false
@@ -22,16 +28,13 @@ parameters:
     demands: ImageOverride -equals windows.vs2026preview.scout.amd64.Open
 
 stages:
-- stage: MicroSuites
-  displayName: MicroSuites
+- stage: Build
+  displayName: Build tests
   jobs:
-  - job: MicroSuites
-    displayName: MicroSuites ${{ parameters.platform }} ${{ parameters.configuration }}
-    timeoutInMinutes: 240
+  - job: Build
+    displayName: Build ${{ parameters.platform }} ${{ parameters.configuration }}
+    timeoutInMinutes: 90
     pool: ${{ parameters.pool }}
-    variables:
-      TestRoot: $(Build.SourcesDirectory)\publish\${{ parameters.configuration }}\${{ parameters.platform }}\Test
-      QvRunDirectory: $(Agent.TempDirectory)\QualityVault\Run
     steps:
     - checkout: self
       clean: true
@@ -42,6 +45,25 @@ stages:
         /p:Platform=${{ parameters.platform }}
       displayName: Build and publish tests
 
+    # Discovers the tests, creates one payload per FeatureTests folder and sets the job matrix.
+    - powershell: eng\scripts\New-TestPayload.ps1
+        -Configuration ${{ parameters.configuration }}
+        -Platform ${{ parameters.platform }}
+        -Keywords '${{ parameters.keywords }}'
+        -Area $env:TEST_AREA
+        -OutputDirectory $(Build.ArtifactStagingDirectory)\TestPayload
+        -OutputVariable matrix
+      name: testMatrix
+      displayName: Create test payloads
+      env:
+        TEST_AREA: ${{ parameters.area }}
+
+    - task: PublishPipelineArtifact@1
+      displayName: Publish test payloads
+      inputs:
+        path: $(Build.ArtifactStagingDirectory)\TestPayload
+        artifactName: TestPayload_${{ parameters.platform }}_${{ parameters.configuration }}
+
     - task: PublishPipelineArtifact@1
       displayName: Publish build logs
       condition: always()
@@ -49,22 +71,50 @@ stages:
         path: $(Build.SourcesDirectory)\artifacts\log
         artifactName: BuildLogs_$(System.JobAttempt)
 
+- stage: Test
+  displayName: Run ${{ parameters.keywords }} tests
+  dependsOn: Build
+  jobs:
+  - job: Test
+    # ADO appends the matrix key (the payload) to the job name.
+    displayName: ${{ parameters.keywords }} ${{ parameters.platform }} ${{ parameters.configuration }}
+    timeoutInMinutes: 90
+    pool: ${{ parameters.pool }}
+    strategy:
+      matrix: $[ stageDependencies.Build.Build.outputs['testMatrix.matrix'] ]
+    variables:
+      PayloadRoot: $(Pipeline.Workspace)\TestPayload
+      QvRunDirectory: $(Agent.TempDirectory)\QualityVault\Run
+    steps:
+    # Only global.json and eng\common are needed, to install .NET.
+    - checkout: self
+      fetchDepth: 1
+
+    - task: DownloadPipelineArtifact@2
+      displayName: Download $(TestPayload) payload
+      inputs:
+        artifact: TestPayload_${{ parameters.platform }}_${{ parameters.configuration }}
+        itemPattern: $(TestPayload)/**
+        path: $(PayloadRoot)
+
     # The tests are framework-dependent and need the exact runtime from global.json.
     - powershell: |
         $ci = $true
         . eng\common\tools.ps1
         $null = InitializeDotNetCli -install:$true
         Write-Host "##vso[task.setvariable variable=TestDotNetRoot]$env:DOTNET_INSTALL_DIR"
-      displayName: Locate .NET from global.json
+      displayName: Install .NET from global.json
 
-    - powershell: eng\scripts\Invoke-Drts.ps1
-        -TestRoot '$(TestRoot)'
+    - powershell: $(PayloadRoot)\$(TestPayload)\Invoke-Drts.ps1
+        -TestRoot '$(PayloadRoot)\$(TestPayload)'
         -DiscoveryInfo DiscoveryInfo.xml
         -RunDirectory '$(QvRunDirectory)'
         -DotNetRoot '$(TestDotNetRoot)'
         -Keywords '${{ parameters.keywords }}'
+        -Area '$(TestAreas)'
+        -ExactArea
         -RerunFailures:$${{ parameters.rerunFailures }}
-      displayName: Run ${{ parameters.keywords }} tests
+      displayName: Run $(TestAreas) tests
 
     - task: PublishTestResults@2
       displayName: Publish test results
@@ -72,7 +122,7 @@ stages:
       inputs:
         testResultsFormat: XUnit
         testResultsFiles: $(QvRunDirectory)\Report\testResults.xml
-        testRunTitle: ${{ parameters.keywords }} ${{ parameters.platform }} ${{ parameters.configuration }} (attempt $(System.JobAttempt))
+        testRunTitle: ${{ parameters.keywords }} $(TestPayload) ${{ parameters.platform }} ${{ parameters.configuration }} (attempt $(System.JobAttempt))
         failTaskOnFailedTests: true
         failTaskOnMissingResultsFile: true
 
@@ -81,4 +131,4 @@ stages:
       condition: always()
       inputs:
         path: $(QvRunDirectory)\Report
-        artifactName: MicroSuiteReport_${{ parameters.platform }}_${{ parameters.configuration }}_$(System.JobAttempt)
+        artifactName: TestReport_${{ parameters.platform }}_${{ parameters.configuration }}_$(TestPayload)_$(System.JobAttempt)
