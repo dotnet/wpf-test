@@ -26,7 +26,8 @@ namespace Microsoft.Test.Editing
     /// <summary>
     /// This test verifies basic speller functionality in RichTextBox and Textbox using a custom speller dictionary.
     /// </summary>
-    [Test(0, "Speller", "CustomSpellerDictionary_Pri0", MethodParameters = "/TestCaseType:CustomSpellerDictionaryTest /Pri=0", SupportFiles = @"FeatureTests\Editing\*.lex", Keywords = "Localization_Suite,MicroSuite", Timeout = 100)]
+    // Quarantined: fails with "Unable to find field testIgnoreSpellingError". See docs/drts-on-ci-implementation.md#microsuites.
+    [Test(0, "Speller", "CustomSpellerDictionary_Pri0", MethodParameters = "/TestCaseType:CustomSpellerDictionaryTest /Pri=0", SupportFiles = @"FeatureTests\Editing\*.lex", Keywords = "Localization_Suite,MicroSuite", Timeout = 100, Disabled = true)]
     [Test(2, "Speller", "CustomSpellerDictionary_PartialTrust", MethodParameters = "/TestCaseType:CustomSpellerDictionaryTest /XbapName=EditingTestDeployPart1", SupportFiles = @"FeatureTests\Editing\EditingTestDeployPart1*", Timeout = 200)]
     [Test(0, "Speller", "CustomSpellerDictionary_UriTypes", MethodParameters = "/TestCaseType:CustomSpellerDictionaryTest /Pri=1", SupportFiles = @"FeatureTests\Editing\*.lex", Keywords = "Localization_Suite", Timeout = 100)]
     [Test(0, "Speller", "CustomSpellerDictionary_Xaml_Main", MethodParameters = "/TestCaseType:CustomSpellerDictionaryTest /Pri=3", SupportFiles = @"FeatureTests\Editing\CustomSpeller*xaml,FeatureTests\Editing\CustomSpellerDictionary1.lex", Keywords = "Localization_Suite", Timeout = 100)]

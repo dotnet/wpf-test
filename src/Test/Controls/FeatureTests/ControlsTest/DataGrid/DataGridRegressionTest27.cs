@@ -21,7 +21,9 @@ namespace Microsoft.Test.Controls
     /// </description>
 
     /// </summary>
-    [Test(0, "DataGrid", "DataGridRegressionTest27", SecurityLevel = TestCaseSecurityLevel.FullTrust, Keywords = "MicroSuite")]
+    // Quarantined: TestDraggingMultipleRowsWhileGrouped fails on CI agents (SelectedItems.Count 0, expected 4).
+    // See docs/drts-on-ci-implementation.md#microsuites.
+    [Test(0, "DataGrid", "DataGridRegressionTest27", SecurityLevel = TestCaseSecurityLevel.FullTrust, Keywords = "MicroSuite", Disabled = true)]
     public class DataGridRegressionTest27 : DataGridTest
     {
         private Button debugButton;

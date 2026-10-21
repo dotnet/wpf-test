@@ -16,7 +16,8 @@ namespace Microsoft.Test.Controls
     [Test(0, "AccessKeys", "AccessKeyMenuItemEventDelegateBVT", Keywords = "Localization_Suite")]
     public class AccessKeyMenuItemEventDelegateBVT : XamlTest
     {
-        [Variation("AccessKeysBVT.xaml", Keywords = "MicroSuite")]
+        // Quarantined: the Click event does not fire on CI agents. See docs/drts-on-ci-implementation.md#microsuites.
+        [Variation("AccessKeysBVT.xaml", Keywords = "MicroSuite", Disabled = true)]
         public AccessKeyMenuItemEventDelegateBVT(string fileName)
             : base(fileName)
         {

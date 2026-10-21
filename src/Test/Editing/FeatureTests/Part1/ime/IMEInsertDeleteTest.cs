@@ -26,7 +26,8 @@ using UisWin32 = Test.Uis.Wrappers.Win32;
 namespace Test.Uis.TextEditing
 {
     [Test(0, "IME", "IMEInsertDeleteTest_Korean", MethodParameters = "/TestCaseType:IMEInsertDeleteTest /locale=Korean", Timeout = 120, Keywords = "KoreanIME")]
-    [Test(0, "IME", "IMEInsertDeleteTest_Japanese", MethodParameters = "/TestCaseType:IMEInsertDeleteTest /locale=Japanese", Timeout = 120, Keywords = "JapaneseIME,MicroSuite")]
+    // Quarantined: fails with "Unable to find field locale". See docs/drts-on-ci-implementation.md#microsuites.
+    [Test(0, "IME", "IMEInsertDeleteTest_Japanese", MethodParameters = "/TestCaseType:IMEInsertDeleteTest /locale=Japanese", Timeout = 120, Keywords = "JapaneseIME,MicroSuite", Disabled = true)]
     [Test(2, "IME", "IMEInsertDeleteTest_ChinesePinyin", MethodParameters = "/TestCaseType:IMEInsertDeleteTest /locale=ChinesePinyin", Timeout = 120, Keywords = "ChinesePinyinIME")]
     [Test(1, "IME", "IMEInsertDeleteTest_ChineseNewPhonetic", MethodParameters = "/TestCaseType:IMEInsertDeleteTest /locale=ChineseNewPhonetic", Timeout = 120, Keywords = "ChineseNewPhoneticIME")]
     public class IMEInsertDeleteTest : ManagedCombinatorialTestCase

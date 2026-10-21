@@ -274,11 +274,13 @@
     </Bugs>
   </TEST>
 -->
+  <!-- Quarantined: times out after 120 seconds on CI agents (it navigates to http://wpfapps). See docs/drts-on-ci-implementation.md#microsuites. -->
   <TEST Name="LooseXaml"
       Priority="0"
       Type="Functional"
       Area="AppModel"
       SubArea="Navigation"
+      Disabled="true"
       Timeout="120"
       Description="[ID: LooseXaml] [DESCRIPTION] Loose Xaml Navigation - standaloneMajor action:  The LooseXaml BVT suite checks the functionality of various navigations to loose xaml files.  The following scenarios are covered:[1] Navigate to uncompiled loose xaml Page1.xaml via absolute Uri[2] Go back to uncompiled loose xaml via the journal[3] Navigate to content loose xaml Page2.xaml via hyperlink in Page1.xaml (pack://siteoforigin:,,,/Page2.xaml)[4] Navigate to html containing IFrame with loose XAML source (http://wpfapps/testscratch/LooseXaml/banana.html)[5] Navigate to a fragment on a content loose xaml page[6] Return to fragment on a content loose xaml page via the journal.Pass condition:  All the navigations are successful.Test owner:  Microsoft" >
     <Driver Executable="sti.exe" />

@@ -208,9 +208,8 @@
         <Driver Executable="sti.exe" />
         <SupportFiles>
           <SupportFile Source="FeatureTests\Editing\*" />
-          <SupportFile Source="Common\AssemblyLinker\%PROCESSOR_ARCHITECTURE%\al.exe" />
-          <SupportFile Source="Common\AssemblyLinker\%PROCESSOR_ARCHITECTURE%\alink.dll" />
-          <SupportFile Source="Common\AssemblyLinker\%PROCESSOR_ARCHITECTURE%\alinkui.dll" />
+          <!-- Common\AssemblyLinker (al.exe, alink.dll, alinkui.dll) is not in this repository, and a missing
+               support file stops every test in the target from running. No Editing test uses al.exe. -->
         </SupportFiles>
         <Deployments>
           <Deployment>FeatureTests\Editing\EditingTestLib.deployment</Deployment>

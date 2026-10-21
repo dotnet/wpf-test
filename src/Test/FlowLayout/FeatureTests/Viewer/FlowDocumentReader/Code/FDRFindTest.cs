@@ -56,12 +56,14 @@ namespace Microsoft.Test.FlowLayout
         [Variation("FlowDocumentSample1x.xaml", "FindIconUI", "Reader.TwoPage", "their")]
         [Variation("FlowDocumentSample1x.xaml", "FindIconUI", "Reader.Scroll", "their")]
         [Variation("FlowDocumentSample1x.xaml", "PressF3Key", "Reader.Page", "their")]
-        [Variation("FlowDocumentSample1x.xaml", "PressF3Key", "Reader.TwoPage", "their", Keywords = "MicroSuite")]
+        // Quarantined (this and the InvokeFindNext TwoPage variation): PlatformNotSupportedException in Initialize on CI
+        // agents. See docs/drts-on-ci-implementation.md#microsuites.
+        [Variation("FlowDocumentSample1x.xaml", "PressF3Key", "Reader.TwoPage", "their", Keywords = "MicroSuite", Disabled = true)]
         [Variation("FlowDocumentSample1x.xaml", "PressF3Key", "Reader.Scroll", "their")]
         [Variation("FlowDocumentSample1x.xaml", "PressF3Key", "PageViewer", "their")]
         [Variation("FlowDocumentSample1x.xaml", "PressF3Key", "Reader.Page", " 6 ")]
         [Variation("FlowDocumentSample1x.xaml", "InvokeFindNext", "Reader.Page", "snake")]
-        [Variation("FlowDocumentSample1x.xaml", "InvokeFindNext", "Reader.TwoPage", "snake", Keywords = "MicroSuite")]
+        [Variation("FlowDocumentSample1x.xaml", "InvokeFindNext", "Reader.TwoPage", "snake", Keywords = "MicroSuite", Disabled = true)]
         [Variation("FlowDocumentSample1x.xaml", "InvokeFindNext", "Reader.Scroll", "snake")]
         [Variation("FlowDocumentSample1x.xaml", "InvokeFindNext", "PageViewer", "snake")]
         [Variation("FlowDocumentSample1x.xaml", "InvokeFindNext", "Reader.TwoPage", "6")]
