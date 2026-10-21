@@ -254,3 +254,4 @@ The Build stage publishes all payloads as one artifact, and each test job downlo
 
 - **Build job:** 412 seconds. Creating the payloads takes about 20 seconds and publishing them 27 seconds.
 - **Test jobs:** 89 to 323 seconds each, of which downloading the payload takes 4 to 28 seconds. UIAutomation (151 variations, 232 s of tests) is the longest job.
+- **Confirmation run:** [build 1644447](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1644447) had one failure, `Animation.AnimationMarkupTest(RectKeySplineBVT.xaml)`, which passed in the two earlier runs; its clock checks are timing-sensitive. The template now reruns failures by default (`rerunFailures: true`), as the DRT template does, instead of quarantining each flaky test.
