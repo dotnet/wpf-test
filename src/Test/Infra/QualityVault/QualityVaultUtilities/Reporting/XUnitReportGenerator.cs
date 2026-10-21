@@ -33,9 +33,9 @@ namespace Microsoft.Test.Reporting
             var resultsByArea = SummaryReportGenerator.ProduceAreaSummaries(records);
             foreach (SummaryReportGenerator.AreaSummaryEntry areaEntry in resultsByArea.Values)
             {
-                string assemblyName = areaEntry.AssociatedTests.FirstOrDefault()?.TestInfo.DriverParameters["exe"];
+                string areaName = string.IsNullOrEmpty(areaEntry.Name) ? "UnknownArea" : areaEntry.Name;
                 var assembly = new XElement("assembly");
-                assembly.SetAttributeValue("name", assemblyName);
+                assembly.SetAttributeValue("name", areaName);
                 assembly.SetAttributeValue("test-framework", "QualityVault");
                 assembly.SetAttributeValue("run-date", DateTime.Now.ToString("yyyy-MM-dd"));
                 assembly.SetAttributeValue("run-time", areaEntry.StartTime.ToString(@"hh\:mm\:ss"));
@@ -65,32 +65,34 @@ namespace Microsoft.Test.Reporting
                     foreach (VariationRecord variation in testRecord.Variations)
                     {
                         var test = new XElement("test");
-                        string className = testRecord.TestInfo.DriverParameters["class"];
-                        string methodName = testRecord.TestInfo.DriverParameters["method"];
+                        string testName = testRecord.TestInfo.Name;
 
-                        test.SetAttributeValue("type", className);
-                        test.SetAttributeValue("method", methodName);
-
-                        test.SetAttributeValue("name", variation.VariationName);
-                        test.SetAttributeValue("time", testRecord.Duration.TotalSeconds);
+                        // Azure DevOps treats tests that share type and method as iterations of one
+                        // data-driven test, so each test needs its own type/method pair.
+                        test.SetAttributeValue("type", areaName);
+                        test.SetAttributeValue("method", testName);
+                        test.SetAttributeValue("name", GetResultName(areaName, testName, variation.VariationName));
+                        test.SetAttributeValue("time", GetResultDuration(testRecord, variation).TotalSeconds);
                         test.SetAttributeValue("result", variation.Result == Result.Ignore ? "Skip" : variation.Result.ToString());
 
-                        if (variation.Result != Result.Pass)
+                        XElement traits = CreateTraits(testRecord.TestInfo);
+                        if (traits.HasElements)
+                        {
+                            test.Add(traits);
+                        }
+
+                        if (variation.Result == Result.Ignore)
+                        {
+                            test.Add(new XElement("reason", new XCData("Ignored by QualityVault.")));
+                        }
+                        else if (variation.Result != Result.Pass)
                         {
                             var failure = new XElement("failure");
                             failure.SetAttributeValue("exception-type", "Exception");
-
-                            var message = new XElement("message");
-
-                            StringBuilder errorMessage = new StringBuilder();
-
-                            errorMessage.AppendLine("Error Log: ");
-                            errorMessage.AppendLine(testRecord.Log);
-
-                            message.Add(new XCData(errorMessage.ToString()));
-                            failure.Add(message);
-
+                            failure.Add(new XElement("message", new XCData(GetFailureReason(testRecord, variation))));
                             test.Add(failure);
+
+                            test.Add(new XElement("output", new XCData(GetOutput(testRecord, variation))));
                         }
                         collection.Add(test);
                     }
@@ -101,6 +103,125 @@ namespace Microsoft.Test.Reporting
 
             string xunitOutputPath = Path.Combine(ReportRoot.FullName, "testResults.xml");
             File.WriteAllText(xunitOutputPath, root.ToString());
+        }
+
+        private const int MaxFailureReasonLength = 1000;
+        private const int MaxOutputLength = 256 * 1024;
+
+        private static readonly string[] OutcomeMarkers = { "Non-zero exit code", "Driver Error", "timed out", "timeout" };
+        private static readonly string[] DetailMarkers = { "Exception", "Assert", "fail", "error" };
+
+        private static string GetResultName(string areaName, string testName, string variationName)
+        {
+            string name = areaName + "." + testName;
+            if (!string.IsNullOrEmpty(variationName) && !string.Equals(variationName, testName, StringComparison.Ordinal))
+            {
+                name += " - " + variationName;
+            }
+            return name;
+        }
+
+        private static TimeSpan GetResultDuration(TestRecord testRecord, VariationRecord variation)
+        {
+            if (testRecord.Variations.Count > 1)
+            {
+                TimeSpan variationDuration = ReportingUtilities.GetVariationDuration(variation);
+                if (variationDuration > TimeSpan.Zero)
+                {
+                    return variationDuration;
+                }
+            }
+            return testRecord.Duration;
+        }
+
+        private static XElement CreateTraits(TestInfo testInfo)
+        {
+            var traits = new XElement("traits");
+            AddTrait(traits, "area", testInfo.Area);
+            AddTrait(traits, "subarea", testInfo.SubArea);
+            AddTrait(traits, "owner", testInfo.DriverParameters?["owner"]);
+            AddTrait(traits, "priority", testInfo.Priority?.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            return traits;
+        }
+
+        private static void AddTrait(XElement traits, string name, string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                var trait = new XElement("trait");
+                trait.SetAttributeValue("name", name);
+                trait.SetAttributeValue("value", value.Trim());
+                traits.Add(trait);
+            }
+        }
+
+        /// <summary>
+        /// Returns a short reason for the failure, for example the DRT's last error line and
+        /// its exit code, so that the Tests tab shows why a test failed without opening its log.
+        /// </summary>
+        private static string GetFailureReason(TestRecord testRecord, VariationRecord variation)
+        {
+            string[] lines = SplitLines(variation.Log).Concat(SplitLines(testRecord.Log)).ToArray();
+            string outcome = FindLastLine(lines, OutcomeMarkers, null);
+            string detail = FindLastLine(lines, DetailMarkers, outcome);
+
+            string reason;
+            if (detail != null && outcome != null)
+            {
+                reason = detail + " (" + outcome + ")";
+            }
+            else
+            {
+                reason = detail ?? outcome ?? string.Format("{0} failed. See the console log for details.", testRecord.TestInfo.Name);
+            }
+            return Truncate(reason, MaxFailureReasonLength);
+        }
+
+        private static string FindLastLine(string[] lines, string[] markers, string exclude)
+        {
+            return lines.LastOrDefault(line =>
+                !string.Equals(line, exclude, StringComparison.Ordinal) &&
+                !line.StartsWith("Logged Result:", StringComparison.Ordinal) &&
+                !line.StartsWith("Logged File:", StringComparison.Ordinal) &&
+                markers.Any(marker => line.IndexOf(marker, StringComparison.OrdinalIgnoreCase) >= 0));
+        }
+
+        private static string GetOutput(TestRecord testRecord, VariationRecord variation)
+        {
+            var output = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(testRecord.Log))
+            {
+                output.AppendLine("QualityVault log:");
+                output.AppendLine(testRecord.Log.TrimEnd());
+                output.AppendLine();
+            }
+            output.AppendLine("Test output:");
+            output.AppendLine(string.IsNullOrWhiteSpace(variation.Log) ? "(none)" : variation.Log.TrimEnd());
+
+            string text = output.ToString();
+            if (text.Length > MaxOutputLength)
+            {
+                text = "(truncated; showing the last " + MaxOutputLength + " characters)" + Environment.NewLine +
+                    text.Substring(text.Length - MaxOutputLength);
+            }
+            return text;
+        }
+
+        private static string[] SplitLines(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return new string[0];
+            }
+            return text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(line => line.Trim())
+                .Where(line => line.Length > 0)
+                .ToArray();
+        }
+
+        private static string Truncate(string text, int maxLength)
+        {
+            return text.Length <= maxLength ? text : text.Substring(0, maxLength) + "...";
         }
 
         private static string GetUploadedFileUrl(string filePath)
