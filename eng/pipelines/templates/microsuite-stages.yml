@@ -1,0 +1,84 @@
+# Builds the tests and runs the MicroSuite feature tests on an Azure DevOps build agent.
+# Baseline: one job that runs every MicroSuite test straight from the build output, to measure
+# run time and pass rate before splitting into per-area jobs with per-area payloads.
+
+parameters:
+- name: configuration
+  type: string
+  default: Release
+- name: platform
+  type: string
+  default: x64
+- name: keywords
+  type: string
+  default: MicroSuite
+- name: rerunFailures
+  type: boolean
+  default: false
+- name: pool
+  type: object
+  default:
+    name: NetCore-Public
+    demands: ImageOverride -equals windows.vs2026preview.scout.amd64.Open
+
+stages:
+- stage: MicroSuites
+  displayName: MicroSuites
+  jobs:
+  - job: MicroSuites
+    displayName: MicroSuites ${{ parameters.platform }} ${{ parameters.configuration }}
+    timeoutInMinutes: 240
+    pool: ${{ parameters.pool }}
+    variables:
+      TestRoot: $(Build.SourcesDirectory)\publish\${{ parameters.configuration }}\${{ parameters.platform }}\Test
+      QvRunDirectory: $(Agent.TempDirectory)\QualityVault\Run
+    steps:
+    - checkout: self
+      clean: true
+
+    - script: eng\scripts\CIBuild.cmd
+        -configuration ${{ parameters.configuration }}
+        -prepareMachine
+        /p:Platform=${{ parameters.platform }}
+      displayName: Build and publish tests
+
+    - task: PublishPipelineArtifact@1
+      displayName: Publish build logs
+      condition: always()
+      inputs:
+        path: $(Build.SourcesDirectory)\artifacts\log
+        artifactName: BuildLogs_$(System.JobAttempt)
+
+    # The tests are framework-dependent and need the exact runtime from global.json.
+    - powershell: |
+        $ci = $true
+        . eng\common\tools.ps1
+        $null = InitializeDotNetCli -install:$true
+        Write-Host "##vso[task.setvariable variable=TestDotNetRoot]$env:DOTNET_INSTALL_DIR"
+      displayName: Locate .NET from global.json
+
+    - powershell: eng\scripts\Invoke-Drts.ps1
+        -TestRoot '$(TestRoot)'
+        -DiscoveryInfo DiscoveryInfo.xml
+        -RunDirectory '$(QvRunDirectory)'
+        -DotNetRoot '$(TestDotNetRoot)'
+        -Keywords '${{ parameters.keywords }}'
+        -RerunFailures:$${{ parameters.rerunFailures }}
+      displayName: Run ${{ parameters.keywords }} tests
+
+    - task: PublishTestResults@2
+      displayName: Publish test results
+      condition: always()
+      inputs:
+        testResultsFormat: XUnit
+        testResultsFiles: $(QvRunDirectory)\Report\testResults.xml
+        testRunTitle: ${{ parameters.keywords }} ${{ parameters.platform }} ${{ parameters.configuration }} (attempt $(System.JobAttempt))
+        failTaskOnFailedTests: true
+        failTaskOnMissingResultsFile: true
+
+    - task: PublishPipelineArtifact@1
+      displayName: Publish test report
+      condition: always()
+      inputs:
+        path: $(QvRunDirectory)\Report
+        artifactName: MicroSuiteReport_${{ parameters.platform }}_${{ parameters.configuration }}_$(System.JobAttempt)

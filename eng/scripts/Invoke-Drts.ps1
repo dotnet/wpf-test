@@ -18,6 +18,10 @@ param(
     # Defaults to this script's folder, which is where New-DrtPayload.ps1 puts it.
     [string]$TestRoot,
 
+    # Discovery file under -TestRoot. DiscoveryInfo.xml runs the feature tests, for example
+    # -Keywords MicroSuite.
+    [string]$DiscoveryInfo = 'DiscoveryInfoDrts.xml',
+
     # QualityVault run directory. The report is written to <RunDirectory>\Report.
     [string]$RunDirectory = (Join-Path $env:TEMP 'QualityVault\Run'),
 
@@ -48,8 +52,8 @@ $ErrorActionPreference = 'Stop'
 if (-not $TestRoot) { $TestRoot = $PSScriptRoot }
 $TestRoot = (Resolve-Path $TestRoot).Path
 $qv = Join-Path $TestRoot 'QV.cmd'
-$discoveryInfo = Join-Path $TestRoot 'DiscoveryInfoDrts.xml'
-foreach ($path in $qv, $discoveryInfo) {
+$discoveryInfoPath = Join-Path $TestRoot $DiscoveryInfo
+foreach ($path in $qv, $discoveryInfoPath) {
     if (-not (Test-Path $path)) { throw "Not found: $path. Is -TestRoot a DRT payload or publish\<config>\<platform>\Test folder?" }
 }
 
@@ -71,7 +75,7 @@ if (Test-Path $RunDirectory) {
     Remove-Item $RunDirectory -Recurse -Force
 }
 
-$qvArgs = @('Run', "/DiscoveryInfoPath=$discoveryInfo", "/RunDirectory=$RunDirectory")
+$qvArgs = @('Run', "/DiscoveryInfoPath=$discoveryInfoPath", "/RunDirectory=$RunDirectory")
 $filters = [ordered]@{ Area = $Area; Name = $Name; Keywords = $Keywords; Priority = $Priority }
 foreach ($filter in $filters.GetEnumerator()) {
     if ($filter.Value -and $filter.Value.Trim()) {
