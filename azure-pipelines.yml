@@ -58,40 +58,6 @@ pr:
     exclude:
     - Documentation/*
 
-# Call the pipeline.yml template, which does the real work
+# Call the pipeline.yml template
 stages:
-- stage: build
-  displayName: Build 
-  jobs:
-  - template: /eng/pipeline.yml
-    parameters:
-      enablePublishUsingPipelines: $(_PublishUsingPipelines)
-      ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-        # agent pool can't be read from a user-defined variable (Azure DevOps limitation)
-        pool:
-          name: NetCore-Public
-          demands: ImageOverride -equals windows.vs2026preview.scout.amd64.Open
-        # runAsPublic is used in expressions, which can't read from user-defined variables
-        runAsPublic: false
-
-- ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-  - template: eng\common\templates\post-build\post-build.yml
-    parameters:
-      publishingInfraVersion: 3
-      enableSymbolValidation: false
-      enableSigningValidation: false
-      enableNugetValidation: false
-      enableSourceLinkValidation: false
-      # This is to enable SDL runs part of Post-Build Validation Stage
-      SDLValidationParameters:
-        enable: false
-        params: ' -SourceToolsList @("policheck","credscan")
-        -TsaInstanceURL $(_TsaInstanceURL)
-        -TsaProjectName $(_TsaProjectName)
-        -TsaNotificationEmail $(_TsaNotificationEmail)
-        -TsaCodebaseAdmin $(_TsaCodebaseAdmin)
-        -TsaBugAreaPath $(_TsaBugAreaPath)
-        -TsaIterationPath $(_TsaIterationPath)
-        -TsaRepositoryName "wpf"
-        -TsaCodebaseName "wpf"
-        -TsaPublish $True'
+- template: /eng/pipelines/templates/drt-stages.yml
