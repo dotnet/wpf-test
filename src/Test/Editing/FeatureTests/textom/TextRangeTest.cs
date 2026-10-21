@@ -702,7 +702,8 @@ namespace Test.Uis.TextEditing
     /// Coverage for Regression_Bug606 comes from the RichTextContentData.FullyPopulatedContent which has BUIC with image
     /// </summary>
     [Test(2, "PartialTrust", TestCaseSecurityLevel.FullTrust, "TextRangeSaveLoadTest1", MethodParameters = "/TestCaseType:TextRangeSaveLoadTest /XbapName=EditingTestDeploy")]
-    [Test(0, "TextOM", "TextRangeSaveLoadTest", MethodParameters = "/TestCaseType=TextRangeSaveLoadTest", Keywords = "MicroSuite")]
+    // Quarantined: ManagedCombinatorialTestCase cannot find the renamed fields. See docs/drts-on-ci-implementation.md#microsuites.
+    [Test(0, "TextOM", "TextRangeSaveLoadTest", MethodParameters = "/TestCaseType=TextRangeSaveLoadTest", Keywords = "MicroSuite", Disabled = true)]
     [TestOwner("Microsoft"), TestTactics("390"), TestBugs("752, 606"), TestLastUpdatedOn("Jan 25, 2007")]
     public class TextRangeSaveLoadTest : ManagedCombinatorialTestCase
     {

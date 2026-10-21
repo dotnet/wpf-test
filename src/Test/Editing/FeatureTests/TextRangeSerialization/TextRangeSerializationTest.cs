@@ -1278,7 +1278,8 @@ namespace Test.Uis.TextEditing
     }
 
     /// <summary>This test runs TextRangeSerializationTest1 to TextRangeSerializationTest22</summary>
-    [Test(0, "TextOM", "TextRangeSerializationTestBVT", MethodParameters = "/TestCaseType:TextRangeSerializationTestBVT", Keywords = "MicroSuite")]
+    // Quarantined: ManagedCombinatorialTestCase cannot find the renamed fields. See docs/drts-on-ci-implementation.md#microsuites.
+    [Test(0, "TextOM", "TextRangeSerializationTestBVT", MethodParameters = "/TestCaseType:TextRangeSerializationTestBVT", Keywords = "MicroSuite", Disabled = true)]
     [TestOwner("Microsoft"), TestTactics("376"), TestBugs("648"), TestTitle("TextRangeSerializationTestBVT"), TestLastUpdatedOn("Aug 9, 2006")]
     public class TextRangeSerializationTestBVT : ManagedCombinatorialTestCase
     {

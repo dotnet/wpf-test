@@ -28,7 +28,8 @@ namespace Microsoft.Test.Controls
     ///     add/remove items/columns frenquently 
     /// TODOs: refactoring as needed
     /// </summary>
-    [Test(0, "DataGrid", "DataGridHiddenColumnBVT", SecurityLevel = TestCaseSecurityLevel.FullTrust, Keywords = "Localization_Suite,MicroSuite")]
+    // Quarantined: flaky on CI agents (row IsSelected assertion in TestSelection). See docs/drts-on-ci-implementation.md#microsuites.
+    [Test(0, "DataGrid", "DataGridHiddenColumnBVT", SecurityLevel = TestCaseSecurityLevel.FullTrust, Keywords = "Localization_Suite,MicroSuite", Disabled = true)]
     public class DataGridHiddenColumnBVT : XamlTest
     {
         #region Private Fields

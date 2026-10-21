@@ -229,6 +229,10 @@ The seven failures are quarantined with `Disabled = true` (`Disabled="true"` in 
 | `Editing.CustomSpellerDictionary_Pri0` | Test bug: "Unable to find field testIgnoreSpellingError". |
 | `Editing.IMEInsertDeleteTest_Japanese` | Test bug: "Unable to find field locale". |
 | `FlowLayout.FindTest`, the two `Reader.TwoPage` variations (`PressF3Key`, `InvokeFindNext`) | `PlatformNotSupportedException` in `Initialize`. |
+| `Editing.XamlPackageBVTTest`, `TableSelectionsTest1`, `TableNegativeTest`, `TextRangeSaveLoadTest`, `TextRangeSerializationTestBVT` | Found in the first per-payload run, once they ran at all (see below). Same cause as the two Editing tests above. |
+| `Controls.DataGridHiddenColumnBVT` | Flaky: passed in the baseline, then failed with "Row (James Monroe) at index 4, IsSelected is not True". |
+
+All seven Editing tests derive from `ManagedCombinatorialTestCase`, which sets each combination value on the field with the same name through reflection ("Unable to find field locale"). The fields were later renamed with a `_` prefix (`_locale`), so the lookup fails before the test starts. Fixing the lookup (also trying `_<name>`) would bring the seven back; that is a follow-up.
 
 ### Editing tests that silently did not run
 
@@ -243,3 +247,10 @@ The published `Test` folder is about 1.8 GB, of which 1.7 GB is `FeatureTests`. 
 For MicroSuites that gives 12 payloads (XamlV3 and XamlV4 share `FeatureTests\XAML`), 1.29 GB in total and 48 to 271 MB each, from 92 enabled test records (QV counts each variation of a `VariationAttributeAdaptor` test as a record). The script takes about 40 seconds locally. Discovery inside each payload, with the job's `/Area` and `/ExactArea` filters, finds the same tests as discovery over the full folder.
 
 The Build stage publishes all payloads as one artifact, and each test job downloads only its folder (`DownloadPipelineArtifact@2` with `itemPattern`). The `area` parameter (exact test areas, for example `Controls,XamlV4`) leaves out payloads with no test in those areas.
+
+### Per-payload run
+
+[Build 1644393](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1644393) ran the 12 payload jobs: 238 variations (the 9 Editing tests now run), 6 failed, all quarantined since. The whole build took 14.5 minutes, against 18 for the single-job baseline.
+
+- **Build job:** 412 seconds. Creating the payloads takes about 20 seconds and publishing them 27 seconds.
+- **Test jobs:** 89 to 323 seconds each, of which downloading the payload takes 4 to 28 seconds. UIAutomation (151 variations, 232 s of tests) is the longest job.

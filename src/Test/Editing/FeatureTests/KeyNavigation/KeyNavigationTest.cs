@@ -839,7 +839,8 @@ namespace Test.Uis.TextEditing
     /// Executes all keyboard actions on all interesting selections
     /// around a table.
     /// </summary>
-    [Test(0, "TableEditing", "TableSelectionsTest1", MethodParameters = "/TestCaseType=TableSelectionsTest /Pri=0", Timeout = 240, Keywords = "MicroSuite")]
+    // Quarantined: ManagedCombinatorialTestCase cannot find the renamed fields. See docs/drts-on-ci-implementation.md#microsuites.
+    [Test(0, "TableEditing", "TableSelectionsTest1", MethodParameters = "/TestCaseType=TableSelectionsTest /Pri=0", Timeout = 240, Keywords = "MicroSuite", Disabled = true)]
     [Test(3, "TableEditing", "TableSelectionsTest2", MethodParameters = "/TestCaseType=TableSelectionsTest /EditingAction=EditingValues", Timeout = 900)]
     [Test(3, "TableEditing", "TableSelectionsTest3", MethodParameters = "/TestCaseType=TableSelectionsTest /EditingAction=NavigationValues", Timeout = 600)]
     [TestOwner("Microsoft"), TestWorkItem("36"), TestTactics("354,355,356"),

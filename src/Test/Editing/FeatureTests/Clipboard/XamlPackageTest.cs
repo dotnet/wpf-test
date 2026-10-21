@@ -34,7 +34,8 @@ namespace DataTransfer
     /// <summary>
     /// This case Test the basic Functionality of Copy/paste image
     /// </summary>
-    [Test(0, "Clipboard", "XamlPackageBVTTest", MethodParameters = "/TestCaseType=XamlPackageBVTTest /Pri=0", Timeout = 240, Keywords = "MicroSuite")]
+    // Quarantined: ManagedCombinatorialTestCase cannot find the renamed fields. See docs/drts-on-ci-implementation.md#microsuites.
+    [Test(0, "Clipboard", "XamlPackageBVTTest", MethodParameters = "/TestCaseType=XamlPackageBVTTest /Pri=0", Timeout = 240, Keywords = "MicroSuite", Disabled = true)]
     [TestOwner("Microsoft"), TestWorkItem("16, 17"), TestTactics("64"), TestBugs("14, 23, 390, 21, 22"), TestLastUpdatedOn("Aug 01,2006")]
     public class XamlPackageBVTTest : ManagedCombinatorialTestCase
     {
