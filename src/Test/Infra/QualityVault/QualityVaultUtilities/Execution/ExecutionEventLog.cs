@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using Microsoft.Test.Execution.Logging;
@@ -102,15 +103,31 @@ namespace Microsoft.Test.Execution
 
         /// <summary>
         /// Writes event to windows event log, and broadcasts it to be traced.
+        /// The event log write is best effort: on a freshly imaged machine the newly created
+        /// source can fail with "Access is denied" for a short while, and the event log is
+        /// only diagnostic, so it must not fail the run.
         /// </summary>        
         static private void RecordEvent(string message, EventLogEntryType eventType, bool isVerbose)
         {
             LoggingMediator.LogEvent(string.Format("QualityVault: {0}", message));
             if (!isVerbose)
             {
-                EventLog.WriteEntry(qualityVaultSource, message, eventType); //Note: Infra does a lot of trivial logging stuff...
+                try
+                {
+                    EventLog.WriteEntry(qualityVaultSource, message, eventType); //Note: Infra does a lot of trivial logging stuff...
+                }
+                catch (Exception e) when (e is InvalidOperationException || e is Win32Exception)
+                {
+                    if (!eventLogWriteFailed)
+                    {
+                        eventLogWriteFailed = true;
+                        LoggingMediator.LogEvent(string.Format("QualityVault: Could not write to the '{0}' event log; continuing without it. {1}", logName, e.Message));
+                    }
+                }
             }
         }
+
+        private static bool eventLogWriteFailed;
 
 
         /// <summary>
