@@ -35,6 +35,13 @@ namespace Microsoft.Test.Commands
         public IEnumerable<string> Area { get; set; }
 
         /// <summary>
+        /// Match Area values exactly (case-insensitive) instead of as substrings, so that
+        /// /Area=Integration does not also select WindowsFormsIntegration.
+        /// </summary>
+        [Description("Match the Area values exactly (case-insensitive) instead of as substrings.")]
+        public bool ExactArea { get; set; }
+
+        /// <summary>
         /// Filter TestRecords such that only TestRecords whose TestInfo's SubArea
         /// property matches the specified value.
         /// </summary>
@@ -83,6 +90,7 @@ namespace Microsoft.Test.Commands
             {
                 FilteringSettings settings = new FilteringSettings();
                 settings.Area = Area;
+                settings.ExactArea = ExactArea;
                 settings.Disabled = Disabled;
                 settings.Keywords = Keywords;
                 settings.Name = Name;

@@ -1,5 +1,5 @@
 # Builds the tests and runs the DRTs on Azure DevOps build agents.
-# See docs/drts-on-ci-implementation.md. Phase 1: wpf-test, x64 Release, one test job.
+# See docs/drts-on-ci-implementation.md. Phase 1: wpf-test, x64 Release, one test job per area.
 
 parameters:
 - name: configuration
@@ -8,18 +8,13 @@ parameters:
 - name: platform
   type: string
   default: x64
-# QualityVault filters. A single space means no filter: ADO needs a non-empty default to show the
-# parameter in the Run pipeline dialog.
+# Filters. A single space means no filter: ADO needs a non-empty default to show the parameter in
+# the Run pipeline dialog. area is a comma-separated list of exact area names (one job each); name
+# is passed to QualityVault /Name= and also drops areas with no matching DRT.
 - name: area
   type: string
   default: ' '
 - name: name
-  type: string
-  default: ' '
-- name: keywords
-  type: string
-  default: ' '
-- name: priority
   type: string
   default: ' '
 - name: rerunFailures
@@ -55,6 +50,18 @@ stages:
         -OutputDirectory $(Build.ArtifactStagingDirectory)\DrtPayload
       displayName: Create DRT payload
 
+    # One test job per DRT area. Areas with no DRT to run are left out.
+    - powershell: eng\scripts\Get-DrtMatrix.ps1
+        -Platform ${{ parameters.platform }}
+        -Area $env:DRT_AREA
+        -Name $env:DRT_NAME
+        -OutputVariable matrix
+      name: drtMatrix
+      displayName: Compute DRT job matrix
+      env:
+        DRT_AREA: ${{ parameters.area }}
+        DRT_NAME: ${{ parameters.name }}
+
     - task: PublishPipelineArtifact@1
       displayName: Publish DRT payload
       inputs:
@@ -73,9 +80,12 @@ stages:
   dependsOn: Build
   jobs:
   - job: Drt
+    # ADO appends the matrix key (the area) to the job name.
     displayName: DRTs ${{ parameters.platform }} ${{ parameters.configuration }}
-    timeoutInMinutes: 90
+    timeoutInMinutes: 60
     pool: ${{ parameters.pool }}
+    strategy:
+      matrix: $[ stageDependencies.Build.Build.outputs['drtMatrix.matrix'] ]
     variables:
       DrtRoot: $(Pipeline.Workspace)\DrtPayload
       QvRunDirectory: $(Agent.TempDirectory)\QualityVault\Run
@@ -102,17 +112,13 @@ stages:
         -TestRoot '$(DrtRoot)'
         -RunDirectory '$(QvRunDirectory)'
         -DotNetRoot '$(DrtDotNetRoot)'
-        -Area $env:DRT_AREA
+        -Area '$(DrtArea)'
+        -ExactArea
         -Name $env:DRT_NAME
-        -Keywords $env:DRT_KEYWORDS
-        -Priority $env:DRT_PRIORITY
         -RerunFailures:$${{ parameters.rerunFailures }}
-      displayName: Run DRTs
+      displayName: Run $(DrtArea) DRTs
       env:
-        DRT_AREA: ${{ parameters.area }}
         DRT_NAME: ${{ parameters.name }}
-        DRT_KEYWORDS: ${{ parameters.keywords }}
-        DRT_PRIORITY: ${{ parameters.priority }}
 
     - task: PublishTestResults@2
       displayName: Publish DRT results
@@ -120,7 +126,7 @@ stages:
       inputs:
         testResultsFormat: XUnit
         testResultsFiles: $(QvRunDirectory)\Report\testResults.xml
-        testRunTitle: DRTs ${{ parameters.platform }} ${{ parameters.configuration }} (attempt $(System.JobAttempt))
+        testRunTitle: DRTs $(DrtArea) ${{ parameters.platform }} ${{ parameters.configuration }} (attempt $(System.JobAttempt))
         failTaskOnFailedTests: true
         failTaskOnMissingResultsFile: true
 
@@ -129,4 +135,4 @@ stages:
       condition: always()
       inputs:
         path: $(QvRunDirectory)\Report
-        artifactName: DrtReport_${{ parameters.platform }}_${{ parameters.configuration }}_$(System.JobAttempt)
+        artifactName: DrtReport_${{ parameters.platform }}_${{ parameters.configuration }}_$(DrtArea)_$(System.JobAttempt)

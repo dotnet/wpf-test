@@ -30,6 +30,10 @@ param(
     [string]$Keywords,
     [string]$Priority,
 
+    # Match -Area exactly instead of as a substring, so Integration does not also run
+    # WindowsFormsIntegration. Used by the per-area jobs in the pipeline.
+    [switch]$ExactArea,
+
     # Rerun each failing DRT once.
     [switch]$RerunFailures,
 
@@ -74,6 +78,7 @@ foreach ($filter in $filters.GetEnumerator()) {
         $qvArgs += "/$($filter.Key)=$($filter.Value.Trim())"
     }
 }
+if ($ExactArea) { $qvArgs += '/ExactArea' }
 if ($RerunFailures) { $qvArgs += '/RerunFailures' }
 if ($Disabled) { $qvArgs += '/Disabled=true' }
 

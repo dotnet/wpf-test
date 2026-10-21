@@ -39,6 +39,14 @@ namespace Microsoft.Test.Filtering
             }
         }
 
+        private static bool AreaMatches(string testArea, string filterArea, bool exact)
+        {
+            testArea = testArea ?? String.Empty;
+            return exact
+                ? String.Equals(testArea, filterArea, StringComparison.OrdinalIgnoreCase)
+                : testArea.IndexOf(filterArea, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
         private static void FilterTestInfo(TestRecord testRecord, FilteringSettings filteringSettings)
         {
             testRecord.ExecutionEnabled = false;
@@ -49,9 +57,10 @@ namespace Microsoft.Test.Filtering
             // likely Name, in which case we could check that first.
 
             // Translation of this Linq query:
-            // Is there not any Area specified by the filtering settings such that it is a substring of the TestInfo's Area.
+            // Is there not any Area specified by the filtering settings such that it is a substring of the TestInfo's Area
+            // (or equal to it, with ExactArea).
             // (.IndexOf >= 0 is used instead of .Contains because we want to be case-insensitive)
-            if (filteringSettings.Area != null && !filteringSettings.Area.Any(filterArea => (testRecord.TestInfo.Area ?? String.Empty).IndexOf(filterArea, StringComparison.OrdinalIgnoreCase) >= 0))
+            if (filteringSettings.Area != null && !filteringSettings.Area.Any(filterArea => AreaMatches(testRecord.TestInfo.Area, filterArea, filteringSettings.ExactArea)))
             {
                 testRecord.FilteringExplanation = String.Format("TestInfo Area value of {0} did not match any of the filter Areas of {1}.", testRecord.TestInfo.Area, CommaSeparatedListExtensions.ToCommaSeparatedList(filteringSettings.Area));
             }

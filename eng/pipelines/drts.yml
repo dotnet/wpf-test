@@ -2,25 +2,20 @@
 #
 # Not run on every PR. Start it with a PR comment, `/azp run <pipeline name>`, or from the
 # ADO "Run pipeline" dialog, where the filter parameters can be set.
+#
+# The DRTs run in one job per area (DrtList.xml Team attribute), so a failed area can be rerun
+# on its own with "Rerun failed jobs".
 
 trigger: none
 pr: none
 
 parameters:
 - name: area
-  displayName: Area (QualityVault /Area=, blank for all)
+  displayName: Areas (comma-separated, exact names, blank for all)
   type: string
   default: ' '
 - name: name
-  displayName: Test name (QualityVault /Name=, blank for all)
-  type: string
-  default: ' '
-- name: keywords
-  displayName: Keywords (QualityVault /Keywords=)
-  type: string
-  default: ' '
-- name: priority
-  displayName: Priority (QualityVault /Priority=)
+  displayName: Test name (QualityVault /Name=, substring, blank for all)
   type: string
   default: ' '
 - name: rerunFailures
@@ -37,6 +32,4 @@ stages:
   parameters:
     area: ${{ parameters.area }}
     name: ${{ parameters.name }}
-    keywords: ${{ parameters.keywords }}
-    priority: ${{ parameters.priority }}
     rerunFailures: ${{ parameters.rerunFailures }}

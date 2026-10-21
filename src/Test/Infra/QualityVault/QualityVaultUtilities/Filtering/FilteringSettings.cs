@@ -18,6 +18,12 @@ namespace Microsoft.Test.Filtering
         /// <summary/>
         public IEnumerable<string> Area { get; set; }
 
+        /// <summary>
+        /// When true, Area values must match the TestInfo's Area exactly (case-insensitive)
+        /// instead of as a substring.
+        /// </summary>
+        public bool ExactArea { get; set; }
+
         /// <summary/>
         public IEnumerable<string> SubArea { get; set; }
 
