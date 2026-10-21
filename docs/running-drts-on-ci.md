@@ -180,7 +180,7 @@ Conclusion: all three use Azure DevOps' standard test-result integration. For th
 | I17 | Build agents: what job size and `maxParallel` to use across 21 areas? | ✅ Decided | One job per area with DRTs to run, no `maxParallel`. See the implementation plan. |
 | I18 | Do DRTs leave machine-wide state (registry, `%ProgramFiles%\QualityVault`) on reused agents? | ⏳ Open | |
 | I20 | Build agents: does each job get a freshly imaged VM, or are agents reused across jobs? | ✅ Done | Fresh VM per job. In M0, all five jobs ran on different machines whose OS had been installed 10–20 minutes earlier, and none found a marker left by another job. |
-| I19 | Does QV report test failures through its exit code? | ✅ Done | No. `QualityVaultFrontend` returns `-1` only for infrastructure errors and 0 otherwise. `QV.cmd` then ends with `rd`, which drops even that exit code. `RunDrts.cmd` uses `findstr` on `DrtReport.xml` instead. See QV changes Q1 and Q2 in the [implementation plan](drts-on-ci-implementation.md#qualityvault-changes). |
+| I19 | Does QV report test failures through its exit code? | ✅ Done | No. `QualityVaultFrontend` returns `-1` only for infrastructure errors and 0 otherwise. `QV.cmd` then ends with `rd`, which drops even that exit code. `RunDrts.cmd` uses `findstr` on `DrtReport.xml` instead. See QV changes Q1 and Q2 in the [implementation plan](drts-on-ci-implementation.md#qualityvault-changes), both done in M3: `QV.cmd` now keeps the exit code, and `/FailOnTestFailure` makes it reflect test failures. |
 
 ### I1. Elevation on Helix client queues
 
