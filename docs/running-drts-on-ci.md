@@ -39,8 +39,8 @@ Consequences for the pipeline design:
 The ADO results integration works unchanged too: QV writes xUnit v2 XML to `Report\testResults.xml`. Known limitations:
 
 - The file has one `<assembly>` per area, named after the **first** test's executable in that area.
-- `type` and `method` are left out for DRTs, so ADO shows each result by its variation name.
-- A failure's message is the test log, not a structured error.
+- Each result shows `type="Microsoft.Test.Drt.DrtRunner"` and `method="Main"`, so every DRT appears under the same class in ADO. This was seen in M0.
+- A failure's message holds only the repro arguments; the DRT's own output is in the QV `Report` folder, not in the Tests tab (M0).
 
 Small QV changes worth considering later, though none is needed to start:
 
@@ -176,10 +176,10 @@ Conclusion: all three use Azure DevOps' standard test-result integration. For th
 | I13 | Can DRTs run on their own, without QV? This matters for approach B. | 🟡 Partly done | At least some DRTs run when you call the DRT executable directly, as confirmed by the user. Not yet checked for every DRT. |
 | I14 | Pipeline wiring: a `send-to-helix` step, the Job Monitor, and producing the payload in PR builds. | ⏳ Open | |
 | I15 | Build agents: does `/azp run` work for a pipeline with `pr: none`? Who can trigger it? | ⏳ Open | Needed for C1. |
-| I16 | Build agents: is there an elevated, interactive session, and at what resolution? | ⏳ Open | Implementation milestone M0 (probe step). |
+| I16 | Build agents: is there an elevated, interactive session, and at what resolution? | ✅ Done | Yes. In M0, jobs ran as `cloudtest`, a local administrator at High integrity, in the active `console` session 1 with `explorer.exe` running. The screen is 1024×768. The image is Windows Server 2025, and **Server Manager opens on the desktop at logon**, which may steal focus from UI tests. See [M0 results](drts-on-ci-implementation.md#m0-results). |
 | I17 | Build agents: what job size and `maxParallel` to use across 21 areas? | ⏳ Open | Decide after M1 timings. |
 | I18 | Do DRTs leave machine-wide state (registry, `%ProgramFiles%\QualityVault`) on reused agents? | ⏳ Open | |
-| I20 | Build agents: does each job get a freshly imaged VM, or are agents reused across jobs? | ⏳ Open | Each matrix job runs on its own agent. Whether `NetCore-Public` reimages between jobs is unverified. Implementation milestone M0 logs the machine name, install and boot times, and a marker file across several jobs. |
+| I20 | Build agents: does each job get a freshly imaged VM, or are agents reused across jobs? | ✅ Done | Fresh VM per job. In M0, all five jobs ran on different machines whose OS had been installed 10–20 minutes earlier, and none found a marker left by another job. |
 | I19 | Does QV report test failures through its exit code? | ✅ Done | No. `QualityVaultFrontend` returns `-1` only for infrastructure errors and 0 otherwise. `QV.cmd` then ends with `rd`, which drops even that exit code. `RunDrts.cmd` uses `findstr` on `DrtReport.xml` instead. See QV changes Q1 and Q2 in the [implementation plan](drts-on-ci-implementation.md#qualityvault-changes). |
 
 ### I1. Elevation on Helix client queues

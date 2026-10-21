@@ -136,7 +136,7 @@ Each change below makes QV easier to drive from a pipeline. They are listed in o
 |---|---|---|---|
 | Q1 | Keep `QualityVaultFrontend`'s exit code in `QV.cmd` (`set rc=%errorlevel%` … `exit /b %rc%`). | `QV.cmd` ends with `rd`, so the frontend's `-1` for an infrastructure failure is lost and the step looks successful. | `src\Test\BranchCommon\data\QV.cmd` |
 | Q2 | Return a distinct exit code when tests fail: for example `0` for all passed, `1` for test failures, `-1` for an infrastructure error. Behind a switch such as `/FailOnTestFailure` so local behavior doesn't change. | Today `Main` returns 0 whenever the run finishes, so scripts check the pass rate in `DrtReport.xml` with `findstr`. | `QualityVaultFrontend\MainEntry.cs`, `RunCommand.cs` |
-| Q3 | Better xUnit report: name each `<assembly>` after its area; set `type` to the area and `method` to the test name; add `<trait>`s for Area, SubArea, Owner and Priority; put a short failure reason in `<message>` and the full log in `<stack-trace>` or `<output>`. | Today each assembly is named after the first test's executable, `type` and `method` are empty for DRTs, and the message is the whole log. The ADO Tests tab is hard to read. | `QualityVaultUtilities\Reporting\XUnitReportGenerator.cs` |
+| Q3 | Better xUnit report: name each `<assembly>` after its area; set `type` to the area and `method` to the test name; add `<trait>`s for Area, SubArea, Owner and Priority; put a short failure reason in `<message>` and the DRT's output in `<output>`. | Today each assembly is named after the first test's executable, and every DRT has `type="Microsoft.Test.Drt.DrtRunner"` and `method="Main"`. The failure message holds only the repro arguments, so the DRT's output is not visible in the Tests tab (seen in M0). | `QualityVaultUtilities\Reporting\XUnitReportGenerator.cs` |
 | Q4 | Record a pass on rerun: keep the first attempt's failure, and report the test as passed with a `Flaky=true` trait and a note in `<output>`. | `ClearResult` drops the first failure, so flaky tests are invisible. The xUnit format has no "flaky" outcome, so a trait is the best available option. | `ExecutionEngine.cs` (rerun around L335 and L386), `XUnitReportGenerator.cs` |
 | Q5 | `/RerunCount=N` instead of a single fixed rerun. | Makes it possible to tune retries. | `RunCommand.cs`, `ExecutionEngine.cs` (`ShouldRerun`) |
 | Q6 | Let QV run without copying `Infra` into `%ProgramFiles%`, for example with an environment variable or switch that runs it in place. | Copying needs administrator rights and shares one machine-wide location between runs. | `QV.cmd` |
@@ -148,7 +148,7 @@ Each change below makes QV easier to drive from a pipeline. They are listed in o
 
 | # | Milestone | Done when |
 |---|---|---|
-| M0 | **Probe the agent.** A temporary PR pipeline step runs `CIRunDrts.cmd /Area=<small area>` and logs elevation, session, resolution and the `%APPDATA%` path. A small matrix of 3–4 jobs also logs the machine name, OS install time, boot time and agent uptime, and writes then checks for a marker file under `%ProgramData%`. | We know whether DRTs can run on `windows.vs2026preview.scout.amd64.Open` as they are, and whether each job gets a freshly imaged machine or agents are reused across jobs (I20). |
+| M0 | ✅ **Probe the agent.** Done; see [M0 results](#m0-results). A temporary PR pipeline step runs `RunDrts.cmd /Area=Controls` and logs elevation, session, resolution and the `%APPDATA%` path. A small matrix of 4 jobs also logs the machine name, OS install time, boot time and agent uptime, and writes then checks for a marker file under `%ProgramData%`. | We know whether DRTs can run on `windows.vs2026preview.scout.amd64.Open` as they are, and whether each job gets a freshly imaged machine or agents are reused across jobs (I20). |
 | M1 | `drts.yml` with a single test job that runs every DRT, publishes results and the report. | A manual run shows the DRT results in the Tests tab. |
 | M2 | A matrix with one job per area, built from `DrtList.xml`, plus filter parameters. | **Rerun failed jobs** reruns only failed areas. |
 | M3 | QV changes Q1–Q3. | Exit codes are reliable and the Tests tab is readable. |
@@ -156,10 +156,44 @@ Each change below makes QV easier to drive from a pipeline. They are listed in o
 | M5 | QV changes Q4 and Q5. | Flaky tests are visible. |
 | M6 | Phase 2: dotnet/wpf uses the template with locally built WPF. | A dotnet/wpf PR can start a DRT run. |
 
+## M0 results
+
+Probe PR [#357](https://github.com/dotnet/wpf-test/pull/357), [build 1642578](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1642578), on 2026-10-20. Pool `NetCore-Public`, image `windows.vs2026preview.scout.amd64.Open`.
+
+| Question | Result |
+|---|---|
+| Operating system | Windows Server 2025 Datacenter (10.0.26100). |
+| Elevation | `cloudtest`, a local administrator at High integrity. QV's copy into `%ProgramFiles%\QualityVault` works. |
+| Desktop session | Interactive `console` session 1, `UserInteractive=True`, with `explorer.exe` running. **Server Manager opens on the desktop at logon,** with a pop-up in front of it. |
+| Screen | 1024×768, 32 bpp. |
+| Global .NET | 6.0, 8.0 and 10.0 only. The DRTs ran on the repo's `.dotnet` (11.0 RC) through `DOTNET_ROOT`, which confirms that .NET must be installed in each job. |
+| `%APPDATA%` | `C:\Users\cloudtest\AppData\Roaming`. |
+| Agent reuse | None. All five jobs ran on different machines whose OS had been installed 10–20 minutes earlier, and none found another job's marker file. |
+| DRTs | `RunDrts.cmd /Area=Controls` ran `DrtControls.exe`. About 50 suites ran, then it **hung in the ToolTip suite** until QV's 240-second timeout killed it, so the result was Fail. |
+| ADO integration | Works. `RunDrts.cmd` exited with 1; `PublishTestResults@2` published `testResults.xml` to the Tests tab and failed the task (`failTaskOnFailedTests`). The QV `Report` folder was uploaded as an artifact. |
+
+Follow-ups:
+
+- **Close Server Manager before running DRTs.** Re-probe in [build 1642720](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1642720): after `Stop-Process ServerManager` the desktop was clear, the ToolTip suite passed alone, and all of `DrtControls` passed (Pass, in about 1.5 minutes). One run doesn't prove Server Manager caused the hang, but closing it is cheap, so `Invoke-Drts.ps1` will do it.
+- Locally, `DrtControls -suite ToolTip` passes. Full local runs over RDP fail in Menu suites because of keyboard layout (AltGr) and mouse focus, so local results don't reflect the agent (I21).
+- **Baseline for all DRTs** ([build 1642763](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1642763), Release x64, Server Manager closed): **79 of 85 pass**, and the run took about 17 minutes in one job. Failures (input for D5):
+
+  | DRT | Area | Failure |
+  |---|---|---|
+  | `DrtControls` | Controls | Hung in the ToolTip suite until QV's 240-second timeout. It passed in the previous run, so it is intermittent. |
+  | `DrtApplicationEvents` | AppModel | Hung until QV's 240-second timeout. |
+  | `DrtJournal` | AppModel | Failed in "Basic Journal Navigation". The log was truncated by QV. |
+  | `DrtPackagingApis` | DigitalDocuments | Failed in the zip archive tests. Needs `/verbose` to see why. |
+  | `Drtparser` | Xaml | "DateTime Test": `DateTime` serialization differs from the expected string. |
+  | `DrtPrinting` | Printing | "Print Queue": PostScript output hash differs from the expected value. |
+- **Quarantine (D5, decided):** these six are marked `Disabled="true"` in `DrtList.xml`, with a comment giving the reason. `DrtAdaptor` maps the attribute to `TestInfo.Disabled`, which QV already skips by default; run them with `RunDrts.cmd /Disabled=true`. In [build 1642817](https://dev.azure.com/dnceng-public/cbb18261-c48f-4abb-8651-8cdcb5474649/_build/results?buildId=1642817) the result was 79 passed and 6 ignored. Each one still needs an issue and an owner.
+- Merging the latest `main`, which uses SDK 12.0 alpha, broke the restore for `net11.0-windows`. The probe branch keeps the 11.0 RC SDK in `global.json`. PR #355 will need the same fix.
+
 ## Open questions
 
 - **I15:** Does `/azp run` work for a pipeline with `pr: none`? Which GitHub permissions does a user need to trigger it?
-- **I16:** On the agent, does the interactive session's resolution meet what the DRTs need? MAUI sets 1920×1080 before its UI tests.
+- **I16:** Answered in M0: 1024×768. Whether some DRTs need more is still open; MAUI sets 1920×1080 before its UI tests.
+- **I21:** Does `DrtControls` pass locally? On the agent it hangs in the ToolTip suite. Is that caused by the agent (Server Manager in the foreground, 1024×768), or does it fail everywhere?
 - **I17:** Is there a sensible `maxParallel` and job size? There are 21 areas; small ones could be grouped.
-- **I20:** Does every job in `NetCore-Public` get a freshly imaged VM, or can one agent run several jobs one after another? Each matrix job runs on its own agent, but a reused agent would carry state between jobs. If agents are reused, per-job cleanup in `Invoke-Drts.ps1` becomes required, not just a precaution. To be answered in M0.
+- **I20:** Answered in M0: every job gets a freshly imaged VM, so cleanup between jobs is not needed. Cleanup within a job, for example between areas grouped into one job, still is.
 - **I18:** Do the DRTs leave machine-wide state (registry, `%ProgramFiles%\QualityVault`, fonts, themes) that matters on reused agents?
