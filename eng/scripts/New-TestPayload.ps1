@@ -183,3 +183,5 @@ Set-Content (Join-Path $OutputDirectory 'matrix.json') $json
 if ($OutputVariable) {
     Write-Host "##vso[task.setvariable variable=$OutputVariable;isOutput=true]$json"
 }
+# Do not leak robocopy's exit code (1 means files were copied).
+exit 0
