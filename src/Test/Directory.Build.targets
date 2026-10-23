@@ -2,4 +2,10 @@
 <Project>
   <Import Condition="Exists('$(WpfTestsRoot)/Directory.Build.targets')" Project="$(WpfTestsRoot)/Directory.Build.targets" />
   <Import Project="PublishAfterBuild.targets" />
+
+  <!-- The WPF Arcade SDK implicitly references Microsoft.NETCore.Platforms, which is provided by the
+       shared framework on modern .NET and triggers NU1510 (not pruned) on net11.0+. -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
+    <PackageReference Remove="Microsoft.NETCore.Platforms" />
+  </ItemGroup>
 </Project>
