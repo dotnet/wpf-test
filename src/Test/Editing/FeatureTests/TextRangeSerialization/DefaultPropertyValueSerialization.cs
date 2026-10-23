@@ -24,6 +24,7 @@ using Test.Uis.Loggers;
 using Test.Uis.Management;
 using Test.Uis.TestTypes;
 using Test.Uis.Utils;
+using StringStream = Test.Uis.IO.StringStream;
 
 namespace Microsoft.Test.Editing.Serialization
 {
