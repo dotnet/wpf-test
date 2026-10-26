@@ -22,6 +22,7 @@ namespace Test.Uis.Utils
     using Test.Uis.Management;
     using System.Security;
     using System.Security.Permissions;
+    using StringStream = Test.Uis.IO.StringStream;
 
     #endregion Namespaces.
 
